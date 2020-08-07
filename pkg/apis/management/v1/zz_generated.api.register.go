@@ -18,6 +18,7 @@ func addKnownTypes(scheme *runtime.Scheme) error {
 		&Cluster{},
 		&ClusterList{},
 		&ClusterMembers{},
+		&ClusterReset{},
 		&ClusterVirtualClusterDefaults{},
 		&ClusterConnect{},
 		&ClusterConnectList{},
@@ -65,6 +66,11 @@ var (
 			func() runtime.Object { return &ClusterMembers{} }, // Register versioned resource
 			nil,
 			management.NewClusterMembersREST),
+		builders.NewApiResourceWithStorage(
+			management.InternalClusterResetREST,
+			func() runtime.Object { return &ClusterReset{} }, // Register versioned resource
+			nil,
+			management.NewClusterResetREST),
 		builders.NewApiResourceWithStorage(
 			management.InternalClusterVirtualClusterDefaultsREST,
 			func() runtime.Object { return &ClusterVirtualClusterDefaults{} }, // Register versioned resource
@@ -189,6 +195,14 @@ type ClusterMembersList struct {
 	metav1.TypeMeta `json:",inline"`
 	metav1.ListMeta `json:"metadata,omitempty"`
 	Items           []ClusterMembers `json:"items"`
+}
+
+// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+
+type ClusterResetList struct {
+	metav1.TypeMeta `json:",inline"`
+	metav1.ListMeta `json:"metadata,omitempty"`
+	Items           []ClusterReset `json:"items"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object

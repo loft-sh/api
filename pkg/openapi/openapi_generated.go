@@ -97,6 +97,8 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 		"github.com/loft-sh/api/pkg/apis/management/v1.ClusterMembers":                       schema_pkg_apis_management_v1_ClusterMembers(ref),
 		"github.com/loft-sh/api/pkg/apis/management/v1.ClusterMembersList":                   schema_pkg_apis_management_v1_ClusterMembersList(ref),
 		"github.com/loft-sh/api/pkg/apis/management/v1.ClusterQuota":                         schema_pkg_apis_management_v1_ClusterQuota(ref),
+		"github.com/loft-sh/api/pkg/apis/management/v1.ClusterReset":                         schema_pkg_apis_management_v1_ClusterReset(ref),
+		"github.com/loft-sh/api/pkg/apis/management/v1.ClusterResetList":                     schema_pkg_apis_management_v1_ClusterResetList(ref),
 		"github.com/loft-sh/api/pkg/apis/management/v1.ClusterRole":                          schema_pkg_apis_management_v1_ClusterRole(ref),
 		"github.com/loft-sh/api/pkg/apis/management/v1.ClusterRoleList":                      schema_pkg_apis_management_v1_ClusterRoleList(ref),
 		"github.com/loft-sh/api/pkg/apis/management/v1.ClusterRoleSpec":                      schema_pkg_apis_management_v1_ClusterRoleSpec(ref),
@@ -4040,6 +4042,103 @@ func schema_pkg_apis_management_v1_ClusterQuota(ref common.ReferenceCallback) co
 		},
 		Dependencies: []string{
 			"github.com/kiosk-sh/kiosk/pkg/apis/config/v1alpha1.AccountQuota", "github.com/loft-sh/api/pkg/apis/management/v1.UserOrTeam"},
+	}
+}
+
+func schema_pkg_apis_management_v1_ClusterReset(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"kind": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"apiVersion": {
+						SchemaProps: spec.SchemaProps{
+							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"metadata": {
+						SchemaProps: spec.SchemaProps{
+							Ref: ref("k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"),
+						},
+					},
+					"kiosk": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"boolean"},
+							Format: "",
+						},
+					},
+					"rbac": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"boolean"},
+							Format: "",
+						},
+					},
+					"virtualCluster": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"boolean"},
+							Format: "",
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			"k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
+	}
+}
+
+func schema_pkg_apis_management_v1_ClusterResetList(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"kind": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"apiVersion": {
+						SchemaProps: spec.SchemaProps{
+							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"metadata": {
+						SchemaProps: spec.SchemaProps{
+							Ref: ref("k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"),
+						},
+					},
+					"items": {
+						SchemaProps: spec.SchemaProps{
+							Type: []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Ref: ref("github.com/loft-sh/api/pkg/apis/management/v1.ClusterReset"),
+									},
+								},
+							},
+						},
+					},
+				},
+				Required: []string{"items"},
+			},
+		},
+		Dependencies: []string{
+			"github.com/loft-sh/api/pkg/apis/management/v1.ClusterReset", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
 	}
 }
 

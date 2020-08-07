@@ -187,7 +187,15 @@ var (
 	NewClusterMembersREST = func(getter generic.RESTOptionsGetter) rest.Storage {
 		return NewClusterMembersRESTFunc(Client, Factory)
 	}
-	NewClusterMembersRESTFunc                 NewRESTFunc
+	NewClusterMembersRESTFunc NewRESTFunc
+	InternalClusterResetREST  = builders.NewInternalSubresource(
+		"clusters", "ClusterReset", "reset",
+		func() runtime.Object { return &ClusterReset{} },
+	)
+	NewClusterResetREST = func(getter generic.RESTOptionsGetter) rest.Storage {
+		return NewClusterResetRESTFunc(Client, Factory)
+	}
+	NewClusterResetRESTFunc                   NewRESTFunc
 	InternalClusterVirtualClusterDefaultsREST = builders.NewInternalSubresource(
 		"clusters", "ClusterVirtualClusterDefaults", "virtualclusterdefaults",
 		func() runtime.Object { return &ClusterVirtualClusterDefaults{} },
@@ -423,6 +431,7 @@ var (
 		InternalCluster,
 		InternalClusterStatus,
 		InternalClusterMembersREST,
+		InternalClusterResetREST,
 		InternalClusterVirtualClusterDefaultsREST,
 		InternalClusterConnect,
 		InternalClusterConnectStatus,
@@ -582,6 +591,16 @@ type ClusterQuota struct {
 	Cluster string
 	Owner   *UserOrTeam
 	Quota   configv1alpha1.AccountQuota
+}
+
+// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+
+type ClusterReset struct {
+	metav1.TypeMeta
+	metav1.ObjectMeta
+	Kiosk          bool
+	RBAC           bool
+	VirtualCluster bool
 }
 
 // +genclient
@@ -1164,6 +1183,14 @@ type ClusterMembersList struct {
 	metav1.TypeMeta
 	metav1.ListMeta
 	Items []ClusterMembers
+}
+
+// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+
+type ClusterResetList struct {
+	metav1.TypeMeta
+	metav1.ListMeta
+	Items []ClusterReset
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object

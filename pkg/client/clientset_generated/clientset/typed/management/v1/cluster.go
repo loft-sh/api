@@ -31,6 +31,7 @@ type ClusterInterface interface {
 	List(ctx context.Context, opts metav1.ListOptions) (*v1.ClusterList, error)
 	Watch(ctx context.Context, opts metav1.ListOptions) (watch.Interface, error)
 	Patch(ctx context.Context, name string, pt types.PatchType, data []byte, opts metav1.PatchOptions, subresources ...string) (result *v1.Cluster, err error)
+	ResetCluster(ctx context.Context, clusterName string, clusterReset *v1.ClusterReset, opts metav1.CreateOptions) (*v1.ClusterReset, error)
 	ListMembers(ctx context.Context, clusterName string, options metav1.GetOptions) (*v1.ClusterMembers, error)
 	ListVirtualClusterDefaults(ctx context.Context, clusterName string, options metav1.GetOptions) (*v1.ClusterVirtualClusterDefaults, error)
 
@@ -165,6 +166,20 @@ func (c *clusters) Patch(ctx context.Context, name string, pt types.PatchType, d
 		SubResource(subresources...).
 		VersionedParams(&opts, scheme.ParameterCodec).
 		Body(data).
+		Do(ctx).
+		Into(result)
+	return
+}
+
+// ResetCluster takes the representation of a clusterReset and creates it.  Returns the server's representation of the clusterReset, and an error, if there is any.
+func (c *clusters) ResetCluster(ctx context.Context, clusterName string, clusterReset *v1.ClusterReset, opts metav1.CreateOptions) (result *v1.ClusterReset, err error) {
+	result = &v1.ClusterReset{}
+	err = c.client.Post().
+		Resource("clusters").
+		Name(clusterName).
+		SubResource("reset").
+		VersionedParams(&opts, scheme.ParameterCodec).
+		Body(clusterReset).
 		Do(ctx).
 		Into(result)
 	return
