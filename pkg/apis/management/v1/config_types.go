@@ -109,6 +109,10 @@ type AuthenticationOIDC struct {
 	// must be a string or list of strings.
 	GroupsClaim string `json:"groupsClaim,omitempty"`
 
+	// GetUserInfo, if specified, tells the OIDCAuthenticator to try to populate the user's
+	// information from the UserInfo.
+	GetUserInfo bool `json:"getUserInfo,omitempty"`
+
 	// GroupsPrefix, if specified, causes claims mapping to group names to be prefixed with the
 	// value. A value "oidc:" would result in groups like "oidc:engineering" and "oidc:marketing".
 	GroupsPrefix string `json:"groupsPrefix,omitempty"`

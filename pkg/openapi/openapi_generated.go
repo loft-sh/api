@@ -3564,6 +3564,13 @@ func schema_pkg_apis_management_v1_AuthenticationOIDC(ref common.ReferenceCallba
 							Format:      "",
 						},
 					},
+					"getUserInfo": {
+						SchemaProps: spec.SchemaProps{
+							Description: "GetUserInfo, if specified, tells the OIDCAuthenticator to try to populate the user's information from the UserInfo.",
+							Type:        []string{"boolean"},
+							Format:      "",
+						},
+					},
 					"groupsPrefix": {
 						SchemaProps: spec.SchemaProps{
 							Description: "GroupsPrefix, if specified, causes claims mapping to group names to be prefixed with the value. A value \"oidc:\" would result in groups like \"oidc:engineering\" and \"oidc:marketing\".",

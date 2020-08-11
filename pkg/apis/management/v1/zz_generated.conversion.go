@@ -1220,6 +1220,7 @@ func autoConvert_v1_AuthenticationOIDC_To_management_AuthenticationOIDC(in *Auth
 	out.UsernameClaim = in.UsernameClaim
 	out.UsernamePrefix = in.UsernamePrefix
 	out.GroupsClaim = in.GroupsClaim
+	out.GetUserInfo = in.GetUserInfo
 	out.GroupsPrefix = in.GroupsPrefix
 	out.Type = in.Type
 	return nil
@@ -1238,6 +1239,7 @@ func autoConvert_management_AuthenticationOIDC_To_v1_AuthenticationOIDC(in *mana
 	out.UsernameClaim = in.UsernameClaim
 	out.UsernamePrefix = in.UsernamePrefix
 	out.GroupsClaim = in.GroupsClaim
+	out.GetUserInfo = in.GetUserInfo
 	out.GroupsPrefix = in.GroupsPrefix
 	out.Type = in.Type
 	return nil
