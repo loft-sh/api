@@ -649,8 +649,9 @@ type ClusterVirtualCluster struct {
 type ClusterVirtualClusterDefaults struct {
 	metav1.TypeMeta
 	metav1.ObjectMeta
-	Values  string
-	Warning string
+	LatestVersion string
+	Values        string
+	Warning       string
 }
 
 // +genclient

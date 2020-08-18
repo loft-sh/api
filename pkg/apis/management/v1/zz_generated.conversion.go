@@ -1782,6 +1782,7 @@ func Convert_management_ClusterVirtualCluster_To_v1_ClusterVirtualCluster(in *ma
 
 func autoConvert_v1_ClusterVirtualClusterDefaults_To_management_ClusterVirtualClusterDefaults(in *ClusterVirtualClusterDefaults, out *management.ClusterVirtualClusterDefaults, s conversion.Scope) error {
 	out.ObjectMeta = in.ObjectMeta
+	out.LatestVersion = in.LatestVersion
 	out.Values = in.Values
 	out.Warning = in.Warning
 	return nil
@@ -1794,6 +1795,7 @@ func Convert_v1_ClusterVirtualClusterDefaults_To_management_ClusterVirtualCluste
 
 func autoConvert_management_ClusterVirtualClusterDefaults_To_v1_ClusterVirtualClusterDefaults(in *management.ClusterVirtualClusterDefaults, out *ClusterVirtualClusterDefaults, s conversion.Scope) error {
 	out.ObjectMeta = in.ObjectMeta
+	out.LatestVersion = in.LatestVersion
 	out.Values = in.Values
 	out.Warning = in.Warning
 	return nil

@@ -11,6 +11,10 @@ type ClusterVirtualClusterDefaults struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
 
+	// LatestVersion is the latest virtual cluster version
+	// +optional
+	LatestVersion string `json:"latestVersion,omitempty"`
+
 	// Default values for the virtual cluster chart
 	// +optional
 	Values string `json:"values,omitempty"`

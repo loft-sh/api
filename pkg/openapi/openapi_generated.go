@@ -4454,6 +4454,13 @@ func schema_pkg_apis_management_v1_ClusterVirtualClusterDefaults(ref common.Refe
 							Ref: ref("k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"),
 						},
 					},
+					"latestVersion": {
+						SchemaProps: spec.SchemaProps{
+							Description: "LatestVersion is the latest virtual cluster version",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
 					"values": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Default values for the virtual cluster chart",
