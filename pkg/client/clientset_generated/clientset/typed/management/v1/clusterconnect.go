@@ -50,7 +50,7 @@ func newClusterConnects(c *ManagementV1Client) *clusterConnects {
 func (c *clusterConnects) Get(ctx context.Context, name string, options metav1.GetOptions) (result *v1.ClusterConnect, err error) {
 	result = &v1.ClusterConnect{}
 	err = c.client.Get().
-		Resource("clusterconnects").
+		Resource("clusterconnect").
 		Name(name).
 		VersionedParams(&options, scheme.ParameterCodec).
 		Do(ctx).
@@ -66,7 +66,7 @@ func (c *clusterConnects) List(ctx context.Context, opts metav1.ListOptions) (re
 	}
 	result = &v1.ClusterConnectList{}
 	err = c.client.Get().
-		Resource("clusterconnects").
+		Resource("clusterconnect").
 		VersionedParams(&opts, scheme.ParameterCodec).
 		Timeout(timeout).
 		Do(ctx).
@@ -82,7 +82,7 @@ func (c *clusterConnects) Watch(ctx context.Context, opts metav1.ListOptions) (w
 	}
 	opts.Watch = true
 	return c.client.Get().
-		Resource("clusterconnects").
+		Resource("clusterconnect").
 		VersionedParams(&opts, scheme.ParameterCodec).
 		Timeout(timeout).
 		Watch(ctx)
@@ -92,7 +92,7 @@ func (c *clusterConnects) Watch(ctx context.Context, opts metav1.ListOptions) (w
 func (c *clusterConnects) Create(ctx context.Context, clusterConnect *v1.ClusterConnect, opts metav1.CreateOptions) (result *v1.ClusterConnect, err error) {
 	result = &v1.ClusterConnect{}
 	err = c.client.Post().
-		Resource("clusterconnects").
+		Resource("clusterconnect").
 		VersionedParams(&opts, scheme.ParameterCodec).
 		Body(clusterConnect).
 		Do(ctx).
@@ -104,7 +104,7 @@ func (c *clusterConnects) Create(ctx context.Context, clusterConnect *v1.Cluster
 func (c *clusterConnects) Update(ctx context.Context, clusterConnect *v1.ClusterConnect, opts metav1.UpdateOptions) (result *v1.ClusterConnect, err error) {
 	result = &v1.ClusterConnect{}
 	err = c.client.Put().
-		Resource("clusterconnects").
+		Resource("clusterconnect").
 		Name(clusterConnect.Name).
 		VersionedParams(&opts, scheme.ParameterCodec).
 		Body(clusterConnect).
@@ -118,7 +118,7 @@ func (c *clusterConnects) Update(ctx context.Context, clusterConnect *v1.Cluster
 func (c *clusterConnects) UpdateStatus(ctx context.Context, clusterConnect *v1.ClusterConnect, opts metav1.UpdateOptions) (result *v1.ClusterConnect, err error) {
 	result = &v1.ClusterConnect{}
 	err = c.client.Put().
-		Resource("clusterconnects").
+		Resource("clusterconnect").
 		Name(clusterConnect.Name).
 		SubResource("status").
 		VersionedParams(&opts, scheme.ParameterCodec).
@@ -131,7 +131,7 @@ func (c *clusterConnects) UpdateStatus(ctx context.Context, clusterConnect *v1.C
 // Delete takes name of the clusterConnect and deletes it. Returns an error if one occurs.
 func (c *clusterConnects) Delete(ctx context.Context, name string, opts metav1.DeleteOptions) error {
 	return c.client.Delete().
-		Resource("clusterconnects").
+		Resource("clusterconnect").
 		Name(name).
 		Body(&opts).
 		Do(ctx).
@@ -145,7 +145,7 @@ func (c *clusterConnects) DeleteCollection(ctx context.Context, opts metav1.Dele
 		timeout = time.Duration(*listOpts.TimeoutSeconds) * time.Second
 	}
 	return c.client.Delete().
-		Resource("clusterconnects").
+		Resource("clusterconnect").
 		VersionedParams(&listOpts, scheme.ParameterCodec).
 		Timeout(timeout).
 		Body(&opts).
@@ -157,7 +157,7 @@ func (c *clusterConnects) DeleteCollection(ctx context.Context, opts metav1.Dele
 func (c *clusterConnects) Patch(ctx context.Context, name string, pt types.PatchType, data []byte, opts metav1.PatchOptions, subresources ...string) (result *v1.ClusterConnect, err error) {
 	result = &v1.ClusterConnect{}
 	err = c.client.Patch(pt).
-		Resource("clusterconnects").
+		Resource("clusterconnect").
 		Name(name).
 		SubResource(subresources...).
 		VersionedParams(&opts, scheme.ParameterCodec).
