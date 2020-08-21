@@ -1184,6 +1184,13 @@ func (in *LicenseInfo) DeepCopyInto(out *LicenseInfo) {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
+	if in.BlockRequests != nil {
+		in, out := &in.BlockRequests, &out.BlockRequests
+		*out = make([]ResoureRequests, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
+	}
 	if in.Features != nil {
 		in, out := &in.Features, &out.Features
 		*out = make(map[string]bool, len(*in))

@@ -762,6 +762,7 @@ type LicenseInfo struct {
 	Announcement   string
 	License        string
 	ResourceLimits []ResourceLimit
+	BlockRequests  []ResoureRequests
 	Features       map[string]bool
 	Customer       CustomerInfo
 	Subscription   SubscriptionInfo

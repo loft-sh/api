@@ -2270,6 +2270,7 @@ func autoConvert_v1_LicenseInfo_To_management_LicenseInfo(in *LicenseInfo, out *
 	out.Announcement = in.Announcement
 	out.License = in.License
 	out.ResourceLimits = *(*[]management.ResourceLimit)(unsafe.Pointer(&in.ResourceLimits))
+	out.BlockRequests = *(*[]management.ResoureRequests)(unsafe.Pointer(&in.BlockRequests))
 	out.Features = *(*map[string]bool)(unsafe.Pointer(&in.Features))
 	if err := Convert_v1_CustomerInfo_To_management_CustomerInfo(&in.Customer, &out.Customer, s); err != nil {
 		return err
@@ -2300,6 +2301,7 @@ func autoConvert_management_LicenseInfo_To_v1_LicenseInfo(in *management.License
 	out.Announcement = in.Announcement
 	out.License = in.License
 	out.ResourceLimits = *(*[]ResourceLimit)(unsafe.Pointer(&in.ResourceLimits))
+	out.BlockRequests = *(*[]ResoureRequests)(unsafe.Pointer(&in.BlockRequests))
 	out.Features = *(*map[string]bool)(unsafe.Pointer(&in.Features))
 	if err := Convert_management_CustomerInfo_To_v1_CustomerInfo(&in.Customer, &out.Customer, s); err != nil {
 		return err

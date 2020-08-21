@@ -34,6 +34,7 @@ type LicenseInfo struct {
 	Announcement   string            `json:"announcement,omitempty"`
 	License        string            `json:"license,omitempty"`
 	ResourceLimits []ResourceLimit   `json:"resourceLimits,omitempty"`
+	BlockRequests  []ResoureRequests `json:"blockRequests,omitempty"`
 	Features       map[string]bool   `json:"features,omitempty"`
 	Customer       CustomerInfo      `json:"customer,omitempty"`
 	Subscription   SubscriptionInfo  `json:"subscription,omitempty"`

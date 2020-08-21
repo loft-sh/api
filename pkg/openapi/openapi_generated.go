@@ -5181,6 +5181,18 @@ func schema_pkg_apis_management_v1_LicenseInfo(ref common.ReferenceCallback) com
 							},
 						},
 					},
+					"blockRequests": {
+						SchemaProps: spec.SchemaProps{
+							Type: []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Ref: ref("github.com/loft-sh/api/pkg/apis/management/v1.ResoureRequests"),
+									},
+								},
+							},
+						},
+					},
 					"features": {
 						SchemaProps: spec.SchemaProps{
 							Type: []string{"object"},
@@ -5245,7 +5257,7 @@ func schema_pkg_apis_management_v1_LicenseInfo(ref common.ReferenceCallback) com
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/pkg/apis/management/v1.Analytics", "github.com/loft-sh/api/pkg/apis/management/v1.CustomerInfo", "github.com/loft-sh/api/pkg/apis/management/v1.Plan", "github.com/loft-sh/api/pkg/apis/management/v1.Promotions", "github.com/loft-sh/api/pkg/apis/management/v1.ResourceLimit", "github.com/loft-sh/api/pkg/apis/management/v1.SubscriptionInfo"},
+			"github.com/loft-sh/api/pkg/apis/management/v1.Analytics", "github.com/loft-sh/api/pkg/apis/management/v1.CustomerInfo", "github.com/loft-sh/api/pkg/apis/management/v1.Plan", "github.com/loft-sh/api/pkg/apis/management/v1.Promotions", "github.com/loft-sh/api/pkg/apis/management/v1.ResourceLimit", "github.com/loft-sh/api/pkg/apis/management/v1.ResoureRequests", "github.com/loft-sh/api/pkg/apis/management/v1.SubscriptionInfo"},
 	}
 }
 
