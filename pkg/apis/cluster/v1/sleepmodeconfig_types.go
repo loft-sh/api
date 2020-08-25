@@ -28,6 +28,10 @@ type SleepModeConfigSpec struct {
 	// +optional
 	DeleteAllPods bool `json:"deleteAllPods,omitempty"`
 
+	// DeleteAfter specifies after how many seconds of inactivity the space should be deleted
+	// +optional
+	DeleteAfter int64 `json:"deleteAfter,omitempty"`
+
 	// SleepAfter specifies after how many seconds of inactivity the space should sleep
 	// +optional
 	SleepAfter int64 `json:"sleepAfter,omitempty"`

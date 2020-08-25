@@ -3257,6 +3257,13 @@ func schema_pkg_apis_cluster_v1_SleepModeConfigSpec(ref common.ReferenceCallback
 							Format:      "",
 						},
 					},
+					"deleteAfter": {
+						SchemaProps: spec.SchemaProps{
+							Description: "DeleteAfter specifies after how many seconds of inactivity the space should be deleted",
+							Type:        []string{"integer"},
+							Format:      "int64",
+						},
+					},
 					"sleepAfter": {
 						SchemaProps: spec.SchemaProps{
 							Description: "SleepAfter specifies after how many seconds of inactivity the space should sleep",
@@ -4084,6 +4091,12 @@ func schema_pkg_apis_management_v1_ClusterReset(ref common.ReferenceCallback) co
 						},
 					},
 					"rbac": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"boolean"},
+							Format: "",
+						},
+					},
+					"templates": {
 						SchemaProps: spec.SchemaProps{
 							Type:   []string{"boolean"},
 							Format: "",

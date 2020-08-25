@@ -601,6 +601,7 @@ type ClusterReset struct {
 	metav1.ObjectMeta
 	Kiosk          bool
 	RBAC           bool
+	Templates      bool
 	VirtualCluster bool
 }
 

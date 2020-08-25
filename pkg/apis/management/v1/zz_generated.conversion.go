@@ -1552,6 +1552,7 @@ func autoConvert_v1_ClusterReset_To_management_ClusterReset(in *ClusterReset, ou
 	out.ObjectMeta = in.ObjectMeta
 	out.Kiosk = in.Kiosk
 	out.RBAC = in.RBAC
+	out.Templates = in.Templates
 	out.VirtualCluster = in.VirtualCluster
 	return nil
 }
@@ -1565,6 +1566,7 @@ func autoConvert_management_ClusterReset_To_v1_ClusterReset(in *management.Clust
 	out.ObjectMeta = in.ObjectMeta
 	out.Kiosk = in.Kiosk
 	out.RBAC = in.RBAC
+	out.Templates = in.Templates
 	out.VirtualCluster = in.VirtualCluster
 	return nil
 }
