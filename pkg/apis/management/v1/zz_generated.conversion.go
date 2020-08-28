@@ -3374,6 +3374,7 @@ func autoConvert_v1_UserProfile_To_management_UserProfile(in *UserProfile, out *
 	out.Username = in.Username
 	out.Password = in.Password
 	out.Email = in.Email
+	out.Icon = in.Icon
 	out.Custom = in.Custom
 	return nil
 }
@@ -3389,6 +3390,7 @@ func autoConvert_management_UserProfile_To_v1_UserProfile(in *management.UserPro
 	out.Username = in.Username
 	out.Password = in.Password
 	out.Email = in.Email
+	out.Icon = in.Icon
 	out.Custom = in.Custom
 	return nil
 }

@@ -7130,6 +7130,13 @@ func schema_pkg_apis_management_v1_UserProfile(ref common.ReferenceCallback) com
 							Format:      "",
 						},
 					},
+					"icon": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Icon is the new icon of the user",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
 					"custom": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Custom is custom information that should be saved of the user",
@@ -7389,6 +7396,13 @@ func schema_pkg_apis_management_v1_UserSpec(ref common.ReferenceCallback) common
 					"username": {
 						SchemaProps: spec.SchemaProps{
 							Description: "The username that is used to login",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"icon": {
+						SchemaProps: spec.SchemaProps{
+							Description: "The URL to an icon that should be shown for the user",
 							Type:        []string{"string"},
 							Format:      "",
 						},
@@ -8235,6 +8249,13 @@ func schema_pkg_apis_storage_v1_UserSpec(ref common.ReferenceCallback) common.Op
 					"username": {
 						SchemaProps: spec.SchemaProps{
 							Description: "The username that is used to login",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"icon": {
+						SchemaProps: spec.SchemaProps{
+							Description: "The URL to an icon that should be shown for the user",
 							Type:        []string{"string"},
 							Format:      "",
 						},

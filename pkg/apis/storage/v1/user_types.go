@@ -26,6 +26,10 @@ type UserSpec struct {
 	// The username that is used to login
 	Username string `json:"username,omitempty"`
 
+	// The URL to an icon that should be shown for the user
+	// +optional
+	Icon string `json:"icon,omitempty"`
+
 	// The users email address
 	// +optional
 	Email string `json:"email,omitempty"`
