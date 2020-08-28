@@ -2353,6 +2353,11 @@ func (in *UserProfile) DeepCopyInto(out *UserProfile) {
 	*out = *in
 	out.TypeMeta = in.TypeMeta
 	in.ObjectMeta.DeepCopyInto(&out.ObjectMeta)
+	if in.Icon != nil {
+		in, out := &in.Icon, &out.Icon
+		*out = new(string)
+		**out = **in
+	}
 	return
 }
 

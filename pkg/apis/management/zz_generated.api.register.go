@@ -997,7 +997,7 @@ type UserProfile struct {
 	Username    string
 	Password    string
 	Email       string
-	Icon        string
+	Icon        *string
 	Custom      string
 }
 

@@ -25,7 +25,7 @@ type UserProfile struct {
 	Email string `json:"email,omitempty"`
 	// Icon is the new icon of the user
 	// +optional
-	Icon string `json:"icon,omitempty"`
+	Icon *string `json:"icon,omitempty"`
 	// Custom is custom information that should be saved of the user
 	// +optional
 	Custom string `json:"custom,omitempty"`
