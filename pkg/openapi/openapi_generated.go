@@ -92,6 +92,8 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 		"github.com/loft-sh/api/pkg/apis/management/v1.ClusterConnectList":                   schema_pkg_apis_management_v1_ClusterConnectList(ref),
 		"github.com/loft-sh/api/pkg/apis/management/v1.ClusterConnectSpec":                   schema_pkg_apis_management_v1_ClusterConnectSpec(ref),
 		"github.com/loft-sh/api/pkg/apis/management/v1.ClusterConnectStatus":                 schema_pkg_apis_management_v1_ClusterConnectStatus(ref),
+		"github.com/loft-sh/api/pkg/apis/management/v1.ClusterDomain":                        schema_pkg_apis_management_v1_ClusterDomain(ref),
+		"github.com/loft-sh/api/pkg/apis/management/v1.ClusterDomainList":                    schema_pkg_apis_management_v1_ClusterDomainList(ref),
 		"github.com/loft-sh/api/pkg/apis/management/v1.ClusterList":                          schema_pkg_apis_management_v1_ClusterList(ref),
 		"github.com/loft-sh/api/pkg/apis/management/v1.ClusterMember":                        schema_pkg_apis_management_v1_ClusterMember(ref),
 		"github.com/loft-sh/api/pkg/apis/management/v1.ClusterMembers":                       schema_pkg_apis_management_v1_ClusterMembers(ref),
@@ -134,6 +136,10 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 		"github.com/loft-sh/api/pkg/apis/management/v1.LicenseTokenList":                     schema_pkg_apis_management_v1_LicenseTokenList(ref),
 		"github.com/loft-sh/api/pkg/apis/management/v1.LicenseTokenSpec":                     schema_pkg_apis_management_v1_LicenseTokenSpec(ref),
 		"github.com/loft-sh/api/pkg/apis/management/v1.LicenseTokenStatus":                   schema_pkg_apis_management_v1_LicenseTokenStatus(ref),
+		"github.com/loft-sh/api/pkg/apis/management/v1.LoftUpgrade":                          schema_pkg_apis_management_v1_LoftUpgrade(ref),
+		"github.com/loft-sh/api/pkg/apis/management/v1.LoftUpgradeList":                      schema_pkg_apis_management_v1_LoftUpgradeList(ref),
+		"github.com/loft-sh/api/pkg/apis/management/v1.LoftUpgradeSpec":                      schema_pkg_apis_management_v1_LoftUpgradeSpec(ref),
+		"github.com/loft-sh/api/pkg/apis/management/v1.LoftUpgradeStatus":                    schema_pkg_apis_management_v1_LoftUpgradeStatus(ref),
 		"github.com/loft-sh/api/pkg/apis/management/v1.OIDC":                                 schema_pkg_apis_management_v1_OIDC(ref),
 		"github.com/loft-sh/api/pkg/apis/management/v1.OIDCClient":                           schema_pkg_apis_management_v1_OIDCClient(ref),
 		"github.com/loft-sh/api/pkg/apis/management/v1.Plan":                                 schema_pkg_apis_management_v1_Plan(ref),
@@ -3362,6 +3368,12 @@ func schema_pkg_apis_management_v1_Analytics(ref common.ReferenceCallback) commo
 							},
 						},
 					},
+					"token": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"string"},
+							Format: "",
+						},
+					},
 				},
 			},
 		},
@@ -3846,6 +3858,97 @@ func schema_pkg_apis_management_v1_ClusterConnectStatus(ref common.ReferenceCall
 				},
 			},
 		},
+	}
+}
+
+func schema_pkg_apis_management_v1_ClusterDomain(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"kind": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"apiVersion": {
+						SchemaProps: spec.SchemaProps{
+							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"metadata": {
+						SchemaProps: spec.SchemaProps{
+							Ref: ref("k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"),
+						},
+					},
+					"target": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"string"},
+							Format: "",
+						},
+					},
+					"domain": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"string"},
+							Format: "",
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			"k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
+	}
+}
+
+func schema_pkg_apis_management_v1_ClusterDomainList(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"kind": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"apiVersion": {
+						SchemaProps: spec.SchemaProps{
+							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"metadata": {
+						SchemaProps: spec.SchemaProps{
+							Ref: ref("k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"),
+						},
+					},
+					"items": {
+						SchemaProps: spec.SchemaProps{
+							Type: []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Ref: ref("github.com/loft-sh/api/pkg/apis/management/v1.ClusterDomain"),
+									},
+								},
+							},
+						},
+					},
+				},
+				Required: []string{"items"},
+			},
+		},
+		Dependencies: []string{
+			"github.com/loft-sh/api/pkg/apis/management/v1.ClusterDomain", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
 	}
 }
 
@@ -5182,6 +5285,12 @@ func schema_pkg_apis_management_v1_LicenseInfo(ref common.ReferenceCallback) com
 							Format: "",
 						},
 					},
+					"currentTime": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"integer"},
+							Format: "int64",
+						},
+					},
 					"resourceLimits": {
 						SchemaProps: spec.SchemaProps{
 							Type: []string{"array"},
@@ -5265,8 +5374,21 @@ func schema_pkg_apis_management_v1_LicenseInfo(ref common.ReferenceCallback) com
 							},
 						},
 					},
+					"baseDomains": {
+						SchemaProps: spec.SchemaProps{
+							Type: []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Type:   []string{"string"},
+										Format: "",
+									},
+								},
+							},
+						},
+					},
 				},
-				Required: []string{"quantity"},
+				Required: []string{"currentTime", "quantity"},
 			},
 		},
 		Dependencies: []string{
@@ -5469,6 +5591,138 @@ func schema_pkg_apis_management_v1_LicenseTokenStatus(ref common.ReferenceCallba
 						},
 					},
 				},
+			},
+		},
+	}
+}
+
+func schema_pkg_apis_management_v1_LoftUpgrade(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "LoftUpgrade holds the upgrade information",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"kind": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"apiVersion": {
+						SchemaProps: spec.SchemaProps{
+							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"metadata": {
+						SchemaProps: spec.SchemaProps{
+							Ref: ref("k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"),
+						},
+					},
+					"spec": {
+						SchemaProps: spec.SchemaProps{
+							Ref: ref("github.com/loft-sh/api/pkg/apis/management/v1.LoftUpgradeSpec"),
+						},
+					},
+					"status": {
+						SchemaProps: spec.SchemaProps{
+							Ref: ref("github.com/loft-sh/api/pkg/apis/management/v1.LoftUpgradeStatus"),
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			"github.com/loft-sh/api/pkg/apis/management/v1.LoftUpgradeSpec", "github.com/loft-sh/api/pkg/apis/management/v1.LoftUpgradeStatus", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
+	}
+}
+
+func schema_pkg_apis_management_v1_LoftUpgradeList(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"kind": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"apiVersion": {
+						SchemaProps: spec.SchemaProps{
+							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"metadata": {
+						SchemaProps: spec.SchemaProps{
+							Ref: ref("k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"),
+						},
+					},
+					"items": {
+						SchemaProps: spec.SchemaProps{
+							Type: []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Ref: ref("github.com/loft-sh/api/pkg/apis/management/v1.LoftUpgrade"),
+									},
+								},
+							},
+						},
+					},
+				},
+				Required: []string{"items"},
+			},
+		},
+		Dependencies: []string{
+			"github.com/loft-sh/api/pkg/apis/management/v1.LoftUpgrade", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
+	}
+}
+
+func schema_pkg_apis_management_v1_LoftUpgradeSpec(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"namespace": {
+						SchemaProps: spec.SchemaProps{
+							Description: "If specified, updated the release in the given namespace",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"release": {
+						SchemaProps: spec.SchemaProps{
+							Description: "If specified, uses this as release name",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"version": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"string"},
+							Format: "",
+						},
+					},
+				},
+			},
+		},
+	}
+}
+
+func schema_pkg_apis_management_v1_LoftUpgradeStatus(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
 			},
 		},
 	}

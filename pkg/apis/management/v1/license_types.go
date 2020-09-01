@@ -33,6 +33,7 @@ type LicenseStatus struct {
 type LicenseInfo struct {
 	Announcement   string            `json:"announcement,omitempty"`
 	License        string            `json:"license,omitempty"`
+	CurrentTime    int64             `json:"currentTime"`
 	ResourceLimits []ResourceLimit   `json:"resourceLimits,omitempty"`
 	BlockRequests  []ResoureRequests `json:"blockRequests,omitempty"`
 	Features       map[string]bool   `json:"features,omitempty"`
@@ -43,6 +44,7 @@ type LicenseInfo struct {
 	Promotions     Promotions        `json:"promotions,omitempty"`
 	Analytics      Analytics         `json:"analytics,omitempty"`
 	Links          map[string]string `json:"links,omitempty"`
+	BaseDomains    []string          `json:"baseDomains,omitempty"`
 }
 
 type CustomerInfo struct {
@@ -61,6 +63,7 @@ type CustomerInfo struct {
 type Analytics struct {
 	Endpoint string            `json:"endpoint,omitempty"`
 	Requests []ResoureRequests `json:"requests,omitempty"`
+	Token    string            `json:"token,omitempty"`
 }
 
 type Promotions struct {

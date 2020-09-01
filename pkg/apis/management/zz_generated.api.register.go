@@ -115,7 +115,17 @@ var (
 	NewLicenseTokenREST = func(getter generic.RESTOptionsGetter) rest.Storage {
 		return NewLicenseTokenRESTFunc(Client, Factory)
 	}
-	NewLicenseTokenRESTFunc                  NewRESTFunc
+	NewLicenseTokenRESTFunc      NewRESTFunc
+	ManagementLoftUpgradeStorage = builders.NewApiResourceWithStorage( // Resource status endpoint
+		InternalLoftUpgrade,
+		func() runtime.Object { return &LoftUpgrade{} },     // Register versioned resource
+		func() runtime.Object { return &LoftUpgradeList{} }, // Register versioned resource list
+		NewLoftUpgradeREST,
+	)
+	NewLoftUpgradeREST = func(getter generic.RESTOptionsGetter) rest.Storage {
+		return NewLoftUpgradeRESTFunc(Client, Factory)
+	}
+	NewLoftUpgradeRESTFunc                   NewRESTFunc
 	ManagementSelfSubjectAccessReviewStorage = builders.NewApiResourceWithStorage( // Resource status endpoint
 		InternalSelfSubjectAccessReview,
 		func() runtime.Object { return &SelfSubjectAccessReview{} },     // Register versioned resource
@@ -180,6 +190,14 @@ var (
 		func() runtime.Object { return &Cluster{} },
 		func() runtime.Object { return &ClusterList{} },
 	)
+	InternalClusterDomainREST = builders.NewInternalSubresource(
+		"clusters", "ClusterDomain", "domain",
+		func() runtime.Object { return &ClusterDomain{} },
+	)
+	NewClusterDomainREST = func(getter generic.RESTOptionsGetter) rest.Storage {
+		return NewClusterDomainRESTFunc(Client, Factory)
+	}
+	NewClusterDomainRESTFunc   NewRESTFunc
 	InternalClusterMembersREST = builders.NewInternalSubresource(
 		"clusters", "ClusterMembers", "members",
 		func() runtime.Object { return &ClusterMembers{} },
@@ -287,6 +305,18 @@ var (
 		"LicenseTokenStatus",
 		func() runtime.Object { return &LicenseToken{} },
 		func() runtime.Object { return &LicenseTokenList{} },
+	)
+	InternalLoftUpgrade = builders.NewInternalResource(
+		"loftupgrades",
+		"LoftUpgrade",
+		func() runtime.Object { return &LoftUpgrade{} },
+		func() runtime.Object { return &LoftUpgradeList{} },
+	)
+	InternalLoftUpgradeStatus = builders.NewInternalResourceStatus(
+		"loftupgrades",
+		"LoftUpgradeStatus",
+		func() runtime.Object { return &LoftUpgrade{} },
+		func() runtime.Object { return &LoftUpgradeList{} },
 	)
 	InternalSelfSubjectAccessReview = builders.NewInternalResource(
 		"selfsubjectaccessreviews",
@@ -430,6 +460,7 @@ var (
 		InternalAnnouncementStatus,
 		InternalCluster,
 		InternalClusterStatus,
+		InternalClusterDomainREST,
 		InternalClusterMembersREST,
 		InternalClusterResetREST,
 		InternalClusterVirtualClusterDefaultsREST,
@@ -447,6 +478,8 @@ var (
 		InternalLicenseStatus,
 		InternalLicenseToken,
 		InternalLicenseTokenStatus,
+		InternalLoftUpgrade,
+		InternalLoftUpgradeStatus,
 		InternalSelfSubjectAccessReview,
 		InternalSelfSubjectAccessReviewStatus,
 		InternalSubjectAccessReview,
@@ -493,6 +526,7 @@ func Resource(resource string) schema.GroupResource {
 type Analytics struct {
 	Endpoint string
 	Requests []ResoureRequests
+	Token    string
 }
 
 // +genclient
@@ -572,6 +606,15 @@ type ClusterConnectStatus struct {
 	Failed  bool
 	Reason  string
 	Message string
+}
+
+// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+
+type ClusterDomain struct {
+	metav1.TypeMeta
+	metav1.ObjectMeta
+	Target string
+	Domain string
 }
 
 type ClusterMember struct {
@@ -762,6 +805,7 @@ type License struct {
 type LicenseInfo struct {
 	Announcement   string
 	License        string
+	CurrentTime    int64
 	ResourceLimits []ResourceLimit
 	BlockRequests  []ResoureRequests
 	Features       map[string]bool
@@ -772,6 +816,7 @@ type LicenseInfo struct {
 	Promotions     Promotions
 	Analytics      Analytics
 	Links          map[string]string
+	BaseDomains    []string
 }
 
 type LicenseSpec struct {
@@ -798,6 +843,26 @@ type LicenseTokenSpec struct {
 
 type LicenseTokenStatus struct {
 	Token string
+}
+
+// +genclient
+// +genclient:nonNamespaced
+// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+
+type LoftUpgrade struct {
+	metav1.TypeMeta
+	metav1.ObjectMeta
+	Spec   LoftUpgradeSpec
+	Status LoftUpgradeStatus
+}
+
+type LoftUpgradeSpec struct {
+	Namespace string
+	Release   string
+	Version   string
+}
+
+type LoftUpgradeStatus struct {
 }
 
 type OIDC struct {
@@ -1180,6 +1245,14 @@ type ClusterList struct {
 	metav1.TypeMeta
 	metav1.ListMeta
 	Items []Cluster
+}
+
+// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+
+type ClusterDomainList struct {
+	metav1.TypeMeta
+	metav1.ListMeta
+	Items []ClusterDomain
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -2140,6 +2213,126 @@ func (s *storageLicenseToken) UpdateLicenseToken(ctx context.Context, object *Li
 }
 
 func (s *storageLicenseToken) DeleteLicenseToken(ctx context.Context, id string) (bool, error) {
+	st := s.GetStandardStorage()
+	_, sync, err := st.Delete(ctx, id, nil, &metav1.DeleteOptions{})
+	return sync, err
+}
+
+//
+// LoftUpgrade Functions and Structs
+//
+// +k8s:deepcopy-gen=false
+type LoftUpgradeStrategy struct {
+	builders.DefaultStorageStrategy
+}
+
+// +k8s:deepcopy-gen=false
+type LoftUpgradeStatusStrategy struct {
+	builders.DefaultStatusStorageStrategy
+}
+
+// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+
+type LoftUpgradeList struct {
+	metav1.TypeMeta
+	metav1.ListMeta
+	Items []LoftUpgrade
+}
+
+func (LoftUpgrade) NewStatus() interface{} {
+	return LoftUpgradeStatus{}
+}
+
+func (pc *LoftUpgrade) GetStatus() interface{} {
+	return pc.Status
+}
+
+func (pc *LoftUpgrade) SetStatus(s interface{}) {
+	pc.Status = s.(LoftUpgradeStatus)
+}
+
+func (pc *LoftUpgrade) GetSpec() interface{} {
+	return pc.Spec
+}
+
+func (pc *LoftUpgrade) SetSpec(s interface{}) {
+	pc.Spec = s.(LoftUpgradeSpec)
+}
+
+func (pc *LoftUpgrade) GetObjectMeta() *metav1.ObjectMeta {
+	return &pc.ObjectMeta
+}
+
+func (pc *LoftUpgrade) SetGeneration(generation int64) {
+	pc.ObjectMeta.Generation = generation
+}
+
+func (pc LoftUpgrade) GetGeneration() int64 {
+	return pc.ObjectMeta.Generation
+}
+
+// Registry is an interface for things that know how to store LoftUpgrade.
+// +k8s:deepcopy-gen=false
+type LoftUpgradeRegistry interface {
+	ListLoftUpgrades(ctx context.Context, options *internalversion.ListOptions) (*LoftUpgradeList, error)
+	GetLoftUpgrade(ctx context.Context, id string, options *metav1.GetOptions) (*LoftUpgrade, error)
+	CreateLoftUpgrade(ctx context.Context, id *LoftUpgrade) (*LoftUpgrade, error)
+	UpdateLoftUpgrade(ctx context.Context, id *LoftUpgrade) (*LoftUpgrade, error)
+	DeleteLoftUpgrade(ctx context.Context, id string) (bool, error)
+}
+
+// NewRegistry returns a new Registry interface for the given Storage. Any mismatched types will panic.
+func NewLoftUpgradeRegistry(sp builders.StandardStorageProvider) LoftUpgradeRegistry {
+	return &storageLoftUpgrade{sp}
+}
+
+// Implement Registry
+// storage puts strong typing around storage calls
+// +k8s:deepcopy-gen=false
+type storageLoftUpgrade struct {
+	builders.StandardStorageProvider
+}
+
+func (s *storageLoftUpgrade) ListLoftUpgrades(ctx context.Context, options *internalversion.ListOptions) (*LoftUpgradeList, error) {
+	if options != nil && options.FieldSelector != nil && !options.FieldSelector.Empty() {
+		return nil, fmt.Errorf("field selector not supported yet")
+	}
+	st := s.GetStandardStorage()
+	obj, err := st.List(ctx, options)
+	if err != nil {
+		return nil, err
+	}
+	return obj.(*LoftUpgradeList), err
+}
+
+func (s *storageLoftUpgrade) GetLoftUpgrade(ctx context.Context, id string, options *metav1.GetOptions) (*LoftUpgrade, error) {
+	st := s.GetStandardStorage()
+	obj, err := st.Get(ctx, id, options)
+	if err != nil {
+		return nil, err
+	}
+	return obj.(*LoftUpgrade), nil
+}
+
+func (s *storageLoftUpgrade) CreateLoftUpgrade(ctx context.Context, object *LoftUpgrade) (*LoftUpgrade, error) {
+	st := s.GetStandardStorage()
+	obj, err := st.Create(ctx, object, nil, &metav1.CreateOptions{})
+	if err != nil {
+		return nil, err
+	}
+	return obj.(*LoftUpgrade), nil
+}
+
+func (s *storageLoftUpgrade) UpdateLoftUpgrade(ctx context.Context, object *LoftUpgrade) (*LoftUpgrade, error) {
+	st := s.GetStandardStorage()
+	obj, _, err := st.Update(ctx, object.Name, rest.DefaultUpdatedObjectInfo(object), nil, nil, false, &metav1.UpdateOptions{})
+	if err != nil {
+		return nil, err
+	}
+	return obj.(*LoftUpgrade), nil
+}
+
+func (s *storageLoftUpgrade) DeleteLoftUpgrade(ctx context.Context, id string) (bool, error) {
 	st := s.GetStandardStorage()
 	_, sync, err := st.Delete(ctx, id, nil, &metav1.DeleteOptions{})
 	return sync, err

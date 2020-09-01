@@ -44,6 +44,10 @@ func (c *FakeManagementV1) LicenseTokens() v1.LicenseTokenInterface {
 	return &FakeLicenseTokens{c}
 }
 
+func (c *FakeManagementV1) LoftUpgrades() v1.LoftUpgradeInterface {
+	return &FakeLoftUpgrades{c}
+}
+
 func (c *FakeManagementV1) SelfSubjectAccessReviews() v1.SelfSubjectAccessReviewInterface {
 	return &FakeSelfSubjectAccessReviews{c}
 }

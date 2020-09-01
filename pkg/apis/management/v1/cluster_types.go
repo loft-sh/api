@@ -16,6 +16,7 @@ import (
 // +k8s:openapi-gen=true
 // +resource:path=clusters,rest=ClusterREST
 // +subresource:request=ClusterReset,path=reset,kind=ClusterReset,rest=ClusterResetREST
+// +subresource:request=ClusterDomain,path=domain,kind=ClusterDomain,rest=ClusterDomainREST
 // +subresource:request=ClusterMembers,path=members,kind=ClusterMembers,rest=ClusterMembersREST
 // +subresource:request=ClusterVirtualClusterDefaults,path=virtualclusterdefaults,kind=ClusterVirtualClusterDefaults,rest=ClusterVirtualClusterDefaultsREST
 type Cluster struct {

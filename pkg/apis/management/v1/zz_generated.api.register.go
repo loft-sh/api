@@ -17,6 +17,7 @@ func addKnownTypes(scheme *runtime.Scheme) error {
 		&AnnouncementList{},
 		&Cluster{},
 		&ClusterList{},
+		&ClusterDomain{},
 		&ClusterMembers{},
 		&ClusterReset{},
 		&ClusterVirtualClusterDefaults{},
@@ -34,6 +35,8 @@ func addKnownTypes(scheme *runtime.Scheme) error {
 		&LicenseList{},
 		&LicenseToken{},
 		&LicenseTokenList{},
+		&LoftUpgrade{},
+		&LoftUpgradeList{},
 		&SelfSubjectAccessReview{},
 		&SelfSubjectAccessReviewList{},
 		&SubjectAccessReview{},
@@ -62,6 +65,11 @@ var (
 		management.ManagementAnnouncementStorage,
 		management.ManagementClusterStorage,
 		builders.NewApiResourceWithStorage(
+			management.InternalClusterDomainREST,
+			func() runtime.Object { return &ClusterDomain{} }, // Register versioned resource
+			nil,
+			management.NewClusterDomainREST),
+		builders.NewApiResourceWithStorage(
 			management.InternalClusterMembersREST,
 			func() runtime.Object { return &ClusterMembers{} }, // Register versioned resource
 			nil,
@@ -83,6 +91,7 @@ var (
 		management.ManagementKioskStorage,
 		management.ManagementLicenseStorage,
 		management.ManagementLicenseTokenStorage,
+		management.ManagementLoftUpgradeStorage,
 		management.ManagementSelfSubjectAccessReviewStorage,
 		management.ManagementSubjectAccessReviewStorage,
 		management.ManagementTeamStorage,
@@ -191,6 +200,14 @@ type ClusterList struct {
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
 
+type ClusterDomainList struct {
+	metav1.TypeMeta `json:",inline"`
+	metav1.ListMeta `json:"metadata,omitempty"`
+	Items           []ClusterDomain `json:"items"`
+}
+
+// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+
 type ClusterMembersList struct {
 	metav1.TypeMeta `json:",inline"`
 	metav1.ListMeta `json:"metadata,omitempty"`
@@ -267,6 +284,14 @@ type LicenseTokenList struct {
 	metav1.TypeMeta `json:",inline"`
 	metav1.ListMeta `json:"metadata,omitempty"`
 	Items           []LicenseToken `json:"items"`
+}
+
+// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+
+type LoftUpgradeList struct {
+	metav1.TypeMeta `json:",inline"`
+	metav1.ListMeta `json:"metadata,omitempty"`
+	Items           []LoftUpgrade `json:"items"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object

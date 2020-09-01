@@ -18,6 +18,8 @@ type LicenseExpansion interface{}
 
 type LicenseTokenExpansion interface{}
 
+type LoftUpgradeExpansion interface{}
+
 type SelfSubjectAccessReviewExpansion interface{}
 
 type SubjectAccessReviewExpansion interface{}

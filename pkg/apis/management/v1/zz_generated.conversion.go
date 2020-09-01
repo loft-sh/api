@@ -163,6 +163,26 @@ func RegisterConversions(s *runtime.Scheme) error {
 	}); err != nil {
 		return err
 	}
+	if err := s.AddGeneratedConversionFunc((*ClusterDomain)(nil), (*management.ClusterDomain)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_v1_ClusterDomain_To_management_ClusterDomain(a.(*ClusterDomain), b.(*management.ClusterDomain), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*management.ClusterDomain)(nil), (*ClusterDomain)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_management_ClusterDomain_To_v1_ClusterDomain(a.(*management.ClusterDomain), b.(*ClusterDomain), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*ClusterDomainList)(nil), (*management.ClusterDomainList)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_v1_ClusterDomainList_To_management_ClusterDomainList(a.(*ClusterDomainList), b.(*management.ClusterDomainList), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*management.ClusterDomainList)(nil), (*ClusterDomainList)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_management_ClusterDomainList_To_v1_ClusterDomainList(a.(*management.ClusterDomainList), b.(*ClusterDomainList), scope)
+	}); err != nil {
+		return err
+	}
 	if err := s.AddGeneratedConversionFunc((*ClusterList)(nil), (*management.ClusterList)(nil), func(a, b interface{}, scope conversion.Scope) error {
 		return Convert_v1_ClusterList_To_management_ClusterList(a.(*ClusterList), b.(*management.ClusterList), scope)
 	}); err != nil {
@@ -580,6 +600,46 @@ func RegisterConversions(s *runtime.Scheme) error {
 	}
 	if err := s.AddGeneratedConversionFunc((*management.LicenseTokenStatus)(nil), (*LicenseTokenStatus)(nil), func(a, b interface{}, scope conversion.Scope) error {
 		return Convert_management_LicenseTokenStatus_To_v1_LicenseTokenStatus(a.(*management.LicenseTokenStatus), b.(*LicenseTokenStatus), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*LoftUpgrade)(nil), (*management.LoftUpgrade)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_v1_LoftUpgrade_To_management_LoftUpgrade(a.(*LoftUpgrade), b.(*management.LoftUpgrade), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*management.LoftUpgrade)(nil), (*LoftUpgrade)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_management_LoftUpgrade_To_v1_LoftUpgrade(a.(*management.LoftUpgrade), b.(*LoftUpgrade), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*LoftUpgradeList)(nil), (*management.LoftUpgradeList)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_v1_LoftUpgradeList_To_management_LoftUpgradeList(a.(*LoftUpgradeList), b.(*management.LoftUpgradeList), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*management.LoftUpgradeList)(nil), (*LoftUpgradeList)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_management_LoftUpgradeList_To_v1_LoftUpgradeList(a.(*management.LoftUpgradeList), b.(*LoftUpgradeList), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*LoftUpgradeSpec)(nil), (*management.LoftUpgradeSpec)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_v1_LoftUpgradeSpec_To_management_LoftUpgradeSpec(a.(*LoftUpgradeSpec), b.(*management.LoftUpgradeSpec), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*management.LoftUpgradeSpec)(nil), (*LoftUpgradeSpec)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_management_LoftUpgradeSpec_To_v1_LoftUpgradeSpec(a.(*management.LoftUpgradeSpec), b.(*LoftUpgradeSpec), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*LoftUpgradeStatus)(nil), (*management.LoftUpgradeStatus)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_v1_LoftUpgradeStatus_To_management_LoftUpgradeStatus(a.(*LoftUpgradeStatus), b.(*management.LoftUpgradeStatus), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*management.LoftUpgradeStatus)(nil), (*LoftUpgradeStatus)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_management_LoftUpgradeStatus_To_v1_LoftUpgradeStatus(a.(*management.LoftUpgradeStatus), b.(*LoftUpgradeStatus), scope)
 	}); err != nil {
 		return err
 	}
@@ -1079,6 +1139,7 @@ func RegisterConversions(s *runtime.Scheme) error {
 func autoConvert_v1_Analytics_To_management_Analytics(in *Analytics, out *management.Analytics, s conversion.Scope) error {
 	out.Endpoint = in.Endpoint
 	out.Requests = *(*[]management.ResoureRequests)(unsafe.Pointer(&in.Requests))
+	out.Token = in.Token
 	return nil
 }
 
@@ -1090,6 +1151,7 @@ func Convert_v1_Analytics_To_management_Analytics(in *Analytics, out *management
 func autoConvert_management_Analytics_To_v1_Analytics(in *management.Analytics, out *Analytics, s conversion.Scope) error {
 	out.Endpoint = in.Endpoint
 	out.Requests = *(*[]ResoureRequests)(unsafe.Pointer(&in.Requests))
+	out.Token = in.Token
 	return nil
 }
 
@@ -1428,6 +1490,52 @@ func autoConvert_management_ClusterConnectStatus_To_v1_ClusterConnectStatus(in *
 // Convert_management_ClusterConnectStatus_To_v1_ClusterConnectStatus is an autogenerated conversion function.
 func Convert_management_ClusterConnectStatus_To_v1_ClusterConnectStatus(in *management.ClusterConnectStatus, out *ClusterConnectStatus, s conversion.Scope) error {
 	return autoConvert_management_ClusterConnectStatus_To_v1_ClusterConnectStatus(in, out, s)
+}
+
+func autoConvert_v1_ClusterDomain_To_management_ClusterDomain(in *ClusterDomain, out *management.ClusterDomain, s conversion.Scope) error {
+	out.ObjectMeta = in.ObjectMeta
+	out.Target = in.Target
+	out.Domain = in.Domain
+	return nil
+}
+
+// Convert_v1_ClusterDomain_To_management_ClusterDomain is an autogenerated conversion function.
+func Convert_v1_ClusterDomain_To_management_ClusterDomain(in *ClusterDomain, out *management.ClusterDomain, s conversion.Scope) error {
+	return autoConvert_v1_ClusterDomain_To_management_ClusterDomain(in, out, s)
+}
+
+func autoConvert_management_ClusterDomain_To_v1_ClusterDomain(in *management.ClusterDomain, out *ClusterDomain, s conversion.Scope) error {
+	out.ObjectMeta = in.ObjectMeta
+	out.Target = in.Target
+	out.Domain = in.Domain
+	return nil
+}
+
+// Convert_management_ClusterDomain_To_v1_ClusterDomain is an autogenerated conversion function.
+func Convert_management_ClusterDomain_To_v1_ClusterDomain(in *management.ClusterDomain, out *ClusterDomain, s conversion.Scope) error {
+	return autoConvert_management_ClusterDomain_To_v1_ClusterDomain(in, out, s)
+}
+
+func autoConvert_v1_ClusterDomainList_To_management_ClusterDomainList(in *ClusterDomainList, out *management.ClusterDomainList, s conversion.Scope) error {
+	out.ListMeta = in.ListMeta
+	out.Items = *(*[]management.ClusterDomain)(unsafe.Pointer(&in.Items))
+	return nil
+}
+
+// Convert_v1_ClusterDomainList_To_management_ClusterDomainList is an autogenerated conversion function.
+func Convert_v1_ClusterDomainList_To_management_ClusterDomainList(in *ClusterDomainList, out *management.ClusterDomainList, s conversion.Scope) error {
+	return autoConvert_v1_ClusterDomainList_To_management_ClusterDomainList(in, out, s)
+}
+
+func autoConvert_management_ClusterDomainList_To_v1_ClusterDomainList(in *management.ClusterDomainList, out *ClusterDomainList, s conversion.Scope) error {
+	out.ListMeta = in.ListMeta
+	out.Items = *(*[]ClusterDomain)(unsafe.Pointer(&in.Items))
+	return nil
+}
+
+// Convert_management_ClusterDomainList_To_v1_ClusterDomainList is an autogenerated conversion function.
+func Convert_management_ClusterDomainList_To_v1_ClusterDomainList(in *management.ClusterDomainList, out *ClusterDomainList, s conversion.Scope) error {
+	return autoConvert_management_ClusterDomainList_To_v1_ClusterDomainList(in, out, s)
 }
 
 func autoConvert_v1_ClusterList_To_management_ClusterList(in *ClusterList, out *management.ClusterList, s conversion.Scope) error {
@@ -2271,6 +2379,7 @@ func Convert_management_License_To_v1_License(in *management.License, out *Licen
 func autoConvert_v1_LicenseInfo_To_management_LicenseInfo(in *LicenseInfo, out *management.LicenseInfo, s conversion.Scope) error {
 	out.Announcement = in.Announcement
 	out.License = in.License
+	out.CurrentTime = in.CurrentTime
 	out.ResourceLimits = *(*[]management.ResourceLimit)(unsafe.Pointer(&in.ResourceLimits))
 	out.BlockRequests = *(*[]management.ResoureRequests)(unsafe.Pointer(&in.BlockRequests))
 	out.Features = *(*map[string]bool)(unsafe.Pointer(&in.Features))
@@ -2291,6 +2400,7 @@ func autoConvert_v1_LicenseInfo_To_management_LicenseInfo(in *LicenseInfo, out *
 		return err
 	}
 	out.Links = *(*map[string]string)(unsafe.Pointer(&in.Links))
+	out.BaseDomains = *(*[]string)(unsafe.Pointer(&in.BaseDomains))
 	return nil
 }
 
@@ -2302,6 +2412,7 @@ func Convert_v1_LicenseInfo_To_management_LicenseInfo(in *LicenseInfo, out *mana
 func autoConvert_management_LicenseInfo_To_v1_LicenseInfo(in *management.LicenseInfo, out *LicenseInfo, s conversion.Scope) error {
 	out.Announcement = in.Announcement
 	out.License = in.License
+	out.CurrentTime = in.CurrentTime
 	out.ResourceLimits = *(*[]ResourceLimit)(unsafe.Pointer(&in.ResourceLimits))
 	out.BlockRequests = *(*[]ResoureRequests)(unsafe.Pointer(&in.BlockRequests))
 	out.Features = *(*map[string]bool)(unsafe.Pointer(&in.Features))
@@ -2322,6 +2433,7 @@ func autoConvert_management_LicenseInfo_To_v1_LicenseInfo(in *management.License
 		return err
 	}
 	out.Links = *(*map[string]string)(unsafe.Pointer(&in.Links))
+	out.BaseDomains = *(*[]string)(unsafe.Pointer(&in.BaseDomains))
 	return nil
 }
 
@@ -2486,6 +2598,102 @@ func autoConvert_management_LicenseTokenStatus_To_v1_LicenseTokenStatus(in *mana
 // Convert_management_LicenseTokenStatus_To_v1_LicenseTokenStatus is an autogenerated conversion function.
 func Convert_management_LicenseTokenStatus_To_v1_LicenseTokenStatus(in *management.LicenseTokenStatus, out *LicenseTokenStatus, s conversion.Scope) error {
 	return autoConvert_management_LicenseTokenStatus_To_v1_LicenseTokenStatus(in, out, s)
+}
+
+func autoConvert_v1_LoftUpgrade_To_management_LoftUpgrade(in *LoftUpgrade, out *management.LoftUpgrade, s conversion.Scope) error {
+	out.ObjectMeta = in.ObjectMeta
+	if err := Convert_v1_LoftUpgradeSpec_To_management_LoftUpgradeSpec(&in.Spec, &out.Spec, s); err != nil {
+		return err
+	}
+	if err := Convert_v1_LoftUpgradeStatus_To_management_LoftUpgradeStatus(&in.Status, &out.Status, s); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Convert_v1_LoftUpgrade_To_management_LoftUpgrade is an autogenerated conversion function.
+func Convert_v1_LoftUpgrade_To_management_LoftUpgrade(in *LoftUpgrade, out *management.LoftUpgrade, s conversion.Scope) error {
+	return autoConvert_v1_LoftUpgrade_To_management_LoftUpgrade(in, out, s)
+}
+
+func autoConvert_management_LoftUpgrade_To_v1_LoftUpgrade(in *management.LoftUpgrade, out *LoftUpgrade, s conversion.Scope) error {
+	out.ObjectMeta = in.ObjectMeta
+	if err := Convert_management_LoftUpgradeSpec_To_v1_LoftUpgradeSpec(&in.Spec, &out.Spec, s); err != nil {
+		return err
+	}
+	if err := Convert_management_LoftUpgradeStatus_To_v1_LoftUpgradeStatus(&in.Status, &out.Status, s); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Convert_management_LoftUpgrade_To_v1_LoftUpgrade is an autogenerated conversion function.
+func Convert_management_LoftUpgrade_To_v1_LoftUpgrade(in *management.LoftUpgrade, out *LoftUpgrade, s conversion.Scope) error {
+	return autoConvert_management_LoftUpgrade_To_v1_LoftUpgrade(in, out, s)
+}
+
+func autoConvert_v1_LoftUpgradeList_To_management_LoftUpgradeList(in *LoftUpgradeList, out *management.LoftUpgradeList, s conversion.Scope) error {
+	out.ListMeta = in.ListMeta
+	out.Items = *(*[]management.LoftUpgrade)(unsafe.Pointer(&in.Items))
+	return nil
+}
+
+// Convert_v1_LoftUpgradeList_To_management_LoftUpgradeList is an autogenerated conversion function.
+func Convert_v1_LoftUpgradeList_To_management_LoftUpgradeList(in *LoftUpgradeList, out *management.LoftUpgradeList, s conversion.Scope) error {
+	return autoConvert_v1_LoftUpgradeList_To_management_LoftUpgradeList(in, out, s)
+}
+
+func autoConvert_management_LoftUpgradeList_To_v1_LoftUpgradeList(in *management.LoftUpgradeList, out *LoftUpgradeList, s conversion.Scope) error {
+	out.ListMeta = in.ListMeta
+	out.Items = *(*[]LoftUpgrade)(unsafe.Pointer(&in.Items))
+	return nil
+}
+
+// Convert_management_LoftUpgradeList_To_v1_LoftUpgradeList is an autogenerated conversion function.
+func Convert_management_LoftUpgradeList_To_v1_LoftUpgradeList(in *management.LoftUpgradeList, out *LoftUpgradeList, s conversion.Scope) error {
+	return autoConvert_management_LoftUpgradeList_To_v1_LoftUpgradeList(in, out, s)
+}
+
+func autoConvert_v1_LoftUpgradeSpec_To_management_LoftUpgradeSpec(in *LoftUpgradeSpec, out *management.LoftUpgradeSpec, s conversion.Scope) error {
+	out.Namespace = in.Namespace
+	out.Release = in.Release
+	out.Version = in.Version
+	return nil
+}
+
+// Convert_v1_LoftUpgradeSpec_To_management_LoftUpgradeSpec is an autogenerated conversion function.
+func Convert_v1_LoftUpgradeSpec_To_management_LoftUpgradeSpec(in *LoftUpgradeSpec, out *management.LoftUpgradeSpec, s conversion.Scope) error {
+	return autoConvert_v1_LoftUpgradeSpec_To_management_LoftUpgradeSpec(in, out, s)
+}
+
+func autoConvert_management_LoftUpgradeSpec_To_v1_LoftUpgradeSpec(in *management.LoftUpgradeSpec, out *LoftUpgradeSpec, s conversion.Scope) error {
+	out.Namespace = in.Namespace
+	out.Release = in.Release
+	out.Version = in.Version
+	return nil
+}
+
+// Convert_management_LoftUpgradeSpec_To_v1_LoftUpgradeSpec is an autogenerated conversion function.
+func Convert_management_LoftUpgradeSpec_To_v1_LoftUpgradeSpec(in *management.LoftUpgradeSpec, out *LoftUpgradeSpec, s conversion.Scope) error {
+	return autoConvert_management_LoftUpgradeSpec_To_v1_LoftUpgradeSpec(in, out, s)
+}
+
+func autoConvert_v1_LoftUpgradeStatus_To_management_LoftUpgradeStatus(in *LoftUpgradeStatus, out *management.LoftUpgradeStatus, s conversion.Scope) error {
+	return nil
+}
+
+// Convert_v1_LoftUpgradeStatus_To_management_LoftUpgradeStatus is an autogenerated conversion function.
+func Convert_v1_LoftUpgradeStatus_To_management_LoftUpgradeStatus(in *LoftUpgradeStatus, out *management.LoftUpgradeStatus, s conversion.Scope) error {
+	return autoConvert_v1_LoftUpgradeStatus_To_management_LoftUpgradeStatus(in, out, s)
+}
+
+func autoConvert_management_LoftUpgradeStatus_To_v1_LoftUpgradeStatus(in *management.LoftUpgradeStatus, out *LoftUpgradeStatus, s conversion.Scope) error {
+	return nil
+}
+
+// Convert_management_LoftUpgradeStatus_To_v1_LoftUpgradeStatus is an autogenerated conversion function.
+func Convert_management_LoftUpgradeStatus_To_v1_LoftUpgradeStatus(in *management.LoftUpgradeStatus, out *LoftUpgradeStatus, s conversion.Scope) error {
+	return autoConvert_management_LoftUpgradeStatus_To_v1_LoftUpgradeStatus(in, out, s)
 }
 
 func autoConvert_v1_OIDC_To_management_OIDC(in *OIDC, out *management.OIDC, s conversion.Scope) error {
