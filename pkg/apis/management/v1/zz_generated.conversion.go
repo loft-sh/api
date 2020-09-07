@@ -2821,6 +2821,7 @@ func autoConvert_v1_ResourceLimit_To_management_ResourceLimit(in *ResourceLimit,
 	out.Version = in.Version
 	out.Kind = in.Kind
 	out.Limit = in.Limit
+	out.AcrossAllClusters = in.AcrossAllClusters
 	out.BlockRequests = *(*[]management.ResoureRequests)(unsafe.Pointer(&in.BlockRequests))
 	return nil
 }
@@ -2835,6 +2836,7 @@ func autoConvert_management_ResourceLimit_To_v1_ResourceLimit(in *management.Res
 	out.Version = in.Version
 	out.Kind = in.Kind
 	out.Limit = in.Limit
+	out.AcrossAllClusters = in.AcrossAllClusters
 	out.BlockRequests = *(*[]ResoureRequests)(unsafe.Pointer(&in.BlockRequests))
 	return nil
 }

@@ -5924,6 +5924,12 @@ func schema_pkg_apis_management_v1_ResourceLimit(ref common.ReferenceCallback) c
 							Format: "int64",
 						},
 					},
+					"acrossAllClusters": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"boolean"},
+							Format: "",
+						},
+					},
 					"blockRequests": {
 						SchemaProps: spec.SchemaProps{
 							Type: []string{"array"},

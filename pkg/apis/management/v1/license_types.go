@@ -110,11 +110,12 @@ type DefaultPaymentMethodCard struct {
 }
 
 type ResourceLimit struct {
-	Group         string            `json:"group,omitempty"`
-	Version       string            `json:"version,omitempty"`
-	Kind          string            `json:"kind,omitempty"`
-	Limit         int64             `json:"limit,omitempty"`
-	BlockRequests []ResoureRequests `json:"blockRequests,omitempty"`
+	Group             string            `json:"group,omitempty"`
+	Version           string            `json:"version,omitempty"`
+	Kind              string            `json:"kind,omitempty"`
+	Limit             int64             `json:"limit,omitempty"`
+	AcrossAllClusters bool              `json:"acrossAllClusters,omitempty"`
+	BlockRequests     []ResoureRequests `json:"blockRequests,omitempty"`
 }
 
 type ResoureRequests struct {

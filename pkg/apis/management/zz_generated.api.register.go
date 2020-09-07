@@ -570,7 +570,7 @@ type AuthenticationPassword struct {
 }
 
 // +genclient
-// +genclient
+// +genclient:nonNamespaced
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
 
 type Cluster struct {
@@ -894,11 +894,12 @@ type Promotions struct {
 }
 
 type ResourceLimit struct {
-	Group         string
-	Version       string
-	Kind          string
-	Limit         int64
-	BlockRequests []ResoureRequests
+	Group             string
+	Version           string
+	Kind              string
+	Limit             int64
+	AcrossAllClusters bool
+	BlockRequests     []ResoureRequests
 }
 
 type ResoureRequests struct {
