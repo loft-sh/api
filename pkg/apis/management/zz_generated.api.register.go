@@ -20,10 +20,9 @@ import (
 	"k8s.io/apiserver/pkg/registry/generic"
 	"k8s.io/apiserver/pkg/registry/rest"
 	"sigs.k8s.io/apiserver-builder-alpha/pkg/builders"
-	"sigs.k8s.io/controller-runtime/pkg/client"
 )
 
-type NewRESTFunc func(client client.Client, factory managerfactory.SharedManagerFactory) rest.Storage
+type NewRESTFunc func(factory managerfactory.SharedManagerFactory) rest.Storage
 
 var (
 	ManagementAnnouncementStorage = builders.NewApiResourceWithStorage( // Resource status endpoint
@@ -33,7 +32,7 @@ var (
 		NewAnnouncementREST,
 	)
 	NewAnnouncementREST = func(getter generic.RESTOptionsGetter) rest.Storage {
-		return NewAnnouncementRESTFunc(Client, Factory)
+		return NewAnnouncementRESTFunc(Factory)
 	}
 	NewAnnouncementRESTFunc  NewRESTFunc
 	ManagementClusterStorage = builders.NewApiResourceWithStorage( // Resource status endpoint
@@ -43,7 +42,7 @@ var (
 		NewClusterREST,
 	)
 	NewClusterREST = func(getter generic.RESTOptionsGetter) rest.Storage {
-		return NewClusterRESTFunc(Client, Factory)
+		return NewClusterRESTFunc(Factory)
 	}
 	NewClusterRESTFunc              NewRESTFunc
 	ManagementClusterConnectStorage = builders.NewApiResourceWithStorage( // Resource status endpoint
@@ -53,7 +52,7 @@ var (
 		NewClusterConnectREST,
 	)
 	NewClusterConnectREST = func(getter generic.RESTOptionsGetter) rest.Storage {
-		return NewClusterConnectRESTFunc(Client, Factory)
+		return NewClusterConnectRESTFunc(Factory)
 	}
 	NewClusterConnectRESTFunc    NewRESTFunc
 	ManagementClusterRoleStorage = builders.NewApiResourceWithStorage( // Resource status endpoint
@@ -63,7 +62,7 @@ var (
 		NewClusterRoleREST,
 	)
 	NewClusterRoleREST = func(getter generic.RESTOptionsGetter) rest.Storage {
-		return NewClusterRoleRESTFunc(Client, Factory)
+		return NewClusterRoleRESTFunc(Factory)
 	}
 	NewClusterRoleRESTFunc  NewRESTFunc
 	ManagementConfigStorage = builders.NewApiResourceWithStorage( // Resource status endpoint
@@ -73,7 +72,7 @@ var (
 		NewConfigREST,
 	)
 	NewConfigREST = func(getter generic.RESTOptionsGetter) rest.Storage {
-		return NewConfigRESTFunc(Client, Factory)
+		return NewConfigRESTFunc(Factory)
 	}
 	NewConfigRESTFunc        NewRESTFunc
 	ManagementFeatureStorage = builders.NewApiResourceWithStorage( // Resource status endpoint
@@ -83,7 +82,7 @@ var (
 		NewFeatureREST,
 	)
 	NewFeatureREST = func(getter generic.RESTOptionsGetter) rest.Storage {
-		return NewFeatureRESTFunc(Client, Factory)
+		return NewFeatureRESTFunc(Factory)
 	}
 	NewFeatureRESTFunc     NewRESTFunc
 	ManagementKioskStorage = builders.NewApiResourceWithStorage( // Resource status endpoint
@@ -93,7 +92,7 @@ var (
 		NewKioskREST,
 	)
 	NewKioskREST = func(getter generic.RESTOptionsGetter) rest.Storage {
-		return NewKioskRESTFunc(Client, Factory)
+		return NewKioskRESTFunc(Factory)
 	}
 	NewKioskRESTFunc         NewRESTFunc
 	ManagementLicenseStorage = builders.NewApiResourceWithStorage( // Resource status endpoint
@@ -103,7 +102,7 @@ var (
 		NewLicenseREST,
 	)
 	NewLicenseREST = func(getter generic.RESTOptionsGetter) rest.Storage {
-		return NewLicenseRESTFunc(Client, Factory)
+		return NewLicenseRESTFunc(Factory)
 	}
 	NewLicenseRESTFunc            NewRESTFunc
 	ManagementLicenseTokenStorage = builders.NewApiResourceWithStorage( // Resource status endpoint
@@ -113,7 +112,7 @@ var (
 		NewLicenseTokenREST,
 	)
 	NewLicenseTokenREST = func(getter generic.RESTOptionsGetter) rest.Storage {
-		return NewLicenseTokenRESTFunc(Client, Factory)
+		return NewLicenseTokenRESTFunc(Factory)
 	}
 	NewLicenseTokenRESTFunc      NewRESTFunc
 	ManagementLoftUpgradeStorage = builders.NewApiResourceWithStorage( // Resource status endpoint
@@ -123,7 +122,7 @@ var (
 		NewLoftUpgradeREST,
 	)
 	NewLoftUpgradeREST = func(getter generic.RESTOptionsGetter) rest.Storage {
-		return NewLoftUpgradeRESTFunc(Client, Factory)
+		return NewLoftUpgradeRESTFunc(Factory)
 	}
 	NewLoftUpgradeRESTFunc                   NewRESTFunc
 	ManagementSelfSubjectAccessReviewStorage = builders.NewApiResourceWithStorage( // Resource status endpoint
@@ -133,7 +132,7 @@ var (
 		NewSelfSubjectAccessReviewREST,
 	)
 	NewSelfSubjectAccessReviewREST = func(getter generic.RESTOptionsGetter) rest.Storage {
-		return NewSelfSubjectAccessReviewRESTFunc(Client, Factory)
+		return NewSelfSubjectAccessReviewRESTFunc(Factory)
 	}
 	NewSelfSubjectAccessReviewRESTFunc   NewRESTFunc
 	ManagementSubjectAccessReviewStorage = builders.NewApiResourceWithStorage( // Resource status endpoint
@@ -143,7 +142,7 @@ var (
 		NewSubjectAccessReviewREST,
 	)
 	NewSubjectAccessReviewREST = func(getter generic.RESTOptionsGetter) rest.Storage {
-		return NewSubjectAccessReviewRESTFunc(Client, Factory)
+		return NewSubjectAccessReviewRESTFunc(Factory)
 	}
 	NewSubjectAccessReviewRESTFunc NewRESTFunc
 	ManagementTeamStorage          = builders.NewApiResourceWithStorage( // Resource status endpoint
@@ -153,7 +152,7 @@ var (
 		NewTeamREST,
 	)
 	NewTeamREST = func(getter generic.RESTOptionsGetter) rest.Storage {
-		return NewTeamRESTFunc(Client, Factory)
+		return NewTeamRESTFunc(Factory)
 	}
 	NewTeamRESTFunc       NewRESTFunc
 	ManagementUserStorage = builders.NewApiResourceWithStorage( // Resource status endpoint
@@ -163,7 +162,7 @@ var (
 		NewUserREST,
 	)
 	NewUserREST = func(getter generic.RESTOptionsGetter) rest.Storage {
-		return NewUserRESTFunc(Client, Factory)
+		return NewUserRESTFunc(Factory)
 	}
 	NewUserRESTFunc      NewRESTFunc
 	InternalAnnouncement = builders.NewInternalResource(
@@ -195,7 +194,7 @@ var (
 		func() runtime.Object { return &ClusterDomain{} },
 	)
 	NewClusterDomainREST = func(getter generic.RESTOptionsGetter) rest.Storage {
-		return NewClusterDomainRESTFunc(Client, Factory)
+		return NewClusterDomainRESTFunc(Factory)
 	}
 	NewClusterDomainRESTFunc   NewRESTFunc
 	InternalClusterMembersREST = builders.NewInternalSubresource(
@@ -203,7 +202,7 @@ var (
 		func() runtime.Object { return &ClusterMembers{} },
 	)
 	NewClusterMembersREST = func(getter generic.RESTOptionsGetter) rest.Storage {
-		return NewClusterMembersRESTFunc(Client, Factory)
+		return NewClusterMembersRESTFunc(Factory)
 	}
 	NewClusterMembersRESTFunc NewRESTFunc
 	InternalClusterResetREST  = builders.NewInternalSubresource(
@@ -211,7 +210,7 @@ var (
 		func() runtime.Object { return &ClusterReset{} },
 	)
 	NewClusterResetREST = func(getter generic.RESTOptionsGetter) rest.Storage {
-		return NewClusterResetRESTFunc(Client, Factory)
+		return NewClusterResetRESTFunc(Factory)
 	}
 	NewClusterResetRESTFunc                   NewRESTFunc
 	InternalClusterVirtualClusterDefaultsREST = builders.NewInternalSubresource(
@@ -219,7 +218,7 @@ var (
 		func() runtime.Object { return &ClusterVirtualClusterDefaults{} },
 	)
 	NewClusterVirtualClusterDefaultsREST = func(getter generic.RESTOptionsGetter) rest.Storage {
-		return NewClusterVirtualClusterDefaultsRESTFunc(Client, Factory)
+		return NewClusterVirtualClusterDefaultsRESTFunc(Factory)
 	}
 	NewClusterVirtualClusterDefaultsRESTFunc NewRESTFunc
 	InternalClusterConnect                   = builders.NewInternalResource(
@@ -359,7 +358,7 @@ var (
 		func() runtime.Object { return &TeamClusterRoles{} },
 	)
 	NewTeamClusterRolesREST = func(getter generic.RESTOptionsGetter) rest.Storage {
-		return NewTeamClusterRolesRESTFunc(Client, Factory)
+		return NewTeamClusterRolesRESTFunc(Factory)
 	}
 	NewTeamClusterRolesRESTFunc NewRESTFunc
 	InternalTeamClustersREST    = builders.NewInternalSubresource(
@@ -367,7 +366,7 @@ var (
 		func() runtime.Object { return &TeamClusters{} },
 	)
 	NewTeamClustersREST = func(getter generic.RESTOptionsGetter) rest.Storage {
-		return NewTeamClustersRESTFunc(Client, Factory)
+		return NewTeamClustersRESTFunc(Factory)
 	}
 	NewTeamClustersRESTFunc NewRESTFunc
 	InternalTeamSpacesREST  = builders.NewInternalSubresource(
@@ -375,7 +374,7 @@ var (
 		func() runtime.Object { return &TeamSpaces{} },
 	)
 	NewTeamSpacesREST = func(getter generic.RESTOptionsGetter) rest.Storage {
-		return NewTeamSpacesRESTFunc(Client, Factory)
+		return NewTeamSpacesRESTFunc(Factory)
 	}
 	NewTeamSpacesRESTFunc NewRESTFunc
 	InternalUser          = builders.NewInternalResource(
@@ -395,7 +394,7 @@ var (
 		func() runtime.Object { return &UserAccessKeys{} },
 	)
 	NewUserAccessKeysREST = func(getter generic.RESTOptionsGetter) rest.Storage {
-		return NewUserAccessKeysRESTFunc(Client, Factory)
+		return NewUserAccessKeysRESTFunc(Factory)
 	}
 	NewUserAccessKeysRESTFunc    NewRESTFunc
 	InternalUserClusterRolesREST = builders.NewInternalSubresource(
@@ -403,7 +402,7 @@ var (
 		func() runtime.Object { return &UserClusterRoles{} },
 	)
 	NewUserClusterRolesREST = func(getter generic.RESTOptionsGetter) rest.Storage {
-		return NewUserClusterRolesRESTFunc(Client, Factory)
+		return NewUserClusterRolesRESTFunc(Factory)
 	}
 	NewUserClusterRolesRESTFunc NewRESTFunc
 	InternalUserClustersREST    = builders.NewInternalSubresource(
@@ -411,7 +410,7 @@ var (
 		func() runtime.Object { return &UserClusters{} },
 	)
 	NewUserClustersREST = func(getter generic.RESTOptionsGetter) rest.Storage {
-		return NewUserClustersRESTFunc(Client, Factory)
+		return NewUserClustersRESTFunc(Factory)
 	}
 	NewUserClustersRESTFunc NewRESTFunc
 	InternalUserProfileREST = builders.NewInternalSubresource(
@@ -419,7 +418,7 @@ var (
 		func() runtime.Object { return &UserProfile{} },
 	)
 	NewUserProfileREST = func(getter generic.RESTOptionsGetter) rest.Storage {
-		return NewUserProfileRESTFunc(Client, Factory)
+		return NewUserProfileRESTFunc(Factory)
 	}
 	NewUserProfileRESTFunc NewRESTFunc
 	InternalUserQuotasREST = builders.NewInternalSubresource(
@@ -427,7 +426,7 @@ var (
 		func() runtime.Object { return &UserQuotas{} },
 	)
 	NewUserQuotasREST = func(getter generic.RESTOptionsGetter) rest.Storage {
-		return NewUserQuotasRESTFunc(Client, Factory)
+		return NewUserQuotasRESTFunc(Factory)
 	}
 	NewUserQuotasRESTFunc  NewRESTFunc
 	InternalUserSpacesREST = builders.NewInternalSubresource(
@@ -435,7 +434,7 @@ var (
 		func() runtime.Object { return &UserSpaces{} },
 	)
 	NewUserSpacesREST = func(getter generic.RESTOptionsGetter) rest.Storage {
-		return NewUserSpacesRESTFunc(Client, Factory)
+		return NewUserSpacesRESTFunc(Factory)
 	}
 	NewUserSpacesRESTFunc NewRESTFunc
 	InternalUserTeamsREST = builders.NewInternalSubresource(
@@ -443,7 +442,7 @@ var (
 		func() runtime.Object { return &UserTeams{} },
 	)
 	NewUserTeamsREST = func(getter generic.RESTOptionsGetter) rest.Storage {
-		return NewUserTeamsRESTFunc(Client, Factory)
+		return NewUserTeamsRESTFunc(Factory)
 	}
 	NewUserTeamsRESTFunc            NewRESTFunc
 	InternalUserVirtualClustersREST = builders.NewInternalSubresource(
@@ -451,7 +450,7 @@ var (
 		func() runtime.Object { return &UserVirtualClusters{} },
 	)
 	NewUserVirtualClustersREST = func(getter generic.RESTOptionsGetter) rest.Storage {
-		return NewUserVirtualClustersRESTFunc(Client, Factory)
+		return NewUserVirtualClustersRESTFunc(Factory)
 	}
 	NewUserVirtualClustersRESTFunc NewRESTFunc
 	// Registered resources and subresources

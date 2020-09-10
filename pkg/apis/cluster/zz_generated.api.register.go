@@ -16,10 +16,9 @@ import (
 	"k8s.io/apiserver/pkg/registry/generic"
 	"k8s.io/apiserver/pkg/registry/rest"
 	"sigs.k8s.io/apiserver-builder-alpha/pkg/builders"
-	"sigs.k8s.io/controller-runtime/pkg/client"
 )
 
-type NewRESTFunc func(client client.Client, factory managerfactory.SharedManagerFactory) rest.Storage
+type NewRESTFunc func(factory managerfactory.SharedManagerFactory) rest.Storage
 
 var (
 	ClusterAccountStorage = builders.NewApiResourceWithStorage( // Resource status endpoint
@@ -29,7 +28,7 @@ var (
 		NewAccountREST,
 	)
 	NewAccountREST = func(getter generic.RESTOptionsGetter) rest.Storage {
-		return NewAccountRESTFunc(Client, Factory)
+		return NewAccountRESTFunc(Factory)
 	}
 	NewAccountRESTFunc    NewRESTFunc
 	ClusterContextStorage = builders.NewApiResourceWithStorage( // Resource status endpoint
@@ -39,7 +38,7 @@ var (
 		NewContextREST,
 	)
 	NewContextREST = func(getter generic.RESTOptionsGetter) rest.Storage {
-		return NewContextRESTFunc(Client, Factory)
+		return NewContextRESTFunc(Factory)
 	}
 	NewContextRESTFunc      NewRESTFunc
 	ClusterHelmChartStorage = builders.NewApiResourceWithStorage( // Resource status endpoint
@@ -49,7 +48,7 @@ var (
 		NewHelmChartREST,
 	)
 	NewHelmChartREST = func(getter generic.RESTOptionsGetter) rest.Storage {
-		return NewHelmChartRESTFunc(Client, Factory)
+		return NewHelmChartRESTFunc(Factory)
 	}
 	NewHelmChartRESTFunc      NewRESTFunc
 	ClusterHelmReleaseStorage = builders.NewApiResourceWithStorage( // Resource status endpoint
@@ -59,7 +58,7 @@ var (
 		NewHelmReleaseREST,
 	)
 	NewHelmReleaseREST = func(getter generic.RESTOptionsGetter) rest.Storage {
-		return NewHelmReleaseRESTFunc(Client, Factory)
+		return NewHelmReleaseRESTFunc(Factory)
 	}
 	NewHelmReleaseRESTFunc        NewRESTFunc
 	ClusterSleepModeConfigStorage = builders.NewApiResourceWithStorage( // Resource status endpoint
@@ -69,7 +68,7 @@ var (
 		NewSleepModeConfigREST,
 	)
 	NewSleepModeConfigREST = func(getter generic.RESTOptionsGetter) rest.Storage {
-		return NewSleepModeConfigRESTFunc(Client, Factory)
+		return NewSleepModeConfigRESTFunc(Factory)
 	}
 	NewSleepModeConfigRESTFunc NewRESTFunc
 	InternalAccount            = builders.NewInternalResource(
@@ -89,7 +88,7 @@ var (
 		func() runtime.Object { return &AccountClusterRoles{} },
 	)
 	NewAccountClusterRolesREST = func(getter generic.RESTOptionsGetter) rest.Storage {
-		return NewAccountClusterRolesRESTFunc(Client, Factory)
+		return NewAccountClusterRolesRESTFunc(Factory)
 	}
 	NewAccountClusterRolesRESTFunc NewRESTFunc
 	InternalContext                = builders.NewInternalResource(

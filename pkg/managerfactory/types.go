@@ -16,14 +16,27 @@ type RemoteRunner interface {
 // SharedManagerFactory is the interface for retrieving managers
 type SharedManagerFactory interface {
 	CreateManager(cluster string, localClient client.Client) error
-	GetClient(cluster string) (client.Client, error)
-	GetUncachedClient(cluster string) (client.Client, error)
-	GetRESTMapper(cluster string) (meta.RESTMapper, error)
-	GetClientConfig(cluster string) (*rest.Config, error)
-	GetScheme() *runtime.Scheme
-	GetManagementConfig() *rest.Config
-	GetManagementClient() client.Client
-	GetManagementRESTMapper() meta.RESTMapper
 	RegisterRunner(RemoteRunner)
 	Stop(cluster string)
+
+	Cluster(cluster string) ClusterClientAccess
+	Management() ManagementClientAccess
+}
+
+// ClusterClientAccess holds the functions for cluster access
+type ClusterClientAccess interface {
+	Scheme() (*runtime.Scheme, error)
+	Config() (*rest.Config, error)
+	RESTMapper() (meta.RESTMapper, error)
+	UncachedClient() (client.Client, error)
+	CachedClient() (client.Client, error)
+}
+
+// ManagementClientAccess holds the functions for management access
+type ManagementClientAccess interface {
+	Scheme() *runtime.Scheme
+	Config() *rest.Config
+	RESTMapper() meta.RESTMapper
+	UncachedClient() client.Client
+	CachedClient() client.Client
 }
