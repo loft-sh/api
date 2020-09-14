@@ -23,7 +23,7 @@ type ClusterAccountTemplate struct {
 type ClusterAccountTemplateSpec struct {
 	// Template is the account template that will be used to create a new account
 	// +optional
-	Template AccountTemplate `json:"template,omitempty"`
+	Template AccountTemplate `json:"accountTemplate,omitempty"`
 
 	// Owns are resources that will be created in the target cluster for the account
 	// Furthermore the account will be added as owner reference in this resources.

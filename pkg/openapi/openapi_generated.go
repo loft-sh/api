@@ -3818,7 +3818,7 @@ func schema_pkg_apis_management_v1_ClusterAccountTemplateSpec(ref common.Referen
 				Description: "ClusterAccountTemplateSpec holds the specification",
 				Type:        []string{"object"},
 				Properties: map[string]spec.Schema{
-					"template": {
+					"accountTemplate": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Template is the account template that will be used to create a new account",
 							Ref:         ref("github.com/loft-sh/api/pkg/apis/storage/v1.AccountTemplate"),
@@ -3835,13 +3835,6 @@ func schema_pkg_apis_management_v1_ClusterAccountTemplateSpec(ref common.Referen
 									},
 								},
 							},
-						},
-					},
-					"accountNamePlaceholder": {
-						SchemaProps: spec.SchemaProps{
-							Description: "AccountNamePlaceholder is the placeholder that will be replaced in the owned templates values with the created kiosk account name (often similar to the loft user). Defaults to ${ACCOUNT_NAME}",
-							Type:        []string{"string"},
-							Format:      "",
 						},
 					},
 					"clusterSelector": {
@@ -8464,7 +8457,7 @@ func schema_pkg_apis_storage_v1_ClusterAccountTemplateSpec(ref common.ReferenceC
 			SchemaProps: spec.SchemaProps{
 				Type: []string{"object"},
 				Properties: map[string]spec.Schema{
-					"template": {
+					"accountTemplate": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Template is the account template that will be used to create a new account",
 							Ref:         ref("github.com/loft-sh/api/pkg/apis/storage/v1.AccountTemplate"),
@@ -8481,13 +8474,6 @@ func schema_pkg_apis_storage_v1_ClusterAccountTemplateSpec(ref common.ReferenceC
 									},
 								},
 							},
-						},
-					},
-					"accountNamePlaceholder": {
-						SchemaProps: spec.SchemaProps{
-							Description: "AccountNamePlaceholder is the placeholder that will be replaced in the owned templates values with the created kiosk account name (often similar to the loft user). Defaults to ${ACCOUNT_NAME}",
-							Type:        []string{"string"},
-							Format:      "",
 						},
 					},
 					"clusterSelector": {
