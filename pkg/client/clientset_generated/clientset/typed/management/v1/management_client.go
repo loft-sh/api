@@ -12,6 +12,7 @@ type ManagementV1Interface interface {
 	RESTClient() rest.Interface
 	AnnouncementsGetter
 	ClustersGetter
+	ClusterAccountTemplatesGetter
 	ClusterConnectsGetter
 	ClusterRolesGetter
 	ConfigsGetter
@@ -36,6 +37,10 @@ func (c *ManagementV1Client) Announcements() AnnouncementInterface {
 
 func (c *ManagementV1Client) Clusters() ClusterInterface {
 	return newClusters(c)
+}
+
+func (c *ManagementV1Client) ClusterAccountTemplates() ClusterAccountTemplateInterface {
+	return newClusterAccountTemplates(c)
 }
 
 func (c *ManagementV1Client) ClusterConnects() ClusterConnectInterface {

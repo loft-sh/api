@@ -56,6 +56,21 @@ type UserSpec struct {
 	// A reference to the users access keys
 	// +optional
 	CodesRef *SecretRef `json:"codesRef,omitempty"`
+
+	// ClusterAccountTemplates that should be applied for the user
+	// +optional
+	ClusterAccountTemplates []UserClusterAccountTemplate `json:"clusterAccountTemplates,omitempty"`
+}
+
+type UserClusterAccountTemplate struct {
+	// Name of the cluster account template to apply
+	// +optional
+	Name string `json:"name,omitempty"`
+
+	// AccountName is the name of the account that should
+	// be created. Defaults to the user or team kubernetes name.
+	// +optional
+	AccountName string `json:"accountName,omitempty"`
 }
 
 // UserStatus holds the status of an user
@@ -63,7 +78,70 @@ type UserStatus struct {
 	// Clusters holds information about which clusters the user has accounts in
 	// +optional
 	Clusters []AccountClusterStatus `json:"clusters,omitempty"`
+
+	// ClusterAccountTemplates holds information about which cluster account templates were applied
+	// +optional
+	ClusterAccountTemplates []UserClusterAccountTemplateStatus `json:"clusterAccountTemplates,omitempty"`
 }
+
+type UserClusterAccountTemplateStatus struct {
+	// Name of the cluster account template that was applied
+	// +optional
+	Name string `json:"name,omitempty"`
+
+	// Clusters holds the cluster on which this template was applied
+	// +optional
+	Clusters []ClusterAccountTemplateClusterStatus `json:"clusters,omitempty"`
+
+	// Status holds the status of the account in the target cluster
+	// +optional
+	Status ClusterAccountTemplateStatusPhase `json:"phase,omitempty"`
+
+	// Reason describes why loft couldn't sync the account with a machine readable identifier
+	// +optional
+	Reason string `json:"reason,omitempty"`
+
+	// Message describes why loft couldn't sync the account in human language
+	// +optional
+	Message string `json:"message,omitempty"`
+}
+
+type ClusterAccountTemplateClusterStatus struct {
+	// Name of the cluster where the cluster account template was applied
+	// +optional
+	Name string `json:"name,omitempty"`
+
+	// Status holds the status of the account in the target cluster
+	// +optional
+	Status ClusterAccountTemplateClusterStatusPhase `json:"phase,omitempty"`
+
+	// Reason describes why loft couldn't sync the account with a machine readable identifier
+	// +optional
+	Reason string `json:"reason,omitempty"`
+
+	// Message describes why loft couldn't sync the account in human language
+	// +optional
+	Message string `json:"message,omitempty"`
+}
+
+// ClusterAccountTemplateClusterStatusPhase describes the phase of a cluster account template
+type ClusterAccountTemplateClusterStatusPhase string
+
+// These are the valid admin account types
+const (
+	ClusterAccountTemplateClusterStatusPhaseCreated ClusterAccountTemplateClusterStatusPhase = "Created"
+	ClusterAccountTemplateClusterStatusPhaseSkipped ClusterAccountTemplateClusterStatusPhase = "Skipped"
+	ClusterAccountTemplateClusterStatusPhaseFailed  ClusterAccountTemplateClusterStatusPhase = "Failed"
+)
+
+// ClusterAccountTemplateStatusPhase describes the phase of a cluster account template
+type ClusterAccountTemplateStatusPhase string
+
+// These are the valid admin account types
+const (
+	ClusterAccountTemplateStatusPhaseCompleted ClusterAccountTemplateStatusPhase = "Completed"
+	ClusterAccountTemplateStatusPhaseFailed    ClusterAccountTemplateStatusPhase = "Failed"
+)
 
 // AccountClusterStatus holds the status of an account in a cluster
 type AccountClusterStatus struct {

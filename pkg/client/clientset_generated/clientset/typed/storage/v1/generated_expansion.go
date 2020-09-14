@@ -4,6 +4,8 @@ package v1
 
 type ClusterExpansion interface{}
 
+type ClusterAccountTemplateExpansion interface{}
+
 type TeamExpansion interface{}
 
 type UserExpansion interface{}

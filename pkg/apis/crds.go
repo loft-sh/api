@@ -27,5 +27,11 @@ var (
 			Plural:   "clusters",
 			Scope:    apiextensionsv1beta1.ClusterScoped,
 		},
+		&crd.TypeDefinition{
+			GVK:      storagev1.SchemeGroupVersion.WithKind("ClusterAccountTemplate"),
+			Singular: "clusteraccounttemplate",
+			Plural:   "clusteraccounttemplates",
+			Scope:    apiextensionsv1beta1.ClusterScoped,
+		},
 	}
 )

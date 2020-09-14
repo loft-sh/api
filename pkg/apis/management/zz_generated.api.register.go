@@ -44,8 +44,18 @@ var (
 	NewClusterREST = func(getter generic.RESTOptionsGetter) rest.Storage {
 		return NewClusterRESTFunc(Factory)
 	}
-	NewClusterRESTFunc              NewRESTFunc
-	ManagementClusterConnectStorage = builders.NewApiResourceWithStorage( // Resource status endpoint
+	NewClusterRESTFunc                      NewRESTFunc
+	ManagementClusterAccountTemplateStorage = builders.NewApiResourceWithStorage( // Resource status endpoint
+		InternalClusterAccountTemplate,
+		func() runtime.Object { return &ClusterAccountTemplate{} },     // Register versioned resource
+		func() runtime.Object { return &ClusterAccountTemplateList{} }, // Register versioned resource list
+		NewClusterAccountTemplateREST,
+	)
+	NewClusterAccountTemplateREST = func(getter generic.RESTOptionsGetter) rest.Storage {
+		return NewClusterAccountTemplateRESTFunc(Factory)
+	}
+	NewClusterAccountTemplateRESTFunc NewRESTFunc
+	ManagementClusterConnectStorage   = builders.NewApiResourceWithStorage( // Resource status endpoint
 		InternalClusterConnect,
 		func() runtime.Object { return &ClusterConnect{} },     // Register versioned resource
 		func() runtime.Object { return &ClusterConnectList{} }, // Register versioned resource list
@@ -221,7 +231,19 @@ var (
 		return NewClusterVirtualClusterDefaultsRESTFunc(Factory)
 	}
 	NewClusterVirtualClusterDefaultsRESTFunc NewRESTFunc
-	InternalClusterConnect                   = builders.NewInternalResource(
+	InternalClusterAccountTemplate           = builders.NewInternalResource(
+		"clusteraccounttemplates",
+		"ClusterAccountTemplate",
+		func() runtime.Object { return &ClusterAccountTemplate{} },
+		func() runtime.Object { return &ClusterAccountTemplateList{} },
+	)
+	InternalClusterAccountTemplateStatus = builders.NewInternalResourceStatus(
+		"clusteraccounttemplates",
+		"ClusterAccountTemplateStatus",
+		func() runtime.Object { return &ClusterAccountTemplate{} },
+		func() runtime.Object { return &ClusterAccountTemplateList{} },
+	)
+	InternalClusterConnect = builders.NewInternalResource(
 		"clusterconnect",
 		"ClusterConnect",
 		func() runtime.Object { return &ClusterConnect{} },
@@ -463,6 +485,8 @@ var (
 		InternalClusterMembersREST,
 		InternalClusterResetREST,
 		InternalClusterVirtualClusterDefaultsREST,
+		InternalClusterAccountTemplate,
+		InternalClusterAccountTemplateStatus,
 		InternalClusterConnect,
 		InternalClusterConnectStatus,
 		InternalClusterRole,
@@ -552,16 +576,18 @@ type Authentication struct {
 }
 
 type AuthenticationOIDC struct {
-	IssuerURL      string
-	ClientID       string
-	ClientSecret   string
-	CAFile         string
-	UsernameClaim  string
-	UsernamePrefix string
-	GroupsClaim    string
-	GetUserInfo    bool
-	GroupsPrefix   string
-	Type           string
+	IssuerURL                    string
+	ClientID                     string
+	ClientSecret                 string
+	CAFile                       string
+	UsernameClaim                string
+	UsernamePrefix               string
+	GroupsClaim                  string
+	GetUserInfo                  bool
+	GroupsPrefix                 string
+	Type                         string
+	ClusterAccountTemplates      []storagev1.UserClusterAccountTemplate
+	GroupClusterAccountTemplates map[string][]storagev1.UserClusterAccountTemplate
 }
 
 type AuthenticationPassword struct {
@@ -569,7 +595,7 @@ type AuthenticationPassword struct {
 }
 
 // +genclient
-// +genclient:nonNamespaced
+// +genclient
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
 
 type Cluster struct {
@@ -577,6 +603,25 @@ type Cluster struct {
 	metav1.ObjectMeta
 	Spec   ClusterSpec
 	Status ClusterStatus
+}
+
+// +genclient
+// +genclient:nonNamespaced
+// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+
+type ClusterAccountTemplate struct {
+	metav1.TypeMeta
+	metav1.ObjectMeta
+	Spec   ClusterAccountTemplateSpec
+	Status ClusterAccountTemplateStatus
+}
+
+type ClusterAccountTemplateSpec struct {
+	storagev1.ClusterAccountTemplateSpec
+}
+
+type ClusterAccountTemplateStatus struct {
+	storagev1.ClusterAccountTemplateStatus
 }
 
 type ClusterAccounts struct {
@@ -1373,6 +1418,126 @@ func (s *storageCluster) UpdateCluster(ctx context.Context, object *Cluster) (*C
 }
 
 func (s *storageCluster) DeleteCluster(ctx context.Context, id string) (bool, error) {
+	st := s.GetStandardStorage()
+	_, sync, err := st.Delete(ctx, id, nil, &metav1.DeleteOptions{})
+	return sync, err
+}
+
+//
+// ClusterAccountTemplate Functions and Structs
+//
+// +k8s:deepcopy-gen=false
+type ClusterAccountTemplateStrategy struct {
+	builders.DefaultStorageStrategy
+}
+
+// +k8s:deepcopy-gen=false
+type ClusterAccountTemplateStatusStrategy struct {
+	builders.DefaultStatusStorageStrategy
+}
+
+// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+
+type ClusterAccountTemplateList struct {
+	metav1.TypeMeta
+	metav1.ListMeta
+	Items []ClusterAccountTemplate
+}
+
+func (ClusterAccountTemplate) NewStatus() interface{} {
+	return ClusterAccountTemplateStatus{}
+}
+
+func (pc *ClusterAccountTemplate) GetStatus() interface{} {
+	return pc.Status
+}
+
+func (pc *ClusterAccountTemplate) SetStatus(s interface{}) {
+	pc.Status = s.(ClusterAccountTemplateStatus)
+}
+
+func (pc *ClusterAccountTemplate) GetSpec() interface{} {
+	return pc.Spec
+}
+
+func (pc *ClusterAccountTemplate) SetSpec(s interface{}) {
+	pc.Spec = s.(ClusterAccountTemplateSpec)
+}
+
+func (pc *ClusterAccountTemplate) GetObjectMeta() *metav1.ObjectMeta {
+	return &pc.ObjectMeta
+}
+
+func (pc *ClusterAccountTemplate) SetGeneration(generation int64) {
+	pc.ObjectMeta.Generation = generation
+}
+
+func (pc ClusterAccountTemplate) GetGeneration() int64 {
+	return pc.ObjectMeta.Generation
+}
+
+// Registry is an interface for things that know how to store ClusterAccountTemplate.
+// +k8s:deepcopy-gen=false
+type ClusterAccountTemplateRegistry interface {
+	ListClusterAccountTemplates(ctx context.Context, options *internalversion.ListOptions) (*ClusterAccountTemplateList, error)
+	GetClusterAccountTemplate(ctx context.Context, id string, options *metav1.GetOptions) (*ClusterAccountTemplate, error)
+	CreateClusterAccountTemplate(ctx context.Context, id *ClusterAccountTemplate) (*ClusterAccountTemplate, error)
+	UpdateClusterAccountTemplate(ctx context.Context, id *ClusterAccountTemplate) (*ClusterAccountTemplate, error)
+	DeleteClusterAccountTemplate(ctx context.Context, id string) (bool, error)
+}
+
+// NewRegistry returns a new Registry interface for the given Storage. Any mismatched types will panic.
+func NewClusterAccountTemplateRegistry(sp builders.StandardStorageProvider) ClusterAccountTemplateRegistry {
+	return &storageClusterAccountTemplate{sp}
+}
+
+// Implement Registry
+// storage puts strong typing around storage calls
+// +k8s:deepcopy-gen=false
+type storageClusterAccountTemplate struct {
+	builders.StandardStorageProvider
+}
+
+func (s *storageClusterAccountTemplate) ListClusterAccountTemplates(ctx context.Context, options *internalversion.ListOptions) (*ClusterAccountTemplateList, error) {
+	if options != nil && options.FieldSelector != nil && !options.FieldSelector.Empty() {
+		return nil, fmt.Errorf("field selector not supported yet")
+	}
+	st := s.GetStandardStorage()
+	obj, err := st.List(ctx, options)
+	if err != nil {
+		return nil, err
+	}
+	return obj.(*ClusterAccountTemplateList), err
+}
+
+func (s *storageClusterAccountTemplate) GetClusterAccountTemplate(ctx context.Context, id string, options *metav1.GetOptions) (*ClusterAccountTemplate, error) {
+	st := s.GetStandardStorage()
+	obj, err := st.Get(ctx, id, options)
+	if err != nil {
+		return nil, err
+	}
+	return obj.(*ClusterAccountTemplate), nil
+}
+
+func (s *storageClusterAccountTemplate) CreateClusterAccountTemplate(ctx context.Context, object *ClusterAccountTemplate) (*ClusterAccountTemplate, error) {
+	st := s.GetStandardStorage()
+	obj, err := st.Create(ctx, object, nil, &metav1.CreateOptions{})
+	if err != nil {
+		return nil, err
+	}
+	return obj.(*ClusterAccountTemplate), nil
+}
+
+func (s *storageClusterAccountTemplate) UpdateClusterAccountTemplate(ctx context.Context, object *ClusterAccountTemplate) (*ClusterAccountTemplate, error) {
+	st := s.GetStandardStorage()
+	obj, _, err := st.Update(ctx, object.Name, rest.DefaultUpdatedObjectInfo(object), nil, nil, false, &metav1.UpdateOptions{})
+	if err != nil {
+		return nil, err
+	}
+	return obj.(*ClusterAccountTemplate), nil
+}
+
+func (s *storageClusterAccountTemplate) DeleteClusterAccountTemplate(ctx context.Context, id string) (bool, error) {
 	st := s.GetStandardStorage()
 	_, sync, err := st.Delete(ctx, id, nil, &metav1.DeleteOptions{})
 	return sync, err

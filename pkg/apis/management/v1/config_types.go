@@ -1,6 +1,7 @@
 package v1
 
 import (
+	storagev1 "github.com/loft-sh/api/pkg/apis/storage/v1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 )
 
@@ -81,6 +82,7 @@ type AuthenticationOIDC struct {
 	//
 	// The provider must implement configuration discovery.
 	// See: https://openid.net/specs/openid-connect-discovery-1_0.html#ProviderConfig
+	// +optional
 	IssuerURL string `json:"issuerUrl,omitempty"`
 
 	// ClientID the JWT must be issued for, the "sub" field. This plugin only trusts a single
@@ -89,34 +91,52 @@ type AuthenticationOIDC struct {
 	// The plugin supports the "authorized party" OpenID Connect claim, which allows
 	// specialized providers to issue tokens to a client for a different client.
 	// See: https://openid.net/specs/openid-connect-core-1_0.html#IDToken
+	// +optional
 	ClientID string `json:"clientId,omitempty"`
 
 	// ClientSecret to issue tokens from the OIDC provider
+	// +optional
 	ClientSecret string `json:"clientSecret,omitempty"`
 
 	// Path to a PEM encoded root certificate of the provider. Optional
+	// +optional
 	CAFile string `json:"caFile,omitempty"`
 
 	// UsernameClaim is the JWT field to use as the user's username.
+	// +optional
 	UsernameClaim string `json:"usernameClaim,omitempty"`
 
 	// UsernamePrefix, if specified, causes claims mapping to username to be prefix with
 	// the provided value. A value "oidc:" would result in usernames like "oidc:john".
+	// +optional
 	UsernamePrefix string `json:"usernamePrefix,omitempty"`
 
 	// GroupsClaim, if specified, causes the OIDCAuthenticator to try to populate the user's
 	// groups with an ID Token field. If the GroupsClaim field is present in an ID Token the value
 	// must be a string or list of strings.
+	// +optional
 	GroupsClaim string `json:"groupsClaim,omitempty"`
 
 	// GetUserInfo, if specified, tells the OIDCAuthenticator to try to populate the user's
 	// information from the UserInfo.
+	// +optional
 	GetUserInfo bool `json:"getUserInfo,omitempty"`
 
 	// GroupsPrefix, if specified, causes claims mapping to group names to be prefixed with the
 	// value. A value "oidc:" would result in groups like "oidc:engineering" and "oidc:marketing".
+	// +optional
 	GroupsPrefix string `json:"groupsPrefix,omitempty"`
 
 	// Type of the OIDC to show in the UI. Only for displaying purposes
+	// +optional
 	Type string `json:"type,omitempty"`
+
+	// Cluster Account Templates that will be applied for users logging in through this authentication
+	// +optional
+	ClusterAccountTemplates []storagev1.UserClusterAccountTemplate `json:"clusterAccountTemplates,omitempty"`
+
+	// A mapping between groups and cluster account templates. If the user has a certain group, the cluster
+	// account template will be added during creation
+	// +optional
+	GroupClusterAccountTemplates map[string][]storagev1.UserClusterAccountTemplate `json:"groupClusterAccountTemplates,omitempty"`
 }

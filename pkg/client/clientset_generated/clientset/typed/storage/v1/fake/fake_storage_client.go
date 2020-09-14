@@ -16,6 +16,10 @@ func (c *FakeStorageV1) Clusters() v1.ClusterInterface {
 	return &FakeClusters{c}
 }
 
+func (c *FakeStorageV1) ClusterAccountTemplates() v1.ClusterAccountTemplateInterface {
+	return &FakeClusterAccountTemplates{c}
+}
+
 func (c *FakeStorageV1) Teams() v1.TeamInterface {
 	return &FakeTeams{c}
 }

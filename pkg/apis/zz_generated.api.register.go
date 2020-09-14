@@ -56,6 +56,7 @@ var managementApiGroup = builders.NewApiGroupBuilder(
 	WithRootScopedKinds(
 		"Announcement",
 		"Cluster",
+		"ClusterAccountTemplate",
 		"ClusterConnect",
 		"ClusterRole",
 		"Config",

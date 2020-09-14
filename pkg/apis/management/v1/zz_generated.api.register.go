@@ -21,6 +21,8 @@ func addKnownTypes(scheme *runtime.Scheme) error {
 		&ClusterMembers{},
 		&ClusterReset{},
 		&ClusterVirtualClusterDefaults{},
+		&ClusterAccountTemplate{},
+		&ClusterAccountTemplateList{},
 		&ClusterConnect{},
 		&ClusterConnectList{},
 		&ClusterRole{},
@@ -84,6 +86,7 @@ var (
 			func() runtime.Object { return &ClusterVirtualClusterDefaults{} }, // Register versioned resource
 			nil,
 			management.NewClusterVirtualClusterDefaultsREST),
+		management.ManagementClusterAccountTemplateStorage,
 		management.ManagementClusterConnectStorage,
 		management.ManagementClusterRoleStorage,
 		management.ManagementConfigStorage,
@@ -228,6 +231,14 @@ type ClusterVirtualClusterDefaultsList struct {
 	metav1.TypeMeta `json:",inline"`
 	metav1.ListMeta `json:"metadata,omitempty"`
 	Items           []ClusterVirtualClusterDefaults `json:"items"`
+}
+
+// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+
+type ClusterAccountTemplateList struct {
+	metav1.TypeMeta `json:",inline"`
+	metav1.ListMeta `json:"metadata,omitempty"`
+	Items           []ClusterAccountTemplate `json:"items"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object

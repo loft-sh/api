@@ -34,12 +34,20 @@ type TeamSpec struct {
 	// The groups defined in a token that belong to a team
 	// +optional
 	Groups []string `json:"groups,omitempty"`
+
+	// ClusterAccountTemplates that should be applied for the user
+	// +optional
+	ClusterAccountTemplates []UserClusterAccountTemplate `json:"clusterAccountTemplates,omitempty"`
 }
 
 type TeamStatus struct {
 	// Clusters holds information about which clusters the user has accounts in
 	// +optional
 	Clusters []AccountClusterStatus `json:"clusters,omitempty"`
+
+	// ClusterAccountTemplates holds information about which cluster account templates were applied
+	// +optional
+	ClusterAccountTemplates []UserClusterAccountTemplateStatus `json:"clusterAccountTemplates,omitempty"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object

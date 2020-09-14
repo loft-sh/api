@@ -6,6 +6,8 @@ type AnnouncementExpansion interface{}
 
 type ClusterExpansion interface{}
 
+type ClusterAccountTemplateExpansion interface{}
+
 type ClusterConnectExpansion interface{}
 
 type ClusterRoleExpansion interface{}

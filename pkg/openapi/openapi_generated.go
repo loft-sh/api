@@ -87,6 +87,10 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 		"github.com/loft-sh/api/pkg/apis/management/v1.AuthenticationOIDC":                   schema_pkg_apis_management_v1_AuthenticationOIDC(ref),
 		"github.com/loft-sh/api/pkg/apis/management/v1.AuthenticationPassword":               schema_pkg_apis_management_v1_AuthenticationPassword(ref),
 		"github.com/loft-sh/api/pkg/apis/management/v1.Cluster":                              schema_pkg_apis_management_v1_Cluster(ref),
+		"github.com/loft-sh/api/pkg/apis/management/v1.ClusterAccountTemplate":               schema_pkg_apis_management_v1_ClusterAccountTemplate(ref),
+		"github.com/loft-sh/api/pkg/apis/management/v1.ClusterAccountTemplateList":           schema_pkg_apis_management_v1_ClusterAccountTemplateList(ref),
+		"github.com/loft-sh/api/pkg/apis/management/v1.ClusterAccountTemplateSpec":           schema_pkg_apis_management_v1_ClusterAccountTemplateSpec(ref),
+		"github.com/loft-sh/api/pkg/apis/management/v1.ClusterAccountTemplateStatus":         schema_pkg_apis_management_v1_ClusterAccountTemplateStatus(ref),
 		"github.com/loft-sh/api/pkg/apis/management/v1.ClusterAccounts":                      schema_pkg_apis_management_v1_ClusterAccounts(ref),
 		"github.com/loft-sh/api/pkg/apis/management/v1.ClusterConnect":                       schema_pkg_apis_management_v1_ClusterConnect(ref),
 		"github.com/loft-sh/api/pkg/apis/management/v1.ClusterConnectList":                   schema_pkg_apis_management_v1_ClusterConnectList(ref),
@@ -190,7 +194,13 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 		"github.com/loft-sh/api/pkg/apis/management/v1.UserVirtualClusters":                  schema_pkg_apis_management_v1_UserVirtualClusters(ref),
 		"github.com/loft-sh/api/pkg/apis/management/v1.UserVirtualClustersList":              schema_pkg_apis_management_v1_UserVirtualClustersList(ref),
 		"github.com/loft-sh/api/pkg/apis/storage/v1.AccountClusterStatus":                    schema_pkg_apis_storage_v1_AccountClusterStatus(ref),
+		"github.com/loft-sh/api/pkg/apis/storage/v1.AccountTemplate":                         schema_pkg_apis_storage_v1_AccountTemplate(ref),
 		"github.com/loft-sh/api/pkg/apis/storage/v1.Cluster":                                 schema_pkg_apis_storage_v1_Cluster(ref),
+		"github.com/loft-sh/api/pkg/apis/storage/v1.ClusterAccountTemplate":                  schema_pkg_apis_storage_v1_ClusterAccountTemplate(ref),
+		"github.com/loft-sh/api/pkg/apis/storage/v1.ClusterAccountTemplateClusterStatus":     schema_pkg_apis_storage_v1_ClusterAccountTemplateClusterStatus(ref),
+		"github.com/loft-sh/api/pkg/apis/storage/v1.ClusterAccountTemplateList":              schema_pkg_apis_storage_v1_ClusterAccountTemplateList(ref),
+		"github.com/loft-sh/api/pkg/apis/storage/v1.ClusterAccountTemplateSpec":              schema_pkg_apis_storage_v1_ClusterAccountTemplateSpec(ref),
+		"github.com/loft-sh/api/pkg/apis/storage/v1.ClusterAccountTemplateStatus":            schema_pkg_apis_storage_v1_ClusterAccountTemplateStatus(ref),
 		"github.com/loft-sh/api/pkg/apis/storage/v1.ClusterList":                             schema_pkg_apis_storage_v1_ClusterList(ref),
 		"github.com/loft-sh/api/pkg/apis/storage/v1.ClusterSpec":                             schema_pkg_apis_storage_v1_ClusterSpec(ref),
 		"github.com/loft-sh/api/pkg/apis/storage/v1.ClusterStatus":                           schema_pkg_apis_storage_v1_ClusterStatus(ref),
@@ -201,6 +211,8 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 		"github.com/loft-sh/api/pkg/apis/storage/v1.TeamSpec":                                schema_pkg_apis_storage_v1_TeamSpec(ref),
 		"github.com/loft-sh/api/pkg/apis/storage/v1.TeamStatus":                              schema_pkg_apis_storage_v1_TeamStatus(ref),
 		"github.com/loft-sh/api/pkg/apis/storage/v1.User":                                    schema_pkg_apis_storage_v1_User(ref),
+		"github.com/loft-sh/api/pkg/apis/storage/v1.UserClusterAccountTemplate":              schema_pkg_apis_storage_v1_UserClusterAccountTemplate(ref),
+		"github.com/loft-sh/api/pkg/apis/storage/v1.UserClusterAccountTemplateStatus":        schema_pkg_apis_storage_v1_UserClusterAccountTemplateStatus(ref),
 		"github.com/loft-sh/api/pkg/apis/storage/v1.UserList":                                schema_pkg_apis_storage_v1_UserList(ref),
 		"github.com/loft-sh/api/pkg/apis/storage/v1.UserSpec":                                schema_pkg_apis_storage_v1_UserSpec(ref),
 		"github.com/loft-sh/api/pkg/apis/storage/v1.UserStatus":                              schema_pkg_apis_storage_v1_UserStatus(ref),
@@ -3604,9 +3616,45 @@ func schema_pkg_apis_management_v1_AuthenticationOIDC(ref common.ReferenceCallba
 							Format:      "",
 						},
 					},
+					"clusterAccountTemplates": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Cluster Account Templates that will be applied for users logging in through this authentication",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Ref: ref("github.com/loft-sh/api/pkg/apis/storage/v1.UserClusterAccountTemplate"),
+									},
+								},
+							},
+						},
+					},
+					"groupClusterAccountTemplates": {
+						SchemaProps: spec.SchemaProps{
+							Description: "A mapping between groups and cluster account templates. If the user has a certain group, the cluster account template will be added during creation",
+							Type:        []string{"object"},
+							AdditionalProperties: &spec.SchemaOrBool{
+								Allows: true,
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Type: []string{"array"},
+										Items: &spec.SchemaOrArray{
+											Schema: &spec.Schema{
+												SchemaProps: spec.SchemaProps{
+													Ref: ref("github.com/loft-sh/api/pkg/apis/storage/v1.UserClusterAccountTemplate"),
+												},
+											},
+										},
+									},
+								},
+							},
+						},
+					},
 				},
 			},
 		},
+		Dependencies: []string{
+			"github.com/loft-sh/api/pkg/apis/storage/v1.UserClusterAccountTemplate"},
 	}
 }
 
@@ -3670,6 +3718,154 @@ func schema_pkg_apis_management_v1_Cluster(ref common.ReferenceCallback) common.
 		},
 		Dependencies: []string{
 			"github.com/loft-sh/api/pkg/apis/management/v1.ClusterSpec", "github.com/loft-sh/api/pkg/apis/management/v1.ClusterStatus", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
+	}
+}
+
+func schema_pkg_apis_management_v1_ClusterAccountTemplate(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "User holds the user information",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"kind": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"apiVersion": {
+						SchemaProps: spec.SchemaProps{
+							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"metadata": {
+						SchemaProps: spec.SchemaProps{
+							Ref: ref("k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"),
+						},
+					},
+					"spec": {
+						SchemaProps: spec.SchemaProps{
+							Ref: ref("github.com/loft-sh/api/pkg/apis/management/v1.ClusterAccountTemplateSpec"),
+						},
+					},
+					"status": {
+						SchemaProps: spec.SchemaProps{
+							Ref: ref("github.com/loft-sh/api/pkg/apis/management/v1.ClusterAccountTemplateStatus"),
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			"github.com/loft-sh/api/pkg/apis/management/v1.ClusterAccountTemplateSpec", "github.com/loft-sh/api/pkg/apis/management/v1.ClusterAccountTemplateStatus", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
+	}
+}
+
+func schema_pkg_apis_management_v1_ClusterAccountTemplateList(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"kind": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"apiVersion": {
+						SchemaProps: spec.SchemaProps{
+							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"metadata": {
+						SchemaProps: spec.SchemaProps{
+							Ref: ref("k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"),
+						},
+					},
+					"items": {
+						SchemaProps: spec.SchemaProps{
+							Type: []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Ref: ref("github.com/loft-sh/api/pkg/apis/management/v1.ClusterAccountTemplate"),
+									},
+								},
+							},
+						},
+					},
+				},
+				Required: []string{"items"},
+			},
+		},
+		Dependencies: []string{
+			"github.com/loft-sh/api/pkg/apis/management/v1.ClusterAccountTemplate", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
+	}
+}
+
+func schema_pkg_apis_management_v1_ClusterAccountTemplateSpec(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "ClusterAccountTemplateSpec holds the specification",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"template": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Template is the account template that will be used to create a new account",
+							Ref:         ref("github.com/loft-sh/api/pkg/apis/storage/v1.AccountTemplate"),
+						},
+					},
+					"owns": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Owns are resources that will be created in the target cluster for the account Furthermore the account will be added as owner reference in this resources.",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Ref: ref("k8s.io/apimachinery/pkg/runtime.RawExtension"),
+									},
+								},
+							},
+						},
+					},
+					"accountNamePlaceholder": {
+						SchemaProps: spec.SchemaProps{
+							Description: "AccountNamePlaceholder is the placeholder that will be replaced in the owned templates values with the created kiosk account name (often similar to the loft user). Defaults to ${ACCOUNT_NAME}",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"clusterSelector": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Selects the target clusters this account template should be applied to. An empty cluster selector selects all clusters",
+							Ref:         ref("k8s.io/apimachinery/pkg/apis/meta/v1.LabelSelector"),
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			"github.com/loft-sh/api/pkg/apis/storage/v1.AccountTemplate", "k8s.io/apimachinery/pkg/apis/meta/v1.LabelSelector", "k8s.io/apimachinery/pkg/runtime.RawExtension"},
+	}
+}
+
+func schema_pkg_apis_management_v1_ClusterAccountTemplateStatus(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "ClusterAccountTemplateStatus holds the status",
+				Type:        []string{"object"},
+			},
+		},
 	}
 }
 
@@ -6819,9 +7015,24 @@ func schema_pkg_apis_management_v1_TeamSpec(ref common.ReferenceCallback) common
 							},
 						},
 					},
+					"clusterAccountTemplates": {
+						SchemaProps: spec.SchemaProps{
+							Description: "ClusterAccountTemplates that should be applied for the user",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Ref: ref("github.com/loft-sh/api/pkg/apis/storage/v1.UserClusterAccountTemplate"),
+									},
+								},
+							},
+						},
+					},
 				},
 			},
 		},
+		Dependencies: []string{
+			"github.com/loft-sh/api/pkg/apis/storage/v1.UserClusterAccountTemplate"},
 	}
 }
 
@@ -6844,11 +7055,24 @@ func schema_pkg_apis_management_v1_TeamStatus(ref common.ReferenceCallback) comm
 							},
 						},
 					},
+					"clusterAccountTemplates": {
+						SchemaProps: spec.SchemaProps{
+							Description: "ClusterAccountTemplates holds information about which cluster account templates were applied",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Ref: ref("github.com/loft-sh/api/pkg/apis/storage/v1.UserClusterAccountTemplateStatus"),
+									},
+								},
+							},
+						},
+					},
 				},
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/pkg/apis/storage/v1.AccountClusterStatus"},
+			"github.com/loft-sh/api/pkg/apis/storage/v1.AccountClusterStatus", "github.com/loft-sh/api/pkg/apis/storage/v1.UserClusterAccountTemplateStatus"},
 	}
 }
 
@@ -7735,11 +7959,24 @@ func schema_pkg_apis_management_v1_UserSpec(ref common.ReferenceCallback) common
 							Ref:         ref("github.com/loft-sh/api/pkg/apis/storage/v1.SecretRef"),
 						},
 					},
+					"clusterAccountTemplates": {
+						SchemaProps: spec.SchemaProps{
+							Description: "ClusterAccountTemplates that should be applied for the user",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Ref: ref("github.com/loft-sh/api/pkg/apis/storage/v1.UserClusterAccountTemplate"),
+									},
+								},
+							},
+						},
+					},
 				},
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/pkg/apis/storage/v1.SecretRef"},
+			"github.com/loft-sh/api/pkg/apis/storage/v1.SecretRef", "github.com/loft-sh/api/pkg/apis/storage/v1.UserClusterAccountTemplate"},
 	}
 }
 
@@ -7763,11 +8000,24 @@ func schema_pkg_apis_management_v1_UserStatus(ref common.ReferenceCallback) comm
 							},
 						},
 					},
+					"clusterAccountTemplates": {
+						SchemaProps: spec.SchemaProps{
+							Description: "ClusterAccountTemplates holds information about which cluster account templates were applied",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Ref: ref("github.com/loft-sh/api/pkg/apis/storage/v1.UserClusterAccountTemplateStatus"),
+									},
+								},
+							},
+						},
+					},
 				},
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/pkg/apis/storage/v1.AccountClusterStatus"},
+			"github.com/loft-sh/api/pkg/apis/storage/v1.AccountClusterStatus", "github.com/loft-sh/api/pkg/apis/storage/v1.UserClusterAccountTemplateStatus"},
 	}
 }
 
@@ -8008,6 +8258,31 @@ func schema_pkg_apis_storage_v1_AccountClusterStatus(ref common.ReferenceCallbac
 	}
 }
 
+func schema_pkg_apis_storage_v1_AccountTemplate(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"metadata": {
+						SchemaProps: spec.SchemaProps{
+							Ref: ref("k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"),
+						},
+					},
+					"spec": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Spec holds the account template spec",
+							Ref:         ref("github.com/kiosk-sh/kiosk/pkg/apis/config/v1alpha1.AccountSpec"),
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			"github.com/kiosk-sh/kiosk/pkg/apis/config/v1alpha1.AccountSpec", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
+	}
+}
+
 func schema_pkg_apis_storage_v1_Cluster(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
@@ -8049,6 +8324,193 @@ func schema_pkg_apis_storage_v1_Cluster(ref common.ReferenceCallback) common.Ope
 		},
 		Dependencies: []string{
 			"github.com/loft-sh/api/pkg/apis/storage/v1.ClusterSpec", "github.com/loft-sh/api/pkg/apis/storage/v1.ClusterStatus", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
+	}
+}
+
+func schema_pkg_apis_storage_v1_ClusterAccountTemplate(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "ClusterAccountTemplate holds the information",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"kind": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"apiVersion": {
+						SchemaProps: spec.SchemaProps{
+							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"metadata": {
+						SchemaProps: spec.SchemaProps{
+							Ref: ref("k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"),
+						},
+					},
+					"spec": {
+						SchemaProps: spec.SchemaProps{
+							Ref: ref("github.com/loft-sh/api/pkg/apis/storage/v1.ClusterAccountTemplateSpec"),
+						},
+					},
+					"status": {
+						SchemaProps: spec.SchemaProps{
+							Ref: ref("github.com/loft-sh/api/pkg/apis/storage/v1.ClusterAccountTemplateStatus"),
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			"github.com/loft-sh/api/pkg/apis/storage/v1.ClusterAccountTemplateSpec", "github.com/loft-sh/api/pkg/apis/storage/v1.ClusterAccountTemplateStatus", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
+	}
+}
+
+func schema_pkg_apis_storage_v1_ClusterAccountTemplateClusterStatus(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"name": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Name of the cluster where the cluster account template was applied",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"phase": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Status holds the status of the account in the target cluster",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"reason": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Reason describes why loft couldn't sync the account with a machine readable identifier",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"message": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Message describes why loft couldn't sync the account in human language",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+				},
+			},
+		},
+	}
+}
+
+func schema_pkg_apis_storage_v1_ClusterAccountTemplateList(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "ClusterAccountTemplateList contains a list of ClusterAccountTemplate",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"kind": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"apiVersion": {
+						SchemaProps: spec.SchemaProps{
+							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"metadata": {
+						SchemaProps: spec.SchemaProps{
+							Ref: ref("k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"),
+						},
+					},
+					"items": {
+						SchemaProps: spec.SchemaProps{
+							Type: []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Ref: ref("github.com/loft-sh/api/pkg/apis/storage/v1.ClusterAccountTemplate"),
+									},
+								},
+							},
+						},
+					},
+				},
+				Required: []string{"items"},
+			},
+		},
+		Dependencies: []string{
+			"github.com/loft-sh/api/pkg/apis/storage/v1.ClusterAccountTemplate", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
+	}
+}
+
+func schema_pkg_apis_storage_v1_ClusterAccountTemplateSpec(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"template": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Template is the account template that will be used to create a new account",
+							Ref:         ref("github.com/loft-sh/api/pkg/apis/storage/v1.AccountTemplate"),
+						},
+					},
+					"owns": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Owns are resources that will be created in the target cluster for the account Furthermore the account will be added as owner reference in this resources.",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Ref: ref("k8s.io/apimachinery/pkg/runtime.RawExtension"),
+									},
+								},
+							},
+						},
+					},
+					"accountNamePlaceholder": {
+						SchemaProps: spec.SchemaProps{
+							Description: "AccountNamePlaceholder is the placeholder that will be replaced in the owned templates values with the created kiosk account name (often similar to the loft user). Defaults to ${ACCOUNT_NAME}",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"clusterSelector": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Selects the target clusters this account template should be applied to. An empty cluster selector selects all clusters",
+							Ref:         ref("k8s.io/apimachinery/pkg/apis/meta/v1.LabelSelector"),
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			"github.com/loft-sh/api/pkg/apis/storage/v1.AccountTemplate", "k8s.io/apimachinery/pkg/apis/meta/v1.LabelSelector", "k8s.io/apimachinery/pkg/runtime.RawExtension"},
+	}
+}
+
+func schema_pkg_apis_storage_v1_ClusterAccountTemplateStatus(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+			},
+		},
 	}
 }
 
@@ -8369,9 +8831,24 @@ func schema_pkg_apis_storage_v1_TeamSpec(ref common.ReferenceCallback) common.Op
 							},
 						},
 					},
+					"clusterAccountTemplates": {
+						SchemaProps: spec.SchemaProps{
+							Description: "ClusterAccountTemplates that should be applied for the user",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Ref: ref("github.com/loft-sh/api/pkg/apis/storage/v1.UserClusterAccountTemplate"),
+									},
+								},
+							},
+						},
+					},
 				},
 			},
 		},
+		Dependencies: []string{
+			"github.com/loft-sh/api/pkg/apis/storage/v1.UserClusterAccountTemplate"},
 	}
 }
 
@@ -8394,11 +8871,24 @@ func schema_pkg_apis_storage_v1_TeamStatus(ref common.ReferenceCallback) common.
 							},
 						},
 					},
+					"clusterAccountTemplates": {
+						SchemaProps: spec.SchemaProps{
+							Description: "ClusterAccountTemplates holds information about which cluster account templates were applied",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Ref: ref("github.com/loft-sh/api/pkg/apis/storage/v1.UserClusterAccountTemplateStatus"),
+									},
+								},
+							},
+						},
+					},
 				},
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/pkg/apis/storage/v1.AccountClusterStatus"},
+			"github.com/loft-sh/api/pkg/apis/storage/v1.AccountClusterStatus", "github.com/loft-sh/api/pkg/apis/storage/v1.UserClusterAccountTemplateStatus"},
 	}
 }
 
@@ -8443,6 +8933,87 @@ func schema_pkg_apis_storage_v1_User(ref common.ReferenceCallback) common.OpenAP
 		},
 		Dependencies: []string{
 			"github.com/loft-sh/api/pkg/apis/storage/v1.UserSpec", "github.com/loft-sh/api/pkg/apis/storage/v1.UserStatus", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
+	}
+}
+
+func schema_pkg_apis_storage_v1_UserClusterAccountTemplate(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"name": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Name of the cluster account template to apply",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"accountName": {
+						SchemaProps: spec.SchemaProps{
+							Description: "AccountName is the name of the account that should be created. Defaults to the user or team kubernetes name.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+				},
+			},
+		},
+	}
+}
+
+func schema_pkg_apis_storage_v1_UserClusterAccountTemplateStatus(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"name": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Name of the cluster account template that was applied",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"clusters": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Clusters holds the cluster on which this template was applied",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Ref: ref("github.com/loft-sh/api/pkg/apis/storage/v1.ClusterAccountTemplateClusterStatus"),
+									},
+								},
+							},
+						},
+					},
+					"phase": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Status holds the status of the account in the target cluster",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"reason": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Reason describes why loft couldn't sync the account with a machine readable identifier",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"message": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Message describes why loft couldn't sync the account in human language",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			"github.com/loft-sh/api/pkg/apis/storage/v1.ClusterAccountTemplateClusterStatus"},
 	}
 }
 
@@ -8588,11 +9159,24 @@ func schema_pkg_apis_storage_v1_UserSpec(ref common.ReferenceCallback) common.Op
 							Ref:         ref("github.com/loft-sh/api/pkg/apis/storage/v1.SecretRef"),
 						},
 					},
+					"clusterAccountTemplates": {
+						SchemaProps: spec.SchemaProps{
+							Description: "ClusterAccountTemplates that should be applied for the user",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Ref: ref("github.com/loft-sh/api/pkg/apis/storage/v1.UserClusterAccountTemplate"),
+									},
+								},
+							},
+						},
+					},
 				},
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/pkg/apis/storage/v1.SecretRef"},
+			"github.com/loft-sh/api/pkg/apis/storage/v1.SecretRef", "github.com/loft-sh/api/pkg/apis/storage/v1.UserClusterAccountTemplate"},
 	}
 }
 
@@ -8616,11 +9200,24 @@ func schema_pkg_apis_storage_v1_UserStatus(ref common.ReferenceCallback) common.
 							},
 						},
 					},
+					"clusterAccountTemplates": {
+						SchemaProps: spec.SchemaProps{
+							Description: "ClusterAccountTemplates holds information about which cluster account templates were applied",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Ref: ref("github.com/loft-sh/api/pkg/apis/storage/v1.UserClusterAccountTemplateStatus"),
+									},
+								},
+							},
+						},
+					},
 				},
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/pkg/apis/storage/v1.AccountClusterStatus"},
+			"github.com/loft-sh/api/pkg/apis/storage/v1.AccountClusterStatus", "github.com/loft-sh/api/pkg/apis/storage/v1.UserClusterAccountTemplateStatus"},
 	}
 }
 

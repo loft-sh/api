@@ -11,6 +11,7 @@ import (
 type StorageV1Interface interface {
 	RESTClient() rest.Interface
 	ClustersGetter
+	ClusterAccountTemplatesGetter
 	TeamsGetter
 	UsersGetter
 	VirtualClustersGetter
@@ -23,6 +24,10 @@ type StorageV1Client struct {
 
 func (c *StorageV1Client) Clusters() ClusterInterface {
 	return newClusters(c)
+}
+
+func (c *StorageV1Client) ClusterAccountTemplates() ClusterAccountTemplateInterface {
+	return newClusterAccountTemplates(c)
 }
 
 func (c *StorageV1Client) Teams() TeamInterface {

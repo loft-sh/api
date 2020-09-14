@@ -30,6 +30,8 @@ func addKnownTypes(scheme *runtime.Scheme) error {
 		&management.ClusterMembers{},
 		&management.ClusterReset{},
 		&management.ClusterVirtualClusterDefaults{},
+		&management.ClusterAccountTemplate{},
+		&management.ClusterAccountTemplateList{},
 		&management.ClusterConnect{},
 		&management.ClusterConnectList{},
 		&management.ClusterRole{},

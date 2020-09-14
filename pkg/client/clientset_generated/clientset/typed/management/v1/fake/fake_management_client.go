@@ -20,6 +20,10 @@ func (c *FakeManagementV1) Clusters() v1.ClusterInterface {
 	return &FakeClusters{c}
 }
 
+func (c *FakeManagementV1) ClusterAccountTemplates() v1.ClusterAccountTemplateInterface {
+	return &FakeClusterAccountTemplates{c}
+}
+
 func (c *FakeManagementV1) ClusterConnects() v1.ClusterConnectInterface {
 	return &FakeClusterConnects{c}
 }
