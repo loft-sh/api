@@ -82,6 +82,9 @@ type VirtualClusterHelmReleaseStatus struct {
 	Phase VirtualClusterHelmReleaseStatusPhase `json:"phase,omitempty"`
 
 	// +optional
+	LastTransitionTime metav1.Time `json:"lastTransitionTime,omitempty"`
+
+	// +optional
 	Reason string `json:"reason,omitempty"`
 
 	// +optional

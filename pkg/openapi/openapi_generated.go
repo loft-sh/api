@@ -9323,6 +9323,11 @@ func schema_pkg_apis_storage_v1_VirtualClusterHelmReleaseStatus(ref common.Refer
 							Format: "",
 						},
 					},
+					"lastTransitionTime": {
+						SchemaProps: spec.SchemaProps{
+							Ref: ref("k8s.io/apimachinery/pkg/apis/meta/v1.Time"),
+						},
+					},
 					"reason": {
 						SchemaProps: spec.SchemaProps{
 							Type:   []string{"string"},
@@ -9345,7 +9350,7 @@ func schema_pkg_apis_storage_v1_VirtualClusterHelmReleaseStatus(ref common.Refer
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/pkg/apis/storage/v1.VirtualClusterHelmRelease"},
+			"github.com/loft-sh/api/pkg/apis/storage/v1.VirtualClusterHelmRelease", "k8s.io/apimachinery/pkg/apis/meta/v1.Time"},
 	}
 }
 
