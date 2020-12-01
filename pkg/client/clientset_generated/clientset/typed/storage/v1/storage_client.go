@@ -12,6 +12,7 @@ type StorageV1Interface interface {
 	RESTClient() rest.Interface
 	ClustersGetter
 	ClusterAccountTemplatesGetter
+	SharedSecretsGetter
 	TeamsGetter
 	UsersGetter
 	VirtualClustersGetter
@@ -28,6 +29,10 @@ func (c *StorageV1Client) Clusters() ClusterInterface {
 
 func (c *StorageV1Client) ClusterAccountTemplates() ClusterAccountTemplateInterface {
 	return newClusterAccountTemplates(c)
+}
+
+func (c *StorageV1Client) SharedSecrets(namespace string) SharedSecretInterface {
+	return newSharedSecrets(c, namespace)
 }
 
 func (c *StorageV1Client) Teams() TeamInterface {

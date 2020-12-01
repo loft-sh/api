@@ -6,6 +6,8 @@ type ClusterExpansion interface{}
 
 type ClusterAccountTemplateExpansion interface{}
 
+type SharedSecretExpansion interface{}
+
 type TeamExpansion interface{}
 
 type UserExpansion interface{}

@@ -20,6 +20,10 @@ func (c *FakeStorageV1) ClusterAccountTemplates() v1.ClusterAccountTemplateInter
 	return &FakeClusterAccountTemplates{c}
 }
 
+func (c *FakeStorageV1) SharedSecrets(namespace string) v1.SharedSecretInterface {
+	return &FakeSharedSecrets{c, namespace}
+}
+
 func (c *FakeStorageV1) Teams() v1.TeamInterface {
 	return &FakeTeams{c}
 }

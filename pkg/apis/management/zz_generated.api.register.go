@@ -144,7 +144,17 @@ var (
 	NewSelfSubjectAccessReviewREST = func(getter generic.RESTOptionsGetter) rest.Storage {
 		return NewSelfSubjectAccessReviewRESTFunc(Factory)
 	}
-	NewSelfSubjectAccessReviewRESTFunc   NewRESTFunc
+	NewSelfSubjectAccessReviewRESTFunc NewRESTFunc
+	ManagementSharedSecretStorage      = builders.NewApiResourceWithStorage( // Resource status endpoint
+		InternalSharedSecret,
+		func() runtime.Object { return &SharedSecret{} },     // Register versioned resource
+		func() runtime.Object { return &SharedSecretList{} }, // Register versioned resource list
+		NewSharedSecretREST,
+	)
+	NewSharedSecretREST = func(getter generic.RESTOptionsGetter) rest.Storage {
+		return NewSharedSecretRESTFunc(Factory)
+	}
+	NewSharedSecretRESTFunc              NewRESTFunc
 	ManagementSubjectAccessReviewStorage = builders.NewApiResourceWithStorage( // Resource status endpoint
 		InternalSubjectAccessReview,
 		func() runtime.Object { return &SubjectAccessReview{} },     // Register versioned resource
@@ -351,6 +361,18 @@ var (
 		func() runtime.Object { return &SelfSubjectAccessReview{} },
 		func() runtime.Object { return &SelfSubjectAccessReviewList{} },
 	)
+	InternalSharedSecret = builders.NewInternalResource(
+		"sharedsecrets",
+		"SharedSecret",
+		func() runtime.Object { return &SharedSecret{} },
+		func() runtime.Object { return &SharedSecretList{} },
+	)
+	InternalSharedSecretStatus = builders.NewInternalResourceStatus(
+		"sharedsecrets",
+		"SharedSecretStatus",
+		func() runtime.Object { return &SharedSecret{} },
+		func() runtime.Object { return &SharedSecretList{} },
+	)
 	InternalSubjectAccessReview = builders.NewInternalResource(
 		"subjectaccessreviews",
 		"SubjectAccessReview",
@@ -505,6 +527,8 @@ var (
 		InternalLoftUpgradeStatus,
 		InternalSelfSubjectAccessReview,
 		InternalSelfSubjectAccessReviewStatus,
+		InternalSharedSecret,
+		InternalSharedSecretStatus,
 		InternalSubjectAccessReview,
 		InternalSubjectAccessReviewStatus,
 		InternalTeam,
@@ -970,6 +994,25 @@ type SelfSubjectAccessReviewSpec struct {
 
 type SelfSubjectAccessReviewStatus struct {
 	authorizationv1.SubjectAccessReviewStatus
+}
+
+// +genclient
+// +genclient:nonNamespaced
+// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+
+type SharedSecret struct {
+	metav1.TypeMeta
+	metav1.ObjectMeta
+	Spec   SharedSecretSpec
+	Status SharedSecretStatus
+}
+
+type SharedSecretSpec struct {
+	storagev1.SharedSecretSpec
+}
+
+type SharedSecretStatus struct {
+	storagev1.SharedSecretStatus
 }
 
 // +genclient
@@ -2618,6 +2661,126 @@ func (s *storageSelfSubjectAccessReview) UpdateSelfSubjectAccessReview(ctx conte
 }
 
 func (s *storageSelfSubjectAccessReview) DeleteSelfSubjectAccessReview(ctx context.Context, id string) (bool, error) {
+	st := s.GetStandardStorage()
+	_, sync, err := st.Delete(ctx, id, nil, &metav1.DeleteOptions{})
+	return sync, err
+}
+
+//
+// SharedSecret Functions and Structs
+//
+// +k8s:deepcopy-gen=false
+type SharedSecretStrategy struct {
+	builders.DefaultStorageStrategy
+}
+
+// +k8s:deepcopy-gen=false
+type SharedSecretStatusStrategy struct {
+	builders.DefaultStatusStorageStrategy
+}
+
+// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+
+type SharedSecretList struct {
+	metav1.TypeMeta
+	metav1.ListMeta
+	Items []SharedSecret
+}
+
+func (SharedSecret) NewStatus() interface{} {
+	return SharedSecretStatus{}
+}
+
+func (pc *SharedSecret) GetStatus() interface{} {
+	return pc.Status
+}
+
+func (pc *SharedSecret) SetStatus(s interface{}) {
+	pc.Status = s.(SharedSecretStatus)
+}
+
+func (pc *SharedSecret) GetSpec() interface{} {
+	return pc.Spec
+}
+
+func (pc *SharedSecret) SetSpec(s interface{}) {
+	pc.Spec = s.(SharedSecretSpec)
+}
+
+func (pc *SharedSecret) GetObjectMeta() *metav1.ObjectMeta {
+	return &pc.ObjectMeta
+}
+
+func (pc *SharedSecret) SetGeneration(generation int64) {
+	pc.ObjectMeta.Generation = generation
+}
+
+func (pc SharedSecret) GetGeneration() int64 {
+	return pc.ObjectMeta.Generation
+}
+
+// Registry is an interface for things that know how to store SharedSecret.
+// +k8s:deepcopy-gen=false
+type SharedSecretRegistry interface {
+	ListSharedSecrets(ctx context.Context, options *internalversion.ListOptions) (*SharedSecretList, error)
+	GetSharedSecret(ctx context.Context, id string, options *metav1.GetOptions) (*SharedSecret, error)
+	CreateSharedSecret(ctx context.Context, id *SharedSecret) (*SharedSecret, error)
+	UpdateSharedSecret(ctx context.Context, id *SharedSecret) (*SharedSecret, error)
+	DeleteSharedSecret(ctx context.Context, id string) (bool, error)
+}
+
+// NewRegistry returns a new Registry interface for the given Storage. Any mismatched types will panic.
+func NewSharedSecretRegistry(sp builders.StandardStorageProvider) SharedSecretRegistry {
+	return &storageSharedSecret{sp}
+}
+
+// Implement Registry
+// storage puts strong typing around storage calls
+// +k8s:deepcopy-gen=false
+type storageSharedSecret struct {
+	builders.StandardStorageProvider
+}
+
+func (s *storageSharedSecret) ListSharedSecrets(ctx context.Context, options *internalversion.ListOptions) (*SharedSecretList, error) {
+	if options != nil && options.FieldSelector != nil && !options.FieldSelector.Empty() {
+		return nil, fmt.Errorf("field selector not supported yet")
+	}
+	st := s.GetStandardStorage()
+	obj, err := st.List(ctx, options)
+	if err != nil {
+		return nil, err
+	}
+	return obj.(*SharedSecretList), err
+}
+
+func (s *storageSharedSecret) GetSharedSecret(ctx context.Context, id string, options *metav1.GetOptions) (*SharedSecret, error) {
+	st := s.GetStandardStorage()
+	obj, err := st.Get(ctx, id, options)
+	if err != nil {
+		return nil, err
+	}
+	return obj.(*SharedSecret), nil
+}
+
+func (s *storageSharedSecret) CreateSharedSecret(ctx context.Context, object *SharedSecret) (*SharedSecret, error) {
+	st := s.GetStandardStorage()
+	obj, err := st.Create(ctx, object, nil, &metav1.CreateOptions{})
+	if err != nil {
+		return nil, err
+	}
+	return obj.(*SharedSecret), nil
+}
+
+func (s *storageSharedSecret) UpdateSharedSecret(ctx context.Context, object *SharedSecret) (*SharedSecret, error) {
+	st := s.GetStandardStorage()
+	obj, _, err := st.Update(ctx, object.Name, rest.DefaultUpdatedObjectInfo(object), nil, nil, false, &metav1.UpdateOptions{})
+	if err != nil {
+		return nil, err
+	}
+	return obj.(*SharedSecret), nil
+}
+
+func (s *storageSharedSecret) DeleteSharedSecret(ctx context.Context, id string) (bool, error) {
 	st := s.GetStandardStorage()
 	_, sync, err := st.Delete(ctx, id, nil, &metav1.DeleteOptions{})
 	return sync, err

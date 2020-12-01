@@ -50,6 +50,8 @@ func addKnownTypes(scheme *runtime.Scheme) error {
 		&management.LoftUpgradeList{},
 		&management.SelfSubjectAccessReview{},
 		&management.SelfSubjectAccessReviewList{},
+		&management.SharedSecret{},
+		&management.SharedSecretList{},
 		&management.SubjectAccessReview{},
 		&management.SubjectAccessReviewList{},
 		&management.Team{},

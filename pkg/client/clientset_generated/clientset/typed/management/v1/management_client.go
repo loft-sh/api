@@ -21,6 +21,7 @@ type ManagementV1Interface interface {
 	LicenseTokensGetter
 	LoftUpgradesGetter
 	SelfSubjectAccessReviewsGetter
+	SharedSecretsGetter
 	SubjectAccessReviewsGetter
 	TeamsGetter
 	UsersGetter
@@ -73,6 +74,10 @@ func (c *ManagementV1Client) LoftUpgrades() LoftUpgradeInterface {
 
 func (c *ManagementV1Client) SelfSubjectAccessReviews() SelfSubjectAccessReviewInterface {
 	return newSelfSubjectAccessReviews(c)
+}
+
+func (c *ManagementV1Client) SharedSecrets() SharedSecretInterface {
+	return newSharedSecrets(c)
 }
 
 func (c *ManagementV1Client) SubjectAccessReviews() SubjectAccessReviewInterface {

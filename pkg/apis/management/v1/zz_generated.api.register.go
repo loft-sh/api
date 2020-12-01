@@ -41,6 +41,8 @@ func addKnownTypes(scheme *runtime.Scheme) error {
 		&LoftUpgradeList{},
 		&SelfSubjectAccessReview{},
 		&SelfSubjectAccessReviewList{},
+		&SharedSecret{},
+		&SharedSecretList{},
 		&SubjectAccessReview{},
 		&SubjectAccessReviewList{},
 		&Team{},
@@ -96,6 +98,7 @@ var (
 		management.ManagementLicenseTokenStorage,
 		management.ManagementLoftUpgradeStorage,
 		management.ManagementSelfSubjectAccessReviewStorage,
+		management.ManagementSharedSecretStorage,
 		management.ManagementSubjectAccessReviewStorage,
 		management.ManagementTeamStorage,
 		builders.NewApiResourceWithStorage(
@@ -311,6 +314,14 @@ type SelfSubjectAccessReviewList struct {
 	metav1.TypeMeta `json:",inline"`
 	metav1.ListMeta `json:"metadata,omitempty"`
 	Items           []SelfSubjectAccessReview `json:"items"`
+}
+
+// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+
+type SharedSecretList struct {
+	metav1.TypeMeta `json:",inline"`
+	metav1.ListMeta `json:"metadata,omitempty"`
+	Items           []SharedSecret `json:"items"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object

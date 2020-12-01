@@ -24,6 +24,8 @@ type LoftUpgradeExpansion interface{}
 
 type SelfSubjectAccessReviewExpansion interface{}
 
+type SharedSecretExpansion interface{}
+
 type SubjectAccessReviewExpansion interface{}
 
 type TeamExpansion interface{}
