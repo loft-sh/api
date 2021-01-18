@@ -18,6 +18,8 @@ import (
 // +subresource:request=ClusterReset,path=reset,kind=ClusterReset,rest=ClusterResetREST
 // +subresource:request=ClusterDomain,path=domain,kind=ClusterDomain,rest=ClusterDomainREST
 // +subresource:request=ClusterMembers,path=members,kind=ClusterMembers,rest=ClusterMembersREST
+// +subresource:request=ClusterCharts,path=charts,kind=ClusterCharts,rest=ClusterChartsREST
+// +subresource:request=ClusterPredefinedApps,path=predefinedapps,kind=ClusterPredefinedApps,rest=ClusterPredefinedAppsREST
 // +subresource:request=ClusterVirtualClusterDefaults,path=virtualclusterdefaults,kind=ClusterVirtualClusterDefaults,rest=ClusterVirtualClusterDefaultsREST
 type Cluster struct {
 	metav1.TypeMeta   `json:",inline"`

@@ -73,6 +73,16 @@ func RegisterConversions(s *runtime.Scheme) error {
 	}); err != nil {
 		return err
 	}
+	if err := s.AddGeneratedConversionFunc((*Apps)(nil), (*management.Apps)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_v1_Apps_To_management_Apps(a.(*Apps), b.(*management.Apps), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*management.Apps)(nil), (*Apps)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_management_Apps_To_v1_Apps(a.(*management.Apps), b.(*Apps), scope)
+	}); err != nil {
+		return err
+	}
 	if err := s.AddGeneratedConversionFunc((*Authentication)(nil), (*management.Authentication)(nil), func(a, b interface{}, scope conversion.Scope) error {
 		return Convert_v1_Authentication_To_management_Authentication(a.(*Authentication), b.(*management.Authentication), scope)
 	}); err != nil {
@@ -160,6 +170,26 @@ func RegisterConversions(s *runtime.Scheme) error {
 	}
 	if err := s.AddGeneratedConversionFunc((*management.ClusterAccounts)(nil), (*ClusterAccounts)(nil), func(a, b interface{}, scope conversion.Scope) error {
 		return Convert_management_ClusterAccounts_To_v1_ClusterAccounts(a.(*management.ClusterAccounts), b.(*ClusterAccounts), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*ClusterCharts)(nil), (*management.ClusterCharts)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_v1_ClusterCharts_To_management_ClusterCharts(a.(*ClusterCharts), b.(*management.ClusterCharts), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*management.ClusterCharts)(nil), (*ClusterCharts)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_management_ClusterCharts_To_v1_ClusterCharts(a.(*management.ClusterCharts), b.(*ClusterCharts), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*ClusterChartsList)(nil), (*management.ClusterChartsList)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_v1_ClusterChartsList_To_management_ClusterChartsList(a.(*ClusterChartsList), b.(*management.ClusterChartsList), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*management.ClusterChartsList)(nil), (*ClusterChartsList)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_management_ClusterChartsList_To_v1_ClusterChartsList(a.(*management.ClusterChartsList), b.(*ClusterChartsList), scope)
 	}); err != nil {
 		return err
 	}
@@ -260,6 +290,26 @@ func RegisterConversions(s *runtime.Scheme) error {
 	}
 	if err := s.AddGeneratedConversionFunc((*management.ClusterMembersList)(nil), (*ClusterMembersList)(nil), func(a, b interface{}, scope conversion.Scope) error {
 		return Convert_management_ClusterMembersList_To_v1_ClusterMembersList(a.(*management.ClusterMembersList), b.(*ClusterMembersList), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*ClusterPredefinedApps)(nil), (*management.ClusterPredefinedApps)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_v1_ClusterPredefinedApps_To_management_ClusterPredefinedApps(a.(*ClusterPredefinedApps), b.(*management.ClusterPredefinedApps), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*management.ClusterPredefinedApps)(nil), (*ClusterPredefinedApps)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_management_ClusterPredefinedApps_To_v1_ClusterPredefinedApps(a.(*management.ClusterPredefinedApps), b.(*ClusterPredefinedApps), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*ClusterPredefinedAppsList)(nil), (*management.ClusterPredefinedAppsList)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_v1_ClusterPredefinedAppsList_To_management_ClusterPredefinedAppsList(a.(*ClusterPredefinedAppsList), b.(*management.ClusterPredefinedAppsList), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*management.ClusterPredefinedAppsList)(nil), (*ClusterPredefinedAppsList)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_management_ClusterPredefinedAppsList_To_v1_ClusterPredefinedAppsList(a.(*management.ClusterPredefinedAppsList), b.(*ClusterPredefinedAppsList), scope)
 	}); err != nil {
 		return err
 	}
@@ -720,6 +770,16 @@ func RegisterConversions(s *runtime.Scheme) error {
 	}
 	if err := s.AddGeneratedConversionFunc((*management.PlanProduct)(nil), (*PlanProduct)(nil), func(a, b interface{}, scope conversion.Scope) error {
 		return Convert_management_PlanProduct_To_v1_PlanProduct(a.(*management.PlanProduct), b.(*PlanProduct), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*PredefinedApp)(nil), (*management.PredefinedApp)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_v1_PredefinedApp_To_management_PredefinedApp(a.(*PredefinedApp), b.(*management.PredefinedApp), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*management.PredefinedApp)(nil), (*PredefinedApp)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_management_PredefinedApp_To_v1_PredefinedApp(a.(*management.PredefinedApp), b.(*PredefinedApp), scope)
 	}); err != nil {
 		return err
 	}
@@ -1332,6 +1392,30 @@ func Convert_management_AnnouncementStatus_To_v1_AnnouncementStatus(in *manageme
 	return autoConvert_management_AnnouncementStatus_To_v1_AnnouncementStatus(in, out, s)
 }
 
+func autoConvert_v1_Apps_To_management_Apps(in *Apps, out *management.Apps, s conversion.Scope) error {
+	out.NoDefault = in.NoDefault
+	out.Repositories = *(*[]storagev1.HelmChartRepository)(unsafe.Pointer(&in.Repositories))
+	out.PredefinedApps = *(*[]management.PredefinedApp)(unsafe.Pointer(&in.PredefinedApps))
+	return nil
+}
+
+// Convert_v1_Apps_To_management_Apps is an autogenerated conversion function.
+func Convert_v1_Apps_To_management_Apps(in *Apps, out *management.Apps, s conversion.Scope) error {
+	return autoConvert_v1_Apps_To_management_Apps(in, out, s)
+}
+
+func autoConvert_management_Apps_To_v1_Apps(in *management.Apps, out *Apps, s conversion.Scope) error {
+	out.NoDefault = in.NoDefault
+	out.Repositories = *(*[]storagev1.HelmChartRepository)(unsafe.Pointer(&in.Repositories))
+	out.PredefinedApps = *(*[]PredefinedApp)(unsafe.Pointer(&in.PredefinedApps))
+	return nil
+}
+
+// Convert_management_Apps_To_v1_Apps is an autogenerated conversion function.
+func Convert_management_Apps_To_v1_Apps(in *management.Apps, out *Apps, s conversion.Scope) error {
+	return autoConvert_management_Apps_To_v1_Apps(in, out, s)
+}
+
 func autoConvert_v1_Authentication_To_management_Authentication(in *Authentication, out *management.Authentication, s conversion.Scope) error {
 	out.Password = (*management.AuthenticationPassword)(unsafe.Pointer(in.Password))
 	out.OIDC = (*management.AuthenticationOIDC)(unsafe.Pointer(in.OIDC))
@@ -1562,6 +1646,52 @@ func autoConvert_management_ClusterAccounts_To_v1_ClusterAccounts(in *management
 // Convert_management_ClusterAccounts_To_v1_ClusterAccounts is an autogenerated conversion function.
 func Convert_management_ClusterAccounts_To_v1_ClusterAccounts(in *management.ClusterAccounts, out *ClusterAccounts, s conversion.Scope) error {
 	return autoConvert_management_ClusterAccounts_To_v1_ClusterAccounts(in, out, s)
+}
+
+func autoConvert_v1_ClusterCharts_To_management_ClusterCharts(in *ClusterCharts, out *management.ClusterCharts, s conversion.Scope) error {
+	out.ObjectMeta = in.ObjectMeta
+	out.Charts = *(*[]storagev1.HelmChart)(unsafe.Pointer(&in.Charts))
+	out.Busy = in.Busy
+	return nil
+}
+
+// Convert_v1_ClusterCharts_To_management_ClusterCharts is an autogenerated conversion function.
+func Convert_v1_ClusterCharts_To_management_ClusterCharts(in *ClusterCharts, out *management.ClusterCharts, s conversion.Scope) error {
+	return autoConvert_v1_ClusterCharts_To_management_ClusterCharts(in, out, s)
+}
+
+func autoConvert_management_ClusterCharts_To_v1_ClusterCharts(in *management.ClusterCharts, out *ClusterCharts, s conversion.Scope) error {
+	out.ObjectMeta = in.ObjectMeta
+	out.Charts = *(*[]storagev1.HelmChart)(unsafe.Pointer(&in.Charts))
+	out.Busy = in.Busy
+	return nil
+}
+
+// Convert_management_ClusterCharts_To_v1_ClusterCharts is an autogenerated conversion function.
+func Convert_management_ClusterCharts_To_v1_ClusterCharts(in *management.ClusterCharts, out *ClusterCharts, s conversion.Scope) error {
+	return autoConvert_management_ClusterCharts_To_v1_ClusterCharts(in, out, s)
+}
+
+func autoConvert_v1_ClusterChartsList_To_management_ClusterChartsList(in *ClusterChartsList, out *management.ClusterChartsList, s conversion.Scope) error {
+	out.ListMeta = in.ListMeta
+	out.Items = *(*[]management.ClusterCharts)(unsafe.Pointer(&in.Items))
+	return nil
+}
+
+// Convert_v1_ClusterChartsList_To_management_ClusterChartsList is an autogenerated conversion function.
+func Convert_v1_ClusterChartsList_To_management_ClusterChartsList(in *ClusterChartsList, out *management.ClusterChartsList, s conversion.Scope) error {
+	return autoConvert_v1_ClusterChartsList_To_management_ClusterChartsList(in, out, s)
+}
+
+func autoConvert_management_ClusterChartsList_To_v1_ClusterChartsList(in *management.ClusterChartsList, out *ClusterChartsList, s conversion.Scope) error {
+	out.ListMeta = in.ListMeta
+	out.Items = *(*[]ClusterCharts)(unsafe.Pointer(&in.Items))
+	return nil
+}
+
+// Convert_management_ClusterChartsList_To_v1_ClusterChartsList is an autogenerated conversion function.
+func Convert_management_ClusterChartsList_To_v1_ClusterChartsList(in *management.ClusterChartsList, out *ClusterChartsList, s conversion.Scope) error {
+	return autoConvert_management_ClusterChartsList_To_v1_ClusterChartsList(in, out, s)
 }
 
 func autoConvert_v1_ClusterConnect_To_management_ClusterConnect(in *ClusterConnect, out *management.ClusterConnect, s conversion.Scope) error {
@@ -1808,6 +1938,50 @@ func autoConvert_management_ClusterMembersList_To_v1_ClusterMembersList(in *mana
 // Convert_management_ClusterMembersList_To_v1_ClusterMembersList is an autogenerated conversion function.
 func Convert_management_ClusterMembersList_To_v1_ClusterMembersList(in *management.ClusterMembersList, out *ClusterMembersList, s conversion.Scope) error {
 	return autoConvert_management_ClusterMembersList_To_v1_ClusterMembersList(in, out, s)
+}
+
+func autoConvert_v1_ClusterPredefinedApps_To_management_ClusterPredefinedApps(in *ClusterPredefinedApps, out *management.ClusterPredefinedApps, s conversion.Scope) error {
+	out.ObjectMeta = in.ObjectMeta
+	out.Apps = *(*[]management.PredefinedApp)(unsafe.Pointer(&in.Apps))
+	return nil
+}
+
+// Convert_v1_ClusterPredefinedApps_To_management_ClusterPredefinedApps is an autogenerated conversion function.
+func Convert_v1_ClusterPredefinedApps_To_management_ClusterPredefinedApps(in *ClusterPredefinedApps, out *management.ClusterPredefinedApps, s conversion.Scope) error {
+	return autoConvert_v1_ClusterPredefinedApps_To_management_ClusterPredefinedApps(in, out, s)
+}
+
+func autoConvert_management_ClusterPredefinedApps_To_v1_ClusterPredefinedApps(in *management.ClusterPredefinedApps, out *ClusterPredefinedApps, s conversion.Scope) error {
+	out.ObjectMeta = in.ObjectMeta
+	out.Apps = *(*[]PredefinedApp)(unsafe.Pointer(&in.Apps))
+	return nil
+}
+
+// Convert_management_ClusterPredefinedApps_To_v1_ClusterPredefinedApps is an autogenerated conversion function.
+func Convert_management_ClusterPredefinedApps_To_v1_ClusterPredefinedApps(in *management.ClusterPredefinedApps, out *ClusterPredefinedApps, s conversion.Scope) error {
+	return autoConvert_management_ClusterPredefinedApps_To_v1_ClusterPredefinedApps(in, out, s)
+}
+
+func autoConvert_v1_ClusterPredefinedAppsList_To_management_ClusterPredefinedAppsList(in *ClusterPredefinedAppsList, out *management.ClusterPredefinedAppsList, s conversion.Scope) error {
+	out.ListMeta = in.ListMeta
+	out.Items = *(*[]management.ClusterPredefinedApps)(unsafe.Pointer(&in.Items))
+	return nil
+}
+
+// Convert_v1_ClusterPredefinedAppsList_To_management_ClusterPredefinedAppsList is an autogenerated conversion function.
+func Convert_v1_ClusterPredefinedAppsList_To_management_ClusterPredefinedAppsList(in *ClusterPredefinedAppsList, out *management.ClusterPredefinedAppsList, s conversion.Scope) error {
+	return autoConvert_v1_ClusterPredefinedAppsList_To_management_ClusterPredefinedAppsList(in, out, s)
+}
+
+func autoConvert_management_ClusterPredefinedAppsList_To_v1_ClusterPredefinedAppsList(in *management.ClusterPredefinedAppsList, out *ClusterPredefinedAppsList, s conversion.Scope) error {
+	out.ListMeta = in.ListMeta
+	out.Items = *(*[]ClusterPredefinedApps)(unsafe.Pointer(&in.Items))
+	return nil
+}
+
+// Convert_management_ClusterPredefinedAppsList_To_v1_ClusterPredefinedAppsList is an autogenerated conversion function.
+func Convert_management_ClusterPredefinedAppsList_To_v1_ClusterPredefinedAppsList(in *management.ClusterPredefinedAppsList, out *ClusterPredefinedAppsList, s conversion.Scope) error {
+	return autoConvert_management_ClusterPredefinedAppsList_To_v1_ClusterPredefinedAppsList(in, out, s)
 }
 
 func autoConvert_v1_ClusterQuota_To_management_ClusterQuota(in *ClusterQuota, out *management.ClusterQuota, s conversion.Scope) error {
@@ -2175,6 +2349,7 @@ func autoConvert_v1_ConfigSpec_To_management_ConfigSpec(in *ConfigSpec, out *man
 		return err
 	}
 	out.OIDC = (*management.OIDC)(unsafe.Pointer(in.OIDC))
+	out.Apps = (*management.Apps)(unsafe.Pointer(in.Apps))
 	return nil
 }
 
@@ -2188,6 +2363,7 @@ func autoConvert_management_ConfigSpec_To_v1_ConfigSpec(in *management.ConfigSpe
 		return err
 	}
 	out.OIDC = (*OIDC)(unsafe.Pointer(in.OIDC))
+	out.Apps = (*Apps)(unsafe.Pointer(in.Apps))
 	return nil
 }
 
@@ -2972,6 +3148,38 @@ func autoConvert_management_PlanProduct_To_v1_PlanProduct(in *management.PlanPro
 // Convert_management_PlanProduct_To_v1_PlanProduct is an autogenerated conversion function.
 func Convert_management_PlanProduct_To_v1_PlanProduct(in *management.PlanProduct, out *PlanProduct, s conversion.Scope) error {
 	return autoConvert_management_PlanProduct_To_v1_PlanProduct(in, out, s)
+}
+
+func autoConvert_v1_PredefinedApp_To_management_PredefinedApp(in *PredefinedApp, out *management.PredefinedApp, s conversion.Scope) error {
+	out.Chart = in.Chart
+	out.InitialVersion = in.InitialVersion
+	out.InitialValues = in.InitialValues
+	out.Clusters = *(*[]string)(unsafe.Pointer(&in.Clusters))
+	out.Title = in.Title
+	out.IconURL = in.IconURL
+	out.ReadmeURL = in.ReadmeURL
+	return nil
+}
+
+// Convert_v1_PredefinedApp_To_management_PredefinedApp is an autogenerated conversion function.
+func Convert_v1_PredefinedApp_To_management_PredefinedApp(in *PredefinedApp, out *management.PredefinedApp, s conversion.Scope) error {
+	return autoConvert_v1_PredefinedApp_To_management_PredefinedApp(in, out, s)
+}
+
+func autoConvert_management_PredefinedApp_To_v1_PredefinedApp(in *management.PredefinedApp, out *PredefinedApp, s conversion.Scope) error {
+	out.Chart = in.Chart
+	out.InitialVersion = in.InitialVersion
+	out.InitialValues = in.InitialValues
+	out.Clusters = *(*[]string)(unsafe.Pointer(&in.Clusters))
+	out.Title = in.Title
+	out.IconURL = in.IconURL
+	out.ReadmeURL = in.ReadmeURL
+	return nil
+}
+
+// Convert_management_PredefinedApp_To_v1_PredefinedApp is an autogenerated conversion function.
+func Convert_management_PredefinedApp_To_v1_PredefinedApp(in *management.PredefinedApp, out *PredefinedApp, s conversion.Scope) error {
+	return autoConvert_management_PredefinedApp_To_v1_PredefinedApp(in, out, s)
 }
 
 func autoConvert_v1_Promotions_To_management_Promotions(in *Promotions, out *management.Promotions, s conversion.Scope) error {

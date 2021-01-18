@@ -27,10 +27,66 @@ type ConfigSpec struct {
 
 	// OIDC holds oidc provider relevant information
 	OIDC *OIDC `json:"oidc,omitempty"`
+
+	// Apps holds configuration around apps
+	// +optional
+	Apps *Apps `json:"apps,omitempty"`
 }
 
 // ConfigStatus holds the status
 type ConfigStatus struct {
+}
+
+// Apps holds configuration for apps that should be shown
+type Apps struct {
+	// If this option is true, loft will not try to parse the default apps
+	// +optional
+	NoDefault bool `json:"noDefault,omitempty"`
+
+	// These are additional repositories that are parsed by loft
+	// +optional
+	Repositories []storagev1.HelmChartRepository `json:"repositories,omitempty"`
+
+	// Predefined apps that can be selected in the Spaces > Space menu
+	// +optional
+	PredefinedApps []PredefinedApp `json:"predefinedApps,omitempty"`
+}
+
+// PredefinedApp holds information about a predefined app
+type PredefinedApp struct {
+	// Chart holds the repo/chart name of the predefined app
+	Chart string `json:"chart"`
+
+	// InitialVersion holds the initial version of this app.
+	// This version will be selected automatically.
+	// +optional
+	InitialVersion string `json:"initialVersion,omitempty"`
+
+	// InitialValues holds the initial values for this app.
+	// The values will be prefilled automatically. There are certain
+	// placeholders that can be used within the values that are replaced
+	// by the loft UI automatically.
+	// +optional
+	InitialValues string `json:"initialValues,omitempty"`
+
+	// Holds the cluster names where to display this app
+	// +optional
+	Clusters []string `json:"clusters,omitempty"`
+
+	// Title is the name that should be displayed for the predefined app.
+	// If empty the chart name is used.
+	// +optional
+	Title string `json:"title,omitempty"`
+
+	// IconURL specifies an url to the icon that should be displayed for this app.
+	// If none is specified the icon from the chart metadata is used.
+	// +optional
+	IconURL string `json:"iconUrl,omitempty"`
+
+	// ReadmeURL specifies an url to the readme page of this predefined app. If empty
+	// an url will be constructed to artifact hub.
+	// +optional
+	ReadmeURL string `json:"readmeUrl,omitempty"`
 }
 
 // OIDC holds oidc provider relevant information

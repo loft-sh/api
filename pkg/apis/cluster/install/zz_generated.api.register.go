@@ -27,8 +27,6 @@ func addKnownTypes(scheme *runtime.Scheme) error {
 		&cluster.AccountClusterRoles{},
 		&cluster.Context{},
 		&cluster.ContextList{},
-		&cluster.HelmChart{},
-		&cluster.HelmChartList{},
 		&cluster.HelmRelease{},
 		&cluster.HelmReleaseList{},
 		&cluster.SleepModeConfig{},

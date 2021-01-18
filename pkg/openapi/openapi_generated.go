@@ -56,24 +56,15 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 		"github.com/loft-sh/api/pkg/apis/cluster/v1.AccountList":                             schema_pkg_apis_cluster_v1_AccountList(ref),
 		"github.com/loft-sh/api/pkg/apis/cluster/v1.AccountSpec":                             schema_pkg_apis_cluster_v1_AccountSpec(ref),
 		"github.com/loft-sh/api/pkg/apis/cluster/v1.AccountStatus":                           schema_pkg_apis_cluster_v1_AccountStatus(ref),
-		"github.com/loft-sh/api/pkg/apis/cluster/v1.Chart":                                   schema_pkg_apis_cluster_v1_Chart(ref),
 		"github.com/loft-sh/api/pkg/apis/cluster/v1.Context":                                 schema_pkg_apis_cluster_v1_Context(ref),
 		"github.com/loft-sh/api/pkg/apis/cluster/v1.ContextList":                             schema_pkg_apis_cluster_v1_ContextList(ref),
 		"github.com/loft-sh/api/pkg/apis/cluster/v1.ContextSpec":                             schema_pkg_apis_cluster_v1_ContextSpec(ref),
 		"github.com/loft-sh/api/pkg/apis/cluster/v1.ContextStatus":                           schema_pkg_apis_cluster_v1_ContextStatus(ref),
 		"github.com/loft-sh/api/pkg/apis/cluster/v1.EpochInfo":                               schema_pkg_apis_cluster_v1_EpochInfo(ref),
-		"github.com/loft-sh/api/pkg/apis/cluster/v1.HelmChart":                               schema_pkg_apis_cluster_v1_HelmChart(ref),
-		"github.com/loft-sh/api/pkg/apis/cluster/v1.HelmChartList":                           schema_pkg_apis_cluster_v1_HelmChartList(ref),
-		"github.com/loft-sh/api/pkg/apis/cluster/v1.HelmChartRepository":                     schema_pkg_apis_cluster_v1_HelmChartRepository(ref),
-		"github.com/loft-sh/api/pkg/apis/cluster/v1.HelmChartSpec":                           schema_pkg_apis_cluster_v1_HelmChartSpec(ref),
-		"github.com/loft-sh/api/pkg/apis/cluster/v1.HelmChartStatus":                         schema_pkg_apis_cluster_v1_HelmChartStatus(ref),
 		"github.com/loft-sh/api/pkg/apis/cluster/v1.HelmRelease":                             schema_pkg_apis_cluster_v1_HelmRelease(ref),
 		"github.com/loft-sh/api/pkg/apis/cluster/v1.HelmReleaseList":                         schema_pkg_apis_cluster_v1_HelmReleaseList(ref),
 		"github.com/loft-sh/api/pkg/apis/cluster/v1.HelmReleaseSpec":                         schema_pkg_apis_cluster_v1_HelmReleaseSpec(ref),
 		"github.com/loft-sh/api/pkg/apis/cluster/v1.HelmReleaseStatus":                       schema_pkg_apis_cluster_v1_HelmReleaseStatus(ref),
-		"github.com/loft-sh/api/pkg/apis/cluster/v1.Info":                                    schema_pkg_apis_cluster_v1_Info(ref),
-		"github.com/loft-sh/api/pkg/apis/cluster/v1.Maintainer":                              schema_pkg_apis_cluster_v1_Maintainer(ref),
-		"github.com/loft-sh/api/pkg/apis/cluster/v1.Metadata":                                schema_pkg_apis_cluster_v1_Metadata(ref),
 		"github.com/loft-sh/api/pkg/apis/cluster/v1.SleepModeConfig":                         schema_pkg_apis_cluster_v1_SleepModeConfig(ref),
 		"github.com/loft-sh/api/pkg/apis/cluster/v1.SleepModeConfigList":                     schema_pkg_apis_cluster_v1_SleepModeConfigList(ref),
 		"github.com/loft-sh/api/pkg/apis/cluster/v1.SleepModeConfigSpec":                     schema_pkg_apis_cluster_v1_SleepModeConfigSpec(ref),
@@ -83,6 +74,7 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 		"github.com/loft-sh/api/pkg/apis/management/v1.AnnouncementList":                     schema_pkg_apis_management_v1_AnnouncementList(ref),
 		"github.com/loft-sh/api/pkg/apis/management/v1.AnnouncementSpec":                     schema_pkg_apis_management_v1_AnnouncementSpec(ref),
 		"github.com/loft-sh/api/pkg/apis/management/v1.AnnouncementStatus":                   schema_pkg_apis_management_v1_AnnouncementStatus(ref),
+		"github.com/loft-sh/api/pkg/apis/management/v1.Apps":                                 schema_pkg_apis_management_v1_Apps(ref),
 		"github.com/loft-sh/api/pkg/apis/management/v1.Authentication":                       schema_pkg_apis_management_v1_Authentication(ref),
 		"github.com/loft-sh/api/pkg/apis/management/v1.AuthenticationOIDC":                   schema_pkg_apis_management_v1_AuthenticationOIDC(ref),
 		"github.com/loft-sh/api/pkg/apis/management/v1.AuthenticationPassword":               schema_pkg_apis_management_v1_AuthenticationPassword(ref),
@@ -92,6 +84,8 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 		"github.com/loft-sh/api/pkg/apis/management/v1.ClusterAccountTemplateSpec":           schema_pkg_apis_management_v1_ClusterAccountTemplateSpec(ref),
 		"github.com/loft-sh/api/pkg/apis/management/v1.ClusterAccountTemplateStatus":         schema_pkg_apis_management_v1_ClusterAccountTemplateStatus(ref),
 		"github.com/loft-sh/api/pkg/apis/management/v1.ClusterAccounts":                      schema_pkg_apis_management_v1_ClusterAccounts(ref),
+		"github.com/loft-sh/api/pkg/apis/management/v1.ClusterCharts":                        schema_pkg_apis_management_v1_ClusterCharts(ref),
+		"github.com/loft-sh/api/pkg/apis/management/v1.ClusterChartsList":                    schema_pkg_apis_management_v1_ClusterChartsList(ref),
 		"github.com/loft-sh/api/pkg/apis/management/v1.ClusterConnect":                       schema_pkg_apis_management_v1_ClusterConnect(ref),
 		"github.com/loft-sh/api/pkg/apis/management/v1.ClusterConnectList":                   schema_pkg_apis_management_v1_ClusterConnectList(ref),
 		"github.com/loft-sh/api/pkg/apis/management/v1.ClusterConnectSpec":                   schema_pkg_apis_management_v1_ClusterConnectSpec(ref),
@@ -102,6 +96,8 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 		"github.com/loft-sh/api/pkg/apis/management/v1.ClusterMember":                        schema_pkg_apis_management_v1_ClusterMember(ref),
 		"github.com/loft-sh/api/pkg/apis/management/v1.ClusterMembers":                       schema_pkg_apis_management_v1_ClusterMembers(ref),
 		"github.com/loft-sh/api/pkg/apis/management/v1.ClusterMembersList":                   schema_pkg_apis_management_v1_ClusterMembersList(ref),
+		"github.com/loft-sh/api/pkg/apis/management/v1.ClusterPredefinedApps":                schema_pkg_apis_management_v1_ClusterPredefinedApps(ref),
+		"github.com/loft-sh/api/pkg/apis/management/v1.ClusterPredefinedAppsList":            schema_pkg_apis_management_v1_ClusterPredefinedAppsList(ref),
 		"github.com/loft-sh/api/pkg/apis/management/v1.ClusterQuota":                         schema_pkg_apis_management_v1_ClusterQuota(ref),
 		"github.com/loft-sh/api/pkg/apis/management/v1.ClusterReset":                         schema_pkg_apis_management_v1_ClusterReset(ref),
 		"github.com/loft-sh/api/pkg/apis/management/v1.ClusterResetList":                     schema_pkg_apis_management_v1_ClusterResetList(ref),
@@ -148,6 +144,7 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 		"github.com/loft-sh/api/pkg/apis/management/v1.OIDCClient":                           schema_pkg_apis_management_v1_OIDCClient(ref),
 		"github.com/loft-sh/api/pkg/apis/management/v1.Plan":                                 schema_pkg_apis_management_v1_Plan(ref),
 		"github.com/loft-sh/api/pkg/apis/management/v1.PlanProduct":                          schema_pkg_apis_management_v1_PlanProduct(ref),
+		"github.com/loft-sh/api/pkg/apis/management/v1.PredefinedApp":                        schema_pkg_apis_management_v1_PredefinedApp(ref),
 		"github.com/loft-sh/api/pkg/apis/management/v1.Promotions":                           schema_pkg_apis_management_v1_Promotions(ref),
 		"github.com/loft-sh/api/pkg/apis/management/v1.ResourceLimit":                        schema_pkg_apis_management_v1_ResourceLimit(ref),
 		"github.com/loft-sh/api/pkg/apis/management/v1.ResoureRequests":                      schema_pkg_apis_management_v1_ResoureRequests(ref),
@@ -199,6 +196,7 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 		"github.com/loft-sh/api/pkg/apis/management/v1.UserVirtualClustersList":              schema_pkg_apis_management_v1_UserVirtualClustersList(ref),
 		"github.com/loft-sh/api/pkg/apis/storage/v1.AccountClusterStatus":                    schema_pkg_apis_storage_v1_AccountClusterStatus(ref),
 		"github.com/loft-sh/api/pkg/apis/storage/v1.AccountTemplate":                         schema_pkg_apis_storage_v1_AccountTemplate(ref),
+		"github.com/loft-sh/api/pkg/apis/storage/v1.Chart":                                   schema_pkg_apis_storage_v1_Chart(ref),
 		"github.com/loft-sh/api/pkg/apis/storage/v1.Cluster":                                 schema_pkg_apis_storage_v1_Cluster(ref),
 		"github.com/loft-sh/api/pkg/apis/storage/v1.ClusterAccountTemplate":                  schema_pkg_apis_storage_v1_ClusterAccountTemplate(ref),
 		"github.com/loft-sh/api/pkg/apis/storage/v1.ClusterAccountTemplateClusterStatus":     schema_pkg_apis_storage_v1_ClusterAccountTemplateClusterStatus(ref),
@@ -208,6 +206,11 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 		"github.com/loft-sh/api/pkg/apis/storage/v1.ClusterList":                             schema_pkg_apis_storage_v1_ClusterList(ref),
 		"github.com/loft-sh/api/pkg/apis/storage/v1.ClusterSpec":                             schema_pkg_apis_storage_v1_ClusterSpec(ref),
 		"github.com/loft-sh/api/pkg/apis/storage/v1.ClusterStatus":                           schema_pkg_apis_storage_v1_ClusterStatus(ref),
+		"github.com/loft-sh/api/pkg/apis/storage/v1.HelmChart":                               schema_pkg_apis_storage_v1_HelmChart(ref),
+		"github.com/loft-sh/api/pkg/apis/storage/v1.HelmChartRepository":                     schema_pkg_apis_storage_v1_HelmChartRepository(ref),
+		"github.com/loft-sh/api/pkg/apis/storage/v1.Info":                                    schema_pkg_apis_storage_v1_Info(ref),
+		"github.com/loft-sh/api/pkg/apis/storage/v1.Maintainer":                              schema_pkg_apis_storage_v1_Maintainer(ref),
+		"github.com/loft-sh/api/pkg/apis/storage/v1.Metadata":                                schema_pkg_apis_storage_v1_Metadata(ref),
 		"github.com/loft-sh/api/pkg/apis/storage/v1.PodSelector":                             schema_pkg_apis_storage_v1_PodSelector(ref),
 		"github.com/loft-sh/api/pkg/apis/storage/v1.SecretRef":                               schema_pkg_apis_storage_v1_SecretRef(ref),
 		"github.com/loft-sh/api/pkg/apis/storage/v1.SharedSecret":                            schema_pkg_apis_storage_v1_SharedSecret(ref),
@@ -2417,54 +2420,6 @@ func schema_pkg_apis_cluster_v1_AccountStatus(ref common.ReferenceCallback) comm
 	}
 }
 
-func schema_pkg_apis_cluster_v1_Chart(ref common.ReferenceCallback) common.OpenAPIDefinition {
-	return common.OpenAPIDefinition{
-		Schema: spec.Schema{
-			SchemaProps: spec.SchemaProps{
-				Description: "Chart describes a chart",
-				Type:        []string{"object"},
-				Properties: map[string]spec.Schema{
-					"name": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Name is the chart name in the repository",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"version": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Version is the chart version in the repository",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"repoURL": {
-						SchemaProps: spec.SchemaProps{
-							Description: "RepoURL is the repo url where the chart can be found",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"username": {
-						SchemaProps: spec.SchemaProps{
-							Description: "The username that is required for this repository",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"password": {
-						SchemaProps: spec.SchemaProps{
-							Description: "The password that is required for this repository",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-				},
-			},
-		},
-	}
-}
-
 func schema_pkg_apis_cluster_v1_Context(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
@@ -2630,171 +2585,6 @@ func schema_pkg_apis_cluster_v1_EpochInfo(ref common.ReferenceCallback) common.O
 	}
 }
 
-func schema_pkg_apis_cluster_v1_HelmChart(ref common.ReferenceCallback) common.OpenAPIDefinition {
-	return common.OpenAPIDefinition{
-		Schema: spec.Schema{
-			SchemaProps: spec.SchemaProps{
-				Type: []string{"object"},
-				Properties: map[string]spec.Schema{
-					"kind": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"apiVersion": {
-						SchemaProps: spec.SchemaProps{
-							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"metadata": {
-						SchemaProps: spec.SchemaProps{
-							Ref: ref("k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"),
-						},
-					},
-					"spec": {
-						SchemaProps: spec.SchemaProps{
-							Ref: ref("github.com/loft-sh/api/pkg/apis/cluster/v1.HelmChartSpec"),
-						},
-					},
-					"status": {
-						SchemaProps: spec.SchemaProps{
-							Ref: ref("github.com/loft-sh/api/pkg/apis/cluster/v1.HelmChartStatus"),
-						},
-					},
-				},
-			},
-		},
-		Dependencies: []string{
-			"github.com/loft-sh/api/pkg/apis/cluster/v1.HelmChartSpec", "github.com/loft-sh/api/pkg/apis/cluster/v1.HelmChartStatus", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
-	}
-}
-
-func schema_pkg_apis_cluster_v1_HelmChartList(ref common.ReferenceCallback) common.OpenAPIDefinition {
-	return common.OpenAPIDefinition{
-		Schema: spec.Schema{
-			SchemaProps: spec.SchemaProps{
-				Type: []string{"object"},
-				Properties: map[string]spec.Schema{
-					"kind": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"apiVersion": {
-						SchemaProps: spec.SchemaProps{
-							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"metadata": {
-						SchemaProps: spec.SchemaProps{
-							Ref: ref("k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"),
-						},
-					},
-					"items": {
-						SchemaProps: spec.SchemaProps{
-							Type: []string{"array"},
-							Items: &spec.SchemaOrArray{
-								Schema: &spec.Schema{
-									SchemaProps: spec.SchemaProps{
-										Ref: ref("github.com/loft-sh/api/pkg/apis/cluster/v1.HelmChart"),
-									},
-								},
-							},
-						},
-					},
-				},
-				Required: []string{"items"},
-			},
-		},
-		Dependencies: []string{
-			"github.com/loft-sh/api/pkg/apis/cluster/v1.HelmChart", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
-	}
-}
-
-func schema_pkg_apis_cluster_v1_HelmChartRepository(ref common.ReferenceCallback) common.OpenAPIDefinition {
-	return common.OpenAPIDefinition{
-		Schema: spec.Schema{
-			SchemaProps: spec.SchemaProps{
-				Type: []string{"object"},
-				Properties: map[string]spec.Schema{
-					"name": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Name is the name of the repository",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"url": {
-						SchemaProps: spec.SchemaProps{
-							Description: "URL is the repository url",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-				},
-			},
-		},
-	}
-}
-
-func schema_pkg_apis_cluster_v1_HelmChartSpec(ref common.ReferenceCallback) common.OpenAPIDefinition {
-	return common.OpenAPIDefinition{
-		Schema: spec.Schema{
-			SchemaProps: spec.SchemaProps{
-				Type: []string{"object"},
-				Properties: map[string]spec.Schema{
-					"repository": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Repository is the repository name of this chart",
-							Ref:         ref("github.com/loft-sh/api/pkg/apis/cluster/v1.HelmChartRepository"),
-						},
-					},
-					"metadata": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Metadata provides information about a chart",
-							Ref:         ref("github.com/loft-sh/api/pkg/apis/cluster/v1.Metadata"),
-						},
-					},
-					"versions": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Versions holds all chart versions",
-							Type:        []string{"array"},
-							Items: &spec.SchemaOrArray{
-								Schema: &spec.Schema{
-									SchemaProps: spec.SchemaProps{
-										Type:   []string{"string"},
-										Format: "",
-									},
-								},
-							},
-						},
-					},
-				},
-			},
-		},
-		Dependencies: []string{
-			"github.com/loft-sh/api/pkg/apis/cluster/v1.HelmChartRepository", "github.com/loft-sh/api/pkg/apis/cluster/v1.Metadata"},
-	}
-}
-
-func schema_pkg_apis_cluster_v1_HelmChartStatus(ref common.ReferenceCallback) common.OpenAPIDefinition {
-	return common.OpenAPIDefinition{
-		Schema: spec.Schema{
-			SchemaProps: spec.SchemaProps{
-				Type: []string{"object"},
-			},
-		},
-	}
-}
-
 func schema_pkg_apis_cluster_v1_HelmRelease(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
@@ -2893,7 +2683,7 @@ func schema_pkg_apis_cluster_v1_HelmReleaseSpec(ref common.ReferenceCallback) co
 					"chart": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Chart holds information about a chart",
-							Ref:         ref("github.com/loft-sh/api/pkg/apis/cluster/v1.Chart"),
+							Ref:         ref("github.com/loft-sh/api/pkg/apis/storage/v1.Chart"),
 						},
 					},
 					"config": {
@@ -2903,11 +2693,18 @@ func schema_pkg_apis_cluster_v1_HelmReleaseSpec(ref common.ReferenceCallback) co
 							Format:      "",
 						},
 					},
+					"insecureSkipTlsVerify": {
+						SchemaProps: spec.SchemaProps{
+							Description: "If tls certificate checks for the chart download should be skipped",
+							Type:        []string{"boolean"},
+							Format:      "",
+						},
+					},
 				},
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/pkg/apis/cluster/v1.Chart"},
+			"github.com/loft-sh/api/pkg/apis/storage/v1.Chart"},
 	}
 }
 
@@ -2927,263 +2724,20 @@ func schema_pkg_apis_cluster_v1_HelmReleaseStatus(ref common.ReferenceCallback) 
 					"info": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Info provides information about a release",
-							Ref:         ref("github.com/loft-sh/api/pkg/apis/cluster/v1.Info"),
+							Ref:         ref("github.com/loft-sh/api/pkg/apis/storage/v1.Info"),
 						},
 					},
 					"metadata": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Metadata provides information about a chart",
-							Ref:         ref("github.com/loft-sh/api/pkg/apis/cluster/v1.Metadata"),
+							Ref:         ref("github.com/loft-sh/api/pkg/apis/storage/v1.Metadata"),
 						},
 					},
 				},
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/pkg/apis/cluster/v1.Info", "github.com/loft-sh/api/pkg/apis/cluster/v1.Metadata"},
-	}
-}
-
-func schema_pkg_apis_cluster_v1_Info(ref common.ReferenceCallback) common.OpenAPIDefinition {
-	return common.OpenAPIDefinition{
-		Schema: spec.Schema{
-			SchemaProps: spec.SchemaProps{
-				Description: "Info describes release information.",
-				Type:        []string{"object"},
-				Properties: map[string]spec.Schema{
-					"first_deployed": {
-						SchemaProps: spec.SchemaProps{
-							Description: "FirstDeployed is when the release was first deployed.",
-							Ref:         ref("k8s.io/apimachinery/pkg/apis/meta/v1.Time"),
-						},
-					},
-					"last_deployed": {
-						SchemaProps: spec.SchemaProps{
-							Description: "LastDeployed is when the release was last deployed.",
-							Ref:         ref("k8s.io/apimachinery/pkg/apis/meta/v1.Time"),
-						},
-					},
-					"deleted": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Deleted tracks when this object was deleted.",
-							Ref:         ref("k8s.io/apimachinery/pkg/apis/meta/v1.Time"),
-						},
-					},
-					"description": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Description is human-friendly \"log entry\" about this release.",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"status": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Status is the current state of the release",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"notes": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Contains the rendered templates/NOTES.txt if available",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-				},
-			},
-		},
-		Dependencies: []string{
-			"k8s.io/apimachinery/pkg/apis/meta/v1.Time"},
-	}
-}
-
-func schema_pkg_apis_cluster_v1_Maintainer(ref common.ReferenceCallback) common.OpenAPIDefinition {
-	return common.OpenAPIDefinition{
-		Schema: spec.Schema{
-			SchemaProps: spec.SchemaProps{
-				Description: "Maintainer describes a Chart maintainer.",
-				Type:        []string{"object"},
-				Properties: map[string]spec.Schema{
-					"name": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Name is a user name or organization name",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"email": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Email is an optional email address to contact the named maintainer",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"url": {
-						SchemaProps: spec.SchemaProps{
-							Description: "URL is an optional URL to an address for the named maintainer",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-				},
-			},
-		},
-	}
-}
-
-func schema_pkg_apis_cluster_v1_Metadata(ref common.ReferenceCallback) common.OpenAPIDefinition {
-	return common.OpenAPIDefinition{
-		Schema: spec.Schema{
-			SchemaProps: spec.SchemaProps{
-				Description: "Metadata for a Chart file. This models the structure of a Chart.yaml file.",
-				Type:        []string{"object"},
-				Properties: map[string]spec.Schema{
-					"name": {
-						SchemaProps: spec.SchemaProps{
-							Description: "The name of the chart",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"home": {
-						SchemaProps: spec.SchemaProps{
-							Description: "The URL to a relevant project page, git repo, or contact person",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"sources": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Source is the URL to the source code of this chart",
-							Type:        []string{"array"},
-							Items: &spec.SchemaOrArray{
-								Schema: &spec.Schema{
-									SchemaProps: spec.SchemaProps{
-										Type:   []string{"string"},
-										Format: "",
-									},
-								},
-							},
-						},
-					},
-					"version": {
-						SchemaProps: spec.SchemaProps{
-							Description: "A SemVer 2 conformant version string of the chart",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"description": {
-						SchemaProps: spec.SchemaProps{
-							Description: "A one-sentence description of the chart",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"keywords": {
-						SchemaProps: spec.SchemaProps{
-							Description: "A list of string keywords",
-							Type:        []string{"array"},
-							Items: &spec.SchemaOrArray{
-								Schema: &spec.Schema{
-									SchemaProps: spec.SchemaProps{
-										Type:   []string{"string"},
-										Format: "",
-									},
-								},
-							},
-						},
-					},
-					"maintainers": {
-						SchemaProps: spec.SchemaProps{
-							Description: "A list of name and URL/email address combinations for the maintainer(s)",
-							Type:        []string{"array"},
-							Items: &spec.SchemaOrArray{
-								Schema: &spec.Schema{
-									SchemaProps: spec.SchemaProps{
-										Ref: ref("github.com/loft-sh/api/pkg/apis/cluster/v1.Maintainer"),
-									},
-								},
-							},
-						},
-					},
-					"icon": {
-						SchemaProps: spec.SchemaProps{
-							Description: "The URL to an icon file.",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"apiVersion": {
-						SchemaProps: spec.SchemaProps{
-							Description: "The API Version of this chart.",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"condition": {
-						SchemaProps: spec.SchemaProps{
-							Description: "The condition to check to enable chart",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"tags": {
-						SchemaProps: spec.SchemaProps{
-							Description: "The tags to check to enable chart",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"appVersion": {
-						SchemaProps: spec.SchemaProps{
-							Description: "The version of the application enclosed inside of this chart.",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"deprecated": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Whether or not this chart is deprecated",
-							Type:        []string{"boolean"},
-							Format:      "",
-						},
-					},
-					"annotations": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Annotations are additional mappings uninterpreted by Helm, made available for inspection by other applications.",
-							Type:        []string{"object"},
-							AdditionalProperties: &spec.SchemaOrBool{
-								Allows: true,
-								Schema: &spec.Schema{
-									SchemaProps: spec.SchemaProps{
-										Type:   []string{"string"},
-										Format: "",
-									},
-								},
-							},
-						},
-					},
-					"kubeVersion": {
-						SchemaProps: spec.SchemaProps{
-							Description: "KubeVersion is a SemVer constraint specifying the version of Kubernetes required.",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"type": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Specifies the chart type: application or library",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-				},
-			},
-		},
-		Dependencies: []string{
-			"github.com/loft-sh/api/pkg/apis/cluster/v1.Maintainer"},
+			"github.com/loft-sh/api/pkg/apis/storage/v1.Info", "github.com/loft-sh/api/pkg/apis/storage/v1.Metadata"},
 	}
 }
 
@@ -3532,6 +3086,54 @@ func schema_pkg_apis_management_v1_AnnouncementStatus(ref common.ReferenceCallba
 				},
 			},
 		},
+	}
+}
+
+func schema_pkg_apis_management_v1_Apps(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "Apps holds configuration for apps that should be shown",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"noDefault": {
+						SchemaProps: spec.SchemaProps{
+							Description: "If this option is true, loft will not try to parse the default apps",
+							Type:        []string{"boolean"},
+							Format:      "",
+						},
+					},
+					"repositories": {
+						SchemaProps: spec.SchemaProps{
+							Description: "These are additional repositories that are parsed by loft",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Ref: ref("github.com/loft-sh/api/pkg/apis/storage/v1.HelmChartRepository"),
+									},
+								},
+							},
+						},
+					},
+					"predefinedApps": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Predefined apps that can be selected in the Spaces > Space menu",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Ref: ref("github.com/loft-sh/api/pkg/apis/management/v1.PredefinedApp"),
+									},
+								},
+							},
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			"github.com/loft-sh/api/pkg/apis/management/v1.PredefinedApp", "github.com/loft-sh/api/pkg/apis/storage/v1.HelmChartRepository"},
 	}
 }
 
@@ -3915,6 +3517,106 @@ func schema_pkg_apis_management_v1_ClusterAccounts(ref common.ReferenceCallback)
 		},
 		Dependencies: []string{
 			"github.com/loft-sh/api/pkg/apis/storage/v1.Cluster"},
+	}
+}
+
+func schema_pkg_apis_management_v1_ClusterCharts(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"kind": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"apiVersion": {
+						SchemaProps: spec.SchemaProps{
+							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"metadata": {
+						SchemaProps: spec.SchemaProps{
+							Ref: ref("k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"),
+						},
+					},
+					"charts": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Holds the available helm charts for this cluster",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Ref: ref("github.com/loft-sh/api/pkg/apis/storage/v1.HelmChart"),
+									},
+								},
+							},
+						},
+					},
+					"busy": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Busy will indicate if the chart parsing is still in progress.",
+							Type:        []string{"boolean"},
+							Format:      "",
+						},
+					},
+				},
+				Required: []string{"charts"},
+			},
+		},
+		Dependencies: []string{
+			"github.com/loft-sh/api/pkg/apis/storage/v1.HelmChart", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
+	}
+}
+
+func schema_pkg_apis_management_v1_ClusterChartsList(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"kind": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"apiVersion": {
+						SchemaProps: spec.SchemaProps{
+							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"metadata": {
+						SchemaProps: spec.SchemaProps{
+							Ref: ref("k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"),
+						},
+					},
+					"items": {
+						SchemaProps: spec.SchemaProps{
+							Type: []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Ref: ref("github.com/loft-sh/api/pkg/apis/management/v1.ClusterCharts"),
+									},
+								},
+							},
+						},
+					},
+				},
+				Required: []string{"items"},
+			},
+		},
+		Dependencies: []string{
+			"github.com/loft-sh/api/pkg/apis/management/v1.ClusterCharts", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
 	}
 }
 
@@ -4337,6 +4039,99 @@ func schema_pkg_apis_management_v1_ClusterMembersList(ref common.ReferenceCallba
 		},
 		Dependencies: []string{
 			"github.com/loft-sh/api/pkg/apis/management/v1.ClusterMembers", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
+	}
+}
+
+func schema_pkg_apis_management_v1_ClusterPredefinedApps(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"kind": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"apiVersion": {
+						SchemaProps: spec.SchemaProps{
+							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"metadata": {
+						SchemaProps: spec.SchemaProps{
+							Ref: ref("k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"),
+						},
+					},
+					"apps": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Holds the available predefined apps for this cluster",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Ref: ref("github.com/loft-sh/api/pkg/apis/management/v1.PredefinedApp"),
+									},
+								},
+							},
+						},
+					},
+				},
+				Required: []string{"apps"},
+			},
+		},
+		Dependencies: []string{
+			"github.com/loft-sh/api/pkg/apis/management/v1.PredefinedApp", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
+	}
+}
+
+func schema_pkg_apis_management_v1_ClusterPredefinedAppsList(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"kind": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"apiVersion": {
+						SchemaProps: spec.SchemaProps{
+							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"metadata": {
+						SchemaProps: spec.SchemaProps{
+							Ref: ref("k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"),
+						},
+					},
+					"items": {
+						SchemaProps: spec.SchemaProps{
+							Type: []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Ref: ref("github.com/loft-sh/api/pkg/apis/management/v1.ClusterPredefinedApps"),
+									},
+								},
+							},
+						},
+					},
+				},
+				Required: []string{"items"},
+			},
+		},
+		Dependencies: []string{
+			"github.com/loft-sh/api/pkg/apis/management/v1.ClusterPredefinedApps", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
 	}
 }
 
@@ -4965,11 +4760,17 @@ func schema_pkg_apis_management_v1_ConfigSpec(ref common.ReferenceCallback) comm
 							Ref:         ref("github.com/loft-sh/api/pkg/apis/management/v1.OIDC"),
 						},
 					},
+					"apps": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Apps holds configuration around apps",
+							Ref:         ref("github.com/loft-sh/api/pkg/apis/management/v1.Apps"),
+						},
+					},
 				},
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/pkg/apis/management/v1.Authentication", "github.com/loft-sh/api/pkg/apis/management/v1.OIDC"},
+			"github.com/loft-sh/api/pkg/apis/management/v1.Apps", "github.com/loft-sh/api/pkg/apis/management/v1.Authentication", "github.com/loft-sh/api/pkg/apis/management/v1.OIDC"},
 	}
 }
 
@@ -6081,6 +5882,76 @@ func schema_pkg_apis_management_v1_PlanProduct(ref common.ReferenceCallback) com
 					},
 				},
 				Required: []string{"name", "unitLabel"},
+			},
+		},
+	}
+}
+
+func schema_pkg_apis_management_v1_PredefinedApp(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "PredefinedApp holds information about a predefined app",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"chart": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Chart holds the repo/chart name of the predefined app",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"initialVersion": {
+						SchemaProps: spec.SchemaProps{
+							Description: "InitialVersion holds the initial version of this app. This version will be selected automatically.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"initialValues": {
+						SchemaProps: spec.SchemaProps{
+							Description: "InitialValues holds the initial values for this app. The values will be prefilled automatically. There are certain placeholders that can be used within the values that are replaced by the loft UI automatically.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"clusters": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Holds the cluster names where to display this app",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Type:   []string{"string"},
+										Format: "",
+									},
+								},
+							},
+						},
+					},
+					"title": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Title is the name that should be displayed for the predefined app. If empty the chart name is used.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"iconUrl": {
+						SchemaProps: spec.SchemaProps{
+							Description: "IconURL specifies an url to the icon that should be displayed for this app. If none is specified the icon from the chart metadata is used.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"readmeUrl": {
+						SchemaProps: spec.SchemaProps{
+							Description: "ReadmeURL specifies an url to the readme page of this predefined app. If empty an url will be constructed to artifact hub.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+				},
+				Required: []string{"chart"},
 			},
 		},
 	}
@@ -8442,6 +8313,54 @@ func schema_pkg_apis_storage_v1_AccountTemplate(ref common.ReferenceCallback) co
 	}
 }
 
+func schema_pkg_apis_storage_v1_Chart(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "Chart describes a chart",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"name": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Name is the chart name in the repository",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"version": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Version is the chart version in the repository",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"repoURL": {
+						SchemaProps: spec.SchemaProps{
+							Description: "RepoURL is the repo url where the chart can be found",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"username": {
+						SchemaProps: spec.SchemaProps{
+							Description: "The username that is required for this repository",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"password": {
+						SchemaProps: spec.SchemaProps{
+							Description: "The password that is required for this repository",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+				},
+			},
+		},
+	}
+}
+
 func schema_pkg_apis_storage_v1_Cluster(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
@@ -8783,6 +8702,315 @@ func schema_pkg_apis_storage_v1_ClusterStatus(ref common.ReferenceCallback) comm
 				},
 			},
 		},
+	}
+}
+
+func schema_pkg_apis_storage_v1_HelmChart(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"metadata": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Metadata provides information about a chart",
+							Ref:         ref("github.com/loft-sh/api/pkg/apis/storage/v1.Metadata"),
+						},
+					},
+					"versions": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Versions holds all chart versions",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Type:   []string{"string"},
+										Format: "",
+									},
+								},
+							},
+						},
+					},
+					"repository": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Repository is the repository name of this chart",
+							Ref:         ref("github.com/loft-sh/api/pkg/apis/storage/v1.HelmChartRepository"),
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			"github.com/loft-sh/api/pkg/apis/storage/v1.HelmChartRepository", "github.com/loft-sh/api/pkg/apis/storage/v1.Metadata"},
+	}
+}
+
+func schema_pkg_apis_storage_v1_HelmChartRepository(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"name": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Name is the name of the repository",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"url": {
+						SchemaProps: spec.SchemaProps{
+							Description: "URL is the repository url",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+				},
+			},
+		},
+	}
+}
+
+func schema_pkg_apis_storage_v1_Info(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "Info describes release information.",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"first_deployed": {
+						SchemaProps: spec.SchemaProps{
+							Description: "FirstDeployed is when the release was first deployed.",
+							Ref:         ref("k8s.io/apimachinery/pkg/apis/meta/v1.Time"),
+						},
+					},
+					"last_deployed": {
+						SchemaProps: spec.SchemaProps{
+							Description: "LastDeployed is when the release was last deployed.",
+							Ref:         ref("k8s.io/apimachinery/pkg/apis/meta/v1.Time"),
+						},
+					},
+					"deleted": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Deleted tracks when this object was deleted.",
+							Ref:         ref("k8s.io/apimachinery/pkg/apis/meta/v1.Time"),
+						},
+					},
+					"description": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Description is human-friendly \"log entry\" about this release.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"status": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Status is the current state of the release",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"notes": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Contains the rendered templates/NOTES.txt if available",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			"k8s.io/apimachinery/pkg/apis/meta/v1.Time"},
+	}
+}
+
+func schema_pkg_apis_storage_v1_Maintainer(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "Maintainer describes a Chart maintainer.",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"name": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Name is a user name or organization name",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"email": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Email is an optional email address to contact the named maintainer",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"url": {
+						SchemaProps: spec.SchemaProps{
+							Description: "URL is an optional URL to an address for the named maintainer",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+				},
+			},
+		},
+	}
+}
+
+func schema_pkg_apis_storage_v1_Metadata(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "Metadata for a Chart file. This models the structure of a Chart.yaml file.",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"name": {
+						SchemaProps: spec.SchemaProps{
+							Description: "The name of the chart",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"home": {
+						SchemaProps: spec.SchemaProps{
+							Description: "The URL to a relevant project page, git repo, or contact person",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"sources": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Source is the URL to the source code of this chart",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Type:   []string{"string"},
+										Format: "",
+									},
+								},
+							},
+						},
+					},
+					"version": {
+						SchemaProps: spec.SchemaProps{
+							Description: "A SemVer 2 conformant version string of the chart",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"description": {
+						SchemaProps: spec.SchemaProps{
+							Description: "A one-sentence description of the chart",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"keywords": {
+						SchemaProps: spec.SchemaProps{
+							Description: "A list of string keywords",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Type:   []string{"string"},
+										Format: "",
+									},
+								},
+							},
+						},
+					},
+					"maintainers": {
+						SchemaProps: spec.SchemaProps{
+							Description: "A list of name and URL/email address combinations for the maintainer(s)",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Ref: ref("github.com/loft-sh/api/pkg/apis/storage/v1.Maintainer"),
+									},
+								},
+							},
+						},
+					},
+					"icon": {
+						SchemaProps: spec.SchemaProps{
+							Description: "The URL to an icon file.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"apiVersion": {
+						SchemaProps: spec.SchemaProps{
+							Description: "The API Version of this chart.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"condition": {
+						SchemaProps: spec.SchemaProps{
+							Description: "The condition to check to enable chart",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"tags": {
+						SchemaProps: spec.SchemaProps{
+							Description: "The tags to check to enable chart",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"appVersion": {
+						SchemaProps: spec.SchemaProps{
+							Description: "The version of the application enclosed inside of this chart.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"deprecated": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Whether or not this chart is deprecated",
+							Type:        []string{"boolean"},
+							Format:      "",
+						},
+					},
+					"annotations": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Annotations are additional mappings uninterpreted by Helm, made available for inspection by other applications.",
+							Type:        []string{"object"},
+							AdditionalProperties: &spec.SchemaOrBool{
+								Allows: true,
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Type:   []string{"string"},
+										Format: "",
+									},
+								},
+							},
+						},
+					},
+					"kubeVersion": {
+						SchemaProps: spec.SchemaProps{
+							Description: "KubeVersion is a SemVer constraint specifying the version of Kubernetes required.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"type": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Specifies the chart type: application or library",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			"github.com/loft-sh/api/pkg/apis/storage/v1.Maintainer"},
 	}
 }
 

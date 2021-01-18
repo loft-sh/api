@@ -18,8 +18,6 @@ func addKnownTypes(scheme *runtime.Scheme) error {
 		&AccountClusterRoles{},
 		&Context{},
 		&ContextList{},
-		&HelmChart{},
-		&HelmChartList{},
 		&HelmRelease{},
 		&HelmReleaseList{},
 		&SleepModeConfig{},
@@ -37,7 +35,6 @@ var (
 			nil,
 			cluster.NewAccountClusterRolesREST),
 		cluster.ClusterContextStorage,
-		cluster.ClusterHelmChartStorage,
 		cluster.ClusterHelmReleaseStorage,
 		cluster.ClusterSleepModeConfigStorage,
 	)
@@ -93,14 +90,6 @@ type ContextList struct {
 	metav1.TypeMeta `json:",inline"`
 	metav1.ListMeta `json:"metadata,omitempty"`
 	Items           []Context `json:"items"`
-}
-
-// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
-
-type HelmChartList struct {
-	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
-	Items           []HelmChart `json:"items"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object

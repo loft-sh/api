@@ -17,8 +17,10 @@ func addKnownTypes(scheme *runtime.Scheme) error {
 		&AnnouncementList{},
 		&Cluster{},
 		&ClusterList{},
+		&ClusterCharts{},
 		&ClusterDomain{},
 		&ClusterMembers{},
+		&ClusterPredefinedApps{},
 		&ClusterReset{},
 		&ClusterVirtualClusterDefaults{},
 		&ClusterAccountTemplate{},
@@ -69,6 +71,11 @@ var (
 		management.ManagementAnnouncementStorage,
 		management.ManagementClusterStorage,
 		builders.NewApiResourceWithStorage(
+			management.InternalClusterChartsREST,
+			func() runtime.Object { return &ClusterCharts{} }, // Register versioned resource
+			nil,
+			management.NewClusterChartsREST),
+		builders.NewApiResourceWithStorage(
 			management.InternalClusterDomainREST,
 			func() runtime.Object { return &ClusterDomain{} }, // Register versioned resource
 			nil,
@@ -78,6 +85,11 @@ var (
 			func() runtime.Object { return &ClusterMembers{} }, // Register versioned resource
 			nil,
 			management.NewClusterMembersREST),
+		builders.NewApiResourceWithStorage(
+			management.InternalClusterPredefinedAppsREST,
+			func() runtime.Object { return &ClusterPredefinedApps{} }, // Register versioned resource
+			nil,
+			management.NewClusterPredefinedAppsREST),
 		builders.NewApiResourceWithStorage(
 			management.InternalClusterResetREST,
 			func() runtime.Object { return &ClusterReset{} }, // Register versioned resource
@@ -206,6 +218,14 @@ type ClusterList struct {
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
 
+type ClusterChartsList struct {
+	metav1.TypeMeta `json:",inline"`
+	metav1.ListMeta `json:"metadata,omitempty"`
+	Items           []ClusterCharts `json:"items"`
+}
+
+// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+
 type ClusterDomainList struct {
 	metav1.TypeMeta `json:",inline"`
 	metav1.ListMeta `json:"metadata,omitempty"`
@@ -218,6 +238,14 @@ type ClusterMembersList struct {
 	metav1.TypeMeta `json:",inline"`
 	metav1.ListMeta `json:"metadata,omitempty"`
 	Items           []ClusterMembers `json:"items"`
+}
+
+// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+
+type ClusterPredefinedAppsList struct {
+	metav1.TypeMeta `json:",inline"`
+	metav1.ListMeta `json:"metadata,omitempty"`
+	Items           []ClusterPredefinedApps `json:"items"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object

@@ -1,6 +1,7 @@
 package v1
 
 import (
+	storagev1 "github.com/loft-sh/api/pkg/apis/storage/v1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 )
 
@@ -19,12 +20,16 @@ type HelmRelease struct {
 
 type HelmReleaseSpec struct {
 	// Chart holds information about a chart
-	Chart Chart `json:"chart,omitempty"`
+	Chart storagev1.Chart `json:"chart,omitempty"`
 
 	// Config is the set of extra Values added to the chart.
 	// These values override the default values inside of the chart.
 	// +optional
 	Config string `json:"config,omitempty"`
+
+	// If tls certificate checks for the chart download should be skipped
+	// +optional
+	InsecureSkipTlsVerify bool `json:"insecureSkipTlsVerify,omitempty"`
 }
 
 type HelmReleaseStatus struct {
@@ -33,147 +38,9 @@ type HelmReleaseStatus struct {
 
 	// Info provides information about a release
 	// +optional
-	Info *Info `json:"info,omitempty"`
+	Info *storagev1.Info `json:"info,omitempty"`
 
 	// Metadata provides information about a chart
 	// +optional
-	Metadata *Metadata `json:"metadata,omitempty"`
-}
-
-// Chart describes a chart
-type Chart struct {
-	// Name is the chart name in the repository
-	Name string `json:"name,omitempty"`
-
-	// Version is the chart version in the repository
-	// +optional
-	Version string `json:"version,omitempty"`
-
-	// RepoURL is the repo url where the chart can be found
-	// +optional
-	RepoURL string `json:"repoURL,omitempty"`
-
-	// The username that is required for this repository
-	// +optional
-	Username string `json:"username,omitempty"`
-
-	// The password that is required for this repository
-	// +optional
-	Password string `json:"password,omitempty"`
-}
-
-// Info describes release information.
-type Info struct {
-	// FirstDeployed is when the release was first deployed.
-	// +optional
-	FirstDeployed metav1.Time `json:"first_deployed,omitempty"`
-	// LastDeployed is when the release was last deployed.
-	// +optional
-	LastDeployed metav1.Time `json:"last_deployed,omitempty"`
-	// Deleted tracks when this object was deleted.
-	// +optional
-	Deleted metav1.Time `json:"deleted"`
-	// Description is human-friendly "log entry" about this release.
-	// +optional
-	Description string `json:"description,omitempty"`
-	// Status is the current state of the release
-	// +optional
-	Status Status `json:"status,omitempty"`
-	// Contains the rendered templates/NOTES.txt if available
-	// +optional
-	Notes string `json:"notes,omitempty"`
-}
-
-// Status is the status of a release
-type Status string
-
-// Describe the status of a release
-// NOTE: Make sure to update cmd/helm/status.go when adding or modifying any of these statuses.
-const (
-	// StatusUnknown indicates that a release is in an uncertain state.
-	StatusUnknown Status = "unknown"
-	// StatusDeployed indicates that the release has been pushed to Kubernetes.
-	StatusDeployed Status = "deployed"
-	// StatusUninstalled indicates that a release has been uninstalled from Kubernetes.
-	StatusUninstalled Status = "uninstalled"
-	// StatusSuperseded indicates that this release object is outdated and a newer one exists.
-	StatusSuperseded Status = "superseded"
-	// StatusFailed indicates that the release was not successfully deployed.
-	StatusFailed Status = "failed"
-	// StatusUninstalling indicates that a uninstall operation is underway.
-	StatusUninstalling Status = "uninstalling"
-	// StatusPendingInstall indicates that an install operation is underway.
-	StatusPendingInstall Status = "pending-install"
-	// StatusPendingUpgrade indicates that an upgrade operation is underway.
-	StatusPendingUpgrade Status = "pending-upgrade"
-	// StatusPendingRollback indicates that an rollback operation is underway.
-	StatusPendingRollback Status = "pending-rollback"
-)
-
-func (x Status) String() string { return string(x) }
-
-// Maintainer describes a Chart maintainer.
-type Maintainer struct {
-	// Name is a user name or organization name
-	// +optional
-	Name string `json:"name,omitempty"`
-	// Email is an optional email address to contact the named maintainer
-	// +optional
-	Email string `json:"email,omitempty"`
-	// URL is an optional URL to an address for the named maintainer
-	// +optional
-	URL string `json:"url,omitempty"`
-}
-
-// Metadata for a Chart file. This models the structure of a Chart.yaml file.
-type Metadata struct {
-	// The name of the chart
-	// +optional
-	Name string `json:"name,omitempty"`
-	// The URL to a relevant project page, git repo, or contact person
-	// +optional
-	Home string `json:"home,omitempty"`
-	// Source is the URL to the source code of this chart
-	// +optional
-	Sources []string `json:"sources,omitempty"`
-	// A SemVer 2 conformant version string of the chart
-	// +optional
-	Version string `json:"version,omitempty"`
-	// A one-sentence description of the chart
-	// +optional
-	Description string `json:"description,omitempty"`
-	// A list of string keywords
-	// +optional
-	Keywords []string `json:"keywords,omitempty"`
-	// A list of name and URL/email address combinations for the maintainer(s)
-	// +optional
-	Maintainers []*Maintainer `json:"maintainers,omitempty"`
-	// The URL to an icon file.
-	// +optional
-	Icon string `json:"icon,omitempty"`
-	// The API Version of this chart.
-	// +optional
-	APIVersion string `json:"apiVersion,omitempty"`
-	// The condition to check to enable chart
-	// +optional
-	Condition string `json:"condition,omitempty"`
-	// The tags to check to enable chart
-	// +optional
-	Tags string `json:"tags,omitempty"`
-	// The version of the application enclosed inside of this chart.
-	// +optional
-	AppVersion string `json:"appVersion,omitempty"`
-	// Whether or not this chart is deprecated
-	// +optional
-	Deprecated bool `json:"deprecated,omitempty"`
-	// Annotations are additional mappings uninterpreted by Helm,
-	// made available for inspection by other applications.
-	// +optional
-	Annotations map[string]string `json:"annotations,omitempty"`
-	// KubeVersion is a SemVer constraint specifying the version of Kubernetes required.
-	// +optional
-	KubeVersion string `json:"kubeVersion,omitempty"`
-	// Specifies the chart type: application or library
-	// +optional
-	Type string `json:"type,omitempty"`
+	Metadata *storagev1.Metadata `json:"metadata,omitempty"`
 }

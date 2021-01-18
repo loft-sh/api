@@ -209,6 +209,14 @@ var (
 		func() runtime.Object { return &Cluster{} },
 		func() runtime.Object { return &ClusterList{} },
 	)
+	InternalClusterChartsREST = builders.NewInternalSubresource(
+		"clusters", "ClusterCharts", "charts",
+		func() runtime.Object { return &ClusterCharts{} },
+	)
+	NewClusterChartsREST = func(getter generic.RESTOptionsGetter) rest.Storage {
+		return NewClusterChartsRESTFunc(Factory)
+	}
+	NewClusterChartsRESTFunc  NewRESTFunc
 	InternalClusterDomainREST = builders.NewInternalSubresource(
 		"clusters", "ClusterDomain", "domain",
 		func() runtime.Object { return &ClusterDomain{} },
@@ -224,8 +232,16 @@ var (
 	NewClusterMembersREST = func(getter generic.RESTOptionsGetter) rest.Storage {
 		return NewClusterMembersRESTFunc(Factory)
 	}
-	NewClusterMembersRESTFunc NewRESTFunc
-	InternalClusterResetREST  = builders.NewInternalSubresource(
+	NewClusterMembersRESTFunc         NewRESTFunc
+	InternalClusterPredefinedAppsREST = builders.NewInternalSubresource(
+		"clusters", "ClusterPredefinedApps", "predefinedapps",
+		func() runtime.Object { return &ClusterPredefinedApps{} },
+	)
+	NewClusterPredefinedAppsREST = func(getter generic.RESTOptionsGetter) rest.Storage {
+		return NewClusterPredefinedAppsRESTFunc(Factory)
+	}
+	NewClusterPredefinedAppsRESTFunc NewRESTFunc
+	InternalClusterResetREST         = builders.NewInternalSubresource(
 		"clusters", "ClusterReset", "reset",
 		func() runtime.Object { return &ClusterReset{} },
 	)
@@ -503,8 +519,10 @@ var (
 		InternalAnnouncementStatus,
 		InternalCluster,
 		InternalClusterStatus,
+		InternalClusterChartsREST,
 		InternalClusterDomainREST,
 		InternalClusterMembersREST,
+		InternalClusterPredefinedAppsREST,
 		InternalClusterResetREST,
 		InternalClusterVirtualClusterDefaultsREST,
 		InternalClusterAccountTemplate,
@@ -594,6 +612,12 @@ type AnnouncementStatus struct {
 	Announcement string
 }
 
+type Apps struct {
+	NoDefault      bool
+	Repositories   []storagev1.HelmChartRepository
+	PredefinedApps []PredefinedApp
+}
+
 type Authentication struct {
 	Password *AuthenticationPassword
 	OIDC     *AuthenticationOIDC
@@ -619,7 +643,7 @@ type AuthenticationPassword struct {
 }
 
 // +genclient
-// +genclient:nonNamespaced
+// +genclient
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
 
 type Cluster struct {
@@ -651,6 +675,15 @@ type ClusterAccountTemplateStatus struct {
 type ClusterAccounts struct {
 	Accounts []string
 	Cluster  storagev1.Cluster
+}
+
+// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+
+type ClusterCharts struct {
+	metav1.TypeMeta
+	metav1.ObjectMeta
+	Charts []storagev1.HelmChart
+	Busy   bool
 }
 
 // +genclient
@@ -697,6 +730,14 @@ type ClusterMembers struct {
 	metav1.ObjectMeta
 	Teams []ClusterMember
 	Users []ClusterMember
+}
+
+// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+
+type ClusterPredefinedApps struct {
+	metav1.TypeMeta
+	metav1.ObjectMeta
+	Apps []PredefinedApp
 }
 
 type ClusterQuota struct {
@@ -780,6 +821,7 @@ type Config struct {
 type ConfigSpec struct {
 	Authentication Authentication
 	OIDC           *OIDC
+	Apps           *Apps
 }
 
 type ConfigStatus struct {
@@ -955,6 +997,16 @@ type Plan struct {
 type PlanProduct struct {
 	Name      string
 	UnitLabel string
+}
+
+type PredefinedApp struct {
+	Chart          string
+	InitialVersion string
+	InitialValues  string
+	Clusters       []string
+	Title          string
+	IconURL        string
+	ReadmeURL      string
 }
 
 type Promotions struct {
@@ -1337,6 +1389,14 @@ type ClusterList struct {
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
 
+type ClusterChartsList struct {
+	metav1.TypeMeta
+	metav1.ListMeta
+	Items []ClusterCharts
+}
+
+// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+
 type ClusterDomainList struct {
 	metav1.TypeMeta
 	metav1.ListMeta
@@ -1349,6 +1409,14 @@ type ClusterMembersList struct {
 	metav1.TypeMeta
 	metav1.ListMeta
 	Items []ClusterMembers
+}
+
+// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+
+type ClusterPredefinedAppsList struct {
+	metav1.TypeMeta
+	metav1.ListMeta
+	Items []ClusterPredefinedApps
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object

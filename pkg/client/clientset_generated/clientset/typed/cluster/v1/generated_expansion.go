@@ -6,8 +6,6 @@ type AccountExpansion interface{}
 
 type ContextExpansion interface{}
 
-type HelmChartExpansion interface{}
-
 type HelmReleaseExpansion interface{}
 
 type SleepModeConfigExpansion interface{}

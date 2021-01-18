@@ -20,10 +20,6 @@ func (c *FakeClusterV1) Contexts() v1.ContextInterface {
 	return &FakeContexts{c}
 }
 
-func (c *FakeClusterV1) HelmCharts(namespace string) v1.HelmChartInterface {
-	return &FakeHelmCharts{c, namespace}
-}
-
 func (c *FakeClusterV1) HelmReleases(namespace string) v1.HelmReleaseInterface {
 	return &FakeHelmReleases{c, namespace}
 }

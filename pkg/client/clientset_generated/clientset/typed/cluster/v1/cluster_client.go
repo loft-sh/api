@@ -12,7 +12,6 @@ type ClusterV1Interface interface {
 	RESTClient() rest.Interface
 	AccountsGetter
 	ContextsGetter
-	HelmChartsGetter
 	HelmReleasesGetter
 	SleepModeConfigsGetter
 }
@@ -28,10 +27,6 @@ func (c *ClusterV1Client) Accounts() AccountInterface {
 
 func (c *ClusterV1Client) Contexts() ContextInterface {
 	return newContexts(c)
-}
-
-func (c *ClusterV1Client) HelmCharts(namespace string) HelmChartInterface {
-	return newHelmCharts(c, namespace)
 }
 
 func (c *ClusterV1Client) HelmReleases(namespace string) HelmReleaseInterface {

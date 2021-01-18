@@ -40,17 +40,7 @@ var (
 	NewContextREST = func(getter generic.RESTOptionsGetter) rest.Storage {
 		return NewContextRESTFunc(Factory)
 	}
-	NewContextRESTFunc      NewRESTFunc
-	ClusterHelmChartStorage = builders.NewApiResourceWithStorage( // Resource status endpoint
-		InternalHelmChart,
-		func() runtime.Object { return &HelmChart{} },     // Register versioned resource
-		func() runtime.Object { return &HelmChartList{} }, // Register versioned resource list
-		NewHelmChartREST,
-	)
-	NewHelmChartREST = func(getter generic.RESTOptionsGetter) rest.Storage {
-		return NewHelmChartRESTFunc(Factory)
-	}
-	NewHelmChartRESTFunc      NewRESTFunc
+	NewContextRESTFunc        NewRESTFunc
 	ClusterHelmReleaseStorage = builders.NewApiResourceWithStorage( // Resource status endpoint
 		InternalHelmRelease,
 		func() runtime.Object { return &HelmRelease{} },     // Register versioned resource
@@ -103,18 +93,6 @@ var (
 		func() runtime.Object { return &Context{} },
 		func() runtime.Object { return &ContextList{} },
 	)
-	InternalHelmChart = builders.NewInternalResource(
-		"helmcharts",
-		"HelmChart",
-		func() runtime.Object { return &HelmChart{} },
-		func() runtime.Object { return &HelmChartList{} },
-	)
-	InternalHelmChartStatus = builders.NewInternalResourceStatus(
-		"helmcharts",
-		"HelmChartStatus",
-		func() runtime.Object { return &HelmChart{} },
-		func() runtime.Object { return &HelmChartList{} },
-	)
 	InternalHelmRelease = builders.NewInternalResource(
 		"helmreleases",
 		"HelmRelease",
@@ -146,8 +124,6 @@ var (
 		InternalAccountClusterRolesREST,
 		InternalContext,
 		InternalContextStatus,
-		InternalHelmChart,
-		InternalHelmChartStatus,
 		InternalHelmRelease,
 		InternalHelmReleaseStatus,
 		InternalSleepModeConfig,
@@ -176,8 +152,6 @@ func Resource(resource string) schema.GroupResource {
 	return SchemeGroupVersion.WithResource(resource).GroupResource()
 }
 
-type Status string
-
 // +genclient
 // +genclient:nonNamespaced
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -203,14 +177,6 @@ type AccountSpec struct {
 
 type AccountStatus struct {
 	configv1alpha1.AccountStatus
-}
-
-type Chart struct {
-	Name     string
-	Version  string
-	RepoURL  string
-	Username string
-	Password string
 }
 
 // +genclient
@@ -242,31 +208,6 @@ type EpochInfo struct {
 // +genclient
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
 
-type HelmChart struct {
-	metav1.TypeMeta
-	metav1.ObjectMeta
-	Spec   HelmChartSpec
-	Status HelmChartStatus
-}
-
-type HelmChartRepository struct {
-	Name string
-	URL  string
-}
-
-type HelmChartSpec struct {
-	Repository HelmChartRepository
-	Metadata   *Metadata
-	Versions   []string
-}
-
-type HelmChartStatus struct {
-}
-
-// +genclient
-// +genclient
-// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
-
 type HelmRelease struct {
 	metav1.TypeMeta
 	metav1.ObjectMeta
@@ -275,48 +216,15 @@ type HelmRelease struct {
 }
 
 type HelmReleaseSpec struct {
-	Chart  Chart
-	Config string
+	Chart                 storagev1.Chart
+	Config                string
+	InsecureSkipTlsVerify bool
 }
 
 type HelmReleaseStatus struct {
 	Revision int
-	Info     *Info
-	Metadata *Metadata
-}
-
-type Info struct {
-	FirstDeployed metav1.Time
-	LastDeployed  metav1.Time
-	Deleted       metav1.Time
-	Description   string
-	Status        Status
-	Notes         string
-}
-
-type Maintainer struct {
-	Name  string
-	Email string
-	URL   string
-}
-
-type Metadata struct {
-	Name        string
-	Home        string
-	Sources     []string
-	Version     string
-	Description string
-	Keywords    []string
-	Maintainers []*Maintainer
-	Icon        string
-	APIVersion  string
-	Condition   string
-	Tags        string
-	AppVersion  string
-	Deprecated  bool
-	Annotations map[string]string
-	KubeVersion string
-	Type        string
+	Info     *storagev1.Info
+	Metadata *storagev1.Metadata
 }
 
 // +genclient
@@ -590,126 +498,6 @@ func (s *storageContext) UpdateContext(ctx context.Context, object *Context) (*C
 }
 
 func (s *storageContext) DeleteContext(ctx context.Context, id string) (bool, error) {
-	st := s.GetStandardStorage()
-	_, sync, err := st.Delete(ctx, id, nil, &metav1.DeleteOptions{})
-	return sync, err
-}
-
-//
-// HelmChart Functions and Structs
-//
-// +k8s:deepcopy-gen=false
-type HelmChartStrategy struct {
-	builders.DefaultStorageStrategy
-}
-
-// +k8s:deepcopy-gen=false
-type HelmChartStatusStrategy struct {
-	builders.DefaultStatusStorageStrategy
-}
-
-// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
-
-type HelmChartList struct {
-	metav1.TypeMeta
-	metav1.ListMeta
-	Items []HelmChart
-}
-
-func (HelmChart) NewStatus() interface{} {
-	return HelmChartStatus{}
-}
-
-func (pc *HelmChart) GetStatus() interface{} {
-	return pc.Status
-}
-
-func (pc *HelmChart) SetStatus(s interface{}) {
-	pc.Status = s.(HelmChartStatus)
-}
-
-func (pc *HelmChart) GetSpec() interface{} {
-	return pc.Spec
-}
-
-func (pc *HelmChart) SetSpec(s interface{}) {
-	pc.Spec = s.(HelmChartSpec)
-}
-
-func (pc *HelmChart) GetObjectMeta() *metav1.ObjectMeta {
-	return &pc.ObjectMeta
-}
-
-func (pc *HelmChart) SetGeneration(generation int64) {
-	pc.ObjectMeta.Generation = generation
-}
-
-func (pc HelmChart) GetGeneration() int64 {
-	return pc.ObjectMeta.Generation
-}
-
-// Registry is an interface for things that know how to store HelmChart.
-// +k8s:deepcopy-gen=false
-type HelmChartRegistry interface {
-	ListHelmCharts(ctx context.Context, options *internalversion.ListOptions) (*HelmChartList, error)
-	GetHelmChart(ctx context.Context, id string, options *metav1.GetOptions) (*HelmChart, error)
-	CreateHelmChart(ctx context.Context, id *HelmChart) (*HelmChart, error)
-	UpdateHelmChart(ctx context.Context, id *HelmChart) (*HelmChart, error)
-	DeleteHelmChart(ctx context.Context, id string) (bool, error)
-}
-
-// NewRegistry returns a new Registry interface for the given Storage. Any mismatched types will panic.
-func NewHelmChartRegistry(sp builders.StandardStorageProvider) HelmChartRegistry {
-	return &storageHelmChart{sp}
-}
-
-// Implement Registry
-// storage puts strong typing around storage calls
-// +k8s:deepcopy-gen=false
-type storageHelmChart struct {
-	builders.StandardStorageProvider
-}
-
-func (s *storageHelmChart) ListHelmCharts(ctx context.Context, options *internalversion.ListOptions) (*HelmChartList, error) {
-	if options != nil && options.FieldSelector != nil && !options.FieldSelector.Empty() {
-		return nil, fmt.Errorf("field selector not supported yet")
-	}
-	st := s.GetStandardStorage()
-	obj, err := st.List(ctx, options)
-	if err != nil {
-		return nil, err
-	}
-	return obj.(*HelmChartList), err
-}
-
-func (s *storageHelmChart) GetHelmChart(ctx context.Context, id string, options *metav1.GetOptions) (*HelmChart, error) {
-	st := s.GetStandardStorage()
-	obj, err := st.Get(ctx, id, options)
-	if err != nil {
-		return nil, err
-	}
-	return obj.(*HelmChart), nil
-}
-
-func (s *storageHelmChart) CreateHelmChart(ctx context.Context, object *HelmChart) (*HelmChart, error) {
-	st := s.GetStandardStorage()
-	obj, err := st.Create(ctx, object, nil, &metav1.CreateOptions{})
-	if err != nil {
-		return nil, err
-	}
-	return obj.(*HelmChart), nil
-}
-
-func (s *storageHelmChart) UpdateHelmChart(ctx context.Context, object *HelmChart) (*HelmChart, error) {
-	st := s.GetStandardStorage()
-	obj, _, err := st.Update(ctx, object.Name, rest.DefaultUpdatedObjectInfo(object), nil, nil, false, &metav1.UpdateOptions{})
-	if err != nil {
-		return nil, err
-	}
-	return obj.(*HelmChart), nil
-}
-
-func (s *storageHelmChart) DeleteHelmChart(ctx context.Context, id string) (bool, error) {
 	st := s.GetStandardStorage()
 	_, sync, err := st.Delete(ctx, id, nil, &metav1.DeleteOptions{})
 	return sync, err
