@@ -194,5 +194,14 @@ type AuthenticationOIDC struct {
 	// A mapping between groups and cluster account templates. If the user has a certain group, the cluster
 	// account template will be added during creation
 	// +optional
-	GroupClusterAccountTemplates map[string][]storagev1.UserClusterAccountTemplate `json:"groupClusterAccountTemplates,omitempty"`
+	GroupClusterAccountTemplates []AuthenticationGroupClusterAccountTemplate `json:"groupClusterAccountTemplates,omitempty"`
+}
+
+type AuthenticationGroupClusterAccountTemplate struct {
+	// Group is the name of the group that should be matched
+	Group string `json:"group"`
+
+	// Cluster Account Templates that will be applied for users logging in through this authentication
+	// +optional
+	ClusterAccountTemplates []storagev1.UserClusterAccountTemplate `json:"clusterAccountTemplates,omitempty"`
 }

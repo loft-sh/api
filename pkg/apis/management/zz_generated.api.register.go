@@ -623,6 +623,11 @@ type Authentication struct {
 	OIDC     *AuthenticationOIDC
 }
 
+type AuthenticationGroupClusterAccountTemplate struct {
+	Group                   string
+	ClusterAccountTemplates []storagev1.UserClusterAccountTemplate
+}
+
 type AuthenticationOIDC struct {
 	IssuerURL                    string
 	ClientID                     string
@@ -635,7 +640,7 @@ type AuthenticationOIDC struct {
 	GroupsPrefix                 string
 	Type                         string
 	ClusterAccountTemplates      []storagev1.UserClusterAccountTemplate
-	GroupClusterAccountTemplates map[string][]storagev1.UserClusterAccountTemplate
+	GroupClusterAccountTemplates []AuthenticationGroupClusterAccountTemplate
 }
 
 type AuthenticationPassword struct {
@@ -643,7 +648,7 @@ type AuthenticationPassword struct {
 }
 
 // +genclient
-// +genclient:nonNamespaced
+// +genclient
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
 
 type Cluster struct {
