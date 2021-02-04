@@ -8030,6 +8030,20 @@ func schema_pkg_apis_management_v1_UserSpec(ref common.ReferenceCallback) common
 							},
 						},
 					},
+					"tokenGeneration": {
+						SchemaProps: spec.SchemaProps{
+							Description: "TokenGeneration can be used to invalidate all user tokens",
+							Type:        []string{"integer"},
+							Format:      "int64",
+						},
+					},
+					"disabled": {
+						SchemaProps: spec.SchemaProps{
+							Description: "If disabled is true, an user will not be able to login anymore. All other user resources are unaffected and other users can still interact with this user",
+							Type:        []string{"boolean"},
+							Format:      "",
+						},
+					},
 				},
 			},
 		},
@@ -9779,6 +9793,20 @@ func schema_pkg_apis_storage_v1_UserSpec(ref common.ReferenceCallback) common.Op
 									},
 								},
 							},
+						},
+					},
+					"tokenGeneration": {
+						SchemaProps: spec.SchemaProps{
+							Description: "TokenGeneration can be used to invalidate all user tokens",
+							Type:        []string{"integer"},
+							Format:      "int64",
+						},
+					},
+					"disabled": {
+						SchemaProps: spec.SchemaProps{
+							Description: "If disabled is true, an user will not be able to login anymore. All other user resources are unaffected and other users can still interact with this user",
+							Type:        []string{"boolean"},
+							Format:      "",
 						},
 					},
 				},

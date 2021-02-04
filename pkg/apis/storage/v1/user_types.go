@@ -60,6 +60,15 @@ type UserSpec struct {
 	// ClusterAccountTemplates that should be applied for the user
 	// +optional
 	ClusterAccountTemplates []UserClusterAccountTemplate `json:"clusterAccountTemplates,omitempty"`
+
+	// TokenGeneration can be used to invalidate all user tokens
+	// +optional
+	TokenGeneration int64 `json:"tokenGeneration,omitempty"`
+
+	// If disabled is true, an user will not be able to login anymore. All other user resources
+	// are unaffected and other users can still interact with this user
+	// +optional
+	Disabled bool `json:"disabled,omitempty"`
 }
 
 type UserClusterAccountTemplate struct {
