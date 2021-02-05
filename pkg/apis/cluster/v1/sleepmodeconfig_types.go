@@ -23,6 +23,14 @@ type SleepModeConfigSpec struct {
 	// +optional
 	ForceSleep bool `json:"forceSleep,omitempty"`
 
+	// If force sleep duration is set, this will force the space to sleep
+	// for the given duration. It also implies that forceSleep is true.
+	// During this period loft will also block certain requests to that space.
+	// If this is set to 0, it means the space will sleep until it is manually
+	// woken up via the cli or ui.
+	// +optional
+	ForceSleepDuration *int64 `json:"forceSleepDuration,omitempty"`
+
 	// If true will delete all pods on sleep in the space regardless of
 	// if they have a parent set
 	// +optional

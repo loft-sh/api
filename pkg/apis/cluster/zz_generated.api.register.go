@@ -239,10 +239,11 @@ type SleepModeConfig struct {
 }
 
 type SleepModeConfigSpec struct {
-	ForceSleep    bool
-	DeleteAllPods bool
-	DeleteAfter   int64
-	SleepAfter    int64
+	ForceSleep         bool
+	ForceSleepDuration *int64
+	DeleteAllPods      bool
+	DeleteAfter        int64
+	SleepAfter         int64
 }
 
 type SleepModeConfigStatus struct {

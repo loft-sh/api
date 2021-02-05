@@ -2845,6 +2845,13 @@ func schema_pkg_apis_cluster_v1_SleepModeConfigSpec(ref common.ReferenceCallback
 							Format:      "",
 						},
 					},
+					"forceSleepDuration": {
+						SchemaProps: spec.SchemaProps{
+							Description: "If force sleep duration is set, this will force the space to sleep for the given duration. It also implies that forceSleep is true. During this period loft will also block certain requests to that space. If this is set to 0, it means the space will sleep until it is manually woken up via the cli or ui.",
+							Type:        []string{"integer"},
+							Format:      "int64",
+						},
+					},
 					"deleteAllPods": {
 						SchemaProps: spec.SchemaProps{
 							Description: "If true will delete all pods on sleep in the space regardless of if they have a parent set",
