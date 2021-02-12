@@ -1,7 +1,7 @@
 package apis
 
 import (
-	"github.com/kiosk-sh/kiosk/pkg/store/crd"
+	"github.com/loft-sh/kiosk/pkg/store/crd"
 	storagev1 "github.com/loft-sh/api/pkg/apis/storage/v1"
 	apiextensionsv1beta1 "k8s.io/apiextensions-apiserver/pkg/apis/apiextensions/v1beta1"
 )

@@ -1,7 +1,7 @@
 package v1
 
 import (
-	tenancyv1alpha1 "github.com/kiosk-sh/kiosk/pkg/apis/tenancy/v1alpha1"
+	tenancyv1alpha1 "github.com/loft-sh/kiosk/pkg/apis/tenancy/v1alpha1"
 	clusterv1 "github.com/loft-sh/api/pkg/apis/cluster/v1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 )

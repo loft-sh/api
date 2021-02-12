@@ -7,10 +7,10 @@ package v1
 import (
 	unsafe "unsafe"
 
-	v1alpha1 "github.com/kiosk-sh/kiosk/pkg/apis/config/v1alpha1"
 	clusterv1 "github.com/loft-sh/api/pkg/apis/cluster/v1"
 	management "github.com/loft-sh/api/pkg/apis/management"
 	storagev1 "github.com/loft-sh/api/pkg/apis/storage/v1"
+	v1alpha1 "github.com/loft-sh/kiosk/pkg/apis/config/v1alpha1"
 	rbacv1 "k8s.io/api/rbac/v1"
 	conversion "k8s.io/apimachinery/pkg/conversion"
 	runtime "k8s.io/apimachinery/pkg/runtime"

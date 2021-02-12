@@ -6,9 +6,9 @@ import (
 	"context"
 	"fmt"
 
-	configv1alpha1 "github.com/kiosk-sh/kiosk/pkg/apis/config/v1alpha1"
 	storagev1 "github.com/loft-sh/api/pkg/apis/storage/v1"
 	"github.com/loft-sh/api/pkg/managerfactory"
+	configv1alpha1 "github.com/loft-sh/kiosk/pkg/apis/config/v1alpha1"
 	"k8s.io/apimachinery/pkg/apis/meta/internalversion"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime"

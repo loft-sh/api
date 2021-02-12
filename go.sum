@@ -242,8 +242,8 @@ github.com/json-iterator/go v1.1.10/go.mod h1:KdQUCv79m/52Kvf8AW2vK1V8akMuk1QjK/
 github.com/jstemmer/go-junit-report v0.0.0-20190106144839-af01ea7f8024/go.mod h1:6v2b51hI/fHJwM22ozAgKL4VKDeJcHhJFhtBdhmNjmU=
 github.com/juju/errors v0.0.0-20190930114154-d42613fe1ab9/go.mod h1:W54LbzXuIE0boCoNJfwqpmkKJ1O4TCTZMetAt6jGk7Q=
 github.com/julienschmidt/httprouter v1.2.0/go.mod h1:SYymIcj16QtmaHHD7aYtjjsJG7VTCxuUUipMqKk8s4w=
-github.com/kiosk-sh/kiosk v0.1.17 h1:9D+36kybcpPKxoa3hO9Sb4wZ6JxPc/Wgzka0ojV7zDs=
-github.com/kiosk-sh/kiosk v0.1.17/go.mod h1:Gy351nrTJmNUOt5jaGFXsQCuRXBntL4Rk9KyoITnXxg=
+github.com/loft-sh/kiosk v0.1.17 h1:9D+36kybcpPKxoa3hO9Sb4wZ6JxPc/Wgzka0ojV7zDs=
+github.com/loft-sh/kiosk v0.1.17/go.mod h1:Gy351nrTJmNUOt5jaGFXsQCuRXBntL4Rk9KyoITnXxg=
 github.com/kisielk/errcheck v1.1.0/go.mod h1:EZBBE59ingxPouuu3KfxchcWSUPOHkagtvWXihfKN4Q=
 github.com/kisielk/errcheck v1.2.0/go.mod h1:/BMXB+zMLi60iA8Vv6Ksmxu/1UDYcXs4uQLJ+jE2L00=
 github.com/kisielk/gotool v1.0.0/go.mod h1:XhKaO+MFFWcvkIS/tQcRk01m1F5IRFswLeQ+oQHNcck=
