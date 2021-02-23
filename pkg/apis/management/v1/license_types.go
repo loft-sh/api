@@ -61,9 +61,10 @@ type CustomerInfo struct {
 }
 
 type Analytics struct {
-	Endpoint string            `json:"endpoint,omitempty"`
-	Requests []ResoureRequests `json:"requests,omitempty"`
-	Token    string            `json:"token,omitempty"`
+	Endpoint      string            `json:"endpoint,omitempty"`
+	BatchEndpoint string            `json:"batchEndpoint,omitempty"`
+	Requests      []ResoureRequests `json:"requests,omitempty"`
+	Token         string            `json:"token,omitempty"`
 }
 
 type Promotions struct {
