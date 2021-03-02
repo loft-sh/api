@@ -48,6 +48,10 @@ func (c *FakeManagementV1) LicenseTokens() v1.LicenseTokenInterface {
 	return &FakeLicenseTokens{c}
 }
 
+func (c *FakeManagementV1) LoftRestarts() v1.LoftRestartInterface {
+	return &FakeLoftRestarts{c}
+}
+
 func (c *FakeManagementV1) LoftUpgrades() v1.LoftUpgradeInterface {
 	return &FakeLoftUpgrades{c}
 }

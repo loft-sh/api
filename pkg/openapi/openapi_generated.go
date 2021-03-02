@@ -16,6 +16,9 @@ import (
 
 func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenAPIDefinition {
 	return map[string]common.OpenAPIDefinition{
+		"github.com/loft-sh/api/pkg/apis/audit/v1.Event":                                          schema_pkg_apis_audit_v1_Event(ref),
+		"github.com/loft-sh/api/pkg/apis/audit/v1.EventList":                                      schema_pkg_apis_audit_v1_EventList(ref),
+		"github.com/loft-sh/api/pkg/apis/audit/v1.ObjectReference":                                schema_pkg_apis_audit_v1_ObjectReference(ref),
 		"github.com/loft-sh/api/pkg/apis/cluster/v1.Account":                                      schema_pkg_apis_cluster_v1_Account(ref),
 		"github.com/loft-sh/api/pkg/apis/cluster/v1.AccountClusterRoles":                          schema_pkg_apis_cluster_v1_AccountClusterRoles(ref),
 		"github.com/loft-sh/api/pkg/apis/cluster/v1.AccountClusterRolesList":                      schema_pkg_apis_cluster_v1_AccountClusterRolesList(ref),
@@ -41,6 +44,9 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 		"github.com/loft-sh/api/pkg/apis/management/v1.AnnouncementSpec":                          schema_pkg_apis_management_v1_AnnouncementSpec(ref),
 		"github.com/loft-sh/api/pkg/apis/management/v1.AnnouncementStatus":                        schema_pkg_apis_management_v1_AnnouncementStatus(ref),
 		"github.com/loft-sh/api/pkg/apis/management/v1.Apps":                                      schema_pkg_apis_management_v1_Apps(ref),
+		"github.com/loft-sh/api/pkg/apis/management/v1.Audit":                                     schema_pkg_apis_management_v1_Audit(ref),
+		"github.com/loft-sh/api/pkg/apis/management/v1.AuditPolicy":                               schema_pkg_apis_management_v1_AuditPolicy(ref),
+		"github.com/loft-sh/api/pkg/apis/management/v1.AuditPolicyRule":                           schema_pkg_apis_management_v1_AuditPolicyRule(ref),
 		"github.com/loft-sh/api/pkg/apis/management/v1.Authentication":                            schema_pkg_apis_management_v1_Authentication(ref),
 		"github.com/loft-sh/api/pkg/apis/management/v1.AuthenticationGroupClusterAccountTemplate": schema_pkg_apis_management_v1_AuthenticationGroupClusterAccountTemplate(ref),
 		"github.com/loft-sh/api/pkg/apis/management/v1.AuthenticationOIDC":                        schema_pkg_apis_management_v1_AuthenticationOIDC(ref),
@@ -90,6 +96,7 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 		"github.com/loft-sh/api/pkg/apis/management/v1.FeatureList":                               schema_pkg_apis_management_v1_FeatureList(ref),
 		"github.com/loft-sh/api/pkg/apis/management/v1.FeatureSpec":                               schema_pkg_apis_management_v1_FeatureSpec(ref),
 		"github.com/loft-sh/api/pkg/apis/management/v1.FeatureStatus":                             schema_pkg_apis_management_v1_FeatureStatus(ref),
+		"github.com/loft-sh/api/pkg/apis/management/v1.GroupResources":                            schema_pkg_apis_management_v1_GroupResources(ref),
 		"github.com/loft-sh/api/pkg/apis/management/v1.Kiosk":                                     schema_pkg_apis_management_v1_Kiosk(ref),
 		"github.com/loft-sh/api/pkg/apis/management/v1.KioskList":                                 schema_pkg_apis_management_v1_KioskList(ref),
 		"github.com/loft-sh/api/pkg/apis/management/v1.KioskSpec":                                 schema_pkg_apis_management_v1_KioskSpec(ref),
@@ -103,6 +110,10 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 		"github.com/loft-sh/api/pkg/apis/management/v1.LicenseTokenList":                          schema_pkg_apis_management_v1_LicenseTokenList(ref),
 		"github.com/loft-sh/api/pkg/apis/management/v1.LicenseTokenSpec":                          schema_pkg_apis_management_v1_LicenseTokenSpec(ref),
 		"github.com/loft-sh/api/pkg/apis/management/v1.LicenseTokenStatus":                        schema_pkg_apis_management_v1_LicenseTokenStatus(ref),
+		"github.com/loft-sh/api/pkg/apis/management/v1.LoftRestart":                               schema_pkg_apis_management_v1_LoftRestart(ref),
+		"github.com/loft-sh/api/pkg/apis/management/v1.LoftRestartList":                           schema_pkg_apis_management_v1_LoftRestartList(ref),
+		"github.com/loft-sh/api/pkg/apis/management/v1.LoftRestartSpec":                           schema_pkg_apis_management_v1_LoftRestartSpec(ref),
+		"github.com/loft-sh/api/pkg/apis/management/v1.LoftRestartStatus":                         schema_pkg_apis_management_v1_LoftRestartStatus(ref),
 		"github.com/loft-sh/api/pkg/apis/management/v1.LoftUpgrade":                               schema_pkg_apis_management_v1_LoftUpgrade(ref),
 		"github.com/loft-sh/api/pkg/apis/management/v1.LoftUpgradeList":                           schema_pkg_apis_management_v1_LoftUpgradeList(ref),
 		"github.com/loft-sh/api/pkg/apis/management/v1.LoftUpgradeSpec":                           schema_pkg_apis_management_v1_LoftUpgradeSpec(ref),
@@ -950,6 +961,265 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 	}
 }
 
+func schema_pkg_apis_audit_v1_Event(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "Event holds the event information",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"kind": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"apiVersion": {
+						SchemaProps: spec.SchemaProps{
+							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"level": {
+						SchemaProps: spec.SchemaProps{
+							Description: "AuditLevel at which event was generated",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"auditID": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Unique audit ID, generated for each request.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"stage": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Stage of the request handling when this event instance was generated.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"requestURI": {
+						SchemaProps: spec.SchemaProps{
+							Description: "RequestURI is the request URI as sent by the client to a server.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"verb": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Verb is the kubernetes verb associated with the request. For non-resource requests, this is the lower-cased HTTP method.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"user": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Authenticated user information.",
+							Ref:         ref("k8s.io/api/authentication/v1.UserInfo"),
+						},
+					},
+					"impersonatedUser": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Impersonated user information.",
+							Ref:         ref("k8s.io/api/authentication/v1.UserInfo"),
+						},
+					},
+					"sourceIPs": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Source IPs, from where the request originated and intermediate proxies.",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Type:   []string{"string"},
+										Format: "",
+									},
+								},
+							},
+						},
+					},
+					"userAgent": {
+						SchemaProps: spec.SchemaProps{
+							Description: "UserAgent records the user agent string reported by the client. Note that the UserAgent is provided by the client, and must not be trusted.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"objectRef": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Object reference this request is targeted at. Does not apply for List-type requests, or non-resource requests.",
+							Ref:         ref("github.com/loft-sh/api/pkg/apis/audit/v1.ObjectReference"),
+						},
+					},
+					"responseStatus": {
+						SchemaProps: spec.SchemaProps{
+							Description: "The response status. For successful and non-successful responses, this will only include the Code and StatusSuccess. For panic type error responses, this will be auto-populated with the error Message.",
+							Ref:         ref("k8s.io/apimachinery/pkg/apis/meta/v1.Status"),
+						},
+					},
+					"requestObject": {
+						SchemaProps: spec.SchemaProps{
+							Description: "API object from the request, in JSON format. The RequestObject is recorded as-is in the request (possibly re-encoded as JSON), prior to version conversion, defaulting, admission or merging. It is an external versioned object type, and may not be a valid object on its own. Omitted for non-resource requests.  Only logged at Request Level and higher.",
+							Ref:         ref("k8s.io/apimachinery/pkg/runtime.Unknown"),
+						},
+					},
+					"responseObject": {
+						SchemaProps: spec.SchemaProps{
+							Description: "API object returned in the response, in JSON. The ResponseObject is recorded after conversion to the external type, and serialized as JSON.  Omitted for non-resource requests.  Only logged at Response Level.",
+							Ref:         ref("k8s.io/apimachinery/pkg/runtime.Unknown"),
+						},
+					},
+					"requestReceivedTimestamp": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Time the request reached the apiserver.",
+							Ref:         ref("k8s.io/apimachinery/pkg/apis/meta/v1.MicroTime"),
+						},
+					},
+					"stageTimestamp": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Time the request reached current audit stage.",
+							Ref:         ref("k8s.io/apimachinery/pkg/apis/meta/v1.MicroTime"),
+						},
+					},
+					"annotations": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Annotations is an unstructured key value map stored with an audit event that may be set by plugins invoked in the request serving chain, including authentication, authorization and admission plugins. Note that these annotations are for the audit event, and do not correspond to the metadata.annotations of the submitted object. Keys should uniquely identify the informing component to avoid name collisions (e.g. podsecuritypolicy.admission.k8s.io/policy). Values should be short. Annotations are included in the Metadata level.",
+							Type:        []string{"object"},
+							AdditionalProperties: &spec.SchemaOrBool{
+								Allows: true,
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Type:   []string{"string"},
+										Format: "",
+									},
+								},
+							},
+						},
+					},
+				},
+				Required: []string{"level", "auditID", "stage", "requestURI", "verb", "user"},
+			},
+		},
+		Dependencies: []string{
+			"github.com/loft-sh/api/pkg/apis/audit/v1.ObjectReference", "k8s.io/api/authentication/v1.UserInfo", "k8s.io/apimachinery/pkg/apis/meta/v1.MicroTime", "k8s.io/apimachinery/pkg/apis/meta/v1.Status", "k8s.io/apimachinery/pkg/runtime.Unknown"},
+	}
+}
+
+func schema_pkg_apis_audit_v1_EventList(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "EventList is a list of audit Events.",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"kind": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"apiVersion": {
+						SchemaProps: spec.SchemaProps{
+							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"metadata": {
+						SchemaProps: spec.SchemaProps{
+							Ref: ref("k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"),
+						},
+					},
+					"items": {
+						SchemaProps: spec.SchemaProps{
+							Type: []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Ref: ref("github.com/loft-sh/api/pkg/apis/audit/v1.Event"),
+									},
+								},
+							},
+						},
+					},
+				},
+				Required: []string{"items"},
+			},
+		},
+		Dependencies: []string{
+			"github.com/loft-sh/api/pkg/apis/audit/v1.Event", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
+	}
+}
+
+func schema_pkg_apis_audit_v1_ObjectReference(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "ObjectReference contains enough information to let you inspect or modify the referred object.",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"resource": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"string"},
+							Format: "",
+						},
+					},
+					"namespace": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"string"},
+							Format: "",
+						},
+					},
+					"name": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"string"},
+							Format: "",
+						},
+					},
+					"uid": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"string"},
+							Format: "",
+						},
+					},
+					"apiGroup": {
+						SchemaProps: spec.SchemaProps{
+							Description: "APIGroup is the name of the API group that contains the referred object. The empty string represents the core API group.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"apiVersion": {
+						SchemaProps: spec.SchemaProps{
+							Description: "APIVersion is the version of the API group that contains the referred object.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"resourceVersion": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"string"},
+							Format: "",
+						},
+					},
+					"subresource": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"string"},
+							Format: "",
+						},
+					},
+				},
+			},
+		},
+	}
+}
+
 func schema_pkg_apis_cluster_v1_Account(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
@@ -1722,6 +1992,12 @@ func schema_pkg_apis_management_v1_Analytics(ref common.ReferenceCallback) commo
 							Format: "",
 						},
 					},
+					"batchEndpoint": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"string"},
+							Format: "",
+						},
+					},
 					"requests": {
 						SchemaProps: spec.SchemaProps{
 							Type: []string{"array"},
@@ -1912,6 +2188,259 @@ func schema_pkg_apis_management_v1_Apps(ref common.ReferenceCallback) common.Ope
 		},
 		Dependencies: []string{
 			"github.com/loft-sh/api/pkg/apis/management/v1.PredefinedApp", "github.com/loft-sh/api/pkg/apis/storage/v1.HelmChartRepository"},
+	}
+}
+
+func schema_pkg_apis_management_v1_Audit(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "Audit holds the audit configuration options for loft. Changing any options will require a loft restart to take effect.",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"enabled": {
+						SchemaProps: spec.SchemaProps{
+							Description: "If audit is enabled and incoming api requests will be logged based on the supplied policy.",
+							Type:        []string{"boolean"},
+							Format:      "",
+						},
+					},
+					"policy": {
+						SchemaProps: spec.SchemaProps{
+							Description: "The audit policy to use and log requests. By default loft will not log anything",
+							Ref:         ref("github.com/loft-sh/api/pkg/apis/management/v1.AuditPolicy"),
+						},
+					},
+					"path": {
+						SchemaProps: spec.SchemaProps{
+							Description: "The path where to save the audit log files. This is required if audit is enabled. Backup log files will be retained in the same directory.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"maxAge": {
+						SchemaProps: spec.SchemaProps{
+							Description: "MaxAge is the maximum number of days to retain old log files based on the timestamp encoded in their filename.  Note that a day is defined as 24 hours and may not exactly correspond to calendar days due to daylight savings, leap seconds, etc. The default is not to remove old log files based on age.",
+							Type:        []string{"integer"},
+							Format:      "int32",
+						},
+					},
+					"maxBackups": {
+						SchemaProps: spec.SchemaProps{
+							Description: "MaxBackups is the maximum number of old log files to retain.  The default is to retain all old log files (though MaxAge may still cause them to get deleted.)",
+							Type:        []string{"integer"},
+							Format:      "int32",
+						},
+					},
+					"maxSize": {
+						SchemaProps: spec.SchemaProps{
+							Description: "MaxSize is the maximum size in megabytes of the log file before it gets rotated. It defaults to 100 megabytes.",
+							Type:        []string{"integer"},
+							Format:      "int32",
+						},
+					},
+					"compress": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Compress determines if the rotated log files should be compressed using gzip. The default is not to perform compression.",
+							Type:        []string{"boolean"},
+							Format:      "",
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			"github.com/loft-sh/api/pkg/apis/management/v1.AuditPolicy"},
+	}
+}
+
+func schema_pkg_apis_management_v1_AuditPolicy(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "AuditPolicy describes the audit policy to use for loft",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"rules": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Rules specify the audit Level a request should be recorded at. A request may match multiple rules, in which case the FIRST matching rule is used. The default audit level is None, but can be overridden by a catch-all rule at the end of the list. PolicyRules are strictly ordered.",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Ref: ref("github.com/loft-sh/api/pkg/apis/management/v1.AuditPolicyRule"),
+									},
+								},
+							},
+						},
+					},
+					"omitStages": {
+						SchemaProps: spec.SchemaProps{
+							Description: "OmitStages is a list of stages for which no events are created. Note that this can also be specified per rule in which case the union of both are omitted.",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Type:   []string{"string"},
+										Format: "",
+									},
+								},
+							},
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			"github.com/loft-sh/api/pkg/apis/management/v1.AuditPolicyRule"},
+	}
+}
+
+func schema_pkg_apis_management_v1_AuditPolicyRule(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "AuditPolicy describes a policy for auditing",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"level": {
+						SchemaProps: spec.SchemaProps{
+							Description: "The Level that requests matching this rule are recorded at.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"users": {
+						SchemaProps: spec.SchemaProps{
+							Description: "The users (by authenticated user name) this rule applies to. An empty list implies every user.",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Type:   []string{"string"},
+										Format: "",
+									},
+								},
+							},
+						},
+					},
+					"userGroups": {
+						SchemaProps: spec.SchemaProps{
+							Description: "The user groups this rule applies to. A user is considered matching if it is a member of any of the UserGroups. An empty list implies every user group.",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Type:   []string{"string"},
+										Format: "",
+									},
+								},
+							},
+						},
+					},
+					"verbs": {
+						SchemaProps: spec.SchemaProps{
+							Description: "The verbs that match this rule. An empty list implies every verb.",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Type:   []string{"string"},
+										Format: "",
+									},
+								},
+							},
+						},
+					},
+					"resources": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Resources that this rule matches. An empty list implies all kinds in all API groups.",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Ref: ref("github.com/loft-sh/api/pkg/apis/management/v1.GroupResources"),
+									},
+								},
+							},
+						},
+					},
+					"namespaces": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Namespaces that this rule matches. The empty string \"\" matches non-namespaced resources. An empty list implies every namespace.",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Type:   []string{"string"},
+										Format: "",
+									},
+								},
+							},
+						},
+					},
+					"nonResourceURLs": {
+						SchemaProps: spec.SchemaProps{
+							Description: "NonResourceURLs is a set of URL paths that should be audited. *s are allowed, but only as the full, final step in the path. Examples:\n \"/metrics\" - Log requests for apiserver metrics\n \"/healthz*\" - Log all health checks",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Type:   []string{"string"},
+										Format: "",
+									},
+								},
+							},
+						},
+					},
+					"omitStages": {
+						SchemaProps: spec.SchemaProps{
+							Description: "OmitStages is a list of stages for which no events are created. Note that this can also be specified policy wide in which case the union of both are omitted. An empty list means no restrictions will apply.",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Type:   []string{"string"},
+										Format: "",
+									},
+								},
+							},
+						},
+					},
+					"requestTargets": {
+						SchemaProps: spec.SchemaProps{
+							Description: "RequestTargets is a list of request targets for which events are created. An empty list implies every request.",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Type:   []string{"string"},
+										Format: "",
+									},
+								},
+							},
+						},
+					},
+					"clusters": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Clusters that this rule matches. Only applies to cluster requests. If this is set, no events for non cluster requests will be created. An empty list means no restrictions will apply.",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Type:   []string{"string"},
+										Format: "",
+									},
+								},
+							},
+						},
+					},
+				},
+				Required: []string{"level"},
+			},
+		},
+		Dependencies: []string{
+			"github.com/loft-sh/api/pkg/apis/management/v1.GroupResources"},
 	}
 }
 
@@ -3571,11 +4100,17 @@ func schema_pkg_apis_management_v1_ConfigSpec(ref common.ReferenceCallback) comm
 							Ref:         ref("github.com/loft-sh/api/pkg/apis/management/v1.Apps"),
 						},
 					},
+					"audit": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Audit holds audit configuration",
+							Ref:         ref("github.com/loft-sh/api/pkg/apis/management/v1.Audit"),
+						},
+					},
 				},
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/pkg/apis/management/v1.Apps", "github.com/loft-sh/api/pkg/apis/management/v1.Authentication", "github.com/loft-sh/api/pkg/apis/management/v1.OIDC"},
+			"github.com/loft-sh/api/pkg/apis/management/v1.Apps", "github.com/loft-sh/api/pkg/apis/management/v1.Audit", "github.com/loft-sh/api/pkg/apis/management/v1.Authentication", "github.com/loft-sh/api/pkg/apis/management/v1.OIDC"},
 	}
 }
 
@@ -3886,6 +4421,54 @@ func schema_pkg_apis_management_v1_FeatureStatus(ref common.ReferenceCallback) c
 							Description: "Enabled signals if the feature is currently enabled or disabled",
 							Type:        []string{"boolean"},
 							Format:      "",
+						},
+					},
+				},
+			},
+		},
+	}
+}
+
+func schema_pkg_apis_management_v1_GroupResources(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "GroupResources represents resource kinds in an API group.",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"group": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Group is the name of the API group that contains the resources. The empty string represents the core API group.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"resources": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Resources is a list of resources this rule applies to.\n\nFor example: 'pods' matches pods. 'pods/log' matches the log subresource of pods. '*' matches all resources and their subresources. 'pods/*' matches all subresources of pods. '*/scale' matches all scale subresources.\n\nIf wildcard is present, the validation rule will ensure resources do not overlap with each other.\n\nAn empty list implies all resources and subresources in this API groups apply.",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Type:   []string{"string"},
+										Format: "",
+									},
+								},
+							},
+						},
+					},
+					"resourceNames": {
+						SchemaProps: spec.SchemaProps{
+							Description: "ResourceNames is a list of resource instance names that the policy matches. Using this field requires Resources to be specified. An empty list implies that every instance of the resource is matched.",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Type:   []string{"string"},
+										Format: "",
+									},
+								},
+							},
 						},
 					},
 				},
@@ -4408,6 +4991,116 @@ func schema_pkg_apis_management_v1_LicenseTokenStatus(ref common.ReferenceCallba
 						},
 					},
 				},
+			},
+		},
+	}
+}
+
+func schema_pkg_apis_management_v1_LoftRestart(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "LoftRestart holds the restart information",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"kind": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"apiVersion": {
+						SchemaProps: spec.SchemaProps{
+							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"metadata": {
+						SchemaProps: spec.SchemaProps{
+							Ref: ref("k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"),
+						},
+					},
+					"spec": {
+						SchemaProps: spec.SchemaProps{
+							Ref: ref("github.com/loft-sh/api/pkg/apis/management/v1.LoftRestartSpec"),
+						},
+					},
+					"status": {
+						SchemaProps: spec.SchemaProps{
+							Ref: ref("github.com/loft-sh/api/pkg/apis/management/v1.LoftRestartStatus"),
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			"github.com/loft-sh/api/pkg/apis/management/v1.LoftRestartSpec", "github.com/loft-sh/api/pkg/apis/management/v1.LoftRestartStatus", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
+	}
+}
+
+func schema_pkg_apis_management_v1_LoftRestartList(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"kind": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"apiVersion": {
+						SchemaProps: spec.SchemaProps{
+							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"metadata": {
+						SchemaProps: spec.SchemaProps{
+							Ref: ref("k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"),
+						},
+					},
+					"items": {
+						SchemaProps: spec.SchemaProps{
+							Type: []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Ref: ref("github.com/loft-sh/api/pkg/apis/management/v1.LoftRestart"),
+									},
+								},
+							},
+						},
+					},
+				},
+				Required: []string{"items"},
+			},
+		},
+		Dependencies: []string{
+			"github.com/loft-sh/api/pkg/apis/management/v1.LoftRestart", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
+	}
+}
+
+func schema_pkg_apis_management_v1_LoftRestartSpec(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+			},
+		},
+	}
+}
+
+func schema_pkg_apis_management_v1_LoftRestartStatus(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
 			},
 		},
 	}

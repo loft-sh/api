@@ -7,6 +7,7 @@ package v1
 import (
 	unsafe "unsafe"
 
+	auditv1 "github.com/loft-sh/api/pkg/apis/audit/v1"
 	clusterv1 "github.com/loft-sh/api/pkg/apis/cluster/v1"
 	management "github.com/loft-sh/api/pkg/apis/management"
 	storagev1 "github.com/loft-sh/api/pkg/apis/storage/v1"
@@ -80,6 +81,36 @@ func RegisterConversions(s *runtime.Scheme) error {
 	}
 	if err := s.AddGeneratedConversionFunc((*management.Apps)(nil), (*Apps)(nil), func(a, b interface{}, scope conversion.Scope) error {
 		return Convert_management_Apps_To_v1_Apps(a.(*management.Apps), b.(*Apps), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*Audit)(nil), (*management.Audit)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_v1_Audit_To_management_Audit(a.(*Audit), b.(*management.Audit), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*management.Audit)(nil), (*Audit)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_management_Audit_To_v1_Audit(a.(*management.Audit), b.(*Audit), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*AuditPolicy)(nil), (*management.AuditPolicy)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_v1_AuditPolicy_To_management_AuditPolicy(a.(*AuditPolicy), b.(*management.AuditPolicy), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*management.AuditPolicy)(nil), (*AuditPolicy)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_management_AuditPolicy_To_v1_AuditPolicy(a.(*management.AuditPolicy), b.(*AuditPolicy), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*AuditPolicyRule)(nil), (*management.AuditPolicyRule)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_v1_AuditPolicyRule_To_management_AuditPolicyRule(a.(*AuditPolicyRule), b.(*management.AuditPolicyRule), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*management.AuditPolicyRule)(nil), (*AuditPolicyRule)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_management_AuditPolicyRule_To_v1_AuditPolicyRule(a.(*management.AuditPolicyRule), b.(*AuditPolicyRule), scope)
 	}); err != nil {
 		return err
 	}
@@ -573,6 +604,16 @@ func RegisterConversions(s *runtime.Scheme) error {
 	}); err != nil {
 		return err
 	}
+	if err := s.AddGeneratedConversionFunc((*GroupResources)(nil), (*management.GroupResources)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_v1_GroupResources_To_management_GroupResources(a.(*GroupResources), b.(*management.GroupResources), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*management.GroupResources)(nil), (*GroupResources)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_management_GroupResources_To_v1_GroupResources(a.(*management.GroupResources), b.(*GroupResources), scope)
+	}); err != nil {
+		return err
+	}
 	if err := s.AddGeneratedConversionFunc((*Kiosk)(nil), (*management.Kiosk)(nil), func(a, b interface{}, scope conversion.Scope) error {
 		return Convert_v1_Kiosk_To_management_Kiosk(a.(*Kiosk), b.(*management.Kiosk), scope)
 	}); err != nil {
@@ -700,6 +741,46 @@ func RegisterConversions(s *runtime.Scheme) error {
 	}
 	if err := s.AddGeneratedConversionFunc((*management.LicenseTokenStatus)(nil), (*LicenseTokenStatus)(nil), func(a, b interface{}, scope conversion.Scope) error {
 		return Convert_management_LicenseTokenStatus_To_v1_LicenseTokenStatus(a.(*management.LicenseTokenStatus), b.(*LicenseTokenStatus), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*LoftRestart)(nil), (*management.LoftRestart)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_v1_LoftRestart_To_management_LoftRestart(a.(*LoftRestart), b.(*management.LoftRestart), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*management.LoftRestart)(nil), (*LoftRestart)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_management_LoftRestart_To_v1_LoftRestart(a.(*management.LoftRestart), b.(*LoftRestart), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*LoftRestartList)(nil), (*management.LoftRestartList)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_v1_LoftRestartList_To_management_LoftRestartList(a.(*LoftRestartList), b.(*management.LoftRestartList), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*management.LoftRestartList)(nil), (*LoftRestartList)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_management_LoftRestartList_To_v1_LoftRestartList(a.(*management.LoftRestartList), b.(*LoftRestartList), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*LoftRestartSpec)(nil), (*management.LoftRestartSpec)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_v1_LoftRestartSpec_To_management_LoftRestartSpec(a.(*LoftRestartSpec), b.(*management.LoftRestartSpec), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*management.LoftRestartSpec)(nil), (*LoftRestartSpec)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_management_LoftRestartSpec_To_v1_LoftRestartSpec(a.(*management.LoftRestartSpec), b.(*LoftRestartSpec), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*LoftRestartStatus)(nil), (*management.LoftRestartStatus)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_v1_LoftRestartStatus_To_management_LoftRestartStatus(a.(*LoftRestartStatus), b.(*management.LoftRestartStatus), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*management.LoftRestartStatus)(nil), (*LoftRestartStatus)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_management_LoftRestartStatus_To_v1_LoftRestartStatus(a.(*management.LoftRestartStatus), b.(*LoftRestartStatus), scope)
 	}); err != nil {
 		return err
 	}
@@ -1288,6 +1369,7 @@ func RegisterConversions(s *runtime.Scheme) error {
 
 func autoConvert_v1_Analytics_To_management_Analytics(in *Analytics, out *management.Analytics, s conversion.Scope) error {
 	out.Endpoint = in.Endpoint
+	out.BatchEndpoint = in.BatchEndpoint
 	out.Requests = *(*[]management.ResoureRequests)(unsafe.Pointer(&in.Requests))
 	out.Token = in.Token
 	return nil
@@ -1300,6 +1382,7 @@ func Convert_v1_Analytics_To_management_Analytics(in *Analytics, out *management
 
 func autoConvert_management_Analytics_To_v1_Analytics(in *management.Analytics, out *Analytics, s conversion.Scope) error {
 	out.Endpoint = in.Endpoint
+	out.BatchEndpoint = in.BatchEndpoint
 	out.Requests = *(*[]ResoureRequests)(unsafe.Pointer(&in.Requests))
 	out.Token = in.Token
 	return nil
@@ -1424,6 +1507,102 @@ func autoConvert_management_Apps_To_v1_Apps(in *management.Apps, out *Apps, s co
 // Convert_management_Apps_To_v1_Apps is an autogenerated conversion function.
 func Convert_management_Apps_To_v1_Apps(in *management.Apps, out *Apps, s conversion.Scope) error {
 	return autoConvert_management_Apps_To_v1_Apps(in, out, s)
+}
+
+func autoConvert_v1_Audit_To_management_Audit(in *Audit, out *management.Audit, s conversion.Scope) error {
+	out.Enabled = in.Enabled
+	if err := Convert_v1_AuditPolicy_To_management_AuditPolicy(&in.Policy, &out.Policy, s); err != nil {
+		return err
+	}
+	out.Path = in.Path
+	out.MaxAge = in.MaxAge
+	out.MaxBackups = in.MaxBackups
+	out.MaxSize = in.MaxSize
+	out.Compress = in.Compress
+	return nil
+}
+
+// Convert_v1_Audit_To_management_Audit is an autogenerated conversion function.
+func Convert_v1_Audit_To_management_Audit(in *Audit, out *management.Audit, s conversion.Scope) error {
+	return autoConvert_v1_Audit_To_management_Audit(in, out, s)
+}
+
+func autoConvert_management_Audit_To_v1_Audit(in *management.Audit, out *Audit, s conversion.Scope) error {
+	out.Enabled = in.Enabled
+	if err := Convert_management_AuditPolicy_To_v1_AuditPolicy(&in.Policy, &out.Policy, s); err != nil {
+		return err
+	}
+	out.Path = in.Path
+	out.MaxAge = in.MaxAge
+	out.MaxBackups = in.MaxBackups
+	out.MaxSize = in.MaxSize
+	out.Compress = in.Compress
+	return nil
+}
+
+// Convert_management_Audit_To_v1_Audit is an autogenerated conversion function.
+func Convert_management_Audit_To_v1_Audit(in *management.Audit, out *Audit, s conversion.Scope) error {
+	return autoConvert_management_Audit_To_v1_Audit(in, out, s)
+}
+
+func autoConvert_v1_AuditPolicy_To_management_AuditPolicy(in *AuditPolicy, out *management.AuditPolicy, s conversion.Scope) error {
+	out.Rules = *(*[]management.AuditPolicyRule)(unsafe.Pointer(&in.Rules))
+	out.OmitStages = *(*[]auditv1.Stage)(unsafe.Pointer(&in.OmitStages))
+	return nil
+}
+
+// Convert_v1_AuditPolicy_To_management_AuditPolicy is an autogenerated conversion function.
+func Convert_v1_AuditPolicy_To_management_AuditPolicy(in *AuditPolicy, out *management.AuditPolicy, s conversion.Scope) error {
+	return autoConvert_v1_AuditPolicy_To_management_AuditPolicy(in, out, s)
+}
+
+func autoConvert_management_AuditPolicy_To_v1_AuditPolicy(in *management.AuditPolicy, out *AuditPolicy, s conversion.Scope) error {
+	out.Rules = *(*[]AuditPolicyRule)(unsafe.Pointer(&in.Rules))
+	out.OmitStages = *(*[]auditv1.Stage)(unsafe.Pointer(&in.OmitStages))
+	return nil
+}
+
+// Convert_management_AuditPolicy_To_v1_AuditPolicy is an autogenerated conversion function.
+func Convert_management_AuditPolicy_To_v1_AuditPolicy(in *management.AuditPolicy, out *AuditPolicy, s conversion.Scope) error {
+	return autoConvert_management_AuditPolicy_To_v1_AuditPolicy(in, out, s)
+}
+
+func autoConvert_v1_AuditPolicyRule_To_management_AuditPolicyRule(in *AuditPolicyRule, out *management.AuditPolicyRule, s conversion.Scope) error {
+	out.Level = auditv1.Level(in.Level)
+	out.Users = *(*[]string)(unsafe.Pointer(&in.Users))
+	out.UserGroups = *(*[]string)(unsafe.Pointer(&in.UserGroups))
+	out.Verbs = *(*[]string)(unsafe.Pointer(&in.Verbs))
+	out.Resources = *(*[]management.GroupResources)(unsafe.Pointer(&in.Resources))
+	out.Namespaces = *(*[]string)(unsafe.Pointer(&in.Namespaces))
+	out.NonResourceURLs = *(*[]string)(unsafe.Pointer(&in.NonResourceURLs))
+	out.OmitStages = *(*[]auditv1.Stage)(unsafe.Pointer(&in.OmitStages))
+	out.RequestTargets = *(*[]auditv1.RequestTarget)(unsafe.Pointer(&in.RequestTargets))
+	out.Clusters = *(*[]string)(unsafe.Pointer(&in.Clusters))
+	return nil
+}
+
+// Convert_v1_AuditPolicyRule_To_management_AuditPolicyRule is an autogenerated conversion function.
+func Convert_v1_AuditPolicyRule_To_management_AuditPolicyRule(in *AuditPolicyRule, out *management.AuditPolicyRule, s conversion.Scope) error {
+	return autoConvert_v1_AuditPolicyRule_To_management_AuditPolicyRule(in, out, s)
+}
+
+func autoConvert_management_AuditPolicyRule_To_v1_AuditPolicyRule(in *management.AuditPolicyRule, out *AuditPolicyRule, s conversion.Scope) error {
+	out.Level = auditv1.Level(in.Level)
+	out.Users = *(*[]string)(unsafe.Pointer(&in.Users))
+	out.UserGroups = *(*[]string)(unsafe.Pointer(&in.UserGroups))
+	out.Verbs = *(*[]string)(unsafe.Pointer(&in.Verbs))
+	out.Resources = *(*[]GroupResources)(unsafe.Pointer(&in.Resources))
+	out.Namespaces = *(*[]string)(unsafe.Pointer(&in.Namespaces))
+	out.NonResourceURLs = *(*[]string)(unsafe.Pointer(&in.NonResourceURLs))
+	out.OmitStages = *(*[]auditv1.Stage)(unsafe.Pointer(&in.OmitStages))
+	out.RequestTargets = *(*[]auditv1.RequestTarget)(unsafe.Pointer(&in.RequestTargets))
+	out.Clusters = *(*[]string)(unsafe.Pointer(&in.Clusters))
+	return nil
+}
+
+// Convert_management_AuditPolicyRule_To_v1_AuditPolicyRule is an autogenerated conversion function.
+func Convert_management_AuditPolicyRule_To_v1_AuditPolicyRule(in *management.AuditPolicyRule, out *AuditPolicyRule, s conversion.Scope) error {
+	return autoConvert_management_AuditPolicyRule_To_v1_AuditPolicyRule(in, out, s)
 }
 
 func autoConvert_v1_Authentication_To_management_Authentication(in *Authentication, out *management.Authentication, s conversion.Scope) error {
@@ -2382,6 +2561,7 @@ func autoConvert_v1_ConfigSpec_To_management_ConfigSpec(in *ConfigSpec, out *man
 	}
 	out.OIDC = (*management.OIDC)(unsafe.Pointer(in.OIDC))
 	out.Apps = (*management.Apps)(unsafe.Pointer(in.Apps))
+	out.Audit = (*management.Audit)(unsafe.Pointer(in.Audit))
 	return nil
 }
 
@@ -2396,6 +2576,7 @@ func autoConvert_management_ConfigSpec_To_v1_ConfigSpec(in *management.ConfigSpe
 	}
 	out.OIDC = (*OIDC)(unsafe.Pointer(in.OIDC))
 	out.Apps = (*Apps)(unsafe.Pointer(in.Apps))
+	out.Audit = (*Audit)(unsafe.Pointer(in.Audit))
 	return nil
 }
 
@@ -2626,6 +2807,30 @@ func autoConvert_management_FeatureStatus_To_v1_FeatureStatus(in *management.Fea
 // Convert_management_FeatureStatus_To_v1_FeatureStatus is an autogenerated conversion function.
 func Convert_management_FeatureStatus_To_v1_FeatureStatus(in *management.FeatureStatus, out *FeatureStatus, s conversion.Scope) error {
 	return autoConvert_management_FeatureStatus_To_v1_FeatureStatus(in, out, s)
+}
+
+func autoConvert_v1_GroupResources_To_management_GroupResources(in *GroupResources, out *management.GroupResources, s conversion.Scope) error {
+	out.Group = in.Group
+	out.Resources = *(*[]string)(unsafe.Pointer(&in.Resources))
+	out.ResourceNames = *(*[]string)(unsafe.Pointer(&in.ResourceNames))
+	return nil
+}
+
+// Convert_v1_GroupResources_To_management_GroupResources is an autogenerated conversion function.
+func Convert_v1_GroupResources_To_management_GroupResources(in *GroupResources, out *management.GroupResources, s conversion.Scope) error {
+	return autoConvert_v1_GroupResources_To_management_GroupResources(in, out, s)
+}
+
+func autoConvert_management_GroupResources_To_v1_GroupResources(in *management.GroupResources, out *GroupResources, s conversion.Scope) error {
+	out.Group = in.Group
+	out.Resources = *(*[]string)(unsafe.Pointer(&in.Resources))
+	out.ResourceNames = *(*[]string)(unsafe.Pointer(&in.ResourceNames))
+	return nil
+}
+
+// Convert_management_GroupResources_To_v1_GroupResources is an autogenerated conversion function.
+func Convert_management_GroupResources_To_v1_GroupResources(in *management.GroupResources, out *GroupResources, s conversion.Scope) error {
+	return autoConvert_management_GroupResources_To_v1_GroupResources(in, out, s)
 }
 
 func autoConvert_v1_Kiosk_To_management_Kiosk(in *Kiosk, out *management.Kiosk, s conversion.Scope) error {
@@ -2984,6 +3189,96 @@ func autoConvert_management_LicenseTokenStatus_To_v1_LicenseTokenStatus(in *mana
 // Convert_management_LicenseTokenStatus_To_v1_LicenseTokenStatus is an autogenerated conversion function.
 func Convert_management_LicenseTokenStatus_To_v1_LicenseTokenStatus(in *management.LicenseTokenStatus, out *LicenseTokenStatus, s conversion.Scope) error {
 	return autoConvert_management_LicenseTokenStatus_To_v1_LicenseTokenStatus(in, out, s)
+}
+
+func autoConvert_v1_LoftRestart_To_management_LoftRestart(in *LoftRestart, out *management.LoftRestart, s conversion.Scope) error {
+	out.ObjectMeta = in.ObjectMeta
+	if err := Convert_v1_LoftRestartSpec_To_management_LoftRestartSpec(&in.Spec, &out.Spec, s); err != nil {
+		return err
+	}
+	if err := Convert_v1_LoftRestartStatus_To_management_LoftRestartStatus(&in.Status, &out.Status, s); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Convert_v1_LoftRestart_To_management_LoftRestart is an autogenerated conversion function.
+func Convert_v1_LoftRestart_To_management_LoftRestart(in *LoftRestart, out *management.LoftRestart, s conversion.Scope) error {
+	return autoConvert_v1_LoftRestart_To_management_LoftRestart(in, out, s)
+}
+
+func autoConvert_management_LoftRestart_To_v1_LoftRestart(in *management.LoftRestart, out *LoftRestart, s conversion.Scope) error {
+	out.ObjectMeta = in.ObjectMeta
+	if err := Convert_management_LoftRestartSpec_To_v1_LoftRestartSpec(&in.Spec, &out.Spec, s); err != nil {
+		return err
+	}
+	if err := Convert_management_LoftRestartStatus_To_v1_LoftRestartStatus(&in.Status, &out.Status, s); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Convert_management_LoftRestart_To_v1_LoftRestart is an autogenerated conversion function.
+func Convert_management_LoftRestart_To_v1_LoftRestart(in *management.LoftRestart, out *LoftRestart, s conversion.Scope) error {
+	return autoConvert_management_LoftRestart_To_v1_LoftRestart(in, out, s)
+}
+
+func autoConvert_v1_LoftRestartList_To_management_LoftRestartList(in *LoftRestartList, out *management.LoftRestartList, s conversion.Scope) error {
+	out.ListMeta = in.ListMeta
+	out.Items = *(*[]management.LoftRestart)(unsafe.Pointer(&in.Items))
+	return nil
+}
+
+// Convert_v1_LoftRestartList_To_management_LoftRestartList is an autogenerated conversion function.
+func Convert_v1_LoftRestartList_To_management_LoftRestartList(in *LoftRestartList, out *management.LoftRestartList, s conversion.Scope) error {
+	return autoConvert_v1_LoftRestartList_To_management_LoftRestartList(in, out, s)
+}
+
+func autoConvert_management_LoftRestartList_To_v1_LoftRestartList(in *management.LoftRestartList, out *LoftRestartList, s conversion.Scope) error {
+	out.ListMeta = in.ListMeta
+	out.Items = *(*[]LoftRestart)(unsafe.Pointer(&in.Items))
+	return nil
+}
+
+// Convert_management_LoftRestartList_To_v1_LoftRestartList is an autogenerated conversion function.
+func Convert_management_LoftRestartList_To_v1_LoftRestartList(in *management.LoftRestartList, out *LoftRestartList, s conversion.Scope) error {
+	return autoConvert_management_LoftRestartList_To_v1_LoftRestartList(in, out, s)
+}
+
+func autoConvert_v1_LoftRestartSpec_To_management_LoftRestartSpec(in *LoftRestartSpec, out *management.LoftRestartSpec, s conversion.Scope) error {
+	return nil
+}
+
+// Convert_v1_LoftRestartSpec_To_management_LoftRestartSpec is an autogenerated conversion function.
+func Convert_v1_LoftRestartSpec_To_management_LoftRestartSpec(in *LoftRestartSpec, out *management.LoftRestartSpec, s conversion.Scope) error {
+	return autoConvert_v1_LoftRestartSpec_To_management_LoftRestartSpec(in, out, s)
+}
+
+func autoConvert_management_LoftRestartSpec_To_v1_LoftRestartSpec(in *management.LoftRestartSpec, out *LoftRestartSpec, s conversion.Scope) error {
+	return nil
+}
+
+// Convert_management_LoftRestartSpec_To_v1_LoftRestartSpec is an autogenerated conversion function.
+func Convert_management_LoftRestartSpec_To_v1_LoftRestartSpec(in *management.LoftRestartSpec, out *LoftRestartSpec, s conversion.Scope) error {
+	return autoConvert_management_LoftRestartSpec_To_v1_LoftRestartSpec(in, out, s)
+}
+
+func autoConvert_v1_LoftRestartStatus_To_management_LoftRestartStatus(in *LoftRestartStatus, out *management.LoftRestartStatus, s conversion.Scope) error {
+	return nil
+}
+
+// Convert_v1_LoftRestartStatus_To_management_LoftRestartStatus is an autogenerated conversion function.
+func Convert_v1_LoftRestartStatus_To_management_LoftRestartStatus(in *LoftRestartStatus, out *management.LoftRestartStatus, s conversion.Scope) error {
+	return autoConvert_v1_LoftRestartStatus_To_management_LoftRestartStatus(in, out, s)
+}
+
+func autoConvert_management_LoftRestartStatus_To_v1_LoftRestartStatus(in *management.LoftRestartStatus, out *LoftRestartStatus, s conversion.Scope) error {
+	return nil
+}
+
+// Convert_management_LoftRestartStatus_To_v1_LoftRestartStatus is an autogenerated conversion function.
+func Convert_management_LoftRestartStatus_To_v1_LoftRestartStatus(in *management.LoftRestartStatus, out *LoftRestartStatus, s conversion.Scope) error {
+	return autoConvert_management_LoftRestartStatus_To_v1_LoftRestartStatus(in, out, s)
 }
 
 func autoConvert_v1_LoftUpgrade_To_management_LoftUpgrade(in *LoftUpgrade, out *management.LoftUpgrade, s conversion.Scope) error {

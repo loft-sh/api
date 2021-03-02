@@ -39,6 +39,8 @@ func addKnownTypes(scheme *runtime.Scheme) error {
 		&LicenseList{},
 		&LicenseToken{},
 		&LicenseTokenList{},
+		&LoftRestart{},
+		&LoftRestartList{},
 		&LoftUpgrade{},
 		&LoftUpgradeList{},
 		&SelfSubjectAccessReview{},
@@ -108,6 +110,7 @@ var (
 		management.ManagementKioskStorage,
 		management.ManagementLicenseStorage,
 		management.ManagementLicenseTokenStorage,
+		management.ManagementLoftRestartStorage,
 		management.ManagementLoftUpgradeStorage,
 		management.ManagementSelfSubjectAccessReviewStorage,
 		management.ManagementSharedSecretStorage,
@@ -326,6 +329,14 @@ type LicenseTokenList struct {
 	metav1.TypeMeta `json:",inline"`
 	metav1.ListMeta `json:"metadata,omitempty"`
 	Items           []LicenseToken `json:"items"`
+}
+
+// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+
+type LoftRestartList struct {
+	metav1.TypeMeta `json:",inline"`
+	metav1.ListMeta `json:"metadata,omitempty"`
+	Items           []LoftRestart `json:"items"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
