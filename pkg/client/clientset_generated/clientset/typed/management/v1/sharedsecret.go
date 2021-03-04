@@ -17,7 +17,7 @@ import (
 // SharedSecretsGetter has a method to return a SharedSecretInterface.
 // A group's client should implement this interface.
 type SharedSecretsGetter interface {
-	SharedSecrets() SharedSecretInterface
+	SharedSecrets(namespace string) SharedSecretInterface
 }
 
 // SharedSecretInterface has methods to work with SharedSecret resources.
@@ -37,12 +37,14 @@ type SharedSecretInterface interface {
 // sharedSecrets implements SharedSecretInterface
 type sharedSecrets struct {
 	client rest.Interface
+	ns     string
 }
 
 // newSharedSecrets returns a SharedSecrets
-func newSharedSecrets(c *ManagementV1Client) *sharedSecrets {
+func newSharedSecrets(c *ManagementV1Client, namespace string) *sharedSecrets {
 	return &sharedSecrets{
 		client: c.RESTClient(),
+		ns:     namespace,
 	}
 }
 
@@ -50,6 +52,7 @@ func newSharedSecrets(c *ManagementV1Client) *sharedSecrets {
 func (c *sharedSecrets) Get(ctx context.Context, name string, options metav1.GetOptions) (result *v1.SharedSecret, err error) {
 	result = &v1.SharedSecret{}
 	err = c.client.Get().
+		Namespace(c.ns).
 		Resource("sharedsecrets").
 		Name(name).
 		VersionedParams(&options, scheme.ParameterCodec).
@@ -66,6 +69,7 @@ func (c *sharedSecrets) List(ctx context.Context, opts metav1.ListOptions) (resu
 	}
 	result = &v1.SharedSecretList{}
 	err = c.client.Get().
+		Namespace(c.ns).
 		Resource("sharedsecrets").
 		VersionedParams(&opts, scheme.ParameterCodec).
 		Timeout(timeout).
@@ -82,6 +86,7 @@ func (c *sharedSecrets) Watch(ctx context.Context, opts metav1.ListOptions) (wat
 	}
 	opts.Watch = true
 	return c.client.Get().
+		Namespace(c.ns).
 		Resource("sharedsecrets").
 		VersionedParams(&opts, scheme.ParameterCodec).
 		Timeout(timeout).
@@ -92,6 +97,7 @@ func (c *sharedSecrets) Watch(ctx context.Context, opts metav1.ListOptions) (wat
 func (c *sharedSecrets) Create(ctx context.Context, sharedSecret *v1.SharedSecret, opts metav1.CreateOptions) (result *v1.SharedSecret, err error) {
 	result = &v1.SharedSecret{}
 	err = c.client.Post().
+		Namespace(c.ns).
 		Resource("sharedsecrets").
 		VersionedParams(&opts, scheme.ParameterCodec).
 		Body(sharedSecret).
@@ -104,6 +110,7 @@ func (c *sharedSecrets) Create(ctx context.Context, sharedSecret *v1.SharedSecre
 func (c *sharedSecrets) Update(ctx context.Context, sharedSecret *v1.SharedSecret, opts metav1.UpdateOptions) (result *v1.SharedSecret, err error) {
 	result = &v1.SharedSecret{}
 	err = c.client.Put().
+		Namespace(c.ns).
 		Resource("sharedsecrets").
 		Name(sharedSecret.Name).
 		VersionedParams(&opts, scheme.ParameterCodec).
@@ -118,6 +125,7 @@ func (c *sharedSecrets) Update(ctx context.Context, sharedSecret *v1.SharedSecre
 func (c *sharedSecrets) UpdateStatus(ctx context.Context, sharedSecret *v1.SharedSecret, opts metav1.UpdateOptions) (result *v1.SharedSecret, err error) {
 	result = &v1.SharedSecret{}
 	err = c.client.Put().
+		Namespace(c.ns).
 		Resource("sharedsecrets").
 		Name(sharedSecret.Name).
 		SubResource("status").
@@ -131,6 +139,7 @@ func (c *sharedSecrets) UpdateStatus(ctx context.Context, sharedSecret *v1.Share
 // Delete takes name of the sharedSecret and deletes it. Returns an error if one occurs.
 func (c *sharedSecrets) Delete(ctx context.Context, name string, opts metav1.DeleteOptions) error {
 	return c.client.Delete().
+		Namespace(c.ns).
 		Resource("sharedsecrets").
 		Name(name).
 		Body(&opts).
@@ -145,6 +154,7 @@ func (c *sharedSecrets) DeleteCollection(ctx context.Context, opts metav1.Delete
 		timeout = time.Duration(*listOpts.TimeoutSeconds) * time.Second
 	}
 	return c.client.Delete().
+		Namespace(c.ns).
 		Resource("sharedsecrets").
 		VersionedParams(&listOpts, scheme.ParameterCodec).
 		Timeout(timeout).
@@ -157,6 +167,7 @@ func (c *sharedSecrets) DeleteCollection(ctx context.Context, opts metav1.Delete
 func (c *sharedSecrets) Patch(ctx context.Context, name string, pt types.PatchType, data []byte, opts metav1.PatchOptions, subresources ...string) (result *v1.SharedSecret, err error) {
 	result = &v1.SharedSecret{}
 	err = c.client.Patch(pt).
+		Namespace(c.ns).
 		Resource("sharedsecrets").
 		Name(name).
 		SubResource(subresources...).

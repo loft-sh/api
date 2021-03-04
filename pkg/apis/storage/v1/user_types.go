@@ -56,6 +56,11 @@ type UserSpec struct {
 	// A reference to the users access keys
 	// +optional
 	CodesRef *SecretRef `json:"codesRef,omitempty"`
+	
+	// ImagePullSecrets holds secret references to image pull 
+	// secrets the user has access to.
+	// +optional
+	ImagePullSecrets []*KindSecretRef `json:"imagePullSecrets,omitempty"`
 
 	// ClusterAccountTemplates that should be applied for the user
 	// +optional
@@ -183,6 +188,20 @@ const (
 	AccountClusterStatusPhaseSynced AccountClusterStatusPhase = "Synced"
 	AccountClusterStatusPhaseFailed AccountClusterStatusPhase = "Failed"
 )
+
+// KindSecretRef is the reference to a secret containing the user password
+type KindSecretRef struct {
+	// APIGroup is the api group of the secret
+	APIGroup string `json:"apiGroup,omitempty"`
+	// Kind is the kind of the secret
+	Kind string `json:"kind,omitempty"`
+	// +optional
+	SecretName string `json:"secretName,omitempty"`
+	// +optional
+	SecretNamespace string `json:"secretNamespace,omitempty"`
+	// +optional
+	Key string `json:"key,omitempty"`
+}
 
 // SecretRef is the reference to a secret containing the user password
 type SecretRef struct {

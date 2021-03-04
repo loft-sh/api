@@ -60,8 +60,8 @@ func (c *FakeManagementV1) SelfSubjectAccessReviews() v1.SelfSubjectAccessReview
 	return &FakeSelfSubjectAccessReviews{c}
 }
 
-func (c *FakeManagementV1) SharedSecrets() v1.SharedSecretInterface {
-	return &FakeSharedSecrets{c}
+func (c *FakeManagementV1) SharedSecrets(namespace string) v1.SharedSecretInterface {
+	return &FakeSharedSecrets{c, namespace}
 }
 
 func (c *FakeManagementV1) SubjectAccessReviews() v1.SubjectAccessReviewInterface {

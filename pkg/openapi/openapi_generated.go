@@ -187,6 +187,7 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 		"github.com/loft-sh/api/pkg/apis/storage/v1.HelmChart":                                    schema_pkg_apis_storage_v1_HelmChart(ref),
 		"github.com/loft-sh/api/pkg/apis/storage/v1.HelmChartRepository":                          schema_pkg_apis_storage_v1_HelmChartRepository(ref),
 		"github.com/loft-sh/api/pkg/apis/storage/v1.Info":                                         schema_pkg_apis_storage_v1_Info(ref),
+		"github.com/loft-sh/api/pkg/apis/storage/v1.KindSecretRef":                                schema_pkg_apis_storage_v1_KindSecretRef(ref),
 		"github.com/loft-sh/api/pkg/apis/storage/v1.Maintainer":                                   schema_pkg_apis_storage_v1_Maintainer(ref),
 		"github.com/loft-sh/api/pkg/apis/storage/v1.Metadata":                                     schema_pkg_apis_storage_v1_Metadata(ref),
 		"github.com/loft-sh/api/pkg/apis/storage/v1.PodSelector":                                  schema_pkg_apis_storage_v1_PodSelector(ref),
@@ -6543,6 +6544,19 @@ func schema_pkg_apis_management_v1_TeamSpec(ref common.ReferenceCallback) common
 							},
 						},
 					},
+					"imagePullSecrets": {
+						SchemaProps: spec.SchemaProps{
+							Description: "ImagePullSecrets holds secret references to image pull secrets the team has access to.",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Ref: ref("github.com/loft-sh/api/pkg/apis/storage/v1.SecretRef"),
+									},
+								},
+							},
+						},
+					},
 					"clusterAccountTemplates": {
 						SchemaProps: spec.SchemaProps{
 							Description: "ClusterAccountTemplates that should be applied for the user",
@@ -6560,7 +6574,7 @@ func schema_pkg_apis_management_v1_TeamSpec(ref common.ReferenceCallback) common
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/pkg/apis/storage/v1.UserClusterAccountTemplate"},
+			"github.com/loft-sh/api/pkg/apis/storage/v1.SecretRef", "github.com/loft-sh/api/pkg/apis/storage/v1.UserClusterAccountTemplate"},
 	}
 }
 
@@ -7487,6 +7501,19 @@ func schema_pkg_apis_management_v1_UserSpec(ref common.ReferenceCallback) common
 							Ref:         ref("github.com/loft-sh/api/pkg/apis/storage/v1.SecretRef"),
 						},
 					},
+					"imagePullSecrets": {
+						SchemaProps: spec.SchemaProps{
+							Description: "ImagePullSecrets holds secret references to image pull secrets the user has access to.",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Ref: ref("github.com/loft-sh/api/pkg/apis/storage/v1.KindSecretRef"),
+									},
+								},
+							},
+						},
+					},
 					"clusterAccountTemplates": {
 						SchemaProps: spec.SchemaProps{
 							Description: "ClusterAccountTemplates that should be applied for the user",
@@ -7518,7 +7545,7 @@ func schema_pkg_apis_management_v1_UserSpec(ref common.ReferenceCallback) common
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/pkg/apis/storage/v1.SecretRef", "github.com/loft-sh/api/pkg/apis/storage/v1.UserClusterAccountTemplate"},
+			"github.com/loft-sh/api/pkg/apis/storage/v1.KindSecretRef", "github.com/loft-sh/api/pkg/apis/storage/v1.SecretRef", "github.com/loft-sh/api/pkg/apis/storage/v1.UserClusterAccountTemplate"},
 	}
 }
 
@@ -8337,6 +8364,51 @@ func schema_pkg_apis_storage_v1_Info(ref common.ReferenceCallback) common.OpenAP
 	}
 }
 
+func schema_pkg_apis_storage_v1_KindSecretRef(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "KindSecretRef is the reference to a secret containing the user password",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"apiGroup": {
+						SchemaProps: spec.SchemaProps{
+							Description: "APIGroup is the api group of the secret",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"kind": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Kind is the kind of the secret",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"secretName": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"string"},
+							Format: "",
+						},
+					},
+					"secretNamespace": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"string"},
+							Format: "",
+						},
+					},
+					"key": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"string"},
+							Format: "",
+						},
+					},
+				},
+			},
+		},
+	}
+}
+
 func schema_pkg_apis_storage_v1_Maintainer(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
@@ -8924,6 +8996,19 @@ func schema_pkg_apis_storage_v1_TeamSpec(ref common.ReferenceCallback) common.Op
 							},
 						},
 					},
+					"imagePullSecrets": {
+						SchemaProps: spec.SchemaProps{
+							Description: "ImagePullSecrets holds secret references to image pull secrets the team has access to.",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Ref: ref("github.com/loft-sh/api/pkg/apis/storage/v1.SecretRef"),
+									},
+								},
+							},
+						},
+					},
 					"clusterAccountTemplates": {
 						SchemaProps: spec.SchemaProps{
 							Description: "ClusterAccountTemplates that should be applied for the user",
@@ -8941,7 +9026,7 @@ func schema_pkg_apis_storage_v1_TeamSpec(ref common.ReferenceCallback) common.Op
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/pkg/apis/storage/v1.UserClusterAccountTemplate"},
+			"github.com/loft-sh/api/pkg/apis/storage/v1.SecretRef", "github.com/loft-sh/api/pkg/apis/storage/v1.UserClusterAccountTemplate"},
 	}
 }
 
@@ -9252,6 +9337,19 @@ func schema_pkg_apis_storage_v1_UserSpec(ref common.ReferenceCallback) common.Op
 							Ref:         ref("github.com/loft-sh/api/pkg/apis/storage/v1.SecretRef"),
 						},
 					},
+					"imagePullSecrets": {
+						SchemaProps: spec.SchemaProps{
+							Description: "ImagePullSecrets holds secret references to image pull secrets the user has access to.",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Ref: ref("github.com/loft-sh/api/pkg/apis/storage/v1.KindSecretRef"),
+									},
+								},
+							},
+						},
+					},
 					"clusterAccountTemplates": {
 						SchemaProps: spec.SchemaProps{
 							Description: "ClusterAccountTemplates that should be applied for the user",
@@ -9283,7 +9381,7 @@ func schema_pkg_apis_storage_v1_UserSpec(ref common.ReferenceCallback) common.Op
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/pkg/apis/storage/v1.SecretRef", "github.com/loft-sh/api/pkg/apis/storage/v1.UserClusterAccountTemplate"},
+			"github.com/loft-sh/api/pkg/apis/storage/v1.KindSecretRef", "github.com/loft-sh/api/pkg/apis/storage/v1.SecretRef", "github.com/loft-sh/api/pkg/apis/storage/v1.UserClusterAccountTemplate"},
 	}
 }
 

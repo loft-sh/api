@@ -17,6 +17,7 @@ import (
 // FakeSharedSecrets implements SharedSecretInterface
 type FakeSharedSecrets struct {
 	Fake *FakeManagementV1
+	ns   string
 }
 
 var sharedsecretsResource = schema.GroupVersionResource{Group: "management.loft.sh", Version: "v1", Resource: "sharedsecrets"}
@@ -26,7 +27,8 @@ var sharedsecretsKind = schema.GroupVersionKind{Group: "management.loft.sh", Ver
 // Get takes name of the sharedSecret, and returns the corresponding sharedSecret object, and an error if there is any.
 func (c *FakeSharedSecrets) Get(ctx context.Context, name string, options v1.GetOptions) (result *managementv1.SharedSecret, err error) {
 	obj, err := c.Fake.
-		Invokes(testing.NewRootGetAction(sharedsecretsResource, name), &managementv1.SharedSecret{})
+		Invokes(testing.NewGetAction(sharedsecretsResource, c.ns, name), &managementv1.SharedSecret{})
+
 	if obj == nil {
 		return nil, err
 	}
@@ -36,7 +38,8 @@ func (c *FakeSharedSecrets) Get(ctx context.Context, name string, options v1.Get
 // List takes label and field selectors, and returns the list of SharedSecrets that match those selectors.
 func (c *FakeSharedSecrets) List(ctx context.Context, opts v1.ListOptions) (result *managementv1.SharedSecretList, err error) {
 	obj, err := c.Fake.
-		Invokes(testing.NewRootListAction(sharedsecretsResource, sharedsecretsKind, opts), &managementv1.SharedSecretList{})
+		Invokes(testing.NewListAction(sharedsecretsResource, sharedsecretsKind, c.ns, opts), &managementv1.SharedSecretList{})
+
 	if obj == nil {
 		return nil, err
 	}
@@ -57,13 +60,15 @@ func (c *FakeSharedSecrets) List(ctx context.Context, opts v1.ListOptions) (resu
 // Watch returns a watch.Interface that watches the requested sharedSecrets.
 func (c *FakeSharedSecrets) Watch(ctx context.Context, opts v1.ListOptions) (watch.Interface, error) {
 	return c.Fake.
-		InvokesWatch(testing.NewRootWatchAction(sharedsecretsResource, opts))
+		InvokesWatch(testing.NewWatchAction(sharedsecretsResource, c.ns, opts))
+
 }
 
 // Create takes the representation of a sharedSecret and creates it.  Returns the server's representation of the sharedSecret, and an error, if there is any.
 func (c *FakeSharedSecrets) Create(ctx context.Context, sharedSecret *managementv1.SharedSecret, opts v1.CreateOptions) (result *managementv1.SharedSecret, err error) {
 	obj, err := c.Fake.
-		Invokes(testing.NewRootCreateAction(sharedsecretsResource, sharedSecret), &managementv1.SharedSecret{})
+		Invokes(testing.NewCreateAction(sharedsecretsResource, c.ns, sharedSecret), &managementv1.SharedSecret{})
+
 	if obj == nil {
 		return nil, err
 	}
@@ -73,7 +78,8 @@ func (c *FakeSharedSecrets) Create(ctx context.Context, sharedSecret *management
 // Update takes the representation of a sharedSecret and updates it. Returns the server's representation of the sharedSecret, and an error, if there is any.
 func (c *FakeSharedSecrets) Update(ctx context.Context, sharedSecret *managementv1.SharedSecret, opts v1.UpdateOptions) (result *managementv1.SharedSecret, err error) {
 	obj, err := c.Fake.
-		Invokes(testing.NewRootUpdateAction(sharedsecretsResource, sharedSecret), &managementv1.SharedSecret{})
+		Invokes(testing.NewUpdateAction(sharedsecretsResource, c.ns, sharedSecret), &managementv1.SharedSecret{})
+
 	if obj == nil {
 		return nil, err
 	}
@@ -84,7 +90,8 @@ func (c *FakeSharedSecrets) Update(ctx context.Context, sharedSecret *management
 // Add a +genclient:noStatus comment above the type to avoid generating UpdateStatus().
 func (c *FakeSharedSecrets) UpdateStatus(ctx context.Context, sharedSecret *managementv1.SharedSecret, opts v1.UpdateOptions) (*managementv1.SharedSecret, error) {
 	obj, err := c.Fake.
-		Invokes(testing.NewRootUpdateSubresourceAction(sharedsecretsResource, "status", sharedSecret), &managementv1.SharedSecret{})
+		Invokes(testing.NewUpdateSubresourceAction(sharedsecretsResource, "status", c.ns, sharedSecret), &managementv1.SharedSecret{})
+
 	if obj == nil {
 		return nil, err
 	}
@@ -94,13 +101,14 @@ func (c *FakeSharedSecrets) UpdateStatus(ctx context.Context, sharedSecret *mana
 // Delete takes name of the sharedSecret and deletes it. Returns an error if one occurs.
 func (c *FakeSharedSecrets) Delete(ctx context.Context, name string, opts v1.DeleteOptions) error {
 	_, err := c.Fake.
-		Invokes(testing.NewRootDeleteAction(sharedsecretsResource, name), &managementv1.SharedSecret{})
+		Invokes(testing.NewDeleteAction(sharedsecretsResource, c.ns, name), &managementv1.SharedSecret{})
+
 	return err
 }
 
 // DeleteCollection deletes a collection of objects.
 func (c *FakeSharedSecrets) DeleteCollection(ctx context.Context, opts v1.DeleteOptions, listOpts v1.ListOptions) error {
-	action := testing.NewRootDeleteCollectionAction(sharedsecretsResource, listOpts)
+	action := testing.NewDeleteCollectionAction(sharedsecretsResource, c.ns, listOpts)
 
 	_, err := c.Fake.Invokes(action, &managementv1.SharedSecretList{})
 	return err
@@ -109,7 +117,8 @@ func (c *FakeSharedSecrets) DeleteCollection(ctx context.Context, opts v1.Delete
 // Patch applies the patch and returns the patched sharedSecret.
 func (c *FakeSharedSecrets) Patch(ctx context.Context, name string, pt types.PatchType, data []byte, opts v1.PatchOptions, subresources ...string) (result *managementv1.SharedSecret, err error) {
 	obj, err := c.Fake.
-		Invokes(testing.NewRootPatchSubresourceAction(sharedsecretsResource, name, pt, data, subresources...), &managementv1.SharedSecret{})
+		Invokes(testing.NewPatchSubresourceAction(sharedsecretsResource, c.ns, name, pt, data, subresources...), &managementv1.SharedSecret{})
+
 	if obj == nil {
 		return nil, err
 	}

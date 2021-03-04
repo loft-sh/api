@@ -7,7 +7,7 @@ type PrivateClaims struct {
 type Loft struct {
 	// The UID of the user that this token is for
 	UID string `json:"uid,omitempty"`
-	// The name of the user that this token is signed for
+	// The kubernetes name of the user that this token is signed for
 	Name string `json:"name,omitempty"`
 	// The generation of the token
 	Gen int64 `json:"gen,omitempty"`

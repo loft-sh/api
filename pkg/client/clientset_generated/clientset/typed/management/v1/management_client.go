@@ -81,8 +81,8 @@ func (c *ManagementV1Client) SelfSubjectAccessReviews() SelfSubjectAccessReviewI
 	return newSelfSubjectAccessReviews(c)
 }
 
-func (c *ManagementV1Client) SharedSecrets() SharedSecretInterface {
-	return newSharedSecrets(c)
+func (c *ManagementV1Client) SharedSecrets(namespace string) SharedSecretInterface {
+	return newSharedSecrets(c, namespace)
 }
 
 func (c *ManagementV1Client) SubjectAccessReviews() SubjectAccessReviewInterface {
