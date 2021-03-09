@@ -669,11 +669,11 @@ func (in *TeamSpec) DeepCopyInto(out *TeamSpec) {
 	}
 	if in.ImagePullSecrets != nil {
 		in, out := &in.ImagePullSecrets, &out.ImagePullSecrets
-		*out = make([]*SecretRef, len(*in))
+		*out = make([]*KindSecretRef, len(*in))
 		for i := range *in {
 			if (*in)[i] != nil {
 				in, out := &(*in)[i], &(*out)[i]
-				*out = new(SecretRef)
+				*out = new(KindSecretRef)
 				**out = **in
 			}
 		}

@@ -6551,7 +6551,7 @@ func schema_pkg_apis_management_v1_TeamSpec(ref common.ReferenceCallback) common
 							Items: &spec.SchemaOrArray{
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
-										Ref: ref("github.com/loft-sh/api/pkg/apis/storage/v1.SecretRef"),
+										Ref: ref("github.com/loft-sh/api/pkg/apis/storage/v1.KindSecretRef"),
 									},
 								},
 							},
@@ -6574,7 +6574,7 @@ func schema_pkg_apis_management_v1_TeamSpec(ref common.ReferenceCallback) common
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/pkg/apis/storage/v1.SecretRef", "github.com/loft-sh/api/pkg/apis/storage/v1.UserClusterAccountTemplate"},
+			"github.com/loft-sh/api/pkg/apis/storage/v1.KindSecretRef", "github.com/loft-sh/api/pkg/apis/storage/v1.UserClusterAccountTemplate"},
 	}
 }
 
@@ -9003,7 +9003,7 @@ func schema_pkg_apis_storage_v1_TeamSpec(ref common.ReferenceCallback) common.Op
 							Items: &spec.SchemaOrArray{
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
-										Ref: ref("github.com/loft-sh/api/pkg/apis/storage/v1.SecretRef"),
+										Ref: ref("github.com/loft-sh/api/pkg/apis/storage/v1.KindSecretRef"),
 									},
 								},
 							},
@@ -9026,7 +9026,7 @@ func schema_pkg_apis_storage_v1_TeamSpec(ref common.ReferenceCallback) common.Op
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/pkg/apis/storage/v1.SecretRef", "github.com/loft-sh/api/pkg/apis/storage/v1.UserClusterAccountTemplate"},
+			"github.com/loft-sh/api/pkg/apis/storage/v1.KindSecretRef", "github.com/loft-sh/api/pkg/apis/storage/v1.UserClusterAccountTemplate"},
 	}
 }
 

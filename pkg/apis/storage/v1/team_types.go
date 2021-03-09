@@ -38,7 +38,7 @@ type TeamSpec struct {
 	// ImagePullSecrets holds secret references to image pull 
 	// secrets the team has access to.
 	// +optional
-	ImagePullSecrets []*SecretRef `json:"imagePullSecrets,omitempty"`
+	ImagePullSecrets []*KindSecretRef `json:"imagePullSecrets,omitempty"`
 	
 	// ClusterAccountTemplates that should be applied for the user
 	// +optional
