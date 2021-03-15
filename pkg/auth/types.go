@@ -6,6 +6,29 @@ import (
 
 const GroupVersion = "authentication.loft.sh/v1"
 
+// OIDCTokenRequest is used by the /auth/oidc/token route 
+type OIDCTokenRequest struct {
+	Token       string `json:"token,omitempty"`
+	AccessToken string `json:"accessToken,omitempty"`
+}
+
+// OIDCRefreshRequest is used by the /auth/oidc/refresh route 
+type OIDCRefreshRequest struct {
+	RefreshToken string `json:"refreshToken,omitempty"`
+}
+
+// TokenRequest is used by the /auth/token route
+type TokenRequest struct {
+	Username string `json:"username,omitempty"`
+	Key      string `json:"key,omitempty"`
+}
+
+// PasswordLoginRequest is used by the /auth/password/login route
+type PasswordLoginRequest struct {
+	Username string `json:"username,omitempty"`
+	Password string `json:"password,omitempty"`
+}
+
 type Token struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
