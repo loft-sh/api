@@ -844,6 +844,46 @@ func RegisterConversions(s *runtime.Scheme) error {
 	}); err != nil {
 		return err
 	}
+	if err := s.AddGeneratedConversionFunc((*OwnedAccessKey)(nil), (*management.OwnedAccessKey)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_v1_OwnedAccessKey_To_management_OwnedAccessKey(a.(*OwnedAccessKey), b.(*management.OwnedAccessKey), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*management.OwnedAccessKey)(nil), (*OwnedAccessKey)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_management_OwnedAccessKey_To_v1_OwnedAccessKey(a.(*management.OwnedAccessKey), b.(*OwnedAccessKey), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*OwnedAccessKeyList)(nil), (*management.OwnedAccessKeyList)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_v1_OwnedAccessKeyList_To_management_OwnedAccessKeyList(a.(*OwnedAccessKeyList), b.(*management.OwnedAccessKeyList), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*management.OwnedAccessKeyList)(nil), (*OwnedAccessKeyList)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_management_OwnedAccessKeyList_To_v1_OwnedAccessKeyList(a.(*management.OwnedAccessKeyList), b.(*OwnedAccessKeyList), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*OwnedAccessKeySpec)(nil), (*management.OwnedAccessKeySpec)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_v1_OwnedAccessKeySpec_To_management_OwnedAccessKeySpec(a.(*OwnedAccessKeySpec), b.(*management.OwnedAccessKeySpec), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*management.OwnedAccessKeySpec)(nil), (*OwnedAccessKeySpec)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_management_OwnedAccessKeySpec_To_v1_OwnedAccessKeySpec(a.(*management.OwnedAccessKeySpec), b.(*OwnedAccessKeySpec), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*OwnedAccessKeyStatus)(nil), (*management.OwnedAccessKeyStatus)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_v1_OwnedAccessKeyStatus_To_management_OwnedAccessKeyStatus(a.(*OwnedAccessKeyStatus), b.(*management.OwnedAccessKeyStatus), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*management.OwnedAccessKeyStatus)(nil), (*OwnedAccessKeyStatus)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_management_OwnedAccessKeyStatus_To_v1_OwnedAccessKeyStatus(a.(*management.OwnedAccessKeyStatus), b.(*OwnedAccessKeyStatus), scope)
+	}); err != nil {
+		return err
+	}
 	if err := s.AddGeneratedConversionFunc((*Plan)(nil), (*management.Plan)(nil), func(a, b interface{}, scope conversion.Scope) error {
 		return Convert_v1_Plan_To_management_Plan(a.(*Plan), b.(*management.Plan), scope)
 	}); err != nil {
@@ -884,6 +924,46 @@ func RegisterConversions(s *runtime.Scheme) error {
 	}); err != nil {
 		return err
 	}
+	if err := s.AddGeneratedConversionFunc((*ResetAccessKey)(nil), (*management.ResetAccessKey)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_v1_ResetAccessKey_To_management_ResetAccessKey(a.(*ResetAccessKey), b.(*management.ResetAccessKey), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*management.ResetAccessKey)(nil), (*ResetAccessKey)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_management_ResetAccessKey_To_v1_ResetAccessKey(a.(*management.ResetAccessKey), b.(*ResetAccessKey), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*ResetAccessKeyList)(nil), (*management.ResetAccessKeyList)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_v1_ResetAccessKeyList_To_management_ResetAccessKeyList(a.(*ResetAccessKeyList), b.(*management.ResetAccessKeyList), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*management.ResetAccessKeyList)(nil), (*ResetAccessKeyList)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_management_ResetAccessKeyList_To_v1_ResetAccessKeyList(a.(*management.ResetAccessKeyList), b.(*ResetAccessKeyList), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*ResetAccessKeySpec)(nil), (*management.ResetAccessKeySpec)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_v1_ResetAccessKeySpec_To_management_ResetAccessKeySpec(a.(*ResetAccessKeySpec), b.(*management.ResetAccessKeySpec), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*management.ResetAccessKeySpec)(nil), (*ResetAccessKeySpec)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_management_ResetAccessKeySpec_To_v1_ResetAccessKeySpec(a.(*management.ResetAccessKeySpec), b.(*ResetAccessKeySpec), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*ResetAccessKeyStatus)(nil), (*management.ResetAccessKeyStatus)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_v1_ResetAccessKeyStatus_To_management_ResetAccessKeyStatus(a.(*ResetAccessKeyStatus), b.(*management.ResetAccessKeyStatus), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*management.ResetAccessKeyStatus)(nil), (*ResetAccessKeyStatus)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_management_ResetAccessKeyStatus_To_v1_ResetAccessKeyStatus(a.(*management.ResetAccessKeyStatus), b.(*ResetAccessKeyStatus), scope)
+	}); err != nil {
+		return err
+	}
 	if err := s.AddGeneratedConversionFunc((*ResourceLimit)(nil), (*management.ResourceLimit)(nil), func(a, b interface{}, scope conversion.Scope) error {
 		return Convert_v1_ResourceLimit_To_management_ResourceLimit(a.(*ResourceLimit), b.(*management.ResourceLimit), scope)
 	}); err != nil {
@@ -901,6 +981,46 @@ func RegisterConversions(s *runtime.Scheme) error {
 	}
 	if err := s.AddGeneratedConversionFunc((*management.ResoureRequests)(nil), (*ResoureRequests)(nil), func(a, b interface{}, scope conversion.Scope) error {
 		return Convert_management_ResoureRequests_To_v1_ResoureRequests(a.(*management.ResoureRequests), b.(*ResoureRequests), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*Self)(nil), (*management.Self)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_v1_Self_To_management_Self(a.(*Self), b.(*management.Self), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*management.Self)(nil), (*Self)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_management_Self_To_v1_Self(a.(*management.Self), b.(*Self), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*SelfList)(nil), (*management.SelfList)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_v1_SelfList_To_management_SelfList(a.(*SelfList), b.(*management.SelfList), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*management.SelfList)(nil), (*SelfList)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_management_SelfList_To_v1_SelfList(a.(*management.SelfList), b.(*SelfList), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*SelfSpec)(nil), (*management.SelfSpec)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_v1_SelfSpec_To_management_SelfSpec(a.(*SelfSpec), b.(*management.SelfSpec), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*management.SelfSpec)(nil), (*SelfSpec)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_management_SelfSpec_To_v1_SelfSpec(a.(*management.SelfSpec), b.(*SelfSpec), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*SelfStatus)(nil), (*management.SelfStatus)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_v1_SelfStatus_To_management_SelfStatus(a.(*SelfStatus), b.(*management.SelfStatus), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*management.SelfStatus)(nil), (*SelfStatus)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_management_SelfStatus_To_v1_SelfStatus(a.(*management.SelfStatus), b.(*SelfStatus), scope)
 	}); err != nil {
 		return err
 	}
@@ -1151,36 +1271,6 @@ func RegisterConversions(s *runtime.Scheme) error {
 	}
 	if err := s.AddGeneratedConversionFunc((*management.User)(nil), (*User)(nil), func(a, b interface{}, scope conversion.Scope) error {
 		return Convert_management_User_To_v1_User(a.(*management.User), b.(*User), scope)
-	}); err != nil {
-		return err
-	}
-	if err := s.AddGeneratedConversionFunc((*UserAccessKey)(nil), (*management.UserAccessKey)(nil), func(a, b interface{}, scope conversion.Scope) error {
-		return Convert_v1_UserAccessKey_To_management_UserAccessKey(a.(*UserAccessKey), b.(*management.UserAccessKey), scope)
-	}); err != nil {
-		return err
-	}
-	if err := s.AddGeneratedConversionFunc((*management.UserAccessKey)(nil), (*UserAccessKey)(nil), func(a, b interface{}, scope conversion.Scope) error {
-		return Convert_management_UserAccessKey_To_v1_UserAccessKey(a.(*management.UserAccessKey), b.(*UserAccessKey), scope)
-	}); err != nil {
-		return err
-	}
-	if err := s.AddGeneratedConversionFunc((*UserAccessKeys)(nil), (*management.UserAccessKeys)(nil), func(a, b interface{}, scope conversion.Scope) error {
-		return Convert_v1_UserAccessKeys_To_management_UserAccessKeys(a.(*UserAccessKeys), b.(*management.UserAccessKeys), scope)
-	}); err != nil {
-		return err
-	}
-	if err := s.AddGeneratedConversionFunc((*management.UserAccessKeys)(nil), (*UserAccessKeys)(nil), func(a, b interface{}, scope conversion.Scope) error {
-		return Convert_management_UserAccessKeys_To_v1_UserAccessKeys(a.(*management.UserAccessKeys), b.(*UserAccessKeys), scope)
-	}); err != nil {
-		return err
-	}
-	if err := s.AddGeneratedConversionFunc((*UserAccessKeysList)(nil), (*management.UserAccessKeysList)(nil), func(a, b interface{}, scope conversion.Scope) error {
-		return Convert_v1_UserAccessKeysList_To_management_UserAccessKeysList(a.(*UserAccessKeysList), b.(*management.UserAccessKeysList), scope)
-	}); err != nil {
-		return err
-	}
-	if err := s.AddGeneratedConversionFunc((*management.UserAccessKeysList)(nil), (*UserAccessKeysList)(nil), func(a, b interface{}, scope conversion.Scope) error {
-		return Convert_management_UserAccessKeysList_To_v1_UserAccessKeysList(a.(*management.UserAccessKeysList), b.(*UserAccessKeysList), scope)
 	}); err != nil {
 		return err
 	}
@@ -3425,6 +3515,100 @@ func Convert_management_OIDCClient_To_v1_OIDCClient(in *management.OIDCClient, o
 	return autoConvert_management_OIDCClient_To_v1_OIDCClient(in, out, s)
 }
 
+func autoConvert_v1_OwnedAccessKey_To_management_OwnedAccessKey(in *OwnedAccessKey, out *management.OwnedAccessKey, s conversion.Scope) error {
+	out.ObjectMeta = in.ObjectMeta
+	if err := Convert_v1_OwnedAccessKeySpec_To_management_OwnedAccessKeySpec(&in.Spec, &out.Spec, s); err != nil {
+		return err
+	}
+	if err := Convert_v1_OwnedAccessKeyStatus_To_management_OwnedAccessKeyStatus(&in.Status, &out.Status, s); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Convert_v1_OwnedAccessKey_To_management_OwnedAccessKey is an autogenerated conversion function.
+func Convert_v1_OwnedAccessKey_To_management_OwnedAccessKey(in *OwnedAccessKey, out *management.OwnedAccessKey, s conversion.Scope) error {
+	return autoConvert_v1_OwnedAccessKey_To_management_OwnedAccessKey(in, out, s)
+}
+
+func autoConvert_management_OwnedAccessKey_To_v1_OwnedAccessKey(in *management.OwnedAccessKey, out *OwnedAccessKey, s conversion.Scope) error {
+	out.ObjectMeta = in.ObjectMeta
+	if err := Convert_management_OwnedAccessKeySpec_To_v1_OwnedAccessKeySpec(&in.Spec, &out.Spec, s); err != nil {
+		return err
+	}
+	if err := Convert_management_OwnedAccessKeyStatus_To_v1_OwnedAccessKeyStatus(&in.Status, &out.Status, s); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Convert_management_OwnedAccessKey_To_v1_OwnedAccessKey is an autogenerated conversion function.
+func Convert_management_OwnedAccessKey_To_v1_OwnedAccessKey(in *management.OwnedAccessKey, out *OwnedAccessKey, s conversion.Scope) error {
+	return autoConvert_management_OwnedAccessKey_To_v1_OwnedAccessKey(in, out, s)
+}
+
+func autoConvert_v1_OwnedAccessKeyList_To_management_OwnedAccessKeyList(in *OwnedAccessKeyList, out *management.OwnedAccessKeyList, s conversion.Scope) error {
+	out.ListMeta = in.ListMeta
+	out.Items = *(*[]management.OwnedAccessKey)(unsafe.Pointer(&in.Items))
+	return nil
+}
+
+// Convert_v1_OwnedAccessKeyList_To_management_OwnedAccessKeyList is an autogenerated conversion function.
+func Convert_v1_OwnedAccessKeyList_To_management_OwnedAccessKeyList(in *OwnedAccessKeyList, out *management.OwnedAccessKeyList, s conversion.Scope) error {
+	return autoConvert_v1_OwnedAccessKeyList_To_management_OwnedAccessKeyList(in, out, s)
+}
+
+func autoConvert_management_OwnedAccessKeyList_To_v1_OwnedAccessKeyList(in *management.OwnedAccessKeyList, out *OwnedAccessKeyList, s conversion.Scope) error {
+	out.ListMeta = in.ListMeta
+	out.Items = *(*[]OwnedAccessKey)(unsafe.Pointer(&in.Items))
+	return nil
+}
+
+// Convert_management_OwnedAccessKeyList_To_v1_OwnedAccessKeyList is an autogenerated conversion function.
+func Convert_management_OwnedAccessKeyList_To_v1_OwnedAccessKeyList(in *management.OwnedAccessKeyList, out *OwnedAccessKeyList, s conversion.Scope) error {
+	return autoConvert_management_OwnedAccessKeyList_To_v1_OwnedAccessKeyList(in, out, s)
+}
+
+func autoConvert_v1_OwnedAccessKeySpec_To_management_OwnedAccessKeySpec(in *OwnedAccessKeySpec, out *management.OwnedAccessKeySpec, s conversion.Scope) error {
+	out.AccessKeySpec = in.AccessKeySpec
+	return nil
+}
+
+// Convert_v1_OwnedAccessKeySpec_To_management_OwnedAccessKeySpec is an autogenerated conversion function.
+func Convert_v1_OwnedAccessKeySpec_To_management_OwnedAccessKeySpec(in *OwnedAccessKeySpec, out *management.OwnedAccessKeySpec, s conversion.Scope) error {
+	return autoConvert_v1_OwnedAccessKeySpec_To_management_OwnedAccessKeySpec(in, out, s)
+}
+
+func autoConvert_management_OwnedAccessKeySpec_To_v1_OwnedAccessKeySpec(in *management.OwnedAccessKeySpec, out *OwnedAccessKeySpec, s conversion.Scope) error {
+	out.AccessKeySpec = in.AccessKeySpec
+	return nil
+}
+
+// Convert_management_OwnedAccessKeySpec_To_v1_OwnedAccessKeySpec is an autogenerated conversion function.
+func Convert_management_OwnedAccessKeySpec_To_v1_OwnedAccessKeySpec(in *management.OwnedAccessKeySpec, out *OwnedAccessKeySpec, s conversion.Scope) error {
+	return autoConvert_management_OwnedAccessKeySpec_To_v1_OwnedAccessKeySpec(in, out, s)
+}
+
+func autoConvert_v1_OwnedAccessKeyStatus_To_management_OwnedAccessKeyStatus(in *OwnedAccessKeyStatus, out *management.OwnedAccessKeyStatus, s conversion.Scope) error {
+	out.AccessKeyStatus = in.AccessKeyStatus
+	return nil
+}
+
+// Convert_v1_OwnedAccessKeyStatus_To_management_OwnedAccessKeyStatus is an autogenerated conversion function.
+func Convert_v1_OwnedAccessKeyStatus_To_management_OwnedAccessKeyStatus(in *OwnedAccessKeyStatus, out *management.OwnedAccessKeyStatus, s conversion.Scope) error {
+	return autoConvert_v1_OwnedAccessKeyStatus_To_management_OwnedAccessKeyStatus(in, out, s)
+}
+
+func autoConvert_management_OwnedAccessKeyStatus_To_v1_OwnedAccessKeyStatus(in *management.OwnedAccessKeyStatus, out *OwnedAccessKeyStatus, s conversion.Scope) error {
+	out.AccessKeyStatus = in.AccessKeyStatus
+	return nil
+}
+
+// Convert_management_OwnedAccessKeyStatus_To_v1_OwnedAccessKeyStatus is an autogenerated conversion function.
+func Convert_management_OwnedAccessKeyStatus_To_v1_OwnedAccessKeyStatus(in *management.OwnedAccessKeyStatus, out *OwnedAccessKeyStatus, s conversion.Scope) error {
+	return autoConvert_management_OwnedAccessKeyStatus_To_v1_OwnedAccessKeyStatus(in, out, s)
+}
+
 func autoConvert_v1_Plan_To_management_Plan(in *Plan, out *management.Plan, s conversion.Scope) error {
 	out.Price = in.Price
 	out.Currency = in.Currency
@@ -3529,6 +3713,100 @@ func Convert_management_Promotions_To_v1_Promotions(in *management.Promotions, o
 	return autoConvert_management_Promotions_To_v1_Promotions(in, out, s)
 }
 
+func autoConvert_v1_ResetAccessKey_To_management_ResetAccessKey(in *ResetAccessKey, out *management.ResetAccessKey, s conversion.Scope) error {
+	out.ObjectMeta = in.ObjectMeta
+	if err := Convert_v1_ResetAccessKeySpec_To_management_ResetAccessKeySpec(&in.Spec, &out.Spec, s); err != nil {
+		return err
+	}
+	if err := Convert_v1_ResetAccessKeyStatus_To_management_ResetAccessKeyStatus(&in.Status, &out.Status, s); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Convert_v1_ResetAccessKey_To_management_ResetAccessKey is an autogenerated conversion function.
+func Convert_v1_ResetAccessKey_To_management_ResetAccessKey(in *ResetAccessKey, out *management.ResetAccessKey, s conversion.Scope) error {
+	return autoConvert_v1_ResetAccessKey_To_management_ResetAccessKey(in, out, s)
+}
+
+func autoConvert_management_ResetAccessKey_To_v1_ResetAccessKey(in *management.ResetAccessKey, out *ResetAccessKey, s conversion.Scope) error {
+	out.ObjectMeta = in.ObjectMeta
+	if err := Convert_management_ResetAccessKeySpec_To_v1_ResetAccessKeySpec(&in.Spec, &out.Spec, s); err != nil {
+		return err
+	}
+	if err := Convert_management_ResetAccessKeyStatus_To_v1_ResetAccessKeyStatus(&in.Status, &out.Status, s); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Convert_management_ResetAccessKey_To_v1_ResetAccessKey is an autogenerated conversion function.
+func Convert_management_ResetAccessKey_To_v1_ResetAccessKey(in *management.ResetAccessKey, out *ResetAccessKey, s conversion.Scope) error {
+	return autoConvert_management_ResetAccessKey_To_v1_ResetAccessKey(in, out, s)
+}
+
+func autoConvert_v1_ResetAccessKeyList_To_management_ResetAccessKeyList(in *ResetAccessKeyList, out *management.ResetAccessKeyList, s conversion.Scope) error {
+	out.ListMeta = in.ListMeta
+	out.Items = *(*[]management.ResetAccessKey)(unsafe.Pointer(&in.Items))
+	return nil
+}
+
+// Convert_v1_ResetAccessKeyList_To_management_ResetAccessKeyList is an autogenerated conversion function.
+func Convert_v1_ResetAccessKeyList_To_management_ResetAccessKeyList(in *ResetAccessKeyList, out *management.ResetAccessKeyList, s conversion.Scope) error {
+	return autoConvert_v1_ResetAccessKeyList_To_management_ResetAccessKeyList(in, out, s)
+}
+
+func autoConvert_management_ResetAccessKeyList_To_v1_ResetAccessKeyList(in *management.ResetAccessKeyList, out *ResetAccessKeyList, s conversion.Scope) error {
+	out.ListMeta = in.ListMeta
+	out.Items = *(*[]ResetAccessKey)(unsafe.Pointer(&in.Items))
+	return nil
+}
+
+// Convert_management_ResetAccessKeyList_To_v1_ResetAccessKeyList is an autogenerated conversion function.
+func Convert_management_ResetAccessKeyList_To_v1_ResetAccessKeyList(in *management.ResetAccessKeyList, out *ResetAccessKeyList, s conversion.Scope) error {
+	return autoConvert_management_ResetAccessKeyList_To_v1_ResetAccessKeyList(in, out, s)
+}
+
+func autoConvert_v1_ResetAccessKeySpec_To_management_ResetAccessKeySpec(in *ResetAccessKeySpec, out *management.ResetAccessKeySpec, s conversion.Scope) error {
+	out.AccessKeySpec = in.AccessKeySpec
+	return nil
+}
+
+// Convert_v1_ResetAccessKeySpec_To_management_ResetAccessKeySpec is an autogenerated conversion function.
+func Convert_v1_ResetAccessKeySpec_To_management_ResetAccessKeySpec(in *ResetAccessKeySpec, out *management.ResetAccessKeySpec, s conversion.Scope) error {
+	return autoConvert_v1_ResetAccessKeySpec_To_management_ResetAccessKeySpec(in, out, s)
+}
+
+func autoConvert_management_ResetAccessKeySpec_To_v1_ResetAccessKeySpec(in *management.ResetAccessKeySpec, out *ResetAccessKeySpec, s conversion.Scope) error {
+	out.AccessKeySpec = in.AccessKeySpec
+	return nil
+}
+
+// Convert_management_ResetAccessKeySpec_To_v1_ResetAccessKeySpec is an autogenerated conversion function.
+func Convert_management_ResetAccessKeySpec_To_v1_ResetAccessKeySpec(in *management.ResetAccessKeySpec, out *ResetAccessKeySpec, s conversion.Scope) error {
+	return autoConvert_management_ResetAccessKeySpec_To_v1_ResetAccessKeySpec(in, out, s)
+}
+
+func autoConvert_v1_ResetAccessKeyStatus_To_management_ResetAccessKeyStatus(in *ResetAccessKeyStatus, out *management.ResetAccessKeyStatus, s conversion.Scope) error {
+	out.AccessKeyStatus = in.AccessKeyStatus
+	return nil
+}
+
+// Convert_v1_ResetAccessKeyStatus_To_management_ResetAccessKeyStatus is an autogenerated conversion function.
+func Convert_v1_ResetAccessKeyStatus_To_management_ResetAccessKeyStatus(in *ResetAccessKeyStatus, out *management.ResetAccessKeyStatus, s conversion.Scope) error {
+	return autoConvert_v1_ResetAccessKeyStatus_To_management_ResetAccessKeyStatus(in, out, s)
+}
+
+func autoConvert_management_ResetAccessKeyStatus_To_v1_ResetAccessKeyStatus(in *management.ResetAccessKeyStatus, out *ResetAccessKeyStatus, s conversion.Scope) error {
+	out.AccessKeyStatus = in.AccessKeyStatus
+	return nil
+}
+
+// Convert_management_ResetAccessKeyStatus_To_v1_ResetAccessKeyStatus is an autogenerated conversion function.
+func Convert_management_ResetAccessKeyStatus_To_v1_ResetAccessKeyStatus(in *management.ResetAccessKeyStatus, out *ResetAccessKeyStatus, s conversion.Scope) error {
+	return autoConvert_management_ResetAccessKeyStatus_To_v1_ResetAccessKeyStatus(in, out, s)
+}
+
 func autoConvert_v1_ResourceLimit_To_management_ResourceLimit(in *ResourceLimit, out *management.ResourceLimit, s conversion.Scope) error {
 	out.Group = in.Group
 	out.Version = in.Version
@@ -3583,6 +3861,104 @@ func autoConvert_management_ResoureRequests_To_v1_ResoureRequests(in *management
 // Convert_management_ResoureRequests_To_v1_ResoureRequests is an autogenerated conversion function.
 func Convert_management_ResoureRequests_To_v1_ResoureRequests(in *management.ResoureRequests, out *ResoureRequests, s conversion.Scope) error {
 	return autoConvert_management_ResoureRequests_To_v1_ResoureRequests(in, out, s)
+}
+
+func autoConvert_v1_Self_To_management_Self(in *Self, out *management.Self, s conversion.Scope) error {
+	out.ObjectMeta = in.ObjectMeta
+	if err := Convert_v1_SelfSpec_To_management_SelfSpec(&in.Spec, &out.Spec, s); err != nil {
+		return err
+	}
+	if err := Convert_v1_SelfStatus_To_management_SelfStatus(&in.Status, &out.Status, s); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Convert_v1_Self_To_management_Self is an autogenerated conversion function.
+func Convert_v1_Self_To_management_Self(in *Self, out *management.Self, s conversion.Scope) error {
+	return autoConvert_v1_Self_To_management_Self(in, out, s)
+}
+
+func autoConvert_management_Self_To_v1_Self(in *management.Self, out *Self, s conversion.Scope) error {
+	out.ObjectMeta = in.ObjectMeta
+	if err := Convert_management_SelfSpec_To_v1_SelfSpec(&in.Spec, &out.Spec, s); err != nil {
+		return err
+	}
+	if err := Convert_management_SelfStatus_To_v1_SelfStatus(&in.Status, &out.Status, s); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Convert_management_Self_To_v1_Self is an autogenerated conversion function.
+func Convert_management_Self_To_v1_Self(in *management.Self, out *Self, s conversion.Scope) error {
+	return autoConvert_management_Self_To_v1_Self(in, out, s)
+}
+
+func autoConvert_v1_SelfList_To_management_SelfList(in *SelfList, out *management.SelfList, s conversion.Scope) error {
+	out.ListMeta = in.ListMeta
+	out.Items = *(*[]management.Self)(unsafe.Pointer(&in.Items))
+	return nil
+}
+
+// Convert_v1_SelfList_To_management_SelfList is an autogenerated conversion function.
+func Convert_v1_SelfList_To_management_SelfList(in *SelfList, out *management.SelfList, s conversion.Scope) error {
+	return autoConvert_v1_SelfList_To_management_SelfList(in, out, s)
+}
+
+func autoConvert_management_SelfList_To_v1_SelfList(in *management.SelfList, out *SelfList, s conversion.Scope) error {
+	out.ListMeta = in.ListMeta
+	out.Items = *(*[]Self)(unsafe.Pointer(&in.Items))
+	return nil
+}
+
+// Convert_management_SelfList_To_v1_SelfList is an autogenerated conversion function.
+func Convert_management_SelfList_To_v1_SelfList(in *management.SelfList, out *SelfList, s conversion.Scope) error {
+	return autoConvert_management_SelfList_To_v1_SelfList(in, out, s)
+}
+
+func autoConvert_v1_SelfSpec_To_management_SelfSpec(in *SelfSpec, out *management.SelfSpec, s conversion.Scope) error {
+	return nil
+}
+
+// Convert_v1_SelfSpec_To_management_SelfSpec is an autogenerated conversion function.
+func Convert_v1_SelfSpec_To_management_SelfSpec(in *SelfSpec, out *management.SelfSpec, s conversion.Scope) error {
+	return autoConvert_v1_SelfSpec_To_management_SelfSpec(in, out, s)
+}
+
+func autoConvert_management_SelfSpec_To_v1_SelfSpec(in *management.SelfSpec, out *SelfSpec, s conversion.Scope) error {
+	return nil
+}
+
+// Convert_management_SelfSpec_To_v1_SelfSpec is an autogenerated conversion function.
+func Convert_management_SelfSpec_To_v1_SelfSpec(in *management.SelfSpec, out *SelfSpec, s conversion.Scope) error {
+	return autoConvert_management_SelfSpec_To_v1_SelfSpec(in, out, s)
+}
+
+func autoConvert_v1_SelfStatus_To_management_SelfStatus(in *SelfStatus, out *management.SelfStatus, s conversion.Scope) error {
+	out.User = in.User
+	out.AccessKey = in.AccessKey
+	out.Subject = in.Subject
+	out.Groups = *(*[]string)(unsafe.Pointer(&in.Groups))
+	return nil
+}
+
+// Convert_v1_SelfStatus_To_management_SelfStatus is an autogenerated conversion function.
+func Convert_v1_SelfStatus_To_management_SelfStatus(in *SelfStatus, out *management.SelfStatus, s conversion.Scope) error {
+	return autoConvert_v1_SelfStatus_To_management_SelfStatus(in, out, s)
+}
+
+func autoConvert_management_SelfStatus_To_v1_SelfStatus(in *management.SelfStatus, out *SelfStatus, s conversion.Scope) error {
+	out.User = in.User
+	out.AccessKey = in.AccessKey
+	out.Subject = in.Subject
+	out.Groups = *(*[]string)(unsafe.Pointer(&in.Groups))
+	return nil
+}
+
+// Convert_management_SelfStatus_To_v1_SelfStatus is an autogenerated conversion function.
+func Convert_management_SelfStatus_To_v1_SelfStatus(in *management.SelfStatus, out *SelfStatus, s conversion.Scope) error {
+	return autoConvert_management_SelfStatus_To_v1_SelfStatus(in, out, s)
 }
 
 func autoConvert_v1_SelfSubjectAccessReview_To_management_SelfSubjectAccessReview(in *SelfSubjectAccessReview, out *management.SelfSubjectAccessReview, s conversion.Scope) error {
@@ -4177,80 +4553,6 @@ func autoConvert_management_User_To_v1_User(in *management.User, out *User, s co
 // Convert_management_User_To_v1_User is an autogenerated conversion function.
 func Convert_management_User_To_v1_User(in *management.User, out *User, s conversion.Scope) error {
 	return autoConvert_management_User_To_v1_User(in, out, s)
-}
-
-func autoConvert_v1_UserAccessKey_To_management_UserAccessKey(in *UserAccessKey, out *management.UserAccessKey, s conversion.Scope) error {
-	out.Name = in.Name
-	out.Key = in.Key
-	out.Expires = in.Expires
-	out.CreationTimestamp = in.CreationTimestamp
-	out.Data = *(*map[string]string)(unsafe.Pointer(&in.Data))
-	return nil
-}
-
-// Convert_v1_UserAccessKey_To_management_UserAccessKey is an autogenerated conversion function.
-func Convert_v1_UserAccessKey_To_management_UserAccessKey(in *UserAccessKey, out *management.UserAccessKey, s conversion.Scope) error {
-	return autoConvert_v1_UserAccessKey_To_management_UserAccessKey(in, out, s)
-}
-
-func autoConvert_management_UserAccessKey_To_v1_UserAccessKey(in *management.UserAccessKey, out *UserAccessKey, s conversion.Scope) error {
-	out.Name = in.Name
-	out.Key = in.Key
-	out.Expires = in.Expires
-	out.CreationTimestamp = in.CreationTimestamp
-	out.Data = *(*map[string]string)(unsafe.Pointer(&in.Data))
-	return nil
-}
-
-// Convert_management_UserAccessKey_To_v1_UserAccessKey is an autogenerated conversion function.
-func Convert_management_UserAccessKey_To_v1_UserAccessKey(in *management.UserAccessKey, out *UserAccessKey, s conversion.Scope) error {
-	return autoConvert_management_UserAccessKey_To_v1_UserAccessKey(in, out, s)
-}
-
-func autoConvert_v1_UserAccessKeys_To_management_UserAccessKeys(in *UserAccessKeys, out *management.UserAccessKeys, s conversion.Scope) error {
-	out.ObjectMeta = in.ObjectMeta
-	out.Username = in.Username
-	out.Keys = *(*[]management.UserAccessKey)(unsafe.Pointer(&in.Keys))
-	return nil
-}
-
-// Convert_v1_UserAccessKeys_To_management_UserAccessKeys is an autogenerated conversion function.
-func Convert_v1_UserAccessKeys_To_management_UserAccessKeys(in *UserAccessKeys, out *management.UserAccessKeys, s conversion.Scope) error {
-	return autoConvert_v1_UserAccessKeys_To_management_UserAccessKeys(in, out, s)
-}
-
-func autoConvert_management_UserAccessKeys_To_v1_UserAccessKeys(in *management.UserAccessKeys, out *UserAccessKeys, s conversion.Scope) error {
-	out.ObjectMeta = in.ObjectMeta
-	out.Username = in.Username
-	out.Keys = *(*[]UserAccessKey)(unsafe.Pointer(&in.Keys))
-	return nil
-}
-
-// Convert_management_UserAccessKeys_To_v1_UserAccessKeys is an autogenerated conversion function.
-func Convert_management_UserAccessKeys_To_v1_UserAccessKeys(in *management.UserAccessKeys, out *UserAccessKeys, s conversion.Scope) error {
-	return autoConvert_management_UserAccessKeys_To_v1_UserAccessKeys(in, out, s)
-}
-
-func autoConvert_v1_UserAccessKeysList_To_management_UserAccessKeysList(in *UserAccessKeysList, out *management.UserAccessKeysList, s conversion.Scope) error {
-	out.ListMeta = in.ListMeta
-	out.Items = *(*[]management.UserAccessKeys)(unsafe.Pointer(&in.Items))
-	return nil
-}
-
-// Convert_v1_UserAccessKeysList_To_management_UserAccessKeysList is an autogenerated conversion function.
-func Convert_v1_UserAccessKeysList_To_management_UserAccessKeysList(in *UserAccessKeysList, out *management.UserAccessKeysList, s conversion.Scope) error {
-	return autoConvert_v1_UserAccessKeysList_To_management_UserAccessKeysList(in, out, s)
-}
-
-func autoConvert_management_UserAccessKeysList_To_v1_UserAccessKeysList(in *management.UserAccessKeysList, out *UserAccessKeysList, s conversion.Scope) error {
-	out.ListMeta = in.ListMeta
-	out.Items = *(*[]UserAccessKeys)(unsafe.Pointer(&in.Items))
-	return nil
-}
-
-// Convert_management_UserAccessKeysList_To_v1_UserAccessKeysList is an autogenerated conversion function.
-func Convert_management_UserAccessKeysList_To_v1_UserAccessKeysList(in *management.UserAccessKeysList, out *UserAccessKeysList, s conversion.Scope) error {
-	return autoConvert_management_UserAccessKeysList_To_v1_UserAccessKeysList(in, out, s)
 }
 
 func autoConvert_v1_UserClusterRoles_To_management_UserClusterRoles(in *UserClusterRoles, out *management.UserClusterRoles, s conversion.Scope) error {

@@ -43,6 +43,12 @@ func addKnownTypes(scheme *runtime.Scheme) error {
 		&LoftRestartList{},
 		&LoftUpgrade{},
 		&LoftUpgradeList{},
+		&OwnedAccessKey{},
+		&OwnedAccessKeyList{},
+		&ResetAccessKey{},
+		&ResetAccessKeyList{},
+		&Self{},
+		&SelfList{},
 		&SelfSubjectAccessReview{},
 		&SelfSubjectAccessReviewList{},
 		&SharedSecret{},
@@ -56,7 +62,6 @@ func addKnownTypes(scheme *runtime.Scheme) error {
 		&TeamSpaces{},
 		&User{},
 		&UserList{},
-		&UserAccessKeys{},
 		&UserClusterRoles{},
 		&UserClusters{},
 		&UserProfile{},
@@ -112,6 +117,9 @@ var (
 		management.ManagementLicenseTokenStorage,
 		management.ManagementLoftRestartStorage,
 		management.ManagementLoftUpgradeStorage,
+		management.ManagementOwnedAccessKeyStorage,
+		management.ManagementResetAccessKeyStorage,
+		management.ManagementSelfStorage,
 		management.ManagementSelfSubjectAccessReviewStorage,
 		management.ManagementSharedSecretStorage,
 		management.ManagementSubjectAccessReviewStorage,
@@ -132,11 +140,6 @@ var (
 			nil,
 			management.NewTeamSpacesREST),
 		management.ManagementUserStorage,
-		builders.NewApiResourceWithStorage(
-			management.InternalUserAccessKeysREST,
-			func() runtime.Object { return &UserAccessKeys{} }, // Register versioned resource
-			nil,
-			management.NewUserAccessKeysREST),
 		builders.NewApiResourceWithStorage(
 			management.InternalUserClusterRolesREST,
 			func() runtime.Object { return &UserClusterRoles{} }, // Register versioned resource
@@ -349,6 +352,30 @@ type LoftUpgradeList struct {
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
 
+type OwnedAccessKeyList struct {
+	metav1.TypeMeta `json:",inline"`
+	metav1.ListMeta `json:"metadata,omitempty"`
+	Items           []OwnedAccessKey `json:"items"`
+}
+
+// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+
+type ResetAccessKeyList struct {
+	metav1.TypeMeta `json:",inline"`
+	metav1.ListMeta `json:"metadata,omitempty"`
+	Items           []ResetAccessKey `json:"items"`
+}
+
+// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+
+type SelfList struct {
+	metav1.TypeMeta `json:",inline"`
+	metav1.ListMeta `json:"metadata,omitempty"`
+	Items           []Self `json:"items"`
+}
+
+// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+
 type SelfSubjectAccessReviewList struct {
 	metav1.TypeMeta `json:",inline"`
 	metav1.ListMeta `json:"metadata,omitempty"`
@@ -409,14 +436,6 @@ type UserList struct {
 	metav1.TypeMeta `json:",inline"`
 	metav1.ListMeta `json:"metadata,omitempty"`
 	Items           []User `json:"items"`
-}
-
-// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
-
-type UserAccessKeysList struct {
-	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
-	Items           []UserAccessKeys `json:"items"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object

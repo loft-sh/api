@@ -21,6 +21,9 @@ type ManagementV1Interface interface {
 	LicenseTokensGetter
 	LoftRestartsGetter
 	LoftUpgradesGetter
+	OwnedAccessKeysGetter
+	ResetAccessKeysGetter
+	SelvesGetter
 	SelfSubjectAccessReviewsGetter
 	SharedSecretsGetter
 	SubjectAccessReviewsGetter
@@ -75,6 +78,18 @@ func (c *ManagementV1Client) LoftRestarts() LoftRestartInterface {
 
 func (c *ManagementV1Client) LoftUpgrades() LoftUpgradeInterface {
 	return newLoftUpgrades(c)
+}
+
+func (c *ManagementV1Client) OwnedAccessKeys() OwnedAccessKeyInterface {
+	return newOwnedAccessKeys(c)
+}
+
+func (c *ManagementV1Client) ResetAccessKeys() ResetAccessKeyInterface {
+	return newResetAccessKeys(c)
+}
+
+func (c *ManagementV1Client) Selves() SelfInterface {
+	return newSelves(c)
 }
 
 func (c *ManagementV1Client) SelfSubjectAccessReviews() SelfSubjectAccessReviewInterface {

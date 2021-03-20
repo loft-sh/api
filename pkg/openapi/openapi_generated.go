@@ -120,12 +120,24 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 		"github.com/loft-sh/api/pkg/apis/management/v1.LoftUpgradeStatus":                         schema_pkg_apis_management_v1_LoftUpgradeStatus(ref),
 		"github.com/loft-sh/api/pkg/apis/management/v1.OIDC":                                      schema_pkg_apis_management_v1_OIDC(ref),
 		"github.com/loft-sh/api/pkg/apis/management/v1.OIDCClient":                                schema_pkg_apis_management_v1_OIDCClient(ref),
+		"github.com/loft-sh/api/pkg/apis/management/v1.OwnedAccessKey":                            schema_pkg_apis_management_v1_OwnedAccessKey(ref),
+		"github.com/loft-sh/api/pkg/apis/management/v1.OwnedAccessKeyList":                        schema_pkg_apis_management_v1_OwnedAccessKeyList(ref),
+		"github.com/loft-sh/api/pkg/apis/management/v1.OwnedAccessKeySpec":                        schema_pkg_apis_management_v1_OwnedAccessKeySpec(ref),
+		"github.com/loft-sh/api/pkg/apis/management/v1.OwnedAccessKeyStatus":                      schema_pkg_apis_management_v1_OwnedAccessKeyStatus(ref),
 		"github.com/loft-sh/api/pkg/apis/management/v1.Plan":                                      schema_pkg_apis_management_v1_Plan(ref),
 		"github.com/loft-sh/api/pkg/apis/management/v1.PlanProduct":                               schema_pkg_apis_management_v1_PlanProduct(ref),
 		"github.com/loft-sh/api/pkg/apis/management/v1.PredefinedApp":                             schema_pkg_apis_management_v1_PredefinedApp(ref),
 		"github.com/loft-sh/api/pkg/apis/management/v1.Promotions":                                schema_pkg_apis_management_v1_Promotions(ref),
+		"github.com/loft-sh/api/pkg/apis/management/v1.ResetAccessKey":                            schema_pkg_apis_management_v1_ResetAccessKey(ref),
+		"github.com/loft-sh/api/pkg/apis/management/v1.ResetAccessKeyList":                        schema_pkg_apis_management_v1_ResetAccessKeyList(ref),
+		"github.com/loft-sh/api/pkg/apis/management/v1.ResetAccessKeySpec":                        schema_pkg_apis_management_v1_ResetAccessKeySpec(ref),
+		"github.com/loft-sh/api/pkg/apis/management/v1.ResetAccessKeyStatus":                      schema_pkg_apis_management_v1_ResetAccessKeyStatus(ref),
 		"github.com/loft-sh/api/pkg/apis/management/v1.ResourceLimit":                             schema_pkg_apis_management_v1_ResourceLimit(ref),
 		"github.com/loft-sh/api/pkg/apis/management/v1.ResoureRequests":                           schema_pkg_apis_management_v1_ResoureRequests(ref),
+		"github.com/loft-sh/api/pkg/apis/management/v1.Self":                                      schema_pkg_apis_management_v1_Self(ref),
+		"github.com/loft-sh/api/pkg/apis/management/v1.SelfList":                                  schema_pkg_apis_management_v1_SelfList(ref),
+		"github.com/loft-sh/api/pkg/apis/management/v1.SelfSpec":                                  schema_pkg_apis_management_v1_SelfSpec(ref),
+		"github.com/loft-sh/api/pkg/apis/management/v1.SelfStatus":                                schema_pkg_apis_management_v1_SelfStatus(ref),
 		"github.com/loft-sh/api/pkg/apis/management/v1.SelfSubjectAccessReview":                   schema_pkg_apis_management_v1_SelfSubjectAccessReview(ref),
 		"github.com/loft-sh/api/pkg/apis/management/v1.SelfSubjectAccessReviewList":               schema_pkg_apis_management_v1_SelfSubjectAccessReviewList(ref),
 		"github.com/loft-sh/api/pkg/apis/management/v1.SelfSubjectAccessReviewSpec":               schema_pkg_apis_management_v1_SelfSubjectAccessReviewSpec(ref),
@@ -151,9 +163,6 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 		"github.com/loft-sh/api/pkg/apis/management/v1.TeamStatus":                                schema_pkg_apis_management_v1_TeamStatus(ref),
 		"github.com/loft-sh/api/pkg/apis/management/v1.TrialPromotion":                            schema_pkg_apis_management_v1_TrialPromotion(ref),
 		"github.com/loft-sh/api/pkg/apis/management/v1.User":                                      schema_pkg_apis_management_v1_User(ref),
-		"github.com/loft-sh/api/pkg/apis/management/v1.UserAccessKey":                             schema_pkg_apis_management_v1_UserAccessKey(ref),
-		"github.com/loft-sh/api/pkg/apis/management/v1.UserAccessKeys":                            schema_pkg_apis_management_v1_UserAccessKeys(ref),
-		"github.com/loft-sh/api/pkg/apis/management/v1.UserAccessKeysList":                        schema_pkg_apis_management_v1_UserAccessKeysList(ref),
 		"github.com/loft-sh/api/pkg/apis/management/v1.UserClusterRoles":                          schema_pkg_apis_management_v1_UserClusterRoles(ref),
 		"github.com/loft-sh/api/pkg/apis/management/v1.UserClusterRolesList":                      schema_pkg_apis_management_v1_UserClusterRolesList(ref),
 		"github.com/loft-sh/api/pkg/apis/management/v1.UserClusters":                              schema_pkg_apis_management_v1_UserClusters(ref),
@@ -172,6 +181,12 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 		"github.com/loft-sh/api/pkg/apis/management/v1.UserTeamsList":                             schema_pkg_apis_management_v1_UserTeamsList(ref),
 		"github.com/loft-sh/api/pkg/apis/management/v1.UserVirtualClusters":                       schema_pkg_apis_management_v1_UserVirtualClusters(ref),
 		"github.com/loft-sh/api/pkg/apis/management/v1.UserVirtualClustersList":                   schema_pkg_apis_management_v1_UserVirtualClustersList(ref),
+		"github.com/loft-sh/api/pkg/apis/storage/v1.AccessKey":                                    schema_pkg_apis_storage_v1_AccessKey(ref),
+		"github.com/loft-sh/api/pkg/apis/storage/v1.AccessKeyList":                                schema_pkg_apis_storage_v1_AccessKeyList(ref),
+		"github.com/loft-sh/api/pkg/apis/storage/v1.AccessKeyOIDC":                                schema_pkg_apis_storage_v1_AccessKeyOIDC(ref),
+		"github.com/loft-sh/api/pkg/apis/storage/v1.AccessKeyOIDCProvider":                        schema_pkg_apis_storage_v1_AccessKeyOIDCProvider(ref),
+		"github.com/loft-sh/api/pkg/apis/storage/v1.AccessKeySpec":                                schema_pkg_apis_storage_v1_AccessKeySpec(ref),
+		"github.com/loft-sh/api/pkg/apis/storage/v1.AccessKeyStatus":                              schema_pkg_apis_storage_v1_AccessKeyStatus(ref),
 		"github.com/loft-sh/api/pkg/apis/storage/v1.AccountClusterStatus":                         schema_pkg_apis_storage_v1_AccountClusterStatus(ref),
 		"github.com/loft-sh/api/pkg/apis/storage/v1.AccountTemplate":                              schema_pkg_apis_storage_v1_AccountTemplate(ref),
 		"github.com/loft-sh/api/pkg/apis/storage/v1.Chart":                                        schema_pkg_apis_storage_v1_Chart(ref),
@@ -5323,6 +5338,198 @@ func schema_pkg_apis_management_v1_OIDCClient(ref common.ReferenceCallback) comm
 	}
 }
 
+func schema_pkg_apis_management_v1_OwnedAccessKey(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "OwnedAccessKey is an access key that is owned by the current user",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"kind": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"apiVersion": {
+						SchemaProps: spec.SchemaProps{
+							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"metadata": {
+						SchemaProps: spec.SchemaProps{
+							Ref: ref("k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"),
+						},
+					},
+					"spec": {
+						SchemaProps: spec.SchemaProps{
+							Ref: ref("github.com/loft-sh/api/pkg/apis/management/v1.OwnedAccessKeySpec"),
+						},
+					},
+					"status": {
+						SchemaProps: spec.SchemaProps{
+							Ref: ref("github.com/loft-sh/api/pkg/apis/management/v1.OwnedAccessKeyStatus"),
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			"github.com/loft-sh/api/pkg/apis/management/v1.OwnedAccessKeySpec", "github.com/loft-sh/api/pkg/apis/management/v1.OwnedAccessKeyStatus", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
+	}
+}
+
+func schema_pkg_apis_management_v1_OwnedAccessKeyList(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"kind": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"apiVersion": {
+						SchemaProps: spec.SchemaProps{
+							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"metadata": {
+						SchemaProps: spec.SchemaProps{
+							Ref: ref("k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"),
+						},
+					},
+					"items": {
+						SchemaProps: spec.SchemaProps{
+							Type: []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Ref: ref("github.com/loft-sh/api/pkg/apis/management/v1.OwnedAccessKey"),
+									},
+								},
+							},
+						},
+					},
+				},
+				Required: []string{"items"},
+			},
+		},
+		Dependencies: []string{
+			"github.com/loft-sh/api/pkg/apis/management/v1.OwnedAccessKey", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
+	}
+}
+
+func schema_pkg_apis_management_v1_OwnedAccessKeySpec(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"user": {
+						SchemaProps: spec.SchemaProps{
+							Description: "The user this access key refers to",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"key": {
+						SchemaProps: spec.SchemaProps{
+							Description: "The actual access key that will be used as a bearer token",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"parent": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Parent is used to share OIDC and external token information with multiple access keys. Since copying an OIDC refresh token would result in the other access keys becoming invalid after a refresh parent allows access keys to share that information.\n\nThe use case for this is primarily user generated access keys, which will have the users current access key as parent if it contains an OIDC token.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"disabled": {
+						SchemaProps: spec.SchemaProps{
+							Description: "If this field is true, the access key is still allowed to exist, however will not work to access the api",
+							Type:        []string{"boolean"},
+							Format:      "",
+						},
+					},
+					"displayName": {
+						SchemaProps: spec.SchemaProps{
+							Description: "The display name shown in the UI",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"ttl": {
+						SchemaProps: spec.SchemaProps{
+							Description: "The time to life for this access key",
+							Type:        []string{"integer"},
+							Format:      "int64",
+						},
+					},
+					"ttlAfterLastActivity": {
+						SchemaProps: spec.SchemaProps{
+							Description: "If this is specified, the time to life for this access key will start after the lastActivity instead of creation timestamp",
+							Type:        []string{"boolean"},
+							Format:      "",
+						},
+					},
+					"type": {
+						SchemaProps: spec.SchemaProps{
+							Description: "The type of an access key, which basically describes if the access key is user managed or managed by loft itself.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"oidcLogin": {
+						SchemaProps: spec.SchemaProps{
+							Description: "If available, contains information about the oidc login data for this access key",
+							Ref:         ref("github.com/loft-sh/api/pkg/apis/storage/v1.AccessKeyOIDC"),
+						},
+					},
+					"oidcProvider": {
+						SchemaProps: spec.SchemaProps{
+							Description: "If the token is a refresh token, contains information about it",
+							Ref:         ref("github.com/loft-sh/api/pkg/apis/storage/v1.AccessKeyOIDCProvider"),
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			"github.com/loft-sh/api/pkg/apis/storage/v1.AccessKeyOIDC", "github.com/loft-sh/api/pkg/apis/storage/v1.AccessKeyOIDCProvider"},
+	}
+}
+
+func schema_pkg_apis_management_v1_OwnedAccessKeyStatus(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"lastActivity": {
+						SchemaProps: spec.SchemaProps{
+							Description: "The last time this access key was used to access the api",
+							Ref:         ref("k8s.io/apimachinery/pkg/apis/meta/v1.Time"),
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			"k8s.io/apimachinery/pkg/apis/meta/v1.Time"},
+	}
+}
+
 func schema_pkg_apis_management_v1_Plan(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
@@ -5475,6 +5682,198 @@ func schema_pkg_apis_management_v1_Promotions(ref common.ReferenceCallback) comm
 	}
 }
 
+func schema_pkg_apis_management_v1_ResetAccessKey(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "ResetAccessKey is an access key that is owned by another user",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"kind": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"apiVersion": {
+						SchemaProps: spec.SchemaProps{
+							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"metadata": {
+						SchemaProps: spec.SchemaProps{
+							Ref: ref("k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"),
+						},
+					},
+					"spec": {
+						SchemaProps: spec.SchemaProps{
+							Ref: ref("github.com/loft-sh/api/pkg/apis/management/v1.ResetAccessKeySpec"),
+						},
+					},
+					"status": {
+						SchemaProps: spec.SchemaProps{
+							Ref: ref("github.com/loft-sh/api/pkg/apis/management/v1.ResetAccessKeyStatus"),
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			"github.com/loft-sh/api/pkg/apis/management/v1.ResetAccessKeySpec", "github.com/loft-sh/api/pkg/apis/management/v1.ResetAccessKeyStatus", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
+	}
+}
+
+func schema_pkg_apis_management_v1_ResetAccessKeyList(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"kind": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"apiVersion": {
+						SchemaProps: spec.SchemaProps{
+							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"metadata": {
+						SchemaProps: spec.SchemaProps{
+							Ref: ref("k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"),
+						},
+					},
+					"items": {
+						SchemaProps: spec.SchemaProps{
+							Type: []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Ref: ref("github.com/loft-sh/api/pkg/apis/management/v1.ResetAccessKey"),
+									},
+								},
+							},
+						},
+					},
+				},
+				Required: []string{"items"},
+			},
+		},
+		Dependencies: []string{
+			"github.com/loft-sh/api/pkg/apis/management/v1.ResetAccessKey", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
+	}
+}
+
+func schema_pkg_apis_management_v1_ResetAccessKeySpec(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"user": {
+						SchemaProps: spec.SchemaProps{
+							Description: "The user this access key refers to",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"key": {
+						SchemaProps: spec.SchemaProps{
+							Description: "The actual access key that will be used as a bearer token",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"parent": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Parent is used to share OIDC and external token information with multiple access keys. Since copying an OIDC refresh token would result in the other access keys becoming invalid after a refresh parent allows access keys to share that information.\n\nThe use case for this is primarily user generated access keys, which will have the users current access key as parent if it contains an OIDC token.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"disabled": {
+						SchemaProps: spec.SchemaProps{
+							Description: "If this field is true, the access key is still allowed to exist, however will not work to access the api",
+							Type:        []string{"boolean"},
+							Format:      "",
+						},
+					},
+					"displayName": {
+						SchemaProps: spec.SchemaProps{
+							Description: "The display name shown in the UI",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"ttl": {
+						SchemaProps: spec.SchemaProps{
+							Description: "The time to life for this access key",
+							Type:        []string{"integer"},
+							Format:      "int64",
+						},
+					},
+					"ttlAfterLastActivity": {
+						SchemaProps: spec.SchemaProps{
+							Description: "If this is specified, the time to life for this access key will start after the lastActivity instead of creation timestamp",
+							Type:        []string{"boolean"},
+							Format:      "",
+						},
+					},
+					"type": {
+						SchemaProps: spec.SchemaProps{
+							Description: "The type of an access key, which basically describes if the access key is user managed or managed by loft itself.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"oidcLogin": {
+						SchemaProps: spec.SchemaProps{
+							Description: "If available, contains information about the oidc login data for this access key",
+							Ref:         ref("github.com/loft-sh/api/pkg/apis/storage/v1.AccessKeyOIDC"),
+						},
+					},
+					"oidcProvider": {
+						SchemaProps: spec.SchemaProps{
+							Description: "If the token is a refresh token, contains information about it",
+							Ref:         ref("github.com/loft-sh/api/pkg/apis/storage/v1.AccessKeyOIDCProvider"),
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			"github.com/loft-sh/api/pkg/apis/storage/v1.AccessKeyOIDC", "github.com/loft-sh/api/pkg/apis/storage/v1.AccessKeyOIDCProvider"},
+	}
+}
+
+func schema_pkg_apis_management_v1_ResetAccessKeyStatus(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"lastActivity": {
+						SchemaProps: spec.SchemaProps{
+							Description: "The last time this access key was used to access the api",
+							Ref:         ref("k8s.io/apimachinery/pkg/apis/meta/v1.Time"),
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			"k8s.io/apimachinery/pkg/apis/meta/v1.Time"},
+	}
+}
+
 func schema_pkg_apis_management_v1_ResourceLimit(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
@@ -5566,6 +5965,153 @@ func schema_pkg_apis_management_v1_ResoureRequests(ref common.ReferenceCallback)
 						SchemaProps: spec.SchemaProps{
 							Type:   []string{"boolean"},
 							Format: "",
+						},
+					},
+				},
+			},
+		},
+	}
+}
+
+func schema_pkg_apis_management_v1_Self(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "Self holds information about the currently logged in user",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"kind": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"apiVersion": {
+						SchemaProps: spec.SchemaProps{
+							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"metadata": {
+						SchemaProps: spec.SchemaProps{
+							Ref: ref("k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"),
+						},
+					},
+					"spec": {
+						SchemaProps: spec.SchemaProps{
+							Ref: ref("github.com/loft-sh/api/pkg/apis/management/v1.SelfSpec"),
+						},
+					},
+					"status": {
+						SchemaProps: spec.SchemaProps{
+							Ref: ref("github.com/loft-sh/api/pkg/apis/management/v1.SelfStatus"),
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			"github.com/loft-sh/api/pkg/apis/management/v1.SelfSpec", "github.com/loft-sh/api/pkg/apis/management/v1.SelfStatus", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
+	}
+}
+
+func schema_pkg_apis_management_v1_SelfList(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"kind": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"apiVersion": {
+						SchemaProps: spec.SchemaProps{
+							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"metadata": {
+						SchemaProps: spec.SchemaProps{
+							Ref: ref("k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"),
+						},
+					},
+					"items": {
+						SchemaProps: spec.SchemaProps{
+							Type: []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Ref: ref("github.com/loft-sh/api/pkg/apis/management/v1.Self"),
+									},
+								},
+							},
+						},
+					},
+				},
+				Required: []string{"items"},
+			},
+		},
+		Dependencies: []string{
+			"github.com/loft-sh/api/pkg/apis/management/v1.Self", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
+	}
+}
+
+func schema_pkg_apis_management_v1_SelfSpec(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+			},
+		},
+	}
+}
+
+func schema_pkg_apis_management_v1_SelfStatus(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"user": {
+						SchemaProps: spec.SchemaProps{
+							Description: "The name of the currently logged in user",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"accessKey": {
+						SchemaProps: spec.SchemaProps{
+							Description: "The name of the currently used access key",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"subject": {
+						SchemaProps: spec.SchemaProps{
+							Description: "The subject of the currently logged in user",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"groups": {
+						SchemaProps: spec.SchemaProps{
+							Description: "The groups of the currently logged in user",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Type:   []string{"string"},
+										Format: "",
+									},
+								},
+							},
 						},
 					},
 				},
@@ -6693,161 +7239,6 @@ func schema_pkg_apis_management_v1_User(ref common.ReferenceCallback) common.Ope
 	}
 }
 
-func schema_pkg_apis_management_v1_UserAccessKey(ref common.ReferenceCallback) common.OpenAPIDefinition {
-	return common.OpenAPIDefinition{
-		Schema: spec.Schema{
-			SchemaProps: spec.SchemaProps{
-				Description: "UserAccessKey defines an access key for an user",
-				Type:        []string{"object"},
-				Properties: map[string]spec.Schema{
-					"name": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Name is the optional identifier of this access key",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"key": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Key is the actual access key",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"expires": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Expires states when the access key will expire",
-							Type:        []string{"integer"},
-							Format:      "int64",
-						},
-					},
-					"creationTimestamp": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Timestamp when this access key was created",
-							Type:        []string{"integer"},
-							Format:      "int64",
-						},
-					},
-					"data": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Data holds additional access key values",
-							Type:        []string{"object"},
-							AdditionalProperties: &spec.SchemaOrBool{
-								Allows: true,
-								Schema: &spec.Schema{
-									SchemaProps: spec.SchemaProps{
-										Type:   []string{"string"},
-										Format: "",
-									},
-								},
-							},
-						},
-					},
-				},
-			},
-		},
-	}
-}
-
-func schema_pkg_apis_management_v1_UserAccessKeys(ref common.ReferenceCallback) common.OpenAPIDefinition {
-	return common.OpenAPIDefinition{
-		Schema: spec.Schema{
-			SchemaProps: spec.SchemaProps{
-				Type: []string{"object"},
-				Properties: map[string]spec.Schema{
-					"kind": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"apiVersion": {
-						SchemaProps: spec.SchemaProps{
-							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"metadata": {
-						SchemaProps: spec.SchemaProps{
-							Ref: ref("k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"),
-						},
-					},
-					"username": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Username is the username the access keys are valid for",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"keys": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Keys is an array of access keys from the user",
-							Type:        []string{"array"},
-							Items: &spec.SchemaOrArray{
-								Schema: &spec.Schema{
-									SchemaProps: spec.SchemaProps{
-										Ref: ref("github.com/loft-sh/api/pkg/apis/management/v1.UserAccessKey"),
-									},
-								},
-							},
-						},
-					},
-				},
-			},
-		},
-		Dependencies: []string{
-			"github.com/loft-sh/api/pkg/apis/management/v1.UserAccessKey", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
-	}
-}
-
-func schema_pkg_apis_management_v1_UserAccessKeysList(ref common.ReferenceCallback) common.OpenAPIDefinition {
-	return common.OpenAPIDefinition{
-		Schema: spec.Schema{
-			SchemaProps: spec.SchemaProps{
-				Type: []string{"object"},
-				Properties: map[string]spec.Schema{
-					"kind": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"apiVersion": {
-						SchemaProps: spec.SchemaProps{
-							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"metadata": {
-						SchemaProps: spec.SchemaProps{
-							Ref: ref("k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"),
-						},
-					},
-					"items": {
-						SchemaProps: spec.SchemaProps{
-							Type: []string{"array"},
-							Items: &spec.SchemaOrArray{
-								Schema: &spec.Schema{
-									SchemaProps: spec.SchemaProps{
-										Ref: ref("github.com/loft-sh/api/pkg/apis/management/v1.UserAccessKeys"),
-									},
-								},
-							},
-						},
-					},
-				},
-				Required: []string{"items"},
-			},
-		},
-		Dependencies: []string{
-			"github.com/loft-sh/api/pkg/apis/management/v1.UserAccessKeys", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
-	}
-}
-
 func schema_pkg_apis_management_v1_UserClusterRoles(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
@@ -7491,7 +7882,7 @@ func schema_pkg_apis_management_v1_UserSpec(ref common.ReferenceCallback) common
 					},
 					"accessKeysRef": {
 						SchemaProps: spec.SchemaProps{
-							Description: "A reference to the users access keys",
+							Description: "Deprecated: Use the Access Key CRD instead A reference to the users access keys",
 							Ref:         ref("github.com/loft-sh/api/pkg/apis/storage/v1.SecretRef"),
 						},
 					},
@@ -7769,6 +8160,281 @@ func schema_pkg_apis_management_v1_UserVirtualClustersList(ref common.ReferenceC
 		},
 		Dependencies: []string{
 			"github.com/loft-sh/api/pkg/apis/management/v1.UserVirtualClusters", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
+	}
+}
+
+func schema_pkg_apis_storage_v1_AccessKey(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "AccessKey holds the session information",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"kind": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"apiVersion": {
+						SchemaProps: spec.SchemaProps{
+							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"metadata": {
+						SchemaProps: spec.SchemaProps{
+							Ref: ref("k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"),
+						},
+					},
+					"spec": {
+						SchemaProps: spec.SchemaProps{
+							Ref: ref("github.com/loft-sh/api/pkg/apis/storage/v1.AccessKeySpec"),
+						},
+					},
+					"status": {
+						SchemaProps: spec.SchemaProps{
+							Ref: ref("github.com/loft-sh/api/pkg/apis/storage/v1.AccessKeyStatus"),
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			"github.com/loft-sh/api/pkg/apis/storage/v1.AccessKeySpec", "github.com/loft-sh/api/pkg/apis/storage/v1.AccessKeyStatus", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
+	}
+}
+
+func schema_pkg_apis_storage_v1_AccessKeyList(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "AccessKeyList contains a list of AccessKey",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"kind": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"apiVersion": {
+						SchemaProps: spec.SchemaProps{
+							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"metadata": {
+						SchemaProps: spec.SchemaProps{
+							Ref: ref("k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"),
+						},
+					},
+					"items": {
+						SchemaProps: spec.SchemaProps{
+							Type: []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Ref: ref("github.com/loft-sh/api/pkg/apis/storage/v1.AccessKey"),
+									},
+								},
+							},
+						},
+					},
+				},
+				Required: []string{"items"},
+			},
+		},
+		Dependencies: []string{
+			"github.com/loft-sh/api/pkg/apis/storage/v1.AccessKey", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
+	}
+}
+
+func schema_pkg_apis_storage_v1_AccessKeyOIDC(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"idToken": {
+						SchemaProps: spec.SchemaProps{
+							Description: "The current id token that was created during login",
+							Type:        []string{"string"},
+							Format:      "byte",
+						},
+					},
+					"accessToken": {
+						SchemaProps: spec.SchemaProps{
+							Description: "The current access token that was created during login",
+							Type:        []string{"string"},
+							Format:      "byte",
+						},
+					},
+					"refreshToken": {
+						SchemaProps: spec.SchemaProps{
+							Description: "The current refresh token that was created during login",
+							Type:        []string{"string"},
+							Format:      "byte",
+						},
+					},
+					"lastRefresh": {
+						SchemaProps: spec.SchemaProps{
+							Description: "The last time the id token was refreshed",
+							Ref:         ref("k8s.io/apimachinery/pkg/apis/meta/v1.Time"),
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			"k8s.io/apimachinery/pkg/apis/meta/v1.Time"},
+	}
+}
+
+func schema_pkg_apis_storage_v1_AccessKeyOIDCProvider(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"clientId": {
+						SchemaProps: spec.SchemaProps{
+							Description: "ClientId the token was generated for",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"nonce": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Nonce to use",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"redirectUri": {
+						SchemaProps: spec.SchemaProps{
+							Description: "RedirectUri to use",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"scopes": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Scopes to use",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+				},
+			},
+		},
+	}
+}
+
+func schema_pkg_apis_storage_v1_AccessKeySpec(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"user": {
+						SchemaProps: spec.SchemaProps{
+							Description: "The user this access key refers to",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"key": {
+						SchemaProps: spec.SchemaProps{
+							Description: "The actual access key that will be used as a bearer token",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"parent": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Parent is used to share OIDC and external token information with multiple access keys. Since copying an OIDC refresh token would result in the other access keys becoming invalid after a refresh parent allows access keys to share that information.\n\nThe use case for this is primarily user generated access keys, which will have the users current access key as parent if it contains an OIDC token.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"disabled": {
+						SchemaProps: spec.SchemaProps{
+							Description: "If this field is true, the access key is still allowed to exist, however will not work to access the api",
+							Type:        []string{"boolean"},
+							Format:      "",
+						},
+					},
+					"displayName": {
+						SchemaProps: spec.SchemaProps{
+							Description: "The display name shown in the UI",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"ttl": {
+						SchemaProps: spec.SchemaProps{
+							Description: "The time to life for this access key",
+							Type:        []string{"integer"},
+							Format:      "int64",
+						},
+					},
+					"ttlAfterLastActivity": {
+						SchemaProps: spec.SchemaProps{
+							Description: "If this is specified, the time to life for this access key will start after the lastActivity instead of creation timestamp",
+							Type:        []string{"boolean"},
+							Format:      "",
+						},
+					},
+					"type": {
+						SchemaProps: spec.SchemaProps{
+							Description: "The type of an access key, which basically describes if the access key is user managed or managed by loft itself.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"oidcLogin": {
+						SchemaProps: spec.SchemaProps{
+							Description: "If available, contains information about the oidc login data for this access key",
+							Ref:         ref("github.com/loft-sh/api/pkg/apis/storage/v1.AccessKeyOIDC"),
+						},
+					},
+					"oidcProvider": {
+						SchemaProps: spec.SchemaProps{
+							Description: "If the token is a refresh token, contains information about it",
+							Ref:         ref("github.com/loft-sh/api/pkg/apis/storage/v1.AccessKeyOIDCProvider"),
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			"github.com/loft-sh/api/pkg/apis/storage/v1.AccessKeyOIDC", "github.com/loft-sh/api/pkg/apis/storage/v1.AccessKeyOIDCProvider"},
+	}
+}
+
+func schema_pkg_apis_storage_v1_AccessKeyStatus(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "AccessKeyStatus holds the status of an access key",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"lastActivity": {
+						SchemaProps: spec.SchemaProps{
+							Description: "The last time this access key was used to access the api",
+							Ref:         ref("k8s.io/apimachinery/pkg/apis/meta/v1.Time"),
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			"k8s.io/apimachinery/pkg/apis/meta/v1.Time"},
 	}
 }
 
@@ -9327,7 +9993,7 @@ func schema_pkg_apis_storage_v1_UserSpec(ref common.ReferenceCallback) common.Op
 					},
 					"accessKeysRef": {
 						SchemaProps: spec.SchemaProps{
-							Description: "A reference to the users access keys",
+							Description: "Deprecated: Use the Access Key CRD instead A reference to the users access keys",
 							Ref:         ref("github.com/loft-sh/api/pkg/apis/storage/v1.SecretRef"),
 						},
 					},

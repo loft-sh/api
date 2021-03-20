@@ -145,7 +145,37 @@ var (
 	NewLoftUpgradeREST = func(getter generic.RESTOptionsGetter) rest.Storage {
 		return NewLoftUpgradeRESTFunc(Factory)
 	}
-	NewLoftUpgradeRESTFunc                   NewRESTFunc
+	NewLoftUpgradeRESTFunc          NewRESTFunc
+	ManagementOwnedAccessKeyStorage = builders.NewApiResourceWithStorage( // Resource status endpoint
+		InternalOwnedAccessKey,
+		func() runtime.Object { return &OwnedAccessKey{} },     // Register versioned resource
+		func() runtime.Object { return &OwnedAccessKeyList{} }, // Register versioned resource list
+		NewOwnedAccessKeyREST,
+	)
+	NewOwnedAccessKeyREST = func(getter generic.RESTOptionsGetter) rest.Storage {
+		return NewOwnedAccessKeyRESTFunc(Factory)
+	}
+	NewOwnedAccessKeyRESTFunc       NewRESTFunc
+	ManagementResetAccessKeyStorage = builders.NewApiResourceWithStorage( // Resource status endpoint
+		InternalResetAccessKey,
+		func() runtime.Object { return &ResetAccessKey{} },     // Register versioned resource
+		func() runtime.Object { return &ResetAccessKeyList{} }, // Register versioned resource list
+		NewResetAccessKeyREST,
+	)
+	NewResetAccessKeyREST = func(getter generic.RESTOptionsGetter) rest.Storage {
+		return NewResetAccessKeyRESTFunc(Factory)
+	}
+	NewResetAccessKeyRESTFunc NewRESTFunc
+	ManagementSelfStorage     = builders.NewApiResourceWithStorage( // Resource status endpoint
+		InternalSelf,
+		func() runtime.Object { return &Self{} },     // Register versioned resource
+		func() runtime.Object { return &SelfList{} }, // Register versioned resource list
+		NewSelfREST,
+	)
+	NewSelfREST = func(getter generic.RESTOptionsGetter) rest.Storage {
+		return NewSelfRESTFunc(Factory)
+	}
+	NewSelfRESTFunc                          NewRESTFunc
 	ManagementSelfSubjectAccessReviewStorage = builders.NewApiResourceWithStorage( // Resource status endpoint
 		InternalSelfSubjectAccessReview,
 		func() runtime.Object { return &SelfSubjectAccessReview{} },     // Register versioned resource
@@ -388,6 +418,42 @@ var (
 		func() runtime.Object { return &LoftUpgrade{} },
 		func() runtime.Object { return &LoftUpgradeList{} },
 	)
+	InternalOwnedAccessKey = builders.NewInternalResource(
+		"ownedaccesskeys",
+		"OwnedAccessKey",
+		func() runtime.Object { return &OwnedAccessKey{} },
+		func() runtime.Object { return &OwnedAccessKeyList{} },
+	)
+	InternalOwnedAccessKeyStatus = builders.NewInternalResourceStatus(
+		"ownedaccesskeys",
+		"OwnedAccessKeyStatus",
+		func() runtime.Object { return &OwnedAccessKey{} },
+		func() runtime.Object { return &OwnedAccessKeyList{} },
+	)
+	InternalResetAccessKey = builders.NewInternalResource(
+		"resetaccesskeys",
+		"ResetAccessKey",
+		func() runtime.Object { return &ResetAccessKey{} },
+		func() runtime.Object { return &ResetAccessKeyList{} },
+	)
+	InternalResetAccessKeyStatus = builders.NewInternalResourceStatus(
+		"resetaccesskeys",
+		"ResetAccessKeyStatus",
+		func() runtime.Object { return &ResetAccessKey{} },
+		func() runtime.Object { return &ResetAccessKeyList{} },
+	)
+	InternalSelf = builders.NewInternalResource(
+		"selves",
+		"Self",
+		func() runtime.Object { return &Self{} },
+		func() runtime.Object { return &SelfList{} },
+	)
+	InternalSelfStatus = builders.NewInternalResourceStatus(
+		"selves",
+		"SelfStatus",
+		func() runtime.Object { return &Self{} },
+		func() runtime.Object { return &SelfList{} },
+	)
 	InternalSelfSubjectAccessReview = builders.NewInternalResource(
 		"selfsubjectaccessreviews",
 		"SelfSubjectAccessReview",
@@ -472,14 +538,6 @@ var (
 		func() runtime.Object { return &User{} },
 		func() runtime.Object { return &UserList{} },
 	)
-	InternalUserAccessKeysREST = builders.NewInternalSubresource(
-		"users", "UserAccessKeys", "accesskeys",
-		func() runtime.Object { return &UserAccessKeys{} },
-	)
-	NewUserAccessKeysREST = func(getter generic.RESTOptionsGetter) rest.Storage {
-		return NewUserAccessKeysRESTFunc(Factory)
-	}
-	NewUserAccessKeysRESTFunc    NewRESTFunc
 	InternalUserClusterRolesREST = builders.NewInternalSubresource(
 		"users", "UserClusterRoles", "clusterroles",
 		func() runtime.Object { return &UserClusterRoles{} },
@@ -568,6 +626,12 @@ var (
 		InternalLoftRestartStatus,
 		InternalLoftUpgrade,
 		InternalLoftUpgradeStatus,
+		InternalOwnedAccessKey,
+		InternalOwnedAccessKeyStatus,
+		InternalResetAccessKey,
+		InternalResetAccessKeyStatus,
+		InternalSelf,
+		InternalSelfStatus,
 		InternalSelfSubjectAccessReview,
 		InternalSelfSubjectAccessReviewStatus,
 		InternalSharedSecret,
@@ -581,7 +645,6 @@ var (
 		InternalTeamSpacesREST,
 		InternalUser,
 		InternalUserStatus,
-		InternalUserAccessKeysREST,
 		InternalUserClusterRolesREST,
 		InternalUserClustersREST,
 		InternalUserProfileREST,
@@ -1074,6 +1137,25 @@ type OIDCClient struct {
 	RedirectURIs []string
 }
 
+// +genclient
+// +genclient:nonNamespaced
+// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+
+type OwnedAccessKey struct {
+	metav1.TypeMeta
+	metav1.ObjectMeta
+	Spec   OwnedAccessKeySpec
+	Status OwnedAccessKeyStatus
+}
+
+type OwnedAccessKeySpec struct {
+	storagev1.AccessKeySpec
+}
+
+type OwnedAccessKeyStatus struct {
+	storagev1.AccessKeyStatus
+}
+
 type Plan struct {
 	Price    int64
 	Currency string
@@ -1100,6 +1182,25 @@ type Promotions struct {
 	Trial *TrialPromotion
 }
 
+// +genclient
+// +genclient:nonNamespaced
+// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+
+type ResetAccessKey struct {
+	metav1.TypeMeta
+	metav1.ObjectMeta
+	Spec   ResetAccessKeySpec
+	Status ResetAccessKeyStatus
+}
+
+type ResetAccessKeySpec struct {
+	storagev1.AccessKeySpec
+}
+
+type ResetAccessKeyStatus struct {
+	storagev1.AccessKeyStatus
+}
+
 type ResourceLimit struct {
 	Group             string
 	Version           string
@@ -1114,6 +1215,27 @@ type ResoureRequests struct {
 	Group      string
 	Resource   string
 	Management bool
+}
+
+// +genclient
+// +genclient:nonNamespaced
+// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+
+type Self struct {
+	metav1.TypeMeta
+	metav1.ObjectMeta
+	Spec   SelfSpec
+	Status SelfStatus
+}
+
+type SelfSpec struct {
+}
+
+type SelfStatus struct {
+	User      string
+	AccessKey string
+	Subject   string
+	Groups    []string
 }
 
 // +genclient
@@ -1240,23 +1362,6 @@ type User struct {
 	metav1.ObjectMeta
 	Spec   UserSpec
 	Status UserStatus
-}
-
-type UserAccessKey struct {
-	Name              string
-	Key               string
-	Expires           int64
-	CreationTimestamp int64
-	Data              map[string]string
-}
-
-// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
-
-type UserAccessKeys struct {
-	metav1.TypeMeta
-	metav1.ObjectMeta
-	Username string
-	Keys     []UserAccessKey
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -2822,6 +2927,366 @@ func (s *storageLoftUpgrade) DeleteLoftUpgrade(ctx context.Context, id string) (
 }
 
 //
+// OwnedAccessKey Functions and Structs
+//
+// +k8s:deepcopy-gen=false
+type OwnedAccessKeyStrategy struct {
+	builders.DefaultStorageStrategy
+}
+
+// +k8s:deepcopy-gen=false
+type OwnedAccessKeyStatusStrategy struct {
+	builders.DefaultStatusStorageStrategy
+}
+
+// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+
+type OwnedAccessKeyList struct {
+	metav1.TypeMeta
+	metav1.ListMeta
+	Items []OwnedAccessKey
+}
+
+func (OwnedAccessKey) NewStatus() interface{} {
+	return OwnedAccessKeyStatus{}
+}
+
+func (pc *OwnedAccessKey) GetStatus() interface{} {
+	return pc.Status
+}
+
+func (pc *OwnedAccessKey) SetStatus(s interface{}) {
+	pc.Status = s.(OwnedAccessKeyStatus)
+}
+
+func (pc *OwnedAccessKey) GetSpec() interface{} {
+	return pc.Spec
+}
+
+func (pc *OwnedAccessKey) SetSpec(s interface{}) {
+	pc.Spec = s.(OwnedAccessKeySpec)
+}
+
+func (pc *OwnedAccessKey) GetObjectMeta() *metav1.ObjectMeta {
+	return &pc.ObjectMeta
+}
+
+func (pc *OwnedAccessKey) SetGeneration(generation int64) {
+	pc.ObjectMeta.Generation = generation
+}
+
+func (pc OwnedAccessKey) GetGeneration() int64 {
+	return pc.ObjectMeta.Generation
+}
+
+// Registry is an interface for things that know how to store OwnedAccessKey.
+// +k8s:deepcopy-gen=false
+type OwnedAccessKeyRegistry interface {
+	ListOwnedAccessKeys(ctx context.Context, options *internalversion.ListOptions) (*OwnedAccessKeyList, error)
+	GetOwnedAccessKey(ctx context.Context, id string, options *metav1.GetOptions) (*OwnedAccessKey, error)
+	CreateOwnedAccessKey(ctx context.Context, id *OwnedAccessKey) (*OwnedAccessKey, error)
+	UpdateOwnedAccessKey(ctx context.Context, id *OwnedAccessKey) (*OwnedAccessKey, error)
+	DeleteOwnedAccessKey(ctx context.Context, id string) (bool, error)
+}
+
+// NewRegistry returns a new Registry interface for the given Storage. Any mismatched types will panic.
+func NewOwnedAccessKeyRegistry(sp builders.StandardStorageProvider) OwnedAccessKeyRegistry {
+	return &storageOwnedAccessKey{sp}
+}
+
+// Implement Registry
+// storage puts strong typing around storage calls
+// +k8s:deepcopy-gen=false
+type storageOwnedAccessKey struct {
+	builders.StandardStorageProvider
+}
+
+func (s *storageOwnedAccessKey) ListOwnedAccessKeys(ctx context.Context, options *internalversion.ListOptions) (*OwnedAccessKeyList, error) {
+	if options != nil && options.FieldSelector != nil && !options.FieldSelector.Empty() {
+		return nil, fmt.Errorf("field selector not supported yet")
+	}
+	st := s.GetStandardStorage()
+	obj, err := st.List(ctx, options)
+	if err != nil {
+		return nil, err
+	}
+	return obj.(*OwnedAccessKeyList), err
+}
+
+func (s *storageOwnedAccessKey) GetOwnedAccessKey(ctx context.Context, id string, options *metav1.GetOptions) (*OwnedAccessKey, error) {
+	st := s.GetStandardStorage()
+	obj, err := st.Get(ctx, id, options)
+	if err != nil {
+		return nil, err
+	}
+	return obj.(*OwnedAccessKey), nil
+}
+
+func (s *storageOwnedAccessKey) CreateOwnedAccessKey(ctx context.Context, object *OwnedAccessKey) (*OwnedAccessKey, error) {
+	st := s.GetStandardStorage()
+	obj, err := st.Create(ctx, object, nil, &metav1.CreateOptions{})
+	if err != nil {
+		return nil, err
+	}
+	return obj.(*OwnedAccessKey), nil
+}
+
+func (s *storageOwnedAccessKey) UpdateOwnedAccessKey(ctx context.Context, object *OwnedAccessKey) (*OwnedAccessKey, error) {
+	st := s.GetStandardStorage()
+	obj, _, err := st.Update(ctx, object.Name, rest.DefaultUpdatedObjectInfo(object), nil, nil, false, &metav1.UpdateOptions{})
+	if err != nil {
+		return nil, err
+	}
+	return obj.(*OwnedAccessKey), nil
+}
+
+func (s *storageOwnedAccessKey) DeleteOwnedAccessKey(ctx context.Context, id string) (bool, error) {
+	st := s.GetStandardStorage()
+	_, sync, err := st.Delete(ctx, id, nil, &metav1.DeleteOptions{})
+	return sync, err
+}
+
+//
+// ResetAccessKey Functions and Structs
+//
+// +k8s:deepcopy-gen=false
+type ResetAccessKeyStrategy struct {
+	builders.DefaultStorageStrategy
+}
+
+// +k8s:deepcopy-gen=false
+type ResetAccessKeyStatusStrategy struct {
+	builders.DefaultStatusStorageStrategy
+}
+
+// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+
+type ResetAccessKeyList struct {
+	metav1.TypeMeta
+	metav1.ListMeta
+	Items []ResetAccessKey
+}
+
+func (ResetAccessKey) NewStatus() interface{} {
+	return ResetAccessKeyStatus{}
+}
+
+func (pc *ResetAccessKey) GetStatus() interface{} {
+	return pc.Status
+}
+
+func (pc *ResetAccessKey) SetStatus(s interface{}) {
+	pc.Status = s.(ResetAccessKeyStatus)
+}
+
+func (pc *ResetAccessKey) GetSpec() interface{} {
+	return pc.Spec
+}
+
+func (pc *ResetAccessKey) SetSpec(s interface{}) {
+	pc.Spec = s.(ResetAccessKeySpec)
+}
+
+func (pc *ResetAccessKey) GetObjectMeta() *metav1.ObjectMeta {
+	return &pc.ObjectMeta
+}
+
+func (pc *ResetAccessKey) SetGeneration(generation int64) {
+	pc.ObjectMeta.Generation = generation
+}
+
+func (pc ResetAccessKey) GetGeneration() int64 {
+	return pc.ObjectMeta.Generation
+}
+
+// Registry is an interface for things that know how to store ResetAccessKey.
+// +k8s:deepcopy-gen=false
+type ResetAccessKeyRegistry interface {
+	ListResetAccessKeys(ctx context.Context, options *internalversion.ListOptions) (*ResetAccessKeyList, error)
+	GetResetAccessKey(ctx context.Context, id string, options *metav1.GetOptions) (*ResetAccessKey, error)
+	CreateResetAccessKey(ctx context.Context, id *ResetAccessKey) (*ResetAccessKey, error)
+	UpdateResetAccessKey(ctx context.Context, id *ResetAccessKey) (*ResetAccessKey, error)
+	DeleteResetAccessKey(ctx context.Context, id string) (bool, error)
+}
+
+// NewRegistry returns a new Registry interface for the given Storage. Any mismatched types will panic.
+func NewResetAccessKeyRegistry(sp builders.StandardStorageProvider) ResetAccessKeyRegistry {
+	return &storageResetAccessKey{sp}
+}
+
+// Implement Registry
+// storage puts strong typing around storage calls
+// +k8s:deepcopy-gen=false
+type storageResetAccessKey struct {
+	builders.StandardStorageProvider
+}
+
+func (s *storageResetAccessKey) ListResetAccessKeys(ctx context.Context, options *internalversion.ListOptions) (*ResetAccessKeyList, error) {
+	if options != nil && options.FieldSelector != nil && !options.FieldSelector.Empty() {
+		return nil, fmt.Errorf("field selector not supported yet")
+	}
+	st := s.GetStandardStorage()
+	obj, err := st.List(ctx, options)
+	if err != nil {
+		return nil, err
+	}
+	return obj.(*ResetAccessKeyList), err
+}
+
+func (s *storageResetAccessKey) GetResetAccessKey(ctx context.Context, id string, options *metav1.GetOptions) (*ResetAccessKey, error) {
+	st := s.GetStandardStorage()
+	obj, err := st.Get(ctx, id, options)
+	if err != nil {
+		return nil, err
+	}
+	return obj.(*ResetAccessKey), nil
+}
+
+func (s *storageResetAccessKey) CreateResetAccessKey(ctx context.Context, object *ResetAccessKey) (*ResetAccessKey, error) {
+	st := s.GetStandardStorage()
+	obj, err := st.Create(ctx, object, nil, &metav1.CreateOptions{})
+	if err != nil {
+		return nil, err
+	}
+	return obj.(*ResetAccessKey), nil
+}
+
+func (s *storageResetAccessKey) UpdateResetAccessKey(ctx context.Context, object *ResetAccessKey) (*ResetAccessKey, error) {
+	st := s.GetStandardStorage()
+	obj, _, err := st.Update(ctx, object.Name, rest.DefaultUpdatedObjectInfo(object), nil, nil, false, &metav1.UpdateOptions{})
+	if err != nil {
+		return nil, err
+	}
+	return obj.(*ResetAccessKey), nil
+}
+
+func (s *storageResetAccessKey) DeleteResetAccessKey(ctx context.Context, id string) (bool, error) {
+	st := s.GetStandardStorage()
+	_, sync, err := st.Delete(ctx, id, nil, &metav1.DeleteOptions{})
+	return sync, err
+}
+
+//
+// Self Functions and Structs
+//
+// +k8s:deepcopy-gen=false
+type SelfStrategy struct {
+	builders.DefaultStorageStrategy
+}
+
+// +k8s:deepcopy-gen=false
+type SelfStatusStrategy struct {
+	builders.DefaultStatusStorageStrategy
+}
+
+// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+
+type SelfList struct {
+	metav1.TypeMeta
+	metav1.ListMeta
+	Items []Self
+}
+
+func (Self) NewStatus() interface{} {
+	return SelfStatus{}
+}
+
+func (pc *Self) GetStatus() interface{} {
+	return pc.Status
+}
+
+func (pc *Self) SetStatus(s interface{}) {
+	pc.Status = s.(SelfStatus)
+}
+
+func (pc *Self) GetSpec() interface{} {
+	return pc.Spec
+}
+
+func (pc *Self) SetSpec(s interface{}) {
+	pc.Spec = s.(SelfSpec)
+}
+
+func (pc *Self) GetObjectMeta() *metav1.ObjectMeta {
+	return &pc.ObjectMeta
+}
+
+func (pc *Self) SetGeneration(generation int64) {
+	pc.ObjectMeta.Generation = generation
+}
+
+func (pc Self) GetGeneration() int64 {
+	return pc.ObjectMeta.Generation
+}
+
+// Registry is an interface for things that know how to store Self.
+// +k8s:deepcopy-gen=false
+type SelfRegistry interface {
+	ListSelfs(ctx context.Context, options *internalversion.ListOptions) (*SelfList, error)
+	GetSelf(ctx context.Context, id string, options *metav1.GetOptions) (*Self, error)
+	CreateSelf(ctx context.Context, id *Self) (*Self, error)
+	UpdateSelf(ctx context.Context, id *Self) (*Self, error)
+	DeleteSelf(ctx context.Context, id string) (bool, error)
+}
+
+// NewRegistry returns a new Registry interface for the given Storage. Any mismatched types will panic.
+func NewSelfRegistry(sp builders.StandardStorageProvider) SelfRegistry {
+	return &storageSelf{sp}
+}
+
+// Implement Registry
+// storage puts strong typing around storage calls
+// +k8s:deepcopy-gen=false
+type storageSelf struct {
+	builders.StandardStorageProvider
+}
+
+func (s *storageSelf) ListSelfs(ctx context.Context, options *internalversion.ListOptions) (*SelfList, error) {
+	if options != nil && options.FieldSelector != nil && !options.FieldSelector.Empty() {
+		return nil, fmt.Errorf("field selector not supported yet")
+	}
+	st := s.GetStandardStorage()
+	obj, err := st.List(ctx, options)
+	if err != nil {
+		return nil, err
+	}
+	return obj.(*SelfList), err
+}
+
+func (s *storageSelf) GetSelf(ctx context.Context, id string, options *metav1.GetOptions) (*Self, error) {
+	st := s.GetStandardStorage()
+	obj, err := st.Get(ctx, id, options)
+	if err != nil {
+		return nil, err
+	}
+	return obj.(*Self), nil
+}
+
+func (s *storageSelf) CreateSelf(ctx context.Context, object *Self) (*Self, error) {
+	st := s.GetStandardStorage()
+	obj, err := st.Create(ctx, object, nil, &metav1.CreateOptions{})
+	if err != nil {
+		return nil, err
+	}
+	return obj.(*Self), nil
+}
+
+func (s *storageSelf) UpdateSelf(ctx context.Context, object *Self) (*Self, error) {
+	st := s.GetStandardStorage()
+	obj, _, err := st.Update(ctx, object.Name, rest.DefaultUpdatedObjectInfo(object), nil, nil, false, &metav1.UpdateOptions{})
+	if err != nil {
+		return nil, err
+	}
+	return obj.(*Self), nil
+}
+
+func (s *storageSelf) DeleteSelf(ctx context.Context, id string) (bool, error) {
+	st := s.GetStandardStorage()
+	_, sync, err := st.Delete(ctx, id, nil, &metav1.DeleteOptions{})
+	return sync, err
+}
+
+//
 // SelfSubjectAccessReview Functions and Structs
 //
 // +k8s:deepcopy-gen=false
@@ -3344,14 +3809,6 @@ type UserList struct {
 	metav1.TypeMeta
 	metav1.ListMeta
 	Items []User
-}
-
-// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
-
-type UserAccessKeysList struct {
-	metav1.TypeMeta
-	metav1.ListMeta
-	Items []UserAccessKeys
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object

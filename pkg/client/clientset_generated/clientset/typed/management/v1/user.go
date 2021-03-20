@@ -38,7 +38,6 @@ type UserInterface interface {
 	ListTeams(ctx context.Context, userName string, options metav1.GetOptions) (*v1.UserTeams, error)
 	ListClusters(ctx context.Context, userName string, options metav1.GetOptions) (*v1.UserClusters, error)
 	ListVirtualClusters(ctx context.Context, userName string, options metav1.GetOptions) (*v1.UserVirtualClusters, error)
-	ListAccessKeys(ctx context.Context, userName string, options metav1.GetOptions) (*v1.UserAccessKeys, error)
 
 	UserExpansion
 }
@@ -262,19 +261,6 @@ func (c *users) ListVirtualClusters(ctx context.Context, userName string, option
 		Resource("users").
 		Name(userName).
 		SubResource("virtualclusters").
-		VersionedParams(&options, scheme.ParameterCodec).
-		Do(ctx).
-		Into(result)
-	return
-}
-
-// ListAccessKeys takes name of the user, and returns the corresponding v1.UserAccessKeys object, and an error if there is any.
-func (c *users) ListAccessKeys(ctx context.Context, userName string, options metav1.GetOptions) (result *v1.UserAccessKeys, err error) {
-	result = &v1.UserAccessKeys{}
-	err = c.client.Get().
-		Resource("users").
-		Name(userName).
-		SubResource("accesskeys").
 		VersionedParams(&options, scheme.ParameterCodec).
 		Do(ctx).
 		Into(result)

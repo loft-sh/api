@@ -49,6 +49,7 @@ type UserSpec struct {
 	// +optional
 	PasswordRef *SecretRef `json:"passwordRef,omitempty"`
 
+	// Deprecated: Use the Access Key CRD instead
 	// A reference to the users access keys
 	// +optional
 	AccessKeysRef *SecretRef `json:"accessKeysRef,omitempty"`
@@ -141,7 +142,7 @@ type ClusterAccountTemplateClusterStatus struct {
 // ClusterAccountTemplateClusterStatusPhase describes the phase of a cluster account template
 type ClusterAccountTemplateClusterStatusPhase string
 
-// These are the valid admin account types
+// These are the valid account template cluster status
 const (
 	ClusterAccountTemplateClusterStatusPhaseCreated ClusterAccountTemplateClusterStatusPhase = "Created"
 	ClusterAccountTemplateClusterStatusPhaseSkipped ClusterAccountTemplateClusterStatusPhase = "Skipped"

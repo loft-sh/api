@@ -10,6 +10,7 @@ import (
 
 type StorageV1Interface interface {
 	RESTClient() rest.Interface
+	AccessKeysGetter
 	ClustersGetter
 	ClusterAccountTemplatesGetter
 	SharedSecretsGetter
@@ -21,6 +22,10 @@ type StorageV1Interface interface {
 // StorageV1Client is used to interact with features provided by the storage.loft.sh group.
 type StorageV1Client struct {
 	restClient rest.Interface
+}
+
+func (c *StorageV1Client) AccessKeys() AccessKeyInterface {
+	return newAccessKeys(c)
 }
 
 func (c *StorageV1Client) Clusters() ClusterInterface {

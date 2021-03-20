@@ -185,13 +185,3 @@ func (c *FakeUsers) ListVirtualClusters(ctx context.Context, userName string, op
 	}
 	return obj.(*managementv1.UserVirtualClusters), err
 }
-
-// ListAccessKeys takes name of the user, and returns the corresponding userAccessKeys object, and an error if there is any.
-func (c *FakeUsers) ListAccessKeys(ctx context.Context, userName string, options v1.GetOptions) (result *managementv1.UserAccessKeys, err error) {
-	obj, err := c.Fake.
-		Invokes(testing.NewRootGetSubresourceAction(usersResource, "accesskeys", userName), &managementv1.UserAccessKeys{})
-	if obj == nil {
-		return nil, err
-	}
-	return obj.(*managementv1.UserAccessKeys), err
-}

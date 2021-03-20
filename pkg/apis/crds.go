@@ -34,6 +34,12 @@ var (
 			Scope:    apiextensionsv1beta1.NamespaceScoped,
 		},
 		&crd.TypeDefinition{
+			GVK:      storagev1.SchemeGroupVersion.WithKind("AccessKey"),
+			Singular: "accesskey",
+			Plural:   "accesskeys",
+			Scope:    apiextensionsv1beta1.ClusterScoped,
+		},
+		&crd.TypeDefinition{
 			GVK:      storagev1.SchemeGroupVersion.WithKind("ClusterAccountTemplate"),
 			Singular: "clusteraccounttemplate",
 			Plural:   "clusteraccounttemplates",

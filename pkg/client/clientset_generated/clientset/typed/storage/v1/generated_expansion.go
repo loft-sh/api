@@ -2,6 +2,8 @@
 
 package v1
 
+type AccessKeyExpansion interface{}
+
 type ClusterExpansion interface{}
 
 type ClusterAccountTemplateExpansion interface{}

@@ -19,8 +19,7 @@ type OIDCRefreshRequest struct {
 
 // TokenRequest is used by the /auth/token route
 type TokenRequest struct {
-	Username string `json:"username,omitempty"`
-	Key      string `json:"key,omitempty"`
+	Key string `json:"key,omitempty"`
 }
 
 // PasswordLoginRequest is used by the /auth/password/login route
@@ -40,6 +39,7 @@ type AccessKey struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
 
+	User      string `json:"user"`
 	Username  string `json:"username"`
 	AccessKey string `json:"accessKey"`
 }

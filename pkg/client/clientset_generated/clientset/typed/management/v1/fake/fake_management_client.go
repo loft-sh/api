@@ -56,6 +56,18 @@ func (c *FakeManagementV1) LoftUpgrades() v1.LoftUpgradeInterface {
 	return &FakeLoftUpgrades{c}
 }
 
+func (c *FakeManagementV1) OwnedAccessKeys() v1.OwnedAccessKeyInterface {
+	return &FakeOwnedAccessKeys{c}
+}
+
+func (c *FakeManagementV1) ResetAccessKeys() v1.ResetAccessKeyInterface {
+	return &FakeResetAccessKeys{c}
+}
+
+func (c *FakeManagementV1) Selves() v1.SelfInterface {
+	return &FakeSelves{c}
+}
+
 func (c *FakeManagementV1) SelfSubjectAccessReviews() v1.SelfSubjectAccessReviewInterface {
 	return &FakeSelfSubjectAccessReviews{c}
 }

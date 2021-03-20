@@ -12,6 +12,10 @@ type FakeStorageV1 struct {
 	*testing.Fake
 }
 
+func (c *FakeStorageV1) AccessKeys() v1.AccessKeyInterface {
+	return &FakeAccessKeys{c}
+}
+
 func (c *FakeStorageV1) Clusters() v1.ClusterInterface {
 	return &FakeClusters{c}
 }

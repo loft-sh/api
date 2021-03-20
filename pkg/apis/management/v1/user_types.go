@@ -14,7 +14,6 @@ import (
 // +genclient:method=ListTeams,verb=get,subresource=teams,result=github.com/loft-sh/api/pkg/apis/management/v1.UserTeams
 // +genclient:method=ListClusters,verb=get,subresource=clusters,result=github.com/loft-sh/api/pkg/apis/management/v1.UserClusters
 // +genclient:method=ListVirtualClusters,verb=get,subresource=virtualclusters,result=github.com/loft-sh/api/pkg/apis/management/v1.UserVirtualClusters
-// +genclient:method=ListAccessKeys,verb=get,subresource=accesskeys,result=github.com/loft-sh/api/pkg/apis/management/v1.UserAccessKeys
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
 
 // User holds the user information
@@ -24,7 +23,6 @@ import (
 // +subresource:request=UserTeams,path=teams,kind=UserTeams,rest=UserTeamsREST
 // +subresource:request=UserClusters,path=clusters,kind=UserClusters,rest=UserClustersREST
 // +subresource:request=UserProfile,path=profile,kind=UserProfile,rest=UserProfileREST
-// +subresource:request=UserAccessKeys,path=accesskeys,kind=UserAccessKeys,rest=UserAccessKeysREST
 // +subresource:request=UserClusterRoles,path=clusterroles,kind=UserClusterRoles,rest=UserClusterRolesREST
 // +subresource:request=UserQuotas,path=quotas,kind=UserQuotas,rest=UserQuotasREST
 // +subresource:request=UserVirtualClusters,path=virtualclusters,kind=UserVirtualClusters,rest=UserVirtualClustersREST

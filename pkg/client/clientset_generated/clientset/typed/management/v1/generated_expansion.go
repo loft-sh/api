@@ -24,6 +24,12 @@ type LoftRestartExpansion interface{}
 
 type LoftUpgradeExpansion interface{}
 
+type OwnedAccessKeyExpansion interface{}
+
+type ResetAccessKeyExpansion interface{}
+
+type SelfExpansion interface{}
+
 type SelfSubjectAccessReviewExpansion interface{}
 
 type SharedSecretExpansion interface{}
