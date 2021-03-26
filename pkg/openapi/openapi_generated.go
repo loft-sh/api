@@ -6093,6 +6093,13 @@ func schema_pkg_apis_management_v1_SelfStatus(ref common.ReferenceCallback) comm
 							Format:      "",
 						},
 					},
+					"accessKeyType": {
+						SchemaProps: spec.SchemaProps{
+							Description: "The type of the currently used access key",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
 					"subject": {
 						SchemaProps: spec.SchemaProps{
 							Description: "The subject of the currently logged in user",

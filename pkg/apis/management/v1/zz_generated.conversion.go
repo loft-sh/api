@@ -3938,6 +3938,7 @@ func Convert_management_SelfSpec_To_v1_SelfSpec(in *management.SelfSpec, out *Se
 func autoConvert_v1_SelfStatus_To_management_SelfStatus(in *SelfStatus, out *management.SelfStatus, s conversion.Scope) error {
 	out.User = in.User
 	out.AccessKey = in.AccessKey
+	out.AccessKeyType = storagev1.AccessKeyType(in.AccessKeyType)
 	out.Subject = in.Subject
 	out.Groups = *(*[]string)(unsafe.Pointer(&in.Groups))
 	return nil
@@ -3951,6 +3952,7 @@ func Convert_v1_SelfStatus_To_management_SelfStatus(in *SelfStatus, out *managem
 func autoConvert_management_SelfStatus_To_v1_SelfStatus(in *management.SelfStatus, out *SelfStatus, s conversion.Scope) error {
 	out.User = in.User
 	out.AccessKey = in.AccessKey
+	out.AccessKeyType = storagev1.AccessKeyType(in.AccessKeyType)
 	out.Subject = in.Subject
 	out.Groups = *(*[]string)(unsafe.Pointer(&in.Groups))
 	return nil

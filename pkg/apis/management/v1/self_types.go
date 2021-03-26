@@ -1,6 +1,7 @@
 package v1
 
 import (
+	storagev1 "github.com/loft-sh/api/pkg/apis/storage/v1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 )
 
@@ -30,6 +31,10 @@ type SelfStatus struct {
 	// The name of the currently used access key
 	// +optional
 	AccessKey string `json:"accessKey,omitempty"`
+
+	// The type of the currently used access key
+	// +optional
+	AccessKeyType storagev1.AccessKeyType `json:"accessKeyType,omitempty"`
 	
 	// The subject of the currently logged in user
 	// +optional

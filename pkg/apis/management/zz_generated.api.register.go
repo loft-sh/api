@@ -676,6 +676,7 @@ func Resource(resource string) schema.GroupResource {
 	return SchemeGroupVersion.WithResource(resource).GroupResource()
 }
 
+type AccessKeyType string
 type Level string
 type RequestTarget string
 type Stage string
@@ -769,7 +770,7 @@ type AuthenticationPassword struct {
 }
 
 // +genclient
-// +genclient
+// +genclient:nonNamespaced
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
 
 type Cluster struct {
@@ -1232,10 +1233,11 @@ type SelfSpec struct {
 }
 
 type SelfStatus struct {
-	User      string
-	AccessKey string
-	Subject   string
-	Groups    []string
+	User          string
+	AccessKey     string
+	AccessKeyType storagev1.AccessKeyType
+	Subject       string
+	Groups        []string
 }
 
 // +genclient
