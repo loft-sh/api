@@ -804,46 +804,6 @@ func RegisterConversions(s *runtime.Scheme) error {
 	}); err != nil {
 		return err
 	}
-	if err := s.AddGeneratedConversionFunc((*LoftRestart)(nil), (*management.LoftRestart)(nil), func(a, b interface{}, scope conversion.Scope) error {
-		return Convert_v1_LoftRestart_To_management_LoftRestart(a.(*LoftRestart), b.(*management.LoftRestart), scope)
-	}); err != nil {
-		return err
-	}
-	if err := s.AddGeneratedConversionFunc((*management.LoftRestart)(nil), (*LoftRestart)(nil), func(a, b interface{}, scope conversion.Scope) error {
-		return Convert_management_LoftRestart_To_v1_LoftRestart(a.(*management.LoftRestart), b.(*LoftRestart), scope)
-	}); err != nil {
-		return err
-	}
-	if err := s.AddGeneratedConversionFunc((*LoftRestartList)(nil), (*management.LoftRestartList)(nil), func(a, b interface{}, scope conversion.Scope) error {
-		return Convert_v1_LoftRestartList_To_management_LoftRestartList(a.(*LoftRestartList), b.(*management.LoftRestartList), scope)
-	}); err != nil {
-		return err
-	}
-	if err := s.AddGeneratedConversionFunc((*management.LoftRestartList)(nil), (*LoftRestartList)(nil), func(a, b interface{}, scope conversion.Scope) error {
-		return Convert_management_LoftRestartList_To_v1_LoftRestartList(a.(*management.LoftRestartList), b.(*LoftRestartList), scope)
-	}); err != nil {
-		return err
-	}
-	if err := s.AddGeneratedConversionFunc((*LoftRestartSpec)(nil), (*management.LoftRestartSpec)(nil), func(a, b interface{}, scope conversion.Scope) error {
-		return Convert_v1_LoftRestartSpec_To_management_LoftRestartSpec(a.(*LoftRestartSpec), b.(*management.LoftRestartSpec), scope)
-	}); err != nil {
-		return err
-	}
-	if err := s.AddGeneratedConversionFunc((*management.LoftRestartSpec)(nil), (*LoftRestartSpec)(nil), func(a, b interface{}, scope conversion.Scope) error {
-		return Convert_management_LoftRestartSpec_To_v1_LoftRestartSpec(a.(*management.LoftRestartSpec), b.(*LoftRestartSpec), scope)
-	}); err != nil {
-		return err
-	}
-	if err := s.AddGeneratedConversionFunc((*LoftRestartStatus)(nil), (*management.LoftRestartStatus)(nil), func(a, b interface{}, scope conversion.Scope) error {
-		return Convert_v1_LoftRestartStatus_To_management_LoftRestartStatus(a.(*LoftRestartStatus), b.(*management.LoftRestartStatus), scope)
-	}); err != nil {
-		return err
-	}
-	if err := s.AddGeneratedConversionFunc((*management.LoftRestartStatus)(nil), (*LoftRestartStatus)(nil), func(a, b interface{}, scope conversion.Scope) error {
-		return Convert_management_LoftRestartStatus_To_v1_LoftRestartStatus(a.(*management.LoftRestartStatus), b.(*LoftRestartStatus), scope)
-	}); err != nil {
-		return err
-	}
 	if err := s.AddGeneratedConversionFunc((*LoftUpgrade)(nil), (*management.LoftUpgrade)(nil), func(a, b interface{}, scope conversion.Scope) error {
 		return Convert_v1_LoftUpgrade_To_management_LoftUpgrade(a.(*LoftUpgrade), b.(*management.LoftUpgrade), scope)
 	}); err != nil {
@@ -2910,12 +2870,7 @@ func Convert_management_ConfigList_To_v1_ConfigList(in *management.ConfigList, o
 }
 
 func autoConvert_v1_ConfigSpec_To_management_ConfigSpec(in *ConfigSpec, out *management.ConfigSpec, s conversion.Scope) error {
-	if err := Convert_v1_Authentication_To_management_Authentication(&in.Authentication, &out.Authentication, s); err != nil {
-		return err
-	}
-	out.OIDC = (*management.OIDC)(unsafe.Pointer(in.OIDC))
-	out.Apps = (*management.Apps)(unsafe.Pointer(in.Apps))
-	out.Audit = (*management.Audit)(unsafe.Pointer(in.Audit))
+	out.Raw = *(*[]byte)(unsafe.Pointer(&in.Raw))
 	return nil
 }
 
@@ -2925,12 +2880,7 @@ func Convert_v1_ConfigSpec_To_management_ConfigSpec(in *ConfigSpec, out *managem
 }
 
 func autoConvert_management_ConfigSpec_To_v1_ConfigSpec(in *management.ConfigSpec, out *ConfigSpec, s conversion.Scope) error {
-	if err := Convert_management_Authentication_To_v1_Authentication(&in.Authentication, &out.Authentication, s); err != nil {
-		return err
-	}
-	out.OIDC = (*OIDC)(unsafe.Pointer(in.OIDC))
-	out.Apps = (*Apps)(unsafe.Pointer(in.Apps))
-	out.Audit = (*Audit)(unsafe.Pointer(in.Audit))
+	out.Raw = *(*[]byte)(unsafe.Pointer(&in.Raw))
 	return nil
 }
 
@@ -2940,6 +2890,12 @@ func Convert_management_ConfigSpec_To_v1_ConfigSpec(in *management.ConfigSpec, o
 }
 
 func autoConvert_v1_ConfigStatus_To_management_ConfigStatus(in *ConfigStatus, out *management.ConfigStatus, s conversion.Scope) error {
+	if err := Convert_v1_Authentication_To_management_Authentication(&in.Authentication, &out.Authentication, s); err != nil {
+		return err
+	}
+	out.OIDC = (*management.OIDC)(unsafe.Pointer(in.OIDC))
+	out.Apps = (*management.Apps)(unsafe.Pointer(in.Apps))
+	out.Audit = (*management.Audit)(unsafe.Pointer(in.Audit))
 	return nil
 }
 
@@ -2949,6 +2905,12 @@ func Convert_v1_ConfigStatus_To_management_ConfigStatus(in *ConfigStatus, out *m
 }
 
 func autoConvert_management_ConfigStatus_To_v1_ConfigStatus(in *management.ConfigStatus, out *ConfigStatus, s conversion.Scope) error {
+	if err := Convert_management_Authentication_To_v1_Authentication(&in.Authentication, &out.Authentication, s); err != nil {
+		return err
+	}
+	out.OIDC = (*OIDC)(unsafe.Pointer(in.OIDC))
+	out.Apps = (*Apps)(unsafe.Pointer(in.Apps))
+	out.Audit = (*Audit)(unsafe.Pointer(in.Audit))
 	return nil
 }
 
@@ -3543,96 +3505,6 @@ func autoConvert_management_LicenseTokenStatus_To_v1_LicenseTokenStatus(in *mana
 // Convert_management_LicenseTokenStatus_To_v1_LicenseTokenStatus is an autogenerated conversion function.
 func Convert_management_LicenseTokenStatus_To_v1_LicenseTokenStatus(in *management.LicenseTokenStatus, out *LicenseTokenStatus, s conversion.Scope) error {
 	return autoConvert_management_LicenseTokenStatus_To_v1_LicenseTokenStatus(in, out, s)
-}
-
-func autoConvert_v1_LoftRestart_To_management_LoftRestart(in *LoftRestart, out *management.LoftRestart, s conversion.Scope) error {
-	out.ObjectMeta = in.ObjectMeta
-	if err := Convert_v1_LoftRestartSpec_To_management_LoftRestartSpec(&in.Spec, &out.Spec, s); err != nil {
-		return err
-	}
-	if err := Convert_v1_LoftRestartStatus_To_management_LoftRestartStatus(&in.Status, &out.Status, s); err != nil {
-		return err
-	}
-	return nil
-}
-
-// Convert_v1_LoftRestart_To_management_LoftRestart is an autogenerated conversion function.
-func Convert_v1_LoftRestart_To_management_LoftRestart(in *LoftRestart, out *management.LoftRestart, s conversion.Scope) error {
-	return autoConvert_v1_LoftRestart_To_management_LoftRestart(in, out, s)
-}
-
-func autoConvert_management_LoftRestart_To_v1_LoftRestart(in *management.LoftRestart, out *LoftRestart, s conversion.Scope) error {
-	out.ObjectMeta = in.ObjectMeta
-	if err := Convert_management_LoftRestartSpec_To_v1_LoftRestartSpec(&in.Spec, &out.Spec, s); err != nil {
-		return err
-	}
-	if err := Convert_management_LoftRestartStatus_To_v1_LoftRestartStatus(&in.Status, &out.Status, s); err != nil {
-		return err
-	}
-	return nil
-}
-
-// Convert_management_LoftRestart_To_v1_LoftRestart is an autogenerated conversion function.
-func Convert_management_LoftRestart_To_v1_LoftRestart(in *management.LoftRestart, out *LoftRestart, s conversion.Scope) error {
-	return autoConvert_management_LoftRestart_To_v1_LoftRestart(in, out, s)
-}
-
-func autoConvert_v1_LoftRestartList_To_management_LoftRestartList(in *LoftRestartList, out *management.LoftRestartList, s conversion.Scope) error {
-	out.ListMeta = in.ListMeta
-	out.Items = *(*[]management.LoftRestart)(unsafe.Pointer(&in.Items))
-	return nil
-}
-
-// Convert_v1_LoftRestartList_To_management_LoftRestartList is an autogenerated conversion function.
-func Convert_v1_LoftRestartList_To_management_LoftRestartList(in *LoftRestartList, out *management.LoftRestartList, s conversion.Scope) error {
-	return autoConvert_v1_LoftRestartList_To_management_LoftRestartList(in, out, s)
-}
-
-func autoConvert_management_LoftRestartList_To_v1_LoftRestartList(in *management.LoftRestartList, out *LoftRestartList, s conversion.Scope) error {
-	out.ListMeta = in.ListMeta
-	out.Items = *(*[]LoftRestart)(unsafe.Pointer(&in.Items))
-	return nil
-}
-
-// Convert_management_LoftRestartList_To_v1_LoftRestartList is an autogenerated conversion function.
-func Convert_management_LoftRestartList_To_v1_LoftRestartList(in *management.LoftRestartList, out *LoftRestartList, s conversion.Scope) error {
-	return autoConvert_management_LoftRestartList_To_v1_LoftRestartList(in, out, s)
-}
-
-func autoConvert_v1_LoftRestartSpec_To_management_LoftRestartSpec(in *LoftRestartSpec, out *management.LoftRestartSpec, s conversion.Scope) error {
-	return nil
-}
-
-// Convert_v1_LoftRestartSpec_To_management_LoftRestartSpec is an autogenerated conversion function.
-func Convert_v1_LoftRestartSpec_To_management_LoftRestartSpec(in *LoftRestartSpec, out *management.LoftRestartSpec, s conversion.Scope) error {
-	return autoConvert_v1_LoftRestartSpec_To_management_LoftRestartSpec(in, out, s)
-}
-
-func autoConvert_management_LoftRestartSpec_To_v1_LoftRestartSpec(in *management.LoftRestartSpec, out *LoftRestartSpec, s conversion.Scope) error {
-	return nil
-}
-
-// Convert_management_LoftRestartSpec_To_v1_LoftRestartSpec is an autogenerated conversion function.
-func Convert_management_LoftRestartSpec_To_v1_LoftRestartSpec(in *management.LoftRestartSpec, out *LoftRestartSpec, s conversion.Scope) error {
-	return autoConvert_management_LoftRestartSpec_To_v1_LoftRestartSpec(in, out, s)
-}
-
-func autoConvert_v1_LoftRestartStatus_To_management_LoftRestartStatus(in *LoftRestartStatus, out *management.LoftRestartStatus, s conversion.Scope) error {
-	return nil
-}
-
-// Convert_v1_LoftRestartStatus_To_management_LoftRestartStatus is an autogenerated conversion function.
-func Convert_v1_LoftRestartStatus_To_management_LoftRestartStatus(in *LoftRestartStatus, out *management.LoftRestartStatus, s conversion.Scope) error {
-	return autoConvert_v1_LoftRestartStatus_To_management_LoftRestartStatus(in, out, s)
-}
-
-func autoConvert_management_LoftRestartStatus_To_v1_LoftRestartStatus(in *management.LoftRestartStatus, out *LoftRestartStatus, s conversion.Scope) error {
-	return nil
-}
-
-// Convert_management_LoftRestartStatus_To_v1_LoftRestartStatus is an autogenerated conversion function.
-func Convert_management_LoftRestartStatus_To_v1_LoftRestartStatus(in *management.LoftRestartStatus, out *LoftRestartStatus, s conversion.Scope) error {
-	return autoConvert_management_LoftRestartStatus_To_v1_LoftRestartStatus(in, out, s)
 }
 
 func autoConvert_v1_LoftUpgrade_To_management_LoftUpgrade(in *LoftUpgrade, out *management.LoftUpgrade, s conversion.Scope) error {

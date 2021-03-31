@@ -63,7 +63,6 @@ var managementApiGroup = builders.NewApiGroupBuilder(
 		"Feature",
 		"License",
 		"LicenseToken",
-		"LoftRestart",
 		"LoftUpgrade",
 		"OwnedAccessKey",
 		"ResetAccessKey",

@@ -116,10 +116,6 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 		"github.com/loft-sh/api/pkg/apis/management/v1.LicenseTokenList":                          schema_pkg_apis_management_v1_LicenseTokenList(ref),
 		"github.com/loft-sh/api/pkg/apis/management/v1.LicenseTokenSpec":                          schema_pkg_apis_management_v1_LicenseTokenSpec(ref),
 		"github.com/loft-sh/api/pkg/apis/management/v1.LicenseTokenStatus":                        schema_pkg_apis_management_v1_LicenseTokenStatus(ref),
-		"github.com/loft-sh/api/pkg/apis/management/v1.LoftRestart":                               schema_pkg_apis_management_v1_LoftRestart(ref),
-		"github.com/loft-sh/api/pkg/apis/management/v1.LoftRestartList":                           schema_pkg_apis_management_v1_LoftRestartList(ref),
-		"github.com/loft-sh/api/pkg/apis/management/v1.LoftRestartSpec":                           schema_pkg_apis_management_v1_LoftRestartSpec(ref),
-		"github.com/loft-sh/api/pkg/apis/management/v1.LoftRestartStatus":                         schema_pkg_apis_management_v1_LoftRestartStatus(ref),
 		"github.com/loft-sh/api/pkg/apis/management/v1.LoftUpgrade":                               schema_pkg_apis_management_v1_LoftUpgrade(ref),
 		"github.com/loft-sh/api/pkg/apis/management/v1.LoftUpgradeList":                           schema_pkg_apis_management_v1_LoftUpgradeList(ref),
 		"github.com/loft-sh/api/pkg/apis/management/v1.LoftUpgradeSpec":                           schema_pkg_apis_management_v1_LoftUpgradeSpec(ref),
@@ -2993,7 +2989,7 @@ func schema_pkg_apis_management_v1_AuthenticationMicrosoft(ref common.ReferenceC
 					},
 					"onlySecurityGroups": {
 						SchemaProps: spec.SchemaProps{
-							Description: "onfiguration option restricts the list to include only security groups. By default all groups (security, Office 365, mailing lists) are included.",
+							Description: "configuration option restricts the list to include only security groups. By default all groups (security, Office 365, mailing lists) are included.",
 							Type:        []string{"boolean"},
 							Format:      "",
 						},
@@ -4597,6 +4593,26 @@ func schema_pkg_apis_management_v1_ConfigSpec(ref common.ReferenceCallback) comm
 				Description: "ConfigSpec holds the specification",
 				Type:        []string{"object"},
 				Properties: map[string]spec.Schema{
+					"raw": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Raw holds the raw config",
+							Type:        []string{"string"},
+							Format:      "byte",
+						},
+					},
+				},
+			},
+		},
+	}
+}
+
+func schema_pkg_apis_management_v1_ConfigStatus(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "ConfigStatus holds the status, which is the parsed raw config",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
 					"auth": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Authentication holds the information for authentication",
@@ -4626,17 +4642,6 @@ func schema_pkg_apis_management_v1_ConfigSpec(ref common.ReferenceCallback) comm
 		},
 		Dependencies: []string{
 			"github.com/loft-sh/api/pkg/apis/management/v1.Apps", "github.com/loft-sh/api/pkg/apis/management/v1.Audit", "github.com/loft-sh/api/pkg/apis/management/v1.Authentication", "github.com/loft-sh/api/pkg/apis/management/v1.OIDC"},
-	}
-}
-
-func schema_pkg_apis_management_v1_ConfigStatus(ref common.ReferenceCallback) common.OpenAPIDefinition {
-	return common.OpenAPIDefinition{
-		Schema: spec.Schema{
-			SchemaProps: spec.SchemaProps{
-				Description: "ConfigStatus holds the status",
-				Type:        []string{"object"},
-			},
-		},
 	}
 }
 
@@ -5506,116 +5511,6 @@ func schema_pkg_apis_management_v1_LicenseTokenStatus(ref common.ReferenceCallba
 						},
 					},
 				},
-			},
-		},
-	}
-}
-
-func schema_pkg_apis_management_v1_LoftRestart(ref common.ReferenceCallback) common.OpenAPIDefinition {
-	return common.OpenAPIDefinition{
-		Schema: spec.Schema{
-			SchemaProps: spec.SchemaProps{
-				Description: "LoftRestart holds the restart information",
-				Type:        []string{"object"},
-				Properties: map[string]spec.Schema{
-					"kind": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"apiVersion": {
-						SchemaProps: spec.SchemaProps{
-							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"metadata": {
-						SchemaProps: spec.SchemaProps{
-							Ref: ref("k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"),
-						},
-					},
-					"spec": {
-						SchemaProps: spec.SchemaProps{
-							Ref: ref("github.com/loft-sh/api/pkg/apis/management/v1.LoftRestartSpec"),
-						},
-					},
-					"status": {
-						SchemaProps: spec.SchemaProps{
-							Ref: ref("github.com/loft-sh/api/pkg/apis/management/v1.LoftRestartStatus"),
-						},
-					},
-				},
-			},
-		},
-		Dependencies: []string{
-			"github.com/loft-sh/api/pkg/apis/management/v1.LoftRestartSpec", "github.com/loft-sh/api/pkg/apis/management/v1.LoftRestartStatus", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
-	}
-}
-
-func schema_pkg_apis_management_v1_LoftRestartList(ref common.ReferenceCallback) common.OpenAPIDefinition {
-	return common.OpenAPIDefinition{
-		Schema: spec.Schema{
-			SchemaProps: spec.SchemaProps{
-				Type: []string{"object"},
-				Properties: map[string]spec.Schema{
-					"kind": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"apiVersion": {
-						SchemaProps: spec.SchemaProps{
-							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"metadata": {
-						SchemaProps: spec.SchemaProps{
-							Ref: ref("k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"),
-						},
-					},
-					"items": {
-						SchemaProps: spec.SchemaProps{
-							Type: []string{"array"},
-							Items: &spec.SchemaOrArray{
-								Schema: &spec.Schema{
-									SchemaProps: spec.SchemaProps{
-										Ref: ref("github.com/loft-sh/api/pkg/apis/management/v1.LoftRestart"),
-									},
-								},
-							},
-						},
-					},
-				},
-				Required: []string{"items"},
-			},
-		},
-		Dependencies: []string{
-			"github.com/loft-sh/api/pkg/apis/management/v1.LoftRestart", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
-	}
-}
-
-func schema_pkg_apis_management_v1_LoftRestartSpec(ref common.ReferenceCallback) common.OpenAPIDefinition {
-	return common.OpenAPIDefinition{
-		Schema: spec.Schema{
-			SchemaProps: spec.SchemaProps{
-				Type: []string{"object"},
-			},
-		},
-	}
-}
-
-func schema_pkg_apis_management_v1_LoftRestartStatus(ref common.ReferenceCallback) common.OpenAPIDefinition {
-	return common.OpenAPIDefinition{
-		Schema: spec.Schema{
-			SchemaProps: spec.SchemaProps{
-				Type: []string{"object"},
 			},
 		},
 	}

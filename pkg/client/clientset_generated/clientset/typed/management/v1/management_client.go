@@ -19,7 +19,6 @@ type ManagementV1Interface interface {
 	FeaturesGetter
 	LicensesGetter
 	LicenseTokensGetter
-	LoftRestartsGetter
 	LoftUpgradesGetter
 	OwnedAccessKeysGetter
 	ResetAccessKeysGetter
@@ -70,10 +69,6 @@ func (c *ManagementV1Client) Licenses() LicenseInterface {
 
 func (c *ManagementV1Client) LicenseTokens() LicenseTokenInterface {
 	return newLicenseTokens(c)
-}
-
-func (c *ManagementV1Client) LoftRestarts() LoftRestartInterface {
-	return newLoftRestarts(c)
 }
 
 func (c *ManagementV1Client) LoftUpgrades() LoftUpgradeInterface {

@@ -23,6 +23,13 @@ type Config struct {
 
 // ConfigSpec holds the specification
 type ConfigSpec struct {
+	// Raw holds the raw config
+	// +optional
+	Raw []byte `json:"raw,omitempty"`
+}
+
+// ConfigStatus holds the status, which is the parsed raw config
+type ConfigStatus struct {
 	// Authentication holds the information for authentication
 	Authentication Authentication `json:"auth,omitempty"`
 
@@ -32,14 +39,10 @@ type ConfigSpec struct {
 	// Apps holds configuration around apps
 	// +optional
 	Apps *Apps `json:"apps,omitempty"`
-	
+
 	// Audit holds audit configuration
 	// +optional
 	Audit *Audit `json:"audit,omitempty"`
-}
-
-// ConfigStatus holds the status
-type ConfigStatus struct {
 }
 
 // Audit holds the audit configuration options for loft. Changing any options will require a loft restart

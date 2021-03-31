@@ -48,8 +48,6 @@ func addKnownTypes(scheme *runtime.Scheme) error {
 		&management.LicenseList{},
 		&management.LicenseToken{},
 		&management.LicenseTokenList{},
-		&management.LoftRestart{},
-		&management.LoftRestartList{},
 		&management.LoftUpgrade{},
 		&management.LoftUpgradeList{},
 		&management.OwnedAccessKey{},

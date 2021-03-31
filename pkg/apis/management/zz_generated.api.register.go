@@ -126,16 +126,6 @@ var (
 		return NewLicenseTokenRESTFunc(Factory)
 	}
 	NewLicenseTokenRESTFunc      NewRESTFunc
-	ManagementLoftRestartStorage = builders.NewApiResourceWithStorage( // Resource status endpoint
-		InternalLoftRestart,
-		func() runtime.Object { return &LoftRestart{} },     // Register versioned resource
-		func() runtime.Object { return &LoftRestartList{} }, // Register versioned resource list
-		NewLoftRestartREST,
-	)
-	NewLoftRestartREST = func(getter generic.RESTOptionsGetter) rest.Storage {
-		return NewLoftRestartRESTFunc(Factory)
-	}
-	NewLoftRestartRESTFunc       NewRESTFunc
 	ManagementLoftUpgradeStorage = builders.NewApiResourceWithStorage( // Resource status endpoint
 		InternalLoftUpgrade,
 		func() runtime.Object { return &LoftUpgrade{} },     // Register versioned resource
@@ -394,18 +384,6 @@ var (
 		func() runtime.Object { return &LicenseToken{} },
 		func() runtime.Object { return &LicenseTokenList{} },
 	)
-	InternalLoftRestart = builders.NewInternalResource(
-		"loftrestarts",
-		"LoftRestart",
-		func() runtime.Object { return &LoftRestart{} },
-		func() runtime.Object { return &LoftRestartList{} },
-	)
-	InternalLoftRestartStatus = builders.NewInternalResourceStatus(
-		"loftrestarts",
-		"LoftRestartStatus",
-		func() runtime.Object { return &LoftRestart{} },
-		func() runtime.Object { return &LoftRestartList{} },
-	)
 	InternalLoftUpgrade = builders.NewInternalResource(
 		"loftupgrades",
 		"LoftUpgrade",
@@ -622,8 +600,6 @@ var (
 		InternalLicenseStatus,
 		InternalLicenseToken,
 		InternalLicenseTokenStatus,
-		InternalLoftRestart,
-		InternalLoftRestartStatus,
 		InternalLoftUpgrade,
 		InternalLoftUpgradeStatus,
 		InternalOwnedAccessKey,
@@ -1002,13 +978,14 @@ type Config struct {
 }
 
 type ConfigSpec struct {
+	Raw []byte
+}
+
+type ConfigStatus struct {
 	Authentication Authentication
 	OIDC           *OIDC
 	Apps           *Apps
 	Audit          *Audit
-}
-
-type ConfigStatus struct {
 }
 
 type CustomerInfo struct {
@@ -1143,23 +1120,6 @@ type LicenseTokenSpec struct {
 
 type LicenseTokenStatus struct {
 	Token string
-}
-
-// +genclient
-// +genclient:nonNamespaced
-// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
-
-type LoftRestart struct {
-	metav1.TypeMeta
-	metav1.ObjectMeta
-	Spec   LoftRestartSpec
-	Status LoftRestartStatus
-}
-
-type LoftRestartSpec struct {
-}
-
-type LoftRestartStatus struct {
 }
 
 // +genclient
@@ -2739,126 +2699,6 @@ func (s *storageLicenseToken) UpdateLicenseToken(ctx context.Context, object *Li
 }
 
 func (s *storageLicenseToken) DeleteLicenseToken(ctx context.Context, id string) (bool, error) {
-	st := s.GetStandardStorage()
-	_, sync, err := st.Delete(ctx, id, nil, &metav1.DeleteOptions{})
-	return sync, err
-}
-
-//
-// LoftRestart Functions and Structs
-//
-// +k8s:deepcopy-gen=false
-type LoftRestartStrategy struct {
-	builders.DefaultStorageStrategy
-}
-
-// +k8s:deepcopy-gen=false
-type LoftRestartStatusStrategy struct {
-	builders.DefaultStatusStorageStrategy
-}
-
-// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
-
-type LoftRestartList struct {
-	metav1.TypeMeta
-	metav1.ListMeta
-	Items []LoftRestart
-}
-
-func (LoftRestart) NewStatus() interface{} {
-	return LoftRestartStatus{}
-}
-
-func (pc *LoftRestart) GetStatus() interface{} {
-	return pc.Status
-}
-
-func (pc *LoftRestart) SetStatus(s interface{}) {
-	pc.Status = s.(LoftRestartStatus)
-}
-
-func (pc *LoftRestart) GetSpec() interface{} {
-	return pc.Spec
-}
-
-func (pc *LoftRestart) SetSpec(s interface{}) {
-	pc.Spec = s.(LoftRestartSpec)
-}
-
-func (pc *LoftRestart) GetObjectMeta() *metav1.ObjectMeta {
-	return &pc.ObjectMeta
-}
-
-func (pc *LoftRestart) SetGeneration(generation int64) {
-	pc.ObjectMeta.Generation = generation
-}
-
-func (pc LoftRestart) GetGeneration() int64 {
-	return pc.ObjectMeta.Generation
-}
-
-// Registry is an interface for things that know how to store LoftRestart.
-// +k8s:deepcopy-gen=false
-type LoftRestartRegistry interface {
-	ListLoftRestarts(ctx context.Context, options *internalversion.ListOptions) (*LoftRestartList, error)
-	GetLoftRestart(ctx context.Context, id string, options *metav1.GetOptions) (*LoftRestart, error)
-	CreateLoftRestart(ctx context.Context, id *LoftRestart) (*LoftRestart, error)
-	UpdateLoftRestart(ctx context.Context, id *LoftRestart) (*LoftRestart, error)
-	DeleteLoftRestart(ctx context.Context, id string) (bool, error)
-}
-
-// NewRegistry returns a new Registry interface for the given Storage. Any mismatched types will panic.
-func NewLoftRestartRegistry(sp builders.StandardStorageProvider) LoftRestartRegistry {
-	return &storageLoftRestart{sp}
-}
-
-// Implement Registry
-// storage puts strong typing around storage calls
-// +k8s:deepcopy-gen=false
-type storageLoftRestart struct {
-	builders.StandardStorageProvider
-}
-
-func (s *storageLoftRestart) ListLoftRestarts(ctx context.Context, options *internalversion.ListOptions) (*LoftRestartList, error) {
-	if options != nil && options.FieldSelector != nil && !options.FieldSelector.Empty() {
-		return nil, fmt.Errorf("field selector not supported yet")
-	}
-	st := s.GetStandardStorage()
-	obj, err := st.List(ctx, options)
-	if err != nil {
-		return nil, err
-	}
-	return obj.(*LoftRestartList), err
-}
-
-func (s *storageLoftRestart) GetLoftRestart(ctx context.Context, id string, options *metav1.GetOptions) (*LoftRestart, error) {
-	st := s.GetStandardStorage()
-	obj, err := st.Get(ctx, id, options)
-	if err != nil {
-		return nil, err
-	}
-	return obj.(*LoftRestart), nil
-}
-
-func (s *storageLoftRestart) CreateLoftRestart(ctx context.Context, object *LoftRestart) (*LoftRestart, error) {
-	st := s.GetStandardStorage()
-	obj, err := st.Create(ctx, object, nil, &metav1.CreateOptions{})
-	if err != nil {
-		return nil, err
-	}
-	return obj.(*LoftRestart), nil
-}
-
-func (s *storageLoftRestart) UpdateLoftRestart(ctx context.Context, object *LoftRestart) (*LoftRestart, error) {
-	st := s.GetStandardStorage()
-	obj, _, err := st.Update(ctx, object.Name, rest.DefaultUpdatedObjectInfo(object), nil, nil, false, &metav1.UpdateOptions{})
-	if err != nil {
-		return nil, err
-	}
-	return obj.(*LoftRestart), nil
-}
-
-func (s *storageLoftRestart) DeleteLoftRestart(ctx context.Context, id string) (bool, error) {
 	st := s.GetStandardStorage()
 	_, sync, err := st.Delete(ctx, id, nil, &metav1.DeleteOptions{})
 	return sync, err
