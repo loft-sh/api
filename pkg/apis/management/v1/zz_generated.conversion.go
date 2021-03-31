@@ -124,6 +124,56 @@ func RegisterConversions(s *runtime.Scheme) error {
 	}); err != nil {
 		return err
 	}
+	if err := s.AddGeneratedConversionFunc((*AuthenticationClusterAccountTemplates)(nil), (*management.AuthenticationClusterAccountTemplates)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_v1_AuthenticationClusterAccountTemplates_To_management_AuthenticationClusterAccountTemplates(a.(*AuthenticationClusterAccountTemplates), b.(*management.AuthenticationClusterAccountTemplates), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*management.AuthenticationClusterAccountTemplates)(nil), (*AuthenticationClusterAccountTemplates)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_management_AuthenticationClusterAccountTemplates_To_v1_AuthenticationClusterAccountTemplates(a.(*management.AuthenticationClusterAccountTemplates), b.(*AuthenticationClusterAccountTemplates), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*AuthenticationGithub)(nil), (*management.AuthenticationGithub)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_v1_AuthenticationGithub_To_management_AuthenticationGithub(a.(*AuthenticationGithub), b.(*management.AuthenticationGithub), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*management.AuthenticationGithub)(nil), (*AuthenticationGithub)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_management_AuthenticationGithub_To_v1_AuthenticationGithub(a.(*management.AuthenticationGithub), b.(*AuthenticationGithub), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*AuthenticationGithubOrg)(nil), (*management.AuthenticationGithubOrg)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_v1_AuthenticationGithubOrg_To_management_AuthenticationGithubOrg(a.(*AuthenticationGithubOrg), b.(*management.AuthenticationGithubOrg), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*management.AuthenticationGithubOrg)(nil), (*AuthenticationGithubOrg)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_management_AuthenticationGithubOrg_To_v1_AuthenticationGithubOrg(a.(*management.AuthenticationGithubOrg), b.(*AuthenticationGithubOrg), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*AuthenticationGitlab)(nil), (*management.AuthenticationGitlab)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_v1_AuthenticationGitlab_To_management_AuthenticationGitlab(a.(*AuthenticationGitlab), b.(*management.AuthenticationGitlab), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*management.AuthenticationGitlab)(nil), (*AuthenticationGitlab)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_management_AuthenticationGitlab_To_v1_AuthenticationGitlab(a.(*management.AuthenticationGitlab), b.(*AuthenticationGitlab), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*AuthenticationGoogle)(nil), (*management.AuthenticationGoogle)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_v1_AuthenticationGoogle_To_management_AuthenticationGoogle(a.(*AuthenticationGoogle), b.(*management.AuthenticationGoogle), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*management.AuthenticationGoogle)(nil), (*AuthenticationGoogle)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_management_AuthenticationGoogle_To_v1_AuthenticationGoogle(a.(*management.AuthenticationGoogle), b.(*AuthenticationGoogle), scope)
+	}); err != nil {
+		return err
+	}
 	if err := s.AddGeneratedConversionFunc((*AuthenticationGroupClusterAccountTemplate)(nil), (*management.AuthenticationGroupClusterAccountTemplate)(nil), func(a, b interface{}, scope conversion.Scope) error {
 		return Convert_v1_AuthenticationGroupClusterAccountTemplate_To_management_AuthenticationGroupClusterAccountTemplate(a.(*AuthenticationGroupClusterAccountTemplate), b.(*management.AuthenticationGroupClusterAccountTemplate), scope)
 	}); err != nil {
@@ -131,6 +181,16 @@ func RegisterConversions(s *runtime.Scheme) error {
 	}
 	if err := s.AddGeneratedConversionFunc((*management.AuthenticationGroupClusterAccountTemplate)(nil), (*AuthenticationGroupClusterAccountTemplate)(nil), func(a, b interface{}, scope conversion.Scope) error {
 		return Convert_management_AuthenticationGroupClusterAccountTemplate_To_v1_AuthenticationGroupClusterAccountTemplate(a.(*management.AuthenticationGroupClusterAccountTemplate), b.(*AuthenticationGroupClusterAccountTemplate), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*AuthenticationMicrosoft)(nil), (*management.AuthenticationMicrosoft)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_v1_AuthenticationMicrosoft_To_management_AuthenticationMicrosoft(a.(*AuthenticationMicrosoft), b.(*management.AuthenticationMicrosoft), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*management.AuthenticationMicrosoft)(nil), (*AuthenticationMicrosoft)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_management_AuthenticationMicrosoft_To_v1_AuthenticationMicrosoft(a.(*management.AuthenticationMicrosoft), b.(*AuthenticationMicrosoft), scope)
 	}); err != nil {
 		return err
 	}
@@ -1698,6 +1758,10 @@ func Convert_management_AuditPolicyRule_To_v1_AuditPolicyRule(in *management.Aud
 func autoConvert_v1_Authentication_To_management_Authentication(in *Authentication, out *management.Authentication, s conversion.Scope) error {
 	out.Password = (*management.AuthenticationPassword)(unsafe.Pointer(in.Password))
 	out.OIDC = (*management.AuthenticationOIDC)(unsafe.Pointer(in.OIDC))
+	out.Github = (*management.AuthenticationGithub)(unsafe.Pointer(in.Github))
+	out.Gitlab = (*management.AuthenticationGitlab)(unsafe.Pointer(in.Gitlab))
+	out.Google = (*management.AuthenticationGoogle)(unsafe.Pointer(in.Google))
+	out.Microsoft = (*management.AuthenticationMicrosoft)(unsafe.Pointer(in.Microsoft))
 	return nil
 }
 
@@ -1709,12 +1773,170 @@ func Convert_v1_Authentication_To_management_Authentication(in *Authentication, 
 func autoConvert_management_Authentication_To_v1_Authentication(in *management.Authentication, out *Authentication, s conversion.Scope) error {
 	out.Password = (*AuthenticationPassword)(unsafe.Pointer(in.Password))
 	out.OIDC = (*AuthenticationOIDC)(unsafe.Pointer(in.OIDC))
+	out.Github = (*AuthenticationGithub)(unsafe.Pointer(in.Github))
+	out.Gitlab = (*AuthenticationGitlab)(unsafe.Pointer(in.Gitlab))
+	out.Google = (*AuthenticationGoogle)(unsafe.Pointer(in.Google))
+	out.Microsoft = (*AuthenticationMicrosoft)(unsafe.Pointer(in.Microsoft))
 	return nil
 }
 
 // Convert_management_Authentication_To_v1_Authentication is an autogenerated conversion function.
 func Convert_management_Authentication_To_v1_Authentication(in *management.Authentication, out *Authentication, s conversion.Scope) error {
 	return autoConvert_management_Authentication_To_v1_Authentication(in, out, s)
+}
+
+func autoConvert_v1_AuthenticationClusterAccountTemplates_To_management_AuthenticationClusterAccountTemplates(in *AuthenticationClusterAccountTemplates, out *management.AuthenticationClusterAccountTemplates, s conversion.Scope) error {
+	out.ClusterAccountTemplates = *(*[]storagev1.UserClusterAccountTemplate)(unsafe.Pointer(&in.ClusterAccountTemplates))
+	out.GroupClusterAccountTemplates = *(*[]management.AuthenticationGroupClusterAccountTemplate)(unsafe.Pointer(&in.GroupClusterAccountTemplates))
+	return nil
+}
+
+// Convert_v1_AuthenticationClusterAccountTemplates_To_management_AuthenticationClusterAccountTemplates is an autogenerated conversion function.
+func Convert_v1_AuthenticationClusterAccountTemplates_To_management_AuthenticationClusterAccountTemplates(in *AuthenticationClusterAccountTemplates, out *management.AuthenticationClusterAccountTemplates, s conversion.Scope) error {
+	return autoConvert_v1_AuthenticationClusterAccountTemplates_To_management_AuthenticationClusterAccountTemplates(in, out, s)
+}
+
+func autoConvert_management_AuthenticationClusterAccountTemplates_To_v1_AuthenticationClusterAccountTemplates(in *management.AuthenticationClusterAccountTemplates, out *AuthenticationClusterAccountTemplates, s conversion.Scope) error {
+	out.ClusterAccountTemplates = *(*[]storagev1.UserClusterAccountTemplate)(unsafe.Pointer(&in.ClusterAccountTemplates))
+	out.GroupClusterAccountTemplates = *(*[]AuthenticationGroupClusterAccountTemplate)(unsafe.Pointer(&in.GroupClusterAccountTemplates))
+	return nil
+}
+
+// Convert_management_AuthenticationClusterAccountTemplates_To_v1_AuthenticationClusterAccountTemplates is an autogenerated conversion function.
+func Convert_management_AuthenticationClusterAccountTemplates_To_v1_AuthenticationClusterAccountTemplates(in *management.AuthenticationClusterAccountTemplates, out *AuthenticationClusterAccountTemplates, s conversion.Scope) error {
+	return autoConvert_management_AuthenticationClusterAccountTemplates_To_v1_AuthenticationClusterAccountTemplates(in, out, s)
+}
+
+func autoConvert_v1_AuthenticationGithub_To_management_AuthenticationGithub(in *AuthenticationGithub, out *management.AuthenticationGithub, s conversion.Scope) error {
+	if err := Convert_v1_AuthenticationClusterAccountTemplates_To_management_AuthenticationClusterAccountTemplates(&in.AuthenticationClusterAccountTemplates, &out.AuthenticationClusterAccountTemplates, s); err != nil {
+		return err
+	}
+	out.ClientID = in.ClientID
+	out.ClientSecret = in.ClientSecret
+	out.RedirectURI = in.RedirectURI
+	out.Orgs = *(*[]management.AuthenticationGithubOrg)(unsafe.Pointer(&in.Orgs))
+	out.HostName = in.HostName
+	out.RootCA = in.RootCA
+	return nil
+}
+
+// Convert_v1_AuthenticationGithub_To_management_AuthenticationGithub is an autogenerated conversion function.
+func Convert_v1_AuthenticationGithub_To_management_AuthenticationGithub(in *AuthenticationGithub, out *management.AuthenticationGithub, s conversion.Scope) error {
+	return autoConvert_v1_AuthenticationGithub_To_management_AuthenticationGithub(in, out, s)
+}
+
+func autoConvert_management_AuthenticationGithub_To_v1_AuthenticationGithub(in *management.AuthenticationGithub, out *AuthenticationGithub, s conversion.Scope) error {
+	if err := Convert_management_AuthenticationClusterAccountTemplates_To_v1_AuthenticationClusterAccountTemplates(&in.AuthenticationClusterAccountTemplates, &out.AuthenticationClusterAccountTemplates, s); err != nil {
+		return err
+	}
+	out.ClientID = in.ClientID
+	out.ClientSecret = in.ClientSecret
+	out.RedirectURI = in.RedirectURI
+	out.Orgs = *(*[]AuthenticationGithubOrg)(unsafe.Pointer(&in.Orgs))
+	out.HostName = in.HostName
+	out.RootCA = in.RootCA
+	return nil
+}
+
+// Convert_management_AuthenticationGithub_To_v1_AuthenticationGithub is an autogenerated conversion function.
+func Convert_management_AuthenticationGithub_To_v1_AuthenticationGithub(in *management.AuthenticationGithub, out *AuthenticationGithub, s conversion.Scope) error {
+	return autoConvert_management_AuthenticationGithub_To_v1_AuthenticationGithub(in, out, s)
+}
+
+func autoConvert_v1_AuthenticationGithubOrg_To_management_AuthenticationGithubOrg(in *AuthenticationGithubOrg, out *management.AuthenticationGithubOrg, s conversion.Scope) error {
+	out.Name = in.Name
+	out.Teams = *(*[]string)(unsafe.Pointer(&in.Teams))
+	return nil
+}
+
+// Convert_v1_AuthenticationGithubOrg_To_management_AuthenticationGithubOrg is an autogenerated conversion function.
+func Convert_v1_AuthenticationGithubOrg_To_management_AuthenticationGithubOrg(in *AuthenticationGithubOrg, out *management.AuthenticationGithubOrg, s conversion.Scope) error {
+	return autoConvert_v1_AuthenticationGithubOrg_To_management_AuthenticationGithubOrg(in, out, s)
+}
+
+func autoConvert_management_AuthenticationGithubOrg_To_v1_AuthenticationGithubOrg(in *management.AuthenticationGithubOrg, out *AuthenticationGithubOrg, s conversion.Scope) error {
+	out.Name = in.Name
+	out.Teams = *(*[]string)(unsafe.Pointer(&in.Teams))
+	return nil
+}
+
+// Convert_management_AuthenticationGithubOrg_To_v1_AuthenticationGithubOrg is an autogenerated conversion function.
+func Convert_management_AuthenticationGithubOrg_To_v1_AuthenticationGithubOrg(in *management.AuthenticationGithubOrg, out *AuthenticationGithubOrg, s conversion.Scope) error {
+	return autoConvert_management_AuthenticationGithubOrg_To_v1_AuthenticationGithubOrg(in, out, s)
+}
+
+func autoConvert_v1_AuthenticationGitlab_To_management_AuthenticationGitlab(in *AuthenticationGitlab, out *management.AuthenticationGitlab, s conversion.Scope) error {
+	if err := Convert_v1_AuthenticationClusterAccountTemplates_To_management_AuthenticationClusterAccountTemplates(&in.AuthenticationClusterAccountTemplates, &out.AuthenticationClusterAccountTemplates, s); err != nil {
+		return err
+	}
+	out.ClientID = in.ClientID
+	out.ClientSecret = in.ClientSecret
+	out.RedirectURI = in.RedirectURI
+	out.BaseURL = in.BaseURL
+	out.Groups = *(*[]string)(unsafe.Pointer(&in.Groups))
+	return nil
+}
+
+// Convert_v1_AuthenticationGitlab_To_management_AuthenticationGitlab is an autogenerated conversion function.
+func Convert_v1_AuthenticationGitlab_To_management_AuthenticationGitlab(in *AuthenticationGitlab, out *management.AuthenticationGitlab, s conversion.Scope) error {
+	return autoConvert_v1_AuthenticationGitlab_To_management_AuthenticationGitlab(in, out, s)
+}
+
+func autoConvert_management_AuthenticationGitlab_To_v1_AuthenticationGitlab(in *management.AuthenticationGitlab, out *AuthenticationGitlab, s conversion.Scope) error {
+	if err := Convert_management_AuthenticationClusterAccountTemplates_To_v1_AuthenticationClusterAccountTemplates(&in.AuthenticationClusterAccountTemplates, &out.AuthenticationClusterAccountTemplates, s); err != nil {
+		return err
+	}
+	out.ClientID = in.ClientID
+	out.ClientSecret = in.ClientSecret
+	out.RedirectURI = in.RedirectURI
+	out.BaseURL = in.BaseURL
+	out.Groups = *(*[]string)(unsafe.Pointer(&in.Groups))
+	return nil
+}
+
+// Convert_management_AuthenticationGitlab_To_v1_AuthenticationGitlab is an autogenerated conversion function.
+func Convert_management_AuthenticationGitlab_To_v1_AuthenticationGitlab(in *management.AuthenticationGitlab, out *AuthenticationGitlab, s conversion.Scope) error {
+	return autoConvert_management_AuthenticationGitlab_To_v1_AuthenticationGitlab(in, out, s)
+}
+
+func autoConvert_v1_AuthenticationGoogle_To_management_AuthenticationGoogle(in *AuthenticationGoogle, out *management.AuthenticationGoogle, s conversion.Scope) error {
+	if err := Convert_v1_AuthenticationClusterAccountTemplates_To_management_AuthenticationClusterAccountTemplates(&in.AuthenticationClusterAccountTemplates, &out.AuthenticationClusterAccountTemplates, s); err != nil {
+		return err
+	}
+	out.ClientID = in.ClientID
+	out.ClientSecret = in.ClientSecret
+	out.RedirectURI = in.RedirectURI
+	out.Scopes = *(*[]string)(unsafe.Pointer(&in.Scopes))
+	out.HostedDomains = *(*[]string)(unsafe.Pointer(&in.HostedDomains))
+	out.Groups = *(*[]string)(unsafe.Pointer(&in.Groups))
+	out.ServiceAccountFilePath = in.ServiceAccountFilePath
+	out.AdminEmail = in.AdminEmail
+	return nil
+}
+
+// Convert_v1_AuthenticationGoogle_To_management_AuthenticationGoogle is an autogenerated conversion function.
+func Convert_v1_AuthenticationGoogle_To_management_AuthenticationGoogle(in *AuthenticationGoogle, out *management.AuthenticationGoogle, s conversion.Scope) error {
+	return autoConvert_v1_AuthenticationGoogle_To_management_AuthenticationGoogle(in, out, s)
+}
+
+func autoConvert_management_AuthenticationGoogle_To_v1_AuthenticationGoogle(in *management.AuthenticationGoogle, out *AuthenticationGoogle, s conversion.Scope) error {
+	if err := Convert_management_AuthenticationClusterAccountTemplates_To_v1_AuthenticationClusterAccountTemplates(&in.AuthenticationClusterAccountTemplates, &out.AuthenticationClusterAccountTemplates, s); err != nil {
+		return err
+	}
+	out.ClientID = in.ClientID
+	out.ClientSecret = in.ClientSecret
+	out.RedirectURI = in.RedirectURI
+	out.Scopes = *(*[]string)(unsafe.Pointer(&in.Scopes))
+	out.HostedDomains = *(*[]string)(unsafe.Pointer(&in.HostedDomains))
+	out.Groups = *(*[]string)(unsafe.Pointer(&in.Groups))
+	out.ServiceAccountFilePath = in.ServiceAccountFilePath
+	out.AdminEmail = in.AdminEmail
+	return nil
+}
+
+// Convert_management_AuthenticationGoogle_To_v1_AuthenticationGoogle is an autogenerated conversion function.
+func Convert_management_AuthenticationGoogle_To_v1_AuthenticationGoogle(in *management.AuthenticationGoogle, out *AuthenticationGoogle, s conversion.Scope) error {
+	return autoConvert_management_AuthenticationGoogle_To_v1_AuthenticationGoogle(in, out, s)
 }
 
 func autoConvert_v1_AuthenticationGroupClusterAccountTemplate_To_management_AuthenticationGroupClusterAccountTemplate(in *AuthenticationGroupClusterAccountTemplate, out *management.AuthenticationGroupClusterAccountTemplate, s conversion.Scope) error {
@@ -1739,10 +1961,52 @@ func Convert_management_AuthenticationGroupClusterAccountTemplate_To_v1_Authenti
 	return autoConvert_management_AuthenticationGroupClusterAccountTemplate_To_v1_AuthenticationGroupClusterAccountTemplate(in, out, s)
 }
 
+func autoConvert_v1_AuthenticationMicrosoft_To_management_AuthenticationMicrosoft(in *AuthenticationMicrosoft, out *management.AuthenticationMicrosoft, s conversion.Scope) error {
+	if err := Convert_v1_AuthenticationClusterAccountTemplates_To_management_AuthenticationClusterAccountTemplates(&in.AuthenticationClusterAccountTemplates, &out.AuthenticationClusterAccountTemplates, s); err != nil {
+		return err
+	}
+	out.ClientID = in.ClientID
+	out.ClientSecret = in.ClientSecret
+	out.RedirectURI = in.RedirectURI
+	out.Tenant = in.Tenant
+	out.Groups = *(*[]string)(unsafe.Pointer(&in.Groups))
+	out.OnlySecurityGroups = in.OnlySecurityGroups
+	out.UseGroupsAsWhitelist = in.UseGroupsAsWhitelist
+	return nil
+}
+
+// Convert_v1_AuthenticationMicrosoft_To_management_AuthenticationMicrosoft is an autogenerated conversion function.
+func Convert_v1_AuthenticationMicrosoft_To_management_AuthenticationMicrosoft(in *AuthenticationMicrosoft, out *management.AuthenticationMicrosoft, s conversion.Scope) error {
+	return autoConvert_v1_AuthenticationMicrosoft_To_management_AuthenticationMicrosoft(in, out, s)
+}
+
+func autoConvert_management_AuthenticationMicrosoft_To_v1_AuthenticationMicrosoft(in *management.AuthenticationMicrosoft, out *AuthenticationMicrosoft, s conversion.Scope) error {
+	if err := Convert_management_AuthenticationClusterAccountTemplates_To_v1_AuthenticationClusterAccountTemplates(&in.AuthenticationClusterAccountTemplates, &out.AuthenticationClusterAccountTemplates, s); err != nil {
+		return err
+	}
+	out.ClientID = in.ClientID
+	out.ClientSecret = in.ClientSecret
+	out.RedirectURI = in.RedirectURI
+	out.Tenant = in.Tenant
+	out.Groups = *(*[]string)(unsafe.Pointer(&in.Groups))
+	out.OnlySecurityGroups = in.OnlySecurityGroups
+	out.UseGroupsAsWhitelist = in.UseGroupsAsWhitelist
+	return nil
+}
+
+// Convert_management_AuthenticationMicrosoft_To_v1_AuthenticationMicrosoft is an autogenerated conversion function.
+func Convert_management_AuthenticationMicrosoft_To_v1_AuthenticationMicrosoft(in *management.AuthenticationMicrosoft, out *AuthenticationMicrosoft, s conversion.Scope) error {
+	return autoConvert_management_AuthenticationMicrosoft_To_v1_AuthenticationMicrosoft(in, out, s)
+}
+
 func autoConvert_v1_AuthenticationOIDC_To_management_AuthenticationOIDC(in *AuthenticationOIDC, out *management.AuthenticationOIDC, s conversion.Scope) error {
+	if err := Convert_v1_AuthenticationClusterAccountTemplates_To_management_AuthenticationClusterAccountTemplates(&in.AuthenticationClusterAccountTemplates, &out.AuthenticationClusterAccountTemplates, s); err != nil {
+		return err
+	}
 	out.IssuerURL = in.IssuerURL
 	out.ClientID = in.ClientID
 	out.ClientSecret = in.ClientSecret
+	out.RedirectURI = in.RedirectURI
 	out.CAFile = in.CAFile
 	out.UsernameClaim = in.UsernameClaim
 	out.UsernamePrefix = in.UsernamePrefix
@@ -1750,8 +2014,6 @@ func autoConvert_v1_AuthenticationOIDC_To_management_AuthenticationOIDC(in *Auth
 	out.GetUserInfo = in.GetUserInfo
 	out.GroupsPrefix = in.GroupsPrefix
 	out.Type = in.Type
-	out.ClusterAccountTemplates = *(*[]storagev1.UserClusterAccountTemplate)(unsafe.Pointer(&in.ClusterAccountTemplates))
-	out.GroupClusterAccountTemplates = *(*[]management.AuthenticationGroupClusterAccountTemplate)(unsafe.Pointer(&in.GroupClusterAccountTemplates))
 	return nil
 }
 
@@ -1761,9 +2023,13 @@ func Convert_v1_AuthenticationOIDC_To_management_AuthenticationOIDC(in *Authenti
 }
 
 func autoConvert_management_AuthenticationOIDC_To_v1_AuthenticationOIDC(in *management.AuthenticationOIDC, out *AuthenticationOIDC, s conversion.Scope) error {
+	if err := Convert_management_AuthenticationClusterAccountTemplates_To_v1_AuthenticationClusterAccountTemplates(&in.AuthenticationClusterAccountTemplates, &out.AuthenticationClusterAccountTemplates, s); err != nil {
+		return err
+	}
 	out.IssuerURL = in.IssuerURL
 	out.ClientID = in.ClientID
 	out.ClientSecret = in.ClientSecret
+	out.RedirectURI = in.RedirectURI
 	out.CAFile = in.CAFile
 	out.UsernameClaim = in.UsernameClaim
 	out.UsernamePrefix = in.UsernamePrefix
@@ -1771,8 +2037,6 @@ func autoConvert_management_AuthenticationOIDC_To_v1_AuthenticationOIDC(in *mana
 	out.GetUserInfo = in.GetUserInfo
 	out.GroupsPrefix = in.GroupsPrefix
 	out.Type = in.Type
-	out.ClusterAccountTemplates = *(*[]storagev1.UserClusterAccountTemplate)(unsafe.Pointer(&in.ClusterAccountTemplates))
-	out.GroupClusterAccountTemplates = *(*[]AuthenticationGroupClusterAccountTemplate)(unsafe.Pointer(&in.GroupClusterAccountTemplates))
 	return nil
 }
 

@@ -48,7 +48,13 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 		"github.com/loft-sh/api/pkg/apis/management/v1.AuditPolicy":                               schema_pkg_apis_management_v1_AuditPolicy(ref),
 		"github.com/loft-sh/api/pkg/apis/management/v1.AuditPolicyRule":                           schema_pkg_apis_management_v1_AuditPolicyRule(ref),
 		"github.com/loft-sh/api/pkg/apis/management/v1.Authentication":                            schema_pkg_apis_management_v1_Authentication(ref),
+		"github.com/loft-sh/api/pkg/apis/management/v1.AuthenticationClusterAccountTemplates":     schema_pkg_apis_management_v1_AuthenticationClusterAccountTemplates(ref),
+		"github.com/loft-sh/api/pkg/apis/management/v1.AuthenticationGithub":                      schema_pkg_apis_management_v1_AuthenticationGithub(ref),
+		"github.com/loft-sh/api/pkg/apis/management/v1.AuthenticationGithubOrg":                   schema_pkg_apis_management_v1_AuthenticationGithubOrg(ref),
+		"github.com/loft-sh/api/pkg/apis/management/v1.AuthenticationGitlab":                      schema_pkg_apis_management_v1_AuthenticationGitlab(ref),
+		"github.com/loft-sh/api/pkg/apis/management/v1.AuthenticationGoogle":                      schema_pkg_apis_management_v1_AuthenticationGoogle(ref),
 		"github.com/loft-sh/api/pkg/apis/management/v1.AuthenticationGroupClusterAccountTemplate": schema_pkg_apis_management_v1_AuthenticationGroupClusterAccountTemplate(ref),
+		"github.com/loft-sh/api/pkg/apis/management/v1.AuthenticationMicrosoft":                   schema_pkg_apis_management_v1_AuthenticationMicrosoft(ref),
 		"github.com/loft-sh/api/pkg/apis/management/v1.AuthenticationOIDC":                        schema_pkg_apis_management_v1_AuthenticationOIDC(ref),
 		"github.com/loft-sh/api/pkg/apis/management/v1.AuthenticationPassword":                    schema_pkg_apis_management_v1_AuthenticationPassword(ref),
 		"github.com/loft-sh/api/pkg/apis/management/v1.Cluster":                                   schema_pkg_apis_management_v1_Cluster(ref),
@@ -182,6 +188,7 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 		"github.com/loft-sh/api/pkg/apis/management/v1.UserVirtualClusters":                       schema_pkg_apis_management_v1_UserVirtualClusters(ref),
 		"github.com/loft-sh/api/pkg/apis/management/v1.UserVirtualClustersList":                   schema_pkg_apis_management_v1_UserVirtualClustersList(ref),
 		"github.com/loft-sh/api/pkg/apis/storage/v1.AccessKey":                                    schema_pkg_apis_storage_v1_AccessKey(ref),
+		"github.com/loft-sh/api/pkg/apis/storage/v1.AccessKeyIdentity":                            schema_pkg_apis_storage_v1_AccessKeyIdentity(ref),
 		"github.com/loft-sh/api/pkg/apis/storage/v1.AccessKeyList":                                schema_pkg_apis_storage_v1_AccessKeyList(ref),
 		"github.com/loft-sh/api/pkg/apis/storage/v1.AccessKeyOIDC":                                schema_pkg_apis_storage_v1_AccessKeyOIDC(ref),
 		"github.com/loft-sh/api/pkg/apis/storage/v1.AccessKeyOIDCProvider":                        schema_pkg_apis_storage_v1_AccessKeyOIDCProvider(ref),
@@ -2479,11 +2486,399 @@ func schema_pkg_apis_management_v1_Authentication(ref common.ReferenceCallback) 
 							Ref:         ref("github.com/loft-sh/api/pkg/apis/management/v1.AuthenticationOIDC"),
 						},
 					},
+					"github": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Github holds github authentication configuration",
+							Ref:         ref("github.com/loft-sh/api/pkg/apis/management/v1.AuthenticationGithub"),
+						},
+					},
+					"gitlab": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Gitlab holds gitlab authentication configuration",
+							Ref:         ref("github.com/loft-sh/api/pkg/apis/management/v1.AuthenticationGitlab"),
+						},
+					},
+					"google": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Google holds google authentication configuration",
+							Ref:         ref("github.com/loft-sh/api/pkg/apis/management/v1.AuthenticationGoogle"),
+						},
+					},
+					"microsoft": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Microsoft holds microsoft authentication configuration",
+							Ref:         ref("github.com/loft-sh/api/pkg/apis/management/v1.AuthenticationMicrosoft"),
+						},
+					},
 				},
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/pkg/apis/management/v1.AuthenticationOIDC", "github.com/loft-sh/api/pkg/apis/management/v1.AuthenticationPassword"},
+			"github.com/loft-sh/api/pkg/apis/management/v1.AuthenticationGithub", "github.com/loft-sh/api/pkg/apis/management/v1.AuthenticationGitlab", "github.com/loft-sh/api/pkg/apis/management/v1.AuthenticationGoogle", "github.com/loft-sh/api/pkg/apis/management/v1.AuthenticationMicrosoft", "github.com/loft-sh/api/pkg/apis/management/v1.AuthenticationOIDC", "github.com/loft-sh/api/pkg/apis/management/v1.AuthenticationPassword"},
+	}
+}
+
+func schema_pkg_apis_management_v1_AuthenticationClusterAccountTemplates(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"clusterAccountTemplates": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Cluster Account Templates that will be applied for users logging in through this authentication",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Ref: ref("github.com/loft-sh/api/pkg/apis/storage/v1.UserClusterAccountTemplate"),
+									},
+								},
+							},
+						},
+					},
+					"groupClusterAccountTemplates": {
+						SchemaProps: spec.SchemaProps{
+							Description: "A mapping between groups and cluster account templates. If the user has a certain group, the cluster account template will be added during creation",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Ref: ref("github.com/loft-sh/api/pkg/apis/management/v1.AuthenticationGroupClusterAccountTemplate"),
+									},
+								},
+							},
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			"github.com/loft-sh/api/pkg/apis/management/v1.AuthenticationGroupClusterAccountTemplate", "github.com/loft-sh/api/pkg/apis/storage/v1.UserClusterAccountTemplate"},
+	}
+}
+
+func schema_pkg_apis_management_v1_AuthenticationGithub(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"clusterAccountTemplates": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Cluster Account Templates that will be applied for users logging in through this authentication",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Ref: ref("github.com/loft-sh/api/pkg/apis/storage/v1.UserClusterAccountTemplate"),
+									},
+								},
+							},
+						},
+					},
+					"groupClusterAccountTemplates": {
+						SchemaProps: spec.SchemaProps{
+							Description: "A mapping between groups and cluster account templates. If the user has a certain group, the cluster account template will be added during creation",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Ref: ref("github.com/loft-sh/api/pkg/apis/management/v1.AuthenticationGroupClusterAccountTemplate"),
+									},
+								},
+							},
+						},
+					},
+					"clientId": {
+						SchemaProps: spec.SchemaProps{
+							Description: "ClientID holds the github client id",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"clientSecret": {
+						SchemaProps: spec.SchemaProps{
+							Description: "ClientID holds the github client secret",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"redirectURI": {
+						SchemaProps: spec.SchemaProps{
+							Description: "RedirectURI holds the redirect URI. Should be https://loft.domain.tld/auth/github/callback",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"orgs": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Loft queries the following organizations for group information. Group claims are formatted as \"(org):(team)\". For example if a user is part of the \"engineering\" team of the \"coreos\" org, the group claim would include \"coreos:engineering\".\n\nIf orgs are specified in the config then user MUST be a member of at least one of the specified orgs to authenticate with loft.",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Ref: ref("github.com/loft-sh/api/pkg/apis/management/v1.AuthenticationGithubOrg"),
+									},
+								},
+							},
+						},
+					},
+					"hostName": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Required ONLY for GitHub Enterprise. This is the Hostname of the GitHub Enterprise account listed on the management console. Ensure this domain is routable on your network.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"rootCA": {
+						SchemaProps: spec.SchemaProps{
+							Description: "ONLY for GitHub Enterprise. Optional field. Used to support self-signed or untrusted CA root certificates.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+				},
+				Required: []string{"clientSecret", "redirectURI"},
+			},
+		},
+		Dependencies: []string{
+			"github.com/loft-sh/api/pkg/apis/management/v1.AuthenticationGithubOrg", "github.com/loft-sh/api/pkg/apis/management/v1.AuthenticationGroupClusterAccountTemplate", "github.com/loft-sh/api/pkg/apis/storage/v1.UserClusterAccountTemplate"},
+	}
+}
+
+func schema_pkg_apis_management_v1_AuthenticationGithubOrg(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "AuthenticationGithubOrg holds org-team filters, in which teams are optional.",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"name": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Organization name in github (not slug, full name). Only users in this github organization can authenticate.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"teams": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Names of teams in a github organization. A user will be able to authenticate if they are members of at least one of these teams. Users in the organization can authenticate if this field is omitted from the config file.",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Type:   []string{"string"},
+										Format: "",
+									},
+								},
+							},
+						},
+					},
+				},
+			},
+		},
+	}
+}
+
+func schema_pkg_apis_management_v1_AuthenticationGitlab(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"clusterAccountTemplates": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Cluster Account Templates that will be applied for users logging in through this authentication",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Ref: ref("github.com/loft-sh/api/pkg/apis/storage/v1.UserClusterAccountTemplate"),
+									},
+								},
+							},
+						},
+					},
+					"groupClusterAccountTemplates": {
+						SchemaProps: spec.SchemaProps{
+							Description: "A mapping between groups and cluster account templates. If the user has a certain group, the cluster account template will be added during creation",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Ref: ref("github.com/loft-sh/api/pkg/apis/management/v1.AuthenticationGroupClusterAccountTemplate"),
+									},
+								},
+							},
+						},
+					},
+					"clientId": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Gitlab client id",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"clientSecret": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Gitlab client secret",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"redirectURI": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Redirect URI",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"baseURL": {
+						SchemaProps: spec.SchemaProps{
+							Description: "BaseURL is optional, default = https://gitlab.com",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"groups": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Optional groups whitelist, communicated through the \"groups\" scope. If `groups` is omitted, all of the user's GitLab groups are returned. If `groups` is provided, this acts as a whitelist - only the user's GitLab groups that are in the configured `groups` below will go into the groups claim. Conversely, if the user is not in any of the configured `groups`, the user will not be authenticated.",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Type:   []string{"string"},
+										Format: "",
+									},
+								},
+							},
+						},
+					},
+				},
+				Required: []string{"clientId", "clientSecret", "redirectURI"},
+			},
+		},
+		Dependencies: []string{
+			"github.com/loft-sh/api/pkg/apis/management/v1.AuthenticationGroupClusterAccountTemplate", "github.com/loft-sh/api/pkg/apis/storage/v1.UserClusterAccountTemplate"},
+	}
+}
+
+func schema_pkg_apis_management_v1_AuthenticationGoogle(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"clusterAccountTemplates": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Cluster Account Templates that will be applied for users logging in through this authentication",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Ref: ref("github.com/loft-sh/api/pkg/apis/storage/v1.UserClusterAccountTemplate"),
+									},
+								},
+							},
+						},
+					},
+					"groupClusterAccountTemplates": {
+						SchemaProps: spec.SchemaProps{
+							Description: "A mapping between groups and cluster account templates. If the user has a certain group, the cluster account template will be added during creation",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Ref: ref("github.com/loft-sh/api/pkg/apis/management/v1.AuthenticationGroupClusterAccountTemplate"),
+									},
+								},
+							},
+						},
+					},
+					"clientId": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Google client id",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"clientSecret": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Google client secret",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"redirectURI": {
+						SchemaProps: spec.SchemaProps{
+							Description: "loft redirect uri. E.g. https://loft.my.domain/auth/google/callback",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"scopes": {
+						SchemaProps: spec.SchemaProps{
+							Description: "defaults to \"profile\" and \"email\"",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Type:   []string{"string"},
+										Format: "",
+									},
+								},
+							},
+						},
+					},
+					"hostedDomains": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Optional list of whitelisted domains If this field is nonempty, only users from a listed domain will be allowed to log in",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Type:   []string{"string"},
+										Format: "",
+									},
+								},
+							},
+						},
+					},
+					"groups": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Optional list of whitelisted groups If this field is nonempty, only users from a listed group will be allowed to log in",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Type:   []string{"string"},
+										Format: "",
+									},
+								},
+							},
+						},
+					},
+					"serviceAccountFilePath": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Optional path to service account json If nonempty, and groups claim is made, will use authentication from file to check groups with the admin directory api",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"adminEmail": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Required if ServiceAccountFilePath The email of a GSuite super user which the service account will impersonate when listing groups",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+				},
+				Required: []string{"clientId", "clientSecret", "redirectURI"},
+			},
+		},
+		Dependencies: []string{
+			"github.com/loft-sh/api/pkg/apis/management/v1.AuthenticationGroupClusterAccountTemplate", "github.com/loft-sh/api/pkg/apis/storage/v1.UserClusterAccountTemplate"},
 	}
 }
 
@@ -2522,12 +2917,135 @@ func schema_pkg_apis_management_v1_AuthenticationGroupClusterAccountTemplate(ref
 	}
 }
 
+func schema_pkg_apis_management_v1_AuthenticationMicrosoft(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"clusterAccountTemplates": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Cluster Account Templates that will be applied for users logging in through this authentication",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Ref: ref("github.com/loft-sh/api/pkg/apis/storage/v1.UserClusterAccountTemplate"),
+									},
+								},
+							},
+						},
+					},
+					"groupClusterAccountTemplates": {
+						SchemaProps: spec.SchemaProps{
+							Description: "A mapping between groups and cluster account templates. If the user has a certain group, the cluster account template will be added during creation",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Ref: ref("github.com/loft-sh/api/pkg/apis/management/v1.AuthenticationGroupClusterAccountTemplate"),
+									},
+								},
+							},
+						},
+					},
+					"clientId": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Microsoft client id",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"clientSecret": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Microsoft client secret",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"redirectURI": {
+						SchemaProps: spec.SchemaProps{
+							Description: "loft redirect uri. Usually https://loft.my.domain/auth/microsoft/callback",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"tenant": {
+						SchemaProps: spec.SchemaProps{
+							Description: "tenant configuration parameter controls what kinds of accounts may be authenticated in loft. By default, all types of Microsoft accounts (consumers and organizations) can authenticate in loft via Microsoft. To change this, set the tenant parameter to one of the following:\n\ncommon - both personal and business/school accounts can authenticate in loft via Microsoft (default) consumers - only personal accounts can authenticate in loft organizations - only business/school accounts can authenticate in loft <tenant uuid> or <tenant name> - only accounts belonging to specific tenant identified by either <tenant uuid> or <tenant name> can authenticate in loft",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"groups": {
+						SchemaProps: spec.SchemaProps{
+							Description: "It is possible to require a user to be a member of a particular group in order to be successfully authenticated in loft.",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Type:   []string{"string"},
+										Format: "",
+									},
+								},
+							},
+						},
+					},
+					"onlySecurityGroups": {
+						SchemaProps: spec.SchemaProps{
+							Description: "onfiguration option restricts the list to include only security groups. By default all groups (security, Office 365, mailing lists) are included.",
+							Type:        []string{"boolean"},
+							Format:      "",
+						},
+					},
+					"useGroupsAsWhitelist": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Restrict the groups claims to include only the user’s groups that are in the configured groups",
+							Type:        []string{"boolean"},
+							Format:      "",
+						},
+					},
+				},
+				Required: []string{"clientId", "clientSecret", "redirectURI"},
+			},
+		},
+		Dependencies: []string{
+			"github.com/loft-sh/api/pkg/apis/management/v1.AuthenticationGroupClusterAccountTemplate", "github.com/loft-sh/api/pkg/apis/storage/v1.UserClusterAccountTemplate"},
+	}
+}
+
 func schema_pkg_apis_management_v1_AuthenticationOIDC(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
 				Type: []string{"object"},
 				Properties: map[string]spec.Schema{
+					"clusterAccountTemplates": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Cluster Account Templates that will be applied for users logging in through this authentication",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Ref: ref("github.com/loft-sh/api/pkg/apis/storage/v1.UserClusterAccountTemplate"),
+									},
+								},
+							},
+						},
+					},
+					"groupClusterAccountTemplates": {
+						SchemaProps: spec.SchemaProps{
+							Description: "A mapping between groups and cluster account templates. If the user has a certain group, the cluster account template will be added during creation",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Ref: ref("github.com/loft-sh/api/pkg/apis/management/v1.AuthenticationGroupClusterAccountTemplate"),
+									},
+								},
+							},
+						},
+					},
 					"issuerUrl": {
 						SchemaProps: spec.SchemaProps{
 							Description: "IssuerURL is the URL the provider signs ID Tokens as. This will be the \"iss\" field of all tokens produced by the provider and is used for configuration discovery.\n\nThe URL is usually the provider's URL without a path, for example \"https://accounts.google.com\" or \"https://login.salesforce.com\".\n\nThe provider must implement configuration discovery. See: https://openid.net/specs/openid-connect-discovery-1_0.html#ProviderConfig",
@@ -2545,6 +3063,13 @@ func schema_pkg_apis_management_v1_AuthenticationOIDC(ref common.ReferenceCallba
 					"clientSecret": {
 						SchemaProps: spec.SchemaProps{
 							Description: "ClientSecret to issue tokens from the OIDC provider",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"redirectURI": {
+						SchemaProps: spec.SchemaProps{
+							Description: "loft redirect uri. E.g. https://loft.my.domain/auth/oidc/callback",
 							Type:        []string{"string"},
 							Format:      "",
 						},
@@ -2596,32 +3121,6 @@ func schema_pkg_apis_management_v1_AuthenticationOIDC(ref common.ReferenceCallba
 							Description: "Type of the OIDC to show in the UI. Only for displaying purposes",
 							Type:        []string{"string"},
 							Format:      "",
-						},
-					},
-					"clusterAccountTemplates": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Cluster Account Templates that will be applied for users logging in through this authentication",
-							Type:        []string{"array"},
-							Items: &spec.SchemaOrArray{
-								Schema: &spec.Schema{
-									SchemaProps: spec.SchemaProps{
-										Ref: ref("github.com/loft-sh/api/pkg/apis/storage/v1.UserClusterAccountTemplate"),
-									},
-								},
-							},
-						},
-					},
-					"groupClusterAccountTemplates": {
-						SchemaProps: spec.SchemaProps{
-							Description: "A mapping between groups and cluster account templates. If the user has a certain group, the cluster account template will be added during creation",
-							Type:        []string{"array"},
-							Items: &spec.SchemaOrArray{
-								Schema: &spec.Schema{
-									SchemaProps: spec.SchemaProps{
-										Ref: ref("github.com/loft-sh/api/pkg/apis/management/v1.AuthenticationGroupClusterAccountTemplate"),
-									},
-								},
-							},
 						},
 					},
 				},
@@ -5490,9 +5989,21 @@ func schema_pkg_apis_management_v1_OwnedAccessKeySpec(ref common.ReferenceCallba
 							Format:      "",
 						},
 					},
+					"identity": {
+						SchemaProps: spec.SchemaProps{
+							Description: "If available, contains information about the sso login data for this access key",
+							Ref:         ref("github.com/loft-sh/api/pkg/apis/storage/v1.AccessKeyIdentity"),
+						},
+					},
+					"identityRefresh": {
+						SchemaProps: spec.SchemaProps{
+							Description: "The last time the identity was refreshed",
+							Ref:         ref("k8s.io/apimachinery/pkg/apis/meta/v1.Time"),
+						},
+					},
 					"oidcLogin": {
 						SchemaProps: spec.SchemaProps{
-							Description: "If available, contains information about the oidc login data for this access key",
+							Description: "DEPRECATED: Use identity instead If available, contains information about the oidc login data for this access key",
 							Ref:         ref("github.com/loft-sh/api/pkg/apis/storage/v1.AccessKeyOIDC"),
 						},
 					},
@@ -5506,7 +6017,7 @@ func schema_pkg_apis_management_v1_OwnedAccessKeySpec(ref common.ReferenceCallba
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/pkg/apis/storage/v1.AccessKeyOIDC", "github.com/loft-sh/api/pkg/apis/storage/v1.AccessKeyOIDCProvider"},
+			"github.com/loft-sh/api/pkg/apis/storage/v1.AccessKeyIdentity", "github.com/loft-sh/api/pkg/apis/storage/v1.AccessKeyOIDC", "github.com/loft-sh/api/pkg/apis/storage/v1.AccessKeyOIDCProvider", "k8s.io/apimachinery/pkg/apis/meta/v1.Time"},
 	}
 }
 
@@ -5834,9 +6345,21 @@ func schema_pkg_apis_management_v1_ResetAccessKeySpec(ref common.ReferenceCallba
 							Format:      "",
 						},
 					},
+					"identity": {
+						SchemaProps: spec.SchemaProps{
+							Description: "If available, contains information about the sso login data for this access key",
+							Ref:         ref("github.com/loft-sh/api/pkg/apis/storage/v1.AccessKeyIdentity"),
+						},
+					},
+					"identityRefresh": {
+						SchemaProps: spec.SchemaProps{
+							Description: "The last time the identity was refreshed",
+							Ref:         ref("k8s.io/apimachinery/pkg/apis/meta/v1.Time"),
+						},
+					},
 					"oidcLogin": {
 						SchemaProps: spec.SchemaProps{
-							Description: "If available, contains information about the oidc login data for this access key",
+							Description: "DEPRECATED: Use identity instead If available, contains information about the oidc login data for this access key",
 							Ref:         ref("github.com/loft-sh/api/pkg/apis/storage/v1.AccessKeyOIDC"),
 						},
 					},
@@ -5850,7 +6373,7 @@ func schema_pkg_apis_management_v1_ResetAccessKeySpec(ref common.ReferenceCallba
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/pkg/apis/storage/v1.AccessKeyOIDC", "github.com/loft-sh/api/pkg/apis/storage/v1.AccessKeyOIDCProvider"},
+			"github.com/loft-sh/api/pkg/apis/storage/v1.AccessKeyIdentity", "github.com/loft-sh/api/pkg/apis/storage/v1.AccessKeyOIDC", "github.com/loft-sh/api/pkg/apis/storage/v1.AccessKeyOIDCProvider", "k8s.io/apimachinery/pkg/apis/meta/v1.Time"},
 	}
 }
 
@@ -8214,6 +8737,74 @@ func schema_pkg_apis_storage_v1_AccessKey(ref common.ReferenceCallback) common.O
 	}
 }
 
+func schema_pkg_apis_storage_v1_AccessKeyIdentity(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"userId": {
+						SchemaProps: spec.SchemaProps{
+							Description: "The subject of the user",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"username": {
+						SchemaProps: spec.SchemaProps{
+							Description: "The username",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"preferredUsername": {
+						SchemaProps: spec.SchemaProps{
+							Description: "The preferred username / display name",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"Email": {
+						SchemaProps: spec.SchemaProps{
+							Description: "The user email",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"EmailVerified": {
+						SchemaProps: spec.SchemaProps{
+							Description: "If the user email was verified",
+							Type:        []string{"boolean"},
+							Format:      "",
+						},
+					},
+					"Groups": {
+						SchemaProps: spec.SchemaProps{
+							Description: "The groups from the identity provider",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Type:   []string{"string"},
+										Format: "",
+									},
+								},
+							},
+						},
+					},
+					"ConnectorData": {
+						SchemaProps: spec.SchemaProps{
+							Description: "ConnectorData holds data used by the connector for subsequent requests after initial authentication, such as access tokens for upstream providers.\n\nThis data is never shared with end users, OAuth clients, or through the API.",
+							Type:        []string{"string"},
+							Format:      "byte",
+						},
+					},
+				},
+			},
+		},
+	}
+}
+
 func schema_pkg_apis_storage_v1_AccessKeyList(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
@@ -8404,9 +8995,21 @@ func schema_pkg_apis_storage_v1_AccessKeySpec(ref common.ReferenceCallback) comm
 							Format:      "",
 						},
 					},
+					"identity": {
+						SchemaProps: spec.SchemaProps{
+							Description: "If available, contains information about the sso login data for this access key",
+							Ref:         ref("github.com/loft-sh/api/pkg/apis/storage/v1.AccessKeyIdentity"),
+						},
+					},
+					"identityRefresh": {
+						SchemaProps: spec.SchemaProps{
+							Description: "The last time the identity was refreshed",
+							Ref:         ref("k8s.io/apimachinery/pkg/apis/meta/v1.Time"),
+						},
+					},
 					"oidcLogin": {
 						SchemaProps: spec.SchemaProps{
-							Description: "If available, contains information about the oidc login data for this access key",
+							Description: "DEPRECATED: Use identity instead If available, contains information about the oidc login data for this access key",
 							Ref:         ref("github.com/loft-sh/api/pkg/apis/storage/v1.AccessKeyOIDC"),
 						},
 					},
@@ -8420,7 +9023,7 @@ func schema_pkg_apis_storage_v1_AccessKeySpec(ref common.ReferenceCallback) comm
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/pkg/apis/storage/v1.AccessKeyOIDC", "github.com/loft-sh/api/pkg/apis/storage/v1.AccessKeyOIDCProvider"},
+			"github.com/loft-sh/api/pkg/apis/storage/v1.AccessKeyIdentity", "github.com/loft-sh/api/pkg/apis/storage/v1.AccessKeyOIDC", "github.com/loft-sh/api/pkg/apis/storage/v1.AccessKeyOIDCProvider", "k8s.io/apimachinery/pkg/apis/meta/v1.Time"},
 	}
 }
 

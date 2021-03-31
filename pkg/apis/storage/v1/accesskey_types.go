@@ -58,7 +58,17 @@ type AccessKeySpec struct {
 	// key is user managed or managed by loft itself.
 	// +optional
 	Type AccessKeyType `json:"type,omitempty"`
+
+	// If available, contains information about the sso login data for this 
+	// access key
+	// +optional
+	Identity *AccessKeyIdentity `json:"identity,omitempty"`
 	
+	// The last time the identity was refreshed
+	// +optional
+	IdentityRefresh *metav1.Time `json:"identityRefresh,omitempty"`
+	
+	// DEPRECATED: Use identity instead
 	// If available, contains information about the oidc login data for this 
 	// access key
 	// +optional
@@ -67,6 +77,39 @@ type AccessKeySpec struct {
 	// If the token is a refresh token, contains information about it
 	// +optional
 	OIDCProvider *AccessKeyOIDCProvider `json:"oidcProvider,omitempty"`
+}
+
+type AccessKeyIdentity struct {
+	// The subject of the user
+	// +optional
+	UserID string `json:"userId,omitempty"`
+	
+	// The username 
+	// +optional
+	Username string `json:"username,omitempty"`
+	
+	// The preferred username / display name
+	// +optional
+	PreferredUsername string `json:"preferredUsername,omitempty"`
+	
+	// The user email
+	// +optional
+	Email string
+	
+	// If the user email was verified
+	// +optional
+	EmailVerified bool
+
+	// The groups from the identity provider
+	// +optional
+	Groups []string
+
+	// ConnectorData holds data used by the connector for subsequent requests after initial
+	// authentication, such as access tokens for upstream providers.
+	//
+	// This data is never shared with end users, OAuth clients, or through the API.
+	// +optional
+	ConnectorData []byte
 }
 
 type AccessKeyOIDCProvider struct {

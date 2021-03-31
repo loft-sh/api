@@ -262,10 +262,28 @@ type OIDCClient struct {
 // Authentication holds authentication relevant information
 type Authentication struct {
 	// Password holds password authentication relevant information
+	// +optional
 	Password *AuthenticationPassword `json:"password,omitempty"`
 
 	// OIDC holds oidc authentication configuration
+	// +optional
 	OIDC *AuthenticationOIDC `json:"oidc,omitempty"`
+	
+	// Github holds github authentication configuration
+	// +optional
+	Github *AuthenticationGithub `json:"github,omitempty"`
+	
+	// Gitlab holds gitlab authentication configuration
+	// +optional
+	Gitlab *AuthenticationGitlab `json:"gitlab,omitempty"`
+	
+	// Google holds google authentication configuration
+	// +optional
+	Google *AuthenticationGoogle `json:"google,omitempty"`
+
+	// Microsoft holds microsoft authentication configuration
+	// +optional
+	Microsoft *AuthenticationMicrosoft `json:"microsoft,omitempty"`
 }
 
 type AuthenticationPassword struct {
@@ -273,7 +291,156 @@ type AuthenticationPassword struct {
 	Disabled bool `json:"disabled,omitempty"`
 }
 
+type AuthenticationMicrosoft struct {
+	AuthenticationClusterAccountTemplates `json:",inline"`
+
+	// Microsoft client id
+	ClientID string `json:"clientId"`
+	
+	// Microsoft client secret
+	ClientSecret string `json:"clientSecret"`
+	
+	// loft redirect uri. Usually https://loft.my.domain/auth/microsoft/callback
+	RedirectURI string `json:"redirectURI"`
+	
+	// tenant configuration parameter controls what kinds of accounts may be authenticated in loft. 
+	// By default, all types of Microsoft accounts (consumers and organizations) can authenticate in loft via Microsoft. 
+	// To change this, set the tenant parameter to one of the following:
+	//
+	// common - both personal and business/school accounts can authenticate in loft via Microsoft (default)
+	// consumers - only personal accounts can authenticate in loft
+	// organizations - only business/school accounts can authenticate in loft
+	// <tenant uuid> or <tenant name> - only accounts belonging to specific tenant identified by either <tenant uuid> or <tenant name> can authenticate in loft
+	// +optional
+	Tenant string `json:"tenant,omitempty"`
+	
+	// It is possible to require a user to be a member of a particular group in order to be successfully authenticated in loft.
+	// +optional
+	Groups []string `json:"groups,omitempty"`
+	
+	// configuration option restricts the list to include only security groups. By default all groups (security, Office 365, mailing lists) are included.
+	// +optional
+	OnlySecurityGroups bool `json:"onlySecurityGroups,omitempty"`
+	
+	// Restrict the groups claims to include only the user’s groups that are in the configured groups
+	// +optional
+	UseGroupsAsWhitelist bool `json:"useGroupsAsWhitelist,omitempty"`
+}
+
+type AuthenticationGoogle struct {
+	AuthenticationClusterAccountTemplates `json:",inline"`
+	
+	// Google client id
+	ClientID string `json:"clientId"`
+	
+	// Google client secret
+	ClientSecret string `json:"clientSecret"`
+	
+	// loft redirect uri. E.g. https://loft.my.domain/auth/google/callback
+	RedirectURI string `json:"redirectURI"`
+	
+	// defaults to "profile" and "email"
+	// +optional
+	Scopes []string `json:"scopes,omitempty"`
+
+	// Optional list of whitelisted domains
+	// If this field is nonempty, only users from a listed domain will be allowed to log in
+	// +optional
+	HostedDomains []string `json:"hostedDomains,omitempty"`
+
+	// Optional list of whitelisted groups
+	// If this field is nonempty, only users from a listed group will be allowed to log in
+	// +optional
+	Groups []string `json:"groups,omitempty"`
+
+	// Optional path to service account json
+	// If nonempty, and groups claim is made, will use authentication from file to
+	// check groups with the admin directory api
+	// +optional
+	ServiceAccountFilePath string `json:"serviceAccountFilePath,omitempty"`
+
+	// Required if ServiceAccountFilePath
+	// The email of a GSuite super user which the service account will impersonate
+	// when listing groups
+	// +optional
+	AdminEmail string `json:"adminEmail,omitempty"`
+}
+
+type AuthenticationGitlab struct {
+	AuthenticationClusterAccountTemplates `json:",inline"`
+	
+	// Gitlab client id
+	ClientID string `json:"clientId"`
+	
+	// Gitlab client secret
+	ClientSecret string `json:"clientSecret"`
+	
+	// Redirect URI 
+	RedirectURI string `json:"redirectURI"`
+	
+	// BaseURL is optional, default = https://gitlab.com
+	// +optional
+	BaseURL string `json:"baseURL,omitempty"`
+
+	// Optional groups whitelist, communicated through the "groups" scope.
+	// If `groups` is omitted, all of the user's GitLab groups are returned.
+	// If `groups` is provided, this acts as a whitelist - only the user's GitLab groups that are in the configured `groups` below will go into the groups claim. Conversely, if the user is not in any of the configured `groups`, the user will not be authenticated.
+	// +optional
+	Groups []string `json:"groups,omitempty"`
+}
+
+type AuthenticationGithub struct {
+	AuthenticationClusterAccountTemplates `json:",inline"`
+	
+	// ClientID holds the github client id
+	ClientID string `json:"clientId,omitempty"`
+
+	// ClientID holds the github client secret
+	ClientSecret string `json:"clientSecret"`
+	
+	// RedirectURI holds the redirect URI. Should be https://loft.domain.tld/auth/github/callback
+	RedirectURI string `json:"redirectURI"`
+
+	// Loft queries the following organizations for group information. 
+	// Group claims are formatted as "(org):(team)".
+	// For example if a user is part of the "engineering" team of the "coreos"
+	// org, the group claim would include "coreos:engineering".
+	//
+	// If orgs are specified in the config then user MUST be a member of at least one of the specified orgs to
+	// authenticate with loft.
+	// +optional
+	Orgs []AuthenticationGithubOrg `json:"orgs,omitempty"`
+	
+	// Required ONLY for GitHub Enterprise.
+	// This is the Hostname of the GitHub Enterprise account listed on the
+	// management console. Ensure this domain is routable on your network.
+	// +optional
+	HostName string `json:"hostName,omitempty"`
+
+	// ONLY for GitHub Enterprise. Optional field.
+	// Used to support self-signed or untrusted CA root certificates.
+	// +optional
+	RootCA string `json:"rootCA,omitempty"`
+}
+
+// AuthenticationGithubOrg holds org-team filters, in which teams are optional.
+type AuthenticationGithubOrg struct {
+	// Organization name in github (not slug, full name). Only users in this github
+	// organization can authenticate.
+	// +optional
+	Name string `json:"name"`
+
+	// Names of teams in a github organization. A user will be able to
+	// authenticate if they are members of at least one of these teams. Users
+	// in the organization can authenticate if this field is omitted from the
+	// config file.
+	// +optional
+	Teams []string `json:"teams,omitempty"`
+}
+
 type AuthenticationOIDC struct {
+	AuthenticationClusterAccountTemplates `json:",inline"`
+	
 	// IssuerURL is the URL the provider signs ID Tokens as. This will be the "iss"
 	// field of all tokens produced by the provider and is used for configuration
 	// discovery.
@@ -298,6 +465,10 @@ type AuthenticationOIDC struct {
 	// ClientSecret to issue tokens from the OIDC provider
 	// +optional
 	ClientSecret string `json:"clientSecret,omitempty"`
+	
+	// loft redirect uri. E.g. https://loft.my.domain/auth/oidc/callback
+	// +optional
+	RedirectURI string `json:"redirectURI,omitempty"`
 
 	// Path to a PEM encoded root certificate of the provider. Optional
 	// +optional
@@ -331,7 +502,9 @@ type AuthenticationOIDC struct {
 	// Type of the OIDC to show in the UI. Only for displaying purposes
 	// +optional
 	Type string `json:"type,omitempty"`
+}
 
+type AuthenticationClusterAccountTemplates struct {
 	// Cluster Account Templates that will be applied for users logging in through this authentication
 	// +optional
 	ClusterAccountTemplates []storagev1.UserClusterAccountTemplate `json:"clusterAccountTemplates,omitempty"`

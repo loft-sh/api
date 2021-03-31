@@ -741,8 +741,53 @@ type AuditPolicyRule struct {
 }
 
 type Authentication struct {
-	Password *AuthenticationPassword
-	OIDC     *AuthenticationOIDC
+	Password  *AuthenticationPassword
+	OIDC      *AuthenticationOIDC
+	Github    *AuthenticationGithub
+	Gitlab    *AuthenticationGitlab
+	Google    *AuthenticationGoogle
+	Microsoft *AuthenticationMicrosoft
+}
+
+type AuthenticationClusterAccountTemplates struct {
+	ClusterAccountTemplates      []storagev1.UserClusterAccountTemplate
+	GroupClusterAccountTemplates []AuthenticationGroupClusterAccountTemplate
+}
+
+type AuthenticationGithub struct {
+	AuthenticationClusterAccountTemplates
+	ClientID     string
+	ClientSecret string
+	RedirectURI  string
+	Orgs         []AuthenticationGithubOrg
+	HostName     string
+	RootCA       string
+}
+
+type AuthenticationGithubOrg struct {
+	Name  string
+	Teams []string
+}
+
+type AuthenticationGitlab struct {
+	AuthenticationClusterAccountTemplates
+	ClientID     string
+	ClientSecret string
+	RedirectURI  string
+	BaseURL      string
+	Groups       []string
+}
+
+type AuthenticationGoogle struct {
+	AuthenticationClusterAccountTemplates
+	ClientID               string
+	ClientSecret           string
+	RedirectURI            string
+	Scopes                 []string
+	HostedDomains          []string
+	Groups                 []string
+	ServiceAccountFilePath string
+	AdminEmail             string
 }
 
 type AuthenticationGroupClusterAccountTemplate struct {
@@ -750,19 +795,30 @@ type AuthenticationGroupClusterAccountTemplate struct {
 	ClusterAccountTemplates []storagev1.UserClusterAccountTemplate
 }
 
+type AuthenticationMicrosoft struct {
+	AuthenticationClusterAccountTemplates
+	ClientID             string
+	ClientSecret         string
+	RedirectURI          string
+	Tenant               string
+	Groups               []string
+	OnlySecurityGroups   bool
+	UseGroupsAsWhitelist bool
+}
+
 type AuthenticationOIDC struct {
-	IssuerURL                    string
-	ClientID                     string
-	ClientSecret                 string
-	CAFile                       string
-	UsernameClaim                string
-	UsernamePrefix               string
-	GroupsClaim                  string
-	GetUserInfo                  bool
-	GroupsPrefix                 string
-	Type                         string
-	ClusterAccountTemplates      []storagev1.UserClusterAccountTemplate
-	GroupClusterAccountTemplates []AuthenticationGroupClusterAccountTemplate
+	AuthenticationClusterAccountTemplates
+	IssuerURL      string
+	ClientID       string
+	ClientSecret   string
+	RedirectURI    string
+	CAFile         string
+	UsernameClaim  string
+	UsernamePrefix string
+	GroupsClaim    string
+	GetUserInfo    bool
+	GroupsPrefix   string
+	Type           string
 }
 
 type AuthenticationPassword struct {
