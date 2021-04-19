@@ -485,6 +485,11 @@ func (in *AuthenticationMicrosoft) DeepCopy() *AuthenticationMicrosoft {
 func (in *AuthenticationOIDC) DeepCopyInto(out *AuthenticationOIDC) {
 	*out = *in
 	in.AuthenticationClusterAccountTemplates.DeepCopyInto(&out.AuthenticationClusterAccountTemplates)
+	if in.Groups != nil {
+		in, out := &in.Groups, &out.Groups
+		*out = make([]string, len(*in))
+		copy(*out, *in)
+	}
 	return
 }
 

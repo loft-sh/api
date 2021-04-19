@@ -10,7 +10,7 @@ import (
 // +genclient:nonNamespaced
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
 
-// User holds the user information
+// Config holds the loft configuration
 // +k8s:openapi-gen=true
 // +resource:path=configs,rest=ConfigREST
 type Config struct {
@@ -48,14 +48,14 @@ type ConfigStatus struct {
 // Audit holds the audit configuration options for loft. Changing any options will require a loft restart
 // to take effect.
 type Audit struct {
-	// If audit is enabled and incoming api requests will be logged based on the supplied policy.  
+	// If audit is enabled and incoming api requests will be logged based on the supplied policy.
 	// +optional
 	Enabled bool `json:"enabled,omitempty"`
-	
+
 	// The audit policy to use and log requests. By default loft will not log anything
 	Policy AuditPolicy `json:"policy,omitempty"`
-	
-	// The path where to save the audit log files. This is required if audit is enabled. Backup log files will 
+
+	// The path where to save the audit log files. This is required if audit is enabled. Backup log files will
 	// be retained in the same directory.
 	Path string `json:"path,omitempty"`
 
@@ -145,16 +145,16 @@ type AuditPolicyRule struct {
 	// +optional
 	OmitStages []auditv1.Stage `json:"omitStages,omitempty" protobuf:"bytes,8,rep,name=omitStages"`
 
-	// RequestTargets is a list of request targets for which events are created. 
+	// RequestTargets is a list of request targets for which events are created.
 	// An empty list implies every request.
 	// +optional
 	RequestTargets []auditv1.RequestTarget `json:"requestTargets,omitempty"`
-	
+
 	// Clusters that this rule matches. Only applies to cluster requests.
 	// If this is set, no events for non cluster requests will be created.
 	// An empty list means no restrictions will apply.
 	// +optional
-	Clusters []string `json:"clusters,omitempty"` 
+	Clusters []string `json:"clusters,omitempty"`
 }
 
 // GroupResources represents resource kinds in an API group.
@@ -271,15 +271,15 @@ type Authentication struct {
 	// OIDC holds oidc authentication configuration
 	// +optional
 	OIDC *AuthenticationOIDC `json:"oidc,omitempty"`
-	
+
 	// Github holds github authentication configuration
 	// +optional
 	Github *AuthenticationGithub `json:"github,omitempty"`
-	
+
 	// Gitlab holds gitlab authentication configuration
 	// +optional
 	Gitlab *AuthenticationGitlab `json:"gitlab,omitempty"`
-	
+
 	// Google holds google authentication configuration
 	// +optional
 	Google *AuthenticationGoogle `json:"google,omitempty"`
@@ -299,15 +299,15 @@ type AuthenticationMicrosoft struct {
 
 	// Microsoft client id
 	ClientID string `json:"clientId"`
-	
+
 	// Microsoft client secret
 	ClientSecret string `json:"clientSecret"`
-	
+
 	// loft redirect uri. Usually https://loft.my.domain/auth/microsoft/callback
 	RedirectURI string `json:"redirectURI"`
-	
-	// tenant configuration parameter controls what kinds of accounts may be authenticated in loft. 
-	// By default, all types of Microsoft accounts (consumers and organizations) can authenticate in loft via Microsoft. 
+
+	// tenant configuration parameter controls what kinds of accounts may be authenticated in loft.
+	// By default, all types of Microsoft accounts (consumers and organizations) can authenticate in loft via Microsoft.
 	// To change this, set the tenant parameter to one of the following:
 	//
 	// common - both personal and business/school accounts can authenticate in loft via Microsoft (default)
@@ -316,15 +316,15 @@ type AuthenticationMicrosoft struct {
 	// <tenant uuid> or <tenant name> - only accounts belonging to specific tenant identified by either <tenant uuid> or <tenant name> can authenticate in loft
 	// +optional
 	Tenant string `json:"tenant,omitempty"`
-	
+
 	// It is possible to require a user to be a member of a particular group in order to be successfully authenticated in loft.
 	// +optional
 	Groups []string `json:"groups,omitempty"`
-	
+
 	// configuration option restricts the list to include only security groups. By default all groups (security, Office 365, mailing lists) are included.
 	// +optional
 	OnlySecurityGroups bool `json:"onlySecurityGroups,omitempty"`
-	
+
 	// Restrict the groups claims to include only the user’s groups that are in the configured groups
 	// +optional
 	UseGroupsAsWhitelist bool `json:"useGroupsAsWhitelist,omitempty"`
@@ -332,16 +332,16 @@ type AuthenticationMicrosoft struct {
 
 type AuthenticationGoogle struct {
 	AuthenticationClusterAccountTemplates `json:",inline"`
-	
+
 	// Google client id
 	ClientID string `json:"clientId"`
-	
+
 	// Google client secret
 	ClientSecret string `json:"clientSecret"`
-	
+
 	// loft redirect uri. E.g. https://loft.my.domain/auth/google/callback
 	RedirectURI string `json:"redirectURI"`
-	
+
 	// defaults to "profile" and "email"
 	// +optional
 	Scopes []string `json:"scopes,omitempty"`
@@ -371,16 +371,16 @@ type AuthenticationGoogle struct {
 
 type AuthenticationGitlab struct {
 	AuthenticationClusterAccountTemplates `json:",inline"`
-	
+
 	// Gitlab client id
 	ClientID string `json:"clientId"`
-	
+
 	// Gitlab client secret
 	ClientSecret string `json:"clientSecret"`
-	
-	// Redirect URI 
+
+	// Redirect URI
 	RedirectURI string `json:"redirectURI"`
-	
+
 	// BaseURL is optional, default = https://gitlab.com
 	// +optional
 	BaseURL string `json:"baseURL,omitempty"`
@@ -394,17 +394,17 @@ type AuthenticationGitlab struct {
 
 type AuthenticationGithub struct {
 	AuthenticationClusterAccountTemplates `json:",inline"`
-	
+
 	// ClientID holds the github client id
 	ClientID string `json:"clientId,omitempty"`
 
 	// ClientID holds the github client secret
 	ClientSecret string `json:"clientSecret"`
-	
+
 	// RedirectURI holds the redirect URI. Should be https://loft.domain.tld/auth/github/callback
 	RedirectURI string `json:"redirectURI"`
 
-	// Loft queries the following organizations for group information. 
+	// Loft queries the following organizations for group information.
 	// Group claims are formatted as "(org):(team)".
 	// For example if a user is part of the "engineering" team of the "coreos"
 	// org, the group claim would include "coreos:engineering".
@@ -413,7 +413,7 @@ type AuthenticationGithub struct {
 	// authenticate with loft.
 	// +optional
 	Orgs []AuthenticationGithubOrg `json:"orgs,omitempty"`
-	
+
 	// Required ONLY for GitHub Enterprise.
 	// This is the Hostname of the GitHub Enterprise account listed on the
 	// management console. Ensure this domain is routable on your network.
@@ -443,7 +443,7 @@ type AuthenticationGithubOrg struct {
 
 type AuthenticationOIDC struct {
 	AuthenticationClusterAccountTemplates `json:",inline"`
-	
+
 	// IssuerURL is the URL the provider signs ID Tokens as. This will be the "iss"
 	// field of all tokens produced by the provider and is used for configuration
 	// discovery.
@@ -468,7 +468,7 @@ type AuthenticationOIDC struct {
 	// ClientSecret to issue tokens from the OIDC provider
 	// +optional
 	ClientSecret string `json:"clientSecret,omitempty"`
-	
+
 	// loft redirect uri. E.g. https://loft.my.domain/auth/oidc/callback
 	// +optional
 	RedirectURI string `json:"redirectURI,omitempty"`
@@ -476,6 +476,10 @@ type AuthenticationOIDC struct {
 	// Path to a PEM encoded root certificate of the provider. Optional
 	// +optional
 	CAFile string `json:"caFile,omitempty"`
+
+	// Specify whether to communicate without validating SSL certificates
+	// +optional
+	InsecureCA bool `json:"insecureCa,omitempty"`
 
 	// UsernameClaim is the JWT field to use as the user's username.
 	// +optional
@@ -491,6 +495,11 @@ type AuthenticationOIDC struct {
 	// must be a string or list of strings.
 	// +optional
 	GroupsClaim string `json:"groupsClaim,omitempty"`
+
+	// If required groups is non empty, access is denied if the user is not part of at least one
+	// of the specified groups.
+	// +optional
+	Groups []string `json:"groups,omitempty"`
 
 	// GetUserInfo, if specified, tells the OIDCAuthenticator to try to populate the user's
 	// information from the UserInfo.

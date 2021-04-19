@@ -789,9 +789,11 @@ type AuthenticationOIDC struct {
 	ClientSecret   string
 	RedirectURI    string
 	CAFile         string
+	InsecureCA     bool
 	UsernameClaim  string
 	UsernamePrefix string
 	GroupsClaim    string
+	Groups         []string
 	GetUserInfo    bool
 	GroupsPrefix   string
 	Type           string
