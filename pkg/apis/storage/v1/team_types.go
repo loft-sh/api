@@ -35,11 +35,11 @@ type TeamSpec struct {
 	// +optional
 	Groups []string `json:"groups,omitempty"`
 
-	// ImagePullSecrets holds secret references to image pull 
+	// ImagePullSecrets holds secret references to image pull
 	// secrets the team has access to.
 	// +optional
 	ImagePullSecrets []*KindSecretRef `json:"imagePullSecrets,omitempty"`
-	
+
 	// ClusterAccountTemplates that should be applied for the user
 	// +optional
 	ClusterAccountTemplates []UserClusterAccountTemplate `json:"clusterAccountTemplates,omitempty"`
@@ -49,10 +49,6 @@ type TeamStatus struct {
 	// Clusters holds information about which clusters the user has accounts in
 	// +optional
 	Clusters []AccountClusterStatus `json:"clusters,omitempty"`
-
-	// ClusterAccountTemplates holds information about which cluster account templates were applied
-	// +optional
-	ClusterAccountTemplates []UserClusterAccountTemplateStatus `json:"clusterAccountTemplates,omitempty"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object

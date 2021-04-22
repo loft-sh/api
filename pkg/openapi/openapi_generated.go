@@ -191,11 +191,11 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 		"github.com/loft-sh/api/pkg/apis/storage/v1.AccessKeySpec":                                schema_pkg_apis_storage_v1_AccessKeySpec(ref),
 		"github.com/loft-sh/api/pkg/apis/storage/v1.AccessKeyStatus":                              schema_pkg_apis_storage_v1_AccessKeyStatus(ref),
 		"github.com/loft-sh/api/pkg/apis/storage/v1.AccountClusterStatus":                         schema_pkg_apis_storage_v1_AccountClusterStatus(ref),
+		"github.com/loft-sh/api/pkg/apis/storage/v1.AccountClusterTemplateStatus":                 schema_pkg_apis_storage_v1_AccountClusterTemplateStatus(ref),
 		"github.com/loft-sh/api/pkg/apis/storage/v1.AccountTemplate":                              schema_pkg_apis_storage_v1_AccountTemplate(ref),
 		"github.com/loft-sh/api/pkg/apis/storage/v1.Chart":                                        schema_pkg_apis_storage_v1_Chart(ref),
 		"github.com/loft-sh/api/pkg/apis/storage/v1.Cluster":                                      schema_pkg_apis_storage_v1_Cluster(ref),
 		"github.com/loft-sh/api/pkg/apis/storage/v1.ClusterAccountTemplate":                       schema_pkg_apis_storage_v1_ClusterAccountTemplate(ref),
-		"github.com/loft-sh/api/pkg/apis/storage/v1.ClusterAccountTemplateClusterStatus":          schema_pkg_apis_storage_v1_ClusterAccountTemplateClusterStatus(ref),
 		"github.com/loft-sh/api/pkg/apis/storage/v1.ClusterAccountTemplateList":                   schema_pkg_apis_storage_v1_ClusterAccountTemplateList(ref),
 		"github.com/loft-sh/api/pkg/apis/storage/v1.ClusterAccountTemplateSpec":                   schema_pkg_apis_storage_v1_ClusterAccountTemplateSpec(ref),
 		"github.com/loft-sh/api/pkg/apis/storage/v1.ClusterAccountTemplateStatus":                 schema_pkg_apis_storage_v1_ClusterAccountTemplateStatus(ref),
@@ -221,7 +221,6 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 		"github.com/loft-sh/api/pkg/apis/storage/v1.TeamStatus":                                   schema_pkg_apis_storage_v1_TeamStatus(ref),
 		"github.com/loft-sh/api/pkg/apis/storage/v1.User":                                         schema_pkg_apis_storage_v1_User(ref),
 		"github.com/loft-sh/api/pkg/apis/storage/v1.UserClusterAccountTemplate":                   schema_pkg_apis_storage_v1_UserClusterAccountTemplate(ref),
-		"github.com/loft-sh/api/pkg/apis/storage/v1.UserClusterAccountTemplateStatus":             schema_pkg_apis_storage_v1_UserClusterAccountTemplateStatus(ref),
 		"github.com/loft-sh/api/pkg/apis/storage/v1.UserList":                                     schema_pkg_apis_storage_v1_UserList(ref),
 		"github.com/loft-sh/api/pkg/apis/storage/v1.UserSpec":                                     schema_pkg_apis_storage_v1_UserSpec(ref),
 		"github.com/loft-sh/api/pkg/apis/storage/v1.UserStatus":                                   schema_pkg_apis_storage_v1_UserStatus(ref),
@@ -7591,24 +7590,11 @@ func schema_pkg_apis_management_v1_TeamStatus(ref common.ReferenceCallback) comm
 							},
 						},
 					},
-					"clusterAccountTemplates": {
-						SchemaProps: spec.SchemaProps{
-							Description: "ClusterAccountTemplates holds information about which cluster account templates were applied",
-							Type:        []string{"array"},
-							Items: &spec.SchemaOrArray{
-								Schema: &spec.Schema{
-									SchemaProps: spec.SchemaProps{
-										Ref: ref("github.com/loft-sh/api/pkg/apis/storage/v1.UserClusterAccountTemplateStatus"),
-									},
-								},
-							},
-						},
-					},
 				},
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/pkg/apis/storage/v1.AccountClusterStatus", "github.com/loft-sh/api/pkg/apis/storage/v1.UserClusterAccountTemplateStatus"},
+			"github.com/loft-sh/api/pkg/apis/storage/v1.AccountClusterStatus"},
 	}
 }
 
@@ -8408,24 +8394,11 @@ func schema_pkg_apis_management_v1_UserStatus(ref common.ReferenceCallback) comm
 							},
 						},
 					},
-					"clusterAccountTemplates": {
-						SchemaProps: spec.SchemaProps{
-							Description: "ClusterAccountTemplates holds information about which cluster account templates were applied",
-							Type:        []string{"array"},
-							Items: &spec.SchemaOrArray{
-								Schema: &spec.Schema{
-									SchemaProps: spec.SchemaProps{
-										Ref: ref("github.com/loft-sh/api/pkg/apis/storage/v1.UserClusterAccountTemplateStatus"),
-									},
-								},
-							},
-						},
-					},
 				},
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/pkg/apis/storage/v1.AccountClusterStatus", "github.com/loft-sh/api/pkg/apis/storage/v1.UserClusterAccountTemplateStatus"},
+			"github.com/loft-sh/api/pkg/apis/storage/v1.AccountClusterStatus"},
 	}
 }
 
@@ -9001,6 +8974,19 @@ func schema_pkg_apis_storage_v1_AccountClusterStatus(ref common.ReferenceCallbac
 							Format:      "",
 						},
 					},
+					"accountsClusterTemplateStatus": {
+						SchemaProps: spec.SchemaProps{
+							Description: "AccountsClusterTemplate status is the status of the account cluster template that was used to create the cluster account",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Ref: ref("github.com/loft-sh/api/pkg/apis/storage/v1.AccountClusterTemplateStatus"),
+									},
+								},
+							},
+						},
+					},
 					"accounts": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Accounts is the account name of the user in the cluster",
@@ -9013,6 +8999,69 @@ func schema_pkg_apis_storage_v1_AccountClusterStatus(ref common.ReferenceCallbac
 									},
 								},
 							},
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			"github.com/loft-sh/api/pkg/apis/storage/v1.AccountClusterTemplateStatus"},
+	}
+}
+
+func schema_pkg_apis_storage_v1_AccountClusterTemplateStatus(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"name": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Name is the name of the cluster account template",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"account": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Account is the name of the account in the cluster",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"accountTemplateHash": {
+						SchemaProps: spec.SchemaProps{
+							Description: "AccountTemplateHash is the hash of the account template that was applied",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"ownsHash": {
+						SchemaProps: spec.SchemaProps{
+							Description: "OwnsHash is the hash of the owns part of the cluster account template that was applied",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"phase": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Status holds the status of the account in the target cluster",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"reason": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Reason describes why loft couldn't sync the account with a machine readable identifier",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"message": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Message describes why loft couldn't sync the account in human language",
+							Type:        []string{"string"},
+							Format:      "",
 						},
 					},
 				},
@@ -9179,46 +9228,6 @@ func schema_pkg_apis_storage_v1_ClusterAccountTemplate(ref common.ReferenceCallb
 		},
 		Dependencies: []string{
 			"github.com/loft-sh/api/pkg/apis/storage/v1.ClusterAccountTemplateSpec", "github.com/loft-sh/api/pkg/apis/storage/v1.ClusterAccountTemplateStatus", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
-	}
-}
-
-func schema_pkg_apis_storage_v1_ClusterAccountTemplateClusterStatus(ref common.ReferenceCallback) common.OpenAPIDefinition {
-	return common.OpenAPIDefinition{
-		Schema: spec.Schema{
-			SchemaProps: spec.SchemaProps{
-				Type: []string{"object"},
-				Properties: map[string]spec.Schema{
-					"name": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Name of the cluster where the cluster account template was applied",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"phase": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Status holds the status of the account in the target cluster",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"reason": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Reason describes why loft couldn't sync the account with a machine readable identifier",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"message": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Message describes why loft couldn't sync the account in human language",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-				},
-			},
-		},
 	}
 }
 
@@ -10243,24 +10252,11 @@ func schema_pkg_apis_storage_v1_TeamStatus(ref common.ReferenceCallback) common.
 							},
 						},
 					},
-					"clusterAccountTemplates": {
-						SchemaProps: spec.SchemaProps{
-							Description: "ClusterAccountTemplates holds information about which cluster account templates were applied",
-							Type:        []string{"array"},
-							Items: &spec.SchemaOrArray{
-								Schema: &spec.Schema{
-									SchemaProps: spec.SchemaProps{
-										Ref: ref("github.com/loft-sh/api/pkg/apis/storage/v1.UserClusterAccountTemplateStatus"),
-									},
-								},
-							},
-						},
-					},
 				},
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/pkg/apis/storage/v1.AccountClusterStatus", "github.com/loft-sh/api/pkg/apis/storage/v1.UserClusterAccountTemplateStatus"},
+			"github.com/loft-sh/api/pkg/apis/storage/v1.AccountClusterStatus"},
 	}
 }
 
@@ -10321,6 +10317,13 @@ func schema_pkg_apis_storage_v1_UserClusterAccountTemplate(ref common.ReferenceC
 							Format:      "",
 						},
 					},
+					"sync": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Sync defines if Loft should sync changes to the cluster account template to the cluster accounts and create new accounts if new clusters match the templates.",
+							Type:        []string{"boolean"},
+							Format:      "",
+						},
+					},
 					"accountName": {
 						SchemaProps: spec.SchemaProps{
 							Description: "AccountName is the name of the account that should be created. Defaults to the user or team kubernetes name.",
@@ -10331,61 +10334,6 @@ func schema_pkg_apis_storage_v1_UserClusterAccountTemplate(ref common.ReferenceC
 				},
 			},
 		},
-	}
-}
-
-func schema_pkg_apis_storage_v1_UserClusterAccountTemplateStatus(ref common.ReferenceCallback) common.OpenAPIDefinition {
-	return common.OpenAPIDefinition{
-		Schema: spec.Schema{
-			SchemaProps: spec.SchemaProps{
-				Type: []string{"object"},
-				Properties: map[string]spec.Schema{
-					"name": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Name of the cluster account template that was applied",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"clusters": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Clusters holds the cluster on which this template was applied",
-							Type:        []string{"array"},
-							Items: &spec.SchemaOrArray{
-								Schema: &spec.Schema{
-									SchemaProps: spec.SchemaProps{
-										Ref: ref("github.com/loft-sh/api/pkg/apis/storage/v1.ClusterAccountTemplateClusterStatus"),
-									},
-								},
-							},
-						},
-					},
-					"phase": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Status holds the status of the account in the target cluster",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"reason": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Reason describes why loft couldn't sync the account with a machine readable identifier",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"message": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Message describes why loft couldn't sync the account in human language",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-				},
-			},
-		},
-		Dependencies: []string{
-			"github.com/loft-sh/api/pkg/apis/storage/v1.ClusterAccountTemplateClusterStatus"},
 	}
 }
 
@@ -10599,24 +10547,11 @@ func schema_pkg_apis_storage_v1_UserStatus(ref common.ReferenceCallback) common.
 							},
 						},
 					},
-					"clusterAccountTemplates": {
-						SchemaProps: spec.SchemaProps{
-							Description: "ClusterAccountTemplates holds information about which cluster account templates were applied",
-							Type:        []string{"array"},
-							Items: &spec.SchemaOrArray{
-								Schema: &spec.Schema{
-									SchemaProps: spec.SchemaProps{
-										Ref: ref("github.com/loft-sh/api/pkg/apis/storage/v1.UserClusterAccountTemplateStatus"),
-									},
-								},
-							},
-						},
-					},
 				},
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/pkg/apis/storage/v1.AccountClusterStatus", "github.com/loft-sh/api/pkg/apis/storage/v1.UserClusterAccountTemplateStatus"},
+			"github.com/loft-sh/api/pkg/apis/storage/v1.AccountClusterStatus"},
 	}
 }
 
