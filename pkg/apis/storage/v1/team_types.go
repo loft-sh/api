@@ -49,6 +49,11 @@ type TeamStatus struct {
 	// Clusters holds information about which clusters the user has accounts in
 	// +optional
 	Clusters []AccountClusterStatus `json:"clusters,omitempty"`
+
+	// ClusterAccountTemplates holds information about which cluster account templates were applied
+	// DEPRECATED: Use status.clusters instead
+	// +optional
+	ClusterAccountTemplates []UserClusterAccountTemplateStatus `json:"clusterAccountTemplates,omitempty"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
