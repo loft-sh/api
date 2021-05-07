@@ -56,6 +56,10 @@ func (c *FakeManagementV1) OwnedAccessKeys() v1.OwnedAccessKeyInterface {
 	return &FakeOwnedAccessKeys{c}
 }
 
+func (c *FakeManagementV1) PolicyViolations() v1.PolicyViolationInterface {
+	return &FakePolicyViolations{c}
+}
+
 func (c *FakeManagementV1) ResetAccessKeys() v1.ResetAccessKeyInterface {
 	return &FakeResetAccessKeys{c}
 }

@@ -10,6 +10,7 @@ import (
 	clusterv1 "github.com/loft-sh/api/pkg/apis/cluster/v1"
 	storagev1 "github.com/loft-sh/api/pkg/apis/storage/v1"
 	"github.com/loft-sh/api/pkg/managerfactory"
+	policyv1beta1 "github.com/loft-sh/jspolicy/pkg/apis/policy/v1beta1"
 	configv1alpha1 "github.com/loft-sh/kiosk/pkg/apis/config/v1alpha1"
 	tenancyv1alpha1 "github.com/loft-sh/kiosk/pkg/apis/tenancy/v1alpha1"
 	authorizationv1 "k8s.io/api/authorization/v1"
@@ -145,7 +146,17 @@ var (
 	NewOwnedAccessKeyREST = func(getter generic.RESTOptionsGetter) rest.Storage {
 		return NewOwnedAccessKeyRESTFunc(Factory)
 	}
-	NewOwnedAccessKeyRESTFunc       NewRESTFunc
+	NewOwnedAccessKeyRESTFunc        NewRESTFunc
+	ManagementPolicyViolationStorage = builders.NewApiResourceWithStorage( // Resource status endpoint
+		InternalPolicyViolation,
+		func() runtime.Object { return &PolicyViolation{} },     // Register versioned resource
+		func() runtime.Object { return &PolicyViolationList{} }, // Register versioned resource list
+		NewPolicyViolationREST,
+	)
+	NewPolicyViolationREST = func(getter generic.RESTOptionsGetter) rest.Storage {
+		return NewPolicyViolationRESTFunc(Factory)
+	}
+	NewPolicyViolationRESTFunc      NewRESTFunc
 	ManagementResetAccessKeyStorage = builders.NewApiResourceWithStorage( // Resource status endpoint
 		InternalResetAccessKey,
 		func() runtime.Object { return &ResetAccessKey{} },     // Register versioned resource
@@ -408,6 +419,18 @@ var (
 		func() runtime.Object { return &OwnedAccessKey{} },
 		func() runtime.Object { return &OwnedAccessKeyList{} },
 	)
+	InternalPolicyViolation = builders.NewInternalResource(
+		"policyviolations",
+		"PolicyViolation",
+		func() runtime.Object { return &PolicyViolation{} },
+		func() runtime.Object { return &PolicyViolationList{} },
+	)
+	InternalPolicyViolationStatus = builders.NewInternalResourceStatus(
+		"policyviolations",
+		"PolicyViolationStatus",
+		func() runtime.Object { return &PolicyViolation{} },
+		func() runtime.Object { return &PolicyViolationList{} },
+	)
 	InternalResetAccessKey = builders.NewInternalResource(
 		"resetaccesskeys",
 		"ResetAccessKey",
@@ -604,6 +627,8 @@ var (
 		InternalLoftUpgradeStatus,
 		InternalOwnedAccessKey,
 		InternalOwnedAccessKeyStatus,
+		InternalPolicyViolation,
+		InternalPolicyViolationStatus,
 		InternalResetAccessKey,
 		InternalResetAccessKeyStatus,
 		InternalSelf,
@@ -804,7 +829,7 @@ type AuthenticationPassword struct {
 }
 
 // +genclient
-// +genclient:nonNamespaced
+// +genclient
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
 
 type Cluster struct {
@@ -1059,12 +1084,15 @@ type Kiosk struct {
 }
 
 type KioskSpec struct {
-	Space            tenancyv1alpha1.Space
-	Account          tenancyv1alpha1.Account
-	ConfigAccount    configv1alpha1.Account
-	AccountQuota     configv1alpha1.AccountQuota
-	Template         configv1alpha1.Template
-	TemplateInstance configv1alpha1.TemplateInstance
+	Space              tenancyv1alpha1.Space
+	Account            tenancyv1alpha1.Account
+	ConfigAccount      configv1alpha1.Account
+	AccountQuota       configv1alpha1.AccountQuota
+	Template           configv1alpha1.Template
+	TemplateInstance   configv1alpha1.TemplateInstance
+	JsPolicy           policyv1beta1.JsPolicy
+	JsPolicyBundle     policyv1beta1.JsPolicyBundle
+	JsPolicyViolations policyv1beta1.JsPolicyViolations
 }
 
 type KioskStatus struct {
@@ -1185,6 +1213,27 @@ type Plan struct {
 type PlanProduct struct {
 	Name      string
 	UnitLabel string
+}
+
+// +genclient
+// +genclient:nonNamespaced
+// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+
+type PolicyViolation struct {
+	metav1.TypeMeta
+	metav1.ObjectMeta
+	Spec   PolicyViolationSpec
+	Status PolicyViolationStatus
+}
+
+type PolicyViolationSpec struct {
+}
+
+type PolicyViolationStatus struct {
+	Policy    string
+	Cluster   string
+	User      *EntityInfo
+	Violation policyv1beta1.PolicyViolation
 }
 
 type PredefinedApp struct {
@@ -2941,6 +2990,126 @@ func (s *storageOwnedAccessKey) UpdateOwnedAccessKey(ctx context.Context, object
 }
 
 func (s *storageOwnedAccessKey) DeleteOwnedAccessKey(ctx context.Context, id string) (bool, error) {
+	st := s.GetStandardStorage()
+	_, sync, err := st.Delete(ctx, id, nil, &metav1.DeleteOptions{})
+	return sync, err
+}
+
+//
+// PolicyViolation Functions and Structs
+//
+// +k8s:deepcopy-gen=false
+type PolicyViolationStrategy struct {
+	builders.DefaultStorageStrategy
+}
+
+// +k8s:deepcopy-gen=false
+type PolicyViolationStatusStrategy struct {
+	builders.DefaultStatusStorageStrategy
+}
+
+// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+
+type PolicyViolationList struct {
+	metav1.TypeMeta
+	metav1.ListMeta
+	Items []PolicyViolation
+}
+
+func (PolicyViolation) NewStatus() interface{} {
+	return PolicyViolationStatus{}
+}
+
+func (pc *PolicyViolation) GetStatus() interface{} {
+	return pc.Status
+}
+
+func (pc *PolicyViolation) SetStatus(s interface{}) {
+	pc.Status = s.(PolicyViolationStatus)
+}
+
+func (pc *PolicyViolation) GetSpec() interface{} {
+	return pc.Spec
+}
+
+func (pc *PolicyViolation) SetSpec(s interface{}) {
+	pc.Spec = s.(PolicyViolationSpec)
+}
+
+func (pc *PolicyViolation) GetObjectMeta() *metav1.ObjectMeta {
+	return &pc.ObjectMeta
+}
+
+func (pc *PolicyViolation) SetGeneration(generation int64) {
+	pc.ObjectMeta.Generation = generation
+}
+
+func (pc PolicyViolation) GetGeneration() int64 {
+	return pc.ObjectMeta.Generation
+}
+
+// Registry is an interface for things that know how to store PolicyViolation.
+// +k8s:deepcopy-gen=false
+type PolicyViolationRegistry interface {
+	ListPolicyViolations(ctx context.Context, options *internalversion.ListOptions) (*PolicyViolationList, error)
+	GetPolicyViolation(ctx context.Context, id string, options *metav1.GetOptions) (*PolicyViolation, error)
+	CreatePolicyViolation(ctx context.Context, id *PolicyViolation) (*PolicyViolation, error)
+	UpdatePolicyViolation(ctx context.Context, id *PolicyViolation) (*PolicyViolation, error)
+	DeletePolicyViolation(ctx context.Context, id string) (bool, error)
+}
+
+// NewRegistry returns a new Registry interface for the given Storage. Any mismatched types will panic.
+func NewPolicyViolationRegistry(sp builders.StandardStorageProvider) PolicyViolationRegistry {
+	return &storagePolicyViolation{sp}
+}
+
+// Implement Registry
+// storage puts strong typing around storage calls
+// +k8s:deepcopy-gen=false
+type storagePolicyViolation struct {
+	builders.StandardStorageProvider
+}
+
+func (s *storagePolicyViolation) ListPolicyViolations(ctx context.Context, options *internalversion.ListOptions) (*PolicyViolationList, error) {
+	if options != nil && options.FieldSelector != nil && !options.FieldSelector.Empty() {
+		return nil, fmt.Errorf("field selector not supported yet")
+	}
+	st := s.GetStandardStorage()
+	obj, err := st.List(ctx, options)
+	if err != nil {
+		return nil, err
+	}
+	return obj.(*PolicyViolationList), err
+}
+
+func (s *storagePolicyViolation) GetPolicyViolation(ctx context.Context, id string, options *metav1.GetOptions) (*PolicyViolation, error) {
+	st := s.GetStandardStorage()
+	obj, err := st.Get(ctx, id, options)
+	if err != nil {
+		return nil, err
+	}
+	return obj.(*PolicyViolation), nil
+}
+
+func (s *storagePolicyViolation) CreatePolicyViolation(ctx context.Context, object *PolicyViolation) (*PolicyViolation, error) {
+	st := s.GetStandardStorage()
+	obj, err := st.Create(ctx, object, nil, &metav1.CreateOptions{})
+	if err != nil {
+		return nil, err
+	}
+	return obj.(*PolicyViolation), nil
+}
+
+func (s *storagePolicyViolation) UpdatePolicyViolation(ctx context.Context, object *PolicyViolation) (*PolicyViolation, error) {
+	st := s.GetStandardStorage()
+	obj, _, err := st.Update(ctx, object.Name, rest.DefaultUpdatedObjectInfo(object), nil, nil, false, &metav1.UpdateOptions{})
+	if err != nil {
+		return nil, err
+	}
+	return obj.(*PolicyViolation), nil
+}
+
+func (s *storagePolicyViolation) DeletePolicyViolation(ctx context.Context, id string) (bool, error) {
 	st := s.GetStandardStorage()
 	_, sync, err := st.Delete(ctx, id, nil, &metav1.DeleteOptions{})
 	return sync, err

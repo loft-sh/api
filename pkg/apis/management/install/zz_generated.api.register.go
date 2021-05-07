@@ -52,6 +52,8 @@ func addKnownTypes(scheme *runtime.Scheme) error {
 		&management.LoftUpgradeList{},
 		&management.OwnedAccessKey{},
 		&management.OwnedAccessKeyList{},
+		&management.PolicyViolation{},
+		&management.PolicyViolationList{},
 		&management.ResetAccessKey{},
 		&management.ResetAccessKeyList{},
 		&management.Self{},

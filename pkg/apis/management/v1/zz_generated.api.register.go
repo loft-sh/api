@@ -43,6 +43,8 @@ func addKnownTypes(scheme *runtime.Scheme) error {
 		&LoftUpgradeList{},
 		&OwnedAccessKey{},
 		&OwnedAccessKeyList{},
+		&PolicyViolation{},
+		&PolicyViolationList{},
 		&ResetAccessKey{},
 		&ResetAccessKeyList{},
 		&Self{},
@@ -115,6 +117,7 @@ var (
 		management.ManagementLicenseTokenStorage,
 		management.ManagementLoftUpgradeStorage,
 		management.ManagementOwnedAccessKeyStorage,
+		management.ManagementPolicyViolationStorage,
 		management.ManagementResetAccessKeyStorage,
 		management.ManagementSelfStorage,
 		management.ManagementSelfSubjectAccessReviewStorage,
@@ -345,6 +348,14 @@ type OwnedAccessKeyList struct {
 	metav1.TypeMeta `json:",inline"`
 	metav1.ListMeta `json:"metadata,omitempty"`
 	Items           []OwnedAccessKey `json:"items"`
+}
+
+// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+
+type PolicyViolationList struct {
+	metav1.TypeMeta `json:",inline"`
+	metav1.ListMeta `json:"metadata,omitempty"`
+	Items           []PolicyViolation `json:"items"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object

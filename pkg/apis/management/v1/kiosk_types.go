@@ -1,6 +1,7 @@
 package v1
 
 import (
+	"github.com/loft-sh/jspolicy/pkg/apis/policy/v1beta1"
 	configv1alpha1 "github.com/loft-sh/kiosk/pkg/apis/config/v1alpha1"
 	tenancyv1alpha1 "github.com/loft-sh/kiosk/pkg/apis/tenancy/v1alpha1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
@@ -31,6 +32,11 @@ type KioskSpec struct {
 	AccountQuota     configv1alpha1.AccountQuota     `json:"accountQuota,omitempty"`
 	Template         configv1alpha1.Template         `json:"template,omitempty"`
 	TemplateInstance configv1alpha1.TemplateInstance `json:"templateInstance,omitempty"`
+
+	// policy.loft.sh
+	JsPolicy           v1beta1.JsPolicy           `json:"jsPolicy,omitempty"`
+	JsPolicyBundle     v1beta1.JsPolicyBundle     `json:"jsPolicyBundle,omitempty"`
+	JsPolicyViolations v1beta1.JsPolicyViolations `json:"jsPolicyViolations,omitempty"`
 }
 
 type KioskStatus struct {

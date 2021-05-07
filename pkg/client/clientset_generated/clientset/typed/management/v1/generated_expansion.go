@@ -24,6 +24,8 @@ type LoftUpgradeExpansion interface{}
 
 type OwnedAccessKeyExpansion interface{}
 
+type PolicyViolationExpansion interface{}
+
 type ResetAccessKeyExpansion interface{}
 
 type SelfExpansion interface{}
