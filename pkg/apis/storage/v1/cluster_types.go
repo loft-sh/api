@@ -94,6 +94,19 @@ type HelmChartRepository struct {
 	// URL is the repository url
 	// +optional
 	URL string `json:"url,omitempty"`
+
+	// Username of the repository
+	// +optional
+	Username string `json:"username,omitempty"`
+
+	// Password of the repository
+	// +optional
+	Password string `json:"password,omitempty"`
+
+	// Insecure specifies if the chart should be retrieved without TLS
+	// verification
+	// +optional
+	Insecure bool `json:"insecure,omitempty"`
 }
 
 // Chart describes a chart

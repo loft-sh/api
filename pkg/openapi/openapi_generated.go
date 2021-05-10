@@ -9750,6 +9750,27 @@ func schema_pkg_apis_storage_v1_HelmChartRepository(ref common.ReferenceCallback
 							Format:      "",
 						},
 					},
+					"username": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Username of the repository",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"password": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Password of the repository",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"insecure": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Insecure specifies if the chart should be retrieved without TLS verification",
+							Type:        []string{"boolean"},
+							Format:      "",
+						},
+					},
 				},
 			},
 		},
