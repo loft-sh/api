@@ -151,6 +151,10 @@ type AccountClusterTemplateStatus struct {
 	// +optional
 	OwnsHash string `json:"ownsHash,omitempty"`
 
+	// Last time the condition transitioned from one status to another.
+	// +optional
+	LastTransitionTime *metav1.Time `json:"lastTransitionTime,omitempty"`
+
 	// Status holds the status of the account in the target cluster
 	// +optional
 	Status ClusterAccountTemplateStatusPhase `json:"phase,omitempty"`

@@ -9246,6 +9246,12 @@ func schema_pkg_apis_storage_v1_AccountClusterTemplateStatus(ref common.Referenc
 							Format:      "",
 						},
 					},
+					"lastTransitionTime": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Last time the condition transitioned from one status to another.",
+							Ref:         ref("k8s.io/apimachinery/pkg/apis/meta/v1.Time"),
+						},
+					},
 					"phase": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Status holds the status of the account in the target cluster",
@@ -9270,6 +9276,8 @@ func schema_pkg_apis_storage_v1_AccountClusterTemplateStatus(ref common.Referenc
 				},
 			},
 		},
+		Dependencies: []string{
+			"k8s.io/apimachinery/pkg/apis/meta/v1.Time"},
 	}
 }
 
