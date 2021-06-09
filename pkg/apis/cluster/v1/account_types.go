@@ -9,7 +9,7 @@ import (
 // +genclient:nonNamespaced
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
 
-// User holds the user information
+// Account holds the account information
 // +k8s:openapi-gen=true
 // +resource:path=accounts,rest=AccountREST
 // +subresource:request=AccountClusterRoles,path=clusterroles,kind=AccountClusterRoles,rest=AccountClusterRolesREST

@@ -4,10 +4,10 @@ package v1
 
 import (
 	"github.com/loft-sh/api/pkg/apis/management"
+	"github.com/loft-sh/apiserver/pkg/builders"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime"
 	"k8s.io/apimachinery/pkg/runtime/schema"
-	"sigs.k8s.io/apiserver-builder-alpha/pkg/builders"
 )
 
 func addKnownTypes(scheme *runtime.Scheme) error {

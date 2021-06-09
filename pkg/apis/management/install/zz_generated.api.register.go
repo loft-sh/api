@@ -5,9 +5,9 @@ package install
 import (
 	"github.com/loft-sh/api/pkg/apis/management"
 	v1 "github.com/loft-sh/api/pkg/apis/management/v1"
+	"github.com/loft-sh/apiserver/pkg/builders"
 	"k8s.io/apimachinery/pkg/runtime"
 	utilruntime "k8s.io/apimachinery/pkg/util/runtime"
-	"sigs.k8s.io/apiserver-builder-alpha/pkg/builders"
 )
 
 func init() {

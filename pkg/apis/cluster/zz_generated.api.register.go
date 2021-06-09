@@ -8,6 +8,7 @@ import (
 
 	storagev1 "github.com/loft-sh/api/pkg/apis/storage/v1"
 	"github.com/loft-sh/api/pkg/managerfactory"
+	"github.com/loft-sh/apiserver/pkg/builders"
 	configv1alpha1 "github.com/loft-sh/kiosk/pkg/apis/config/v1alpha1"
 	"k8s.io/apimachinery/pkg/apis/meta/internalversion"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
@@ -15,7 +16,6 @@ import (
 	"k8s.io/apimachinery/pkg/runtime/schema"
 	"k8s.io/apiserver/pkg/registry/generic"
 	"k8s.io/apiserver/pkg/registry/rest"
-	"sigs.k8s.io/apiserver-builder-alpha/pkg/builders"
 )
 
 type NewRESTFunc func(factory managerfactory.SharedManagerFactory) rest.Storage
