@@ -86,8 +86,18 @@ var (
 	NewConfigREST = func(getter generic.RESTOptionsGetter) rest.Storage {
 		return NewConfigRESTFunc(Factory)
 	}
-	NewConfigRESTFunc        NewRESTFunc
-	ManagementFeatureStorage = builders.NewApiResourceWithStorage( // Resource status endpoint
+	NewConfigRESTFunc                           NewRESTFunc
+	ManagementDirectClusterEndpointTokenStorage = builders.NewApiResourceWithStorage( // Resource status endpoint
+		InternalDirectClusterEndpointToken,
+		func() runtime.Object { return &DirectClusterEndpointToken{} },     // Register versioned resource
+		func() runtime.Object { return &DirectClusterEndpointTokenList{} }, // Register versioned resource list
+		NewDirectClusterEndpointTokenREST,
+	)
+	NewDirectClusterEndpointTokenREST = func(getter generic.RESTOptionsGetter) rest.Storage {
+		return NewDirectClusterEndpointTokenRESTFunc(Factory)
+	}
+	NewDirectClusterEndpointTokenRESTFunc NewRESTFunc
+	ManagementFeatureStorage              = builders.NewApiResourceWithStorage( // Resource status endpoint
 		InternalFeature,
 		func() runtime.Object { return &Feature{} },     // Register versioned resource
 		func() runtime.Object { return &FeatureList{} }, // Register versioned resource list
@@ -346,6 +356,18 @@ var (
 		"ConfigStatus",
 		func() runtime.Object { return &Config{} },
 		func() runtime.Object { return &ConfigList{} },
+	)
+	InternalDirectClusterEndpointToken = builders.NewInternalResource(
+		"directclusterendpointtokens",
+		"DirectClusterEndpointToken",
+		func() runtime.Object { return &DirectClusterEndpointToken{} },
+		func() runtime.Object { return &DirectClusterEndpointTokenList{} },
+	)
+	InternalDirectClusterEndpointTokenStatus = builders.NewInternalResourceStatus(
+		"directclusterendpointtokens",
+		"DirectClusterEndpointTokenStatus",
+		func() runtime.Object { return &DirectClusterEndpointToken{} },
+		func() runtime.Object { return &DirectClusterEndpointTokenList{} },
 	)
 	InternalFeature = builders.NewInternalResource(
 		"features",
@@ -615,6 +637,8 @@ var (
 		InternalClusterRoleStatus,
 		InternalConfig,
 		InternalConfigStatus,
+		InternalDirectClusterEndpointToken,
+		InternalDirectClusterEndpointTokenStatus,
 		InternalFeature,
 		InternalFeatureStatus,
 		InternalKiosk,
@@ -829,7 +853,7 @@ type AuthenticationPassword struct {
 }
 
 // +genclient
-// +genclient:nonNamespaced
+// +genclient
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
 
 type Cluster struct {
@@ -937,10 +961,11 @@ type ClusterQuota struct {
 type ClusterReset struct {
 	metav1.TypeMeta
 	metav1.ObjectMeta
-	Kiosk          bool
-	RBAC           bool
-	Templates      bool
-	VirtualCluster bool
+	Kiosk                 bool
+	RBAC                  bool
+	Templates             bool
+	VirtualCluster        bool
+	DirectClusterEndpoint bool
 }
 
 // +genclient
@@ -1038,6 +1063,24 @@ type DefaultPaymentMethodCard struct {
 	ExpYear  uint64
 	Brand    string
 	Funding  string
+}
+
+// +genclient
+// +genclient:nonNamespaced
+// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+
+type DirectClusterEndpointToken struct {
+	metav1.TypeMeta
+	metav1.ObjectMeta
+	Spec   DirectClusterEndpointTokenSpec
+	Status DirectClusterEndpointTokenStatus
+}
+
+type DirectClusterEndpointTokenSpec struct {
+}
+
+type DirectClusterEndpointTokenStatus struct {
+	Token string
 }
 
 type EntityInfo struct {
@@ -2270,6 +2313,126 @@ func (s *storageConfig) UpdateConfig(ctx context.Context, object *Config) (*Conf
 }
 
 func (s *storageConfig) DeleteConfig(ctx context.Context, id string) (bool, error) {
+	st := s.GetStandardStorage()
+	_, sync, err := st.Delete(ctx, id, nil, &metav1.DeleteOptions{})
+	return sync, err
+}
+
+//
+// DirectClusterEndpointToken Functions and Structs
+//
+// +k8s:deepcopy-gen=false
+type DirectClusterEndpointTokenStrategy struct {
+	builders.DefaultStorageStrategy
+}
+
+// +k8s:deepcopy-gen=false
+type DirectClusterEndpointTokenStatusStrategy struct {
+	builders.DefaultStatusStorageStrategy
+}
+
+// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+
+type DirectClusterEndpointTokenList struct {
+	metav1.TypeMeta
+	metav1.ListMeta
+	Items []DirectClusterEndpointToken
+}
+
+func (DirectClusterEndpointToken) NewStatus() interface{} {
+	return DirectClusterEndpointTokenStatus{}
+}
+
+func (pc *DirectClusterEndpointToken) GetStatus() interface{} {
+	return pc.Status
+}
+
+func (pc *DirectClusterEndpointToken) SetStatus(s interface{}) {
+	pc.Status = s.(DirectClusterEndpointTokenStatus)
+}
+
+func (pc *DirectClusterEndpointToken) GetSpec() interface{} {
+	return pc.Spec
+}
+
+func (pc *DirectClusterEndpointToken) SetSpec(s interface{}) {
+	pc.Spec = s.(DirectClusterEndpointTokenSpec)
+}
+
+func (pc *DirectClusterEndpointToken) GetObjectMeta() *metav1.ObjectMeta {
+	return &pc.ObjectMeta
+}
+
+func (pc *DirectClusterEndpointToken) SetGeneration(generation int64) {
+	pc.ObjectMeta.Generation = generation
+}
+
+func (pc DirectClusterEndpointToken) GetGeneration() int64 {
+	return pc.ObjectMeta.Generation
+}
+
+// Registry is an interface for things that know how to store DirectClusterEndpointToken.
+// +k8s:deepcopy-gen=false
+type DirectClusterEndpointTokenRegistry interface {
+	ListDirectClusterEndpointTokens(ctx context.Context, options *internalversion.ListOptions) (*DirectClusterEndpointTokenList, error)
+	GetDirectClusterEndpointToken(ctx context.Context, id string, options *metav1.GetOptions) (*DirectClusterEndpointToken, error)
+	CreateDirectClusterEndpointToken(ctx context.Context, id *DirectClusterEndpointToken) (*DirectClusterEndpointToken, error)
+	UpdateDirectClusterEndpointToken(ctx context.Context, id *DirectClusterEndpointToken) (*DirectClusterEndpointToken, error)
+	DeleteDirectClusterEndpointToken(ctx context.Context, id string) (bool, error)
+}
+
+// NewRegistry returns a new Registry interface for the given Storage. Any mismatched types will panic.
+func NewDirectClusterEndpointTokenRegistry(sp builders.StandardStorageProvider) DirectClusterEndpointTokenRegistry {
+	return &storageDirectClusterEndpointToken{sp}
+}
+
+// Implement Registry
+// storage puts strong typing around storage calls
+// +k8s:deepcopy-gen=false
+type storageDirectClusterEndpointToken struct {
+	builders.StandardStorageProvider
+}
+
+func (s *storageDirectClusterEndpointToken) ListDirectClusterEndpointTokens(ctx context.Context, options *internalversion.ListOptions) (*DirectClusterEndpointTokenList, error) {
+	if options != nil && options.FieldSelector != nil && !options.FieldSelector.Empty() {
+		return nil, fmt.Errorf("field selector not supported yet")
+	}
+	st := s.GetStandardStorage()
+	obj, err := st.List(ctx, options)
+	if err != nil {
+		return nil, err
+	}
+	return obj.(*DirectClusterEndpointTokenList), err
+}
+
+func (s *storageDirectClusterEndpointToken) GetDirectClusterEndpointToken(ctx context.Context, id string, options *metav1.GetOptions) (*DirectClusterEndpointToken, error) {
+	st := s.GetStandardStorage()
+	obj, err := st.Get(ctx, id, options)
+	if err != nil {
+		return nil, err
+	}
+	return obj.(*DirectClusterEndpointToken), nil
+}
+
+func (s *storageDirectClusterEndpointToken) CreateDirectClusterEndpointToken(ctx context.Context, object *DirectClusterEndpointToken) (*DirectClusterEndpointToken, error) {
+	st := s.GetStandardStorage()
+	obj, err := st.Create(ctx, object, nil, &metav1.CreateOptions{})
+	if err != nil {
+		return nil, err
+	}
+	return obj.(*DirectClusterEndpointToken), nil
+}
+
+func (s *storageDirectClusterEndpointToken) UpdateDirectClusterEndpointToken(ctx context.Context, object *DirectClusterEndpointToken) (*DirectClusterEndpointToken, error) {
+	st := s.GetStandardStorage()
+	obj, _, err := st.Update(ctx, object.Name, rest.DefaultUpdatedObjectInfo(object), nil, nil, false, &metav1.UpdateOptions{})
+	if err != nil {
+		return nil, err
+	}
+	return obj.(*DirectClusterEndpointToken), nil
+}
+
+func (s *storageDirectClusterEndpointToken) DeleteDirectClusterEndpointToken(ctx context.Context, id string) (bool, error) {
 	st := s.GetStandardStorage()
 	_, sync, err := st.Delete(ctx, id, nil, &metav1.DeleteOptions{})
 	return sync, err

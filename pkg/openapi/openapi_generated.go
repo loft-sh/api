@@ -97,6 +97,10 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 		"github.com/loft-sh/api/pkg/apis/management/v1.CustomerInfo":                              schema_pkg_apis_management_v1_CustomerInfo(ref),
 		"github.com/loft-sh/api/pkg/apis/management/v1.DefaultPaymentMethod":                      schema_pkg_apis_management_v1_DefaultPaymentMethod(ref),
 		"github.com/loft-sh/api/pkg/apis/management/v1.DefaultPaymentMethodCard":                  schema_pkg_apis_management_v1_DefaultPaymentMethodCard(ref),
+		"github.com/loft-sh/api/pkg/apis/management/v1.DirectClusterEndpointToken":                schema_pkg_apis_management_v1_DirectClusterEndpointToken(ref),
+		"github.com/loft-sh/api/pkg/apis/management/v1.DirectClusterEndpointTokenList":            schema_pkg_apis_management_v1_DirectClusterEndpointTokenList(ref),
+		"github.com/loft-sh/api/pkg/apis/management/v1.DirectClusterEndpointTokenSpec":            schema_pkg_apis_management_v1_DirectClusterEndpointTokenSpec(ref),
+		"github.com/loft-sh/api/pkg/apis/management/v1.DirectClusterEndpointTokenStatus":          schema_pkg_apis_management_v1_DirectClusterEndpointTokenStatus(ref),
 		"github.com/loft-sh/api/pkg/apis/management/v1.EntityInfo":                                schema_pkg_apis_management_v1_EntityInfo(ref),
 		"github.com/loft-sh/api/pkg/apis/management/v1.Feature":                                   schema_pkg_apis_management_v1_Feature(ref),
 		"github.com/loft-sh/api/pkg/apis/management/v1.FeatureList":                               schema_pkg_apis_management_v1_FeatureList(ref),
@@ -4106,6 +4110,12 @@ func schema_pkg_apis_management_v1_ClusterReset(ref common.ReferenceCallback) co
 							Format: "",
 						},
 					},
+					"directClusterEndpoint": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"boolean"},
+							Format: "",
+						},
+					},
 				},
 			},
 		},
@@ -4820,6 +4830,126 @@ func schema_pkg_apis_management_v1_DefaultPaymentMethodCard(ref common.Reference
 					},
 				},
 				Required: []string{"last4", "expMonth", "expYear", "brand", "funding"},
+			},
+		},
+	}
+}
+
+func schema_pkg_apis_management_v1_DirectClusterEndpointToken(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "DirectClusterEndpointToken holds the object information",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"kind": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"apiVersion": {
+						SchemaProps: spec.SchemaProps{
+							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"metadata": {
+						SchemaProps: spec.SchemaProps{
+							Ref: ref("k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"),
+						},
+					},
+					"spec": {
+						SchemaProps: spec.SchemaProps{
+							Ref: ref("github.com/loft-sh/api/pkg/apis/management/v1.DirectClusterEndpointTokenSpec"),
+						},
+					},
+					"status": {
+						SchemaProps: spec.SchemaProps{
+							Ref: ref("github.com/loft-sh/api/pkg/apis/management/v1.DirectClusterEndpointTokenStatus"),
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			"github.com/loft-sh/api/pkg/apis/management/v1.DirectClusterEndpointTokenSpec", "github.com/loft-sh/api/pkg/apis/management/v1.DirectClusterEndpointTokenStatus", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
+	}
+}
+
+func schema_pkg_apis_management_v1_DirectClusterEndpointTokenList(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"kind": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"apiVersion": {
+						SchemaProps: spec.SchemaProps{
+							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"metadata": {
+						SchemaProps: spec.SchemaProps{
+							Ref: ref("k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"),
+						},
+					},
+					"items": {
+						SchemaProps: spec.SchemaProps{
+							Type: []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Ref: ref("github.com/loft-sh/api/pkg/apis/management/v1.DirectClusterEndpointToken"),
+									},
+								},
+							},
+						},
+					},
+				},
+				Required: []string{"items"},
+			},
+		},
+		Dependencies: []string{
+			"github.com/loft-sh/api/pkg/apis/management/v1.DirectClusterEndpointToken", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
+	}
+}
+
+func schema_pkg_apis_management_v1_DirectClusterEndpointTokenSpec(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "DirectClusterEndpointTokenSpec holds the object specification",
+				Type:        []string{"object"},
+			},
+		},
+	}
+}
+
+func schema_pkg_apis_management_v1_DirectClusterEndpointTokenStatus(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "DirectClusterEndpointTokenStatus holds the object status",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"token": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"string"},
+							Format: "",
+						},
+					},
+				},
 			},
 		},
 	}

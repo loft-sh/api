@@ -16,6 +16,7 @@ type ManagementV1Interface interface {
 	ClusterConnectsGetter
 	ClusterRolesGetter
 	ConfigsGetter
+	DirectClusterEndpointTokensGetter
 	FeaturesGetter
 	LicensesGetter
 	LicenseTokensGetter
@@ -58,6 +59,10 @@ func (c *ManagementV1Client) ClusterRoles() ClusterRoleInterface {
 
 func (c *ManagementV1Client) Configs() ConfigInterface {
 	return newConfigs(c)
+}
+
+func (c *ManagementV1Client) DirectClusterEndpointTokens() DirectClusterEndpointTokenInterface {
+	return newDirectClusterEndpointTokens(c)
 }
 
 func (c *ManagementV1Client) Features() FeatureInterface {

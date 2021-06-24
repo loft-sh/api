@@ -11,4 +11,6 @@ type Loft struct {
 	Name string `json:"name,omitempty"`
 	// The generation of the token
 	Gen int64 `json:"gen,omitempty"`
+	// The groups the user is part of (includes teams)
+	Groups []string `json:"groups,omitempty"`
 }

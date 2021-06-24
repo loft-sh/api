@@ -36,6 +36,10 @@ func (c *FakeManagementV1) Configs() v1.ConfigInterface {
 	return &FakeConfigs{c}
 }
 
+func (c *FakeManagementV1) DirectClusterEndpointTokens() v1.DirectClusterEndpointTokenInterface {
+	return &FakeDirectClusterEndpointTokens{c}
+}
+
 func (c *FakeManagementV1) Features() v1.FeatureInterface {
 	return &FakeFeatures{c}
 }

@@ -22,4 +22,7 @@ type ClusterReset struct {
 
 	// +optional
 	VirtualCluster bool `json:"virtualCluster,omitempty"`
+
+	// +optional
+	DirectClusterEndpoint bool `json:"directClusterEndpoint,omitempty"`
 }

@@ -14,6 +14,8 @@ type ClusterRoleExpansion interface{}
 
 type ConfigExpansion interface{}
 
+type DirectClusterEndpointTokenExpansion interface{}
+
 type FeatureExpansion interface{}
 
 type LicenseExpansion interface{}

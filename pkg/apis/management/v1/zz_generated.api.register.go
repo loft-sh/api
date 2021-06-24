@@ -31,6 +31,8 @@ func addKnownTypes(scheme *runtime.Scheme) error {
 		&ClusterRoleList{},
 		&Config{},
 		&ConfigList{},
+		&DirectClusterEndpointToken{},
+		&DirectClusterEndpointTokenList{},
 		&Feature{},
 		&FeatureList{},
 		&Kiosk{},
@@ -111,6 +113,7 @@ var (
 		management.ManagementClusterConnectStorage,
 		management.ManagementClusterRoleStorage,
 		management.ManagementConfigStorage,
+		management.ManagementDirectClusterEndpointTokenStorage,
 		management.ManagementFeatureStorage,
 		management.ManagementKioskStorage,
 		management.ManagementLicenseStorage,
@@ -300,6 +303,14 @@ type ConfigList struct {
 	metav1.TypeMeta `json:",inline"`
 	metav1.ListMeta `json:"metadata,omitempty"`
 	Items           []Config `json:"items"`
+}
+
+// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+
+type DirectClusterEndpointTokenList struct {
+	metav1.TypeMeta `json:",inline"`
+	metav1.ListMeta `json:"metadata,omitempty"`
+	Items           []DirectClusterEndpointToken `json:"items"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object

@@ -6,13 +6,13 @@ import (
 
 const GroupVersion = "authentication.loft.sh/v1"
 
-// OIDCTokenRequest is used by the /auth/oidc/token route 
+// OIDCTokenRequest is used by the /auth/oidc/token route
 type OIDCTokenRequest struct {
 	Token       string `json:"token,omitempty"`
 	AccessToken string `json:"accessToken,omitempty"`
 }
 
-// OIDCRefreshRequest is used by the /auth/oidc/refresh route 
+// OIDCRefreshRequest is used by the /auth/oidc/refresh route
 type OIDCRefreshRequest struct {
 	RefreshToken string `json:"refreshToken,omitempty"`
 }
@@ -78,7 +78,7 @@ type MethodSSO struct {
 
 	// Type of the SSO to show in the UI. Only for displaying purposes
 	Type string `json:"type,omitempty"`
-	
+
 	// LoginEndpoint is the path the UI will request a login url from
 	LoginEndpoint string `json:"loginEndpoint,omitempty"`
 }

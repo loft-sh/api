@@ -60,6 +60,7 @@ var managementApiGroup = builders.NewApiGroupBuilder(
 		"ClusterConnect",
 		"ClusterRole",
 		"Config",
+		"DirectClusterEndpointToken",
 		"Feature",
 		"License",
 		"LicenseToken",
