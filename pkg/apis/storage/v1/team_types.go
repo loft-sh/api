@@ -18,6 +18,14 @@ type Team struct {
 	Status TeamStatus `json:"status,omitempty"`
 }
 
+func (a *Team) GetAccess() []Access {
+	return a.Spec.Access
+}
+
+func (a *Team) SetAccess(access []Access) {
+	a.Spec.Access = access
+}
+
 type TeamSpec struct {
 	// The display name shown in the UI
 	// +optional
@@ -43,6 +51,10 @@ type TeamSpec struct {
 	// ClusterAccountTemplates that should be applied for the user
 	// +optional
 	ClusterAccountTemplates []UserClusterAccountTemplate `json:"clusterAccountTemplates,omitempty"`
+
+	// Access holds the access rights for users and teams
+	// +optional
+	Access []Access `json:"access,omitempty"`
 }
 
 type TeamStatus struct {

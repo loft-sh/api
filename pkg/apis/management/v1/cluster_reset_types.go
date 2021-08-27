@@ -12,17 +12,11 @@ type ClusterReset struct {
 	metav1.ObjectMeta `json:"metadata,omitempty"`
 
 	// +optional
-	Kiosk bool `json:"kiosk,omitempty"`
+	Agent bool `json:"agent,omitempty"`
 
 	// +optional
 	RBAC bool `json:"rbac,omitempty"`
 
 	// +optional
 	Templates bool `json:"templates,omitempty"`
-
-	// +optional
-	VirtualCluster bool `json:"virtualCluster,omitempty"`
-
-	// +optional
-	DirectClusterEndpoint bool `json:"directClusterEndpoint,omitempty"`
 }

@@ -9,7 +9,7 @@ import (
 // +genclient:nonNamespaced
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
 
-// User holds the user information
+// ClusterAccountTemplate holds the clusterAccountTemplate information
 // +k8s:openapi-gen=true
 // +resource:path=clusteraccounttemplates,rest=ClusterAccountTemplateREST
 type ClusterAccountTemplate struct {

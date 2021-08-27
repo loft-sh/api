@@ -1,9 +1,11 @@
 package v1
 
 import (
+	configv1alpha1 "github.com/loft-sh/agentapi/pkg/apis/kiosk/config/v1alpha1"
+	tenancyv1alpha1 "github.com/loft-sh/agentapi/pkg/apis/kiosk/tenancy/v1alpha1"
+	clusterv1 "github.com/loft-sh/agentapi/pkg/apis/loft/cluster/v1"
+	storagev1 "github.com/loft-sh/agentapi/pkg/apis/loft/storage/v1"
 	"github.com/loft-sh/jspolicy/pkg/apis/policy/v1beta1"
-	configv1alpha1 "github.com/loft-sh/kiosk/pkg/apis/config/v1alpha1"
-	tenancyv1alpha1 "github.com/loft-sh/kiosk/pkg/apis/tenancy/v1alpha1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 )
 
@@ -11,7 +13,7 @@ import (
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
 
-// User holds the user information
+// Kiosk holds the kiosk types
 // +k8s:openapi-gen=true
 // +resource:path=kiosk,rest=KioskREST
 type Kiosk struct {
@@ -37,6 +39,17 @@ type KioskSpec struct {
 	JsPolicy           v1beta1.JsPolicy           `json:"jsPolicy,omitempty"`
 	JsPolicyBundle     v1beta1.JsPolicyBundle     `json:"jsPolicyBundle,omitempty"`
 	JsPolicyViolations v1beta1.JsPolicyViolations `json:"jsPolicyViolations,omitempty"`
+
+	// cluster.loft.sh
+	HelmRelease         clusterv1.HelmRelease         `json:"helmRelease,omitempty"`
+	HelmReleaseRollback clusterv1.HelmReleaseRollback `json:"helmReleaseRollback,omitempty"`
+	SleepModeConfig     clusterv1.SleepModeConfig     `json:"sleepModeConfig,omitempty"`
+	ClusterAccount      clusterv1.Account             `json:"clusterAcccount,omitempty"`
+	ClusterAccountRoles clusterv1.AccountClusterRoles `json:"clusterAcccountRoles,omitempty"`
+	VirtualCluster      clusterv1.VirtualCluster      `json:"virtualCluster,omitempty"`
+
+	// storage.loft.sh
+	StorageVirtualCluster storagev1.VirtualCluster `json:"storageVirtualCluster,omitempty"`
 }
 
 type KioskStatus struct {

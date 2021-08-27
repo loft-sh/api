@@ -4,14 +4,18 @@ package v1
 
 type AccessKeyExpansion interface{}
 
+type AppExpansion interface{}
+
 type ClusterExpansion interface{}
 
 type ClusterAccountTemplateExpansion interface{}
 
 type SharedSecretExpansion interface{}
 
+type SpaceTemplateExpansion interface{}
+
 type TeamExpansion interface{}
 
 type UserExpansion interface{}
 
-type VirtualClusterExpansion interface{}
+type VirtualClusterTemplateExpansion interface{}

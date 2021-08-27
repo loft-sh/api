@@ -3,20 +3,20 @@
 package apis
 
 import (
-	"github.com/loft-sh/api/pkg/apis/cluster"
-	_ "github.com/loft-sh/api/pkg/apis/cluster/install" // Install the cluster group
-	clusterv1 "github.com/loft-sh/api/pkg/apis/cluster/v1"
 	"github.com/loft-sh/api/pkg/apis/management"
 	_ "github.com/loft-sh/api/pkg/apis/management/install" // Install the management group
 	managementv1 "github.com/loft-sh/api/pkg/apis/management/v1"
+	"github.com/loft-sh/api/pkg/apis/virtualcluster"
+	_ "github.com/loft-sh/api/pkg/apis/virtualcluster/install" // Install the virtualcluster group
+	virtualclusterv1 "github.com/loft-sh/api/pkg/apis/virtualcluster/v1"
 	"github.com/loft-sh/apiserver/pkg/builders"
 	"k8s.io/apimachinery/pkg/runtime"
 )
 
 var (
 	localSchemeBuilder = runtime.SchemeBuilder{
-		clusterv1.AddToScheme,
 		managementv1.AddToScheme,
+		virtualclusterv1.AddToScheme,
 	}
 	AddToScheme = localSchemeBuilder.AddToScheme
 )
@@ -25,25 +25,9 @@ var (
 // so they can be registered with the apiserver
 func GetAllApiBuilders() []*builders.APIGroupBuilder {
 	return []*builders.APIGroupBuilder{
-		GetClusterAPIBuilder(),
 		GetManagementAPIBuilder(),
+		GetVirtualclusterAPIBuilder(),
 	}
-}
-
-var clusterApiGroup = builders.NewApiGroupBuilder(
-	"cluster.loft.sh",
-	"github.com/loft-sh/api/pkg/apis/cluster").
-	WithUnVersionedApi(cluster.ApiVersion).
-	WithVersionedApis(
-		clusterv1.ApiVersion,
-	).
-	WithRootScopedKinds(
-		"Account",
-		"Context",
-	)
-
-func GetClusterAPIBuilder() *builders.APIGroupBuilder {
-	return clusterApiGroup
 }
 
 var managementApiGroup = builders.NewApiGroupBuilder(
@@ -55,6 +39,7 @@ var managementApiGroup = builders.NewApiGroupBuilder(
 	).
 	WithRootScopedKinds(
 		"Announcement",
+		"App",
 		"Cluster",
 		"ClusterAccountTemplate",
 		"ClusterConnect",
@@ -70,11 +55,26 @@ var managementApiGroup = builders.NewApiGroupBuilder(
 		"ResetAccessKey",
 		"Self",
 		"SelfSubjectAccessReview",
+		"SpaceTemplate",
 		"SubjectAccessReview",
 		"Team",
 		"User",
+		"VirtualClusterTemplate",
 	)
 
 func GetManagementAPIBuilder() *builders.APIGroupBuilder {
 	return managementApiGroup
+}
+
+var virtualclusterApiGroup = builders.NewApiGroupBuilder(
+	"virtualcluster.loft.sh",
+	"github.com/loft-sh/api/pkg/apis/virtualcluster").
+	WithUnVersionedApi(virtualcluster.ApiVersion).
+	WithVersionedApis(
+		virtualclusterv1.ApiVersion,
+	).
+	WithRootScopedKinds()
+
+func GetVirtualclusterAPIBuilder() *builders.APIGroupBuilder {
+	return virtualclusterApiGroup
 }

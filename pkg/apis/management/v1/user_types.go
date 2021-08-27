@@ -26,6 +26,7 @@ import (
 // +subresource:request=UserClusterRoles,path=clusterroles,kind=UserClusterRoles,rest=UserClusterRolesREST
 // +subresource:request=UserQuotas,path=quotas,kind=UserQuotas,rest=UserQuotasREST
 // +subresource:request=UserVirtualClusters,path=virtualclusters,kind=UserVirtualClusters,rest=UserVirtualClustersREST
+// +subresource:request=UserAccessKeys,path=accesskeys,kind=UserAccessKeys,rest=UserAccessKeysREST
 type User struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`

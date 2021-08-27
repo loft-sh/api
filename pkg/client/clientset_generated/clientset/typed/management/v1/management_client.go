@@ -11,6 +11,7 @@ import (
 type ManagementV1Interface interface {
 	RESTClient() rest.Interface
 	AnnouncementsGetter
+	AppsGetter
 	ClustersGetter
 	ClusterAccountTemplatesGetter
 	ClusterConnectsGetter
@@ -27,9 +28,11 @@ type ManagementV1Interface interface {
 	SelvesGetter
 	SelfSubjectAccessReviewsGetter
 	SharedSecretsGetter
+	SpaceTemplatesGetter
 	SubjectAccessReviewsGetter
 	TeamsGetter
 	UsersGetter
+	VirtualClusterTemplatesGetter
 }
 
 // ManagementV1Client is used to interact with features provided by the management.loft.sh group.
@@ -39,6 +42,10 @@ type ManagementV1Client struct {
 
 func (c *ManagementV1Client) Announcements() AnnouncementInterface {
 	return newAnnouncements(c)
+}
+
+func (c *ManagementV1Client) Apps() AppInterface {
+	return newApps(c)
 }
 
 func (c *ManagementV1Client) Clusters() ClusterInterface {
@@ -105,6 +112,10 @@ func (c *ManagementV1Client) SharedSecrets(namespace string) SharedSecretInterfa
 	return newSharedSecrets(c, namespace)
 }
 
+func (c *ManagementV1Client) SpaceTemplates() SpaceTemplateInterface {
+	return newSpaceTemplates(c)
+}
+
 func (c *ManagementV1Client) SubjectAccessReviews() SubjectAccessReviewInterface {
 	return newSubjectAccessReviews(c)
 }
@@ -115,6 +126,10 @@ func (c *ManagementV1Client) Teams() TeamInterface {
 
 func (c *ManagementV1Client) Users() UserInterface {
 	return newUsers(c)
+}
+
+func (c *ManagementV1Client) VirtualClusterTemplates() VirtualClusterTemplateInterface {
+	return newVirtualClusterTemplates(c)
 }
 
 // NewForConfig creates a new ManagementV1Client for the given config.

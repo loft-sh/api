@@ -17,6 +17,14 @@ type SharedSecret struct {
 	Status SharedSecretStatus `json:"status,omitempty"`
 }
 
+func (a *SharedSecret) GetAccess() []Access {
+	return a.Spec.Access
+}
+
+func (a *SharedSecret) SetAccess(access []Access) {
+	a.Spec.Access = access
+}
+
 // SharedSecretSpec holds the specification
 type SharedSecretSpec struct {
 	// Data contains the secret data. Each key must consist of alphanumeric
@@ -29,13 +37,17 @@ type SharedSecretSpec struct {
 	// Access holds the access rights for users and teams which will be transformed
 	// to Roles and RoleBindings
 	// +optional
-	Access []SharedSecretAccess `json:"access,omitempty"`
+	Access []Access `json:"access,omitempty"`
 }
 
-// SharedSecretAccess describes the access to a secret
-type SharedSecretAccess struct {
+// Access describes the access to a secret
+type Access struct {
 	// Verbs is a list of Verbs that apply to ALL the ResourceKinds and AttributeRestrictions contained in this rule. VerbAll represents all kinds.
 	Verbs []string `json:"verbs"`
+
+	// Subresources defines the sub resources that are allowed by this access rule
+	// +optional
+	Subresources []string `json:"subresources,omitempty"`
 
 	// Users specifies which users should be able to access this secret with the aforementioned verbs
 	// +optional

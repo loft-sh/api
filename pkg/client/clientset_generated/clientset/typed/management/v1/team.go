@@ -33,6 +33,7 @@ type TeamInterface interface {
 	Patch(ctx context.Context, name string, pt types.PatchType, data []byte, opts metav1.PatchOptions, subresources ...string) (result *v1.Team, err error)
 	ListSpaces(ctx context.Context, teamName string, options metav1.GetOptions) (*v1.TeamSpaces, error)
 	ListClusters(ctx context.Context, teamName string, options metav1.GetOptions) (*v1.TeamClusters, error)
+	ListVirtualClusters(ctx context.Context, teamName string, options metav1.GetOptions) (*v1.TeamVirtualClusters, error)
 
 	TeamExpansion
 }
@@ -190,6 +191,19 @@ func (c *teams) ListClusters(ctx context.Context, teamName string, options metav
 		Resource("teams").
 		Name(teamName).
 		SubResource("clusters").
+		VersionedParams(&options, scheme.ParameterCodec).
+		Do(ctx).
+		Into(result)
+	return
+}
+
+// ListVirtualClusters takes name of the team, and returns the corresponding v1.TeamVirtualClusters object, and an error if there is any.
+func (c *teams) ListVirtualClusters(ctx context.Context, teamName string, options metav1.GetOptions) (result *v1.TeamVirtualClusters, err error) {
+	result = &v1.TeamVirtualClusters{}
+	err = c.client.Get().
+		Resource("teams").
+		Name(teamName).
+		SubResource("virtualclusters").
 		VersionedParams(&options, scheme.ParameterCodec).
 		Do(ctx).
 		Into(result)

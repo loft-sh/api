@@ -20,82 +20,195 @@ type AccessKey struct {
 
 type AccessKeySpec struct {
 	// The user this access key refers to
+	// +optional
 	User string `json:"user,omitempty"`
 
+	// The team this access key refers to
+	// +optional
+	Team string `json:"team,omitempty"`
+
 	// The actual access key that will be used as a bearer token
+	// +optional
 	Key string `json:"key,omitempty"`
-	
+
 	// Parent is used to share OIDC and external token information
 	// with multiple access keys. Since copying an OIDC refresh token
 	// would result in the other access keys becoming invalid after a refresh
-	// parent allows access keys to share that information. 
-	// 
+	// parent allows access keys to share that information.
+	//
 	// The use case for this is primarily user generated access keys,
 	// which will have the users current access key as parent if it contains
 	// an OIDC token.
 	// +optional
 	Parent string `json:"parent,omitempty"`
-	
+
 	// If this field is true, the access key is still allowed to exist,
 	// however will not work to access the api
 	// +optional
 	Disabled bool `json:"disabled,omitempty"`
-	
+
 	// The display name shown in the UI
 	// +optional
 	DisplayName string `json:"displayName,omitempty"`
-	
+
 	// The time to life for this access key
-	// +optional 
+	// +optional
 	TTL int64 `json:"ttl,omitempty"`
-	
+
 	// If this is specified, the time to life for this access key will
 	// start after the lastActivity instead of creation timestamp
 	// +optional
 	TTLAfterLastActivity bool `json:"ttlAfterLastActivity,omitempty"`
-	
-	// The type of an access key, which basically describes if the access 
+
+	// Scope defines the scope of the access key.
+	// +optional
+	Scope *AccessKeyScope `json:"scope,omitempty"`
+
+	// The type of an access key, which basically describes if the access
 	// key is user managed or managed by loft itself.
 	// +optional
 	Type AccessKeyType `json:"type,omitempty"`
 
-	// If available, contains information about the sso login data for this 
+	// If available, contains information about the sso login data for this
 	// access key
 	// +optional
 	Identity *AccessKeyIdentity `json:"identity,omitempty"`
-	
+
 	// The last time the identity was refreshed
 	// +optional
 	IdentityRefresh *metav1.Time `json:"identityRefresh,omitempty"`
-	
+
 	// DEPRECATED: Use identity instead
-	// If available, contains information about the oidc login data for this 
+	// If available, contains information about the oidc login data for this
 	// access key
 	// +optional
 	OIDCLogin *AccessKeyOIDC `json:"oidcLogin,omitempty"`
-	
+
 	// If the token is a refresh token, contains information about it
 	// +optional
 	OIDCProvider *AccessKeyOIDCProvider `json:"oidcProvider,omitempty"`
+}
+
+type AccessKeyScope struct {
+	// Rules specifies the rules that should apply to the access key.
+	// +optional
+	Rules []AccessKeyScopeRule `json:"rules,omitempty"`
+}
+
+// AccessKeyScopeRule describes a rule for the access key
+type AccessKeyScopeRule struct {
+	// The verbs that match this rule.
+	// An empty list implies every verb.
+	// +optional
+	Verbs []string `json:"verbs,omitempty"`
+
+	// Rules can apply to API resources (such as "pods" or "secrets"),
+	// non-resource URL paths (such as "/api"), or neither, but not both.
+	// If neither is specified, the rule is treated as a default for all URLs.
+
+	// Resources that this rule matches. An empty list implies all kinds in all API groups.
+	// +optional
+	Resources []GroupResources `json:"resources,omitempty"`
+
+	// Namespaces that this rule matches.
+	// The empty string "" matches non-namespaced resources.
+	// An empty list implies every namespace.
+	// +optional
+	Namespaces []string `json:"namespaces,omitempty"`
+
+	// NonResourceURLs is a set of URL paths that should be checked.
+	// *s are allowed, but only as the full, final step in the path.
+	// Examples:
+	//  "/metrics" - Log requests for apiserver metrics
+	//  "/healthz*" - Log all health checks
+	// +optional
+	NonResourceURLs []string `json:"nonResourceURLs,omitempty"`
+
+	// RequestTargets is a list of request targets that are allowed.
+	// An empty list implies every request.
+	// +optional
+	RequestTargets []RequestTarget `json:"requestTargets,omitempty"`
+
+	// Cluster that this rule matches. Only applies to cluster requests.
+	// If this is set, no requests for non cluster requests are allowed.
+	// An empty cluster means no restrictions will apply.
+	// +optional
+	Cluster string `json:"cluster,omitempty"`
+
+	// VirtualClusters that this rule matches. Only applies to virtual cluster requests.
+	// An empty list means no restrictions will apply.
+	// +optional
+	VirtualClusters []AccessKeyVirtualCluster `json:"virtualClusters,omitempty"`
+}
+
+type AccessKeyVirtualCluster struct {
+	// Name of the virtual cluster. Empty means all virtual clusters.
+	// +optional
+	Name string `json:"name,omitempty"`
+
+	// Namespace of the virtual cluster. Empty means all namespaces.
+	// +optional
+	Namespace string `json:"namespace,omitempty"`
+}
+
+// RequestTarget defines the target of an incoming request
+type RequestTarget string
+
+// Valid request targets
+const (
+	// RequestTargetManagement specifies a loft management api request
+	RequestTargetManagement RequestTarget = "Management"
+	// RequestTargetCluster specifies a connected kubernetes cluster request
+	RequestTargetCluster RequestTarget = "Cluster"
+	// RequestTargetVirtualCluster specifies a virtual kubernetes cluster request
+	RequestTargetVirtualCluster RequestTarget = "VirtualCluster"
+)
+
+// GroupResources represents resource kinds in an API group.
+type GroupResources struct {
+	// Group is the name of the API group that contains the resources.
+	// The empty string represents the core API group.
+	// +optional
+	Group string `json:"group,omitempty" protobuf:"bytes,1,opt,name=group"`
+	// Resources is a list of resources this rule applies to.
+	//
+	// For example:
+	// 'pods' matches pods.
+	// 'pods/log' matches the log subresource of pods.
+	// '*' matches all resources and their subresources.
+	// 'pods/*' matches all subresources of pods.
+	// '*/scale' matches all scale subresources.
+	//
+	// If wildcard is present, the validation rule will ensure resources do not
+	// overlap with each other.
+	//
+	// An empty list implies all resources and subresources in this API groups apply.
+	// +optional
+	Resources []string `json:"resources,omitempty" protobuf:"bytes,2,rep,name=resources"`
+	// ResourceNames is a list of resource instance names that the policy matches.
+	// Using this field requires Resources to be specified.
+	// An empty list implies that every instance of the resource is matched.
+	// +optional
+	ResourceNames []string `json:"resourceNames,omitempty" protobuf:"bytes,3,rep,name=resourceNames"`
 }
 
 type AccessKeyIdentity struct {
 	// The subject of the user
 	// +optional
 	UserID string `json:"userId,omitempty"`
-	
-	// The username 
+
+	// The username
 	// +optional
 	Username string `json:"username,omitempty"`
-	
+
 	// The preferred username / display name
 	// +optional
 	PreferredUsername string `json:"preferredUsername,omitempty"`
-	
+
 	// The user email
 	// +optional
 	Email string
-	
+
 	// If the user email was verified
 	// +optional
 	EmailVerified bool
@@ -116,7 +229,7 @@ type AccessKeyOIDCProvider struct {
 	// ClientId the token was generated for
 	// +optional
 	ClientId string `json:"clientId,omitempty"`
-	
+
 	// Nonce to use
 	// +optional
 	Nonce string `json:"nonce,omitempty"`
@@ -124,7 +237,7 @@ type AccessKeyOIDCProvider struct {
 	// RedirectUri to use
 	// +optional
 	RedirectUri string `json:"redirectUri,omitempty"`
-	
+
 	// Scopes to use
 	// +optional
 	Scopes string `json:"scopes,omitempty"`
@@ -134,15 +247,15 @@ type AccessKeyOIDC struct {
 	// The current id token that was created during login
 	// +optional
 	IDToken []byte `json:"idToken,omitempty"`
-	
+
 	// The current access token that was created during login
 	// +optional
 	AccessToken []byte `json:"accessToken,omitempty"`
-	
+
 	// The current refresh token that was created during login
 	// +optional
 	RefreshToken []byte `json:"refreshToken,omitempty"`
-	
+
 	// The last time the id token was refreshed
 	// +optional
 	LastRefresh *metav1.Time `json:"lastRefresh,omitempty"`

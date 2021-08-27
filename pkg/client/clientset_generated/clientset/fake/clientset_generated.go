@@ -4,12 +4,12 @@ package fake
 
 import (
 	clientset "github.com/loft-sh/api/pkg/client/clientset_generated/clientset"
-	clusterv1 "github.com/loft-sh/api/pkg/client/clientset_generated/clientset/typed/cluster/v1"
-	fakeclusterv1 "github.com/loft-sh/api/pkg/client/clientset_generated/clientset/typed/cluster/v1/fake"
 	managementv1 "github.com/loft-sh/api/pkg/client/clientset_generated/clientset/typed/management/v1"
 	fakemanagementv1 "github.com/loft-sh/api/pkg/client/clientset_generated/clientset/typed/management/v1/fake"
 	storagev1 "github.com/loft-sh/api/pkg/client/clientset_generated/clientset/typed/storage/v1"
 	fakestoragev1 "github.com/loft-sh/api/pkg/client/clientset_generated/clientset/typed/storage/v1/fake"
+	virtualclusterv1 "github.com/loft-sh/api/pkg/client/clientset_generated/clientset/typed/virtualcluster/v1"
+	fakevirtualclusterv1 "github.com/loft-sh/api/pkg/client/clientset_generated/clientset/typed/virtualcluster/v1/fake"
 	"k8s.io/apimachinery/pkg/runtime"
 	"k8s.io/apimachinery/pkg/watch"
 	"k8s.io/client-go/discovery"
@@ -64,11 +64,6 @@ func (c *Clientset) Tracker() testing.ObjectTracker {
 
 var _ clientset.Interface = &Clientset{}
 
-// ClusterV1 retrieves the ClusterV1Client
-func (c *Clientset) ClusterV1() clusterv1.ClusterV1Interface {
-	return &fakeclusterv1.FakeClusterV1{Fake: &c.Fake}
-}
-
 // ManagementV1 retrieves the ManagementV1Client
 func (c *Clientset) ManagementV1() managementv1.ManagementV1Interface {
 	return &fakemanagementv1.FakeManagementV1{Fake: &c.Fake}
@@ -77,4 +72,9 @@ func (c *Clientset) ManagementV1() managementv1.ManagementV1Interface {
 // StorageV1 retrieves the StorageV1Client
 func (c *Clientset) StorageV1() storagev1.StorageV1Interface {
 	return &fakestoragev1.FakeStorageV1{Fake: &c.Fake}
+}
+
+// VirtualclusterV1 retrieves the VirtualclusterV1Client
+func (c *Clientset) VirtualclusterV1() virtualclusterv1.VirtualclusterV1Interface {
+	return &fakevirtualclusterv1.FakeVirtualclusterV1{Fake: &c.Fake}
 }

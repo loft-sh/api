@@ -1,8 +1,7 @@
 package v1
 
 import (
-	clusterv1 "github.com/loft-sh/api/pkg/apis/cluster/v1"
-	storagev1 "github.com/loft-sh/api/pkg/apis/storage/v1"
+	clusterv1 "github.com/loft-sh/agentapi/pkg/apis/loft/cluster/v1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 )
 
@@ -26,5 +25,5 @@ type ClusterVirtualCluster struct {
 	SleepModeConfig *clusterv1.SleepModeConfig `json:"sleepModeConfig,omitempty"`
 
 	// VirtualCluster is the VirtualCluster object in the cluster
-	VirtualCluster storagev1.VirtualCluster `json:"virtualCluster,omitempty"`
+	VirtualCluster clusterv1.VirtualCluster `json:"virtualCluster,omitempty"`
 }

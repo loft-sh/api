@@ -1,7 +1,7 @@
 package v1
 
 import (
-	configv1alpha1 "github.com/loft-sh/kiosk/pkg/apis/config/v1alpha1"
+	configv1alpha1 "github.com/loft-sh/agentapi/pkg/apis/kiosk/config/v1alpha1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 )
 

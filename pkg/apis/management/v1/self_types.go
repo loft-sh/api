@@ -27,7 +27,11 @@ type SelfStatus struct {
 	// The name of the currently logged in user
 	// +optional
 	User string `json:"user,omitempty"`
-	
+
+	// The name of the currently logged in team
+	// +optional
+	Team string `json:"team,omitempty"`
+
 	// The name of the currently used access key
 	// +optional
 	AccessKey string `json:"accessKey,omitempty"`
@@ -35,11 +39,11 @@ type SelfStatus struct {
 	// The type of the currently used access key
 	// +optional
 	AccessKeyType storagev1.AccessKeyType `json:"accessKeyType,omitempty"`
-	
+
 	// The subject of the currently logged in user
 	// +optional
 	Subject string `json:"subject,omitempty"`
-	
+
 	// The groups of the currently logged in user
 	// +optional
 	Groups []string `json:"groups,omitempty"`

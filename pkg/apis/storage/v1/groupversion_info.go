@@ -21,3 +21,8 @@ var (
 	// SchemeGroupVersion is a shim that expect this to be present in the api package
 	SchemeGroupVersion = GroupVersion
 )
+
+type AccessAccessor interface {
+	GetAccess() []Access
+	SetAccess(access []Access)
+}

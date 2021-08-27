@@ -11,12 +11,14 @@ import (
 type StorageV1Interface interface {
 	RESTClient() rest.Interface
 	AccessKeysGetter
+	AppsGetter
 	ClustersGetter
 	ClusterAccountTemplatesGetter
 	SharedSecretsGetter
+	SpaceTemplatesGetter
 	TeamsGetter
 	UsersGetter
-	VirtualClustersGetter
+	VirtualClusterTemplatesGetter
 }
 
 // StorageV1Client is used to interact with features provided by the storage.loft.sh group.
@@ -26,6 +28,10 @@ type StorageV1Client struct {
 
 func (c *StorageV1Client) AccessKeys() AccessKeyInterface {
 	return newAccessKeys(c)
+}
+
+func (c *StorageV1Client) Apps() AppInterface {
+	return newApps(c)
 }
 
 func (c *StorageV1Client) Clusters() ClusterInterface {
@@ -40,6 +46,10 @@ func (c *StorageV1Client) SharedSecrets(namespace string) SharedSecretInterface 
 	return newSharedSecrets(c, namespace)
 }
 
+func (c *StorageV1Client) SpaceTemplates() SpaceTemplateInterface {
+	return newSpaceTemplates(c)
+}
+
 func (c *StorageV1Client) Teams() TeamInterface {
 	return newTeams(c)
 }
@@ -48,8 +58,8 @@ func (c *StorageV1Client) Users() UserInterface {
 	return newUsers(c)
 }
 
-func (c *StorageV1Client) VirtualClusters(namespace string) VirtualClusterInterface {
-	return newVirtualClusters(c, namespace)
+func (c *StorageV1Client) VirtualClusterTemplates() VirtualClusterTemplateInterface {
+	return newVirtualClusterTemplates(c)
 }
 
 // NewForConfig creates a new StorageV1Client for the given config.

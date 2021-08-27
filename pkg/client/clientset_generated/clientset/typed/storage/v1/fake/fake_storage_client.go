@@ -16,6 +16,10 @@ func (c *FakeStorageV1) AccessKeys() v1.AccessKeyInterface {
 	return &FakeAccessKeys{c}
 }
 
+func (c *FakeStorageV1) Apps() v1.AppInterface {
+	return &FakeApps{c}
+}
+
 func (c *FakeStorageV1) Clusters() v1.ClusterInterface {
 	return &FakeClusters{c}
 }
@@ -28,6 +32,10 @@ func (c *FakeStorageV1) SharedSecrets(namespace string) v1.SharedSecretInterface
 	return &FakeSharedSecrets{c, namespace}
 }
 
+func (c *FakeStorageV1) SpaceTemplates() v1.SpaceTemplateInterface {
+	return &FakeSpaceTemplates{c}
+}
+
 func (c *FakeStorageV1) Teams() v1.TeamInterface {
 	return &FakeTeams{c}
 }
@@ -36,8 +44,8 @@ func (c *FakeStorageV1) Users() v1.UserInterface {
 	return &FakeUsers{c}
 }
 
-func (c *FakeStorageV1) VirtualClusters(namespace string) v1.VirtualClusterInterface {
-	return &FakeVirtualClusters{c, namespace}
+func (c *FakeStorageV1) VirtualClusterTemplates() v1.VirtualClusterTemplateInterface {
+	return &FakeVirtualClusterTemplates{c}
 }
 
 // RESTClient returns a RESTClient that is used to communicate

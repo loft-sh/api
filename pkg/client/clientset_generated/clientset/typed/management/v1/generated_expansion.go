@@ -4,6 +4,8 @@ package v1
 
 type AnnouncementExpansion interface{}
 
+type AppExpansion interface{}
+
 type ClusterExpansion interface{}
 
 type ClusterAccountTemplateExpansion interface{}
@@ -36,8 +38,12 @@ type SelfSubjectAccessReviewExpansion interface{}
 
 type SharedSecretExpansion interface{}
 
+type SpaceTemplateExpansion interface{}
+
 type SubjectAccessReviewExpansion interface{}
 
 type TeamExpansion interface{}
 
 type UserExpansion interface{}
+
+type VirtualClusterTemplateExpansion interface{}

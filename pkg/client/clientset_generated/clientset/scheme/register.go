@@ -3,9 +3,9 @@
 package scheme
 
 import (
-	clusterv1 "github.com/loft-sh/api/pkg/apis/cluster/v1"
 	managementv1 "github.com/loft-sh/api/pkg/apis/management/v1"
 	storagev1 "github.com/loft-sh/api/pkg/apis/storage/v1"
+	virtualclusterv1 "github.com/loft-sh/api/pkg/apis/virtualcluster/v1"
 	v1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	runtime "k8s.io/apimachinery/pkg/runtime"
 	schema "k8s.io/apimachinery/pkg/runtime/schema"
@@ -17,9 +17,9 @@ var Scheme = runtime.NewScheme()
 var Codecs = serializer.NewCodecFactory(Scheme)
 var ParameterCodec = runtime.NewParameterCodec(Scheme)
 var localSchemeBuilder = runtime.SchemeBuilder{
-	clusterv1.AddToScheme,
 	managementv1.AddToScheme,
 	storagev1.AddToScheme,
+	virtualclusterv1.AddToScheme,
 }
 
 // AddToScheme adds all types of this clientset into the given scheme. This allows composition

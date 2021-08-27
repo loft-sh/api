@@ -18,6 +18,14 @@ type User struct {
 	Status UserStatus `json:"status,omitempty"`
 }
 
+func (a *User) GetAccess() []Access {
+	return a.Spec.Access
+}
+
+func (a *User) SetAccess(access []Access) {
+	a.Spec.Access = access
+}
+
 type UserSpec struct {
 	// The display name shown in the UI
 	// +optional
@@ -40,10 +48,6 @@ type UserSpec struct {
 	// The groups the user has access to
 	// +optional
 	Groups []string `json:"groups,omitempty"`
-
-	// The extras the user has
-	// +optional
-	Extras map[string][]string `json:"extras,omitempty"`
 
 	// A reference to the user password
 	// +optional
@@ -75,6 +79,10 @@ type UserSpec struct {
 	// are unaffected and other users can still interact with this user
 	// +optional
 	Disabled bool `json:"disabled,omitempty"`
+
+	// Access holds the access rights for users and teams
+	// +optional
+	Access []Access `json:"access,omitempty"`
 }
 
 type UserClusterAccountTemplate struct {

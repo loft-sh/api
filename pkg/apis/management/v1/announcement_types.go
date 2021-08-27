@@ -26,4 +26,8 @@ type AnnouncementStatus struct {
 	// Announcement is the html announcement that should be displayed in the frontend
 	// +optional
 	Announcement string `json:"announcement,omitempty"`
+
+	// AnalyticsToken is a token signed for the user that is used by the frontend
+	// +optional
+	AnalyticsToken string `json:"analyticsToken,omitempty"`
 }

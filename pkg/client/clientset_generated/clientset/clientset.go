@@ -5,9 +5,9 @@ package clientset
 import (
 	"fmt"
 
-	clusterv1 "github.com/loft-sh/api/pkg/client/clientset_generated/clientset/typed/cluster/v1"
 	managementv1 "github.com/loft-sh/api/pkg/client/clientset_generated/clientset/typed/management/v1"
 	storagev1 "github.com/loft-sh/api/pkg/client/clientset_generated/clientset/typed/storage/v1"
+	virtualclusterv1 "github.com/loft-sh/api/pkg/client/clientset_generated/clientset/typed/virtualcluster/v1"
 	discovery "k8s.io/client-go/discovery"
 	rest "k8s.io/client-go/rest"
 	flowcontrol "k8s.io/client-go/util/flowcontrol"
@@ -15,23 +15,18 @@ import (
 
 type Interface interface {
 	Discovery() discovery.DiscoveryInterface
-	ClusterV1() clusterv1.ClusterV1Interface
 	ManagementV1() managementv1.ManagementV1Interface
 	StorageV1() storagev1.StorageV1Interface
+	VirtualclusterV1() virtualclusterv1.VirtualclusterV1Interface
 }
 
 // Clientset contains the clients for groups. Each group has exactly one
 // version included in a Clientset.
 type Clientset struct {
 	*discovery.DiscoveryClient
-	clusterV1    *clusterv1.ClusterV1Client
-	managementV1 *managementv1.ManagementV1Client
-	storageV1    *storagev1.StorageV1Client
-}
-
-// ClusterV1 retrieves the ClusterV1Client
-func (c *Clientset) ClusterV1() clusterv1.ClusterV1Interface {
-	return c.clusterV1
+	managementV1     *managementv1.ManagementV1Client
+	storageV1        *storagev1.StorageV1Client
+	virtualclusterV1 *virtualclusterv1.VirtualclusterV1Client
 }
 
 // ManagementV1 retrieves the ManagementV1Client
@@ -42,6 +37,11 @@ func (c *Clientset) ManagementV1() managementv1.ManagementV1Interface {
 // StorageV1 retrieves the StorageV1Client
 func (c *Clientset) StorageV1() storagev1.StorageV1Interface {
 	return c.storageV1
+}
+
+// VirtualclusterV1 retrieves the VirtualclusterV1Client
+func (c *Clientset) VirtualclusterV1() virtualclusterv1.VirtualclusterV1Interface {
+	return c.virtualclusterV1
 }
 
 // Discovery retrieves the DiscoveryClient
@@ -65,15 +65,15 @@ func NewForConfig(c *rest.Config) (*Clientset, error) {
 	}
 	var cs Clientset
 	var err error
-	cs.clusterV1, err = clusterv1.NewForConfig(&configShallowCopy)
-	if err != nil {
-		return nil, err
-	}
 	cs.managementV1, err = managementv1.NewForConfig(&configShallowCopy)
 	if err != nil {
 		return nil, err
 	}
 	cs.storageV1, err = storagev1.NewForConfig(&configShallowCopy)
+	if err != nil {
+		return nil, err
+	}
+	cs.virtualclusterV1, err = virtualclusterv1.NewForConfig(&configShallowCopy)
 	if err != nil {
 		return nil, err
 	}
@@ -89,9 +89,9 @@ func NewForConfig(c *rest.Config) (*Clientset, error) {
 // panics if there is an error in the config.
 func NewForConfigOrDie(c *rest.Config) *Clientset {
 	var cs Clientset
-	cs.clusterV1 = clusterv1.NewForConfigOrDie(c)
 	cs.managementV1 = managementv1.NewForConfigOrDie(c)
 	cs.storageV1 = storagev1.NewForConfigOrDie(c)
+	cs.virtualclusterV1 = virtualclusterv1.NewForConfigOrDie(c)
 
 	cs.DiscoveryClient = discovery.NewDiscoveryClientForConfigOrDie(c)
 	return &cs
@@ -100,9 +100,9 @@ func NewForConfigOrDie(c *rest.Config) *Clientset {
 // New creates a new Clientset for the given RESTClient.
 func New(c rest.Interface) *Clientset {
 	var cs Clientset
-	cs.clusterV1 = clusterv1.New(c)
 	cs.managementV1 = managementv1.New(c)
 	cs.storageV1 = storagev1.New(c)
+	cs.virtualclusterV1 = virtualclusterv1.New(c)
 
 	cs.DiscoveryClient = discovery.NewDiscoveryClient(c)
 	return &cs

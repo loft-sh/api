@@ -1,7 +1,7 @@
 package v1
 
 import (
-	configv1alpha1 "github.com/loft-sh/kiosk/pkg/apis/config/v1alpha1"
+	configv1alpha1 "github.com/loft-sh/agentapi/pkg/apis/kiosk/config/v1alpha1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime"
 )
@@ -20,6 +20,14 @@ type ClusterAccountTemplate struct {
 	Status ClusterAccountTemplateStatus `json:"status,omitempty"`
 }
 
+func (a *ClusterAccountTemplate) GetAccess() []Access {
+	return a.Spec.Access
+}
+
+func (a *ClusterAccountTemplate) SetAccess(access []Access) {
+	a.Spec.Access = access
+}
+
 type ClusterAccountTemplateSpec struct {
 	// Template is the account template that will be used to create a new account
 	// +optional
@@ -32,7 +40,16 @@ type ClusterAccountTemplateSpec struct {
 
 	// Selects the target clusters this account template should be applied to. An empty
 	// cluster selector selects all clusters
-	ClusterSelector metav1.LabelSelector `json:"clusterSelector,omitempty"`
+	// +optional
+	ClusterSelector *metav1.LabelSelector `json:"clusterSelector,omitempty"`
+
+	// Clusters are the clusters this template should be applied on.
+	// +optional
+	Clusters []string `json:"clusters,omitempty"`
+
+	// Access holds the access rights for users and teams
+	// +optional
+	Access []Access `json:"access,omitempty"`
 }
 
 type AccountTemplate struct {

@@ -8,7 +8,7 @@ import (
 // +genclient:nonNamespaced
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
 
-// User holds the user information
+// Cluster holds the cluster information
 // +k8s:openapi-gen=true
 type Cluster struct {
 	metav1.TypeMeta   `json:",inline"`
@@ -18,7 +18,15 @@ type Cluster struct {
 	Status ClusterStatus `json:"status,omitempty"`
 }
 
-// ClusterSpec holds the user specification
+func (a *Cluster) GetAccess() []Access {
+	return a.Spec.Access
+}
+
+func (a *Cluster) SetAccess(access []Access) {
+	a.Spec.Access = access
+}
+
+// ClusterSpec holds the cluster specification
 type ClusterSpec struct {
 	// Holds a reference to a secret that holds the kube config to access this cluster
 	// +optional
@@ -35,6 +43,16 @@ type ClusterSpec struct {
 	// If specified this name is displayed in the UI instead of the metadata name
 	// +optional
 	DisplayName string `json:"displayName,omitempty"`
+
+	// Access holds the access rights for users and teams
+	// +optional
+	Access []Access `json:"access,omitempty"`
+}
+
+type AllowedClusterAccountTemplate struct {
+	// Name is the name of a cluster account template
+	// +optional
+	Name string `json:"name,omitempty"`
 }
 
 // ClusterStatus holds the user status
