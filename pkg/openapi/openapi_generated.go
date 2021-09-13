@@ -78,6 +78,7 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 		"github.com/loft-sh/agentapi/pkg/apis/loft/cluster/v1.VirtualClusterList":                    schema_apis_loft_cluster_v1_VirtualClusterList(ref),
 		"github.com/loft-sh/agentapi/pkg/apis/loft/cluster/v1.VirtualClusterSpec":                    schema_apis_loft_cluster_v1_VirtualClusterSpec(ref),
 		"github.com/loft-sh/agentapi/pkg/apis/loft/cluster/v1.VirtualClusterStatus":                  schema_apis_loft_cluster_v1_VirtualClusterStatus(ref),
+		"github.com/loft-sh/agentapi/pkg/apis/loft/storage/v1.Condition":                             schema_apis_loft_storage_v1_Condition(ref),
 		"github.com/loft-sh/agentapi/pkg/apis/loft/storage/v1.PodSelector":                           schema_apis_loft_storage_v1_PodSelector(ref),
 		"github.com/loft-sh/agentapi/pkg/apis/loft/storage/v1.SecretRef":                             schema_apis_loft_storage_v1_SecretRef(ref),
 		"github.com/loft-sh/agentapi/pkg/apis/loft/storage/v1.VirtualCluster":                        schema_apis_loft_storage_v1_VirtualCluster(ref),
@@ -3575,9 +3576,57 @@ func schema_apis_loft_cluster_v1_VirtualClusterStatus(ref common.ReferenceCallba
 			SchemaProps: spec.SchemaProps{
 				Type: []string{"object"},
 				Properties: map[string]spec.Schema{
+					"phase": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Phase describes the current phase the virtual cluster is in",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"reason": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Reason describes the reason in machine readable form why the cluster is in the current phase",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"message": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Message describes the reason in human readable form why the cluster is in the currrent phase",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"controlPlaneReady": {
+						SchemaProps: spec.SchemaProps{
+							Description: "ControlPlaneReady defines if the virtual cluster control plane is ready.",
+							Type:        []string{"boolean"},
+							Format:      "",
+						},
+					},
+					"conditions": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Conditions holds several conditions the virtual cluster might be in",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Ref: ref("github.com/loft-sh/agentapi/pkg/apis/loft/storage/v1.Condition"),
+									},
+								},
+							},
+						},
+					},
+					"observedGeneration": {
+						SchemaProps: spec.SchemaProps{
+							Description: "ObservedGeneration is the latest generation observed by the controller.",
+							Type:        []string{"integer"},
+							Format:      "int64",
+						},
+					},
 					"helmRelease": {
 						SchemaProps: spec.SchemaProps{
-							Description: "the status of the helm release that was used to deploy the virtual cluster",
+							Description: "DEPRECATED: do not use anymore the status of the helm release that was used to deploy the virtual cluster",
 							Ref:         ref("github.com/loft-sh/agentapi/pkg/apis/loft/storage/v1.VirtualClusterHelmReleaseStatus"),
 						},
 					},
@@ -3585,7 +3634,64 @@ func schema_apis_loft_cluster_v1_VirtualClusterStatus(ref common.ReferenceCallba
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/agentapi/pkg/apis/loft/storage/v1.VirtualClusterHelmReleaseStatus"},
+			"github.com/loft-sh/agentapi/pkg/apis/loft/storage/v1.Condition", "github.com/loft-sh/agentapi/pkg/apis/loft/storage/v1.VirtualClusterHelmReleaseStatus"},
+	}
+}
+
+func schema_apis_loft_storage_v1_Condition(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "Condition defines an observation of a Cluster API resource operational state.",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"type": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Type of condition in CamelCase or in foo.example.com/CamelCase. Many .condition.type values are consistent across resources like Available, but because arbitrary conditions can be useful (see .node.status.conditions), the ability to deconflict is important.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"status": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Status of the condition, one of True, False, Unknown.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"severity": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Severity provides an explicit classification of Reason code, so the users or machines can immediately understand the current situation and act accordingly. The Severity field MUST be set only when Status=False.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"lastTransitionTime": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Last time the condition transitioned from one status to another. This should be when the underlying condition changed. If that is not known, then using the time when the API field changed is acceptable.",
+							Ref:         ref("k8s.io/apimachinery/pkg/apis/meta/v1.Time"),
+						},
+					},
+					"reason": {
+						SchemaProps: spec.SchemaProps{
+							Description: "The reason for the condition's last transition in CamelCase. The specific API may choose whether this field is considered a guaranteed API. This field may not be empty.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"message": {
+						SchemaProps: spec.SchemaProps{
+							Description: "A human readable message indicating details about the transition. This field may be empty.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+				},
+				Required: []string{"type", "status"},
+			},
+		},
+		Dependencies: []string{
+			"k8s.io/apimachinery/pkg/apis/meta/v1.Time"},
 	}
 }
 
@@ -3880,9 +3986,57 @@ func schema_apis_loft_storage_v1_VirtualClusterStatus(ref common.ReferenceCallba
 				Description: "VirtualClusterStatus holds the status of a virtual cluster",
 				Type:        []string{"object"},
 				Properties: map[string]spec.Schema{
+					"phase": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Phase describes the current phase the virtual cluster is in",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"reason": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Reason describes the reason in machine readable form why the cluster is in the current phase",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"message": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Message describes the reason in human readable form why the cluster is in the currrent phase",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"controlPlaneReady": {
+						SchemaProps: spec.SchemaProps{
+							Description: "ControlPlaneReady defines if the virtual cluster control plane is ready.",
+							Type:        []string{"boolean"},
+							Format:      "",
+						},
+					},
+					"conditions": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Conditions holds several conditions the virtual cluster might be in",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Ref: ref("github.com/loft-sh/agentapi/pkg/apis/loft/storage/v1.Condition"),
+									},
+								},
+							},
+						},
+					},
+					"observedGeneration": {
+						SchemaProps: spec.SchemaProps{
+							Description: "ObservedGeneration is the latest generation observed by the controller.",
+							Type:        []string{"integer"},
+							Format:      "int64",
+						},
+					},
 					"helmRelease": {
 						SchemaProps: spec.SchemaProps{
-							Description: "the status of the helm release that was used to deploy the virtual cluster",
+							Description: "DEPRECATED: do not use anymore the status of the helm release that was used to deploy the virtual cluster",
 							Ref:         ref("github.com/loft-sh/agentapi/pkg/apis/loft/storage/v1.VirtualClusterHelmReleaseStatus"),
 						},
 					},
@@ -3890,7 +4044,7 @@ func schema_apis_loft_storage_v1_VirtualClusterStatus(ref common.ReferenceCallba
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/agentapi/pkg/apis/loft/storage/v1.VirtualClusterHelmReleaseStatus"},
+			"github.com/loft-sh/agentapi/pkg/apis/loft/storage/v1.Condition", "github.com/loft-sh/agentapi/pkg/apis/loft/storage/v1.VirtualClusterHelmReleaseStatus"},
 	}
 }
 
