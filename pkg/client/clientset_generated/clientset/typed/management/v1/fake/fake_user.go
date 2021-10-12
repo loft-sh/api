@@ -129,7 +129,7 @@ func (c *FakeUsers) GetProfile(ctx context.Context, userName string, options v1.
 // UpdateProfile takes the representation of a userProfile and creates it.  Returns the server's representation of the userProfile, and an error, if there is any.
 func (c *FakeUsers) UpdateProfile(ctx context.Context, userName string, userProfile *managementv1.UserProfile, opts v1.CreateOptions) (result *managementv1.UserProfile, err error) {
 	obj, err := c.Fake.
-		Invokes(testing.NewRootCreateSubresourceAction(usersResource, "profile", userProfile), &managementv1.UserProfile{})
+		Invokes(testing.NewRootCreateSubresourceAction(usersResource, userName, "profile", userProfile), &managementv1.UserProfile{})
 	if obj == nil {
 		return nil, err
 	}
@@ -184,4 +184,14 @@ func (c *FakeUsers) ListVirtualClusters(ctx context.Context, userName string, op
 		return nil, err
 	}
 	return obj.(*managementv1.UserVirtualClusters), err
+}
+
+// ListAccessKeys takes name of the user, and returns the corresponding userAccessKeys object, and an error if there is any.
+func (c *FakeUsers) ListAccessKeys(ctx context.Context, userName string, options v1.GetOptions) (result *managementv1.UserAccessKeys, err error) {
+	obj, err := c.Fake.
+		Invokes(testing.NewRootGetSubresourceAction(usersResource, "accesskeys", userName), &managementv1.UserAccessKeys{})
+	if obj == nil {
+		return nil, err
+	}
+	return obj.(*managementv1.UserAccessKeys), err
 }

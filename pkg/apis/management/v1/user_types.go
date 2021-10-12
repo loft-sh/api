@@ -14,6 +14,7 @@ import (
 // +genclient:method=ListTeams,verb=get,subresource=teams,result=github.com/loft-sh/api/pkg/apis/management/v1.UserTeams
 // +genclient:method=ListClusters,verb=get,subresource=clusters,result=github.com/loft-sh/api/pkg/apis/management/v1.UserClusters
 // +genclient:method=ListVirtualClusters,verb=get,subresource=virtualclusters,result=github.com/loft-sh/api/pkg/apis/management/v1.UserVirtualClusters
+// +genclient:method=ListAccessKeys,verb=get,subresource=accesskeys,result=github.com/loft-sh/api/pkg/apis/management/v1.UserAccessKeys
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
 
 // User holds the user information

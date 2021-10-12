@@ -145,3 +145,13 @@ func (c *FakeTeams) ListVirtualClusters(ctx context.Context, teamName string, op
 	}
 	return obj.(*managementv1.TeamVirtualClusters), err
 }
+
+// ListAccessKeys takes name of the team, and returns the corresponding teamAccessKeys object, and an error if there is any.
+func (c *FakeTeams) ListAccessKeys(ctx context.Context, teamName string, options v1.GetOptions) (result *managementv1.TeamAccessKeys, err error) {
+	obj, err := c.Fake.
+		Invokes(testing.NewRootGetSubresourceAction(teamsResource, "accesskeys", teamName), &managementv1.TeamAccessKeys{})
+	if obj == nil {
+		return nil, err
+	}
+	return obj.(*managementv1.TeamAccessKeys), err
+}

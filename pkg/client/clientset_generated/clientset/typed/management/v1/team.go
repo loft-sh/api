@@ -34,6 +34,7 @@ type TeamInterface interface {
 	ListSpaces(ctx context.Context, teamName string, options metav1.GetOptions) (*v1.TeamSpaces, error)
 	ListClusters(ctx context.Context, teamName string, options metav1.GetOptions) (*v1.TeamClusters, error)
 	ListVirtualClusters(ctx context.Context, teamName string, options metav1.GetOptions) (*v1.TeamVirtualClusters, error)
+	ListAccessKeys(ctx context.Context, teamName string, options metav1.GetOptions) (*v1.TeamAccessKeys, error)
 
 	TeamExpansion
 }
@@ -204,6 +205,19 @@ func (c *teams) ListVirtualClusters(ctx context.Context, teamName string, option
 		Resource("teams").
 		Name(teamName).
 		SubResource("virtualclusters").
+		VersionedParams(&options, scheme.ParameterCodec).
+		Do(ctx).
+		Into(result)
+	return
+}
+
+// ListAccessKeys takes name of the team, and returns the corresponding v1.TeamAccessKeys object, and an error if there is any.
+func (c *teams) ListAccessKeys(ctx context.Context, teamName string, options metav1.GetOptions) (result *v1.TeamAccessKeys, err error) {
+	result = &v1.TeamAccessKeys{}
+	err = c.client.Get().
+		Resource("teams").
+		Name(teamName).
+		SubResource("accesskeys").
 		VersionedParams(&options, scheme.ParameterCodec).
 		Do(ctx).
 		Into(result)

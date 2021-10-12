@@ -119,7 +119,7 @@ func (c *FakeClusters) Patch(ctx context.Context, name string, pt types.PatchTyp
 // ResetCluster takes the representation of a clusterReset and creates it.  Returns the server's representation of the clusterReset, and an error, if there is any.
 func (c *FakeClusters) ResetCluster(ctx context.Context, clusterName string, clusterReset *managementv1.ClusterReset, opts v1.CreateOptions) (result *managementv1.ClusterReset, err error) {
 	obj, err := c.Fake.
-		Invokes(testing.NewRootCreateSubresourceAction(clustersResource, "reset", clusterReset), &managementv1.ClusterReset{})
+		Invokes(testing.NewRootCreateSubresourceAction(clustersResource, clusterName, "reset", clusterReset), &managementv1.ClusterReset{})
 	if obj == nil {
 		return nil, err
 	}
