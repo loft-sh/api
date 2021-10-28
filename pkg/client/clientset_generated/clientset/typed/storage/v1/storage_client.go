@@ -14,8 +14,12 @@ type StorageV1Interface interface {
 	AppsGetter
 	ClustersGetter
 	ClusterAccountTemplatesGetter
+	GlobalClusterAccessesGetter
+	GlobalClusterRoleTemplatesGetter
+	GlobalSpaceConstraintsGetter
 	SharedSecretsGetter
 	SpaceTemplatesGetter
+	TasksGetter
 	TeamsGetter
 	UsersGetter
 	VirtualClusterTemplatesGetter
@@ -42,12 +46,28 @@ func (c *StorageV1Client) ClusterAccountTemplates() ClusterAccountTemplateInterf
 	return newClusterAccountTemplates(c)
 }
 
+func (c *StorageV1Client) GlobalClusterAccesses() GlobalClusterAccessInterface {
+	return newGlobalClusterAccesses(c)
+}
+
+func (c *StorageV1Client) GlobalClusterRoleTemplates() GlobalClusterRoleTemplateInterface {
+	return newGlobalClusterRoleTemplates(c)
+}
+
+func (c *StorageV1Client) GlobalSpaceConstraints() GlobalSpaceConstraintInterface {
+	return newGlobalSpaceConstraints(c)
+}
+
 func (c *StorageV1Client) SharedSecrets(namespace string) SharedSecretInterface {
 	return newSharedSecrets(c, namespace)
 }
 
 func (c *StorageV1Client) SpaceTemplates() SpaceTemplateInterface {
 	return newSpaceTemplates(c)
+}
+
+func (c *StorageV1Client) Tasks() TaskInterface {
+	return newTasks(c)
 }
 
 func (c *StorageV1Client) Teams() TeamInterface {

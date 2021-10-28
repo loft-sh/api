@@ -28,12 +28,28 @@ func (c *FakeStorageV1) ClusterAccountTemplates() v1.ClusterAccountTemplateInter
 	return &FakeClusterAccountTemplates{c}
 }
 
+func (c *FakeStorageV1) GlobalClusterAccesses() v1.GlobalClusterAccessInterface {
+	return &FakeGlobalClusterAccesses{c}
+}
+
+func (c *FakeStorageV1) GlobalClusterRoleTemplates() v1.GlobalClusterRoleTemplateInterface {
+	return &FakeGlobalClusterRoleTemplates{c}
+}
+
+func (c *FakeStorageV1) GlobalSpaceConstraints() v1.GlobalSpaceConstraintInterface {
+	return &FakeGlobalSpaceConstraints{c}
+}
+
 func (c *FakeStorageV1) SharedSecrets(namespace string) v1.SharedSecretInterface {
 	return &FakeSharedSecrets{c, namespace}
 }
 
 func (c *FakeStorageV1) SpaceTemplates() v1.SpaceTemplateInterface {
 	return &FakeSpaceTemplates{c}
+}
+
+func (c *FakeStorageV1) Tasks() v1.TaskInterface {
+	return &FakeTasks{c}
 }
 
 func (c *FakeStorageV1) Teams() v1.TeamInterface {

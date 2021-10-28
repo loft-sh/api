@@ -116,14 +116,14 @@ func (c *FakeClusters) Patch(ctx context.Context, name string, pt types.PatchTyp
 	return obj.(*managementv1.Cluster), err
 }
 
-// ResetCluster takes the representation of a clusterReset and creates it.  Returns the server's representation of the clusterReset, and an error, if there is any.
-func (c *FakeClusters) ResetCluster(ctx context.Context, clusterName string, clusterReset *managementv1.ClusterReset, opts v1.CreateOptions) (result *managementv1.ClusterReset, err error) {
+// ListAccess takes name of the cluster, and returns the corresponding clusterAccess object, and an error if there is any.
+func (c *FakeClusters) ListAccess(ctx context.Context, clusterName string, options v1.GetOptions) (result *managementv1.ClusterAccess, err error) {
 	obj, err := c.Fake.
-		Invokes(testing.NewRootCreateSubresourceAction(clustersResource, clusterName, "reset", clusterReset), &managementv1.ClusterReset{})
+		Invokes(testing.NewRootGetSubresourceAction(clustersResource, "access", clusterName), &managementv1.ClusterAccess{})
 	if obj == nil {
 		return nil, err
 	}
-	return obj.(*managementv1.ClusterReset), err
+	return obj.(*managementv1.ClusterAccess), err
 }
 
 // ListMembers takes name of the cluster, and returns the corresponding clusterMembers object, and an error if there is any.

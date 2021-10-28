@@ -29,3 +29,19 @@ type AppSpec struct {
 type AppStatus struct {
 	storagev1.AppStatus `json:",inline"`
 }
+
+func (a *App) GetOwner() *storagev1.UserOrTeam {
+	return a.Spec.Owner
+}
+
+func (a *App) SetOwner(userOrTeam *storagev1.UserOrTeam) {
+	a.Spec.Owner = userOrTeam
+}
+
+func (a *App) GetAccess() []storagev1.Access {
+	return a.Spec.Access
+}
+
+func (a *App) SetAccess(access []storagev1.Access) {
+	a.Spec.Access = access
+}

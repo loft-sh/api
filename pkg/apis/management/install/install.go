@@ -21,6 +21,7 @@ func InstallOptions(scheme *runtime.Scheme) {
 
 func addKnownOptionsTypes(scheme *runtime.Scheme) error {
 	scheme.AddKnownTypes(management.SchemeGroupVersion,
+		&management.TaskLogOptions{},
 		&management.UserSpacesOptions{},
 		&management.UserVirtualClustersOptions{},
 		&management.UserQuotasOptions{},

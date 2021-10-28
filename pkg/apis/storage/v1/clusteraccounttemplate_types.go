@@ -20,6 +20,14 @@ type ClusterAccountTemplate struct {
 	Status ClusterAccountTemplateStatus `json:"status,omitempty"`
 }
 
+func (a *ClusterAccountTemplate) GetOwner() *UserOrTeam {
+	return a.Spec.Owner
+}
+
+func (a *ClusterAccountTemplate) SetOwner(userOrTeam *UserOrTeam) {
+	a.Spec.Owner = userOrTeam
+}
+
 func (a *ClusterAccountTemplate) GetAccess() []Access {
 	return a.Spec.Access
 }
@@ -29,6 +37,10 @@ func (a *ClusterAccountTemplate) SetAccess(access []Access) {
 }
 
 type ClusterAccountTemplateSpec struct {
+	// Owner holds the owner of this object
+	// +optional
+	Owner *UserOrTeam `json:"owner,omitempty"`
+
 	// Template is the account template that will be used to create a new account
 	// +optional
 	Template AccountTemplate `json:"accountTemplate,omitempty"`

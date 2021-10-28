@@ -2,7 +2,6 @@ package v1
 
 import (
 	configv1alpha1 "github.com/loft-sh/agentapi/pkg/apis/kiosk/config/v1alpha1"
-	tenancyv1alpha1 "github.com/loft-sh/agentapi/pkg/apis/kiosk/tenancy/v1alpha1"
 	clusterv1 "github.com/loft-sh/agentapi/pkg/apis/loft/cluster/v1"
 	storagev1 "github.com/loft-sh/agentapi/pkg/apis/loft/storage/v1"
 	"github.com/loft-sh/jspolicy/pkg/apis/policy/v1beta1"
@@ -25,13 +24,8 @@ type Kiosk struct {
 }
 
 type KioskSpec struct {
-	// tenancy.kiosk.sh
-	Space   tenancyv1alpha1.Space   `json:"space,omitempty"`
-	Account tenancyv1alpha1.Account `json:"account,omitempty"`
-
 	// config.kiosk.sh
 	ConfigAccount    configv1alpha1.Account          `json:"configAccount,omitempty"`
-	AccountQuota     configv1alpha1.AccountQuota     `json:"accountQuota,omitempty"`
 	Template         configv1alpha1.Template         `json:"template,omitempty"`
 	TemplateInstance configv1alpha1.TemplateInstance `json:"templateInstance,omitempty"`
 
@@ -41,15 +35,19 @@ type KioskSpec struct {
 	JsPolicyViolations v1beta1.JsPolicyViolations `json:"jsPolicyViolations,omitempty"`
 
 	// cluster.loft.sh
-	HelmRelease         clusterv1.HelmRelease         `json:"helmRelease,omitempty"`
-	HelmReleaseRollback clusterv1.HelmReleaseRollback `json:"helmReleaseRollback,omitempty"`
-	SleepModeConfig     clusterv1.SleepModeConfig     `json:"sleepModeConfig,omitempty"`
-	ClusterAccount      clusterv1.Account             `json:"clusterAcccount,omitempty"`
-	ClusterAccountRoles clusterv1.AccountClusterRoles `json:"clusterAcccountRoles,omitempty"`
-	VirtualCluster      clusterv1.VirtualCluster      `json:"virtualCluster,omitempty"`
+	HelmRelease     clusterv1.HelmRelease     `json:"helmRelease,omitempty"`
+	SleepModeConfig clusterv1.SleepModeConfig `json:"sleepModeConfig,omitempty"`
+	Space           clusterv1.Space           `json:"space,omitempty"`
+	VirtualCluster  clusterv1.VirtualCluster  `json:"virtualCluster,omitempty"`
+	ClusterAccess   clusterv1.ClusterAccess   `json:"clusterAccess,omitempty"`
+	ClusterQuota    clusterv1.ClusterQuota    `json:"clusterQuota,omitempty"`
 
 	// storage.loft.sh
-	StorageVirtualCluster storagev1.VirtualCluster `json:"storageVirtualCluster,omitempty"`
+	SpaceConstraint       storagev1.SpaceConstraint     `json:"spaceConstraint,omitempty"`
+	StorageClusterAccess  storagev1.ClusterAccess       `json:"storageClusterAccess,omitempty"`
+	ClusterRoleTemplate   storagev1.ClusterRoleTemplate `json:"clusterRoleTemplate,omitempty"`
+	StorageClusterQuota   storagev1.ClusterQuota        `json:"storageClusterQuota,omitempty"`
+	StorageVirtualCluster storagev1.VirtualCluster      `json:"storageVirtualCluster,omitempty"`
 }
 
 type KioskStatus struct {

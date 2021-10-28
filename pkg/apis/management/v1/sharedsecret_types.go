@@ -28,3 +28,19 @@ type SharedSecretSpec struct {
 type SharedSecretStatus struct {
 	storagev1.SharedSecretStatus `json:",inline"`
 }
+
+func (a *SharedSecret) GetOwner() *storagev1.UserOrTeam {
+	return a.Spec.Owner
+}
+
+func (a *SharedSecret) SetOwner(userOrTeam *storagev1.UserOrTeam) {
+	a.Spec.Owner = userOrTeam
+}
+
+func (a *SharedSecret) GetAccess() []storagev1.Access {
+	return a.Spec.Access
+}
+
+func (a *SharedSecret) SetAccess(access []storagev1.Access) {
+	a.Spec.Access = access
+}

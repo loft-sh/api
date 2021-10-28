@@ -32,10 +32,6 @@ func (c *FakeManagementV1) ClusterConnects() v1.ClusterConnectInterface {
 	return &FakeClusterConnects{c}
 }
 
-func (c *FakeManagementV1) ClusterRoles() v1.ClusterRoleInterface {
-	return &FakeClusterRoles{c}
-}
-
 func (c *FakeManagementV1) Configs() v1.ConfigInterface {
 	return &FakeConfigs{c}
 }
@@ -46,6 +42,18 @@ func (c *FakeManagementV1) DirectClusterEndpointTokens() v1.DirectClusterEndpoin
 
 func (c *FakeManagementV1) Features() v1.FeatureInterface {
 	return &FakeFeatures{c}
+}
+
+func (c *FakeManagementV1) GlobalClusterAccesses() v1.GlobalClusterAccessInterface {
+	return &FakeGlobalClusterAccesses{c}
+}
+
+func (c *FakeManagementV1) GlobalClusterRoleTemplates() v1.GlobalClusterRoleTemplateInterface {
+	return &FakeGlobalClusterRoleTemplates{c}
+}
+
+func (c *FakeManagementV1) GlobalSpaceConstraints() v1.GlobalSpaceConstraintInterface {
+	return &FakeGlobalSpaceConstraints{c}
 }
 
 func (c *FakeManagementV1) Licenses() v1.LicenseInterface {
@@ -90,6 +98,10 @@ func (c *FakeManagementV1) SpaceTemplates() v1.SpaceTemplateInterface {
 
 func (c *FakeManagementV1) SubjectAccessReviews() v1.SubjectAccessReviewInterface {
 	return &FakeSubjectAccessReviews{c}
+}
+
+func (c *FakeManagementV1) Tasks() v1.TaskInterface {
+	return &FakeTasks{c}
 }
 
 func (c *FakeManagementV1) Teams() v1.TeamInterface {

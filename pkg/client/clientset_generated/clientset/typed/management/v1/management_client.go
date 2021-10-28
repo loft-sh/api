@@ -15,10 +15,12 @@ type ManagementV1Interface interface {
 	ClustersGetter
 	ClusterAccountTemplatesGetter
 	ClusterConnectsGetter
-	ClusterRolesGetter
 	ConfigsGetter
 	DirectClusterEndpointTokensGetter
 	FeaturesGetter
+	GlobalClusterAccessesGetter
+	GlobalClusterRoleTemplatesGetter
+	GlobalSpaceConstraintsGetter
 	LicensesGetter
 	LicenseTokensGetter
 	LoftUpgradesGetter
@@ -30,6 +32,7 @@ type ManagementV1Interface interface {
 	SharedSecretsGetter
 	SpaceTemplatesGetter
 	SubjectAccessReviewsGetter
+	TasksGetter
 	TeamsGetter
 	UsersGetter
 	VirtualClusterTemplatesGetter
@@ -60,10 +63,6 @@ func (c *ManagementV1Client) ClusterConnects() ClusterConnectInterface {
 	return newClusterConnects(c)
 }
 
-func (c *ManagementV1Client) ClusterRoles() ClusterRoleInterface {
-	return newClusterRoles(c)
-}
-
 func (c *ManagementV1Client) Configs() ConfigInterface {
 	return newConfigs(c)
 }
@@ -74,6 +73,18 @@ func (c *ManagementV1Client) DirectClusterEndpointTokens() DirectClusterEndpoint
 
 func (c *ManagementV1Client) Features() FeatureInterface {
 	return newFeatures(c)
+}
+
+func (c *ManagementV1Client) GlobalClusterAccesses() GlobalClusterAccessInterface {
+	return newGlobalClusterAccesses(c)
+}
+
+func (c *ManagementV1Client) GlobalClusterRoleTemplates() GlobalClusterRoleTemplateInterface {
+	return newGlobalClusterRoleTemplates(c)
+}
+
+func (c *ManagementV1Client) GlobalSpaceConstraints() GlobalSpaceConstraintInterface {
+	return newGlobalSpaceConstraints(c)
 }
 
 func (c *ManagementV1Client) Licenses() LicenseInterface {
@@ -118,6 +129,10 @@ func (c *ManagementV1Client) SpaceTemplates() SpaceTemplateInterface {
 
 func (c *ManagementV1Client) SubjectAccessReviews() SubjectAccessReviewInterface {
 	return newSubjectAccessReviews(c)
+}
+
+func (c *ManagementV1Client) Tasks() TaskInterface {
+	return newTasks(c)
 }
 
 func (c *ManagementV1Client) Teams() TeamInterface {

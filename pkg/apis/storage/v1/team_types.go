@@ -1,6 +1,7 @@
 package v1
 
 import (
+	agentstoragev1 "github.com/loft-sh/agentapi/pkg/apis/loft/storage/v1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 )
 
@@ -18,6 +19,14 @@ type Team struct {
 	Status TeamStatus `json:"status,omitempty"`
 }
 
+func (a *Team) GetOwner() *UserOrTeam {
+	return a.Spec.Owner
+}
+
+func (a *Team) SetOwner(userOrTeam *UserOrTeam) {
+	a.Spec.Owner = userOrTeam
+}
+
 func (a *Team) GetAccess() []Access {
 	return a.Spec.Access
 }
@@ -30,6 +39,14 @@ type TeamSpec struct {
 	// The display name shown in the UI
 	// +optional
 	DisplayName string `json:"displayName,omitempty"`
+
+	// Description describes a cluster access object
+	// +optional
+	Description string `json:"description,omitempty"`
+
+	// Owner holds the owner of this object
+	// +optional
+	Owner *UserOrTeam `json:"owner,omitempty"`
 
 	// The username of the team that will be used for identification and docker registry namespace
 	// +optional
@@ -51,6 +68,10 @@ type TeamSpec struct {
 	// ClusterAccountTemplates that should be applied for the user
 	// +optional
 	ClusterAccountTemplates []UserClusterAccountTemplate `json:"clusterAccountTemplates,omitempty"`
+
+	// ClusterRoles define the cluster roles that the users should have assigned in the cluster.
+	// +optional
+	ClusterRoles []agentstoragev1.ClusterRoleRef `json:"clusterRoles,omitempty"`
 
 	// Access holds the access rights for users and teams
 	// +optional

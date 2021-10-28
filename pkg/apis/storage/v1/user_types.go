@@ -1,6 +1,7 @@
 package v1
 
 import (
+	agentstoragev1 "github.com/loft-sh/agentapi/pkg/apis/loft/storage/v1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 )
 
@@ -18,6 +19,14 @@ type User struct {
 	Status UserStatus `json:"status,omitempty"`
 }
 
+func (a *User) GetOwner() *UserOrTeam {
+	return a.Spec.Owner
+}
+
+func (a *User) SetOwner(userOrTeam *UserOrTeam) {
+	a.Spec.Owner = userOrTeam
+}
+
 func (a *User) GetAccess() []Access {
 	return a.Spec.Access
 }
@@ -30,6 +39,14 @@ type UserSpec struct {
 	// The display name shown in the UI
 	// +optional
 	DisplayName string `json:"displayName,omitempty"`
+
+	// Description describes a cluster access object
+	// +optional
+	Description string `json:"description,omitempty"`
+
+	// Owner holds the owner of this object
+	// +optional
+	Owner *UserOrTeam `json:"owner,omitempty"`
 
 	// The username that is used to login
 	Username string `json:"username,omitempty"`
@@ -80,6 +97,10 @@ type UserSpec struct {
 	// +optional
 	Disabled bool `json:"disabled,omitempty"`
 
+	// ClusterRoles define the cluster roles that the users should have assigned in the cluster.
+	// +optional
+	ClusterRoles []agentstoragev1.ClusterRoleRef `json:"clusterRoles,omitempty"`
+
 	// Access holds the access rights for users and teams
 	// +optional
 	Access []Access `json:"access,omitempty"`
@@ -111,6 +132,10 @@ type UserStatus struct {
 	// DEPRECATED: Use status.clusters instead
 	// +optional
 	ClusterAccountTemplates []UserClusterAccountTemplateStatus `json:"clusterAccountTemplates,omitempty"`
+
+	// Teams the user is currently part of
+	// +optional
+	Teams []string `json:"teams,omitempty"`
 }
 
 // AccountClusterStatus holds the status of an account in a cluster

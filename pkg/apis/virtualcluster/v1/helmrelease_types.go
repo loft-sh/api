@@ -10,7 +10,6 @@ import (
 
 // +k8s:openapi-gen=true
 // +resource:path=helmreleases,rest=HelmReleaseREST
-// +subresource:request=HelmReleaseRollback,path=rollback,kind=HelmReleaseRollback,rest=HelmReleaseRollbackREST
 type HelmRelease struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`

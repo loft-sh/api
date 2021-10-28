@@ -7,19 +7,14 @@ import (
 
 // +genclient
 // +genclient:nonNamespaced
-// +genclient:method=ListSpaces,verb=get,subresource=spaces,result=github.com/loft-sh/api/pkg/apis/management/v1.TeamSpaces
 // +genclient:method=ListClusters,verb=get,subresource=clusters,result=github.com/loft-sh/api/pkg/apis/management/v1.TeamClusters
-// +genclient:method=ListVirtualClusters,verb=get,subresource=virtualclusters,result=github.com/loft-sh/api/pkg/apis/management/v1.TeamVirtualClusters
 // +genclient:method=ListAccessKeys,verb=get,subresource=accesskeys,result=github.com/loft-sh/api/pkg/apis/management/v1.TeamAccessKeys
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
 
 // Team holds the team information
 // +k8s:openapi-gen=true
 // +resource:path=teams,rest=TeamREST
-// +subresource:request=TeamSpaces,path=spaces,kind=TeamSpaces,rest=TeamSpacesREST
 // +subresource:request=TeamClusters,path=clusters,kind=TeamClusters,rest=TeamClustersREST
-// +subresource:request=TeamClusterRoles,path=clusterroles,kind=TeamClusterRoles,rest=TeamClusterRolesREST
-// +subresource:request=TeamVirtualClusters,path=virtualclusters,kind=TeamVirtualClusters,rest=TeamVirtualClustersREST
 // +subresource:request=TeamAccessKeys,path=accesskeys,kind=TeamAccessKeys,rest=TeamAccessKeysREST
 type Team struct {
 	metav1.TypeMeta   `json:",inline"`
@@ -35,4 +30,20 @@ type TeamSpec struct {
 
 type TeamStatus struct {
 	storagev1.TeamStatus `json:",inline"`
+}
+
+func (a *Team) GetOwner() *storagev1.UserOrTeam {
+	return a.Spec.Owner
+}
+
+func (a *Team) SetOwner(userOrTeam *storagev1.UserOrTeam) {
+	a.Spec.Owner = userOrTeam
+}
+
+func (a *Team) GetAccess() []storagev1.Access {
+	return a.Spec.Access
+}
+
+func (a *Team) SetAccess(access []storagev1.Access) {
+	a.Spec.Access = access
 }

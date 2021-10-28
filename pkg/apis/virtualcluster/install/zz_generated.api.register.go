@@ -24,7 +24,6 @@ func addKnownTypes(scheme *runtime.Scheme) error {
 	scheme.AddKnownTypes(virtualcluster.SchemeGroupVersion,
 		&virtualcluster.HelmRelease{},
 		&virtualcluster.HelmReleaseList{},
-		&virtualcluster.HelmReleaseRollback{},
 	)
 	return nil
 }

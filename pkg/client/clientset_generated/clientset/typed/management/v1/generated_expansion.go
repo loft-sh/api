@@ -12,13 +12,17 @@ type ClusterAccountTemplateExpansion interface{}
 
 type ClusterConnectExpansion interface{}
 
-type ClusterRoleExpansion interface{}
-
 type ConfigExpansion interface{}
 
 type DirectClusterEndpointTokenExpansion interface{}
 
 type FeatureExpansion interface{}
+
+type GlobalClusterAccessExpansion interface{}
+
+type GlobalClusterRoleTemplateExpansion interface{}
+
+type GlobalSpaceConstraintExpansion interface{}
 
 type LicenseExpansion interface{}
 
@@ -41,6 +45,8 @@ type SharedSecretExpansion interface{}
 type SpaceTemplateExpansion interface{}
 
 type SubjectAccessReviewExpansion interface{}
+
+type TaskExpansion interface{}
 
 type TeamExpansion interface{}
 

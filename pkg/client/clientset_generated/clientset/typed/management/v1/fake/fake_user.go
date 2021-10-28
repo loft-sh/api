@@ -126,46 +126,6 @@ func (c *FakeUsers) GetProfile(ctx context.Context, userName string, options v1.
 	return obj.(*managementv1.UserProfile), err
 }
 
-// UpdateProfile takes the representation of a userProfile and creates it.  Returns the server's representation of the userProfile, and an error, if there is any.
-func (c *FakeUsers) UpdateProfile(ctx context.Context, userName string, userProfile *managementv1.UserProfile, opts v1.CreateOptions) (result *managementv1.UserProfile, err error) {
-	obj, err := c.Fake.
-		Invokes(testing.NewRootCreateSubresourceAction(usersResource, userName, "profile", userProfile), &managementv1.UserProfile{})
-	if obj == nil {
-		return nil, err
-	}
-	return obj.(*managementv1.UserProfile), err
-}
-
-// ListSpaces takes name of the user, and returns the corresponding userSpaces object, and an error if there is any.
-func (c *FakeUsers) ListSpaces(ctx context.Context, userName string, options v1.GetOptions) (result *managementv1.UserSpaces, err error) {
-	obj, err := c.Fake.
-		Invokes(testing.NewRootGetSubresourceAction(usersResource, "spaces", userName), &managementv1.UserSpaces{})
-	if obj == nil {
-		return nil, err
-	}
-	return obj.(*managementv1.UserSpaces), err
-}
-
-// ListQuotas takes name of the user, and returns the corresponding userQuotas object, and an error if there is any.
-func (c *FakeUsers) ListQuotas(ctx context.Context, userName string, options v1.GetOptions) (result *managementv1.UserQuotas, err error) {
-	obj, err := c.Fake.
-		Invokes(testing.NewRootGetSubresourceAction(usersResource, "quotas", userName), &managementv1.UserQuotas{})
-	if obj == nil {
-		return nil, err
-	}
-	return obj.(*managementv1.UserQuotas), err
-}
-
-// ListTeams takes name of the user, and returns the corresponding userTeams object, and an error if there is any.
-func (c *FakeUsers) ListTeams(ctx context.Context, userName string, options v1.GetOptions) (result *managementv1.UserTeams, err error) {
-	obj, err := c.Fake.
-		Invokes(testing.NewRootGetSubresourceAction(usersResource, "teams", userName), &managementv1.UserTeams{})
-	if obj == nil {
-		return nil, err
-	}
-	return obj.(*managementv1.UserTeams), err
-}
-
 // ListClusters takes name of the user, and returns the corresponding userClusters object, and an error if there is any.
 func (c *FakeUsers) ListClusters(ctx context.Context, userName string, options v1.GetOptions) (result *managementv1.UserClusters, err error) {
 	obj, err := c.Fake.
@@ -174,16 +134,6 @@ func (c *FakeUsers) ListClusters(ctx context.Context, userName string, options v
 		return nil, err
 	}
 	return obj.(*managementv1.UserClusters), err
-}
-
-// ListVirtualClusters takes name of the user, and returns the corresponding userVirtualClusters object, and an error if there is any.
-func (c *FakeUsers) ListVirtualClusters(ctx context.Context, userName string, options v1.GetOptions) (result *managementv1.UserVirtualClusters, err error) {
-	obj, err := c.Fake.
-		Invokes(testing.NewRootGetSubresourceAction(usersResource, "virtualclusters", userName), &managementv1.UserVirtualClusters{})
-	if obj == nil {
-		return nil, err
-	}
-	return obj.(*managementv1.UserVirtualClusters), err
 }
 
 // ListAccessKeys takes name of the user, and returns the corresponding userAccessKeys object, and an error if there is any.

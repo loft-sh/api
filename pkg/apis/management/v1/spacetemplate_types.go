@@ -1,6 +1,7 @@
 package v1
 
 import (
+	clusterv1 "github.com/loft-sh/agentapi/pkg/apis/loft/cluster/v1"
 	storagev1 "github.com/loft-sh/api/pkg/apis/storage/v1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 )
@@ -28,4 +29,23 @@ type SpaceTemplateSpec struct {
 // SpaceTemplateStatus holds the status
 type SpaceTemplateStatus struct {
 	storagev1.SpaceTemplateStatus `json:",inline"`
+
+	// +optional
+	Apps []*clusterv1.EntityInfo `json:"apps,omitempty"`
+}
+
+func (a *SpaceTemplate) GetOwner() *storagev1.UserOrTeam {
+	return a.Spec.Owner
+}
+
+func (a *SpaceTemplate) SetOwner(userOrTeam *storagev1.UserOrTeam) {
+	a.Spec.Owner = userOrTeam
+}
+
+func (a *SpaceTemplate) GetAccess() []storagev1.Access {
+	return a.Spec.Access
+}
+
+func (a *SpaceTemplate) SetAccess(access []storagev1.Access) {
+	a.Spec.Access = access
 }

@@ -18,6 +18,14 @@ type Cluster struct {
 	Status ClusterStatus `json:"status,omitempty"`
 }
 
+func (a *Cluster) GetOwner() *UserOrTeam {
+	return a.Spec.Owner
+}
+
+func (a *Cluster) SetOwner(userOrTeam *UserOrTeam) {
+	a.Spec.Owner = userOrTeam
+}
+
 func (a *Cluster) GetAccess() []Access {
 	return a.Spec.Access
 }
@@ -28,6 +36,18 @@ func (a *Cluster) SetAccess(access []Access) {
 
 // ClusterSpec holds the cluster specification
 type ClusterSpec struct {
+	// If specified this name is displayed in the UI instead of the metadata name
+	// +optional
+	DisplayName string `json:"displayName,omitempty"`
+
+	// Description describes a cluster access object
+	// +optional
+	Description string `json:"description,omitempty"`
+
+	// Owner holds the owner of this object
+	// +optional
+	Owner *UserOrTeam `json:"owner,omitempty"`
+
 	// Holds a reference to a secret that holds the kube config to access this cluster
 	// +optional
 	Config SecretRef `json:"config,omitempty"`
@@ -39,10 +59,6 @@ type ClusterSpec struct {
 	// The namespace where the cluster components will be installed in
 	// +optional
 	ManagementNamespace string `json:"managementNamespace,omitempty"`
-
-	// If specified this name is displayed in the UI instead of the metadata name
-	// +optional
-	DisplayName string `json:"displayName,omitempty"`
 
 	// Access holds the access rights for users and teams
 	// +optional

@@ -1,6 +1,7 @@
 package v1
 
 import (
+	clusterv1 "github.com/loft-sh/agentapi/pkg/apis/loft/cluster/v1"
 	storagev1 "github.com/loft-sh/api/pkg/apis/storage/v1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 )
@@ -28,4 +29,23 @@ type VirtualClusterTemplateSpec struct {
 // VirtualClusterTemplateStatus holds the status
 type VirtualClusterTemplateStatus struct {
 	storagev1.VirtualClusterTemplateStatus `json:",inline"`
+
+	// +optional
+	Apps []*clusterv1.EntityInfo `json:"apps,omitempty"`
+}
+
+func (a *VirtualClusterTemplate) GetOwner() *storagev1.UserOrTeam {
+	return a.Spec.Owner
+}
+
+func (a *VirtualClusterTemplate) SetOwner(userOrTeam *storagev1.UserOrTeam) {
+	a.Spec.Owner = userOrTeam
+}
+
+func (a *VirtualClusterTemplate) GetAccess() []storagev1.Access {
+	return a.Spec.Access
+}
+
+func (a *VirtualClusterTemplate) SetAccess(access []storagev1.Access) {
+	a.Spec.Access = access
 }
