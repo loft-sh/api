@@ -169,6 +169,10 @@ type HelmTask struct {
 	// Helm is the helm config
 	// +optional
 	Helm HelmTaskTemplate `json:"helm,omitempty"`
+
+	// Args are extra args to pass to helm
+	// +optional
+	Args []string `json:"args,omitempty"`
 }
 
 type TaskStatus struct {

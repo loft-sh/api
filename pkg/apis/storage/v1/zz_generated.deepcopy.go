@@ -1283,6 +1283,11 @@ func (in *HelmTask) DeepCopyInto(out *HelmTask) {
 	*out = *in
 	in.Release.DeepCopyInto(&out.Release)
 	out.Helm = in.Helm
+	if in.Args != nil {
+		in, out := &in.Args, &out.Args
+		*out = make([]string, len(*in))
+		copy(*out, *in)
+	}
 	return
 }
 

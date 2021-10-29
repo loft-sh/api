@@ -48,6 +48,8 @@ type KioskSpec struct {
 	ClusterRoleTemplate   storagev1.ClusterRoleTemplate `json:"clusterRoleTemplate,omitempty"`
 	StorageClusterQuota   storagev1.ClusterQuota        `json:"storageClusterQuota,omitempty"`
 	StorageVirtualCluster storagev1.VirtualCluster      `json:"storageVirtualCluster,omitempty"`
+	ClusterUser           storagev1.ClusterUser         `json:"clusterUser,omitempty"`
+	ClusterTeam           storagev1.ClusterTeam         `json:"clusterTeam,omitempty"`
 }
 
 type KioskStatus struct {

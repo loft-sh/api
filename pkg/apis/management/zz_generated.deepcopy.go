@@ -2131,6 +2131,8 @@ func (in *KioskSpec) DeepCopyInto(out *KioskSpec) {
 	in.ClusterRoleTemplate.DeepCopyInto(&out.ClusterRoleTemplate)
 	in.StorageClusterQuota.DeepCopyInto(&out.StorageClusterQuota)
 	in.StorageVirtualCluster.DeepCopyInto(&out.StorageVirtualCluster)
+	in.ClusterUser.DeepCopyInto(&out.ClusterUser)
+	in.ClusterTeam.DeepCopyInto(&out.ClusterTeam)
 	return
 }
 

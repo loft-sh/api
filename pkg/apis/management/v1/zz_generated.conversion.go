@@ -2869,7 +2869,6 @@ func autoConvert_v1_ClusterReset_To_management_ClusterReset(in *ClusterReset, ou
 	out.ObjectMeta = in.ObjectMeta
 	out.Agent = in.Agent
 	out.RBAC = in.RBAC
-	out.Templates = in.Templates
 	return nil
 }
 
@@ -2882,7 +2881,6 @@ func autoConvert_management_ClusterReset_To_v1_ClusterReset(in *management.Clust
 	out.ObjectMeta = in.ObjectMeta
 	out.Agent = in.Agent
 	out.RBAC = in.RBAC
-	out.Templates = in.Templates
 	return nil
 }
 
@@ -3769,6 +3767,8 @@ func autoConvert_v1_KioskSpec_To_management_KioskSpec(in *KioskSpec, out *manage
 	out.ClusterRoleTemplate = in.ClusterRoleTemplate
 	out.StorageClusterQuota = in.StorageClusterQuota
 	out.StorageVirtualCluster = in.StorageVirtualCluster
+	out.ClusterUser = in.ClusterUser
+	out.ClusterTeam = in.ClusterTeam
 	return nil
 }
 
@@ -3795,6 +3795,8 @@ func autoConvert_management_KioskSpec_To_v1_KioskSpec(in *management.KioskSpec, 
 	out.ClusterRoleTemplate = in.ClusterRoleTemplate
 	out.StorageClusterQuota = in.StorageClusterQuota
 	out.StorageVirtualCluster = in.StorageVirtualCluster
+	out.ClusterUser = in.ClusterUser
+	out.ClusterTeam = in.ClusterTeam
 	return nil
 }
 

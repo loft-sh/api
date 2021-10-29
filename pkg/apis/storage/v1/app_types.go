@@ -68,6 +68,14 @@ type AppSpec struct {
 	// +optional
 	Helm *HelmConfiguration `json:"helm,omitempty"`
 
+	// Wait determines if Loft should wait during deploy for the app to become ready
+	// +optional
+	Wait bool `json:"wait,omitempty"`
+
+	// Timeout is the time to wait for any individual Kubernetes operation (like Jobs for hooks) (default 5m0s)
+	// +optional
+	Timeout string `json:"timeout,omitempty"`
+
 	// Parameters define additional app parameters that will set helm values
 	// +optional
 	Parameters []AppParameter `json:"parameters,omitempty"`

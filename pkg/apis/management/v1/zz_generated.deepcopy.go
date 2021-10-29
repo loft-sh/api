@@ -52,6 +52,11 @@ func (in *AgentConfigSpec) DeepCopyInto(out *AgentConfigSpec) {
 		*out = make([]byte, len(*in))
 		copy(*out, *in)
 	}
+	if in.Audit != nil {
+		in, out := &in.Audit, &out.Audit
+		*out = new(Audit)
+		(*in).DeepCopyInto(*out)
+	}
 	return
 }
 
@@ -2201,6 +2206,8 @@ func (in *KioskSpec) DeepCopyInto(out *KioskSpec) {
 	in.ClusterRoleTemplate.DeepCopyInto(&out.ClusterRoleTemplate)
 	in.StorageClusterQuota.DeepCopyInto(&out.StorageClusterQuota)
 	in.StorageVirtualCluster.DeepCopyInto(&out.StorageVirtualCluster)
+	in.ClusterUser.DeepCopyInto(&out.ClusterUser)
+	in.ClusterTeam.DeepCopyInto(&out.ClusterTeam)
 	return
 }
 

@@ -1082,9 +1082,8 @@ type ClusterMembers struct {
 type ClusterReset struct {
 	metav1.TypeMeta
 	metav1.ObjectMeta
-	Agent     bool
-	RBAC      bool
-	Templates bool
+	Agent bool
+	RBAC  bool
 }
 
 type ClusterSpec struct {
@@ -1288,6 +1287,8 @@ type KioskSpec struct {
 	ClusterRoleTemplate   agentstoragev1.ClusterRoleTemplate
 	StorageClusterQuota   agentstoragev1.ClusterQuota
 	StorageVirtualCluster agentstoragev1.VirtualCluster
+	ClusterUser           agentstoragev1.ClusterUser
+	ClusterTeam           agentstoragev1.ClusterTeam
 }
 
 type KioskStatus struct {
@@ -1380,7 +1381,7 @@ type OIDCClient struct {
 }
 
 // +genclient
-// +genclient
+// +genclient:nonNamespaced
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
 
 type OwnedAccessKey struct {

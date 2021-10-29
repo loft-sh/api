@@ -63,6 +63,7 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 		"github.com/loft-sh/agentapi/pkg/apis/loft/cluster/v1.HelmReleaseSpec":                       schema_apis_loft_cluster_v1_HelmReleaseSpec(ref),
 		"github.com/loft-sh/agentapi/pkg/apis/loft/cluster/v1.HelmReleaseStatus":                     schema_apis_loft_cluster_v1_HelmReleaseStatus(ref),
 		"github.com/loft-sh/agentapi/pkg/apis/loft/cluster/v1.Info":                                  schema_apis_loft_cluster_v1_Info(ref),
+		"github.com/loft-sh/agentapi/pkg/apis/loft/cluster/v1.LastActivityInfo":                      schema_apis_loft_cluster_v1_LastActivityInfo(ref),
 		"github.com/loft-sh/agentapi/pkg/apis/loft/cluster/v1.Maintainer":                            schema_apis_loft_cluster_v1_Maintainer(ref),
 		"github.com/loft-sh/agentapi/pkg/apis/loft/cluster/v1.Metadata":                              schema_apis_loft_cluster_v1_Metadata(ref),
 		"github.com/loft-sh/agentapi/pkg/apis/loft/cluster/v1.SleepModeConfig":                       schema_apis_loft_cluster_v1_SleepModeConfig(ref),
@@ -2909,6 +2910,21 @@ func schema_apis_loft_cluster_v1_HelmReleaseSpec(ref common.ReferenceCallback) c
 							Format:      "",
 						},
 					},
+					"annotations": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Annotations are extra annotations for this helm release",
+							Type:        []string{"object"},
+							AdditionalProperties: &spec.SchemaOrBool{
+								Allows: true,
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Type:   []string{"string"},
+										Format: "",
+									},
+								},
+							},
+						},
+					},
 				},
 			},
 		},
@@ -3001,6 +3017,68 @@ func schema_apis_loft_cluster_v1_Info(ref common.ReferenceCallback) common.OpenA
 		},
 		Dependencies: []string{
 			"k8s.io/apimachinery/pkg/apis/meta/v1.Time"},
+	}
+}
+
+func schema_apis_loft_cluster_v1_LastActivityInfo(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "LastActivityInfo holds information about the last activity",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"subject": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Subject is the user or team where this activity was recorded",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"verb": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Verb is the verb that was used for the request",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"apiGroup": {
+						SchemaProps: spec.SchemaProps{
+							Description: "APIGroup is the api group that was used for the request",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"resource": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Resource is the resource of the request",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"subresource": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Subresource is the subresource of the request",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"name": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Name is the name of the resource",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"virtualCluster": {
+						SchemaProps: spec.SchemaProps{
+							Description: "VirtualCluster is the virtual cluster this activity happened in",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+				},
+			},
+		},
 	}
 }
 
@@ -3364,16 +3442,15 @@ func schema_apis_loft_cluster_v1_SleepModeConfigStatus(ref common.ReferenceCallb
 							Format:      "int64",
 						},
 					},
+					"lastActivityInfo": {
+						SchemaProps: spec.SchemaProps{
+							Description: "LastActivityInfo holds information about the last activity within this space",
+							Ref:         ref("github.com/loft-sh/agentapi/pkg/apis/loft/cluster/v1.LastActivityInfo"),
+						},
+					},
 					"sleepingSince": {
 						SchemaProps: spec.SchemaProps{
 							Description: "SleepingSince specifies since when the space is sleeping (if this is not specified, loft assumes the space is not sleeping)",
-							Type:        []string{"integer"},
-							Format:      "int64",
-						},
-					},
-					"activeConnections": {
-						SchemaProps: spec.SchemaProps{
-							Description: "ActiveConnections is the amount of open connections to this space",
 							Type:        []string{"integer"},
 							Format:      "int64",
 						},
@@ -3429,7 +3506,7 @@ func schema_apis_loft_cluster_v1_SleepModeConfigStatus(ref common.ReferenceCallb
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/agentapi/pkg/apis/loft/cluster/v1.EpochInfo"},
+			"github.com/loft-sh/agentapi/pkg/apis/loft/cluster/v1.EpochInfo", "github.com/loft-sh/agentapi/pkg/apis/loft/cluster/v1.LastActivityInfo"},
 	}
 }
 
@@ -5845,11 +5922,17 @@ func schema_pkg_apis_management_v1_AgentConfigSpec(ref common.ReferenceCallback)
 							Format:      "byte",
 						},
 					},
+					"audit": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Audit are the audit settings from Loft",
+							Ref:         ref("github.com/loft-sh/api/pkg/apis/management/v1.Audit"),
+						},
+					},
 				},
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/pkg/apis/management/v1.Analytics"},
+			"github.com/loft-sh/api/pkg/apis/management/v1.Analytics", "github.com/loft-sh/api/pkg/apis/management/v1.Audit"},
 	}
 }
 
@@ -6190,6 +6273,20 @@ func schema_pkg_apis_management_v1_AppSpec(ref common.ReferenceCallback) common.
 						SchemaProps: spec.SchemaProps{
 							Description: "helm defines the configuration for a helm deployment",
 							Ref:         ref("github.com/loft-sh/api/pkg/apis/storage/v1.HelmConfiguration"),
+						},
+					},
+					"wait": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Wait determines if Loft should wait during deploy for the app to become ready",
+							Type:        []string{"boolean"},
+							Format:      "",
+						},
+					},
+					"timeout": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Timeout is the time to wait for any individual Kubernetes operation (like Jobs for hooks) (default 5m0s)",
+							Type:        []string{"string"},
+							Format:      "",
 						},
 					},
 					"parameters": {
@@ -8152,12 +8249,6 @@ func schema_pkg_apis_management_v1_ClusterReset(ref common.ReferenceCallback) co
 							Format: "",
 						},
 					},
-					"templates": {
-						SchemaProps: spec.SchemaProps{
-							Type:   []string{"boolean"},
-							Format: "",
-						},
-					},
 				},
 			},
 		},
@@ -9772,11 +9863,21 @@ func schema_pkg_apis_management_v1_KioskSpec(ref common.ReferenceCallback) commo
 							Ref: ref("github.com/loft-sh/agentapi/pkg/apis/loft/storage/v1.VirtualCluster"),
 						},
 					},
+					"clusterUser": {
+						SchemaProps: spec.SchemaProps{
+							Ref: ref("github.com/loft-sh/agentapi/pkg/apis/loft/storage/v1.ClusterUser"),
+						},
+					},
+					"clusterTeam": {
+						SchemaProps: spec.SchemaProps{
+							Ref: ref("github.com/loft-sh/agentapi/pkg/apis/loft/storage/v1.ClusterTeam"),
+						},
+					},
 				},
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/agentapi/pkg/apis/kiosk/config/v1alpha1.Account", "github.com/loft-sh/agentapi/pkg/apis/kiosk/config/v1alpha1.Template", "github.com/loft-sh/agentapi/pkg/apis/kiosk/config/v1alpha1.TemplateInstance", "github.com/loft-sh/agentapi/pkg/apis/loft/cluster/v1.ClusterAccess", "github.com/loft-sh/agentapi/pkg/apis/loft/cluster/v1.ClusterQuota", "github.com/loft-sh/agentapi/pkg/apis/loft/cluster/v1.HelmRelease", "github.com/loft-sh/agentapi/pkg/apis/loft/cluster/v1.SleepModeConfig", "github.com/loft-sh/agentapi/pkg/apis/loft/cluster/v1.Space", "github.com/loft-sh/agentapi/pkg/apis/loft/cluster/v1.VirtualCluster", "github.com/loft-sh/agentapi/pkg/apis/loft/storage/v1.ClusterAccess", "github.com/loft-sh/agentapi/pkg/apis/loft/storage/v1.ClusterQuota", "github.com/loft-sh/agentapi/pkg/apis/loft/storage/v1.ClusterRoleTemplate", "github.com/loft-sh/agentapi/pkg/apis/loft/storage/v1.SpaceConstraint", "github.com/loft-sh/agentapi/pkg/apis/loft/storage/v1.VirtualCluster", "github.com/loft-sh/jspolicy/pkg/apis/policy/v1beta1.JsPolicy", "github.com/loft-sh/jspolicy/pkg/apis/policy/v1beta1.JsPolicyBundle", "github.com/loft-sh/jspolicy/pkg/apis/policy/v1beta1.JsPolicyViolations"},
+			"github.com/loft-sh/agentapi/pkg/apis/kiosk/config/v1alpha1.Account", "github.com/loft-sh/agentapi/pkg/apis/kiosk/config/v1alpha1.Template", "github.com/loft-sh/agentapi/pkg/apis/kiosk/config/v1alpha1.TemplateInstance", "github.com/loft-sh/agentapi/pkg/apis/loft/cluster/v1.ClusterAccess", "github.com/loft-sh/agentapi/pkg/apis/loft/cluster/v1.ClusterQuota", "github.com/loft-sh/agentapi/pkg/apis/loft/cluster/v1.HelmRelease", "github.com/loft-sh/agentapi/pkg/apis/loft/cluster/v1.SleepModeConfig", "github.com/loft-sh/agentapi/pkg/apis/loft/cluster/v1.Space", "github.com/loft-sh/agentapi/pkg/apis/loft/cluster/v1.VirtualCluster", "github.com/loft-sh/agentapi/pkg/apis/loft/storage/v1.ClusterAccess", "github.com/loft-sh/agentapi/pkg/apis/loft/storage/v1.ClusterQuota", "github.com/loft-sh/agentapi/pkg/apis/loft/storage/v1.ClusterRoleTemplate", "github.com/loft-sh/agentapi/pkg/apis/loft/storage/v1.ClusterTeam", "github.com/loft-sh/agentapi/pkg/apis/loft/storage/v1.ClusterUser", "github.com/loft-sh/agentapi/pkg/apis/loft/storage/v1.SpaceConstraint", "github.com/loft-sh/agentapi/pkg/apis/loft/storage/v1.VirtualCluster", "github.com/loft-sh/jspolicy/pkg/apis/policy/v1beta1.JsPolicy", "github.com/loft-sh/jspolicy/pkg/apis/policy/v1beta1.JsPolicyBundle", "github.com/loft-sh/jspolicy/pkg/apis/policy/v1beta1.JsPolicyViolations"},
 	}
 }
 
@@ -14952,6 +15053,20 @@ func schema_pkg_apis_storage_v1_AppSpec(ref common.ReferenceCallback) common.Ope
 							Ref:         ref("github.com/loft-sh/api/pkg/apis/storage/v1.HelmConfiguration"),
 						},
 					},
+					"wait": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Wait determines if Loft should wait during deploy for the app to become ready",
+							Type:        []string{"boolean"},
+							Format:      "",
+						},
+					},
+					"timeout": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Timeout is the time to wait for any individual Kubernetes operation (like Jobs for hooks) (default 5m0s)",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
 					"parameters": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Parameters define additional app parameters that will set helm values",
@@ -16242,6 +16357,20 @@ func schema_pkg_apis_storage_v1_HelmTask(ref common.ReferenceCallback) common.Op
 						SchemaProps: spec.SchemaProps{
 							Description: "Helm is the helm config",
 							Ref:         ref("github.com/loft-sh/api/pkg/apis/storage/v1.HelmTaskTemplate"),
+						},
+					},
+					"args": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Args are extra args to pass to helm",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Type:   []string{"string"},
+										Format: "",
+									},
+								},
+							},
 						},
 					},
 				},
@@ -18608,6 +18737,21 @@ func schema_pkg_apis_virtualcluster_v1_HelmReleaseSpec(ref common.ReferenceCallb
 							Description: "If tls certificate checks for the chart download should be skipped",
 							Type:        []string{"boolean"},
 							Format:      "",
+						},
+					},
+					"annotations": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Annotations are extra annotations for this helm release",
+							Type:        []string{"object"},
+							AdditionalProperties: &spec.SchemaOrBool{
+								Allows: true,
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Type:   []string{"string"},
+										Format: "",
+									},
+								},
+							},
 						},
 					},
 				},
