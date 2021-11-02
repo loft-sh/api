@@ -1,6 +1,7 @@
 package v1
 
 import (
+	clusterv1 "github.com/loft-sh/agentapi/pkg/apis/loft/cluster/v1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 )
 
@@ -60,13 +61,23 @@ type AppSpec struct {
 	// +optional
 	ReleaseName string `json:"releaseName,omitempty"`
 
+	// StreamContainer can be used to stream a containers logs instead of the helm output.
+	// +optional
+	StreamContainer *StreamContainer `json:"streamContainer,omitempty"`
+
+	// Config is the helm config to use to deploy the helm release
+	// +optional
+	Config clusterv1.HelmReleaseSpec `json:"config,omitempty"`
+
+	// DEPRECATED: Use config instead
 	// manifest represents kubernetes resources that will be deployed into the target namespace
 	// +optional
-	Manifests string `json:"manifests,omitempty"`
+	//Manifests string `json:"manifests,omitempty"`
 
+	// DEPRECATED: Use config instead
 	// helm defines the configuration for a helm deployment
 	// +optional
-	Helm *HelmConfiguration `json:"helm,omitempty"`
+	//Helm *HelmConfiguration `json:"helm,omitempty"`
 
 	// Wait determines if Loft should wait during deploy for the app to become ready
 	// +optional

@@ -154,6 +154,14 @@ type SpaceCreationAppReference struct {
 }
 
 type HelmTask struct {
+	// Release holds the release information
+	// +optional
+	Release HelmTaskRelease `json:"release,omitempty"`
+
+	// StreamContainer can be used to stream a containers logs instead of the helm output.
+	// +optional
+	StreamContainer *StreamContainer `json:"streamContainer,omitempty"`
+
 	// Type is the task type. Defaults to Upgrade
 	// +optional
 	Type HelmTaskType `json:"type,omitempty"`
@@ -162,17 +170,36 @@ type HelmTask struct {
 	// +optional
 	RollbackRevision string `json:"rollbackRevision,omitempty"`
 
-	// Release is information about the release
-	// +optional
-	Release HelmTaskRelease `json:"release,omitempty"`
-
-	// Helm is the helm config
-	// +optional
-	Helm HelmTaskTemplate `json:"helm,omitempty"`
-
 	// Args are extra args to pass to helm
 	// +optional
 	Args []string `json:"args,omitempty"`
+}
+
+type HelmTaskRelease struct {
+	// Name is the name of the release
+	Name string `json:"name,omitempty"`
+
+	// Namespace of the release, if empty will use the target namespace
+	// +optional
+	Namespace string `json:"namespace,omitempty"`
+
+	// Labels are additional labels for the helm release.
+	// +optional
+	Labels map[string]string `json:"labels,omitempty"`
+
+	// Config is the helm config to use to deploy the release
+	// +optional
+	Config clusterv1.HelmReleaseSpec `json:"config,omitempty"`
+}
+
+type StreamContainer struct {
+	// Label selector for pods. The newest matching pod will be used to stream logs from
+	// +optional
+	Selector metav1.LabelSelector `json:"selector" protobuf:"bytes,2,opt,name=selector"`
+
+	// Container is the container name to use
+	// +optional
+	Container string `json:"container,omitempty"`
 }
 
 type TaskStatus struct {
@@ -213,47 +240,6 @@ const (
 	HelmTaskTypeDelete   HelmTaskType = "Delete"
 	HelmTaskTypeRollback HelmTaskType = "Rollback"
 )
-
-type HelmTaskRelease struct {
-	// Name is the name of the release
-	Name string `json:"name,omitempty"`
-
-	// Namespace of the release, if empty will use the target namespace
-	// +optional
-	Namespace string `json:"namespace,omitempty"`
-
-	// Labels are additional labels for the helm release.
-	// +optional
-	Labels map[string]string `json:"labels,omitempty"`
-
-	// Annotations are additional annotations for the helm release.
-	// +optional
-	Annotations map[string]string `json:"annotations,omitempty"`
-}
-
-type HelmTaskTemplate struct {
-	// Chart holds information about a chart
-	Chart clusterv1.Chart `json:"chart,omitempty"`
-
-	// Manifests holds kube manifests that will be deployed as a chart
-	// +optional
-	Manifests string `json:"manifests,omitempty"`
-
-	// Config is the set of extra Values added to the chart.
-	// These values merge with the default values inside of the chart.
-	// You can use golang templating in here with values from parameters.
-	// +optional
-	Config string `json:"config,omitempty"`
-
-	// Parameters are additional helm chart values that will get merged
-	// with config and are then used to deploy the helm chart.
-	// +optional
-	Parameters string `json:"parameters,omitempty"`
-
-	// If tls certificate checks for the chart download should be skipped
-	// +optional
-	InsecureSkipTlsVerify bool `json:"insecureSkipTlsVerify,omitempty"`
-}
 
 type Target struct {
 	// Cluster defines a connected cluster as target

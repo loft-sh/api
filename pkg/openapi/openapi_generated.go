@@ -345,7 +345,6 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 		"github.com/loft-sh/api/pkg/apis/storage/v1.HelmConfiguration":                               schema_pkg_apis_storage_v1_HelmConfiguration(ref),
 		"github.com/loft-sh/api/pkg/apis/storage/v1.HelmTask":                                        schema_pkg_apis_storage_v1_HelmTask(ref),
 		"github.com/loft-sh/api/pkg/apis/storage/v1.HelmTaskRelease":                                 schema_pkg_apis_storage_v1_HelmTaskRelease(ref),
-		"github.com/loft-sh/api/pkg/apis/storage/v1.HelmTaskTemplate":                                schema_pkg_apis_storage_v1_HelmTaskTemplate(ref),
 		"github.com/loft-sh/api/pkg/apis/storage/v1.Info":                                            schema_pkg_apis_storage_v1_Info(ref),
 		"github.com/loft-sh/api/pkg/apis/storage/v1.KindSecretRef":                                   schema_pkg_apis_storage_v1_KindSecretRef(ref),
 		"github.com/loft-sh/api/pkg/apis/storage/v1.Maintainer":                                      schema_pkg_apis_storage_v1_Maintainer(ref),
@@ -364,6 +363,7 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 		"github.com/loft-sh/api/pkg/apis/storage/v1.SpaceTemplateList":                               schema_pkg_apis_storage_v1_SpaceTemplateList(ref),
 		"github.com/loft-sh/api/pkg/apis/storage/v1.SpaceTemplateSpec":                               schema_pkg_apis_storage_v1_SpaceTemplateSpec(ref),
 		"github.com/loft-sh/api/pkg/apis/storage/v1.SpaceTemplateStatus":                             schema_pkg_apis_storage_v1_SpaceTemplateStatus(ref),
+		"github.com/loft-sh/api/pkg/apis/storage/v1.StreamContainer":                                 schema_pkg_apis_storage_v1_StreamContainer(ref),
 		"github.com/loft-sh/api/pkg/apis/storage/v1.Target":                                          schema_pkg_apis_storage_v1_Target(ref),
 		"github.com/loft-sh/api/pkg/apis/storage/v1.TargetCluster":                                   schema_pkg_apis_storage_v1_TargetCluster(ref),
 		"github.com/loft-sh/api/pkg/apis/storage/v1.TargetVirtualCluster":                            schema_pkg_apis_storage_v1_TargetVirtualCluster(ref),
@@ -2317,6 +2317,13 @@ func schema_apis_loft_cluster_v1_Chart(ref common.ReferenceCallback) common.Open
 							Format:      "",
 						},
 					},
+					"insecureSkipTlsVerify": {
+						SchemaProps: spec.SchemaProps{
+							Description: "If tls certificate checks for the chart download should be skipped",
+							Type:        []string{"boolean"},
+							Format:      "",
+						},
+					},
 				},
 			},
 		},
@@ -2878,7 +2885,7 @@ func schema_apis_loft_cluster_v1_HelmReleaseSpec(ref common.ReferenceCallback) c
 				Properties: map[string]spec.Schema{
 					"chart": {
 						SchemaProps: spec.SchemaProps{
-							Description: "Chart holds information about a chart",
+							Description: "Chart holds information about a chart that should get deployed",
 							Ref:         ref("github.com/loft-sh/agentapi/pkg/apis/loft/cluster/v1.Chart"),
 						},
 					},
@@ -2889,9 +2896,9 @@ func schema_apis_loft_cluster_v1_HelmReleaseSpec(ref common.ReferenceCallback) c
 							Format:      "",
 						},
 					},
-					"config": {
+					"values": {
 						SchemaProps: spec.SchemaProps{
-							Description: "Config is the set of extra Values added to the chart. These values merge with the default values inside of the chart. You can use golang templating in here with values from parameters.",
+							Description: "Values is the set of extra Values added to the chart. These values merge with the default values inside of the chart. You can use golang templating in here with values from parameters.",
 							Type:        []string{"string"},
 							Format:      "",
 						},
@@ -2900,13 +2907,6 @@ func schema_apis_loft_cluster_v1_HelmReleaseSpec(ref common.ReferenceCallback) c
 						SchemaProps: spec.SchemaProps{
 							Description: "Parameters are additional helm chart values that will get merged with config and are then used to deploy the helm chart.",
 							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"insecureSkipTlsVerify": {
-						SchemaProps: spec.SchemaProps{
-							Description: "If tls certificate checks for the chart download should be skipped",
-							Type:        []string{"boolean"},
 							Format:      "",
 						},
 					},
@@ -6262,17 +6262,16 @@ func schema_pkg_apis_management_v1_AppSpec(ref common.ReferenceCallback) common.
 							Format:      "",
 						},
 					},
-					"manifests": {
+					"streamContainer": {
 						SchemaProps: spec.SchemaProps{
-							Description: "manifest represents kubernetes resources that will be deployed into the target namespace",
-							Type:        []string{"string"},
-							Format:      "",
+							Description: "StreamContainer can be used to stream a containers logs instead of the helm output.",
+							Ref:         ref("github.com/loft-sh/api/pkg/apis/storage/v1.StreamContainer"),
 						},
 					},
-					"helm": {
+					"config": {
 						SchemaProps: spec.SchemaProps{
-							Description: "helm defines the configuration for a helm deployment",
-							Ref:         ref("github.com/loft-sh/api/pkg/apis/storage/v1.HelmConfiguration"),
+							Description: "Config is the helm config to use to deploy the helm release",
+							Ref:         ref("github.com/loft-sh/agentapi/pkg/apis/loft/cluster/v1.HelmReleaseSpec"),
 						},
 					},
 					"wait": {
@@ -6319,7 +6318,7 @@ func schema_pkg_apis_management_v1_AppSpec(ref common.ReferenceCallback) common.
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/pkg/apis/storage/v1.Access", "github.com/loft-sh/api/pkg/apis/storage/v1.AppParameter", "github.com/loft-sh/api/pkg/apis/storage/v1.HelmConfiguration", "github.com/loft-sh/api/pkg/apis/storage/v1.UserOrTeam"},
+			"github.com/loft-sh/agentapi/pkg/apis/loft/cluster/v1.HelmReleaseSpec", "github.com/loft-sh/api/pkg/apis/storage/v1.Access", "github.com/loft-sh/api/pkg/apis/storage/v1.AppParameter", "github.com/loft-sh/api/pkg/apis/storage/v1.StreamContainer", "github.com/loft-sh/api/pkg/apis/storage/v1.UserOrTeam"},
 	}
 }
 
@@ -15040,17 +15039,16 @@ func schema_pkg_apis_storage_v1_AppSpec(ref common.ReferenceCallback) common.Ope
 							Format:      "",
 						},
 					},
-					"manifests": {
+					"streamContainer": {
 						SchemaProps: spec.SchemaProps{
-							Description: "manifest represents kubernetes resources that will be deployed into the target namespace",
-							Type:        []string{"string"},
-							Format:      "",
+							Description: "StreamContainer can be used to stream a containers logs instead of the helm output.",
+							Ref:         ref("github.com/loft-sh/api/pkg/apis/storage/v1.StreamContainer"),
 						},
 					},
-					"helm": {
+					"config": {
 						SchemaProps: spec.SchemaProps{
-							Description: "helm defines the configuration for a helm deployment",
-							Ref:         ref("github.com/loft-sh/api/pkg/apis/storage/v1.HelmConfiguration"),
+							Description: "Config is the helm config to use to deploy the helm release",
+							Ref:         ref("github.com/loft-sh/agentapi/pkg/apis/loft/cluster/v1.HelmReleaseSpec"),
 						},
 					},
 					"wait": {
@@ -15097,7 +15095,7 @@ func schema_pkg_apis_storage_v1_AppSpec(ref common.ReferenceCallback) common.Ope
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/pkg/apis/storage/v1.Access", "github.com/loft-sh/api/pkg/apis/storage/v1.AppParameter", "github.com/loft-sh/api/pkg/apis/storage/v1.HelmConfiguration", "github.com/loft-sh/api/pkg/apis/storage/v1.UserOrTeam"},
+			"github.com/loft-sh/agentapi/pkg/apis/loft/cluster/v1.HelmReleaseSpec", "github.com/loft-sh/api/pkg/apis/storage/v1.Access", "github.com/loft-sh/api/pkg/apis/storage/v1.AppParameter", "github.com/loft-sh/api/pkg/apis/storage/v1.StreamContainer", "github.com/loft-sh/api/pkg/apis/storage/v1.UserOrTeam"},
 	}
 }
 
@@ -16333,6 +16331,18 @@ func schema_pkg_apis_storage_v1_HelmTask(ref common.ReferenceCallback) common.Op
 			SchemaProps: spec.SchemaProps{
 				Type: []string{"object"},
 				Properties: map[string]spec.Schema{
+					"release": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Release holds the release information",
+							Ref:         ref("github.com/loft-sh/api/pkg/apis/storage/v1.HelmTaskRelease"),
+						},
+					},
+					"streamContainer": {
+						SchemaProps: spec.SchemaProps{
+							Description: "StreamContainer can be used to stream a containers logs instead of the helm output.",
+							Ref:         ref("github.com/loft-sh/api/pkg/apis/storage/v1.StreamContainer"),
+						},
+					},
 					"type": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Type is the task type. Defaults to Upgrade",
@@ -16345,18 +16355,6 @@ func schema_pkg_apis_storage_v1_HelmTask(ref common.ReferenceCallback) common.Op
 							Description: "RollbackRevision is the revision to rollback to",
 							Type:        []string{"string"},
 							Format:      "",
-						},
-					},
-					"release": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Release is information about the release",
-							Ref:         ref("github.com/loft-sh/api/pkg/apis/storage/v1.HelmTaskRelease"),
-						},
-					},
-					"helm": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Helm is the helm config",
-							Ref:         ref("github.com/loft-sh/api/pkg/apis/storage/v1.HelmTaskTemplate"),
 						},
 					},
 					"args": {
@@ -16377,7 +16375,7 @@ func schema_pkg_apis_storage_v1_HelmTask(ref common.ReferenceCallback) common.Op
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/pkg/apis/storage/v1.HelmTaskRelease", "github.com/loft-sh/api/pkg/apis/storage/v1.HelmTaskTemplate"},
+			"github.com/loft-sh/api/pkg/apis/storage/v1.HelmTaskRelease", "github.com/loft-sh/api/pkg/apis/storage/v1.StreamContainer"},
 	}
 }
 
@@ -16416,72 +16414,17 @@ func schema_pkg_apis_storage_v1_HelmTaskRelease(ref common.ReferenceCallback) co
 							},
 						},
 					},
-					"annotations": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Annotations are additional annotations for the helm release.",
-							Type:        []string{"object"},
-							AdditionalProperties: &spec.SchemaOrBool{
-								Allows: true,
-								Schema: &spec.Schema{
-									SchemaProps: spec.SchemaProps{
-										Type:   []string{"string"},
-										Format: "",
-									},
-								},
-							},
-						},
-					},
-				},
-			},
-		},
-	}
-}
-
-func schema_pkg_apis_storage_v1_HelmTaskTemplate(ref common.ReferenceCallback) common.OpenAPIDefinition {
-	return common.OpenAPIDefinition{
-		Schema: spec.Schema{
-			SchemaProps: spec.SchemaProps{
-				Type: []string{"object"},
-				Properties: map[string]spec.Schema{
-					"chart": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Chart holds information about a chart",
-							Ref:         ref("github.com/loft-sh/agentapi/pkg/apis/loft/cluster/v1.Chart"),
-						},
-					},
-					"manifests": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Manifests holds kube manifests that will be deployed as a chart",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
 					"config": {
 						SchemaProps: spec.SchemaProps{
-							Description: "Config is the set of extra Values added to the chart. These values merge with the default values inside of the chart. You can use golang templating in here with values from parameters.",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"parameters": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Parameters are additional helm chart values that will get merged with config and are then used to deploy the helm chart.",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"insecureSkipTlsVerify": {
-						SchemaProps: spec.SchemaProps{
-							Description: "If tls certificate checks for the chart download should be skipped",
-							Type:        []string{"boolean"},
-							Format:      "",
+							Description: "Config is the helm config to use to deploy the release",
+							Ref:         ref("github.com/loft-sh/agentapi/pkg/apis/loft/cluster/v1.HelmReleaseSpec"),
 						},
 					},
 				},
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/agentapi/pkg/apis/loft/cluster/v1.Chart"},
+			"github.com/loft-sh/agentapi/pkg/apis/loft/cluster/v1.HelmReleaseSpec"},
 	}
 }
 
@@ -17279,6 +17222,33 @@ func schema_pkg_apis_storage_v1_SpaceTemplateStatus(ref common.ReferenceCallback
 				Type:        []string{"object"},
 			},
 		},
+	}
+}
+
+func schema_pkg_apis_storage_v1_StreamContainer(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"selector": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Label selector for pods. The newest matching pod will be used to stream logs from",
+							Ref:         ref("k8s.io/apimachinery/pkg/apis/meta/v1.LabelSelector"),
+						},
+					},
+					"container": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Container is the container name to use",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			"k8s.io/apimachinery/pkg/apis/meta/v1.LabelSelector"},
 	}
 }
 
@@ -18707,7 +18677,7 @@ func schema_pkg_apis_virtualcluster_v1_HelmReleaseSpec(ref common.ReferenceCallb
 				Properties: map[string]spec.Schema{
 					"chart": {
 						SchemaProps: spec.SchemaProps{
-							Description: "Chart holds information about a chart",
+							Description: "Chart holds information about a chart that should get deployed",
 							Ref:         ref("github.com/loft-sh/agentapi/pkg/apis/loft/cluster/v1.Chart"),
 						},
 					},
@@ -18718,9 +18688,9 @@ func schema_pkg_apis_virtualcluster_v1_HelmReleaseSpec(ref common.ReferenceCallb
 							Format:      "",
 						},
 					},
-					"config": {
+					"values": {
 						SchemaProps: spec.SchemaProps{
-							Description: "Config is the set of extra Values added to the chart. These values merge with the default values inside of the chart. You can use golang templating in here with values from parameters.",
+							Description: "Values is the set of extra Values added to the chart. These values merge with the default values inside of the chart. You can use golang templating in here with values from parameters.",
 							Type:        []string{"string"},
 							Format:      "",
 						},
@@ -18729,13 +18699,6 @@ func schema_pkg_apis_virtualcluster_v1_HelmReleaseSpec(ref common.ReferenceCallb
 						SchemaProps: spec.SchemaProps{
 							Description: "Parameters are additional helm chart values that will get merged with config and are then used to deploy the helm chart.",
 							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"insecureSkipTlsVerify": {
-						SchemaProps: spec.SchemaProps{
-							Description: "If tls certificate checks for the chart download should be skipped",
-							Type:        []string{"boolean"},
 							Format:      "",
 						},
 					},
