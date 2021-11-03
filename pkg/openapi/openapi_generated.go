@@ -6274,6 +6274,19 @@ func schema_pkg_apis_management_v1_AppSpec(ref common.ReferenceCallback) common.
 							Ref:         ref("github.com/loft-sh/agentapi/pkg/apis/loft/cluster/v1.HelmReleaseSpec"),
 						},
 					},
+					"manifests": {
+						SchemaProps: spec.SchemaProps{
+							Description: "DEPRECATED: Use config instead manifest represents kubernetes resources that will be deployed into the target namespace",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"helm": {
+						SchemaProps: spec.SchemaProps{
+							Description: "DEPRECATED: Use config instead helm defines the configuration for a helm deployment",
+							Ref:         ref("github.com/loft-sh/api/pkg/apis/storage/v1.HelmConfiguration"),
+						},
+					},
 					"wait": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Wait determines if Loft should wait during deploy for the app to become ready",
@@ -6318,7 +6331,7 @@ func schema_pkg_apis_management_v1_AppSpec(ref common.ReferenceCallback) common.
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/agentapi/pkg/apis/loft/cluster/v1.HelmReleaseSpec", "github.com/loft-sh/api/pkg/apis/storage/v1.Access", "github.com/loft-sh/api/pkg/apis/storage/v1.AppParameter", "github.com/loft-sh/api/pkg/apis/storage/v1.StreamContainer", "github.com/loft-sh/api/pkg/apis/storage/v1.UserOrTeam"},
+			"github.com/loft-sh/agentapi/pkg/apis/loft/cluster/v1.HelmReleaseSpec", "github.com/loft-sh/api/pkg/apis/storage/v1.Access", "github.com/loft-sh/api/pkg/apis/storage/v1.AppParameter", "github.com/loft-sh/api/pkg/apis/storage/v1.HelmConfiguration", "github.com/loft-sh/api/pkg/apis/storage/v1.StreamContainer", "github.com/loft-sh/api/pkg/apis/storage/v1.UserOrTeam"},
 	}
 }
 
@@ -15051,6 +15064,19 @@ func schema_pkg_apis_storage_v1_AppSpec(ref common.ReferenceCallback) common.Ope
 							Ref:         ref("github.com/loft-sh/agentapi/pkg/apis/loft/cluster/v1.HelmReleaseSpec"),
 						},
 					},
+					"manifests": {
+						SchemaProps: spec.SchemaProps{
+							Description: "DEPRECATED: Use config instead manifest represents kubernetes resources that will be deployed into the target namespace",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"helm": {
+						SchemaProps: spec.SchemaProps{
+							Description: "DEPRECATED: Use config instead helm defines the configuration for a helm deployment",
+							Ref:         ref("github.com/loft-sh/api/pkg/apis/storage/v1.HelmConfiguration"),
+						},
+					},
 					"wait": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Wait determines if Loft should wait during deploy for the app to become ready",
@@ -15095,7 +15121,7 @@ func schema_pkg_apis_storage_v1_AppSpec(ref common.ReferenceCallback) common.Ope
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/agentapi/pkg/apis/loft/cluster/v1.HelmReleaseSpec", "github.com/loft-sh/api/pkg/apis/storage/v1.Access", "github.com/loft-sh/api/pkg/apis/storage/v1.AppParameter", "github.com/loft-sh/api/pkg/apis/storage/v1.StreamContainer", "github.com/loft-sh/api/pkg/apis/storage/v1.UserOrTeam"},
+			"github.com/loft-sh/agentapi/pkg/apis/loft/cluster/v1.HelmReleaseSpec", "github.com/loft-sh/api/pkg/apis/storage/v1.Access", "github.com/loft-sh/api/pkg/apis/storage/v1.AppParameter", "github.com/loft-sh/api/pkg/apis/storage/v1.HelmConfiguration", "github.com/loft-sh/api/pkg/apis/storage/v1.StreamContainer", "github.com/loft-sh/api/pkg/apis/storage/v1.UserOrTeam"},
 	}
 }
 

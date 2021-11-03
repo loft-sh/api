@@ -72,12 +72,12 @@ type AppSpec struct {
 	// DEPRECATED: Use config instead
 	// manifest represents kubernetes resources that will be deployed into the target namespace
 	// +optional
-	//Manifests string `json:"manifests,omitempty"`
+	Manifests string `json:"manifests,omitempty"`
 
 	// DEPRECATED: Use config instead
 	// helm defines the configuration for a helm deployment
 	// +optional
-	//Helm *HelmConfiguration `json:"helm,omitempty"`
+	Helm *HelmConfiguration `json:"helm,omitempty"`
 
 	// Wait determines if Loft should wait during deploy for the app to become ready
 	// +optional
@@ -110,7 +110,7 @@ type AppParameter struct {
 	Description string `json:"description,omitempty"`
 
 	// Type of the parameter. Can be one of:
-	// string, multiline, boolean, number, enum and password
+	// string, multiline, boolean, enum and password
 	// +optional
 	Type string `json:"type,omitempty"`
 

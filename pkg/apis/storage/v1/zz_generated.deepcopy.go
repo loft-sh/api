@@ -525,6 +525,11 @@ func (in *AppSpec) DeepCopyInto(out *AppSpec) {
 		(*in).DeepCopyInto(*out)
 	}
 	in.Config.DeepCopyInto(&out.Config)
+	if in.Helm != nil {
+		in, out := &in.Helm, &out.Helm
+		*out = new(HelmConfiguration)
+		**out = **in
+	}
 	if in.Parameters != nil {
 		in, out := &in.Parameters, &out.Parameters
 		*out = make([]AppParameter, len(*in))
