@@ -69,6 +69,10 @@ type TaskSpec struct {
 }
 
 type TaskDefinition struct {
+	// ApplyTask executes a kubectl apply
+	// +optional
+	ApplyTask *ApplyTask `json:"apply,omitempty"`
+
 	// HelmTask executes a helm command
 	// +optional
 	HelmTask *HelmTask `json:"helm,omitempty"`
@@ -80,6 +84,15 @@ type TaskDefinition struct {
 	// VirtualClusterCreatioTask creates a new virtual cluster
 	// +optional
 	VirtualClusterCreationTask *VirtualClusterCreationTask `json:"virtualClusterCreation,omitempty"`
+}
+
+type ApplyTask struct {
+	// Manifests are the manifests to apply
+	Manifests string `json:"manifests,omitempty"`
+
+	// Args are extra arguments used to apply the manifests
+	// +optional
+	Args []string `json:"args,omitempty"`
 }
 
 type VirtualClusterCreationTask struct {

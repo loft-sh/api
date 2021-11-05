@@ -315,6 +315,7 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 		"github.com/loft-sh/api/pkg/apis/storage/v1.AppParameter":                                    schema_pkg_apis_storage_v1_AppParameter(ref),
 		"github.com/loft-sh/api/pkg/apis/storage/v1.AppSpec":                                         schema_pkg_apis_storage_v1_AppSpec(ref),
 		"github.com/loft-sh/api/pkg/apis/storage/v1.AppStatus":                                       schema_pkg_apis_storage_v1_AppStatus(ref),
+		"github.com/loft-sh/api/pkg/apis/storage/v1.ApplyTask":                                       schema_pkg_apis_storage_v1_ApplyTask(ref),
 		"github.com/loft-sh/api/pkg/apis/storage/v1.Chart":                                           schema_pkg_apis_storage_v1_Chart(ref),
 		"github.com/loft-sh/api/pkg/apis/storage/v1.Cluster":                                         schema_pkg_apis_storage_v1_Cluster(ref),
 		"github.com/loft-sh/api/pkg/apis/storage/v1.ClusterAccessTemplate":                           schema_pkg_apis_storage_v1_ClusterAccessTemplate(ref),
@@ -14916,7 +14917,7 @@ func schema_pkg_apis_storage_v1_AppParameter(ref common.ReferenceCallback) commo
 					},
 					"type": {
 						SchemaProps: spec.SchemaProps{
-							Description: "Type of the parameter. Can be one of: string, multiline, boolean, number, enum and password",
+							Description: "Type of the parameter. Can be one of: string, multiline, boolean, enum and password",
 							Type:        []string{"string"},
 							Format:      "",
 						},
@@ -15131,6 +15132,39 @@ func schema_pkg_apis_storage_v1_AppStatus(ref common.ReferenceCallback) common.O
 			SchemaProps: spec.SchemaProps{
 				Description: "AppStatus holds the status",
 				Type:        []string{"object"},
+			},
+		},
+	}
+}
+
+func schema_pkg_apis_storage_v1_ApplyTask(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"manifests": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Manifests are the manifests to apply",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"args": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Args are extra arguments used to apply the manifests",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Type:   []string{"string"},
+										Format: "",
+									},
+								},
+							},
+						},
+					},
+				},
 			},
 		},
 	}
@@ -17412,6 +17446,12 @@ func schema_pkg_apis_storage_v1_TaskDefinition(ref common.ReferenceCallback) com
 			SchemaProps: spec.SchemaProps{
 				Type: []string{"object"},
 				Properties: map[string]spec.Schema{
+					"apply": {
+						SchemaProps: spec.SchemaProps{
+							Description: "ApplyTask executes a kubectl apply",
+							Ref:         ref("github.com/loft-sh/api/pkg/apis/storage/v1.ApplyTask"),
+						},
+					},
 					"helm": {
 						SchemaProps: spec.SchemaProps{
 							Description: "HelmTask executes a helm command",
@@ -17434,7 +17474,7 @@ func schema_pkg_apis_storage_v1_TaskDefinition(ref common.ReferenceCallback) com
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/pkg/apis/storage/v1.HelmTask", "github.com/loft-sh/api/pkg/apis/storage/v1.SpaceCreationTask", "github.com/loft-sh/api/pkg/apis/storage/v1.VirtualClusterCreationTask"},
+			"github.com/loft-sh/api/pkg/apis/storage/v1.ApplyTask", "github.com/loft-sh/api/pkg/apis/storage/v1.HelmTask", "github.com/loft-sh/api/pkg/apis/storage/v1.SpaceCreationTask", "github.com/loft-sh/api/pkg/apis/storage/v1.VirtualClusterCreationTask"},
 	}
 }
 
