@@ -33,6 +33,8 @@ func addKnownTypes(scheme *runtime.Scheme) error {
 		&ConfigList{},
 		&DirectClusterEndpointToken{},
 		&DirectClusterEndpointTokenList{},
+		&Event{},
+		&EventList{},
 		&Feature{},
 		&FeatureList{},
 		&GlobalClusterAccess{},
@@ -122,6 +124,7 @@ var (
 		management.ManagementClusterConnectStorage,
 		management.ManagementConfigStorage,
 		management.ManagementDirectClusterEndpointTokenStorage,
+		management.ManagementEventStorage,
 		management.ManagementFeatureStorage,
 		management.ManagementGlobalClusterAccessStorage,
 		management.ManagementGlobalClusterRoleTemplateStorage,
@@ -305,6 +308,14 @@ type DirectClusterEndpointTokenList struct {
 	metav1.TypeMeta `json:",inline"`
 	metav1.ListMeta `json:"metadata,omitempty"`
 	Items           []DirectClusterEndpointToken `json:"items"`
+}
+
+// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+
+type EventList struct {
+	metav1.TypeMeta `json:",inline"`
+	metav1.ListMeta `json:"metadata,omitempty"`
+	Items           []Event `json:"items"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object

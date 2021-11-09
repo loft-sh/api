@@ -42,6 +42,8 @@ func addKnownTypes(scheme *runtime.Scheme) error {
 		&management.ConfigList{},
 		&management.DirectClusterEndpointToken{},
 		&management.DirectClusterEndpointTokenList{},
+		&management.Event{},
+		&management.EventList{},
 		&management.Feature{},
 		&management.FeatureList{},
 		&management.GlobalClusterAccess{},

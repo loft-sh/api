@@ -16,6 +16,8 @@ type ConfigExpansion interface{}
 
 type DirectClusterEndpointTokenExpansion interface{}
 
+type EventExpansion interface{}
+
 type FeatureExpansion interface{}
 
 type GlobalClusterAccessExpansion interface{}

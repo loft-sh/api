@@ -186,6 +186,10 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 		"github.com/loft-sh/api/pkg/apis/management/v1.DirectClusterEndpointTokenList":               schema_pkg_apis_management_v1_DirectClusterEndpointTokenList(ref),
 		"github.com/loft-sh/api/pkg/apis/management/v1.DirectClusterEndpointTokenSpec":               schema_pkg_apis_management_v1_DirectClusterEndpointTokenSpec(ref),
 		"github.com/loft-sh/api/pkg/apis/management/v1.DirectClusterEndpointTokenStatus":             schema_pkg_apis_management_v1_DirectClusterEndpointTokenStatus(ref),
+		"github.com/loft-sh/api/pkg/apis/management/v1.Event":                                        schema_pkg_apis_management_v1_Event(ref),
+		"github.com/loft-sh/api/pkg/apis/management/v1.EventList":                                    schema_pkg_apis_management_v1_EventList(ref),
+		"github.com/loft-sh/api/pkg/apis/management/v1.EventSpec":                                    schema_pkg_apis_management_v1_EventSpec(ref),
+		"github.com/loft-sh/api/pkg/apis/management/v1.EventStatus":                                  schema_pkg_apis_management_v1_EventStatus(ref),
 		"github.com/loft-sh/api/pkg/apis/management/v1.Feature":                                      schema_pkg_apis_management_v1_Feature(ref),
 		"github.com/loft-sh/api/pkg/apis/management/v1.FeatureList":                                  schema_pkg_apis_management_v1_FeatureList(ref),
 		"github.com/loft-sh/api/pkg/apis/management/v1.FeatureSpec":                                  schema_pkg_apis_management_v1_FeatureSpec(ref),
@@ -5923,17 +5927,11 @@ func schema_pkg_apis_management_v1_AgentConfigSpec(ref common.ReferenceCallback)
 							Format:      "byte",
 						},
 					},
-					"audit": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Audit are the audit settings from Loft",
-							Ref:         ref("github.com/loft-sh/api/pkg/apis/management/v1.Audit"),
-						},
-					},
 				},
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/pkg/apis/management/v1.Analytics", "github.com/loft-sh/api/pkg/apis/management/v1.Audit"},
+			"github.com/loft-sh/api/pkg/apis/management/v1.Analytics"},
 	}
 }
 
@@ -6409,10 +6407,31 @@ func schema_pkg_apis_management_v1_Audit(ref common.ReferenceCallback) common.Op
 							Format:      "",
 						},
 					},
+					"level": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Level is an optional log level for audit logs. Cannot be used together with policy",
+							Type:        []string{"integer"},
+							Format:      "int32",
+						},
+					},
 					"policy": {
 						SchemaProps: spec.SchemaProps{
 							Description: "The audit policy to use and log requests. By default loft will not log anything",
 							Ref:         ref("github.com/loft-sh/api/pkg/apis/management/v1.AuditPolicy"),
+						},
+					},
+					"dataStoreEndpoint": {
+						SchemaProps: spec.SchemaProps{
+							Description: "DataStoreEndpoint is an endpoint to store events in.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"dataStoreTTL": {
+						SchemaProps: spec.SchemaProps{
+							Description: "DataStoreMaxAge is the maximum number of hours to retain old log events in the datastore",
+							Type:        []string{"integer"},
+							Format:      "int32",
 						},
 					},
 					"path": {
@@ -8923,6 +8942,256 @@ func schema_pkg_apis_management_v1_DirectClusterEndpointTokenStatus(ref common.R
 				},
 			},
 		},
+	}
+}
+
+func schema_pkg_apis_management_v1_Event(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "Event holds an event",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"kind": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"apiVersion": {
+						SchemaProps: spec.SchemaProps{
+							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"metadata": {
+						SchemaProps: spec.SchemaProps{
+							Ref: ref("k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"),
+						},
+					},
+					"spec": {
+						SchemaProps: spec.SchemaProps{
+							Ref: ref("github.com/loft-sh/api/pkg/apis/management/v1.EventSpec"),
+						},
+					},
+					"status": {
+						SchemaProps: spec.SchemaProps{
+							Ref: ref("github.com/loft-sh/api/pkg/apis/management/v1.EventStatus"),
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			"github.com/loft-sh/api/pkg/apis/management/v1.EventSpec", "github.com/loft-sh/api/pkg/apis/management/v1.EventStatus", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
+	}
+}
+
+func schema_pkg_apis_management_v1_EventList(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"kind": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"apiVersion": {
+						SchemaProps: spec.SchemaProps{
+							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"metadata": {
+						SchemaProps: spec.SchemaProps{
+							Ref: ref("k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"),
+						},
+					},
+					"items": {
+						SchemaProps: spec.SchemaProps{
+							Type: []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Ref: ref("github.com/loft-sh/api/pkg/apis/management/v1.Event"),
+									},
+								},
+							},
+						},
+					},
+				},
+				Required: []string{"items"},
+			},
+		},
+		Dependencies: []string{
+			"github.com/loft-sh/api/pkg/apis/management/v1.Event", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
+	}
+}
+
+func schema_pkg_apis_management_v1_EventSpec(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "EventSpec holds the specification",
+				Type:        []string{"object"},
+			},
+		},
+	}
+}
+
+func schema_pkg_apis_management_v1_EventStatus(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "EventStatus holds the status, which is the parsed raw config",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"kind": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"apiVersion": {
+						SchemaProps: spec.SchemaProps{
+							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"level": {
+						SchemaProps: spec.SchemaProps{
+							Description: "AuditLevel at which event was generated",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"auditID": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Unique audit ID, generated for each request.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"stage": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Stage of the request handling when this event instance was generated.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"requestURI": {
+						SchemaProps: spec.SchemaProps{
+							Description: "RequestURI is the request URI as sent by the client to a server.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"verb": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Verb is the kubernetes verb associated with the request. For non-resource requests, this is the lower-cased HTTP method.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"user": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Authenticated user information.",
+							Ref:         ref("k8s.io/api/authentication/v1.UserInfo"),
+						},
+					},
+					"impersonatedUser": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Impersonated user information.",
+							Ref:         ref("k8s.io/api/authentication/v1.UserInfo"),
+						},
+					},
+					"sourceIPs": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Source IPs, from where the request originated and intermediate proxies.",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Type:   []string{"string"},
+										Format: "",
+									},
+								},
+							},
+						},
+					},
+					"userAgent": {
+						SchemaProps: spec.SchemaProps{
+							Description: "UserAgent records the user agent string reported by the client. Note that the UserAgent is provided by the client, and must not be trusted.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"objectRef": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Object reference this request is targeted at. Does not apply for List-type requests, or non-resource requests.",
+							Ref:         ref("github.com/loft-sh/api/pkg/apis/audit/v1.ObjectReference"),
+						},
+					},
+					"responseStatus": {
+						SchemaProps: spec.SchemaProps{
+							Description: "The response status. For successful and non-successful responses, this will only include the Code and StatusSuccess. For panic type error responses, this will be auto-populated with the error Message.",
+							Ref:         ref("k8s.io/apimachinery/pkg/apis/meta/v1.Status"),
+						},
+					},
+					"requestObject": {
+						SchemaProps: spec.SchemaProps{
+							Description: "API object from the request, in JSON format. The RequestObject is recorded as-is in the request (possibly re-encoded as JSON), prior to version conversion, defaulting, admission or merging. It is an external versioned object type, and may not be a valid object on its own. Omitted for non-resource requests.  Only logged at Request Level and higher.",
+							Ref:         ref("k8s.io/apimachinery/pkg/runtime.Unknown"),
+						},
+					},
+					"responseObject": {
+						SchemaProps: spec.SchemaProps{
+							Description: "API object returned in the response, in JSON. The ResponseObject is recorded after conversion to the external type, and serialized as JSON.  Omitted for non-resource requests.  Only logged at Response Level.",
+							Ref:         ref("k8s.io/apimachinery/pkg/runtime.Unknown"),
+						},
+					},
+					"requestReceivedTimestamp": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Time the request reached the apiserver.",
+							Ref:         ref("k8s.io/apimachinery/pkg/apis/meta/v1.MicroTime"),
+						},
+					},
+					"stageTimestamp": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Time the request reached current audit stage.",
+							Ref:         ref("k8s.io/apimachinery/pkg/apis/meta/v1.MicroTime"),
+						},
+					},
+					"annotations": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Annotations is an unstructured key value map stored with an audit event that may be set by plugins invoked in the request serving chain, including authentication, authorization and admission plugins. Note that these annotations are for the audit event, and do not correspond to the metadata.annotations of the submitted object. Keys should uniquely identify the informing component to avoid name collisions (e.g. podsecuritypolicy.admission.k8s.io/policy). Values should be short. Annotations are included in the Metadata level.",
+							Type:        []string{"object"},
+							AdditionalProperties: &spec.SchemaOrBool{
+								Allows: true,
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Type:   []string{"string"},
+										Format: "",
+									},
+								},
+							},
+						},
+					},
+				},
+				Required: []string{"level", "auditID", "stage", "requestURI", "verb", "user"},
+			},
+		},
+		Dependencies: []string{
+			"github.com/loft-sh/api/pkg/apis/audit/v1.ObjectReference", "k8s.io/api/authentication/v1.UserInfo", "k8s.io/apimachinery/pkg/apis/meta/v1.MicroTime", "k8s.io/apimachinery/pkg/apis/meta/v1.Status", "k8s.io/apimachinery/pkg/runtime.Unknown"},
 	}
 }
 
@@ -12580,11 +12849,21 @@ func schema_pkg_apis_management_v1_TaskStatus(ref common.ReferenceCallback) comm
 							Ref:         ref("k8s.io/api/core/v1.ContainerStatus"),
 						},
 					},
+					"owner": {
+						SchemaProps: spec.SchemaProps{
+							Ref: ref("github.com/loft-sh/agentapi/pkg/apis/loft/cluster/v1.UserOrTeam"),
+						},
+					},
+					"cluster": {
+						SchemaProps: spec.SchemaProps{
+							Ref: ref("github.com/loft-sh/agentapi/pkg/apis/loft/cluster/v1.EntityInfo"),
+						},
+					},
 				},
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/agentapi/pkg/apis/loft/storage/v1.Condition", "k8s.io/api/core/v1.ContainerStatus"},
+			"github.com/loft-sh/agentapi/pkg/apis/loft/cluster/v1.EntityInfo", "github.com/loft-sh/agentapi/pkg/apis/loft/cluster/v1.UserOrTeam", "github.com/loft-sh/agentapi/pkg/apis/loft/storage/v1.Condition", "k8s.io/api/core/v1.ContainerStatus"},
 	}
 }
 

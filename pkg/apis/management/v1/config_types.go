@@ -52,8 +52,21 @@ type Audit struct {
 	// +optional
 	Enabled bool `json:"enabled,omitempty"`
 
+	// Level is an optional log level for audit logs. Cannot be used together with policy
+	// +optional
+	Level int `json:"level,omitempty"`
+
 	// The audit policy to use and log requests. By default loft will not log anything
+	// +optional
 	Policy AuditPolicy `json:"policy,omitempty"`
+
+	// DataStoreEndpoint is an endpoint to store events in.
+	// +optional
+	DataStoreEndpoint string `json:"dataStoreEndpoint,omitempty"`
+
+	// DataStoreMaxAge is the maximum number of hours to retain old log events in the datastore
+	// +optional
+	DataStoreMaxAge *int `json:"dataStoreTTL,omitempty"`
 
 	// The path where to save the audit log files. This is required if audit is enabled. Backup log files will
 	// be retained in the same directory.

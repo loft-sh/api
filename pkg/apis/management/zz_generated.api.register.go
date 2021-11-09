@@ -96,7 +96,17 @@ var (
 		return NewDirectClusterEndpointTokenRESTFunc(Factory)
 	}
 	NewDirectClusterEndpointTokenRESTFunc NewRESTFunc
-	ManagementFeatureStorage              = builders.NewApiResourceWithStorage( // Resource status endpoint
+	ManagementEventStorage                = builders.NewApiResourceWithStorage( // Resource status endpoint
+		InternalEvent,
+		func() runtime.Object { return &Event{} },     // Register versioned resource
+		func() runtime.Object { return &EventList{} }, // Register versioned resource list
+		NewEventREST,
+	)
+	NewEventREST = func(getter generic.RESTOptionsGetter) rest.Storage {
+		return NewEventRESTFunc(Factory)
+	}
+	NewEventRESTFunc         NewRESTFunc
+	ManagementFeatureStorage = builders.NewApiResourceWithStorage( // Resource status endpoint
 		InternalFeature,
 		func() runtime.Object { return &Feature{} },     // Register versioned resource
 		func() runtime.Object { return &FeatureList{} }, // Register versioned resource list
@@ -428,6 +438,18 @@ var (
 		func() runtime.Object { return &DirectClusterEndpointToken{} },
 		func() runtime.Object { return &DirectClusterEndpointTokenList{} },
 	)
+	InternalEvent = builders.NewInternalResource(
+		"events",
+		"Event",
+		func() runtime.Object { return &Event{} },
+		func() runtime.Object { return &EventList{} },
+	)
+	InternalEventStatus = builders.NewInternalResourceStatus(
+		"events",
+		"EventStatus",
+		func() runtime.Object { return &Event{} },
+		func() runtime.Object { return &EventList{} },
+	)
 	InternalFeature = builders.NewInternalResource(
 		"features",
 		"Feature",
@@ -738,6 +760,8 @@ var (
 		InternalConfigStatus,
 		InternalDirectClusterEndpointToken,
 		InternalDirectClusterEndpointTokenStatus,
+		InternalEvent,
+		InternalEventStatus,
 		InternalFeature,
 		InternalFeatureStatus,
 		InternalGlobalClusterAccess,
@@ -865,13 +889,16 @@ type Apps struct {
 }
 
 type Audit struct {
-	Enabled    bool
-	Policy     AuditPolicy
-	Path       string
-	MaxAge     int
-	MaxBackups int
-	MaxSize    int
-	Compress   bool
+	Enabled           bool
+	Level             int
+	Policy            AuditPolicy
+	DataStoreEndpoint string
+	DataStoreMaxAge   *int
+	Path              string
+	MaxAge            int
+	MaxBackups        int
+	MaxSize           int
+	Compress          bool
 }
 
 type AuditPolicy struct {
@@ -980,7 +1007,7 @@ type AuthenticationPassword struct {
 }
 
 // +genclient
-// +genclient
+// +genclient:nonNamespaced
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
 
 type Cluster struct {
@@ -1168,6 +1195,24 @@ type DirectClusterEndpointTokenSpec struct {
 
 type DirectClusterEndpointTokenStatus struct {
 	Token string
+}
+
+// +genclient
+// +genclient:nonNamespaced
+// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+
+type Event struct {
+	metav1.TypeMeta
+	metav1.ObjectMeta
+	Spec   EventSpec
+	Status EventStatus
+}
+
+type EventSpec struct {
+}
+
+type EventStatus struct {
+	auditv1.Event
 }
 
 // +genclient
@@ -1381,7 +1426,7 @@ type OIDCClient struct {
 }
 
 // +genclient
-// +genclient
+// +genclient:nonNamespaced
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
 
 type OwnedAccessKey struct {
@@ -1614,6 +1659,8 @@ type TaskSpec struct {
 
 type TaskStatus struct {
 	storagev1.TaskStatus
+	Owner   *clusterv1.UserOrTeam
+	Cluster *clusterv1.EntityInfo
 }
 
 // +genclient
@@ -2613,6 +2660,126 @@ func (s *storageDirectClusterEndpointToken) UpdateDirectClusterEndpointToken(ctx
 }
 
 func (s *storageDirectClusterEndpointToken) DeleteDirectClusterEndpointToken(ctx context.Context, id string) (bool, error) {
+	st := s.GetStandardStorage()
+	_, sync, err := st.Delete(ctx, id, nil, &metav1.DeleteOptions{})
+	return sync, err
+}
+
+//
+// Event Functions and Structs
+//
+// +k8s:deepcopy-gen=false
+type EventStrategy struct {
+	builders.DefaultStorageStrategy
+}
+
+// +k8s:deepcopy-gen=false
+type EventStatusStrategy struct {
+	builders.DefaultStatusStorageStrategy
+}
+
+// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+
+type EventList struct {
+	metav1.TypeMeta
+	metav1.ListMeta
+	Items []Event
+}
+
+func (Event) NewStatus() interface{} {
+	return EventStatus{}
+}
+
+func (pc *Event) GetStatus() interface{} {
+	return pc.Status
+}
+
+func (pc *Event) SetStatus(s interface{}) {
+	pc.Status = s.(EventStatus)
+}
+
+func (pc *Event) GetSpec() interface{} {
+	return pc.Spec
+}
+
+func (pc *Event) SetSpec(s interface{}) {
+	pc.Spec = s.(EventSpec)
+}
+
+func (pc *Event) GetObjectMeta() *metav1.ObjectMeta {
+	return &pc.ObjectMeta
+}
+
+func (pc *Event) SetGeneration(generation int64) {
+	pc.ObjectMeta.Generation = generation
+}
+
+func (pc Event) GetGeneration() int64 {
+	return pc.ObjectMeta.Generation
+}
+
+// Registry is an interface for things that know how to store Event.
+// +k8s:deepcopy-gen=false
+type EventRegistry interface {
+	ListEvents(ctx context.Context, options *internalversion.ListOptions) (*EventList, error)
+	GetEvent(ctx context.Context, id string, options *metav1.GetOptions) (*Event, error)
+	CreateEvent(ctx context.Context, id *Event) (*Event, error)
+	UpdateEvent(ctx context.Context, id *Event) (*Event, error)
+	DeleteEvent(ctx context.Context, id string) (bool, error)
+}
+
+// NewRegistry returns a new Registry interface for the given Storage. Any mismatched types will panic.
+func NewEventRegistry(sp builders.StandardStorageProvider) EventRegistry {
+	return &storageEvent{sp}
+}
+
+// Implement Registry
+// storage puts strong typing around storage calls
+// +k8s:deepcopy-gen=false
+type storageEvent struct {
+	builders.StandardStorageProvider
+}
+
+func (s *storageEvent) ListEvents(ctx context.Context, options *internalversion.ListOptions) (*EventList, error) {
+	if options != nil && options.FieldSelector != nil && !options.FieldSelector.Empty() {
+		return nil, fmt.Errorf("field selector not supported yet")
+	}
+	st := s.GetStandardStorage()
+	obj, err := st.List(ctx, options)
+	if err != nil {
+		return nil, err
+	}
+	return obj.(*EventList), err
+}
+
+func (s *storageEvent) GetEvent(ctx context.Context, id string, options *metav1.GetOptions) (*Event, error) {
+	st := s.GetStandardStorage()
+	obj, err := st.Get(ctx, id, options)
+	if err != nil {
+		return nil, err
+	}
+	return obj.(*Event), nil
+}
+
+func (s *storageEvent) CreateEvent(ctx context.Context, object *Event) (*Event, error) {
+	st := s.GetStandardStorage()
+	obj, err := st.Create(ctx, object, nil, &metav1.CreateOptions{})
+	if err != nil {
+		return nil, err
+	}
+	return obj.(*Event), nil
+}
+
+func (s *storageEvent) UpdateEvent(ctx context.Context, object *Event) (*Event, error) {
+	st := s.GetStandardStorage()
+	obj, _, err := st.Update(ctx, object.Name, rest.DefaultUpdatedObjectInfo(object), nil, nil, false, &metav1.UpdateOptions{})
+	if err != nil {
+		return nil, err
+	}
+	return obj.(*Event), nil
+}
+
+func (s *storageEvent) DeleteEvent(ctx context.Context, id string) (bool, error) {
 	st := s.GetStandardStorage()
 	_, sync, err := st.Delete(ctx, id, nil, &metav1.DeleteOptions{})
 	return sync, err

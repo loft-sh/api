@@ -38,10 +38,6 @@ type AgentConfigSpec struct {
 	// be signed with
 	// +optional
 	TokenCaCert []byte `json:"tokenCaCert,omitempty"`
-
-	// Audit are the audit settings from Loft
-	// +optional
-	Audit *Audit `json:"audit,omitempty"`
 }
 
 // AgentConfigStatus holds the status, which is the parsed raw config

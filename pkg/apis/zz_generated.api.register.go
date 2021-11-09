@@ -45,6 +45,7 @@ var managementApiGroup = builders.NewApiGroupBuilder(
 		"ClusterConnect",
 		"Config",
 		"DirectClusterEndpointToken",
+		"Event",
 		"Feature",
 		"GlobalClusterAccess",
 		"GlobalClusterRoleTemplate",

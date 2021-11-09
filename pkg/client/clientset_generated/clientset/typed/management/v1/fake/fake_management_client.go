@@ -40,6 +40,10 @@ func (c *FakeManagementV1) DirectClusterEndpointTokens() v1.DirectClusterEndpoin
 	return &FakeDirectClusterEndpointTokens{c}
 }
 
+func (c *FakeManagementV1) Events() v1.EventInterface {
+	return &FakeEvents{c}
+}
+
 func (c *FakeManagementV1) Features() v1.FeatureInterface {
 	return &FakeFeatures{c}
 }
