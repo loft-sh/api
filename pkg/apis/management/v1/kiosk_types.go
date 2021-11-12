@@ -41,6 +41,7 @@ type KioskSpec struct {
 	VirtualCluster  clusterv1.VirtualCluster  `json:"virtualCluster,omitempty"`
 	ClusterAccess   clusterv1.ClusterAccess   `json:"clusterAccess,omitempty"`
 	ClusterQuota    clusterv1.ClusterQuota    `json:"clusterQuota,omitempty"`
+	ChartInfo       clusterv1.ChartInfo       `json:"chartInfo,omitempty"`
 
 	// storage.loft.sh
 	SpaceConstraint       storagev1.SpaceConstraint     `json:"spaceConstraint,omitempty"`

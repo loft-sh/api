@@ -3900,6 +3900,7 @@ func autoConvert_v1_KioskSpec_To_management_KioskSpec(in *KioskSpec, out *manage
 	out.VirtualCluster = in.VirtualCluster
 	out.ClusterAccess = in.ClusterAccess
 	out.ClusterQuota = in.ClusterQuota
+	out.ChartInfo = in.ChartInfo
 	out.SpaceConstraint = in.SpaceConstraint
 	out.StorageClusterAccess = in.StorageClusterAccess
 	out.ClusterRoleTemplate = in.ClusterRoleTemplate
@@ -3928,6 +3929,7 @@ func autoConvert_management_KioskSpec_To_v1_KioskSpec(in *management.KioskSpec, 
 	out.VirtualCluster = in.VirtualCluster
 	out.ClusterAccess = in.ClusterAccess
 	out.ClusterQuota = in.ClusterQuota
+	out.ChartInfo = in.ChartInfo
 	out.SpaceConstraint = in.SpaceConstraint
 	out.StorageClusterAccess = in.StorageClusterAccess
 	out.ClusterRoleTemplate = in.ClusterRoleTemplate

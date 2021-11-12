@@ -31,6 +31,7 @@ type AccessKeySpec struct {
 	// +optional
 	Key string `json:"key,omitempty"`
 
+	// DEPRECATED: do not use anymore
 	// Parent is used to share OIDC and external token information
 	// with multiple access keys. Since copying an OIDC refresh token
 	// would result in the other access keys becoming invalid after a refresh

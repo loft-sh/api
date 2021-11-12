@@ -48,6 +48,10 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 		"github.com/loft-sh/agentapi/pkg/apis/loft/cluster/v1.AppliedMetadata":                       schema_apis_loft_cluster_v1_AppliedMetadata(ref),
 		"github.com/loft-sh/agentapi/pkg/apis/loft/cluster/v1.AppliedObject":                         schema_apis_loft_cluster_v1_AppliedObject(ref),
 		"github.com/loft-sh/agentapi/pkg/apis/loft/cluster/v1.Chart":                                 schema_apis_loft_cluster_v1_Chart(ref),
+		"github.com/loft-sh/agentapi/pkg/apis/loft/cluster/v1.ChartInfo":                             schema_apis_loft_cluster_v1_ChartInfo(ref),
+		"github.com/loft-sh/agentapi/pkg/apis/loft/cluster/v1.ChartInfoList":                         schema_apis_loft_cluster_v1_ChartInfoList(ref),
+		"github.com/loft-sh/agentapi/pkg/apis/loft/cluster/v1.ChartInfoSpec":                         schema_apis_loft_cluster_v1_ChartInfoSpec(ref),
+		"github.com/loft-sh/agentapi/pkg/apis/loft/cluster/v1.ChartInfoStatus":                       schema_apis_loft_cluster_v1_ChartInfoStatus(ref),
 		"github.com/loft-sh/agentapi/pkg/apis/loft/cluster/v1.ClusterAccess":                         schema_apis_loft_cluster_v1_ClusterAccess(ref),
 		"github.com/loft-sh/agentapi/pkg/apis/loft/cluster/v1.ClusterAccessList":                     schema_apis_loft_cluster_v1_ClusterAccessList(ref),
 		"github.com/loft-sh/agentapi/pkg/apis/loft/cluster/v1.ClusterAccessSpec":                     schema_apis_loft_cluster_v1_ClusterAccessSpec(ref),
@@ -350,10 +354,7 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 		"github.com/loft-sh/api/pkg/apis/storage/v1.HelmConfiguration":                               schema_pkg_apis_storage_v1_HelmConfiguration(ref),
 		"github.com/loft-sh/api/pkg/apis/storage/v1.HelmTask":                                        schema_pkg_apis_storage_v1_HelmTask(ref),
 		"github.com/loft-sh/api/pkg/apis/storage/v1.HelmTaskRelease":                                 schema_pkg_apis_storage_v1_HelmTaskRelease(ref),
-		"github.com/loft-sh/api/pkg/apis/storage/v1.Info":                                            schema_pkg_apis_storage_v1_Info(ref),
 		"github.com/loft-sh/api/pkg/apis/storage/v1.KindSecretRef":                                   schema_pkg_apis_storage_v1_KindSecretRef(ref),
-		"github.com/loft-sh/api/pkg/apis/storage/v1.Maintainer":                                      schema_pkg_apis_storage_v1_Maintainer(ref),
-		"github.com/loft-sh/api/pkg/apis/storage/v1.Metadata":                                        schema_pkg_apis_storage_v1_Metadata(ref),
 		"github.com/loft-sh/api/pkg/apis/storage/v1.SecretRef":                                       schema_pkg_apis_storage_v1_SecretRef(ref),
 		"github.com/loft-sh/api/pkg/apis/storage/v1.SharedSecret":                                    schema_pkg_apis_storage_v1_SharedSecret(ref),
 		"github.com/loft-sh/api/pkg/apis/storage/v1.SharedSecretList":                                schema_pkg_apis_storage_v1_SharedSecretList(ref),
@@ -2335,6 +2336,149 @@ func schema_apis_loft_cluster_v1_Chart(ref common.ReferenceCallback) common.Open
 	}
 }
 
+func schema_apis_loft_cluster_v1_ChartInfo(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"kind": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"apiVersion": {
+						SchemaProps: spec.SchemaProps{
+							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"metadata": {
+						SchemaProps: spec.SchemaProps{
+							Ref: ref("k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"),
+						},
+					},
+					"spec": {
+						SchemaProps: spec.SchemaProps{
+							Ref: ref("github.com/loft-sh/agentapi/pkg/apis/loft/cluster/v1.ChartInfoSpec"),
+						},
+					},
+					"status": {
+						SchemaProps: spec.SchemaProps{
+							Ref: ref("github.com/loft-sh/agentapi/pkg/apis/loft/cluster/v1.ChartInfoStatus"),
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			"github.com/loft-sh/agentapi/pkg/apis/loft/cluster/v1.ChartInfoSpec", "github.com/loft-sh/agentapi/pkg/apis/loft/cluster/v1.ChartInfoStatus", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
+	}
+}
+
+func schema_apis_loft_cluster_v1_ChartInfoList(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"kind": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"apiVersion": {
+						SchemaProps: spec.SchemaProps{
+							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"metadata": {
+						SchemaProps: spec.SchemaProps{
+							Ref: ref("k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"),
+						},
+					},
+					"items": {
+						SchemaProps: spec.SchemaProps{
+							Type: []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Ref: ref("github.com/loft-sh/agentapi/pkg/apis/loft/cluster/v1.ChartInfo"),
+									},
+								},
+							},
+						},
+					},
+				},
+				Required: []string{"items"},
+			},
+		},
+		Dependencies: []string{
+			"github.com/loft-sh/agentapi/pkg/apis/loft/cluster/v1.ChartInfo", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
+	}
+}
+
+func schema_apis_loft_cluster_v1_ChartInfoSpec(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"chart": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Chart holds information about a chart that should get deployed",
+							Ref:         ref("github.com/loft-sh/agentapi/pkg/apis/loft/cluster/v1.Chart"),
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			"github.com/loft-sh/agentapi/pkg/apis/loft/cluster/v1.Chart"},
+	}
+}
+
+func schema_apis_loft_cluster_v1_ChartInfoStatus(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"metadata": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Metadata provides information about a chart",
+							Ref:         ref("github.com/loft-sh/agentapi/pkg/apis/loft/cluster/v1.Metadata"),
+						},
+					},
+					"readme": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Readme is the readme of the chart",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"values": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Values are the default values of the chart",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			"github.com/loft-sh/agentapi/pkg/apis/loft/cluster/v1.Metadata"},
+	}
+}
+
 func schema_apis_loft_cluster_v1_ClusterAccess(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
@@ -3266,6 +3410,20 @@ func schema_apis_loft_cluster_v1_Metadata(ref common.ReferenceCallback) common.O
 							Description: "Specifies the chart type: application or library",
 							Type:        []string{"string"},
 							Format:      "",
+						},
+					},
+					"urls": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Urls where to find the chart contents",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Type:   []string{"string"},
+										Format: "",
+									},
+								},
+							},
 						},
 					},
 				},
@@ -6223,6 +6381,13 @@ func schema_pkg_apis_management_v1_AppSpec(ref common.ReferenceCallback) common.
 					"description": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Description describes an app",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"readme": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Readme is a longer markdown string that describes the app.",
 							Type:        []string{"string"},
 							Format:      "",
 						},
@@ -10119,6 +10284,11 @@ func schema_pkg_apis_management_v1_KioskSpec(ref common.ReferenceCallback) commo
 							Ref: ref("github.com/loft-sh/agentapi/pkg/apis/loft/cluster/v1.ClusterQuota"),
 						},
 					},
+					"chartInfo": {
+						SchemaProps: spec.SchemaProps{
+							Ref: ref("github.com/loft-sh/agentapi/pkg/apis/loft/cluster/v1.ChartInfo"),
+						},
+					},
 					"spaceConstraint": {
 						SchemaProps: spec.SchemaProps{
 							Description: "storage.loft.sh",
@@ -10159,7 +10329,7 @@ func schema_pkg_apis_management_v1_KioskSpec(ref common.ReferenceCallback) commo
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/agentapi/pkg/apis/kiosk/config/v1alpha1.Account", "github.com/loft-sh/agentapi/pkg/apis/kiosk/config/v1alpha1.Template", "github.com/loft-sh/agentapi/pkg/apis/kiosk/config/v1alpha1.TemplateInstance", "github.com/loft-sh/agentapi/pkg/apis/loft/cluster/v1.ClusterAccess", "github.com/loft-sh/agentapi/pkg/apis/loft/cluster/v1.ClusterQuota", "github.com/loft-sh/agentapi/pkg/apis/loft/cluster/v1.HelmRelease", "github.com/loft-sh/agentapi/pkg/apis/loft/cluster/v1.SleepModeConfig", "github.com/loft-sh/agentapi/pkg/apis/loft/cluster/v1.Space", "github.com/loft-sh/agentapi/pkg/apis/loft/cluster/v1.VirtualCluster", "github.com/loft-sh/agentapi/pkg/apis/loft/storage/v1.ClusterAccess", "github.com/loft-sh/agentapi/pkg/apis/loft/storage/v1.ClusterQuota", "github.com/loft-sh/agentapi/pkg/apis/loft/storage/v1.ClusterRoleTemplate", "github.com/loft-sh/agentapi/pkg/apis/loft/storage/v1.ClusterTeam", "github.com/loft-sh/agentapi/pkg/apis/loft/storage/v1.ClusterUser", "github.com/loft-sh/agentapi/pkg/apis/loft/storage/v1.SpaceConstraint", "github.com/loft-sh/agentapi/pkg/apis/loft/storage/v1.VirtualCluster", "github.com/loft-sh/jspolicy/pkg/apis/policy/v1beta1.JsPolicy", "github.com/loft-sh/jspolicy/pkg/apis/policy/v1beta1.JsPolicyBundle", "github.com/loft-sh/jspolicy/pkg/apis/policy/v1beta1.JsPolicyViolations"},
+			"github.com/loft-sh/agentapi/pkg/apis/kiosk/config/v1alpha1.Account", "github.com/loft-sh/agentapi/pkg/apis/kiosk/config/v1alpha1.Template", "github.com/loft-sh/agentapi/pkg/apis/kiosk/config/v1alpha1.TemplateInstance", "github.com/loft-sh/agentapi/pkg/apis/loft/cluster/v1.ChartInfo", "github.com/loft-sh/agentapi/pkg/apis/loft/cluster/v1.ClusterAccess", "github.com/loft-sh/agentapi/pkg/apis/loft/cluster/v1.ClusterQuota", "github.com/loft-sh/agentapi/pkg/apis/loft/cluster/v1.HelmRelease", "github.com/loft-sh/agentapi/pkg/apis/loft/cluster/v1.SleepModeConfig", "github.com/loft-sh/agentapi/pkg/apis/loft/cluster/v1.Space", "github.com/loft-sh/agentapi/pkg/apis/loft/cluster/v1.VirtualCluster", "github.com/loft-sh/agentapi/pkg/apis/loft/storage/v1.ClusterAccess", "github.com/loft-sh/agentapi/pkg/apis/loft/storage/v1.ClusterQuota", "github.com/loft-sh/agentapi/pkg/apis/loft/storage/v1.ClusterRoleTemplate", "github.com/loft-sh/agentapi/pkg/apis/loft/storage/v1.ClusterTeam", "github.com/loft-sh/agentapi/pkg/apis/loft/storage/v1.ClusterUser", "github.com/loft-sh/agentapi/pkg/apis/loft/storage/v1.SpaceConstraint", "github.com/loft-sh/agentapi/pkg/apis/loft/storage/v1.VirtualCluster", "github.com/loft-sh/jspolicy/pkg/apis/policy/v1beta1.JsPolicy", "github.com/loft-sh/jspolicy/pkg/apis/policy/v1beta1.JsPolicyBundle", "github.com/loft-sh/jspolicy/pkg/apis/policy/v1beta1.JsPolicyViolations"},
 	}
 }
 
@@ -10881,7 +11051,7 @@ func schema_pkg_apis_management_v1_OwnedAccessKeySpec(ref common.ReferenceCallba
 					},
 					"parent": {
 						SchemaProps: spec.SchemaProps{
-							Description: "Parent is used to share OIDC and external token information with multiple access keys. Since copying an OIDC refresh token would result in the other access keys becoming invalid after a refresh parent allows access keys to share that information.\n\nThe use case for this is primarily user generated access keys, which will have the users current access key as parent if it contains an OIDC token.",
+							Description: "DEPRECATED: do not use anymore Parent is used to share OIDC and external token information with multiple access keys. Since copying an OIDC refresh token would result in the other access keys becoming invalid after a refresh parent allows access keys to share that information.\n\nThe use case for this is primarily user generated access keys, which will have the users current access key as parent if it contains an OIDC token.",
 							Type:        []string{"string"},
 							Format:      "",
 						},
@@ -11390,7 +11560,7 @@ func schema_pkg_apis_management_v1_ResetAccessKeySpec(ref common.ReferenceCallba
 					},
 					"parent": {
 						SchemaProps: spec.SchemaProps{
-							Description: "Parent is used to share OIDC and external token information with multiple access keys. Since copying an OIDC refresh token would result in the other access keys becoming invalid after a refresh parent allows access keys to share that information.\n\nThe use case for this is primarily user generated access keys, which will have the users current access key as parent if it contains an OIDC token.",
+							Description: "DEPRECATED: do not use anymore Parent is used to share OIDC and external token information with multiple access keys. Since copying an OIDC refresh token would result in the other access keys becoming invalid after a refresh parent allows access keys to share that information.\n\nThe use case for this is primarily user generated access keys, which will have the users current access key as parent if it contains an OIDC token.",
 							Type:        []string{"string"},
 							Format:      "",
 						},
@@ -14768,7 +14938,7 @@ func schema_pkg_apis_storage_v1_AccessKeySpec(ref common.ReferenceCallback) comm
 					},
 					"parent": {
 						SchemaProps: spec.SchemaProps{
-							Description: "Parent is used to share OIDC and external token information with multiple access keys. Since copying an OIDC refresh token would result in the other access keys becoming invalid after a refresh parent allows access keys to share that information.\n\nThe use case for this is primarily user generated access keys, which will have the users current access key as parent if it contains an OIDC token.",
+							Description: "DEPRECATED: do not use anymore Parent is used to share OIDC and external token information with multiple access keys. Since copying an OIDC refresh token would result in the other access keys becoming invalid after a refresh parent allows access keys to share that information.\n\nThe use case for this is primarily user generated access keys, which will have the users current access key as parent if it contains an OIDC token.",
 							Type:        []string{"string"},
 							Format:      "",
 						},
@@ -15294,6 +15464,13 @@ func schema_pkg_apis_storage_v1_AppSpec(ref common.ReferenceCallback) common.Ope
 					"description": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Description describes an app",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"readme": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Readme is a longer markdown string that describes the app.",
 							Type:        []string{"string"},
 							Format:      "",
 						},
@@ -16523,7 +16700,7 @@ func schema_pkg_apis_storage_v1_HelmChart(ref common.ReferenceCallback) common.O
 					"metadata": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Metadata provides information about a chart",
-							Ref:         ref("github.com/loft-sh/api/pkg/apis/storage/v1.Metadata"),
+							Ref:         ref("github.com/loft-sh/agentapi/pkg/apis/loft/cluster/v1.Metadata"),
 						},
 					},
 					"versions": {
@@ -16550,7 +16727,7 @@ func schema_pkg_apis_storage_v1_HelmChart(ref common.ReferenceCallback) common.O
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/pkg/apis/storage/v1.HelmChartRepository", "github.com/loft-sh/api/pkg/apis/storage/v1.Metadata"},
+			"github.com/loft-sh/agentapi/pkg/apis/loft/cluster/v1.Metadata", "github.com/loft-sh/api/pkg/apis/storage/v1.HelmChartRepository"},
 	}
 }
 
@@ -16767,60 +16944,6 @@ func schema_pkg_apis_storage_v1_HelmTaskRelease(ref common.ReferenceCallback) co
 	}
 }
 
-func schema_pkg_apis_storage_v1_Info(ref common.ReferenceCallback) common.OpenAPIDefinition {
-	return common.OpenAPIDefinition{
-		Schema: spec.Schema{
-			SchemaProps: spec.SchemaProps{
-				Description: "Info describes release information.",
-				Type:        []string{"object"},
-				Properties: map[string]spec.Schema{
-					"first_deployed": {
-						SchemaProps: spec.SchemaProps{
-							Description: "FirstDeployed is when the release was first deployed.",
-							Ref:         ref("k8s.io/apimachinery/pkg/apis/meta/v1.Time"),
-						},
-					},
-					"last_deployed": {
-						SchemaProps: spec.SchemaProps{
-							Description: "LastDeployed is when the release was last deployed.",
-							Ref:         ref("k8s.io/apimachinery/pkg/apis/meta/v1.Time"),
-						},
-					},
-					"deleted": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Deleted tracks when this object was deleted.",
-							Ref:         ref("k8s.io/apimachinery/pkg/apis/meta/v1.Time"),
-						},
-					},
-					"description": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Description is human-friendly \"log entry\" about this release.",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"status": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Status is the current state of the release",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"notes": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Contains the rendered templates/NOTES.txt if available",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-				},
-			},
-		},
-		Dependencies: []string{
-			"k8s.io/apimachinery/pkg/apis/meta/v1.Time"},
-	}
-}
-
 func schema_pkg_apis_storage_v1_KindSecretRef(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
@@ -16863,195 +16986,6 @@ func schema_pkg_apis_storage_v1_KindSecretRef(ref common.ReferenceCallback) comm
 				},
 			},
 		},
-	}
-}
-
-func schema_pkg_apis_storage_v1_Maintainer(ref common.ReferenceCallback) common.OpenAPIDefinition {
-	return common.OpenAPIDefinition{
-		Schema: spec.Schema{
-			SchemaProps: spec.SchemaProps{
-				Description: "Maintainer describes a Chart maintainer.",
-				Type:        []string{"object"},
-				Properties: map[string]spec.Schema{
-					"name": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Name is a user name or organization name",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"email": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Email is an optional email address to contact the named maintainer",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"url": {
-						SchemaProps: spec.SchemaProps{
-							Description: "URL is an optional URL to an address for the named maintainer",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-				},
-			},
-		},
-	}
-}
-
-func schema_pkg_apis_storage_v1_Metadata(ref common.ReferenceCallback) common.OpenAPIDefinition {
-	return common.OpenAPIDefinition{
-		Schema: spec.Schema{
-			SchemaProps: spec.SchemaProps{
-				Description: "Metadata for a Chart file. This models the structure of a Chart.yaml file.",
-				Type:        []string{"object"},
-				Properties: map[string]spec.Schema{
-					"name": {
-						SchemaProps: spec.SchemaProps{
-							Description: "The name of the chart",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"home": {
-						SchemaProps: spec.SchemaProps{
-							Description: "The URL to a relevant project page, git repo, or contact person",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"sources": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Source is the URL to the source code of this chart",
-							Type:        []string{"array"},
-							Items: &spec.SchemaOrArray{
-								Schema: &spec.Schema{
-									SchemaProps: spec.SchemaProps{
-										Type:   []string{"string"},
-										Format: "",
-									},
-								},
-							},
-						},
-					},
-					"version": {
-						SchemaProps: spec.SchemaProps{
-							Description: "A SemVer 2 conformant version string of the chart",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"description": {
-						SchemaProps: spec.SchemaProps{
-							Description: "A one-sentence description of the chart",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"keywords": {
-						SchemaProps: spec.SchemaProps{
-							Description: "A list of string keywords",
-							Type:        []string{"array"},
-							Items: &spec.SchemaOrArray{
-								Schema: &spec.Schema{
-									SchemaProps: spec.SchemaProps{
-										Type:   []string{"string"},
-										Format: "",
-									},
-								},
-							},
-						},
-					},
-					"maintainers": {
-						SchemaProps: spec.SchemaProps{
-							Description: "A list of name and URL/email address combinations for the maintainer(s)",
-							Type:        []string{"array"},
-							Items: &spec.SchemaOrArray{
-								Schema: &spec.Schema{
-									SchemaProps: spec.SchemaProps{
-										Ref: ref("github.com/loft-sh/api/pkg/apis/storage/v1.Maintainer"),
-									},
-								},
-							},
-						},
-					},
-					"icon": {
-						SchemaProps: spec.SchemaProps{
-							Description: "The URL to an icon file.",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"apiVersion": {
-						SchemaProps: spec.SchemaProps{
-							Description: "The API Version of this chart.",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"condition": {
-						SchemaProps: spec.SchemaProps{
-							Description: "The condition to check to enable chart",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"tags": {
-						SchemaProps: spec.SchemaProps{
-							Description: "The tags to check to enable chart",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"appVersion": {
-						SchemaProps: spec.SchemaProps{
-							Description: "The version of the application enclosed inside of this chart.",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"deprecated": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Whether or not this chart is deprecated",
-							Type:        []string{"boolean"},
-							Format:      "",
-						},
-					},
-					"annotations": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Annotations are additional mappings uninterpreted by Helm, made available for inspection by other applications.",
-							Type:        []string{"object"},
-							AdditionalProperties: &spec.SchemaOrBool{
-								Allows: true,
-								Schema: &spec.Schema{
-									SchemaProps: spec.SchemaProps{
-										Type:   []string{"string"},
-										Format: "",
-									},
-								},
-							},
-						},
-					},
-					"kubeVersion": {
-						SchemaProps: spec.SchemaProps{
-							Description: "KubeVersion is a SemVer constraint specifying the version of Kubernetes required.",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"type": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Specifies the chart type: application or library",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-				},
-			},
-		},
-		Dependencies: []string{
-			"github.com/loft-sh/api/pkg/apis/storage/v1.Maintainer"},
 	}
 }
 

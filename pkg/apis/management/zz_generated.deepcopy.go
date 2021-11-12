@@ -2225,6 +2225,7 @@ func (in *KioskSpec) DeepCopyInto(out *KioskSpec) {
 	in.VirtualCluster.DeepCopyInto(&out.VirtualCluster)
 	in.ClusterAccess.DeepCopyInto(&out.ClusterAccess)
 	in.ClusterQuota.DeepCopyInto(&out.ClusterQuota)
+	in.ChartInfo.DeepCopyInto(&out.ChartInfo)
 	in.SpaceConstraint.DeepCopyInto(&out.SpaceConstraint)
 	in.StorageClusterAccess.DeepCopyInto(&out.StorageClusterAccess)
 	in.ClusterRoleTemplate.DeepCopyInto(&out.ClusterRoleTemplate)

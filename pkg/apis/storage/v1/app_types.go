@@ -45,6 +45,10 @@ type AppSpec struct {
 	// +optional
 	Description string `json:"description,omitempty"`
 
+	// Readme is a longer markdown string that describes the app.
+	// +optional
+	Readme string `json:"readme,omitempty"`
+
 	// Owner holds the owner of this object
 	// +optional
 	Owner *UserOrTeam `json:"owner,omitempty"`

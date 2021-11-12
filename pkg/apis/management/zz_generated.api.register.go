@@ -1007,7 +1007,7 @@ type AuthenticationPassword struct {
 }
 
 // +genclient
-// +genclient:nonNamespaced
+// +genclient
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
 
 type Cluster struct {
@@ -1327,6 +1327,7 @@ type KioskSpec struct {
 	VirtualCluster        clusterv1.VirtualCluster
 	ClusterAccess         clusterv1.ClusterAccess
 	ClusterQuota          clusterv1.ClusterQuota
+	ChartInfo             clusterv1.ChartInfo
 	SpaceConstraint       agentstoragev1.SpaceConstraint
 	StorageClusterAccess  agentstoragev1.ClusterAccess
 	ClusterRoleTemplate   agentstoragev1.ClusterRoleTemplate
@@ -1426,7 +1427,7 @@ type OIDCClient struct {
 }
 
 // +genclient
-// +genclient:nonNamespaced
+// +genclient
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
 
 type OwnedAccessKey struct {
