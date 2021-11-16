@@ -7,7 +7,7 @@ import (
 
 // +genclient
 // +genclient:nonNamespaced
-// +genclient:method=ListAccess,verb=get,subresource=access,result=github.com/loft-sh/api/pkg/apis/management/v1.ClusterMemberAccess
+// +genclient:method=ListAccess,verb=get,subresource=memberaccess,result=github.com/loft-sh/api/pkg/apis/management/v1.ClusterMemberAccess
 // +genclient:method=ListMembers,verb=get,subresource=members,result=github.com/loft-sh/api/pkg/apis/management/v1.ClusterMembers
 // +genclient:method=ListVirtualClusterDefaults,verb=get,subresource=virtualclusterdefaults,result=github.com/loft-sh/api/pkg/apis/management/v1.ClusterVirtualClusterDefaults
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object

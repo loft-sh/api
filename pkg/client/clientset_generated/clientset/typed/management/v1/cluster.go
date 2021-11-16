@@ -177,7 +177,7 @@ func (c *clusters) ListAccess(ctx context.Context, clusterName string, options m
 	err = c.client.Get().
 		Resource("clusters").
 		Name(clusterName).
-		SubResource("access").
+		SubResource("memberaccess").
 		VersionedParams(&options, scheme.ParameterCodec).
 		Do(ctx).
 		Into(result)

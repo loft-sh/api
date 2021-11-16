@@ -119,7 +119,7 @@ func (c *FakeClusters) Patch(ctx context.Context, name string, pt types.PatchTyp
 // ListAccess takes name of the cluster, and returns the corresponding clusterMemberAccess object, and an error if there is any.
 func (c *FakeClusters) ListAccess(ctx context.Context, clusterName string, options v1.GetOptions) (result *managementv1.ClusterMemberAccess, err error) {
 	obj, err := c.Fake.
-		Invokes(testing.NewRootGetSubresourceAction(clustersResource, "access", clusterName), &managementv1.ClusterMemberAccess{})
+		Invokes(testing.NewRootGetSubresourceAction(clustersResource, "memberaccess", clusterName), &managementv1.ClusterMemberAccess{})
 	if obj == nil {
 		return nil, err
 	}
