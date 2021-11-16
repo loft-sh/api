@@ -55,7 +55,17 @@ var (
 	NewClusterREST = func(getter generic.RESTOptionsGetter) rest.Storage {
 		return NewClusterRESTFunc(Factory)
 	}
-	NewClusterRESTFunc                      NewRESTFunc
+	NewClusterRESTFunc             NewRESTFunc
+	ManagementClusterAccessStorage = builders.NewApiResourceWithStorage( // Resource status endpoint
+		InternalClusterAccess,
+		func() runtime.Object { return &ClusterAccess{} },     // Register versioned resource
+		func() runtime.Object { return &ClusterAccessList{} }, // Register versioned resource list
+		NewClusterAccessREST,
+	)
+	NewClusterAccessREST = func(getter generic.RESTOptionsGetter) rest.Storage {
+		return NewClusterAccessRESTFunc(Factory)
+	}
+	NewClusterAccessRESTFunc                NewRESTFunc
 	ManagementClusterAccountTemplateStorage = builders.NewApiResourceWithStorage( // Resource status endpoint
 		InternalClusterAccountTemplate,
 		func() runtime.Object { return &ClusterAccountTemplate{} },     // Register versioned resource
@@ -75,8 +85,18 @@ var (
 	NewClusterConnectREST = func(getter generic.RESTOptionsGetter) rest.Storage {
 		return NewClusterConnectRESTFunc(Factory)
 	}
-	NewClusterConnectRESTFunc NewRESTFunc
-	ManagementConfigStorage   = builders.NewApiResourceWithStorage( // Resource status endpoint
+	NewClusterConnectRESTFunc            NewRESTFunc
+	ManagementClusterRoleTemplateStorage = builders.NewApiResourceWithStorage( // Resource status endpoint
+		InternalClusterRoleTemplate,
+		func() runtime.Object { return &ClusterRoleTemplate{} },     // Register versioned resource
+		func() runtime.Object { return &ClusterRoleTemplateList{} }, // Register versioned resource list
+		NewClusterRoleTemplateREST,
+	)
+	NewClusterRoleTemplateREST = func(getter generic.RESTOptionsGetter) rest.Storage {
+		return NewClusterRoleTemplateRESTFunc(Factory)
+	}
+	NewClusterRoleTemplateRESTFunc NewRESTFunc
+	ManagementConfigStorage        = builders.NewApiResourceWithStorage( // Resource status endpoint
 		InternalConfig,
 		func() runtime.Object { return &Config{} },     // Register versioned resource
 		func() runtime.Object { return &ConfigList{} }, // Register versioned resource list
@@ -115,38 +135,8 @@ var (
 	NewFeatureREST = func(getter generic.RESTOptionsGetter) rest.Storage {
 		return NewFeatureRESTFunc(Factory)
 	}
-	NewFeatureRESTFunc                   NewRESTFunc
-	ManagementGlobalClusterAccessStorage = builders.NewApiResourceWithStorage( // Resource status endpoint
-		InternalGlobalClusterAccess,
-		func() runtime.Object { return &GlobalClusterAccess{} },     // Register versioned resource
-		func() runtime.Object { return &GlobalClusterAccessList{} }, // Register versioned resource list
-		NewGlobalClusterAccessREST,
-	)
-	NewGlobalClusterAccessREST = func(getter generic.RESTOptionsGetter) rest.Storage {
-		return NewGlobalClusterAccessRESTFunc(Factory)
-	}
-	NewGlobalClusterAccessRESTFunc             NewRESTFunc
-	ManagementGlobalClusterRoleTemplateStorage = builders.NewApiResourceWithStorage( // Resource status endpoint
-		InternalGlobalClusterRoleTemplate,
-		func() runtime.Object { return &GlobalClusterRoleTemplate{} },     // Register versioned resource
-		func() runtime.Object { return &GlobalClusterRoleTemplateList{} }, // Register versioned resource list
-		NewGlobalClusterRoleTemplateREST,
-	)
-	NewGlobalClusterRoleTemplateREST = func(getter generic.RESTOptionsGetter) rest.Storage {
-		return NewGlobalClusterRoleTemplateRESTFunc(Factory)
-	}
-	NewGlobalClusterRoleTemplateRESTFunc   NewRESTFunc
-	ManagementGlobalSpaceConstraintStorage = builders.NewApiResourceWithStorage( // Resource status endpoint
-		InternalGlobalSpaceConstraint,
-		func() runtime.Object { return &GlobalSpaceConstraint{} },     // Register versioned resource
-		func() runtime.Object { return &GlobalSpaceConstraintList{} }, // Register versioned resource list
-		NewGlobalSpaceConstraintREST,
-	)
-	NewGlobalSpaceConstraintREST = func(getter generic.RESTOptionsGetter) rest.Storage {
-		return NewGlobalSpaceConstraintRESTFunc(Factory)
-	}
-	NewGlobalSpaceConstraintRESTFunc NewRESTFunc
-	ManagementKioskStorage           = builders.NewApiResourceWithStorage( // Resource status endpoint
+	NewFeatureRESTFunc     NewRESTFunc
+	ManagementKioskStorage = builders.NewApiResourceWithStorage( // Resource status endpoint
 		InternalKiosk,
 		func() runtime.Object { return &Kiosk{} },     // Register versioned resource
 		func() runtime.Object { return &KioskList{} }, // Register versioned resource list
@@ -245,7 +235,17 @@ var (
 	NewSharedSecretREST = func(getter generic.RESTOptionsGetter) rest.Storage {
 		return NewSharedSecretRESTFunc(Factory)
 	}
-	NewSharedSecretRESTFunc        NewRESTFunc
+	NewSharedSecretRESTFunc          NewRESTFunc
+	ManagementSpaceConstraintStorage = builders.NewApiResourceWithStorage( // Resource status endpoint
+		InternalSpaceConstraint,
+		func() runtime.Object { return &SpaceConstraint{} },     // Register versioned resource
+		func() runtime.Object { return &SpaceConstraintList{} }, // Register versioned resource list
+		NewSpaceConstraintREST,
+	)
+	NewSpaceConstraintREST = func(getter generic.RESTOptionsGetter) rest.Storage {
+		return NewSpaceConstraintRESTFunc(Factory)
+	}
+	NewSpaceConstraintRESTFunc     NewRESTFunc
 	ManagementSpaceTemplateStorage = builders.NewApiResourceWithStorage( // Resource status endpoint
 		InternalSpaceTemplate,
 		func() runtime.Object { return &SpaceTemplate{} },     // Register versioned resource
@@ -342,14 +342,6 @@ var (
 		func() runtime.Object { return &Cluster{} },
 		func() runtime.Object { return &ClusterList{} },
 	)
-	InternalClusterAccessREST = builders.NewInternalSubresource(
-		"clusters", "ClusterAccess", "access",
-		func() runtime.Object { return &ClusterAccess{} },
-	)
-	NewClusterAccessREST = func(getter generic.RESTOptionsGetter) rest.Storage {
-		return NewClusterAccessRESTFunc(Factory)
-	}
-	NewClusterAccessRESTFunc  NewRESTFunc
 	InternalClusterChartsREST = builders.NewInternalSubresource(
 		"clusters", "ClusterCharts", "charts",
 		func() runtime.Object { return &ClusterCharts{} },
@@ -365,8 +357,16 @@ var (
 	NewClusterDomainREST = func(getter generic.RESTOptionsGetter) rest.Storage {
 		return NewClusterDomainRESTFunc(Factory)
 	}
-	NewClusterDomainRESTFunc   NewRESTFunc
-	InternalClusterMembersREST = builders.NewInternalSubresource(
+	NewClusterDomainRESTFunc        NewRESTFunc
+	InternalClusterMemberAccessREST = builders.NewInternalSubresource(
+		"clusters", "ClusterMemberAccess", "memberaccess",
+		func() runtime.Object { return &ClusterMemberAccess{} },
+	)
+	NewClusterMemberAccessREST = func(getter generic.RESTOptionsGetter) rest.Storage {
+		return NewClusterMemberAccessRESTFunc(Factory)
+	}
+	NewClusterMemberAccessRESTFunc NewRESTFunc
+	InternalClusterMembersREST     = builders.NewInternalSubresource(
 		"clusters", "ClusterMembers", "members",
 		func() runtime.Object { return &ClusterMembers{} },
 	)
@@ -390,7 +390,19 @@ var (
 		return NewClusterVirtualClusterDefaultsRESTFunc(Factory)
 	}
 	NewClusterVirtualClusterDefaultsRESTFunc NewRESTFunc
-	InternalClusterAccountTemplate           = builders.NewInternalResource(
+	InternalClusterAccess                    = builders.NewInternalResource(
+		"clusteraccesses",
+		"ClusterAccess",
+		func() runtime.Object { return &ClusterAccess{} },
+		func() runtime.Object { return &ClusterAccessList{} },
+	)
+	InternalClusterAccessStatus = builders.NewInternalResourceStatus(
+		"clusteraccesses",
+		"ClusterAccessStatus",
+		func() runtime.Object { return &ClusterAccess{} },
+		func() runtime.Object { return &ClusterAccessList{} },
+	)
+	InternalClusterAccountTemplate = builders.NewInternalResource(
 		"clusteraccounttemplates",
 		"ClusterAccountTemplate",
 		func() runtime.Object { return &ClusterAccountTemplate{} },
@@ -413,6 +425,18 @@ var (
 		"ClusterConnectStatus",
 		func() runtime.Object { return &ClusterConnect{} },
 		func() runtime.Object { return &ClusterConnectList{} },
+	)
+	InternalClusterRoleTemplate = builders.NewInternalResource(
+		"clusterroletemplates",
+		"ClusterRoleTemplate",
+		func() runtime.Object { return &ClusterRoleTemplate{} },
+		func() runtime.Object { return &ClusterRoleTemplateList{} },
+	)
+	InternalClusterRoleTemplateStatus = builders.NewInternalResourceStatus(
+		"clusterroletemplates",
+		"ClusterRoleTemplateStatus",
+		func() runtime.Object { return &ClusterRoleTemplate{} },
+		func() runtime.Object { return &ClusterRoleTemplateList{} },
 	)
 	InternalConfig = builders.NewInternalResource(
 		"configs",
@@ -461,42 +485,6 @@ var (
 		"FeatureStatus",
 		func() runtime.Object { return &Feature{} },
 		func() runtime.Object { return &FeatureList{} },
-	)
-	InternalGlobalClusterAccess = builders.NewInternalResource(
-		"globalclusteraccesses",
-		"GlobalClusterAccess",
-		func() runtime.Object { return &GlobalClusterAccess{} },
-		func() runtime.Object { return &GlobalClusterAccessList{} },
-	)
-	InternalGlobalClusterAccessStatus = builders.NewInternalResourceStatus(
-		"globalclusteraccesses",
-		"GlobalClusterAccessStatus",
-		func() runtime.Object { return &GlobalClusterAccess{} },
-		func() runtime.Object { return &GlobalClusterAccessList{} },
-	)
-	InternalGlobalClusterRoleTemplate = builders.NewInternalResource(
-		"globalclusterroletemplates",
-		"GlobalClusterRoleTemplate",
-		func() runtime.Object { return &GlobalClusterRoleTemplate{} },
-		func() runtime.Object { return &GlobalClusterRoleTemplateList{} },
-	)
-	InternalGlobalClusterRoleTemplateStatus = builders.NewInternalResourceStatus(
-		"globalclusterroletemplates",
-		"GlobalClusterRoleTemplateStatus",
-		func() runtime.Object { return &GlobalClusterRoleTemplate{} },
-		func() runtime.Object { return &GlobalClusterRoleTemplateList{} },
-	)
-	InternalGlobalSpaceConstraint = builders.NewInternalResource(
-		"globalspaceconstraints",
-		"GlobalSpaceConstraint",
-		func() runtime.Object { return &GlobalSpaceConstraint{} },
-		func() runtime.Object { return &GlobalSpaceConstraintList{} },
-	)
-	InternalGlobalSpaceConstraintStatus = builders.NewInternalResourceStatus(
-		"globalspaceconstraints",
-		"GlobalSpaceConstraintStatus",
-		func() runtime.Object { return &GlobalSpaceConstraint{} },
-		func() runtime.Object { return &GlobalSpaceConstraintList{} },
 	)
 	InternalKiosk = builders.NewInternalResource(
 		"kiosk",
@@ -617,6 +605,18 @@ var (
 		"SharedSecretStatus",
 		func() runtime.Object { return &SharedSecret{} },
 		func() runtime.Object { return &SharedSecretList{} },
+	)
+	InternalSpaceConstraint = builders.NewInternalResource(
+		"spaceconstraints",
+		"SpaceConstraint",
+		func() runtime.Object { return &SpaceConstraint{} },
+		func() runtime.Object { return &SpaceConstraintList{} },
+	)
+	InternalSpaceConstraintStatus = builders.NewInternalResourceStatus(
+		"spaceconstraints",
+		"SpaceConstraintStatus",
+		func() runtime.Object { return &SpaceConstraint{} },
+		func() runtime.Object { return &SpaceConstraintList{} },
 	)
 	InternalSpaceTemplate = builders.NewInternalResource(
 		"spacetemplates",
@@ -746,16 +746,20 @@ var (
 		InternalAppStatus,
 		InternalCluster,
 		InternalClusterStatus,
-		InternalClusterAccessREST,
 		InternalClusterChartsREST,
 		InternalClusterDomainREST,
+		InternalClusterMemberAccessREST,
 		InternalClusterMembersREST,
 		InternalClusterResetREST,
 		InternalClusterVirtualClusterDefaultsREST,
+		InternalClusterAccess,
+		InternalClusterAccessStatus,
 		InternalClusterAccountTemplate,
 		InternalClusterAccountTemplateStatus,
 		InternalClusterConnect,
 		InternalClusterConnectStatus,
+		InternalClusterRoleTemplate,
+		InternalClusterRoleTemplateStatus,
 		InternalConfig,
 		InternalConfigStatus,
 		InternalDirectClusterEndpointToken,
@@ -764,12 +768,6 @@ var (
 		InternalEventStatus,
 		InternalFeature,
 		InternalFeatureStatus,
-		InternalGlobalClusterAccess,
-		InternalGlobalClusterAccessStatus,
-		InternalGlobalClusterRoleTemplate,
-		InternalGlobalClusterRoleTemplateStatus,
-		InternalGlobalSpaceConstraint,
-		InternalGlobalSpaceConstraintStatus,
 		InternalKiosk,
 		InternalKioskStatus,
 		InternalLicense,
@@ -790,6 +788,8 @@ var (
 		InternalSelfSubjectAccessReviewStatus,
 		InternalSharedSecret,
 		InternalSharedSecretStatus,
+		InternalSpaceConstraint,
+		InternalSpaceConstraintStatus,
 		InternalSpaceTemplate,
 		InternalSpaceTemplateStatus,
 		InternalSubjectAccessReview,
@@ -1017,13 +1017,27 @@ type Cluster struct {
 	Status ClusterStatus
 }
 
+// +genclient
+// +genclient:nonNamespaced
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
 
 type ClusterAccess struct {
 	metav1.TypeMeta
 	metav1.ObjectMeta
-	Teams []ClusterMember
-	Users []ClusterMember
+	Spec   ClusterAccessSpec
+	Status ClusterAccessStatus
+}
+
+type ClusterAccessSpec struct {
+	storagev1.ClusterAccessSpec
+}
+
+type ClusterAccessStatus struct {
+	storagev1.ClusterAccessStatus
+	Clusters        []*clusterv1.EntityInfo
+	Users           []*clusterv1.UserOrTeam
+	Teams           []*clusterv1.EntityInfo
+	SpaceConstraint *clusterv1.EntityInfo
 }
 
 // +genclient
@@ -1097,6 +1111,15 @@ type ClusterMember struct {
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
 
+type ClusterMemberAccess struct {
+	metav1.TypeMeta
+	metav1.ObjectMeta
+	Teams []ClusterMember
+	Users []ClusterMember
+}
+
+// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+
 type ClusterMembers struct {
 	metav1.TypeMeta
 	metav1.ObjectMeta
@@ -1111,6 +1134,26 @@ type ClusterReset struct {
 	metav1.ObjectMeta
 	Agent bool
 	RBAC  bool
+}
+
+// +genclient
+// +genclient:nonNamespaced
+// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+
+type ClusterRoleTemplate struct {
+	metav1.TypeMeta
+	metav1.ObjectMeta
+	Spec   ClusterRoleTemplateSpec
+	Status ClusterRoleTemplateStatus
+}
+
+type ClusterRoleTemplateSpec struct {
+	storagev1.ClusterRoleTemplateSpec
+}
+
+type ClusterRoleTemplateStatus struct {
+	storagev1.ClusterRoleTemplateStatus
+	Clusters []*clusterv1.EntityInfo
 }
 
 type ClusterSpec struct {
@@ -1233,70 +1276,6 @@ type FeatureStatus struct {
 	Enabled bool
 }
 
-// +genclient
-// +genclient:nonNamespaced
-// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
-
-type GlobalClusterAccess struct {
-	metav1.TypeMeta
-	metav1.ObjectMeta
-	Spec   GlobalClusterAccessSpec
-	Status GlobalClusterAccessStatus
-}
-
-type GlobalClusterAccessSpec struct {
-	storagev1.GlobalClusterAccessSpec
-}
-
-type GlobalClusterAccessStatus struct {
-	storagev1.GlobalClusterAccessStatus
-	Clusters        []*clusterv1.EntityInfo
-	Users           []*clusterv1.UserOrTeam
-	Teams           []*clusterv1.EntityInfo
-	SpaceConstraint *clusterv1.EntityInfo
-}
-
-// +genclient
-// +genclient:nonNamespaced
-// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
-
-type GlobalClusterRoleTemplate struct {
-	metav1.TypeMeta
-	metav1.ObjectMeta
-	Spec   GlobalClusterRoleTemplateSpec
-	Status GlobalClusterRoleTemplateStatus
-}
-
-type GlobalClusterRoleTemplateSpec struct {
-	storagev1.GlobalClusterRoleTemplateSpec
-}
-
-type GlobalClusterRoleTemplateStatus struct {
-	storagev1.GlobalClusterRoleTemplateStatus
-	Clusters []*clusterv1.EntityInfo
-}
-
-// +genclient
-// +genclient:nonNamespaced
-// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
-
-type GlobalSpaceConstraint struct {
-	metav1.TypeMeta
-	metav1.ObjectMeta
-	Spec   GlobalSpaceConstraintSpec
-	Status GlobalSpaceConstraintStatus
-}
-
-type GlobalSpaceConstraintSpec struct {
-	storagev1.GlobalSpaceConstraintSpec
-}
-
-type GlobalSpaceConstraintStatus struct {
-	storagev1.GlobalSpaceConstraintStatus
-	ClusterRole *clusterv1.EntityInfo
-	Clusters    []*clusterv1.EntityInfo
-}
-
 type GroupResources struct {
 	Group         string
 	Resources     []string
@@ -1325,16 +1304,16 @@ type KioskSpec struct {
 	SleepModeConfig       clusterv1.SleepModeConfig
 	Space                 clusterv1.Space
 	VirtualCluster        clusterv1.VirtualCluster
-	ClusterAccess         clusterv1.ClusterAccess
+	LocalClusterAccess    clusterv1.LocalClusterAccess
 	ClusterQuota          clusterv1.ClusterQuota
 	ChartInfo             clusterv1.ChartInfo
-	SpaceConstraint       agentstoragev1.SpaceConstraint
-	StorageClusterAccess  agentstoragev1.ClusterAccess
-	ClusterRoleTemplate   agentstoragev1.ClusterRoleTemplate
+	SpaceConstraint       agentstoragev1.LocalSpaceConstraint
+	StorageClusterAccess  agentstoragev1.LocalClusterAccess
+	ClusterRoleTemplate   agentstoragev1.LocalClusterRoleTemplate
 	StorageClusterQuota   agentstoragev1.ClusterQuota
 	StorageVirtualCluster agentstoragev1.VirtualCluster
-	ClusterUser           agentstoragev1.ClusterUser
-	ClusterTeam           agentstoragev1.ClusterTeam
+	LocalUser             agentstoragev1.LocalUser
+	LocalTeam             agentstoragev1.LocalTeam
 }
 
 type KioskStatus struct {
@@ -1586,6 +1565,27 @@ type SharedSecretSpec struct {
 
 type SharedSecretStatus struct {
 	storagev1.SharedSecretStatus
+}
+
+// +genclient
+// +genclient:nonNamespaced
+// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+
+type SpaceConstraint struct {
+	metav1.TypeMeta
+	metav1.ObjectMeta
+	Spec   SpaceConstraintSpec
+	Status SpaceConstraintStatus
+}
+
+type SpaceConstraintSpec struct {
+	storagev1.SpaceConstraintSpec
+}
+
+type SpaceConstraintStatus struct {
+	storagev1.SpaceConstraintStatus
+	ClusterRole *clusterv1.EntityInfo
+	Clusters    []*clusterv1.EntityInfo
 }
 
 // +genclient
@@ -2041,14 +2041,6 @@ type ClusterList struct {
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
 
-type ClusterAccessList struct {
-	metav1.TypeMeta
-	metav1.ListMeta
-	Items []ClusterAccess
-}
-
-// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
-
 type ClusterChartsList struct {
 	metav1.TypeMeta
 	metav1.ListMeta
@@ -2061,6 +2053,14 @@ type ClusterDomainList struct {
 	metav1.TypeMeta
 	metav1.ListMeta
 	Items []ClusterDomain
+}
+
+// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+
+type ClusterMemberAccessList struct {
+	metav1.TypeMeta
+	metav1.ListMeta
+	Items []ClusterMemberAccess
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -2181,6 +2181,126 @@ func (s *storageCluster) UpdateCluster(ctx context.Context, object *Cluster) (*C
 }
 
 func (s *storageCluster) DeleteCluster(ctx context.Context, id string) (bool, error) {
+	st := s.GetStandardStorage()
+	_, sync, err := st.Delete(ctx, id, nil, &metav1.DeleteOptions{})
+	return sync, err
+}
+
+//
+// ClusterAccess Functions and Structs
+//
+// +k8s:deepcopy-gen=false
+type ClusterAccessStrategy struct {
+	builders.DefaultStorageStrategy
+}
+
+// +k8s:deepcopy-gen=false
+type ClusterAccessStatusStrategy struct {
+	builders.DefaultStatusStorageStrategy
+}
+
+// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+
+type ClusterAccessList struct {
+	metav1.TypeMeta
+	metav1.ListMeta
+	Items []ClusterAccess
+}
+
+func (ClusterAccess) NewStatus() interface{} {
+	return ClusterAccessStatus{}
+}
+
+func (pc *ClusterAccess) GetStatus() interface{} {
+	return pc.Status
+}
+
+func (pc *ClusterAccess) SetStatus(s interface{}) {
+	pc.Status = s.(ClusterAccessStatus)
+}
+
+func (pc *ClusterAccess) GetSpec() interface{} {
+	return pc.Spec
+}
+
+func (pc *ClusterAccess) SetSpec(s interface{}) {
+	pc.Spec = s.(ClusterAccessSpec)
+}
+
+func (pc *ClusterAccess) GetObjectMeta() *metav1.ObjectMeta {
+	return &pc.ObjectMeta
+}
+
+func (pc *ClusterAccess) SetGeneration(generation int64) {
+	pc.ObjectMeta.Generation = generation
+}
+
+func (pc ClusterAccess) GetGeneration() int64 {
+	return pc.ObjectMeta.Generation
+}
+
+// Registry is an interface for things that know how to store ClusterAccess.
+// +k8s:deepcopy-gen=false
+type ClusterAccessRegistry interface {
+	ListClusterAccesss(ctx context.Context, options *internalversion.ListOptions) (*ClusterAccessList, error)
+	GetClusterAccess(ctx context.Context, id string, options *metav1.GetOptions) (*ClusterAccess, error)
+	CreateClusterAccess(ctx context.Context, id *ClusterAccess) (*ClusterAccess, error)
+	UpdateClusterAccess(ctx context.Context, id *ClusterAccess) (*ClusterAccess, error)
+	DeleteClusterAccess(ctx context.Context, id string) (bool, error)
+}
+
+// NewRegistry returns a new Registry interface for the given Storage. Any mismatched types will panic.
+func NewClusterAccessRegistry(sp builders.StandardStorageProvider) ClusterAccessRegistry {
+	return &storageClusterAccess{sp}
+}
+
+// Implement Registry
+// storage puts strong typing around storage calls
+// +k8s:deepcopy-gen=false
+type storageClusterAccess struct {
+	builders.StandardStorageProvider
+}
+
+func (s *storageClusterAccess) ListClusterAccesss(ctx context.Context, options *internalversion.ListOptions) (*ClusterAccessList, error) {
+	if options != nil && options.FieldSelector != nil && !options.FieldSelector.Empty() {
+		return nil, fmt.Errorf("field selector not supported yet")
+	}
+	st := s.GetStandardStorage()
+	obj, err := st.List(ctx, options)
+	if err != nil {
+		return nil, err
+	}
+	return obj.(*ClusterAccessList), err
+}
+
+func (s *storageClusterAccess) GetClusterAccess(ctx context.Context, id string, options *metav1.GetOptions) (*ClusterAccess, error) {
+	st := s.GetStandardStorage()
+	obj, err := st.Get(ctx, id, options)
+	if err != nil {
+		return nil, err
+	}
+	return obj.(*ClusterAccess), nil
+}
+
+func (s *storageClusterAccess) CreateClusterAccess(ctx context.Context, object *ClusterAccess) (*ClusterAccess, error) {
+	st := s.GetStandardStorage()
+	obj, err := st.Create(ctx, object, nil, &metav1.CreateOptions{})
+	if err != nil {
+		return nil, err
+	}
+	return obj.(*ClusterAccess), nil
+}
+
+func (s *storageClusterAccess) UpdateClusterAccess(ctx context.Context, object *ClusterAccess) (*ClusterAccess, error) {
+	st := s.GetStandardStorage()
+	obj, _, err := st.Update(ctx, object.Name, rest.DefaultUpdatedObjectInfo(object), nil, nil, false, &metav1.UpdateOptions{})
+	if err != nil {
+		return nil, err
+	}
+	return obj.(*ClusterAccess), nil
+}
+
+func (s *storageClusterAccess) DeleteClusterAccess(ctx context.Context, id string) (bool, error) {
 	st := s.GetStandardStorage()
 	_, sync, err := st.Delete(ctx, id, nil, &metav1.DeleteOptions{})
 	return sync, err
@@ -2421,6 +2541,126 @@ func (s *storageClusterConnect) UpdateClusterConnect(ctx context.Context, object
 }
 
 func (s *storageClusterConnect) DeleteClusterConnect(ctx context.Context, id string) (bool, error) {
+	st := s.GetStandardStorage()
+	_, sync, err := st.Delete(ctx, id, nil, &metav1.DeleteOptions{})
+	return sync, err
+}
+
+//
+// ClusterRoleTemplate Functions and Structs
+//
+// +k8s:deepcopy-gen=false
+type ClusterRoleTemplateStrategy struct {
+	builders.DefaultStorageStrategy
+}
+
+// +k8s:deepcopy-gen=false
+type ClusterRoleTemplateStatusStrategy struct {
+	builders.DefaultStatusStorageStrategy
+}
+
+// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+
+type ClusterRoleTemplateList struct {
+	metav1.TypeMeta
+	metav1.ListMeta
+	Items []ClusterRoleTemplate
+}
+
+func (ClusterRoleTemplate) NewStatus() interface{} {
+	return ClusterRoleTemplateStatus{}
+}
+
+func (pc *ClusterRoleTemplate) GetStatus() interface{} {
+	return pc.Status
+}
+
+func (pc *ClusterRoleTemplate) SetStatus(s interface{}) {
+	pc.Status = s.(ClusterRoleTemplateStatus)
+}
+
+func (pc *ClusterRoleTemplate) GetSpec() interface{} {
+	return pc.Spec
+}
+
+func (pc *ClusterRoleTemplate) SetSpec(s interface{}) {
+	pc.Spec = s.(ClusterRoleTemplateSpec)
+}
+
+func (pc *ClusterRoleTemplate) GetObjectMeta() *metav1.ObjectMeta {
+	return &pc.ObjectMeta
+}
+
+func (pc *ClusterRoleTemplate) SetGeneration(generation int64) {
+	pc.ObjectMeta.Generation = generation
+}
+
+func (pc ClusterRoleTemplate) GetGeneration() int64 {
+	return pc.ObjectMeta.Generation
+}
+
+// Registry is an interface for things that know how to store ClusterRoleTemplate.
+// +k8s:deepcopy-gen=false
+type ClusterRoleTemplateRegistry interface {
+	ListClusterRoleTemplates(ctx context.Context, options *internalversion.ListOptions) (*ClusterRoleTemplateList, error)
+	GetClusterRoleTemplate(ctx context.Context, id string, options *metav1.GetOptions) (*ClusterRoleTemplate, error)
+	CreateClusterRoleTemplate(ctx context.Context, id *ClusterRoleTemplate) (*ClusterRoleTemplate, error)
+	UpdateClusterRoleTemplate(ctx context.Context, id *ClusterRoleTemplate) (*ClusterRoleTemplate, error)
+	DeleteClusterRoleTemplate(ctx context.Context, id string) (bool, error)
+}
+
+// NewRegistry returns a new Registry interface for the given Storage. Any mismatched types will panic.
+func NewClusterRoleTemplateRegistry(sp builders.StandardStorageProvider) ClusterRoleTemplateRegistry {
+	return &storageClusterRoleTemplate{sp}
+}
+
+// Implement Registry
+// storage puts strong typing around storage calls
+// +k8s:deepcopy-gen=false
+type storageClusterRoleTemplate struct {
+	builders.StandardStorageProvider
+}
+
+func (s *storageClusterRoleTemplate) ListClusterRoleTemplates(ctx context.Context, options *internalversion.ListOptions) (*ClusterRoleTemplateList, error) {
+	if options != nil && options.FieldSelector != nil && !options.FieldSelector.Empty() {
+		return nil, fmt.Errorf("field selector not supported yet")
+	}
+	st := s.GetStandardStorage()
+	obj, err := st.List(ctx, options)
+	if err != nil {
+		return nil, err
+	}
+	return obj.(*ClusterRoleTemplateList), err
+}
+
+func (s *storageClusterRoleTemplate) GetClusterRoleTemplate(ctx context.Context, id string, options *metav1.GetOptions) (*ClusterRoleTemplate, error) {
+	st := s.GetStandardStorage()
+	obj, err := st.Get(ctx, id, options)
+	if err != nil {
+		return nil, err
+	}
+	return obj.(*ClusterRoleTemplate), nil
+}
+
+func (s *storageClusterRoleTemplate) CreateClusterRoleTemplate(ctx context.Context, object *ClusterRoleTemplate) (*ClusterRoleTemplate, error) {
+	st := s.GetStandardStorage()
+	obj, err := st.Create(ctx, object, nil, &metav1.CreateOptions{})
+	if err != nil {
+		return nil, err
+	}
+	return obj.(*ClusterRoleTemplate), nil
+}
+
+func (s *storageClusterRoleTemplate) UpdateClusterRoleTemplate(ctx context.Context, object *ClusterRoleTemplate) (*ClusterRoleTemplate, error) {
+	st := s.GetStandardStorage()
+	obj, _, err := st.Update(ctx, object.Name, rest.DefaultUpdatedObjectInfo(object), nil, nil, false, &metav1.UpdateOptions{})
+	if err != nil {
+		return nil, err
+	}
+	return obj.(*ClusterRoleTemplate), nil
+}
+
+func (s *storageClusterRoleTemplate) DeleteClusterRoleTemplate(ctx context.Context, id string) (bool, error) {
 	st := s.GetStandardStorage()
 	_, sync, err := st.Delete(ctx, id, nil, &metav1.DeleteOptions{})
 	return sync, err
@@ -2901,366 +3141,6 @@ func (s *storageFeature) UpdateFeature(ctx context.Context, object *Feature) (*F
 }
 
 func (s *storageFeature) DeleteFeature(ctx context.Context, id string) (bool, error) {
-	st := s.GetStandardStorage()
-	_, sync, err := st.Delete(ctx, id, nil, &metav1.DeleteOptions{})
-	return sync, err
-}
-
-//
-// GlobalClusterAccess Functions and Structs
-//
-// +k8s:deepcopy-gen=false
-type GlobalClusterAccessStrategy struct {
-	builders.DefaultStorageStrategy
-}
-
-// +k8s:deepcopy-gen=false
-type GlobalClusterAccessStatusStrategy struct {
-	builders.DefaultStatusStorageStrategy
-}
-
-// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
-
-type GlobalClusterAccessList struct {
-	metav1.TypeMeta
-	metav1.ListMeta
-	Items []GlobalClusterAccess
-}
-
-func (GlobalClusterAccess) NewStatus() interface{} {
-	return GlobalClusterAccessStatus{}
-}
-
-func (pc *GlobalClusterAccess) GetStatus() interface{} {
-	return pc.Status
-}
-
-func (pc *GlobalClusterAccess) SetStatus(s interface{}) {
-	pc.Status = s.(GlobalClusterAccessStatus)
-}
-
-func (pc *GlobalClusterAccess) GetSpec() interface{} {
-	return pc.Spec
-}
-
-func (pc *GlobalClusterAccess) SetSpec(s interface{}) {
-	pc.Spec = s.(GlobalClusterAccessSpec)
-}
-
-func (pc *GlobalClusterAccess) GetObjectMeta() *metav1.ObjectMeta {
-	return &pc.ObjectMeta
-}
-
-func (pc *GlobalClusterAccess) SetGeneration(generation int64) {
-	pc.ObjectMeta.Generation = generation
-}
-
-func (pc GlobalClusterAccess) GetGeneration() int64 {
-	return pc.ObjectMeta.Generation
-}
-
-// Registry is an interface for things that know how to store GlobalClusterAccess.
-// +k8s:deepcopy-gen=false
-type GlobalClusterAccessRegistry interface {
-	ListGlobalClusterAccesss(ctx context.Context, options *internalversion.ListOptions) (*GlobalClusterAccessList, error)
-	GetGlobalClusterAccess(ctx context.Context, id string, options *metav1.GetOptions) (*GlobalClusterAccess, error)
-	CreateGlobalClusterAccess(ctx context.Context, id *GlobalClusterAccess) (*GlobalClusterAccess, error)
-	UpdateGlobalClusterAccess(ctx context.Context, id *GlobalClusterAccess) (*GlobalClusterAccess, error)
-	DeleteGlobalClusterAccess(ctx context.Context, id string) (bool, error)
-}
-
-// NewRegistry returns a new Registry interface for the given Storage. Any mismatched types will panic.
-func NewGlobalClusterAccessRegistry(sp builders.StandardStorageProvider) GlobalClusterAccessRegistry {
-	return &storageGlobalClusterAccess{sp}
-}
-
-// Implement Registry
-// storage puts strong typing around storage calls
-// +k8s:deepcopy-gen=false
-type storageGlobalClusterAccess struct {
-	builders.StandardStorageProvider
-}
-
-func (s *storageGlobalClusterAccess) ListGlobalClusterAccesss(ctx context.Context, options *internalversion.ListOptions) (*GlobalClusterAccessList, error) {
-	if options != nil && options.FieldSelector != nil && !options.FieldSelector.Empty() {
-		return nil, fmt.Errorf("field selector not supported yet")
-	}
-	st := s.GetStandardStorage()
-	obj, err := st.List(ctx, options)
-	if err != nil {
-		return nil, err
-	}
-	return obj.(*GlobalClusterAccessList), err
-}
-
-func (s *storageGlobalClusterAccess) GetGlobalClusterAccess(ctx context.Context, id string, options *metav1.GetOptions) (*GlobalClusterAccess, error) {
-	st := s.GetStandardStorage()
-	obj, err := st.Get(ctx, id, options)
-	if err != nil {
-		return nil, err
-	}
-	return obj.(*GlobalClusterAccess), nil
-}
-
-func (s *storageGlobalClusterAccess) CreateGlobalClusterAccess(ctx context.Context, object *GlobalClusterAccess) (*GlobalClusterAccess, error) {
-	st := s.GetStandardStorage()
-	obj, err := st.Create(ctx, object, nil, &metav1.CreateOptions{})
-	if err != nil {
-		return nil, err
-	}
-	return obj.(*GlobalClusterAccess), nil
-}
-
-func (s *storageGlobalClusterAccess) UpdateGlobalClusterAccess(ctx context.Context, object *GlobalClusterAccess) (*GlobalClusterAccess, error) {
-	st := s.GetStandardStorage()
-	obj, _, err := st.Update(ctx, object.Name, rest.DefaultUpdatedObjectInfo(object), nil, nil, false, &metav1.UpdateOptions{})
-	if err != nil {
-		return nil, err
-	}
-	return obj.(*GlobalClusterAccess), nil
-}
-
-func (s *storageGlobalClusterAccess) DeleteGlobalClusterAccess(ctx context.Context, id string) (bool, error) {
-	st := s.GetStandardStorage()
-	_, sync, err := st.Delete(ctx, id, nil, &metav1.DeleteOptions{})
-	return sync, err
-}
-
-//
-// GlobalClusterRoleTemplate Functions and Structs
-//
-// +k8s:deepcopy-gen=false
-type GlobalClusterRoleTemplateStrategy struct {
-	builders.DefaultStorageStrategy
-}
-
-// +k8s:deepcopy-gen=false
-type GlobalClusterRoleTemplateStatusStrategy struct {
-	builders.DefaultStatusStorageStrategy
-}
-
-// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
-
-type GlobalClusterRoleTemplateList struct {
-	metav1.TypeMeta
-	metav1.ListMeta
-	Items []GlobalClusterRoleTemplate
-}
-
-func (GlobalClusterRoleTemplate) NewStatus() interface{} {
-	return GlobalClusterRoleTemplateStatus{}
-}
-
-func (pc *GlobalClusterRoleTemplate) GetStatus() interface{} {
-	return pc.Status
-}
-
-func (pc *GlobalClusterRoleTemplate) SetStatus(s interface{}) {
-	pc.Status = s.(GlobalClusterRoleTemplateStatus)
-}
-
-func (pc *GlobalClusterRoleTemplate) GetSpec() interface{} {
-	return pc.Spec
-}
-
-func (pc *GlobalClusterRoleTemplate) SetSpec(s interface{}) {
-	pc.Spec = s.(GlobalClusterRoleTemplateSpec)
-}
-
-func (pc *GlobalClusterRoleTemplate) GetObjectMeta() *metav1.ObjectMeta {
-	return &pc.ObjectMeta
-}
-
-func (pc *GlobalClusterRoleTemplate) SetGeneration(generation int64) {
-	pc.ObjectMeta.Generation = generation
-}
-
-func (pc GlobalClusterRoleTemplate) GetGeneration() int64 {
-	return pc.ObjectMeta.Generation
-}
-
-// Registry is an interface for things that know how to store GlobalClusterRoleTemplate.
-// +k8s:deepcopy-gen=false
-type GlobalClusterRoleTemplateRegistry interface {
-	ListGlobalClusterRoleTemplates(ctx context.Context, options *internalversion.ListOptions) (*GlobalClusterRoleTemplateList, error)
-	GetGlobalClusterRoleTemplate(ctx context.Context, id string, options *metav1.GetOptions) (*GlobalClusterRoleTemplate, error)
-	CreateGlobalClusterRoleTemplate(ctx context.Context, id *GlobalClusterRoleTemplate) (*GlobalClusterRoleTemplate, error)
-	UpdateGlobalClusterRoleTemplate(ctx context.Context, id *GlobalClusterRoleTemplate) (*GlobalClusterRoleTemplate, error)
-	DeleteGlobalClusterRoleTemplate(ctx context.Context, id string) (bool, error)
-}
-
-// NewRegistry returns a new Registry interface for the given Storage. Any mismatched types will panic.
-func NewGlobalClusterRoleTemplateRegistry(sp builders.StandardStorageProvider) GlobalClusterRoleTemplateRegistry {
-	return &storageGlobalClusterRoleTemplate{sp}
-}
-
-// Implement Registry
-// storage puts strong typing around storage calls
-// +k8s:deepcopy-gen=false
-type storageGlobalClusterRoleTemplate struct {
-	builders.StandardStorageProvider
-}
-
-func (s *storageGlobalClusterRoleTemplate) ListGlobalClusterRoleTemplates(ctx context.Context, options *internalversion.ListOptions) (*GlobalClusterRoleTemplateList, error) {
-	if options != nil && options.FieldSelector != nil && !options.FieldSelector.Empty() {
-		return nil, fmt.Errorf("field selector not supported yet")
-	}
-	st := s.GetStandardStorage()
-	obj, err := st.List(ctx, options)
-	if err != nil {
-		return nil, err
-	}
-	return obj.(*GlobalClusterRoleTemplateList), err
-}
-
-func (s *storageGlobalClusterRoleTemplate) GetGlobalClusterRoleTemplate(ctx context.Context, id string, options *metav1.GetOptions) (*GlobalClusterRoleTemplate, error) {
-	st := s.GetStandardStorage()
-	obj, err := st.Get(ctx, id, options)
-	if err != nil {
-		return nil, err
-	}
-	return obj.(*GlobalClusterRoleTemplate), nil
-}
-
-func (s *storageGlobalClusterRoleTemplate) CreateGlobalClusterRoleTemplate(ctx context.Context, object *GlobalClusterRoleTemplate) (*GlobalClusterRoleTemplate, error) {
-	st := s.GetStandardStorage()
-	obj, err := st.Create(ctx, object, nil, &metav1.CreateOptions{})
-	if err != nil {
-		return nil, err
-	}
-	return obj.(*GlobalClusterRoleTemplate), nil
-}
-
-func (s *storageGlobalClusterRoleTemplate) UpdateGlobalClusterRoleTemplate(ctx context.Context, object *GlobalClusterRoleTemplate) (*GlobalClusterRoleTemplate, error) {
-	st := s.GetStandardStorage()
-	obj, _, err := st.Update(ctx, object.Name, rest.DefaultUpdatedObjectInfo(object), nil, nil, false, &metav1.UpdateOptions{})
-	if err != nil {
-		return nil, err
-	}
-	return obj.(*GlobalClusterRoleTemplate), nil
-}
-
-func (s *storageGlobalClusterRoleTemplate) DeleteGlobalClusterRoleTemplate(ctx context.Context, id string) (bool, error) {
-	st := s.GetStandardStorage()
-	_, sync, err := st.Delete(ctx, id, nil, &metav1.DeleteOptions{})
-	return sync, err
-}
-
-//
-// GlobalSpaceConstraint Functions and Structs
-//
-// +k8s:deepcopy-gen=false
-type GlobalSpaceConstraintStrategy struct {
-	builders.DefaultStorageStrategy
-}
-
-// +k8s:deepcopy-gen=false
-type GlobalSpaceConstraintStatusStrategy struct {
-	builders.DefaultStatusStorageStrategy
-}
-
-// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
-
-type GlobalSpaceConstraintList struct {
-	metav1.TypeMeta
-	metav1.ListMeta
-	Items []GlobalSpaceConstraint
-}
-
-func (GlobalSpaceConstraint) NewStatus() interface{} {
-	return GlobalSpaceConstraintStatus{}
-}
-
-func (pc *GlobalSpaceConstraint) GetStatus() interface{} {
-	return pc.Status
-}
-
-func (pc *GlobalSpaceConstraint) SetStatus(s interface{}) {
-	pc.Status = s.(GlobalSpaceConstraintStatus)
-}
-
-func (pc *GlobalSpaceConstraint) GetSpec() interface{} {
-	return pc.Spec
-}
-
-func (pc *GlobalSpaceConstraint) SetSpec(s interface{}) {
-	pc.Spec = s.(GlobalSpaceConstraintSpec)
-}
-
-func (pc *GlobalSpaceConstraint) GetObjectMeta() *metav1.ObjectMeta {
-	return &pc.ObjectMeta
-}
-
-func (pc *GlobalSpaceConstraint) SetGeneration(generation int64) {
-	pc.ObjectMeta.Generation = generation
-}
-
-func (pc GlobalSpaceConstraint) GetGeneration() int64 {
-	return pc.ObjectMeta.Generation
-}
-
-// Registry is an interface for things that know how to store GlobalSpaceConstraint.
-// +k8s:deepcopy-gen=false
-type GlobalSpaceConstraintRegistry interface {
-	ListGlobalSpaceConstraints(ctx context.Context, options *internalversion.ListOptions) (*GlobalSpaceConstraintList, error)
-	GetGlobalSpaceConstraint(ctx context.Context, id string, options *metav1.GetOptions) (*GlobalSpaceConstraint, error)
-	CreateGlobalSpaceConstraint(ctx context.Context, id *GlobalSpaceConstraint) (*GlobalSpaceConstraint, error)
-	UpdateGlobalSpaceConstraint(ctx context.Context, id *GlobalSpaceConstraint) (*GlobalSpaceConstraint, error)
-	DeleteGlobalSpaceConstraint(ctx context.Context, id string) (bool, error)
-}
-
-// NewRegistry returns a new Registry interface for the given Storage. Any mismatched types will panic.
-func NewGlobalSpaceConstraintRegistry(sp builders.StandardStorageProvider) GlobalSpaceConstraintRegistry {
-	return &storageGlobalSpaceConstraint{sp}
-}
-
-// Implement Registry
-// storage puts strong typing around storage calls
-// +k8s:deepcopy-gen=false
-type storageGlobalSpaceConstraint struct {
-	builders.StandardStorageProvider
-}
-
-func (s *storageGlobalSpaceConstraint) ListGlobalSpaceConstraints(ctx context.Context, options *internalversion.ListOptions) (*GlobalSpaceConstraintList, error) {
-	if options != nil && options.FieldSelector != nil && !options.FieldSelector.Empty() {
-		return nil, fmt.Errorf("field selector not supported yet")
-	}
-	st := s.GetStandardStorage()
-	obj, err := st.List(ctx, options)
-	if err != nil {
-		return nil, err
-	}
-	return obj.(*GlobalSpaceConstraintList), err
-}
-
-func (s *storageGlobalSpaceConstraint) GetGlobalSpaceConstraint(ctx context.Context, id string, options *metav1.GetOptions) (*GlobalSpaceConstraint, error) {
-	st := s.GetStandardStorage()
-	obj, err := st.Get(ctx, id, options)
-	if err != nil {
-		return nil, err
-	}
-	return obj.(*GlobalSpaceConstraint), nil
-}
-
-func (s *storageGlobalSpaceConstraint) CreateGlobalSpaceConstraint(ctx context.Context, object *GlobalSpaceConstraint) (*GlobalSpaceConstraint, error) {
-	st := s.GetStandardStorage()
-	obj, err := st.Create(ctx, object, nil, &metav1.CreateOptions{})
-	if err != nil {
-		return nil, err
-	}
-	return obj.(*GlobalSpaceConstraint), nil
-}
-
-func (s *storageGlobalSpaceConstraint) UpdateGlobalSpaceConstraint(ctx context.Context, object *GlobalSpaceConstraint) (*GlobalSpaceConstraint, error) {
-	st := s.GetStandardStorage()
-	obj, _, err := st.Update(ctx, object.Name, rest.DefaultUpdatedObjectInfo(object), nil, nil, false, &metav1.UpdateOptions{})
-	if err != nil {
-		return nil, err
-	}
-	return obj.(*GlobalSpaceConstraint), nil
-}
-
-func (s *storageGlobalSpaceConstraint) DeleteGlobalSpaceConstraint(ctx context.Context, id string) (bool, error) {
 	st := s.GetStandardStorage()
 	_, sync, err := st.Delete(ctx, id, nil, &metav1.DeleteOptions{})
 	return sync, err
@@ -4461,6 +4341,126 @@ func (s *storageSharedSecret) UpdateSharedSecret(ctx context.Context, object *Sh
 }
 
 func (s *storageSharedSecret) DeleteSharedSecret(ctx context.Context, id string) (bool, error) {
+	st := s.GetStandardStorage()
+	_, sync, err := st.Delete(ctx, id, nil, &metav1.DeleteOptions{})
+	return sync, err
+}
+
+//
+// SpaceConstraint Functions and Structs
+//
+// +k8s:deepcopy-gen=false
+type SpaceConstraintStrategy struct {
+	builders.DefaultStorageStrategy
+}
+
+// +k8s:deepcopy-gen=false
+type SpaceConstraintStatusStrategy struct {
+	builders.DefaultStatusStorageStrategy
+}
+
+// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+
+type SpaceConstraintList struct {
+	metav1.TypeMeta
+	metav1.ListMeta
+	Items []SpaceConstraint
+}
+
+func (SpaceConstraint) NewStatus() interface{} {
+	return SpaceConstraintStatus{}
+}
+
+func (pc *SpaceConstraint) GetStatus() interface{} {
+	return pc.Status
+}
+
+func (pc *SpaceConstraint) SetStatus(s interface{}) {
+	pc.Status = s.(SpaceConstraintStatus)
+}
+
+func (pc *SpaceConstraint) GetSpec() interface{} {
+	return pc.Spec
+}
+
+func (pc *SpaceConstraint) SetSpec(s interface{}) {
+	pc.Spec = s.(SpaceConstraintSpec)
+}
+
+func (pc *SpaceConstraint) GetObjectMeta() *metav1.ObjectMeta {
+	return &pc.ObjectMeta
+}
+
+func (pc *SpaceConstraint) SetGeneration(generation int64) {
+	pc.ObjectMeta.Generation = generation
+}
+
+func (pc SpaceConstraint) GetGeneration() int64 {
+	return pc.ObjectMeta.Generation
+}
+
+// Registry is an interface for things that know how to store SpaceConstraint.
+// +k8s:deepcopy-gen=false
+type SpaceConstraintRegistry interface {
+	ListSpaceConstraints(ctx context.Context, options *internalversion.ListOptions) (*SpaceConstraintList, error)
+	GetSpaceConstraint(ctx context.Context, id string, options *metav1.GetOptions) (*SpaceConstraint, error)
+	CreateSpaceConstraint(ctx context.Context, id *SpaceConstraint) (*SpaceConstraint, error)
+	UpdateSpaceConstraint(ctx context.Context, id *SpaceConstraint) (*SpaceConstraint, error)
+	DeleteSpaceConstraint(ctx context.Context, id string) (bool, error)
+}
+
+// NewRegistry returns a new Registry interface for the given Storage. Any mismatched types will panic.
+func NewSpaceConstraintRegistry(sp builders.StandardStorageProvider) SpaceConstraintRegistry {
+	return &storageSpaceConstraint{sp}
+}
+
+// Implement Registry
+// storage puts strong typing around storage calls
+// +k8s:deepcopy-gen=false
+type storageSpaceConstraint struct {
+	builders.StandardStorageProvider
+}
+
+func (s *storageSpaceConstraint) ListSpaceConstraints(ctx context.Context, options *internalversion.ListOptions) (*SpaceConstraintList, error) {
+	if options != nil && options.FieldSelector != nil && !options.FieldSelector.Empty() {
+		return nil, fmt.Errorf("field selector not supported yet")
+	}
+	st := s.GetStandardStorage()
+	obj, err := st.List(ctx, options)
+	if err != nil {
+		return nil, err
+	}
+	return obj.(*SpaceConstraintList), err
+}
+
+func (s *storageSpaceConstraint) GetSpaceConstraint(ctx context.Context, id string, options *metav1.GetOptions) (*SpaceConstraint, error) {
+	st := s.GetStandardStorage()
+	obj, err := st.Get(ctx, id, options)
+	if err != nil {
+		return nil, err
+	}
+	return obj.(*SpaceConstraint), nil
+}
+
+func (s *storageSpaceConstraint) CreateSpaceConstraint(ctx context.Context, object *SpaceConstraint) (*SpaceConstraint, error) {
+	st := s.GetStandardStorage()
+	obj, err := st.Create(ctx, object, nil, &metav1.CreateOptions{})
+	if err != nil {
+		return nil, err
+	}
+	return obj.(*SpaceConstraint), nil
+}
+
+func (s *storageSpaceConstraint) UpdateSpaceConstraint(ctx context.Context, object *SpaceConstraint) (*SpaceConstraint, error) {
+	st := s.GetStandardStorage()
+	obj, _, err := st.Update(ctx, object.Name, rest.DefaultUpdatedObjectInfo(object), nil, nil, false, &metav1.UpdateOptions{})
+	if err != nil {
+		return nil, err
+	}
+	return obj.(*SpaceConstraint), nil
+}
+
+func (s *storageSpaceConstraint) DeleteSpaceConstraint(ctx context.Context, id string) (bool, error) {
 	st := s.GetStandardStorage()
 	_, sync, err := st.Delete(ctx, id, nil, &metav1.DeleteOptions{})
 	return sync, err

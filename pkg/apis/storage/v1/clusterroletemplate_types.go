@@ -9,33 +9,33 @@ import (
 // +genclient:nonNamespaced
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
 
-// GlobalClusterRoleTemplate holds the global role template information
+// ClusterRoleTemplate holds the global role template information
 // +k8s:openapi-gen=true
-type GlobalClusterRoleTemplate struct {
+type ClusterRoleTemplate struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
 
-	Spec   GlobalClusterRoleTemplateSpec   `json:"spec,omitempty"`
-	Status GlobalClusterRoleTemplateStatus `json:"status,omitempty"`
+	Spec   ClusterRoleTemplateSpec   `json:"spec,omitempty"`
+	Status ClusterRoleTemplateStatus `json:"status,omitempty"`
 }
 
-func (a *GlobalClusterRoleTemplate) GetOwner() *UserOrTeam {
+func (a *ClusterRoleTemplate) GetOwner() *UserOrTeam {
 	return a.Spec.Owner
 }
 
-func (a *GlobalClusterRoleTemplate) SetOwner(userOrTeam *UserOrTeam) {
+func (a *ClusterRoleTemplate) SetOwner(userOrTeam *UserOrTeam) {
 	a.Spec.Owner = userOrTeam
 }
 
-func (a *GlobalClusterRoleTemplate) GetAccess() []Access {
+func (a *ClusterRoleTemplate) GetAccess() []Access {
 	return a.Spec.Access
 }
 
-func (a *GlobalClusterRoleTemplate) SetAccess(access []Access) {
+func (a *ClusterRoleTemplate) SetAccess(access []Access) {
 	a.Spec.Access = access
 }
 
-type GlobalClusterRoleTemplateSpec struct {
+type ClusterRoleTemplateSpec struct {
 	// DisplayName is the name that should be displayed in the UI
 	// +optional
 	DisplayName string `json:"displayName,omitempty"`
@@ -60,34 +60,34 @@ type GlobalClusterRoleTemplateSpec struct {
 	// +optional
 	Access []Access `json:"access,omitempty"`
 
-	// ClusterRoleTemplate holds the cluster role template
+	// LocalClusterRoleTemplate holds the cluster role template
 	// +omitempty
-	ClusterRoleTemplate ClusterRoleTemplate `json:"clusterRoleTemplate,omitempty"`
+	LocalClusterRoleTemplate LocalClusterRoleTemplate `json:"localClusterRoleTemplate,omitempty"`
 }
 
-type ClusterRoleTemplate struct {
+type LocalClusterRoleTemplate struct {
 	// Metadata is the metadata of the cluster role template object
 	// +optional
 	Metadata metav1.ObjectMeta `json:"metadata,omitempty"`
 
-	// ClusterRoleTemplateSpec holds the spec of the cluster role template in the cluster
+	// LocalClusterRoleTemplateSpec holds the spec of the cluster role template in the cluster
 	// +optional
-	ClusterRoleTemplateSpec agentstoragev1.ClusterRoleTemplateSpec `json:"spec,omitempty"`
+	LocalClusterRoleTemplateSpec agentstoragev1.LocalClusterRoleTemplateSpec `json:"spec,omitempty"`
 }
 
-// GlobalClusterRoleTemplateStatus holds the status of a user access
-type GlobalClusterRoleTemplateStatus struct {
+// ClusterRoleTemplateStatus holds the status of a user access
+type ClusterRoleTemplateStatus struct {
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
 
-// GlobalClusterRoleTemplateList contains a list of GlobalClusterRoleTemplate objects
-type GlobalClusterRoleTemplateList struct {
+// ClusterRoleTemplateList contains a list of ClusterRoleTemplate objects
+type ClusterRoleTemplateList struct {
 	metav1.TypeMeta `json:",inline"`
 	metav1.ListMeta `json:"metadata,omitempty"`
-	Items           []GlobalClusterRoleTemplate `json:"items"`
+	Items           []ClusterRoleTemplate `json:"items"`
 }
 
 func init() {
-	SchemeBuilder.Register(&GlobalClusterRoleTemplate{}, &GlobalClusterRoleTemplateList{})
+	SchemeBuilder.Register(&ClusterRoleTemplate{}, &ClusterRoleTemplateList{})
 }

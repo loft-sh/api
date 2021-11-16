@@ -9,33 +9,33 @@ import (
 // +genclient:nonNamespaced
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
 
-// GlobalClusterAccess holds the global cluster access information
+// ClusterAccess holds the global cluster access information
 // +k8s:openapi-gen=true
-type GlobalClusterAccess struct {
+type ClusterAccess struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
 
-	Spec   GlobalClusterAccessSpec   `json:"spec,omitempty"`
-	Status GlobalClusterAccessStatus `json:"status,omitempty"`
+	Spec   ClusterAccessSpec   `json:"spec,omitempty"`
+	Status ClusterAccessStatus `json:"status,omitempty"`
 }
 
-func (a *GlobalClusterAccess) GetOwner() *UserOrTeam {
+func (a *ClusterAccess) GetOwner() *UserOrTeam {
 	return a.Spec.Owner
 }
 
-func (a *GlobalClusterAccess) SetOwner(userOrTeam *UserOrTeam) {
+func (a *ClusterAccess) SetOwner(userOrTeam *UserOrTeam) {
 	a.Spec.Owner = userOrTeam
 }
 
-func (a *GlobalClusterAccess) GetAccess() []Access {
+func (a *ClusterAccess) GetAccess() []Access {
 	return a.Spec.Access
 }
 
-func (a *GlobalClusterAccess) SetAccess(access []Access) {
+func (a *ClusterAccess) SetAccess(access []Access) {
 	a.Spec.Access = access
 }
 
-type GlobalClusterAccessSpec struct {
+type ClusterAccessSpec struct {
 	// DisplayName is the name that should be displayed in the UI
 	// +optional
 	DisplayName string `json:"displayName,omitempty"`
@@ -56,34 +56,34 @@ type GlobalClusterAccessSpec struct {
 	// +optional
 	Access []Access `json:"access,omitempty"`
 
-	// ClusterAccessTemplate holds the cluster access template
+	// LocalClusterAccessTemplate holds the cluster access template
 	// +omitempty
-	ClusterAccessTemplate ClusterAccessTemplate `json:"clusterAccessTemplate,omitempty"`
+	LocalClusterAccessTemplate LocalClusterAccessTemplate `json:"localClusterAccessTemplate,omitempty"`
 }
 
-type ClusterAccessTemplate struct {
+type LocalClusterAccessTemplate struct {
 	// Metadata is the metadata of the cluster access object
 	// +optional
 	Metadata metav1.ObjectMeta `json:"metadata,omitempty"`
 
-	// ClusterAccessSpec holds the spec of the cluster access in the cluster
+	// LocalClusterAccessSpec holds the spec of the cluster access in the cluster
 	// +optional
-	ClusterAccessSpec agentstoragev1.ClusterAccessSpec `json:"spec,omitempty"`
+	LocalClusterAccessSpec agentstoragev1.LocalClusterAccessSpec `json:"spec,omitempty"`
 }
 
-// GlobalClusterAccessStatus holds the status of a user access
-type GlobalClusterAccessStatus struct {
+// ClusterAccessStatus holds the status of a user access
+type ClusterAccessStatus struct {
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
 
-// GlobalClusterAccessList contains a list of GlobalClusterAccess objects
-type GlobalClusterAccessList struct {
+// ClusterAccessList contains a list of ClusterAccess objects
+type ClusterAccessList struct {
 	metav1.TypeMeta `json:",inline"`
 	metav1.ListMeta `json:"metadata,omitempty"`
-	Items           []GlobalClusterAccess `json:"items"`
+	Items           []ClusterAccess `json:"items"`
 }
 
 func init() {
-	SchemeBuilder.Register(&GlobalClusterAccess{}, &GlobalClusterAccessList{})
+	SchemeBuilder.Register(&ClusterAccess{}, &ClusterAccessList{})
 }

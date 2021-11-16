@@ -9,33 +9,33 @@ import (
 // +genclient:nonNamespaced
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
 
-// GlobalSpaceConstraint holds the global space constraint information
+// SpaceConstraint holds the global space constraint information
 // +k8s:openapi-gen=true
-type GlobalSpaceConstraint struct {
+type SpaceConstraint struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
 
-	Spec   GlobalSpaceConstraintSpec   `json:"spec,omitempty"`
-	Status GlobalSpaceConstraintStatus `json:"status,omitempty"`
+	Spec   SpaceConstraintSpec   `json:"spec,omitempty"`
+	Status SpaceConstraintStatus `json:"status,omitempty"`
 }
 
-func (a *GlobalSpaceConstraint) GetOwner() *UserOrTeam {
+func (a *SpaceConstraint) GetOwner() *UserOrTeam {
 	return a.Spec.Owner
 }
 
-func (a *GlobalSpaceConstraint) SetOwner(userOrTeam *UserOrTeam) {
+func (a *SpaceConstraint) SetOwner(userOrTeam *UserOrTeam) {
 	a.Spec.Owner = userOrTeam
 }
 
-func (a *GlobalSpaceConstraint) GetAccess() []Access {
+func (a *SpaceConstraint) GetAccess() []Access {
 	return a.Spec.Access
 }
 
-func (a *GlobalSpaceConstraint) SetAccess(access []Access) {
+func (a *SpaceConstraint) SetAccess(access []Access) {
 	a.Spec.Access = access
 }
 
-type GlobalSpaceConstraintSpec struct {
+type SpaceConstraintSpec struct {
 	// DisplayName is the name that should be displayed in the UI
 	// +optional
 	DisplayName string `json:"displayName,omitempty"`
@@ -56,34 +56,34 @@ type GlobalSpaceConstraintSpec struct {
 	// +optional
 	Access []Access `json:"access,omitempty"`
 
-	// ClusterAccessTemplate holds the cluster access template
+	// LocalSpaceConstraintTemplate holds the space constraint template
 	// +omitempty
-	SpaceConstraintTemplate SpaceConstraintTemplate `json:"spaceConstraintTemplate,omitempty"`
+	LocalSpaceConstraintTemplate LocalSpaceConstraintTemplate `json:"localSpaceConstraintTemplate,omitempty"`
 }
 
-type SpaceConstraintTemplate struct {
+type LocalSpaceConstraintTemplate struct {
 	// Metadata is the metadata of the space constraint object
 	// +optional
 	Metadata metav1.ObjectMeta `json:"metadata,omitempty"`
 
-	// SpaceConstraintSpec holds the spec of the space constraint in the cluster
+	// LocalSpaceConstraintSpec holds the spec of the space constraint in the cluster
 	// +optional
-	SpaceConstraintSpec agentstoragev1.SpaceConstraintSpec `json:"spec,omitempty"`
+	LocalSpaceConstraintSpec agentstoragev1.LocalSpaceConstraintSpec `json:"spec,omitempty"`
 }
 
-// GlobalSpaceConstraintStatus holds the status of a user access
-type GlobalSpaceConstraintStatus struct {
+// SpaceConstraintStatus holds the status of a user access
+type SpaceConstraintStatus struct {
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
 
-// GlobalSpaceConstraintList contains a list of GlobalSpaceConstraint objects
-type GlobalSpaceConstraintList struct {
+// SpaceConstraintList contains a list of SpaceConstraint objects
+type SpaceConstraintList struct {
 	metav1.TypeMeta `json:",inline"`
 	metav1.ListMeta `json:"metadata,omitempty"`
-	Items           []GlobalSpaceConstraint `json:"items"`
+	Items           []SpaceConstraint `json:"items"`
 }
 
 func init() {
-	SchemeBuilder.Register(&GlobalSpaceConstraint{}, &GlobalSpaceConstraintList{})
+	SchemeBuilder.Register(&SpaceConstraint{}, &SpaceConstraintList{})
 }

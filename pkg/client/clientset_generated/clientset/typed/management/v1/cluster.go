@@ -31,7 +31,7 @@ type ClusterInterface interface {
 	List(ctx context.Context, opts metav1.ListOptions) (*v1.ClusterList, error)
 	Watch(ctx context.Context, opts metav1.ListOptions) (watch.Interface, error)
 	Patch(ctx context.Context, name string, pt types.PatchType, data []byte, opts metav1.PatchOptions, subresources ...string) (result *v1.Cluster, err error)
-	ListAccess(ctx context.Context, clusterName string, options metav1.GetOptions) (*v1.ClusterAccess, error)
+	ListAccess(ctx context.Context, clusterName string, options metav1.GetOptions) (*v1.ClusterMemberAccess, error)
 	ListMembers(ctx context.Context, clusterName string, options metav1.GetOptions) (*v1.ClusterMembers, error)
 	ListVirtualClusterDefaults(ctx context.Context, clusterName string, options metav1.GetOptions) (*v1.ClusterVirtualClusterDefaults, error)
 
@@ -171,9 +171,9 @@ func (c *clusters) Patch(ctx context.Context, name string, pt types.PatchType, d
 	return
 }
 
-// ListAccess takes name of the cluster, and returns the corresponding v1.ClusterAccess object, and an error if there is any.
-func (c *clusters) ListAccess(ctx context.Context, clusterName string, options metav1.GetOptions) (result *v1.ClusterAccess, err error) {
-	result = &v1.ClusterAccess{}
+// ListAccess takes name of the cluster, and returns the corresponding v1.ClusterMemberAccess object, and an error if there is any.
+func (c *clusters) ListAccess(ctx context.Context, clusterName string, options metav1.GetOptions) (result *v1.ClusterMemberAccess, err error) {
+	result = &v1.ClusterMemberAccess{}
 	err = c.client.Get().
 		Resource("clusters").
 		Name(clusterName).

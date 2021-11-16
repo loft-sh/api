@@ -13,15 +13,14 @@ type ManagementV1Interface interface {
 	AnnouncementsGetter
 	AppsGetter
 	ClustersGetter
+	ClusterAccessesGetter
 	ClusterAccountTemplatesGetter
 	ClusterConnectsGetter
+	ClusterRoleTemplatesGetter
 	ConfigsGetter
 	DirectClusterEndpointTokensGetter
 	EventsGetter
 	FeaturesGetter
-	GlobalClusterAccessesGetter
-	GlobalClusterRoleTemplatesGetter
-	GlobalSpaceConstraintsGetter
 	LicensesGetter
 	LicenseTokensGetter
 	LoftUpgradesGetter
@@ -31,6 +30,7 @@ type ManagementV1Interface interface {
 	SelvesGetter
 	SelfSubjectAccessReviewsGetter
 	SharedSecretsGetter
+	SpaceConstraintsGetter
 	SpaceTemplatesGetter
 	SubjectAccessReviewsGetter
 	TasksGetter
@@ -56,12 +56,20 @@ func (c *ManagementV1Client) Clusters() ClusterInterface {
 	return newClusters(c)
 }
 
+func (c *ManagementV1Client) ClusterAccesses() ClusterAccessInterface {
+	return newClusterAccesses(c)
+}
+
 func (c *ManagementV1Client) ClusterAccountTemplates() ClusterAccountTemplateInterface {
 	return newClusterAccountTemplates(c)
 }
 
 func (c *ManagementV1Client) ClusterConnects() ClusterConnectInterface {
 	return newClusterConnects(c)
+}
+
+func (c *ManagementV1Client) ClusterRoleTemplates() ClusterRoleTemplateInterface {
+	return newClusterRoleTemplates(c)
 }
 
 func (c *ManagementV1Client) Configs() ConfigInterface {
@@ -78,18 +86,6 @@ func (c *ManagementV1Client) Events() EventInterface {
 
 func (c *ManagementV1Client) Features() FeatureInterface {
 	return newFeatures(c)
-}
-
-func (c *ManagementV1Client) GlobalClusterAccesses() GlobalClusterAccessInterface {
-	return newGlobalClusterAccesses(c)
-}
-
-func (c *ManagementV1Client) GlobalClusterRoleTemplates() GlobalClusterRoleTemplateInterface {
-	return newGlobalClusterRoleTemplates(c)
-}
-
-func (c *ManagementV1Client) GlobalSpaceConstraints() GlobalSpaceConstraintInterface {
-	return newGlobalSpaceConstraints(c)
 }
 
 func (c *ManagementV1Client) Licenses() LicenseInterface {
@@ -126,6 +122,10 @@ func (c *ManagementV1Client) SelfSubjectAccessReviews() SelfSubjectAccessReviewI
 
 func (c *ManagementV1Client) SharedSecrets(namespace string) SharedSecretInterface {
 	return newSharedSecrets(c, namespace)
+}
+
+func (c *ManagementV1Client) SpaceConstraints() SpaceConstraintInterface {
+	return newSpaceConstraints(c)
 }
 
 func (c *ManagementV1Client) SpaceTemplates() SpaceTemplateInterface {

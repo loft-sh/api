@@ -52,10 +52,6 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 		"github.com/loft-sh/agentapi/pkg/apis/loft/cluster/v1.ChartInfoList":                         schema_apis_loft_cluster_v1_ChartInfoList(ref),
 		"github.com/loft-sh/agentapi/pkg/apis/loft/cluster/v1.ChartInfoSpec":                         schema_apis_loft_cluster_v1_ChartInfoSpec(ref),
 		"github.com/loft-sh/agentapi/pkg/apis/loft/cluster/v1.ChartInfoStatus":                       schema_apis_loft_cluster_v1_ChartInfoStatus(ref),
-		"github.com/loft-sh/agentapi/pkg/apis/loft/cluster/v1.ClusterAccess":                         schema_apis_loft_cluster_v1_ClusterAccess(ref),
-		"github.com/loft-sh/agentapi/pkg/apis/loft/cluster/v1.ClusterAccessList":                     schema_apis_loft_cluster_v1_ClusterAccessList(ref),
-		"github.com/loft-sh/agentapi/pkg/apis/loft/cluster/v1.ClusterAccessSpec":                     schema_apis_loft_cluster_v1_ClusterAccessSpec(ref),
-		"github.com/loft-sh/agentapi/pkg/apis/loft/cluster/v1.ClusterAccessStatus":                   schema_apis_loft_cluster_v1_ClusterAccessStatus(ref),
 		"github.com/loft-sh/agentapi/pkg/apis/loft/cluster/v1.ClusterQuota":                          schema_apis_loft_cluster_v1_ClusterQuota(ref),
 		"github.com/loft-sh/agentapi/pkg/apis/loft/cluster/v1.ClusterQuotaList":                      schema_apis_loft_cluster_v1_ClusterQuotaList(ref),
 		"github.com/loft-sh/agentapi/pkg/apis/loft/cluster/v1.ClusterQuotaSpec":                      schema_apis_loft_cluster_v1_ClusterQuotaSpec(ref),
@@ -68,6 +64,10 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 		"github.com/loft-sh/agentapi/pkg/apis/loft/cluster/v1.HelmReleaseStatus":                     schema_apis_loft_cluster_v1_HelmReleaseStatus(ref),
 		"github.com/loft-sh/agentapi/pkg/apis/loft/cluster/v1.Info":                                  schema_apis_loft_cluster_v1_Info(ref),
 		"github.com/loft-sh/agentapi/pkg/apis/loft/cluster/v1.LastActivityInfo":                      schema_apis_loft_cluster_v1_LastActivityInfo(ref),
+		"github.com/loft-sh/agentapi/pkg/apis/loft/cluster/v1.LocalClusterAccess":                    schema_apis_loft_cluster_v1_LocalClusterAccess(ref),
+		"github.com/loft-sh/agentapi/pkg/apis/loft/cluster/v1.LocalClusterAccessList":                schema_apis_loft_cluster_v1_LocalClusterAccessList(ref),
+		"github.com/loft-sh/agentapi/pkg/apis/loft/cluster/v1.LocalClusterAccessSpec":                schema_apis_loft_cluster_v1_LocalClusterAccessSpec(ref),
+		"github.com/loft-sh/agentapi/pkg/apis/loft/cluster/v1.LocalClusterAccessStatus":              schema_apis_loft_cluster_v1_LocalClusterAccessStatus(ref),
 		"github.com/loft-sh/agentapi/pkg/apis/loft/cluster/v1.Maintainer":                            schema_apis_loft_cluster_v1_Maintainer(ref),
 		"github.com/loft-sh/agentapi/pkg/apis/loft/cluster/v1.Metadata":                              schema_apis_loft_cluster_v1_Metadata(ref),
 		"github.com/loft-sh/agentapi/pkg/apis/loft/cluster/v1.SleepModeConfig":                       schema_apis_loft_cluster_v1_SleepModeConfig(ref),
@@ -85,36 +85,36 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 		"github.com/loft-sh/agentapi/pkg/apis/loft/cluster/v1.VirtualClusterSpec":                    schema_apis_loft_cluster_v1_VirtualClusterSpec(ref),
 		"github.com/loft-sh/agentapi/pkg/apis/loft/cluster/v1.VirtualClusterStatus":                  schema_apis_loft_cluster_v1_VirtualClusterStatus(ref),
 		"github.com/loft-sh/agentapi/pkg/apis/loft/storage/v1.AccessQuota":                           schema_apis_loft_storage_v1_AccessQuota(ref),
-		"github.com/loft-sh/agentapi/pkg/apis/loft/storage/v1.ClusterAccess":                         schema_apis_loft_storage_v1_ClusterAccess(ref),
-		"github.com/loft-sh/agentapi/pkg/apis/loft/storage/v1.ClusterAccessList":                     schema_apis_loft_storage_v1_ClusterAccessList(ref),
-		"github.com/loft-sh/agentapi/pkg/apis/loft/storage/v1.ClusterAccessSpec":                     schema_apis_loft_storage_v1_ClusterAccessSpec(ref),
-		"github.com/loft-sh/agentapi/pkg/apis/loft/storage/v1.ClusterAccessStatus":                   schema_apis_loft_storage_v1_ClusterAccessStatus(ref),
 		"github.com/loft-sh/agentapi/pkg/apis/loft/storage/v1.ClusterQuota":                          schema_apis_loft_storage_v1_ClusterQuota(ref),
 		"github.com/loft-sh/agentapi/pkg/apis/loft/storage/v1.ClusterQuotaList":                      schema_apis_loft_storage_v1_ClusterQuotaList(ref),
 		"github.com/loft-sh/agentapi/pkg/apis/loft/storage/v1.ClusterQuotaSpec":                      schema_apis_loft_storage_v1_ClusterQuotaSpec(ref),
 		"github.com/loft-sh/agentapi/pkg/apis/loft/storage/v1.ClusterQuotaStatus":                    schema_apis_loft_storage_v1_ClusterQuotaStatus(ref),
 		"github.com/loft-sh/agentapi/pkg/apis/loft/storage/v1.ClusterQuotaStatusByNamespace":         schema_apis_loft_storage_v1_ClusterQuotaStatusByNamespace(ref),
 		"github.com/loft-sh/agentapi/pkg/apis/loft/storage/v1.ClusterRoleRef":                        schema_apis_loft_storage_v1_ClusterRoleRef(ref),
-		"github.com/loft-sh/agentapi/pkg/apis/loft/storage/v1.ClusterRoleTemplate":                   schema_apis_loft_storage_v1_ClusterRoleTemplate(ref),
-		"github.com/loft-sh/agentapi/pkg/apis/loft/storage/v1.ClusterRoleTemplateList":               schema_apis_loft_storage_v1_ClusterRoleTemplateList(ref),
-		"github.com/loft-sh/agentapi/pkg/apis/loft/storage/v1.ClusterRoleTemplateSpec":               schema_apis_loft_storage_v1_ClusterRoleTemplateSpec(ref),
-		"github.com/loft-sh/agentapi/pkg/apis/loft/storage/v1.ClusterRoleTemplateStatus":             schema_apis_loft_storage_v1_ClusterRoleTemplateStatus(ref),
 		"github.com/loft-sh/agentapi/pkg/apis/loft/storage/v1.ClusterRoleTemplateTemplate":           schema_apis_loft_storage_v1_ClusterRoleTemplateTemplate(ref),
-		"github.com/loft-sh/agentapi/pkg/apis/loft/storage/v1.ClusterTeam":                           schema_apis_loft_storage_v1_ClusterTeam(ref),
-		"github.com/loft-sh/agentapi/pkg/apis/loft/storage/v1.ClusterTeamList":                       schema_apis_loft_storage_v1_ClusterTeamList(ref),
-		"github.com/loft-sh/agentapi/pkg/apis/loft/storage/v1.ClusterTeamSpec":                       schema_apis_loft_storage_v1_ClusterTeamSpec(ref),
-		"github.com/loft-sh/agentapi/pkg/apis/loft/storage/v1.ClusterTeamStatus":                     schema_apis_loft_storage_v1_ClusterTeamStatus(ref),
-		"github.com/loft-sh/agentapi/pkg/apis/loft/storage/v1.ClusterUser":                           schema_apis_loft_storage_v1_ClusterUser(ref),
-		"github.com/loft-sh/agentapi/pkg/apis/loft/storage/v1.ClusterUserList":                       schema_apis_loft_storage_v1_ClusterUserList(ref),
-		"github.com/loft-sh/agentapi/pkg/apis/loft/storage/v1.ClusterUserSpec":                       schema_apis_loft_storage_v1_ClusterUserSpec(ref),
-		"github.com/loft-sh/agentapi/pkg/apis/loft/storage/v1.ClusterUserStatus":                     schema_apis_loft_storage_v1_ClusterUserStatus(ref),
 		"github.com/loft-sh/agentapi/pkg/apis/loft/storage/v1.Condition":                             schema_apis_loft_storage_v1_Condition(ref),
+		"github.com/loft-sh/agentapi/pkg/apis/loft/storage/v1.LocalClusterAccess":                    schema_apis_loft_storage_v1_LocalClusterAccess(ref),
+		"github.com/loft-sh/agentapi/pkg/apis/loft/storage/v1.LocalClusterAccessList":                schema_apis_loft_storage_v1_LocalClusterAccessList(ref),
+		"github.com/loft-sh/agentapi/pkg/apis/loft/storage/v1.LocalClusterAccessSpec":                schema_apis_loft_storage_v1_LocalClusterAccessSpec(ref),
+		"github.com/loft-sh/agentapi/pkg/apis/loft/storage/v1.LocalClusterAccessStatus":              schema_apis_loft_storage_v1_LocalClusterAccessStatus(ref),
+		"github.com/loft-sh/agentapi/pkg/apis/loft/storage/v1.LocalClusterRoleTemplate":              schema_apis_loft_storage_v1_LocalClusterRoleTemplate(ref),
+		"github.com/loft-sh/agentapi/pkg/apis/loft/storage/v1.LocalClusterRoleTemplateList":          schema_apis_loft_storage_v1_LocalClusterRoleTemplateList(ref),
+		"github.com/loft-sh/agentapi/pkg/apis/loft/storage/v1.LocalClusterRoleTemplateSpec":          schema_apis_loft_storage_v1_LocalClusterRoleTemplateSpec(ref),
+		"github.com/loft-sh/agentapi/pkg/apis/loft/storage/v1.LocalClusterRoleTemplateStatus":        schema_apis_loft_storage_v1_LocalClusterRoleTemplateStatus(ref),
+		"github.com/loft-sh/agentapi/pkg/apis/loft/storage/v1.LocalSpaceConstraint":                  schema_apis_loft_storage_v1_LocalSpaceConstraint(ref),
+		"github.com/loft-sh/agentapi/pkg/apis/loft/storage/v1.LocalSpaceConstraintList":              schema_apis_loft_storage_v1_LocalSpaceConstraintList(ref),
+		"github.com/loft-sh/agentapi/pkg/apis/loft/storage/v1.LocalSpaceConstraintSpec":              schema_apis_loft_storage_v1_LocalSpaceConstraintSpec(ref),
+		"github.com/loft-sh/agentapi/pkg/apis/loft/storage/v1.LocalSpaceConstraintStatus":            schema_apis_loft_storage_v1_LocalSpaceConstraintStatus(ref),
+		"github.com/loft-sh/agentapi/pkg/apis/loft/storage/v1.LocalTeam":                             schema_apis_loft_storage_v1_LocalTeam(ref),
+		"github.com/loft-sh/agentapi/pkg/apis/loft/storage/v1.LocalTeamList":                         schema_apis_loft_storage_v1_LocalTeamList(ref),
+		"github.com/loft-sh/agentapi/pkg/apis/loft/storage/v1.LocalTeamSpec":                         schema_apis_loft_storage_v1_LocalTeamSpec(ref),
+		"github.com/loft-sh/agentapi/pkg/apis/loft/storage/v1.LocalTeamStatus":                       schema_apis_loft_storage_v1_LocalTeamStatus(ref),
+		"github.com/loft-sh/agentapi/pkg/apis/loft/storage/v1.LocalUser":                             schema_apis_loft_storage_v1_LocalUser(ref),
+		"github.com/loft-sh/agentapi/pkg/apis/loft/storage/v1.LocalUserList":                         schema_apis_loft_storage_v1_LocalUserList(ref),
+		"github.com/loft-sh/agentapi/pkg/apis/loft/storage/v1.LocalUserSpec":                         schema_apis_loft_storage_v1_LocalUserSpec(ref),
+		"github.com/loft-sh/agentapi/pkg/apis/loft/storage/v1.LocalUserStatus":                       schema_apis_loft_storage_v1_LocalUserStatus(ref),
 		"github.com/loft-sh/agentapi/pkg/apis/loft/storage/v1.PodSelector":                           schema_apis_loft_storage_v1_PodSelector(ref),
 		"github.com/loft-sh/agentapi/pkg/apis/loft/storage/v1.SecretRef":                             schema_apis_loft_storage_v1_SecretRef(ref),
-		"github.com/loft-sh/agentapi/pkg/apis/loft/storage/v1.SpaceConstraint":                       schema_apis_loft_storage_v1_SpaceConstraint(ref),
-		"github.com/loft-sh/agentapi/pkg/apis/loft/storage/v1.SpaceConstraintList":                   schema_apis_loft_storage_v1_SpaceConstraintList(ref),
-		"github.com/loft-sh/agentapi/pkg/apis/loft/storage/v1.SpaceConstraintSpec":                   schema_apis_loft_storage_v1_SpaceConstraintSpec(ref),
-		"github.com/loft-sh/agentapi/pkg/apis/loft/storage/v1.SpaceConstraintStatus":                 schema_apis_loft_storage_v1_SpaceConstraintStatus(ref),
 		"github.com/loft-sh/agentapi/pkg/apis/loft/storage/v1.SpaceTemplate":                         schema_apis_loft_storage_v1_SpaceTemplate(ref),
 		"github.com/loft-sh/agentapi/pkg/apis/loft/storage/v1.UserOrTeam":                            schema_apis_loft_storage_v1_UserOrTeam(ref),
 		"github.com/loft-sh/agentapi/pkg/apis/loft/storage/v1.VirtualCluster":                        schema_apis_loft_storage_v1_VirtualCluster(ref),
@@ -156,6 +156,8 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 		"github.com/loft-sh/api/pkg/apis/management/v1.Cluster":                                      schema_pkg_apis_management_v1_Cluster(ref),
 		"github.com/loft-sh/api/pkg/apis/management/v1.ClusterAccess":                                schema_pkg_apis_management_v1_ClusterAccess(ref),
 		"github.com/loft-sh/api/pkg/apis/management/v1.ClusterAccessList":                            schema_pkg_apis_management_v1_ClusterAccessList(ref),
+		"github.com/loft-sh/api/pkg/apis/management/v1.ClusterAccessSpec":                            schema_pkg_apis_management_v1_ClusterAccessSpec(ref),
+		"github.com/loft-sh/api/pkg/apis/management/v1.ClusterAccessStatus":                          schema_pkg_apis_management_v1_ClusterAccessStatus(ref),
 		"github.com/loft-sh/api/pkg/apis/management/v1.ClusterAccountTemplate":                       schema_pkg_apis_management_v1_ClusterAccountTemplate(ref),
 		"github.com/loft-sh/api/pkg/apis/management/v1.ClusterAccountTemplateList":                   schema_pkg_apis_management_v1_ClusterAccountTemplateList(ref),
 		"github.com/loft-sh/api/pkg/apis/management/v1.ClusterAccountTemplateSpec":                   schema_pkg_apis_management_v1_ClusterAccountTemplateSpec(ref),
@@ -171,10 +173,16 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 		"github.com/loft-sh/api/pkg/apis/management/v1.ClusterDomainList":                            schema_pkg_apis_management_v1_ClusterDomainList(ref),
 		"github.com/loft-sh/api/pkg/apis/management/v1.ClusterList":                                  schema_pkg_apis_management_v1_ClusterList(ref),
 		"github.com/loft-sh/api/pkg/apis/management/v1.ClusterMember":                                schema_pkg_apis_management_v1_ClusterMember(ref),
+		"github.com/loft-sh/api/pkg/apis/management/v1.ClusterMemberAccess":                          schema_pkg_apis_management_v1_ClusterMemberAccess(ref),
+		"github.com/loft-sh/api/pkg/apis/management/v1.ClusterMemberAccessList":                      schema_pkg_apis_management_v1_ClusterMemberAccessList(ref),
 		"github.com/loft-sh/api/pkg/apis/management/v1.ClusterMembers":                               schema_pkg_apis_management_v1_ClusterMembers(ref),
 		"github.com/loft-sh/api/pkg/apis/management/v1.ClusterMembersList":                           schema_pkg_apis_management_v1_ClusterMembersList(ref),
 		"github.com/loft-sh/api/pkg/apis/management/v1.ClusterReset":                                 schema_pkg_apis_management_v1_ClusterReset(ref),
 		"github.com/loft-sh/api/pkg/apis/management/v1.ClusterResetList":                             schema_pkg_apis_management_v1_ClusterResetList(ref),
+		"github.com/loft-sh/api/pkg/apis/management/v1.ClusterRoleTemplate":                          schema_pkg_apis_management_v1_ClusterRoleTemplate(ref),
+		"github.com/loft-sh/api/pkg/apis/management/v1.ClusterRoleTemplateList":                      schema_pkg_apis_management_v1_ClusterRoleTemplateList(ref),
+		"github.com/loft-sh/api/pkg/apis/management/v1.ClusterRoleTemplateSpec":                      schema_pkg_apis_management_v1_ClusterRoleTemplateSpec(ref),
+		"github.com/loft-sh/api/pkg/apis/management/v1.ClusterRoleTemplateStatus":                    schema_pkg_apis_management_v1_ClusterRoleTemplateStatus(ref),
 		"github.com/loft-sh/api/pkg/apis/management/v1.ClusterSpec":                                  schema_pkg_apis_management_v1_ClusterSpec(ref),
 		"github.com/loft-sh/api/pkg/apis/management/v1.ClusterStatus":                                schema_pkg_apis_management_v1_ClusterStatus(ref),
 		"github.com/loft-sh/api/pkg/apis/management/v1.ClusterVirtualClusterDefaults":                schema_pkg_apis_management_v1_ClusterVirtualClusterDefaults(ref),
@@ -198,18 +206,6 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 		"github.com/loft-sh/api/pkg/apis/management/v1.FeatureList":                                  schema_pkg_apis_management_v1_FeatureList(ref),
 		"github.com/loft-sh/api/pkg/apis/management/v1.FeatureSpec":                                  schema_pkg_apis_management_v1_FeatureSpec(ref),
 		"github.com/loft-sh/api/pkg/apis/management/v1.FeatureStatus":                                schema_pkg_apis_management_v1_FeatureStatus(ref),
-		"github.com/loft-sh/api/pkg/apis/management/v1.GlobalClusterAccess":                          schema_pkg_apis_management_v1_GlobalClusterAccess(ref),
-		"github.com/loft-sh/api/pkg/apis/management/v1.GlobalClusterAccessList":                      schema_pkg_apis_management_v1_GlobalClusterAccessList(ref),
-		"github.com/loft-sh/api/pkg/apis/management/v1.GlobalClusterAccessSpec":                      schema_pkg_apis_management_v1_GlobalClusterAccessSpec(ref),
-		"github.com/loft-sh/api/pkg/apis/management/v1.GlobalClusterAccessStatus":                    schema_pkg_apis_management_v1_GlobalClusterAccessStatus(ref),
-		"github.com/loft-sh/api/pkg/apis/management/v1.GlobalClusterRoleTemplate":                    schema_pkg_apis_management_v1_GlobalClusterRoleTemplate(ref),
-		"github.com/loft-sh/api/pkg/apis/management/v1.GlobalClusterRoleTemplateList":                schema_pkg_apis_management_v1_GlobalClusterRoleTemplateList(ref),
-		"github.com/loft-sh/api/pkg/apis/management/v1.GlobalClusterRoleTemplateSpec":                schema_pkg_apis_management_v1_GlobalClusterRoleTemplateSpec(ref),
-		"github.com/loft-sh/api/pkg/apis/management/v1.GlobalClusterRoleTemplateStatus":              schema_pkg_apis_management_v1_GlobalClusterRoleTemplateStatus(ref),
-		"github.com/loft-sh/api/pkg/apis/management/v1.GlobalSpaceConstraint":                        schema_pkg_apis_management_v1_GlobalSpaceConstraint(ref),
-		"github.com/loft-sh/api/pkg/apis/management/v1.GlobalSpaceConstraintList":                    schema_pkg_apis_management_v1_GlobalSpaceConstraintList(ref),
-		"github.com/loft-sh/api/pkg/apis/management/v1.GlobalSpaceConstraintSpec":                    schema_pkg_apis_management_v1_GlobalSpaceConstraintSpec(ref),
-		"github.com/loft-sh/api/pkg/apis/management/v1.GlobalSpaceConstraintStatus":                  schema_pkg_apis_management_v1_GlobalSpaceConstraintStatus(ref),
 		"github.com/loft-sh/api/pkg/apis/management/v1.GroupResources":                               schema_pkg_apis_management_v1_GroupResources(ref),
 		"github.com/loft-sh/api/pkg/apis/management/v1.Kiosk":                                        schema_pkg_apis_management_v1_Kiosk(ref),
 		"github.com/loft-sh/api/pkg/apis/management/v1.KioskList":                                    schema_pkg_apis_management_v1_KioskList(ref),
@@ -260,6 +256,10 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 		"github.com/loft-sh/api/pkg/apis/management/v1.SharedSecretList":                             schema_pkg_apis_management_v1_SharedSecretList(ref),
 		"github.com/loft-sh/api/pkg/apis/management/v1.SharedSecretSpec":                             schema_pkg_apis_management_v1_SharedSecretSpec(ref),
 		"github.com/loft-sh/api/pkg/apis/management/v1.SharedSecretStatus":                           schema_pkg_apis_management_v1_SharedSecretStatus(ref),
+		"github.com/loft-sh/api/pkg/apis/management/v1.SpaceConstraint":                              schema_pkg_apis_management_v1_SpaceConstraint(ref),
+		"github.com/loft-sh/api/pkg/apis/management/v1.SpaceConstraintList":                          schema_pkg_apis_management_v1_SpaceConstraintList(ref),
+		"github.com/loft-sh/api/pkg/apis/management/v1.SpaceConstraintSpec":                          schema_pkg_apis_management_v1_SpaceConstraintSpec(ref),
+		"github.com/loft-sh/api/pkg/apis/management/v1.SpaceConstraintStatus":                        schema_pkg_apis_management_v1_SpaceConstraintStatus(ref),
 		"github.com/loft-sh/api/pkg/apis/management/v1.SpaceTemplate":                                schema_pkg_apis_management_v1_SpaceTemplate(ref),
 		"github.com/loft-sh/api/pkg/apis/management/v1.SpaceTemplateList":                            schema_pkg_apis_management_v1_SpaceTemplateList(ref),
 		"github.com/loft-sh/api/pkg/apis/management/v1.SpaceTemplateSpec":                            schema_pkg_apis_management_v1_SpaceTemplateSpec(ref),
@@ -326,7 +326,10 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 		"github.com/loft-sh/api/pkg/apis/storage/v1.ApplyTask":                                       schema_pkg_apis_storage_v1_ApplyTask(ref),
 		"github.com/loft-sh/api/pkg/apis/storage/v1.Chart":                                           schema_pkg_apis_storage_v1_Chart(ref),
 		"github.com/loft-sh/api/pkg/apis/storage/v1.Cluster":                                         schema_pkg_apis_storage_v1_Cluster(ref),
-		"github.com/loft-sh/api/pkg/apis/storage/v1.ClusterAccessTemplate":                           schema_pkg_apis_storage_v1_ClusterAccessTemplate(ref),
+		"github.com/loft-sh/api/pkg/apis/storage/v1.ClusterAccess":                                   schema_pkg_apis_storage_v1_ClusterAccess(ref),
+		"github.com/loft-sh/api/pkg/apis/storage/v1.ClusterAccessList":                               schema_pkg_apis_storage_v1_ClusterAccessList(ref),
+		"github.com/loft-sh/api/pkg/apis/storage/v1.ClusterAccessSpec":                               schema_pkg_apis_storage_v1_ClusterAccessSpec(ref),
+		"github.com/loft-sh/api/pkg/apis/storage/v1.ClusterAccessStatus":                             schema_pkg_apis_storage_v1_ClusterAccessStatus(ref),
 		"github.com/loft-sh/api/pkg/apis/storage/v1.ClusterAccountTemplate":                          schema_pkg_apis_storage_v1_ClusterAccountTemplate(ref),
 		"github.com/loft-sh/api/pkg/apis/storage/v1.ClusterAccountTemplateClusterStatus":             schema_pkg_apis_storage_v1_ClusterAccountTemplateClusterStatus(ref),
 		"github.com/loft-sh/api/pkg/apis/storage/v1.ClusterAccountTemplateList":                      schema_pkg_apis_storage_v1_ClusterAccountTemplateList(ref),
@@ -334,20 +337,11 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 		"github.com/loft-sh/api/pkg/apis/storage/v1.ClusterAccountTemplateStatus":                    schema_pkg_apis_storage_v1_ClusterAccountTemplateStatus(ref),
 		"github.com/loft-sh/api/pkg/apis/storage/v1.ClusterList":                                     schema_pkg_apis_storage_v1_ClusterList(ref),
 		"github.com/loft-sh/api/pkg/apis/storage/v1.ClusterRoleTemplate":                             schema_pkg_apis_storage_v1_ClusterRoleTemplate(ref),
+		"github.com/loft-sh/api/pkg/apis/storage/v1.ClusterRoleTemplateList":                         schema_pkg_apis_storage_v1_ClusterRoleTemplateList(ref),
+		"github.com/loft-sh/api/pkg/apis/storage/v1.ClusterRoleTemplateSpec":                         schema_pkg_apis_storage_v1_ClusterRoleTemplateSpec(ref),
+		"github.com/loft-sh/api/pkg/apis/storage/v1.ClusterRoleTemplateStatus":                       schema_pkg_apis_storage_v1_ClusterRoleTemplateStatus(ref),
 		"github.com/loft-sh/api/pkg/apis/storage/v1.ClusterSpec":                                     schema_pkg_apis_storage_v1_ClusterSpec(ref),
 		"github.com/loft-sh/api/pkg/apis/storage/v1.ClusterStatus":                                   schema_pkg_apis_storage_v1_ClusterStatus(ref),
-		"github.com/loft-sh/api/pkg/apis/storage/v1.GlobalClusterAccess":                             schema_pkg_apis_storage_v1_GlobalClusterAccess(ref),
-		"github.com/loft-sh/api/pkg/apis/storage/v1.GlobalClusterAccessList":                         schema_pkg_apis_storage_v1_GlobalClusterAccessList(ref),
-		"github.com/loft-sh/api/pkg/apis/storage/v1.GlobalClusterAccessSpec":                         schema_pkg_apis_storage_v1_GlobalClusterAccessSpec(ref),
-		"github.com/loft-sh/api/pkg/apis/storage/v1.GlobalClusterAccessStatus":                       schema_pkg_apis_storage_v1_GlobalClusterAccessStatus(ref),
-		"github.com/loft-sh/api/pkg/apis/storage/v1.GlobalClusterRoleTemplate":                       schema_pkg_apis_storage_v1_GlobalClusterRoleTemplate(ref),
-		"github.com/loft-sh/api/pkg/apis/storage/v1.GlobalClusterRoleTemplateList":                   schema_pkg_apis_storage_v1_GlobalClusterRoleTemplateList(ref),
-		"github.com/loft-sh/api/pkg/apis/storage/v1.GlobalClusterRoleTemplateSpec":                   schema_pkg_apis_storage_v1_GlobalClusterRoleTemplateSpec(ref),
-		"github.com/loft-sh/api/pkg/apis/storage/v1.GlobalClusterRoleTemplateStatus":                 schema_pkg_apis_storage_v1_GlobalClusterRoleTemplateStatus(ref),
-		"github.com/loft-sh/api/pkg/apis/storage/v1.GlobalSpaceConstraint":                           schema_pkg_apis_storage_v1_GlobalSpaceConstraint(ref),
-		"github.com/loft-sh/api/pkg/apis/storage/v1.GlobalSpaceConstraintList":                       schema_pkg_apis_storage_v1_GlobalSpaceConstraintList(ref),
-		"github.com/loft-sh/api/pkg/apis/storage/v1.GlobalSpaceConstraintSpec":                       schema_pkg_apis_storage_v1_GlobalSpaceConstraintSpec(ref),
-		"github.com/loft-sh/api/pkg/apis/storage/v1.GlobalSpaceConstraintStatus":                     schema_pkg_apis_storage_v1_GlobalSpaceConstraintStatus(ref),
 		"github.com/loft-sh/api/pkg/apis/storage/v1.GroupResources":                                  schema_pkg_apis_storage_v1_GroupResources(ref),
 		"github.com/loft-sh/api/pkg/apis/storage/v1.HelmChart":                                       schema_pkg_apis_storage_v1_HelmChart(ref),
 		"github.com/loft-sh/api/pkg/apis/storage/v1.HelmChartRepository":                             schema_pkg_apis_storage_v1_HelmChartRepository(ref),
@@ -355,13 +349,19 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 		"github.com/loft-sh/api/pkg/apis/storage/v1.HelmTask":                                        schema_pkg_apis_storage_v1_HelmTask(ref),
 		"github.com/loft-sh/api/pkg/apis/storage/v1.HelmTaskRelease":                                 schema_pkg_apis_storage_v1_HelmTaskRelease(ref),
 		"github.com/loft-sh/api/pkg/apis/storage/v1.KindSecretRef":                                   schema_pkg_apis_storage_v1_KindSecretRef(ref),
+		"github.com/loft-sh/api/pkg/apis/storage/v1.LocalClusterAccessTemplate":                      schema_pkg_apis_storage_v1_LocalClusterAccessTemplate(ref),
+		"github.com/loft-sh/api/pkg/apis/storage/v1.LocalClusterRoleTemplate":                        schema_pkg_apis_storage_v1_LocalClusterRoleTemplate(ref),
+		"github.com/loft-sh/api/pkg/apis/storage/v1.LocalSpaceConstraintTemplate":                    schema_pkg_apis_storage_v1_LocalSpaceConstraintTemplate(ref),
 		"github.com/loft-sh/api/pkg/apis/storage/v1.SecretRef":                                       schema_pkg_apis_storage_v1_SecretRef(ref),
 		"github.com/loft-sh/api/pkg/apis/storage/v1.SharedSecret":                                    schema_pkg_apis_storage_v1_SharedSecret(ref),
 		"github.com/loft-sh/api/pkg/apis/storage/v1.SharedSecretList":                                schema_pkg_apis_storage_v1_SharedSecretList(ref),
 		"github.com/loft-sh/api/pkg/apis/storage/v1.SharedSecretSpec":                                schema_pkg_apis_storage_v1_SharedSecretSpec(ref),
 		"github.com/loft-sh/api/pkg/apis/storage/v1.SharedSecretStatus":                              schema_pkg_apis_storage_v1_SharedSecretStatus(ref),
 		"github.com/loft-sh/api/pkg/apis/storage/v1.SpaceAppReference":                               schema_pkg_apis_storage_v1_SpaceAppReference(ref),
-		"github.com/loft-sh/api/pkg/apis/storage/v1.SpaceConstraintTemplate":                         schema_pkg_apis_storage_v1_SpaceConstraintTemplate(ref),
+		"github.com/loft-sh/api/pkg/apis/storage/v1.SpaceConstraint":                                 schema_pkg_apis_storage_v1_SpaceConstraint(ref),
+		"github.com/loft-sh/api/pkg/apis/storage/v1.SpaceConstraintList":                             schema_pkg_apis_storage_v1_SpaceConstraintList(ref),
+		"github.com/loft-sh/api/pkg/apis/storage/v1.SpaceConstraintSpec":                             schema_pkg_apis_storage_v1_SpaceConstraintSpec(ref),
+		"github.com/loft-sh/api/pkg/apis/storage/v1.SpaceConstraintStatus":                           schema_pkg_apis_storage_v1_SpaceConstraintStatus(ref),
 		"github.com/loft-sh/api/pkg/apis/storage/v1.SpaceCreationAppReference":                       schema_pkg_apis_storage_v1_SpaceCreationAppReference(ref),
 		"github.com/loft-sh/api/pkg/apis/storage/v1.SpaceCreationTask":                               schema_pkg_apis_storage_v1_SpaceCreationTask(ref),
 		"github.com/loft-sh/api/pkg/apis/storage/v1.SpaceTemplate":                                   schema_pkg_apis_storage_v1_SpaceTemplate(ref),
@@ -2479,227 +2479,6 @@ func schema_apis_loft_cluster_v1_ChartInfoStatus(ref common.ReferenceCallback) c
 	}
 }
 
-func schema_apis_loft_cluster_v1_ClusterAccess(ref common.ReferenceCallback) common.OpenAPIDefinition {
-	return common.OpenAPIDefinition{
-		Schema: spec.Schema{
-			SchemaProps: spec.SchemaProps{
-				Description: "ClusterAccess holds the cluster access information",
-				Type:        []string{"object"},
-				Properties: map[string]spec.Schema{
-					"kind": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"apiVersion": {
-						SchemaProps: spec.SchemaProps{
-							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"metadata": {
-						SchemaProps: spec.SchemaProps{
-							Ref: ref("k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"),
-						},
-					},
-					"spec": {
-						SchemaProps: spec.SchemaProps{
-							Ref: ref("github.com/loft-sh/agentapi/pkg/apis/loft/cluster/v1.ClusterAccessSpec"),
-						},
-					},
-					"status": {
-						SchemaProps: spec.SchemaProps{
-							Ref: ref("github.com/loft-sh/agentapi/pkg/apis/loft/cluster/v1.ClusterAccessStatus"),
-						},
-					},
-				},
-			},
-		},
-		Dependencies: []string{
-			"github.com/loft-sh/agentapi/pkg/apis/loft/cluster/v1.ClusterAccessSpec", "github.com/loft-sh/agentapi/pkg/apis/loft/cluster/v1.ClusterAccessStatus", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
-	}
-}
-
-func schema_apis_loft_cluster_v1_ClusterAccessList(ref common.ReferenceCallback) common.OpenAPIDefinition {
-	return common.OpenAPIDefinition{
-		Schema: spec.Schema{
-			SchemaProps: spec.SchemaProps{
-				Type: []string{"object"},
-				Properties: map[string]spec.Schema{
-					"kind": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"apiVersion": {
-						SchemaProps: spec.SchemaProps{
-							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"metadata": {
-						SchemaProps: spec.SchemaProps{
-							Ref: ref("k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"),
-						},
-					},
-					"items": {
-						SchemaProps: spec.SchemaProps{
-							Type: []string{"array"},
-							Items: &spec.SchemaOrArray{
-								Schema: &spec.Schema{
-									SchemaProps: spec.SchemaProps{
-										Ref: ref("github.com/loft-sh/agentapi/pkg/apis/loft/cluster/v1.ClusterAccess"),
-									},
-								},
-							},
-						},
-					},
-				},
-				Required: []string{"items"},
-			},
-		},
-		Dependencies: []string{
-			"github.com/loft-sh/agentapi/pkg/apis/loft/cluster/v1.ClusterAccess", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
-	}
-}
-
-func schema_apis_loft_cluster_v1_ClusterAccessSpec(ref common.ReferenceCallback) common.OpenAPIDefinition {
-	return common.OpenAPIDefinition{
-		Schema: spec.Schema{
-			SchemaProps: spec.SchemaProps{
-				Type: []string{"object"},
-				Properties: map[string]spec.Schema{
-					"displayName": {
-						SchemaProps: spec.SchemaProps{
-							Description: "DisplayName is the name that should be shown in the UI",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"description": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Description is the description of this object in human-readable text.",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"users": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Users are the users affected by this cluster access object",
-							Type:        []string{"array"},
-							Items: &spec.SchemaOrArray{
-								Schema: &spec.Schema{
-									SchemaProps: spec.SchemaProps{
-										Ref: ref("github.com/loft-sh/agentapi/pkg/apis/loft/storage/v1.UserOrTeam"),
-									},
-								},
-							},
-						},
-					},
-					"teams": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Teams are the teams affected by this cluster access object",
-							Type:        []string{"array"},
-							Items: &spec.SchemaOrArray{
-								Schema: &spec.Schema{
-									SchemaProps: spec.SchemaProps{
-										Type:   []string{"string"},
-										Format: "",
-									},
-								},
-							},
-						},
-					},
-					"clusterRoles": {
-						SchemaProps: spec.SchemaProps{
-							Description: "ClusterRoles define the cluster roles that the users should have assigned in the cluster.",
-							Type:        []string{"array"},
-							Items: &spec.SchemaOrArray{
-								Schema: &spec.Schema{
-									SchemaProps: spec.SchemaProps{
-										Ref: ref("github.com/loft-sh/agentapi/pkg/apis/loft/storage/v1.ClusterRoleRef"),
-									},
-								},
-							},
-						},
-					},
-					"priority": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Priority is a unique value that specifies the priority of this cluster access for the space constraints and quota. A higher priority means the cluster access object will override the space constraints of lower priority cluster access objects",
-							Type:        []string{"integer"},
-							Format:      "int32",
-						},
-					},
-					"spaceConstraintsRef": {
-						SchemaProps: spec.SchemaProps{
-							Description: "SpaceConstraintsRef is a reference to a space constraints object",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"quota": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Quota defines the quotas for the members that should be created.",
-							Ref:         ref("github.com/loft-sh/agentapi/pkg/apis/loft/storage/v1.AccessQuota"),
-						},
-					},
-				},
-			},
-		},
-		Dependencies: []string{
-			"github.com/loft-sh/agentapi/pkg/apis/loft/storage/v1.AccessQuota", "github.com/loft-sh/agentapi/pkg/apis/loft/storage/v1.ClusterRoleRef", "github.com/loft-sh/agentapi/pkg/apis/loft/storage/v1.UserOrTeam"},
-	}
-}
-
-func schema_apis_loft_cluster_v1_ClusterAccessStatus(ref common.ReferenceCallback) common.OpenAPIDefinition {
-	return common.OpenAPIDefinition{
-		Schema: spec.Schema{
-			SchemaProps: spec.SchemaProps{
-				Type: []string{"object"},
-				Properties: map[string]spec.Schema{
-					"users": {
-						SchemaProps: spec.SchemaProps{
-							Type: []string{"array"},
-							Items: &spec.SchemaOrArray{
-								Schema: &spec.Schema{
-									SchemaProps: spec.SchemaProps{
-										Ref: ref("github.com/loft-sh/agentapi/pkg/apis/loft/cluster/v1.UserOrTeam"),
-									},
-								},
-							},
-						},
-					},
-					"teams": {
-						SchemaProps: spec.SchemaProps{
-							Type: []string{"array"},
-							Items: &spec.SchemaOrArray{
-								Schema: &spec.Schema{
-									SchemaProps: spec.SchemaProps{
-										Ref: ref("github.com/loft-sh/agentapi/pkg/apis/loft/cluster/v1.EntityInfo"),
-									},
-								},
-							},
-						},
-					},
-					"spaceConstraint": {
-						SchemaProps: spec.SchemaProps{
-							Ref: ref("github.com/loft-sh/agentapi/pkg/apis/loft/cluster/v1.EntityInfo"),
-						},
-					},
-				},
-			},
-		},
-		Dependencies: []string{
-			"github.com/loft-sh/agentapi/pkg/apis/loft/cluster/v1.EntityInfo", "github.com/loft-sh/agentapi/pkg/apis/loft/cluster/v1.UserOrTeam"},
-	}
-}
-
 func schema_apis_loft_cluster_v1_ClusterQuota(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
@@ -3231,6 +3010,227 @@ func schema_apis_loft_cluster_v1_LastActivityInfo(ref common.ReferenceCallback) 
 	}
 }
 
+func schema_apis_loft_cluster_v1_LocalClusterAccess(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "LocalClusterAccess holds the cluster access information",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"kind": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"apiVersion": {
+						SchemaProps: spec.SchemaProps{
+							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"metadata": {
+						SchemaProps: spec.SchemaProps{
+							Ref: ref("k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"),
+						},
+					},
+					"spec": {
+						SchemaProps: spec.SchemaProps{
+							Ref: ref("github.com/loft-sh/agentapi/pkg/apis/loft/cluster/v1.LocalClusterAccessSpec"),
+						},
+					},
+					"status": {
+						SchemaProps: spec.SchemaProps{
+							Ref: ref("github.com/loft-sh/agentapi/pkg/apis/loft/cluster/v1.LocalClusterAccessStatus"),
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			"github.com/loft-sh/agentapi/pkg/apis/loft/cluster/v1.LocalClusterAccessSpec", "github.com/loft-sh/agentapi/pkg/apis/loft/cluster/v1.LocalClusterAccessStatus", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
+	}
+}
+
+func schema_apis_loft_cluster_v1_LocalClusterAccessList(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"kind": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"apiVersion": {
+						SchemaProps: spec.SchemaProps{
+							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"metadata": {
+						SchemaProps: spec.SchemaProps{
+							Ref: ref("k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"),
+						},
+					},
+					"items": {
+						SchemaProps: spec.SchemaProps{
+							Type: []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Ref: ref("github.com/loft-sh/agentapi/pkg/apis/loft/cluster/v1.LocalClusterAccess"),
+									},
+								},
+							},
+						},
+					},
+				},
+				Required: []string{"items"},
+			},
+		},
+		Dependencies: []string{
+			"github.com/loft-sh/agentapi/pkg/apis/loft/cluster/v1.LocalClusterAccess", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
+	}
+}
+
+func schema_apis_loft_cluster_v1_LocalClusterAccessSpec(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"displayName": {
+						SchemaProps: spec.SchemaProps{
+							Description: "DisplayName is the name that should be shown in the UI",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"description": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Description is the description of this object in human-readable text.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"users": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Users are the users affected by this cluster access object",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Ref: ref("github.com/loft-sh/agentapi/pkg/apis/loft/storage/v1.UserOrTeam"),
+									},
+								},
+							},
+						},
+					},
+					"teams": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Teams are the teams affected by this cluster access object",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Type:   []string{"string"},
+										Format: "",
+									},
+								},
+							},
+						},
+					},
+					"clusterRoles": {
+						SchemaProps: spec.SchemaProps{
+							Description: "ClusterRoles define the cluster roles that the users should have assigned in the cluster.",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Ref: ref("github.com/loft-sh/agentapi/pkg/apis/loft/storage/v1.ClusterRoleRef"),
+									},
+								},
+							},
+						},
+					},
+					"priority": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Priority is a unique value that specifies the priority of this cluster access for the space constraints and quota. A higher priority means the cluster access object will override the space constraints of lower priority cluster access objects",
+							Type:        []string{"integer"},
+							Format:      "int32",
+						},
+					},
+					"spaceConstraintsRef": {
+						SchemaProps: spec.SchemaProps{
+							Description: "SpaceConstraintsRef is a reference to a space constraints object",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"quota": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Quota defines the quotas for the members that should be created.",
+							Ref:         ref("github.com/loft-sh/agentapi/pkg/apis/loft/storage/v1.AccessQuota"),
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			"github.com/loft-sh/agentapi/pkg/apis/loft/storage/v1.AccessQuota", "github.com/loft-sh/agentapi/pkg/apis/loft/storage/v1.ClusterRoleRef", "github.com/loft-sh/agentapi/pkg/apis/loft/storage/v1.UserOrTeam"},
+	}
+}
+
+func schema_apis_loft_cluster_v1_LocalClusterAccessStatus(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"users": {
+						SchemaProps: spec.SchemaProps{
+							Type: []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Ref: ref("github.com/loft-sh/agentapi/pkg/apis/loft/cluster/v1.UserOrTeam"),
+									},
+								},
+							},
+						},
+					},
+					"teams": {
+						SchemaProps: spec.SchemaProps{
+							Type: []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Ref: ref("github.com/loft-sh/agentapi/pkg/apis/loft/cluster/v1.EntityInfo"),
+									},
+								},
+							},
+						},
+					},
+					"spaceConstraint": {
+						SchemaProps: spec.SchemaProps{
+							Ref: ref("github.com/loft-sh/agentapi/pkg/apis/loft/cluster/v1.EntityInfo"),
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			"github.com/loft-sh/agentapi/pkg/apis/loft/cluster/v1.EntityInfo", "github.com/loft-sh/agentapi/pkg/apis/loft/cluster/v1.UserOrTeam"},
+	}
+}
+
 func schema_apis_loft_cluster_v1_Maintainer(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
@@ -3723,6 +3723,27 @@ func schema_apis_loft_cluster_v1_SpaceConstraintNamespaceStatus(ref common.Refer
 			SchemaProps: spec.SchemaProps{
 				Type: []string{"object"},
 				Properties: map[string]spec.Schema{
+					"spaceConstraint": {
+						SchemaProps: spec.SchemaProps{
+							Description: "SpaceConstraint are the applied space constraints",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"user": {
+						SchemaProps: spec.SchemaProps{
+							Description: "User that was used to apply the space constraints",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"team": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Team that was used to apply the space constraints",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
 					"observedGeneration": {
 						SchemaProps: spec.SchemaProps{
 							Description: "ObservedGeneration of the space constraint",
@@ -4168,196 +4189,6 @@ func schema_apis_loft_storage_v1_AccessQuota(ref common.ReferenceCallback) commo
 	}
 }
 
-func schema_apis_loft_storage_v1_ClusterAccess(ref common.ReferenceCallback) common.OpenAPIDefinition {
-	return common.OpenAPIDefinition{
-		Schema: spec.Schema{
-			SchemaProps: spec.SchemaProps{
-				Description: "ClusterAccess holds the cluster access information",
-				Type:        []string{"object"},
-				Properties: map[string]spec.Schema{
-					"kind": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"apiVersion": {
-						SchemaProps: spec.SchemaProps{
-							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"metadata": {
-						SchemaProps: spec.SchemaProps{
-							Ref: ref("k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"),
-						},
-					},
-					"spec": {
-						SchemaProps: spec.SchemaProps{
-							Ref: ref("github.com/loft-sh/agentapi/pkg/apis/loft/storage/v1.ClusterAccessSpec"),
-						},
-					},
-					"status": {
-						SchemaProps: spec.SchemaProps{
-							Ref: ref("github.com/loft-sh/agentapi/pkg/apis/loft/storage/v1.ClusterAccessStatus"),
-						},
-					},
-				},
-			},
-		},
-		Dependencies: []string{
-			"github.com/loft-sh/agentapi/pkg/apis/loft/storage/v1.ClusterAccessSpec", "github.com/loft-sh/agentapi/pkg/apis/loft/storage/v1.ClusterAccessStatus", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
-	}
-}
-
-func schema_apis_loft_storage_v1_ClusterAccessList(ref common.ReferenceCallback) common.OpenAPIDefinition {
-	return common.OpenAPIDefinition{
-		Schema: spec.Schema{
-			SchemaProps: spec.SchemaProps{
-				Description: "ClusterAccessList contains a list of cluster access objects",
-				Type:        []string{"object"},
-				Properties: map[string]spec.Schema{
-					"kind": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"apiVersion": {
-						SchemaProps: spec.SchemaProps{
-							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"metadata": {
-						SchemaProps: spec.SchemaProps{
-							Ref: ref("k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"),
-						},
-					},
-					"items": {
-						SchemaProps: spec.SchemaProps{
-							Type: []string{"array"},
-							Items: &spec.SchemaOrArray{
-								Schema: &spec.Schema{
-									SchemaProps: spec.SchemaProps{
-										Ref: ref("github.com/loft-sh/agentapi/pkg/apis/loft/storage/v1.ClusterAccess"),
-									},
-								},
-							},
-						},
-					},
-				},
-				Required: []string{"items"},
-			},
-		},
-		Dependencies: []string{
-			"github.com/loft-sh/agentapi/pkg/apis/loft/storage/v1.ClusterAccess", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
-	}
-}
-
-func schema_apis_loft_storage_v1_ClusterAccessSpec(ref common.ReferenceCallback) common.OpenAPIDefinition {
-	return common.OpenAPIDefinition{
-		Schema: spec.Schema{
-			SchemaProps: spec.SchemaProps{
-				Type: []string{"object"},
-				Properties: map[string]spec.Schema{
-					"displayName": {
-						SchemaProps: spec.SchemaProps{
-							Description: "DisplayName is the name that should be shown in the UI",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"description": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Description is the description of this object in human-readable text.",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"users": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Users are the users affected by this cluster access object",
-							Type:        []string{"array"},
-							Items: &spec.SchemaOrArray{
-								Schema: &spec.Schema{
-									SchemaProps: spec.SchemaProps{
-										Ref: ref("github.com/loft-sh/agentapi/pkg/apis/loft/storage/v1.UserOrTeam"),
-									},
-								},
-							},
-						},
-					},
-					"teams": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Teams are the teams affected by this cluster access object",
-							Type:        []string{"array"},
-							Items: &spec.SchemaOrArray{
-								Schema: &spec.Schema{
-									SchemaProps: spec.SchemaProps{
-										Type:   []string{"string"},
-										Format: "",
-									},
-								},
-							},
-						},
-					},
-					"clusterRoles": {
-						SchemaProps: spec.SchemaProps{
-							Description: "ClusterRoles define the cluster roles that the users should have assigned in the cluster.",
-							Type:        []string{"array"},
-							Items: &spec.SchemaOrArray{
-								Schema: &spec.Schema{
-									SchemaProps: spec.SchemaProps{
-										Ref: ref("github.com/loft-sh/agentapi/pkg/apis/loft/storage/v1.ClusterRoleRef"),
-									},
-								},
-							},
-						},
-					},
-					"priority": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Priority is a unique value that specifies the priority of this cluster access for the space constraints and quota. A higher priority means the cluster access object will override the space constraints of lower priority cluster access objects",
-							Type:        []string{"integer"},
-							Format:      "int32",
-						},
-					},
-					"spaceConstraintsRef": {
-						SchemaProps: spec.SchemaProps{
-							Description: "SpaceConstraintsRef is a reference to a space constraints object",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"quota": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Quota defines the quotas for the members that should be created.",
-							Ref:         ref("github.com/loft-sh/agentapi/pkg/apis/loft/storage/v1.AccessQuota"),
-						},
-					},
-				},
-			},
-		},
-		Dependencies: []string{
-			"github.com/loft-sh/agentapi/pkg/apis/loft/storage/v1.AccessQuota", "github.com/loft-sh/agentapi/pkg/apis/loft/storage/v1.ClusterRoleRef", "github.com/loft-sh/agentapi/pkg/apis/loft/storage/v1.UserOrTeam"},
-	}
-}
-
-func schema_apis_loft_storage_v1_ClusterAccessStatus(ref common.ReferenceCallback) common.OpenAPIDefinition {
-	return common.OpenAPIDefinition{
-		Schema: spec.Schema{
-			SchemaProps: spec.SchemaProps{
-				Description: "ClusterAccessStatus holds the status of a user access",
-				Type:        []string{"object"},
-			},
-		},
-	}
-}
-
 func schema_apis_loft_storage_v1_ClusterQuota(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
@@ -4566,142 +4397,6 @@ func schema_apis_loft_storage_v1_ClusterRoleRef(ref common.ReferenceCallback) co
 	}
 }
 
-func schema_apis_loft_storage_v1_ClusterRoleTemplate(ref common.ReferenceCallback) common.OpenAPIDefinition {
-	return common.OpenAPIDefinition{
-		Schema: spec.Schema{
-			SchemaProps: spec.SchemaProps{
-				Description: "ClusterRoleTemplate holds a cluster role configuration",
-				Type:        []string{"object"},
-				Properties: map[string]spec.Schema{
-					"kind": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"apiVersion": {
-						SchemaProps: spec.SchemaProps{
-							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"metadata": {
-						SchemaProps: spec.SchemaProps{
-							Ref: ref("k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"),
-						},
-					},
-					"spec": {
-						SchemaProps: spec.SchemaProps{
-							Ref: ref("github.com/loft-sh/agentapi/pkg/apis/loft/storage/v1.ClusterRoleTemplateSpec"),
-						},
-					},
-					"status": {
-						SchemaProps: spec.SchemaProps{
-							Ref: ref("github.com/loft-sh/agentapi/pkg/apis/loft/storage/v1.ClusterRoleTemplateStatus"),
-						},
-					},
-				},
-			},
-		},
-		Dependencies: []string{
-			"github.com/loft-sh/agentapi/pkg/apis/loft/storage/v1.ClusterRoleTemplateSpec", "github.com/loft-sh/agentapi/pkg/apis/loft/storage/v1.ClusterRoleTemplateStatus", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
-	}
-}
-
-func schema_apis_loft_storage_v1_ClusterRoleTemplateList(ref common.ReferenceCallback) common.OpenAPIDefinition {
-	return common.OpenAPIDefinition{
-		Schema: spec.Schema{
-			SchemaProps: spec.SchemaProps{
-				Description: "ClusterRoleTemplateList contains a list of ClusterRoleTemplate objects",
-				Type:        []string{"object"},
-				Properties: map[string]spec.Schema{
-					"kind": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"apiVersion": {
-						SchemaProps: spec.SchemaProps{
-							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"metadata": {
-						SchemaProps: spec.SchemaProps{
-							Ref: ref("k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"),
-						},
-					},
-					"items": {
-						SchemaProps: spec.SchemaProps{
-							Type: []string{"array"},
-							Items: &spec.SchemaOrArray{
-								Schema: &spec.Schema{
-									SchemaProps: spec.SchemaProps{
-										Ref: ref("github.com/loft-sh/agentapi/pkg/apis/loft/storage/v1.ClusterRoleTemplate"),
-									},
-								},
-							},
-						},
-					},
-				},
-				Required: []string{"items"},
-			},
-		},
-		Dependencies: []string{
-			"github.com/loft-sh/agentapi/pkg/apis/loft/storage/v1.ClusterRoleTemplate", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
-	}
-}
-
-func schema_apis_loft_storage_v1_ClusterRoleTemplateSpec(ref common.ReferenceCallback) common.OpenAPIDefinition {
-	return common.OpenAPIDefinition{
-		Schema: spec.Schema{
-			SchemaProps: spec.SchemaProps{
-				Type: []string{"object"},
-				Properties: map[string]spec.Schema{
-					"displayName": {
-						SchemaProps: spec.SchemaProps{
-							Description: "DisplayName is the name that should be shown in the UI",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"description": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Description is the description of this object in human-readable text.",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"clusterRoleTemplate": {
-						SchemaProps: spec.SchemaProps{
-							Description: "ClusterRoleTemplate holds the cluster role template",
-							Ref:         ref("github.com/loft-sh/agentapi/pkg/apis/loft/storage/v1.ClusterRoleTemplateTemplate"),
-						},
-					},
-				},
-			},
-		},
-		Dependencies: []string{
-			"github.com/loft-sh/agentapi/pkg/apis/loft/storage/v1.ClusterRoleTemplateTemplate"},
-	}
-}
-
-func schema_apis_loft_storage_v1_ClusterRoleTemplateStatus(ref common.ReferenceCallback) common.OpenAPIDefinition {
-	return common.OpenAPIDefinition{
-		Schema: spec.Schema{
-			SchemaProps: spec.SchemaProps{
-				Description: "ClusterRoleTemplateStatus holds the status of a user access",
-				Type:        []string{"object"},
-			},
-		},
-	}
-}
-
 func schema_apis_loft_storage_v1_ClusterRoleTemplateTemplate(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
@@ -4741,11 +4436,68 @@ func schema_apis_loft_storage_v1_ClusterRoleTemplateTemplate(ref common.Referenc
 	}
 }
 
-func schema_apis_loft_storage_v1_ClusterTeam(ref common.ReferenceCallback) common.OpenAPIDefinition {
+func schema_apis_loft_storage_v1_Condition(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
-				Description: "ClusterTeam holds the cluster user information",
+				Description: "Condition defines an observation of a Cluster API resource operational state.",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"type": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Type of condition in CamelCase or in foo.example.com/CamelCase. Many .condition.type values are consistent across resources like Available, but because arbitrary conditions can be useful (see .node.status.conditions), the ability to deconflict is important.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"status": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Status of the condition, one of True, False, Unknown.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"severity": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Severity provides an explicit classification of Reason code, so the users or machines can immediately understand the current situation and act accordingly. The Severity field MUST be set only when Status=False.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"lastTransitionTime": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Last time the condition transitioned from one status to another. This should be when the underlying condition changed. If that is not known, then using the time when the API field changed is acceptable.",
+							Ref:         ref("k8s.io/apimachinery/pkg/apis/meta/v1.Time"),
+						},
+					},
+					"reason": {
+						SchemaProps: spec.SchemaProps{
+							Description: "The reason for the condition's last transition in CamelCase. The specific API may choose whether this field is considered a guaranteed API. This field may not be empty.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"message": {
+						SchemaProps: spec.SchemaProps{
+							Description: "A human readable message indicating details about the transition. This field may be empty.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+				},
+				Required: []string{"type", "status"},
+			},
+		},
+		Dependencies: []string{
+			"k8s.io/apimachinery/pkg/apis/meta/v1.Time"},
+	}
+}
+
+func schema_apis_loft_storage_v1_LocalClusterAccess(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "LocalClusterAccess holds the cluster access information",
 				Type:        []string{"object"},
 				Properties: map[string]spec.Schema{
 					"kind": {
@@ -4769,27 +4521,27 @@ func schema_apis_loft_storage_v1_ClusterTeam(ref common.ReferenceCallback) commo
 					},
 					"spec": {
 						SchemaProps: spec.SchemaProps{
-							Ref: ref("github.com/loft-sh/agentapi/pkg/apis/loft/storage/v1.ClusterTeamSpec"),
+							Ref: ref("github.com/loft-sh/agentapi/pkg/apis/loft/storage/v1.LocalClusterAccessSpec"),
 						},
 					},
 					"status": {
 						SchemaProps: spec.SchemaProps{
-							Ref: ref("github.com/loft-sh/agentapi/pkg/apis/loft/storage/v1.ClusterTeamStatus"),
+							Ref: ref("github.com/loft-sh/agentapi/pkg/apis/loft/storage/v1.LocalClusterAccessStatus"),
 						},
 					},
 				},
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/agentapi/pkg/apis/loft/storage/v1.ClusterTeamSpec", "github.com/loft-sh/agentapi/pkg/apis/loft/storage/v1.ClusterTeamStatus", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
+			"github.com/loft-sh/agentapi/pkg/apis/loft/storage/v1.LocalClusterAccessSpec", "github.com/loft-sh/agentapi/pkg/apis/loft/storage/v1.LocalClusterAccessStatus", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
 	}
 }
 
-func schema_apis_loft_storage_v1_ClusterTeamList(ref common.ReferenceCallback) common.OpenAPIDefinition {
+func schema_apis_loft_storage_v1_LocalClusterAccessList(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
-				Description: "ClusterTeamList contains a list of ClusterTeam objects",
+				Description: "LocalClusterAccessList contains a list of cluster access objects",
 				Type:        []string{"object"},
 				Properties: map[string]spec.Schema{
 					"kind": {
@@ -4817,7 +4569,7 @@ func schema_apis_loft_storage_v1_ClusterTeamList(ref common.ReferenceCallback) c
 							Items: &spec.SchemaOrArray{
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
-										Ref: ref("github.com/loft-sh/agentapi/pkg/apis/loft/storage/v1.ClusterTeam"),
+										Ref: ref("github.com/loft-sh/agentapi/pkg/apis/loft/storage/v1.LocalClusterAccess"),
 									},
 								},
 							},
@@ -4828,11 +4580,480 @@ func schema_apis_loft_storage_v1_ClusterTeamList(ref common.ReferenceCallback) c
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/agentapi/pkg/apis/loft/storage/v1.ClusterTeam", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
+			"github.com/loft-sh/agentapi/pkg/apis/loft/storage/v1.LocalClusterAccess", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
 	}
 }
 
-func schema_apis_loft_storage_v1_ClusterTeamSpec(ref common.ReferenceCallback) common.OpenAPIDefinition {
+func schema_apis_loft_storage_v1_LocalClusterAccessSpec(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"displayName": {
+						SchemaProps: spec.SchemaProps{
+							Description: "DisplayName is the name that should be shown in the UI",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"description": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Description is the description of this object in human-readable text.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"users": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Users are the users affected by this cluster access object",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Ref: ref("github.com/loft-sh/agentapi/pkg/apis/loft/storage/v1.UserOrTeam"),
+									},
+								},
+							},
+						},
+					},
+					"teams": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Teams are the teams affected by this cluster access object",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Type:   []string{"string"},
+										Format: "",
+									},
+								},
+							},
+						},
+					},
+					"clusterRoles": {
+						SchemaProps: spec.SchemaProps{
+							Description: "ClusterRoles define the cluster roles that the users should have assigned in the cluster.",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Ref: ref("github.com/loft-sh/agentapi/pkg/apis/loft/storage/v1.ClusterRoleRef"),
+									},
+								},
+							},
+						},
+					},
+					"priority": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Priority is a unique value that specifies the priority of this cluster access for the space constraints and quota. A higher priority means the cluster access object will override the space constraints of lower priority cluster access objects",
+							Type:        []string{"integer"},
+							Format:      "int32",
+						},
+					},
+					"spaceConstraintsRef": {
+						SchemaProps: spec.SchemaProps{
+							Description: "SpaceConstraintsRef is a reference to a space constraints object",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"quota": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Quota defines the quotas for the members that should be created.",
+							Ref:         ref("github.com/loft-sh/agentapi/pkg/apis/loft/storage/v1.AccessQuota"),
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			"github.com/loft-sh/agentapi/pkg/apis/loft/storage/v1.AccessQuota", "github.com/loft-sh/agentapi/pkg/apis/loft/storage/v1.ClusterRoleRef", "github.com/loft-sh/agentapi/pkg/apis/loft/storage/v1.UserOrTeam"},
+	}
+}
+
+func schema_apis_loft_storage_v1_LocalClusterAccessStatus(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "LocalClusterAccessStatus holds the status of a user access",
+				Type:        []string{"object"},
+			},
+		},
+	}
+}
+
+func schema_apis_loft_storage_v1_LocalClusterRoleTemplate(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "LocalClusterRoleTemplate holds a cluster role configuration",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"kind": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"apiVersion": {
+						SchemaProps: spec.SchemaProps{
+							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"metadata": {
+						SchemaProps: spec.SchemaProps{
+							Ref: ref("k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"),
+						},
+					},
+					"spec": {
+						SchemaProps: spec.SchemaProps{
+							Ref: ref("github.com/loft-sh/agentapi/pkg/apis/loft/storage/v1.LocalClusterRoleTemplateSpec"),
+						},
+					},
+					"status": {
+						SchemaProps: spec.SchemaProps{
+							Ref: ref("github.com/loft-sh/agentapi/pkg/apis/loft/storage/v1.LocalClusterRoleTemplateStatus"),
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			"github.com/loft-sh/agentapi/pkg/apis/loft/storage/v1.LocalClusterRoleTemplateSpec", "github.com/loft-sh/agentapi/pkg/apis/loft/storage/v1.LocalClusterRoleTemplateStatus", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
+	}
+}
+
+func schema_apis_loft_storage_v1_LocalClusterRoleTemplateList(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "LocalClusterRoleTemplateList contains a list of LocalClusterRoleTemplate objects",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"kind": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"apiVersion": {
+						SchemaProps: spec.SchemaProps{
+							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"metadata": {
+						SchemaProps: spec.SchemaProps{
+							Ref: ref("k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"),
+						},
+					},
+					"items": {
+						SchemaProps: spec.SchemaProps{
+							Type: []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Ref: ref("github.com/loft-sh/agentapi/pkg/apis/loft/storage/v1.LocalClusterRoleTemplate"),
+									},
+								},
+							},
+						},
+					},
+				},
+				Required: []string{"items"},
+			},
+		},
+		Dependencies: []string{
+			"github.com/loft-sh/agentapi/pkg/apis/loft/storage/v1.LocalClusterRoleTemplate", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
+	}
+}
+
+func schema_apis_loft_storage_v1_LocalClusterRoleTemplateSpec(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"displayName": {
+						SchemaProps: spec.SchemaProps{
+							Description: "DisplayName is the name that should be shown in the UI",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"description": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Description is the description of this object in human-readable text.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"clusterRoleTemplate": {
+						SchemaProps: spec.SchemaProps{
+							Description: "ClusterRoleTemplate holds the cluster role template",
+							Ref:         ref("github.com/loft-sh/agentapi/pkg/apis/loft/storage/v1.ClusterRoleTemplateTemplate"),
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			"github.com/loft-sh/agentapi/pkg/apis/loft/storage/v1.ClusterRoleTemplateTemplate"},
+	}
+}
+
+func schema_apis_loft_storage_v1_LocalClusterRoleTemplateStatus(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "LocalClusterRoleTemplateStatus holds the status of a user access",
+				Type:        []string{"object"},
+			},
+		},
+	}
+}
+
+func schema_apis_loft_storage_v1_LocalSpaceConstraint(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "LocalSpaceConstraint holds the space constraints",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"kind": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"apiVersion": {
+						SchemaProps: spec.SchemaProps{
+							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"metadata": {
+						SchemaProps: spec.SchemaProps{
+							Ref: ref("k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"),
+						},
+					},
+					"spec": {
+						SchemaProps: spec.SchemaProps{
+							Ref: ref("github.com/loft-sh/agentapi/pkg/apis/loft/storage/v1.LocalSpaceConstraintSpec"),
+						},
+					},
+					"status": {
+						SchemaProps: spec.SchemaProps{
+							Ref: ref("github.com/loft-sh/agentapi/pkg/apis/loft/storage/v1.LocalSpaceConstraintStatus"),
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			"github.com/loft-sh/agentapi/pkg/apis/loft/storage/v1.LocalSpaceConstraintSpec", "github.com/loft-sh/agentapi/pkg/apis/loft/storage/v1.LocalSpaceConstraintStatus", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
+	}
+}
+
+func schema_apis_loft_storage_v1_LocalSpaceConstraintList(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "LocalSpaceConstraintList contains a list of LocalSpaceConstraint objects",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"kind": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"apiVersion": {
+						SchemaProps: spec.SchemaProps{
+							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"metadata": {
+						SchemaProps: spec.SchemaProps{
+							Ref: ref("k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"),
+						},
+					},
+					"items": {
+						SchemaProps: spec.SchemaProps{
+							Type: []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Ref: ref("github.com/loft-sh/agentapi/pkg/apis/loft/storage/v1.LocalSpaceConstraint"),
+									},
+								},
+							},
+						},
+					},
+				},
+				Required: []string{"items"},
+			},
+		},
+		Dependencies: []string{
+			"github.com/loft-sh/agentapi/pkg/apis/loft/storage/v1.LocalSpaceConstraint", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
+	}
+}
+
+func schema_apis_loft_storage_v1_LocalSpaceConstraintSpec(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"displayName": {
+						SchemaProps: spec.SchemaProps{
+							Description: "DisplayName is the name that should be shown in the UI",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"description": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Description is the description of this object in human-readable text.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"spaceTemplate": {
+						SchemaProps: spec.SchemaProps{
+							Description: "SpaceTemplate holds the space configuration",
+							Ref:         ref("github.com/loft-sh/agentapi/pkg/apis/loft/storage/v1.SpaceTemplate"),
+						},
+					},
+					"sync": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Sync specifies if spaces that were created through this space constraint object should get synced with this object.",
+							Type:        []string{"boolean"},
+							Format:      "",
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			"github.com/loft-sh/agentapi/pkg/apis/loft/storage/v1.SpaceTemplate"},
+	}
+}
+
+func schema_apis_loft_storage_v1_LocalSpaceConstraintStatus(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "LocalSpaceConstraintStatus holds the status of a user access",
+				Type:        []string{"object"},
+			},
+		},
+	}
+}
+
+func schema_apis_loft_storage_v1_LocalTeam(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "LocalTeam holds the cluster user information",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"kind": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"apiVersion": {
+						SchemaProps: spec.SchemaProps{
+							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"metadata": {
+						SchemaProps: spec.SchemaProps{
+							Ref: ref("k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"),
+						},
+					},
+					"spec": {
+						SchemaProps: spec.SchemaProps{
+							Ref: ref("github.com/loft-sh/agentapi/pkg/apis/loft/storage/v1.LocalTeamSpec"),
+						},
+					},
+					"status": {
+						SchemaProps: spec.SchemaProps{
+							Ref: ref("github.com/loft-sh/agentapi/pkg/apis/loft/storage/v1.LocalTeamStatus"),
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			"github.com/loft-sh/agentapi/pkg/apis/loft/storage/v1.LocalTeamSpec", "github.com/loft-sh/agentapi/pkg/apis/loft/storage/v1.LocalTeamStatus", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
+	}
+}
+
+func schema_apis_loft_storage_v1_LocalTeamList(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "LocalTeamList contains a list of LocalTeam objects",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"kind": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"apiVersion": {
+						SchemaProps: spec.SchemaProps{
+							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"metadata": {
+						SchemaProps: spec.SchemaProps{
+							Ref: ref("k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"),
+						},
+					},
+					"items": {
+						SchemaProps: spec.SchemaProps{
+							Type: []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Ref: ref("github.com/loft-sh/agentapi/pkg/apis/loft/storage/v1.LocalTeam"),
+									},
+								},
+							},
+						},
+					},
+				},
+				Required: []string{"items"},
+			},
+		},
+		Dependencies: []string{
+			"github.com/loft-sh/agentapi/pkg/apis/loft/storage/v1.LocalTeam", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
+	}
+}
+
+func schema_apis_loft_storage_v1_LocalTeamSpec(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
@@ -4842,11 +5063,11 @@ func schema_apis_loft_storage_v1_ClusterTeamSpec(ref common.ReferenceCallback) c
 	}
 }
 
-func schema_apis_loft_storage_v1_ClusterTeamStatus(ref common.ReferenceCallback) common.OpenAPIDefinition {
+func schema_apis_loft_storage_v1_LocalTeamStatus(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
-				Description: "ClusterTeamStatus holds the status of a user access",
+				Description: "LocalTeamStatus holds the status of a user access",
 				Type:        []string{"object"},
 				Properties: map[string]spec.Schema{
 					"displayName": {
@@ -4927,11 +5148,11 @@ func schema_apis_loft_storage_v1_ClusterTeamStatus(ref common.ReferenceCallback)
 	}
 }
 
-func schema_apis_loft_storage_v1_ClusterUser(ref common.ReferenceCallback) common.OpenAPIDefinition {
+func schema_apis_loft_storage_v1_LocalUser(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
-				Description: "ClusterUser holds the cluster user information",
+				Description: "LocalUser holds the cluster user information",
 				Type:        []string{"object"},
 				Properties: map[string]spec.Schema{
 					"kind": {
@@ -4955,27 +5176,27 @@ func schema_apis_loft_storage_v1_ClusterUser(ref common.ReferenceCallback) commo
 					},
 					"spec": {
 						SchemaProps: spec.SchemaProps{
-							Ref: ref("github.com/loft-sh/agentapi/pkg/apis/loft/storage/v1.ClusterUserSpec"),
+							Ref: ref("github.com/loft-sh/agentapi/pkg/apis/loft/storage/v1.LocalUserSpec"),
 						},
 					},
 					"status": {
 						SchemaProps: spec.SchemaProps{
-							Ref: ref("github.com/loft-sh/agentapi/pkg/apis/loft/storage/v1.ClusterUserStatus"),
+							Ref: ref("github.com/loft-sh/agentapi/pkg/apis/loft/storage/v1.LocalUserStatus"),
 						},
 					},
 				},
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/agentapi/pkg/apis/loft/storage/v1.ClusterUserSpec", "github.com/loft-sh/agentapi/pkg/apis/loft/storage/v1.ClusterUserStatus", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
+			"github.com/loft-sh/agentapi/pkg/apis/loft/storage/v1.LocalUserSpec", "github.com/loft-sh/agentapi/pkg/apis/loft/storage/v1.LocalUserStatus", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
 	}
 }
 
-func schema_apis_loft_storage_v1_ClusterUserList(ref common.ReferenceCallback) common.OpenAPIDefinition {
+func schema_apis_loft_storage_v1_LocalUserList(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
-				Description: "ClusterUserList contains a list of ClusterUser objects",
+				Description: "LocalUserList contains a list of LocalUser objects",
 				Type:        []string{"object"},
 				Properties: map[string]spec.Schema{
 					"kind": {
@@ -5003,7 +5224,7 @@ func schema_apis_loft_storage_v1_ClusterUserList(ref common.ReferenceCallback) c
 							Items: &spec.SchemaOrArray{
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
-										Ref: ref("github.com/loft-sh/agentapi/pkg/apis/loft/storage/v1.ClusterUser"),
+										Ref: ref("github.com/loft-sh/agentapi/pkg/apis/loft/storage/v1.LocalUser"),
 									},
 								},
 							},
@@ -5014,11 +5235,11 @@ func schema_apis_loft_storage_v1_ClusterUserList(ref common.ReferenceCallback) c
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/agentapi/pkg/apis/loft/storage/v1.ClusterUser", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
+			"github.com/loft-sh/agentapi/pkg/apis/loft/storage/v1.LocalUser", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
 	}
 }
 
-func schema_apis_loft_storage_v1_ClusterUserSpec(ref common.ReferenceCallback) common.OpenAPIDefinition {
+func schema_apis_loft_storage_v1_LocalUserSpec(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
@@ -5028,11 +5249,11 @@ func schema_apis_loft_storage_v1_ClusterUserSpec(ref common.ReferenceCallback) c
 	}
 }
 
-func schema_apis_loft_storage_v1_ClusterUserStatus(ref common.ReferenceCallback) common.OpenAPIDefinition {
+func schema_apis_loft_storage_v1_LocalUserStatus(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
-				Description: "ClusterUserStatus holds the status of a user access",
+				Description: "LocalUserStatus holds the status of a user access",
 				Type:        []string{"object"},
 				Properties: map[string]spec.Schema{
 					"displayName": {
@@ -5127,63 +5348,6 @@ func schema_apis_loft_storage_v1_ClusterUserStatus(ref common.ReferenceCallback)
 	}
 }
 
-func schema_apis_loft_storage_v1_Condition(ref common.ReferenceCallback) common.OpenAPIDefinition {
-	return common.OpenAPIDefinition{
-		Schema: spec.Schema{
-			SchemaProps: spec.SchemaProps{
-				Description: "Condition defines an observation of a Cluster API resource operational state.",
-				Type:        []string{"object"},
-				Properties: map[string]spec.Schema{
-					"type": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Type of condition in CamelCase or in foo.example.com/CamelCase. Many .condition.type values are consistent across resources like Available, but because arbitrary conditions can be useful (see .node.status.conditions), the ability to deconflict is important.",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"status": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Status of the condition, one of True, False, Unknown.",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"severity": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Severity provides an explicit classification of Reason code, so the users or machines can immediately understand the current situation and act accordingly. The Severity field MUST be set only when Status=False.",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"lastTransitionTime": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Last time the condition transitioned from one status to another. This should be when the underlying condition changed. If that is not known, then using the time when the API field changed is acceptable.",
-							Ref:         ref("k8s.io/apimachinery/pkg/apis/meta/v1.Time"),
-						},
-					},
-					"reason": {
-						SchemaProps: spec.SchemaProps{
-							Description: "The reason for the condition's last transition in CamelCase. The specific API may choose whether this field is considered a guaranteed API. This field may not be empty.",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"message": {
-						SchemaProps: spec.SchemaProps{
-							Description: "A human readable message indicating details about the transition. This field may be empty.",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-				},
-				Required: []string{"type", "status"},
-			},
-		},
-		Dependencies: []string{
-			"k8s.io/apimachinery/pkg/apis/meta/v1.Time"},
-	}
-}
-
 func schema_apis_loft_storage_v1_PodSelector(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
@@ -5237,149 +5401,6 @@ func schema_apis_loft_storage_v1_SecretRef(ref common.ReferenceCallback) common.
 						},
 					},
 				},
-			},
-		},
-	}
-}
-
-func schema_apis_loft_storage_v1_SpaceConstraint(ref common.ReferenceCallback) common.OpenAPIDefinition {
-	return common.OpenAPIDefinition{
-		Schema: spec.Schema{
-			SchemaProps: spec.SchemaProps{
-				Description: "SpaceConstraint holds the space constraints",
-				Type:        []string{"object"},
-				Properties: map[string]spec.Schema{
-					"kind": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"apiVersion": {
-						SchemaProps: spec.SchemaProps{
-							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"metadata": {
-						SchemaProps: spec.SchemaProps{
-							Ref: ref("k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"),
-						},
-					},
-					"spec": {
-						SchemaProps: spec.SchemaProps{
-							Ref: ref("github.com/loft-sh/agentapi/pkg/apis/loft/storage/v1.SpaceConstraintSpec"),
-						},
-					},
-					"status": {
-						SchemaProps: spec.SchemaProps{
-							Ref: ref("github.com/loft-sh/agentapi/pkg/apis/loft/storage/v1.SpaceConstraintStatus"),
-						},
-					},
-				},
-			},
-		},
-		Dependencies: []string{
-			"github.com/loft-sh/agentapi/pkg/apis/loft/storage/v1.SpaceConstraintSpec", "github.com/loft-sh/agentapi/pkg/apis/loft/storage/v1.SpaceConstraintStatus", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
-	}
-}
-
-func schema_apis_loft_storage_v1_SpaceConstraintList(ref common.ReferenceCallback) common.OpenAPIDefinition {
-	return common.OpenAPIDefinition{
-		Schema: spec.Schema{
-			SchemaProps: spec.SchemaProps{
-				Description: "SpaceConstraintList contains a list of SpaceConstraint objects",
-				Type:        []string{"object"},
-				Properties: map[string]spec.Schema{
-					"kind": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"apiVersion": {
-						SchemaProps: spec.SchemaProps{
-							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"metadata": {
-						SchemaProps: spec.SchemaProps{
-							Ref: ref("k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"),
-						},
-					},
-					"items": {
-						SchemaProps: spec.SchemaProps{
-							Type: []string{"array"},
-							Items: &spec.SchemaOrArray{
-								Schema: &spec.Schema{
-									SchemaProps: spec.SchemaProps{
-										Ref: ref("github.com/loft-sh/agentapi/pkg/apis/loft/storage/v1.SpaceConstraint"),
-									},
-								},
-							},
-						},
-					},
-				},
-				Required: []string{"items"},
-			},
-		},
-		Dependencies: []string{
-			"github.com/loft-sh/agentapi/pkg/apis/loft/storage/v1.SpaceConstraint", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
-	}
-}
-
-func schema_apis_loft_storage_v1_SpaceConstraintSpec(ref common.ReferenceCallback) common.OpenAPIDefinition {
-	return common.OpenAPIDefinition{
-		Schema: spec.Schema{
-			SchemaProps: spec.SchemaProps{
-				Type: []string{"object"},
-				Properties: map[string]spec.Schema{
-					"displayName": {
-						SchemaProps: spec.SchemaProps{
-							Description: "DisplayName is the name that should be shown in the UI",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"description": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Description is the description of this object in human-readable text.",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"spaceTemplate": {
-						SchemaProps: spec.SchemaProps{
-							Description: "SpaceTemplate holds the space configuration",
-							Ref:         ref("github.com/loft-sh/agentapi/pkg/apis/loft/storage/v1.SpaceTemplate"),
-						},
-					},
-					"sync": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Sync specifies if spaces that were created through this space constraint object should get synced with this object.",
-							Type:        []string{"boolean"},
-							Format:      "",
-						},
-					},
-				},
-			},
-		},
-		Dependencies: []string{
-			"github.com/loft-sh/agentapi/pkg/apis/loft/storage/v1.SpaceTemplate"},
-	}
-}
-
-func schema_apis_loft_storage_v1_SpaceConstraintStatus(ref common.ReferenceCallback) common.OpenAPIDefinition {
-	return common.OpenAPIDefinition{
-		Schema: spec.Schema{
-			SchemaProps: spec.SchemaProps{
-				Description: "SpaceConstraintStatus holds the status of a user access",
-				Type:        []string{"object"},
 			},
 		},
 	}
@@ -7584,7 +7605,8 @@ func schema_pkg_apis_management_v1_ClusterAccess(ref common.ReferenceCallback) c
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
-				Type: []string{"object"},
+				Description: "ClusterAccess holds the globalClusterAccess information",
+				Type:        []string{"object"},
 				Properties: map[string]spec.Schema{
 					"kind": {
 						SchemaProps: spec.SchemaProps{
@@ -7605,37 +7627,21 @@ func schema_pkg_apis_management_v1_ClusterAccess(ref common.ReferenceCallback) c
 							Ref: ref("k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"),
 						},
 					},
-					"teams": {
+					"spec": {
 						SchemaProps: spec.SchemaProps{
-							Description: "Teams holds all the teams that have access to the cluster",
-							Type:        []string{"array"},
-							Items: &spec.SchemaOrArray{
-								Schema: &spec.Schema{
-									SchemaProps: spec.SchemaProps{
-										Ref: ref("github.com/loft-sh/api/pkg/apis/management/v1.ClusterMember"),
-									},
-								},
-							},
+							Ref: ref("github.com/loft-sh/api/pkg/apis/management/v1.ClusterAccessSpec"),
 						},
 					},
-					"users": {
+					"status": {
 						SchemaProps: spec.SchemaProps{
-							Description: "Users holds all the users that have access to the cluster",
-							Type:        []string{"array"},
-							Items: &spec.SchemaOrArray{
-								Schema: &spec.Schema{
-									SchemaProps: spec.SchemaProps{
-										Ref: ref("github.com/loft-sh/api/pkg/apis/management/v1.ClusterMember"),
-									},
-								},
-							},
+							Ref: ref("github.com/loft-sh/api/pkg/apis/management/v1.ClusterAccessStatus"),
 						},
 					},
 				},
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/pkg/apis/management/v1.ClusterMember", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
+			"github.com/loft-sh/api/pkg/apis/management/v1.ClusterAccessSpec", "github.com/loft-sh/api/pkg/apis/management/v1.ClusterAccessStatus", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
 	}
 }
 
@@ -7682,6 +7688,130 @@ func schema_pkg_apis_management_v1_ClusterAccessList(ref common.ReferenceCallbac
 		},
 		Dependencies: []string{
 			"github.com/loft-sh/api/pkg/apis/management/v1.ClusterAccess", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
+	}
+}
+
+func schema_pkg_apis_management_v1_ClusterAccessSpec(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "ClusterAccessSpec holds the specification",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"displayName": {
+						SchemaProps: spec.SchemaProps{
+							Description: "DisplayName is the name that should be displayed in the UI",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"description": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Description describes a cluster access object",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"owner": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Owner holds the owner of this object",
+							Ref:         ref("github.com/loft-sh/api/pkg/apis/storage/v1.UserOrTeam"),
+						},
+					},
+					"clusters": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Clusters are the clusters this template should be applied on.",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Type:   []string{"string"},
+										Format: "",
+									},
+								},
+							},
+						},
+					},
+					"access": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Access holds the access rights for users and teams",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Ref: ref("github.com/loft-sh/api/pkg/apis/storage/v1.Access"),
+									},
+								},
+							},
+						},
+					},
+					"localClusterAccessTemplate": {
+						SchemaProps: spec.SchemaProps{
+							Description: "LocalClusterAccessTemplate holds the cluster access template",
+							Ref:         ref("github.com/loft-sh/api/pkg/apis/storage/v1.LocalClusterAccessTemplate"),
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			"github.com/loft-sh/api/pkg/apis/storage/v1.Access", "github.com/loft-sh/api/pkg/apis/storage/v1.LocalClusterAccessTemplate", "github.com/loft-sh/api/pkg/apis/storage/v1.UserOrTeam"},
+	}
+}
+
+func schema_pkg_apis_management_v1_ClusterAccessStatus(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "ClusterAccessStatus holds the status",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"clusters": {
+						SchemaProps: spec.SchemaProps{
+							Type: []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Ref: ref("github.com/loft-sh/agentapi/pkg/apis/loft/cluster/v1.EntityInfo"),
+									},
+								},
+							},
+						},
+					},
+					"users": {
+						SchemaProps: spec.SchemaProps{
+							Type: []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Ref: ref("github.com/loft-sh/agentapi/pkg/apis/loft/cluster/v1.UserOrTeam"),
+									},
+								},
+							},
+						},
+					},
+					"teams": {
+						SchemaProps: spec.SchemaProps{
+							Type: []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Ref: ref("github.com/loft-sh/agentapi/pkg/apis/loft/cluster/v1.EntityInfo"),
+									},
+								},
+							},
+						},
+					},
+					"spaceConstraint": {
+						SchemaProps: spec.SchemaProps{
+							Ref: ref("github.com/loft-sh/agentapi/pkg/apis/loft/cluster/v1.EntityInfo"),
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			"github.com/loft-sh/agentapi/pkg/apis/loft/cluster/v1.EntityInfo", "github.com/loft-sh/agentapi/pkg/apis/loft/cluster/v1.UserOrTeam"},
 	}
 }
 
@@ -8304,6 +8434,111 @@ func schema_pkg_apis_management_v1_ClusterMember(ref common.ReferenceCallback) c
 	}
 }
 
+func schema_pkg_apis_management_v1_ClusterMemberAccess(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"kind": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"apiVersion": {
+						SchemaProps: spec.SchemaProps{
+							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"metadata": {
+						SchemaProps: spec.SchemaProps{
+							Ref: ref("k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"),
+						},
+					},
+					"teams": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Teams holds all the teams that the current user has access to the cluster",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Ref: ref("github.com/loft-sh/api/pkg/apis/management/v1.ClusterMember"),
+									},
+								},
+							},
+						},
+					},
+					"users": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Users holds all the users that the current user has access to the cluster",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Ref: ref("github.com/loft-sh/api/pkg/apis/management/v1.ClusterMember"),
+									},
+								},
+							},
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			"github.com/loft-sh/api/pkg/apis/management/v1.ClusterMember", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
+	}
+}
+
+func schema_pkg_apis_management_v1_ClusterMemberAccessList(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"kind": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"apiVersion": {
+						SchemaProps: spec.SchemaProps{
+							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"metadata": {
+						SchemaProps: spec.SchemaProps{
+							Ref: ref("k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"),
+						},
+					},
+					"items": {
+						SchemaProps: spec.SchemaProps{
+							Type: []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Ref: ref("github.com/loft-sh/api/pkg/apis/management/v1.ClusterMemberAccess"),
+									},
+								},
+							},
+						},
+					},
+				},
+				Required: []string{"items"},
+			},
+		},
+		Dependencies: []string{
+			"github.com/loft-sh/api/pkg/apis/management/v1.ClusterMemberAccess", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
+	}
+}
+
 func schema_pkg_apis_management_v1_ClusterMembers(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
@@ -8497,6 +8732,198 @@ func schema_pkg_apis_management_v1_ClusterResetList(ref common.ReferenceCallback
 		},
 		Dependencies: []string{
 			"github.com/loft-sh/api/pkg/apis/management/v1.ClusterReset", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
+	}
+}
+
+func schema_pkg_apis_management_v1_ClusterRoleTemplate(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "ClusterRoleTemplate holds the clusterRoleTemplate information",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"kind": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"apiVersion": {
+						SchemaProps: spec.SchemaProps{
+							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"metadata": {
+						SchemaProps: spec.SchemaProps{
+							Ref: ref("k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"),
+						},
+					},
+					"spec": {
+						SchemaProps: spec.SchemaProps{
+							Ref: ref("github.com/loft-sh/api/pkg/apis/management/v1.ClusterRoleTemplateSpec"),
+						},
+					},
+					"status": {
+						SchemaProps: spec.SchemaProps{
+							Ref: ref("github.com/loft-sh/api/pkg/apis/management/v1.ClusterRoleTemplateStatus"),
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			"github.com/loft-sh/api/pkg/apis/management/v1.ClusterRoleTemplateSpec", "github.com/loft-sh/api/pkg/apis/management/v1.ClusterRoleTemplateStatus", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
+	}
+}
+
+func schema_pkg_apis_management_v1_ClusterRoleTemplateList(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"kind": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"apiVersion": {
+						SchemaProps: spec.SchemaProps{
+							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"metadata": {
+						SchemaProps: spec.SchemaProps{
+							Ref: ref("k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"),
+						},
+					},
+					"items": {
+						SchemaProps: spec.SchemaProps{
+							Type: []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Ref: ref("github.com/loft-sh/api/pkg/apis/management/v1.ClusterRoleTemplate"),
+									},
+								},
+							},
+						},
+					},
+				},
+				Required: []string{"items"},
+			},
+		},
+		Dependencies: []string{
+			"github.com/loft-sh/api/pkg/apis/management/v1.ClusterRoleTemplate", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
+	}
+}
+
+func schema_pkg_apis_management_v1_ClusterRoleTemplateSpec(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "ClusterRoleTemplateSpec holds the specification",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"displayName": {
+						SchemaProps: spec.SchemaProps{
+							Description: "DisplayName is the name that should be displayed in the UI",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"description": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Description describes a cluster role template object",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"owner": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Owner holds the owner of this object",
+							Ref:         ref("github.com/loft-sh/api/pkg/apis/storage/v1.UserOrTeam"),
+						},
+					},
+					"clusters": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Clusters are the clusters this template should be applied on.",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Type:   []string{"string"},
+										Format: "",
+									},
+								},
+							},
+						},
+					},
+					"management": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Management defines if this cluster role should be created in the management instance.",
+							Type:        []string{"boolean"},
+							Format:      "",
+						},
+					},
+					"access": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Access holds the access rights for users and teams",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Ref: ref("github.com/loft-sh/api/pkg/apis/storage/v1.Access"),
+									},
+								},
+							},
+						},
+					},
+					"localClusterRoleTemplate": {
+						SchemaProps: spec.SchemaProps{
+							Description: "LocalClusterRoleTemplate holds the cluster role template",
+							Ref:         ref("github.com/loft-sh/api/pkg/apis/storage/v1.LocalClusterRoleTemplate"),
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			"github.com/loft-sh/api/pkg/apis/storage/v1.Access", "github.com/loft-sh/api/pkg/apis/storage/v1.LocalClusterRoleTemplate", "github.com/loft-sh/api/pkg/apis/storage/v1.UserOrTeam"},
+	}
+}
+
+func schema_pkg_apis_management_v1_ClusterRoleTemplateStatus(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "ClusterRoleTemplateStatus holds the status",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"clusters": {
+						SchemaProps: spec.SchemaProps{
+							Type: []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Ref: ref("github.com/loft-sh/agentapi/pkg/apis/loft/cluster/v1.EntityInfo"),
+									},
+								},
+							},
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			"github.com/loft-sh/agentapi/pkg/apis/loft/cluster/v1.EntityInfo"},
 	}
 }
 
@@ -9481,602 +9908,6 @@ func schema_pkg_apis_management_v1_FeatureStatus(ref common.ReferenceCallback) c
 	}
 }
 
-func schema_pkg_apis_management_v1_GlobalClusterAccess(ref common.ReferenceCallback) common.OpenAPIDefinition {
-	return common.OpenAPIDefinition{
-		Schema: spec.Schema{
-			SchemaProps: spec.SchemaProps{
-				Description: "GlobalClusterAccess holds the globalClusterAccess information",
-				Type:        []string{"object"},
-				Properties: map[string]spec.Schema{
-					"kind": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"apiVersion": {
-						SchemaProps: spec.SchemaProps{
-							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"metadata": {
-						SchemaProps: spec.SchemaProps{
-							Ref: ref("k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"),
-						},
-					},
-					"spec": {
-						SchemaProps: spec.SchemaProps{
-							Ref: ref("github.com/loft-sh/api/pkg/apis/management/v1.GlobalClusterAccessSpec"),
-						},
-					},
-					"status": {
-						SchemaProps: spec.SchemaProps{
-							Ref: ref("github.com/loft-sh/api/pkg/apis/management/v1.GlobalClusterAccessStatus"),
-						},
-					},
-				},
-			},
-		},
-		Dependencies: []string{
-			"github.com/loft-sh/api/pkg/apis/management/v1.GlobalClusterAccessSpec", "github.com/loft-sh/api/pkg/apis/management/v1.GlobalClusterAccessStatus", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
-	}
-}
-
-func schema_pkg_apis_management_v1_GlobalClusterAccessList(ref common.ReferenceCallback) common.OpenAPIDefinition {
-	return common.OpenAPIDefinition{
-		Schema: spec.Schema{
-			SchemaProps: spec.SchemaProps{
-				Type: []string{"object"},
-				Properties: map[string]spec.Schema{
-					"kind": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"apiVersion": {
-						SchemaProps: spec.SchemaProps{
-							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"metadata": {
-						SchemaProps: spec.SchemaProps{
-							Ref: ref("k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"),
-						},
-					},
-					"items": {
-						SchemaProps: spec.SchemaProps{
-							Type: []string{"array"},
-							Items: &spec.SchemaOrArray{
-								Schema: &spec.Schema{
-									SchemaProps: spec.SchemaProps{
-										Ref: ref("github.com/loft-sh/api/pkg/apis/management/v1.GlobalClusterAccess"),
-									},
-								},
-							},
-						},
-					},
-				},
-				Required: []string{"items"},
-			},
-		},
-		Dependencies: []string{
-			"github.com/loft-sh/api/pkg/apis/management/v1.GlobalClusterAccess", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
-	}
-}
-
-func schema_pkg_apis_management_v1_GlobalClusterAccessSpec(ref common.ReferenceCallback) common.OpenAPIDefinition {
-	return common.OpenAPIDefinition{
-		Schema: spec.Schema{
-			SchemaProps: spec.SchemaProps{
-				Description: "GlobalClusterAccessSpec holds the specification",
-				Type:        []string{"object"},
-				Properties: map[string]spec.Schema{
-					"displayName": {
-						SchemaProps: spec.SchemaProps{
-							Description: "DisplayName is the name that should be displayed in the UI",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"description": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Description describes a cluster access object",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"owner": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Owner holds the owner of this object",
-							Ref:         ref("github.com/loft-sh/api/pkg/apis/storage/v1.UserOrTeam"),
-						},
-					},
-					"clusters": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Clusters are the clusters this template should be applied on.",
-							Type:        []string{"array"},
-							Items: &spec.SchemaOrArray{
-								Schema: &spec.Schema{
-									SchemaProps: spec.SchemaProps{
-										Type:   []string{"string"},
-										Format: "",
-									},
-								},
-							},
-						},
-					},
-					"access": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Access holds the access rights for users and teams",
-							Type:        []string{"array"},
-							Items: &spec.SchemaOrArray{
-								Schema: &spec.Schema{
-									SchemaProps: spec.SchemaProps{
-										Ref: ref("github.com/loft-sh/api/pkg/apis/storage/v1.Access"),
-									},
-								},
-							},
-						},
-					},
-					"clusterAccessTemplate": {
-						SchemaProps: spec.SchemaProps{
-							Description: "ClusterAccessTemplate holds the cluster access template",
-							Ref:         ref("github.com/loft-sh/api/pkg/apis/storage/v1.ClusterAccessTemplate"),
-						},
-					},
-				},
-			},
-		},
-		Dependencies: []string{
-			"github.com/loft-sh/api/pkg/apis/storage/v1.Access", "github.com/loft-sh/api/pkg/apis/storage/v1.ClusterAccessTemplate", "github.com/loft-sh/api/pkg/apis/storage/v1.UserOrTeam"},
-	}
-}
-
-func schema_pkg_apis_management_v1_GlobalClusterAccessStatus(ref common.ReferenceCallback) common.OpenAPIDefinition {
-	return common.OpenAPIDefinition{
-		Schema: spec.Schema{
-			SchemaProps: spec.SchemaProps{
-				Description: "GlobalClusterAccessStatus holds the status",
-				Type:        []string{"object"},
-				Properties: map[string]spec.Schema{
-					"clusters": {
-						SchemaProps: spec.SchemaProps{
-							Type: []string{"array"},
-							Items: &spec.SchemaOrArray{
-								Schema: &spec.Schema{
-									SchemaProps: spec.SchemaProps{
-										Ref: ref("github.com/loft-sh/agentapi/pkg/apis/loft/cluster/v1.EntityInfo"),
-									},
-								},
-							},
-						},
-					},
-					"users": {
-						SchemaProps: spec.SchemaProps{
-							Type: []string{"array"},
-							Items: &spec.SchemaOrArray{
-								Schema: &spec.Schema{
-									SchemaProps: spec.SchemaProps{
-										Ref: ref("github.com/loft-sh/agentapi/pkg/apis/loft/cluster/v1.UserOrTeam"),
-									},
-								},
-							},
-						},
-					},
-					"teams": {
-						SchemaProps: spec.SchemaProps{
-							Type: []string{"array"},
-							Items: &spec.SchemaOrArray{
-								Schema: &spec.Schema{
-									SchemaProps: spec.SchemaProps{
-										Ref: ref("github.com/loft-sh/agentapi/pkg/apis/loft/cluster/v1.EntityInfo"),
-									},
-								},
-							},
-						},
-					},
-					"spaceConstraint": {
-						SchemaProps: spec.SchemaProps{
-							Ref: ref("github.com/loft-sh/agentapi/pkg/apis/loft/cluster/v1.EntityInfo"),
-						},
-					},
-				},
-			},
-		},
-		Dependencies: []string{
-			"github.com/loft-sh/agentapi/pkg/apis/loft/cluster/v1.EntityInfo", "github.com/loft-sh/agentapi/pkg/apis/loft/cluster/v1.UserOrTeam"},
-	}
-}
-
-func schema_pkg_apis_management_v1_GlobalClusterRoleTemplate(ref common.ReferenceCallback) common.OpenAPIDefinition {
-	return common.OpenAPIDefinition{
-		Schema: spec.Schema{
-			SchemaProps: spec.SchemaProps{
-				Description: "GlobalClusterRoleTemplate holds the globalClusterRoleTemplate information",
-				Type:        []string{"object"},
-				Properties: map[string]spec.Schema{
-					"kind": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"apiVersion": {
-						SchemaProps: spec.SchemaProps{
-							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"metadata": {
-						SchemaProps: spec.SchemaProps{
-							Ref: ref("k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"),
-						},
-					},
-					"spec": {
-						SchemaProps: spec.SchemaProps{
-							Ref: ref("github.com/loft-sh/api/pkg/apis/management/v1.GlobalClusterRoleTemplateSpec"),
-						},
-					},
-					"status": {
-						SchemaProps: spec.SchemaProps{
-							Ref: ref("github.com/loft-sh/api/pkg/apis/management/v1.GlobalClusterRoleTemplateStatus"),
-						},
-					},
-				},
-			},
-		},
-		Dependencies: []string{
-			"github.com/loft-sh/api/pkg/apis/management/v1.GlobalClusterRoleTemplateSpec", "github.com/loft-sh/api/pkg/apis/management/v1.GlobalClusterRoleTemplateStatus", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
-	}
-}
-
-func schema_pkg_apis_management_v1_GlobalClusterRoleTemplateList(ref common.ReferenceCallback) common.OpenAPIDefinition {
-	return common.OpenAPIDefinition{
-		Schema: spec.Schema{
-			SchemaProps: spec.SchemaProps{
-				Type: []string{"object"},
-				Properties: map[string]spec.Schema{
-					"kind": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"apiVersion": {
-						SchemaProps: spec.SchemaProps{
-							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"metadata": {
-						SchemaProps: spec.SchemaProps{
-							Ref: ref("k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"),
-						},
-					},
-					"items": {
-						SchemaProps: spec.SchemaProps{
-							Type: []string{"array"},
-							Items: &spec.SchemaOrArray{
-								Schema: &spec.Schema{
-									SchemaProps: spec.SchemaProps{
-										Ref: ref("github.com/loft-sh/api/pkg/apis/management/v1.GlobalClusterRoleTemplate"),
-									},
-								},
-							},
-						},
-					},
-				},
-				Required: []string{"items"},
-			},
-		},
-		Dependencies: []string{
-			"github.com/loft-sh/api/pkg/apis/management/v1.GlobalClusterRoleTemplate", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
-	}
-}
-
-func schema_pkg_apis_management_v1_GlobalClusterRoleTemplateSpec(ref common.ReferenceCallback) common.OpenAPIDefinition {
-	return common.OpenAPIDefinition{
-		Schema: spec.Schema{
-			SchemaProps: spec.SchemaProps{
-				Description: "GlobalClusterRoleTemplateSpec holds the specification",
-				Type:        []string{"object"},
-				Properties: map[string]spec.Schema{
-					"displayName": {
-						SchemaProps: spec.SchemaProps{
-							Description: "DisplayName is the name that should be displayed in the UI",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"description": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Description describes a cluster role template object",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"owner": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Owner holds the owner of this object",
-							Ref:         ref("github.com/loft-sh/api/pkg/apis/storage/v1.UserOrTeam"),
-						},
-					},
-					"clusters": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Clusters are the clusters this template should be applied on.",
-							Type:        []string{"array"},
-							Items: &spec.SchemaOrArray{
-								Schema: &spec.Schema{
-									SchemaProps: spec.SchemaProps{
-										Type:   []string{"string"},
-										Format: "",
-									},
-								},
-							},
-						},
-					},
-					"management": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Management defines if this cluster role should be created in the management instance.",
-							Type:        []string{"boolean"},
-							Format:      "",
-						},
-					},
-					"access": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Access holds the access rights for users and teams",
-							Type:        []string{"array"},
-							Items: &spec.SchemaOrArray{
-								Schema: &spec.Schema{
-									SchemaProps: spec.SchemaProps{
-										Ref: ref("github.com/loft-sh/api/pkg/apis/storage/v1.Access"),
-									},
-								},
-							},
-						},
-					},
-					"clusterRoleTemplate": {
-						SchemaProps: spec.SchemaProps{
-							Description: "ClusterRoleTemplate holds the cluster role template",
-							Ref:         ref("github.com/loft-sh/api/pkg/apis/storage/v1.ClusterRoleTemplate"),
-						},
-					},
-				},
-			},
-		},
-		Dependencies: []string{
-			"github.com/loft-sh/api/pkg/apis/storage/v1.Access", "github.com/loft-sh/api/pkg/apis/storage/v1.ClusterRoleTemplate", "github.com/loft-sh/api/pkg/apis/storage/v1.UserOrTeam"},
-	}
-}
-
-func schema_pkg_apis_management_v1_GlobalClusterRoleTemplateStatus(ref common.ReferenceCallback) common.OpenAPIDefinition {
-	return common.OpenAPIDefinition{
-		Schema: spec.Schema{
-			SchemaProps: spec.SchemaProps{
-				Description: "GlobalClusterRoleTemplateStatus holds the status",
-				Type:        []string{"object"},
-				Properties: map[string]spec.Schema{
-					"clusters": {
-						SchemaProps: spec.SchemaProps{
-							Type: []string{"array"},
-							Items: &spec.SchemaOrArray{
-								Schema: &spec.Schema{
-									SchemaProps: spec.SchemaProps{
-										Ref: ref("github.com/loft-sh/agentapi/pkg/apis/loft/cluster/v1.EntityInfo"),
-									},
-								},
-							},
-						},
-					},
-				},
-			},
-		},
-		Dependencies: []string{
-			"github.com/loft-sh/agentapi/pkg/apis/loft/cluster/v1.EntityInfo"},
-	}
-}
-
-func schema_pkg_apis_management_v1_GlobalSpaceConstraint(ref common.ReferenceCallback) common.OpenAPIDefinition {
-	return common.OpenAPIDefinition{
-		Schema: spec.Schema{
-			SchemaProps: spec.SchemaProps{
-				Description: "GlobalSpaceConstraint holds the globalSpaceConstraint information",
-				Type:        []string{"object"},
-				Properties: map[string]spec.Schema{
-					"kind": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"apiVersion": {
-						SchemaProps: spec.SchemaProps{
-							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"metadata": {
-						SchemaProps: spec.SchemaProps{
-							Ref: ref("k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"),
-						},
-					},
-					"spec": {
-						SchemaProps: spec.SchemaProps{
-							Ref: ref("github.com/loft-sh/api/pkg/apis/management/v1.GlobalSpaceConstraintSpec"),
-						},
-					},
-					"status": {
-						SchemaProps: spec.SchemaProps{
-							Ref: ref("github.com/loft-sh/api/pkg/apis/management/v1.GlobalSpaceConstraintStatus"),
-						},
-					},
-				},
-			},
-		},
-		Dependencies: []string{
-			"github.com/loft-sh/api/pkg/apis/management/v1.GlobalSpaceConstraintSpec", "github.com/loft-sh/api/pkg/apis/management/v1.GlobalSpaceConstraintStatus", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
-	}
-}
-
-func schema_pkg_apis_management_v1_GlobalSpaceConstraintList(ref common.ReferenceCallback) common.OpenAPIDefinition {
-	return common.OpenAPIDefinition{
-		Schema: spec.Schema{
-			SchemaProps: spec.SchemaProps{
-				Type: []string{"object"},
-				Properties: map[string]spec.Schema{
-					"kind": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"apiVersion": {
-						SchemaProps: spec.SchemaProps{
-							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"metadata": {
-						SchemaProps: spec.SchemaProps{
-							Ref: ref("k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"),
-						},
-					},
-					"items": {
-						SchemaProps: spec.SchemaProps{
-							Type: []string{"array"},
-							Items: &spec.SchemaOrArray{
-								Schema: &spec.Schema{
-									SchemaProps: spec.SchemaProps{
-										Ref: ref("github.com/loft-sh/api/pkg/apis/management/v1.GlobalSpaceConstraint"),
-									},
-								},
-							},
-						},
-					},
-				},
-				Required: []string{"items"},
-			},
-		},
-		Dependencies: []string{
-			"github.com/loft-sh/api/pkg/apis/management/v1.GlobalSpaceConstraint", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
-	}
-}
-
-func schema_pkg_apis_management_v1_GlobalSpaceConstraintSpec(ref common.ReferenceCallback) common.OpenAPIDefinition {
-	return common.OpenAPIDefinition{
-		Schema: spec.Schema{
-			SchemaProps: spec.SchemaProps{
-				Description: "GlobalSpaceConstraintSpec holds the specification",
-				Type:        []string{"object"},
-				Properties: map[string]spec.Schema{
-					"displayName": {
-						SchemaProps: spec.SchemaProps{
-							Description: "DisplayName is the name that should be displayed in the UI",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"description": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Description describes a space constraint object",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"owner": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Owner holds the owner of this object",
-							Ref:         ref("github.com/loft-sh/api/pkg/apis/storage/v1.UserOrTeam"),
-						},
-					},
-					"clusters": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Clusters are the clusters this template should be applied on.",
-							Type:        []string{"array"},
-							Items: &spec.SchemaOrArray{
-								Schema: &spec.Schema{
-									SchemaProps: spec.SchemaProps{
-										Type:   []string{"string"},
-										Format: "",
-									},
-								},
-							},
-						},
-					},
-					"access": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Access holds the access rights for users and teams",
-							Type:        []string{"array"},
-							Items: &spec.SchemaOrArray{
-								Schema: &spec.Schema{
-									SchemaProps: spec.SchemaProps{
-										Ref: ref("github.com/loft-sh/api/pkg/apis/storage/v1.Access"),
-									},
-								},
-							},
-						},
-					},
-					"spaceConstraintTemplate": {
-						SchemaProps: spec.SchemaProps{
-							Description: "ClusterAccessTemplate holds the cluster access template",
-							Ref:         ref("github.com/loft-sh/api/pkg/apis/storage/v1.SpaceConstraintTemplate"),
-						},
-					},
-				},
-			},
-		},
-		Dependencies: []string{
-			"github.com/loft-sh/api/pkg/apis/storage/v1.Access", "github.com/loft-sh/api/pkg/apis/storage/v1.SpaceConstraintTemplate", "github.com/loft-sh/api/pkg/apis/storage/v1.UserOrTeam"},
-	}
-}
-
-func schema_pkg_apis_management_v1_GlobalSpaceConstraintStatus(ref common.ReferenceCallback) common.OpenAPIDefinition {
-	return common.OpenAPIDefinition{
-		Schema: spec.Schema{
-			SchemaProps: spec.SchemaProps{
-				Description: "GlobalSpaceConstraintStatus holds the status",
-				Type:        []string{"object"},
-				Properties: map[string]spec.Schema{
-					"clusterRole": {
-						SchemaProps: spec.SchemaProps{
-							Ref: ref("github.com/loft-sh/agentapi/pkg/apis/loft/cluster/v1.EntityInfo"),
-						},
-					},
-					"clusters": {
-						SchemaProps: spec.SchemaProps{
-							Type: []string{"array"},
-							Items: &spec.SchemaOrArray{
-								Schema: &spec.Schema{
-									SchemaProps: spec.SchemaProps{
-										Ref: ref("github.com/loft-sh/agentapi/pkg/apis/loft/cluster/v1.EntityInfo"),
-									},
-								},
-							},
-						},
-					},
-				},
-			},
-		},
-		Dependencies: []string{
-			"github.com/loft-sh/agentapi/pkg/apis/loft/cluster/v1.EntityInfo"},
-	}
-}
-
 func schema_pkg_apis_management_v1_GroupResources(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
@@ -10274,9 +10105,9 @@ func schema_pkg_apis_management_v1_KioskSpec(ref common.ReferenceCallback) commo
 							Ref: ref("github.com/loft-sh/agentapi/pkg/apis/loft/cluster/v1.VirtualCluster"),
 						},
 					},
-					"clusterAccess": {
+					"localClusterAccess": {
 						SchemaProps: spec.SchemaProps{
-							Ref: ref("github.com/loft-sh/agentapi/pkg/apis/loft/cluster/v1.ClusterAccess"),
+							Ref: ref("github.com/loft-sh/agentapi/pkg/apis/loft/cluster/v1.LocalClusterAccess"),
 						},
 					},
 					"clusterQuota": {
@@ -10289,20 +10120,20 @@ func schema_pkg_apis_management_v1_KioskSpec(ref common.ReferenceCallback) commo
 							Ref: ref("github.com/loft-sh/agentapi/pkg/apis/loft/cluster/v1.ChartInfo"),
 						},
 					},
-					"spaceConstraint": {
+					"localSpaceConstraint": {
 						SchemaProps: spec.SchemaProps{
 							Description: "storage.loft.sh",
-							Ref:         ref("github.com/loft-sh/agentapi/pkg/apis/loft/storage/v1.SpaceConstraint"),
+							Ref:         ref("github.com/loft-sh/agentapi/pkg/apis/loft/storage/v1.LocalSpaceConstraint"),
 						},
 					},
-					"storageClusterAccess": {
+					"localStorageClusterAccess": {
 						SchemaProps: spec.SchemaProps{
-							Ref: ref("github.com/loft-sh/agentapi/pkg/apis/loft/storage/v1.ClusterAccess"),
+							Ref: ref("github.com/loft-sh/agentapi/pkg/apis/loft/storage/v1.LocalClusterAccess"),
 						},
 					},
-					"clusterRoleTemplate": {
+					"localClusterRoleTemplate": {
 						SchemaProps: spec.SchemaProps{
-							Ref: ref("github.com/loft-sh/agentapi/pkg/apis/loft/storage/v1.ClusterRoleTemplate"),
+							Ref: ref("github.com/loft-sh/agentapi/pkg/apis/loft/storage/v1.LocalClusterRoleTemplate"),
 						},
 					},
 					"storageClusterQuota": {
@@ -10315,21 +10146,21 @@ func schema_pkg_apis_management_v1_KioskSpec(ref common.ReferenceCallback) commo
 							Ref: ref("github.com/loft-sh/agentapi/pkg/apis/loft/storage/v1.VirtualCluster"),
 						},
 					},
-					"clusterUser": {
+					"localUser": {
 						SchemaProps: spec.SchemaProps{
-							Ref: ref("github.com/loft-sh/agentapi/pkg/apis/loft/storage/v1.ClusterUser"),
+							Ref: ref("github.com/loft-sh/agentapi/pkg/apis/loft/storage/v1.LocalUser"),
 						},
 					},
-					"clusterTeam": {
+					"localTeam": {
 						SchemaProps: spec.SchemaProps{
-							Ref: ref("github.com/loft-sh/agentapi/pkg/apis/loft/storage/v1.ClusterTeam"),
+							Ref: ref("github.com/loft-sh/agentapi/pkg/apis/loft/storage/v1.LocalTeam"),
 						},
 					},
 				},
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/agentapi/pkg/apis/kiosk/config/v1alpha1.Account", "github.com/loft-sh/agentapi/pkg/apis/kiosk/config/v1alpha1.Template", "github.com/loft-sh/agentapi/pkg/apis/kiosk/config/v1alpha1.TemplateInstance", "github.com/loft-sh/agentapi/pkg/apis/loft/cluster/v1.ChartInfo", "github.com/loft-sh/agentapi/pkg/apis/loft/cluster/v1.ClusterAccess", "github.com/loft-sh/agentapi/pkg/apis/loft/cluster/v1.ClusterQuota", "github.com/loft-sh/agentapi/pkg/apis/loft/cluster/v1.HelmRelease", "github.com/loft-sh/agentapi/pkg/apis/loft/cluster/v1.SleepModeConfig", "github.com/loft-sh/agentapi/pkg/apis/loft/cluster/v1.Space", "github.com/loft-sh/agentapi/pkg/apis/loft/cluster/v1.VirtualCluster", "github.com/loft-sh/agentapi/pkg/apis/loft/storage/v1.ClusterAccess", "github.com/loft-sh/agentapi/pkg/apis/loft/storage/v1.ClusterQuota", "github.com/loft-sh/agentapi/pkg/apis/loft/storage/v1.ClusterRoleTemplate", "github.com/loft-sh/agentapi/pkg/apis/loft/storage/v1.ClusterTeam", "github.com/loft-sh/agentapi/pkg/apis/loft/storage/v1.ClusterUser", "github.com/loft-sh/agentapi/pkg/apis/loft/storage/v1.SpaceConstraint", "github.com/loft-sh/agentapi/pkg/apis/loft/storage/v1.VirtualCluster", "github.com/loft-sh/jspolicy/pkg/apis/policy/v1beta1.JsPolicy", "github.com/loft-sh/jspolicy/pkg/apis/policy/v1beta1.JsPolicyBundle", "github.com/loft-sh/jspolicy/pkg/apis/policy/v1beta1.JsPolicyViolations"},
+			"github.com/loft-sh/agentapi/pkg/apis/kiosk/config/v1alpha1.Account", "github.com/loft-sh/agentapi/pkg/apis/kiosk/config/v1alpha1.Template", "github.com/loft-sh/agentapi/pkg/apis/kiosk/config/v1alpha1.TemplateInstance", "github.com/loft-sh/agentapi/pkg/apis/loft/cluster/v1.ChartInfo", "github.com/loft-sh/agentapi/pkg/apis/loft/cluster/v1.ClusterQuota", "github.com/loft-sh/agentapi/pkg/apis/loft/cluster/v1.HelmRelease", "github.com/loft-sh/agentapi/pkg/apis/loft/cluster/v1.LocalClusterAccess", "github.com/loft-sh/agentapi/pkg/apis/loft/cluster/v1.SleepModeConfig", "github.com/loft-sh/agentapi/pkg/apis/loft/cluster/v1.Space", "github.com/loft-sh/agentapi/pkg/apis/loft/cluster/v1.VirtualCluster", "github.com/loft-sh/agentapi/pkg/apis/loft/storage/v1.ClusterQuota", "github.com/loft-sh/agentapi/pkg/apis/loft/storage/v1.LocalClusterAccess", "github.com/loft-sh/agentapi/pkg/apis/loft/storage/v1.LocalClusterRoleTemplate", "github.com/loft-sh/agentapi/pkg/apis/loft/storage/v1.LocalSpaceConstraint", "github.com/loft-sh/agentapi/pkg/apis/loft/storage/v1.LocalTeam", "github.com/loft-sh/agentapi/pkg/apis/loft/storage/v1.LocalUser", "github.com/loft-sh/agentapi/pkg/apis/loft/storage/v1.VirtualCluster", "github.com/loft-sh/jspolicy/pkg/apis/policy/v1beta1.JsPolicy", "github.com/loft-sh/jspolicy/pkg/apis/policy/v1beta1.JsPolicyBundle", "github.com/loft-sh/jspolicy/pkg/apis/policy/v1beta1.JsPolicyViolations"},
 	}
 }
 
@@ -12236,6 +12067,196 @@ func schema_pkg_apis_management_v1_SharedSecretStatus(ref common.ReferenceCallba
 				Type:        []string{"object"},
 			},
 		},
+	}
+}
+
+func schema_pkg_apis_management_v1_SpaceConstraint(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "SpaceConstraint holds the globalSpaceConstraint information",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"kind": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"apiVersion": {
+						SchemaProps: spec.SchemaProps{
+							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"metadata": {
+						SchemaProps: spec.SchemaProps{
+							Ref: ref("k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"),
+						},
+					},
+					"spec": {
+						SchemaProps: spec.SchemaProps{
+							Ref: ref("github.com/loft-sh/api/pkg/apis/management/v1.SpaceConstraintSpec"),
+						},
+					},
+					"status": {
+						SchemaProps: spec.SchemaProps{
+							Ref: ref("github.com/loft-sh/api/pkg/apis/management/v1.SpaceConstraintStatus"),
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			"github.com/loft-sh/api/pkg/apis/management/v1.SpaceConstraintSpec", "github.com/loft-sh/api/pkg/apis/management/v1.SpaceConstraintStatus", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
+	}
+}
+
+func schema_pkg_apis_management_v1_SpaceConstraintList(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"kind": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"apiVersion": {
+						SchemaProps: spec.SchemaProps{
+							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"metadata": {
+						SchemaProps: spec.SchemaProps{
+							Ref: ref("k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"),
+						},
+					},
+					"items": {
+						SchemaProps: spec.SchemaProps{
+							Type: []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Ref: ref("github.com/loft-sh/api/pkg/apis/management/v1.SpaceConstraint"),
+									},
+								},
+							},
+						},
+					},
+				},
+				Required: []string{"items"},
+			},
+		},
+		Dependencies: []string{
+			"github.com/loft-sh/api/pkg/apis/management/v1.SpaceConstraint", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
+	}
+}
+
+func schema_pkg_apis_management_v1_SpaceConstraintSpec(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "SpaceConstraintSpec holds the specification",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"displayName": {
+						SchemaProps: spec.SchemaProps{
+							Description: "DisplayName is the name that should be displayed in the UI",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"description": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Description describes a space constraint object",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"owner": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Owner holds the owner of this object",
+							Ref:         ref("github.com/loft-sh/api/pkg/apis/storage/v1.UserOrTeam"),
+						},
+					},
+					"clusters": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Clusters are the clusters this template should be applied on.",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Type:   []string{"string"},
+										Format: "",
+									},
+								},
+							},
+						},
+					},
+					"access": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Access holds the access rights for users and teams",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Ref: ref("github.com/loft-sh/api/pkg/apis/storage/v1.Access"),
+									},
+								},
+							},
+						},
+					},
+					"localSpaceConstraintTemplate": {
+						SchemaProps: spec.SchemaProps{
+							Description: "LocalSpaceConstraintTemplate holds the space constraint template",
+							Ref:         ref("github.com/loft-sh/api/pkg/apis/storage/v1.LocalSpaceConstraintTemplate"),
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			"github.com/loft-sh/api/pkg/apis/storage/v1.Access", "github.com/loft-sh/api/pkg/apis/storage/v1.LocalSpaceConstraintTemplate", "github.com/loft-sh/api/pkg/apis/storage/v1.UserOrTeam"},
+	}
+}
+
+func schema_pkg_apis_management_v1_SpaceConstraintStatus(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "SpaceConstraintStatus holds the status",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"clusterRole": {
+						SchemaProps: spec.SchemaProps{
+							Ref: ref("github.com/loft-sh/agentapi/pkg/apis/loft/cluster/v1.EntityInfo"),
+						},
+					},
+					"clusters": {
+						SchemaProps: spec.SchemaProps{
+							Type: []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Ref: ref("github.com/loft-sh/agentapi/pkg/apis/loft/cluster/v1.EntityInfo"),
+									},
+								},
+							},
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			"github.com/loft-sh/agentapi/pkg/apis/loft/cluster/v1.EntityInfo"},
 	}
 }
 
@@ -15718,29 +15739,172 @@ func schema_pkg_apis_storage_v1_Cluster(ref common.ReferenceCallback) common.Ope
 	}
 }
 
-func schema_pkg_apis_storage_v1_ClusterAccessTemplate(ref common.ReferenceCallback) common.OpenAPIDefinition {
+func schema_pkg_apis_storage_v1_ClusterAccess(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
-				Type: []string{"object"},
+				Description: "ClusterAccess holds the global cluster access information",
+				Type:        []string{"object"},
 				Properties: map[string]spec.Schema{
+					"kind": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"apiVersion": {
+						SchemaProps: spec.SchemaProps{
+							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
 					"metadata": {
 						SchemaProps: spec.SchemaProps{
-							Description: "Metadata is the metadata of the cluster access object",
-							Ref:         ref("k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"),
+							Ref: ref("k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"),
 						},
 					},
 					"spec": {
 						SchemaProps: spec.SchemaProps{
-							Description: "ClusterAccessSpec holds the spec of the cluster access in the cluster",
-							Ref:         ref("github.com/loft-sh/agentapi/pkg/apis/loft/storage/v1.ClusterAccessSpec"),
+							Ref: ref("github.com/loft-sh/api/pkg/apis/storage/v1.ClusterAccessSpec"),
+						},
+					},
+					"status": {
+						SchemaProps: spec.SchemaProps{
+							Ref: ref("github.com/loft-sh/api/pkg/apis/storage/v1.ClusterAccessStatus"),
 						},
 					},
 				},
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/agentapi/pkg/apis/loft/storage/v1.ClusterAccessSpec", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
+			"github.com/loft-sh/api/pkg/apis/storage/v1.ClusterAccessSpec", "github.com/loft-sh/api/pkg/apis/storage/v1.ClusterAccessStatus", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
+	}
+}
+
+func schema_pkg_apis_storage_v1_ClusterAccessList(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "ClusterAccessList contains a list of ClusterAccess objects",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"kind": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"apiVersion": {
+						SchemaProps: spec.SchemaProps{
+							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"metadata": {
+						SchemaProps: spec.SchemaProps{
+							Ref: ref("k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"),
+						},
+					},
+					"items": {
+						SchemaProps: spec.SchemaProps{
+							Type: []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Ref: ref("github.com/loft-sh/api/pkg/apis/storage/v1.ClusterAccess"),
+									},
+								},
+							},
+						},
+					},
+				},
+				Required: []string{"items"},
+			},
+		},
+		Dependencies: []string{
+			"github.com/loft-sh/api/pkg/apis/storage/v1.ClusterAccess", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
+	}
+}
+
+func schema_pkg_apis_storage_v1_ClusterAccessSpec(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"displayName": {
+						SchemaProps: spec.SchemaProps{
+							Description: "DisplayName is the name that should be displayed in the UI",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"description": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Description describes a cluster access object",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"owner": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Owner holds the owner of this object",
+							Ref:         ref("github.com/loft-sh/api/pkg/apis/storage/v1.UserOrTeam"),
+						},
+					},
+					"clusters": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Clusters are the clusters this template should be applied on.",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Type:   []string{"string"},
+										Format: "",
+									},
+								},
+							},
+						},
+					},
+					"access": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Access holds the access rights for users and teams",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Ref: ref("github.com/loft-sh/api/pkg/apis/storage/v1.Access"),
+									},
+								},
+							},
+						},
+					},
+					"localClusterAccessTemplate": {
+						SchemaProps: spec.SchemaProps{
+							Description: "LocalClusterAccessTemplate holds the cluster access template",
+							Ref:         ref("github.com/loft-sh/api/pkg/apis/storage/v1.LocalClusterAccessTemplate"),
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			"github.com/loft-sh/api/pkg/apis/storage/v1.Access", "github.com/loft-sh/api/pkg/apis/storage/v1.LocalClusterAccessTemplate", "github.com/loft-sh/api/pkg/apis/storage/v1.UserOrTeam"},
+	}
+}
+
+func schema_pkg_apis_storage_v1_ClusterAccessStatus(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "ClusterAccessStatus holds the status of a user access",
+				Type:        []string{"object"},
+			},
+		},
 	}
 }
 
@@ -16008,25 +16172,175 @@ func schema_pkg_apis_storage_v1_ClusterRoleTemplate(ref common.ReferenceCallback
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
-				Type: []string{"object"},
+				Description: "ClusterRoleTemplate holds the global role template information",
+				Type:        []string{"object"},
 				Properties: map[string]spec.Schema{
+					"kind": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"apiVersion": {
+						SchemaProps: spec.SchemaProps{
+							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
 					"metadata": {
 						SchemaProps: spec.SchemaProps{
-							Description: "Metadata is the metadata of the cluster role template object",
-							Ref:         ref("k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"),
+							Ref: ref("k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"),
 						},
 					},
 					"spec": {
 						SchemaProps: spec.SchemaProps{
-							Description: "ClusterRoleTemplateSpec holds the spec of the cluster role template in the cluster",
-							Ref:         ref("github.com/loft-sh/agentapi/pkg/apis/loft/storage/v1.ClusterRoleTemplateSpec"),
+							Ref: ref("github.com/loft-sh/api/pkg/apis/storage/v1.ClusterRoleTemplateSpec"),
+						},
+					},
+					"status": {
+						SchemaProps: spec.SchemaProps{
+							Ref: ref("github.com/loft-sh/api/pkg/apis/storage/v1.ClusterRoleTemplateStatus"),
 						},
 					},
 				},
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/agentapi/pkg/apis/loft/storage/v1.ClusterRoleTemplateSpec", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
+			"github.com/loft-sh/api/pkg/apis/storage/v1.ClusterRoleTemplateSpec", "github.com/loft-sh/api/pkg/apis/storage/v1.ClusterRoleTemplateStatus", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
+	}
+}
+
+func schema_pkg_apis_storage_v1_ClusterRoleTemplateList(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "ClusterRoleTemplateList contains a list of ClusterRoleTemplate objects",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"kind": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"apiVersion": {
+						SchemaProps: spec.SchemaProps{
+							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"metadata": {
+						SchemaProps: spec.SchemaProps{
+							Ref: ref("k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"),
+						},
+					},
+					"items": {
+						SchemaProps: spec.SchemaProps{
+							Type: []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Ref: ref("github.com/loft-sh/api/pkg/apis/storage/v1.ClusterRoleTemplate"),
+									},
+								},
+							},
+						},
+					},
+				},
+				Required: []string{"items"},
+			},
+		},
+		Dependencies: []string{
+			"github.com/loft-sh/api/pkg/apis/storage/v1.ClusterRoleTemplate", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
+	}
+}
+
+func schema_pkg_apis_storage_v1_ClusterRoleTemplateSpec(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"displayName": {
+						SchemaProps: spec.SchemaProps{
+							Description: "DisplayName is the name that should be displayed in the UI",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"description": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Description describes a cluster role template object",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"owner": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Owner holds the owner of this object",
+							Ref:         ref("github.com/loft-sh/api/pkg/apis/storage/v1.UserOrTeam"),
+						},
+					},
+					"clusters": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Clusters are the clusters this template should be applied on.",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Type:   []string{"string"},
+										Format: "",
+									},
+								},
+							},
+						},
+					},
+					"management": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Management defines if this cluster role should be created in the management instance.",
+							Type:        []string{"boolean"},
+							Format:      "",
+						},
+					},
+					"access": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Access holds the access rights for users and teams",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Ref: ref("github.com/loft-sh/api/pkg/apis/storage/v1.Access"),
+									},
+								},
+							},
+						},
+					},
+					"localClusterRoleTemplate": {
+						SchemaProps: spec.SchemaProps{
+							Description: "LocalClusterRoleTemplate holds the cluster role template",
+							Ref:         ref("github.com/loft-sh/api/pkg/apis/storage/v1.LocalClusterRoleTemplate"),
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			"github.com/loft-sh/api/pkg/apis/storage/v1.Access", "github.com/loft-sh/api/pkg/apis/storage/v1.LocalClusterRoleTemplate", "github.com/loft-sh/api/pkg/apis/storage/v1.UserOrTeam"},
+	}
+}
+
+func schema_pkg_apis_storage_v1_ClusterRoleTemplateStatus(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "ClusterRoleTemplateStatus holds the status of a user access",
+				Type:        []string{"object"},
+			},
+		},
 	}
 }
 
@@ -16124,520 +16438,6 @@ func schema_pkg_apis_storage_v1_ClusterStatus(ref common.ReferenceCallback) comm
 						},
 					},
 				},
-			},
-		},
-	}
-}
-
-func schema_pkg_apis_storage_v1_GlobalClusterAccess(ref common.ReferenceCallback) common.OpenAPIDefinition {
-	return common.OpenAPIDefinition{
-		Schema: spec.Schema{
-			SchemaProps: spec.SchemaProps{
-				Description: "GlobalClusterAccess holds the global cluster access information",
-				Type:        []string{"object"},
-				Properties: map[string]spec.Schema{
-					"kind": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"apiVersion": {
-						SchemaProps: spec.SchemaProps{
-							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"metadata": {
-						SchemaProps: spec.SchemaProps{
-							Ref: ref("k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"),
-						},
-					},
-					"spec": {
-						SchemaProps: spec.SchemaProps{
-							Ref: ref("github.com/loft-sh/api/pkg/apis/storage/v1.GlobalClusterAccessSpec"),
-						},
-					},
-					"status": {
-						SchemaProps: spec.SchemaProps{
-							Ref: ref("github.com/loft-sh/api/pkg/apis/storage/v1.GlobalClusterAccessStatus"),
-						},
-					},
-				},
-			},
-		},
-		Dependencies: []string{
-			"github.com/loft-sh/api/pkg/apis/storage/v1.GlobalClusterAccessSpec", "github.com/loft-sh/api/pkg/apis/storage/v1.GlobalClusterAccessStatus", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
-	}
-}
-
-func schema_pkg_apis_storage_v1_GlobalClusterAccessList(ref common.ReferenceCallback) common.OpenAPIDefinition {
-	return common.OpenAPIDefinition{
-		Schema: spec.Schema{
-			SchemaProps: spec.SchemaProps{
-				Description: "GlobalClusterAccessList contains a list of GlobalClusterAccess objects",
-				Type:        []string{"object"},
-				Properties: map[string]spec.Schema{
-					"kind": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"apiVersion": {
-						SchemaProps: spec.SchemaProps{
-							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"metadata": {
-						SchemaProps: spec.SchemaProps{
-							Ref: ref("k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"),
-						},
-					},
-					"items": {
-						SchemaProps: spec.SchemaProps{
-							Type: []string{"array"},
-							Items: &spec.SchemaOrArray{
-								Schema: &spec.Schema{
-									SchemaProps: spec.SchemaProps{
-										Ref: ref("github.com/loft-sh/api/pkg/apis/storage/v1.GlobalClusterAccess"),
-									},
-								},
-							},
-						},
-					},
-				},
-				Required: []string{"items"},
-			},
-		},
-		Dependencies: []string{
-			"github.com/loft-sh/api/pkg/apis/storage/v1.GlobalClusterAccess", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
-	}
-}
-
-func schema_pkg_apis_storage_v1_GlobalClusterAccessSpec(ref common.ReferenceCallback) common.OpenAPIDefinition {
-	return common.OpenAPIDefinition{
-		Schema: spec.Schema{
-			SchemaProps: spec.SchemaProps{
-				Type: []string{"object"},
-				Properties: map[string]spec.Schema{
-					"displayName": {
-						SchemaProps: spec.SchemaProps{
-							Description: "DisplayName is the name that should be displayed in the UI",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"description": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Description describes a cluster access object",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"owner": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Owner holds the owner of this object",
-							Ref:         ref("github.com/loft-sh/api/pkg/apis/storage/v1.UserOrTeam"),
-						},
-					},
-					"clusters": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Clusters are the clusters this template should be applied on.",
-							Type:        []string{"array"},
-							Items: &spec.SchemaOrArray{
-								Schema: &spec.Schema{
-									SchemaProps: spec.SchemaProps{
-										Type:   []string{"string"},
-										Format: "",
-									},
-								},
-							},
-						},
-					},
-					"access": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Access holds the access rights for users and teams",
-							Type:        []string{"array"},
-							Items: &spec.SchemaOrArray{
-								Schema: &spec.Schema{
-									SchemaProps: spec.SchemaProps{
-										Ref: ref("github.com/loft-sh/api/pkg/apis/storage/v1.Access"),
-									},
-								},
-							},
-						},
-					},
-					"clusterAccessTemplate": {
-						SchemaProps: spec.SchemaProps{
-							Description: "ClusterAccessTemplate holds the cluster access template",
-							Ref:         ref("github.com/loft-sh/api/pkg/apis/storage/v1.ClusterAccessTemplate"),
-						},
-					},
-				},
-			},
-		},
-		Dependencies: []string{
-			"github.com/loft-sh/api/pkg/apis/storage/v1.Access", "github.com/loft-sh/api/pkg/apis/storage/v1.ClusterAccessTemplate", "github.com/loft-sh/api/pkg/apis/storage/v1.UserOrTeam"},
-	}
-}
-
-func schema_pkg_apis_storage_v1_GlobalClusterAccessStatus(ref common.ReferenceCallback) common.OpenAPIDefinition {
-	return common.OpenAPIDefinition{
-		Schema: spec.Schema{
-			SchemaProps: spec.SchemaProps{
-				Description: "GlobalClusterAccessStatus holds the status of a user access",
-				Type:        []string{"object"},
-			},
-		},
-	}
-}
-
-func schema_pkg_apis_storage_v1_GlobalClusterRoleTemplate(ref common.ReferenceCallback) common.OpenAPIDefinition {
-	return common.OpenAPIDefinition{
-		Schema: spec.Schema{
-			SchemaProps: spec.SchemaProps{
-				Description: "GlobalClusterRoleTemplate holds the global role template information",
-				Type:        []string{"object"},
-				Properties: map[string]spec.Schema{
-					"kind": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"apiVersion": {
-						SchemaProps: spec.SchemaProps{
-							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"metadata": {
-						SchemaProps: spec.SchemaProps{
-							Ref: ref("k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"),
-						},
-					},
-					"spec": {
-						SchemaProps: spec.SchemaProps{
-							Ref: ref("github.com/loft-sh/api/pkg/apis/storage/v1.GlobalClusterRoleTemplateSpec"),
-						},
-					},
-					"status": {
-						SchemaProps: spec.SchemaProps{
-							Ref: ref("github.com/loft-sh/api/pkg/apis/storage/v1.GlobalClusterRoleTemplateStatus"),
-						},
-					},
-				},
-			},
-		},
-		Dependencies: []string{
-			"github.com/loft-sh/api/pkg/apis/storage/v1.GlobalClusterRoleTemplateSpec", "github.com/loft-sh/api/pkg/apis/storage/v1.GlobalClusterRoleTemplateStatus", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
-	}
-}
-
-func schema_pkg_apis_storage_v1_GlobalClusterRoleTemplateList(ref common.ReferenceCallback) common.OpenAPIDefinition {
-	return common.OpenAPIDefinition{
-		Schema: spec.Schema{
-			SchemaProps: spec.SchemaProps{
-				Description: "GlobalClusterRoleTemplateList contains a list of GlobalClusterRoleTemplate objects",
-				Type:        []string{"object"},
-				Properties: map[string]spec.Schema{
-					"kind": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"apiVersion": {
-						SchemaProps: spec.SchemaProps{
-							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"metadata": {
-						SchemaProps: spec.SchemaProps{
-							Ref: ref("k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"),
-						},
-					},
-					"items": {
-						SchemaProps: spec.SchemaProps{
-							Type: []string{"array"},
-							Items: &spec.SchemaOrArray{
-								Schema: &spec.Schema{
-									SchemaProps: spec.SchemaProps{
-										Ref: ref("github.com/loft-sh/api/pkg/apis/storage/v1.GlobalClusterRoleTemplate"),
-									},
-								},
-							},
-						},
-					},
-				},
-				Required: []string{"items"},
-			},
-		},
-		Dependencies: []string{
-			"github.com/loft-sh/api/pkg/apis/storage/v1.GlobalClusterRoleTemplate", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
-	}
-}
-
-func schema_pkg_apis_storage_v1_GlobalClusterRoleTemplateSpec(ref common.ReferenceCallback) common.OpenAPIDefinition {
-	return common.OpenAPIDefinition{
-		Schema: spec.Schema{
-			SchemaProps: spec.SchemaProps{
-				Type: []string{"object"},
-				Properties: map[string]spec.Schema{
-					"displayName": {
-						SchemaProps: spec.SchemaProps{
-							Description: "DisplayName is the name that should be displayed in the UI",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"description": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Description describes a cluster role template object",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"owner": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Owner holds the owner of this object",
-							Ref:         ref("github.com/loft-sh/api/pkg/apis/storage/v1.UserOrTeam"),
-						},
-					},
-					"clusters": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Clusters are the clusters this template should be applied on.",
-							Type:        []string{"array"},
-							Items: &spec.SchemaOrArray{
-								Schema: &spec.Schema{
-									SchemaProps: spec.SchemaProps{
-										Type:   []string{"string"},
-										Format: "",
-									},
-								},
-							},
-						},
-					},
-					"management": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Management defines if this cluster role should be created in the management instance.",
-							Type:        []string{"boolean"},
-							Format:      "",
-						},
-					},
-					"access": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Access holds the access rights for users and teams",
-							Type:        []string{"array"},
-							Items: &spec.SchemaOrArray{
-								Schema: &spec.Schema{
-									SchemaProps: spec.SchemaProps{
-										Ref: ref("github.com/loft-sh/api/pkg/apis/storage/v1.Access"),
-									},
-								},
-							},
-						},
-					},
-					"clusterRoleTemplate": {
-						SchemaProps: spec.SchemaProps{
-							Description: "ClusterRoleTemplate holds the cluster role template",
-							Ref:         ref("github.com/loft-sh/api/pkg/apis/storage/v1.ClusterRoleTemplate"),
-						},
-					},
-				},
-			},
-		},
-		Dependencies: []string{
-			"github.com/loft-sh/api/pkg/apis/storage/v1.Access", "github.com/loft-sh/api/pkg/apis/storage/v1.ClusterRoleTemplate", "github.com/loft-sh/api/pkg/apis/storage/v1.UserOrTeam"},
-	}
-}
-
-func schema_pkg_apis_storage_v1_GlobalClusterRoleTemplateStatus(ref common.ReferenceCallback) common.OpenAPIDefinition {
-	return common.OpenAPIDefinition{
-		Schema: spec.Schema{
-			SchemaProps: spec.SchemaProps{
-				Description: "GlobalClusterRoleTemplateStatus holds the status of a user access",
-				Type:        []string{"object"},
-			},
-		},
-	}
-}
-
-func schema_pkg_apis_storage_v1_GlobalSpaceConstraint(ref common.ReferenceCallback) common.OpenAPIDefinition {
-	return common.OpenAPIDefinition{
-		Schema: spec.Schema{
-			SchemaProps: spec.SchemaProps{
-				Description: "GlobalSpaceConstraint holds the global space constraint information",
-				Type:        []string{"object"},
-				Properties: map[string]spec.Schema{
-					"kind": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"apiVersion": {
-						SchemaProps: spec.SchemaProps{
-							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"metadata": {
-						SchemaProps: spec.SchemaProps{
-							Ref: ref("k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"),
-						},
-					},
-					"spec": {
-						SchemaProps: spec.SchemaProps{
-							Ref: ref("github.com/loft-sh/api/pkg/apis/storage/v1.GlobalSpaceConstraintSpec"),
-						},
-					},
-					"status": {
-						SchemaProps: spec.SchemaProps{
-							Ref: ref("github.com/loft-sh/api/pkg/apis/storage/v1.GlobalSpaceConstraintStatus"),
-						},
-					},
-				},
-			},
-		},
-		Dependencies: []string{
-			"github.com/loft-sh/api/pkg/apis/storage/v1.GlobalSpaceConstraintSpec", "github.com/loft-sh/api/pkg/apis/storage/v1.GlobalSpaceConstraintStatus", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
-	}
-}
-
-func schema_pkg_apis_storage_v1_GlobalSpaceConstraintList(ref common.ReferenceCallback) common.OpenAPIDefinition {
-	return common.OpenAPIDefinition{
-		Schema: spec.Schema{
-			SchemaProps: spec.SchemaProps{
-				Description: "GlobalSpaceConstraintList contains a list of GlobalSpaceConstraint objects",
-				Type:        []string{"object"},
-				Properties: map[string]spec.Schema{
-					"kind": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"apiVersion": {
-						SchemaProps: spec.SchemaProps{
-							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"metadata": {
-						SchemaProps: spec.SchemaProps{
-							Ref: ref("k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"),
-						},
-					},
-					"items": {
-						SchemaProps: spec.SchemaProps{
-							Type: []string{"array"},
-							Items: &spec.SchemaOrArray{
-								Schema: &spec.Schema{
-									SchemaProps: spec.SchemaProps{
-										Ref: ref("github.com/loft-sh/api/pkg/apis/storage/v1.GlobalSpaceConstraint"),
-									},
-								},
-							},
-						},
-					},
-				},
-				Required: []string{"items"},
-			},
-		},
-		Dependencies: []string{
-			"github.com/loft-sh/api/pkg/apis/storage/v1.GlobalSpaceConstraint", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
-	}
-}
-
-func schema_pkg_apis_storage_v1_GlobalSpaceConstraintSpec(ref common.ReferenceCallback) common.OpenAPIDefinition {
-	return common.OpenAPIDefinition{
-		Schema: spec.Schema{
-			SchemaProps: spec.SchemaProps{
-				Type: []string{"object"},
-				Properties: map[string]spec.Schema{
-					"displayName": {
-						SchemaProps: spec.SchemaProps{
-							Description: "DisplayName is the name that should be displayed in the UI",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"description": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Description describes a space constraint object",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"owner": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Owner holds the owner of this object",
-							Ref:         ref("github.com/loft-sh/api/pkg/apis/storage/v1.UserOrTeam"),
-						},
-					},
-					"clusters": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Clusters are the clusters this template should be applied on.",
-							Type:        []string{"array"},
-							Items: &spec.SchemaOrArray{
-								Schema: &spec.Schema{
-									SchemaProps: spec.SchemaProps{
-										Type:   []string{"string"},
-										Format: "",
-									},
-								},
-							},
-						},
-					},
-					"access": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Access holds the access rights for users and teams",
-							Type:        []string{"array"},
-							Items: &spec.SchemaOrArray{
-								Schema: &spec.Schema{
-									SchemaProps: spec.SchemaProps{
-										Ref: ref("github.com/loft-sh/api/pkg/apis/storage/v1.Access"),
-									},
-								},
-							},
-						},
-					},
-					"spaceConstraintTemplate": {
-						SchemaProps: spec.SchemaProps{
-							Description: "ClusterAccessTemplate holds the cluster access template",
-							Ref:         ref("github.com/loft-sh/api/pkg/apis/storage/v1.SpaceConstraintTemplate"),
-						},
-					},
-				},
-			},
-		},
-		Dependencies: []string{
-			"github.com/loft-sh/api/pkg/apis/storage/v1.Access", "github.com/loft-sh/api/pkg/apis/storage/v1.SpaceConstraintTemplate", "github.com/loft-sh/api/pkg/apis/storage/v1.UserOrTeam"},
-	}
-}
-
-func schema_pkg_apis_storage_v1_GlobalSpaceConstraintStatus(ref common.ReferenceCallback) common.OpenAPIDefinition {
-	return common.OpenAPIDefinition{
-		Schema: spec.Schema{
-			SchemaProps: spec.SchemaProps{
-				Description: "GlobalSpaceConstraintStatus holds the status of a user access",
-				Type:        []string{"object"},
 			},
 		},
 	}
@@ -16989,6 +16789,84 @@ func schema_pkg_apis_storage_v1_KindSecretRef(ref common.ReferenceCallback) comm
 	}
 }
 
+func schema_pkg_apis_storage_v1_LocalClusterAccessTemplate(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"metadata": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Metadata is the metadata of the cluster access object",
+							Ref:         ref("k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"),
+						},
+					},
+					"spec": {
+						SchemaProps: spec.SchemaProps{
+							Description: "LocalClusterAccessSpec holds the spec of the cluster access in the cluster",
+							Ref:         ref("github.com/loft-sh/agentapi/pkg/apis/loft/storage/v1.LocalClusterAccessSpec"),
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			"github.com/loft-sh/agentapi/pkg/apis/loft/storage/v1.LocalClusterAccessSpec", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
+	}
+}
+
+func schema_pkg_apis_storage_v1_LocalClusterRoleTemplate(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"metadata": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Metadata is the metadata of the cluster role template object",
+							Ref:         ref("k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"),
+						},
+					},
+					"spec": {
+						SchemaProps: spec.SchemaProps{
+							Description: "LocalClusterRoleTemplateSpec holds the spec of the cluster role template in the cluster",
+							Ref:         ref("github.com/loft-sh/agentapi/pkg/apis/loft/storage/v1.LocalClusterRoleTemplateSpec"),
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			"github.com/loft-sh/agentapi/pkg/apis/loft/storage/v1.LocalClusterRoleTemplateSpec", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
+	}
+}
+
+func schema_pkg_apis_storage_v1_LocalSpaceConstraintTemplate(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"metadata": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Metadata is the metadata of the space constraint object",
+							Ref:         ref("k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"),
+						},
+					},
+					"spec": {
+						SchemaProps: spec.SchemaProps{
+							Description: "LocalSpaceConstraintSpec holds the spec of the space constraint in the cluster",
+							Ref:         ref("github.com/loft-sh/agentapi/pkg/apis/loft/storage/v1.LocalSpaceConstraintSpec"),
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			"github.com/loft-sh/agentapi/pkg/apis/loft/storage/v1.LocalSpaceConstraintSpec", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
+	}
+}
+
 func schema_pkg_apis_storage_v1_SecretRef(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
@@ -17211,29 +17089,172 @@ func schema_pkg_apis_storage_v1_SpaceAppReference(ref common.ReferenceCallback) 
 	}
 }
 
-func schema_pkg_apis_storage_v1_SpaceConstraintTemplate(ref common.ReferenceCallback) common.OpenAPIDefinition {
+func schema_pkg_apis_storage_v1_SpaceConstraint(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
-				Type: []string{"object"},
+				Description: "SpaceConstraint holds the global space constraint information",
+				Type:        []string{"object"},
 				Properties: map[string]spec.Schema{
+					"kind": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"apiVersion": {
+						SchemaProps: spec.SchemaProps{
+							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
 					"metadata": {
 						SchemaProps: spec.SchemaProps{
-							Description: "Metadata is the metadata of the space constraint object",
-							Ref:         ref("k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"),
+							Ref: ref("k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"),
 						},
 					},
 					"spec": {
 						SchemaProps: spec.SchemaProps{
-							Description: "SpaceConstraintSpec holds the spec of the space constraint in the cluster",
-							Ref:         ref("github.com/loft-sh/agentapi/pkg/apis/loft/storage/v1.SpaceConstraintSpec"),
+							Ref: ref("github.com/loft-sh/api/pkg/apis/storage/v1.SpaceConstraintSpec"),
+						},
+					},
+					"status": {
+						SchemaProps: spec.SchemaProps{
+							Ref: ref("github.com/loft-sh/api/pkg/apis/storage/v1.SpaceConstraintStatus"),
 						},
 					},
 				},
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/agentapi/pkg/apis/loft/storage/v1.SpaceConstraintSpec", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
+			"github.com/loft-sh/api/pkg/apis/storage/v1.SpaceConstraintSpec", "github.com/loft-sh/api/pkg/apis/storage/v1.SpaceConstraintStatus", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
+	}
+}
+
+func schema_pkg_apis_storage_v1_SpaceConstraintList(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "SpaceConstraintList contains a list of SpaceConstraint objects",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"kind": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"apiVersion": {
+						SchemaProps: spec.SchemaProps{
+							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"metadata": {
+						SchemaProps: spec.SchemaProps{
+							Ref: ref("k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"),
+						},
+					},
+					"items": {
+						SchemaProps: spec.SchemaProps{
+							Type: []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Ref: ref("github.com/loft-sh/api/pkg/apis/storage/v1.SpaceConstraint"),
+									},
+								},
+							},
+						},
+					},
+				},
+				Required: []string{"items"},
+			},
+		},
+		Dependencies: []string{
+			"github.com/loft-sh/api/pkg/apis/storage/v1.SpaceConstraint", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
+	}
+}
+
+func schema_pkg_apis_storage_v1_SpaceConstraintSpec(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"displayName": {
+						SchemaProps: spec.SchemaProps{
+							Description: "DisplayName is the name that should be displayed in the UI",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"description": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Description describes a space constraint object",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"owner": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Owner holds the owner of this object",
+							Ref:         ref("github.com/loft-sh/api/pkg/apis/storage/v1.UserOrTeam"),
+						},
+					},
+					"clusters": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Clusters are the clusters this template should be applied on.",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Type:   []string{"string"},
+										Format: "",
+									},
+								},
+							},
+						},
+					},
+					"access": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Access holds the access rights for users and teams",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Ref: ref("github.com/loft-sh/api/pkg/apis/storage/v1.Access"),
+									},
+								},
+							},
+						},
+					},
+					"localSpaceConstraintTemplate": {
+						SchemaProps: spec.SchemaProps{
+							Description: "LocalSpaceConstraintTemplate holds the space constraint template",
+							Ref:         ref("github.com/loft-sh/api/pkg/apis/storage/v1.LocalSpaceConstraintTemplate"),
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			"github.com/loft-sh/api/pkg/apis/storage/v1.Access", "github.com/loft-sh/api/pkg/apis/storage/v1.LocalSpaceConstraintTemplate", "github.com/loft-sh/api/pkg/apis/storage/v1.UserOrTeam"},
+	}
+}
+
+func schema_pkg_apis_storage_v1_SpaceConstraintStatus(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "SpaceConstraintStatus holds the status of a user access",
+				Type:        []string{"object"},
+			},
+		},
 	}
 }
 

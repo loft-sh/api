@@ -35,22 +35,22 @@ type KioskSpec struct {
 	JsPolicyViolations v1beta1.JsPolicyViolations `json:"jsPolicyViolations,omitempty"`
 
 	// cluster.loft.sh
-	HelmRelease     clusterv1.HelmRelease     `json:"helmRelease,omitempty"`
-	SleepModeConfig clusterv1.SleepModeConfig `json:"sleepModeConfig,omitempty"`
-	Space           clusterv1.Space           `json:"space,omitempty"`
-	VirtualCluster  clusterv1.VirtualCluster  `json:"virtualCluster,omitempty"`
-	ClusterAccess   clusterv1.ClusterAccess   `json:"clusterAccess,omitempty"`
-	ClusterQuota    clusterv1.ClusterQuota    `json:"clusterQuota,omitempty"`
-	ChartInfo       clusterv1.ChartInfo       `json:"chartInfo,omitempty"`
+	HelmRelease        clusterv1.HelmRelease        `json:"helmRelease,omitempty"`
+	SleepModeConfig    clusterv1.SleepModeConfig    `json:"sleepModeConfig,omitempty"`
+	Space              clusterv1.Space              `json:"space,omitempty"`
+	VirtualCluster     clusterv1.VirtualCluster     `json:"virtualCluster,omitempty"`
+	LocalClusterAccess clusterv1.LocalClusterAccess `json:"localClusterAccess,omitempty"`
+	ClusterQuota       clusterv1.ClusterQuota       `json:"clusterQuota,omitempty"`
+	ChartInfo          clusterv1.ChartInfo          `json:"chartInfo,omitempty"`
 
 	// storage.loft.sh
-	SpaceConstraint       storagev1.SpaceConstraint     `json:"spaceConstraint,omitempty"`
-	StorageClusterAccess  storagev1.ClusterAccess       `json:"storageClusterAccess,omitempty"`
-	ClusterRoleTemplate   storagev1.ClusterRoleTemplate `json:"clusterRoleTemplate,omitempty"`
-	StorageClusterQuota   storagev1.ClusterQuota        `json:"storageClusterQuota,omitempty"`
-	StorageVirtualCluster storagev1.VirtualCluster      `json:"storageVirtualCluster,omitempty"`
-	ClusterUser           storagev1.ClusterUser         `json:"clusterUser,omitempty"`
-	ClusterTeam           storagev1.ClusterTeam         `json:"clusterTeam,omitempty"`
+	SpaceConstraint       storagev1.LocalSpaceConstraint     `json:"localSpaceConstraint,omitempty"`
+	StorageClusterAccess  storagev1.LocalClusterAccess       `json:"localStorageClusterAccess,omitempty"`
+	ClusterRoleTemplate   storagev1.LocalClusterRoleTemplate `json:"localClusterRoleTemplate,omitempty"`
+	StorageClusterQuota   storagev1.ClusterQuota             `json:"storageClusterQuota,omitempty"`
+	StorageVirtualCluster storagev1.VirtualCluster           `json:"storageVirtualCluster,omitempty"`
+	LocalUser             storagev1.LocalUser                `json:"localUser,omitempty"`
+	LocalTeam             storagev1.LocalTeam                `json:"localTeam,omitempty"`
 }
 
 type KioskStatus struct {

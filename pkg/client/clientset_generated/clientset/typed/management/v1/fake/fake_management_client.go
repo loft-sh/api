@@ -24,12 +24,20 @@ func (c *FakeManagementV1) Clusters() v1.ClusterInterface {
 	return &FakeClusters{c}
 }
 
+func (c *FakeManagementV1) ClusterAccesses() v1.ClusterAccessInterface {
+	return &FakeClusterAccesses{c}
+}
+
 func (c *FakeManagementV1) ClusterAccountTemplates() v1.ClusterAccountTemplateInterface {
 	return &FakeClusterAccountTemplates{c}
 }
 
 func (c *FakeManagementV1) ClusterConnects() v1.ClusterConnectInterface {
 	return &FakeClusterConnects{c}
+}
+
+func (c *FakeManagementV1) ClusterRoleTemplates() v1.ClusterRoleTemplateInterface {
+	return &FakeClusterRoleTemplates{c}
 }
 
 func (c *FakeManagementV1) Configs() v1.ConfigInterface {
@@ -46,18 +54,6 @@ func (c *FakeManagementV1) Events() v1.EventInterface {
 
 func (c *FakeManagementV1) Features() v1.FeatureInterface {
 	return &FakeFeatures{c}
-}
-
-func (c *FakeManagementV1) GlobalClusterAccesses() v1.GlobalClusterAccessInterface {
-	return &FakeGlobalClusterAccesses{c}
-}
-
-func (c *FakeManagementV1) GlobalClusterRoleTemplates() v1.GlobalClusterRoleTemplateInterface {
-	return &FakeGlobalClusterRoleTemplates{c}
-}
-
-func (c *FakeManagementV1) GlobalSpaceConstraints() v1.GlobalSpaceConstraintInterface {
-	return &FakeGlobalSpaceConstraints{c}
 }
 
 func (c *FakeManagementV1) Licenses() v1.LicenseInterface {
@@ -94,6 +90,10 @@ func (c *FakeManagementV1) SelfSubjectAccessReviews() v1.SelfSubjectAccessReview
 
 func (c *FakeManagementV1) SharedSecrets(namespace string) v1.SharedSecretInterface {
 	return &FakeSharedSecrets{c, namespace}
+}
+
+func (c *FakeManagementV1) SpaceConstraints() v1.SpaceConstraintInterface {
+	return &FakeSpaceConstraints{c}
 }
 
 func (c *FakeManagementV1) SpaceTemplates() v1.SpaceTemplateInterface {

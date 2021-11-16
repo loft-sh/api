@@ -8,9 +8,13 @@ type AppExpansion interface{}
 
 type ClusterExpansion interface{}
 
+type ClusterAccessExpansion interface{}
+
 type ClusterAccountTemplateExpansion interface{}
 
 type ClusterConnectExpansion interface{}
+
+type ClusterRoleTemplateExpansion interface{}
 
 type ConfigExpansion interface{}
 
@@ -19,12 +23,6 @@ type DirectClusterEndpointTokenExpansion interface{}
 type EventExpansion interface{}
 
 type FeatureExpansion interface{}
-
-type GlobalClusterAccessExpansion interface{}
-
-type GlobalClusterRoleTemplateExpansion interface{}
-
-type GlobalSpaceConstraintExpansion interface{}
 
 type LicenseExpansion interface{}
 
@@ -43,6 +41,8 @@ type SelfExpansion interface{}
 type SelfSubjectAccessReviewExpansion interface{}
 
 type SharedSecretExpansion interface{}
+
+type SpaceConstraintExpansion interface{}
 
 type SpaceTemplateExpansion interface{}
 

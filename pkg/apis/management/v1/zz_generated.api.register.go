@@ -19,16 +19,20 @@ func addKnownTypes(scheme *runtime.Scheme) error {
 		&AppList{},
 		&Cluster{},
 		&ClusterList{},
-		&ClusterAccess{},
 		&ClusterCharts{},
 		&ClusterDomain{},
+		&ClusterMemberAccess{},
 		&ClusterMembers{},
 		&ClusterReset{},
 		&ClusterVirtualClusterDefaults{},
+		&ClusterAccess{},
+		&ClusterAccessList{},
 		&ClusterAccountTemplate{},
 		&ClusterAccountTemplateList{},
 		&ClusterConnect{},
 		&ClusterConnectList{},
+		&ClusterRoleTemplate{},
+		&ClusterRoleTemplateList{},
 		&Config{},
 		&ConfigList{},
 		&DirectClusterEndpointToken{},
@@ -37,12 +41,6 @@ func addKnownTypes(scheme *runtime.Scheme) error {
 		&EventList{},
 		&Feature{},
 		&FeatureList{},
-		&GlobalClusterAccess{},
-		&GlobalClusterAccessList{},
-		&GlobalClusterRoleTemplate{},
-		&GlobalClusterRoleTemplateList{},
-		&GlobalSpaceConstraint{},
-		&GlobalSpaceConstraintList{},
 		&Kiosk{},
 		&KioskList{},
 		&License{},
@@ -63,6 +61,8 @@ func addKnownTypes(scheme *runtime.Scheme) error {
 		&SelfSubjectAccessReviewList{},
 		&SharedSecret{},
 		&SharedSecretList{},
+		&SpaceConstraint{},
+		&SpaceConstraintList{},
 		&SpaceTemplate{},
 		&SpaceTemplateList{},
 		&SubjectAccessReview{},
@@ -91,11 +91,6 @@ var (
 		management.ManagementAppStorage,
 		management.ManagementClusterStorage,
 		builders.NewApiResourceWithStorage(
-			management.InternalClusterAccessREST,
-			func() runtime.Object { return &ClusterAccess{} }, // Register versioned resource
-			nil,
-			management.NewClusterAccessREST),
-		builders.NewApiResourceWithStorage(
 			management.InternalClusterChartsREST,
 			func() runtime.Object { return &ClusterCharts{} }, // Register versioned resource
 			nil,
@@ -105,6 +100,11 @@ var (
 			func() runtime.Object { return &ClusterDomain{} }, // Register versioned resource
 			nil,
 			management.NewClusterDomainREST),
+		builders.NewApiResourceWithStorage(
+			management.InternalClusterMemberAccessREST,
+			func() runtime.Object { return &ClusterMemberAccess{} }, // Register versioned resource
+			nil,
+			management.NewClusterMemberAccessREST),
 		builders.NewApiResourceWithStorage(
 			management.InternalClusterMembersREST,
 			func() runtime.Object { return &ClusterMembers{} }, // Register versioned resource
@@ -120,15 +120,14 @@ var (
 			func() runtime.Object { return &ClusterVirtualClusterDefaults{} }, // Register versioned resource
 			nil,
 			management.NewClusterVirtualClusterDefaultsREST),
+		management.ManagementClusterAccessStorage,
 		management.ManagementClusterAccountTemplateStorage,
 		management.ManagementClusterConnectStorage,
+		management.ManagementClusterRoleTemplateStorage,
 		management.ManagementConfigStorage,
 		management.ManagementDirectClusterEndpointTokenStorage,
 		management.ManagementEventStorage,
 		management.ManagementFeatureStorage,
-		management.ManagementGlobalClusterAccessStorage,
-		management.ManagementGlobalClusterRoleTemplateStorage,
-		management.ManagementGlobalSpaceConstraintStorage,
 		management.ManagementKioskStorage,
 		management.ManagementLicenseStorage,
 		management.ManagementLicenseTokenStorage,
@@ -139,6 +138,7 @@ var (
 		management.ManagementSelfStorage,
 		management.ManagementSelfSubjectAccessReviewStorage,
 		management.ManagementSharedSecretStorage,
+		management.ManagementSpaceConstraintStorage,
 		management.ManagementSpaceTemplateStorage,
 		management.ManagementSubjectAccessReviewStorage,
 		management.ManagementTaskStorage,
@@ -232,14 +232,6 @@ type ClusterList struct {
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
 
-type ClusterAccessList struct {
-	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
-	Items           []ClusterAccess `json:"items"`
-}
-
-// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
-
 type ClusterChartsList struct {
 	metav1.TypeMeta `json:",inline"`
 	metav1.ListMeta `json:"metadata,omitempty"`
@@ -252,6 +244,14 @@ type ClusterDomainList struct {
 	metav1.TypeMeta `json:",inline"`
 	metav1.ListMeta `json:"metadata,omitempty"`
 	Items           []ClusterDomain `json:"items"`
+}
+
+// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+
+type ClusterMemberAccessList struct {
+	metav1.TypeMeta `json:",inline"`
+	metav1.ListMeta `json:"metadata,omitempty"`
+	Items           []ClusterMemberAccess `json:"items"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -280,6 +280,14 @@ type ClusterVirtualClusterDefaultsList struct {
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
 
+type ClusterAccessList struct {
+	metav1.TypeMeta `json:",inline"`
+	metav1.ListMeta `json:"metadata,omitempty"`
+	Items           []ClusterAccess `json:"items"`
+}
+
+// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+
 type ClusterAccountTemplateList struct {
 	metav1.TypeMeta `json:",inline"`
 	metav1.ListMeta `json:"metadata,omitempty"`
@@ -292,6 +300,14 @@ type ClusterConnectList struct {
 	metav1.TypeMeta `json:",inline"`
 	metav1.ListMeta `json:"metadata,omitempty"`
 	Items           []ClusterConnect `json:"items"`
+}
+
+// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+
+type ClusterRoleTemplateList struct {
+	metav1.TypeMeta `json:",inline"`
+	metav1.ListMeta `json:"metadata,omitempty"`
+	Items           []ClusterRoleTemplate `json:"items"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -324,30 +340,6 @@ type FeatureList struct {
 	metav1.TypeMeta `json:",inline"`
 	metav1.ListMeta `json:"metadata,omitempty"`
 	Items           []Feature `json:"items"`
-}
-
-// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
-
-type GlobalClusterAccessList struct {
-	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
-	Items           []GlobalClusterAccess `json:"items"`
-}
-
-// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
-
-type GlobalClusterRoleTemplateList struct {
-	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
-	Items           []GlobalClusterRoleTemplate `json:"items"`
-}
-
-// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
-
-type GlobalSpaceConstraintList struct {
-	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
-	Items           []GlobalSpaceConstraint `json:"items"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -428,6 +420,14 @@ type SharedSecretList struct {
 	metav1.TypeMeta `json:",inline"`
 	metav1.ListMeta `json:"metadata,omitempty"`
 	Items           []SharedSecret `json:"items"`
+}
+
+// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+
+type SpaceConstraintList struct {
+	metav1.TypeMeta `json:",inline"`
+	metav1.ListMeta `json:"metadata,omitempty"`
+	Items           []SpaceConstraint `json:"items"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object

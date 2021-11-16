@@ -7,7 +7,7 @@ import (
 
 // +genclient
 // +genclient:nonNamespaced
-// +genclient:method=ListAccess,verb=get,subresource=access,result=github.com/loft-sh/api/pkg/apis/management/v1.ClusterAccess
+// +genclient:method=ListAccess,verb=get,subresource=access,result=github.com/loft-sh/api/pkg/apis/management/v1.ClusterMemberAccess
 // +genclient:method=ListMembers,verb=get,subresource=members,result=github.com/loft-sh/api/pkg/apis/management/v1.ClusterMembers
 // +genclient:method=ListVirtualClusterDefaults,verb=get,subresource=virtualclusterdefaults,result=github.com/loft-sh/api/pkg/apis/management/v1.ClusterVirtualClusterDefaults
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -15,7 +15,7 @@ import (
 // Cluster holds the cluster information
 // +k8s:openapi-gen=true
 // +resource:path=clusters,rest=ClusterREST
-// +subresource:request=ClusterAccess,path=access,kind=ClusterAccess,rest=ClusterAccessREST
+// +subresource:request=ClusterMemberAccess,path=memberaccess,kind=ClusterMemberAccess,rest=ClusterMemberAccessREST
 // +subresource:request=ClusterReset,path=reset,kind=ClusterReset,rest=ClusterResetREST
 // +subresource:request=ClusterDomain,path=domain,kind=ClusterDomain,rest=ClusterDomainREST
 // +subresource:request=ClusterMembers,path=members,kind=ClusterMembers,rest=ClusterMembersREST

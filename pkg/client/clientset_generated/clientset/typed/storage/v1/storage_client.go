@@ -13,11 +13,11 @@ type StorageV1Interface interface {
 	AccessKeysGetter
 	AppsGetter
 	ClustersGetter
+	ClusterAccessesGetter
 	ClusterAccountTemplatesGetter
-	GlobalClusterAccessesGetter
-	GlobalClusterRoleTemplatesGetter
-	GlobalSpaceConstraintsGetter
+	ClusterRoleTemplatesGetter
 	SharedSecretsGetter
+	SpaceConstraintsGetter
 	SpaceTemplatesGetter
 	TasksGetter
 	TeamsGetter
@@ -42,24 +42,24 @@ func (c *StorageV1Client) Clusters() ClusterInterface {
 	return newClusters(c)
 }
 
+func (c *StorageV1Client) ClusterAccesses() ClusterAccessInterface {
+	return newClusterAccesses(c)
+}
+
 func (c *StorageV1Client) ClusterAccountTemplates() ClusterAccountTemplateInterface {
 	return newClusterAccountTemplates(c)
 }
 
-func (c *StorageV1Client) GlobalClusterAccesses() GlobalClusterAccessInterface {
-	return newGlobalClusterAccesses(c)
-}
-
-func (c *StorageV1Client) GlobalClusterRoleTemplates() GlobalClusterRoleTemplateInterface {
-	return newGlobalClusterRoleTemplates(c)
-}
-
-func (c *StorageV1Client) GlobalSpaceConstraints() GlobalSpaceConstraintInterface {
-	return newGlobalSpaceConstraints(c)
+func (c *StorageV1Client) ClusterRoleTemplates() ClusterRoleTemplateInterface {
+	return newClusterRoleTemplates(c)
 }
 
 func (c *StorageV1Client) SharedSecrets(namespace string) SharedSecretInterface {
 	return newSharedSecrets(c, namespace)
+}
+
+func (c *StorageV1Client) SpaceConstraints() SpaceConstraintInterface {
+	return newSpaceConstraints(c)
 }
 
 func (c *StorageV1Client) SpaceTemplates() SpaceTemplateInterface {
