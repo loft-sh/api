@@ -55,6 +55,10 @@ type TaskSpec struct {
 	// +optional
 	Access []Access `json:"access,omitempty"`
 
+	// Scope defines the scope of the access key.
+	// +optional
+	Scope *AccessKeyScope `json:"scope,omitempty"`
+
 	// Owner holds the owner of this object
 	// +optional
 	Owner *UserOrTeam `json:"owner,omitempty"`

@@ -12967,6 +12967,12 @@ func schema_pkg_apis_management_v1_TaskSpec(ref common.ReferenceCallback) common
 							},
 						},
 					},
+					"scope": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Scope defines the scope of the access key.",
+							Ref:         ref("github.com/loft-sh/api/pkg/apis/storage/v1.AccessKeyScope"),
+						},
+					},
 					"owner": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Owner holds the owner of this object",
@@ -12989,7 +12995,7 @@ func schema_pkg_apis_management_v1_TaskSpec(ref common.ReferenceCallback) common
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/pkg/apis/storage/v1.Access", "github.com/loft-sh/api/pkg/apis/storage/v1.Target", "github.com/loft-sh/api/pkg/apis/storage/v1.TaskDefinition", "github.com/loft-sh/api/pkg/apis/storage/v1.UserOrTeam"},
+			"github.com/loft-sh/api/pkg/apis/storage/v1.Access", "github.com/loft-sh/api/pkg/apis/storage/v1.AccessKeyScope", "github.com/loft-sh/api/pkg/apis/storage/v1.Target", "github.com/loft-sh/api/pkg/apis/storage/v1.TaskDefinition", "github.com/loft-sh/api/pkg/apis/storage/v1.UserOrTeam"},
 	}
 }
 
@@ -17785,6 +17791,12 @@ func schema_pkg_apis_storage_v1_TaskSpec(ref common.ReferenceCallback) common.Op
 							},
 						},
 					},
+					"scope": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Scope defines the scope of the access key.",
+							Ref:         ref("github.com/loft-sh/api/pkg/apis/storage/v1.AccessKeyScope"),
+						},
+					},
 					"owner": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Owner holds the owner of this object",
@@ -17807,7 +17819,7 @@ func schema_pkg_apis_storage_v1_TaskSpec(ref common.ReferenceCallback) common.Op
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/pkg/apis/storage/v1.Access", "github.com/loft-sh/api/pkg/apis/storage/v1.Target", "github.com/loft-sh/api/pkg/apis/storage/v1.TaskDefinition", "github.com/loft-sh/api/pkg/apis/storage/v1.UserOrTeam"},
+			"github.com/loft-sh/api/pkg/apis/storage/v1.Access", "github.com/loft-sh/api/pkg/apis/storage/v1.AccessKeyScope", "github.com/loft-sh/api/pkg/apis/storage/v1.Target", "github.com/loft-sh/api/pkg/apis/storage/v1.TaskDefinition", "github.com/loft-sh/api/pkg/apis/storage/v1.UserOrTeam"},
 	}
 }
 

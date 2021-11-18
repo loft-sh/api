@@ -1895,6 +1895,11 @@ func (in *TaskSpec) DeepCopyInto(out *TaskSpec) {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
+	if in.Scope != nil {
+		in, out := &in.Scope, &out.Scope
+		*out = new(AccessKeyScope)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.Owner != nil {
 		in, out := &in.Owner, &out.Owner
 		*out = new(UserOrTeam)
