@@ -6,12 +6,12 @@ import (
 	"context"
 	"fmt"
 
-	configv1alpha1 "github.com/loft-sh/agentapi/pkg/apis/kiosk/config/v1alpha1"
-	clusterv1 "github.com/loft-sh/agentapi/pkg/apis/loft/cluster/v1"
-	agentstoragev1 "github.com/loft-sh/agentapi/pkg/apis/loft/storage/v1"
-	auditv1 "github.com/loft-sh/api/pkg/apis/audit/v1"
-	storagev1 "github.com/loft-sh/api/pkg/apis/storage/v1"
-	"github.com/loft-sh/api/pkg/managerfactory"
+	configv1alpha1 "github.com/loft-sh/agentapi/v2/pkg/apis/kiosk/config/v1alpha1"
+	clusterv1 "github.com/loft-sh/agentapi/v2/pkg/apis/loft/cluster/v1"
+	agentstoragev1 "github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1"
+	auditv1 "github.com/loft-sh/api/v2/pkg/apis/audit/v1"
+	storagev1 "github.com/loft-sh/api/v2/pkg/apis/storage/v1"
+	"github.com/loft-sh/api/v2/pkg/managerfactory"
 	"github.com/loft-sh/apiserver/pkg/builders"
 	policyv1beta1 "github.com/loft-sh/jspolicy/pkg/apis/policy/v1beta1"
 	authorizationv1 "k8s.io/api/authorization/v1"
@@ -1007,7 +1007,7 @@ type AuthenticationPassword struct {
 }
 
 // +genclient
-// +genclient:nonNamespaced
+// +genclient
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
 
 type Cluster struct {

@@ -5,7 +5,7 @@
 package v1
 
 import (
-	storagev1 "github.com/loft-sh/agentapi/pkg/apis/loft/storage/v1"
+	storagev1 "github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1"
 	corev1 "k8s.io/api/core/v1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	runtime "k8s.io/apimachinery/pkg/runtime"

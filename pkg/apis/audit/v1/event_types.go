@@ -114,7 +114,7 @@ type Event struct {
 	// For panic type error responses, this will be auto-populated with the error Message.
 	// +optional
 	ResponseStatus *metav1.Status `json:"responseStatus,omitempty" protobuf:"bytes,10,opt,name=responseStatus"`
-	
+
 	// API object from the request, in JSON format. The RequestObject is recorded as-is in the request
 	// (possibly re-encoded as JSON), prior to version conversion, defaulting, admission or
 	// merging. It is an external versioned object type, and may not be a valid object on its own.

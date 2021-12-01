@@ -1,7 +1,7 @@
 package v1
 
 import (
-	clusterv1 "github.com/loft-sh/agentapi/pkg/apis/loft/cluster/v1"
+	clusterv1 "github.com/loft-sh/agentapi/v2/pkg/apis/loft/cluster/v1"
 	policyv1beta1 "github.com/loft-sh/jspolicy/pkg/apis/policy/v1beta1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 )

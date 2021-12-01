@@ -1,9 +1,9 @@
 package v1
 
 import (
-	configv1alpha1 "github.com/loft-sh/agentapi/pkg/apis/kiosk/config/v1alpha1"
-	clusterv1 "github.com/loft-sh/agentapi/pkg/apis/loft/cluster/v1"
-	storagev1 "github.com/loft-sh/agentapi/pkg/apis/loft/storage/v1"
+	configv1alpha1 "github.com/loft-sh/agentapi/v2/pkg/apis/kiosk/config/v1alpha1"
+	clusterv1 "github.com/loft-sh/agentapi/v2/pkg/apis/loft/cluster/v1"
+	storagev1 "github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1"
 	"github.com/loft-sh/jspolicy/pkg/apis/policy/v1beta1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 )

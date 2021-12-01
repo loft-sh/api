@@ -5,9 +5,9 @@
 package management
 
 import (
-	clusterv1 "github.com/loft-sh/agentapi/pkg/apis/loft/cluster/v1"
-	auditv1 "github.com/loft-sh/api/pkg/apis/audit/v1"
-	v1 "github.com/loft-sh/api/pkg/apis/storage/v1"
+	clusterv1 "github.com/loft-sh/agentapi/v2/pkg/apis/loft/cluster/v1"
+	auditv1 "github.com/loft-sh/api/v2/pkg/apis/audit/v1"
+	v1 "github.com/loft-sh/api/v2/pkg/apis/storage/v1"
 	runtime "k8s.io/apimachinery/pkg/runtime"
 )
 
