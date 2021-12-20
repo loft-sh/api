@@ -7,7 +7,7 @@ require (
 	github.com/go-openapi/spec v0.20.1
 	github.com/loft-sh/apiserver v0.0.0-20210607160412-10c99558fdeb
 	github.com/loft-sh/jspolicy v0.1.0
-	github.com/loft-sh/agentapi v2.0.3-beta.5
+	github.com/loft-sh/agentapi v1.15.0
 	k8s.io/api v0.21.1
 	k8s.io/apiextensions-apiserver v0.21.1
 	k8s.io/apimachinery v0.21.1
