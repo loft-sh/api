@@ -94,7 +94,7 @@ func (c *FakeSelfSubjectAccessReviews) UpdateStatus(ctx context.Context, selfSub
 // Delete takes name of the selfSubjectAccessReview and deletes it. Returns an error if one occurs.
 func (c *FakeSelfSubjectAccessReviews) Delete(ctx context.Context, name string, opts v1.DeleteOptions) error {
 	_, err := c.Fake.
-		Invokes(testing.NewRootDeleteAction(selfsubjectaccessreviewsResource, name), &managementv1.SelfSubjectAccessReview{})
+		Invokes(testing.NewRootDeleteActionWithOptions(selfsubjectaccessreviewsResource, name, opts), &managementv1.SelfSubjectAccessReview{})
 	return err
 }
 

@@ -94,7 +94,7 @@ func (c *FakePolicyViolations) UpdateStatus(ctx context.Context, policyViolation
 // Delete takes name of the policyViolation and deletes it. Returns an error if one occurs.
 func (c *FakePolicyViolations) Delete(ctx context.Context, name string, opts v1.DeleteOptions) error {
 	_, err := c.Fake.
-		Invokes(testing.NewRootDeleteAction(policyviolationsResource, name), &managementv1.PolicyViolation{})
+		Invokes(testing.NewRootDeleteActionWithOptions(policyviolationsResource, name, opts), &managementv1.PolicyViolation{})
 	return err
 }
 

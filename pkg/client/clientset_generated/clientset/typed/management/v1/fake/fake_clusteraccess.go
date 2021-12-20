@@ -94,7 +94,7 @@ func (c *FakeClusterAccesses) UpdateStatus(ctx context.Context, clusterAccess *m
 // Delete takes name of the clusterAccess and deletes it. Returns an error if one occurs.
 func (c *FakeClusterAccesses) Delete(ctx context.Context, name string, opts v1.DeleteOptions) error {
 	_, err := c.Fake.
-		Invokes(testing.NewRootDeleteAction(clusteraccessesResource, name), &managementv1.ClusterAccess{})
+		Invokes(testing.NewRootDeleteActionWithOptions(clusteraccessesResource, name, opts), &managementv1.ClusterAccess{})
 	return err
 }
 

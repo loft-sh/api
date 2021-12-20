@@ -94,7 +94,7 @@ func (c *FakeClusterConnects) UpdateStatus(ctx context.Context, clusterConnect *
 // Delete takes name of the clusterConnect and deletes it. Returns an error if one occurs.
 func (c *FakeClusterConnects) Delete(ctx context.Context, name string, opts v1.DeleteOptions) error {
 	_, err := c.Fake.
-		Invokes(testing.NewRootDeleteAction(clusterconnectsResource, name), &managementv1.ClusterConnect{})
+		Invokes(testing.NewRootDeleteActionWithOptions(clusterconnectsResource, name, opts), &managementv1.ClusterConnect{})
 	return err
 }
 

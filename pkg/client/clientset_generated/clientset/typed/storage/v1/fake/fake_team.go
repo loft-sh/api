@@ -94,7 +94,7 @@ func (c *FakeTeams) UpdateStatus(ctx context.Context, team *storagev1.Team, opts
 // Delete takes name of the team and deletes it. Returns an error if one occurs.
 func (c *FakeTeams) Delete(ctx context.Context, name string, opts v1.DeleteOptions) error {
 	_, err := c.Fake.
-		Invokes(testing.NewRootDeleteAction(teamsResource, name), &storagev1.Team{})
+		Invokes(testing.NewRootDeleteActionWithOptions(teamsResource, name, opts), &storagev1.Team{})
 	return err
 }
 

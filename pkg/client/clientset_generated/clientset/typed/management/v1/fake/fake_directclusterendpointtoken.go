@@ -94,7 +94,7 @@ func (c *FakeDirectClusterEndpointTokens) UpdateStatus(ctx context.Context, dire
 // Delete takes name of the directClusterEndpointToken and deletes it. Returns an error if one occurs.
 func (c *FakeDirectClusterEndpointTokens) Delete(ctx context.Context, name string, opts v1.DeleteOptions) error {
 	_, err := c.Fake.
-		Invokes(testing.NewRootDeleteAction(directclusterendpointtokensResource, name), &managementv1.DirectClusterEndpointToken{})
+		Invokes(testing.NewRootDeleteActionWithOptions(directclusterendpointtokensResource, name, opts), &managementv1.DirectClusterEndpointToken{})
 	return err
 }
 

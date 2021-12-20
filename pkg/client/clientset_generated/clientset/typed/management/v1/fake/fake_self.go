@@ -94,7 +94,7 @@ func (c *FakeSelves) UpdateStatus(ctx context.Context, self *managementv1.Self, 
 // Delete takes name of the self and deletes it. Returns an error if one occurs.
 func (c *FakeSelves) Delete(ctx context.Context, name string, opts v1.DeleteOptions) error {
 	_, err := c.Fake.
-		Invokes(testing.NewRootDeleteAction(selvesResource, name), &managementv1.Self{})
+		Invokes(testing.NewRootDeleteActionWithOptions(selvesResource, name, opts), &managementv1.Self{})
 	return err
 }
 
