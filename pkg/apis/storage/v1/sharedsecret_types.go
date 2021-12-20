@@ -17,14 +17,6 @@ type SharedSecret struct {
 	Status SharedSecretStatus `json:"status,omitempty"`
 }
 
-func (a *SharedSecret) GetOwner() *UserOrTeam {
-	return a.Spec.Owner
-}
-
-func (a *SharedSecret) SetOwner(userOrTeam *UserOrTeam) {
-	a.Spec.Owner = userOrTeam
-}
-
 func (a *SharedSecret) GetAccess() []Access {
 	return a.Spec.Access
 }
@@ -35,18 +27,6 @@ func (a *SharedSecret) SetAccess(access []Access) {
 
 // SharedSecretSpec holds the specification
 type SharedSecretSpec struct {
-	// DisplayName is the name that should be displayed in the UI
-	// +optional
-	DisplayName string `json:"displayName,omitempty"`
-
-	// Description describes a shared secret
-	// +optional
-	Description string `json:"description,omitempty"`
-
-	// Owner holds the owner of this object
-	// +optional
-	Owner *UserOrTeam `json:"owner,omitempty"`
-
 	// Data contains the secret data. Each key must consist of alphanumeric
 	// characters, '-', '_' or '.'. The serialized form of the secret data is a
 	// base64 encoded string, representing the arbitrary (possibly non-string)

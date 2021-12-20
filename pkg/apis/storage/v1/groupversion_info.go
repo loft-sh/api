@@ -25,7 +25,4 @@ var (
 type AccessAccessor interface {
 	GetAccess() []Access
 	SetAccess(access []Access)
-
-	GetOwner() *UserOrTeam
-	SetOwner(userOrTeam *UserOrTeam)
 }

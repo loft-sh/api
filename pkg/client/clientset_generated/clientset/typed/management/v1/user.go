@@ -6,8 +6,8 @@ import (
 	"context"
 	"time"
 
-	v1 "github.com/loft-sh/api/v2/pkg/apis/management/v1"
-	scheme "github.com/loft-sh/api/v2/pkg/client/clientset_generated/clientset/scheme"
+	v1 "github.com/loft-sh/api/pkg/apis/management/v1"
+	scheme "github.com/loft-sh/api/pkg/client/clientset_generated/clientset/scheme"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	types "k8s.io/apimachinery/pkg/types"
 	watch "k8s.io/apimachinery/pkg/watch"
@@ -32,8 +32,12 @@ type UserInterface interface {
 	Watch(ctx context.Context, opts metav1.ListOptions) (watch.Interface, error)
 	Patch(ctx context.Context, name string, pt types.PatchType, data []byte, opts metav1.PatchOptions, subresources ...string) (result *v1.User, err error)
 	GetProfile(ctx context.Context, userName string, options metav1.GetOptions) (*v1.UserProfile, error)
+	UpdateProfile(ctx context.Context, userName string, userProfile *v1.UserProfile, opts metav1.CreateOptions) (*v1.UserProfile, error)
+	ListSpaces(ctx context.Context, userName string, options metav1.GetOptions) (*v1.UserSpaces, error)
+	ListQuotas(ctx context.Context, userName string, options metav1.GetOptions) (*v1.UserQuotas, error)
+	ListTeams(ctx context.Context, userName string, options metav1.GetOptions) (*v1.UserTeams, error)
 	ListClusters(ctx context.Context, userName string, options metav1.GetOptions) (*v1.UserClusters, error)
-	ListAccessKeys(ctx context.Context, userName string, options metav1.GetOptions) (*v1.UserAccessKeys, error)
+	ListVirtualClusters(ctx context.Context, userName string, options metav1.GetOptions) (*v1.UserVirtualClusters, error)
 
 	UserExpansion
 }
@@ -184,6 +188,59 @@ func (c *users) GetProfile(ctx context.Context, userName string, options metav1.
 	return
 }
 
+// UpdateProfile takes the representation of a userProfile and creates it.  Returns the server's representation of the userProfile, and an error, if there is any.
+func (c *users) UpdateProfile(ctx context.Context, userName string, userProfile *v1.UserProfile, opts metav1.CreateOptions) (result *v1.UserProfile, err error) {
+	result = &v1.UserProfile{}
+	err = c.client.Post().
+		Resource("users").
+		Name(userName).
+		SubResource("profile").
+		VersionedParams(&opts, scheme.ParameterCodec).
+		Body(userProfile).
+		Do(ctx).
+		Into(result)
+	return
+}
+
+// ListSpaces takes name of the user, and returns the corresponding v1.UserSpaces object, and an error if there is any.
+func (c *users) ListSpaces(ctx context.Context, userName string, options metav1.GetOptions) (result *v1.UserSpaces, err error) {
+	result = &v1.UserSpaces{}
+	err = c.client.Get().
+		Resource("users").
+		Name(userName).
+		SubResource("spaces").
+		VersionedParams(&options, scheme.ParameterCodec).
+		Do(ctx).
+		Into(result)
+	return
+}
+
+// ListQuotas takes name of the user, and returns the corresponding v1.UserQuotas object, and an error if there is any.
+func (c *users) ListQuotas(ctx context.Context, userName string, options metav1.GetOptions) (result *v1.UserQuotas, err error) {
+	result = &v1.UserQuotas{}
+	err = c.client.Get().
+		Resource("users").
+		Name(userName).
+		SubResource("quotas").
+		VersionedParams(&options, scheme.ParameterCodec).
+		Do(ctx).
+		Into(result)
+	return
+}
+
+// ListTeams takes name of the user, and returns the corresponding v1.UserTeams object, and an error if there is any.
+func (c *users) ListTeams(ctx context.Context, userName string, options metav1.GetOptions) (result *v1.UserTeams, err error) {
+	result = &v1.UserTeams{}
+	err = c.client.Get().
+		Resource("users").
+		Name(userName).
+		SubResource("teams").
+		VersionedParams(&options, scheme.ParameterCodec).
+		Do(ctx).
+		Into(result)
+	return
+}
+
 // ListClusters takes name of the user, and returns the corresponding v1.UserClusters object, and an error if there is any.
 func (c *users) ListClusters(ctx context.Context, userName string, options metav1.GetOptions) (result *v1.UserClusters, err error) {
 	result = &v1.UserClusters{}
@@ -197,13 +254,13 @@ func (c *users) ListClusters(ctx context.Context, userName string, options metav
 	return
 }
 
-// ListAccessKeys takes name of the user, and returns the corresponding v1.UserAccessKeys object, and an error if there is any.
-func (c *users) ListAccessKeys(ctx context.Context, userName string, options metav1.GetOptions) (result *v1.UserAccessKeys, err error) {
-	result = &v1.UserAccessKeys{}
+// ListVirtualClusters takes name of the user, and returns the corresponding v1.UserVirtualClusters object, and an error if there is any.
+func (c *users) ListVirtualClusters(ctx context.Context, userName string, options metav1.GetOptions) (result *v1.UserVirtualClusters, err error) {
+	result = &v1.UserVirtualClusters{}
 	err = c.client.Get().
 		Resource("users").
 		Name(userName).
-		SubResource("accesskeys").
+		SubResource("virtualclusters").
 		VersionedParams(&options, scheme.ParameterCodec).
 		Do(ctx).
 		Into(result)

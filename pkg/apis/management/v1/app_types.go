@@ -1,7 +1,7 @@
 package v1
 
 import (
-	storagev1 "github.com/loft-sh/api/v2/pkg/apis/storage/v1"
+	storagev1 "github.com/loft-sh/api/pkg/apis/storage/v1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 )
 
@@ -28,20 +28,4 @@ type AppSpec struct {
 // AppStatus holds the status
 type AppStatus struct {
 	storagev1.AppStatus `json:",inline"`
-}
-
-func (a *App) GetOwner() *storagev1.UserOrTeam {
-	return a.Spec.Owner
-}
-
-func (a *App) SetOwner(userOrTeam *storagev1.UserOrTeam) {
-	a.Spec.Owner = userOrTeam
-}
-
-func (a *App) GetAccess() []storagev1.Access {
-	return a.Spec.Access
-}
-
-func (a *App) SetAccess(access []storagev1.Access) {
-	a.Spec.Access = access
 }

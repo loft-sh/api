@@ -16,4 +16,7 @@ type ClusterReset struct {
 
 	// +optional
 	RBAC bool `json:"rbac,omitempty"`
+
+	// +optional
+	Templates bool `json:"templates,omitempty"`
 }

@@ -7,7 +7,9 @@ import (
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
 
 // +subresource-request
-type TaskLog struct {
+type UserClusterRoles struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
+
+	ClusterRoles []string `json:"clusterRoles,omitempty"`
 }

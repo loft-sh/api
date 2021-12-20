@@ -3,8 +3,8 @@
 package v1
 
 import (
-	v1 "github.com/loft-sh/api/v2/pkg/apis/storage/v1"
-	"github.com/loft-sh/api/v2/pkg/client/clientset_generated/clientset/scheme"
+	v1 "github.com/loft-sh/api/pkg/apis/storage/v1"
+	"github.com/loft-sh/api/pkg/client/clientset_generated/clientset/scheme"
 	rest "k8s.io/client-go/rest"
 )
 
@@ -13,13 +13,9 @@ type StorageV1Interface interface {
 	AccessKeysGetter
 	AppsGetter
 	ClustersGetter
-	ClusterAccessesGetter
 	ClusterAccountTemplatesGetter
-	ClusterRoleTemplatesGetter
 	SharedSecretsGetter
-	SpaceConstraintsGetter
 	SpaceTemplatesGetter
-	TasksGetter
 	TeamsGetter
 	UsersGetter
 	VirtualClusterTemplatesGetter
@@ -42,32 +38,16 @@ func (c *StorageV1Client) Clusters() ClusterInterface {
 	return newClusters(c)
 }
 
-func (c *StorageV1Client) ClusterAccesses() ClusterAccessInterface {
-	return newClusterAccesses(c)
-}
-
 func (c *StorageV1Client) ClusterAccountTemplates() ClusterAccountTemplateInterface {
 	return newClusterAccountTemplates(c)
-}
-
-func (c *StorageV1Client) ClusterRoleTemplates() ClusterRoleTemplateInterface {
-	return newClusterRoleTemplates(c)
 }
 
 func (c *StorageV1Client) SharedSecrets(namespace string) SharedSecretInterface {
 	return newSharedSecrets(c, namespace)
 }
 
-func (c *StorageV1Client) SpaceConstraints() SpaceConstraintInterface {
-	return newSpaceConstraints(c)
-}
-
 func (c *StorageV1Client) SpaceTemplates() SpaceTemplateInterface {
 	return newSpaceTemplates(c)
-}
-
-func (c *StorageV1Client) Tasks() TaskInterface {
-	return newTasks(c)
 }
 
 func (c *StorageV1Client) Teams() TeamInterface {

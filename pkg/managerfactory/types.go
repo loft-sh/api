@@ -10,7 +10,7 @@ import (
 
 // RemoteRunner can be registered in the factory and will be called if a new manager is created
 type RemoteRunner interface {
-	Register(cluster string, clusterManager ctrl.Manager, managementManager ctrl.Manager) error
+	Register(cluster string, mgr ctrl.Manager) error
 }
 
 // SharedManagerFactory is the interface for retrieving managers

@@ -3,8 +3,8 @@
 package v1
 
 import (
-	v1 "github.com/loft-sh/api/v2/pkg/apis/virtualcluster/v1"
-	"github.com/loft-sh/api/v2/pkg/client/clientset_generated/clientset/scheme"
+	v1 "github.com/loft-sh/api/pkg/apis/virtualcluster/v1"
+	"github.com/loft-sh/api/pkg/client/clientset_generated/clientset/scheme"
 	rest "k8s.io/client-go/rest"
 )
 

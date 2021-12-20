@@ -1,7 +1,7 @@
 package v1
 
 import (
-	clusterv1 "github.com/loft-sh/agentapi/v2/pkg/apis/loft/cluster/v1"
+	configv1alpha1 "github.com/loft-sh/agentapi/pkg/apis/kiosk/config/v1alpha1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 )
 
@@ -22,5 +22,30 @@ type ClusterMembers struct {
 type ClusterMember struct {
 	// Info about the user or team
 	// +optional
-	Info clusterv1.EntityInfo `json:"info,omitempty"`
+	Info EntityInfo `json:"info,omitempty"`
+
+	// The account of the member in the cluster
+	// +optional
+	Account *configv1alpha1.Account `json:"account,omitempty"`
+}
+
+type EntityInfo struct {
+	// Name is the kubernetes name of the object
+	Name string `json:"name,omitempty"`
+
+	// The display name shown in the UI
+	// +optional
+	DisplayName string `json:"displayName,omitempty"`
+
+	// The username that is used to login
+	// +optional
+	Username string `json:"username,omitempty"`
+
+	// The users email address
+	// +optional
+	Email string `json:"email,omitempty"`
+
+	// The user subject
+	// +optional
+	Subject string `json:"subject,omitempty"`
 }

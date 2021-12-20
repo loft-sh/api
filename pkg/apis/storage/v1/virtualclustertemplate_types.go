@@ -1,7 +1,7 @@
 package v1
 
 import (
-	storagev1 "github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1"
+	storagev1 "github.com/loft-sh/agentapi/pkg/apis/loft/storage/v1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 )
 
@@ -19,14 +19,6 @@ type VirtualClusterTemplate struct {
 	Status VirtualClusterTemplateStatus `json:"status,omitempty"`
 }
 
-func (a *VirtualClusterTemplate) GetOwner() *UserOrTeam {
-	return a.Spec.Owner
-}
-
-func (a *VirtualClusterTemplate) SetOwner(userOrTeam *UserOrTeam) {
-	a.Spec.Owner = userOrTeam
-}
-
 func (a *VirtualClusterTemplate) GetAccess() []Access {
 	return a.Spec.Access
 }
@@ -37,18 +29,6 @@ func (a *VirtualClusterTemplate) SetAccess(access []Access) {
 
 // VirtualClusterTemplateSpec holds the specification
 type VirtualClusterTemplateSpec struct {
-	// DisplayName is the name that is shown in the UI
-	// +optional
-	DisplayName string `json:"displayName,omitempty"`
-
-	// Description describes the virtual cluster template
-	// +optional
-	Description string `json:"description,omitempty"`
-
-	// Owner holds the owner of this object
-	// +optional
-	Owner *UserOrTeam `json:"owner,omitempty"`
-
 	// Template holds the virtual cluster template
 	// +optional
 	Template VirtualClusterTemplateDefinition `json:"template,omitempty"`
@@ -91,10 +71,6 @@ type VirtualClusterAppReference struct {
 	// get deployed in
 	// +optional
 	Namespace string `json:"namespace,omitempty"`
-
-	// ReleaseName is the name of the app release
-	// +optional
-	ReleaseName string `json:"releaseName,omitempty"`
 }
 
 // VirtualClusterTemplateStatus holds the status

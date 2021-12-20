@@ -8,19 +8,11 @@ type AppExpansion interface{}
 
 type ClusterExpansion interface{}
 
-type ClusterAccessExpansion interface{}
-
 type ClusterAccountTemplateExpansion interface{}
-
-type ClusterRoleTemplateExpansion interface{}
 
 type SharedSecretExpansion interface{}
 
-type SpaceConstraintExpansion interface{}
-
 type SpaceTemplateExpansion interface{}
-
-type TaskExpansion interface{}
 
 type TeamExpansion interface{}
 

@@ -1,7 +1,6 @@
 package v1
 
 import (
-	clusterv1 "github.com/loft-sh/agentapi/v2/pkg/apis/loft/cluster/v1"
 	policyv1beta1 "github.com/loft-sh/jspolicy/pkg/apis/policy/v1beta1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 )
@@ -35,7 +34,7 @@ type PolicyViolationStatus struct {
 
 	// The Loft user that caused the violation
 	// +optional
-	User *clusterv1.EntityInfo `json:"user,omitempty"`
+	User *EntityInfo `json:"user,omitempty"`
 
 	// Violation contains information about the violation
 	// +optional

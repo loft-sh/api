@@ -3,13 +3,13 @@
 package fake
 
 import (
-	clientset "github.com/loft-sh/api/v2/pkg/client/clientset_generated/clientset"
-	managementv1 "github.com/loft-sh/api/v2/pkg/client/clientset_generated/clientset/typed/management/v1"
-	fakemanagementv1 "github.com/loft-sh/api/v2/pkg/client/clientset_generated/clientset/typed/management/v1/fake"
-	storagev1 "github.com/loft-sh/api/v2/pkg/client/clientset_generated/clientset/typed/storage/v1"
-	fakestoragev1 "github.com/loft-sh/api/v2/pkg/client/clientset_generated/clientset/typed/storage/v1/fake"
-	virtualclusterv1 "github.com/loft-sh/api/v2/pkg/client/clientset_generated/clientset/typed/virtualcluster/v1"
-	fakevirtualclusterv1 "github.com/loft-sh/api/v2/pkg/client/clientset_generated/clientset/typed/virtualcluster/v1/fake"
+	clientset "github.com/loft-sh/api/pkg/client/clientset_generated/clientset"
+	managementv1 "github.com/loft-sh/api/pkg/client/clientset_generated/clientset/typed/management/v1"
+	fakemanagementv1 "github.com/loft-sh/api/pkg/client/clientset_generated/clientset/typed/management/v1/fake"
+	storagev1 "github.com/loft-sh/api/pkg/client/clientset_generated/clientset/typed/storage/v1"
+	fakestoragev1 "github.com/loft-sh/api/pkg/client/clientset_generated/clientset/typed/storage/v1/fake"
+	virtualclusterv1 "github.com/loft-sh/api/pkg/client/clientset_generated/clientset/typed/virtualcluster/v1"
+	fakevirtualclusterv1 "github.com/loft-sh/api/pkg/client/clientset_generated/clientset/typed/virtualcluster/v1/fake"
 	"k8s.io/apimachinery/pkg/runtime"
 	"k8s.io/apimachinery/pkg/watch"
 	"k8s.io/client-go/discovery"

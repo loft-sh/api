@@ -3,8 +3,8 @@
 package v1
 
 import (
-	v1 "github.com/loft-sh/api/v2/pkg/apis/management/v1"
-	"github.com/loft-sh/api/v2/pkg/client/clientset_generated/clientset/scheme"
+	v1 "github.com/loft-sh/api/pkg/apis/management/v1"
+	"github.com/loft-sh/api/pkg/client/clientset_generated/clientset/scheme"
 	rest "k8s.io/client-go/rest"
 )
 
@@ -13,13 +13,11 @@ type ManagementV1Interface interface {
 	AnnouncementsGetter
 	AppsGetter
 	ClustersGetter
-	ClusterAccessesGetter
 	ClusterAccountTemplatesGetter
 	ClusterConnectsGetter
-	ClusterRoleTemplatesGetter
+	ClusterRolesGetter
 	ConfigsGetter
 	DirectClusterEndpointTokensGetter
-	EventsGetter
 	FeaturesGetter
 	LicensesGetter
 	LicenseTokensGetter
@@ -30,10 +28,8 @@ type ManagementV1Interface interface {
 	SelvesGetter
 	SelfSubjectAccessReviewsGetter
 	SharedSecretsGetter
-	SpaceConstraintsGetter
 	SpaceTemplatesGetter
 	SubjectAccessReviewsGetter
-	TasksGetter
 	TeamsGetter
 	UsersGetter
 	VirtualClusterTemplatesGetter
@@ -56,10 +52,6 @@ func (c *ManagementV1Client) Clusters() ClusterInterface {
 	return newClusters(c)
 }
 
-func (c *ManagementV1Client) ClusterAccesses() ClusterAccessInterface {
-	return newClusterAccesses(c)
-}
-
 func (c *ManagementV1Client) ClusterAccountTemplates() ClusterAccountTemplateInterface {
 	return newClusterAccountTemplates(c)
 }
@@ -68,8 +60,8 @@ func (c *ManagementV1Client) ClusterConnects() ClusterConnectInterface {
 	return newClusterConnects(c)
 }
 
-func (c *ManagementV1Client) ClusterRoleTemplates() ClusterRoleTemplateInterface {
-	return newClusterRoleTemplates(c)
+func (c *ManagementV1Client) ClusterRoles() ClusterRoleInterface {
+	return newClusterRoles(c)
 }
 
 func (c *ManagementV1Client) Configs() ConfigInterface {
@@ -78,10 +70,6 @@ func (c *ManagementV1Client) Configs() ConfigInterface {
 
 func (c *ManagementV1Client) DirectClusterEndpointTokens() DirectClusterEndpointTokenInterface {
 	return newDirectClusterEndpointTokens(c)
-}
-
-func (c *ManagementV1Client) Events() EventInterface {
-	return newEvents(c)
 }
 
 func (c *ManagementV1Client) Features() FeatureInterface {
@@ -124,20 +112,12 @@ func (c *ManagementV1Client) SharedSecrets(namespace string) SharedSecretInterfa
 	return newSharedSecrets(c, namespace)
 }
 
-func (c *ManagementV1Client) SpaceConstraints() SpaceConstraintInterface {
-	return newSpaceConstraints(c)
-}
-
 func (c *ManagementV1Client) SpaceTemplates() SpaceTemplateInterface {
 	return newSpaceTemplates(c)
 }
 
 func (c *ManagementV1Client) SubjectAccessReviews() SubjectAccessReviewInterface {
 	return newSubjectAccessReviews(c)
-}
-
-func (c *ManagementV1Client) Tasks() TaskInterface {
-	return newTasks(c)
 }
 
 func (c *ManagementV1Client) Teams() TeamInterface {

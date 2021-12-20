@@ -1,7 +1,6 @@
 package v1
 
 import (
-	clusterv1 "github.com/loft-sh/agentapi/v2/pkg/apis/loft/cluster/v1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 )
 
@@ -19,14 +18,6 @@ type App struct {
 	Status AppStatus `json:"status,omitempty"`
 }
 
-func (a *App) GetOwner() *UserOrTeam {
-	return a.Spec.Owner
-}
-
-func (a *App) SetOwner(userOrTeam *UserOrTeam) {
-	a.Spec.Owner = userOrTeam
-}
-
 func (a *App) GetAccess() []Access {
 	return a.Spec.Access
 }
@@ -37,21 +28,9 @@ func (a *App) SetAccess(access []Access) {
 
 // AppSpec holds the specification
 type AppSpec struct {
-	// DisplayName is the name that should be displayed in the UI
-	// +optional
-	DisplayName string `json:"displayName,omitempty"`
-
 	// Description describes an app
 	// +optional
 	Description string `json:"description,omitempty"`
-
-	// Readme is a longer markdown string that describes the app.
-	// +optional
-	Readme string `json:"readme,omitempty"`
-
-	// Owner holds the owner of this object
-	// +optional
-	Owner *UserOrTeam `json:"owner,omitempty"`
 
 	// Icon holds an URL to the app icon
 	// +optional
@@ -61,106 +40,17 @@ type AppSpec struct {
 	// +optional
 	RecommendedApp []RecommendedApp `json:"recommendedApp,omitempty"`
 
-	// ReleaseName is the preferred release name of the app
-	// +optional
-	ReleaseName string `json:"releaseName,omitempty"`
-
-	// StreamContainer can be used to stream a containers logs instead of the helm output.
-	// +optional
-	StreamContainer *StreamContainer `json:"streamContainer,omitempty"`
-
-	// Config is the helm config to use to deploy the helm release
-	// +optional
-	Config clusterv1.HelmReleaseSpec `json:"config,omitempty"`
-
-	// DEPRECATED: Use config instead
 	// manifest represents kubernetes resources that will be deployed into the target namespace
 	// +optional
 	Manifests string `json:"manifests,omitempty"`
 
-	// DEPRECATED: Use config instead
 	// helm defines the configuration for a helm deployment
 	// +optional
 	Helm *HelmConfiguration `json:"helm,omitempty"`
 
-	// Wait determines if Loft should wait during deploy for the app to become ready
-	// +optional
-	Wait bool `json:"wait,omitempty"`
-
-	// Timeout is the time to wait for any individual Kubernetes operation (like Jobs for hooks) (default 5m0s)
-	// +optional
-	Timeout string `json:"timeout,omitempty"`
-
-	// Parameters define additional app parameters that will set helm values
-	// +optional
-	Parameters []AppParameter `json:"parameters,omitempty"`
-
 	// Access holds the access rights for users and teams
 	// +optional
 	Access []Access `json:"access,omitempty"`
-}
-
-type AppParameter struct {
-	// Variable is the path of the variable. Can be foo or foo.bar for nested objects.
-	// +optional
-	Variable string `json:"variable,omitempty"`
-
-	// Label is the label to show for this parameter
-	// +optional
-	Label string `json:"label,omitempty"`
-
-	// Description is the description to show for this parameter
-	// +optional
-	Description string `json:"description,omitempty"`
-
-	// Type of the parameter. Can be one of:
-	// string, multiline, boolean, enum and password
-	// +optional
-	Type string `json:"type,omitempty"`
-
-	// Options are the options if type is enum
-	// +optional
-	Options []string `json:"options,omitempty"`
-
-	// Min is the minimum number if type is number
-	// +optional
-	Min *int `json:"min,omitempty"`
-
-	// Max is the maximum number if type is number
-	// +optional
-	Max *int `json:"max,omitempty"`
-
-	// Required specifies if this parameter is required
-	// +optional
-	Required bool `json:"required,omitempty"`
-
-	// DefaultValue is the default value if none is specified
-	// +optional
-	DefaultValue string `json:"defaultValue,omitempty"`
-
-	// Placeholder shown in the UI
-	// +optional
-	Placeholder string `json:"placeholder,omitempty"`
-
-	// Invalidation regex that if matched will reject the input
-	// +optional
-	Invalidation string `json:"invalidation,omitempty"`
-
-	// Validation regex that if matched will allow the input
-	// +optional
-	Validation string `json:"validation,omitempty"`
-
-	// Section where this app should be displayed. Apps with the same section name will be grouped together
-	// +optional
-	Section string `json:"section,omitempty"`
-}
-
-type UserOrTeam struct {
-	// +optional
-	User string `json:"user,omitempty"`
-
-	// +optional
-	Team string `json:"team,omitempty"`
 }
 
 // HelmConfiguration holds the helm configuration

@@ -1,7 +1,7 @@
 package v1
 
 import (
-	storagev1 "github.com/loft-sh/api/v2/pkg/apis/storage/v1"
+	storagev1 "github.com/loft-sh/api/pkg/apis/storage/v1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 )
 
@@ -27,20 +27,4 @@ type SharedSecretSpec struct {
 // SharedSecretStatus holds the status
 type SharedSecretStatus struct {
 	storagev1.SharedSecretStatus `json:",inline"`
-}
-
-func (a *SharedSecret) GetOwner() *storagev1.UserOrTeam {
-	return a.Spec.Owner
-}
-
-func (a *SharedSecret) SetOwner(userOrTeam *storagev1.UserOrTeam) {
-	a.Spec.Owner = userOrTeam
-}
-
-func (a *SharedSecret) GetAccess() []storagev1.Access {
-	return a.Spec.Access
-}
-
-func (a *SharedSecret) SetAccess(access []storagev1.Access) {
-	a.Spec.Access = access
 }

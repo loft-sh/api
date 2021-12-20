@@ -18,14 +18,6 @@ type SpaceTemplate struct {
 	Status SpaceTemplateStatus `json:"status,omitempty"`
 }
 
-func (a *SpaceTemplate) GetOwner() *UserOrTeam {
-	return a.Spec.Owner
-}
-
-func (a *SpaceTemplate) SetOwner(userOrTeam *UserOrTeam) {
-	a.Spec.Owner = userOrTeam
-}
-
 func (a *SpaceTemplate) GetAccess() []Access {
 	return a.Spec.Access
 }
@@ -36,18 +28,6 @@ func (a *SpaceTemplate) SetAccess(access []Access) {
 
 // SpaceTemplateSpec holds the specification
 type SpaceTemplateSpec struct {
-	// DisplayName is the name that is shown in the UI
-	// +optional
-	DisplayName string `json:"displayName,omitempty"`
-
-	// Description describes the space template
-	// +optional
-	Description string `json:"description,omitempty"`
-
-	// Owner holds the owner of this object
-	// +optional
-	Owner *UserOrTeam `json:"owner,omitempty"`
-
 	// Template holds the space template
 	// +optional
 	Template SpaceTemplateDefinition `json:"template,omitempty"`
@@ -58,7 +38,7 @@ type SpaceTemplateSpec struct {
 }
 
 type SpaceTemplateDefinition struct {
-	// The space metadata
+	// The virtual cluster metadata
 	// +optional
 	Metadata metav1.ObjectMeta `json:"metadata,omitempty"`
 
@@ -71,10 +51,6 @@ type SpaceAppReference struct {
 	// Name of the target app
 	// +optional
 	Name string `json:"name,omitempty"`
-
-	// ReleaseName of the target app
-	// +optional
-	ReleaseName string `json:"releaseName,omitempty"`
 }
 
 // SpaceTemplateStatus holds the status

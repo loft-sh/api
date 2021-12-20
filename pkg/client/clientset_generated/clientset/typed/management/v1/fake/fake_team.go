@@ -5,7 +5,7 @@ package fake
 import (
 	"context"
 
-	managementv1 "github.com/loft-sh/api/v2/pkg/apis/management/v1"
+	managementv1 "github.com/loft-sh/api/pkg/apis/management/v1"
 	v1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	labels "k8s.io/apimachinery/pkg/labels"
 	schema "k8s.io/apimachinery/pkg/runtime/schema"
@@ -116,6 +116,16 @@ func (c *FakeTeams) Patch(ctx context.Context, name string, pt types.PatchType, 
 	return obj.(*managementv1.Team), err
 }
 
+// ListSpaces takes name of the team, and returns the corresponding teamSpaces object, and an error if there is any.
+func (c *FakeTeams) ListSpaces(ctx context.Context, teamName string, options v1.GetOptions) (result *managementv1.TeamSpaces, err error) {
+	obj, err := c.Fake.
+		Invokes(testing.NewRootGetSubresourceAction(teamsResource, "spaces", teamName), &managementv1.TeamSpaces{})
+	if obj == nil {
+		return nil, err
+	}
+	return obj.(*managementv1.TeamSpaces), err
+}
+
 // ListClusters takes name of the team, and returns the corresponding teamClusters object, and an error if there is any.
 func (c *FakeTeams) ListClusters(ctx context.Context, teamName string, options v1.GetOptions) (result *managementv1.TeamClusters, err error) {
 	obj, err := c.Fake.
@@ -126,12 +136,12 @@ func (c *FakeTeams) ListClusters(ctx context.Context, teamName string, options v
 	return obj.(*managementv1.TeamClusters), err
 }
 
-// ListAccessKeys takes name of the team, and returns the corresponding teamAccessKeys object, and an error if there is any.
-func (c *FakeTeams) ListAccessKeys(ctx context.Context, teamName string, options v1.GetOptions) (result *managementv1.TeamAccessKeys, err error) {
+// ListVirtualClusters takes name of the team, and returns the corresponding teamVirtualClusters object, and an error if there is any.
+func (c *FakeTeams) ListVirtualClusters(ctx context.Context, teamName string, options v1.GetOptions) (result *managementv1.TeamVirtualClusters, err error) {
 	obj, err := c.Fake.
-		Invokes(testing.NewRootGetSubresourceAction(teamsResource, "accesskeys", teamName), &managementv1.TeamAccessKeys{})
+		Invokes(testing.NewRootGetSubresourceAction(teamsResource, "virtualclusters", teamName), &managementv1.TeamVirtualClusters{})
 	if obj == nil {
 		return nil, err
 	}
-	return obj.(*managementv1.TeamAccessKeys), err
+	return obj.(*managementv1.TeamVirtualClusters), err
 }

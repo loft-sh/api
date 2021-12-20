@@ -5,7 +5,7 @@ package fake
 import (
 	"context"
 
-	managementv1 "github.com/loft-sh/api/v2/pkg/apis/management/v1"
+	managementv1 "github.com/loft-sh/api/pkg/apis/management/v1"
 	v1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	labels "k8s.io/apimachinery/pkg/labels"
 	schema "k8s.io/apimachinery/pkg/runtime/schema"
@@ -116,14 +116,14 @@ func (c *FakeClusters) Patch(ctx context.Context, name string, pt types.PatchTyp
 	return obj.(*managementv1.Cluster), err
 }
 
-// ListAccess takes name of the cluster, and returns the corresponding clusterMemberAccess object, and an error if there is any.
-func (c *FakeClusters) ListAccess(ctx context.Context, clusterName string, options v1.GetOptions) (result *managementv1.ClusterMemberAccess, err error) {
+// ResetCluster takes the representation of a clusterReset and creates it.  Returns the server's representation of the clusterReset, and an error, if there is any.
+func (c *FakeClusters) ResetCluster(ctx context.Context, clusterName string, clusterReset *managementv1.ClusterReset, opts v1.CreateOptions) (result *managementv1.ClusterReset, err error) {
 	obj, err := c.Fake.
-		Invokes(testing.NewRootGetSubresourceAction(clustersResource, "memberaccess", clusterName), &managementv1.ClusterMemberAccess{})
+		Invokes(testing.NewRootCreateSubresourceAction(clustersResource, "reset", clusterReset), &managementv1.ClusterReset{})
 	if obj == nil {
 		return nil, err
 	}
-	return obj.(*managementv1.ClusterMemberAccess), err
+	return obj.(*managementv1.ClusterReset), err
 }
 
 // ListMembers takes name of the cluster, and returns the corresponding clusterMembers object, and an error if there is any.

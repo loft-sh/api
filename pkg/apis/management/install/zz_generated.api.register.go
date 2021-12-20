@@ -3,8 +3,8 @@
 package install
 
 import (
-	"github.com/loft-sh/api/v2/pkg/apis/management"
-	v1 "github.com/loft-sh/api/v2/pkg/apis/management/v1"
+	"github.com/loft-sh/api/pkg/apis/management"
+	v1 "github.com/loft-sh/api/pkg/apis/management/v1"
 	"github.com/loft-sh/apiserver/pkg/builders"
 	"k8s.io/apimachinery/pkg/runtime"
 	utilruntime "k8s.io/apimachinery/pkg/util/runtime"
@@ -30,24 +30,20 @@ func addKnownTypes(scheme *runtime.Scheme) error {
 		&management.ClusterList{},
 		&management.ClusterCharts{},
 		&management.ClusterDomain{},
-		&management.ClusterMemberAccess{},
 		&management.ClusterMembers{},
+		&management.ClusterPredefinedApps{},
 		&management.ClusterReset{},
 		&management.ClusterVirtualClusterDefaults{},
-		&management.ClusterAccess{},
-		&management.ClusterAccessList{},
 		&management.ClusterAccountTemplate{},
 		&management.ClusterAccountTemplateList{},
 		&management.ClusterConnect{},
 		&management.ClusterConnectList{},
-		&management.ClusterRoleTemplate{},
-		&management.ClusterRoleTemplateList{},
+		&management.ClusterRole{},
+		&management.ClusterRoleList{},
 		&management.Config{},
 		&management.ConfigList{},
 		&management.DirectClusterEndpointToken{},
 		&management.DirectClusterEndpointTokenList{},
-		&management.Event{},
-		&management.EventList{},
 		&management.Feature{},
 		&management.FeatureList{},
 		&management.Kiosk{},
@@ -70,24 +66,27 @@ func addKnownTypes(scheme *runtime.Scheme) error {
 		&management.SelfSubjectAccessReviewList{},
 		&management.SharedSecret{},
 		&management.SharedSecretList{},
-		&management.SpaceConstraint{},
-		&management.SpaceConstraintList{},
 		&management.SpaceTemplate{},
 		&management.SpaceTemplateList{},
 		&management.SubjectAccessReview{},
 		&management.SubjectAccessReviewList{},
-		&management.Task{},
-		&management.TaskList{},
-		&management.TaskLog{},
 		&management.Team{},
 		&management.TeamList{},
 		&management.TeamAccessKeys{},
+		&management.TeamClusterRoles{},
 		&management.TeamClusters{},
+		&management.TeamSpaces{},
+		&management.TeamVirtualClusters{},
 		&management.User{},
 		&management.UserList{},
 		&management.UserAccessKeys{},
+		&management.UserClusterRoles{},
 		&management.UserClusters{},
 		&management.UserProfile{},
+		&management.UserQuotas{},
+		&management.UserSpaces{},
+		&management.UserTeams{},
+		&management.UserVirtualClusters{},
 		&management.VirtualClusterTemplate{},
 		&management.VirtualClusterTemplateList{},
 	)

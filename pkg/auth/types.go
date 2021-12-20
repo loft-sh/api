@@ -87,18 +87,3 @@ type MethodPassword struct {
 	// Indicates if the authentication method is enabled
 	Enabled bool `json:"enabled,omitempty"`
 }
-
-type Version struct {
-	metav1.TypeMeta   `json:",inline"`
-	metav1.ObjectMeta `json:"metadata,omitempty"`
-
-	Version string `json:"version"`
-	Major   string `json:"major,omitempty"`
-	Minor   string `json:"minor,omitempty"`
-
-	Instance    string `json:"instance,omitempty"`
-	KubeVersion string `json:"kubeVersion,omitempty"`
-
-	NewerVersion  string `json:"newerVersion,omitempty"`
-	ShouldUpgrade bool   `json:"shouldUpgrade,omitempty"`
-}

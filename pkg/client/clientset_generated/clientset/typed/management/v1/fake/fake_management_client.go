@@ -3,7 +3,7 @@
 package fake
 
 import (
-	v1 "github.com/loft-sh/api/v2/pkg/client/clientset_generated/clientset/typed/management/v1"
+	v1 "github.com/loft-sh/api/pkg/client/clientset_generated/clientset/typed/management/v1"
 	rest "k8s.io/client-go/rest"
 	testing "k8s.io/client-go/testing"
 )
@@ -24,10 +24,6 @@ func (c *FakeManagementV1) Clusters() v1.ClusterInterface {
 	return &FakeClusters{c}
 }
 
-func (c *FakeManagementV1) ClusterAccesses() v1.ClusterAccessInterface {
-	return &FakeClusterAccesses{c}
-}
-
 func (c *FakeManagementV1) ClusterAccountTemplates() v1.ClusterAccountTemplateInterface {
 	return &FakeClusterAccountTemplates{c}
 }
@@ -36,8 +32,8 @@ func (c *FakeManagementV1) ClusterConnects() v1.ClusterConnectInterface {
 	return &FakeClusterConnects{c}
 }
 
-func (c *FakeManagementV1) ClusterRoleTemplates() v1.ClusterRoleTemplateInterface {
-	return &FakeClusterRoleTemplates{c}
+func (c *FakeManagementV1) ClusterRoles() v1.ClusterRoleInterface {
+	return &FakeClusterRoles{c}
 }
 
 func (c *FakeManagementV1) Configs() v1.ConfigInterface {
@@ -46,10 +42,6 @@ func (c *FakeManagementV1) Configs() v1.ConfigInterface {
 
 func (c *FakeManagementV1) DirectClusterEndpointTokens() v1.DirectClusterEndpointTokenInterface {
 	return &FakeDirectClusterEndpointTokens{c}
-}
-
-func (c *FakeManagementV1) Events() v1.EventInterface {
-	return &FakeEvents{c}
 }
 
 func (c *FakeManagementV1) Features() v1.FeatureInterface {
@@ -92,20 +84,12 @@ func (c *FakeManagementV1) SharedSecrets(namespace string) v1.SharedSecretInterf
 	return &FakeSharedSecrets{c, namespace}
 }
 
-func (c *FakeManagementV1) SpaceConstraints() v1.SpaceConstraintInterface {
-	return &FakeSpaceConstraints{c}
-}
-
 func (c *FakeManagementV1) SpaceTemplates() v1.SpaceTemplateInterface {
 	return &FakeSpaceTemplates{c}
 }
 
 func (c *FakeManagementV1) SubjectAccessReviews() v1.SubjectAccessReviewInterface {
 	return &FakeSubjectAccessReviews{c}
-}
-
-func (c *FakeManagementV1) Tasks() v1.TaskInterface {
-	return &FakeTasks{c}
 }
 
 func (c *FakeManagementV1) Teams() v1.TeamInterface {

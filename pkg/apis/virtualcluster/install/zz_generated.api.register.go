@@ -3,8 +3,8 @@
 package install
 
 import (
-	"github.com/loft-sh/api/v2/pkg/apis/virtualcluster"
-	v1 "github.com/loft-sh/api/v2/pkg/apis/virtualcluster/v1"
+	"github.com/loft-sh/api/pkg/apis/virtualcluster"
+	v1 "github.com/loft-sh/api/pkg/apis/virtualcluster/v1"
 	"github.com/loft-sh/apiserver/pkg/builders"
 	"k8s.io/apimachinery/pkg/runtime"
 	utilruntime "k8s.io/apimachinery/pkg/util/runtime"
@@ -24,6 +24,7 @@ func addKnownTypes(scheme *runtime.Scheme) error {
 	scheme.AddKnownTypes(virtualcluster.SchemeGroupVersion,
 		&virtualcluster.HelmRelease{},
 		&virtualcluster.HelmReleaseList{},
+		&virtualcluster.HelmReleaseRollback{},
 	)
 	return nil
 }

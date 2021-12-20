@@ -1,9 +1,10 @@
 package v1
 
 import (
-	configv1alpha1 "github.com/loft-sh/agentapi/v2/pkg/apis/kiosk/config/v1alpha1"
-	clusterv1 "github.com/loft-sh/agentapi/v2/pkg/apis/loft/cluster/v1"
-	storagev1 "github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1"
+	configv1alpha1 "github.com/loft-sh/agentapi/pkg/apis/kiosk/config/v1alpha1"
+	tenancyv1alpha1 "github.com/loft-sh/agentapi/pkg/apis/kiosk/tenancy/v1alpha1"
+	clusterv1 "github.com/loft-sh/agentapi/pkg/apis/loft/cluster/v1"
+	storagev1 "github.com/loft-sh/agentapi/pkg/apis/loft/storage/v1"
 	"github.com/loft-sh/jspolicy/pkg/apis/policy/v1beta1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 )
@@ -24,8 +25,13 @@ type Kiosk struct {
 }
 
 type KioskSpec struct {
+	// tenancy.kiosk.sh
+	Space   tenancyv1alpha1.Space   `json:"space,omitempty"`
+	Account tenancyv1alpha1.Account `json:"account,omitempty"`
+
 	// config.kiosk.sh
 	ConfigAccount    configv1alpha1.Account          `json:"configAccount,omitempty"`
+	AccountQuota     configv1alpha1.AccountQuota     `json:"accountQuota,omitempty"`
 	Template         configv1alpha1.Template         `json:"template,omitempty"`
 	TemplateInstance configv1alpha1.TemplateInstance `json:"templateInstance,omitempty"`
 
@@ -35,22 +41,15 @@ type KioskSpec struct {
 	JsPolicyViolations v1beta1.JsPolicyViolations `json:"jsPolicyViolations,omitempty"`
 
 	// cluster.loft.sh
-	HelmRelease        clusterv1.HelmRelease        `json:"helmRelease,omitempty"`
-	SleepModeConfig    clusterv1.SleepModeConfig    `json:"sleepModeConfig,omitempty"`
-	Space              clusterv1.Space              `json:"space,omitempty"`
-	VirtualCluster     clusterv1.VirtualCluster     `json:"virtualCluster,omitempty"`
-	LocalClusterAccess clusterv1.LocalClusterAccess `json:"localClusterAccess,omitempty"`
-	ClusterQuota       clusterv1.ClusterQuota       `json:"clusterQuota,omitempty"`
-	ChartInfo          clusterv1.ChartInfo          `json:"chartInfo,omitempty"`
+	HelmRelease         clusterv1.HelmRelease         `json:"helmRelease,omitempty"`
+	HelmReleaseRollback clusterv1.HelmReleaseRollback `json:"helmReleaseRollback,omitempty"`
+	SleepModeConfig     clusterv1.SleepModeConfig     `json:"sleepModeConfig,omitempty"`
+	ClusterAccount      clusterv1.Account             `json:"clusterAcccount,omitempty"`
+	ClusterAccountRoles clusterv1.AccountClusterRoles `json:"clusterAcccountRoles,omitempty"`
+	VirtualCluster      clusterv1.VirtualCluster      `json:"virtualCluster,omitempty"`
 
 	// storage.loft.sh
-	SpaceConstraint       storagev1.LocalSpaceConstraint     `json:"localSpaceConstraint,omitempty"`
-	StorageClusterAccess  storagev1.LocalClusterAccess       `json:"localStorageClusterAccess,omitempty"`
-	ClusterRoleTemplate   storagev1.LocalClusterRoleTemplate `json:"localClusterRoleTemplate,omitempty"`
-	StorageClusterQuota   storagev1.ClusterQuota             `json:"storageClusterQuota,omitempty"`
-	StorageVirtualCluster storagev1.VirtualCluster           `json:"storageVirtualCluster,omitempty"`
-	LocalUser             storagev1.LocalUser                `json:"localUser,omitempty"`
-	LocalTeam             storagev1.LocalTeam                `json:"localTeam,omitempty"`
+	StorageVirtualCluster storagev1.VirtualCluster `json:"storageVirtualCluster,omitempty"`
 }
 
 type KioskStatus struct {

@@ -6,8 +6,8 @@ import (
 	"context"
 	"time"
 
-	v1 "github.com/loft-sh/api/v2/pkg/apis/management/v1"
-	scheme "github.com/loft-sh/api/v2/pkg/client/clientset_generated/clientset/scheme"
+	v1 "github.com/loft-sh/api/pkg/apis/management/v1"
+	scheme "github.com/loft-sh/api/pkg/client/clientset_generated/clientset/scheme"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	types "k8s.io/apimachinery/pkg/types"
 	watch "k8s.io/apimachinery/pkg/watch"
@@ -31,8 +31,9 @@ type TeamInterface interface {
 	List(ctx context.Context, opts metav1.ListOptions) (*v1.TeamList, error)
 	Watch(ctx context.Context, opts metav1.ListOptions) (watch.Interface, error)
 	Patch(ctx context.Context, name string, pt types.PatchType, data []byte, opts metav1.PatchOptions, subresources ...string) (result *v1.Team, err error)
+	ListSpaces(ctx context.Context, teamName string, options metav1.GetOptions) (*v1.TeamSpaces, error)
 	ListClusters(ctx context.Context, teamName string, options metav1.GetOptions) (*v1.TeamClusters, error)
-	ListAccessKeys(ctx context.Context, teamName string, options metav1.GetOptions) (*v1.TeamAccessKeys, error)
+	ListVirtualClusters(ctx context.Context, teamName string, options metav1.GetOptions) (*v1.TeamVirtualClusters, error)
 
 	TeamExpansion
 }
@@ -170,6 +171,19 @@ func (c *teams) Patch(ctx context.Context, name string, pt types.PatchType, data
 	return
 }
 
+// ListSpaces takes name of the team, and returns the corresponding v1.TeamSpaces object, and an error if there is any.
+func (c *teams) ListSpaces(ctx context.Context, teamName string, options metav1.GetOptions) (result *v1.TeamSpaces, err error) {
+	result = &v1.TeamSpaces{}
+	err = c.client.Get().
+		Resource("teams").
+		Name(teamName).
+		SubResource("spaces").
+		VersionedParams(&options, scheme.ParameterCodec).
+		Do(ctx).
+		Into(result)
+	return
+}
+
 // ListClusters takes name of the team, and returns the corresponding v1.TeamClusters object, and an error if there is any.
 func (c *teams) ListClusters(ctx context.Context, teamName string, options metav1.GetOptions) (result *v1.TeamClusters, err error) {
 	result = &v1.TeamClusters{}
@@ -183,13 +197,13 @@ func (c *teams) ListClusters(ctx context.Context, teamName string, options metav
 	return
 }
 
-// ListAccessKeys takes name of the team, and returns the corresponding v1.TeamAccessKeys object, and an error if there is any.
-func (c *teams) ListAccessKeys(ctx context.Context, teamName string, options metav1.GetOptions) (result *v1.TeamAccessKeys, err error) {
-	result = &v1.TeamAccessKeys{}
+// ListVirtualClusters takes name of the team, and returns the corresponding v1.TeamVirtualClusters object, and an error if there is any.
+func (c *teams) ListVirtualClusters(ctx context.Context, teamName string, options metav1.GetOptions) (result *v1.TeamVirtualClusters, err error) {
+	result = &v1.TeamVirtualClusters{}
 	err = c.client.Get().
 		Resource("teams").
 		Name(teamName).
-		SubResource("accesskeys").
+		SubResource("virtualclusters").
 		VersionedParams(&options, scheme.ParameterCodec).
 		Do(ctx).
 		Into(result)
