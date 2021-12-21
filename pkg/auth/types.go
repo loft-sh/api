@@ -49,6 +49,10 @@ type OIDCRedirect struct {
 	metav1.ObjectMeta `json:"metadata,omitempty"`
 
 	Redirect string `json:"redirect,omitempty"`
+
+	// SAML specific values
+	SamlID   string `json:"samlId,omitempty"`
+	SamlData string `json:"samlData,omitempty"`
 }
 
 type OIDCToken struct {

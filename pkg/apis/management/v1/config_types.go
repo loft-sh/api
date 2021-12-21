@@ -300,6 +300,52 @@ type Authentication struct {
 	// Microsoft holds microsoft authentication configuration
 	// +optional
 	Microsoft *AuthenticationMicrosoft `json:"microsoft,omitempty"`
+
+	// SAML holds saml authentication configuration
+	// +optional
+	SAML *AuthenticationSAML `json:"saml,omitempty"`
+}
+
+type AuthenticationSAML struct {
+	// TODO(ericchiang): A bunch of these fields could be auto-filled if
+	// we supported SAML metadata discovery.
+	//
+	// https://www.oasis-open.org/committees/download.php/35391/sstc-saml-metadata-errata-2.0-wd-04-diff.pdf
+
+	EntityIssuer string `json:"entityIssuer,omitempty"`
+	SSOIssuer    string `json:"ssoIssuer,omitempty"`
+	SSOURL       string `json:"ssoURL,omitempty"`
+
+	// X509 CA file or raw data to verify XML signatures.
+	CA                              string `json:"ca,omitempty"`
+	CAData                          []byte `json:"caData,omitempty"`
+	InsecureSkipSignatureValidation bool   `json:"insecureSkipSignatureValidation,omitempty"`
+
+	// Assertion attribute names to lookup various claims with.
+	UsernameAttr string `json:"usernameAttr,omitempty"`
+	EmailAttr    string `json:"emailAttr,omitempty"`
+	GroupsAttr   string `json:"groupsAttr,omitempty"`
+	// If GroupsDelim is supplied the connector assumes groups are returned as a
+	// single string instead of multiple attribute values. This delimiter will be
+	// used split the groups string.
+	GroupsDelim   string   `json:"groupsDelim,omitempty"`
+	AllowedGroups []string `json:"allowedGroups,omitempty"`
+	FilterGroups  bool     `json:"filterGroups,omitempty"`
+	RedirectURI   string   `json:"redirectURI,omitempty"`
+
+	// Requested format of the NameID. The NameID value is is mapped to the ID Token
+	// 'sub' claim.
+	//
+	// This can be an abbreviated form of the full URI with just the last component. For
+	// example, if this value is set to "emailAddress" the format will resolve to:
+	//
+	//		urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress
+	//
+	// If no value is specified, this value defaults to:
+	//
+	//		urn:oasis:names:tc:SAML:2.0:nameid-format:persistent
+	//
+	NameIDPolicyFormat string `json:"nameIDPolicyFormat,omitempty"`
 }
 
 type AuthenticationPassword struct {
