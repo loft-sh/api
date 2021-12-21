@@ -154,6 +154,7 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 		"github.com/loft-sh/api/v2/pkg/apis/management/v1.AuthenticationMicrosoft":                      schema_pkg_apis_management_v1_AuthenticationMicrosoft(ref),
 		"github.com/loft-sh/api/v2/pkg/apis/management/v1.AuthenticationOIDC":                           schema_pkg_apis_management_v1_AuthenticationOIDC(ref),
 		"github.com/loft-sh/api/v2/pkg/apis/management/v1.AuthenticationPassword":                       schema_pkg_apis_management_v1_AuthenticationPassword(ref),
+		"github.com/loft-sh/api/v2/pkg/apis/management/v1.AuthenticationSAML":                           schema_pkg_apis_management_v1_AuthenticationSAML(ref),
 		"github.com/loft-sh/api/v2/pkg/apis/management/v1.Cluster":                                      schema_pkg_apis_management_v1_Cluster(ref),
 		"github.com/loft-sh/api/v2/pkg/apis/management/v1.ClusterAccess":                                schema_pkg_apis_management_v1_ClusterAccess(ref),
 		"github.com/loft-sh/api/v2/pkg/apis/management/v1.ClusterAccessList":                            schema_pkg_apis_management_v1_ClusterAccessList(ref),
@@ -7117,11 +7118,17 @@ func schema_pkg_apis_management_v1_Authentication(ref common.ReferenceCallback) 
 							Ref:         ref("github.com/loft-sh/api/v2/pkg/apis/management/v1.AuthenticationMicrosoft"),
 						},
 					},
+					"saml": {
+						SchemaProps: spec.SchemaProps{
+							Description: "SAML holds saml authentication configuration",
+							Ref:         ref("github.com/loft-sh/api/v2/pkg/apis/management/v1.AuthenticationSAML"),
+						},
+					},
 				},
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/v2/pkg/apis/management/v1.AuthenticationGithub", "github.com/loft-sh/api/v2/pkg/apis/management/v1.AuthenticationGitlab", "github.com/loft-sh/api/v2/pkg/apis/management/v1.AuthenticationGoogle", "github.com/loft-sh/api/v2/pkg/apis/management/v1.AuthenticationMicrosoft", "github.com/loft-sh/api/v2/pkg/apis/management/v1.AuthenticationOIDC", "github.com/loft-sh/api/v2/pkg/apis/management/v1.AuthenticationPassword"},
+			"github.com/loft-sh/api/v2/pkg/apis/management/v1.AuthenticationGithub", "github.com/loft-sh/api/v2/pkg/apis/management/v1.AuthenticationGitlab", "github.com/loft-sh/api/v2/pkg/apis/management/v1.AuthenticationGoogle", "github.com/loft-sh/api/v2/pkg/apis/management/v1.AuthenticationMicrosoft", "github.com/loft-sh/api/v2/pkg/apis/management/v1.AuthenticationOIDC", "github.com/loft-sh/api/v2/pkg/apis/management/v1.AuthenticationPassword", "github.com/loft-sh/api/v2/pkg/apis/management/v1.AuthenticationSAML"},
 	}
 }
 
@@ -7803,6 +7810,114 @@ func schema_pkg_apis_management_v1_AuthenticationPassword(ref common.ReferenceCa
 						SchemaProps: spec.SchemaProps{
 							Description: "If true login via password is disabled",
 							Type:        []string{"boolean"},
+							Format:      "",
+						},
+					},
+				},
+			},
+		},
+	}
+}
+
+func schema_pkg_apis_management_v1_AuthenticationSAML(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"entityIssuer": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"string"},
+							Format: "",
+						},
+					},
+					"ssoIssuer": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"string"},
+							Format: "",
+						},
+					},
+					"ssoURL": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"string"},
+							Format: "",
+						},
+					},
+					"ca": {
+						SchemaProps: spec.SchemaProps{
+							Description: "X509 CA file or raw data to verify XML signatures.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"caData": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"string"},
+							Format: "byte",
+						},
+					},
+					"insecureSkipSignatureValidation": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"boolean"},
+							Format: "",
+						},
+					},
+					"usernameAttr": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Assertion attribute names to lookup various claims with.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"emailAttr": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"string"},
+							Format: "",
+						},
+					},
+					"groupsAttr": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"string"},
+							Format: "",
+						},
+					},
+					"groupsDelim": {
+						SchemaProps: spec.SchemaProps{
+							Description: "If GroupsDelim is supplied the connector assumes groups are returned as a single string instead of multiple attribute values. This delimiter will be used split the groups string.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"allowedGroups": {
+						SchemaProps: spec.SchemaProps{
+							Type: []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: "",
+										Type:    []string{"string"},
+										Format:  "",
+									},
+								},
+							},
+						},
+					},
+					"filterGroups": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"boolean"},
+							Format: "",
+						},
+					},
+					"redirectURI": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"string"},
+							Format: "",
+						},
+					},
+					"nameIDPolicyFormat": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Requested format of the NameID. The NameID value is is mapped to the ID Token 'sub' claim.\n\nThis can be an abbreviated form of the full URI with just the last component. For example, if this value is set to \"emailAddress\" the format will resolve to:\n\n\t\turn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress\n\nIf no value is specified, this value defaults to:\n\n\t\turn:oasis:names:tc:SAML:2.0:nameid-format:persistent",
+							Type:        []string{"string"},
 							Format:      "",
 						},
 					},

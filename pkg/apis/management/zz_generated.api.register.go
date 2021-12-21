@@ -926,6 +926,7 @@ type Authentication struct {
 	Gitlab    *AuthenticationGitlab
 	Google    *AuthenticationGoogle
 	Microsoft *AuthenticationMicrosoft
+	SAML      *AuthenticationSAML
 }
 
 type AuthenticationClusterAccountTemplates struct {
@@ -1006,8 +1007,25 @@ type AuthenticationPassword struct {
 	Disabled bool
 }
 
+type AuthenticationSAML struct {
+	EntityIssuer                    string
+	SSOIssuer                       string
+	SSOURL                          string
+	CA                              string
+	CAData                          []byte
+	InsecureSkipSignatureValidation bool
+	UsernameAttr                    string
+	EmailAttr                       string
+	GroupsAttr                      string
+	GroupsDelim                     string
+	AllowedGroups                   []string
+	FilterGroups                    bool
+	RedirectURI                     string
+	NameIDPolicyFormat              string
+}
+
 // +genclient
-// +genclient:nonNamespaced
+// +genclient
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
 
 type Cluster struct {

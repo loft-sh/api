@@ -16,6 +16,4 @@ require (
 	sigs.k8s.io/controller-tools v0.7.0
 )
 
-replace (
-	
-)
+
