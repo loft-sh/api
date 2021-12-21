@@ -94,7 +94,7 @@ func (c *FakeApps) UpdateStatus(ctx context.Context, app *managementv1.App, opts
 // Delete takes name of the app and deletes it. Returns an error if one occurs.
 func (c *FakeApps) Delete(ctx context.Context, name string, opts v1.DeleteOptions) error {
 	_, err := c.Fake.
-		Invokes(testing.NewRootDeleteAction(appsResource, name), &managementv1.App{})
+		Invokes(testing.NewRootDeleteActionWithOptions(appsResource, name, opts), &managementv1.App{})
 	return err
 }
 

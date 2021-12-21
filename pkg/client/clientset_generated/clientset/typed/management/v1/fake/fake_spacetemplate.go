@@ -94,7 +94,7 @@ func (c *FakeSpaceTemplates) UpdateStatus(ctx context.Context, spaceTemplate *ma
 // Delete takes name of the spaceTemplate and deletes it. Returns an error if one occurs.
 func (c *FakeSpaceTemplates) Delete(ctx context.Context, name string, opts v1.DeleteOptions) error {
 	_, err := c.Fake.
-		Invokes(testing.NewRootDeleteAction(spacetemplatesResource, name), &managementv1.SpaceTemplate{})
+		Invokes(testing.NewRootDeleteActionWithOptions(spacetemplatesResource, name, opts), &managementv1.SpaceTemplate{})
 	return err
 }
 

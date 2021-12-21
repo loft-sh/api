@@ -94,7 +94,7 @@ func (c *FakeSpaceConstraints) UpdateStatus(ctx context.Context, spaceConstraint
 // Delete takes name of the spaceConstraint and deletes it. Returns an error if one occurs.
 func (c *FakeSpaceConstraints) Delete(ctx context.Context, name string, opts v1.DeleteOptions) error {
 	_, err := c.Fake.
-		Invokes(testing.NewRootDeleteAction(spaceconstraintsResource, name), &managementv1.SpaceConstraint{})
+		Invokes(testing.NewRootDeleteActionWithOptions(spaceconstraintsResource, name, opts), &managementv1.SpaceConstraint{})
 	return err
 }
 

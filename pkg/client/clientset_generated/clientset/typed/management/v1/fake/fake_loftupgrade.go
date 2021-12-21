@@ -94,7 +94,7 @@ func (c *FakeLoftUpgrades) UpdateStatus(ctx context.Context, loftUpgrade *manage
 // Delete takes name of the loftUpgrade and deletes it. Returns an error if one occurs.
 func (c *FakeLoftUpgrades) Delete(ctx context.Context, name string, opts v1.DeleteOptions) error {
 	_, err := c.Fake.
-		Invokes(testing.NewRootDeleteAction(loftupgradesResource, name), &managementv1.LoftUpgrade{})
+		Invokes(testing.NewRootDeleteActionWithOptions(loftupgradesResource, name, opts), &managementv1.LoftUpgrade{})
 	return err
 }
 

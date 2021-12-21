@@ -101,7 +101,7 @@ func (c *FakeSharedSecrets) UpdateStatus(ctx context.Context, sharedSecret *mana
 // Delete takes name of the sharedSecret and deletes it. Returns an error if one occurs.
 func (c *FakeSharedSecrets) Delete(ctx context.Context, name string, opts v1.DeleteOptions) error {
 	_, err := c.Fake.
-		Invokes(testing.NewDeleteAction(sharedsecretsResource, c.ns, name), &managementv1.SharedSecret{})
+		Invokes(testing.NewDeleteActionWithOptions(sharedsecretsResource, c.ns, name, opts), &managementv1.SharedSecret{})
 
 	return err
 }

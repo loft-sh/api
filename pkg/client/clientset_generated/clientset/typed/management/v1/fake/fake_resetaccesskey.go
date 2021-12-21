@@ -94,7 +94,7 @@ func (c *FakeResetAccessKeys) UpdateStatus(ctx context.Context, resetAccessKey *
 // Delete takes name of the resetAccessKey and deletes it. Returns an error if one occurs.
 func (c *FakeResetAccessKeys) Delete(ctx context.Context, name string, opts v1.DeleteOptions) error {
 	_, err := c.Fake.
-		Invokes(testing.NewRootDeleteAction(resetaccesskeysResource, name), &managementv1.ResetAccessKey{})
+		Invokes(testing.NewRootDeleteActionWithOptions(resetaccesskeysResource, name, opts), &managementv1.ResetAccessKey{})
 	return err
 }
 

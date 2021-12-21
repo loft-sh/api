@@ -94,7 +94,7 @@ func (c *FakeClusterAccountTemplates) UpdateStatus(ctx context.Context, clusterA
 // Delete takes name of the clusterAccountTemplate and deletes it. Returns an error if one occurs.
 func (c *FakeClusterAccountTemplates) Delete(ctx context.Context, name string, opts v1.DeleteOptions) error {
 	_, err := c.Fake.
-		Invokes(testing.NewRootDeleteAction(clusteraccounttemplatesResource, name), &managementv1.ClusterAccountTemplate{})
+		Invokes(testing.NewRootDeleteActionWithOptions(clusteraccounttemplatesResource, name, opts), &managementv1.ClusterAccountTemplate{})
 	return err
 }
 

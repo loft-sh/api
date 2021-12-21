@@ -94,7 +94,7 @@ func (c *FakeSubjectAccessReviews) UpdateStatus(ctx context.Context, subjectAcce
 // Delete takes name of the subjectAccessReview and deletes it. Returns an error if one occurs.
 func (c *FakeSubjectAccessReviews) Delete(ctx context.Context, name string, opts v1.DeleteOptions) error {
 	_, err := c.Fake.
-		Invokes(testing.NewRootDeleteAction(subjectaccessreviewsResource, name), &managementv1.SubjectAccessReview{})
+		Invokes(testing.NewRootDeleteActionWithOptions(subjectaccessreviewsResource, name, opts), &managementv1.SubjectAccessReview{})
 	return err
 }
 

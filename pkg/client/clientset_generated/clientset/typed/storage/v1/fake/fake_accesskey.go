@@ -94,7 +94,7 @@ func (c *FakeAccessKeys) UpdateStatus(ctx context.Context, accessKey *storagev1.
 // Delete takes name of the accessKey and deletes it. Returns an error if one occurs.
 func (c *FakeAccessKeys) Delete(ctx context.Context, name string, opts v1.DeleteOptions) error {
 	_, err := c.Fake.
-		Invokes(testing.NewRootDeleteAction(accesskeysResource, name), &storagev1.AccessKey{})
+		Invokes(testing.NewRootDeleteActionWithOptions(accesskeysResource, name, opts), &storagev1.AccessKey{})
 	return err
 }
 

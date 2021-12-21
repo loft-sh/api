@@ -94,7 +94,7 @@ func (c *FakeClusterRoleTemplates) UpdateStatus(ctx context.Context, clusterRole
 // Delete takes name of the clusterRoleTemplate and deletes it. Returns an error if one occurs.
 func (c *FakeClusterRoleTemplates) Delete(ctx context.Context, name string, opts v1.DeleteOptions) error {
 	_, err := c.Fake.
-		Invokes(testing.NewRootDeleteAction(clusterroletemplatesResource, name), &managementv1.ClusterRoleTemplate{})
+		Invokes(testing.NewRootDeleteActionWithOptions(clusterroletemplatesResource, name, opts), &managementv1.ClusterRoleTemplate{})
 	return err
 }
 

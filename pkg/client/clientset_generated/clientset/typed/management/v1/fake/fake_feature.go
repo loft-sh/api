@@ -94,7 +94,7 @@ func (c *FakeFeatures) UpdateStatus(ctx context.Context, feature *managementv1.F
 // Delete takes name of the feature and deletes it. Returns an error if one occurs.
 func (c *FakeFeatures) Delete(ctx context.Context, name string, opts v1.DeleteOptions) error {
 	_, err := c.Fake.
-		Invokes(testing.NewRootDeleteAction(featuresResource, name), &managementv1.Feature{})
+		Invokes(testing.NewRootDeleteActionWithOptions(featuresResource, name, opts), &managementv1.Feature{})
 	return err
 }
 

@@ -94,7 +94,7 @@ func (c *FakeOwnedAccessKeys) UpdateStatus(ctx context.Context, ownedAccessKey *
 // Delete takes name of the ownedAccessKey and deletes it. Returns an error if one occurs.
 func (c *FakeOwnedAccessKeys) Delete(ctx context.Context, name string, opts v1.DeleteOptions) error {
 	_, err := c.Fake.
-		Invokes(testing.NewRootDeleteAction(ownedaccesskeysResource, name), &managementv1.OwnedAccessKey{})
+		Invokes(testing.NewRootDeleteActionWithOptions(ownedaccesskeysResource, name, opts), &managementv1.OwnedAccessKey{})
 	return err
 }
 

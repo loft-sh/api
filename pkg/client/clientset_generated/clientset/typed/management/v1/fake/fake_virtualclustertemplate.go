@@ -94,7 +94,7 @@ func (c *FakeVirtualClusterTemplates) UpdateStatus(ctx context.Context, virtualC
 // Delete takes name of the virtualClusterTemplate and deletes it. Returns an error if one occurs.
 func (c *FakeVirtualClusterTemplates) Delete(ctx context.Context, name string, opts v1.DeleteOptions) error {
 	_, err := c.Fake.
-		Invokes(testing.NewRootDeleteAction(virtualclustertemplatesResource, name), &managementv1.VirtualClusterTemplate{})
+		Invokes(testing.NewRootDeleteActionWithOptions(virtualclustertemplatesResource, name, opts), &managementv1.VirtualClusterTemplate{})
 	return err
 }
 
