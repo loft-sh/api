@@ -104,6 +104,10 @@ type VirtualClusterCreationTask struct {
 	// +optional
 	Metadata metav1.ObjectMeta `json:"metadata,omitempty"`
 
+	// The virtual cluster access
+	// +optional
+	Access storagev1.VirtualClusterAccess `json:"access,omitempty"`
+
 	// The helm release configuration for the virtual cluster.
 	// +optional
 	HelmRelease *storagev1.VirtualClusterHelmRelease `json:"helmRelease,omitempty"`

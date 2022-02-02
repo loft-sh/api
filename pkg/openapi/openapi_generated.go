@@ -119,6 +119,8 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 		"github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.SpaceTemplate":                         schema_apis_loft_storage_v1_SpaceTemplate(ref),
 		"github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.UserOrTeam":                            schema_apis_loft_storage_v1_UserOrTeam(ref),
 		"github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.VirtualCluster":                        schema_apis_loft_storage_v1_VirtualCluster(ref),
+		"github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.VirtualClusterAccess":                  schema_apis_loft_storage_v1_VirtualClusterAccess(ref),
+		"github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.VirtualClusterAccessRule":              schema_apis_loft_storage_v1_VirtualClusterAccessRule(ref),
 		"github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.VirtualClusterHelmChart":               schema_apis_loft_storage_v1_VirtualClusterHelmChart(ref),
 		"github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.VirtualClusterHelmRelease":             schema_apis_loft_storage_v1_VirtualClusterHelmRelease(ref),
 		"github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.VirtualClusterHelmReleaseStatus":       schema_apis_loft_storage_v1_VirtualClusterHelmReleaseStatus(ref),
@@ -4172,6 +4174,13 @@ func schema_apis_loft_cluster_v1_VirtualClusterSpec(ref common.ReferenceCallback
 			SchemaProps: spec.SchemaProps{
 				Type: []string{"object"},
 				Properties: map[string]spec.Schema{
+					"access": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Access defines the access of users and teams to the virtual cluster.",
+							Default:     map[string]interface{}{},
+							Ref:         ref("github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.VirtualClusterAccess"),
+						},
+					},
 					"helmRelease": {
 						SchemaProps: spec.SchemaProps{
 							Description: "The helm release configuration for the virtual cluster. This is optional, but when filled, loft will deploy the specified chart for the given",
@@ -4194,7 +4203,7 @@ func schema_apis_loft_cluster_v1_VirtualClusterSpec(ref common.ReferenceCallback
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.PodSelector", "github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.SecretRef", "github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.VirtualClusterHelmRelease"},
+			"github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.PodSelector", "github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.SecretRef", "github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.VirtualClusterAccess", "github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.VirtualClusterHelmRelease"},
 	}
 }
 
@@ -5694,6 +5703,97 @@ func schema_apis_loft_storage_v1_VirtualCluster(ref common.ReferenceCallback) co
 	}
 }
 
+func schema_apis_loft_storage_v1_VirtualClusterAccess(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"disableServiceAccountsAuth": {
+						SchemaProps: spec.SchemaProps{
+							Description: "If enabled, service account tokens will not be allowed to access this virtual cluster through the Loft gateway.",
+							Type:        []string{"boolean"},
+							Format:      "",
+						},
+					},
+					"defaultClusterRole": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Specifies which cluster role should get applied to users or teams that do not match a rule below.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"rules": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Rules defines which users and teams should have which access to the virtual cluster. If no rule matches an authenticated incoming user, the user will get cluster admin access.",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref("github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.VirtualClusterAccessRule"),
+									},
+								},
+							},
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			"github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.VirtualClusterAccessRule"},
+	}
+}
+
+func schema_apis_loft_storage_v1_VirtualClusterAccessRule(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"users": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Users this rule matches. * means all users.",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: "",
+										Type:    []string{"string"},
+										Format:  "",
+									},
+								},
+							},
+						},
+					},
+					"teams": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Teams that this rule matches.",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: "",
+										Type:    []string{"string"},
+										Format:  "",
+									},
+								},
+							},
+						},
+					},
+					"clusterRole": {
+						SchemaProps: spec.SchemaProps{
+							Description: "ClusterRole is the cluster role that should be assigned to the",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+				},
+			},
+		},
+	}
+}
+
 func schema_apis_loft_storage_v1_VirtualClusterHelmChart(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
@@ -5855,6 +5955,13 @@ func schema_apis_loft_storage_v1_VirtualClusterSpec(ref common.ReferenceCallback
 			SchemaProps: spec.SchemaProps{
 				Type: []string{"object"},
 				Properties: map[string]spec.Schema{
+					"access": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Access defines the access of users and teams to the virtual cluster.",
+							Default:     map[string]interface{}{},
+							Ref:         ref("github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.VirtualClusterAccess"),
+						},
+					},
 					"helmRelease": {
 						SchemaProps: spec.SchemaProps{
 							Description: "The helm release configuration for the virtual cluster. This is optional, but when filled, loft will deploy the specified chart for the given",
@@ -5877,7 +5984,7 @@ func schema_apis_loft_storage_v1_VirtualClusterSpec(ref common.ReferenceCallback
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.PodSelector", "github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.SecretRef", "github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.VirtualClusterHelmRelease"},
+			"github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.PodSelector", "github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.SecretRef", "github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.VirtualClusterAccess", "github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.VirtualClusterHelmRelease"},
 	}
 }
 
@@ -19455,6 +19562,13 @@ func schema_pkg_apis_storage_v1_VirtualClusterCreationTask(ref common.ReferenceC
 							Ref:         ref("k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"),
 						},
 					},
+					"access": {
+						SchemaProps: spec.SchemaProps{
+							Description: "The virtual cluster access",
+							Default:     map[string]interface{}{},
+							Ref:         ref("github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.VirtualClusterAccess"),
+						},
+					},
 					"helmRelease": {
 						SchemaProps: spec.SchemaProps{
 							Description: "The helm release configuration for the virtual cluster.",
@@ -19492,7 +19606,7 @@ func schema_pkg_apis_storage_v1_VirtualClusterCreationTask(ref common.ReferenceC
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.VirtualClusterHelmRelease", "github.com/loft-sh/api/v2/pkg/apis/storage/v1.SpaceCreationTask", "github.com/loft-sh/api/v2/pkg/apis/storage/v1.VirtualClusterCreationAppReference", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
+			"github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.VirtualClusterAccess", "github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.VirtualClusterHelmRelease", "github.com/loft-sh/api/v2/pkg/apis/storage/v1.SpaceCreationTask", "github.com/loft-sh/api/v2/pkg/apis/storage/v1.VirtualClusterCreationAppReference", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
 	}
 }
 
@@ -19556,6 +19670,13 @@ func schema_pkg_apis_storage_v1_VirtualClusterTemplateDefinition(ref common.Refe
 							Ref:         ref("k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"),
 						},
 					},
+					"access": {
+						SchemaProps: spec.SchemaProps{
+							Description: "The virtual cluster access",
+							Default:     map[string]interface{}{},
+							Ref:         ref("github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.VirtualClusterAccess"),
+						},
+					},
 					"helmRelease": {
 						SchemaProps: spec.SchemaProps{
 							Description: "The helm release configuration for the virtual cluster.",
@@ -19580,7 +19701,7 @@ func schema_pkg_apis_storage_v1_VirtualClusterTemplateDefinition(ref common.Refe
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.VirtualClusterHelmRelease", "github.com/loft-sh/api/v2/pkg/apis/storage/v1.VirtualClusterAppReference", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
+			"github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.VirtualClusterAccess", "github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.VirtualClusterHelmRelease", "github.com/loft-sh/api/v2/pkg/apis/storage/v1.VirtualClusterAppReference", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
 	}
 }
 
