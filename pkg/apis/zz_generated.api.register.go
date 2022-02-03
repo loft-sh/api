@@ -49,6 +49,7 @@ var managementApiGroup = builders.NewApiGroupBuilder(
 		"DirectClusterEndpointToken",
 		"Event",
 		"Feature",
+		"IngressAuthToken",
 		"License",
 		"LicenseToken",
 		"LoftUpgrade",

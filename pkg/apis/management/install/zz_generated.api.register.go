@@ -50,6 +50,8 @@ func addKnownTypes(scheme *runtime.Scheme) error {
 		&management.EventList{},
 		&management.Feature{},
 		&management.FeatureList{},
+		&management.IngressAuthToken{},
+		&management.IngressAuthTokenList{},
 		&management.Kiosk{},
 		&management.KioskList{},
 		&management.License{},

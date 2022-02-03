@@ -56,6 +56,10 @@ func (c *FakeManagementV1) Features() v1.FeatureInterface {
 	return &FakeFeatures{c}
 }
 
+func (c *FakeManagementV1) IngressAuthTokens() v1.IngressAuthTokenInterface {
+	return &FakeIngressAuthTokens{c}
+}
+
 func (c *FakeManagementV1) Licenses() v1.LicenseInterface {
 	return &FakeLicenses{c}
 }

@@ -23,6 +23,7 @@ type ManagementV1Interface interface {
 	DirectClusterEndpointTokensGetter
 	EventsGetter
 	FeaturesGetter
+	IngressAuthTokensGetter
 	LicensesGetter
 	LicenseTokensGetter
 	LoftUpgradesGetter
@@ -88,6 +89,10 @@ func (c *ManagementV1Client) Events() EventInterface {
 
 func (c *ManagementV1Client) Features() FeatureInterface {
 	return newFeatures(c)
+}
+
+func (c *ManagementV1Client) IngressAuthTokens() IngressAuthTokenInterface {
+	return newIngressAuthTokens(c)
 }
 
 func (c *ManagementV1Client) Licenses() LicenseInterface {

@@ -211,6 +211,10 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 		"github.com/loft-sh/api/v2/pkg/apis/management/v1.FeatureSpec":                                  schema_pkg_apis_management_v1_FeatureSpec(ref),
 		"github.com/loft-sh/api/v2/pkg/apis/management/v1.FeatureStatus":                                schema_pkg_apis_management_v1_FeatureStatus(ref),
 		"github.com/loft-sh/api/v2/pkg/apis/management/v1.GroupResources":                               schema_pkg_apis_management_v1_GroupResources(ref),
+		"github.com/loft-sh/api/v2/pkg/apis/management/v1.IngressAuthToken":                             schema_pkg_apis_management_v1_IngressAuthToken(ref),
+		"github.com/loft-sh/api/v2/pkg/apis/management/v1.IngressAuthTokenList":                         schema_pkg_apis_management_v1_IngressAuthTokenList(ref),
+		"github.com/loft-sh/api/v2/pkg/apis/management/v1.IngressAuthTokenSpec":                         schema_pkg_apis_management_v1_IngressAuthTokenSpec(ref),
+		"github.com/loft-sh/api/v2/pkg/apis/management/v1.IngressAuthTokenStatus":                       schema_pkg_apis_management_v1_IngressAuthTokenStatus(ref),
 		"github.com/loft-sh/api/v2/pkg/apis/management/v1.Kiosk":                                        schema_pkg_apis_management_v1_Kiosk(ref),
 		"github.com/loft-sh/api/v2/pkg/apis/management/v1.KioskList":                                    schema_pkg_apis_management_v1_KioskList(ref),
 		"github.com/loft-sh/api/v2/pkg/apis/management/v1.KioskSpec":                                    schema_pkg_apis_management_v1_KioskSpec(ref),
@@ -10540,6 +10544,147 @@ func schema_pkg_apis_management_v1_GroupResources(ref common.ReferenceCallback) 
 									},
 								},
 							},
+						},
+					},
+				},
+			},
+		},
+	}
+}
+
+func schema_pkg_apis_management_v1_IngressAuthToken(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "IngressAuthToken holds the object information",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"kind": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"apiVersion": {
+						SchemaProps: spec.SchemaProps{
+							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"metadata": {
+						SchemaProps: spec.SchemaProps{
+							Default: map[string]interface{}{},
+							Ref:     ref("k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"),
+						},
+					},
+					"spec": {
+						SchemaProps: spec.SchemaProps{
+							Default: map[string]interface{}{},
+							Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/management/v1.IngressAuthTokenSpec"),
+						},
+					},
+					"status": {
+						SchemaProps: spec.SchemaProps{
+							Default: map[string]interface{}{},
+							Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/management/v1.IngressAuthTokenStatus"),
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			"github.com/loft-sh/api/v2/pkg/apis/management/v1.IngressAuthTokenSpec", "github.com/loft-sh/api/v2/pkg/apis/management/v1.IngressAuthTokenStatus", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
+	}
+}
+
+func schema_pkg_apis_management_v1_IngressAuthTokenList(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"kind": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"apiVersion": {
+						SchemaProps: spec.SchemaProps{
+							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"metadata": {
+						SchemaProps: spec.SchemaProps{
+							Default: map[string]interface{}{},
+							Ref:     ref("k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"),
+						},
+					},
+					"items": {
+						SchemaProps: spec.SchemaProps{
+							Type: []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/management/v1.IngressAuthToken"),
+									},
+								},
+							},
+						},
+					},
+				},
+				Required: []string{"items"},
+			},
+		},
+		Dependencies: []string{
+			"github.com/loft-sh/api/v2/pkg/apis/management/v1.IngressAuthToken", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
+	}
+}
+
+func schema_pkg_apis_management_v1_IngressAuthTokenSpec(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "IngressAuthTokenSpec holds the object specification",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"host": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Host is the host where the UI should get redirected",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"signature": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Signature is the signature of the agent for the host",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+				},
+			},
+		},
+	}
+}
+
+func schema_pkg_apis_management_v1_IngressAuthTokenStatus(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "IngressAuthTokenStatus holds the object status",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"token": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"string"},
+							Format: "",
 						},
 					},
 				},

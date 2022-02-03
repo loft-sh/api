@@ -41,6 +41,8 @@ func addKnownTypes(scheme *runtime.Scheme) error {
 		&EventList{},
 		&Feature{},
 		&FeatureList{},
+		&IngressAuthToken{},
+		&IngressAuthTokenList{},
 		&Kiosk{},
 		&KioskList{},
 		&License{},
@@ -128,6 +130,7 @@ var (
 		management.ManagementDirectClusterEndpointTokenStorage,
 		management.ManagementEventStorage,
 		management.ManagementFeatureStorage,
+		management.ManagementIngressAuthTokenStorage,
 		management.ManagementKioskStorage,
 		management.ManagementLicenseStorage,
 		management.ManagementLicenseTokenStorage,
@@ -340,6 +343,14 @@ type FeatureList struct {
 	metav1.TypeMeta `json:",inline"`
 	metav1.ListMeta `json:"metadata,omitempty"`
 	Items           []Feature `json:"items"`
+}
+
+// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+
+type IngressAuthTokenList struct {
+	metav1.TypeMeta `json:",inline"`
+	metav1.ListMeta `json:"metadata,omitempty"`
+	Items           []IngressAuthToken `json:"items"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object

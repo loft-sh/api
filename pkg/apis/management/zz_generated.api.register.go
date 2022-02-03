@@ -135,8 +135,18 @@ var (
 	NewFeatureREST = func(getter generic.RESTOptionsGetter) rest.Storage {
 		return NewFeatureRESTFunc(Factory)
 	}
-	NewFeatureRESTFunc     NewRESTFunc
-	ManagementKioskStorage = builders.NewApiResourceWithStorage( // Resource status endpoint
+	NewFeatureRESTFunc                NewRESTFunc
+	ManagementIngressAuthTokenStorage = builders.NewApiResourceWithStorage( // Resource status endpoint
+		InternalIngressAuthToken,
+		func() runtime.Object { return &IngressAuthToken{} },     // Register versioned resource
+		func() runtime.Object { return &IngressAuthTokenList{} }, // Register versioned resource list
+		NewIngressAuthTokenREST,
+	)
+	NewIngressAuthTokenREST = func(getter generic.RESTOptionsGetter) rest.Storage {
+		return NewIngressAuthTokenRESTFunc(Factory)
+	}
+	NewIngressAuthTokenRESTFunc NewRESTFunc
+	ManagementKioskStorage      = builders.NewApiResourceWithStorage( // Resource status endpoint
 		InternalKiosk,
 		func() runtime.Object { return &Kiosk{} },     // Register versioned resource
 		func() runtime.Object { return &KioskList{} }, // Register versioned resource list
@@ -486,6 +496,18 @@ var (
 		func() runtime.Object { return &Feature{} },
 		func() runtime.Object { return &FeatureList{} },
 	)
+	InternalIngressAuthToken = builders.NewInternalResource(
+		"ingressauthtokens",
+		"IngressAuthToken",
+		func() runtime.Object { return &IngressAuthToken{} },
+		func() runtime.Object { return &IngressAuthTokenList{} },
+	)
+	InternalIngressAuthTokenStatus = builders.NewInternalResourceStatus(
+		"ingressauthtokens",
+		"IngressAuthTokenStatus",
+		func() runtime.Object { return &IngressAuthToken{} },
+		func() runtime.Object { return &IngressAuthTokenList{} },
+	)
 	InternalKiosk = builders.NewInternalResource(
 		"kiosk",
 		"Kiosk",
@@ -768,6 +790,8 @@ var (
 		InternalEventStatus,
 		InternalFeature,
 		InternalFeatureStatus,
+		InternalIngressAuthToken,
+		InternalIngressAuthTokenStatus,
 		InternalKiosk,
 		InternalKioskStatus,
 		InternalLicense,
@@ -1298,6 +1322,26 @@ type GroupResources struct {
 	Group         string
 	Resources     []string
 	ResourceNames []string
+}
+
+// +genclient
+// +genclient:nonNamespaced
+// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+
+type IngressAuthToken struct {
+	metav1.TypeMeta
+	metav1.ObjectMeta
+	Spec   IngressAuthTokenSpec
+	Status IngressAuthTokenStatus
+}
+
+type IngressAuthTokenSpec struct {
+	Host      string
+	Signature string
+}
+
+type IngressAuthTokenStatus struct {
+	Token string
 }
 
 // +genclient
@@ -3159,6 +3203,126 @@ func (s *storageFeature) UpdateFeature(ctx context.Context, object *Feature) (*F
 }
 
 func (s *storageFeature) DeleteFeature(ctx context.Context, id string) (bool, error) {
+	st := s.GetStandardStorage()
+	_, sync, err := st.Delete(ctx, id, nil, &metav1.DeleteOptions{})
+	return sync, err
+}
+
+//
+// IngressAuthToken Functions and Structs
+//
+// +k8s:deepcopy-gen=false
+type IngressAuthTokenStrategy struct {
+	builders.DefaultStorageStrategy
+}
+
+// +k8s:deepcopy-gen=false
+type IngressAuthTokenStatusStrategy struct {
+	builders.DefaultStatusStorageStrategy
+}
+
+// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+
+type IngressAuthTokenList struct {
+	metav1.TypeMeta
+	metav1.ListMeta
+	Items []IngressAuthToken
+}
+
+func (IngressAuthToken) NewStatus() interface{} {
+	return IngressAuthTokenStatus{}
+}
+
+func (pc *IngressAuthToken) GetStatus() interface{} {
+	return pc.Status
+}
+
+func (pc *IngressAuthToken) SetStatus(s interface{}) {
+	pc.Status = s.(IngressAuthTokenStatus)
+}
+
+func (pc *IngressAuthToken) GetSpec() interface{} {
+	return pc.Spec
+}
+
+func (pc *IngressAuthToken) SetSpec(s interface{}) {
+	pc.Spec = s.(IngressAuthTokenSpec)
+}
+
+func (pc *IngressAuthToken) GetObjectMeta() *metav1.ObjectMeta {
+	return &pc.ObjectMeta
+}
+
+func (pc *IngressAuthToken) SetGeneration(generation int64) {
+	pc.ObjectMeta.Generation = generation
+}
+
+func (pc IngressAuthToken) GetGeneration() int64 {
+	return pc.ObjectMeta.Generation
+}
+
+// Registry is an interface for things that know how to store IngressAuthToken.
+// +k8s:deepcopy-gen=false
+type IngressAuthTokenRegistry interface {
+	ListIngressAuthTokens(ctx context.Context, options *internalversion.ListOptions) (*IngressAuthTokenList, error)
+	GetIngressAuthToken(ctx context.Context, id string, options *metav1.GetOptions) (*IngressAuthToken, error)
+	CreateIngressAuthToken(ctx context.Context, id *IngressAuthToken) (*IngressAuthToken, error)
+	UpdateIngressAuthToken(ctx context.Context, id *IngressAuthToken) (*IngressAuthToken, error)
+	DeleteIngressAuthToken(ctx context.Context, id string) (bool, error)
+}
+
+// NewRegistry returns a new Registry interface for the given Storage. Any mismatched types will panic.
+func NewIngressAuthTokenRegistry(sp builders.StandardStorageProvider) IngressAuthTokenRegistry {
+	return &storageIngressAuthToken{sp}
+}
+
+// Implement Registry
+// storage puts strong typing around storage calls
+// +k8s:deepcopy-gen=false
+type storageIngressAuthToken struct {
+	builders.StandardStorageProvider
+}
+
+func (s *storageIngressAuthToken) ListIngressAuthTokens(ctx context.Context, options *internalversion.ListOptions) (*IngressAuthTokenList, error) {
+	if options != nil && options.FieldSelector != nil && !options.FieldSelector.Empty() {
+		return nil, fmt.Errorf("field selector not supported yet")
+	}
+	st := s.GetStandardStorage()
+	obj, err := st.List(ctx, options)
+	if err != nil {
+		return nil, err
+	}
+	return obj.(*IngressAuthTokenList), err
+}
+
+func (s *storageIngressAuthToken) GetIngressAuthToken(ctx context.Context, id string, options *metav1.GetOptions) (*IngressAuthToken, error) {
+	st := s.GetStandardStorage()
+	obj, err := st.Get(ctx, id, options)
+	if err != nil {
+		return nil, err
+	}
+	return obj.(*IngressAuthToken), nil
+}
+
+func (s *storageIngressAuthToken) CreateIngressAuthToken(ctx context.Context, object *IngressAuthToken) (*IngressAuthToken, error) {
+	st := s.GetStandardStorage()
+	obj, err := st.Create(ctx, object, nil, &metav1.CreateOptions{})
+	if err != nil {
+		return nil, err
+	}
+	return obj.(*IngressAuthToken), nil
+}
+
+func (s *storageIngressAuthToken) UpdateIngressAuthToken(ctx context.Context, object *IngressAuthToken) (*IngressAuthToken, error) {
+	st := s.GetStandardStorage()
+	obj, _, err := st.Update(ctx, object.Name, rest.DefaultUpdatedObjectInfo(object), nil, nil, false, &metav1.UpdateOptions{})
+	if err != nil {
+		return nil, err
+	}
+	return obj.(*IngressAuthToken), nil
+}
+
+func (s *storageIngressAuthToken) DeleteIngressAuthToken(ctx context.Context, id string) (bool, error) {
 	st := s.GetStandardStorage()
 	_, sync, err := st.Delete(ctx, id, nil, &metav1.DeleteOptions{})
 	return sync, err

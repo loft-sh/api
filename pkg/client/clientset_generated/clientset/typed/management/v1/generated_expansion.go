@@ -24,6 +24,8 @@ type EventExpansion interface{}
 
 type FeatureExpansion interface{}
 
+type IngressAuthTokenExpansion interface{}
+
 type LicenseExpansion interface{}
 
 type LicenseTokenExpansion interface{}
