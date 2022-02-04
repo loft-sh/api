@@ -1049,7 +1049,6 @@ type AuthenticationSAML struct {
 }
 
 // +genclient
-// +genclient
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
 
 type Cluster struct {
@@ -1237,6 +1236,7 @@ type ConfigStatus struct {
 	OIDC           *OIDC
 	Apps           *Apps
 	Audit          *Audit
+	LoftHost       string
 }
 
 type CustomerInfo struct {

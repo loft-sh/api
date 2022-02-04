@@ -6421,6 +6421,13 @@ func schema_pkg_apis_management_v1_AgentConfigSpec(ref common.ReferenceCallback)
 							Format:      "byte",
 						},
 					},
+					"loftHost": {
+						SchemaProps: spec.SchemaProps{
+							Description: "LoftHost defines the host for the agent's loft instance",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
 				},
 			},
 		},
@@ -9834,6 +9841,13 @@ func schema_pkg_apis_management_v1_ConfigStatus(ref common.ReferenceCallback) co
 						SchemaProps: spec.SchemaProps{
 							Description: "Audit holds audit configuration",
 							Ref:         ref("github.com/loft-sh/api/v2/pkg/apis/management/v1.Audit"),
+						},
+					},
+					"loftHost": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Host holds the domain where the loft instance is hosted",
+							Type:        []string{"string"},
+							Format:      "",
 						},
 					},
 				},

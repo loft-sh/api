@@ -38,6 +38,10 @@ type AgentConfigSpec struct {
 	// be signed with
 	// +optional
 	TokenCaCert []byte `json:"tokenCaCert,omitempty"`
+
+	// LoftHost defines the host for the agent's loft instance
+	// +optional
+	LoftHost string `json:"loftHost,omitempty"`
 }
 
 // AgentConfigStatus holds the status, which is the parsed raw config

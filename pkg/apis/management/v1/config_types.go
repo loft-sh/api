@@ -43,6 +43,9 @@ type ConfigStatus struct {
 	// Audit holds audit configuration
 	// +optional
 	Audit *Audit `json:"audit,omitempty"`
+
+	// Host holds the domain where the loft instance is hosted
+	LoftHost string `json:"loftHost,omitempty"`
 }
 
 // Audit holds the audit configuration options for loft. Changing any options will require a loft restart

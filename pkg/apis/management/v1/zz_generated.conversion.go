@@ -3425,6 +3425,7 @@ func autoConvert_v1_ConfigStatus_To_management_ConfigStatus(in *ConfigStatus, ou
 	out.OIDC = (*management.OIDC)(unsafe.Pointer(in.OIDC))
 	out.Apps = (*management.Apps)(unsafe.Pointer(in.Apps))
 	out.Audit = (*management.Audit)(unsafe.Pointer(in.Audit))
+	out.LoftHost = in.LoftHost
 	return nil
 }
 
@@ -3440,6 +3441,7 @@ func autoConvert_management_ConfigStatus_To_v1_ConfigStatus(in *management.Confi
 	out.OIDC = (*OIDC)(unsafe.Pointer(in.OIDC))
 	out.Apps = (*Apps)(unsafe.Pointer(in.Apps))
 	out.Audit = (*Audit)(unsafe.Pointer(in.Audit))
+	out.LoftHost = in.LoftHost
 	return nil
 }
 
