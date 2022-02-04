@@ -3049,6 +3049,13 @@ func schema_apis_loft_cluster_v1_LastActivityInfo(ref common.ReferenceCallback) 
 							Format:      "",
 						},
 					},
+					"host": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Host is the host where this activity was recorded",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
 					"verb": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Verb is the verb that was used for the request",
