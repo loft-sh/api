@@ -15,3 +15,5 @@ require (
 	sigs.k8s.io/controller-runtime v0.11.0
 	sigs.k8s.io/controller-tools v0.7.0
 )
+
+replace github.com/loft-sh/agentapi/v2 => ../../agentapi/v2
