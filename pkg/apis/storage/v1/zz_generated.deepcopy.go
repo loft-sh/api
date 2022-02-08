@@ -2353,7 +2353,11 @@ func (in *VirtualClusterCreationAppReference) DeepCopy() *VirtualClusterCreation
 func (in *VirtualClusterCreationTask) DeepCopyInto(out *VirtualClusterCreationTask) {
 	*out = *in
 	in.Metadata.DeepCopyInto(&out.Metadata)
-	in.Access.DeepCopyInto(&out.Access)
+	if in.Access != nil {
+		in, out := &in.Access, &out.Access
+		*out = new(storagev1.VirtualClusterAccess)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.HelmRelease != nil {
 		in, out := &in.HelmRelease, &out.HelmRelease
 		*out = new(storagev1.VirtualClusterHelmRelease)
@@ -2414,7 +2418,11 @@ func (in *VirtualClusterTemplate) DeepCopyObject() runtime.Object {
 func (in *VirtualClusterTemplateDefinition) DeepCopyInto(out *VirtualClusterTemplateDefinition) {
 	*out = *in
 	in.Metadata.DeepCopyInto(&out.Metadata)
-	in.Access.DeepCopyInto(&out.Access)
+	if in.Access != nil {
+		in, out := &in.Access, &out.Access
+		*out = new(storagev1.VirtualClusterAccess)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.HelmRelease != nil {
 		in, out := &in.HelmRelease, &out.HelmRelease
 		*out = new(storagev1.VirtualClusterHelmRelease)

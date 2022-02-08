@@ -4188,7 +4188,6 @@ func schema_apis_loft_cluster_v1_VirtualClusterSpec(ref common.ReferenceCallback
 					"access": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Access defines the access of users and teams to the virtual cluster.",
-							Default:     map[string]interface{}{},
 							Ref:         ref("github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.VirtualClusterAccess"),
 						},
 					},
@@ -5969,7 +5968,6 @@ func schema_apis_loft_storage_v1_VirtualClusterSpec(ref common.ReferenceCallback
 					"access": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Access defines the access of users and teams to the virtual cluster.",
-							Default:     map[string]interface{}{},
 							Ref:         ref("github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.VirtualClusterAccess"),
 						},
 					},
@@ -19731,7 +19729,6 @@ func schema_pkg_apis_storage_v1_VirtualClusterCreationTask(ref common.ReferenceC
 					"access": {
 						SchemaProps: spec.SchemaProps{
 							Description: "The virtual cluster access",
-							Default:     map[string]interface{}{},
 							Ref:         ref("github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.VirtualClusterAccess"),
 						},
 					},
@@ -19839,7 +19836,6 @@ func schema_pkg_apis_storage_v1_VirtualClusterTemplateDefinition(ref common.Refe
 					"access": {
 						SchemaProps: spec.SchemaProps{
 							Description: "The virtual cluster access",
-							Default:     map[string]interface{}{},
 							Ref:         ref("github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.VirtualClusterAccess"),
 						},
 					},

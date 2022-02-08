@@ -75,7 +75,7 @@ type VirtualClusterTemplateDefinition struct {
 
 	// The virtual cluster access
 	// +optional
-	Access storagev1.VirtualClusterAccess `json:"access,omitempty"`
+	Access *storagev1.VirtualClusterAccess `json:"access,omitempty"`
 
 	// The helm release configuration for the virtual cluster.
 	// +optional
