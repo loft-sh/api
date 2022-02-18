@@ -63,6 +63,7 @@ type SpaceConstraintSpec struct {
 
 type LocalSpaceConstraintTemplate struct {
 	// Metadata is the metadata of the space constraint object
+	// +kubebuilder:pruning:PreserveUnknownFields
 	// +optional
 	Metadata metav1.ObjectMeta `json:"metadata,omitempty"`
 
