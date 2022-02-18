@@ -101,6 +101,7 @@ type ApplyTask struct {
 
 type VirtualClusterCreationTask struct {
 	// The virtual cluster metadata
+	// +kubebuilder:pruning:PreserveUnknownFields
 	// +optional
 	Metadata metav1.ObjectMeta `json:"metadata,omitempty"`
 
@@ -147,6 +148,7 @@ type VirtualClusterCreationAppReference struct {
 
 type SpaceCreationTask struct {
 	// Metadata of the space
+	// +kubebuilder:pruning:PreserveUnknownFields
 	// +optional
 	Metadata metav1.ObjectMeta `json:"metadata,omitempty"`
 

@@ -94,6 +94,7 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 		"github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.ClusterRoleRef":                        schema_apis_loft_storage_v1_ClusterRoleRef(ref),
 		"github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.ClusterRoleTemplateTemplate":           schema_apis_loft_storage_v1_ClusterRoleTemplateTemplate(ref),
 		"github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.Condition":                             schema_apis_loft_storage_v1_Condition(ref),
+		"github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.ConstraintSpaceTemplate":               schema_apis_loft_storage_v1_ConstraintSpaceTemplate(ref),
 		"github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.LocalClusterAccess":                    schema_apis_loft_storage_v1_LocalClusterAccess(ref),
 		"github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.LocalClusterAccessList":                schema_apis_loft_storage_v1_LocalClusterAccessList(ref),
 		"github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.LocalClusterAccessSpec":                schema_apis_loft_storage_v1_LocalClusterAccessSpec(ref),
@@ -116,7 +117,6 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 		"github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.LocalUserStatus":                       schema_apis_loft_storage_v1_LocalUserStatus(ref),
 		"github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.PodSelector":                           schema_apis_loft_storage_v1_PodSelector(ref),
 		"github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.SecretRef":                             schema_apis_loft_storage_v1_SecretRef(ref),
-		"github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.SpaceTemplate":                         schema_apis_loft_storage_v1_SpaceTemplate(ref),
 		"github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.UserOrTeam":                            schema_apis_loft_storage_v1_UserOrTeam(ref),
 		"github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.VirtualCluster":                        schema_apis_loft_storage_v1_VirtualCluster(ref),
 		"github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.VirtualClusterAccess":                  schema_apis_loft_storage_v1_VirtualClusterAccess(ref),
@@ -4652,6 +4652,42 @@ func schema_apis_loft_storage_v1_Condition(ref common.ReferenceCallback) common.
 	}
 }
 
+func schema_apis_loft_storage_v1_ConstraintSpaceTemplate(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "ConstraintSpaceTemplate defines properties how many spaces can be owned by the account and how they should be created",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"metadata": {
+						SchemaProps: spec.SchemaProps{
+							Description: "The enforced metadata of the space to create. Currently, only annotations and labels are supported",
+							Default:     map[string]interface{}{},
+							Ref:         ref("k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"),
+						},
+					},
+					"clusterRole": {
+						SchemaProps: spec.SchemaProps{
+							Description: "This defines the cluster role that will be used for the rolebinding when creating a new space for the selected subjects",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"objects": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Objects are Kubernetes style yamls that should get deployed into the space",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			"k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
+	}
+}
+
 func schema_apis_loft_storage_v1_LocalClusterAccess(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
@@ -5112,7 +5148,7 @@ func schema_apis_loft_storage_v1_LocalSpaceConstraintSpec(ref common.ReferenceCa
 						SchemaProps: spec.SchemaProps{
 							Description: "SpaceTemplate holds the space configuration",
 							Default:     map[string]interface{}{},
-							Ref:         ref("github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.SpaceTemplate"),
+							Ref:         ref("github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.ConstraintSpaceTemplate"),
 						},
 					},
 					"sync": {
@@ -5126,7 +5162,7 @@ func schema_apis_loft_storage_v1_LocalSpaceConstraintSpec(ref common.ReferenceCa
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.SpaceTemplate"},
+			"github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.ConstraintSpaceTemplate"},
 	}
 }
 
@@ -5601,42 +5637,6 @@ func schema_apis_loft_storage_v1_SecretRef(ref common.ReferenceCallback) common.
 				},
 			},
 		},
-	}
-}
-
-func schema_apis_loft_storage_v1_SpaceTemplate(ref common.ReferenceCallback) common.OpenAPIDefinition {
-	return common.OpenAPIDefinition{
-		Schema: spec.Schema{
-			SchemaProps: spec.SchemaProps{
-				Description: "SpaceTemplate defines properties how many spaces can be owned by the account and how they should be created",
-				Type:        []string{"object"},
-				Properties: map[string]spec.Schema{
-					"metadata": {
-						SchemaProps: spec.SchemaProps{
-							Description: "The enforced metadata of the space to create. Currently only annotations and labels are supported",
-							Default:     map[string]interface{}{},
-							Ref:         ref("k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"),
-						},
-					},
-					"clusterRole": {
-						SchemaProps: spec.SchemaProps{
-							Description: "This defines the cluster role that will be used for the rolebinding when creating a new space for the selected subjects",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"objects": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Objects are Kubernetes style yamls that should get deployed into the space",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-				},
-			},
-		},
-		Dependencies: []string{
-			"k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
 	}
 }
 

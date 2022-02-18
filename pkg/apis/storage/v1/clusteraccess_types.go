@@ -63,6 +63,7 @@ type ClusterAccessSpec struct {
 
 type LocalClusterAccessTemplate struct {
 	// Metadata is the metadata of the cluster access object
+	// +kubebuilder:pruning:PreserveUnknownFields
 	// +optional
 	Metadata metav1.ObjectMeta `json:"metadata,omitempty"`
 

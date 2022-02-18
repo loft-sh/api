@@ -59,6 +59,7 @@ type SpaceTemplateSpec struct {
 
 type SpaceTemplateDefinition struct {
 	// The space metadata
+	// +kubebuilder:pruning:PreserveUnknownFields
 	// +optional
 	Metadata metav1.ObjectMeta `json:"metadata,omitempty"`
 

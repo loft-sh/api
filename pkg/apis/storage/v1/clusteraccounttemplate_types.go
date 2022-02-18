@@ -65,6 +65,8 @@ type ClusterAccountTemplateSpec struct {
 }
 
 type AccountTemplate struct {
+	// +kubebuilder:pruning:PreserveUnknownFields
+	// +optional
 	metav1.ObjectMeta `json:"metadata,omitempty"`
 
 	// Spec holds the account template spec

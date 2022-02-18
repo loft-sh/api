@@ -67,6 +67,7 @@ type ClusterRoleTemplateSpec struct {
 
 type LocalClusterRoleTemplate struct {
 	// Metadata is the metadata of the cluster role template object
+	// +kubebuilder:pruning:PreserveUnknownFields
 	// +optional
 	Metadata metav1.ObjectMeta `json:"metadata,omitempty"`
 
