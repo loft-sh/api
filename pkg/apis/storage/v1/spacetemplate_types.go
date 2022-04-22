@@ -61,7 +61,7 @@ type SpaceTemplateDefinition struct {
 	// The space metadata
 	// +kubebuilder:pruning:PreserveUnknownFields
 	// +optional
-	Metadata metav1.ObjectMeta `json:"metadata,omitempty"`
+	metav1.ObjectMeta `json:"metadata,omitempty"`
 
 	// Apps specifies the apps that should get deployed by this template
 	// +optional

@@ -72,7 +72,7 @@ type VirtualClusterTemplateDefinition struct {
 	// The virtual cluster metadata
 	// +kubebuilder:pruning:PreserveUnknownFields
 	// +optional
-	Metadata metav1.ObjectMeta `json:"metadata,omitempty"`
+	metav1.ObjectMeta `json:"metadata,omitempty"`
 
 	// The virtual cluster access
 	// +optional

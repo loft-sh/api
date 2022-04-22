@@ -80,6 +80,7 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 		"github.com/loft-sh/agentapi/v2/pkg/apis/loft/cluster/v1.SpaceList":                             schema_apis_loft_cluster_v1_SpaceList(ref),
 		"github.com/loft-sh/agentapi/v2/pkg/apis/loft/cluster/v1.SpaceSpec":                             schema_apis_loft_cluster_v1_SpaceSpec(ref),
 		"github.com/loft-sh/agentapi/v2/pkg/apis/loft/cluster/v1.SpaceStatus":                           schema_apis_loft_cluster_v1_SpaceStatus(ref),
+		"github.com/loft-sh/agentapi/v2/pkg/apis/loft/cluster/v1.TemplateSyncStatus":                    schema_apis_loft_cluster_v1_TemplateSyncStatus(ref),
 		"github.com/loft-sh/agentapi/v2/pkg/apis/loft/cluster/v1.UserOrTeam":                            schema_apis_loft_cluster_v1_UserOrTeam(ref),
 		"github.com/loft-sh/agentapi/v2/pkg/apis/loft/cluster/v1.VirtualCluster":                        schema_apis_loft_cluster_v1_VirtualCluster(ref),
 		"github.com/loft-sh/agentapi/v2/pkg/apis/loft/cluster/v1.VirtualClusterList":                    schema_apis_loft_cluster_v1_VirtualClusterList(ref),
@@ -4055,6 +4056,32 @@ func schema_apis_loft_cluster_v1_SpaceStatus(ref common.ReferenceCallback) commo
 		},
 		Dependencies: []string{
 			"github.com/loft-sh/agentapi/v2/pkg/apis/loft/cluster/v1.EntityInfo", "github.com/loft-sh/agentapi/v2/pkg/apis/loft/cluster/v1.SleepModeConfig", "github.com/loft-sh/agentapi/v2/pkg/apis/loft/cluster/v1.SpaceConstraintNamespaceStatus", "github.com/loft-sh/agentapi/v2/pkg/apis/loft/cluster/v1.UserOrTeam"},
+	}
+}
+
+func schema_apis_loft_cluster_v1_TemplateSyncStatus(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"template": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Template is the json string of the template that was applied",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"phase": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Phase indicates the current phase the template is in",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+				},
+			},
+		},
 	}
 }
 
@@ -49367,11 +49394,6 @@ func schema_k8sio_api_policy_v1beta1_PodDisruptionBudgetSpec(ref common.Referenc
 						},
 					},
 					"selector": {
-						VendorExtensible: spec.VendorExtensible{
-							Extensions: spec.Extensions{
-								"x-kubernetes-patch-strategy": "replace",
-							},
-						},
 						SchemaProps: spec.SchemaProps{
 							Description: "Label query over pods whose evictions are managed by the disruption budget. A null selector selects no pods. An empty selector ({}) also selects no pods, which differs from standard behavior of selecting all pods. In policy/v1, an empty selector will select all pods in the namespace.",
 							Ref:         ref("k8s.io/apimachinery/pkg/apis/meta/v1.LabelSelector"),
