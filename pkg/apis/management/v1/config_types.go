@@ -44,7 +44,7 @@ type ConfigStatus struct {
 	// +optional
 	Audit *Audit `json:"audit,omitempty"`
 
-	// Host holds the domain where the loft instance is hosted
+	// LoftHost holds the domain where the loft instance is hosted
 	LoftHost string `json:"loftHost,omitempty"`
 }
 
