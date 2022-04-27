@@ -78,6 +78,7 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 		"github.com/loft-sh/agentapi/v2/pkg/apis/loft/cluster/v1.Space":                                 schema_apis_loft_cluster_v1_Space(ref),
 		"github.com/loft-sh/agentapi/v2/pkg/apis/loft/cluster/v1.SpaceConstraintNamespaceStatus":        schema_apis_loft_cluster_v1_SpaceConstraintNamespaceStatus(ref),
 		"github.com/loft-sh/agentapi/v2/pkg/apis/loft/cluster/v1.SpaceList":                             schema_apis_loft_cluster_v1_SpaceList(ref),
+		"github.com/loft-sh/agentapi/v2/pkg/apis/loft/cluster/v1.SpaceObjectsNamespaceStatus":           schema_apis_loft_cluster_v1_SpaceObjectsNamespaceStatus(ref),
 		"github.com/loft-sh/agentapi/v2/pkg/apis/loft/cluster/v1.SpaceSpec":                             schema_apis_loft_cluster_v1_SpaceSpec(ref),
 		"github.com/loft-sh/agentapi/v2/pkg/apis/loft/cluster/v1.SpaceStatus":                           schema_apis_loft_cluster_v1_SpaceStatus(ref),
 		"github.com/loft-sh/agentapi/v2/pkg/apis/loft/cluster/v1.TemplateSyncStatus":                    schema_apis_loft_cluster_v1_TemplateSyncStatus(ref),
@@ -3903,7 +3904,7 @@ func schema_apis_loft_cluster_v1_SpaceConstraintNamespaceStatus(ref common.Refer
 					},
 					"appliedObjects": {
 						SchemaProps: spec.SchemaProps{
-							Description: "AppliedObjects are the objects that were applied on this namespace",
+							Description: "AppliedObjects are the objects that were applied on this namespace by the space constraint",
 							Type:        []string{"array"},
 							Items: &spec.SchemaOrArray{
 								Schema: &spec.Schema{
@@ -3971,6 +3972,55 @@ func schema_apis_loft_cluster_v1_SpaceList(ref common.ReferenceCallback) common.
 	}
 }
 
+func schema_apis_loft_cluster_v1_SpaceObjectsNamespaceStatus(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"phase": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Phase the namespace is in",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"reason": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Reason why this namespace is in the current phase",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"message": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Message is the human-readable message why this space is in this phase",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"appliedObjects": {
+						SchemaProps: spec.SchemaProps{
+							Description: "AppliedObjects are the objects that were applied on this namespace by the space spec objects",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref("github.com/loft-sh/agentapi/v2/pkg/apis/loft/cluster/v1.AppliedObject"),
+									},
+								},
+							},
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			"github.com/loft-sh/agentapi/v2/pkg/apis/loft/cluster/v1.AppliedObject"},
+	}
+}
+
 func schema_apis_loft_cluster_v1_SpaceSpec(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
@@ -3988,6 +4038,13 @@ func schema_apis_loft_cluster_v1_SpaceSpec(ref common.ReferenceCallback) common.
 					"team": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Team is the owning team of the space",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"objects": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Objects are Kubernetes style yamls that should get deployed into the space",
 							Type:        []string{"string"},
 							Format:      "",
 						},
@@ -4051,11 +4108,17 @@ func schema_apis_loft_cluster_v1_SpaceStatus(ref common.ReferenceCallback) commo
 							Ref:         ref("github.com/loft-sh/agentapi/v2/pkg/apis/loft/cluster/v1.SpaceConstraintNamespaceStatus"),
 						},
 					},
+					"spaceObjectsStatus": {
+						SchemaProps: spec.SchemaProps{
+							Description: "SpaceObjectsStats describes the status of applying space objects.",
+							Ref:         ref("github.com/loft-sh/agentapi/v2/pkg/apis/loft/cluster/v1.SpaceObjectsNamespaceStatus"),
+						},
+					},
 				},
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/agentapi/v2/pkg/apis/loft/cluster/v1.EntityInfo", "github.com/loft-sh/agentapi/v2/pkg/apis/loft/cluster/v1.SleepModeConfig", "github.com/loft-sh/agentapi/v2/pkg/apis/loft/cluster/v1.SpaceConstraintNamespaceStatus", "github.com/loft-sh/agentapi/v2/pkg/apis/loft/cluster/v1.UserOrTeam"},
+			"github.com/loft-sh/agentapi/v2/pkg/apis/loft/cluster/v1.EntityInfo", "github.com/loft-sh/agentapi/v2/pkg/apis/loft/cluster/v1.SleepModeConfig", "github.com/loft-sh/agentapi/v2/pkg/apis/loft/cluster/v1.SpaceConstraintNamespaceStatus", "github.com/loft-sh/agentapi/v2/pkg/apis/loft/cluster/v1.SpaceObjectsNamespaceStatus", "github.com/loft-sh/agentapi/v2/pkg/apis/loft/cluster/v1.UserOrTeam"},
 	}
 }
 
