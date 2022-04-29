@@ -4110,15 +4110,21 @@ func schema_apis_loft_cluster_v1_SpaceStatus(ref common.ReferenceCallback) commo
 					},
 					"spaceObjectsStatus": {
 						SchemaProps: spec.SchemaProps{
-							Description: "SpaceObjectsStats describes the status of applying space objects.",
+							Description: "SpaceObjectsStatus describes the status of applying space objects.",
 							Ref:         ref("github.com/loft-sh/agentapi/v2/pkg/apis/loft/cluster/v1.SpaceObjectsNamespaceStatus"),
+						},
+					},
+					"templateSyncStatus": {
+						SchemaProps: spec.SchemaProps{
+							Description: "TemplateSyncStatus describes the template sync status",
+							Ref:         ref("github.com/loft-sh/agentapi/v2/pkg/apis/loft/cluster/v1.TemplateSyncStatus"),
 						},
 					},
 				},
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/agentapi/v2/pkg/apis/loft/cluster/v1.EntityInfo", "github.com/loft-sh/agentapi/v2/pkg/apis/loft/cluster/v1.SleepModeConfig", "github.com/loft-sh/agentapi/v2/pkg/apis/loft/cluster/v1.SpaceConstraintNamespaceStatus", "github.com/loft-sh/agentapi/v2/pkg/apis/loft/cluster/v1.SpaceObjectsNamespaceStatus", "github.com/loft-sh/agentapi/v2/pkg/apis/loft/cluster/v1.UserOrTeam"},
+			"github.com/loft-sh/agentapi/v2/pkg/apis/loft/cluster/v1.EntityInfo", "github.com/loft-sh/agentapi/v2/pkg/apis/loft/cluster/v1.SleepModeConfig", "github.com/loft-sh/agentapi/v2/pkg/apis/loft/cluster/v1.SpaceConstraintNamespaceStatus", "github.com/loft-sh/agentapi/v2/pkg/apis/loft/cluster/v1.SpaceObjectsNamespaceStatus", "github.com/loft-sh/agentapi/v2/pkg/apis/loft/cluster/v1.TemplateSyncStatus", "github.com/loft-sh/agentapi/v2/pkg/apis/loft/cluster/v1.UserOrTeam"},
 	}
 }
 
@@ -4393,11 +4399,17 @@ func schema_apis_loft_cluster_v1_VirtualClusterStatus(ref common.ReferenceCallba
 							Ref:         ref("github.com/loft-sh/agentapi/v2/pkg/apis/loft/cluster/v1.SleepModeConfig"),
 						},
 					},
+					"templateSyncStatus": {
+						SchemaProps: spec.SchemaProps{
+							Description: "TemplateSyncStatus describes the template sync status",
+							Ref:         ref("github.com/loft-sh/agentapi/v2/pkg/apis/loft/cluster/v1.TemplateSyncStatus"),
+						},
+					},
 				},
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/agentapi/v2/pkg/apis/loft/cluster/v1.SleepModeConfig", "github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.Condition", "github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.VirtualClusterHelmReleaseStatus", "k8s.io/api/core/v1.Pod"},
+			"github.com/loft-sh/agentapi/v2/pkg/apis/loft/cluster/v1.SleepModeConfig", "github.com/loft-sh/agentapi/v2/pkg/apis/loft/cluster/v1.TemplateSyncStatus", "github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.Condition", "github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.VirtualClusterHelmReleaseStatus", "k8s.io/api/core/v1.Pod"},
 	}
 }
 
