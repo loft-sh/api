@@ -113,6 +113,10 @@ type VirtualClusterCreationTask struct {
 	// +optional
 	HelmRelease *storagev1.VirtualClusterHelmRelease `json:"helmRelease,omitempty"`
 
+	// Objects is the optional objects configuration for the virtual cluster
+	// +optional
+	Objects string `json:"objects,omitempty"`
+
 	// Wait defines if the task should wait until the virtual cluster is ready
 	// +optional
 	Wait bool `json:"wait,omitempty"`
@@ -151,6 +155,10 @@ type SpaceCreationTask struct {
 	// +kubebuilder:pruning:PreserveUnknownFields
 	// +optional
 	Metadata metav1.ObjectMeta `json:"metadata,omitempty"`
+
+	// Objects are objects to put into the space
+	// +optional
+	Objects string `json:"objects,omitempty"`
 
 	// Owner defines the space owner
 	// +optional

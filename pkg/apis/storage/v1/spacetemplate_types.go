@@ -63,6 +63,10 @@ type SpaceTemplateDefinition struct {
 	// +optional
 	metav1.ObjectMeta `json:"metadata,omitempty"`
 
+	// Objects are Kubernetes style yamls that should get deployed into the virtual cluster
+	// +optional
+	Objects string `json:"objects,omitempty"`
+
 	// Apps specifies the apps that should get deployed by this template
 	// +optional
 	Apps []SpaceAppReference `json:"apps,omitempty"`

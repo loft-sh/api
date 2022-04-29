@@ -18473,6 +18473,13 @@ func schema_pkg_apis_storage_v1_SpaceCreationTask(ref common.ReferenceCallback) 
 							Ref:         ref("k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"),
 						},
 					},
+					"objects": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Objects are objects to put into the space",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
 					"owner": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Owner defines the space owner",
@@ -18559,6 +18566,13 @@ func schema_pkg_apis_storage_v1_SpaceTemplateDefinition(ref common.ReferenceCall
 							Description: "The space metadata",
 							Default:     map[string]interface{}{},
 							Ref:         ref("k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"),
+						},
+					},
+					"objects": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Objects are Kubernetes style yamls that should get deployed into the virtual cluster",
+							Type:        []string{"string"},
+							Format:      "",
 						},
 					},
 					"apps": {
@@ -19854,6 +19868,13 @@ func schema_pkg_apis_storage_v1_VirtualClusterCreationTask(ref common.ReferenceC
 							Ref:         ref("github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.VirtualClusterHelmRelease"),
 						},
 					},
+					"objects": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Objects is the optional objects configuration for the virtual cluster",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
 					"wait": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Wait defines if the task should wait until the virtual cluster is ready",
@@ -19959,6 +19980,13 @@ func schema_pkg_apis_storage_v1_VirtualClusterTemplateDefinition(ref common.Refe
 						SchemaProps: spec.SchemaProps{
 							Description: "The helm release configuration for the virtual cluster.",
 							Ref:         ref("github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.VirtualClusterHelmRelease"),
+						},
+					},
+					"objects": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Objects are Kubernetes style yamls that should get deployed into the virtual cluster",
+							Type:        []string{"string"},
+							Format:      "",
 						},
 					},
 					"apps": {

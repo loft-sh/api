@@ -82,6 +82,10 @@ type VirtualClusterTemplateDefinition struct {
 	// +optional
 	HelmRelease *storagev1.VirtualClusterHelmRelease `json:"helmRelease,omitempty"`
 
+	// Objects are Kubernetes style yamls that should get deployed into the virtual cluster
+	// +optional
+	Objects string `json:"objects,omitempty"`
+
 	// Apps specifies the apps that should get deployed by this template
 	// +optional
 	Apps []VirtualClusterAppReference `json:"apps,omitempty"`
