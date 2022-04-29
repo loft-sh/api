@@ -4299,6 +4299,13 @@ func schema_apis_loft_cluster_v1_VirtualClusterSpec(ref common.ReferenceCallback
 							Ref:         ref("github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.SecretRef"),
 						},
 					},
+					"objects": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Objects are Kubernetes style yamls that should get deployed into the virtual cluster",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
 				},
 			},
 		},
@@ -6077,6 +6084,13 @@ func schema_apis_loft_storage_v1_VirtualClusterSpec(ref common.ReferenceCallback
 						SchemaProps: spec.SchemaProps{
 							Description: "A reference to the cluster admin kube config. This is needed for the cli & ui to access the virtual clusters",
 							Ref:         ref("github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.SecretRef"),
+						},
+					},
+					"objects": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Objects are Kubernetes style yamls that should get deployed into the virtual cluster",
+							Type:        []string{"string"},
+							Format:      "",
 						},
 					},
 				},
@@ -9940,7 +9954,7 @@ func schema_pkg_apis_management_v1_ConfigStatus(ref common.ReferenceCallback) co
 					},
 					"loftHost": {
 						SchemaProps: spec.SchemaProps{
-							Description: "Host holds the domain where the loft instance is hosted",
+							Description: "LoftHost holds the domain where the loft instance is hosted",
 							Type:        []string{"string"},
 							Format:      "",
 						},
