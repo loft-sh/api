@@ -315,46 +315,6 @@ func RegisterConversions(s *runtime.Scheme) error {
 	}); err != nil {
 		return err
 	}
-	if err := s.AddGeneratedConversionFunc((*ClusterAccountTemplate)(nil), (*management.ClusterAccountTemplate)(nil), func(a, b interface{}, scope conversion.Scope) error {
-		return Convert_v1_ClusterAccountTemplate_To_management_ClusterAccountTemplate(a.(*ClusterAccountTemplate), b.(*management.ClusterAccountTemplate), scope)
-	}); err != nil {
-		return err
-	}
-	if err := s.AddGeneratedConversionFunc((*management.ClusterAccountTemplate)(nil), (*ClusterAccountTemplate)(nil), func(a, b interface{}, scope conversion.Scope) error {
-		return Convert_management_ClusterAccountTemplate_To_v1_ClusterAccountTemplate(a.(*management.ClusterAccountTemplate), b.(*ClusterAccountTemplate), scope)
-	}); err != nil {
-		return err
-	}
-	if err := s.AddGeneratedConversionFunc((*ClusterAccountTemplateList)(nil), (*management.ClusterAccountTemplateList)(nil), func(a, b interface{}, scope conversion.Scope) error {
-		return Convert_v1_ClusterAccountTemplateList_To_management_ClusterAccountTemplateList(a.(*ClusterAccountTemplateList), b.(*management.ClusterAccountTemplateList), scope)
-	}); err != nil {
-		return err
-	}
-	if err := s.AddGeneratedConversionFunc((*management.ClusterAccountTemplateList)(nil), (*ClusterAccountTemplateList)(nil), func(a, b interface{}, scope conversion.Scope) error {
-		return Convert_management_ClusterAccountTemplateList_To_v1_ClusterAccountTemplateList(a.(*management.ClusterAccountTemplateList), b.(*ClusterAccountTemplateList), scope)
-	}); err != nil {
-		return err
-	}
-	if err := s.AddGeneratedConversionFunc((*ClusterAccountTemplateSpec)(nil), (*management.ClusterAccountTemplateSpec)(nil), func(a, b interface{}, scope conversion.Scope) error {
-		return Convert_v1_ClusterAccountTemplateSpec_To_management_ClusterAccountTemplateSpec(a.(*ClusterAccountTemplateSpec), b.(*management.ClusterAccountTemplateSpec), scope)
-	}); err != nil {
-		return err
-	}
-	if err := s.AddGeneratedConversionFunc((*management.ClusterAccountTemplateSpec)(nil), (*ClusterAccountTemplateSpec)(nil), func(a, b interface{}, scope conversion.Scope) error {
-		return Convert_management_ClusterAccountTemplateSpec_To_v1_ClusterAccountTemplateSpec(a.(*management.ClusterAccountTemplateSpec), b.(*ClusterAccountTemplateSpec), scope)
-	}); err != nil {
-		return err
-	}
-	if err := s.AddGeneratedConversionFunc((*ClusterAccountTemplateStatus)(nil), (*management.ClusterAccountTemplateStatus)(nil), func(a, b interface{}, scope conversion.Scope) error {
-		return Convert_v1_ClusterAccountTemplateStatus_To_management_ClusterAccountTemplateStatus(a.(*ClusterAccountTemplateStatus), b.(*management.ClusterAccountTemplateStatus), scope)
-	}); err != nil {
-		return err
-	}
-	if err := s.AddGeneratedConversionFunc((*management.ClusterAccountTemplateStatus)(nil), (*ClusterAccountTemplateStatus)(nil), func(a, b interface{}, scope conversion.Scope) error {
-		return Convert_management_ClusterAccountTemplateStatus_To_v1_ClusterAccountTemplateStatus(a.(*management.ClusterAccountTemplateStatus), b.(*ClusterAccountTemplateStatus), scope)
-	}); err != nil {
-		return err
-	}
 	if err := s.AddGeneratedConversionFunc((*ClusterAccounts)(nil), (*management.ClusterAccounts)(nil), func(a, b interface{}, scope conversion.Scope) error {
 		return Convert_v1_ClusterAccounts_To_management_ClusterAccounts(a.(*ClusterAccounts), b.(*management.ClusterAccounts), scope)
 	}); err != nil {
@@ -1145,6 +1105,336 @@ func RegisterConversions(s *runtime.Scheme) error {
 	}); err != nil {
 		return err
 	}
+	if err := s.AddGeneratedConversionFunc((*Project)(nil), (*management.Project)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_v1_Project_To_management_Project(a.(*Project), b.(*management.Project), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*management.Project)(nil), (*Project)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_management_Project_To_v1_Project(a.(*management.Project), b.(*Project), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*ProjectChartInfo)(nil), (*management.ProjectChartInfo)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_v1_ProjectChartInfo_To_management_ProjectChartInfo(a.(*ProjectChartInfo), b.(*management.ProjectChartInfo), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*management.ProjectChartInfo)(nil), (*ProjectChartInfo)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_management_ProjectChartInfo_To_v1_ProjectChartInfo(a.(*management.ProjectChartInfo), b.(*ProjectChartInfo), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*ProjectChartInfoList)(nil), (*management.ProjectChartInfoList)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_v1_ProjectChartInfoList_To_management_ProjectChartInfoList(a.(*ProjectChartInfoList), b.(*management.ProjectChartInfoList), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*management.ProjectChartInfoList)(nil), (*ProjectChartInfoList)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_management_ProjectChartInfoList_To_v1_ProjectChartInfoList(a.(*management.ProjectChartInfoList), b.(*ProjectChartInfoList), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*ProjectChartInfoSpec)(nil), (*management.ProjectChartInfoSpec)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_v1_ProjectChartInfoSpec_To_management_ProjectChartInfoSpec(a.(*ProjectChartInfoSpec), b.(*management.ProjectChartInfoSpec), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*management.ProjectChartInfoSpec)(nil), (*ProjectChartInfoSpec)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_management_ProjectChartInfoSpec_To_v1_ProjectChartInfoSpec(a.(*management.ProjectChartInfoSpec), b.(*ProjectChartInfoSpec), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*ProjectChartInfoStatus)(nil), (*management.ProjectChartInfoStatus)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_v1_ProjectChartInfoStatus_To_management_ProjectChartInfoStatus(a.(*ProjectChartInfoStatus), b.(*management.ProjectChartInfoStatus), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*management.ProjectChartInfoStatus)(nil), (*ProjectChartInfoStatus)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_management_ProjectChartInfoStatus_To_v1_ProjectChartInfoStatus(a.(*management.ProjectChartInfoStatus), b.(*ProjectChartInfoStatus), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*ProjectCharts)(nil), (*management.ProjectCharts)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_v1_ProjectCharts_To_management_ProjectCharts(a.(*ProjectCharts), b.(*management.ProjectCharts), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*management.ProjectCharts)(nil), (*ProjectCharts)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_management_ProjectCharts_To_v1_ProjectCharts(a.(*management.ProjectCharts), b.(*ProjectCharts), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*ProjectChartsList)(nil), (*management.ProjectChartsList)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_v1_ProjectChartsList_To_management_ProjectChartsList(a.(*ProjectChartsList), b.(*management.ProjectChartsList), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*management.ProjectChartsList)(nil), (*ProjectChartsList)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_management_ProjectChartsList_To_v1_ProjectChartsList(a.(*management.ProjectChartsList), b.(*ProjectChartsList), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*ProjectClusters)(nil), (*management.ProjectClusters)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_v1_ProjectClusters_To_management_ProjectClusters(a.(*ProjectClusters), b.(*management.ProjectClusters), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*management.ProjectClusters)(nil), (*ProjectClusters)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_management_ProjectClusters_To_v1_ProjectClusters(a.(*management.ProjectClusters), b.(*ProjectClusters), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*ProjectClustersList)(nil), (*management.ProjectClustersList)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_v1_ProjectClustersList_To_management_ProjectClustersList(a.(*ProjectClustersList), b.(*management.ProjectClustersList), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*management.ProjectClustersList)(nil), (*ProjectClustersList)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_management_ProjectClustersList_To_v1_ProjectClustersList(a.(*management.ProjectClustersList), b.(*ProjectClustersList), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*ProjectImportSpace)(nil), (*management.ProjectImportSpace)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_v1_ProjectImportSpace_To_management_ProjectImportSpace(a.(*ProjectImportSpace), b.(*management.ProjectImportSpace), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*management.ProjectImportSpace)(nil), (*ProjectImportSpace)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_management_ProjectImportSpace_To_v1_ProjectImportSpace(a.(*management.ProjectImportSpace), b.(*ProjectImportSpace), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*ProjectImportSpaceList)(nil), (*management.ProjectImportSpaceList)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_v1_ProjectImportSpaceList_To_management_ProjectImportSpaceList(a.(*ProjectImportSpaceList), b.(*management.ProjectImportSpaceList), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*management.ProjectImportSpaceList)(nil), (*ProjectImportSpaceList)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_management_ProjectImportSpaceList_To_v1_ProjectImportSpaceList(a.(*management.ProjectImportSpaceList), b.(*ProjectImportSpaceList), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*ProjectImportSpaceSource)(nil), (*management.ProjectImportSpaceSource)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_v1_ProjectImportSpaceSource_To_management_ProjectImportSpaceSource(a.(*ProjectImportSpaceSource), b.(*management.ProjectImportSpaceSource), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*management.ProjectImportSpaceSource)(nil), (*ProjectImportSpaceSource)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_management_ProjectImportSpaceSource_To_v1_ProjectImportSpaceSource(a.(*management.ProjectImportSpaceSource), b.(*ProjectImportSpaceSource), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*ProjectImportVirtualCluster)(nil), (*management.ProjectImportVirtualCluster)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_v1_ProjectImportVirtualCluster_To_management_ProjectImportVirtualCluster(a.(*ProjectImportVirtualCluster), b.(*management.ProjectImportVirtualCluster), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*management.ProjectImportVirtualCluster)(nil), (*ProjectImportVirtualCluster)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_management_ProjectImportVirtualCluster_To_v1_ProjectImportVirtualCluster(a.(*management.ProjectImportVirtualCluster), b.(*ProjectImportVirtualCluster), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*ProjectImportVirtualClusterList)(nil), (*management.ProjectImportVirtualClusterList)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_v1_ProjectImportVirtualClusterList_To_management_ProjectImportVirtualClusterList(a.(*ProjectImportVirtualClusterList), b.(*management.ProjectImportVirtualClusterList), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*management.ProjectImportVirtualClusterList)(nil), (*ProjectImportVirtualClusterList)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_management_ProjectImportVirtualClusterList_To_v1_ProjectImportVirtualClusterList(a.(*management.ProjectImportVirtualClusterList), b.(*ProjectImportVirtualClusterList), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*ProjectImportVirtualClusterSource)(nil), (*management.ProjectImportVirtualClusterSource)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_v1_ProjectImportVirtualClusterSource_To_management_ProjectImportVirtualClusterSource(a.(*ProjectImportVirtualClusterSource), b.(*management.ProjectImportVirtualClusterSource), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*management.ProjectImportVirtualClusterSource)(nil), (*ProjectImportVirtualClusterSource)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_management_ProjectImportVirtualClusterSource_To_v1_ProjectImportVirtualClusterSource(a.(*management.ProjectImportVirtualClusterSource), b.(*ProjectImportVirtualClusterSource), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*ProjectList)(nil), (*management.ProjectList)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_v1_ProjectList_To_management_ProjectList(a.(*ProjectList), b.(*management.ProjectList), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*management.ProjectList)(nil), (*ProjectList)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_management_ProjectList_To_v1_ProjectList(a.(*management.ProjectList), b.(*ProjectList), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*ProjectMember)(nil), (*management.ProjectMember)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_v1_ProjectMember_To_management_ProjectMember(a.(*ProjectMember), b.(*management.ProjectMember), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*management.ProjectMember)(nil), (*ProjectMember)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_management_ProjectMember_To_v1_ProjectMember(a.(*management.ProjectMember), b.(*ProjectMember), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*ProjectMembers)(nil), (*management.ProjectMembers)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_v1_ProjectMembers_To_management_ProjectMembers(a.(*ProjectMembers), b.(*management.ProjectMembers), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*management.ProjectMembers)(nil), (*ProjectMembers)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_management_ProjectMembers_To_v1_ProjectMembers(a.(*management.ProjectMembers), b.(*ProjectMembers), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*ProjectMembersList)(nil), (*management.ProjectMembersList)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_v1_ProjectMembersList_To_management_ProjectMembersList(a.(*ProjectMembersList), b.(*management.ProjectMembersList), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*management.ProjectMembersList)(nil), (*ProjectMembersList)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_management_ProjectMembersList_To_v1_ProjectMembersList(a.(*management.ProjectMembersList), b.(*ProjectMembersList), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*ProjectMigrateSpaceInstance)(nil), (*management.ProjectMigrateSpaceInstance)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_v1_ProjectMigrateSpaceInstance_To_management_ProjectMigrateSpaceInstance(a.(*ProjectMigrateSpaceInstance), b.(*management.ProjectMigrateSpaceInstance), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*management.ProjectMigrateSpaceInstance)(nil), (*ProjectMigrateSpaceInstance)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_management_ProjectMigrateSpaceInstance_To_v1_ProjectMigrateSpaceInstance(a.(*management.ProjectMigrateSpaceInstance), b.(*ProjectMigrateSpaceInstance), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*ProjectMigrateSpaceInstanceList)(nil), (*management.ProjectMigrateSpaceInstanceList)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_v1_ProjectMigrateSpaceInstanceList_To_management_ProjectMigrateSpaceInstanceList(a.(*ProjectMigrateSpaceInstanceList), b.(*management.ProjectMigrateSpaceInstanceList), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*management.ProjectMigrateSpaceInstanceList)(nil), (*ProjectMigrateSpaceInstanceList)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_management_ProjectMigrateSpaceInstanceList_To_v1_ProjectMigrateSpaceInstanceList(a.(*management.ProjectMigrateSpaceInstanceList), b.(*ProjectMigrateSpaceInstanceList), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*ProjectMigrateSpaceInstanceSource)(nil), (*management.ProjectMigrateSpaceInstanceSource)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_v1_ProjectMigrateSpaceInstanceSource_To_management_ProjectMigrateSpaceInstanceSource(a.(*ProjectMigrateSpaceInstanceSource), b.(*management.ProjectMigrateSpaceInstanceSource), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*management.ProjectMigrateSpaceInstanceSource)(nil), (*ProjectMigrateSpaceInstanceSource)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_management_ProjectMigrateSpaceInstanceSource_To_v1_ProjectMigrateSpaceInstanceSource(a.(*management.ProjectMigrateSpaceInstanceSource), b.(*ProjectMigrateSpaceInstanceSource), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*ProjectMigrateVirtualClusterInstance)(nil), (*management.ProjectMigrateVirtualClusterInstance)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_v1_ProjectMigrateVirtualClusterInstance_To_management_ProjectMigrateVirtualClusterInstance(a.(*ProjectMigrateVirtualClusterInstance), b.(*management.ProjectMigrateVirtualClusterInstance), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*management.ProjectMigrateVirtualClusterInstance)(nil), (*ProjectMigrateVirtualClusterInstance)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_management_ProjectMigrateVirtualClusterInstance_To_v1_ProjectMigrateVirtualClusterInstance(a.(*management.ProjectMigrateVirtualClusterInstance), b.(*ProjectMigrateVirtualClusterInstance), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*ProjectMigrateVirtualClusterInstanceList)(nil), (*management.ProjectMigrateVirtualClusterInstanceList)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_v1_ProjectMigrateVirtualClusterInstanceList_To_management_ProjectMigrateVirtualClusterInstanceList(a.(*ProjectMigrateVirtualClusterInstanceList), b.(*management.ProjectMigrateVirtualClusterInstanceList), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*management.ProjectMigrateVirtualClusterInstanceList)(nil), (*ProjectMigrateVirtualClusterInstanceList)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_management_ProjectMigrateVirtualClusterInstanceList_To_v1_ProjectMigrateVirtualClusterInstanceList(a.(*management.ProjectMigrateVirtualClusterInstanceList), b.(*ProjectMigrateVirtualClusterInstanceList), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*ProjectMigrateVirtualClusterInstanceSource)(nil), (*management.ProjectMigrateVirtualClusterInstanceSource)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_v1_ProjectMigrateVirtualClusterInstanceSource_To_management_ProjectMigrateVirtualClusterInstanceSource(a.(*ProjectMigrateVirtualClusterInstanceSource), b.(*management.ProjectMigrateVirtualClusterInstanceSource), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*management.ProjectMigrateVirtualClusterInstanceSource)(nil), (*ProjectMigrateVirtualClusterInstanceSource)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_management_ProjectMigrateVirtualClusterInstanceSource_To_v1_ProjectMigrateVirtualClusterInstanceSource(a.(*management.ProjectMigrateVirtualClusterInstanceSource), b.(*ProjectMigrateVirtualClusterInstanceSource), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*ProjectSecret)(nil), (*management.ProjectSecret)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_v1_ProjectSecret_To_management_ProjectSecret(a.(*ProjectSecret), b.(*management.ProjectSecret), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*management.ProjectSecret)(nil), (*ProjectSecret)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_management_ProjectSecret_To_v1_ProjectSecret(a.(*management.ProjectSecret), b.(*ProjectSecret), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*ProjectSecretList)(nil), (*management.ProjectSecretList)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_v1_ProjectSecretList_To_management_ProjectSecretList(a.(*ProjectSecretList), b.(*management.ProjectSecretList), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*management.ProjectSecretList)(nil), (*ProjectSecretList)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_management_ProjectSecretList_To_v1_ProjectSecretList(a.(*management.ProjectSecretList), b.(*ProjectSecretList), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*ProjectSecretSpec)(nil), (*management.ProjectSecretSpec)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_v1_ProjectSecretSpec_To_management_ProjectSecretSpec(a.(*ProjectSecretSpec), b.(*management.ProjectSecretSpec), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*management.ProjectSecretSpec)(nil), (*ProjectSecretSpec)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_management_ProjectSecretSpec_To_v1_ProjectSecretSpec(a.(*management.ProjectSecretSpec), b.(*ProjectSecretSpec), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*ProjectSecretStatus)(nil), (*management.ProjectSecretStatus)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_v1_ProjectSecretStatus_To_management_ProjectSecretStatus(a.(*ProjectSecretStatus), b.(*management.ProjectSecretStatus), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*management.ProjectSecretStatus)(nil), (*ProjectSecretStatus)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_management_ProjectSecretStatus_To_v1_ProjectSecretStatus(a.(*management.ProjectSecretStatus), b.(*ProjectSecretStatus), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*ProjectSpec)(nil), (*management.ProjectSpec)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_v1_ProjectSpec_To_management_ProjectSpec(a.(*ProjectSpec), b.(*management.ProjectSpec), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*management.ProjectSpec)(nil), (*ProjectSpec)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_management_ProjectSpec_To_v1_ProjectSpec(a.(*management.ProjectSpec), b.(*ProjectSpec), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*ProjectStatus)(nil), (*management.ProjectStatus)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_v1_ProjectStatus_To_management_ProjectStatus(a.(*ProjectStatus), b.(*management.ProjectStatus), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*management.ProjectStatus)(nil), (*ProjectStatus)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_management_ProjectStatus_To_v1_ProjectStatus(a.(*management.ProjectStatus), b.(*ProjectStatus), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*ProjectTemplates)(nil), (*management.ProjectTemplates)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_v1_ProjectTemplates_To_management_ProjectTemplates(a.(*ProjectTemplates), b.(*management.ProjectTemplates), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*management.ProjectTemplates)(nil), (*ProjectTemplates)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_management_ProjectTemplates_To_v1_ProjectTemplates(a.(*management.ProjectTemplates), b.(*ProjectTemplates), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*ProjectTemplatesList)(nil), (*management.ProjectTemplatesList)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_v1_ProjectTemplatesList_To_management_ProjectTemplatesList(a.(*ProjectTemplatesList), b.(*management.ProjectTemplatesList), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*management.ProjectTemplatesList)(nil), (*ProjectTemplatesList)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_management_ProjectTemplatesList_To_v1_ProjectTemplatesList(a.(*management.ProjectTemplatesList), b.(*ProjectTemplatesList), scope)
+	}); err != nil {
+		return err
+	}
 	if err := s.AddGeneratedConversionFunc((*Promotions)(nil), (*management.Promotions)(nil), func(a, b interface{}, scope conversion.Scope) error {
 		return Convert_v1_Promotions_To_management_Promotions(a.(*Promotions), b.(*management.Promotions), scope)
 	}); err != nil {
@@ -1372,6 +1662,46 @@ func RegisterConversions(s *runtime.Scheme) error {
 	}
 	if err := s.AddGeneratedConversionFunc((*management.SpaceConstraintStatus)(nil), (*SpaceConstraintStatus)(nil), func(a, b interface{}, scope conversion.Scope) error {
 		return Convert_management_SpaceConstraintStatus_To_v1_SpaceConstraintStatus(a.(*management.SpaceConstraintStatus), b.(*SpaceConstraintStatus), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*SpaceInstance)(nil), (*management.SpaceInstance)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_v1_SpaceInstance_To_management_SpaceInstance(a.(*SpaceInstance), b.(*management.SpaceInstance), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*management.SpaceInstance)(nil), (*SpaceInstance)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_management_SpaceInstance_To_v1_SpaceInstance(a.(*management.SpaceInstance), b.(*SpaceInstance), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*SpaceInstanceList)(nil), (*management.SpaceInstanceList)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_v1_SpaceInstanceList_To_management_SpaceInstanceList(a.(*SpaceInstanceList), b.(*management.SpaceInstanceList), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*management.SpaceInstanceList)(nil), (*SpaceInstanceList)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_management_SpaceInstanceList_To_v1_SpaceInstanceList(a.(*management.SpaceInstanceList), b.(*SpaceInstanceList), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*SpaceInstanceSpec)(nil), (*management.SpaceInstanceSpec)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_v1_SpaceInstanceSpec_To_management_SpaceInstanceSpec(a.(*SpaceInstanceSpec), b.(*management.SpaceInstanceSpec), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*management.SpaceInstanceSpec)(nil), (*SpaceInstanceSpec)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_management_SpaceInstanceSpec_To_v1_SpaceInstanceSpec(a.(*management.SpaceInstanceSpec), b.(*SpaceInstanceSpec), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*SpaceInstanceStatus)(nil), (*management.SpaceInstanceStatus)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_v1_SpaceInstanceStatus_To_management_SpaceInstanceStatus(a.(*SpaceInstanceStatus), b.(*management.SpaceInstanceStatus), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*management.SpaceInstanceStatus)(nil), (*SpaceInstanceStatus)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_management_SpaceInstanceStatus_To_v1_SpaceInstanceStatus(a.(*management.SpaceInstanceStatus), b.(*SpaceInstanceStatus), scope)
 	}); err != nil {
 		return err
 	}
@@ -1765,6 +2095,116 @@ func RegisterConversions(s *runtime.Scheme) error {
 	}); err != nil {
 		return err
 	}
+	if err := s.AddGeneratedConversionFunc((*VirtualClusterInstance)(nil), (*management.VirtualClusterInstance)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_v1_VirtualClusterInstance_To_management_VirtualClusterInstance(a.(*VirtualClusterInstance), b.(*management.VirtualClusterInstance), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*management.VirtualClusterInstance)(nil), (*VirtualClusterInstance)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_management_VirtualClusterInstance_To_v1_VirtualClusterInstance(a.(*management.VirtualClusterInstance), b.(*VirtualClusterInstance), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*VirtualClusterInstanceKubeConfig)(nil), (*management.VirtualClusterInstanceKubeConfig)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_v1_VirtualClusterInstanceKubeConfig_To_management_VirtualClusterInstanceKubeConfig(a.(*VirtualClusterInstanceKubeConfig), b.(*management.VirtualClusterInstanceKubeConfig), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*management.VirtualClusterInstanceKubeConfig)(nil), (*VirtualClusterInstanceKubeConfig)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_management_VirtualClusterInstanceKubeConfig_To_v1_VirtualClusterInstanceKubeConfig(a.(*management.VirtualClusterInstanceKubeConfig), b.(*VirtualClusterInstanceKubeConfig), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*VirtualClusterInstanceKubeConfigList)(nil), (*management.VirtualClusterInstanceKubeConfigList)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_v1_VirtualClusterInstanceKubeConfigList_To_management_VirtualClusterInstanceKubeConfigList(a.(*VirtualClusterInstanceKubeConfigList), b.(*management.VirtualClusterInstanceKubeConfigList), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*management.VirtualClusterInstanceKubeConfigList)(nil), (*VirtualClusterInstanceKubeConfigList)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_management_VirtualClusterInstanceKubeConfigList_To_v1_VirtualClusterInstanceKubeConfigList(a.(*management.VirtualClusterInstanceKubeConfigList), b.(*VirtualClusterInstanceKubeConfigList), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*VirtualClusterInstanceKubeConfigRequestOptions)(nil), (*management.VirtualClusterInstanceKubeConfigRequestOptions)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_v1_VirtualClusterInstanceKubeConfigRequestOptions_To_management_VirtualClusterInstanceKubeConfigRequestOptions(a.(*VirtualClusterInstanceKubeConfigRequestOptions), b.(*management.VirtualClusterInstanceKubeConfigRequestOptions), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*management.VirtualClusterInstanceKubeConfigRequestOptions)(nil), (*VirtualClusterInstanceKubeConfigRequestOptions)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_management_VirtualClusterInstanceKubeConfigRequestOptions_To_v1_VirtualClusterInstanceKubeConfigRequestOptions(a.(*management.VirtualClusterInstanceKubeConfigRequestOptions), b.(*VirtualClusterInstanceKubeConfigRequestOptions), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*VirtualClusterInstanceKubeConfigStatus)(nil), (*management.VirtualClusterInstanceKubeConfigStatus)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_v1_VirtualClusterInstanceKubeConfigStatus_To_management_VirtualClusterInstanceKubeConfigStatus(a.(*VirtualClusterInstanceKubeConfigStatus), b.(*management.VirtualClusterInstanceKubeConfigStatus), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*management.VirtualClusterInstanceKubeConfigStatus)(nil), (*VirtualClusterInstanceKubeConfigStatus)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_management_VirtualClusterInstanceKubeConfigStatus_To_v1_VirtualClusterInstanceKubeConfigStatus(a.(*management.VirtualClusterInstanceKubeConfigStatus), b.(*VirtualClusterInstanceKubeConfigStatus), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*VirtualClusterInstanceList)(nil), (*management.VirtualClusterInstanceList)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_v1_VirtualClusterInstanceList_To_management_VirtualClusterInstanceList(a.(*VirtualClusterInstanceList), b.(*management.VirtualClusterInstanceList), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*management.VirtualClusterInstanceList)(nil), (*VirtualClusterInstanceList)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_management_VirtualClusterInstanceList_To_v1_VirtualClusterInstanceList(a.(*management.VirtualClusterInstanceList), b.(*VirtualClusterInstanceList), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*VirtualClusterInstanceLog)(nil), (*management.VirtualClusterInstanceLog)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_v1_VirtualClusterInstanceLog_To_management_VirtualClusterInstanceLog(a.(*VirtualClusterInstanceLog), b.(*management.VirtualClusterInstanceLog), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*management.VirtualClusterInstanceLog)(nil), (*VirtualClusterInstanceLog)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_management_VirtualClusterInstanceLog_To_v1_VirtualClusterInstanceLog(a.(*management.VirtualClusterInstanceLog), b.(*VirtualClusterInstanceLog), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*VirtualClusterInstanceLogList)(nil), (*management.VirtualClusterInstanceLogList)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_v1_VirtualClusterInstanceLogList_To_management_VirtualClusterInstanceLogList(a.(*VirtualClusterInstanceLogList), b.(*management.VirtualClusterInstanceLogList), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*management.VirtualClusterInstanceLogList)(nil), (*VirtualClusterInstanceLogList)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_management_VirtualClusterInstanceLogList_To_v1_VirtualClusterInstanceLogList(a.(*management.VirtualClusterInstanceLogList), b.(*VirtualClusterInstanceLogList), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*VirtualClusterInstanceLogOptions)(nil), (*management.VirtualClusterInstanceLogOptions)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_v1_VirtualClusterInstanceLogOptions_To_management_VirtualClusterInstanceLogOptions(a.(*VirtualClusterInstanceLogOptions), b.(*management.VirtualClusterInstanceLogOptions), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*management.VirtualClusterInstanceLogOptions)(nil), (*VirtualClusterInstanceLogOptions)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_management_VirtualClusterInstanceLogOptions_To_v1_VirtualClusterInstanceLogOptions(a.(*management.VirtualClusterInstanceLogOptions), b.(*VirtualClusterInstanceLogOptions), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*VirtualClusterInstanceSpec)(nil), (*management.VirtualClusterInstanceSpec)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_v1_VirtualClusterInstanceSpec_To_management_VirtualClusterInstanceSpec(a.(*VirtualClusterInstanceSpec), b.(*management.VirtualClusterInstanceSpec), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*management.VirtualClusterInstanceSpec)(nil), (*VirtualClusterInstanceSpec)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_management_VirtualClusterInstanceSpec_To_v1_VirtualClusterInstanceSpec(a.(*management.VirtualClusterInstanceSpec), b.(*VirtualClusterInstanceSpec), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*VirtualClusterInstanceStatus)(nil), (*management.VirtualClusterInstanceStatus)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_v1_VirtualClusterInstanceStatus_To_management_VirtualClusterInstanceStatus(a.(*VirtualClusterInstanceStatus), b.(*management.VirtualClusterInstanceStatus), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*management.VirtualClusterInstanceStatus)(nil), (*VirtualClusterInstanceStatus)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_management_VirtualClusterInstanceStatus_To_v1_VirtualClusterInstanceStatus(a.(*management.VirtualClusterInstanceStatus), b.(*VirtualClusterInstanceStatus), scope)
+	}); err != nil {
+		return err
+	}
 	if err := s.AddGeneratedConversionFunc((*VirtualClusterTemplate)(nil), (*management.VirtualClusterTemplate)(nil), func(a, b interface{}, scope conversion.Scope) error {
 		return Convert_v1_VirtualClusterTemplate_To_management_VirtualClusterTemplate(a.(*VirtualClusterTemplate), b.(*management.VirtualClusterTemplate), scope)
 	}); err != nil {
@@ -1822,6 +2262,11 @@ func RegisterConversions(s *runtime.Scheme) error {
 	}
 	if err := s.AddGeneratedConversionFunc((*url.Values)(nil), (*UserVirtualClustersOptions)(nil), func(a, b interface{}, scope conversion.Scope) error {
 		return Convert_url_Values_To_v1_UserVirtualClustersOptions(a.(*url.Values), b.(*UserVirtualClustersOptions), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*url.Values)(nil), (*VirtualClusterInstanceLogOptions)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_url_Values_To_v1_VirtualClusterInstanceLogOptions(a.(*url.Values), b.(*VirtualClusterInstanceLogOptions), scope)
 	}); err != nil {
 		return err
 	}
@@ -2176,6 +2621,7 @@ func autoConvert_v1_Authentication_To_management_Authentication(in *Authenticati
 	out.Google = (*management.AuthenticationGoogle)(unsafe.Pointer(in.Google))
 	out.Microsoft = (*management.AuthenticationMicrosoft)(unsafe.Pointer(in.Microsoft))
 	out.SAML = (*management.AuthenticationSAML)(unsafe.Pointer(in.SAML))
+	out.DisableTeamCreation = in.DisableTeamCreation
 	return nil
 }
 
@@ -2192,6 +2638,7 @@ func autoConvert_management_Authentication_To_v1_Authentication(in *management.A
 	out.Google = (*AuthenticationGoogle)(unsafe.Pointer(in.Google))
 	out.Microsoft = (*AuthenticationMicrosoft)(unsafe.Pointer(in.Microsoft))
 	out.SAML = (*AuthenticationSAML)(unsafe.Pointer(in.SAML))
+	out.DisableTeamCreation = in.DisableTeamCreation
 	return nil
 }
 
@@ -2662,100 +3109,6 @@ func autoConvert_management_ClusterAccessStatus_To_v1_ClusterAccessStatus(in *ma
 // Convert_management_ClusterAccessStatus_To_v1_ClusterAccessStatus is an autogenerated conversion function.
 func Convert_management_ClusterAccessStatus_To_v1_ClusterAccessStatus(in *management.ClusterAccessStatus, out *ClusterAccessStatus, s conversion.Scope) error {
 	return autoConvert_management_ClusterAccessStatus_To_v1_ClusterAccessStatus(in, out, s)
-}
-
-func autoConvert_v1_ClusterAccountTemplate_To_management_ClusterAccountTemplate(in *ClusterAccountTemplate, out *management.ClusterAccountTemplate, s conversion.Scope) error {
-	out.ObjectMeta = in.ObjectMeta
-	if err := Convert_v1_ClusterAccountTemplateSpec_To_management_ClusterAccountTemplateSpec(&in.Spec, &out.Spec, s); err != nil {
-		return err
-	}
-	if err := Convert_v1_ClusterAccountTemplateStatus_To_management_ClusterAccountTemplateStatus(&in.Status, &out.Status, s); err != nil {
-		return err
-	}
-	return nil
-}
-
-// Convert_v1_ClusterAccountTemplate_To_management_ClusterAccountTemplate is an autogenerated conversion function.
-func Convert_v1_ClusterAccountTemplate_To_management_ClusterAccountTemplate(in *ClusterAccountTemplate, out *management.ClusterAccountTemplate, s conversion.Scope) error {
-	return autoConvert_v1_ClusterAccountTemplate_To_management_ClusterAccountTemplate(in, out, s)
-}
-
-func autoConvert_management_ClusterAccountTemplate_To_v1_ClusterAccountTemplate(in *management.ClusterAccountTemplate, out *ClusterAccountTemplate, s conversion.Scope) error {
-	out.ObjectMeta = in.ObjectMeta
-	if err := Convert_management_ClusterAccountTemplateSpec_To_v1_ClusterAccountTemplateSpec(&in.Spec, &out.Spec, s); err != nil {
-		return err
-	}
-	if err := Convert_management_ClusterAccountTemplateStatus_To_v1_ClusterAccountTemplateStatus(&in.Status, &out.Status, s); err != nil {
-		return err
-	}
-	return nil
-}
-
-// Convert_management_ClusterAccountTemplate_To_v1_ClusterAccountTemplate is an autogenerated conversion function.
-func Convert_management_ClusterAccountTemplate_To_v1_ClusterAccountTemplate(in *management.ClusterAccountTemplate, out *ClusterAccountTemplate, s conversion.Scope) error {
-	return autoConvert_management_ClusterAccountTemplate_To_v1_ClusterAccountTemplate(in, out, s)
-}
-
-func autoConvert_v1_ClusterAccountTemplateList_To_management_ClusterAccountTemplateList(in *ClusterAccountTemplateList, out *management.ClusterAccountTemplateList, s conversion.Scope) error {
-	out.ListMeta = in.ListMeta
-	out.Items = *(*[]management.ClusterAccountTemplate)(unsafe.Pointer(&in.Items))
-	return nil
-}
-
-// Convert_v1_ClusterAccountTemplateList_To_management_ClusterAccountTemplateList is an autogenerated conversion function.
-func Convert_v1_ClusterAccountTemplateList_To_management_ClusterAccountTemplateList(in *ClusterAccountTemplateList, out *management.ClusterAccountTemplateList, s conversion.Scope) error {
-	return autoConvert_v1_ClusterAccountTemplateList_To_management_ClusterAccountTemplateList(in, out, s)
-}
-
-func autoConvert_management_ClusterAccountTemplateList_To_v1_ClusterAccountTemplateList(in *management.ClusterAccountTemplateList, out *ClusterAccountTemplateList, s conversion.Scope) error {
-	out.ListMeta = in.ListMeta
-	out.Items = *(*[]ClusterAccountTemplate)(unsafe.Pointer(&in.Items))
-	return nil
-}
-
-// Convert_management_ClusterAccountTemplateList_To_v1_ClusterAccountTemplateList is an autogenerated conversion function.
-func Convert_management_ClusterAccountTemplateList_To_v1_ClusterAccountTemplateList(in *management.ClusterAccountTemplateList, out *ClusterAccountTemplateList, s conversion.Scope) error {
-	return autoConvert_management_ClusterAccountTemplateList_To_v1_ClusterAccountTemplateList(in, out, s)
-}
-
-func autoConvert_v1_ClusterAccountTemplateSpec_To_management_ClusterAccountTemplateSpec(in *ClusterAccountTemplateSpec, out *management.ClusterAccountTemplateSpec, s conversion.Scope) error {
-	out.ClusterAccountTemplateSpec = in.ClusterAccountTemplateSpec
-	return nil
-}
-
-// Convert_v1_ClusterAccountTemplateSpec_To_management_ClusterAccountTemplateSpec is an autogenerated conversion function.
-func Convert_v1_ClusterAccountTemplateSpec_To_management_ClusterAccountTemplateSpec(in *ClusterAccountTemplateSpec, out *management.ClusterAccountTemplateSpec, s conversion.Scope) error {
-	return autoConvert_v1_ClusterAccountTemplateSpec_To_management_ClusterAccountTemplateSpec(in, out, s)
-}
-
-func autoConvert_management_ClusterAccountTemplateSpec_To_v1_ClusterAccountTemplateSpec(in *management.ClusterAccountTemplateSpec, out *ClusterAccountTemplateSpec, s conversion.Scope) error {
-	out.ClusterAccountTemplateSpec = in.ClusterAccountTemplateSpec
-	return nil
-}
-
-// Convert_management_ClusterAccountTemplateSpec_To_v1_ClusterAccountTemplateSpec is an autogenerated conversion function.
-func Convert_management_ClusterAccountTemplateSpec_To_v1_ClusterAccountTemplateSpec(in *management.ClusterAccountTemplateSpec, out *ClusterAccountTemplateSpec, s conversion.Scope) error {
-	return autoConvert_management_ClusterAccountTemplateSpec_To_v1_ClusterAccountTemplateSpec(in, out, s)
-}
-
-func autoConvert_v1_ClusterAccountTemplateStatus_To_management_ClusterAccountTemplateStatus(in *ClusterAccountTemplateStatus, out *management.ClusterAccountTemplateStatus, s conversion.Scope) error {
-	out.ClusterAccountTemplateStatus = in.ClusterAccountTemplateStatus
-	return nil
-}
-
-// Convert_v1_ClusterAccountTemplateStatus_To_management_ClusterAccountTemplateStatus is an autogenerated conversion function.
-func Convert_v1_ClusterAccountTemplateStatus_To_management_ClusterAccountTemplateStatus(in *ClusterAccountTemplateStatus, out *management.ClusterAccountTemplateStatus, s conversion.Scope) error {
-	return autoConvert_v1_ClusterAccountTemplateStatus_To_management_ClusterAccountTemplateStatus(in, out, s)
-}
-
-func autoConvert_management_ClusterAccountTemplateStatus_To_v1_ClusterAccountTemplateStatus(in *management.ClusterAccountTemplateStatus, out *ClusterAccountTemplateStatus, s conversion.Scope) error {
-	out.ClusterAccountTemplateStatus = in.ClusterAccountTemplateStatus
-	return nil
-}
-
-// Convert_management_ClusterAccountTemplateStatus_To_v1_ClusterAccountTemplateStatus is an autogenerated conversion function.
-func Convert_management_ClusterAccountTemplateStatus_To_v1_ClusterAccountTemplateStatus(in *management.ClusterAccountTemplateStatus, out *ClusterAccountTemplateStatus, s conversion.Scope) error {
-	return autoConvert_management_ClusterAccountTemplateStatus_To_v1_ClusterAccountTemplateStatus(in, out, s)
 }
 
 func autoConvert_v1_ClusterAccounts_To_management_ClusterAccounts(in *ClusterAccounts, out *management.ClusterAccounts, s conversion.Scope) error {
@@ -3987,9 +4340,6 @@ func Convert_management_KioskList_To_v1_KioskList(in *management.KioskList, out 
 }
 
 func autoConvert_v1_KioskSpec_To_management_KioskSpec(in *KioskSpec, out *management.KioskSpec, s conversion.Scope) error {
-	out.ConfigAccount = in.ConfigAccount
-	out.Template = in.Template
-	out.TemplateInstance = in.TemplateInstance
 	out.JsPolicy = in.JsPolicy
 	out.JsPolicyBundle = in.JsPolicyBundle
 	out.JsPolicyViolations = in.JsPolicyViolations
@@ -4016,9 +4366,6 @@ func Convert_v1_KioskSpec_To_management_KioskSpec(in *KioskSpec, out *management
 }
 
 func autoConvert_management_KioskSpec_To_v1_KioskSpec(in *management.KioskSpec, out *KioskSpec, s conversion.Scope) error {
-	out.ConfigAccount = in.ConfigAccount
-	out.Template = in.Template
-	out.TemplateInstance = in.TemplateInstance
 	out.JsPolicy = in.JsPolicy
 	out.JsPolicyBundle = in.JsPolicyBundle
 	out.JsPolicyViolations = in.JsPolicyViolations
@@ -4738,6 +5085,782 @@ func Convert_management_PredefinedApp_To_v1_PredefinedApp(in *management.Predefi
 	return autoConvert_management_PredefinedApp_To_v1_PredefinedApp(in, out, s)
 }
 
+func autoConvert_v1_Project_To_management_Project(in *Project, out *management.Project, s conversion.Scope) error {
+	out.ObjectMeta = in.ObjectMeta
+	if err := Convert_v1_ProjectSpec_To_management_ProjectSpec(&in.Spec, &out.Spec, s); err != nil {
+		return err
+	}
+	if err := Convert_v1_ProjectStatus_To_management_ProjectStatus(&in.Status, &out.Status, s); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Convert_v1_Project_To_management_Project is an autogenerated conversion function.
+func Convert_v1_Project_To_management_Project(in *Project, out *management.Project, s conversion.Scope) error {
+	return autoConvert_v1_Project_To_management_Project(in, out, s)
+}
+
+func autoConvert_management_Project_To_v1_Project(in *management.Project, out *Project, s conversion.Scope) error {
+	out.ObjectMeta = in.ObjectMeta
+	if err := Convert_management_ProjectSpec_To_v1_ProjectSpec(&in.Spec, &out.Spec, s); err != nil {
+		return err
+	}
+	if err := Convert_management_ProjectStatus_To_v1_ProjectStatus(&in.Status, &out.Status, s); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Convert_management_Project_To_v1_Project is an autogenerated conversion function.
+func Convert_management_Project_To_v1_Project(in *management.Project, out *Project, s conversion.Scope) error {
+	return autoConvert_management_Project_To_v1_Project(in, out, s)
+}
+
+func autoConvert_v1_ProjectChartInfo_To_management_ProjectChartInfo(in *ProjectChartInfo, out *management.ProjectChartInfo, s conversion.Scope) error {
+	out.ObjectMeta = in.ObjectMeta
+	if err := Convert_v1_ProjectChartInfoSpec_To_management_ProjectChartInfoSpec(&in.Spec, &out.Spec, s); err != nil {
+		return err
+	}
+	if err := Convert_v1_ProjectChartInfoStatus_To_management_ProjectChartInfoStatus(&in.Status, &out.Status, s); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Convert_v1_ProjectChartInfo_To_management_ProjectChartInfo is an autogenerated conversion function.
+func Convert_v1_ProjectChartInfo_To_management_ProjectChartInfo(in *ProjectChartInfo, out *management.ProjectChartInfo, s conversion.Scope) error {
+	return autoConvert_v1_ProjectChartInfo_To_management_ProjectChartInfo(in, out, s)
+}
+
+func autoConvert_management_ProjectChartInfo_To_v1_ProjectChartInfo(in *management.ProjectChartInfo, out *ProjectChartInfo, s conversion.Scope) error {
+	out.ObjectMeta = in.ObjectMeta
+	if err := Convert_management_ProjectChartInfoSpec_To_v1_ProjectChartInfoSpec(&in.Spec, &out.Spec, s); err != nil {
+		return err
+	}
+	if err := Convert_management_ProjectChartInfoStatus_To_v1_ProjectChartInfoStatus(&in.Status, &out.Status, s); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Convert_management_ProjectChartInfo_To_v1_ProjectChartInfo is an autogenerated conversion function.
+func Convert_management_ProjectChartInfo_To_v1_ProjectChartInfo(in *management.ProjectChartInfo, out *ProjectChartInfo, s conversion.Scope) error {
+	return autoConvert_management_ProjectChartInfo_To_v1_ProjectChartInfo(in, out, s)
+}
+
+func autoConvert_v1_ProjectChartInfoList_To_management_ProjectChartInfoList(in *ProjectChartInfoList, out *management.ProjectChartInfoList, s conversion.Scope) error {
+	out.ListMeta = in.ListMeta
+	out.Items = *(*[]management.ProjectChartInfo)(unsafe.Pointer(&in.Items))
+	return nil
+}
+
+// Convert_v1_ProjectChartInfoList_To_management_ProjectChartInfoList is an autogenerated conversion function.
+func Convert_v1_ProjectChartInfoList_To_management_ProjectChartInfoList(in *ProjectChartInfoList, out *management.ProjectChartInfoList, s conversion.Scope) error {
+	return autoConvert_v1_ProjectChartInfoList_To_management_ProjectChartInfoList(in, out, s)
+}
+
+func autoConvert_management_ProjectChartInfoList_To_v1_ProjectChartInfoList(in *management.ProjectChartInfoList, out *ProjectChartInfoList, s conversion.Scope) error {
+	out.ListMeta = in.ListMeta
+	out.Items = *(*[]ProjectChartInfo)(unsafe.Pointer(&in.Items))
+	return nil
+}
+
+// Convert_management_ProjectChartInfoList_To_v1_ProjectChartInfoList is an autogenerated conversion function.
+func Convert_management_ProjectChartInfoList_To_v1_ProjectChartInfoList(in *management.ProjectChartInfoList, out *ProjectChartInfoList, s conversion.Scope) error {
+	return autoConvert_management_ProjectChartInfoList_To_v1_ProjectChartInfoList(in, out, s)
+}
+
+func autoConvert_v1_ProjectChartInfoSpec_To_management_ProjectChartInfoSpec(in *ProjectChartInfoSpec, out *management.ProjectChartInfoSpec, s conversion.Scope) error {
+	out.ChartInfoSpec = in.ChartInfoSpec
+	return nil
+}
+
+// Convert_v1_ProjectChartInfoSpec_To_management_ProjectChartInfoSpec is an autogenerated conversion function.
+func Convert_v1_ProjectChartInfoSpec_To_management_ProjectChartInfoSpec(in *ProjectChartInfoSpec, out *management.ProjectChartInfoSpec, s conversion.Scope) error {
+	return autoConvert_v1_ProjectChartInfoSpec_To_management_ProjectChartInfoSpec(in, out, s)
+}
+
+func autoConvert_management_ProjectChartInfoSpec_To_v1_ProjectChartInfoSpec(in *management.ProjectChartInfoSpec, out *ProjectChartInfoSpec, s conversion.Scope) error {
+	out.ChartInfoSpec = in.ChartInfoSpec
+	return nil
+}
+
+// Convert_management_ProjectChartInfoSpec_To_v1_ProjectChartInfoSpec is an autogenerated conversion function.
+func Convert_management_ProjectChartInfoSpec_To_v1_ProjectChartInfoSpec(in *management.ProjectChartInfoSpec, out *ProjectChartInfoSpec, s conversion.Scope) error {
+	return autoConvert_management_ProjectChartInfoSpec_To_v1_ProjectChartInfoSpec(in, out, s)
+}
+
+func autoConvert_v1_ProjectChartInfoStatus_To_management_ProjectChartInfoStatus(in *ProjectChartInfoStatus, out *management.ProjectChartInfoStatus, s conversion.Scope) error {
+	out.ChartInfoStatus = in.ChartInfoStatus
+	return nil
+}
+
+// Convert_v1_ProjectChartInfoStatus_To_management_ProjectChartInfoStatus is an autogenerated conversion function.
+func Convert_v1_ProjectChartInfoStatus_To_management_ProjectChartInfoStatus(in *ProjectChartInfoStatus, out *management.ProjectChartInfoStatus, s conversion.Scope) error {
+	return autoConvert_v1_ProjectChartInfoStatus_To_management_ProjectChartInfoStatus(in, out, s)
+}
+
+func autoConvert_management_ProjectChartInfoStatus_To_v1_ProjectChartInfoStatus(in *management.ProjectChartInfoStatus, out *ProjectChartInfoStatus, s conversion.Scope) error {
+	out.ChartInfoStatus = in.ChartInfoStatus
+	return nil
+}
+
+// Convert_management_ProjectChartInfoStatus_To_v1_ProjectChartInfoStatus is an autogenerated conversion function.
+func Convert_management_ProjectChartInfoStatus_To_v1_ProjectChartInfoStatus(in *management.ProjectChartInfoStatus, out *ProjectChartInfoStatus, s conversion.Scope) error {
+	return autoConvert_management_ProjectChartInfoStatus_To_v1_ProjectChartInfoStatus(in, out, s)
+}
+
+func autoConvert_v1_ProjectCharts_To_management_ProjectCharts(in *ProjectCharts, out *management.ProjectCharts, s conversion.Scope) error {
+	out.ObjectMeta = in.ObjectMeta
+	out.Charts = *(*[]storagev1.HelmChart)(unsafe.Pointer(&in.Charts))
+	out.Busy = in.Busy
+	return nil
+}
+
+// Convert_v1_ProjectCharts_To_management_ProjectCharts is an autogenerated conversion function.
+func Convert_v1_ProjectCharts_To_management_ProjectCharts(in *ProjectCharts, out *management.ProjectCharts, s conversion.Scope) error {
+	return autoConvert_v1_ProjectCharts_To_management_ProjectCharts(in, out, s)
+}
+
+func autoConvert_management_ProjectCharts_To_v1_ProjectCharts(in *management.ProjectCharts, out *ProjectCharts, s conversion.Scope) error {
+	out.ObjectMeta = in.ObjectMeta
+	out.Charts = *(*[]storagev1.HelmChart)(unsafe.Pointer(&in.Charts))
+	out.Busy = in.Busy
+	return nil
+}
+
+// Convert_management_ProjectCharts_To_v1_ProjectCharts is an autogenerated conversion function.
+func Convert_management_ProjectCharts_To_v1_ProjectCharts(in *management.ProjectCharts, out *ProjectCharts, s conversion.Scope) error {
+	return autoConvert_management_ProjectCharts_To_v1_ProjectCharts(in, out, s)
+}
+
+func autoConvert_v1_ProjectChartsList_To_management_ProjectChartsList(in *ProjectChartsList, out *management.ProjectChartsList, s conversion.Scope) error {
+	out.ListMeta = in.ListMeta
+	out.Items = *(*[]management.ProjectCharts)(unsafe.Pointer(&in.Items))
+	return nil
+}
+
+// Convert_v1_ProjectChartsList_To_management_ProjectChartsList is an autogenerated conversion function.
+func Convert_v1_ProjectChartsList_To_management_ProjectChartsList(in *ProjectChartsList, out *management.ProjectChartsList, s conversion.Scope) error {
+	return autoConvert_v1_ProjectChartsList_To_management_ProjectChartsList(in, out, s)
+}
+
+func autoConvert_management_ProjectChartsList_To_v1_ProjectChartsList(in *management.ProjectChartsList, out *ProjectChartsList, s conversion.Scope) error {
+	out.ListMeta = in.ListMeta
+	out.Items = *(*[]ProjectCharts)(unsafe.Pointer(&in.Items))
+	return nil
+}
+
+// Convert_management_ProjectChartsList_To_v1_ProjectChartsList is an autogenerated conversion function.
+func Convert_management_ProjectChartsList_To_v1_ProjectChartsList(in *management.ProjectChartsList, out *ProjectChartsList, s conversion.Scope) error {
+	return autoConvert_management_ProjectChartsList_To_v1_ProjectChartsList(in, out, s)
+}
+
+func autoConvert_v1_ProjectClusters_To_management_ProjectClusters(in *ProjectClusters, out *management.ProjectClusters, s conversion.Scope) error {
+	out.ObjectMeta = in.ObjectMeta
+	out.Clusters = *(*[]management.Cluster)(unsafe.Pointer(&in.Clusters))
+	return nil
+}
+
+// Convert_v1_ProjectClusters_To_management_ProjectClusters is an autogenerated conversion function.
+func Convert_v1_ProjectClusters_To_management_ProjectClusters(in *ProjectClusters, out *management.ProjectClusters, s conversion.Scope) error {
+	return autoConvert_v1_ProjectClusters_To_management_ProjectClusters(in, out, s)
+}
+
+func autoConvert_management_ProjectClusters_To_v1_ProjectClusters(in *management.ProjectClusters, out *ProjectClusters, s conversion.Scope) error {
+	out.ObjectMeta = in.ObjectMeta
+	out.Clusters = *(*[]Cluster)(unsafe.Pointer(&in.Clusters))
+	return nil
+}
+
+// Convert_management_ProjectClusters_To_v1_ProjectClusters is an autogenerated conversion function.
+func Convert_management_ProjectClusters_To_v1_ProjectClusters(in *management.ProjectClusters, out *ProjectClusters, s conversion.Scope) error {
+	return autoConvert_management_ProjectClusters_To_v1_ProjectClusters(in, out, s)
+}
+
+func autoConvert_v1_ProjectClustersList_To_management_ProjectClustersList(in *ProjectClustersList, out *management.ProjectClustersList, s conversion.Scope) error {
+	out.ListMeta = in.ListMeta
+	out.Items = *(*[]management.ProjectClusters)(unsafe.Pointer(&in.Items))
+	return nil
+}
+
+// Convert_v1_ProjectClustersList_To_management_ProjectClustersList is an autogenerated conversion function.
+func Convert_v1_ProjectClustersList_To_management_ProjectClustersList(in *ProjectClustersList, out *management.ProjectClustersList, s conversion.Scope) error {
+	return autoConvert_v1_ProjectClustersList_To_management_ProjectClustersList(in, out, s)
+}
+
+func autoConvert_management_ProjectClustersList_To_v1_ProjectClustersList(in *management.ProjectClustersList, out *ProjectClustersList, s conversion.Scope) error {
+	out.ListMeta = in.ListMeta
+	out.Items = *(*[]ProjectClusters)(unsafe.Pointer(&in.Items))
+	return nil
+}
+
+// Convert_management_ProjectClustersList_To_v1_ProjectClustersList is an autogenerated conversion function.
+func Convert_management_ProjectClustersList_To_v1_ProjectClustersList(in *management.ProjectClustersList, out *ProjectClustersList, s conversion.Scope) error {
+	return autoConvert_management_ProjectClustersList_To_v1_ProjectClustersList(in, out, s)
+}
+
+func autoConvert_v1_ProjectImportSpace_To_management_ProjectImportSpace(in *ProjectImportSpace, out *management.ProjectImportSpace, s conversion.Scope) error {
+	out.ObjectMeta = in.ObjectMeta
+	if err := Convert_v1_ProjectImportSpaceSource_To_management_ProjectImportSpaceSource(&in.SourceSpace, &out.SourceSpace, s); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Convert_v1_ProjectImportSpace_To_management_ProjectImportSpace is an autogenerated conversion function.
+func Convert_v1_ProjectImportSpace_To_management_ProjectImportSpace(in *ProjectImportSpace, out *management.ProjectImportSpace, s conversion.Scope) error {
+	return autoConvert_v1_ProjectImportSpace_To_management_ProjectImportSpace(in, out, s)
+}
+
+func autoConvert_management_ProjectImportSpace_To_v1_ProjectImportSpace(in *management.ProjectImportSpace, out *ProjectImportSpace, s conversion.Scope) error {
+	out.ObjectMeta = in.ObjectMeta
+	if err := Convert_management_ProjectImportSpaceSource_To_v1_ProjectImportSpaceSource(&in.SourceSpace, &out.SourceSpace, s); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Convert_management_ProjectImportSpace_To_v1_ProjectImportSpace is an autogenerated conversion function.
+func Convert_management_ProjectImportSpace_To_v1_ProjectImportSpace(in *management.ProjectImportSpace, out *ProjectImportSpace, s conversion.Scope) error {
+	return autoConvert_management_ProjectImportSpace_To_v1_ProjectImportSpace(in, out, s)
+}
+
+func autoConvert_v1_ProjectImportSpaceList_To_management_ProjectImportSpaceList(in *ProjectImportSpaceList, out *management.ProjectImportSpaceList, s conversion.Scope) error {
+	out.ListMeta = in.ListMeta
+	out.Items = *(*[]management.ProjectImportSpace)(unsafe.Pointer(&in.Items))
+	return nil
+}
+
+// Convert_v1_ProjectImportSpaceList_To_management_ProjectImportSpaceList is an autogenerated conversion function.
+func Convert_v1_ProjectImportSpaceList_To_management_ProjectImportSpaceList(in *ProjectImportSpaceList, out *management.ProjectImportSpaceList, s conversion.Scope) error {
+	return autoConvert_v1_ProjectImportSpaceList_To_management_ProjectImportSpaceList(in, out, s)
+}
+
+func autoConvert_management_ProjectImportSpaceList_To_v1_ProjectImportSpaceList(in *management.ProjectImportSpaceList, out *ProjectImportSpaceList, s conversion.Scope) error {
+	out.ListMeta = in.ListMeta
+	out.Items = *(*[]ProjectImportSpace)(unsafe.Pointer(&in.Items))
+	return nil
+}
+
+// Convert_management_ProjectImportSpaceList_To_v1_ProjectImportSpaceList is an autogenerated conversion function.
+func Convert_management_ProjectImportSpaceList_To_v1_ProjectImportSpaceList(in *management.ProjectImportSpaceList, out *ProjectImportSpaceList, s conversion.Scope) error {
+	return autoConvert_management_ProjectImportSpaceList_To_v1_ProjectImportSpaceList(in, out, s)
+}
+
+func autoConvert_v1_ProjectImportSpaceSource_To_management_ProjectImportSpaceSource(in *ProjectImportSpaceSource, out *management.ProjectImportSpaceSource, s conversion.Scope) error {
+	out.Name = in.Name
+	out.Cluster = in.Cluster
+	out.ImportName = in.ImportName
+	return nil
+}
+
+// Convert_v1_ProjectImportSpaceSource_To_management_ProjectImportSpaceSource is an autogenerated conversion function.
+func Convert_v1_ProjectImportSpaceSource_To_management_ProjectImportSpaceSource(in *ProjectImportSpaceSource, out *management.ProjectImportSpaceSource, s conversion.Scope) error {
+	return autoConvert_v1_ProjectImportSpaceSource_To_management_ProjectImportSpaceSource(in, out, s)
+}
+
+func autoConvert_management_ProjectImportSpaceSource_To_v1_ProjectImportSpaceSource(in *management.ProjectImportSpaceSource, out *ProjectImportSpaceSource, s conversion.Scope) error {
+	out.Name = in.Name
+	out.Cluster = in.Cluster
+	out.ImportName = in.ImportName
+	return nil
+}
+
+// Convert_management_ProjectImportSpaceSource_To_v1_ProjectImportSpaceSource is an autogenerated conversion function.
+func Convert_management_ProjectImportSpaceSource_To_v1_ProjectImportSpaceSource(in *management.ProjectImportSpaceSource, out *ProjectImportSpaceSource, s conversion.Scope) error {
+	return autoConvert_management_ProjectImportSpaceSource_To_v1_ProjectImportSpaceSource(in, out, s)
+}
+
+func autoConvert_v1_ProjectImportVirtualCluster_To_management_ProjectImportVirtualCluster(in *ProjectImportVirtualCluster, out *management.ProjectImportVirtualCluster, s conversion.Scope) error {
+	out.ObjectMeta = in.ObjectMeta
+	if err := Convert_v1_ProjectImportVirtualClusterSource_To_management_ProjectImportVirtualClusterSource(&in.SourceVirtualCluster, &out.SourceVirtualCluster, s); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Convert_v1_ProjectImportVirtualCluster_To_management_ProjectImportVirtualCluster is an autogenerated conversion function.
+func Convert_v1_ProjectImportVirtualCluster_To_management_ProjectImportVirtualCluster(in *ProjectImportVirtualCluster, out *management.ProjectImportVirtualCluster, s conversion.Scope) error {
+	return autoConvert_v1_ProjectImportVirtualCluster_To_management_ProjectImportVirtualCluster(in, out, s)
+}
+
+func autoConvert_management_ProjectImportVirtualCluster_To_v1_ProjectImportVirtualCluster(in *management.ProjectImportVirtualCluster, out *ProjectImportVirtualCluster, s conversion.Scope) error {
+	out.ObjectMeta = in.ObjectMeta
+	if err := Convert_management_ProjectImportVirtualClusterSource_To_v1_ProjectImportVirtualClusterSource(&in.SourceVirtualCluster, &out.SourceVirtualCluster, s); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Convert_management_ProjectImportVirtualCluster_To_v1_ProjectImportVirtualCluster is an autogenerated conversion function.
+func Convert_management_ProjectImportVirtualCluster_To_v1_ProjectImportVirtualCluster(in *management.ProjectImportVirtualCluster, out *ProjectImportVirtualCluster, s conversion.Scope) error {
+	return autoConvert_management_ProjectImportVirtualCluster_To_v1_ProjectImportVirtualCluster(in, out, s)
+}
+
+func autoConvert_v1_ProjectImportVirtualClusterList_To_management_ProjectImportVirtualClusterList(in *ProjectImportVirtualClusterList, out *management.ProjectImportVirtualClusterList, s conversion.Scope) error {
+	out.ListMeta = in.ListMeta
+	out.Items = *(*[]management.ProjectImportVirtualCluster)(unsafe.Pointer(&in.Items))
+	return nil
+}
+
+// Convert_v1_ProjectImportVirtualClusterList_To_management_ProjectImportVirtualClusterList is an autogenerated conversion function.
+func Convert_v1_ProjectImportVirtualClusterList_To_management_ProjectImportVirtualClusterList(in *ProjectImportVirtualClusterList, out *management.ProjectImportVirtualClusterList, s conversion.Scope) error {
+	return autoConvert_v1_ProjectImportVirtualClusterList_To_management_ProjectImportVirtualClusterList(in, out, s)
+}
+
+func autoConvert_management_ProjectImportVirtualClusterList_To_v1_ProjectImportVirtualClusterList(in *management.ProjectImportVirtualClusterList, out *ProjectImportVirtualClusterList, s conversion.Scope) error {
+	out.ListMeta = in.ListMeta
+	out.Items = *(*[]ProjectImportVirtualCluster)(unsafe.Pointer(&in.Items))
+	return nil
+}
+
+// Convert_management_ProjectImportVirtualClusterList_To_v1_ProjectImportVirtualClusterList is an autogenerated conversion function.
+func Convert_management_ProjectImportVirtualClusterList_To_v1_ProjectImportVirtualClusterList(in *management.ProjectImportVirtualClusterList, out *ProjectImportVirtualClusterList, s conversion.Scope) error {
+	return autoConvert_management_ProjectImportVirtualClusterList_To_v1_ProjectImportVirtualClusterList(in, out, s)
+}
+
+func autoConvert_v1_ProjectImportVirtualClusterSource_To_management_ProjectImportVirtualClusterSource(in *ProjectImportVirtualClusterSource, out *management.ProjectImportVirtualClusterSource, s conversion.Scope) error {
+	out.Name = in.Name
+	out.Namespace = in.Namespace
+	out.Cluster = in.Cluster
+	out.ImportName = in.ImportName
+	return nil
+}
+
+// Convert_v1_ProjectImportVirtualClusterSource_To_management_ProjectImportVirtualClusterSource is an autogenerated conversion function.
+func Convert_v1_ProjectImportVirtualClusterSource_To_management_ProjectImportVirtualClusterSource(in *ProjectImportVirtualClusterSource, out *management.ProjectImportVirtualClusterSource, s conversion.Scope) error {
+	return autoConvert_v1_ProjectImportVirtualClusterSource_To_management_ProjectImportVirtualClusterSource(in, out, s)
+}
+
+func autoConvert_management_ProjectImportVirtualClusterSource_To_v1_ProjectImportVirtualClusterSource(in *management.ProjectImportVirtualClusterSource, out *ProjectImportVirtualClusterSource, s conversion.Scope) error {
+	out.Name = in.Name
+	out.Namespace = in.Namespace
+	out.Cluster = in.Cluster
+	out.ImportName = in.ImportName
+	return nil
+}
+
+// Convert_management_ProjectImportVirtualClusterSource_To_v1_ProjectImportVirtualClusterSource is an autogenerated conversion function.
+func Convert_management_ProjectImportVirtualClusterSource_To_v1_ProjectImportVirtualClusterSource(in *management.ProjectImportVirtualClusterSource, out *ProjectImportVirtualClusterSource, s conversion.Scope) error {
+	return autoConvert_management_ProjectImportVirtualClusterSource_To_v1_ProjectImportVirtualClusterSource(in, out, s)
+}
+
+func autoConvert_v1_ProjectList_To_management_ProjectList(in *ProjectList, out *management.ProjectList, s conversion.Scope) error {
+	out.ListMeta = in.ListMeta
+	out.Items = *(*[]management.Project)(unsafe.Pointer(&in.Items))
+	return nil
+}
+
+// Convert_v1_ProjectList_To_management_ProjectList is an autogenerated conversion function.
+func Convert_v1_ProjectList_To_management_ProjectList(in *ProjectList, out *management.ProjectList, s conversion.Scope) error {
+	return autoConvert_v1_ProjectList_To_management_ProjectList(in, out, s)
+}
+
+func autoConvert_management_ProjectList_To_v1_ProjectList(in *management.ProjectList, out *ProjectList, s conversion.Scope) error {
+	out.ListMeta = in.ListMeta
+	out.Items = *(*[]Project)(unsafe.Pointer(&in.Items))
+	return nil
+}
+
+// Convert_management_ProjectList_To_v1_ProjectList is an autogenerated conversion function.
+func Convert_management_ProjectList_To_v1_ProjectList(in *management.ProjectList, out *ProjectList, s conversion.Scope) error {
+	return autoConvert_management_ProjectList_To_v1_ProjectList(in, out, s)
+}
+
+func autoConvert_v1_ProjectMember_To_management_ProjectMember(in *ProjectMember, out *management.ProjectMember, s conversion.Scope) error {
+	out.Info = in.Info
+	return nil
+}
+
+// Convert_v1_ProjectMember_To_management_ProjectMember is an autogenerated conversion function.
+func Convert_v1_ProjectMember_To_management_ProjectMember(in *ProjectMember, out *management.ProjectMember, s conversion.Scope) error {
+	return autoConvert_v1_ProjectMember_To_management_ProjectMember(in, out, s)
+}
+
+func autoConvert_management_ProjectMember_To_v1_ProjectMember(in *management.ProjectMember, out *ProjectMember, s conversion.Scope) error {
+	out.Info = in.Info
+	return nil
+}
+
+// Convert_management_ProjectMember_To_v1_ProjectMember is an autogenerated conversion function.
+func Convert_management_ProjectMember_To_v1_ProjectMember(in *management.ProjectMember, out *ProjectMember, s conversion.Scope) error {
+	return autoConvert_management_ProjectMember_To_v1_ProjectMember(in, out, s)
+}
+
+func autoConvert_v1_ProjectMembers_To_management_ProjectMembers(in *ProjectMembers, out *management.ProjectMembers, s conversion.Scope) error {
+	out.ObjectMeta = in.ObjectMeta
+	out.Teams = *(*[]management.ProjectMember)(unsafe.Pointer(&in.Teams))
+	out.Users = *(*[]management.ProjectMember)(unsafe.Pointer(&in.Users))
+	return nil
+}
+
+// Convert_v1_ProjectMembers_To_management_ProjectMembers is an autogenerated conversion function.
+func Convert_v1_ProjectMembers_To_management_ProjectMembers(in *ProjectMembers, out *management.ProjectMembers, s conversion.Scope) error {
+	return autoConvert_v1_ProjectMembers_To_management_ProjectMembers(in, out, s)
+}
+
+func autoConvert_management_ProjectMembers_To_v1_ProjectMembers(in *management.ProjectMembers, out *ProjectMembers, s conversion.Scope) error {
+	out.ObjectMeta = in.ObjectMeta
+	out.Teams = *(*[]ProjectMember)(unsafe.Pointer(&in.Teams))
+	out.Users = *(*[]ProjectMember)(unsafe.Pointer(&in.Users))
+	return nil
+}
+
+// Convert_management_ProjectMembers_To_v1_ProjectMembers is an autogenerated conversion function.
+func Convert_management_ProjectMembers_To_v1_ProjectMembers(in *management.ProjectMembers, out *ProjectMembers, s conversion.Scope) error {
+	return autoConvert_management_ProjectMembers_To_v1_ProjectMembers(in, out, s)
+}
+
+func autoConvert_v1_ProjectMembersList_To_management_ProjectMembersList(in *ProjectMembersList, out *management.ProjectMembersList, s conversion.Scope) error {
+	out.ListMeta = in.ListMeta
+	out.Items = *(*[]management.ProjectMembers)(unsafe.Pointer(&in.Items))
+	return nil
+}
+
+// Convert_v1_ProjectMembersList_To_management_ProjectMembersList is an autogenerated conversion function.
+func Convert_v1_ProjectMembersList_To_management_ProjectMembersList(in *ProjectMembersList, out *management.ProjectMembersList, s conversion.Scope) error {
+	return autoConvert_v1_ProjectMembersList_To_management_ProjectMembersList(in, out, s)
+}
+
+func autoConvert_management_ProjectMembersList_To_v1_ProjectMembersList(in *management.ProjectMembersList, out *ProjectMembersList, s conversion.Scope) error {
+	out.ListMeta = in.ListMeta
+	out.Items = *(*[]ProjectMembers)(unsafe.Pointer(&in.Items))
+	return nil
+}
+
+// Convert_management_ProjectMembersList_To_v1_ProjectMembersList is an autogenerated conversion function.
+func Convert_management_ProjectMembersList_To_v1_ProjectMembersList(in *management.ProjectMembersList, out *ProjectMembersList, s conversion.Scope) error {
+	return autoConvert_management_ProjectMembersList_To_v1_ProjectMembersList(in, out, s)
+}
+
+func autoConvert_v1_ProjectMigrateSpaceInstance_To_management_ProjectMigrateSpaceInstance(in *ProjectMigrateSpaceInstance, out *management.ProjectMigrateSpaceInstance, s conversion.Scope) error {
+	out.ObjectMeta = in.ObjectMeta
+	if err := Convert_v1_ProjectMigrateSpaceInstanceSource_To_management_ProjectMigrateSpaceInstanceSource(&in.SourceSpaceInstance, &out.SourceSpaceInstance, s); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Convert_v1_ProjectMigrateSpaceInstance_To_management_ProjectMigrateSpaceInstance is an autogenerated conversion function.
+func Convert_v1_ProjectMigrateSpaceInstance_To_management_ProjectMigrateSpaceInstance(in *ProjectMigrateSpaceInstance, out *management.ProjectMigrateSpaceInstance, s conversion.Scope) error {
+	return autoConvert_v1_ProjectMigrateSpaceInstance_To_management_ProjectMigrateSpaceInstance(in, out, s)
+}
+
+func autoConvert_management_ProjectMigrateSpaceInstance_To_v1_ProjectMigrateSpaceInstance(in *management.ProjectMigrateSpaceInstance, out *ProjectMigrateSpaceInstance, s conversion.Scope) error {
+	out.ObjectMeta = in.ObjectMeta
+	if err := Convert_management_ProjectMigrateSpaceInstanceSource_To_v1_ProjectMigrateSpaceInstanceSource(&in.SourceSpaceInstance, &out.SourceSpaceInstance, s); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Convert_management_ProjectMigrateSpaceInstance_To_v1_ProjectMigrateSpaceInstance is an autogenerated conversion function.
+func Convert_management_ProjectMigrateSpaceInstance_To_v1_ProjectMigrateSpaceInstance(in *management.ProjectMigrateSpaceInstance, out *ProjectMigrateSpaceInstance, s conversion.Scope) error {
+	return autoConvert_management_ProjectMigrateSpaceInstance_To_v1_ProjectMigrateSpaceInstance(in, out, s)
+}
+
+func autoConvert_v1_ProjectMigrateSpaceInstanceList_To_management_ProjectMigrateSpaceInstanceList(in *ProjectMigrateSpaceInstanceList, out *management.ProjectMigrateSpaceInstanceList, s conversion.Scope) error {
+	out.ListMeta = in.ListMeta
+	out.Items = *(*[]management.ProjectMigrateSpaceInstance)(unsafe.Pointer(&in.Items))
+	return nil
+}
+
+// Convert_v1_ProjectMigrateSpaceInstanceList_To_management_ProjectMigrateSpaceInstanceList is an autogenerated conversion function.
+func Convert_v1_ProjectMigrateSpaceInstanceList_To_management_ProjectMigrateSpaceInstanceList(in *ProjectMigrateSpaceInstanceList, out *management.ProjectMigrateSpaceInstanceList, s conversion.Scope) error {
+	return autoConvert_v1_ProjectMigrateSpaceInstanceList_To_management_ProjectMigrateSpaceInstanceList(in, out, s)
+}
+
+func autoConvert_management_ProjectMigrateSpaceInstanceList_To_v1_ProjectMigrateSpaceInstanceList(in *management.ProjectMigrateSpaceInstanceList, out *ProjectMigrateSpaceInstanceList, s conversion.Scope) error {
+	out.ListMeta = in.ListMeta
+	out.Items = *(*[]ProjectMigrateSpaceInstance)(unsafe.Pointer(&in.Items))
+	return nil
+}
+
+// Convert_management_ProjectMigrateSpaceInstanceList_To_v1_ProjectMigrateSpaceInstanceList is an autogenerated conversion function.
+func Convert_management_ProjectMigrateSpaceInstanceList_To_v1_ProjectMigrateSpaceInstanceList(in *management.ProjectMigrateSpaceInstanceList, out *ProjectMigrateSpaceInstanceList, s conversion.Scope) error {
+	return autoConvert_management_ProjectMigrateSpaceInstanceList_To_v1_ProjectMigrateSpaceInstanceList(in, out, s)
+}
+
+func autoConvert_v1_ProjectMigrateSpaceInstanceSource_To_management_ProjectMigrateSpaceInstanceSource(in *ProjectMigrateSpaceInstanceSource, out *management.ProjectMigrateSpaceInstanceSource, s conversion.Scope) error {
+	out.Name = in.Name
+	out.Namespace = in.Namespace
+	return nil
+}
+
+// Convert_v1_ProjectMigrateSpaceInstanceSource_To_management_ProjectMigrateSpaceInstanceSource is an autogenerated conversion function.
+func Convert_v1_ProjectMigrateSpaceInstanceSource_To_management_ProjectMigrateSpaceInstanceSource(in *ProjectMigrateSpaceInstanceSource, out *management.ProjectMigrateSpaceInstanceSource, s conversion.Scope) error {
+	return autoConvert_v1_ProjectMigrateSpaceInstanceSource_To_management_ProjectMigrateSpaceInstanceSource(in, out, s)
+}
+
+func autoConvert_management_ProjectMigrateSpaceInstanceSource_To_v1_ProjectMigrateSpaceInstanceSource(in *management.ProjectMigrateSpaceInstanceSource, out *ProjectMigrateSpaceInstanceSource, s conversion.Scope) error {
+	out.Name = in.Name
+	out.Namespace = in.Namespace
+	return nil
+}
+
+// Convert_management_ProjectMigrateSpaceInstanceSource_To_v1_ProjectMigrateSpaceInstanceSource is an autogenerated conversion function.
+func Convert_management_ProjectMigrateSpaceInstanceSource_To_v1_ProjectMigrateSpaceInstanceSource(in *management.ProjectMigrateSpaceInstanceSource, out *ProjectMigrateSpaceInstanceSource, s conversion.Scope) error {
+	return autoConvert_management_ProjectMigrateSpaceInstanceSource_To_v1_ProjectMigrateSpaceInstanceSource(in, out, s)
+}
+
+func autoConvert_v1_ProjectMigrateVirtualClusterInstance_To_management_ProjectMigrateVirtualClusterInstance(in *ProjectMigrateVirtualClusterInstance, out *management.ProjectMigrateVirtualClusterInstance, s conversion.Scope) error {
+	out.ObjectMeta = in.ObjectMeta
+	if err := Convert_v1_ProjectMigrateVirtualClusterInstanceSource_To_management_ProjectMigrateVirtualClusterInstanceSource(&in.SourceVirtualClusterInstance, &out.SourceVirtualClusterInstance, s); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Convert_v1_ProjectMigrateVirtualClusterInstance_To_management_ProjectMigrateVirtualClusterInstance is an autogenerated conversion function.
+func Convert_v1_ProjectMigrateVirtualClusterInstance_To_management_ProjectMigrateVirtualClusterInstance(in *ProjectMigrateVirtualClusterInstance, out *management.ProjectMigrateVirtualClusterInstance, s conversion.Scope) error {
+	return autoConvert_v1_ProjectMigrateVirtualClusterInstance_To_management_ProjectMigrateVirtualClusterInstance(in, out, s)
+}
+
+func autoConvert_management_ProjectMigrateVirtualClusterInstance_To_v1_ProjectMigrateVirtualClusterInstance(in *management.ProjectMigrateVirtualClusterInstance, out *ProjectMigrateVirtualClusterInstance, s conversion.Scope) error {
+	out.ObjectMeta = in.ObjectMeta
+	if err := Convert_management_ProjectMigrateVirtualClusterInstanceSource_To_v1_ProjectMigrateVirtualClusterInstanceSource(&in.SourceVirtualClusterInstance, &out.SourceVirtualClusterInstance, s); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Convert_management_ProjectMigrateVirtualClusterInstance_To_v1_ProjectMigrateVirtualClusterInstance is an autogenerated conversion function.
+func Convert_management_ProjectMigrateVirtualClusterInstance_To_v1_ProjectMigrateVirtualClusterInstance(in *management.ProjectMigrateVirtualClusterInstance, out *ProjectMigrateVirtualClusterInstance, s conversion.Scope) error {
+	return autoConvert_management_ProjectMigrateVirtualClusterInstance_To_v1_ProjectMigrateVirtualClusterInstance(in, out, s)
+}
+
+func autoConvert_v1_ProjectMigrateVirtualClusterInstanceList_To_management_ProjectMigrateVirtualClusterInstanceList(in *ProjectMigrateVirtualClusterInstanceList, out *management.ProjectMigrateVirtualClusterInstanceList, s conversion.Scope) error {
+	out.ListMeta = in.ListMeta
+	out.Items = *(*[]management.ProjectMigrateVirtualClusterInstance)(unsafe.Pointer(&in.Items))
+	return nil
+}
+
+// Convert_v1_ProjectMigrateVirtualClusterInstanceList_To_management_ProjectMigrateVirtualClusterInstanceList is an autogenerated conversion function.
+func Convert_v1_ProjectMigrateVirtualClusterInstanceList_To_management_ProjectMigrateVirtualClusterInstanceList(in *ProjectMigrateVirtualClusterInstanceList, out *management.ProjectMigrateVirtualClusterInstanceList, s conversion.Scope) error {
+	return autoConvert_v1_ProjectMigrateVirtualClusterInstanceList_To_management_ProjectMigrateVirtualClusterInstanceList(in, out, s)
+}
+
+func autoConvert_management_ProjectMigrateVirtualClusterInstanceList_To_v1_ProjectMigrateVirtualClusterInstanceList(in *management.ProjectMigrateVirtualClusterInstanceList, out *ProjectMigrateVirtualClusterInstanceList, s conversion.Scope) error {
+	out.ListMeta = in.ListMeta
+	out.Items = *(*[]ProjectMigrateVirtualClusterInstance)(unsafe.Pointer(&in.Items))
+	return nil
+}
+
+// Convert_management_ProjectMigrateVirtualClusterInstanceList_To_v1_ProjectMigrateVirtualClusterInstanceList is an autogenerated conversion function.
+func Convert_management_ProjectMigrateVirtualClusterInstanceList_To_v1_ProjectMigrateVirtualClusterInstanceList(in *management.ProjectMigrateVirtualClusterInstanceList, out *ProjectMigrateVirtualClusterInstanceList, s conversion.Scope) error {
+	return autoConvert_management_ProjectMigrateVirtualClusterInstanceList_To_v1_ProjectMigrateVirtualClusterInstanceList(in, out, s)
+}
+
+func autoConvert_v1_ProjectMigrateVirtualClusterInstanceSource_To_management_ProjectMigrateVirtualClusterInstanceSource(in *ProjectMigrateVirtualClusterInstanceSource, out *management.ProjectMigrateVirtualClusterInstanceSource, s conversion.Scope) error {
+	out.Name = in.Name
+	out.Namespace = in.Namespace
+	return nil
+}
+
+// Convert_v1_ProjectMigrateVirtualClusterInstanceSource_To_management_ProjectMigrateVirtualClusterInstanceSource is an autogenerated conversion function.
+func Convert_v1_ProjectMigrateVirtualClusterInstanceSource_To_management_ProjectMigrateVirtualClusterInstanceSource(in *ProjectMigrateVirtualClusterInstanceSource, out *management.ProjectMigrateVirtualClusterInstanceSource, s conversion.Scope) error {
+	return autoConvert_v1_ProjectMigrateVirtualClusterInstanceSource_To_management_ProjectMigrateVirtualClusterInstanceSource(in, out, s)
+}
+
+func autoConvert_management_ProjectMigrateVirtualClusterInstanceSource_To_v1_ProjectMigrateVirtualClusterInstanceSource(in *management.ProjectMigrateVirtualClusterInstanceSource, out *ProjectMigrateVirtualClusterInstanceSource, s conversion.Scope) error {
+	out.Name = in.Name
+	out.Namespace = in.Namespace
+	return nil
+}
+
+// Convert_management_ProjectMigrateVirtualClusterInstanceSource_To_v1_ProjectMigrateVirtualClusterInstanceSource is an autogenerated conversion function.
+func Convert_management_ProjectMigrateVirtualClusterInstanceSource_To_v1_ProjectMigrateVirtualClusterInstanceSource(in *management.ProjectMigrateVirtualClusterInstanceSource, out *ProjectMigrateVirtualClusterInstanceSource, s conversion.Scope) error {
+	return autoConvert_management_ProjectMigrateVirtualClusterInstanceSource_To_v1_ProjectMigrateVirtualClusterInstanceSource(in, out, s)
+}
+
+func autoConvert_v1_ProjectSecret_To_management_ProjectSecret(in *ProjectSecret, out *management.ProjectSecret, s conversion.Scope) error {
+	out.ObjectMeta = in.ObjectMeta
+	if err := Convert_v1_ProjectSecretSpec_To_management_ProjectSecretSpec(&in.Spec, &out.Spec, s); err != nil {
+		return err
+	}
+	if err := Convert_v1_ProjectSecretStatus_To_management_ProjectSecretStatus(&in.Status, &out.Status, s); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Convert_v1_ProjectSecret_To_management_ProjectSecret is an autogenerated conversion function.
+func Convert_v1_ProjectSecret_To_management_ProjectSecret(in *ProjectSecret, out *management.ProjectSecret, s conversion.Scope) error {
+	return autoConvert_v1_ProjectSecret_To_management_ProjectSecret(in, out, s)
+}
+
+func autoConvert_management_ProjectSecret_To_v1_ProjectSecret(in *management.ProjectSecret, out *ProjectSecret, s conversion.Scope) error {
+	out.ObjectMeta = in.ObjectMeta
+	if err := Convert_management_ProjectSecretSpec_To_v1_ProjectSecretSpec(&in.Spec, &out.Spec, s); err != nil {
+		return err
+	}
+	if err := Convert_management_ProjectSecretStatus_To_v1_ProjectSecretStatus(&in.Status, &out.Status, s); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Convert_management_ProjectSecret_To_v1_ProjectSecret is an autogenerated conversion function.
+func Convert_management_ProjectSecret_To_v1_ProjectSecret(in *management.ProjectSecret, out *ProjectSecret, s conversion.Scope) error {
+	return autoConvert_management_ProjectSecret_To_v1_ProjectSecret(in, out, s)
+}
+
+func autoConvert_v1_ProjectSecretList_To_management_ProjectSecretList(in *ProjectSecretList, out *management.ProjectSecretList, s conversion.Scope) error {
+	out.ListMeta = in.ListMeta
+	out.Items = *(*[]management.ProjectSecret)(unsafe.Pointer(&in.Items))
+	return nil
+}
+
+// Convert_v1_ProjectSecretList_To_management_ProjectSecretList is an autogenerated conversion function.
+func Convert_v1_ProjectSecretList_To_management_ProjectSecretList(in *ProjectSecretList, out *management.ProjectSecretList, s conversion.Scope) error {
+	return autoConvert_v1_ProjectSecretList_To_management_ProjectSecretList(in, out, s)
+}
+
+func autoConvert_management_ProjectSecretList_To_v1_ProjectSecretList(in *management.ProjectSecretList, out *ProjectSecretList, s conversion.Scope) error {
+	out.ListMeta = in.ListMeta
+	out.Items = *(*[]ProjectSecret)(unsafe.Pointer(&in.Items))
+	return nil
+}
+
+// Convert_management_ProjectSecretList_To_v1_ProjectSecretList is an autogenerated conversion function.
+func Convert_management_ProjectSecretList_To_v1_ProjectSecretList(in *management.ProjectSecretList, out *ProjectSecretList, s conversion.Scope) error {
+	return autoConvert_management_ProjectSecretList_To_v1_ProjectSecretList(in, out, s)
+}
+
+func autoConvert_v1_ProjectSecretSpec_To_management_ProjectSecretSpec(in *ProjectSecretSpec, out *management.ProjectSecretSpec, s conversion.Scope) error {
+	out.DisplayName = in.DisplayName
+	out.Description = in.Description
+	out.Data = *(*map[string][]byte)(unsafe.Pointer(&in.Data))
+	return nil
+}
+
+// Convert_v1_ProjectSecretSpec_To_management_ProjectSecretSpec is an autogenerated conversion function.
+func Convert_v1_ProjectSecretSpec_To_management_ProjectSecretSpec(in *ProjectSecretSpec, out *management.ProjectSecretSpec, s conversion.Scope) error {
+	return autoConvert_v1_ProjectSecretSpec_To_management_ProjectSecretSpec(in, out, s)
+}
+
+func autoConvert_management_ProjectSecretSpec_To_v1_ProjectSecretSpec(in *management.ProjectSecretSpec, out *ProjectSecretSpec, s conversion.Scope) error {
+	out.DisplayName = in.DisplayName
+	out.Description = in.Description
+	out.Data = *(*map[string][]byte)(unsafe.Pointer(&in.Data))
+	return nil
+}
+
+// Convert_management_ProjectSecretSpec_To_v1_ProjectSecretSpec is an autogenerated conversion function.
+func Convert_management_ProjectSecretSpec_To_v1_ProjectSecretSpec(in *management.ProjectSecretSpec, out *ProjectSecretSpec, s conversion.Scope) error {
+	return autoConvert_management_ProjectSecretSpec_To_v1_ProjectSecretSpec(in, out, s)
+}
+
+func autoConvert_v1_ProjectSecretStatus_To_management_ProjectSecretStatus(in *ProjectSecretStatus, out *management.ProjectSecretStatus, s conversion.Scope) error {
+	return nil
+}
+
+// Convert_v1_ProjectSecretStatus_To_management_ProjectSecretStatus is an autogenerated conversion function.
+func Convert_v1_ProjectSecretStatus_To_management_ProjectSecretStatus(in *ProjectSecretStatus, out *management.ProjectSecretStatus, s conversion.Scope) error {
+	return autoConvert_v1_ProjectSecretStatus_To_management_ProjectSecretStatus(in, out, s)
+}
+
+func autoConvert_management_ProjectSecretStatus_To_v1_ProjectSecretStatus(in *management.ProjectSecretStatus, out *ProjectSecretStatus, s conversion.Scope) error {
+	return nil
+}
+
+// Convert_management_ProjectSecretStatus_To_v1_ProjectSecretStatus is an autogenerated conversion function.
+func Convert_management_ProjectSecretStatus_To_v1_ProjectSecretStatus(in *management.ProjectSecretStatus, out *ProjectSecretStatus, s conversion.Scope) error {
+	return autoConvert_management_ProjectSecretStatus_To_v1_ProjectSecretStatus(in, out, s)
+}
+
+func autoConvert_v1_ProjectSpec_To_management_ProjectSpec(in *ProjectSpec, out *management.ProjectSpec, s conversion.Scope) error {
+	out.ProjectSpec = in.ProjectSpec
+	return nil
+}
+
+// Convert_v1_ProjectSpec_To_management_ProjectSpec is an autogenerated conversion function.
+func Convert_v1_ProjectSpec_To_management_ProjectSpec(in *ProjectSpec, out *management.ProjectSpec, s conversion.Scope) error {
+	return autoConvert_v1_ProjectSpec_To_management_ProjectSpec(in, out, s)
+}
+
+func autoConvert_management_ProjectSpec_To_v1_ProjectSpec(in *management.ProjectSpec, out *ProjectSpec, s conversion.Scope) error {
+	out.ProjectSpec = in.ProjectSpec
+	return nil
+}
+
+// Convert_management_ProjectSpec_To_v1_ProjectSpec is an autogenerated conversion function.
+func Convert_management_ProjectSpec_To_v1_ProjectSpec(in *management.ProjectSpec, out *ProjectSpec, s conversion.Scope) error {
+	return autoConvert_management_ProjectSpec_To_v1_ProjectSpec(in, out, s)
+}
+
+func autoConvert_v1_ProjectStatus_To_management_ProjectStatus(in *ProjectStatus, out *management.ProjectStatus, s conversion.Scope) error {
+	out.ProjectStatus = in.ProjectStatus
+	return nil
+}
+
+// Convert_v1_ProjectStatus_To_management_ProjectStatus is an autogenerated conversion function.
+func Convert_v1_ProjectStatus_To_management_ProjectStatus(in *ProjectStatus, out *management.ProjectStatus, s conversion.Scope) error {
+	return autoConvert_v1_ProjectStatus_To_management_ProjectStatus(in, out, s)
+}
+
+func autoConvert_management_ProjectStatus_To_v1_ProjectStatus(in *management.ProjectStatus, out *ProjectStatus, s conversion.Scope) error {
+	out.ProjectStatus = in.ProjectStatus
+	return nil
+}
+
+// Convert_management_ProjectStatus_To_v1_ProjectStatus is an autogenerated conversion function.
+func Convert_management_ProjectStatus_To_v1_ProjectStatus(in *management.ProjectStatus, out *ProjectStatus, s conversion.Scope) error {
+	return autoConvert_management_ProjectStatus_To_v1_ProjectStatus(in, out, s)
+}
+
+func autoConvert_v1_ProjectTemplates_To_management_ProjectTemplates(in *ProjectTemplates, out *management.ProjectTemplates, s conversion.Scope) error {
+	out.ObjectMeta = in.ObjectMeta
+	out.DefaultVirtualClusterTemplate = in.DefaultVirtualClusterTemplate
+	out.VirtualClusterTemplates = *(*[]management.VirtualClusterTemplate)(unsafe.Pointer(&in.VirtualClusterTemplates))
+	out.DefaultSpaceTemplate = in.DefaultSpaceTemplate
+	out.SpaceTemplates = *(*[]management.SpaceTemplate)(unsafe.Pointer(&in.SpaceTemplates))
+	return nil
+}
+
+// Convert_v1_ProjectTemplates_To_management_ProjectTemplates is an autogenerated conversion function.
+func Convert_v1_ProjectTemplates_To_management_ProjectTemplates(in *ProjectTemplates, out *management.ProjectTemplates, s conversion.Scope) error {
+	return autoConvert_v1_ProjectTemplates_To_management_ProjectTemplates(in, out, s)
+}
+
+func autoConvert_management_ProjectTemplates_To_v1_ProjectTemplates(in *management.ProjectTemplates, out *ProjectTemplates, s conversion.Scope) error {
+	out.ObjectMeta = in.ObjectMeta
+	out.DefaultVirtualClusterTemplate = in.DefaultVirtualClusterTemplate
+	out.VirtualClusterTemplates = *(*[]VirtualClusterTemplate)(unsafe.Pointer(&in.VirtualClusterTemplates))
+	out.DefaultSpaceTemplate = in.DefaultSpaceTemplate
+	out.SpaceTemplates = *(*[]SpaceTemplate)(unsafe.Pointer(&in.SpaceTemplates))
+	return nil
+}
+
+// Convert_management_ProjectTemplates_To_v1_ProjectTemplates is an autogenerated conversion function.
+func Convert_management_ProjectTemplates_To_v1_ProjectTemplates(in *management.ProjectTemplates, out *ProjectTemplates, s conversion.Scope) error {
+	return autoConvert_management_ProjectTemplates_To_v1_ProjectTemplates(in, out, s)
+}
+
+func autoConvert_v1_ProjectTemplatesList_To_management_ProjectTemplatesList(in *ProjectTemplatesList, out *management.ProjectTemplatesList, s conversion.Scope) error {
+	out.ListMeta = in.ListMeta
+	out.Items = *(*[]management.ProjectTemplates)(unsafe.Pointer(&in.Items))
+	return nil
+}
+
+// Convert_v1_ProjectTemplatesList_To_management_ProjectTemplatesList is an autogenerated conversion function.
+func Convert_v1_ProjectTemplatesList_To_management_ProjectTemplatesList(in *ProjectTemplatesList, out *management.ProjectTemplatesList, s conversion.Scope) error {
+	return autoConvert_v1_ProjectTemplatesList_To_management_ProjectTemplatesList(in, out, s)
+}
+
+func autoConvert_management_ProjectTemplatesList_To_v1_ProjectTemplatesList(in *management.ProjectTemplatesList, out *ProjectTemplatesList, s conversion.Scope) error {
+	out.ListMeta = in.ListMeta
+	out.Items = *(*[]ProjectTemplates)(unsafe.Pointer(&in.Items))
+	return nil
+}
+
+// Convert_management_ProjectTemplatesList_To_v1_ProjectTemplatesList is an autogenerated conversion function.
+func Convert_management_ProjectTemplatesList_To_v1_ProjectTemplatesList(in *management.ProjectTemplatesList, out *ProjectTemplatesList, s conversion.Scope) error {
+	return autoConvert_management_ProjectTemplatesList_To_v1_ProjectTemplatesList(in, out, s)
+}
+
 func autoConvert_v1_Promotions_To_management_Promotions(in *Promotions, out *management.Promotions, s conversion.Scope) error {
 	out.Trial = (*management.TrialPromotion)(unsafe.Pointer(in.Trial))
 	return nil
@@ -5294,6 +6417,106 @@ func autoConvert_management_SpaceConstraintStatus_To_v1_SpaceConstraintStatus(in
 // Convert_management_SpaceConstraintStatus_To_v1_SpaceConstraintStatus is an autogenerated conversion function.
 func Convert_management_SpaceConstraintStatus_To_v1_SpaceConstraintStatus(in *management.SpaceConstraintStatus, out *SpaceConstraintStatus, s conversion.Scope) error {
 	return autoConvert_management_SpaceConstraintStatus_To_v1_SpaceConstraintStatus(in, out, s)
+}
+
+func autoConvert_v1_SpaceInstance_To_management_SpaceInstance(in *SpaceInstance, out *management.SpaceInstance, s conversion.Scope) error {
+	out.ObjectMeta = in.ObjectMeta
+	if err := Convert_v1_SpaceInstanceSpec_To_management_SpaceInstanceSpec(&in.Spec, &out.Spec, s); err != nil {
+		return err
+	}
+	if err := Convert_v1_SpaceInstanceStatus_To_management_SpaceInstanceStatus(&in.Status, &out.Status, s); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Convert_v1_SpaceInstance_To_management_SpaceInstance is an autogenerated conversion function.
+func Convert_v1_SpaceInstance_To_management_SpaceInstance(in *SpaceInstance, out *management.SpaceInstance, s conversion.Scope) error {
+	return autoConvert_v1_SpaceInstance_To_management_SpaceInstance(in, out, s)
+}
+
+func autoConvert_management_SpaceInstance_To_v1_SpaceInstance(in *management.SpaceInstance, out *SpaceInstance, s conversion.Scope) error {
+	out.ObjectMeta = in.ObjectMeta
+	if err := Convert_management_SpaceInstanceSpec_To_v1_SpaceInstanceSpec(&in.Spec, &out.Spec, s); err != nil {
+		return err
+	}
+	if err := Convert_management_SpaceInstanceStatus_To_v1_SpaceInstanceStatus(&in.Status, &out.Status, s); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Convert_management_SpaceInstance_To_v1_SpaceInstance is an autogenerated conversion function.
+func Convert_management_SpaceInstance_To_v1_SpaceInstance(in *management.SpaceInstance, out *SpaceInstance, s conversion.Scope) error {
+	return autoConvert_management_SpaceInstance_To_v1_SpaceInstance(in, out, s)
+}
+
+func autoConvert_v1_SpaceInstanceList_To_management_SpaceInstanceList(in *SpaceInstanceList, out *management.SpaceInstanceList, s conversion.Scope) error {
+	out.ListMeta = in.ListMeta
+	out.Items = *(*[]management.SpaceInstance)(unsafe.Pointer(&in.Items))
+	return nil
+}
+
+// Convert_v1_SpaceInstanceList_To_management_SpaceInstanceList is an autogenerated conversion function.
+func Convert_v1_SpaceInstanceList_To_management_SpaceInstanceList(in *SpaceInstanceList, out *management.SpaceInstanceList, s conversion.Scope) error {
+	return autoConvert_v1_SpaceInstanceList_To_management_SpaceInstanceList(in, out, s)
+}
+
+func autoConvert_management_SpaceInstanceList_To_v1_SpaceInstanceList(in *management.SpaceInstanceList, out *SpaceInstanceList, s conversion.Scope) error {
+	out.ListMeta = in.ListMeta
+	out.Items = *(*[]SpaceInstance)(unsafe.Pointer(&in.Items))
+	return nil
+}
+
+// Convert_management_SpaceInstanceList_To_v1_SpaceInstanceList is an autogenerated conversion function.
+func Convert_management_SpaceInstanceList_To_v1_SpaceInstanceList(in *management.SpaceInstanceList, out *SpaceInstanceList, s conversion.Scope) error {
+	return autoConvert_management_SpaceInstanceList_To_v1_SpaceInstanceList(in, out, s)
+}
+
+func autoConvert_v1_SpaceInstanceSpec_To_management_SpaceInstanceSpec(in *SpaceInstanceSpec, out *management.SpaceInstanceSpec, s conversion.Scope) error {
+	out.SpaceInstanceSpec = in.SpaceInstanceSpec
+	return nil
+}
+
+// Convert_v1_SpaceInstanceSpec_To_management_SpaceInstanceSpec is an autogenerated conversion function.
+func Convert_v1_SpaceInstanceSpec_To_management_SpaceInstanceSpec(in *SpaceInstanceSpec, out *management.SpaceInstanceSpec, s conversion.Scope) error {
+	return autoConvert_v1_SpaceInstanceSpec_To_management_SpaceInstanceSpec(in, out, s)
+}
+
+func autoConvert_management_SpaceInstanceSpec_To_v1_SpaceInstanceSpec(in *management.SpaceInstanceSpec, out *SpaceInstanceSpec, s conversion.Scope) error {
+	out.SpaceInstanceSpec = in.SpaceInstanceSpec
+	return nil
+}
+
+// Convert_management_SpaceInstanceSpec_To_v1_SpaceInstanceSpec is an autogenerated conversion function.
+func Convert_management_SpaceInstanceSpec_To_v1_SpaceInstanceSpec(in *management.SpaceInstanceSpec, out *SpaceInstanceSpec, s conversion.Scope) error {
+	return autoConvert_management_SpaceInstanceSpec_To_v1_SpaceInstanceSpec(in, out, s)
+}
+
+func autoConvert_v1_SpaceInstanceStatus_To_management_SpaceInstanceStatus(in *SpaceInstanceStatus, out *management.SpaceInstanceStatus, s conversion.Scope) error {
+	out.SpaceInstanceStatus = in.SpaceInstanceStatus
+	out.SleepModeConfig = (*clusterv1.SleepModeConfig)(unsafe.Pointer(in.SleepModeConfig))
+	out.CanUse = in.CanUse
+	out.CanUpdate = in.CanUpdate
+	return nil
+}
+
+// Convert_v1_SpaceInstanceStatus_To_management_SpaceInstanceStatus is an autogenerated conversion function.
+func Convert_v1_SpaceInstanceStatus_To_management_SpaceInstanceStatus(in *SpaceInstanceStatus, out *management.SpaceInstanceStatus, s conversion.Scope) error {
+	return autoConvert_v1_SpaceInstanceStatus_To_management_SpaceInstanceStatus(in, out, s)
+}
+
+func autoConvert_management_SpaceInstanceStatus_To_v1_SpaceInstanceStatus(in *management.SpaceInstanceStatus, out *SpaceInstanceStatus, s conversion.Scope) error {
+	out.SpaceInstanceStatus = in.SpaceInstanceStatus
+	out.SleepModeConfig = (*clusterv1.SleepModeConfig)(unsafe.Pointer(in.SleepModeConfig))
+	out.CanUse = in.CanUse
+	out.CanUpdate = in.CanUpdate
+	return nil
+}
+
+// Convert_management_SpaceInstanceStatus_To_v1_SpaceInstanceStatus is an autogenerated conversion function.
+func Convert_management_SpaceInstanceStatus_To_v1_SpaceInstanceStatus(in *management.SpaceInstanceStatus, out *SpaceInstanceStatus, s conversion.Scope) error {
+	return autoConvert_management_SpaceInstanceStatus_To_v1_SpaceInstanceStatus(in, out, s)
 }
 
 func autoConvert_v1_SpaceTemplate_To_management_SpaceTemplate(in *SpaceTemplate, out *management.SpaceTemplate, s conversion.Scope) error {
@@ -6327,6 +7550,352 @@ func autoConvert_url_Values_To_v1_UserVirtualClustersOptions(in *url.Values, out
 // Convert_url_Values_To_v1_UserVirtualClustersOptions is an autogenerated conversion function.
 func Convert_url_Values_To_v1_UserVirtualClustersOptions(in *url.Values, out *UserVirtualClustersOptions, s conversion.Scope) error {
 	return autoConvert_url_Values_To_v1_UserVirtualClustersOptions(in, out, s)
+}
+
+func autoConvert_v1_VirtualClusterInstance_To_management_VirtualClusterInstance(in *VirtualClusterInstance, out *management.VirtualClusterInstance, s conversion.Scope) error {
+	out.ObjectMeta = in.ObjectMeta
+	if err := Convert_v1_VirtualClusterInstanceSpec_To_management_VirtualClusterInstanceSpec(&in.Spec, &out.Spec, s); err != nil {
+		return err
+	}
+	if err := Convert_v1_VirtualClusterInstanceStatus_To_management_VirtualClusterInstanceStatus(&in.Status, &out.Status, s); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Convert_v1_VirtualClusterInstance_To_management_VirtualClusterInstance is an autogenerated conversion function.
+func Convert_v1_VirtualClusterInstance_To_management_VirtualClusterInstance(in *VirtualClusterInstance, out *management.VirtualClusterInstance, s conversion.Scope) error {
+	return autoConvert_v1_VirtualClusterInstance_To_management_VirtualClusterInstance(in, out, s)
+}
+
+func autoConvert_management_VirtualClusterInstance_To_v1_VirtualClusterInstance(in *management.VirtualClusterInstance, out *VirtualClusterInstance, s conversion.Scope) error {
+	out.ObjectMeta = in.ObjectMeta
+	if err := Convert_management_VirtualClusterInstanceSpec_To_v1_VirtualClusterInstanceSpec(&in.Spec, &out.Spec, s); err != nil {
+		return err
+	}
+	if err := Convert_management_VirtualClusterInstanceStatus_To_v1_VirtualClusterInstanceStatus(&in.Status, &out.Status, s); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Convert_management_VirtualClusterInstance_To_v1_VirtualClusterInstance is an autogenerated conversion function.
+func Convert_management_VirtualClusterInstance_To_v1_VirtualClusterInstance(in *management.VirtualClusterInstance, out *VirtualClusterInstance, s conversion.Scope) error {
+	return autoConvert_management_VirtualClusterInstance_To_v1_VirtualClusterInstance(in, out, s)
+}
+
+func autoConvert_v1_VirtualClusterInstanceKubeConfig_To_management_VirtualClusterInstanceKubeConfig(in *VirtualClusterInstanceKubeConfig, out *management.VirtualClusterInstanceKubeConfig, s conversion.Scope) error {
+	out.ObjectMeta = in.ObjectMeta
+	if err := Convert_v1_VirtualClusterInstanceKubeConfigRequestOptions_To_management_VirtualClusterInstanceKubeConfigRequestOptions(&in.RequestOptions, &out.RequestOptions, s); err != nil {
+		return err
+	}
+	if err := Convert_v1_VirtualClusterInstanceKubeConfigStatus_To_management_VirtualClusterInstanceKubeConfigStatus(&in.Status, &out.Status, s); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Convert_v1_VirtualClusterInstanceKubeConfig_To_management_VirtualClusterInstanceKubeConfig is an autogenerated conversion function.
+func Convert_v1_VirtualClusterInstanceKubeConfig_To_management_VirtualClusterInstanceKubeConfig(in *VirtualClusterInstanceKubeConfig, out *management.VirtualClusterInstanceKubeConfig, s conversion.Scope) error {
+	return autoConvert_v1_VirtualClusterInstanceKubeConfig_To_management_VirtualClusterInstanceKubeConfig(in, out, s)
+}
+
+func autoConvert_management_VirtualClusterInstanceKubeConfig_To_v1_VirtualClusterInstanceKubeConfig(in *management.VirtualClusterInstanceKubeConfig, out *VirtualClusterInstanceKubeConfig, s conversion.Scope) error {
+	out.ObjectMeta = in.ObjectMeta
+	if err := Convert_management_VirtualClusterInstanceKubeConfigRequestOptions_To_v1_VirtualClusterInstanceKubeConfigRequestOptions(&in.RequestOptions, &out.RequestOptions, s); err != nil {
+		return err
+	}
+	if err := Convert_management_VirtualClusterInstanceKubeConfigStatus_To_v1_VirtualClusterInstanceKubeConfigStatus(&in.Status, &out.Status, s); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Convert_management_VirtualClusterInstanceKubeConfig_To_v1_VirtualClusterInstanceKubeConfig is an autogenerated conversion function.
+func Convert_management_VirtualClusterInstanceKubeConfig_To_v1_VirtualClusterInstanceKubeConfig(in *management.VirtualClusterInstanceKubeConfig, out *VirtualClusterInstanceKubeConfig, s conversion.Scope) error {
+	return autoConvert_management_VirtualClusterInstanceKubeConfig_To_v1_VirtualClusterInstanceKubeConfig(in, out, s)
+}
+
+func autoConvert_v1_VirtualClusterInstanceKubeConfigList_To_management_VirtualClusterInstanceKubeConfigList(in *VirtualClusterInstanceKubeConfigList, out *management.VirtualClusterInstanceKubeConfigList, s conversion.Scope) error {
+	out.ListMeta = in.ListMeta
+	out.Items = *(*[]management.VirtualClusterInstanceKubeConfig)(unsafe.Pointer(&in.Items))
+	return nil
+}
+
+// Convert_v1_VirtualClusterInstanceKubeConfigList_To_management_VirtualClusterInstanceKubeConfigList is an autogenerated conversion function.
+func Convert_v1_VirtualClusterInstanceKubeConfigList_To_management_VirtualClusterInstanceKubeConfigList(in *VirtualClusterInstanceKubeConfigList, out *management.VirtualClusterInstanceKubeConfigList, s conversion.Scope) error {
+	return autoConvert_v1_VirtualClusterInstanceKubeConfigList_To_management_VirtualClusterInstanceKubeConfigList(in, out, s)
+}
+
+func autoConvert_management_VirtualClusterInstanceKubeConfigList_To_v1_VirtualClusterInstanceKubeConfigList(in *management.VirtualClusterInstanceKubeConfigList, out *VirtualClusterInstanceKubeConfigList, s conversion.Scope) error {
+	out.ListMeta = in.ListMeta
+	out.Items = *(*[]VirtualClusterInstanceKubeConfig)(unsafe.Pointer(&in.Items))
+	return nil
+}
+
+// Convert_management_VirtualClusterInstanceKubeConfigList_To_v1_VirtualClusterInstanceKubeConfigList is an autogenerated conversion function.
+func Convert_management_VirtualClusterInstanceKubeConfigList_To_v1_VirtualClusterInstanceKubeConfigList(in *management.VirtualClusterInstanceKubeConfigList, out *VirtualClusterInstanceKubeConfigList, s conversion.Scope) error {
+	return autoConvert_management_VirtualClusterInstanceKubeConfigList_To_v1_VirtualClusterInstanceKubeConfigList(in, out, s)
+}
+
+func autoConvert_v1_VirtualClusterInstanceKubeConfigRequestOptions_To_management_VirtualClusterInstanceKubeConfigRequestOptions(in *VirtualClusterInstanceKubeConfigRequestOptions, out *management.VirtualClusterInstanceKubeConfigRequestOptions, s conversion.Scope) error {
+	out.CertificateTTL = (*int32)(unsafe.Pointer(in.CertificateTTL))
+	return nil
+}
+
+// Convert_v1_VirtualClusterInstanceKubeConfigRequestOptions_To_management_VirtualClusterInstanceKubeConfigRequestOptions is an autogenerated conversion function.
+func Convert_v1_VirtualClusterInstanceKubeConfigRequestOptions_To_management_VirtualClusterInstanceKubeConfigRequestOptions(in *VirtualClusterInstanceKubeConfigRequestOptions, out *management.VirtualClusterInstanceKubeConfigRequestOptions, s conversion.Scope) error {
+	return autoConvert_v1_VirtualClusterInstanceKubeConfigRequestOptions_To_management_VirtualClusterInstanceKubeConfigRequestOptions(in, out, s)
+}
+
+func autoConvert_management_VirtualClusterInstanceKubeConfigRequestOptions_To_v1_VirtualClusterInstanceKubeConfigRequestOptions(in *management.VirtualClusterInstanceKubeConfigRequestOptions, out *VirtualClusterInstanceKubeConfigRequestOptions, s conversion.Scope) error {
+	out.CertificateTTL = (*int32)(unsafe.Pointer(in.CertificateTTL))
+	return nil
+}
+
+// Convert_management_VirtualClusterInstanceKubeConfigRequestOptions_To_v1_VirtualClusterInstanceKubeConfigRequestOptions is an autogenerated conversion function.
+func Convert_management_VirtualClusterInstanceKubeConfigRequestOptions_To_v1_VirtualClusterInstanceKubeConfigRequestOptions(in *management.VirtualClusterInstanceKubeConfigRequestOptions, out *VirtualClusterInstanceKubeConfigRequestOptions, s conversion.Scope) error {
+	return autoConvert_management_VirtualClusterInstanceKubeConfigRequestOptions_To_v1_VirtualClusterInstanceKubeConfigRequestOptions(in, out, s)
+}
+
+func autoConvert_v1_VirtualClusterInstanceKubeConfigStatus_To_management_VirtualClusterInstanceKubeConfigStatus(in *VirtualClusterInstanceKubeConfigStatus, out *management.VirtualClusterInstanceKubeConfigStatus, s conversion.Scope) error {
+	out.KubeConfig = in.KubeConfig
+	return nil
+}
+
+// Convert_v1_VirtualClusterInstanceKubeConfigStatus_To_management_VirtualClusterInstanceKubeConfigStatus is an autogenerated conversion function.
+func Convert_v1_VirtualClusterInstanceKubeConfigStatus_To_management_VirtualClusterInstanceKubeConfigStatus(in *VirtualClusterInstanceKubeConfigStatus, out *management.VirtualClusterInstanceKubeConfigStatus, s conversion.Scope) error {
+	return autoConvert_v1_VirtualClusterInstanceKubeConfigStatus_To_management_VirtualClusterInstanceKubeConfigStatus(in, out, s)
+}
+
+func autoConvert_management_VirtualClusterInstanceKubeConfigStatus_To_v1_VirtualClusterInstanceKubeConfigStatus(in *management.VirtualClusterInstanceKubeConfigStatus, out *VirtualClusterInstanceKubeConfigStatus, s conversion.Scope) error {
+	out.KubeConfig = in.KubeConfig
+	return nil
+}
+
+// Convert_management_VirtualClusterInstanceKubeConfigStatus_To_v1_VirtualClusterInstanceKubeConfigStatus is an autogenerated conversion function.
+func Convert_management_VirtualClusterInstanceKubeConfigStatus_To_v1_VirtualClusterInstanceKubeConfigStatus(in *management.VirtualClusterInstanceKubeConfigStatus, out *VirtualClusterInstanceKubeConfigStatus, s conversion.Scope) error {
+	return autoConvert_management_VirtualClusterInstanceKubeConfigStatus_To_v1_VirtualClusterInstanceKubeConfigStatus(in, out, s)
+}
+
+func autoConvert_v1_VirtualClusterInstanceList_To_management_VirtualClusterInstanceList(in *VirtualClusterInstanceList, out *management.VirtualClusterInstanceList, s conversion.Scope) error {
+	out.ListMeta = in.ListMeta
+	out.Items = *(*[]management.VirtualClusterInstance)(unsafe.Pointer(&in.Items))
+	return nil
+}
+
+// Convert_v1_VirtualClusterInstanceList_To_management_VirtualClusterInstanceList is an autogenerated conversion function.
+func Convert_v1_VirtualClusterInstanceList_To_management_VirtualClusterInstanceList(in *VirtualClusterInstanceList, out *management.VirtualClusterInstanceList, s conversion.Scope) error {
+	return autoConvert_v1_VirtualClusterInstanceList_To_management_VirtualClusterInstanceList(in, out, s)
+}
+
+func autoConvert_management_VirtualClusterInstanceList_To_v1_VirtualClusterInstanceList(in *management.VirtualClusterInstanceList, out *VirtualClusterInstanceList, s conversion.Scope) error {
+	out.ListMeta = in.ListMeta
+	out.Items = *(*[]VirtualClusterInstance)(unsafe.Pointer(&in.Items))
+	return nil
+}
+
+// Convert_management_VirtualClusterInstanceList_To_v1_VirtualClusterInstanceList is an autogenerated conversion function.
+func Convert_management_VirtualClusterInstanceList_To_v1_VirtualClusterInstanceList(in *management.VirtualClusterInstanceList, out *VirtualClusterInstanceList, s conversion.Scope) error {
+	return autoConvert_management_VirtualClusterInstanceList_To_v1_VirtualClusterInstanceList(in, out, s)
+}
+
+func autoConvert_v1_VirtualClusterInstanceLog_To_management_VirtualClusterInstanceLog(in *VirtualClusterInstanceLog, out *management.VirtualClusterInstanceLog, s conversion.Scope) error {
+	out.ObjectMeta = in.ObjectMeta
+	return nil
+}
+
+// Convert_v1_VirtualClusterInstanceLog_To_management_VirtualClusterInstanceLog is an autogenerated conversion function.
+func Convert_v1_VirtualClusterInstanceLog_To_management_VirtualClusterInstanceLog(in *VirtualClusterInstanceLog, out *management.VirtualClusterInstanceLog, s conversion.Scope) error {
+	return autoConvert_v1_VirtualClusterInstanceLog_To_management_VirtualClusterInstanceLog(in, out, s)
+}
+
+func autoConvert_management_VirtualClusterInstanceLog_To_v1_VirtualClusterInstanceLog(in *management.VirtualClusterInstanceLog, out *VirtualClusterInstanceLog, s conversion.Scope) error {
+	out.ObjectMeta = in.ObjectMeta
+	return nil
+}
+
+// Convert_management_VirtualClusterInstanceLog_To_v1_VirtualClusterInstanceLog is an autogenerated conversion function.
+func Convert_management_VirtualClusterInstanceLog_To_v1_VirtualClusterInstanceLog(in *management.VirtualClusterInstanceLog, out *VirtualClusterInstanceLog, s conversion.Scope) error {
+	return autoConvert_management_VirtualClusterInstanceLog_To_v1_VirtualClusterInstanceLog(in, out, s)
+}
+
+func autoConvert_v1_VirtualClusterInstanceLogList_To_management_VirtualClusterInstanceLogList(in *VirtualClusterInstanceLogList, out *management.VirtualClusterInstanceLogList, s conversion.Scope) error {
+	out.ListMeta = in.ListMeta
+	out.Items = *(*[]management.VirtualClusterInstanceLog)(unsafe.Pointer(&in.Items))
+	return nil
+}
+
+// Convert_v1_VirtualClusterInstanceLogList_To_management_VirtualClusterInstanceLogList is an autogenerated conversion function.
+func Convert_v1_VirtualClusterInstanceLogList_To_management_VirtualClusterInstanceLogList(in *VirtualClusterInstanceLogList, out *management.VirtualClusterInstanceLogList, s conversion.Scope) error {
+	return autoConvert_v1_VirtualClusterInstanceLogList_To_management_VirtualClusterInstanceLogList(in, out, s)
+}
+
+func autoConvert_management_VirtualClusterInstanceLogList_To_v1_VirtualClusterInstanceLogList(in *management.VirtualClusterInstanceLogList, out *VirtualClusterInstanceLogList, s conversion.Scope) error {
+	out.ListMeta = in.ListMeta
+	out.Items = *(*[]VirtualClusterInstanceLog)(unsafe.Pointer(&in.Items))
+	return nil
+}
+
+// Convert_management_VirtualClusterInstanceLogList_To_v1_VirtualClusterInstanceLogList is an autogenerated conversion function.
+func Convert_management_VirtualClusterInstanceLogList_To_v1_VirtualClusterInstanceLogList(in *management.VirtualClusterInstanceLogList, out *VirtualClusterInstanceLogList, s conversion.Scope) error {
+	return autoConvert_management_VirtualClusterInstanceLogList_To_v1_VirtualClusterInstanceLogList(in, out, s)
+}
+
+func autoConvert_v1_VirtualClusterInstanceLogOptions_To_management_VirtualClusterInstanceLogOptions(in *VirtualClusterInstanceLogOptions, out *management.VirtualClusterInstanceLogOptions, s conversion.Scope) error {
+	out.Container = in.Container
+	out.Follow = in.Follow
+	out.Previous = in.Previous
+	out.SinceSeconds = (*int64)(unsafe.Pointer(in.SinceSeconds))
+	out.SinceTime = (*metav1.Time)(unsafe.Pointer(in.SinceTime))
+	out.Timestamps = in.Timestamps
+	out.TailLines = (*int64)(unsafe.Pointer(in.TailLines))
+	out.LimitBytes = (*int64)(unsafe.Pointer(in.LimitBytes))
+	out.InsecureSkipTLSVerifyBackend = in.InsecureSkipTLSVerifyBackend
+	return nil
+}
+
+// Convert_v1_VirtualClusterInstanceLogOptions_To_management_VirtualClusterInstanceLogOptions is an autogenerated conversion function.
+func Convert_v1_VirtualClusterInstanceLogOptions_To_management_VirtualClusterInstanceLogOptions(in *VirtualClusterInstanceLogOptions, out *management.VirtualClusterInstanceLogOptions, s conversion.Scope) error {
+	return autoConvert_v1_VirtualClusterInstanceLogOptions_To_management_VirtualClusterInstanceLogOptions(in, out, s)
+}
+
+func autoConvert_management_VirtualClusterInstanceLogOptions_To_v1_VirtualClusterInstanceLogOptions(in *management.VirtualClusterInstanceLogOptions, out *VirtualClusterInstanceLogOptions, s conversion.Scope) error {
+	out.Container = in.Container
+	out.Follow = in.Follow
+	out.Previous = in.Previous
+	out.SinceSeconds = (*int64)(unsafe.Pointer(in.SinceSeconds))
+	out.SinceTime = (*metav1.Time)(unsafe.Pointer(in.SinceTime))
+	out.Timestamps = in.Timestamps
+	out.TailLines = (*int64)(unsafe.Pointer(in.TailLines))
+	out.LimitBytes = (*int64)(unsafe.Pointer(in.LimitBytes))
+	out.InsecureSkipTLSVerifyBackend = in.InsecureSkipTLSVerifyBackend
+	return nil
+}
+
+// Convert_management_VirtualClusterInstanceLogOptions_To_v1_VirtualClusterInstanceLogOptions is an autogenerated conversion function.
+func Convert_management_VirtualClusterInstanceLogOptions_To_v1_VirtualClusterInstanceLogOptions(in *management.VirtualClusterInstanceLogOptions, out *VirtualClusterInstanceLogOptions, s conversion.Scope) error {
+	return autoConvert_management_VirtualClusterInstanceLogOptions_To_v1_VirtualClusterInstanceLogOptions(in, out, s)
+}
+
+func autoConvert_url_Values_To_v1_VirtualClusterInstanceLogOptions(in *url.Values, out *VirtualClusterInstanceLogOptions, s conversion.Scope) error {
+	// WARNING: Field TypeMeta does not have json tag, skipping.
+
+	if values, ok := map[string][]string(*in)["container"]; ok && len(values) > 0 {
+		if err := runtime.Convert_Slice_string_To_string(&values, &out.Container, s); err != nil {
+			return err
+		}
+	} else {
+		out.Container = ""
+	}
+	if values, ok := map[string][]string(*in)["follow"]; ok && len(values) > 0 {
+		if err := runtime.Convert_Slice_string_To_bool(&values, &out.Follow, s); err != nil {
+			return err
+		}
+	} else {
+		out.Follow = false
+	}
+	if values, ok := map[string][]string(*in)["previous"]; ok && len(values) > 0 {
+		if err := runtime.Convert_Slice_string_To_bool(&values, &out.Previous, s); err != nil {
+			return err
+		}
+	} else {
+		out.Previous = false
+	}
+	if values, ok := map[string][]string(*in)["sinceSeconds"]; ok && len(values) > 0 {
+		if err := runtime.Convert_Slice_string_To_Pointer_int64(&values, &out.SinceSeconds, s); err != nil {
+			return err
+		}
+	} else {
+		out.SinceSeconds = nil
+	}
+	if values, ok := map[string][]string(*in)["sinceTime"]; ok && len(values) > 0 {
+		if err := metav1.Convert_Slice_string_To_Pointer_v1_Time(&values, &out.SinceTime, s); err != nil {
+			return err
+		}
+	} else {
+		out.SinceTime = nil
+	}
+	if values, ok := map[string][]string(*in)["timestamps"]; ok && len(values) > 0 {
+		if err := runtime.Convert_Slice_string_To_bool(&values, &out.Timestamps, s); err != nil {
+			return err
+		}
+	} else {
+		out.Timestamps = false
+	}
+	if values, ok := map[string][]string(*in)["tailLines"]; ok && len(values) > 0 {
+		if err := runtime.Convert_Slice_string_To_Pointer_int64(&values, &out.TailLines, s); err != nil {
+			return err
+		}
+	} else {
+		out.TailLines = nil
+	}
+	if values, ok := map[string][]string(*in)["limitBytes"]; ok && len(values) > 0 {
+		if err := runtime.Convert_Slice_string_To_Pointer_int64(&values, &out.LimitBytes, s); err != nil {
+			return err
+		}
+	} else {
+		out.LimitBytes = nil
+	}
+	if values, ok := map[string][]string(*in)["insecureSkipTLSVerifyBackend"]; ok && len(values) > 0 {
+		if err := runtime.Convert_Slice_string_To_bool(&values, &out.InsecureSkipTLSVerifyBackend, s); err != nil {
+			return err
+		}
+	} else {
+		out.InsecureSkipTLSVerifyBackend = false
+	}
+	return nil
+}
+
+// Convert_url_Values_To_v1_VirtualClusterInstanceLogOptions is an autogenerated conversion function.
+func Convert_url_Values_To_v1_VirtualClusterInstanceLogOptions(in *url.Values, out *VirtualClusterInstanceLogOptions, s conversion.Scope) error {
+	return autoConvert_url_Values_To_v1_VirtualClusterInstanceLogOptions(in, out, s)
+}
+
+func autoConvert_v1_VirtualClusterInstanceSpec_To_management_VirtualClusterInstanceSpec(in *VirtualClusterInstanceSpec, out *management.VirtualClusterInstanceSpec, s conversion.Scope) error {
+	out.VirtualClusterInstanceSpec = in.VirtualClusterInstanceSpec
+	return nil
+}
+
+// Convert_v1_VirtualClusterInstanceSpec_To_management_VirtualClusterInstanceSpec is an autogenerated conversion function.
+func Convert_v1_VirtualClusterInstanceSpec_To_management_VirtualClusterInstanceSpec(in *VirtualClusterInstanceSpec, out *management.VirtualClusterInstanceSpec, s conversion.Scope) error {
+	return autoConvert_v1_VirtualClusterInstanceSpec_To_management_VirtualClusterInstanceSpec(in, out, s)
+}
+
+func autoConvert_management_VirtualClusterInstanceSpec_To_v1_VirtualClusterInstanceSpec(in *management.VirtualClusterInstanceSpec, out *VirtualClusterInstanceSpec, s conversion.Scope) error {
+	out.VirtualClusterInstanceSpec = in.VirtualClusterInstanceSpec
+	return nil
+}
+
+// Convert_management_VirtualClusterInstanceSpec_To_v1_VirtualClusterInstanceSpec is an autogenerated conversion function.
+func Convert_management_VirtualClusterInstanceSpec_To_v1_VirtualClusterInstanceSpec(in *management.VirtualClusterInstanceSpec, out *VirtualClusterInstanceSpec, s conversion.Scope) error {
+	return autoConvert_management_VirtualClusterInstanceSpec_To_v1_VirtualClusterInstanceSpec(in, out, s)
+}
+
+func autoConvert_v1_VirtualClusterInstanceStatus_To_management_VirtualClusterInstanceStatus(in *VirtualClusterInstanceStatus, out *management.VirtualClusterInstanceStatus, s conversion.Scope) error {
+	out.VirtualClusterInstanceStatus = in.VirtualClusterInstanceStatus
+	out.SleepModeConfig = (*clusterv1.SleepModeConfig)(unsafe.Pointer(in.SleepModeConfig))
+	out.CanUse = in.CanUse
+	out.CanUpdate = in.CanUpdate
+	return nil
+}
+
+// Convert_v1_VirtualClusterInstanceStatus_To_management_VirtualClusterInstanceStatus is an autogenerated conversion function.
+func Convert_v1_VirtualClusterInstanceStatus_To_management_VirtualClusterInstanceStatus(in *VirtualClusterInstanceStatus, out *management.VirtualClusterInstanceStatus, s conversion.Scope) error {
+	return autoConvert_v1_VirtualClusterInstanceStatus_To_management_VirtualClusterInstanceStatus(in, out, s)
+}
+
+func autoConvert_management_VirtualClusterInstanceStatus_To_v1_VirtualClusterInstanceStatus(in *management.VirtualClusterInstanceStatus, out *VirtualClusterInstanceStatus, s conversion.Scope) error {
+	out.VirtualClusterInstanceStatus = in.VirtualClusterInstanceStatus
+	out.SleepModeConfig = (*clusterv1.SleepModeConfig)(unsafe.Pointer(in.SleepModeConfig))
+	out.CanUse = in.CanUse
+	out.CanUpdate = in.CanUpdate
+	return nil
+}
+
+// Convert_management_VirtualClusterInstanceStatus_To_v1_VirtualClusterInstanceStatus is an autogenerated conversion function.
+func Convert_management_VirtualClusterInstanceStatus_To_v1_VirtualClusterInstanceStatus(in *management.VirtualClusterInstanceStatus, out *VirtualClusterInstanceStatus, s conversion.Scope) error {
+	return autoConvert_management_VirtualClusterInstanceStatus_To_v1_VirtualClusterInstanceStatus(in, out, s)
 }
 
 func autoConvert_v1_VirtualClusterTemplate_To_management_VirtualClusterTemplate(in *VirtualClusterTemplate, out *management.VirtualClusterTemplate, s conversion.Scope) error {

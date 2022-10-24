@@ -114,7 +114,7 @@ type AuditPolicy struct {
 	OmitStages []auditv1.Stage `json:"omitStages,omitempty"`
 }
 
-// AuditPolicy describes a policy for auditing
+// AuditPolicyRule describes a policy for auditing
 type AuditPolicyRule struct {
 	// The Level that requests matching this rule are recorded at.
 	Level auditv1.Level `json:"level"`
@@ -307,6 +307,10 @@ type Authentication struct {
 	// SAML holds saml authentication configuration
 	// +optional
 	SAML *AuthenticationSAML `json:"saml,omitempty"`
+
+	// Prevents from team creation for the new groups associated with the user at the time of logging in through sso,
+	// Default behaviour is false, this means that teams will be created for new groups.
+	DisableTeamCreation bool `json:"disableTeamCreation,omitempty"`
 }
 
 type AuthenticationSAML struct {

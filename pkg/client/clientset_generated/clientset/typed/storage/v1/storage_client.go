@@ -16,14 +16,16 @@ type StorageV1Interface interface {
 	AppsGetter
 	ClustersGetter
 	ClusterAccessesGetter
-	ClusterAccountTemplatesGetter
 	ClusterRoleTemplatesGetter
+	ProjectsGetter
 	SharedSecretsGetter
 	SpaceConstraintsGetter
+	SpaceInstancesGetter
 	SpaceTemplatesGetter
 	TasksGetter
 	TeamsGetter
 	UsersGetter
+	VirtualClusterInstancesGetter
 	VirtualClusterTemplatesGetter
 }
 
@@ -48,12 +50,12 @@ func (c *StorageV1Client) ClusterAccesses() ClusterAccessInterface {
 	return newClusterAccesses(c)
 }
 
-func (c *StorageV1Client) ClusterAccountTemplates() ClusterAccountTemplateInterface {
-	return newClusterAccountTemplates(c)
-}
-
 func (c *StorageV1Client) ClusterRoleTemplates() ClusterRoleTemplateInterface {
 	return newClusterRoleTemplates(c)
+}
+
+func (c *StorageV1Client) Projects() ProjectInterface {
+	return newProjects(c)
 }
 
 func (c *StorageV1Client) SharedSecrets(namespace string) SharedSecretInterface {
@@ -62,6 +64,10 @@ func (c *StorageV1Client) SharedSecrets(namespace string) SharedSecretInterface 
 
 func (c *StorageV1Client) SpaceConstraints() SpaceConstraintInterface {
 	return newSpaceConstraints(c)
+}
+
+func (c *StorageV1Client) SpaceInstances(namespace string) SpaceInstanceInterface {
+	return newSpaceInstances(c, namespace)
 }
 
 func (c *StorageV1Client) SpaceTemplates() SpaceTemplateInterface {
@@ -78,6 +84,10 @@ func (c *StorageV1Client) Teams() TeamInterface {
 
 func (c *StorageV1Client) Users() UserInterface {
 	return newUsers(c)
+}
+
+func (c *StorageV1Client) VirtualClusterInstances(namespace string) VirtualClusterInstanceInterface {
+	return newVirtualClusterInstances(c, namespace)
 }
 
 func (c *StorageV1Client) VirtualClusterTemplates() VirtualClusterTemplateInterface {

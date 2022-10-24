@@ -34,6 +34,16 @@ type VirtualClusterTemplateStatus struct {
 	Apps []*clusterv1.EntityInfo `json:"apps,omitempty"`
 }
 
+func (a *VirtualClusterTemplate) GetVersions() []storagev1.VersionAccessor {
+	var retVersions []storagev1.VersionAccessor
+	for _, v := range a.Spec.Versions {
+		b := v
+		retVersions = append(retVersions, &b)
+	}
+
+	return retVersions
+}
+
 func (a *VirtualClusterTemplate) GetOwner() *storagev1.UserOrTeam {
 	return a.Spec.Owner
 }

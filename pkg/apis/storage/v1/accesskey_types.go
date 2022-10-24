@@ -27,21 +27,19 @@ type AccessKeySpec struct {
 	// +optional
 	Team string `json:"team,omitempty"`
 
+	// Subject is a generic subject that can be used
+	// instead of user or team
+	// +optional
+	Subject string `json:"subject,omitempty"`
+
+	// Groups specifies extra groups to apply when using
+	// this access key
+	// +optional
+	Groups []string `json:"groups,omitempty"`
+
 	// The actual access key that will be used as a bearer token
 	// +optional
 	Key string `json:"key,omitempty"`
-
-	// DEPRECATED: do not use anymore
-	// Parent is used to share OIDC and external token information
-	// with multiple access keys. Since copying an OIDC refresh token
-	// would result in the other access keys becoming invalid after a refresh
-	// parent allows access keys to share that information.
-	//
-	// The use case for this is primarily user generated access keys,
-	// which will have the users current access key as parent if it contains
-	// an OIDC token.
-	// +optional
-	Parent string `json:"parent,omitempty"`
 
 	// If this field is true, the access key is still allowed to exist,
 	// however will not work to access the api
@@ -79,15 +77,27 @@ type AccessKeySpec struct {
 	// +optional
 	IdentityRefresh *metav1.Time `json:"identityRefresh,omitempty"`
 
+	// If the token is a refresh token, contains information about it
+	// +optional
+	OIDCProvider *AccessKeyOIDCProvider `json:"oidcProvider,omitempty"`
+
+	// DEPRECATED: do not use anymore
+	// Parent is used to share OIDC and external token information
+	// with multiple access keys. Since copying an OIDC refresh token
+	// would result in the other access keys becoming invalid after a refresh
+	// parent allows access keys to share that information.
+	//
+	// The use case for this is primarily user generated access keys,
+	// which will have the users current access key as parent if it contains
+	// an OIDC token.
+	// +optional
+	Parent string `json:"parent,omitempty"`
+
 	// DEPRECATED: Use identity instead
 	// If available, contains information about the oidc login data for this
 	// access key
 	// +optional
 	OIDCLogin *AccessKeyOIDC `json:"oidcLogin,omitempty"`
-
-	// If the token is a refresh token, contains information about it
-	// +optional
-	OIDCProvider *AccessKeyOIDCProvider `json:"oidcProvider,omitempty"`
 }
 
 type AccessKeyScope struct {
@@ -270,6 +280,7 @@ const (
 	AccessKeyTypeNone             AccessKeyType = ""
 	AccessKeyTypeLogin            AccessKeyType = "Login"
 	AccessKeyTypeUser             AccessKeyType = "User"
+	AccessKeyTypeOther            AccessKeyType = "Other"
 	AccessKeyTypeReset            AccessKeyType = "Reset"
 	AccessKeyTypeOIDCRefreshToken AccessKeyType = "OIDCRefreshToken"
 )

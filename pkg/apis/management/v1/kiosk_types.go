@@ -1,7 +1,6 @@
 package v1
 
 import (
-	configv1alpha1 "github.com/loft-sh/agentapi/v2/pkg/apis/kiosk/config/v1alpha1"
 	clusterv1 "github.com/loft-sh/agentapi/v2/pkg/apis/loft/cluster/v1"
 	storagev1 "github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1"
 	"github.com/loft-sh/jspolicy/pkg/apis/policy/v1beta1"
@@ -24,11 +23,6 @@ type Kiosk struct {
 }
 
 type KioskSpec struct {
-	// config.kiosk.sh
-	ConfigAccount    configv1alpha1.Account          `json:"configAccount,omitempty"`
-	Template         configv1alpha1.Template         `json:"template,omitempty"`
-	TemplateInstance configv1alpha1.TemplateInstance `json:"templateInstance,omitempty"`
-
 	// policy.loft.sh
 	JsPolicy           v1beta1.JsPolicy           `json:"jsPolicy,omitempty"`
 	JsPolicyBundle     v1beta1.JsPolicyBundle     `json:"jsPolicyBundle,omitempty"`
