@@ -42,6 +42,16 @@ type AgentConfigSpec struct {
 	// LoftHost defines the host for the agent's loft instance
 	// +optional
 	LoftHost string `json:"loftHost,omitempty"`
+
+	// LoftAPIHost defines the host for the loft api. If empty, Loft will
+	// create an ssh tunnel to the agent pod.
+	// +optional
+	LoftAPIHost string `json:"loftAPIHost,omitempty"`
+
+	// LoftAPIKey defines the api key the agent should use to connect to the
+	// loft api server.
+	// +optional
+	LoftAPIKey string `json:"loftAPIKey,omitempty"`
 }
 
 // AgentConfigStatus holds the status, which is the parsed raw config

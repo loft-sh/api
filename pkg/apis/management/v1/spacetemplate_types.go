@@ -34,6 +34,16 @@ type SpaceTemplateStatus struct {
 	Apps []*clusterv1.EntityInfo `json:"apps,omitempty"`
 }
 
+func (a *SpaceTemplate) GetVersions() []storagev1.VersionAccessor {
+	var retVersions []storagev1.VersionAccessor
+	for _, v := range a.Spec.Versions {
+		b := v
+		retVersions = append(retVersions, &b)
+	}
+
+	return retVersions
+}
+
 func (a *SpaceTemplate) GetOwner() *storagev1.UserOrTeam {
 	return a.Spec.Owner
 }

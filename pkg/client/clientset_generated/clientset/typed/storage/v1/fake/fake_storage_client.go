@@ -28,12 +28,12 @@ func (c *FakeStorageV1) ClusterAccesses() v1.ClusterAccessInterface {
 	return &FakeClusterAccesses{c}
 }
 
-func (c *FakeStorageV1) ClusterAccountTemplates() v1.ClusterAccountTemplateInterface {
-	return &FakeClusterAccountTemplates{c}
-}
-
 func (c *FakeStorageV1) ClusterRoleTemplates() v1.ClusterRoleTemplateInterface {
 	return &FakeClusterRoleTemplates{c}
+}
+
+func (c *FakeStorageV1) Projects() v1.ProjectInterface {
+	return &FakeProjects{c}
 }
 
 func (c *FakeStorageV1) SharedSecrets(namespace string) v1.SharedSecretInterface {
@@ -42,6 +42,10 @@ func (c *FakeStorageV1) SharedSecrets(namespace string) v1.SharedSecretInterface
 
 func (c *FakeStorageV1) SpaceConstraints() v1.SpaceConstraintInterface {
 	return &FakeSpaceConstraints{c}
+}
+
+func (c *FakeStorageV1) SpaceInstances(namespace string) v1.SpaceInstanceInterface {
+	return &FakeSpaceInstances{c, namespace}
 }
 
 func (c *FakeStorageV1) SpaceTemplates() v1.SpaceTemplateInterface {
@@ -58,6 +62,10 @@ func (c *FakeStorageV1) Teams() v1.TeamInterface {
 
 func (c *FakeStorageV1) Users() v1.UserInterface {
 	return &FakeUsers{c}
+}
+
+func (c *FakeStorageV1) VirtualClusterInstances(namespace string) v1.VirtualClusterInstanceInterface {
+	return &FakeVirtualClusterInstances{c, namespace}
 }
 
 func (c *FakeStorageV1) VirtualClusterTemplates() v1.VirtualClusterTemplateInterface {

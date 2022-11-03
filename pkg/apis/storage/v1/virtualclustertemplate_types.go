@@ -19,6 +19,20 @@ type VirtualClusterTemplate struct {
 	Status VirtualClusterTemplateStatus `json:"status,omitempty"`
 }
 
+func (a *VirtualClusterTemplate) GetVersions() []VersionAccessor {
+	var retVersions []VersionAccessor
+	for _, v := range a.Spec.Versions {
+		b := v
+		retVersions = append(retVersions, &b)
+	}
+
+	return retVersions
+}
+
+func (a *VirtualClusterTemplateVersion) GetVersion() string {
+	return a.Version
+}
+
 func (a *VirtualClusterTemplate) GetOwner() *UserOrTeam {
 	return a.Spec.Owner
 }
@@ -53,13 +67,39 @@ type VirtualClusterTemplateSpec struct {
 	// +optional
 	Template VirtualClusterTemplateDefinition `json:"template,omitempty"`
 
-	// SpaceTemplate to use to create the virtual cluster space if it does not exist
+	// Parameters define additional app parameters that will set helm values
 	// +optional
-	SpaceTemplateRef *VirtualClusterTemplateSpaceTemplateRef `json:"spaceTemplateRef,omitempty"`
+	Parameters []AppParameter `json:"parameters,omitempty"`
+
+	// Versions are different versions of the template that can be referenced as well
+	// +optional
+	Versions []VirtualClusterTemplateVersion `json:"versions,omitempty"`
 
 	// Access holds the access rights for users and teams
 	// +optional
 	Access []Access `json:"access,omitempty"`
+
+	// =======================
+	// DEPRECATED FIELDS BELOW
+	// =======================
+
+	// DEPRECATED: SpaceTemplate to use to create the virtual cluster space if it does not exist
+	// +optional
+	SpaceTemplateRef *VirtualClusterTemplateSpaceTemplateRef `json:"spaceTemplateRef,omitempty"`
+}
+
+type VirtualClusterTemplateVersion struct {
+	// Template holds the space template
+	// +optional
+	Template VirtualClusterTemplateDefinition `json:"template,omitempty"`
+
+	// Parameters define additional app parameters that will set helm values
+	// +optional
+	Parameters []AppParameter `json:"parameters,omitempty"`
+
+	// Version is the version. Needs to be in X.X.X format.
+	// +optional
+	Version string `json:"version,omitempty"`
 }
 
 type VirtualClusterTemplateSpaceTemplateRef struct {
@@ -72,38 +112,44 @@ type VirtualClusterTemplateDefinition struct {
 	// The virtual cluster metadata
 	// +kubebuilder:pruning:PreserveUnknownFields
 	// +optional
-	metav1.ObjectMeta `json:"metadata,omitempty"`
+	TemplateMetadata `json:"metadata,omitempty"`
 
-	// The virtual cluster access
+	// VirtualClusterCommonSpec defines virtual cluster spec that is common between the virtual
+	// cluster templates, and virtual cluster
+	storagev1.VirtualClusterCommonSpec `json:",inline"`
+
+	// SpaceTemplate holds the space template
 	// +optional
-	Access *storagev1.VirtualClusterAccess `json:"access,omitempty"`
+	SpaceTemplate VirtualClusterSpaceTemplateDefinition `json:"spaceTemplate,omitempty"`
+}
 
-	// The helm release configuration for the virtual cluster.
+type VirtualClusterSpaceTemplateDefinition struct {
+	// The space metadata
+	// +kubebuilder:pruning:PreserveUnknownFields
 	// +optional
-	HelmRelease *storagev1.VirtualClusterHelmRelease `json:"helmRelease,omitempty"`
+	TemplateMetadata `json:"metadata,omitempty"`
 
-	// Objects are Kubernetes style yamls that should get deployed into the virtual cluster
+	// Objects are Kubernetes style yamls that should get deployed into the virtual cluster namespace
 	// +optional
 	Objects string `json:"objects,omitempty"`
 
+	// Charts are helm charts that should get deployed
+	// +optional
+	Charts []storagev1.TemplateHelmChart `json:"charts,omitempty"`
+
 	// Apps specifies the apps that should get deployed by this template
 	// +optional
-	Apps []VirtualClusterAppReference `json:"apps,omitempty"`
+	Apps []storagev1.AppReference `json:"apps,omitempty"`
 }
 
-type VirtualClusterAppReference struct {
-	// Name of the target app
+type TemplateMetadata struct {
+	// Labels are labels on the object
 	// +optional
-	Name string `json:"name,omitempty"`
+	Labels map[string]string `json:"labels,omitempty"`
 
-	// Namespace specifies in which target namespace the app should
-	// get deployed in
+	// Annotations are annotations on the object
 	// +optional
-	Namespace string `json:"namespace,omitempty"`
-
-	// ReleaseName is the name of the app release
-	// +optional
-	ReleaseName string `json:"releaseName,omitempty"`
+	Annotations map[string]string `json:"annotations,omitempty"`
 }
 
 // VirtualClusterTemplateStatus holds the status
