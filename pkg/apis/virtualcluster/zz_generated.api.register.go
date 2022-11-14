@@ -89,7 +89,6 @@ type HelmReleaseStatus struct {
 	clusterv1.HelmReleaseStatus
 }
 
-//
 // HelmRelease Functions and Structs
 //
 // +k8s:deepcopy-gen=false
