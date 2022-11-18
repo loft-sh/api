@@ -6055,6 +6055,13 @@ func schema_pkg_apis_management_v1_AppSpec(ref common.ReferenceCallback) common.
 							},
 						},
 					},
+					"defaultNamespace": {
+						SchemaProps: spec.SchemaProps{
+							Description: "DefaultNamespace is the default namespace this app should installed in.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
 					"readme": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Readme is a longer markdown string that describes the app.",
@@ -17902,6 +17909,13 @@ func schema_pkg_apis_storage_v1_AppConfig(ref common.ReferenceCallback) common.O
 			SchemaProps: spec.SchemaProps{
 				Type: []string{"object"},
 				Properties: map[string]spec.Schema{
+					"defaultNamespace": {
+						SchemaProps: spec.SchemaProps{
+							Description: "DefaultNamespace is the default namespace this app should installed in.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
 					"readme": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Readme is a longer markdown string that describes the app.",
@@ -18182,6 +18196,13 @@ func schema_pkg_apis_storage_v1_AppSpec(ref common.ReferenceCallback) common.Ope
 							},
 						},
 					},
+					"defaultNamespace": {
+						SchemaProps: spec.SchemaProps{
+							Description: "DefaultNamespace is the default namespace this app should installed in.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
 					"readme": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Readme is a longer markdown string that describes the app.",
@@ -18338,6 +18359,13 @@ func schema_pkg_apis_storage_v1_AppVersion(ref common.ReferenceCallback) common.
 			SchemaProps: spec.SchemaProps{
 				Type: []string{"object"},
 				Properties: map[string]spec.Schema{
+					"defaultNamespace": {
+						SchemaProps: spec.SchemaProps{
+							Description: "DefaultNamespace is the default namespace this app should installed in.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
 					"readme": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Readme is a longer markdown string that describes the app.",

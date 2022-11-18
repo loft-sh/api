@@ -93,6 +93,11 @@ type AppVersion struct {
 }
 
 type AppConfig struct {
+	// DefaultNamespace is the default namespace this app should installed
+	// in.
+	// +optional
+	DefaultNamespace string `json:"defaultNamespace,omitempty"`
+
 	// Readme is a longer markdown string that describes the app.
 	// +optional
 	Readme string `json:"readme,omitempty"`
