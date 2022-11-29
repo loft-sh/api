@@ -129,6 +129,7 @@ type AppConfig struct {
 	// DEPRECATED: Use config.bash instead
 	// StreamContainer can be used to stream a containers logs instead of the helm output.
 	// +optional
+	// +internal
 	StreamContainer *StreamContainer `json:"streamContainer,omitempty"`
 }
 
@@ -188,9 +189,11 @@ type AppParameter struct {
 }
 
 type UserOrTeam struct {
+	// User specifies a Loft user.
 	// +optional
 	User string `json:"user,omitempty"`
 
+	// Team specifies a Loft team.
 	// +optional
 	Team string `json:"team,omitempty"`
 }

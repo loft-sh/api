@@ -335,7 +335,10 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 		"github.com/loft-sh/api/v2/pkg/apis/storage/v1.AccessKeyOIDC":                                     schema_pkg_apis_storage_v1_AccessKeyOIDC(ref),
 		"github.com/loft-sh/api/v2/pkg/apis/storage/v1.AccessKeyOIDCProvider":                             schema_pkg_apis_storage_v1_AccessKeyOIDCProvider(ref),
 		"github.com/loft-sh/api/v2/pkg/apis/storage/v1.AccessKeyScope":                                    schema_pkg_apis_storage_v1_AccessKeyScope(ref),
+		"github.com/loft-sh/api/v2/pkg/apis/storage/v1.AccessKeyScopeProject":                             schema_pkg_apis_storage_v1_AccessKeyScopeProject(ref),
 		"github.com/loft-sh/api/v2/pkg/apis/storage/v1.AccessKeyScopeRule":                                schema_pkg_apis_storage_v1_AccessKeyScopeRule(ref),
+		"github.com/loft-sh/api/v2/pkg/apis/storage/v1.AccessKeyScopeSpace":                               schema_pkg_apis_storage_v1_AccessKeyScopeSpace(ref),
+		"github.com/loft-sh/api/v2/pkg/apis/storage/v1.AccessKeyScopeVirtualCluster":                      schema_pkg_apis_storage_v1_AccessKeyScopeVirtualCluster(ref),
 		"github.com/loft-sh/api/v2/pkg/apis/storage/v1.AccessKeySpec":                                     schema_pkg_apis_storage_v1_AccessKeySpec(ref),
 		"github.com/loft-sh/api/v2/pkg/apis/storage/v1.AccessKeyStatus":                                   schema_pkg_apis_storage_v1_AccessKeyStatus(ref),
 		"github.com/loft-sh/api/v2/pkg/apis/storage/v1.AccessKeyVirtualCluster":                           schema_pkg_apis_storage_v1_AccessKeyVirtualCluster(ref),
@@ -7066,7 +7069,7 @@ func schema_pkg_apis_management_v1_AuthenticationMicrosoft(ref common.ReferenceC
 					},
 					"tenant": {
 						SchemaProps: spec.SchemaProps{
-							Description: "tenant configuration parameter controls what kinds of accounts may be authenticated in loft. By default, all types of Microsoft accounts (consumers and organizations) can authenticate in loft via Microsoft. To change this, set the tenant parameter to one of the following:\n\ncommon - both personal and business/school accounts can authenticate in loft via Microsoft (default) consumers - only personal accounts can authenticate in loft organizations - only business/school accounts can authenticate in loft <tenant uuid> or <tenant name> - only accounts belonging to specific tenant identified by either <tenant uuid> or <tenant name> can authenticate in loft",
+							Description: "tenant configuration parameter controls what kinds of accounts may be authenticated in loft. By default, all types of Microsoft accounts (consumers and organizations) can authenticate in loft via Microsoft. To change this, set the tenant parameter to one of the following:\n\ncommon - both personal and business/school accounts can authenticate in loft via Microsoft (default) consumers - only personal accounts can authenticate in loft organizations - only business/school accounts can authenticate in loft tenant uuid or tenant name - only accounts belonging to specific tenant identified by either tenant uuid or tenant name can authenticate in loft",
 							Type:        []string{"string"},
 							Format:      "",
 						},
@@ -10783,6 +10786,20 @@ func schema_pkg_apis_management_v1_OwnedAccessKeySpec(ref common.ReferenceCallba
 			SchemaProps: spec.SchemaProps{
 				Type: []string{"object"},
 				Properties: map[string]spec.Schema{
+					"displayName": {
+						SchemaProps: spec.SchemaProps{
+							Description: "The display name shown in the UI",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"description": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Description describes an app",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
 					"user": {
 						SchemaProps: spec.SchemaProps{
 							Description: "The user this access key refers to",
@@ -10830,13 +10847,6 @@ func schema_pkg_apis_management_v1_OwnedAccessKeySpec(ref common.ReferenceCallba
 						SchemaProps: spec.SchemaProps{
 							Description: "If this field is true, the access key is still allowed to exist, however will not work to access the api",
 							Type:        []string{"boolean"},
-							Format:      "",
-						},
-					},
-					"displayName": {
-						SchemaProps: spec.SchemaProps{
-							Description: "The display name shown in the UI",
-							Type:        []string{"string"},
 							Format:      "",
 						},
 					},
@@ -12813,6 +12823,20 @@ func schema_pkg_apis_management_v1_ResetAccessKeySpec(ref common.ReferenceCallba
 			SchemaProps: spec.SchemaProps{
 				Type: []string{"object"},
 				Properties: map[string]spec.Schema{
+					"displayName": {
+						SchemaProps: spec.SchemaProps{
+							Description: "The display name shown in the UI",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"description": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Description describes an app",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
 					"user": {
 						SchemaProps: spec.SchemaProps{
 							Description: "The user this access key refers to",
@@ -12860,13 +12884,6 @@ func schema_pkg_apis_management_v1_ResetAccessKeySpec(ref common.ReferenceCallba
 						SchemaProps: spec.SchemaProps{
 							Description: "If this field is true, the access key is still allowed to exist, however will not work to access the api",
 							Type:        []string{"boolean"},
-							Format:      "",
-						},
-					},
-					"displayName": {
-						SchemaProps: spec.SchemaProps{
-							Description: "The display name shown in the UI",
-							Type:        []string{"string"},
 							Format:      "",
 						},
 					},
@@ -17333,9 +17350,51 @@ func schema_pkg_apis_storage_v1_AccessKeyScope(ref common.ReferenceCallback) com
 			SchemaProps: spec.SchemaProps{
 				Type: []string{"object"},
 				Properties: map[string]spec.Schema{
+					"projects": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Projects specifies the projects the access key should have access to.",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/storage/v1.AccessKeyScopeProject"),
+									},
+								},
+							},
+						},
+					},
+					"spaces": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Spaces specifies the spaces the access key is allowed to access.",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/storage/v1.AccessKeyScopeSpace"),
+									},
+								},
+							},
+						},
+					},
+					"virtualClusters": {
+						SchemaProps: spec.SchemaProps{
+							Description: "VirtualClusters specifies the virtual clusters the access key is allowed to access.",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/storage/v1.AccessKeyScopeVirtualCluster"),
+									},
+								},
+							},
+						},
+					},
 					"rules": {
 						SchemaProps: spec.SchemaProps{
-							Description: "Rules specifies the rules that should apply to the access key.",
+							Description: "DEPRECATED: Use Projects, Spaces and VirtualClusters instead Rules specifies the rules that should apply to the access key.",
 							Type:        []string{"array"},
 							Items: &spec.SchemaOrArray{
 								Schema: &spec.Schema{
@@ -17351,7 +17410,26 @@ func schema_pkg_apis_storage_v1_AccessKeyScope(ref common.ReferenceCallback) com
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/v2/pkg/apis/storage/v1.AccessKeyScopeRule"},
+			"github.com/loft-sh/api/v2/pkg/apis/storage/v1.AccessKeyScopeProject", "github.com/loft-sh/api/v2/pkg/apis/storage/v1.AccessKeyScopeRule", "github.com/loft-sh/api/v2/pkg/apis/storage/v1.AccessKeyScopeSpace", "github.com/loft-sh/api/v2/pkg/apis/storage/v1.AccessKeyScopeVirtualCluster"},
+	}
+}
+
+func schema_pkg_apis_storage_v1_AccessKeyScopeProject(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"project": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Project is the name of the project. You can specify * to select all projects.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+				},
+			},
+		},
 	}
 }
 
@@ -17465,12 +17543,78 @@ func schema_pkg_apis_storage_v1_AccessKeyScopeRule(ref common.ReferenceCallback)
 	}
 }
 
+func schema_pkg_apis_storage_v1_AccessKeyScopeSpace(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"project": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Project is the name of the project.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"space": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Space is the name of the space. You can specify * to select all spaces.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+				},
+			},
+		},
+	}
+}
+
+func schema_pkg_apis_storage_v1_AccessKeyScopeVirtualCluster(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"project": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Project is the name of the project.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"virtualCluster": {
+						SchemaProps: spec.SchemaProps{
+							Description: "VirtualCluster is the name of the virtual cluster to access. You can specify * to select all virtual clusters.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+				},
+			},
+		},
+	}
+}
+
 func schema_pkg_apis_storage_v1_AccessKeySpec(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
 				Type: []string{"object"},
 				Properties: map[string]spec.Schema{
+					"displayName": {
+						SchemaProps: spec.SchemaProps{
+							Description: "The display name shown in the UI",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"description": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Description describes an app",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
 					"user": {
 						SchemaProps: spec.SchemaProps{
 							Description: "The user this access key refers to",
@@ -17518,13 +17662,6 @@ func schema_pkg_apis_storage_v1_AccessKeySpec(ref common.ReferenceCallback) comm
 						SchemaProps: spec.SchemaProps{
 							Description: "If this field is true, the access key is still allowed to exist, however will not work to access the api",
 							Type:        []string{"boolean"},
-							Format:      "",
-						},
-					},
-					"displayName": {
-						SchemaProps: spec.SchemaProps{
-							Description: "The display name shown in the UI",
-							Type:        []string{"string"},
 							Format:      "",
 						},
 					},
@@ -22251,21 +22388,21 @@ func schema_pkg_apis_storage_v1_TemplateRef(ref common.ReferenceCallback) common
 				Properties: map[string]spec.Schema{
 					"name": {
 						SchemaProps: spec.SchemaProps{
-							Description: "Name holds the space template reference",
+							Description: "Name holds the name of the template to reference.",
 							Type:        []string{"string"},
 							Format:      "",
 						},
 					},
 					"version": {
 						SchemaProps: spec.SchemaProps{
-							Description: "Version holds the template version to use",
+							Description: "Version holds the template version to use. Version is expected to be in semantic versioning format. Alternatively, you can also exchange major, minor or patch with an 'x' to tell Loft to automatically select the latest major, minor or patch version.",
 							Type:        []string{"string"},
 							Format:      "",
 						},
 					},
 					"syncOnce": {
 						SchemaProps: spec.SchemaProps{
-							Description: "SyncOnce tells the controller to sync the template once.",
+							Description: "SyncOnce tells the controller to sync the instance once with the template. This is useful if you want to sync an instance after a template was changed. To automatically sync an instance with a template, use 'x.x.x' as version instead.",
 							Type:        []string{"boolean"},
 							Format:      "",
 						},
@@ -22469,14 +22606,16 @@ func schema_pkg_apis_storage_v1_UserOrTeam(ref common.ReferenceCallback) common.
 				Properties: map[string]spec.Schema{
 					"user": {
 						SchemaProps: spec.SchemaProps{
-							Type:   []string{"string"},
-							Format: "",
+							Description: "User specifies a Loft user.",
+							Type:        []string{"string"},
+							Format:      "",
 						},
 					},
 					"team": {
 						SchemaProps: spec.SchemaProps{
-							Type:   []string{"string"},
-							Format: "",
+							Description: "Team specifies a Loft team.",
+							Type:        []string{"string"},
+							Format:      "",
 						},
 					},
 				},
@@ -58369,15 +58508,7 @@ func schema_k8sio_api_storage_v1beta1_VolumeNodeResources(ref common.ReferenceCa
 }
 
 func schema_apimachinery_pkg_api_resource_Quantity(ref common.ReferenceCallback) common.OpenAPIDefinition {
-	return common.EmbedOpenAPIDefinitionIntoV2Extension(common.OpenAPIDefinition{
-		Schema: spec.Schema{
-			SchemaProps: spec.SchemaProps{
-				Description: "Quantity is a fixed-point representation of a number. It provides convenient marshaling/unmarshaling in JSON and YAML, in addition to String() and AsInt64() accessors.\n\nThe serialization format is:\n\n``` <quantity>        ::= <signedNumber><suffix>\n\n\t(Note that <suffix> may be empty, from the \"\" case in <decimalSI>.)\n\n<digit>           ::= 0 | 1 | ... | 9 <digits>          ::= <digit> | <digit><digits> <number>          ::= <digits> | <digits>.<digits> | <digits>. | .<digits> <sign>            ::= \"+\" | \"-\" <signedNumber>    ::= <number> | <sign><number> <suffix>          ::= <binarySI> | <decimalExponent> | <decimalSI> <binarySI>        ::= Ki | Mi | Gi | Ti | Pi | Ei\n\n\t(International System of units; See: http://physics.nist.gov/cuu/Units/binary.html)\n\n<decimalSI>       ::= m | \"\" | k | M | G | T | P | E\n\n\t(Note that 1024 = 1Ki but 1000 = 1k; I didn't choose the capitalization.)\n\n<decimalExponent> ::= \"e\" <signedNumber> | \"E\" <signedNumber> ```\n\nNo matter which of the three exponent forms is used, no quantity may represent a number greater than 2^63-1 in magnitude, nor may it have more than 3 decimal places. Numbers larger or more precise will be capped or rounded up. (E.g.: 0.1m will rounded up to 1m.) This may be extended in the future if we require larger or smaller quantities.\n\nWhen a Quantity is parsed from a string, it will remember the type of suffix it had, and will use the same type again when it is serialized.\n\nBefore serializing, Quantity will be put in \"canonical form\". This means that Exponent/suffix will be adjusted up or down (with a corresponding increase or decrease in Mantissa) such that:\n\n- No precision is lost - No fractional digits will be emitted - The exponent (or suffix) is as large as possible.\n\nThe sign will be omitted unless the number is negative.\n\nExamples:\n\n- 1.5 will be serialized as \"1500m\" - 1.5Gi will be serialized as \"1536Mi\"\n\nNote that the quantity will NEVER be internally represented by a floating point number. That is the whole point of this exercise.\n\nNon-canonical values will still parse as long as they are well formed, but will be re-emitted in their canonical form. (So always use canonical form, or don't diff.)\n\nThis format is intended to make it difficult to use these numbers without writing some sort of special handling code in the hopes that that will cause implementors to also use a fixed point implementation.",
-				OneOf:       common.GenerateOpenAPIV3OneOfSchema(resource.Quantity{}.OpenAPIV3OneOfTypes()),
-				Format:      resource.Quantity{}.OpenAPISchemaFormat(),
-			},
-		},
-	}, common.OpenAPIDefinition{
+	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
 				Description: "Quantity is a fixed-point representation of a number. It provides convenient marshaling/unmarshaling in JSON and YAML, in addition to String() and AsInt64() accessors.\n\nThe serialization format is:\n\n``` <quantity>        ::= <signedNumber><suffix>\n\n\t(Note that <suffix> may be empty, from the \"\" case in <decimalSI>.)\n\n<digit>           ::= 0 | 1 | ... | 9 <digits>          ::= <digit> | <digit><digits> <number>          ::= <digits> | <digits>.<digits> | <digits>. | .<digits> <sign>            ::= \"+\" | \"-\" <signedNumber>    ::= <number> | <sign><number> <suffix>          ::= <binarySI> | <decimalExponent> | <decimalSI> <binarySI>        ::= Ki | Mi | Gi | Ti | Pi | Ei\n\n\t(International System of units; See: http://physics.nist.gov/cuu/Units/binary.html)\n\n<decimalSI>       ::= m | \"\" | k | M | G | T | P | E\n\n\t(Note that 1024 = 1Ki but 1000 = 1k; I didn't choose the capitalization.)\n\n<decimalExponent> ::= \"e\" <signedNumber> | \"E\" <signedNumber> ```\n\nNo matter which of the three exponent forms is used, no quantity may represent a number greater than 2^63-1 in magnitude, nor may it have more than 3 decimal places. Numbers larger or more precise will be capped or rounded up. (E.g.: 0.1m will rounded up to 1m.) This may be extended in the future if we require larger or smaller quantities.\n\nWhen a Quantity is parsed from a string, it will remember the type of suffix it had, and will use the same type again when it is serialized.\n\nBefore serializing, Quantity will be put in \"canonical form\". This means that Exponent/suffix will be adjusted up or down (with a corresponding increase or decrease in Mantissa) such that:\n\n- No precision is lost - No fractional digits will be emitted - The exponent (or suffix) is as large as possible.\n\nThe sign will be omitted unless the number is negative.\n\nExamples:\n\n- 1.5 will be serialized as \"1500m\" - 1.5Gi will be serialized as \"1536Mi\"\n\nNote that the quantity will NEVER be internally represented by a floating point number. That is the whole point of this exercise.\n\nNon-canonical values will still parse as long as they are well formed, but will be re-emitted in their canonical form. (So always use canonical form, or don't diff.)\n\nThis format is intended to make it difficult to use these numbers without writing some sort of special handling code in the hopes that that will cause implementors to also use a fixed point implementation.",
@@ -58385,7 +58516,7 @@ func schema_apimachinery_pkg_api_resource_Quantity(ref common.ReferenceCallback)
 				Format:      resource.Quantity{}.OpenAPISchemaFormat(),
 			},
 		},
-	})
+	}
 }
 
 func schema_apimachinery_pkg_api_resource_int64Amount(ref common.ReferenceCallback) common.OpenAPIDefinition {
@@ -60770,15 +60901,7 @@ func schema_k8sio_apimachinery_pkg_runtime_Unknown(ref common.ReferenceCallback)
 }
 
 func schema_apimachinery_pkg_util_intstr_IntOrString(ref common.ReferenceCallback) common.OpenAPIDefinition {
-	return common.EmbedOpenAPIDefinitionIntoV2Extension(common.OpenAPIDefinition{
-		Schema: spec.Schema{
-			SchemaProps: spec.SchemaProps{
-				Description: "IntOrString is a type that can hold an int32 or a string.  When used in JSON or YAML marshalling and unmarshalling, it produces or consumes the inner type.  This allows you to have, for example, a JSON field that can accept a name or number.",
-				OneOf:       common.GenerateOpenAPIV3OneOfSchema(intstr.IntOrString{}.OpenAPIV3OneOfTypes()),
-				Format:      intstr.IntOrString{}.OpenAPISchemaFormat(),
-			},
-		},
-	}, common.OpenAPIDefinition{
+	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
 				Description: "IntOrString is a type that can hold an int32 or a string.  When used in JSON or YAML marshalling and unmarshalling, it produces or consumes the inner type.  This allows you to have, for example, a JSON field that can accept a name or number.",
@@ -60786,7 +60909,7 @@ func schema_apimachinery_pkg_util_intstr_IntOrString(ref common.ReferenceCallbac
 				Format:      intstr.IntOrString{}.OpenAPISchemaFormat(),
 			},
 		},
-	})
+	}
 }
 
 func schema_k8sio_apimachinery_pkg_version_Info(ref common.ReferenceCallback) common.OpenAPIDefinition {

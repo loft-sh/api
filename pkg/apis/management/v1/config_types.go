@@ -379,7 +379,7 @@ type AuthenticationMicrosoft struct {
 	// common - both personal and business/school accounts can authenticate in loft via Microsoft (default)
 	// consumers - only personal accounts can authenticate in loft
 	// organizations - only business/school accounts can authenticate in loft
-	// <tenant uuid> or <tenant name> - only accounts belonging to specific tenant identified by either <tenant uuid> or <tenant name> can authenticate in loft
+	// tenant uuid or tenant name - only accounts belonging to specific tenant identified by either tenant uuid or tenant name can authenticate in loft
 	// +optional
 	Tenant string `json:"tenant,omitempty"`
 

@@ -111,15 +111,21 @@ type VirtualClusterClusterRef struct {
 }
 
 type TemplateRef struct {
-	// Name holds the space template reference
+	// Name holds the name of the template to reference.
 	// +optional
 	Name string `json:"name,omitempty"`
 
-	// Version holds the template version to use
+	// Version holds the template version to use. Version is expected to
+	// be in semantic versioning format. Alternatively, you can also exchange
+	// major, minor or patch with an 'x' to tell Loft to automatically select
+	// the latest major, minor or patch version.
 	// +optional
 	Version string `json:"version,omitempty"`
 
-	// SyncOnce tells the controller to sync the template once.
+	// SyncOnce tells the controller to sync the instance once with the template.
+	// This is useful if you want to sync an instance after a template was changed.
+	// To automatically sync an instance with a template, use 'x.x.x' as version
+	// instead.
 	// +optional
 	SyncOnce bool `json:"syncOnce,omitempty"`
 }
