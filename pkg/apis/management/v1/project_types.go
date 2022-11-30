@@ -1,19 +1,19 @@
 package v1
 
 import (
-	storagev1 "github.com/loft-sh/api/v2/pkg/apis/storage/v1"
+	storagev1 "github.com/loft-sh/api/v3/pkg/apis/storage/v1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 )
 
 // +genclient
 // +genclient:nonNamespaced
-// +genclient:method=ListMembers,verb=get,subresource=members,result=github.com/loft-sh/api/v2/pkg/apis/management/v1.ProjectMembers
-// +genclient:method=ListTemplates,verb=get,subresource=templates,result=github.com/loft-sh/api/v2/pkg/apis/management/v1.ProjectTemplates
-// +genclient:method=ListClusters,verb=get,subresource=clusters,result=github.com/loft-sh/api/v2/pkg/apis/management/v1.ProjectClusters
-// +genclient:method=ImportVirtualCluster,verb=create,subresource=importvirtualcluster,input=github.com/loft-sh/api/v2/pkg/apis/management/v1.ProjectImportVirtualCluster,result=github.com/loft-sh/api/v2/pkg/apis/management/v1.ProjectImportVirtualCluster
-// +genclient:method=MigrateVirtualClusterInstance,verb=create,subresource=migratevirtualclusterinstance,input=github.com/loft-sh/api/v2/pkg/apis/management/v1.ProjectMigrateVirtualClusterInstance,result=github.com/loft-sh/api/v2/pkg/apis/management/v1.ProjectMigrateVirtualClusterInstance
-// +genclient:method=ImportSpace,verb=create,subresource=importspace,input=github.com/loft-sh/api/v2/pkg/apis/management/v1.ProjectImportSpace,result=github.com/loft-sh/api/v2/pkg/apis/management/v1.ProjectImportSpace
-// +genclient:method=MigrateSpaceInstance,verb=create,subresource=migratespaceinstance,input=github.com/loft-sh/api/v2/pkg/apis/management/v1.ProjectMigrateSpaceInstance,result=github.com/loft-sh/api/v2/pkg/apis/management/v1.ProjectMigrateSpaceInstance
+// +genclient:method=ListMembers,verb=get,subresource=members,result=github.com/loft-sh/api/v3/pkg/apis/management/v1.ProjectMembers
+// +genclient:method=ListTemplates,verb=get,subresource=templates,result=github.com/loft-sh/api/v3/pkg/apis/management/v1.ProjectTemplates
+// +genclient:method=ListClusters,verb=get,subresource=clusters,result=github.com/loft-sh/api/v3/pkg/apis/management/v1.ProjectClusters
+// +genclient:method=ImportVirtualCluster,verb=create,subresource=importvirtualcluster,input=github.com/loft-sh/api/v3/pkg/apis/management/v1.ProjectImportVirtualCluster,result=github.com/loft-sh/api/v3/pkg/apis/management/v1.ProjectImportVirtualCluster
+// +genclient:method=MigrateVirtualClusterInstance,verb=create,subresource=migratevirtualclusterinstance,input=github.com/loft-sh/api/v3/pkg/apis/management/v1.ProjectMigrateVirtualClusterInstance,result=github.com/loft-sh/api/v3/pkg/apis/management/v1.ProjectMigrateVirtualClusterInstance
+// +genclient:method=ImportSpace,verb=create,subresource=importspace,input=github.com/loft-sh/api/v3/pkg/apis/management/v1.ProjectImportSpace,result=github.com/loft-sh/api/v3/pkg/apis/management/v1.ProjectImportSpace
+// +genclient:method=MigrateSpaceInstance,verb=create,subresource=migratespaceinstance,input=github.com/loft-sh/api/v3/pkg/apis/management/v1.ProjectMigrateSpaceInstance,result=github.com/loft-sh/api/v3/pkg/apis/management/v1.ProjectMigrateSpaceInstance
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
 
 // Project holds the Project information

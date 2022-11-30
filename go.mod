@@ -1,10 +1,10 @@
-module github.com/loft-sh/api/v2
+module github.com/loft-sh/api/v3
 
 go 1.19
 
 require (
 	github.com/ghodss/yaml v1.0.0
-	github.com/loft-sh/agentapi/v2 v2.3.3-0.20221125083603-6094cede9a8e
+	github.com/loft-sh/agentapi/v3 v3.0.0
 	github.com/loft-sh/apiserver v0.0.0-20221118114023-11a52e0a20c2
 	github.com/loft-sh/jspolicy v0.1.0
 	k8s.io/api v0.25.4
@@ -48,6 +48,7 @@ require (
 	github.com/inconshreveable/mousetrap v1.0.1 // indirect
 	github.com/josharian/intern v1.0.0 // indirect
 	github.com/json-iterator/go v1.1.12 // indirect
+	github.com/loft-sh/agentapi/v2 v2.3.3-0.20221125083603-6094cede9a8e // indirect
 	github.com/mailru/easyjson v0.7.7 // indirect
 	github.com/matttproud/golang_protobuf_extensions v1.0.4 // indirect
 	github.com/modern-go/concurrent v0.0.0-20180306012644-bacd9c7ef1dd // indirect
@@ -103,7 +104,7 @@ require (
 	sigs.k8s.io/yaml v1.3.0 // indirect
 )
 
-replace github.com/loft-sh/agentapi/v2 => ../../agentapi/v2
+replace github.com/loft-sh/agentapi/v3 => ./../../agentapi/v3
 
 // modules imported by k8s.io that are replaced in kubernetes/kubernetes/go.mod
 // (not all, just the ones that caused trouble)

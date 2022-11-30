@@ -6,8 +6,8 @@ import (
 	"context"
 	"fmt"
 
-	clusterv1 "github.com/loft-sh/agentapi/v2/pkg/apis/loft/cluster/v1"
-	"github.com/loft-sh/api/v2/pkg/managerfactory"
+	clusterv1 "github.com/loft-sh/agentapi/v3/pkg/apis/loft/cluster/v1"
+	"github.com/loft-sh/api/v3/pkg/managerfactory"
 	"github.com/loft-sh/apiserver/pkg/builders"
 	"k8s.io/apimachinery/pkg/apis/meta/internalversion"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"

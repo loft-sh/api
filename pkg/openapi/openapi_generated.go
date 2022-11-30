@@ -17,452 +17,452 @@ import (
 
 func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenAPIDefinition {
 	return map[string]common.OpenAPIDefinition{
-		"github.com/loft-sh/agentapi/v2/pkg/apis/loft/cluster/v1.AppliedMetadata":                         schema_apis_loft_cluster_v1_AppliedMetadata(ref),
-		"github.com/loft-sh/agentapi/v2/pkg/apis/loft/cluster/v1.AppliedObject":                           schema_apis_loft_cluster_v1_AppliedObject(ref),
-		"github.com/loft-sh/agentapi/v2/pkg/apis/loft/cluster/v1.Bash":                                    schema_apis_loft_cluster_v1_Bash(ref),
-		"github.com/loft-sh/agentapi/v2/pkg/apis/loft/cluster/v1.ChartInfo":                               schema_apis_loft_cluster_v1_ChartInfo(ref),
-		"github.com/loft-sh/agentapi/v2/pkg/apis/loft/cluster/v1.ChartInfoList":                           schema_apis_loft_cluster_v1_ChartInfoList(ref),
-		"github.com/loft-sh/agentapi/v2/pkg/apis/loft/cluster/v1.ChartInfoSpec":                           schema_apis_loft_cluster_v1_ChartInfoSpec(ref),
-		"github.com/loft-sh/agentapi/v2/pkg/apis/loft/cluster/v1.ChartInfoStatus":                         schema_apis_loft_cluster_v1_ChartInfoStatus(ref),
-		"github.com/loft-sh/agentapi/v2/pkg/apis/loft/cluster/v1.ClusterQuota":                            schema_apis_loft_cluster_v1_ClusterQuota(ref),
-		"github.com/loft-sh/agentapi/v2/pkg/apis/loft/cluster/v1.ClusterQuotaList":                        schema_apis_loft_cluster_v1_ClusterQuotaList(ref),
-		"github.com/loft-sh/agentapi/v2/pkg/apis/loft/cluster/v1.ClusterQuotaSpec":                        schema_apis_loft_cluster_v1_ClusterQuotaSpec(ref),
-		"github.com/loft-sh/agentapi/v2/pkg/apis/loft/cluster/v1.ClusterQuotaStatus":                      schema_apis_loft_cluster_v1_ClusterQuotaStatus(ref),
-		"github.com/loft-sh/agentapi/v2/pkg/apis/loft/cluster/v1.EntityInfo":                              schema_apis_loft_cluster_v1_EntityInfo(ref),
-		"github.com/loft-sh/agentapi/v2/pkg/apis/loft/cluster/v1.EpochInfo":                               schema_apis_loft_cluster_v1_EpochInfo(ref),
-		"github.com/loft-sh/agentapi/v2/pkg/apis/loft/cluster/v1.HelmRelease":                             schema_apis_loft_cluster_v1_HelmRelease(ref),
-		"github.com/loft-sh/agentapi/v2/pkg/apis/loft/cluster/v1.HelmReleaseApp":                          schema_apis_loft_cluster_v1_HelmReleaseApp(ref),
-		"github.com/loft-sh/agentapi/v2/pkg/apis/loft/cluster/v1.HelmReleaseConfig":                       schema_apis_loft_cluster_v1_HelmReleaseConfig(ref),
-		"github.com/loft-sh/agentapi/v2/pkg/apis/loft/cluster/v1.HelmReleaseList":                         schema_apis_loft_cluster_v1_HelmReleaseList(ref),
-		"github.com/loft-sh/agentapi/v2/pkg/apis/loft/cluster/v1.HelmReleaseSpec":                         schema_apis_loft_cluster_v1_HelmReleaseSpec(ref),
-		"github.com/loft-sh/agentapi/v2/pkg/apis/loft/cluster/v1.HelmReleaseStatus":                       schema_apis_loft_cluster_v1_HelmReleaseStatus(ref),
-		"github.com/loft-sh/agentapi/v2/pkg/apis/loft/cluster/v1.Info":                                    schema_apis_loft_cluster_v1_Info(ref),
-		"github.com/loft-sh/agentapi/v2/pkg/apis/loft/cluster/v1.LastActivityInfo":                        schema_apis_loft_cluster_v1_LastActivityInfo(ref),
-		"github.com/loft-sh/agentapi/v2/pkg/apis/loft/cluster/v1.LocalClusterAccess":                      schema_apis_loft_cluster_v1_LocalClusterAccess(ref),
-		"github.com/loft-sh/agentapi/v2/pkg/apis/loft/cluster/v1.LocalClusterAccessList":                  schema_apis_loft_cluster_v1_LocalClusterAccessList(ref),
-		"github.com/loft-sh/agentapi/v2/pkg/apis/loft/cluster/v1.LocalClusterAccessSpec":                  schema_apis_loft_cluster_v1_LocalClusterAccessSpec(ref),
-		"github.com/loft-sh/agentapi/v2/pkg/apis/loft/cluster/v1.LocalClusterAccessStatus":                schema_apis_loft_cluster_v1_LocalClusterAccessStatus(ref),
-		"github.com/loft-sh/agentapi/v2/pkg/apis/loft/cluster/v1.Maintainer":                              schema_apis_loft_cluster_v1_Maintainer(ref),
-		"github.com/loft-sh/agentapi/v2/pkg/apis/loft/cluster/v1.Metadata":                                schema_apis_loft_cluster_v1_Metadata(ref),
-		"github.com/loft-sh/agentapi/v2/pkg/apis/loft/cluster/v1.SleepModeConfig":                         schema_apis_loft_cluster_v1_SleepModeConfig(ref),
-		"github.com/loft-sh/agentapi/v2/pkg/apis/loft/cluster/v1.SleepModeConfigList":                     schema_apis_loft_cluster_v1_SleepModeConfigList(ref),
-		"github.com/loft-sh/agentapi/v2/pkg/apis/loft/cluster/v1.SleepModeConfigSpec":                     schema_apis_loft_cluster_v1_SleepModeConfigSpec(ref),
-		"github.com/loft-sh/agentapi/v2/pkg/apis/loft/cluster/v1.SleepModeConfigStatus":                   schema_apis_loft_cluster_v1_SleepModeConfigStatus(ref),
-		"github.com/loft-sh/agentapi/v2/pkg/apis/loft/cluster/v1.Space":                                   schema_apis_loft_cluster_v1_Space(ref),
-		"github.com/loft-sh/agentapi/v2/pkg/apis/loft/cluster/v1.SpaceConstraintNamespaceStatus":          schema_apis_loft_cluster_v1_SpaceConstraintNamespaceStatus(ref),
-		"github.com/loft-sh/agentapi/v2/pkg/apis/loft/cluster/v1.SpaceList":                               schema_apis_loft_cluster_v1_SpaceList(ref),
-		"github.com/loft-sh/agentapi/v2/pkg/apis/loft/cluster/v1.SpaceObjectsNamespaceStatus":             schema_apis_loft_cluster_v1_SpaceObjectsNamespaceStatus(ref),
-		"github.com/loft-sh/agentapi/v2/pkg/apis/loft/cluster/v1.SpaceSpec":                               schema_apis_loft_cluster_v1_SpaceSpec(ref),
-		"github.com/loft-sh/agentapi/v2/pkg/apis/loft/cluster/v1.SpaceStatus":                             schema_apis_loft_cluster_v1_SpaceStatus(ref),
-		"github.com/loft-sh/agentapi/v2/pkg/apis/loft/cluster/v1.TemplateSyncStatus":                      schema_apis_loft_cluster_v1_TemplateSyncStatus(ref),
-		"github.com/loft-sh/agentapi/v2/pkg/apis/loft/cluster/v1.UserOrTeam":                              schema_apis_loft_cluster_v1_UserOrTeam(ref),
-		"github.com/loft-sh/agentapi/v2/pkg/apis/loft/cluster/v1.VirtualCluster":                          schema_apis_loft_cluster_v1_VirtualCluster(ref),
-		"github.com/loft-sh/agentapi/v2/pkg/apis/loft/cluster/v1.VirtualClusterList":                      schema_apis_loft_cluster_v1_VirtualClusterList(ref),
-		"github.com/loft-sh/agentapi/v2/pkg/apis/loft/cluster/v1.VirtualClusterSpec":                      schema_apis_loft_cluster_v1_VirtualClusterSpec(ref),
-		"github.com/loft-sh/agentapi/v2/pkg/apis/loft/cluster/v1.VirtualClusterStatus":                    schema_apis_loft_cluster_v1_VirtualClusterStatus(ref),
-		"github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.AccessQuota":                             schema_apis_loft_storage_v1_AccessQuota(ref),
-		"github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.AppReference":                            schema_apis_loft_storage_v1_AppReference(ref),
-		"github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.Chart":                                   schema_apis_loft_storage_v1_Chart(ref),
-		"github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.ChartStatus":                             schema_apis_loft_storage_v1_ChartStatus(ref),
-		"github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.ClusterQuota":                            schema_apis_loft_storage_v1_ClusterQuota(ref),
-		"github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.ClusterQuotaList":                        schema_apis_loft_storage_v1_ClusterQuotaList(ref),
-		"github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.ClusterQuotaSpec":                        schema_apis_loft_storage_v1_ClusterQuotaSpec(ref),
-		"github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.ClusterQuotaStatus":                      schema_apis_loft_storage_v1_ClusterQuotaStatus(ref),
-		"github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.ClusterQuotaStatusByNamespace":           schema_apis_loft_storage_v1_ClusterQuotaStatusByNamespace(ref),
-		"github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.ClusterRoleRef":                          schema_apis_loft_storage_v1_ClusterRoleRef(ref),
-		"github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.Condition":                               schema_apis_loft_storage_v1_Condition(ref),
-		"github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.InstanceAccess":                          schema_apis_loft_storage_v1_InstanceAccess(ref),
-		"github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.InstanceAccessRule":                      schema_apis_loft_storage_v1_InstanceAccessRule(ref),
-		"github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.LocalClusterAccess":                      schema_apis_loft_storage_v1_LocalClusterAccess(ref),
-		"github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.LocalClusterAccessList":                  schema_apis_loft_storage_v1_LocalClusterAccessList(ref),
-		"github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.LocalClusterAccessSpec":                  schema_apis_loft_storage_v1_LocalClusterAccessSpec(ref),
-		"github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.LocalClusterAccessStatus":                schema_apis_loft_storage_v1_LocalClusterAccessStatus(ref),
-		"github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.LocalTeam":                               schema_apis_loft_storage_v1_LocalTeam(ref),
-		"github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.LocalTeamList":                           schema_apis_loft_storage_v1_LocalTeamList(ref),
-		"github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.LocalTeamSpec":                           schema_apis_loft_storage_v1_LocalTeamSpec(ref),
-		"github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.LocalTeamStatus":                         schema_apis_loft_storage_v1_LocalTeamStatus(ref),
-		"github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.LocalUser":                               schema_apis_loft_storage_v1_LocalUser(ref),
-		"github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.LocalUserList":                           schema_apis_loft_storage_v1_LocalUserList(ref),
-		"github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.LocalUserSpec":                           schema_apis_loft_storage_v1_LocalUserSpec(ref),
-		"github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.LocalUserStatus":                         schema_apis_loft_storage_v1_LocalUserStatus(ref),
-		"github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.ObjectsStatus":                           schema_apis_loft_storage_v1_ObjectsStatus(ref),
-		"github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.PodSelector":                             schema_apis_loft_storage_v1_PodSelector(ref),
-		"github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.SecretRef":                               schema_apis_loft_storage_v1_SecretRef(ref),
-		"github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.TemplateHelmChart":                       schema_apis_loft_storage_v1_TemplateHelmChart(ref),
-		"github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.UserOrTeam":                              schema_apis_loft_storage_v1_UserOrTeam(ref),
-		"github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.VirtualCluster":                          schema_apis_loft_storage_v1_VirtualCluster(ref),
-		"github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.VirtualClusterAccessPoint":               schema_apis_loft_storage_v1_VirtualClusterAccessPoint(ref),
-		"github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.VirtualClusterAccessPointIngressSpec":    schema_apis_loft_storage_v1_VirtualClusterAccessPointIngressSpec(ref),
-		"github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.VirtualClusterCommonSpec":                schema_apis_loft_storage_v1_VirtualClusterCommonSpec(ref),
-		"github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.VirtualClusterHelmChart":                 schema_apis_loft_storage_v1_VirtualClusterHelmChart(ref),
-		"github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.VirtualClusterHelmRelease":               schema_apis_loft_storage_v1_VirtualClusterHelmRelease(ref),
-		"github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.VirtualClusterHelmReleaseStatus":         schema_apis_loft_storage_v1_VirtualClusterHelmReleaseStatus(ref),
-		"github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.VirtualClusterList":                      schema_apis_loft_storage_v1_VirtualClusterList(ref),
-		"github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.VirtualClusterSpec":                      schema_apis_loft_storage_v1_VirtualClusterSpec(ref),
-		"github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.VirtualClusterStatus":                    schema_apis_loft_storage_v1_VirtualClusterStatus(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/audit/v1.Event":                                               schema_pkg_apis_audit_v1_Event(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/audit/v1.EventList":                                           schema_pkg_apis_audit_v1_EventList(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/audit/v1.ObjectReference":                                     schema_pkg_apis_audit_v1_ObjectReference(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/management/v1.AgentConfig":                                    schema_pkg_apis_management_v1_AgentConfig(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/management/v1.AgentConfigSpec":                                schema_pkg_apis_management_v1_AgentConfigSpec(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/management/v1.AgentConfigStatus":                              schema_pkg_apis_management_v1_AgentConfigStatus(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/management/v1.Analytics":                                      schema_pkg_apis_management_v1_Analytics(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/management/v1.Announcement":                                   schema_pkg_apis_management_v1_Announcement(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/management/v1.AnnouncementList":                               schema_pkg_apis_management_v1_AnnouncementList(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/management/v1.AnnouncementSpec":                               schema_pkg_apis_management_v1_AnnouncementSpec(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/management/v1.AnnouncementStatus":                             schema_pkg_apis_management_v1_AnnouncementStatus(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/management/v1.App":                                            schema_pkg_apis_management_v1_App(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/management/v1.AppList":                                        schema_pkg_apis_management_v1_AppList(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/management/v1.AppSpec":                                        schema_pkg_apis_management_v1_AppSpec(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/management/v1.AppStatus":                                      schema_pkg_apis_management_v1_AppStatus(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/management/v1.Apps":                                           schema_pkg_apis_management_v1_Apps(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/management/v1.Audit":                                          schema_pkg_apis_management_v1_Audit(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/management/v1.AuditPolicy":                                    schema_pkg_apis_management_v1_AuditPolicy(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/management/v1.AuditPolicyRule":                                schema_pkg_apis_management_v1_AuditPolicyRule(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/management/v1.Authentication":                                 schema_pkg_apis_management_v1_Authentication(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/management/v1.AuthenticationClusterAccountTemplates":          schema_pkg_apis_management_v1_AuthenticationClusterAccountTemplates(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/management/v1.AuthenticationGithub":                           schema_pkg_apis_management_v1_AuthenticationGithub(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/management/v1.AuthenticationGithubOrg":                        schema_pkg_apis_management_v1_AuthenticationGithubOrg(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/management/v1.AuthenticationGitlab":                           schema_pkg_apis_management_v1_AuthenticationGitlab(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/management/v1.AuthenticationGoogle":                           schema_pkg_apis_management_v1_AuthenticationGoogle(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/management/v1.AuthenticationGroupClusterAccountTemplate":      schema_pkg_apis_management_v1_AuthenticationGroupClusterAccountTemplate(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/management/v1.AuthenticationMicrosoft":                        schema_pkg_apis_management_v1_AuthenticationMicrosoft(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/management/v1.AuthenticationOIDC":                             schema_pkg_apis_management_v1_AuthenticationOIDC(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/management/v1.AuthenticationPassword":                         schema_pkg_apis_management_v1_AuthenticationPassword(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/management/v1.AuthenticationSAML":                             schema_pkg_apis_management_v1_AuthenticationSAML(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/management/v1.Cluster":                                        schema_pkg_apis_management_v1_Cluster(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/management/v1.ClusterAccess":                                  schema_pkg_apis_management_v1_ClusterAccess(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/management/v1.ClusterAccessList":                              schema_pkg_apis_management_v1_ClusterAccessList(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/management/v1.ClusterAccessSpec":                              schema_pkg_apis_management_v1_ClusterAccessSpec(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/management/v1.ClusterAccessStatus":                            schema_pkg_apis_management_v1_ClusterAccessStatus(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/management/v1.ClusterAccounts":                                schema_pkg_apis_management_v1_ClusterAccounts(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/management/v1.ClusterCharts":                                  schema_pkg_apis_management_v1_ClusterCharts(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/management/v1.ClusterChartsList":                              schema_pkg_apis_management_v1_ClusterChartsList(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/management/v1.ClusterConnect":                                 schema_pkg_apis_management_v1_ClusterConnect(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/management/v1.ClusterConnectList":                             schema_pkg_apis_management_v1_ClusterConnectList(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/management/v1.ClusterConnectSpec":                             schema_pkg_apis_management_v1_ClusterConnectSpec(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/management/v1.ClusterConnectStatus":                           schema_pkg_apis_management_v1_ClusterConnectStatus(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/management/v1.ClusterDomain":                                  schema_pkg_apis_management_v1_ClusterDomain(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/management/v1.ClusterDomainList":                              schema_pkg_apis_management_v1_ClusterDomainList(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/management/v1.ClusterList":                                    schema_pkg_apis_management_v1_ClusterList(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/management/v1.ClusterMember":                                  schema_pkg_apis_management_v1_ClusterMember(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/management/v1.ClusterMemberAccess":                            schema_pkg_apis_management_v1_ClusterMemberAccess(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/management/v1.ClusterMemberAccessList":                        schema_pkg_apis_management_v1_ClusterMemberAccessList(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/management/v1.ClusterMembers":                                 schema_pkg_apis_management_v1_ClusterMembers(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/management/v1.ClusterMembersList":                             schema_pkg_apis_management_v1_ClusterMembersList(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/management/v1.ClusterReset":                                   schema_pkg_apis_management_v1_ClusterReset(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/management/v1.ClusterResetList":                               schema_pkg_apis_management_v1_ClusterResetList(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/management/v1.ClusterRoleTemplate":                            schema_pkg_apis_management_v1_ClusterRoleTemplate(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/management/v1.ClusterRoleTemplateList":                        schema_pkg_apis_management_v1_ClusterRoleTemplateList(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/management/v1.ClusterRoleTemplateSpec":                        schema_pkg_apis_management_v1_ClusterRoleTemplateSpec(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/management/v1.ClusterRoleTemplateStatus":                      schema_pkg_apis_management_v1_ClusterRoleTemplateStatus(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/management/v1.ClusterSpec":                                    schema_pkg_apis_management_v1_ClusterSpec(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/management/v1.ClusterStatus":                                  schema_pkg_apis_management_v1_ClusterStatus(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/management/v1.ClusterVirtualClusterDefaults":                  schema_pkg_apis_management_v1_ClusterVirtualClusterDefaults(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/management/v1.ClusterVirtualClusterDefaultsList":              schema_pkg_apis_management_v1_ClusterVirtualClusterDefaultsList(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/management/v1.Config":                                         schema_pkg_apis_management_v1_Config(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/management/v1.ConfigList":                                     schema_pkg_apis_management_v1_ConfigList(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/management/v1.ConfigSpec":                                     schema_pkg_apis_management_v1_ConfigSpec(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/management/v1.ConfigStatus":                                   schema_pkg_apis_management_v1_ConfigStatus(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/management/v1.CustomerInfo":                                   schema_pkg_apis_management_v1_CustomerInfo(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/management/v1.DefaultPaymentMethod":                           schema_pkg_apis_management_v1_DefaultPaymentMethod(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/management/v1.DefaultPaymentMethodCard":                       schema_pkg_apis_management_v1_DefaultPaymentMethodCard(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/management/v1.DirectClusterEndpointToken":                     schema_pkg_apis_management_v1_DirectClusterEndpointToken(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/management/v1.DirectClusterEndpointTokenList":                 schema_pkg_apis_management_v1_DirectClusterEndpointTokenList(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/management/v1.DirectClusterEndpointTokenSpec":                 schema_pkg_apis_management_v1_DirectClusterEndpointTokenSpec(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/management/v1.DirectClusterEndpointTokenStatus":               schema_pkg_apis_management_v1_DirectClusterEndpointTokenStatus(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/management/v1.Event":                                          schema_pkg_apis_management_v1_Event(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/management/v1.EventList":                                      schema_pkg_apis_management_v1_EventList(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/management/v1.EventSpec":                                      schema_pkg_apis_management_v1_EventSpec(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/management/v1.EventStatus":                                    schema_pkg_apis_management_v1_EventStatus(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/management/v1.Feature":                                        schema_pkg_apis_management_v1_Feature(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/management/v1.FeatureList":                                    schema_pkg_apis_management_v1_FeatureList(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/management/v1.FeatureSpec":                                    schema_pkg_apis_management_v1_FeatureSpec(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/management/v1.FeatureStatus":                                  schema_pkg_apis_management_v1_FeatureStatus(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/management/v1.GroupResources":                                 schema_pkg_apis_management_v1_GroupResources(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/management/v1.IngressAuthToken":                               schema_pkg_apis_management_v1_IngressAuthToken(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/management/v1.IngressAuthTokenList":                           schema_pkg_apis_management_v1_IngressAuthTokenList(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/management/v1.IngressAuthTokenSpec":                           schema_pkg_apis_management_v1_IngressAuthTokenSpec(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/management/v1.IngressAuthTokenStatus":                         schema_pkg_apis_management_v1_IngressAuthTokenStatus(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/management/v1.Kiosk":                                          schema_pkg_apis_management_v1_Kiosk(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/management/v1.KioskList":                                      schema_pkg_apis_management_v1_KioskList(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/management/v1.KioskSpec":                                      schema_pkg_apis_management_v1_KioskSpec(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/management/v1.KioskStatus":                                    schema_pkg_apis_management_v1_KioskStatus(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/management/v1.License":                                        schema_pkg_apis_management_v1_License(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/management/v1.LicenseInfo":                                    schema_pkg_apis_management_v1_LicenseInfo(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/management/v1.LicenseList":                                    schema_pkg_apis_management_v1_LicenseList(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/management/v1.LicenseSpec":                                    schema_pkg_apis_management_v1_LicenseSpec(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/management/v1.LicenseStatus":                                  schema_pkg_apis_management_v1_LicenseStatus(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/management/v1.LicenseToken":                                   schema_pkg_apis_management_v1_LicenseToken(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/management/v1.LicenseTokenList":                               schema_pkg_apis_management_v1_LicenseTokenList(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/management/v1.LicenseTokenSpec":                               schema_pkg_apis_management_v1_LicenseTokenSpec(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/management/v1.LicenseTokenStatus":                             schema_pkg_apis_management_v1_LicenseTokenStatus(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/management/v1.LoftUpgrade":                                    schema_pkg_apis_management_v1_LoftUpgrade(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/management/v1.LoftUpgradeList":                                schema_pkg_apis_management_v1_LoftUpgradeList(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/management/v1.LoftUpgradeSpec":                                schema_pkg_apis_management_v1_LoftUpgradeSpec(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/management/v1.LoftUpgradeStatus":                              schema_pkg_apis_management_v1_LoftUpgradeStatus(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/management/v1.OIDC":                                           schema_pkg_apis_management_v1_OIDC(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/management/v1.OIDCClient":                                     schema_pkg_apis_management_v1_OIDCClient(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/management/v1.OwnedAccessKey":                                 schema_pkg_apis_management_v1_OwnedAccessKey(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/management/v1.OwnedAccessKeyList":                             schema_pkg_apis_management_v1_OwnedAccessKeyList(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/management/v1.OwnedAccessKeySpec":                             schema_pkg_apis_management_v1_OwnedAccessKeySpec(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/management/v1.OwnedAccessKeyStatus":                           schema_pkg_apis_management_v1_OwnedAccessKeyStatus(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/management/v1.Plan":                                           schema_pkg_apis_management_v1_Plan(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/management/v1.PlanProduct":                                    schema_pkg_apis_management_v1_PlanProduct(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/management/v1.PolicyViolation":                                schema_pkg_apis_management_v1_PolicyViolation(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/management/v1.PolicyViolationList":                            schema_pkg_apis_management_v1_PolicyViolationList(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/management/v1.PolicyViolationSpec":                            schema_pkg_apis_management_v1_PolicyViolationSpec(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/management/v1.PolicyViolationStatus":                          schema_pkg_apis_management_v1_PolicyViolationStatus(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/management/v1.PredefinedApp":                                  schema_pkg_apis_management_v1_PredefinedApp(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/management/v1.Project":                                        schema_pkg_apis_management_v1_Project(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/management/v1.ProjectChartInfo":                               schema_pkg_apis_management_v1_ProjectChartInfo(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/management/v1.ProjectChartInfoList":                           schema_pkg_apis_management_v1_ProjectChartInfoList(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/management/v1.ProjectChartInfoSpec":                           schema_pkg_apis_management_v1_ProjectChartInfoSpec(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/management/v1.ProjectChartInfoStatus":                         schema_pkg_apis_management_v1_ProjectChartInfoStatus(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/management/v1.ProjectCharts":                                  schema_pkg_apis_management_v1_ProjectCharts(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/management/v1.ProjectChartsList":                              schema_pkg_apis_management_v1_ProjectChartsList(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/management/v1.ProjectClusters":                                schema_pkg_apis_management_v1_ProjectClusters(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/management/v1.ProjectClustersList":                            schema_pkg_apis_management_v1_ProjectClustersList(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/management/v1.ProjectImportSpace":                             schema_pkg_apis_management_v1_ProjectImportSpace(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/management/v1.ProjectImportSpaceList":                         schema_pkg_apis_management_v1_ProjectImportSpaceList(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/management/v1.ProjectImportSpaceSource":                       schema_pkg_apis_management_v1_ProjectImportSpaceSource(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/management/v1.ProjectImportVirtualCluster":                    schema_pkg_apis_management_v1_ProjectImportVirtualCluster(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/management/v1.ProjectImportVirtualClusterList":                schema_pkg_apis_management_v1_ProjectImportVirtualClusterList(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/management/v1.ProjectImportVirtualClusterSource":              schema_pkg_apis_management_v1_ProjectImportVirtualClusterSource(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/management/v1.ProjectList":                                    schema_pkg_apis_management_v1_ProjectList(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/management/v1.ProjectMember":                                  schema_pkg_apis_management_v1_ProjectMember(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/management/v1.ProjectMembers":                                 schema_pkg_apis_management_v1_ProjectMembers(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/management/v1.ProjectMembersList":                             schema_pkg_apis_management_v1_ProjectMembersList(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/management/v1.ProjectMigrateSpaceInstance":                    schema_pkg_apis_management_v1_ProjectMigrateSpaceInstance(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/management/v1.ProjectMigrateSpaceInstanceList":                schema_pkg_apis_management_v1_ProjectMigrateSpaceInstanceList(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/management/v1.ProjectMigrateSpaceInstanceSource":              schema_pkg_apis_management_v1_ProjectMigrateSpaceInstanceSource(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/management/v1.ProjectMigrateVirtualClusterInstance":           schema_pkg_apis_management_v1_ProjectMigrateVirtualClusterInstance(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/management/v1.ProjectMigrateVirtualClusterInstanceList":       schema_pkg_apis_management_v1_ProjectMigrateVirtualClusterInstanceList(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/management/v1.ProjectMigrateVirtualClusterInstanceSource":     schema_pkg_apis_management_v1_ProjectMigrateVirtualClusterInstanceSource(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/management/v1.ProjectSecret":                                  schema_pkg_apis_management_v1_ProjectSecret(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/management/v1.ProjectSecretList":                              schema_pkg_apis_management_v1_ProjectSecretList(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/management/v1.ProjectSecretSpec":                              schema_pkg_apis_management_v1_ProjectSecretSpec(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/management/v1.ProjectSecretStatus":                            schema_pkg_apis_management_v1_ProjectSecretStatus(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/management/v1.ProjectSpec":                                    schema_pkg_apis_management_v1_ProjectSpec(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/management/v1.ProjectStatus":                                  schema_pkg_apis_management_v1_ProjectStatus(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/management/v1.ProjectTemplates":                               schema_pkg_apis_management_v1_ProjectTemplates(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/management/v1.ProjectTemplatesList":                           schema_pkg_apis_management_v1_ProjectTemplatesList(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/management/v1.Promotions":                                     schema_pkg_apis_management_v1_Promotions(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/management/v1.ResetAccessKey":                                 schema_pkg_apis_management_v1_ResetAccessKey(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/management/v1.ResetAccessKeyList":                             schema_pkg_apis_management_v1_ResetAccessKeyList(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/management/v1.ResetAccessKeySpec":                             schema_pkg_apis_management_v1_ResetAccessKeySpec(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/management/v1.ResetAccessKeyStatus":                           schema_pkg_apis_management_v1_ResetAccessKeyStatus(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/management/v1.ResourceLimit":                                  schema_pkg_apis_management_v1_ResourceLimit(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/management/v1.ResoureRequests":                                schema_pkg_apis_management_v1_ResoureRequests(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/management/v1.Self":                                           schema_pkg_apis_management_v1_Self(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/management/v1.SelfList":                                       schema_pkg_apis_management_v1_SelfList(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/management/v1.SelfSpec":                                       schema_pkg_apis_management_v1_SelfSpec(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/management/v1.SelfStatus":                                     schema_pkg_apis_management_v1_SelfStatus(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/management/v1.SelfSubjectAccessReview":                        schema_pkg_apis_management_v1_SelfSubjectAccessReview(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/management/v1.SelfSubjectAccessReviewList":                    schema_pkg_apis_management_v1_SelfSubjectAccessReviewList(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/management/v1.SelfSubjectAccessReviewSpec":                    schema_pkg_apis_management_v1_SelfSubjectAccessReviewSpec(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/management/v1.SelfSubjectAccessReviewStatus":                  schema_pkg_apis_management_v1_SelfSubjectAccessReviewStatus(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/management/v1.SharedSecret":                                   schema_pkg_apis_management_v1_SharedSecret(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/management/v1.SharedSecretList":                               schema_pkg_apis_management_v1_SharedSecretList(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/management/v1.SharedSecretSpec":                               schema_pkg_apis_management_v1_SharedSecretSpec(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/management/v1.SharedSecretStatus":                             schema_pkg_apis_management_v1_SharedSecretStatus(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/management/v1.SpaceConstraint":                                schema_pkg_apis_management_v1_SpaceConstraint(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/management/v1.SpaceConstraintList":                            schema_pkg_apis_management_v1_SpaceConstraintList(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/management/v1.SpaceConstraintSpec":                            schema_pkg_apis_management_v1_SpaceConstraintSpec(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/management/v1.SpaceConstraintStatus":                          schema_pkg_apis_management_v1_SpaceConstraintStatus(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/management/v1.SpaceInstance":                                  schema_pkg_apis_management_v1_SpaceInstance(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/management/v1.SpaceInstanceList":                              schema_pkg_apis_management_v1_SpaceInstanceList(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/management/v1.SpaceInstanceSpec":                              schema_pkg_apis_management_v1_SpaceInstanceSpec(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/management/v1.SpaceInstanceStatus":                            schema_pkg_apis_management_v1_SpaceInstanceStatus(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/management/v1.SpaceTemplate":                                  schema_pkg_apis_management_v1_SpaceTemplate(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/management/v1.SpaceTemplateList":                              schema_pkg_apis_management_v1_SpaceTemplateList(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/management/v1.SpaceTemplateSpec":                              schema_pkg_apis_management_v1_SpaceTemplateSpec(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/management/v1.SpaceTemplateStatus":                            schema_pkg_apis_management_v1_SpaceTemplateStatus(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/management/v1.SubjectAccessReview":                            schema_pkg_apis_management_v1_SubjectAccessReview(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/management/v1.SubjectAccessReviewList":                        schema_pkg_apis_management_v1_SubjectAccessReviewList(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/management/v1.SubjectAccessReviewSpec":                        schema_pkg_apis_management_v1_SubjectAccessReviewSpec(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/management/v1.SubjectAccessReviewStatus":                      schema_pkg_apis_management_v1_SubjectAccessReviewStatus(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/management/v1.SubscriptionInfo":                               schema_pkg_apis_management_v1_SubscriptionInfo(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/management/v1.Task":                                           schema_pkg_apis_management_v1_Task(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/management/v1.TaskList":                                       schema_pkg_apis_management_v1_TaskList(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/management/v1.TaskLog":                                        schema_pkg_apis_management_v1_TaskLog(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/management/v1.TaskLogList":                                    schema_pkg_apis_management_v1_TaskLogList(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/management/v1.TaskLogOptions":                                 schema_pkg_apis_management_v1_TaskLogOptions(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/management/v1.TaskSpec":                                       schema_pkg_apis_management_v1_TaskSpec(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/management/v1.TaskStatus":                                     schema_pkg_apis_management_v1_TaskStatus(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/management/v1.Team":                                           schema_pkg_apis_management_v1_Team(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/management/v1.TeamAccessKeys":                                 schema_pkg_apis_management_v1_TeamAccessKeys(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/management/v1.TeamAccessKeysList":                             schema_pkg_apis_management_v1_TeamAccessKeysList(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/management/v1.TeamClusters":                                   schema_pkg_apis_management_v1_TeamClusters(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/management/v1.TeamClustersList":                               schema_pkg_apis_management_v1_TeamClustersList(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/management/v1.TeamList":                                       schema_pkg_apis_management_v1_TeamList(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/management/v1.TeamSpec":                                       schema_pkg_apis_management_v1_TeamSpec(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/management/v1.TeamStatus":                                     schema_pkg_apis_management_v1_TeamStatus(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/management/v1.TrialPromotion":                                 schema_pkg_apis_management_v1_TrialPromotion(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/management/v1.User":                                           schema_pkg_apis_management_v1_User(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/management/v1.UserAccessKeys":                                 schema_pkg_apis_management_v1_UserAccessKeys(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/management/v1.UserAccessKeysList":                             schema_pkg_apis_management_v1_UserAccessKeysList(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/management/v1.UserClusters":                                   schema_pkg_apis_management_v1_UserClusters(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/management/v1.UserClustersList":                               schema_pkg_apis_management_v1_UserClustersList(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/management/v1.UserInfo":                                       schema_pkg_apis_management_v1_UserInfo(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/management/v1.UserList":                                       schema_pkg_apis_management_v1_UserList(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/management/v1.UserProfile":                                    schema_pkg_apis_management_v1_UserProfile(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/management/v1.UserProfileList":                                schema_pkg_apis_management_v1_UserProfileList(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/management/v1.UserQuotasOptions":                              schema_pkg_apis_management_v1_UserQuotasOptions(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/management/v1.UserSpacesOptions":                              schema_pkg_apis_management_v1_UserSpacesOptions(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/management/v1.UserSpec":                                       schema_pkg_apis_management_v1_UserSpec(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/management/v1.UserStatus":                                     schema_pkg_apis_management_v1_UserStatus(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/management/v1.UserVirtualClustersOptions":                     schema_pkg_apis_management_v1_UserVirtualClustersOptions(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/management/v1.VirtualClusterInstance":                         schema_pkg_apis_management_v1_VirtualClusterInstance(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/management/v1.VirtualClusterInstanceKubeConfig":               schema_pkg_apis_management_v1_VirtualClusterInstanceKubeConfig(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/management/v1.VirtualClusterInstanceKubeConfigList":           schema_pkg_apis_management_v1_VirtualClusterInstanceKubeConfigList(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/management/v1.VirtualClusterInstanceKubeConfigRequestOptions": schema_pkg_apis_management_v1_VirtualClusterInstanceKubeConfigRequestOptions(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/management/v1.VirtualClusterInstanceKubeConfigStatus":         schema_pkg_apis_management_v1_VirtualClusterInstanceKubeConfigStatus(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/management/v1.VirtualClusterInstanceList":                     schema_pkg_apis_management_v1_VirtualClusterInstanceList(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/management/v1.VirtualClusterInstanceLog":                      schema_pkg_apis_management_v1_VirtualClusterInstanceLog(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/management/v1.VirtualClusterInstanceLogList":                  schema_pkg_apis_management_v1_VirtualClusterInstanceLogList(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/management/v1.VirtualClusterInstanceLogOptions":               schema_pkg_apis_management_v1_VirtualClusterInstanceLogOptions(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/management/v1.VirtualClusterInstanceSpec":                     schema_pkg_apis_management_v1_VirtualClusterInstanceSpec(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/management/v1.VirtualClusterInstanceStatus":                   schema_pkg_apis_management_v1_VirtualClusterInstanceStatus(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/management/v1.VirtualClusterTemplate":                         schema_pkg_apis_management_v1_VirtualClusterTemplate(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/management/v1.VirtualClusterTemplateList":                     schema_pkg_apis_management_v1_VirtualClusterTemplateList(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/management/v1.VirtualClusterTemplateSpec":                     schema_pkg_apis_management_v1_VirtualClusterTemplateSpec(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/management/v1.VirtualClusterTemplateStatus":                   schema_pkg_apis_management_v1_VirtualClusterTemplateStatus(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/storage/v1.Access":                                            schema_pkg_apis_storage_v1_Access(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/storage/v1.AccessKey":                                         schema_pkg_apis_storage_v1_AccessKey(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/storage/v1.AccessKeyIdentity":                                 schema_pkg_apis_storage_v1_AccessKeyIdentity(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/storage/v1.AccessKeyList":                                     schema_pkg_apis_storage_v1_AccessKeyList(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/storage/v1.AccessKeyOIDC":                                     schema_pkg_apis_storage_v1_AccessKeyOIDC(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/storage/v1.AccessKeyOIDCProvider":                             schema_pkg_apis_storage_v1_AccessKeyOIDCProvider(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/storage/v1.AccessKeyScope":                                    schema_pkg_apis_storage_v1_AccessKeyScope(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/storage/v1.AccessKeyScopeProject":                             schema_pkg_apis_storage_v1_AccessKeyScopeProject(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/storage/v1.AccessKeyScopeRule":                                schema_pkg_apis_storage_v1_AccessKeyScopeRule(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/storage/v1.AccessKeyScopeSpace":                               schema_pkg_apis_storage_v1_AccessKeyScopeSpace(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/storage/v1.AccessKeyScopeVirtualCluster":                      schema_pkg_apis_storage_v1_AccessKeyScopeVirtualCluster(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/storage/v1.AccessKeySpec":                                     schema_pkg_apis_storage_v1_AccessKeySpec(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/storage/v1.AccessKeyStatus":                                   schema_pkg_apis_storage_v1_AccessKeyStatus(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/storage/v1.AccessKeyVirtualCluster":                           schema_pkg_apis_storage_v1_AccessKeyVirtualCluster(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/storage/v1.AccountClusterStatus":                              schema_pkg_apis_storage_v1_AccountClusterStatus(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/storage/v1.AccountClusterTemplateStatus":                      schema_pkg_apis_storage_v1_AccountClusterTemplateStatus(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/storage/v1.AllowedCluster":                                    schema_pkg_apis_storage_v1_AllowedCluster(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/storage/v1.AllowedClusterAccountTemplate":                     schema_pkg_apis_storage_v1_AllowedClusterAccountTemplate(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/storage/v1.AllowedTemplate":                                   schema_pkg_apis_storage_v1_AllowedTemplate(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/storage/v1.App":                                               schema_pkg_apis_storage_v1_App(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/storage/v1.AppConfig":                                         schema_pkg_apis_storage_v1_AppConfig(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/storage/v1.AppList":                                           schema_pkg_apis_storage_v1_AppList(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/storage/v1.AppParameter":                                      schema_pkg_apis_storage_v1_AppParameter(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/storage/v1.AppSpec":                                           schema_pkg_apis_storage_v1_AppSpec(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/storage/v1.AppStatus":                                         schema_pkg_apis_storage_v1_AppStatus(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/storage/v1.AppTask":                                           schema_pkg_apis_storage_v1_AppTask(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/storage/v1.AppVersion":                                        schema_pkg_apis_storage_v1_AppVersion(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/storage/v1.ArgoIntegrationSpec":                               schema_pkg_apis_storage_v1_ArgoIntegrationSpec(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/storage/v1.ArgoProjectPolicyRule":                             schema_pkg_apis_storage_v1_ArgoProjectPolicyRule(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/storage/v1.ArgoProjectRole":                                   schema_pkg_apis_storage_v1_ArgoProjectRole(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/storage/v1.ArgoProjectSpec":                                   schema_pkg_apis_storage_v1_ArgoProjectSpec(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/storage/v1.ArgoProjectSpecMetadata":                           schema_pkg_apis_storage_v1_ArgoProjectSpecMetadata(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/storage/v1.ArgoSSOSpec":                                       schema_pkg_apis_storage_v1_ArgoSSOSpec(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/storage/v1.Chart":                                             schema_pkg_apis_storage_v1_Chart(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/storage/v1.Cluster":                                           schema_pkg_apis_storage_v1_Cluster(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/storage/v1.ClusterAccess":                                     schema_pkg_apis_storage_v1_ClusterAccess(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/storage/v1.ClusterAccessList":                                 schema_pkg_apis_storage_v1_ClusterAccessList(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/storage/v1.ClusterAccessSpec":                                 schema_pkg_apis_storage_v1_ClusterAccessSpec(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/storage/v1.ClusterAccessStatus":                               schema_pkg_apis_storage_v1_ClusterAccessStatus(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/storage/v1.ClusterAccountTemplateClusterStatus":               schema_pkg_apis_storage_v1_ClusterAccountTemplateClusterStatus(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/storage/v1.ClusterList":                                       schema_pkg_apis_storage_v1_ClusterList(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/storage/v1.ClusterRef":                                        schema_pkg_apis_storage_v1_ClusterRef(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/storage/v1.ClusterRoleTemplate":                               schema_pkg_apis_storage_v1_ClusterRoleTemplate(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/storage/v1.ClusterRoleTemplateList":                           schema_pkg_apis_storage_v1_ClusterRoleTemplateList(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/storage/v1.ClusterRoleTemplateSpec":                           schema_pkg_apis_storage_v1_ClusterRoleTemplateSpec(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/storage/v1.ClusterRoleTemplateStatus":                         schema_pkg_apis_storage_v1_ClusterRoleTemplateStatus(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/storage/v1.ClusterRoleTemplateTemplate":                       schema_pkg_apis_storage_v1_ClusterRoleTemplateTemplate(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/storage/v1.ClusterSpec":                                       schema_pkg_apis_storage_v1_ClusterSpec(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/storage/v1.ClusterStatus":                                     schema_pkg_apis_storage_v1_ClusterStatus(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/storage/v1.ConstraintSpaceTemplate":                           schema_pkg_apis_storage_v1_ConstraintSpaceTemplate(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/storage/v1.GroupResources":                                    schema_pkg_apis_storage_v1_GroupResources(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/storage/v1.HelmChart":                                         schema_pkg_apis_storage_v1_HelmChart(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/storage/v1.HelmChartRepository":                               schema_pkg_apis_storage_v1_HelmChartRepository(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/storage/v1.HelmConfiguration":                                 schema_pkg_apis_storage_v1_HelmConfiguration(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/storage/v1.HelmTask":                                          schema_pkg_apis_storage_v1_HelmTask(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/storage/v1.HelmTaskRelease":                                   schema_pkg_apis_storage_v1_HelmTaskRelease(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/storage/v1.InstanceDeployedAppStatus":                         schema_pkg_apis_storage_v1_InstanceDeployedAppStatus(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/storage/v1.KindSecretRef":                                     schema_pkg_apis_storage_v1_KindSecretRef(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/storage/v1.LocalClusterAccessTemplate":                        schema_pkg_apis_storage_v1_LocalClusterAccessTemplate(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/storage/v1.LocalClusterRoleTemplate":                          schema_pkg_apis_storage_v1_LocalClusterRoleTemplate(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/storage/v1.LocalClusterRoleTemplateSpec":                      schema_pkg_apis_storage_v1_LocalClusterRoleTemplateSpec(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/storage/v1.LocalSpaceConstraintSpec":                          schema_pkg_apis_storage_v1_LocalSpaceConstraintSpec(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/storage/v1.LocalSpaceConstraintTemplate":                      schema_pkg_apis_storage_v1_LocalSpaceConstraintTemplate(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/storage/v1.Member":                                            schema_pkg_apis_storage_v1_Member(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/storage/v1.NamespacePattern":                                  schema_pkg_apis_storage_v1_NamespacePattern(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/storage/v1.Project":                                           schema_pkg_apis_storage_v1_Project(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/storage/v1.ProjectList":                                       schema_pkg_apis_storage_v1_ProjectList(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/storage/v1.ProjectSpec":                                       schema_pkg_apis_storage_v1_ProjectSpec(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/storage/v1.ProjectStatus":                                     schema_pkg_apis_storage_v1_ProjectStatus(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/storage/v1.QuotaStatus":                                       schema_pkg_apis_storage_v1_QuotaStatus(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/storage/v1.QuotaStatusProject":                                schema_pkg_apis_storage_v1_QuotaStatusProject(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/storage/v1.QuotaStatusUser":                                   schema_pkg_apis_storage_v1_QuotaStatusUser(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/storage/v1.QuotaStatusUserUsed":                               schema_pkg_apis_storage_v1_QuotaStatusUserUsed(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/storage/v1.Quotas":                                            schema_pkg_apis_storage_v1_Quotas(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/storage/v1.SecretRef":                                         schema_pkg_apis_storage_v1_SecretRef(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/storage/v1.SharedSecret":                                      schema_pkg_apis_storage_v1_SharedSecret(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/storage/v1.SharedSecretList":                                  schema_pkg_apis_storage_v1_SharedSecretList(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/storage/v1.SharedSecretSpec":                                  schema_pkg_apis_storage_v1_SharedSecretSpec(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/storage/v1.SharedSecretStatus":                                schema_pkg_apis_storage_v1_SharedSecretStatus(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/storage/v1.SpaceConstraint":                                   schema_pkg_apis_storage_v1_SpaceConstraint(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/storage/v1.SpaceConstraintList":                               schema_pkg_apis_storage_v1_SpaceConstraintList(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/storage/v1.SpaceConstraintSpec":                               schema_pkg_apis_storage_v1_SpaceConstraintSpec(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/storage/v1.SpaceConstraintStatus":                             schema_pkg_apis_storage_v1_SpaceConstraintStatus(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/storage/v1.SpaceCreationTask":                                 schema_pkg_apis_storage_v1_SpaceCreationTask(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/storage/v1.SpaceInstance":                                     schema_pkg_apis_storage_v1_SpaceInstance(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/storage/v1.SpaceInstanceList":                                 schema_pkg_apis_storage_v1_SpaceInstanceList(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/storage/v1.SpaceInstanceSpec":                                 schema_pkg_apis_storage_v1_SpaceInstanceSpec(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/storage/v1.SpaceInstanceStatus":                               schema_pkg_apis_storage_v1_SpaceInstanceStatus(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/storage/v1.SpaceTemplate":                                     schema_pkg_apis_storage_v1_SpaceTemplate(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/storage/v1.SpaceTemplateDefinition":                           schema_pkg_apis_storage_v1_SpaceTemplateDefinition(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/storage/v1.SpaceTemplateList":                                 schema_pkg_apis_storage_v1_SpaceTemplateList(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/storage/v1.SpaceTemplateSpec":                                 schema_pkg_apis_storage_v1_SpaceTemplateSpec(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/storage/v1.SpaceTemplateStatus":                               schema_pkg_apis_storage_v1_SpaceTemplateStatus(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/storage/v1.SpaceTemplateVersion":                              schema_pkg_apis_storage_v1_SpaceTemplateVersion(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/storage/v1.StreamContainer":                                   schema_pkg_apis_storage_v1_StreamContainer(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/storage/v1.Target":                                            schema_pkg_apis_storage_v1_Target(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/storage/v1.TargetCluster":                                     schema_pkg_apis_storage_v1_TargetCluster(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/storage/v1.TargetInstance":                                    schema_pkg_apis_storage_v1_TargetInstance(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/storage/v1.TargetVirtualCluster":                              schema_pkg_apis_storage_v1_TargetVirtualCluster(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/storage/v1.Task":                                              schema_pkg_apis_storage_v1_Task(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/storage/v1.TaskDefinition":                                    schema_pkg_apis_storage_v1_TaskDefinition(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/storage/v1.TaskList":                                          schema_pkg_apis_storage_v1_TaskList(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/storage/v1.TaskSpec":                                          schema_pkg_apis_storage_v1_TaskSpec(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/storage/v1.TaskStatus":                                        schema_pkg_apis_storage_v1_TaskStatus(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/storage/v1.Team":                                              schema_pkg_apis_storage_v1_Team(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/storage/v1.TeamList":                                          schema_pkg_apis_storage_v1_TeamList(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/storage/v1.TeamSpec":                                          schema_pkg_apis_storage_v1_TeamSpec(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/storage/v1.TeamStatus":                                        schema_pkg_apis_storage_v1_TeamStatus(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/storage/v1.TemplateMetadata":                                  schema_pkg_apis_storage_v1_TemplateMetadata(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/storage/v1.TemplateRef":                                       schema_pkg_apis_storage_v1_TemplateRef(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/storage/v1.User":                                              schema_pkg_apis_storage_v1_User(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/storage/v1.UserClusterAccountTemplate":                        schema_pkg_apis_storage_v1_UserClusterAccountTemplate(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/storage/v1.UserClusterAccountTemplateStatus":                  schema_pkg_apis_storage_v1_UserClusterAccountTemplateStatus(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/storage/v1.UserList":                                          schema_pkg_apis_storage_v1_UserList(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/storage/v1.UserOrTeam":                                        schema_pkg_apis_storage_v1_UserOrTeam(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/storage/v1.UserSpec":                                          schema_pkg_apis_storage_v1_UserSpec(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/storage/v1.UserStatus":                                        schema_pkg_apis_storage_v1_UserStatus(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/storage/v1.VirtualClusterClusterRef":                          schema_pkg_apis_storage_v1_VirtualClusterClusterRef(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/storage/v1.VirtualClusterCreationTask":                        schema_pkg_apis_storage_v1_VirtualClusterCreationTask(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/storage/v1.VirtualClusterInstance":                            schema_pkg_apis_storage_v1_VirtualClusterInstance(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/storage/v1.VirtualClusterInstanceList":                        schema_pkg_apis_storage_v1_VirtualClusterInstanceList(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/storage/v1.VirtualClusterInstanceSpec":                        schema_pkg_apis_storage_v1_VirtualClusterInstanceSpec(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/storage/v1.VirtualClusterInstanceStatus":                      schema_pkg_apis_storage_v1_VirtualClusterInstanceStatus(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/storage/v1.VirtualClusterSpaceTemplateDefinition":             schema_pkg_apis_storage_v1_VirtualClusterSpaceTemplateDefinition(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/storage/v1.VirtualClusterTemplate":                            schema_pkg_apis_storage_v1_VirtualClusterTemplate(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/storage/v1.VirtualClusterTemplateDefinition":                  schema_pkg_apis_storage_v1_VirtualClusterTemplateDefinition(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/storage/v1.VirtualClusterTemplateList":                        schema_pkg_apis_storage_v1_VirtualClusterTemplateList(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/storage/v1.VirtualClusterTemplateSpaceTemplateRef":            schema_pkg_apis_storage_v1_VirtualClusterTemplateSpaceTemplateRef(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/storage/v1.VirtualClusterTemplateSpec":                        schema_pkg_apis_storage_v1_VirtualClusterTemplateSpec(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/storage/v1.VirtualClusterTemplateStatus":                      schema_pkg_apis_storage_v1_VirtualClusterTemplateStatus(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/storage/v1.VirtualClusterTemplateVersion":                     schema_pkg_apis_storage_v1_VirtualClusterTemplateVersion(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/virtualcluster/v1.HelmRelease":                                schema_pkg_apis_virtualcluster_v1_HelmRelease(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/virtualcluster/v1.HelmReleaseList":                            schema_pkg_apis_virtualcluster_v1_HelmReleaseList(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/virtualcluster/v1.HelmReleaseSpec":                            schema_pkg_apis_virtualcluster_v1_HelmReleaseSpec(ref),
-		"github.com/loft-sh/api/v2/pkg/apis/virtualcluster/v1.HelmReleaseStatus":                          schema_pkg_apis_virtualcluster_v1_HelmReleaseStatus(ref),
+		"github.com/loft-sh/agentapi/v3/pkg/apis/loft/cluster/v1.AppliedMetadata":                         schema_apis_loft_cluster_v1_AppliedMetadata(ref),
+		"github.com/loft-sh/agentapi/v3/pkg/apis/loft/cluster/v1.AppliedObject":                           schema_apis_loft_cluster_v1_AppliedObject(ref),
+		"github.com/loft-sh/agentapi/v3/pkg/apis/loft/cluster/v1.Bash":                                    schema_apis_loft_cluster_v1_Bash(ref),
+		"github.com/loft-sh/agentapi/v3/pkg/apis/loft/cluster/v1.ChartInfo":                               schema_apis_loft_cluster_v1_ChartInfo(ref),
+		"github.com/loft-sh/agentapi/v3/pkg/apis/loft/cluster/v1.ChartInfoList":                           schema_apis_loft_cluster_v1_ChartInfoList(ref),
+		"github.com/loft-sh/agentapi/v3/pkg/apis/loft/cluster/v1.ChartInfoSpec":                           schema_apis_loft_cluster_v1_ChartInfoSpec(ref),
+		"github.com/loft-sh/agentapi/v3/pkg/apis/loft/cluster/v1.ChartInfoStatus":                         schema_apis_loft_cluster_v1_ChartInfoStatus(ref),
+		"github.com/loft-sh/agentapi/v3/pkg/apis/loft/cluster/v1.ClusterQuota":                            schema_apis_loft_cluster_v1_ClusterQuota(ref),
+		"github.com/loft-sh/agentapi/v3/pkg/apis/loft/cluster/v1.ClusterQuotaList":                        schema_apis_loft_cluster_v1_ClusterQuotaList(ref),
+		"github.com/loft-sh/agentapi/v3/pkg/apis/loft/cluster/v1.ClusterQuotaSpec":                        schema_apis_loft_cluster_v1_ClusterQuotaSpec(ref),
+		"github.com/loft-sh/agentapi/v3/pkg/apis/loft/cluster/v1.ClusterQuotaStatus":                      schema_apis_loft_cluster_v1_ClusterQuotaStatus(ref),
+		"github.com/loft-sh/agentapi/v3/pkg/apis/loft/cluster/v1.EntityInfo":                              schema_apis_loft_cluster_v1_EntityInfo(ref),
+		"github.com/loft-sh/agentapi/v3/pkg/apis/loft/cluster/v1.EpochInfo":                               schema_apis_loft_cluster_v1_EpochInfo(ref),
+		"github.com/loft-sh/agentapi/v3/pkg/apis/loft/cluster/v1.HelmRelease":                             schema_apis_loft_cluster_v1_HelmRelease(ref),
+		"github.com/loft-sh/agentapi/v3/pkg/apis/loft/cluster/v1.HelmReleaseApp":                          schema_apis_loft_cluster_v1_HelmReleaseApp(ref),
+		"github.com/loft-sh/agentapi/v3/pkg/apis/loft/cluster/v1.HelmReleaseConfig":                       schema_apis_loft_cluster_v1_HelmReleaseConfig(ref),
+		"github.com/loft-sh/agentapi/v3/pkg/apis/loft/cluster/v1.HelmReleaseList":                         schema_apis_loft_cluster_v1_HelmReleaseList(ref),
+		"github.com/loft-sh/agentapi/v3/pkg/apis/loft/cluster/v1.HelmReleaseSpec":                         schema_apis_loft_cluster_v1_HelmReleaseSpec(ref),
+		"github.com/loft-sh/agentapi/v3/pkg/apis/loft/cluster/v1.HelmReleaseStatus":                       schema_apis_loft_cluster_v1_HelmReleaseStatus(ref),
+		"github.com/loft-sh/agentapi/v3/pkg/apis/loft/cluster/v1.Info":                                    schema_apis_loft_cluster_v1_Info(ref),
+		"github.com/loft-sh/agentapi/v3/pkg/apis/loft/cluster/v1.LastActivityInfo":                        schema_apis_loft_cluster_v1_LastActivityInfo(ref),
+		"github.com/loft-sh/agentapi/v3/pkg/apis/loft/cluster/v1.LocalClusterAccess":                      schema_apis_loft_cluster_v1_LocalClusterAccess(ref),
+		"github.com/loft-sh/agentapi/v3/pkg/apis/loft/cluster/v1.LocalClusterAccessList":                  schema_apis_loft_cluster_v1_LocalClusterAccessList(ref),
+		"github.com/loft-sh/agentapi/v3/pkg/apis/loft/cluster/v1.LocalClusterAccessSpec":                  schema_apis_loft_cluster_v1_LocalClusterAccessSpec(ref),
+		"github.com/loft-sh/agentapi/v3/pkg/apis/loft/cluster/v1.LocalClusterAccessStatus":                schema_apis_loft_cluster_v1_LocalClusterAccessStatus(ref),
+		"github.com/loft-sh/agentapi/v3/pkg/apis/loft/cluster/v1.Maintainer":                              schema_apis_loft_cluster_v1_Maintainer(ref),
+		"github.com/loft-sh/agentapi/v3/pkg/apis/loft/cluster/v1.Metadata":                                schema_apis_loft_cluster_v1_Metadata(ref),
+		"github.com/loft-sh/agentapi/v3/pkg/apis/loft/cluster/v1.SleepModeConfig":                         schema_apis_loft_cluster_v1_SleepModeConfig(ref),
+		"github.com/loft-sh/agentapi/v3/pkg/apis/loft/cluster/v1.SleepModeConfigList":                     schema_apis_loft_cluster_v1_SleepModeConfigList(ref),
+		"github.com/loft-sh/agentapi/v3/pkg/apis/loft/cluster/v1.SleepModeConfigSpec":                     schema_apis_loft_cluster_v1_SleepModeConfigSpec(ref),
+		"github.com/loft-sh/agentapi/v3/pkg/apis/loft/cluster/v1.SleepModeConfigStatus":                   schema_apis_loft_cluster_v1_SleepModeConfigStatus(ref),
+		"github.com/loft-sh/agentapi/v3/pkg/apis/loft/cluster/v1.Space":                                   schema_apis_loft_cluster_v1_Space(ref),
+		"github.com/loft-sh/agentapi/v3/pkg/apis/loft/cluster/v1.SpaceConstraintNamespaceStatus":          schema_apis_loft_cluster_v1_SpaceConstraintNamespaceStatus(ref),
+		"github.com/loft-sh/agentapi/v3/pkg/apis/loft/cluster/v1.SpaceList":                               schema_apis_loft_cluster_v1_SpaceList(ref),
+		"github.com/loft-sh/agentapi/v3/pkg/apis/loft/cluster/v1.SpaceObjectsNamespaceStatus":             schema_apis_loft_cluster_v1_SpaceObjectsNamespaceStatus(ref),
+		"github.com/loft-sh/agentapi/v3/pkg/apis/loft/cluster/v1.SpaceSpec":                               schema_apis_loft_cluster_v1_SpaceSpec(ref),
+		"github.com/loft-sh/agentapi/v3/pkg/apis/loft/cluster/v1.SpaceStatus":                             schema_apis_loft_cluster_v1_SpaceStatus(ref),
+		"github.com/loft-sh/agentapi/v3/pkg/apis/loft/cluster/v1.TemplateSyncStatus":                      schema_apis_loft_cluster_v1_TemplateSyncStatus(ref),
+		"github.com/loft-sh/agentapi/v3/pkg/apis/loft/cluster/v1.UserOrTeam":                              schema_apis_loft_cluster_v1_UserOrTeam(ref),
+		"github.com/loft-sh/agentapi/v3/pkg/apis/loft/cluster/v1.VirtualCluster":                          schema_apis_loft_cluster_v1_VirtualCluster(ref),
+		"github.com/loft-sh/agentapi/v3/pkg/apis/loft/cluster/v1.VirtualClusterList":                      schema_apis_loft_cluster_v1_VirtualClusterList(ref),
+		"github.com/loft-sh/agentapi/v3/pkg/apis/loft/cluster/v1.VirtualClusterSpec":                      schema_apis_loft_cluster_v1_VirtualClusterSpec(ref),
+		"github.com/loft-sh/agentapi/v3/pkg/apis/loft/cluster/v1.VirtualClusterStatus":                    schema_apis_loft_cluster_v1_VirtualClusterStatus(ref),
+		"github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.AccessQuota":                             schema_apis_loft_storage_v1_AccessQuota(ref),
+		"github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.AppReference":                            schema_apis_loft_storage_v1_AppReference(ref),
+		"github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.Chart":                                   schema_apis_loft_storage_v1_Chart(ref),
+		"github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.ChartStatus":                             schema_apis_loft_storage_v1_ChartStatus(ref),
+		"github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.ClusterQuota":                            schema_apis_loft_storage_v1_ClusterQuota(ref),
+		"github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.ClusterQuotaList":                        schema_apis_loft_storage_v1_ClusterQuotaList(ref),
+		"github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.ClusterQuotaSpec":                        schema_apis_loft_storage_v1_ClusterQuotaSpec(ref),
+		"github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.ClusterQuotaStatus":                      schema_apis_loft_storage_v1_ClusterQuotaStatus(ref),
+		"github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.ClusterQuotaStatusByNamespace":           schema_apis_loft_storage_v1_ClusterQuotaStatusByNamespace(ref),
+		"github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.ClusterRoleRef":                          schema_apis_loft_storage_v1_ClusterRoleRef(ref),
+		"github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.Condition":                               schema_apis_loft_storage_v1_Condition(ref),
+		"github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.InstanceAccess":                          schema_apis_loft_storage_v1_InstanceAccess(ref),
+		"github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.InstanceAccessRule":                      schema_apis_loft_storage_v1_InstanceAccessRule(ref),
+		"github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.LocalClusterAccess":                      schema_apis_loft_storage_v1_LocalClusterAccess(ref),
+		"github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.LocalClusterAccessList":                  schema_apis_loft_storage_v1_LocalClusterAccessList(ref),
+		"github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.LocalClusterAccessSpec":                  schema_apis_loft_storage_v1_LocalClusterAccessSpec(ref),
+		"github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.LocalClusterAccessStatus":                schema_apis_loft_storage_v1_LocalClusterAccessStatus(ref),
+		"github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.LocalTeam":                               schema_apis_loft_storage_v1_LocalTeam(ref),
+		"github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.LocalTeamList":                           schema_apis_loft_storage_v1_LocalTeamList(ref),
+		"github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.LocalTeamSpec":                           schema_apis_loft_storage_v1_LocalTeamSpec(ref),
+		"github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.LocalTeamStatus":                         schema_apis_loft_storage_v1_LocalTeamStatus(ref),
+		"github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.LocalUser":                               schema_apis_loft_storage_v1_LocalUser(ref),
+		"github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.LocalUserList":                           schema_apis_loft_storage_v1_LocalUserList(ref),
+		"github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.LocalUserSpec":                           schema_apis_loft_storage_v1_LocalUserSpec(ref),
+		"github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.LocalUserStatus":                         schema_apis_loft_storage_v1_LocalUserStatus(ref),
+		"github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.ObjectsStatus":                           schema_apis_loft_storage_v1_ObjectsStatus(ref),
+		"github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.PodSelector":                             schema_apis_loft_storage_v1_PodSelector(ref),
+		"github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.SecretRef":                               schema_apis_loft_storage_v1_SecretRef(ref),
+		"github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.TemplateHelmChart":                       schema_apis_loft_storage_v1_TemplateHelmChart(ref),
+		"github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.UserOrTeam":                              schema_apis_loft_storage_v1_UserOrTeam(ref),
+		"github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.VirtualCluster":                          schema_apis_loft_storage_v1_VirtualCluster(ref),
+		"github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.VirtualClusterAccessPoint":               schema_apis_loft_storage_v1_VirtualClusterAccessPoint(ref),
+		"github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.VirtualClusterAccessPointIngressSpec":    schema_apis_loft_storage_v1_VirtualClusterAccessPointIngressSpec(ref),
+		"github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.VirtualClusterCommonSpec":                schema_apis_loft_storage_v1_VirtualClusterCommonSpec(ref),
+		"github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.VirtualClusterHelmChart":                 schema_apis_loft_storage_v1_VirtualClusterHelmChart(ref),
+		"github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.VirtualClusterHelmRelease":               schema_apis_loft_storage_v1_VirtualClusterHelmRelease(ref),
+		"github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.VirtualClusterHelmReleaseStatus":         schema_apis_loft_storage_v1_VirtualClusterHelmReleaseStatus(ref),
+		"github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.VirtualClusterList":                      schema_apis_loft_storage_v1_VirtualClusterList(ref),
+		"github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.VirtualClusterSpec":                      schema_apis_loft_storage_v1_VirtualClusterSpec(ref),
+		"github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.VirtualClusterStatus":                    schema_apis_loft_storage_v1_VirtualClusterStatus(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/audit/v1.Event":                                               schema_pkg_apis_audit_v1_Event(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/audit/v1.EventList":                                           schema_pkg_apis_audit_v1_EventList(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/audit/v1.ObjectReference":                                     schema_pkg_apis_audit_v1_ObjectReference(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/management/v1.AgentConfig":                                    schema_pkg_apis_management_v1_AgentConfig(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/management/v1.AgentConfigSpec":                                schema_pkg_apis_management_v1_AgentConfigSpec(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/management/v1.AgentConfigStatus":                              schema_pkg_apis_management_v1_AgentConfigStatus(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/management/v1.Analytics":                                      schema_pkg_apis_management_v1_Analytics(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/management/v1.Announcement":                                   schema_pkg_apis_management_v1_Announcement(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/management/v1.AnnouncementList":                               schema_pkg_apis_management_v1_AnnouncementList(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/management/v1.AnnouncementSpec":                               schema_pkg_apis_management_v1_AnnouncementSpec(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/management/v1.AnnouncementStatus":                             schema_pkg_apis_management_v1_AnnouncementStatus(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/management/v1.App":                                            schema_pkg_apis_management_v1_App(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/management/v1.AppList":                                        schema_pkg_apis_management_v1_AppList(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/management/v1.AppSpec":                                        schema_pkg_apis_management_v1_AppSpec(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/management/v1.AppStatus":                                      schema_pkg_apis_management_v1_AppStatus(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/management/v1.Apps":                                           schema_pkg_apis_management_v1_Apps(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/management/v1.Audit":                                          schema_pkg_apis_management_v1_Audit(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/management/v1.AuditPolicy":                                    schema_pkg_apis_management_v1_AuditPolicy(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/management/v1.AuditPolicyRule":                                schema_pkg_apis_management_v1_AuditPolicyRule(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/management/v1.Authentication":                                 schema_pkg_apis_management_v1_Authentication(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/management/v1.AuthenticationClusterAccountTemplates":          schema_pkg_apis_management_v1_AuthenticationClusterAccountTemplates(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/management/v1.AuthenticationGithub":                           schema_pkg_apis_management_v1_AuthenticationGithub(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/management/v1.AuthenticationGithubOrg":                        schema_pkg_apis_management_v1_AuthenticationGithubOrg(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/management/v1.AuthenticationGitlab":                           schema_pkg_apis_management_v1_AuthenticationGitlab(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/management/v1.AuthenticationGoogle":                           schema_pkg_apis_management_v1_AuthenticationGoogle(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/management/v1.AuthenticationGroupClusterAccountTemplate":      schema_pkg_apis_management_v1_AuthenticationGroupClusterAccountTemplate(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/management/v1.AuthenticationMicrosoft":                        schema_pkg_apis_management_v1_AuthenticationMicrosoft(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/management/v1.AuthenticationOIDC":                             schema_pkg_apis_management_v1_AuthenticationOIDC(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/management/v1.AuthenticationPassword":                         schema_pkg_apis_management_v1_AuthenticationPassword(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/management/v1.AuthenticationSAML":                             schema_pkg_apis_management_v1_AuthenticationSAML(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/management/v1.Cluster":                                        schema_pkg_apis_management_v1_Cluster(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/management/v1.ClusterAccess":                                  schema_pkg_apis_management_v1_ClusterAccess(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/management/v1.ClusterAccessList":                              schema_pkg_apis_management_v1_ClusterAccessList(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/management/v1.ClusterAccessSpec":                              schema_pkg_apis_management_v1_ClusterAccessSpec(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/management/v1.ClusterAccessStatus":                            schema_pkg_apis_management_v1_ClusterAccessStatus(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/management/v1.ClusterAccounts":                                schema_pkg_apis_management_v1_ClusterAccounts(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/management/v1.ClusterCharts":                                  schema_pkg_apis_management_v1_ClusterCharts(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/management/v1.ClusterChartsList":                              schema_pkg_apis_management_v1_ClusterChartsList(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/management/v1.ClusterConnect":                                 schema_pkg_apis_management_v1_ClusterConnect(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/management/v1.ClusterConnectList":                             schema_pkg_apis_management_v1_ClusterConnectList(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/management/v1.ClusterConnectSpec":                             schema_pkg_apis_management_v1_ClusterConnectSpec(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/management/v1.ClusterConnectStatus":                           schema_pkg_apis_management_v1_ClusterConnectStatus(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/management/v1.ClusterDomain":                                  schema_pkg_apis_management_v1_ClusterDomain(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/management/v1.ClusterDomainList":                              schema_pkg_apis_management_v1_ClusterDomainList(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/management/v1.ClusterList":                                    schema_pkg_apis_management_v1_ClusterList(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/management/v1.ClusterMember":                                  schema_pkg_apis_management_v1_ClusterMember(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/management/v1.ClusterMemberAccess":                            schema_pkg_apis_management_v1_ClusterMemberAccess(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/management/v1.ClusterMemberAccessList":                        schema_pkg_apis_management_v1_ClusterMemberAccessList(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/management/v1.ClusterMembers":                                 schema_pkg_apis_management_v1_ClusterMembers(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/management/v1.ClusterMembersList":                             schema_pkg_apis_management_v1_ClusterMembersList(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/management/v1.ClusterReset":                                   schema_pkg_apis_management_v1_ClusterReset(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/management/v1.ClusterResetList":                               schema_pkg_apis_management_v1_ClusterResetList(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/management/v1.ClusterRoleTemplate":                            schema_pkg_apis_management_v1_ClusterRoleTemplate(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/management/v1.ClusterRoleTemplateList":                        schema_pkg_apis_management_v1_ClusterRoleTemplateList(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/management/v1.ClusterRoleTemplateSpec":                        schema_pkg_apis_management_v1_ClusterRoleTemplateSpec(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/management/v1.ClusterRoleTemplateStatus":                      schema_pkg_apis_management_v1_ClusterRoleTemplateStatus(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/management/v1.ClusterSpec":                                    schema_pkg_apis_management_v1_ClusterSpec(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/management/v1.ClusterStatus":                                  schema_pkg_apis_management_v1_ClusterStatus(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/management/v1.ClusterVirtualClusterDefaults":                  schema_pkg_apis_management_v1_ClusterVirtualClusterDefaults(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/management/v1.ClusterVirtualClusterDefaultsList":              schema_pkg_apis_management_v1_ClusterVirtualClusterDefaultsList(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/management/v1.Config":                                         schema_pkg_apis_management_v1_Config(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/management/v1.ConfigList":                                     schema_pkg_apis_management_v1_ConfigList(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/management/v1.ConfigSpec":                                     schema_pkg_apis_management_v1_ConfigSpec(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/management/v1.ConfigStatus":                                   schema_pkg_apis_management_v1_ConfigStatus(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/management/v1.CustomerInfo":                                   schema_pkg_apis_management_v1_CustomerInfo(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/management/v1.DefaultPaymentMethod":                           schema_pkg_apis_management_v1_DefaultPaymentMethod(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/management/v1.DefaultPaymentMethodCard":                       schema_pkg_apis_management_v1_DefaultPaymentMethodCard(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/management/v1.DirectClusterEndpointToken":                     schema_pkg_apis_management_v1_DirectClusterEndpointToken(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/management/v1.DirectClusterEndpointTokenList":                 schema_pkg_apis_management_v1_DirectClusterEndpointTokenList(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/management/v1.DirectClusterEndpointTokenSpec":                 schema_pkg_apis_management_v1_DirectClusterEndpointTokenSpec(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/management/v1.DirectClusterEndpointTokenStatus":               schema_pkg_apis_management_v1_DirectClusterEndpointTokenStatus(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/management/v1.Event":                                          schema_pkg_apis_management_v1_Event(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/management/v1.EventList":                                      schema_pkg_apis_management_v1_EventList(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/management/v1.EventSpec":                                      schema_pkg_apis_management_v1_EventSpec(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/management/v1.EventStatus":                                    schema_pkg_apis_management_v1_EventStatus(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/management/v1.Feature":                                        schema_pkg_apis_management_v1_Feature(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/management/v1.FeatureList":                                    schema_pkg_apis_management_v1_FeatureList(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/management/v1.FeatureSpec":                                    schema_pkg_apis_management_v1_FeatureSpec(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/management/v1.FeatureStatus":                                  schema_pkg_apis_management_v1_FeatureStatus(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/management/v1.GroupResources":                                 schema_pkg_apis_management_v1_GroupResources(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/management/v1.IngressAuthToken":                               schema_pkg_apis_management_v1_IngressAuthToken(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/management/v1.IngressAuthTokenList":                           schema_pkg_apis_management_v1_IngressAuthTokenList(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/management/v1.IngressAuthTokenSpec":                           schema_pkg_apis_management_v1_IngressAuthTokenSpec(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/management/v1.IngressAuthTokenStatus":                         schema_pkg_apis_management_v1_IngressAuthTokenStatus(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/management/v1.Kiosk":                                          schema_pkg_apis_management_v1_Kiosk(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/management/v1.KioskList":                                      schema_pkg_apis_management_v1_KioskList(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/management/v1.KioskSpec":                                      schema_pkg_apis_management_v1_KioskSpec(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/management/v1.KioskStatus":                                    schema_pkg_apis_management_v1_KioskStatus(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/management/v1.License":                                        schema_pkg_apis_management_v1_License(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/management/v1.LicenseInfo":                                    schema_pkg_apis_management_v1_LicenseInfo(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/management/v1.LicenseList":                                    schema_pkg_apis_management_v1_LicenseList(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/management/v1.LicenseSpec":                                    schema_pkg_apis_management_v1_LicenseSpec(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/management/v1.LicenseStatus":                                  schema_pkg_apis_management_v1_LicenseStatus(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/management/v1.LicenseToken":                                   schema_pkg_apis_management_v1_LicenseToken(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/management/v1.LicenseTokenList":                               schema_pkg_apis_management_v1_LicenseTokenList(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/management/v1.LicenseTokenSpec":                               schema_pkg_apis_management_v1_LicenseTokenSpec(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/management/v1.LicenseTokenStatus":                             schema_pkg_apis_management_v1_LicenseTokenStatus(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/management/v1.LoftUpgrade":                                    schema_pkg_apis_management_v1_LoftUpgrade(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/management/v1.LoftUpgradeList":                                schema_pkg_apis_management_v1_LoftUpgradeList(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/management/v1.LoftUpgradeSpec":                                schema_pkg_apis_management_v1_LoftUpgradeSpec(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/management/v1.LoftUpgradeStatus":                              schema_pkg_apis_management_v1_LoftUpgradeStatus(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/management/v1.OIDC":                                           schema_pkg_apis_management_v1_OIDC(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/management/v1.OIDCClient":                                     schema_pkg_apis_management_v1_OIDCClient(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/management/v1.OwnedAccessKey":                                 schema_pkg_apis_management_v1_OwnedAccessKey(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/management/v1.OwnedAccessKeyList":                             schema_pkg_apis_management_v1_OwnedAccessKeyList(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/management/v1.OwnedAccessKeySpec":                             schema_pkg_apis_management_v1_OwnedAccessKeySpec(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/management/v1.OwnedAccessKeyStatus":                           schema_pkg_apis_management_v1_OwnedAccessKeyStatus(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/management/v1.Plan":                                           schema_pkg_apis_management_v1_Plan(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/management/v1.PlanProduct":                                    schema_pkg_apis_management_v1_PlanProduct(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/management/v1.PolicyViolation":                                schema_pkg_apis_management_v1_PolicyViolation(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/management/v1.PolicyViolationList":                            schema_pkg_apis_management_v1_PolicyViolationList(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/management/v1.PolicyViolationSpec":                            schema_pkg_apis_management_v1_PolicyViolationSpec(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/management/v1.PolicyViolationStatus":                          schema_pkg_apis_management_v1_PolicyViolationStatus(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/management/v1.PredefinedApp":                                  schema_pkg_apis_management_v1_PredefinedApp(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/management/v1.Project":                                        schema_pkg_apis_management_v1_Project(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/management/v1.ProjectChartInfo":                               schema_pkg_apis_management_v1_ProjectChartInfo(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/management/v1.ProjectChartInfoList":                           schema_pkg_apis_management_v1_ProjectChartInfoList(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/management/v1.ProjectChartInfoSpec":                           schema_pkg_apis_management_v1_ProjectChartInfoSpec(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/management/v1.ProjectChartInfoStatus":                         schema_pkg_apis_management_v1_ProjectChartInfoStatus(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/management/v1.ProjectCharts":                                  schema_pkg_apis_management_v1_ProjectCharts(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/management/v1.ProjectChartsList":                              schema_pkg_apis_management_v1_ProjectChartsList(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/management/v1.ProjectClusters":                                schema_pkg_apis_management_v1_ProjectClusters(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/management/v1.ProjectClustersList":                            schema_pkg_apis_management_v1_ProjectClustersList(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/management/v1.ProjectImportSpace":                             schema_pkg_apis_management_v1_ProjectImportSpace(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/management/v1.ProjectImportSpaceList":                         schema_pkg_apis_management_v1_ProjectImportSpaceList(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/management/v1.ProjectImportSpaceSource":                       schema_pkg_apis_management_v1_ProjectImportSpaceSource(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/management/v1.ProjectImportVirtualCluster":                    schema_pkg_apis_management_v1_ProjectImportVirtualCluster(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/management/v1.ProjectImportVirtualClusterList":                schema_pkg_apis_management_v1_ProjectImportVirtualClusterList(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/management/v1.ProjectImportVirtualClusterSource":              schema_pkg_apis_management_v1_ProjectImportVirtualClusterSource(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/management/v1.ProjectList":                                    schema_pkg_apis_management_v1_ProjectList(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/management/v1.ProjectMember":                                  schema_pkg_apis_management_v1_ProjectMember(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/management/v1.ProjectMembers":                                 schema_pkg_apis_management_v1_ProjectMembers(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/management/v1.ProjectMembersList":                             schema_pkg_apis_management_v1_ProjectMembersList(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/management/v1.ProjectMigrateSpaceInstance":                    schema_pkg_apis_management_v1_ProjectMigrateSpaceInstance(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/management/v1.ProjectMigrateSpaceInstanceList":                schema_pkg_apis_management_v1_ProjectMigrateSpaceInstanceList(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/management/v1.ProjectMigrateSpaceInstanceSource":              schema_pkg_apis_management_v1_ProjectMigrateSpaceInstanceSource(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/management/v1.ProjectMigrateVirtualClusterInstance":           schema_pkg_apis_management_v1_ProjectMigrateVirtualClusterInstance(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/management/v1.ProjectMigrateVirtualClusterInstanceList":       schema_pkg_apis_management_v1_ProjectMigrateVirtualClusterInstanceList(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/management/v1.ProjectMigrateVirtualClusterInstanceSource":     schema_pkg_apis_management_v1_ProjectMigrateVirtualClusterInstanceSource(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/management/v1.ProjectSecret":                                  schema_pkg_apis_management_v1_ProjectSecret(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/management/v1.ProjectSecretList":                              schema_pkg_apis_management_v1_ProjectSecretList(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/management/v1.ProjectSecretSpec":                              schema_pkg_apis_management_v1_ProjectSecretSpec(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/management/v1.ProjectSecretStatus":                            schema_pkg_apis_management_v1_ProjectSecretStatus(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/management/v1.ProjectSpec":                                    schema_pkg_apis_management_v1_ProjectSpec(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/management/v1.ProjectStatus":                                  schema_pkg_apis_management_v1_ProjectStatus(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/management/v1.ProjectTemplates":                               schema_pkg_apis_management_v1_ProjectTemplates(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/management/v1.ProjectTemplatesList":                           schema_pkg_apis_management_v1_ProjectTemplatesList(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/management/v1.Promotions":                                     schema_pkg_apis_management_v1_Promotions(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/management/v1.ResetAccessKey":                                 schema_pkg_apis_management_v1_ResetAccessKey(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/management/v1.ResetAccessKeyList":                             schema_pkg_apis_management_v1_ResetAccessKeyList(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/management/v1.ResetAccessKeySpec":                             schema_pkg_apis_management_v1_ResetAccessKeySpec(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/management/v1.ResetAccessKeyStatus":                           schema_pkg_apis_management_v1_ResetAccessKeyStatus(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/management/v1.ResourceLimit":                                  schema_pkg_apis_management_v1_ResourceLimit(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/management/v1.ResoureRequests":                                schema_pkg_apis_management_v1_ResoureRequests(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/management/v1.Self":                                           schema_pkg_apis_management_v1_Self(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/management/v1.SelfList":                                       schema_pkg_apis_management_v1_SelfList(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/management/v1.SelfSpec":                                       schema_pkg_apis_management_v1_SelfSpec(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/management/v1.SelfStatus":                                     schema_pkg_apis_management_v1_SelfStatus(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/management/v1.SelfSubjectAccessReview":                        schema_pkg_apis_management_v1_SelfSubjectAccessReview(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/management/v1.SelfSubjectAccessReviewList":                    schema_pkg_apis_management_v1_SelfSubjectAccessReviewList(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/management/v1.SelfSubjectAccessReviewSpec":                    schema_pkg_apis_management_v1_SelfSubjectAccessReviewSpec(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/management/v1.SelfSubjectAccessReviewStatus":                  schema_pkg_apis_management_v1_SelfSubjectAccessReviewStatus(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/management/v1.SharedSecret":                                   schema_pkg_apis_management_v1_SharedSecret(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/management/v1.SharedSecretList":                               schema_pkg_apis_management_v1_SharedSecretList(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/management/v1.SharedSecretSpec":                               schema_pkg_apis_management_v1_SharedSecretSpec(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/management/v1.SharedSecretStatus":                             schema_pkg_apis_management_v1_SharedSecretStatus(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/management/v1.SpaceConstraint":                                schema_pkg_apis_management_v1_SpaceConstraint(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/management/v1.SpaceConstraintList":                            schema_pkg_apis_management_v1_SpaceConstraintList(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/management/v1.SpaceConstraintSpec":                            schema_pkg_apis_management_v1_SpaceConstraintSpec(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/management/v1.SpaceConstraintStatus":                          schema_pkg_apis_management_v1_SpaceConstraintStatus(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/management/v1.SpaceInstance":                                  schema_pkg_apis_management_v1_SpaceInstance(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/management/v1.SpaceInstanceList":                              schema_pkg_apis_management_v1_SpaceInstanceList(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/management/v1.SpaceInstanceSpec":                              schema_pkg_apis_management_v1_SpaceInstanceSpec(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/management/v1.SpaceInstanceStatus":                            schema_pkg_apis_management_v1_SpaceInstanceStatus(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/management/v1.SpaceTemplate":                                  schema_pkg_apis_management_v1_SpaceTemplate(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/management/v1.SpaceTemplateList":                              schema_pkg_apis_management_v1_SpaceTemplateList(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/management/v1.SpaceTemplateSpec":                              schema_pkg_apis_management_v1_SpaceTemplateSpec(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/management/v1.SpaceTemplateStatus":                            schema_pkg_apis_management_v1_SpaceTemplateStatus(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/management/v1.SubjectAccessReview":                            schema_pkg_apis_management_v1_SubjectAccessReview(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/management/v1.SubjectAccessReviewList":                        schema_pkg_apis_management_v1_SubjectAccessReviewList(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/management/v1.SubjectAccessReviewSpec":                        schema_pkg_apis_management_v1_SubjectAccessReviewSpec(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/management/v1.SubjectAccessReviewStatus":                      schema_pkg_apis_management_v1_SubjectAccessReviewStatus(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/management/v1.SubscriptionInfo":                               schema_pkg_apis_management_v1_SubscriptionInfo(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/management/v1.Task":                                           schema_pkg_apis_management_v1_Task(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/management/v1.TaskList":                                       schema_pkg_apis_management_v1_TaskList(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/management/v1.TaskLog":                                        schema_pkg_apis_management_v1_TaskLog(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/management/v1.TaskLogList":                                    schema_pkg_apis_management_v1_TaskLogList(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/management/v1.TaskLogOptions":                                 schema_pkg_apis_management_v1_TaskLogOptions(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/management/v1.TaskSpec":                                       schema_pkg_apis_management_v1_TaskSpec(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/management/v1.TaskStatus":                                     schema_pkg_apis_management_v1_TaskStatus(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/management/v1.Team":                                           schema_pkg_apis_management_v1_Team(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/management/v1.TeamAccessKeys":                                 schema_pkg_apis_management_v1_TeamAccessKeys(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/management/v1.TeamAccessKeysList":                             schema_pkg_apis_management_v1_TeamAccessKeysList(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/management/v1.TeamClusters":                                   schema_pkg_apis_management_v1_TeamClusters(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/management/v1.TeamClustersList":                               schema_pkg_apis_management_v1_TeamClustersList(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/management/v1.TeamList":                                       schema_pkg_apis_management_v1_TeamList(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/management/v1.TeamSpec":                                       schema_pkg_apis_management_v1_TeamSpec(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/management/v1.TeamStatus":                                     schema_pkg_apis_management_v1_TeamStatus(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/management/v1.TrialPromotion":                                 schema_pkg_apis_management_v1_TrialPromotion(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/management/v1.User":                                           schema_pkg_apis_management_v1_User(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/management/v1.UserAccessKeys":                                 schema_pkg_apis_management_v1_UserAccessKeys(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/management/v1.UserAccessKeysList":                             schema_pkg_apis_management_v1_UserAccessKeysList(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/management/v1.UserClusters":                                   schema_pkg_apis_management_v1_UserClusters(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/management/v1.UserClustersList":                               schema_pkg_apis_management_v1_UserClustersList(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/management/v1.UserInfo":                                       schema_pkg_apis_management_v1_UserInfo(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/management/v1.UserList":                                       schema_pkg_apis_management_v1_UserList(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/management/v1.UserProfile":                                    schema_pkg_apis_management_v1_UserProfile(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/management/v1.UserProfileList":                                schema_pkg_apis_management_v1_UserProfileList(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/management/v1.UserQuotasOptions":                              schema_pkg_apis_management_v1_UserQuotasOptions(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/management/v1.UserSpacesOptions":                              schema_pkg_apis_management_v1_UserSpacesOptions(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/management/v1.UserSpec":                                       schema_pkg_apis_management_v1_UserSpec(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/management/v1.UserStatus":                                     schema_pkg_apis_management_v1_UserStatus(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/management/v1.UserVirtualClustersOptions":                     schema_pkg_apis_management_v1_UserVirtualClustersOptions(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/management/v1.VirtualClusterInstance":                         schema_pkg_apis_management_v1_VirtualClusterInstance(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/management/v1.VirtualClusterInstanceKubeConfig":               schema_pkg_apis_management_v1_VirtualClusterInstanceKubeConfig(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/management/v1.VirtualClusterInstanceKubeConfigList":           schema_pkg_apis_management_v1_VirtualClusterInstanceKubeConfigList(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/management/v1.VirtualClusterInstanceKubeConfigRequestOptions": schema_pkg_apis_management_v1_VirtualClusterInstanceKubeConfigRequestOptions(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/management/v1.VirtualClusterInstanceKubeConfigStatus":         schema_pkg_apis_management_v1_VirtualClusterInstanceKubeConfigStatus(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/management/v1.VirtualClusterInstanceList":                     schema_pkg_apis_management_v1_VirtualClusterInstanceList(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/management/v1.VirtualClusterInstanceLog":                      schema_pkg_apis_management_v1_VirtualClusterInstanceLog(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/management/v1.VirtualClusterInstanceLogList":                  schema_pkg_apis_management_v1_VirtualClusterInstanceLogList(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/management/v1.VirtualClusterInstanceLogOptions":               schema_pkg_apis_management_v1_VirtualClusterInstanceLogOptions(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/management/v1.VirtualClusterInstanceSpec":                     schema_pkg_apis_management_v1_VirtualClusterInstanceSpec(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/management/v1.VirtualClusterInstanceStatus":                   schema_pkg_apis_management_v1_VirtualClusterInstanceStatus(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/management/v1.VirtualClusterTemplate":                         schema_pkg_apis_management_v1_VirtualClusterTemplate(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/management/v1.VirtualClusterTemplateList":                     schema_pkg_apis_management_v1_VirtualClusterTemplateList(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/management/v1.VirtualClusterTemplateSpec":                     schema_pkg_apis_management_v1_VirtualClusterTemplateSpec(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/management/v1.VirtualClusterTemplateStatus":                   schema_pkg_apis_management_v1_VirtualClusterTemplateStatus(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.Access":                                            schema_pkg_apis_storage_v1_Access(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.AccessKey":                                         schema_pkg_apis_storage_v1_AccessKey(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.AccessKeyIdentity":                                 schema_pkg_apis_storage_v1_AccessKeyIdentity(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.AccessKeyList":                                     schema_pkg_apis_storage_v1_AccessKeyList(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.AccessKeyOIDC":                                     schema_pkg_apis_storage_v1_AccessKeyOIDC(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.AccessKeyOIDCProvider":                             schema_pkg_apis_storage_v1_AccessKeyOIDCProvider(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.AccessKeyScope":                                    schema_pkg_apis_storage_v1_AccessKeyScope(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.AccessKeyScopeProject":                             schema_pkg_apis_storage_v1_AccessKeyScopeProject(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.AccessKeyScopeRule":                                schema_pkg_apis_storage_v1_AccessKeyScopeRule(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.AccessKeyScopeSpace":                               schema_pkg_apis_storage_v1_AccessKeyScopeSpace(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.AccessKeyScopeVirtualCluster":                      schema_pkg_apis_storage_v1_AccessKeyScopeVirtualCluster(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.AccessKeySpec":                                     schema_pkg_apis_storage_v1_AccessKeySpec(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.AccessKeyStatus":                                   schema_pkg_apis_storage_v1_AccessKeyStatus(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.AccessKeyVirtualCluster":                           schema_pkg_apis_storage_v1_AccessKeyVirtualCluster(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.AccountClusterStatus":                              schema_pkg_apis_storage_v1_AccountClusterStatus(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.AccountClusterTemplateStatus":                      schema_pkg_apis_storage_v1_AccountClusterTemplateStatus(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.AllowedCluster":                                    schema_pkg_apis_storage_v1_AllowedCluster(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.AllowedClusterAccountTemplate":                     schema_pkg_apis_storage_v1_AllowedClusterAccountTemplate(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.AllowedTemplate":                                   schema_pkg_apis_storage_v1_AllowedTemplate(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.App":                                               schema_pkg_apis_storage_v1_App(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.AppConfig":                                         schema_pkg_apis_storage_v1_AppConfig(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.AppList":                                           schema_pkg_apis_storage_v1_AppList(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.AppParameter":                                      schema_pkg_apis_storage_v1_AppParameter(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.AppSpec":                                           schema_pkg_apis_storage_v1_AppSpec(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.AppStatus":                                         schema_pkg_apis_storage_v1_AppStatus(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.AppTask":                                           schema_pkg_apis_storage_v1_AppTask(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.AppVersion":                                        schema_pkg_apis_storage_v1_AppVersion(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.ArgoIntegrationSpec":                               schema_pkg_apis_storage_v1_ArgoIntegrationSpec(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.ArgoProjectPolicyRule":                             schema_pkg_apis_storage_v1_ArgoProjectPolicyRule(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.ArgoProjectRole":                                   schema_pkg_apis_storage_v1_ArgoProjectRole(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.ArgoProjectSpec":                                   schema_pkg_apis_storage_v1_ArgoProjectSpec(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.ArgoProjectSpecMetadata":                           schema_pkg_apis_storage_v1_ArgoProjectSpecMetadata(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.ArgoSSOSpec":                                       schema_pkg_apis_storage_v1_ArgoSSOSpec(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.Chart":                                             schema_pkg_apis_storage_v1_Chart(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.Cluster":                                           schema_pkg_apis_storage_v1_Cluster(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.ClusterAccess":                                     schema_pkg_apis_storage_v1_ClusterAccess(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.ClusterAccessList":                                 schema_pkg_apis_storage_v1_ClusterAccessList(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.ClusterAccessSpec":                                 schema_pkg_apis_storage_v1_ClusterAccessSpec(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.ClusterAccessStatus":                               schema_pkg_apis_storage_v1_ClusterAccessStatus(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.ClusterAccountTemplateClusterStatus":               schema_pkg_apis_storage_v1_ClusterAccountTemplateClusterStatus(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.ClusterList":                                       schema_pkg_apis_storage_v1_ClusterList(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.ClusterRef":                                        schema_pkg_apis_storage_v1_ClusterRef(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.ClusterRoleTemplate":                               schema_pkg_apis_storage_v1_ClusterRoleTemplate(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.ClusterRoleTemplateList":                           schema_pkg_apis_storage_v1_ClusterRoleTemplateList(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.ClusterRoleTemplateSpec":                           schema_pkg_apis_storage_v1_ClusterRoleTemplateSpec(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.ClusterRoleTemplateStatus":                         schema_pkg_apis_storage_v1_ClusterRoleTemplateStatus(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.ClusterRoleTemplateTemplate":                       schema_pkg_apis_storage_v1_ClusterRoleTemplateTemplate(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.ClusterSpec":                                       schema_pkg_apis_storage_v1_ClusterSpec(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.ClusterStatus":                                     schema_pkg_apis_storage_v1_ClusterStatus(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.ConstraintSpaceTemplate":                           schema_pkg_apis_storage_v1_ConstraintSpaceTemplate(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.GroupResources":                                    schema_pkg_apis_storage_v1_GroupResources(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.HelmChart":                                         schema_pkg_apis_storage_v1_HelmChart(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.HelmChartRepository":                               schema_pkg_apis_storage_v1_HelmChartRepository(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.HelmConfiguration":                                 schema_pkg_apis_storage_v1_HelmConfiguration(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.HelmTask":                                          schema_pkg_apis_storage_v1_HelmTask(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.HelmTaskRelease":                                   schema_pkg_apis_storage_v1_HelmTaskRelease(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.InstanceDeployedAppStatus":                         schema_pkg_apis_storage_v1_InstanceDeployedAppStatus(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.KindSecretRef":                                     schema_pkg_apis_storage_v1_KindSecretRef(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.LocalClusterAccessTemplate":                        schema_pkg_apis_storage_v1_LocalClusterAccessTemplate(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.LocalClusterRoleTemplate":                          schema_pkg_apis_storage_v1_LocalClusterRoleTemplate(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.LocalClusterRoleTemplateSpec":                      schema_pkg_apis_storage_v1_LocalClusterRoleTemplateSpec(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.LocalSpaceConstraintSpec":                          schema_pkg_apis_storage_v1_LocalSpaceConstraintSpec(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.LocalSpaceConstraintTemplate":                      schema_pkg_apis_storage_v1_LocalSpaceConstraintTemplate(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.Member":                                            schema_pkg_apis_storage_v1_Member(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.NamespacePattern":                                  schema_pkg_apis_storage_v1_NamespacePattern(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.Project":                                           schema_pkg_apis_storage_v1_Project(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.ProjectList":                                       schema_pkg_apis_storage_v1_ProjectList(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.ProjectSpec":                                       schema_pkg_apis_storage_v1_ProjectSpec(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.ProjectStatus":                                     schema_pkg_apis_storage_v1_ProjectStatus(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.QuotaStatus":                                       schema_pkg_apis_storage_v1_QuotaStatus(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.QuotaStatusProject":                                schema_pkg_apis_storage_v1_QuotaStatusProject(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.QuotaStatusUser":                                   schema_pkg_apis_storage_v1_QuotaStatusUser(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.QuotaStatusUserUsed":                               schema_pkg_apis_storage_v1_QuotaStatusUserUsed(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.Quotas":                                            schema_pkg_apis_storage_v1_Quotas(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.SecretRef":                                         schema_pkg_apis_storage_v1_SecretRef(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.SharedSecret":                                      schema_pkg_apis_storage_v1_SharedSecret(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.SharedSecretList":                                  schema_pkg_apis_storage_v1_SharedSecretList(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.SharedSecretSpec":                                  schema_pkg_apis_storage_v1_SharedSecretSpec(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.SharedSecretStatus":                                schema_pkg_apis_storage_v1_SharedSecretStatus(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.SpaceConstraint":                                   schema_pkg_apis_storage_v1_SpaceConstraint(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.SpaceConstraintList":                               schema_pkg_apis_storage_v1_SpaceConstraintList(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.SpaceConstraintSpec":                               schema_pkg_apis_storage_v1_SpaceConstraintSpec(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.SpaceConstraintStatus":                             schema_pkg_apis_storage_v1_SpaceConstraintStatus(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.SpaceCreationTask":                                 schema_pkg_apis_storage_v1_SpaceCreationTask(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.SpaceInstance":                                     schema_pkg_apis_storage_v1_SpaceInstance(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.SpaceInstanceList":                                 schema_pkg_apis_storage_v1_SpaceInstanceList(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.SpaceInstanceSpec":                                 schema_pkg_apis_storage_v1_SpaceInstanceSpec(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.SpaceInstanceStatus":                               schema_pkg_apis_storage_v1_SpaceInstanceStatus(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.SpaceTemplate":                                     schema_pkg_apis_storage_v1_SpaceTemplate(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.SpaceTemplateDefinition":                           schema_pkg_apis_storage_v1_SpaceTemplateDefinition(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.SpaceTemplateList":                                 schema_pkg_apis_storage_v1_SpaceTemplateList(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.SpaceTemplateSpec":                                 schema_pkg_apis_storage_v1_SpaceTemplateSpec(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.SpaceTemplateStatus":                               schema_pkg_apis_storage_v1_SpaceTemplateStatus(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.SpaceTemplateVersion":                              schema_pkg_apis_storage_v1_SpaceTemplateVersion(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.StreamContainer":                                   schema_pkg_apis_storage_v1_StreamContainer(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.Target":                                            schema_pkg_apis_storage_v1_Target(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.TargetCluster":                                     schema_pkg_apis_storage_v1_TargetCluster(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.TargetInstance":                                    schema_pkg_apis_storage_v1_TargetInstance(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.TargetVirtualCluster":                              schema_pkg_apis_storage_v1_TargetVirtualCluster(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.Task":                                              schema_pkg_apis_storage_v1_Task(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.TaskDefinition":                                    schema_pkg_apis_storage_v1_TaskDefinition(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.TaskList":                                          schema_pkg_apis_storage_v1_TaskList(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.TaskSpec":                                          schema_pkg_apis_storage_v1_TaskSpec(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.TaskStatus":                                        schema_pkg_apis_storage_v1_TaskStatus(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.Team":                                              schema_pkg_apis_storage_v1_Team(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.TeamList":                                          schema_pkg_apis_storage_v1_TeamList(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.TeamSpec":                                          schema_pkg_apis_storage_v1_TeamSpec(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.TeamStatus":                                        schema_pkg_apis_storage_v1_TeamStatus(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.TemplateMetadata":                                  schema_pkg_apis_storage_v1_TemplateMetadata(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.TemplateRef":                                       schema_pkg_apis_storage_v1_TemplateRef(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.User":                                              schema_pkg_apis_storage_v1_User(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.UserClusterAccountTemplate":                        schema_pkg_apis_storage_v1_UserClusterAccountTemplate(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.UserClusterAccountTemplateStatus":                  schema_pkg_apis_storage_v1_UserClusterAccountTemplateStatus(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.UserList":                                          schema_pkg_apis_storage_v1_UserList(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.UserOrTeam":                                        schema_pkg_apis_storage_v1_UserOrTeam(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.UserSpec":                                          schema_pkg_apis_storage_v1_UserSpec(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.UserStatus":                                        schema_pkg_apis_storage_v1_UserStatus(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.VirtualClusterClusterRef":                          schema_pkg_apis_storage_v1_VirtualClusterClusterRef(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.VirtualClusterCreationTask":                        schema_pkg_apis_storage_v1_VirtualClusterCreationTask(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.VirtualClusterInstance":                            schema_pkg_apis_storage_v1_VirtualClusterInstance(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.VirtualClusterInstanceList":                        schema_pkg_apis_storage_v1_VirtualClusterInstanceList(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.VirtualClusterInstanceSpec":                        schema_pkg_apis_storage_v1_VirtualClusterInstanceSpec(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.VirtualClusterInstanceStatus":                      schema_pkg_apis_storage_v1_VirtualClusterInstanceStatus(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.VirtualClusterSpaceTemplateDefinition":             schema_pkg_apis_storage_v1_VirtualClusterSpaceTemplateDefinition(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.VirtualClusterTemplate":                            schema_pkg_apis_storage_v1_VirtualClusterTemplate(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.VirtualClusterTemplateDefinition":                  schema_pkg_apis_storage_v1_VirtualClusterTemplateDefinition(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.VirtualClusterTemplateList":                        schema_pkg_apis_storage_v1_VirtualClusterTemplateList(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.VirtualClusterTemplateSpaceTemplateRef":            schema_pkg_apis_storage_v1_VirtualClusterTemplateSpaceTemplateRef(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.VirtualClusterTemplateSpec":                        schema_pkg_apis_storage_v1_VirtualClusterTemplateSpec(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.VirtualClusterTemplateStatus":                      schema_pkg_apis_storage_v1_VirtualClusterTemplateStatus(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.VirtualClusterTemplateVersion":                     schema_pkg_apis_storage_v1_VirtualClusterTemplateVersion(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/virtualcluster/v1.HelmRelease":                                schema_pkg_apis_virtualcluster_v1_HelmRelease(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/virtualcluster/v1.HelmReleaseList":                            schema_pkg_apis_virtualcluster_v1_HelmReleaseList(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/virtualcluster/v1.HelmReleaseSpec":                            schema_pkg_apis_virtualcluster_v1_HelmReleaseSpec(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/virtualcluster/v1.HelmReleaseStatus":                          schema_pkg_apis_virtualcluster_v1_HelmReleaseStatus(ref),
 		"github.com/loft-sh/jspolicy/pkg/apis/policy/v1beta1.JsPolicy":                                    schema_pkg_apis_policy_v1beta1_JsPolicy(ref),
 		"github.com/loft-sh/jspolicy/pkg/apis/policy/v1beta1.JsPolicyBundle":                              schema_pkg_apis_policy_v1beta1_JsPolicyBundle(ref),
 		"github.com/loft-sh/jspolicy/pkg/apis/policy/v1beta1.JsPolicyBundleList":                          schema_pkg_apis_policy_v1beta1_JsPolicyBundleList(ref),
@@ -1334,20 +1334,20 @@ func schema_apis_loft_cluster_v1_ChartInfo(ref common.ReferenceCallback) common.
 					"spec": {
 						SchemaProps: spec.SchemaProps{
 							Default: map[string]interface{}{},
-							Ref:     ref("github.com/loft-sh/agentapi/v2/pkg/apis/loft/cluster/v1.ChartInfoSpec"),
+							Ref:     ref("github.com/loft-sh/agentapi/v3/pkg/apis/loft/cluster/v1.ChartInfoSpec"),
 						},
 					},
 					"status": {
 						SchemaProps: spec.SchemaProps{
 							Default: map[string]interface{}{},
-							Ref:     ref("github.com/loft-sh/agentapi/v2/pkg/apis/loft/cluster/v1.ChartInfoStatus"),
+							Ref:     ref("github.com/loft-sh/agentapi/v3/pkg/apis/loft/cluster/v1.ChartInfoStatus"),
 						},
 					},
 				},
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/agentapi/v2/pkg/apis/loft/cluster/v1.ChartInfoSpec", "github.com/loft-sh/agentapi/v2/pkg/apis/loft/cluster/v1.ChartInfoStatus", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
+			"github.com/loft-sh/agentapi/v3/pkg/apis/loft/cluster/v1.ChartInfoSpec", "github.com/loft-sh/agentapi/v3/pkg/apis/loft/cluster/v1.ChartInfoStatus", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
 	}
 }
 
@@ -1384,7 +1384,7 @@ func schema_apis_loft_cluster_v1_ChartInfoList(ref common.ReferenceCallback) com
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/loft-sh/agentapi/v2/pkg/apis/loft/cluster/v1.ChartInfo"),
+										Ref:     ref("github.com/loft-sh/agentapi/v3/pkg/apis/loft/cluster/v1.ChartInfo"),
 									},
 								},
 							},
@@ -1395,7 +1395,7 @@ func schema_apis_loft_cluster_v1_ChartInfoList(ref common.ReferenceCallback) com
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/agentapi/v2/pkg/apis/loft/cluster/v1.ChartInfo", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
+			"github.com/loft-sh/agentapi/v3/pkg/apis/loft/cluster/v1.ChartInfo", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
 	}
 }
 
@@ -1409,14 +1409,14 @@ func schema_apis_loft_cluster_v1_ChartInfoSpec(ref common.ReferenceCallback) com
 						SchemaProps: spec.SchemaProps{
 							Description: "Chart holds information about a chart that should get deployed",
 							Default:     map[string]interface{}{},
-							Ref:         ref("github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.Chart"),
+							Ref:         ref("github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.Chart"),
 						},
 					},
 				},
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.Chart"},
+			"github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.Chart"},
 	}
 }
 
@@ -1429,7 +1429,7 @@ func schema_apis_loft_cluster_v1_ChartInfoStatus(ref common.ReferenceCallback) c
 					"metadata": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Metadata provides information about a chart",
-							Ref:         ref("github.com/loft-sh/agentapi/v2/pkg/apis/loft/cluster/v1.Metadata"),
+							Ref:         ref("github.com/loft-sh/agentapi/v3/pkg/apis/loft/cluster/v1.Metadata"),
 						},
 					},
 					"readme": {
@@ -1450,7 +1450,7 @@ func schema_apis_loft_cluster_v1_ChartInfoStatus(ref common.ReferenceCallback) c
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/agentapi/v2/pkg/apis/loft/cluster/v1.Metadata"},
+			"github.com/loft-sh/agentapi/v3/pkg/apis/loft/cluster/v1.Metadata"},
 	}
 }
 
@@ -1484,20 +1484,20 @@ func schema_apis_loft_cluster_v1_ClusterQuota(ref common.ReferenceCallback) comm
 					"spec": {
 						SchemaProps: spec.SchemaProps{
 							Default: map[string]interface{}{},
-							Ref:     ref("github.com/loft-sh/agentapi/v2/pkg/apis/loft/cluster/v1.ClusterQuotaSpec"),
+							Ref:     ref("github.com/loft-sh/agentapi/v3/pkg/apis/loft/cluster/v1.ClusterQuotaSpec"),
 						},
 					},
 					"status": {
 						SchemaProps: spec.SchemaProps{
 							Default: map[string]interface{}{},
-							Ref:     ref("github.com/loft-sh/agentapi/v2/pkg/apis/loft/cluster/v1.ClusterQuotaStatus"),
+							Ref:     ref("github.com/loft-sh/agentapi/v3/pkg/apis/loft/cluster/v1.ClusterQuotaStatus"),
 						},
 					},
 				},
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/agentapi/v2/pkg/apis/loft/cluster/v1.ClusterQuotaSpec", "github.com/loft-sh/agentapi/v2/pkg/apis/loft/cluster/v1.ClusterQuotaStatus", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
+			"github.com/loft-sh/agentapi/v3/pkg/apis/loft/cluster/v1.ClusterQuotaSpec", "github.com/loft-sh/agentapi/v3/pkg/apis/loft/cluster/v1.ClusterQuotaStatus", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
 	}
 }
 
@@ -1534,7 +1534,7 @@ func schema_apis_loft_cluster_v1_ClusterQuotaList(ref common.ReferenceCallback) 
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/loft-sh/agentapi/v2/pkg/apis/loft/cluster/v1.ClusterQuota"),
+										Ref:     ref("github.com/loft-sh/agentapi/v3/pkg/apis/loft/cluster/v1.ClusterQuota"),
 									},
 								},
 							},
@@ -1545,7 +1545,7 @@ func schema_apis_loft_cluster_v1_ClusterQuotaList(ref common.ReferenceCallback) 
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/agentapi/v2/pkg/apis/loft/cluster/v1.ClusterQuota", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
+			"github.com/loft-sh/agentapi/v3/pkg/apis/loft/cluster/v1.ClusterQuota", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
 	}
 }
 
@@ -1605,7 +1605,7 @@ func schema_apis_loft_cluster_v1_ClusterQuotaStatus(ref common.ReferenceCallback
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.ClusterQuotaStatusByNamespace"),
+										Ref:     ref("github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.ClusterQuotaStatusByNamespace"),
 									},
 								},
 							},
@@ -1614,14 +1614,14 @@ func schema_apis_loft_cluster_v1_ClusterQuotaStatus(ref common.ReferenceCallback
 					"owner": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Owner describes the owner of the space. This can be either empty (nil), be a team or an loft user. If the space has an account that does not belong to an user / team in loft this is empty",
-							Ref:         ref("github.com/loft-sh/agentapi/v2/pkg/apis/loft/cluster/v1.UserOrTeam"),
+							Ref:         ref("github.com/loft-sh/agentapi/v3/pkg/apis/loft/cluster/v1.UserOrTeam"),
 						},
 					},
 				},
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/agentapi/v2/pkg/apis/loft/cluster/v1.UserOrTeam", "github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.ClusterQuotaStatusByNamespace", "k8s.io/api/core/v1.ResourceQuotaStatus"},
+			"github.com/loft-sh/agentapi/v3/pkg/apis/loft/cluster/v1.UserOrTeam", "github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.ClusterQuotaStatusByNamespace", "k8s.io/api/core/v1.ResourceQuotaStatus"},
 	}
 }
 
@@ -1735,20 +1735,20 @@ func schema_apis_loft_cluster_v1_HelmRelease(ref common.ReferenceCallback) commo
 					"spec": {
 						SchemaProps: spec.SchemaProps{
 							Default: map[string]interface{}{},
-							Ref:     ref("github.com/loft-sh/agentapi/v2/pkg/apis/loft/cluster/v1.HelmReleaseSpec"),
+							Ref:     ref("github.com/loft-sh/agentapi/v3/pkg/apis/loft/cluster/v1.HelmReleaseSpec"),
 						},
 					},
 					"status": {
 						SchemaProps: spec.SchemaProps{
 							Default: map[string]interface{}{},
-							Ref:     ref("github.com/loft-sh/agentapi/v2/pkg/apis/loft/cluster/v1.HelmReleaseStatus"),
+							Ref:     ref("github.com/loft-sh/agentapi/v3/pkg/apis/loft/cluster/v1.HelmReleaseStatus"),
 						},
 					},
 				},
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/agentapi/v2/pkg/apis/loft/cluster/v1.HelmReleaseSpec", "github.com/loft-sh/agentapi/v2/pkg/apis/loft/cluster/v1.HelmReleaseStatus", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
+			"github.com/loft-sh/agentapi/v3/pkg/apis/loft/cluster/v1.HelmReleaseSpec", "github.com/loft-sh/agentapi/v3/pkg/apis/loft/cluster/v1.HelmReleaseStatus", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
 	}
 }
 
@@ -1788,7 +1788,7 @@ func schema_apis_loft_cluster_v1_HelmReleaseConfig(ref common.ReferenceCallback)
 						SchemaProps: spec.SchemaProps{
 							Description: "Chart holds information about a chart that should get deployed",
 							Default:     map[string]interface{}{},
-							Ref:         ref("github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.Chart"),
+							Ref:         ref("github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.Chart"),
 						},
 					},
 					"manifests": {
@@ -1801,7 +1801,7 @@ func schema_apis_loft_cluster_v1_HelmReleaseConfig(ref common.ReferenceCallback)
 					"bash": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Bash holds the bash script to execute in a container in the target",
-							Ref:         ref("github.com/loft-sh/agentapi/v2/pkg/apis/loft/cluster/v1.Bash"),
+							Ref:         ref("github.com/loft-sh/agentapi/v3/pkg/apis/loft/cluster/v1.Bash"),
 						},
 					},
 					"values": {
@@ -1838,7 +1838,7 @@ func schema_apis_loft_cluster_v1_HelmReleaseConfig(ref common.ReferenceCallback)
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/agentapi/v2/pkg/apis/loft/cluster/v1.Bash", "github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.Chart"},
+			"github.com/loft-sh/agentapi/v3/pkg/apis/loft/cluster/v1.Bash", "github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.Chart"},
 	}
 }
 
@@ -1875,7 +1875,7 @@ func schema_apis_loft_cluster_v1_HelmReleaseList(ref common.ReferenceCallback) c
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/loft-sh/agentapi/v2/pkg/apis/loft/cluster/v1.HelmRelease"),
+										Ref:     ref("github.com/loft-sh/agentapi/v3/pkg/apis/loft/cluster/v1.HelmRelease"),
 									},
 								},
 							},
@@ -1886,7 +1886,7 @@ func schema_apis_loft_cluster_v1_HelmReleaseList(ref common.ReferenceCallback) c
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/agentapi/v2/pkg/apis/loft/cluster/v1.HelmRelease", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
+			"github.com/loft-sh/agentapi/v3/pkg/apis/loft/cluster/v1.HelmRelease", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
 	}
 }
 
@@ -1900,7 +1900,7 @@ func schema_apis_loft_cluster_v1_HelmReleaseSpec(ref common.ReferenceCallback) c
 						SchemaProps: spec.SchemaProps{
 							Description: "Chart holds information about a chart that should get deployed",
 							Default:     map[string]interface{}{},
-							Ref:         ref("github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.Chart"),
+							Ref:         ref("github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.Chart"),
 						},
 					},
 					"manifests": {
@@ -1913,7 +1913,7 @@ func schema_apis_loft_cluster_v1_HelmReleaseSpec(ref common.ReferenceCallback) c
 					"bash": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Bash holds the bash script to execute in a container in the target",
-							Ref:         ref("github.com/loft-sh/agentapi/v2/pkg/apis/loft/cluster/v1.Bash"),
+							Ref:         ref("github.com/loft-sh/agentapi/v3/pkg/apis/loft/cluster/v1.Bash"),
 						},
 					},
 					"values": {
@@ -1950,7 +1950,7 @@ func schema_apis_loft_cluster_v1_HelmReleaseSpec(ref common.ReferenceCallback) c
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/agentapi/v2/pkg/apis/loft/cluster/v1.Bash", "github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.Chart"},
+			"github.com/loft-sh/agentapi/v3/pkg/apis/loft/cluster/v1.Bash", "github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.Chart"},
 	}
 }
 
@@ -1970,20 +1970,20 @@ func schema_apis_loft_cluster_v1_HelmReleaseStatus(ref common.ReferenceCallback)
 					"info": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Info provides information about a release",
-							Ref:         ref("github.com/loft-sh/agentapi/v2/pkg/apis/loft/cluster/v1.Info"),
+							Ref:         ref("github.com/loft-sh/agentapi/v3/pkg/apis/loft/cluster/v1.Info"),
 						},
 					},
 					"metadata": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Metadata provides information about a chart",
-							Ref:         ref("github.com/loft-sh/agentapi/v2/pkg/apis/loft/cluster/v1.Metadata"),
+							Ref:         ref("github.com/loft-sh/agentapi/v3/pkg/apis/loft/cluster/v1.Metadata"),
 						},
 					},
 				},
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/agentapi/v2/pkg/apis/loft/cluster/v1.Info", "github.com/loft-sh/agentapi/v2/pkg/apis/loft/cluster/v1.Metadata"},
+			"github.com/loft-sh/agentapi/v3/pkg/apis/loft/cluster/v1.Info", "github.com/loft-sh/agentapi/v3/pkg/apis/loft/cluster/v1.Metadata"},
 	}
 }
 
@@ -2143,20 +2143,20 @@ func schema_apis_loft_cluster_v1_LocalClusterAccess(ref common.ReferenceCallback
 					"spec": {
 						SchemaProps: spec.SchemaProps{
 							Default: map[string]interface{}{},
-							Ref:     ref("github.com/loft-sh/agentapi/v2/pkg/apis/loft/cluster/v1.LocalClusterAccessSpec"),
+							Ref:     ref("github.com/loft-sh/agentapi/v3/pkg/apis/loft/cluster/v1.LocalClusterAccessSpec"),
 						},
 					},
 					"status": {
 						SchemaProps: spec.SchemaProps{
 							Default: map[string]interface{}{},
-							Ref:     ref("github.com/loft-sh/agentapi/v2/pkg/apis/loft/cluster/v1.LocalClusterAccessStatus"),
+							Ref:     ref("github.com/loft-sh/agentapi/v3/pkg/apis/loft/cluster/v1.LocalClusterAccessStatus"),
 						},
 					},
 				},
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/agentapi/v2/pkg/apis/loft/cluster/v1.LocalClusterAccessSpec", "github.com/loft-sh/agentapi/v2/pkg/apis/loft/cluster/v1.LocalClusterAccessStatus", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
+			"github.com/loft-sh/agentapi/v3/pkg/apis/loft/cluster/v1.LocalClusterAccessSpec", "github.com/loft-sh/agentapi/v3/pkg/apis/loft/cluster/v1.LocalClusterAccessStatus", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
 	}
 }
 
@@ -2193,7 +2193,7 @@ func schema_apis_loft_cluster_v1_LocalClusterAccessList(ref common.ReferenceCall
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/loft-sh/agentapi/v2/pkg/apis/loft/cluster/v1.LocalClusterAccess"),
+										Ref:     ref("github.com/loft-sh/agentapi/v3/pkg/apis/loft/cluster/v1.LocalClusterAccess"),
 									},
 								},
 							},
@@ -2204,7 +2204,7 @@ func schema_apis_loft_cluster_v1_LocalClusterAccessList(ref common.ReferenceCall
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/agentapi/v2/pkg/apis/loft/cluster/v1.LocalClusterAccess", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
+			"github.com/loft-sh/agentapi/v3/pkg/apis/loft/cluster/v1.LocalClusterAccess", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
 	}
 }
 
@@ -2236,7 +2236,7 @@ func schema_apis_loft_cluster_v1_LocalClusterAccessSpec(ref common.ReferenceCall
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.UserOrTeam"),
+										Ref:     ref("github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.UserOrTeam"),
 									},
 								},
 							},
@@ -2265,7 +2265,7 @@ func schema_apis_loft_cluster_v1_LocalClusterAccessSpec(ref common.ReferenceCall
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.ClusterRoleRef"),
+										Ref:     ref("github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.ClusterRoleRef"),
 									},
 								},
 							},
@@ -2288,14 +2288,14 @@ func schema_apis_loft_cluster_v1_LocalClusterAccessSpec(ref common.ReferenceCall
 					"quota": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Quota defines the quotas for the members that should be created.",
-							Ref:         ref("github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.AccessQuota"),
+							Ref:         ref("github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.AccessQuota"),
 						},
 					},
 				},
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.AccessQuota", "github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.ClusterRoleRef", "github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.UserOrTeam"},
+			"github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.AccessQuota", "github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.ClusterRoleRef", "github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.UserOrTeam"},
 	}
 }
 
@@ -2311,7 +2311,7 @@ func schema_apis_loft_cluster_v1_LocalClusterAccessStatus(ref common.ReferenceCa
 							Items: &spec.SchemaOrArray{
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
-										Ref: ref("github.com/loft-sh/agentapi/v2/pkg/apis/loft/cluster/v1.UserOrTeam"),
+										Ref: ref("github.com/loft-sh/agentapi/v3/pkg/apis/loft/cluster/v1.UserOrTeam"),
 									},
 								},
 							},
@@ -2323,7 +2323,7 @@ func schema_apis_loft_cluster_v1_LocalClusterAccessStatus(ref common.ReferenceCa
 							Items: &spec.SchemaOrArray{
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
-										Ref: ref("github.com/loft-sh/agentapi/v2/pkg/apis/loft/cluster/v1.EntityInfo"),
+										Ref: ref("github.com/loft-sh/agentapi/v3/pkg/apis/loft/cluster/v1.EntityInfo"),
 									},
 								},
 							},
@@ -2333,7 +2333,7 @@ func schema_apis_loft_cluster_v1_LocalClusterAccessStatus(ref common.ReferenceCa
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/agentapi/v2/pkg/apis/loft/cluster/v1.EntityInfo", "github.com/loft-sh/agentapi/v2/pkg/apis/loft/cluster/v1.UserOrTeam"},
+			"github.com/loft-sh/agentapi/v3/pkg/apis/loft/cluster/v1.EntityInfo", "github.com/loft-sh/agentapi/v3/pkg/apis/loft/cluster/v1.UserOrTeam"},
 	}
 }
 
@@ -2443,7 +2443,7 @@ func schema_apis_loft_cluster_v1_Metadata(ref common.ReferenceCallback) common.O
 							Items: &spec.SchemaOrArray{
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
-										Ref: ref("github.com/loft-sh/agentapi/v2/pkg/apis/loft/cluster/v1.Maintainer"),
+										Ref: ref("github.com/loft-sh/agentapi/v3/pkg/apis/loft/cluster/v1.Maintainer"),
 									},
 								},
 							},
@@ -2540,7 +2540,7 @@ func schema_apis_loft_cluster_v1_Metadata(ref common.ReferenceCallback) common.O
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/agentapi/v2/pkg/apis/loft/cluster/v1.Maintainer"},
+			"github.com/loft-sh/agentapi/v3/pkg/apis/loft/cluster/v1.Maintainer"},
 	}
 }
 
@@ -2574,20 +2574,20 @@ func schema_apis_loft_cluster_v1_SleepModeConfig(ref common.ReferenceCallback) c
 					"spec": {
 						SchemaProps: spec.SchemaProps{
 							Default: map[string]interface{}{},
-							Ref:     ref("github.com/loft-sh/agentapi/v2/pkg/apis/loft/cluster/v1.SleepModeConfigSpec"),
+							Ref:     ref("github.com/loft-sh/agentapi/v3/pkg/apis/loft/cluster/v1.SleepModeConfigSpec"),
 						},
 					},
 					"status": {
 						SchemaProps: spec.SchemaProps{
 							Default: map[string]interface{}{},
-							Ref:     ref("github.com/loft-sh/agentapi/v2/pkg/apis/loft/cluster/v1.SleepModeConfigStatus"),
+							Ref:     ref("github.com/loft-sh/agentapi/v3/pkg/apis/loft/cluster/v1.SleepModeConfigStatus"),
 						},
 					},
 				},
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/agentapi/v2/pkg/apis/loft/cluster/v1.SleepModeConfigSpec", "github.com/loft-sh/agentapi/v2/pkg/apis/loft/cluster/v1.SleepModeConfigStatus", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
+			"github.com/loft-sh/agentapi/v3/pkg/apis/loft/cluster/v1.SleepModeConfigSpec", "github.com/loft-sh/agentapi/v3/pkg/apis/loft/cluster/v1.SleepModeConfigStatus", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
 	}
 }
 
@@ -2624,7 +2624,7 @@ func schema_apis_loft_cluster_v1_SleepModeConfigList(ref common.ReferenceCallbac
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/loft-sh/agentapi/v2/pkg/apis/loft/cluster/v1.SleepModeConfig"),
+										Ref:     ref("github.com/loft-sh/agentapi/v3/pkg/apis/loft/cluster/v1.SleepModeConfig"),
 									},
 								},
 							},
@@ -2635,7 +2635,7 @@ func schema_apis_loft_cluster_v1_SleepModeConfigList(ref common.ReferenceCallbac
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/agentapi/v2/pkg/apis/loft/cluster/v1.SleepModeConfig", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
+			"github.com/loft-sh/agentapi/v3/pkg/apis/loft/cluster/v1.SleepModeConfig", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
 	}
 }
 
@@ -2779,7 +2779,7 @@ func schema_apis_loft_cluster_v1_SleepModeConfigStatus(ref common.ReferenceCallb
 					"lastActivityInfo": {
 						SchemaProps: spec.SchemaProps{
 							Description: "LastActivityInfo holds information about the last activity within this space",
-							Ref:         ref("github.com/loft-sh/agentapi/v2/pkg/apis/loft/cluster/v1.LastActivityInfo"),
+							Ref:         ref("github.com/loft-sh/agentapi/v3/pkg/apis/loft/cluster/v1.LastActivityInfo"),
 						},
 					},
 					"sleepingSince": {
@@ -2792,13 +2792,13 @@ func schema_apis_loft_cluster_v1_SleepModeConfigStatus(ref common.ReferenceCallb
 					"currentEpoch": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Optional info that indicates how long the space was sleeping in the current epoch",
-							Ref:         ref("github.com/loft-sh/agentapi/v2/pkg/apis/loft/cluster/v1.EpochInfo"),
+							Ref:         ref("github.com/loft-sh/agentapi/v3/pkg/apis/loft/cluster/v1.EpochInfo"),
 						},
 					},
 					"lastEpoch": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Optional info that indicates how long the space was sleeping in the current epoch",
-							Ref:         ref("github.com/loft-sh/agentapi/v2/pkg/apis/loft/cluster/v1.EpochInfo"),
+							Ref:         ref("github.com/loft-sh/agentapi/v3/pkg/apis/loft/cluster/v1.EpochInfo"),
 						},
 					},
 					"sleptLastThirtyDays": {
@@ -2840,7 +2840,7 @@ func schema_apis_loft_cluster_v1_SleepModeConfigStatus(ref common.ReferenceCallb
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/agentapi/v2/pkg/apis/loft/cluster/v1.EpochInfo", "github.com/loft-sh/agentapi/v2/pkg/apis/loft/cluster/v1.LastActivityInfo"},
+			"github.com/loft-sh/agentapi/v3/pkg/apis/loft/cluster/v1.EpochInfo", "github.com/loft-sh/agentapi/v3/pkg/apis/loft/cluster/v1.LastActivityInfo"},
 	}
 }
 
@@ -2874,20 +2874,20 @@ func schema_apis_loft_cluster_v1_Space(ref common.ReferenceCallback) common.Open
 					"spec": {
 						SchemaProps: spec.SchemaProps{
 							Default: map[string]interface{}{},
-							Ref:     ref("github.com/loft-sh/agentapi/v2/pkg/apis/loft/cluster/v1.SpaceSpec"),
+							Ref:     ref("github.com/loft-sh/agentapi/v3/pkg/apis/loft/cluster/v1.SpaceSpec"),
 						},
 					},
 					"status": {
 						SchemaProps: spec.SchemaProps{
 							Default: map[string]interface{}{},
-							Ref:     ref("github.com/loft-sh/agentapi/v2/pkg/apis/loft/cluster/v1.SpaceStatus"),
+							Ref:     ref("github.com/loft-sh/agentapi/v3/pkg/apis/loft/cluster/v1.SpaceStatus"),
 						},
 					},
 				},
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/agentapi/v2/pkg/apis/loft/cluster/v1.SpaceSpec", "github.com/loft-sh/agentapi/v2/pkg/apis/loft/cluster/v1.SpaceStatus", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
+			"github.com/loft-sh/agentapi/v3/pkg/apis/loft/cluster/v1.SpaceSpec", "github.com/loft-sh/agentapi/v3/pkg/apis/loft/cluster/v1.SpaceStatus", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
 	}
 }
 
@@ -2957,7 +2957,7 @@ func schema_apis_loft_cluster_v1_SpaceConstraintNamespaceStatus(ref common.Refer
 						SchemaProps: spec.SchemaProps{
 							Description: "AppliedMetadata is the metadata that was applied on the space",
 							Default:     map[string]interface{}{},
-							Ref:         ref("github.com/loft-sh/agentapi/v2/pkg/apis/loft/cluster/v1.AppliedMetadata"),
+							Ref:         ref("github.com/loft-sh/agentapi/v3/pkg/apis/loft/cluster/v1.AppliedMetadata"),
 						},
 					},
 					"appliedObjects": {
@@ -2968,7 +2968,7 @@ func schema_apis_loft_cluster_v1_SpaceConstraintNamespaceStatus(ref common.Refer
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/loft-sh/agentapi/v2/pkg/apis/loft/cluster/v1.AppliedObject"),
+										Ref:     ref("github.com/loft-sh/agentapi/v3/pkg/apis/loft/cluster/v1.AppliedObject"),
 									},
 								},
 							},
@@ -2978,7 +2978,7 @@ func schema_apis_loft_cluster_v1_SpaceConstraintNamespaceStatus(ref common.Refer
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/agentapi/v2/pkg/apis/loft/cluster/v1.AppliedMetadata", "github.com/loft-sh/agentapi/v2/pkg/apis/loft/cluster/v1.AppliedObject"},
+			"github.com/loft-sh/agentapi/v3/pkg/apis/loft/cluster/v1.AppliedMetadata", "github.com/loft-sh/agentapi/v3/pkg/apis/loft/cluster/v1.AppliedObject"},
 	}
 }
 
@@ -3015,7 +3015,7 @@ func schema_apis_loft_cluster_v1_SpaceList(ref common.ReferenceCallback) common.
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/loft-sh/agentapi/v2/pkg/apis/loft/cluster/v1.Space"),
+										Ref:     ref("github.com/loft-sh/agentapi/v3/pkg/apis/loft/cluster/v1.Space"),
 									},
 								},
 							},
@@ -3026,7 +3026,7 @@ func schema_apis_loft_cluster_v1_SpaceList(ref common.ReferenceCallback) common.
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/agentapi/v2/pkg/apis/loft/cluster/v1.Space", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
+			"github.com/loft-sh/agentapi/v3/pkg/apis/loft/cluster/v1.Space", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
 	}
 }
 
@@ -3065,7 +3065,7 @@ func schema_apis_loft_cluster_v1_SpaceObjectsNamespaceStatus(ref common.Referenc
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/loft-sh/agentapi/v2/pkg/apis/loft/cluster/v1.AppliedObject"),
+										Ref:     ref("github.com/loft-sh/agentapi/v3/pkg/apis/loft/cluster/v1.AppliedObject"),
 									},
 								},
 							},
@@ -3075,7 +3075,7 @@ func schema_apis_loft_cluster_v1_SpaceObjectsNamespaceStatus(ref common.Referenc
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/agentapi/v2/pkg/apis/loft/cluster/v1.AppliedObject"},
+			"github.com/loft-sh/agentapi/v3/pkg/apis/loft/cluster/v1.AppliedObject"},
 	}
 }
 
@@ -3145,32 +3145,32 @@ func schema_apis_loft_cluster_v1_SpaceStatus(ref common.ReferenceCallback) commo
 					"sleepModeConfig": {
 						SchemaProps: spec.SchemaProps{
 							Description: "SleepModeConfig is the sleep mode config of the space",
-							Ref:         ref("github.com/loft-sh/agentapi/v2/pkg/apis/loft/cluster/v1.SleepModeConfig"),
+							Ref:         ref("github.com/loft-sh/agentapi/v3/pkg/apis/loft/cluster/v1.SleepModeConfig"),
 						},
 					},
 					"owner": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Owner describes the owner of the space. This can be either empty (nil), be a team or an loft user. If the space has an account that does not belong to an user / team in loft this is empty",
-							Ref:         ref("github.com/loft-sh/agentapi/v2/pkg/apis/loft/cluster/v1.UserOrTeam"),
+							Ref:         ref("github.com/loft-sh/agentapi/v3/pkg/apis/loft/cluster/v1.UserOrTeam"),
 						},
 					},
 					"spaceObjectsStatus": {
 						SchemaProps: spec.SchemaProps{
 							Description: "SpaceObjectsStatus describes the status of applying space objects.",
-							Ref:         ref("github.com/loft-sh/agentapi/v2/pkg/apis/loft/cluster/v1.SpaceObjectsNamespaceStatus"),
+							Ref:         ref("github.com/loft-sh/agentapi/v3/pkg/apis/loft/cluster/v1.SpaceObjectsNamespaceStatus"),
 						},
 					},
 					"templateSyncStatus": {
 						SchemaProps: spec.SchemaProps{
 							Description: "TemplateSyncStatus describes the template sync status",
-							Ref:         ref("github.com/loft-sh/agentapi/v2/pkg/apis/loft/cluster/v1.TemplateSyncStatus"),
+							Ref:         ref("github.com/loft-sh/agentapi/v3/pkg/apis/loft/cluster/v1.TemplateSyncStatus"),
 						},
 					},
 				},
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/agentapi/v2/pkg/apis/loft/cluster/v1.SleepModeConfig", "github.com/loft-sh/agentapi/v2/pkg/apis/loft/cluster/v1.SpaceObjectsNamespaceStatus", "github.com/loft-sh/agentapi/v2/pkg/apis/loft/cluster/v1.TemplateSyncStatus", "github.com/loft-sh/agentapi/v2/pkg/apis/loft/cluster/v1.UserOrTeam"},
+			"github.com/loft-sh/agentapi/v3/pkg/apis/loft/cluster/v1.SleepModeConfig", "github.com/loft-sh/agentapi/v3/pkg/apis/loft/cluster/v1.SpaceObjectsNamespaceStatus", "github.com/loft-sh/agentapi/v3/pkg/apis/loft/cluster/v1.TemplateSyncStatus", "github.com/loft-sh/agentapi/v3/pkg/apis/loft/cluster/v1.UserOrTeam"},
 	}
 }
 
@@ -3209,20 +3209,20 @@ func schema_apis_loft_cluster_v1_UserOrTeam(ref common.ReferenceCallback) common
 					"user": {
 						SchemaProps: spec.SchemaProps{
 							Description: "User describes an user",
-							Ref:         ref("github.com/loft-sh/agentapi/v2/pkg/apis/loft/cluster/v1.EntityInfo"),
+							Ref:         ref("github.com/loft-sh/agentapi/v3/pkg/apis/loft/cluster/v1.EntityInfo"),
 						},
 					},
 					"team": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Team describes a team",
-							Ref:         ref("github.com/loft-sh/agentapi/v2/pkg/apis/loft/cluster/v1.EntityInfo"),
+							Ref:         ref("github.com/loft-sh/agentapi/v3/pkg/apis/loft/cluster/v1.EntityInfo"),
 						},
 					},
 				},
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/agentapi/v2/pkg/apis/loft/cluster/v1.EntityInfo"},
+			"github.com/loft-sh/agentapi/v3/pkg/apis/loft/cluster/v1.EntityInfo"},
 	}
 }
 
@@ -3256,20 +3256,20 @@ func schema_apis_loft_cluster_v1_VirtualCluster(ref common.ReferenceCallback) co
 					"spec": {
 						SchemaProps: spec.SchemaProps{
 							Default: map[string]interface{}{},
-							Ref:     ref("github.com/loft-sh/agentapi/v2/pkg/apis/loft/cluster/v1.VirtualClusterSpec"),
+							Ref:     ref("github.com/loft-sh/agentapi/v3/pkg/apis/loft/cluster/v1.VirtualClusterSpec"),
 						},
 					},
 					"status": {
 						SchemaProps: spec.SchemaProps{
 							Default: map[string]interface{}{},
-							Ref:     ref("github.com/loft-sh/agentapi/v2/pkg/apis/loft/cluster/v1.VirtualClusterStatus"),
+							Ref:     ref("github.com/loft-sh/agentapi/v3/pkg/apis/loft/cluster/v1.VirtualClusterStatus"),
 						},
 					},
 				},
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/agentapi/v2/pkg/apis/loft/cluster/v1.VirtualClusterSpec", "github.com/loft-sh/agentapi/v2/pkg/apis/loft/cluster/v1.VirtualClusterStatus", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
+			"github.com/loft-sh/agentapi/v3/pkg/apis/loft/cluster/v1.VirtualClusterSpec", "github.com/loft-sh/agentapi/v3/pkg/apis/loft/cluster/v1.VirtualClusterStatus", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
 	}
 }
 
@@ -3306,7 +3306,7 @@ func schema_apis_loft_cluster_v1_VirtualClusterList(ref common.ReferenceCallback
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/loft-sh/agentapi/v2/pkg/apis/loft/cluster/v1.VirtualCluster"),
+										Ref:     ref("github.com/loft-sh/agentapi/v3/pkg/apis/loft/cluster/v1.VirtualCluster"),
 									},
 								},
 							},
@@ -3317,7 +3317,7 @@ func schema_apis_loft_cluster_v1_VirtualClusterList(ref common.ReferenceCallback
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/agentapi/v2/pkg/apis/loft/cluster/v1.VirtualCluster", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
+			"github.com/loft-sh/agentapi/v3/pkg/apis/loft/cluster/v1.VirtualCluster", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
 	}
 }
 
@@ -3335,7 +3335,7 @@ func schema_apis_loft_cluster_v1_VirtualClusterSpec(ref common.ReferenceCallback
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.AppReference"),
+										Ref:     ref("github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.AppReference"),
 									},
 								},
 							},
@@ -3349,7 +3349,7 @@ func schema_apis_loft_cluster_v1_VirtualClusterSpec(ref common.ReferenceCallback
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.TemplateHelmChart"),
+										Ref:     ref("github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.TemplateHelmChart"),
 									},
 								},
 							},
@@ -3365,40 +3365,40 @@ func schema_apis_loft_cluster_v1_VirtualClusterSpec(ref common.ReferenceCallback
 					"access": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Access defines the access of users and teams to the virtual cluster.",
-							Ref:         ref("github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.InstanceAccess"),
+							Ref:         ref("github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.InstanceAccess"),
 						},
 					},
 					"helmRelease": {
 						SchemaProps: spec.SchemaProps{
 							Description: "HelmRelease is the helm release configuration for the virtual cluster.",
 							Default:     map[string]interface{}{},
-							Ref:         ref("github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.VirtualClusterHelmRelease"),
+							Ref:         ref("github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.VirtualClusterHelmRelease"),
 						},
 					},
 					"accessPoint": {
 						SchemaProps: spec.SchemaProps{
 							Description: "AccessPoint defines settings to expose the virtual cluster directly via an ingress rather than through the (default) Loft proxy",
 							Default:     map[string]interface{}{},
-							Ref:         ref("github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.VirtualClusterAccessPoint"),
+							Ref:         ref("github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.VirtualClusterAccessPoint"),
 						},
 					},
 					"pod": {
 						SchemaProps: spec.SchemaProps{
 							Description: "DEPRECATED: don't use anymore A label selector to select the virtual cluster pod to route incoming requests to.",
-							Ref:         ref("github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.PodSelector"),
+							Ref:         ref("github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.PodSelector"),
 						},
 					},
 					"kubeConfigRef": {
 						SchemaProps: spec.SchemaProps{
 							Description: "DEPRECATED: don't use anymore A reference to the cluster admin kube config. This is needed for the cli & ui to access the virtual clusters",
-							Ref:         ref("github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.SecretRef"),
+							Ref:         ref("github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.SecretRef"),
 						},
 					},
 				},
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.AppReference", "github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.InstanceAccess", "github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.PodSelector", "github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.SecretRef", "github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.TemplateHelmChart", "github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.VirtualClusterAccessPoint", "github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.VirtualClusterHelmRelease"},
+			"github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.AppReference", "github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.InstanceAccess", "github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.PodSelector", "github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.SecretRef", "github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.TemplateHelmChart", "github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.VirtualClusterAccessPoint", "github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.VirtualClusterHelmRelease"},
 	}
 }
 
@@ -3444,7 +3444,7 @@ func schema_apis_loft_cluster_v1_VirtualClusterStatus(ref common.ReferenceCallba
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.Condition"),
+										Ref:     ref("github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.Condition"),
 									},
 								},
 							},
@@ -3460,7 +3460,7 @@ func schema_apis_loft_cluster_v1_VirtualClusterStatus(ref common.ReferenceCallba
 					"virtualClusterObjects": {
 						SchemaProps: spec.SchemaProps{
 							Description: "VirtualClusterObjects are the objects that were applied within the virtual cluster itself",
-							Ref:         ref("github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.ObjectsStatus"),
+							Ref:         ref("github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.ObjectsStatus"),
 						},
 					},
 					"deployHash": {
@@ -3473,7 +3473,7 @@ func schema_apis_loft_cluster_v1_VirtualClusterStatus(ref common.ReferenceCallba
 					"helmRelease": {
 						SchemaProps: spec.SchemaProps{
 							Description: "DEPRECATED: do not use anymore the status of the helm release that was used to deploy the virtual cluster",
-							Ref:         ref("github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.VirtualClusterHelmReleaseStatus"),
+							Ref:         ref("github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.VirtualClusterHelmReleaseStatus"),
 						},
 					},
 					"syncerPod": {
@@ -3491,20 +3491,20 @@ func schema_apis_loft_cluster_v1_VirtualClusterStatus(ref common.ReferenceCallba
 					"sleepModeConfig": {
 						SchemaProps: spec.SchemaProps{
 							Description: "SleepModeConfig is the sleep mode config of the space",
-							Ref:         ref("github.com/loft-sh/agentapi/v2/pkg/apis/loft/cluster/v1.SleepModeConfig"),
+							Ref:         ref("github.com/loft-sh/agentapi/v3/pkg/apis/loft/cluster/v1.SleepModeConfig"),
 						},
 					},
 					"templateSyncStatus": {
 						SchemaProps: spec.SchemaProps{
 							Description: "TemplateSyncStatus describes the template sync status",
-							Ref:         ref("github.com/loft-sh/agentapi/v2/pkg/apis/loft/cluster/v1.TemplateSyncStatus"),
+							Ref:         ref("github.com/loft-sh/agentapi/v3/pkg/apis/loft/cluster/v1.TemplateSyncStatus"),
 						},
 					},
 				},
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/agentapi/v2/pkg/apis/loft/cluster/v1.SleepModeConfig", "github.com/loft-sh/agentapi/v2/pkg/apis/loft/cluster/v1.TemplateSyncStatus", "github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.Condition", "github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.ObjectsStatus", "github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.VirtualClusterHelmReleaseStatus", "k8s.io/api/core/v1.Pod"},
+			"github.com/loft-sh/agentapi/v3/pkg/apis/loft/cluster/v1.SleepModeConfig", "github.com/loft-sh/agentapi/v3/pkg/apis/loft/cluster/v1.TemplateSyncStatus", "github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.Condition", "github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.ObjectsStatus", "github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.VirtualClusterHelmReleaseStatus", "k8s.io/api/core/v1.Pod"},
 	}
 }
 
@@ -3702,20 +3702,20 @@ func schema_apis_loft_storage_v1_ClusterQuota(ref common.ReferenceCallback) comm
 					"spec": {
 						SchemaProps: spec.SchemaProps{
 							Default: map[string]interface{}{},
-							Ref:     ref("github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.ClusterQuotaSpec"),
+							Ref:     ref("github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.ClusterQuotaSpec"),
 						},
 					},
 					"status": {
 						SchemaProps: spec.SchemaProps{
 							Default: map[string]interface{}{},
-							Ref:     ref("github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.ClusterQuotaStatus"),
+							Ref:     ref("github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.ClusterQuotaStatus"),
 						},
 					},
 				},
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.ClusterQuotaSpec", "github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.ClusterQuotaStatus", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
+			"github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.ClusterQuotaSpec", "github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.ClusterQuotaStatus", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
 	}
 }
 
@@ -3753,7 +3753,7 @@ func schema_apis_loft_storage_v1_ClusterQuotaList(ref common.ReferenceCallback) 
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.ClusterQuota"),
+										Ref:     ref("github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.ClusterQuota"),
 									},
 								},
 							},
@@ -3764,7 +3764,7 @@ func schema_apis_loft_storage_v1_ClusterQuotaList(ref common.ReferenceCallback) 
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.ClusterQuota", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
+			"github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.ClusterQuota", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
 	}
 }
 
@@ -3826,7 +3826,7 @@ func schema_apis_loft_storage_v1_ClusterQuotaStatus(ref common.ReferenceCallback
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.ClusterQuotaStatusByNamespace"),
+										Ref:     ref("github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.ClusterQuotaStatusByNamespace"),
 									},
 								},
 							},
@@ -3836,7 +3836,7 @@ func schema_apis_loft_storage_v1_ClusterQuotaStatus(ref common.ReferenceCallback
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.ClusterQuotaStatusByNamespace", "k8s.io/api/core/v1.ResourceQuotaStatus"},
+			"github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.ClusterQuotaStatusByNamespace", "k8s.io/api/core/v1.ResourceQuotaStatus"},
 	}
 }
 
@@ -3971,7 +3971,7 @@ func schema_apis_loft_storage_v1_InstanceAccess(ref common.ReferenceCallback) co
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.InstanceAccessRule"),
+										Ref:     ref("github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.InstanceAccessRule"),
 									},
 								},
 							},
@@ -3981,7 +3981,7 @@ func schema_apis_loft_storage_v1_InstanceAccess(ref common.ReferenceCallback) co
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.InstanceAccessRule"},
+			"github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.InstanceAccessRule"},
 	}
 }
 
@@ -4064,20 +4064,20 @@ func schema_apis_loft_storage_v1_LocalClusterAccess(ref common.ReferenceCallback
 					"spec": {
 						SchemaProps: spec.SchemaProps{
 							Default: map[string]interface{}{},
-							Ref:     ref("github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.LocalClusterAccessSpec"),
+							Ref:     ref("github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.LocalClusterAccessSpec"),
 						},
 					},
 					"status": {
 						SchemaProps: spec.SchemaProps{
 							Default: map[string]interface{}{},
-							Ref:     ref("github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.LocalClusterAccessStatus"),
+							Ref:     ref("github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.LocalClusterAccessStatus"),
 						},
 					},
 				},
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.LocalClusterAccessSpec", "github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.LocalClusterAccessStatus", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
+			"github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.LocalClusterAccessSpec", "github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.LocalClusterAccessStatus", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
 	}
 }
 
@@ -4115,7 +4115,7 @@ func schema_apis_loft_storage_v1_LocalClusterAccessList(ref common.ReferenceCall
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.LocalClusterAccess"),
+										Ref:     ref("github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.LocalClusterAccess"),
 									},
 								},
 							},
@@ -4126,7 +4126,7 @@ func schema_apis_loft_storage_v1_LocalClusterAccessList(ref common.ReferenceCall
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.LocalClusterAccess", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
+			"github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.LocalClusterAccess", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
 	}
 }
 
@@ -4158,7 +4158,7 @@ func schema_apis_loft_storage_v1_LocalClusterAccessSpec(ref common.ReferenceCall
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.UserOrTeam"),
+										Ref:     ref("github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.UserOrTeam"),
 									},
 								},
 							},
@@ -4187,7 +4187,7 @@ func schema_apis_loft_storage_v1_LocalClusterAccessSpec(ref common.ReferenceCall
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.ClusterRoleRef"),
+										Ref:     ref("github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.ClusterRoleRef"),
 									},
 								},
 							},
@@ -4210,14 +4210,14 @@ func schema_apis_loft_storage_v1_LocalClusterAccessSpec(ref common.ReferenceCall
 					"quota": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Quota defines the quotas for the members that should be created.",
-							Ref:         ref("github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.AccessQuota"),
+							Ref:         ref("github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.AccessQuota"),
 						},
 					},
 				},
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.AccessQuota", "github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.ClusterRoleRef", "github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.UserOrTeam"},
+			"github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.AccessQuota", "github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.ClusterRoleRef", "github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.UserOrTeam"},
 	}
 }
 
@@ -4262,20 +4262,20 @@ func schema_apis_loft_storage_v1_LocalTeam(ref common.ReferenceCallback) common.
 					"spec": {
 						SchemaProps: spec.SchemaProps{
 							Default: map[string]interface{}{},
-							Ref:     ref("github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.LocalTeamSpec"),
+							Ref:     ref("github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.LocalTeamSpec"),
 						},
 					},
 					"status": {
 						SchemaProps: spec.SchemaProps{
 							Default: map[string]interface{}{},
-							Ref:     ref("github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.LocalTeamStatus"),
+							Ref:     ref("github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.LocalTeamStatus"),
 						},
 					},
 				},
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.LocalTeamSpec", "github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.LocalTeamStatus", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
+			"github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.LocalTeamSpec", "github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.LocalTeamStatus", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
 	}
 }
 
@@ -4313,7 +4313,7 @@ func schema_apis_loft_storage_v1_LocalTeamList(ref common.ReferenceCallback) com
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.LocalTeam"),
+										Ref:     ref("github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.LocalTeam"),
 									},
 								},
 							},
@@ -4324,7 +4324,7 @@ func schema_apis_loft_storage_v1_LocalTeamList(ref common.ReferenceCallback) com
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.LocalTeam", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
+			"github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.LocalTeam", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
 	}
 }
 
@@ -4457,20 +4457,20 @@ func schema_apis_loft_storage_v1_LocalUser(ref common.ReferenceCallback) common.
 					"spec": {
 						SchemaProps: spec.SchemaProps{
 							Default: map[string]interface{}{},
-							Ref:     ref("github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.LocalUserSpec"),
+							Ref:     ref("github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.LocalUserSpec"),
 						},
 					},
 					"status": {
 						SchemaProps: spec.SchemaProps{
 							Default: map[string]interface{}{},
-							Ref:     ref("github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.LocalUserStatus"),
+							Ref:     ref("github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.LocalUserStatus"),
 						},
 					},
 				},
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.LocalUserSpec", "github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.LocalUserStatus", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
+			"github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.LocalUserSpec", "github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.LocalUserStatus", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
 	}
 }
 
@@ -4508,7 +4508,7 @@ func schema_apis_loft_storage_v1_LocalUserList(ref common.ReferenceCallback) com
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.LocalUser"),
+										Ref:     ref("github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.LocalUser"),
 									},
 								},
 							},
@@ -4519,7 +4519,7 @@ func schema_apis_loft_storage_v1_LocalUserList(ref common.ReferenceCallback) com
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.LocalUser", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
+			"github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.LocalUser", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
 	}
 }
 
@@ -4657,7 +4657,7 @@ func schema_apis_loft_storage_v1_ObjectsStatus(ref common.ReferenceCallback) com
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.ChartStatus"),
+										Ref:     ref("github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.ChartStatus"),
 									},
 								},
 							},
@@ -4671,7 +4671,7 @@ func schema_apis_loft_storage_v1_ObjectsStatus(ref common.ReferenceCallback) com
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.AppReference"),
+										Ref:     ref("github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.AppReference"),
 									},
 								},
 							},
@@ -4681,7 +4681,7 @@ func schema_apis_loft_storage_v1_ObjectsStatus(ref common.ReferenceCallback) com
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.AppReference", "github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.ChartStatus"},
+			"github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.AppReference", "github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.ChartStatus"},
 	}
 }
 
@@ -4889,20 +4889,20 @@ func schema_apis_loft_storage_v1_VirtualCluster(ref common.ReferenceCallback) co
 					"spec": {
 						SchemaProps: spec.SchemaProps{
 							Default: map[string]interface{}{},
-							Ref:     ref("github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.VirtualClusterSpec"),
+							Ref:     ref("github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.VirtualClusterSpec"),
 						},
 					},
 					"status": {
 						SchemaProps: spec.SchemaProps{
 							Default: map[string]interface{}{},
-							Ref:     ref("github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.VirtualClusterStatus"),
+							Ref:     ref("github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.VirtualClusterStatus"),
 						},
 					},
 				},
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.VirtualClusterSpec", "github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.VirtualClusterStatus", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
+			"github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.VirtualClusterSpec", "github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.VirtualClusterStatus", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
 	}
 }
 
@@ -4916,14 +4916,14 @@ func schema_apis_loft_storage_v1_VirtualClusterAccessPoint(ref common.ReferenceC
 						SchemaProps: spec.SchemaProps{
 							Description: "Ingress defines virtual cluster access via ingress",
 							Default:     map[string]interface{}{},
-							Ref:         ref("github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.VirtualClusterAccessPointIngressSpec"),
+							Ref:         ref("github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.VirtualClusterAccessPointIngressSpec"),
 						},
 					},
 				},
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.VirtualClusterAccessPointIngressSpec"},
+			"github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.VirtualClusterAccessPointIngressSpec"},
 	}
 }
 
@@ -4961,7 +4961,7 @@ func schema_apis_loft_storage_v1_VirtualClusterCommonSpec(ref common.ReferenceCa
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.AppReference"),
+										Ref:     ref("github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.AppReference"),
 									},
 								},
 							},
@@ -4975,7 +4975,7 @@ func schema_apis_loft_storage_v1_VirtualClusterCommonSpec(ref common.ReferenceCa
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.TemplateHelmChart"),
+										Ref:     ref("github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.TemplateHelmChart"),
 									},
 								},
 							},
@@ -4991,28 +4991,28 @@ func schema_apis_loft_storage_v1_VirtualClusterCommonSpec(ref common.ReferenceCa
 					"access": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Access defines the access of users and teams to the virtual cluster.",
-							Ref:         ref("github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.InstanceAccess"),
+							Ref:         ref("github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.InstanceAccess"),
 						},
 					},
 					"helmRelease": {
 						SchemaProps: spec.SchemaProps{
 							Description: "HelmRelease is the helm release configuration for the virtual cluster.",
 							Default:     map[string]interface{}{},
-							Ref:         ref("github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.VirtualClusterHelmRelease"),
+							Ref:         ref("github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.VirtualClusterHelmRelease"),
 						},
 					},
 					"accessPoint": {
 						SchemaProps: spec.SchemaProps{
 							Description: "AccessPoint defines settings to expose the virtual cluster directly via an ingress rather than through the (default) Loft proxy",
 							Default:     map[string]interface{}{},
-							Ref:         ref("github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.VirtualClusterAccessPoint"),
+							Ref:         ref("github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.VirtualClusterAccessPoint"),
 						},
 					},
 				},
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.AppReference", "github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.InstanceAccess", "github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.TemplateHelmChart", "github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.VirtualClusterAccessPoint", "github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.VirtualClusterHelmRelease"},
+			"github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.AppReference", "github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.InstanceAccess", "github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.TemplateHelmChart", "github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.VirtualClusterAccessPoint", "github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.VirtualClusterHelmRelease"},
 	}
 }
 
@@ -5059,7 +5059,7 @@ func schema_apis_loft_storage_v1_VirtualClusterHelmRelease(ref common.ReferenceC
 						SchemaProps: spec.SchemaProps{
 							Description: "infos about what chart to deploy",
 							Default:     map[string]interface{}{},
-							Ref:         ref("github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.VirtualClusterHelmChart"),
+							Ref:         ref("github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.VirtualClusterHelmChart"),
 						},
 					},
 					"values": {
@@ -5073,7 +5073,7 @@ func schema_apis_loft_storage_v1_VirtualClusterHelmRelease(ref common.ReferenceC
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.VirtualClusterHelmChart"},
+			"github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.VirtualClusterHelmChart"},
 	}
 }
 
@@ -5111,14 +5111,14 @@ func schema_apis_loft_storage_v1_VirtualClusterHelmReleaseStatus(ref common.Refe
 						SchemaProps: spec.SchemaProps{
 							Description: "the release that was deployed",
 							Default:     map[string]interface{}{},
-							Ref:         ref("github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.VirtualClusterHelmRelease"),
+							Ref:         ref("github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.VirtualClusterHelmRelease"),
 						},
 					},
 				},
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.VirtualClusterHelmRelease", "k8s.io/apimachinery/pkg/apis/meta/v1.Time"},
+			"github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.VirtualClusterHelmRelease", "k8s.io/apimachinery/pkg/apis/meta/v1.Time"},
 	}
 }
 
@@ -5156,7 +5156,7 @@ func schema_apis_loft_storage_v1_VirtualClusterList(ref common.ReferenceCallback
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.VirtualCluster"),
+										Ref:     ref("github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.VirtualCluster"),
 									},
 								},
 							},
@@ -5167,7 +5167,7 @@ func schema_apis_loft_storage_v1_VirtualClusterList(ref common.ReferenceCallback
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.VirtualCluster", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
+			"github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.VirtualCluster", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
 	}
 }
 
@@ -5185,7 +5185,7 @@ func schema_apis_loft_storage_v1_VirtualClusterSpec(ref common.ReferenceCallback
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.AppReference"),
+										Ref:     ref("github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.AppReference"),
 									},
 								},
 							},
@@ -5199,7 +5199,7 @@ func schema_apis_loft_storage_v1_VirtualClusterSpec(ref common.ReferenceCallback
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.TemplateHelmChart"),
+										Ref:     ref("github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.TemplateHelmChart"),
 									},
 								},
 							},
@@ -5215,40 +5215,40 @@ func schema_apis_loft_storage_v1_VirtualClusterSpec(ref common.ReferenceCallback
 					"access": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Access defines the access of users and teams to the virtual cluster.",
-							Ref:         ref("github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.InstanceAccess"),
+							Ref:         ref("github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.InstanceAccess"),
 						},
 					},
 					"helmRelease": {
 						SchemaProps: spec.SchemaProps{
 							Description: "HelmRelease is the helm release configuration for the virtual cluster.",
 							Default:     map[string]interface{}{},
-							Ref:         ref("github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.VirtualClusterHelmRelease"),
+							Ref:         ref("github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.VirtualClusterHelmRelease"),
 						},
 					},
 					"accessPoint": {
 						SchemaProps: spec.SchemaProps{
 							Description: "AccessPoint defines settings to expose the virtual cluster directly via an ingress rather than through the (default) Loft proxy",
 							Default:     map[string]interface{}{},
-							Ref:         ref("github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.VirtualClusterAccessPoint"),
+							Ref:         ref("github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.VirtualClusterAccessPoint"),
 						},
 					},
 					"pod": {
 						SchemaProps: spec.SchemaProps{
 							Description: "DEPRECATED: don't use anymore A label selector to select the virtual cluster pod to route incoming requests to.",
-							Ref:         ref("github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.PodSelector"),
+							Ref:         ref("github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.PodSelector"),
 						},
 					},
 					"kubeConfigRef": {
 						SchemaProps: spec.SchemaProps{
 							Description: "DEPRECATED: don't use anymore A reference to the cluster admin kube config. This is needed for the cli & ui to access the virtual clusters",
-							Ref:         ref("github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.SecretRef"),
+							Ref:         ref("github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.SecretRef"),
 						},
 					},
 				},
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.AppReference", "github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.InstanceAccess", "github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.PodSelector", "github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.SecretRef", "github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.TemplateHelmChart", "github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.VirtualClusterAccessPoint", "github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.VirtualClusterHelmRelease"},
+			"github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.AppReference", "github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.InstanceAccess", "github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.PodSelector", "github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.SecretRef", "github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.TemplateHelmChart", "github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.VirtualClusterAccessPoint", "github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.VirtualClusterHelmRelease"},
 	}
 }
 
@@ -5295,7 +5295,7 @@ func schema_apis_loft_storage_v1_VirtualClusterStatus(ref common.ReferenceCallba
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.Condition"),
+										Ref:     ref("github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.Condition"),
 									},
 								},
 							},
@@ -5311,7 +5311,7 @@ func schema_apis_loft_storage_v1_VirtualClusterStatus(ref common.ReferenceCallba
 					"virtualClusterObjects": {
 						SchemaProps: spec.SchemaProps{
 							Description: "VirtualClusterObjects are the objects that were applied within the virtual cluster itself",
-							Ref:         ref("github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.ObjectsStatus"),
+							Ref:         ref("github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.ObjectsStatus"),
 						},
 					},
 					"deployHash": {
@@ -5324,14 +5324,14 @@ func schema_apis_loft_storage_v1_VirtualClusterStatus(ref common.ReferenceCallba
 					"helmRelease": {
 						SchemaProps: spec.SchemaProps{
 							Description: "DEPRECATED: do not use anymore the status of the helm release that was used to deploy the virtual cluster",
-							Ref:         ref("github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.VirtualClusterHelmReleaseStatus"),
+							Ref:         ref("github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.VirtualClusterHelmReleaseStatus"),
 						},
 					},
 				},
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.Condition", "github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.ObjectsStatus", "github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.VirtualClusterHelmReleaseStatus"},
+			"github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.Condition", "github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.ObjectsStatus", "github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.VirtualClusterHelmReleaseStatus"},
 	}
 }
 
@@ -5434,7 +5434,7 @@ func schema_pkg_apis_audit_v1_Event(ref common.ReferenceCallback) common.OpenAPI
 					"objectRef": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Object reference this request is targeted at. Does not apply for List-type requests, or non-resource requests.",
-							Ref:         ref("github.com/loft-sh/api/v2/pkg/apis/audit/v1.ObjectReference"),
+							Ref:         ref("github.com/loft-sh/api/v3/pkg/apis/audit/v1.ObjectReference"),
 						},
 					},
 					"responseStatus": {
@@ -5490,7 +5490,7 @@ func schema_pkg_apis_audit_v1_Event(ref common.ReferenceCallback) common.OpenAPI
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/v2/pkg/apis/audit/v1.ObjectReference", "k8s.io/api/authentication/v1.UserInfo", "k8s.io/apimachinery/pkg/apis/meta/v1.MicroTime", "k8s.io/apimachinery/pkg/apis/meta/v1.Status", "k8s.io/apimachinery/pkg/runtime.Unknown"},
+			"github.com/loft-sh/api/v3/pkg/apis/audit/v1.ObjectReference", "k8s.io/api/authentication/v1.UserInfo", "k8s.io/apimachinery/pkg/apis/meta/v1.MicroTime", "k8s.io/apimachinery/pkg/apis/meta/v1.Status", "k8s.io/apimachinery/pkg/runtime.Unknown"},
 	}
 }
 
@@ -5528,7 +5528,7 @@ func schema_pkg_apis_audit_v1_EventList(ref common.ReferenceCallback) common.Ope
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/audit/v1.Event"),
+										Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/audit/v1.Event"),
 									},
 								},
 							},
@@ -5539,7 +5539,7 @@ func schema_pkg_apis_audit_v1_EventList(ref common.ReferenceCallback) common.Ope
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/v2/pkg/apis/audit/v1.Event", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
+			"github.com/loft-sh/api/v3/pkg/apis/audit/v1.Event", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
 	}
 }
 
@@ -5636,20 +5636,20 @@ func schema_pkg_apis_management_v1_AgentConfig(ref common.ReferenceCallback) com
 					"spec": {
 						SchemaProps: spec.SchemaProps{
 							Default: map[string]interface{}{},
-							Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/management/v1.AgentConfigSpec"),
+							Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/management/v1.AgentConfigSpec"),
 						},
 					},
 					"status": {
 						SchemaProps: spec.SchemaProps{
 							Default: map[string]interface{}{},
-							Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/management/v1.AgentConfigStatus"),
+							Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/management/v1.AgentConfigStatus"),
 						},
 					},
 				},
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/v2/pkg/apis/management/v1.AgentConfigSpec", "github.com/loft-sh/api/v2/pkg/apis/management/v1.AgentConfigStatus", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
+			"github.com/loft-sh/api/v3/pkg/apis/management/v1.AgentConfigSpec", "github.com/loft-sh/api/v3/pkg/apis/management/v1.AgentConfigStatus", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
 	}
 }
 
@@ -5677,7 +5677,7 @@ func schema_pkg_apis_management_v1_AgentConfigSpec(ref common.ReferenceCallback)
 					"analytics": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Analytics config for the agent",
-							Ref:         ref("github.com/loft-sh/api/v2/pkg/apis/management/v1.Analytics"),
+							Ref:         ref("github.com/loft-sh/api/v3/pkg/apis/management/v1.Analytics"),
 						},
 					},
 					"defaultImageRegistry": {
@@ -5719,7 +5719,7 @@ func schema_pkg_apis_management_v1_AgentConfigSpec(ref common.ReferenceCallback)
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/v2/pkg/apis/management/v1.Analytics"},
+			"github.com/loft-sh/api/v3/pkg/apis/management/v1.Analytics"},
 	}
 }
 
@@ -5759,7 +5759,7 @@ func schema_pkg_apis_management_v1_Analytics(ref common.ReferenceCallback) commo
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/management/v1.ResoureRequests"),
+										Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/management/v1.ResoureRequests"),
 									},
 								},
 							},
@@ -5775,7 +5775,7 @@ func schema_pkg_apis_management_v1_Analytics(ref common.ReferenceCallback) commo
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/v2/pkg/apis/management/v1.ResoureRequests"},
+			"github.com/loft-sh/api/v3/pkg/apis/management/v1.ResoureRequests"},
 	}
 }
 
@@ -5809,20 +5809,20 @@ func schema_pkg_apis_management_v1_Announcement(ref common.ReferenceCallback) co
 					"spec": {
 						SchemaProps: spec.SchemaProps{
 							Default: map[string]interface{}{},
-							Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/management/v1.AnnouncementSpec"),
+							Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/management/v1.AnnouncementSpec"),
 						},
 					},
 					"status": {
 						SchemaProps: spec.SchemaProps{
 							Default: map[string]interface{}{},
-							Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/management/v1.AnnouncementStatus"),
+							Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/management/v1.AnnouncementStatus"),
 						},
 					},
 				},
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/v2/pkg/apis/management/v1.AnnouncementSpec", "github.com/loft-sh/api/v2/pkg/apis/management/v1.AnnouncementStatus", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
+			"github.com/loft-sh/api/v3/pkg/apis/management/v1.AnnouncementSpec", "github.com/loft-sh/api/v3/pkg/apis/management/v1.AnnouncementStatus", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
 	}
 }
 
@@ -5859,7 +5859,7 @@ func schema_pkg_apis_management_v1_AnnouncementList(ref common.ReferenceCallback
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/management/v1.Announcement"),
+										Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/management/v1.Announcement"),
 									},
 								},
 							},
@@ -5870,7 +5870,7 @@ func schema_pkg_apis_management_v1_AnnouncementList(ref common.ReferenceCallback
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/v2/pkg/apis/management/v1.Announcement", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
+			"github.com/loft-sh/api/v3/pkg/apis/management/v1.Announcement", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
 	}
 }
 
@@ -5940,20 +5940,20 @@ func schema_pkg_apis_management_v1_App(ref common.ReferenceCallback) common.Open
 					"spec": {
 						SchemaProps: spec.SchemaProps{
 							Default: map[string]interface{}{},
-							Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/management/v1.AppSpec"),
+							Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/management/v1.AppSpec"),
 						},
 					},
 					"status": {
 						SchemaProps: spec.SchemaProps{
 							Default: map[string]interface{}{},
-							Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/management/v1.AppStatus"),
+							Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/management/v1.AppStatus"),
 						},
 					},
 				},
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/v2/pkg/apis/management/v1.AppSpec", "github.com/loft-sh/api/v2/pkg/apis/management/v1.AppStatus", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
+			"github.com/loft-sh/api/v3/pkg/apis/management/v1.AppSpec", "github.com/loft-sh/api/v3/pkg/apis/management/v1.AppStatus", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
 	}
 }
 
@@ -5990,7 +5990,7 @@ func schema_pkg_apis_management_v1_AppList(ref common.ReferenceCallback) common.
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/management/v1.App"),
+										Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/management/v1.App"),
 									},
 								},
 							},
@@ -6001,7 +6001,7 @@ func schema_pkg_apis_management_v1_AppList(ref common.ReferenceCallback) common.
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/v2/pkg/apis/management/v1.App", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
+			"github.com/loft-sh/api/v3/pkg/apis/management/v1.App", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
 	}
 }
 
@@ -6029,7 +6029,7 @@ func schema_pkg_apis_management_v1_AppSpec(ref common.ReferenceCallback) common.
 					"owner": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Owner holds the owner of this object",
-							Ref:         ref("github.com/loft-sh/api/v2/pkg/apis/storage/v1.UserOrTeam"),
+							Ref:         ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.UserOrTeam"),
 						},
 					},
 					"clusters": {
@@ -6087,7 +6087,7 @@ func schema_pkg_apis_management_v1_AppSpec(ref common.ReferenceCallback) common.
 						SchemaProps: spec.SchemaProps{
 							Description: "Config is the helm config to use to deploy the helm release",
 							Default:     map[string]interface{}{},
-							Ref:         ref("github.com/loft-sh/agentapi/v2/pkg/apis/loft/cluster/v1.HelmReleaseConfig"),
+							Ref:         ref("github.com/loft-sh/agentapi/v3/pkg/apis/loft/cluster/v1.HelmReleaseConfig"),
 						},
 					},
 					"wait": {
@@ -6112,7 +6112,7 @@ func schema_pkg_apis_management_v1_AppSpec(ref common.ReferenceCallback) common.
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/storage/v1.AppParameter"),
+										Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.AppParameter"),
 									},
 								},
 							},
@@ -6121,7 +6121,7 @@ func schema_pkg_apis_management_v1_AppSpec(ref common.ReferenceCallback) common.
 					"streamContainer": {
 						SchemaProps: spec.SchemaProps{
 							Description: "DEPRECATED: Use config.bash instead StreamContainer can be used to stream a containers logs instead of the helm output.",
-							Ref:         ref("github.com/loft-sh/api/v2/pkg/apis/storage/v1.StreamContainer"),
+							Ref:         ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.StreamContainer"),
 						},
 					},
 					"versions": {
@@ -6132,7 +6132,7 @@ func schema_pkg_apis_management_v1_AppSpec(ref common.ReferenceCallback) common.
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/storage/v1.AppVersion"),
+										Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.AppVersion"),
 									},
 								},
 							},
@@ -6146,7 +6146,7 @@ func schema_pkg_apis_management_v1_AppSpec(ref common.ReferenceCallback) common.
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/storage/v1.Access"),
+										Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.Access"),
 									},
 								},
 							},
@@ -6162,14 +6162,14 @@ func schema_pkg_apis_management_v1_AppSpec(ref common.ReferenceCallback) common.
 					"helm": {
 						SchemaProps: spec.SchemaProps{
 							Description: "DEPRECATED: Use config instead helm defines the configuration for a helm deployment",
-							Ref:         ref("github.com/loft-sh/api/v2/pkg/apis/storage/v1.HelmConfiguration"),
+							Ref:         ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.HelmConfiguration"),
 						},
 					},
 				},
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/agentapi/v2/pkg/apis/loft/cluster/v1.HelmReleaseConfig", "github.com/loft-sh/api/v2/pkg/apis/storage/v1.Access", "github.com/loft-sh/api/v2/pkg/apis/storage/v1.AppParameter", "github.com/loft-sh/api/v2/pkg/apis/storage/v1.AppVersion", "github.com/loft-sh/api/v2/pkg/apis/storage/v1.HelmConfiguration", "github.com/loft-sh/api/v2/pkg/apis/storage/v1.StreamContainer", "github.com/loft-sh/api/v2/pkg/apis/storage/v1.UserOrTeam"},
+			"github.com/loft-sh/agentapi/v3/pkg/apis/loft/cluster/v1.HelmReleaseConfig", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.Access", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.AppParameter", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.AppVersion", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.HelmConfiguration", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.StreamContainer", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.UserOrTeam"},
 	}
 }
 
@@ -6206,7 +6206,7 @@ func schema_pkg_apis_management_v1_Apps(ref common.ReferenceCallback) common.Ope
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/storage/v1.HelmChartRepository"),
+										Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.HelmChartRepository"),
 									},
 								},
 							},
@@ -6220,7 +6220,7 @@ func schema_pkg_apis_management_v1_Apps(ref common.ReferenceCallback) common.Ope
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/management/v1.PredefinedApp"),
+										Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/management/v1.PredefinedApp"),
 									},
 								},
 							},
@@ -6230,7 +6230,7 @@ func schema_pkg_apis_management_v1_Apps(ref common.ReferenceCallback) common.Ope
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/v2/pkg/apis/management/v1.PredefinedApp", "github.com/loft-sh/api/v2/pkg/apis/storage/v1.HelmChartRepository"},
+			"github.com/loft-sh/api/v3/pkg/apis/management/v1.PredefinedApp", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.HelmChartRepository"},
 	}
 }
 
@@ -6259,7 +6259,7 @@ func schema_pkg_apis_management_v1_Audit(ref common.ReferenceCallback) common.Op
 						SchemaProps: spec.SchemaProps{
 							Description: "The audit policy to use and log requests. By default loft will not log anything",
 							Default:     map[string]interface{}{},
-							Ref:         ref("github.com/loft-sh/api/v2/pkg/apis/management/v1.AuditPolicy"),
+							Ref:         ref("github.com/loft-sh/api/v3/pkg/apis/management/v1.AuditPolicy"),
 						},
 					},
 					"dataStoreEndpoint": {
@@ -6315,7 +6315,7 @@ func schema_pkg_apis_management_v1_Audit(ref common.ReferenceCallback) common.Op
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/v2/pkg/apis/management/v1.AuditPolicy"},
+			"github.com/loft-sh/api/v3/pkg/apis/management/v1.AuditPolicy"},
 	}
 }
 
@@ -6334,7 +6334,7 @@ func schema_pkg_apis_management_v1_AuditPolicy(ref common.ReferenceCallback) com
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/management/v1.AuditPolicyRule"),
+										Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/management/v1.AuditPolicyRule"),
 									},
 								},
 							},
@@ -6359,7 +6359,7 @@ func schema_pkg_apis_management_v1_AuditPolicy(ref common.ReferenceCallback) com
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/v2/pkg/apis/management/v1.AuditPolicyRule"},
+			"github.com/loft-sh/api/v3/pkg/apis/management/v1.AuditPolicyRule"},
 	}
 }
 
@@ -6431,7 +6431,7 @@ func schema_pkg_apis_management_v1_AuditPolicyRule(ref common.ReferenceCallback)
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/management/v1.GroupResources"),
+										Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/management/v1.GroupResources"),
 									},
 								},
 							},
@@ -6517,7 +6517,7 @@ func schema_pkg_apis_management_v1_AuditPolicyRule(ref common.ReferenceCallback)
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/v2/pkg/apis/management/v1.GroupResources"},
+			"github.com/loft-sh/api/v3/pkg/apis/management/v1.GroupResources"},
 	}
 }
 
@@ -6531,43 +6531,43 @@ func schema_pkg_apis_management_v1_Authentication(ref common.ReferenceCallback) 
 					"password": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Password holds password authentication relevant information",
-							Ref:         ref("github.com/loft-sh/api/v2/pkg/apis/management/v1.AuthenticationPassword"),
+							Ref:         ref("github.com/loft-sh/api/v3/pkg/apis/management/v1.AuthenticationPassword"),
 						},
 					},
 					"oidc": {
 						SchemaProps: spec.SchemaProps{
 							Description: "OIDC holds oidc authentication configuration",
-							Ref:         ref("github.com/loft-sh/api/v2/pkg/apis/management/v1.AuthenticationOIDC"),
+							Ref:         ref("github.com/loft-sh/api/v3/pkg/apis/management/v1.AuthenticationOIDC"),
 						},
 					},
 					"github": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Github holds github authentication configuration",
-							Ref:         ref("github.com/loft-sh/api/v2/pkg/apis/management/v1.AuthenticationGithub"),
+							Ref:         ref("github.com/loft-sh/api/v3/pkg/apis/management/v1.AuthenticationGithub"),
 						},
 					},
 					"gitlab": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Gitlab holds gitlab authentication configuration",
-							Ref:         ref("github.com/loft-sh/api/v2/pkg/apis/management/v1.AuthenticationGitlab"),
+							Ref:         ref("github.com/loft-sh/api/v3/pkg/apis/management/v1.AuthenticationGitlab"),
 						},
 					},
 					"google": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Google holds google authentication configuration",
-							Ref:         ref("github.com/loft-sh/api/v2/pkg/apis/management/v1.AuthenticationGoogle"),
+							Ref:         ref("github.com/loft-sh/api/v3/pkg/apis/management/v1.AuthenticationGoogle"),
 						},
 					},
 					"microsoft": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Microsoft holds microsoft authentication configuration",
-							Ref:         ref("github.com/loft-sh/api/v2/pkg/apis/management/v1.AuthenticationMicrosoft"),
+							Ref:         ref("github.com/loft-sh/api/v3/pkg/apis/management/v1.AuthenticationMicrosoft"),
 						},
 					},
 					"saml": {
 						SchemaProps: spec.SchemaProps{
 							Description: "SAML holds saml authentication configuration",
-							Ref:         ref("github.com/loft-sh/api/v2/pkg/apis/management/v1.AuthenticationSAML"),
+							Ref:         ref("github.com/loft-sh/api/v3/pkg/apis/management/v1.AuthenticationSAML"),
 						},
 					},
 					"disableTeamCreation": {
@@ -6581,7 +6581,7 @@ func schema_pkg_apis_management_v1_Authentication(ref common.ReferenceCallback) 
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/v2/pkg/apis/management/v1.AuthenticationGithub", "github.com/loft-sh/api/v2/pkg/apis/management/v1.AuthenticationGitlab", "github.com/loft-sh/api/v2/pkg/apis/management/v1.AuthenticationGoogle", "github.com/loft-sh/api/v2/pkg/apis/management/v1.AuthenticationMicrosoft", "github.com/loft-sh/api/v2/pkg/apis/management/v1.AuthenticationOIDC", "github.com/loft-sh/api/v2/pkg/apis/management/v1.AuthenticationPassword", "github.com/loft-sh/api/v2/pkg/apis/management/v1.AuthenticationSAML"},
+			"github.com/loft-sh/api/v3/pkg/apis/management/v1.AuthenticationGithub", "github.com/loft-sh/api/v3/pkg/apis/management/v1.AuthenticationGitlab", "github.com/loft-sh/api/v3/pkg/apis/management/v1.AuthenticationGoogle", "github.com/loft-sh/api/v3/pkg/apis/management/v1.AuthenticationMicrosoft", "github.com/loft-sh/api/v3/pkg/apis/management/v1.AuthenticationOIDC", "github.com/loft-sh/api/v3/pkg/apis/management/v1.AuthenticationPassword", "github.com/loft-sh/api/v3/pkg/apis/management/v1.AuthenticationSAML"},
 	}
 }
 
@@ -6599,7 +6599,7 @@ func schema_pkg_apis_management_v1_AuthenticationClusterAccountTemplates(ref com
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/storage/v1.UserClusterAccountTemplate"),
+										Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.UserClusterAccountTemplate"),
 									},
 								},
 							},
@@ -6613,7 +6613,7 @@ func schema_pkg_apis_management_v1_AuthenticationClusterAccountTemplates(ref com
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/management/v1.AuthenticationGroupClusterAccountTemplate"),
+										Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/management/v1.AuthenticationGroupClusterAccountTemplate"),
 									},
 								},
 							},
@@ -6623,7 +6623,7 @@ func schema_pkg_apis_management_v1_AuthenticationClusterAccountTemplates(ref com
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/v2/pkg/apis/management/v1.AuthenticationGroupClusterAccountTemplate", "github.com/loft-sh/api/v2/pkg/apis/storage/v1.UserClusterAccountTemplate"},
+			"github.com/loft-sh/api/v3/pkg/apis/management/v1.AuthenticationGroupClusterAccountTemplate", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.UserClusterAccountTemplate"},
 	}
 }
 
@@ -6641,7 +6641,7 @@ func schema_pkg_apis_management_v1_AuthenticationGithub(ref common.ReferenceCall
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/storage/v1.UserClusterAccountTemplate"),
+										Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.UserClusterAccountTemplate"),
 									},
 								},
 							},
@@ -6655,7 +6655,7 @@ func schema_pkg_apis_management_v1_AuthenticationGithub(ref common.ReferenceCall
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/management/v1.AuthenticationGroupClusterAccountTemplate"),
+										Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/management/v1.AuthenticationGroupClusterAccountTemplate"),
 									},
 								},
 							},
@@ -6692,7 +6692,7 @@ func schema_pkg_apis_management_v1_AuthenticationGithub(ref common.ReferenceCall
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/management/v1.AuthenticationGithubOrg"),
+										Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/management/v1.AuthenticationGithubOrg"),
 									},
 								},
 							},
@@ -6717,7 +6717,7 @@ func schema_pkg_apis_management_v1_AuthenticationGithub(ref common.ReferenceCall
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/v2/pkg/apis/management/v1.AuthenticationGithubOrg", "github.com/loft-sh/api/v2/pkg/apis/management/v1.AuthenticationGroupClusterAccountTemplate", "github.com/loft-sh/api/v2/pkg/apis/storage/v1.UserClusterAccountTemplate"},
+			"github.com/loft-sh/api/v3/pkg/apis/management/v1.AuthenticationGithubOrg", "github.com/loft-sh/api/v3/pkg/apis/management/v1.AuthenticationGroupClusterAccountTemplate", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.UserClusterAccountTemplate"},
 	}
 }
 
@@ -6771,7 +6771,7 @@ func schema_pkg_apis_management_v1_AuthenticationGitlab(ref common.ReferenceCall
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/storage/v1.UserClusterAccountTemplate"),
+										Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.UserClusterAccountTemplate"),
 									},
 								},
 							},
@@ -6785,7 +6785,7 @@ func schema_pkg_apis_management_v1_AuthenticationGitlab(ref common.ReferenceCall
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/management/v1.AuthenticationGroupClusterAccountTemplate"),
+										Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/management/v1.AuthenticationGroupClusterAccountTemplate"),
 									},
 								},
 							},
@@ -6842,7 +6842,7 @@ func schema_pkg_apis_management_v1_AuthenticationGitlab(ref common.ReferenceCall
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/v2/pkg/apis/management/v1.AuthenticationGroupClusterAccountTemplate", "github.com/loft-sh/api/v2/pkg/apis/storage/v1.UserClusterAccountTemplate"},
+			"github.com/loft-sh/api/v3/pkg/apis/management/v1.AuthenticationGroupClusterAccountTemplate", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.UserClusterAccountTemplate"},
 	}
 }
 
@@ -6860,7 +6860,7 @@ func schema_pkg_apis_management_v1_AuthenticationGoogle(ref common.ReferenceCall
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/storage/v1.UserClusterAccountTemplate"),
+										Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.UserClusterAccountTemplate"),
 									},
 								},
 							},
@@ -6874,7 +6874,7 @@ func schema_pkg_apis_management_v1_AuthenticationGoogle(ref common.ReferenceCall
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/management/v1.AuthenticationGroupClusterAccountTemplate"),
+										Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/management/v1.AuthenticationGroupClusterAccountTemplate"),
 									},
 								},
 							},
@@ -6968,7 +6968,7 @@ func schema_pkg_apis_management_v1_AuthenticationGoogle(ref common.ReferenceCall
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/v2/pkg/apis/management/v1.AuthenticationGroupClusterAccountTemplate", "github.com/loft-sh/api/v2/pkg/apis/storage/v1.UserClusterAccountTemplate"},
+			"github.com/loft-sh/api/v3/pkg/apis/management/v1.AuthenticationGroupClusterAccountTemplate", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.UserClusterAccountTemplate"},
 	}
 }
 
@@ -6994,7 +6994,7 @@ func schema_pkg_apis_management_v1_AuthenticationGroupClusterAccountTemplate(ref
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/storage/v1.UserClusterAccountTemplate"),
+										Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.UserClusterAccountTemplate"),
 									},
 								},
 							},
@@ -7005,7 +7005,7 @@ func schema_pkg_apis_management_v1_AuthenticationGroupClusterAccountTemplate(ref
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/v2/pkg/apis/storage/v1.UserClusterAccountTemplate"},
+			"github.com/loft-sh/api/v3/pkg/apis/storage/v1.UserClusterAccountTemplate"},
 	}
 }
 
@@ -7023,7 +7023,7 @@ func schema_pkg_apis_management_v1_AuthenticationMicrosoft(ref common.ReferenceC
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/storage/v1.UserClusterAccountTemplate"),
+										Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.UserClusterAccountTemplate"),
 									},
 								},
 							},
@@ -7037,7 +7037,7 @@ func schema_pkg_apis_management_v1_AuthenticationMicrosoft(ref common.ReferenceC
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/management/v1.AuthenticationGroupClusterAccountTemplate"),
+										Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/management/v1.AuthenticationGroupClusterAccountTemplate"),
 									},
 								},
 							},
@@ -7108,7 +7108,7 @@ func schema_pkg_apis_management_v1_AuthenticationMicrosoft(ref common.ReferenceC
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/v2/pkg/apis/management/v1.AuthenticationGroupClusterAccountTemplate", "github.com/loft-sh/api/v2/pkg/apis/storage/v1.UserClusterAccountTemplate"},
+			"github.com/loft-sh/api/v3/pkg/apis/management/v1.AuthenticationGroupClusterAccountTemplate", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.UserClusterAccountTemplate"},
 	}
 }
 
@@ -7126,7 +7126,7 @@ func schema_pkg_apis_management_v1_AuthenticationOIDC(ref common.ReferenceCallba
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/storage/v1.UserClusterAccountTemplate"),
+										Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.UserClusterAccountTemplate"),
 									},
 								},
 							},
@@ -7140,7 +7140,7 @@ func schema_pkg_apis_management_v1_AuthenticationOIDC(ref common.ReferenceCallba
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/management/v1.AuthenticationGroupClusterAccountTemplate"),
+										Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/management/v1.AuthenticationGroupClusterAccountTemplate"),
 									},
 								},
 							},
@@ -7249,7 +7249,7 @@ func schema_pkg_apis_management_v1_AuthenticationOIDC(ref common.ReferenceCallba
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/v2/pkg/apis/management/v1.AuthenticationGroupClusterAccountTemplate", "github.com/loft-sh/api/v2/pkg/apis/storage/v1.UserClusterAccountTemplate"},
+			"github.com/loft-sh/api/v3/pkg/apis/management/v1.AuthenticationGroupClusterAccountTemplate", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.UserClusterAccountTemplate"},
 	}
 }
 
@@ -7410,20 +7410,20 @@ func schema_pkg_apis_management_v1_Cluster(ref common.ReferenceCallback) common.
 					"spec": {
 						SchemaProps: spec.SchemaProps{
 							Default: map[string]interface{}{},
-							Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/management/v1.ClusterSpec"),
+							Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/management/v1.ClusterSpec"),
 						},
 					},
 					"status": {
 						SchemaProps: spec.SchemaProps{
 							Default: map[string]interface{}{},
-							Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/management/v1.ClusterStatus"),
+							Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/management/v1.ClusterStatus"),
 						},
 					},
 				},
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/v2/pkg/apis/management/v1.ClusterSpec", "github.com/loft-sh/api/v2/pkg/apis/management/v1.ClusterStatus", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
+			"github.com/loft-sh/api/v3/pkg/apis/management/v1.ClusterSpec", "github.com/loft-sh/api/v3/pkg/apis/management/v1.ClusterStatus", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
 	}
 }
 
@@ -7457,20 +7457,20 @@ func schema_pkg_apis_management_v1_ClusterAccess(ref common.ReferenceCallback) c
 					"spec": {
 						SchemaProps: spec.SchemaProps{
 							Default: map[string]interface{}{},
-							Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/management/v1.ClusterAccessSpec"),
+							Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/management/v1.ClusterAccessSpec"),
 						},
 					},
 					"status": {
 						SchemaProps: spec.SchemaProps{
 							Default: map[string]interface{}{},
-							Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/management/v1.ClusterAccessStatus"),
+							Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/management/v1.ClusterAccessStatus"),
 						},
 					},
 				},
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/v2/pkg/apis/management/v1.ClusterAccessSpec", "github.com/loft-sh/api/v2/pkg/apis/management/v1.ClusterAccessStatus", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
+			"github.com/loft-sh/api/v3/pkg/apis/management/v1.ClusterAccessSpec", "github.com/loft-sh/api/v3/pkg/apis/management/v1.ClusterAccessStatus", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
 	}
 }
 
@@ -7507,7 +7507,7 @@ func schema_pkg_apis_management_v1_ClusterAccessList(ref common.ReferenceCallbac
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/management/v1.ClusterAccess"),
+										Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/management/v1.ClusterAccess"),
 									},
 								},
 							},
@@ -7518,7 +7518,7 @@ func schema_pkg_apis_management_v1_ClusterAccessList(ref common.ReferenceCallbac
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/v2/pkg/apis/management/v1.ClusterAccess", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
+			"github.com/loft-sh/api/v3/pkg/apis/management/v1.ClusterAccess", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
 	}
 }
 
@@ -7546,7 +7546,7 @@ func schema_pkg_apis_management_v1_ClusterAccessSpec(ref common.ReferenceCallbac
 					"owner": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Owner holds the owner of this object",
-							Ref:         ref("github.com/loft-sh/api/v2/pkg/apis/storage/v1.UserOrTeam"),
+							Ref:         ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.UserOrTeam"),
 						},
 					},
 					"clusters": {
@@ -7572,7 +7572,7 @@ func schema_pkg_apis_management_v1_ClusterAccessSpec(ref common.ReferenceCallbac
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/storage/v1.Access"),
+										Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.Access"),
 									},
 								},
 							},
@@ -7582,14 +7582,14 @@ func schema_pkg_apis_management_v1_ClusterAccessSpec(ref common.ReferenceCallbac
 						SchemaProps: spec.SchemaProps{
 							Description: "LocalClusterAccessTemplate holds the cluster access template",
 							Default:     map[string]interface{}{},
-							Ref:         ref("github.com/loft-sh/api/v2/pkg/apis/storage/v1.LocalClusterAccessTemplate"),
+							Ref:         ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.LocalClusterAccessTemplate"),
 						},
 					},
 				},
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/v2/pkg/apis/storage/v1.Access", "github.com/loft-sh/api/v2/pkg/apis/storage/v1.LocalClusterAccessTemplate", "github.com/loft-sh/api/v2/pkg/apis/storage/v1.UserOrTeam"},
+			"github.com/loft-sh/api/v3/pkg/apis/storage/v1.Access", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.LocalClusterAccessTemplate", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.UserOrTeam"},
 	}
 }
 
@@ -7606,7 +7606,7 @@ func schema_pkg_apis_management_v1_ClusterAccessStatus(ref common.ReferenceCallb
 							Items: &spec.SchemaOrArray{
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
-										Ref: ref("github.com/loft-sh/agentapi/v2/pkg/apis/loft/cluster/v1.EntityInfo"),
+										Ref: ref("github.com/loft-sh/agentapi/v3/pkg/apis/loft/cluster/v1.EntityInfo"),
 									},
 								},
 							},
@@ -7618,7 +7618,7 @@ func schema_pkg_apis_management_v1_ClusterAccessStatus(ref common.ReferenceCallb
 							Items: &spec.SchemaOrArray{
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
-										Ref: ref("github.com/loft-sh/agentapi/v2/pkg/apis/loft/cluster/v1.UserOrTeam"),
+										Ref: ref("github.com/loft-sh/agentapi/v3/pkg/apis/loft/cluster/v1.UserOrTeam"),
 									},
 								},
 							},
@@ -7630,7 +7630,7 @@ func schema_pkg_apis_management_v1_ClusterAccessStatus(ref common.ReferenceCallb
 							Items: &spec.SchemaOrArray{
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
-										Ref: ref("github.com/loft-sh/agentapi/v2/pkg/apis/loft/cluster/v1.EntityInfo"),
+										Ref: ref("github.com/loft-sh/agentapi/v3/pkg/apis/loft/cluster/v1.EntityInfo"),
 									},
 								},
 							},
@@ -7638,14 +7638,14 @@ func schema_pkg_apis_management_v1_ClusterAccessStatus(ref common.ReferenceCallb
 					},
 					"spaceConstraint": {
 						SchemaProps: spec.SchemaProps{
-							Ref: ref("github.com/loft-sh/agentapi/v2/pkg/apis/loft/cluster/v1.EntityInfo"),
+							Ref: ref("github.com/loft-sh/agentapi/v3/pkg/apis/loft/cluster/v1.EntityInfo"),
 						},
 					},
 				},
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/agentapi/v2/pkg/apis/loft/cluster/v1.EntityInfo", "github.com/loft-sh/agentapi/v2/pkg/apis/loft/cluster/v1.UserOrTeam"},
+			"github.com/loft-sh/agentapi/v3/pkg/apis/loft/cluster/v1.EntityInfo", "github.com/loft-sh/agentapi/v3/pkg/apis/loft/cluster/v1.UserOrTeam"},
 	}
 }
 
@@ -7674,14 +7674,14 @@ func schema_pkg_apis_management_v1_ClusterAccounts(ref common.ReferenceCallback)
 						SchemaProps: spec.SchemaProps{
 							Description: "Cluster is the cluster object",
 							Default:     map[string]interface{}{},
-							Ref:         ref("github.com/loft-sh/api/v2/pkg/apis/storage/v1.Cluster"),
+							Ref:         ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.Cluster"),
 						},
 					},
 				},
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/v2/pkg/apis/storage/v1.Cluster"},
+			"github.com/loft-sh/api/v3/pkg/apis/storage/v1.Cluster"},
 	}
 }
 
@@ -7719,7 +7719,7 @@ func schema_pkg_apis_management_v1_ClusterCharts(ref common.ReferenceCallback) c
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/storage/v1.HelmChart"),
+										Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.HelmChart"),
 									},
 								},
 							},
@@ -7737,7 +7737,7 @@ func schema_pkg_apis_management_v1_ClusterCharts(ref common.ReferenceCallback) c
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/v2/pkg/apis/storage/v1.HelmChart", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
+			"github.com/loft-sh/api/v3/pkg/apis/storage/v1.HelmChart", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
 	}
 }
 
@@ -7774,7 +7774,7 @@ func schema_pkg_apis_management_v1_ClusterChartsList(ref common.ReferenceCallbac
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/management/v1.ClusterCharts"),
+										Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/management/v1.ClusterCharts"),
 									},
 								},
 							},
@@ -7785,7 +7785,7 @@ func schema_pkg_apis_management_v1_ClusterChartsList(ref common.ReferenceCallbac
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/v2/pkg/apis/management/v1.ClusterCharts", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
+			"github.com/loft-sh/api/v3/pkg/apis/management/v1.ClusterCharts", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
 	}
 }
 
@@ -7819,20 +7819,20 @@ func schema_pkg_apis_management_v1_ClusterConnect(ref common.ReferenceCallback) 
 					"spec": {
 						SchemaProps: spec.SchemaProps{
 							Default: map[string]interface{}{},
-							Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/management/v1.ClusterConnectSpec"),
+							Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/management/v1.ClusterConnectSpec"),
 						},
 					},
 					"status": {
 						SchemaProps: spec.SchemaProps{
 							Default: map[string]interface{}{},
-							Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/management/v1.ClusterConnectStatus"),
+							Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/management/v1.ClusterConnectStatus"),
 						},
 					},
 				},
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/v2/pkg/apis/management/v1.ClusterConnectSpec", "github.com/loft-sh/api/v2/pkg/apis/management/v1.ClusterConnectStatus", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
+			"github.com/loft-sh/api/v3/pkg/apis/management/v1.ClusterConnectSpec", "github.com/loft-sh/api/v3/pkg/apis/management/v1.ClusterConnectStatus", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
 	}
 }
 
@@ -7869,7 +7869,7 @@ func schema_pkg_apis_management_v1_ClusterConnectList(ref common.ReferenceCallba
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/management/v1.ClusterConnect"),
+										Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/management/v1.ClusterConnect"),
 									},
 								},
 							},
@@ -7880,7 +7880,7 @@ func schema_pkg_apis_management_v1_ClusterConnectList(ref common.ReferenceCallba
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/v2/pkg/apis/management/v1.ClusterConnect", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
+			"github.com/loft-sh/api/v3/pkg/apis/management/v1.ClusterConnect", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
 	}
 }
 
@@ -7908,14 +7908,14 @@ func schema_pkg_apis_management_v1_ClusterConnectSpec(ref common.ReferenceCallba
 						SchemaProps: spec.SchemaProps{
 							Description: "the cluster template to create",
 							Default:     map[string]interface{}{},
-							Ref:         ref("github.com/loft-sh/api/v2/pkg/apis/management/v1.Cluster"),
+							Ref:         ref("github.com/loft-sh/api/v3/pkg/apis/management/v1.Cluster"),
 						},
 					},
 				},
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/v2/pkg/apis/management/v1.Cluster"},
+			"github.com/loft-sh/api/v3/pkg/apis/management/v1.Cluster"},
 	}
 }
 
@@ -8028,7 +8028,7 @@ func schema_pkg_apis_management_v1_ClusterDomainList(ref common.ReferenceCallbac
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/management/v1.ClusterDomain"),
+										Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/management/v1.ClusterDomain"),
 									},
 								},
 							},
@@ -8039,7 +8039,7 @@ func schema_pkg_apis_management_v1_ClusterDomainList(ref common.ReferenceCallbac
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/v2/pkg/apis/management/v1.ClusterDomain", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
+			"github.com/loft-sh/api/v3/pkg/apis/management/v1.ClusterDomain", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
 	}
 }
 
@@ -8076,7 +8076,7 @@ func schema_pkg_apis_management_v1_ClusterList(ref common.ReferenceCallback) com
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/management/v1.Cluster"),
+										Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/management/v1.Cluster"),
 									},
 								},
 							},
@@ -8087,7 +8087,7 @@ func schema_pkg_apis_management_v1_ClusterList(ref common.ReferenceCallback) com
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/v2/pkg/apis/management/v1.Cluster", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
+			"github.com/loft-sh/api/v3/pkg/apis/management/v1.Cluster", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
 	}
 }
 
@@ -8101,14 +8101,14 @@ func schema_pkg_apis_management_v1_ClusterMember(ref common.ReferenceCallback) c
 						SchemaProps: spec.SchemaProps{
 							Description: "Info about the user or team",
 							Default:     map[string]interface{}{},
-							Ref:         ref("github.com/loft-sh/agentapi/v2/pkg/apis/loft/cluster/v1.EntityInfo"),
+							Ref:         ref("github.com/loft-sh/agentapi/v3/pkg/apis/loft/cluster/v1.EntityInfo"),
 						},
 					},
 				},
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/agentapi/v2/pkg/apis/loft/cluster/v1.EntityInfo"},
+			"github.com/loft-sh/agentapi/v3/pkg/apis/loft/cluster/v1.EntityInfo"},
 	}
 }
 
@@ -8146,7 +8146,7 @@ func schema_pkg_apis_management_v1_ClusterMemberAccess(ref common.ReferenceCallb
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/management/v1.ClusterMember"),
+										Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/management/v1.ClusterMember"),
 									},
 								},
 							},
@@ -8160,7 +8160,7 @@ func schema_pkg_apis_management_v1_ClusterMemberAccess(ref common.ReferenceCallb
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/management/v1.ClusterMember"),
+										Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/management/v1.ClusterMember"),
 									},
 								},
 							},
@@ -8170,7 +8170,7 @@ func schema_pkg_apis_management_v1_ClusterMemberAccess(ref common.ReferenceCallb
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/v2/pkg/apis/management/v1.ClusterMember", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
+			"github.com/loft-sh/api/v3/pkg/apis/management/v1.ClusterMember", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
 	}
 }
 
@@ -8207,7 +8207,7 @@ func schema_pkg_apis_management_v1_ClusterMemberAccessList(ref common.ReferenceC
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/management/v1.ClusterMemberAccess"),
+										Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/management/v1.ClusterMemberAccess"),
 									},
 								},
 							},
@@ -8218,7 +8218,7 @@ func schema_pkg_apis_management_v1_ClusterMemberAccessList(ref common.ReferenceC
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/v2/pkg/apis/management/v1.ClusterMemberAccess", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
+			"github.com/loft-sh/api/v3/pkg/apis/management/v1.ClusterMemberAccess", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
 	}
 }
 
@@ -8256,7 +8256,7 @@ func schema_pkg_apis_management_v1_ClusterMembers(ref common.ReferenceCallback) 
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/management/v1.ClusterMember"),
+										Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/management/v1.ClusterMember"),
 									},
 								},
 							},
@@ -8270,7 +8270,7 @@ func schema_pkg_apis_management_v1_ClusterMembers(ref common.ReferenceCallback) 
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/management/v1.ClusterMember"),
+										Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/management/v1.ClusterMember"),
 									},
 								},
 							},
@@ -8280,7 +8280,7 @@ func schema_pkg_apis_management_v1_ClusterMembers(ref common.ReferenceCallback) 
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/v2/pkg/apis/management/v1.ClusterMember", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
+			"github.com/loft-sh/api/v3/pkg/apis/management/v1.ClusterMember", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
 	}
 }
 
@@ -8317,7 +8317,7 @@ func schema_pkg_apis_management_v1_ClusterMembersList(ref common.ReferenceCallba
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/management/v1.ClusterMembers"),
+										Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/management/v1.ClusterMembers"),
 									},
 								},
 							},
@@ -8328,7 +8328,7 @@ func schema_pkg_apis_management_v1_ClusterMembersList(ref common.ReferenceCallba
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/v2/pkg/apis/management/v1.ClusterMembers", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
+			"github.com/loft-sh/api/v3/pkg/apis/management/v1.ClusterMembers", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
 	}
 }
 
@@ -8411,7 +8411,7 @@ func schema_pkg_apis_management_v1_ClusterResetList(ref common.ReferenceCallback
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/management/v1.ClusterReset"),
+										Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/management/v1.ClusterReset"),
 									},
 								},
 							},
@@ -8422,7 +8422,7 @@ func schema_pkg_apis_management_v1_ClusterResetList(ref common.ReferenceCallback
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/v2/pkg/apis/management/v1.ClusterReset", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
+			"github.com/loft-sh/api/v3/pkg/apis/management/v1.ClusterReset", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
 	}
 }
 
@@ -8456,20 +8456,20 @@ func schema_pkg_apis_management_v1_ClusterRoleTemplate(ref common.ReferenceCallb
 					"spec": {
 						SchemaProps: spec.SchemaProps{
 							Default: map[string]interface{}{},
-							Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/management/v1.ClusterRoleTemplateSpec"),
+							Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/management/v1.ClusterRoleTemplateSpec"),
 						},
 					},
 					"status": {
 						SchemaProps: spec.SchemaProps{
 							Default: map[string]interface{}{},
-							Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/management/v1.ClusterRoleTemplateStatus"),
+							Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/management/v1.ClusterRoleTemplateStatus"),
 						},
 					},
 				},
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/v2/pkg/apis/management/v1.ClusterRoleTemplateSpec", "github.com/loft-sh/api/v2/pkg/apis/management/v1.ClusterRoleTemplateStatus", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
+			"github.com/loft-sh/api/v3/pkg/apis/management/v1.ClusterRoleTemplateSpec", "github.com/loft-sh/api/v3/pkg/apis/management/v1.ClusterRoleTemplateStatus", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
 	}
 }
 
@@ -8506,7 +8506,7 @@ func schema_pkg_apis_management_v1_ClusterRoleTemplateList(ref common.ReferenceC
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/management/v1.ClusterRoleTemplate"),
+										Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/management/v1.ClusterRoleTemplate"),
 									},
 								},
 							},
@@ -8517,7 +8517,7 @@ func schema_pkg_apis_management_v1_ClusterRoleTemplateList(ref common.ReferenceC
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/v2/pkg/apis/management/v1.ClusterRoleTemplate", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
+			"github.com/loft-sh/api/v3/pkg/apis/management/v1.ClusterRoleTemplate", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
 	}
 }
 
@@ -8545,7 +8545,7 @@ func schema_pkg_apis_management_v1_ClusterRoleTemplateSpec(ref common.ReferenceC
 					"owner": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Owner holds the owner of this object",
-							Ref:         ref("github.com/loft-sh/api/v2/pkg/apis/storage/v1.UserOrTeam"),
+							Ref:         ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.UserOrTeam"),
 						},
 					},
 					"clusters": {
@@ -8578,7 +8578,7 @@ func schema_pkg_apis_management_v1_ClusterRoleTemplateSpec(ref common.ReferenceC
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/storage/v1.Access"),
+										Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.Access"),
 									},
 								},
 							},
@@ -8588,20 +8588,20 @@ func schema_pkg_apis_management_v1_ClusterRoleTemplateSpec(ref common.ReferenceC
 						SchemaProps: spec.SchemaProps{
 							Description: "ClusterRoleTemplate holds the cluster role template",
 							Default:     map[string]interface{}{},
-							Ref:         ref("github.com/loft-sh/api/v2/pkg/apis/storage/v1.ClusterRoleTemplateTemplate"),
+							Ref:         ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.ClusterRoleTemplateTemplate"),
 						},
 					},
 					"localClusterRoleTemplate": {
 						SchemaProps: spec.SchemaProps{
 							Description: "DEPRECATED: Use ClusterRoleTemplate instead LocalClusterRoleTemplate holds the cluster role template",
-							Ref:         ref("github.com/loft-sh/api/v2/pkg/apis/storage/v1.LocalClusterRoleTemplate"),
+							Ref:         ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.LocalClusterRoleTemplate"),
 						},
 					},
 				},
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/v2/pkg/apis/storage/v1.Access", "github.com/loft-sh/api/v2/pkg/apis/storage/v1.ClusterRoleTemplateTemplate", "github.com/loft-sh/api/v2/pkg/apis/storage/v1.LocalClusterRoleTemplate", "github.com/loft-sh/api/v2/pkg/apis/storage/v1.UserOrTeam"},
+			"github.com/loft-sh/api/v3/pkg/apis/storage/v1.Access", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.ClusterRoleTemplateTemplate", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.LocalClusterRoleTemplate", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.UserOrTeam"},
 	}
 }
 
@@ -8618,7 +8618,7 @@ func schema_pkg_apis_management_v1_ClusterRoleTemplateStatus(ref common.Referenc
 							Items: &spec.SchemaOrArray{
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
-										Ref: ref("github.com/loft-sh/agentapi/v2/pkg/apis/loft/cluster/v1.EntityInfo"),
+										Ref: ref("github.com/loft-sh/agentapi/v3/pkg/apis/loft/cluster/v1.EntityInfo"),
 									},
 								},
 							},
@@ -8628,7 +8628,7 @@ func schema_pkg_apis_management_v1_ClusterRoleTemplateStatus(ref common.Referenc
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/agentapi/v2/pkg/apis/loft/cluster/v1.EntityInfo"},
+			"github.com/loft-sh/agentapi/v3/pkg/apis/loft/cluster/v1.EntityInfo"},
 	}
 }
 
@@ -8656,14 +8656,14 @@ func schema_pkg_apis_management_v1_ClusterSpec(ref common.ReferenceCallback) com
 					"owner": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Owner holds the owner of this object",
-							Ref:         ref("github.com/loft-sh/api/v2/pkg/apis/storage/v1.UserOrTeam"),
+							Ref:         ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.UserOrTeam"),
 						},
 					},
 					"config": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Holds a reference to a secret that holds the kube config to access this cluster",
 							Default:     map[string]interface{}{},
-							Ref:         ref("github.com/loft-sh/api/v2/pkg/apis/storage/v1.SecretRef"),
+							Ref:         ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.SecretRef"),
 						},
 					},
 					"local": {
@@ -8688,7 +8688,7 @@ func schema_pkg_apis_management_v1_ClusterSpec(ref common.ReferenceCallback) com
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/storage/v1.Access"),
+										Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.Access"),
 									},
 								},
 							},
@@ -8698,7 +8698,7 @@ func schema_pkg_apis_management_v1_ClusterSpec(ref common.ReferenceCallback) com
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/v2/pkg/apis/storage/v1.Access", "github.com/loft-sh/api/v2/pkg/apis/storage/v1.SecretRef", "github.com/loft-sh/api/v2/pkg/apis/storage/v1.UserOrTeam"},
+			"github.com/loft-sh/api/v3/pkg/apis/storage/v1.Access", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.SecretRef", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.UserOrTeam"},
 	}
 }
 
@@ -8762,7 +8762,7 @@ func schema_pkg_apis_management_v1_ClusterVirtualClusterDefaults(ref common.Refe
 					"defaultTemplate": {
 						SchemaProps: spec.SchemaProps{
 							Description: "DefaultTemplate is the default virtual cluster template",
-							Ref:         ref("github.com/loft-sh/api/v2/pkg/apis/storage/v1.VirtualClusterTemplate"),
+							Ref:         ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.VirtualClusterTemplate"),
 						},
 					},
 					"latestVersion": {
@@ -8790,7 +8790,7 @@ func schema_pkg_apis_management_v1_ClusterVirtualClusterDefaults(ref common.Refe
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/v2/pkg/apis/storage/v1.VirtualClusterTemplate", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
+			"github.com/loft-sh/api/v3/pkg/apis/storage/v1.VirtualClusterTemplate", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
 	}
 }
 
@@ -8827,7 +8827,7 @@ func schema_pkg_apis_management_v1_ClusterVirtualClusterDefaultsList(ref common.
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/management/v1.ClusterVirtualClusterDefaults"),
+										Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/management/v1.ClusterVirtualClusterDefaults"),
 									},
 								},
 							},
@@ -8838,7 +8838,7 @@ func schema_pkg_apis_management_v1_ClusterVirtualClusterDefaultsList(ref common.
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/v2/pkg/apis/management/v1.ClusterVirtualClusterDefaults", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
+			"github.com/loft-sh/api/v3/pkg/apis/management/v1.ClusterVirtualClusterDefaults", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
 	}
 }
 
@@ -8872,20 +8872,20 @@ func schema_pkg_apis_management_v1_Config(ref common.ReferenceCallback) common.O
 					"spec": {
 						SchemaProps: spec.SchemaProps{
 							Default: map[string]interface{}{},
-							Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/management/v1.ConfigSpec"),
+							Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/management/v1.ConfigSpec"),
 						},
 					},
 					"status": {
 						SchemaProps: spec.SchemaProps{
 							Default: map[string]interface{}{},
-							Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/management/v1.ConfigStatus"),
+							Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/management/v1.ConfigStatus"),
 						},
 					},
 				},
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/v2/pkg/apis/management/v1.ConfigSpec", "github.com/loft-sh/api/v2/pkg/apis/management/v1.ConfigStatus", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
+			"github.com/loft-sh/api/v3/pkg/apis/management/v1.ConfigSpec", "github.com/loft-sh/api/v3/pkg/apis/management/v1.ConfigStatus", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
 	}
 }
 
@@ -8922,7 +8922,7 @@ func schema_pkg_apis_management_v1_ConfigList(ref common.ReferenceCallback) comm
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/management/v1.Config"),
+										Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/management/v1.Config"),
 									},
 								},
 							},
@@ -8933,7 +8933,7 @@ func schema_pkg_apis_management_v1_ConfigList(ref common.ReferenceCallback) comm
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/v2/pkg/apis/management/v1.Config", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
+			"github.com/loft-sh/api/v3/pkg/apis/management/v1.Config", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
 	}
 }
 
@@ -8968,25 +8968,25 @@ func schema_pkg_apis_management_v1_ConfigStatus(ref common.ReferenceCallback) co
 						SchemaProps: spec.SchemaProps{
 							Description: "Authentication holds the information for authentication",
 							Default:     map[string]interface{}{},
-							Ref:         ref("github.com/loft-sh/api/v2/pkg/apis/management/v1.Authentication"),
+							Ref:         ref("github.com/loft-sh/api/v3/pkg/apis/management/v1.Authentication"),
 						},
 					},
 					"oidc": {
 						SchemaProps: spec.SchemaProps{
 							Description: "OIDC holds oidc provider relevant information",
-							Ref:         ref("github.com/loft-sh/api/v2/pkg/apis/management/v1.OIDC"),
+							Ref:         ref("github.com/loft-sh/api/v3/pkg/apis/management/v1.OIDC"),
 						},
 					},
 					"apps": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Apps holds configuration around apps",
-							Ref:         ref("github.com/loft-sh/api/v2/pkg/apis/management/v1.Apps"),
+							Ref:         ref("github.com/loft-sh/api/v3/pkg/apis/management/v1.Apps"),
 						},
 					},
 					"audit": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Audit holds audit configuration",
-							Ref:         ref("github.com/loft-sh/api/v2/pkg/apis/management/v1.Audit"),
+							Ref:         ref("github.com/loft-sh/api/v3/pkg/apis/management/v1.Audit"),
 						},
 					},
 					"loftHost": {
@@ -9000,7 +9000,7 @@ func schema_pkg_apis_management_v1_ConfigStatus(ref common.ReferenceCallback) co
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/v2/pkg/apis/management/v1.Apps", "github.com/loft-sh/api/v2/pkg/apis/management/v1.Audit", "github.com/loft-sh/api/v2/pkg/apis/management/v1.Authentication", "github.com/loft-sh/api/v2/pkg/apis/management/v1.OIDC"},
+			"github.com/loft-sh/api/v3/pkg/apis/management/v1.Apps", "github.com/loft-sh/api/v3/pkg/apis/management/v1.Audit", "github.com/loft-sh/api/v3/pkg/apis/management/v1.Authentication", "github.com/loft-sh/api/v3/pkg/apis/management/v1.OIDC"},
 	}
 }
 
@@ -9086,7 +9086,7 @@ func schema_pkg_apis_management_v1_DefaultPaymentMethod(ref common.ReferenceCall
 				Properties: map[string]spec.Schema{
 					"card": {
 						SchemaProps: spec.SchemaProps{
-							Ref: ref("github.com/loft-sh/api/v2/pkg/apis/management/v1.DefaultPaymentMethodCard"),
+							Ref: ref("github.com/loft-sh/api/v3/pkg/apis/management/v1.DefaultPaymentMethodCard"),
 						},
 					},
 				},
@@ -9094,7 +9094,7 @@ func schema_pkg_apis_management_v1_DefaultPaymentMethod(ref common.ReferenceCall
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/v2/pkg/apis/management/v1.DefaultPaymentMethodCard"},
+			"github.com/loft-sh/api/v3/pkg/apis/management/v1.DefaultPaymentMethodCard"},
 	}
 }
 
@@ -9176,20 +9176,20 @@ func schema_pkg_apis_management_v1_DirectClusterEndpointToken(ref common.Referen
 					"spec": {
 						SchemaProps: spec.SchemaProps{
 							Default: map[string]interface{}{},
-							Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/management/v1.DirectClusterEndpointTokenSpec"),
+							Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/management/v1.DirectClusterEndpointTokenSpec"),
 						},
 					},
 					"status": {
 						SchemaProps: spec.SchemaProps{
 							Default: map[string]interface{}{},
-							Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/management/v1.DirectClusterEndpointTokenStatus"),
+							Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/management/v1.DirectClusterEndpointTokenStatus"),
 						},
 					},
 				},
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/v2/pkg/apis/management/v1.DirectClusterEndpointTokenSpec", "github.com/loft-sh/api/v2/pkg/apis/management/v1.DirectClusterEndpointTokenStatus", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
+			"github.com/loft-sh/api/v3/pkg/apis/management/v1.DirectClusterEndpointTokenSpec", "github.com/loft-sh/api/v3/pkg/apis/management/v1.DirectClusterEndpointTokenStatus", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
 	}
 }
 
@@ -9226,7 +9226,7 @@ func schema_pkg_apis_management_v1_DirectClusterEndpointTokenList(ref common.Ref
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/management/v1.DirectClusterEndpointToken"),
+										Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/management/v1.DirectClusterEndpointToken"),
 									},
 								},
 							},
@@ -9237,7 +9237,7 @@ func schema_pkg_apis_management_v1_DirectClusterEndpointTokenList(ref common.Ref
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/v2/pkg/apis/management/v1.DirectClusterEndpointToken", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
+			"github.com/loft-sh/api/v3/pkg/apis/management/v1.DirectClusterEndpointToken", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
 	}
 }
 
@@ -9301,20 +9301,20 @@ func schema_pkg_apis_management_v1_Event(ref common.ReferenceCallback) common.Op
 					"spec": {
 						SchemaProps: spec.SchemaProps{
 							Default: map[string]interface{}{},
-							Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/management/v1.EventSpec"),
+							Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/management/v1.EventSpec"),
 						},
 					},
 					"status": {
 						SchemaProps: spec.SchemaProps{
 							Default: map[string]interface{}{},
-							Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/management/v1.EventStatus"),
+							Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/management/v1.EventStatus"),
 						},
 					},
 				},
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/v2/pkg/apis/management/v1.EventSpec", "github.com/loft-sh/api/v2/pkg/apis/management/v1.EventStatus", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
+			"github.com/loft-sh/api/v3/pkg/apis/management/v1.EventSpec", "github.com/loft-sh/api/v3/pkg/apis/management/v1.EventStatus", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
 	}
 }
 
@@ -9351,7 +9351,7 @@ func schema_pkg_apis_management_v1_EventList(ref common.ReferenceCallback) commo
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/management/v1.Event"),
+										Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/management/v1.Event"),
 									},
 								},
 							},
@@ -9362,7 +9362,7 @@ func schema_pkg_apis_management_v1_EventList(ref common.ReferenceCallback) commo
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/v2/pkg/apis/management/v1.Event", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
+			"github.com/loft-sh/api/v3/pkg/apis/management/v1.Event", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
 	}
 }
 
@@ -9476,7 +9476,7 @@ func schema_pkg_apis_management_v1_EventStatus(ref common.ReferenceCallback) com
 					"objectRef": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Object reference this request is targeted at. Does not apply for List-type requests, or non-resource requests.",
-							Ref:         ref("github.com/loft-sh/api/v2/pkg/apis/audit/v1.ObjectReference"),
+							Ref:         ref("github.com/loft-sh/api/v3/pkg/apis/audit/v1.ObjectReference"),
 						},
 					},
 					"responseStatus": {
@@ -9532,7 +9532,7 @@ func schema_pkg_apis_management_v1_EventStatus(ref common.ReferenceCallback) com
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/v2/pkg/apis/audit/v1.ObjectReference", "k8s.io/api/authentication/v1.UserInfo", "k8s.io/apimachinery/pkg/apis/meta/v1.MicroTime", "k8s.io/apimachinery/pkg/apis/meta/v1.Status", "k8s.io/apimachinery/pkg/runtime.Unknown"},
+			"github.com/loft-sh/api/v3/pkg/apis/audit/v1.ObjectReference", "k8s.io/api/authentication/v1.UserInfo", "k8s.io/apimachinery/pkg/apis/meta/v1.MicroTime", "k8s.io/apimachinery/pkg/apis/meta/v1.Status", "k8s.io/apimachinery/pkg/runtime.Unknown"},
 	}
 }
 
@@ -9566,20 +9566,20 @@ func schema_pkg_apis_management_v1_Feature(ref common.ReferenceCallback) common.
 					"spec": {
 						SchemaProps: spec.SchemaProps{
 							Default: map[string]interface{}{},
-							Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/management/v1.FeatureSpec"),
+							Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/management/v1.FeatureSpec"),
 						},
 					},
 					"status": {
 						SchemaProps: spec.SchemaProps{
 							Default: map[string]interface{}{},
-							Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/management/v1.FeatureStatus"),
+							Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/management/v1.FeatureStatus"),
 						},
 					},
 				},
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/v2/pkg/apis/management/v1.FeatureSpec", "github.com/loft-sh/api/v2/pkg/apis/management/v1.FeatureStatus", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
+			"github.com/loft-sh/api/v3/pkg/apis/management/v1.FeatureSpec", "github.com/loft-sh/api/v3/pkg/apis/management/v1.FeatureStatus", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
 	}
 }
 
@@ -9616,7 +9616,7 @@ func schema_pkg_apis_management_v1_FeatureList(ref common.ReferenceCallback) com
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/management/v1.Feature"),
+										Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/management/v1.Feature"),
 									},
 								},
 							},
@@ -9627,7 +9627,7 @@ func schema_pkg_apis_management_v1_FeatureList(ref common.ReferenceCallback) com
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/v2/pkg/apis/management/v1.Feature", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
+			"github.com/loft-sh/api/v3/pkg/apis/management/v1.Feature", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
 	}
 }
 
@@ -9742,20 +9742,20 @@ func schema_pkg_apis_management_v1_IngressAuthToken(ref common.ReferenceCallback
 					"spec": {
 						SchemaProps: spec.SchemaProps{
 							Default: map[string]interface{}{},
-							Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/management/v1.IngressAuthTokenSpec"),
+							Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/management/v1.IngressAuthTokenSpec"),
 						},
 					},
 					"status": {
 						SchemaProps: spec.SchemaProps{
 							Default: map[string]interface{}{},
-							Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/management/v1.IngressAuthTokenStatus"),
+							Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/management/v1.IngressAuthTokenStatus"),
 						},
 					},
 				},
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/v2/pkg/apis/management/v1.IngressAuthTokenSpec", "github.com/loft-sh/api/v2/pkg/apis/management/v1.IngressAuthTokenStatus", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
+			"github.com/loft-sh/api/v3/pkg/apis/management/v1.IngressAuthTokenSpec", "github.com/loft-sh/api/v3/pkg/apis/management/v1.IngressAuthTokenStatus", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
 	}
 }
 
@@ -9792,7 +9792,7 @@ func schema_pkg_apis_management_v1_IngressAuthTokenList(ref common.ReferenceCall
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/management/v1.IngressAuthToken"),
+										Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/management/v1.IngressAuthToken"),
 									},
 								},
 							},
@@ -9803,7 +9803,7 @@ func schema_pkg_apis_management_v1_IngressAuthTokenList(ref common.ReferenceCall
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/v2/pkg/apis/management/v1.IngressAuthToken", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
+			"github.com/loft-sh/api/v3/pkg/apis/management/v1.IngressAuthToken", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
 	}
 }
 
@@ -9883,20 +9883,20 @@ func schema_pkg_apis_management_v1_Kiosk(ref common.ReferenceCallback) common.Op
 					"spec": {
 						SchemaProps: spec.SchemaProps{
 							Default: map[string]interface{}{},
-							Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/management/v1.KioskSpec"),
+							Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/management/v1.KioskSpec"),
 						},
 					},
 					"status": {
 						SchemaProps: spec.SchemaProps{
 							Default: map[string]interface{}{},
-							Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/management/v1.KioskStatus"),
+							Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/management/v1.KioskStatus"),
 						},
 					},
 				},
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/v2/pkg/apis/management/v1.KioskSpec", "github.com/loft-sh/api/v2/pkg/apis/management/v1.KioskStatus", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
+			"github.com/loft-sh/api/v3/pkg/apis/management/v1.KioskSpec", "github.com/loft-sh/api/v3/pkg/apis/management/v1.KioskStatus", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
 	}
 }
 
@@ -9933,7 +9933,7 @@ func schema_pkg_apis_management_v1_KioskList(ref common.ReferenceCallback) commo
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/management/v1.Kiosk"),
+										Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/management/v1.Kiosk"),
 									},
 								},
 							},
@@ -9944,7 +9944,7 @@ func schema_pkg_apis_management_v1_KioskList(ref common.ReferenceCallback) commo
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/v2/pkg/apis/management/v1.Kiosk", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
+			"github.com/loft-sh/api/v3/pkg/apis/management/v1.Kiosk", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
 	}
 }
 
@@ -9977,81 +9977,81 @@ func schema_pkg_apis_management_v1_KioskSpec(ref common.ReferenceCallback) commo
 						SchemaProps: spec.SchemaProps{
 							Description: "cluster.loft.sh",
 							Default:     map[string]interface{}{},
-							Ref:         ref("github.com/loft-sh/agentapi/v2/pkg/apis/loft/cluster/v1.HelmRelease"),
+							Ref:         ref("github.com/loft-sh/agentapi/v3/pkg/apis/loft/cluster/v1.HelmRelease"),
 						},
 					},
 					"sleepModeConfig": {
 						SchemaProps: spec.SchemaProps{
 							Default: map[string]interface{}{},
-							Ref:     ref("github.com/loft-sh/agentapi/v2/pkg/apis/loft/cluster/v1.SleepModeConfig"),
+							Ref:     ref("github.com/loft-sh/agentapi/v3/pkg/apis/loft/cluster/v1.SleepModeConfig"),
 						},
 					},
 					"space": {
 						SchemaProps: spec.SchemaProps{
 							Default: map[string]interface{}{},
-							Ref:     ref("github.com/loft-sh/agentapi/v2/pkg/apis/loft/cluster/v1.Space"),
+							Ref:     ref("github.com/loft-sh/agentapi/v3/pkg/apis/loft/cluster/v1.Space"),
 						},
 					},
 					"virtualCluster": {
 						SchemaProps: spec.SchemaProps{
 							Default: map[string]interface{}{},
-							Ref:     ref("github.com/loft-sh/agentapi/v2/pkg/apis/loft/cluster/v1.VirtualCluster"),
+							Ref:     ref("github.com/loft-sh/agentapi/v3/pkg/apis/loft/cluster/v1.VirtualCluster"),
 						},
 					},
 					"localClusterAccess": {
 						SchemaProps: spec.SchemaProps{
 							Default: map[string]interface{}{},
-							Ref:     ref("github.com/loft-sh/agentapi/v2/pkg/apis/loft/cluster/v1.LocalClusterAccess"),
+							Ref:     ref("github.com/loft-sh/agentapi/v3/pkg/apis/loft/cluster/v1.LocalClusterAccess"),
 						},
 					},
 					"clusterQuota": {
 						SchemaProps: spec.SchemaProps{
 							Default: map[string]interface{}{},
-							Ref:     ref("github.com/loft-sh/agentapi/v2/pkg/apis/loft/cluster/v1.ClusterQuota"),
+							Ref:     ref("github.com/loft-sh/agentapi/v3/pkg/apis/loft/cluster/v1.ClusterQuota"),
 						},
 					},
 					"chartInfo": {
 						SchemaProps: spec.SchemaProps{
 							Default: map[string]interface{}{},
-							Ref:     ref("github.com/loft-sh/agentapi/v2/pkg/apis/loft/cluster/v1.ChartInfo"),
+							Ref:     ref("github.com/loft-sh/agentapi/v3/pkg/apis/loft/cluster/v1.ChartInfo"),
 						},
 					},
 					"localStorageClusterAccess": {
 						SchemaProps: spec.SchemaProps{
 							Description: "storage.loft.sh",
 							Default:     map[string]interface{}{},
-							Ref:         ref("github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.LocalClusterAccess"),
+							Ref:         ref("github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.LocalClusterAccess"),
 						},
 					},
 					"storageClusterQuota": {
 						SchemaProps: spec.SchemaProps{
 							Default: map[string]interface{}{},
-							Ref:     ref("github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.ClusterQuota"),
+							Ref:     ref("github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.ClusterQuota"),
 						},
 					},
 					"storageVirtualCluster": {
 						SchemaProps: spec.SchemaProps{
 							Default: map[string]interface{}{},
-							Ref:     ref("github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.VirtualCluster"),
+							Ref:     ref("github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.VirtualCluster"),
 						},
 					},
 					"localUser": {
 						SchemaProps: spec.SchemaProps{
 							Default: map[string]interface{}{},
-							Ref:     ref("github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.LocalUser"),
+							Ref:     ref("github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.LocalUser"),
 						},
 					},
 					"localTeam": {
 						SchemaProps: spec.SchemaProps{
 							Default: map[string]interface{}{},
-							Ref:     ref("github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.LocalTeam"),
+							Ref:     ref("github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.LocalTeam"),
 						},
 					},
 				},
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/agentapi/v2/pkg/apis/loft/cluster/v1.ChartInfo", "github.com/loft-sh/agentapi/v2/pkg/apis/loft/cluster/v1.ClusterQuota", "github.com/loft-sh/agentapi/v2/pkg/apis/loft/cluster/v1.HelmRelease", "github.com/loft-sh/agentapi/v2/pkg/apis/loft/cluster/v1.LocalClusterAccess", "github.com/loft-sh/agentapi/v2/pkg/apis/loft/cluster/v1.SleepModeConfig", "github.com/loft-sh/agentapi/v2/pkg/apis/loft/cluster/v1.Space", "github.com/loft-sh/agentapi/v2/pkg/apis/loft/cluster/v1.VirtualCluster", "github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.ClusterQuota", "github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.LocalClusterAccess", "github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.LocalTeam", "github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.LocalUser", "github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.VirtualCluster", "github.com/loft-sh/jspolicy/pkg/apis/policy/v1beta1.JsPolicy", "github.com/loft-sh/jspolicy/pkg/apis/policy/v1beta1.JsPolicyBundle", "github.com/loft-sh/jspolicy/pkg/apis/policy/v1beta1.JsPolicyViolations"},
+			"github.com/loft-sh/agentapi/v3/pkg/apis/loft/cluster/v1.ChartInfo", "github.com/loft-sh/agentapi/v3/pkg/apis/loft/cluster/v1.ClusterQuota", "github.com/loft-sh/agentapi/v3/pkg/apis/loft/cluster/v1.HelmRelease", "github.com/loft-sh/agentapi/v3/pkg/apis/loft/cluster/v1.LocalClusterAccess", "github.com/loft-sh/agentapi/v3/pkg/apis/loft/cluster/v1.SleepModeConfig", "github.com/loft-sh/agentapi/v3/pkg/apis/loft/cluster/v1.Space", "github.com/loft-sh/agentapi/v3/pkg/apis/loft/cluster/v1.VirtualCluster", "github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.ClusterQuota", "github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.LocalClusterAccess", "github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.LocalTeam", "github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.LocalUser", "github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.VirtualCluster", "github.com/loft-sh/jspolicy/pkg/apis/policy/v1beta1.JsPolicy", "github.com/loft-sh/jspolicy/pkg/apis/policy/v1beta1.JsPolicyBundle", "github.com/loft-sh/jspolicy/pkg/apis/policy/v1beta1.JsPolicyViolations"},
 	}
 }
 
@@ -10095,20 +10095,20 @@ func schema_pkg_apis_management_v1_License(ref common.ReferenceCallback) common.
 					"spec": {
 						SchemaProps: spec.SchemaProps{
 							Default: map[string]interface{}{},
-							Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/management/v1.LicenseSpec"),
+							Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/management/v1.LicenseSpec"),
 						},
 					},
 					"status": {
 						SchemaProps: spec.SchemaProps{
 							Default: map[string]interface{}{},
-							Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/management/v1.LicenseStatus"),
+							Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/management/v1.LicenseStatus"),
 						},
 					},
 				},
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/v2/pkg/apis/management/v1.LicenseSpec", "github.com/loft-sh/api/v2/pkg/apis/management/v1.LicenseStatus", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
+			"github.com/loft-sh/api/v3/pkg/apis/management/v1.LicenseSpec", "github.com/loft-sh/api/v3/pkg/apis/management/v1.LicenseStatus", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
 	}
 }
 
@@ -10144,7 +10144,7 @@ func schema_pkg_apis_management_v1_LicenseInfo(ref common.ReferenceCallback) com
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/management/v1.ResourceLimit"),
+										Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/management/v1.ResourceLimit"),
 									},
 								},
 							},
@@ -10157,7 +10157,7 @@ func schema_pkg_apis_management_v1_LicenseInfo(ref common.ReferenceCallback) com
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/management/v1.ResoureRequests"),
+										Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/management/v1.ResoureRequests"),
 									},
 								},
 							},
@@ -10181,13 +10181,13 @@ func schema_pkg_apis_management_v1_LicenseInfo(ref common.ReferenceCallback) com
 					"customer": {
 						SchemaProps: spec.SchemaProps{
 							Default: map[string]interface{}{},
-							Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/management/v1.CustomerInfo"),
+							Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/management/v1.CustomerInfo"),
 						},
 					},
 					"subscription": {
 						SchemaProps: spec.SchemaProps{
 							Default: map[string]interface{}{},
-							Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/management/v1.SubscriptionInfo"),
+							Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/management/v1.SubscriptionInfo"),
 						},
 					},
 					"quantity": {
@@ -10200,19 +10200,19 @@ func schema_pkg_apis_management_v1_LicenseInfo(ref common.ReferenceCallback) com
 					"plan": {
 						SchemaProps: spec.SchemaProps{
 							Default: map[string]interface{}{},
-							Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/management/v1.Plan"),
+							Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/management/v1.Plan"),
 						},
 					},
 					"promotions": {
 						SchemaProps: spec.SchemaProps{
 							Default: map[string]interface{}{},
-							Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/management/v1.Promotions"),
+							Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/management/v1.Promotions"),
 						},
 					},
 					"analytics": {
 						SchemaProps: spec.SchemaProps{
 							Default: map[string]interface{}{},
-							Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/management/v1.Analytics"),
+							Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/management/v1.Analytics"),
 						},
 					},
 					"links": {
@@ -10249,7 +10249,7 @@ func schema_pkg_apis_management_v1_LicenseInfo(ref common.ReferenceCallback) com
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/v2/pkg/apis/management/v1.Analytics", "github.com/loft-sh/api/v2/pkg/apis/management/v1.CustomerInfo", "github.com/loft-sh/api/v2/pkg/apis/management/v1.Plan", "github.com/loft-sh/api/v2/pkg/apis/management/v1.Promotions", "github.com/loft-sh/api/v2/pkg/apis/management/v1.ResourceLimit", "github.com/loft-sh/api/v2/pkg/apis/management/v1.ResoureRequests", "github.com/loft-sh/api/v2/pkg/apis/management/v1.SubscriptionInfo"},
+			"github.com/loft-sh/api/v3/pkg/apis/management/v1.Analytics", "github.com/loft-sh/api/v3/pkg/apis/management/v1.CustomerInfo", "github.com/loft-sh/api/v3/pkg/apis/management/v1.Plan", "github.com/loft-sh/api/v3/pkg/apis/management/v1.Promotions", "github.com/loft-sh/api/v3/pkg/apis/management/v1.ResourceLimit", "github.com/loft-sh/api/v3/pkg/apis/management/v1.ResoureRequests", "github.com/loft-sh/api/v3/pkg/apis/management/v1.SubscriptionInfo"},
 	}
 }
 
@@ -10286,7 +10286,7 @@ func schema_pkg_apis_management_v1_LicenseList(ref common.ReferenceCallback) com
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/management/v1.License"),
+										Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/management/v1.License"),
 									},
 								},
 							},
@@ -10297,7 +10297,7 @@ func schema_pkg_apis_management_v1_LicenseList(ref common.ReferenceCallback) com
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/v2/pkg/apis/management/v1.License", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
+			"github.com/loft-sh/api/v3/pkg/apis/management/v1.License", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
 	}
 }
 
@@ -10327,14 +10327,14 @@ func schema_pkg_apis_management_v1_LicenseStatus(ref common.ReferenceCallback) c
 					"info": {
 						SchemaProps: spec.SchemaProps{
 							Default: map[string]interface{}{},
-							Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/management/v1.LicenseInfo"),
+							Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/management/v1.LicenseInfo"),
 						},
 					},
 				},
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/v2/pkg/apis/management/v1.LicenseInfo"},
+			"github.com/loft-sh/api/v3/pkg/apis/management/v1.LicenseInfo"},
 	}
 }
 
@@ -10368,20 +10368,20 @@ func schema_pkg_apis_management_v1_LicenseToken(ref common.ReferenceCallback) co
 					"spec": {
 						SchemaProps: spec.SchemaProps{
 							Default: map[string]interface{}{},
-							Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/management/v1.LicenseTokenSpec"),
+							Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/management/v1.LicenseTokenSpec"),
 						},
 					},
 					"status": {
 						SchemaProps: spec.SchemaProps{
 							Default: map[string]interface{}{},
-							Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/management/v1.LicenseTokenStatus"),
+							Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/management/v1.LicenseTokenStatus"),
 						},
 					},
 				},
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/v2/pkg/apis/management/v1.LicenseTokenSpec", "github.com/loft-sh/api/v2/pkg/apis/management/v1.LicenseTokenStatus", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
+			"github.com/loft-sh/api/v3/pkg/apis/management/v1.LicenseTokenSpec", "github.com/loft-sh/api/v3/pkg/apis/management/v1.LicenseTokenStatus", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
 	}
 }
 
@@ -10418,7 +10418,7 @@ func schema_pkg_apis_management_v1_LicenseTokenList(ref common.ReferenceCallback
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/management/v1.LicenseToken"),
+										Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/management/v1.LicenseToken"),
 									},
 								},
 							},
@@ -10429,7 +10429,7 @@ func schema_pkg_apis_management_v1_LicenseTokenList(ref common.ReferenceCallback
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/v2/pkg/apis/management/v1.LicenseToken", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
+			"github.com/loft-sh/api/v3/pkg/apis/management/v1.LicenseToken", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
 	}
 }
 
@@ -10492,20 +10492,20 @@ func schema_pkg_apis_management_v1_LoftUpgrade(ref common.ReferenceCallback) com
 					"spec": {
 						SchemaProps: spec.SchemaProps{
 							Default: map[string]interface{}{},
-							Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/management/v1.LoftUpgradeSpec"),
+							Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/management/v1.LoftUpgradeSpec"),
 						},
 					},
 					"status": {
 						SchemaProps: spec.SchemaProps{
 							Default: map[string]interface{}{},
-							Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/management/v1.LoftUpgradeStatus"),
+							Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/management/v1.LoftUpgradeStatus"),
 						},
 					},
 				},
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/v2/pkg/apis/management/v1.LoftUpgradeSpec", "github.com/loft-sh/api/v2/pkg/apis/management/v1.LoftUpgradeStatus", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
+			"github.com/loft-sh/api/v3/pkg/apis/management/v1.LoftUpgradeSpec", "github.com/loft-sh/api/v3/pkg/apis/management/v1.LoftUpgradeStatus", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
 	}
 }
 
@@ -10542,7 +10542,7 @@ func schema_pkg_apis_management_v1_LoftUpgradeList(ref common.ReferenceCallback)
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/management/v1.LoftUpgrade"),
+										Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/management/v1.LoftUpgrade"),
 									},
 								},
 							},
@@ -10553,7 +10553,7 @@ func schema_pkg_apis_management_v1_LoftUpgradeList(ref common.ReferenceCallback)
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/v2/pkg/apis/management/v1.LoftUpgrade", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
+			"github.com/loft-sh/api/v3/pkg/apis/management/v1.LoftUpgrade", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
 	}
 }
 
@@ -10621,7 +10621,7 @@ func schema_pkg_apis_management_v1_OIDC(ref common.ReferenceCallback) common.Ope
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/management/v1.OIDCClient"),
+										Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/management/v1.OIDCClient"),
 									},
 								},
 							},
@@ -10631,7 +10631,7 @@ func schema_pkg_apis_management_v1_OIDC(ref common.ReferenceCallback) common.Ope
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/v2/pkg/apis/management/v1.OIDCClient"},
+			"github.com/loft-sh/api/v3/pkg/apis/management/v1.OIDCClient"},
 	}
 }
 
@@ -10715,20 +10715,20 @@ func schema_pkg_apis_management_v1_OwnedAccessKey(ref common.ReferenceCallback) 
 					"spec": {
 						SchemaProps: spec.SchemaProps{
 							Default: map[string]interface{}{},
-							Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/management/v1.OwnedAccessKeySpec"),
+							Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/management/v1.OwnedAccessKeySpec"),
 						},
 					},
 					"status": {
 						SchemaProps: spec.SchemaProps{
 							Default: map[string]interface{}{},
-							Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/management/v1.OwnedAccessKeyStatus"),
+							Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/management/v1.OwnedAccessKeyStatus"),
 						},
 					},
 				},
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/v2/pkg/apis/management/v1.OwnedAccessKeySpec", "github.com/loft-sh/api/v2/pkg/apis/management/v1.OwnedAccessKeyStatus", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
+			"github.com/loft-sh/api/v3/pkg/apis/management/v1.OwnedAccessKeySpec", "github.com/loft-sh/api/v3/pkg/apis/management/v1.OwnedAccessKeyStatus", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
 	}
 }
 
@@ -10765,7 +10765,7 @@ func schema_pkg_apis_management_v1_OwnedAccessKeyList(ref common.ReferenceCallba
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/management/v1.OwnedAccessKey"),
+										Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/management/v1.OwnedAccessKey"),
 									},
 								},
 							},
@@ -10776,7 +10776,7 @@ func schema_pkg_apis_management_v1_OwnedAccessKeyList(ref common.ReferenceCallba
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/v2/pkg/apis/management/v1.OwnedAccessKey", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
+			"github.com/loft-sh/api/v3/pkg/apis/management/v1.OwnedAccessKey", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
 	}
 }
 
@@ -10867,7 +10867,7 @@ func schema_pkg_apis_management_v1_OwnedAccessKeySpec(ref common.ReferenceCallba
 					"scope": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Scope defines the scope of the access key.",
-							Ref:         ref("github.com/loft-sh/api/v2/pkg/apis/storage/v1.AccessKeyScope"),
+							Ref:         ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.AccessKeyScope"),
 						},
 					},
 					"type": {
@@ -10880,7 +10880,7 @@ func schema_pkg_apis_management_v1_OwnedAccessKeySpec(ref common.ReferenceCallba
 					"identity": {
 						SchemaProps: spec.SchemaProps{
 							Description: "If available, contains information about the sso login data for this access key",
-							Ref:         ref("github.com/loft-sh/api/v2/pkg/apis/storage/v1.AccessKeyIdentity"),
+							Ref:         ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.AccessKeyIdentity"),
 						},
 					},
 					"identityRefresh": {
@@ -10892,7 +10892,7 @@ func schema_pkg_apis_management_v1_OwnedAccessKeySpec(ref common.ReferenceCallba
 					"oidcProvider": {
 						SchemaProps: spec.SchemaProps{
 							Description: "If the token is a refresh token, contains information about it",
-							Ref:         ref("github.com/loft-sh/api/v2/pkg/apis/storage/v1.AccessKeyOIDCProvider"),
+							Ref:         ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.AccessKeyOIDCProvider"),
 						},
 					},
 					"parent": {
@@ -10905,14 +10905,14 @@ func schema_pkg_apis_management_v1_OwnedAccessKeySpec(ref common.ReferenceCallba
 					"oidcLogin": {
 						SchemaProps: spec.SchemaProps{
 							Description: "DEPRECATED: Use identity instead If available, contains information about the oidc login data for this access key",
-							Ref:         ref("github.com/loft-sh/api/v2/pkg/apis/storage/v1.AccessKeyOIDC"),
+							Ref:         ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.AccessKeyOIDC"),
 						},
 					},
 				},
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/v2/pkg/apis/storage/v1.AccessKeyIdentity", "github.com/loft-sh/api/v2/pkg/apis/storage/v1.AccessKeyOIDC", "github.com/loft-sh/api/v2/pkg/apis/storage/v1.AccessKeyOIDCProvider", "github.com/loft-sh/api/v2/pkg/apis/storage/v1.AccessKeyScope", "k8s.io/apimachinery/pkg/apis/meta/v1.Time"},
+			"github.com/loft-sh/api/v3/pkg/apis/storage/v1.AccessKeyIdentity", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.AccessKeyOIDC", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.AccessKeyOIDCProvider", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.AccessKeyScope", "k8s.io/apimachinery/pkg/apis/meta/v1.Time"},
 	}
 }
 
@@ -10965,7 +10965,7 @@ func schema_pkg_apis_management_v1_Plan(ref common.ReferenceCallback) common.Ope
 					"product": {
 						SchemaProps: spec.SchemaProps{
 							Default: map[string]interface{}{},
-							Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/management/v1.PlanProduct"),
+							Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/management/v1.PlanProduct"),
 						},
 					},
 				},
@@ -10973,7 +10973,7 @@ func schema_pkg_apis_management_v1_Plan(ref common.ReferenceCallback) common.Ope
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/v2/pkg/apis/management/v1.PlanProduct"},
+			"github.com/loft-sh/api/v3/pkg/apis/management/v1.PlanProduct"},
 	}
 }
 
@@ -11034,20 +11034,20 @@ func schema_pkg_apis_management_v1_PolicyViolation(ref common.ReferenceCallback)
 					"spec": {
 						SchemaProps: spec.SchemaProps{
 							Default: map[string]interface{}{},
-							Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/management/v1.PolicyViolationSpec"),
+							Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/management/v1.PolicyViolationSpec"),
 						},
 					},
 					"status": {
 						SchemaProps: spec.SchemaProps{
 							Default: map[string]interface{}{},
-							Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/management/v1.PolicyViolationStatus"),
+							Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/management/v1.PolicyViolationStatus"),
 						},
 					},
 				},
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/v2/pkg/apis/management/v1.PolicyViolationSpec", "github.com/loft-sh/api/v2/pkg/apis/management/v1.PolicyViolationStatus", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
+			"github.com/loft-sh/api/v3/pkg/apis/management/v1.PolicyViolationSpec", "github.com/loft-sh/api/v3/pkg/apis/management/v1.PolicyViolationStatus", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
 	}
 }
 
@@ -11084,7 +11084,7 @@ func schema_pkg_apis_management_v1_PolicyViolationList(ref common.ReferenceCallb
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/management/v1.PolicyViolation"),
+										Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/management/v1.PolicyViolation"),
 									},
 								},
 							},
@@ -11095,7 +11095,7 @@ func schema_pkg_apis_management_v1_PolicyViolationList(ref common.ReferenceCallb
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/v2/pkg/apis/management/v1.PolicyViolation", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
+			"github.com/loft-sh/api/v3/pkg/apis/management/v1.PolicyViolation", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
 	}
 }
 
@@ -11132,7 +11132,7 @@ func schema_pkg_apis_management_v1_PolicyViolationStatus(ref common.ReferenceCal
 					"user": {
 						SchemaProps: spec.SchemaProps{
 							Description: "The Loft user that caused the violation",
-							Ref:         ref("github.com/loft-sh/agentapi/v2/pkg/apis/loft/cluster/v1.EntityInfo"),
+							Ref:         ref("github.com/loft-sh/agentapi/v3/pkg/apis/loft/cluster/v1.EntityInfo"),
 						},
 					},
 					"violation": {
@@ -11146,7 +11146,7 @@ func schema_pkg_apis_management_v1_PolicyViolationStatus(ref common.ReferenceCal
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/agentapi/v2/pkg/apis/loft/cluster/v1.EntityInfo", "github.com/loft-sh/jspolicy/pkg/apis/policy/v1beta1.PolicyViolation"},
+			"github.com/loft-sh/agentapi/v3/pkg/apis/loft/cluster/v1.EntityInfo", "github.com/loft-sh/jspolicy/pkg/apis/policy/v1beta1.PolicyViolation"},
 	}
 }
 
@@ -11252,20 +11252,20 @@ func schema_pkg_apis_management_v1_Project(ref common.ReferenceCallback) common.
 					"spec": {
 						SchemaProps: spec.SchemaProps{
 							Default: map[string]interface{}{},
-							Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/management/v1.ProjectSpec"),
+							Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/management/v1.ProjectSpec"),
 						},
 					},
 					"status": {
 						SchemaProps: spec.SchemaProps{
 							Default: map[string]interface{}{},
-							Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/management/v1.ProjectStatus"),
+							Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/management/v1.ProjectStatus"),
 						},
 					},
 				},
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/v2/pkg/apis/management/v1.ProjectSpec", "github.com/loft-sh/api/v2/pkg/apis/management/v1.ProjectStatus", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
+			"github.com/loft-sh/api/v3/pkg/apis/management/v1.ProjectSpec", "github.com/loft-sh/api/v3/pkg/apis/management/v1.ProjectStatus", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
 	}
 }
 
@@ -11298,20 +11298,20 @@ func schema_pkg_apis_management_v1_ProjectChartInfo(ref common.ReferenceCallback
 					"spec": {
 						SchemaProps: spec.SchemaProps{
 							Default: map[string]interface{}{},
-							Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/management/v1.ProjectChartInfoSpec"),
+							Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/management/v1.ProjectChartInfoSpec"),
 						},
 					},
 					"status": {
 						SchemaProps: spec.SchemaProps{
 							Default: map[string]interface{}{},
-							Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/management/v1.ProjectChartInfoStatus"),
+							Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/management/v1.ProjectChartInfoStatus"),
 						},
 					},
 				},
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/v2/pkg/apis/management/v1.ProjectChartInfoSpec", "github.com/loft-sh/api/v2/pkg/apis/management/v1.ProjectChartInfoStatus", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
+			"github.com/loft-sh/api/v3/pkg/apis/management/v1.ProjectChartInfoSpec", "github.com/loft-sh/api/v3/pkg/apis/management/v1.ProjectChartInfoStatus", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
 	}
 }
 
@@ -11348,7 +11348,7 @@ func schema_pkg_apis_management_v1_ProjectChartInfoList(ref common.ReferenceCall
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/management/v1.ProjectChartInfo"),
+										Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/management/v1.ProjectChartInfo"),
 									},
 								},
 							},
@@ -11359,7 +11359,7 @@ func schema_pkg_apis_management_v1_ProjectChartInfoList(ref common.ReferenceCall
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/v2/pkg/apis/management/v1.ProjectChartInfo", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
+			"github.com/loft-sh/api/v3/pkg/apis/management/v1.ProjectChartInfo", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
 	}
 }
 
@@ -11373,14 +11373,14 @@ func schema_pkg_apis_management_v1_ProjectChartInfoSpec(ref common.ReferenceCall
 						SchemaProps: spec.SchemaProps{
 							Description: "Chart holds information about a chart that should get deployed",
 							Default:     map[string]interface{}{},
-							Ref:         ref("github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.Chart"),
+							Ref:         ref("github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.Chart"),
 						},
 					},
 				},
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.Chart"},
+			"github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.Chart"},
 	}
 }
 
@@ -11393,7 +11393,7 @@ func schema_pkg_apis_management_v1_ProjectChartInfoStatus(ref common.ReferenceCa
 					"metadata": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Metadata provides information about a chart",
-							Ref:         ref("github.com/loft-sh/agentapi/v2/pkg/apis/loft/cluster/v1.Metadata"),
+							Ref:         ref("github.com/loft-sh/agentapi/v3/pkg/apis/loft/cluster/v1.Metadata"),
 						},
 					},
 					"readme": {
@@ -11414,7 +11414,7 @@ func schema_pkg_apis_management_v1_ProjectChartInfoStatus(ref common.ReferenceCa
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/agentapi/v2/pkg/apis/loft/cluster/v1.Metadata"},
+			"github.com/loft-sh/agentapi/v3/pkg/apis/loft/cluster/v1.Metadata"},
 	}
 }
 
@@ -11452,7 +11452,7 @@ func schema_pkg_apis_management_v1_ProjectCharts(ref common.ReferenceCallback) c
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/storage/v1.HelmChart"),
+										Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.HelmChart"),
 									},
 								},
 							},
@@ -11470,7 +11470,7 @@ func schema_pkg_apis_management_v1_ProjectCharts(ref common.ReferenceCallback) c
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/v2/pkg/apis/storage/v1.HelmChart", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
+			"github.com/loft-sh/api/v3/pkg/apis/storage/v1.HelmChart", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
 	}
 }
 
@@ -11507,7 +11507,7 @@ func schema_pkg_apis_management_v1_ProjectChartsList(ref common.ReferenceCallbac
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/management/v1.ProjectCharts"),
+										Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/management/v1.ProjectCharts"),
 									},
 								},
 							},
@@ -11518,7 +11518,7 @@ func schema_pkg_apis_management_v1_ProjectChartsList(ref common.ReferenceCallbac
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/v2/pkg/apis/management/v1.ProjectCharts", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
+			"github.com/loft-sh/api/v3/pkg/apis/management/v1.ProjectCharts", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
 	}
 }
 
@@ -11556,7 +11556,7 @@ func schema_pkg_apis_management_v1_ProjectClusters(ref common.ReferenceCallback)
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/management/v1.Cluster"),
+										Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/management/v1.Cluster"),
 									},
 								},
 							},
@@ -11566,7 +11566,7 @@ func schema_pkg_apis_management_v1_ProjectClusters(ref common.ReferenceCallback)
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/v2/pkg/apis/management/v1.Cluster", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
+			"github.com/loft-sh/api/v3/pkg/apis/management/v1.Cluster", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
 	}
 }
 
@@ -11603,7 +11603,7 @@ func schema_pkg_apis_management_v1_ProjectClustersList(ref common.ReferenceCallb
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/management/v1.ProjectClusters"),
+										Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/management/v1.ProjectClusters"),
 									},
 								},
 							},
@@ -11614,7 +11614,7 @@ func schema_pkg_apis_management_v1_ProjectClustersList(ref common.ReferenceCallb
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/v2/pkg/apis/management/v1.ProjectClusters", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
+			"github.com/loft-sh/api/v3/pkg/apis/management/v1.ProjectClusters", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
 	}
 }
 
@@ -11649,7 +11649,7 @@ func schema_pkg_apis_management_v1_ProjectImportSpace(ref common.ReferenceCallba
 						SchemaProps: spec.SchemaProps{
 							Description: "SourceSpace is the space to import into this project",
 							Default:     map[string]interface{}{},
-							Ref:         ref("github.com/loft-sh/api/v2/pkg/apis/management/v1.ProjectImportSpaceSource"),
+							Ref:         ref("github.com/loft-sh/api/v3/pkg/apis/management/v1.ProjectImportSpaceSource"),
 						},
 					},
 				},
@@ -11657,7 +11657,7 @@ func schema_pkg_apis_management_v1_ProjectImportSpace(ref common.ReferenceCallba
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/v2/pkg/apis/management/v1.ProjectImportSpaceSource", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
+			"github.com/loft-sh/api/v3/pkg/apis/management/v1.ProjectImportSpaceSource", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
 	}
 }
 
@@ -11694,7 +11694,7 @@ func schema_pkg_apis_management_v1_ProjectImportSpaceList(ref common.ReferenceCa
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/management/v1.ProjectImportSpace"),
+										Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/management/v1.ProjectImportSpace"),
 									},
 								},
 							},
@@ -11705,7 +11705,7 @@ func schema_pkg_apis_management_v1_ProjectImportSpaceList(ref common.ReferenceCa
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/v2/pkg/apis/management/v1.ProjectImportSpace", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
+			"github.com/loft-sh/api/v3/pkg/apis/management/v1.ProjectImportSpace", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
 	}
 }
 
@@ -11773,7 +11773,7 @@ func schema_pkg_apis_management_v1_ProjectImportVirtualCluster(ref common.Refere
 						SchemaProps: spec.SchemaProps{
 							Description: "SourceVirtualCluster is the virtual cluster to import into this project",
 							Default:     map[string]interface{}{},
-							Ref:         ref("github.com/loft-sh/api/v2/pkg/apis/management/v1.ProjectImportVirtualClusterSource"),
+							Ref:         ref("github.com/loft-sh/api/v3/pkg/apis/management/v1.ProjectImportVirtualClusterSource"),
 						},
 					},
 				},
@@ -11781,7 +11781,7 @@ func schema_pkg_apis_management_v1_ProjectImportVirtualCluster(ref common.Refere
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/v2/pkg/apis/management/v1.ProjectImportVirtualClusterSource", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
+			"github.com/loft-sh/api/v3/pkg/apis/management/v1.ProjectImportVirtualClusterSource", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
 	}
 }
 
@@ -11818,7 +11818,7 @@ func schema_pkg_apis_management_v1_ProjectImportVirtualClusterList(ref common.Re
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/management/v1.ProjectImportVirtualCluster"),
+										Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/management/v1.ProjectImportVirtualCluster"),
 									},
 								},
 							},
@@ -11829,7 +11829,7 @@ func schema_pkg_apis_management_v1_ProjectImportVirtualClusterList(ref common.Re
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/v2/pkg/apis/management/v1.ProjectImportVirtualCluster", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
+			"github.com/loft-sh/api/v3/pkg/apis/management/v1.ProjectImportVirtualCluster", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
 	}
 }
 
@@ -11906,7 +11906,7 @@ func schema_pkg_apis_management_v1_ProjectList(ref common.ReferenceCallback) com
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/management/v1.Project"),
+										Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/management/v1.Project"),
 									},
 								},
 							},
@@ -11917,7 +11917,7 @@ func schema_pkg_apis_management_v1_ProjectList(ref common.ReferenceCallback) com
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/v2/pkg/apis/management/v1.Project", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
+			"github.com/loft-sh/api/v3/pkg/apis/management/v1.Project", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
 	}
 }
 
@@ -11931,14 +11931,14 @@ func schema_pkg_apis_management_v1_ProjectMember(ref common.ReferenceCallback) c
 						SchemaProps: spec.SchemaProps{
 							Description: "Info about the user or team",
 							Default:     map[string]interface{}{},
-							Ref:         ref("github.com/loft-sh/agentapi/v2/pkg/apis/loft/cluster/v1.EntityInfo"),
+							Ref:         ref("github.com/loft-sh/agentapi/v3/pkg/apis/loft/cluster/v1.EntityInfo"),
 						},
 					},
 				},
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/agentapi/v2/pkg/apis/loft/cluster/v1.EntityInfo"},
+			"github.com/loft-sh/agentapi/v3/pkg/apis/loft/cluster/v1.EntityInfo"},
 	}
 }
 
@@ -11976,7 +11976,7 @@ func schema_pkg_apis_management_v1_ProjectMembers(ref common.ReferenceCallback) 
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/management/v1.ProjectMember"),
+										Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/management/v1.ProjectMember"),
 									},
 								},
 							},
@@ -11990,7 +11990,7 @@ func schema_pkg_apis_management_v1_ProjectMembers(ref common.ReferenceCallback) 
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/management/v1.ProjectMember"),
+										Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/management/v1.ProjectMember"),
 									},
 								},
 							},
@@ -12000,7 +12000,7 @@ func schema_pkg_apis_management_v1_ProjectMembers(ref common.ReferenceCallback) 
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/v2/pkg/apis/management/v1.ProjectMember", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
+			"github.com/loft-sh/api/v3/pkg/apis/management/v1.ProjectMember", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
 	}
 }
 
@@ -12037,7 +12037,7 @@ func schema_pkg_apis_management_v1_ProjectMembersList(ref common.ReferenceCallba
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/management/v1.ProjectMembers"),
+										Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/management/v1.ProjectMembers"),
 									},
 								},
 							},
@@ -12048,7 +12048,7 @@ func schema_pkg_apis_management_v1_ProjectMembersList(ref common.ReferenceCallba
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/v2/pkg/apis/management/v1.ProjectMembers", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
+			"github.com/loft-sh/api/v3/pkg/apis/management/v1.ProjectMembers", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
 	}
 }
 
@@ -12083,7 +12083,7 @@ func schema_pkg_apis_management_v1_ProjectMigrateSpaceInstance(ref common.Refere
 						SchemaProps: spec.SchemaProps{
 							Description: "SourceSpaceInstance is the spaceinstance to migrate into this project",
 							Default:     map[string]interface{}{},
-							Ref:         ref("github.com/loft-sh/api/v2/pkg/apis/management/v1.ProjectMigrateSpaceInstanceSource"),
+							Ref:         ref("github.com/loft-sh/api/v3/pkg/apis/management/v1.ProjectMigrateSpaceInstanceSource"),
 						},
 					},
 				},
@@ -12091,7 +12091,7 @@ func schema_pkg_apis_management_v1_ProjectMigrateSpaceInstance(ref common.Refere
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/v2/pkg/apis/management/v1.ProjectMigrateSpaceInstanceSource", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
+			"github.com/loft-sh/api/v3/pkg/apis/management/v1.ProjectMigrateSpaceInstanceSource", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
 	}
 }
 
@@ -12128,7 +12128,7 @@ func schema_pkg_apis_management_v1_ProjectMigrateSpaceInstanceList(ref common.Re
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/management/v1.ProjectMigrateSpaceInstance"),
+										Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/management/v1.ProjectMigrateSpaceInstance"),
 									},
 								},
 							},
@@ -12139,7 +12139,7 @@ func schema_pkg_apis_management_v1_ProjectMigrateSpaceInstanceList(ref common.Re
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/v2/pkg/apis/management/v1.ProjectMigrateSpaceInstance", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
+			"github.com/loft-sh/api/v3/pkg/apis/management/v1.ProjectMigrateSpaceInstance", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
 	}
 }
 
@@ -12200,7 +12200,7 @@ func schema_pkg_apis_management_v1_ProjectMigrateVirtualClusterInstance(ref comm
 						SchemaProps: spec.SchemaProps{
 							Description: "SourceVirtualClusterInstance is the virtual cluster instance to migrate into this project",
 							Default:     map[string]interface{}{},
-							Ref:         ref("github.com/loft-sh/api/v2/pkg/apis/management/v1.ProjectMigrateVirtualClusterInstanceSource"),
+							Ref:         ref("github.com/loft-sh/api/v3/pkg/apis/management/v1.ProjectMigrateVirtualClusterInstanceSource"),
 						},
 					},
 				},
@@ -12208,7 +12208,7 @@ func schema_pkg_apis_management_v1_ProjectMigrateVirtualClusterInstance(ref comm
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/v2/pkg/apis/management/v1.ProjectMigrateVirtualClusterInstanceSource", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
+			"github.com/loft-sh/api/v3/pkg/apis/management/v1.ProjectMigrateVirtualClusterInstanceSource", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
 	}
 }
 
@@ -12245,7 +12245,7 @@ func schema_pkg_apis_management_v1_ProjectMigrateVirtualClusterInstanceList(ref 
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/management/v1.ProjectMigrateVirtualClusterInstance"),
+										Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/management/v1.ProjectMigrateVirtualClusterInstance"),
 									},
 								},
 							},
@@ -12256,7 +12256,7 @@ func schema_pkg_apis_management_v1_ProjectMigrateVirtualClusterInstanceList(ref 
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/v2/pkg/apis/management/v1.ProjectMigrateVirtualClusterInstance", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
+			"github.com/loft-sh/api/v3/pkg/apis/management/v1.ProjectMigrateVirtualClusterInstance", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
 	}
 }
 
@@ -12316,20 +12316,20 @@ func schema_pkg_apis_management_v1_ProjectSecret(ref common.ReferenceCallback) c
 					"spec": {
 						SchemaProps: spec.SchemaProps{
 							Default: map[string]interface{}{},
-							Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/management/v1.ProjectSecretSpec"),
+							Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/management/v1.ProjectSecretSpec"),
 						},
 					},
 					"status": {
 						SchemaProps: spec.SchemaProps{
 							Default: map[string]interface{}{},
-							Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/management/v1.ProjectSecretStatus"),
+							Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/management/v1.ProjectSecretStatus"),
 						},
 					},
 				},
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/v2/pkg/apis/management/v1.ProjectSecretSpec", "github.com/loft-sh/api/v2/pkg/apis/management/v1.ProjectSecretStatus", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
+			"github.com/loft-sh/api/v3/pkg/apis/management/v1.ProjectSecretSpec", "github.com/loft-sh/api/v3/pkg/apis/management/v1.ProjectSecretStatus", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
 	}
 }
 
@@ -12366,7 +12366,7 @@ func schema_pkg_apis_management_v1_ProjectSecretList(ref common.ReferenceCallbac
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/management/v1.ProjectSecret"),
+										Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/management/v1.ProjectSecret"),
 									},
 								},
 							},
@@ -12377,7 +12377,7 @@ func schema_pkg_apis_management_v1_ProjectSecretList(ref common.ReferenceCallbac
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/v2/pkg/apis/management/v1.ProjectSecret", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
+			"github.com/loft-sh/api/v3/pkg/apis/management/v1.ProjectSecret", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
 	}
 }
 
@@ -12458,14 +12458,14 @@ func schema_pkg_apis_management_v1_ProjectSpec(ref common.ReferenceCallback) com
 					"owner": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Owner holds the owner of this object",
-							Ref:         ref("github.com/loft-sh/api/v2/pkg/apis/storage/v1.UserOrTeam"),
+							Ref:         ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.UserOrTeam"),
 						},
 					},
 					"quotas": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Quotas define the quotas inside the project",
 							Default:     map[string]interface{}{},
-							Ref:         ref("github.com/loft-sh/api/v2/pkg/apis/storage/v1.Quotas"),
+							Ref:         ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.Quotas"),
 						},
 					},
 					"allowedClusters": {
@@ -12476,7 +12476,7 @@ func schema_pkg_apis_management_v1_ProjectSpec(ref common.ReferenceCallback) com
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/storage/v1.AllowedCluster"),
+										Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.AllowedCluster"),
 									},
 								},
 							},
@@ -12490,7 +12490,7 @@ func schema_pkg_apis_management_v1_ProjectSpec(ref common.ReferenceCallback) com
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/storage/v1.AllowedTemplate"),
+										Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.AllowedTemplate"),
 									},
 								},
 							},
@@ -12504,7 +12504,7 @@ func schema_pkg_apis_management_v1_ProjectSpec(ref common.ReferenceCallback) com
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/storage/v1.Member"),
+										Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.Member"),
 									},
 								},
 							},
@@ -12518,7 +12518,7 @@ func schema_pkg_apis_management_v1_ProjectSpec(ref common.ReferenceCallback) com
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/storage/v1.Access"),
+										Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.Access"),
 									},
 								},
 							},
@@ -12527,20 +12527,20 @@ func schema_pkg_apis_management_v1_ProjectSpec(ref common.ReferenceCallback) com
 					"namespacePattern": {
 						SchemaProps: spec.SchemaProps{
 							Description: "NamespacePattern specifies template patterns to use for creating each space or virtual cluster's namespace",
-							Ref:         ref("github.com/loft-sh/api/v2/pkg/apis/storage/v1.NamespacePattern"),
+							Ref:         ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.NamespacePattern"),
 						},
 					},
 					"argoCD": {
 						SchemaProps: spec.SchemaProps{
 							Description: "ArgoIntegration holds information about ArgoCD Integration",
-							Ref:         ref("github.com/loft-sh/api/v2/pkg/apis/storage/v1.ArgoIntegrationSpec"),
+							Ref:         ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.ArgoIntegrationSpec"),
 						},
 					},
 				},
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/v2/pkg/apis/storage/v1.Access", "github.com/loft-sh/api/v2/pkg/apis/storage/v1.AllowedCluster", "github.com/loft-sh/api/v2/pkg/apis/storage/v1.AllowedTemplate", "github.com/loft-sh/api/v2/pkg/apis/storage/v1.ArgoIntegrationSpec", "github.com/loft-sh/api/v2/pkg/apis/storage/v1.Member", "github.com/loft-sh/api/v2/pkg/apis/storage/v1.NamespacePattern", "github.com/loft-sh/api/v2/pkg/apis/storage/v1.Quotas", "github.com/loft-sh/api/v2/pkg/apis/storage/v1.UserOrTeam"},
+			"github.com/loft-sh/api/v3/pkg/apis/storage/v1.Access", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.AllowedCluster", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.AllowedTemplate", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.ArgoIntegrationSpec", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.Member", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.NamespacePattern", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.Quotas", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.UserOrTeam"},
 	}
 }
 
@@ -12554,7 +12554,7 @@ func schema_pkg_apis_management_v1_ProjectStatus(ref common.ReferenceCallback) c
 					"quotas": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Quotas holds the quota status",
-							Ref:         ref("github.com/loft-sh/api/v2/pkg/apis/storage/v1.QuotaStatus"),
+							Ref:         ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.QuotaStatus"),
 						},
 					},
 					"conditions": {
@@ -12565,7 +12565,7 @@ func schema_pkg_apis_management_v1_ProjectStatus(ref common.ReferenceCallback) c
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.Condition"),
+										Ref:     ref("github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.Condition"),
 									},
 								},
 							},
@@ -12575,7 +12575,7 @@ func schema_pkg_apis_management_v1_ProjectStatus(ref common.ReferenceCallback) c
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.Condition", "github.com/loft-sh/api/v2/pkg/apis/storage/v1.QuotaStatus"},
+			"github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.Condition", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.QuotaStatus"},
 	}
 }
 
@@ -12620,7 +12620,7 @@ func schema_pkg_apis_management_v1_ProjectTemplates(ref common.ReferenceCallback
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/management/v1.VirtualClusterTemplate"),
+										Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/management/v1.VirtualClusterTemplate"),
 									},
 								},
 							},
@@ -12641,7 +12641,7 @@ func schema_pkg_apis_management_v1_ProjectTemplates(ref common.ReferenceCallback
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/management/v1.SpaceTemplate"),
+										Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/management/v1.SpaceTemplate"),
 									},
 								},
 							},
@@ -12651,7 +12651,7 @@ func schema_pkg_apis_management_v1_ProjectTemplates(ref common.ReferenceCallback
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/v2/pkg/apis/management/v1.SpaceTemplate", "github.com/loft-sh/api/v2/pkg/apis/management/v1.VirtualClusterTemplate", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
+			"github.com/loft-sh/api/v3/pkg/apis/management/v1.SpaceTemplate", "github.com/loft-sh/api/v3/pkg/apis/management/v1.VirtualClusterTemplate", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
 	}
 }
 
@@ -12688,7 +12688,7 @@ func schema_pkg_apis_management_v1_ProjectTemplatesList(ref common.ReferenceCall
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/management/v1.ProjectTemplates"),
+										Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/management/v1.ProjectTemplates"),
 									},
 								},
 							},
@@ -12699,7 +12699,7 @@ func schema_pkg_apis_management_v1_ProjectTemplatesList(ref common.ReferenceCall
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/v2/pkg/apis/management/v1.ProjectTemplates", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
+			"github.com/loft-sh/api/v3/pkg/apis/management/v1.ProjectTemplates", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
 	}
 }
 
@@ -12711,14 +12711,14 @@ func schema_pkg_apis_management_v1_Promotions(ref common.ReferenceCallback) comm
 				Properties: map[string]spec.Schema{
 					"trial": {
 						SchemaProps: spec.SchemaProps{
-							Ref: ref("github.com/loft-sh/api/v2/pkg/apis/management/v1.TrialPromotion"),
+							Ref: ref("github.com/loft-sh/api/v3/pkg/apis/management/v1.TrialPromotion"),
 						},
 					},
 				},
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/v2/pkg/apis/management/v1.TrialPromotion"},
+			"github.com/loft-sh/api/v3/pkg/apis/management/v1.TrialPromotion"},
 	}
 }
 
@@ -12752,20 +12752,20 @@ func schema_pkg_apis_management_v1_ResetAccessKey(ref common.ReferenceCallback) 
 					"spec": {
 						SchemaProps: spec.SchemaProps{
 							Default: map[string]interface{}{},
-							Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/management/v1.ResetAccessKeySpec"),
+							Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/management/v1.ResetAccessKeySpec"),
 						},
 					},
 					"status": {
 						SchemaProps: spec.SchemaProps{
 							Default: map[string]interface{}{},
-							Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/management/v1.ResetAccessKeyStatus"),
+							Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/management/v1.ResetAccessKeyStatus"),
 						},
 					},
 				},
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/v2/pkg/apis/management/v1.ResetAccessKeySpec", "github.com/loft-sh/api/v2/pkg/apis/management/v1.ResetAccessKeyStatus", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
+			"github.com/loft-sh/api/v3/pkg/apis/management/v1.ResetAccessKeySpec", "github.com/loft-sh/api/v3/pkg/apis/management/v1.ResetAccessKeyStatus", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
 	}
 }
 
@@ -12802,7 +12802,7 @@ func schema_pkg_apis_management_v1_ResetAccessKeyList(ref common.ReferenceCallba
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/management/v1.ResetAccessKey"),
+										Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/management/v1.ResetAccessKey"),
 									},
 								},
 							},
@@ -12813,7 +12813,7 @@ func schema_pkg_apis_management_v1_ResetAccessKeyList(ref common.ReferenceCallba
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/v2/pkg/apis/management/v1.ResetAccessKey", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
+			"github.com/loft-sh/api/v3/pkg/apis/management/v1.ResetAccessKey", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
 	}
 }
 
@@ -12904,7 +12904,7 @@ func schema_pkg_apis_management_v1_ResetAccessKeySpec(ref common.ReferenceCallba
 					"scope": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Scope defines the scope of the access key.",
-							Ref:         ref("github.com/loft-sh/api/v2/pkg/apis/storage/v1.AccessKeyScope"),
+							Ref:         ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.AccessKeyScope"),
 						},
 					},
 					"type": {
@@ -12917,7 +12917,7 @@ func schema_pkg_apis_management_v1_ResetAccessKeySpec(ref common.ReferenceCallba
 					"identity": {
 						SchemaProps: spec.SchemaProps{
 							Description: "If available, contains information about the sso login data for this access key",
-							Ref:         ref("github.com/loft-sh/api/v2/pkg/apis/storage/v1.AccessKeyIdentity"),
+							Ref:         ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.AccessKeyIdentity"),
 						},
 					},
 					"identityRefresh": {
@@ -12929,7 +12929,7 @@ func schema_pkg_apis_management_v1_ResetAccessKeySpec(ref common.ReferenceCallba
 					"oidcProvider": {
 						SchemaProps: spec.SchemaProps{
 							Description: "If the token is a refresh token, contains information about it",
-							Ref:         ref("github.com/loft-sh/api/v2/pkg/apis/storage/v1.AccessKeyOIDCProvider"),
+							Ref:         ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.AccessKeyOIDCProvider"),
 						},
 					},
 					"parent": {
@@ -12942,14 +12942,14 @@ func schema_pkg_apis_management_v1_ResetAccessKeySpec(ref common.ReferenceCallba
 					"oidcLogin": {
 						SchemaProps: spec.SchemaProps{
 							Description: "DEPRECATED: Use identity instead If available, contains information about the oidc login data for this access key",
-							Ref:         ref("github.com/loft-sh/api/v2/pkg/apis/storage/v1.AccessKeyOIDC"),
+							Ref:         ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.AccessKeyOIDC"),
 						},
 					},
 				},
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/v2/pkg/apis/storage/v1.AccessKeyIdentity", "github.com/loft-sh/api/v2/pkg/apis/storage/v1.AccessKeyOIDC", "github.com/loft-sh/api/v2/pkg/apis/storage/v1.AccessKeyOIDCProvider", "github.com/loft-sh/api/v2/pkg/apis/storage/v1.AccessKeyScope", "k8s.io/apimachinery/pkg/apis/meta/v1.Time"},
+			"github.com/loft-sh/api/v3/pkg/apis/storage/v1.AccessKeyIdentity", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.AccessKeyOIDC", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.AccessKeyOIDCProvider", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.AccessKeyScope", "k8s.io/apimachinery/pkg/apis/meta/v1.Time"},
 	}
 }
 
@@ -13016,7 +13016,7 @@ func schema_pkg_apis_management_v1_ResourceLimit(ref common.ReferenceCallback) c
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/management/v1.ResoureRequests"),
+										Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/management/v1.ResoureRequests"),
 									},
 								},
 							},
@@ -13026,7 +13026,7 @@ func schema_pkg_apis_management_v1_ResourceLimit(ref common.ReferenceCallback) c
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/v2/pkg/apis/management/v1.ResoureRequests"},
+			"github.com/loft-sh/api/v3/pkg/apis/management/v1.ResoureRequests"},
 	}
 }
 
@@ -13104,20 +13104,20 @@ func schema_pkg_apis_management_v1_Self(ref common.ReferenceCallback) common.Ope
 					"spec": {
 						SchemaProps: spec.SchemaProps{
 							Default: map[string]interface{}{},
-							Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/management/v1.SelfSpec"),
+							Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/management/v1.SelfSpec"),
 						},
 					},
 					"status": {
 						SchemaProps: spec.SchemaProps{
 							Default: map[string]interface{}{},
-							Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/management/v1.SelfStatus"),
+							Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/management/v1.SelfStatus"),
 						},
 					},
 				},
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/v2/pkg/apis/management/v1.SelfSpec", "github.com/loft-sh/api/v2/pkg/apis/management/v1.SelfStatus", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
+			"github.com/loft-sh/api/v3/pkg/apis/management/v1.SelfSpec", "github.com/loft-sh/api/v3/pkg/apis/management/v1.SelfStatus", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
 	}
 }
 
@@ -13154,7 +13154,7 @@ func schema_pkg_apis_management_v1_SelfList(ref common.ReferenceCallback) common
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/management/v1.Self"),
+										Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/management/v1.Self"),
 									},
 								},
 							},
@@ -13165,7 +13165,7 @@ func schema_pkg_apis_management_v1_SelfList(ref common.ReferenceCallback) common
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/v2/pkg/apis/management/v1.Self", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
+			"github.com/loft-sh/api/v3/pkg/apis/management/v1.Self", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
 	}
 }
 
@@ -13188,13 +13188,13 @@ func schema_pkg_apis_management_v1_SelfStatus(ref common.ReferenceCallback) comm
 					"user": {
 						SchemaProps: spec.SchemaProps{
 							Description: "The name of the currently logged in user",
-							Ref:         ref("github.com/loft-sh/api/v2/pkg/apis/management/v1.UserInfo"),
+							Ref:         ref("github.com/loft-sh/api/v3/pkg/apis/management/v1.UserInfo"),
 						},
 					},
 					"team": {
 						SchemaProps: spec.SchemaProps{
 							Description: "The name of the currently logged in team",
-							Ref:         ref("github.com/loft-sh/agentapi/v2/pkg/apis/loft/cluster/v1.EntityInfo"),
+							Ref:         ref("github.com/loft-sh/agentapi/v3/pkg/apis/loft/cluster/v1.EntityInfo"),
 						},
 					},
 					"accessKey": {
@@ -13237,7 +13237,7 @@ func schema_pkg_apis_management_v1_SelfStatus(ref common.ReferenceCallback) comm
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/agentapi/v2/pkg/apis/loft/cluster/v1.EntityInfo", "github.com/loft-sh/api/v2/pkg/apis/management/v1.UserInfo"},
+			"github.com/loft-sh/agentapi/v3/pkg/apis/loft/cluster/v1.EntityInfo", "github.com/loft-sh/api/v3/pkg/apis/management/v1.UserInfo"},
 	}
 }
 
@@ -13271,20 +13271,20 @@ func schema_pkg_apis_management_v1_SelfSubjectAccessReview(ref common.ReferenceC
 					"spec": {
 						SchemaProps: spec.SchemaProps{
 							Default: map[string]interface{}{},
-							Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/management/v1.SelfSubjectAccessReviewSpec"),
+							Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/management/v1.SelfSubjectAccessReviewSpec"),
 						},
 					},
 					"status": {
 						SchemaProps: spec.SchemaProps{
 							Default: map[string]interface{}{},
-							Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/management/v1.SelfSubjectAccessReviewStatus"),
+							Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/management/v1.SelfSubjectAccessReviewStatus"),
 						},
 					},
 				},
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/v2/pkg/apis/management/v1.SelfSubjectAccessReviewSpec", "github.com/loft-sh/api/v2/pkg/apis/management/v1.SelfSubjectAccessReviewStatus", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
+			"github.com/loft-sh/api/v3/pkg/apis/management/v1.SelfSubjectAccessReviewSpec", "github.com/loft-sh/api/v3/pkg/apis/management/v1.SelfSubjectAccessReviewStatus", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
 	}
 }
 
@@ -13321,7 +13321,7 @@ func schema_pkg_apis_management_v1_SelfSubjectAccessReviewList(ref common.Refere
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/management/v1.SelfSubjectAccessReview"),
+										Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/management/v1.SelfSubjectAccessReview"),
 									},
 								},
 							},
@@ -13332,7 +13332,7 @@ func schema_pkg_apis_management_v1_SelfSubjectAccessReviewList(ref common.Refere
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/v2/pkg/apis/management/v1.SelfSubjectAccessReview", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
+			"github.com/loft-sh/api/v3/pkg/apis/management/v1.SelfSubjectAccessReview", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
 	}
 }
 
@@ -13434,20 +13434,20 @@ func schema_pkg_apis_management_v1_SharedSecret(ref common.ReferenceCallback) co
 					"spec": {
 						SchemaProps: spec.SchemaProps{
 							Default: map[string]interface{}{},
-							Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/management/v1.SharedSecretSpec"),
+							Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/management/v1.SharedSecretSpec"),
 						},
 					},
 					"status": {
 						SchemaProps: spec.SchemaProps{
 							Default: map[string]interface{}{},
-							Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/management/v1.SharedSecretStatus"),
+							Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/management/v1.SharedSecretStatus"),
 						},
 					},
 				},
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/v2/pkg/apis/management/v1.SharedSecretSpec", "github.com/loft-sh/api/v2/pkg/apis/management/v1.SharedSecretStatus", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
+			"github.com/loft-sh/api/v3/pkg/apis/management/v1.SharedSecretSpec", "github.com/loft-sh/api/v3/pkg/apis/management/v1.SharedSecretStatus", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
 	}
 }
 
@@ -13484,7 +13484,7 @@ func schema_pkg_apis_management_v1_SharedSecretList(ref common.ReferenceCallback
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/management/v1.SharedSecret"),
+										Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/management/v1.SharedSecret"),
 									},
 								},
 							},
@@ -13495,7 +13495,7 @@ func schema_pkg_apis_management_v1_SharedSecretList(ref common.ReferenceCallback
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/v2/pkg/apis/management/v1.SharedSecret", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
+			"github.com/loft-sh/api/v3/pkg/apis/management/v1.SharedSecret", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
 	}
 }
 
@@ -13523,7 +13523,7 @@ func schema_pkg_apis_management_v1_SharedSecretSpec(ref common.ReferenceCallback
 					"owner": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Owner holds the owner of this object",
-							Ref:         ref("github.com/loft-sh/api/v2/pkg/apis/storage/v1.UserOrTeam"),
+							Ref:         ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.UserOrTeam"),
 						},
 					},
 					"data": {
@@ -13549,7 +13549,7 @@ func schema_pkg_apis_management_v1_SharedSecretSpec(ref common.ReferenceCallback
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/storage/v1.Access"),
+										Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.Access"),
 									},
 								},
 							},
@@ -13559,7 +13559,7 @@ func schema_pkg_apis_management_v1_SharedSecretSpec(ref common.ReferenceCallback
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/v2/pkg/apis/storage/v1.Access", "github.com/loft-sh/api/v2/pkg/apis/storage/v1.UserOrTeam"},
+			"github.com/loft-sh/api/v3/pkg/apis/storage/v1.Access", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.UserOrTeam"},
 	}
 }
 
@@ -13604,20 +13604,20 @@ func schema_pkg_apis_management_v1_SpaceConstraint(ref common.ReferenceCallback)
 					"spec": {
 						SchemaProps: spec.SchemaProps{
 							Default: map[string]interface{}{},
-							Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/management/v1.SpaceConstraintSpec"),
+							Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/management/v1.SpaceConstraintSpec"),
 						},
 					},
 					"status": {
 						SchemaProps: spec.SchemaProps{
 							Default: map[string]interface{}{},
-							Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/management/v1.SpaceConstraintStatus"),
+							Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/management/v1.SpaceConstraintStatus"),
 						},
 					},
 				},
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/v2/pkg/apis/management/v1.SpaceConstraintSpec", "github.com/loft-sh/api/v2/pkg/apis/management/v1.SpaceConstraintStatus", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
+			"github.com/loft-sh/api/v3/pkg/apis/management/v1.SpaceConstraintSpec", "github.com/loft-sh/api/v3/pkg/apis/management/v1.SpaceConstraintStatus", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
 	}
 }
 
@@ -13654,7 +13654,7 @@ func schema_pkg_apis_management_v1_SpaceConstraintList(ref common.ReferenceCallb
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/management/v1.SpaceConstraint"),
+										Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/management/v1.SpaceConstraint"),
 									},
 								},
 							},
@@ -13665,7 +13665,7 @@ func schema_pkg_apis_management_v1_SpaceConstraintList(ref common.ReferenceCallb
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/v2/pkg/apis/management/v1.SpaceConstraint", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
+			"github.com/loft-sh/api/v3/pkg/apis/management/v1.SpaceConstraint", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
 	}
 }
 
@@ -13693,7 +13693,7 @@ func schema_pkg_apis_management_v1_SpaceConstraintSpec(ref common.ReferenceCallb
 					"owner": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Owner holds the owner of this object",
-							Ref:         ref("github.com/loft-sh/api/v2/pkg/apis/storage/v1.UserOrTeam"),
+							Ref:         ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.UserOrTeam"),
 						},
 					},
 					"clusters": {
@@ -13719,7 +13719,7 @@ func schema_pkg_apis_management_v1_SpaceConstraintSpec(ref common.ReferenceCallb
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/storage/v1.Access"),
+										Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.Access"),
 									},
 								},
 							},
@@ -13729,14 +13729,14 @@ func schema_pkg_apis_management_v1_SpaceConstraintSpec(ref common.ReferenceCallb
 						SchemaProps: spec.SchemaProps{
 							Description: "LocalSpaceConstraintTemplate holds the space constraint template",
 							Default:     map[string]interface{}{},
-							Ref:         ref("github.com/loft-sh/api/v2/pkg/apis/storage/v1.LocalSpaceConstraintTemplate"),
+							Ref:         ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.LocalSpaceConstraintTemplate"),
 						},
 					},
 				},
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/v2/pkg/apis/storage/v1.Access", "github.com/loft-sh/api/v2/pkg/apis/storage/v1.LocalSpaceConstraintTemplate", "github.com/loft-sh/api/v2/pkg/apis/storage/v1.UserOrTeam"},
+			"github.com/loft-sh/api/v3/pkg/apis/storage/v1.Access", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.LocalSpaceConstraintTemplate", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.UserOrTeam"},
 	}
 }
 
@@ -13749,7 +13749,7 @@ func schema_pkg_apis_management_v1_SpaceConstraintStatus(ref common.ReferenceCal
 				Properties: map[string]spec.Schema{
 					"clusterRole": {
 						SchemaProps: spec.SchemaProps{
-							Ref: ref("github.com/loft-sh/agentapi/v2/pkg/apis/loft/cluster/v1.EntityInfo"),
+							Ref: ref("github.com/loft-sh/agentapi/v3/pkg/apis/loft/cluster/v1.EntityInfo"),
 						},
 					},
 					"clusters": {
@@ -13758,7 +13758,7 @@ func schema_pkg_apis_management_v1_SpaceConstraintStatus(ref common.ReferenceCal
 							Items: &spec.SchemaOrArray{
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
-										Ref: ref("github.com/loft-sh/agentapi/v2/pkg/apis/loft/cluster/v1.EntityInfo"),
+										Ref: ref("github.com/loft-sh/agentapi/v3/pkg/apis/loft/cluster/v1.EntityInfo"),
 									},
 								},
 							},
@@ -13768,7 +13768,7 @@ func schema_pkg_apis_management_v1_SpaceConstraintStatus(ref common.ReferenceCal
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/agentapi/v2/pkg/apis/loft/cluster/v1.EntityInfo"},
+			"github.com/loft-sh/agentapi/v3/pkg/apis/loft/cluster/v1.EntityInfo"},
 	}
 }
 
@@ -13802,20 +13802,20 @@ func schema_pkg_apis_management_v1_SpaceInstance(ref common.ReferenceCallback) c
 					"spec": {
 						SchemaProps: spec.SchemaProps{
 							Default: map[string]interface{}{},
-							Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/management/v1.SpaceInstanceSpec"),
+							Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/management/v1.SpaceInstanceSpec"),
 						},
 					},
 					"status": {
 						SchemaProps: spec.SchemaProps{
 							Default: map[string]interface{}{},
-							Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/management/v1.SpaceInstanceStatus"),
+							Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/management/v1.SpaceInstanceStatus"),
 						},
 					},
 				},
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/v2/pkg/apis/management/v1.SpaceInstanceSpec", "github.com/loft-sh/api/v2/pkg/apis/management/v1.SpaceInstanceStatus", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
+			"github.com/loft-sh/api/v3/pkg/apis/management/v1.SpaceInstanceSpec", "github.com/loft-sh/api/v3/pkg/apis/management/v1.SpaceInstanceStatus", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
 	}
 }
 
@@ -13852,7 +13852,7 @@ func schema_pkg_apis_management_v1_SpaceInstanceList(ref common.ReferenceCallbac
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/management/v1.SpaceInstance"),
+										Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/management/v1.SpaceInstance"),
 									},
 								},
 							},
@@ -13863,7 +13863,7 @@ func schema_pkg_apis_management_v1_SpaceInstanceList(ref common.ReferenceCallbac
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/v2/pkg/apis/management/v1.SpaceInstance", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
+			"github.com/loft-sh/api/v3/pkg/apis/management/v1.SpaceInstance", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
 	}
 }
 
@@ -13891,26 +13891,26 @@ func schema_pkg_apis_management_v1_SpaceInstanceSpec(ref common.ReferenceCallbac
 					"owner": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Owner holds the owner of this object",
-							Ref:         ref("github.com/loft-sh/api/v2/pkg/apis/storage/v1.UserOrTeam"),
+							Ref:         ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.UserOrTeam"),
 						},
 					},
 					"templateRef": {
 						SchemaProps: spec.SchemaProps{
 							Description: "TemplateRef holds the space template reference",
-							Ref:         ref("github.com/loft-sh/api/v2/pkg/apis/storage/v1.TemplateRef"),
+							Ref:         ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.TemplateRef"),
 						},
 					},
 					"template": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Template is the inline template to use for space creation. This is mutually exclusive with templateRef.",
-							Ref:         ref("github.com/loft-sh/api/v2/pkg/apis/storage/v1.SpaceTemplateDefinition"),
+							Ref:         ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.SpaceTemplateDefinition"),
 						},
 					},
 					"clusterRef": {
 						SchemaProps: spec.SchemaProps{
 							Description: "ClusterRef is the reference to the connected cluster holding this space",
 							Default:     map[string]interface{}{},
-							Ref:         ref("github.com/loft-sh/api/v2/pkg/apis/storage/v1.ClusterRef"),
+							Ref:         ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.ClusterRef"),
 						},
 					},
 					"parameters": {
@@ -13928,7 +13928,7 @@ func schema_pkg_apis_management_v1_SpaceInstanceSpec(ref common.ReferenceCallbac
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.InstanceAccessRule"),
+										Ref:     ref("github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.InstanceAccessRule"),
 									},
 								},
 							},
@@ -13942,7 +13942,7 @@ func schema_pkg_apis_management_v1_SpaceInstanceSpec(ref common.ReferenceCallbac
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/storage/v1.Access"),
+										Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.Access"),
 									},
 								},
 							},
@@ -13952,7 +13952,7 @@ func schema_pkg_apis_management_v1_SpaceInstanceSpec(ref common.ReferenceCallbac
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.InstanceAccessRule", "github.com/loft-sh/api/v2/pkg/apis/storage/v1.Access", "github.com/loft-sh/api/v2/pkg/apis/storage/v1.ClusterRef", "github.com/loft-sh/api/v2/pkg/apis/storage/v1.SpaceTemplateDefinition", "github.com/loft-sh/api/v2/pkg/apis/storage/v1.TemplateRef", "github.com/loft-sh/api/v2/pkg/apis/storage/v1.UserOrTeam"},
+			"github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.InstanceAccessRule", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.Access", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.ClusterRef", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.SpaceTemplateDefinition", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.TemplateRef", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.UserOrTeam"},
 	}
 }
 
@@ -13992,7 +13992,7 @@ func schema_pkg_apis_management_v1_SpaceInstanceStatus(ref common.ReferenceCallb
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.Condition"),
+										Ref:     ref("github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.Condition"),
 									},
 								},
 							},
@@ -14001,13 +14001,13 @@ func schema_pkg_apis_management_v1_SpaceInstanceStatus(ref common.ReferenceCallb
 					"spaceObjects": {
 						SchemaProps: spec.SchemaProps{
 							Description: "SpaceObjects are the objects that were applied within the virtual cluster space",
-							Ref:         ref("github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.ObjectsStatus"),
+							Ref:         ref("github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.ObjectsStatus"),
 						},
 					},
 					"space": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Space is the template rendered with all the parameters",
-							Ref:         ref("github.com/loft-sh/api/v2/pkg/apis/storage/v1.SpaceTemplateDefinition"),
+							Ref:         ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.SpaceTemplateDefinition"),
 						},
 					},
 					"ignoreReconciliation": {
@@ -14020,7 +14020,7 @@ func schema_pkg_apis_management_v1_SpaceInstanceStatus(ref common.ReferenceCallb
 					"sleepModeConfig": {
 						SchemaProps: spec.SchemaProps{
 							Description: "SleepModeConfig is the sleep mode config of the space. This will only be shown in the front end.",
-							Ref:         ref("github.com/loft-sh/agentapi/v2/pkg/apis/loft/cluster/v1.SleepModeConfig"),
+							Ref:         ref("github.com/loft-sh/agentapi/v3/pkg/apis/loft/cluster/v1.SleepModeConfig"),
 						},
 					},
 					"canUse": {
@@ -14041,7 +14041,7 @@ func schema_pkg_apis_management_v1_SpaceInstanceStatus(ref common.ReferenceCallb
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/agentapi/v2/pkg/apis/loft/cluster/v1.SleepModeConfig", "github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.Condition", "github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.ObjectsStatus", "github.com/loft-sh/api/v2/pkg/apis/storage/v1.SpaceTemplateDefinition"},
+			"github.com/loft-sh/agentapi/v3/pkg/apis/loft/cluster/v1.SleepModeConfig", "github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.Condition", "github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.ObjectsStatus", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.SpaceTemplateDefinition"},
 	}
 }
 
@@ -14075,20 +14075,20 @@ func schema_pkg_apis_management_v1_SpaceTemplate(ref common.ReferenceCallback) c
 					"spec": {
 						SchemaProps: spec.SchemaProps{
 							Default: map[string]interface{}{},
-							Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/management/v1.SpaceTemplateSpec"),
+							Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/management/v1.SpaceTemplateSpec"),
 						},
 					},
 					"status": {
 						SchemaProps: spec.SchemaProps{
 							Default: map[string]interface{}{},
-							Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/management/v1.SpaceTemplateStatus"),
+							Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/management/v1.SpaceTemplateStatus"),
 						},
 					},
 				},
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/v2/pkg/apis/management/v1.SpaceTemplateSpec", "github.com/loft-sh/api/v2/pkg/apis/management/v1.SpaceTemplateStatus", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
+			"github.com/loft-sh/api/v3/pkg/apis/management/v1.SpaceTemplateSpec", "github.com/loft-sh/api/v3/pkg/apis/management/v1.SpaceTemplateStatus", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
 	}
 }
 
@@ -14125,7 +14125,7 @@ func schema_pkg_apis_management_v1_SpaceTemplateList(ref common.ReferenceCallbac
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/management/v1.SpaceTemplate"),
+										Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/management/v1.SpaceTemplate"),
 									},
 								},
 							},
@@ -14136,7 +14136,7 @@ func schema_pkg_apis_management_v1_SpaceTemplateList(ref common.ReferenceCallbac
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/v2/pkg/apis/management/v1.SpaceTemplate", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
+			"github.com/loft-sh/api/v3/pkg/apis/management/v1.SpaceTemplate", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
 	}
 }
 
@@ -14164,14 +14164,14 @@ func schema_pkg_apis_management_v1_SpaceTemplateSpec(ref common.ReferenceCallbac
 					"owner": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Owner holds the owner of this object",
-							Ref:         ref("github.com/loft-sh/api/v2/pkg/apis/storage/v1.UserOrTeam"),
+							Ref:         ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.UserOrTeam"),
 						},
 					},
 					"template": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Template holds the space template",
 							Default:     map[string]interface{}{},
-							Ref:         ref("github.com/loft-sh/api/v2/pkg/apis/storage/v1.SpaceTemplateDefinition"),
+							Ref:         ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.SpaceTemplateDefinition"),
 						},
 					},
 					"parameters": {
@@ -14182,7 +14182,7 @@ func schema_pkg_apis_management_v1_SpaceTemplateSpec(ref common.ReferenceCallbac
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/storage/v1.AppParameter"),
+										Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.AppParameter"),
 									},
 								},
 							},
@@ -14196,7 +14196,7 @@ func schema_pkg_apis_management_v1_SpaceTemplateSpec(ref common.ReferenceCallbac
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/storage/v1.SpaceTemplateVersion"),
+										Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.SpaceTemplateVersion"),
 									},
 								},
 							},
@@ -14210,7 +14210,7 @@ func schema_pkg_apis_management_v1_SpaceTemplateSpec(ref common.ReferenceCallbac
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/storage/v1.Access"),
+										Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.Access"),
 									},
 								},
 							},
@@ -14220,7 +14220,7 @@ func schema_pkg_apis_management_v1_SpaceTemplateSpec(ref common.ReferenceCallbac
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/v2/pkg/apis/storage/v1.Access", "github.com/loft-sh/api/v2/pkg/apis/storage/v1.AppParameter", "github.com/loft-sh/api/v2/pkg/apis/storage/v1.SpaceTemplateDefinition", "github.com/loft-sh/api/v2/pkg/apis/storage/v1.SpaceTemplateVersion", "github.com/loft-sh/api/v2/pkg/apis/storage/v1.UserOrTeam"},
+			"github.com/loft-sh/api/v3/pkg/apis/storage/v1.Access", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.AppParameter", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.SpaceTemplateDefinition", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.SpaceTemplateVersion", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.UserOrTeam"},
 	}
 }
 
@@ -14237,7 +14237,7 @@ func schema_pkg_apis_management_v1_SpaceTemplateStatus(ref common.ReferenceCallb
 							Items: &spec.SchemaOrArray{
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
-										Ref: ref("github.com/loft-sh/agentapi/v2/pkg/apis/loft/cluster/v1.EntityInfo"),
+										Ref: ref("github.com/loft-sh/agentapi/v3/pkg/apis/loft/cluster/v1.EntityInfo"),
 									},
 								},
 							},
@@ -14247,7 +14247,7 @@ func schema_pkg_apis_management_v1_SpaceTemplateStatus(ref common.ReferenceCallb
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/agentapi/v2/pkg/apis/loft/cluster/v1.EntityInfo"},
+			"github.com/loft-sh/agentapi/v3/pkg/apis/loft/cluster/v1.EntityInfo"},
 	}
 }
 
@@ -14281,20 +14281,20 @@ func schema_pkg_apis_management_v1_SubjectAccessReview(ref common.ReferenceCallb
 					"spec": {
 						SchemaProps: spec.SchemaProps{
 							Default: map[string]interface{}{},
-							Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/management/v1.SubjectAccessReviewSpec"),
+							Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/management/v1.SubjectAccessReviewSpec"),
 						},
 					},
 					"status": {
 						SchemaProps: spec.SchemaProps{
 							Default: map[string]interface{}{},
-							Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/management/v1.SubjectAccessReviewStatus"),
+							Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/management/v1.SubjectAccessReviewStatus"),
 						},
 					},
 				},
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/v2/pkg/apis/management/v1.SubjectAccessReviewSpec", "github.com/loft-sh/api/v2/pkg/apis/management/v1.SubjectAccessReviewStatus", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
+			"github.com/loft-sh/api/v3/pkg/apis/management/v1.SubjectAccessReviewSpec", "github.com/loft-sh/api/v3/pkg/apis/management/v1.SubjectAccessReviewStatus", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
 	}
 }
 
@@ -14331,7 +14331,7 @@ func schema_pkg_apis_management_v1_SubjectAccessReviewList(ref common.ReferenceC
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/management/v1.SubjectAccessReview"),
+										Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/management/v1.SubjectAccessReview"),
 									},
 								},
 							},
@@ -14342,7 +14342,7 @@ func schema_pkg_apis_management_v1_SubjectAccessReviewList(ref common.ReferenceC
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/v2/pkg/apis/management/v1.SubjectAccessReview", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
+			"github.com/loft-sh/api/v3/pkg/apis/management/v1.SubjectAccessReview", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
 	}
 }
 
@@ -14502,7 +14502,7 @@ func schema_pkg_apis_management_v1_SubscriptionInfo(ref common.ReferenceCallback
 					},
 					"defaultPaymentMethod": {
 						SchemaProps: spec.SchemaProps{
-							Ref: ref("github.com/loft-sh/api/v2/pkg/apis/management/v1.DefaultPaymentMethod"),
+							Ref: ref("github.com/loft-sh/api/v3/pkg/apis/management/v1.DefaultPaymentMethod"),
 						},
 					},
 					"created": {
@@ -14517,7 +14517,7 @@ func schema_pkg_apis_management_v1_SubscriptionInfo(ref common.ReferenceCallback
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/v2/pkg/apis/management/v1.DefaultPaymentMethod"},
+			"github.com/loft-sh/api/v3/pkg/apis/management/v1.DefaultPaymentMethod"},
 	}
 }
 
@@ -14551,20 +14551,20 @@ func schema_pkg_apis_management_v1_Task(ref common.ReferenceCallback) common.Ope
 					"spec": {
 						SchemaProps: spec.SchemaProps{
 							Default: map[string]interface{}{},
-							Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/management/v1.TaskSpec"),
+							Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/management/v1.TaskSpec"),
 						},
 					},
 					"status": {
 						SchemaProps: spec.SchemaProps{
 							Default: map[string]interface{}{},
-							Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/management/v1.TaskStatus"),
+							Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/management/v1.TaskStatus"),
 						},
 					},
 				},
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/v2/pkg/apis/management/v1.TaskSpec", "github.com/loft-sh/api/v2/pkg/apis/management/v1.TaskStatus", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
+			"github.com/loft-sh/api/v3/pkg/apis/management/v1.TaskSpec", "github.com/loft-sh/api/v3/pkg/apis/management/v1.TaskStatus", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
 	}
 }
 
@@ -14601,7 +14601,7 @@ func schema_pkg_apis_management_v1_TaskList(ref common.ReferenceCallback) common
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/management/v1.Task"),
+										Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/management/v1.Task"),
 									},
 								},
 							},
@@ -14612,7 +14612,7 @@ func schema_pkg_apis_management_v1_TaskList(ref common.ReferenceCallback) common
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/v2/pkg/apis/management/v1.Task", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
+			"github.com/loft-sh/api/v3/pkg/apis/management/v1.Task", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
 	}
 }
 
@@ -14683,7 +14683,7 @@ func schema_pkg_apis_management_v1_TaskLogList(ref common.ReferenceCallback) com
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/management/v1.TaskLog"),
+										Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/management/v1.TaskLog"),
 									},
 								},
 							},
@@ -14694,7 +14694,7 @@ func schema_pkg_apis_management_v1_TaskLogList(ref common.ReferenceCallback) com
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/v2/pkg/apis/management/v1.TaskLog", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
+			"github.com/loft-sh/api/v3/pkg/apis/management/v1.TaskLog", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
 	}
 }
 
@@ -14803,7 +14803,7 @@ func schema_pkg_apis_management_v1_TaskSpec(ref common.ReferenceCallback) common
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/storage/v1.Access"),
+										Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.Access"),
 									},
 								},
 							},
@@ -14812,34 +14812,34 @@ func schema_pkg_apis_management_v1_TaskSpec(ref common.ReferenceCallback) common
 					"scope": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Scope defines the scope of the access key.",
-							Ref:         ref("github.com/loft-sh/api/v2/pkg/apis/storage/v1.AccessKeyScope"),
+							Ref:         ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.AccessKeyScope"),
 						},
 					},
 					"owner": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Owner holds the owner of this object",
-							Ref:         ref("github.com/loft-sh/api/v2/pkg/apis/storage/v1.UserOrTeam"),
+							Ref:         ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.UserOrTeam"),
 						},
 					},
 					"target": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Target where this task should get executed",
 							Default:     map[string]interface{}{},
-							Ref:         ref("github.com/loft-sh/api/v2/pkg/apis/storage/v1.Target"),
+							Ref:         ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.Target"),
 						},
 					},
 					"task": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Task defines the task to execute",
 							Default:     map[string]interface{}{},
-							Ref:         ref("github.com/loft-sh/api/v2/pkg/apis/storage/v1.TaskDefinition"),
+							Ref:         ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.TaskDefinition"),
 						},
 					},
 				},
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/v2/pkg/apis/storage/v1.Access", "github.com/loft-sh/api/v2/pkg/apis/storage/v1.AccessKeyScope", "github.com/loft-sh/api/v2/pkg/apis/storage/v1.Target", "github.com/loft-sh/api/v2/pkg/apis/storage/v1.TaskDefinition", "github.com/loft-sh/api/v2/pkg/apis/storage/v1.UserOrTeam"},
+			"github.com/loft-sh/api/v3/pkg/apis/storage/v1.Access", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.AccessKeyScope", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.Target", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.TaskDefinition", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.UserOrTeam"},
 	}
 }
 
@@ -14865,7 +14865,7 @@ func schema_pkg_apis_management_v1_TaskStatus(ref common.ReferenceCallback) comm
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.Condition"),
+										Ref:     ref("github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.Condition"),
 									},
 								},
 							},
@@ -14893,19 +14893,19 @@ func schema_pkg_apis_management_v1_TaskStatus(ref common.ReferenceCallback) comm
 					},
 					"owner": {
 						SchemaProps: spec.SchemaProps{
-							Ref: ref("github.com/loft-sh/agentapi/v2/pkg/apis/loft/cluster/v1.UserOrTeam"),
+							Ref: ref("github.com/loft-sh/agentapi/v3/pkg/apis/loft/cluster/v1.UserOrTeam"),
 						},
 					},
 					"cluster": {
 						SchemaProps: spec.SchemaProps{
-							Ref: ref("github.com/loft-sh/agentapi/v2/pkg/apis/loft/cluster/v1.EntityInfo"),
+							Ref: ref("github.com/loft-sh/agentapi/v3/pkg/apis/loft/cluster/v1.EntityInfo"),
 						},
 					},
 				},
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/agentapi/v2/pkg/apis/loft/cluster/v1.EntityInfo", "github.com/loft-sh/agentapi/v2/pkg/apis/loft/cluster/v1.UserOrTeam", "github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.Condition", "k8s.io/api/core/v1.ContainerStatus"},
+			"github.com/loft-sh/agentapi/v3/pkg/apis/loft/cluster/v1.EntityInfo", "github.com/loft-sh/agentapi/v3/pkg/apis/loft/cluster/v1.UserOrTeam", "github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.Condition", "k8s.io/api/core/v1.ContainerStatus"},
 	}
 }
 
@@ -14939,20 +14939,20 @@ func schema_pkg_apis_management_v1_Team(ref common.ReferenceCallback) common.Ope
 					"spec": {
 						SchemaProps: spec.SchemaProps{
 							Default: map[string]interface{}{},
-							Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/management/v1.TeamSpec"),
+							Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/management/v1.TeamSpec"),
 						},
 					},
 					"status": {
 						SchemaProps: spec.SchemaProps{
 							Default: map[string]interface{}{},
-							Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/management/v1.TeamStatus"),
+							Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/management/v1.TeamStatus"),
 						},
 					},
 				},
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/v2/pkg/apis/management/v1.TeamSpec", "github.com/loft-sh/api/v2/pkg/apis/management/v1.TeamStatus", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
+			"github.com/loft-sh/api/v3/pkg/apis/management/v1.TeamSpec", "github.com/loft-sh/api/v3/pkg/apis/management/v1.TeamStatus", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
 	}
 }
 
@@ -14989,7 +14989,7 @@ func schema_pkg_apis_management_v1_TeamAccessKeys(ref common.ReferenceCallback) 
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/management/v1.OwnedAccessKey"),
+										Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/management/v1.OwnedAccessKey"),
 									},
 								},
 							},
@@ -14999,7 +14999,7 @@ func schema_pkg_apis_management_v1_TeamAccessKeys(ref common.ReferenceCallback) 
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/v2/pkg/apis/management/v1.OwnedAccessKey", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
+			"github.com/loft-sh/api/v3/pkg/apis/management/v1.OwnedAccessKey", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
 	}
 }
 
@@ -15036,7 +15036,7 @@ func schema_pkg_apis_management_v1_TeamAccessKeysList(ref common.ReferenceCallba
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/management/v1.TeamAccessKeys"),
+										Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/management/v1.TeamAccessKeys"),
 									},
 								},
 							},
@@ -15047,7 +15047,7 @@ func schema_pkg_apis_management_v1_TeamAccessKeysList(ref common.ReferenceCallba
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/v2/pkg/apis/management/v1.TeamAccessKeys", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
+			"github.com/loft-sh/api/v3/pkg/apis/management/v1.TeamAccessKeys", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
 	}
 }
 
@@ -15084,7 +15084,7 @@ func schema_pkg_apis_management_v1_TeamClusters(ref common.ReferenceCallback) co
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/management/v1.ClusterAccounts"),
+										Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/management/v1.ClusterAccounts"),
 									},
 								},
 							},
@@ -15094,7 +15094,7 @@ func schema_pkg_apis_management_v1_TeamClusters(ref common.ReferenceCallback) co
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/v2/pkg/apis/management/v1.ClusterAccounts", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
+			"github.com/loft-sh/api/v3/pkg/apis/management/v1.ClusterAccounts", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
 	}
 }
 
@@ -15131,7 +15131,7 @@ func schema_pkg_apis_management_v1_TeamClustersList(ref common.ReferenceCallback
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/management/v1.TeamClusters"),
+										Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/management/v1.TeamClusters"),
 									},
 								},
 							},
@@ -15142,7 +15142,7 @@ func schema_pkg_apis_management_v1_TeamClustersList(ref common.ReferenceCallback
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/v2/pkg/apis/management/v1.TeamClusters", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
+			"github.com/loft-sh/api/v3/pkg/apis/management/v1.TeamClusters", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
 	}
 }
 
@@ -15179,7 +15179,7 @@ func schema_pkg_apis_management_v1_TeamList(ref common.ReferenceCallback) common
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/management/v1.Team"),
+										Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/management/v1.Team"),
 									},
 								},
 							},
@@ -15190,7 +15190,7 @@ func schema_pkg_apis_management_v1_TeamList(ref common.ReferenceCallback) common
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/v2/pkg/apis/management/v1.Team", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
+			"github.com/loft-sh/api/v3/pkg/apis/management/v1.Team", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
 	}
 }
 
@@ -15217,7 +15217,7 @@ func schema_pkg_apis_management_v1_TeamSpec(ref common.ReferenceCallback) common
 					"owner": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Owner holds the owner of this object",
-							Ref:         ref("github.com/loft-sh/api/v2/pkg/apis/storage/v1.UserOrTeam"),
+							Ref:         ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.UserOrTeam"),
 						},
 					},
 					"username": {
@@ -15264,7 +15264,7 @@ func schema_pkg_apis_management_v1_TeamSpec(ref common.ReferenceCallback) common
 							Items: &spec.SchemaOrArray{
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
-										Ref: ref("github.com/loft-sh/api/v2/pkg/apis/storage/v1.KindSecretRef"),
+										Ref: ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.KindSecretRef"),
 									},
 								},
 							},
@@ -15278,7 +15278,7 @@ func schema_pkg_apis_management_v1_TeamSpec(ref common.ReferenceCallback) common
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/storage/v1.UserClusterAccountTemplate"),
+										Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.UserClusterAccountTemplate"),
 									},
 								},
 							},
@@ -15292,7 +15292,7 @@ func schema_pkg_apis_management_v1_TeamSpec(ref common.ReferenceCallback) common
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.ClusterRoleRef"),
+										Ref:     ref("github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.ClusterRoleRef"),
 									},
 								},
 							},
@@ -15306,7 +15306,7 @@ func schema_pkg_apis_management_v1_TeamSpec(ref common.ReferenceCallback) common
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/storage/v1.Access"),
+										Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.Access"),
 									},
 								},
 							},
@@ -15316,7 +15316,7 @@ func schema_pkg_apis_management_v1_TeamSpec(ref common.ReferenceCallback) common
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.ClusterRoleRef", "github.com/loft-sh/api/v2/pkg/apis/storage/v1.Access", "github.com/loft-sh/api/v2/pkg/apis/storage/v1.KindSecretRef", "github.com/loft-sh/api/v2/pkg/apis/storage/v1.UserClusterAccountTemplate", "github.com/loft-sh/api/v2/pkg/apis/storage/v1.UserOrTeam"},
+			"github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.ClusterRoleRef", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.Access", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.KindSecretRef", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.UserClusterAccountTemplate", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.UserOrTeam"},
 	}
 }
 
@@ -15334,7 +15334,7 @@ func schema_pkg_apis_management_v1_TeamStatus(ref common.ReferenceCallback) comm
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/storage/v1.AccountClusterStatus"),
+										Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.AccountClusterStatus"),
 									},
 								},
 							},
@@ -15348,7 +15348,7 @@ func schema_pkg_apis_management_v1_TeamStatus(ref common.ReferenceCallback) comm
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/storage/v1.UserClusterAccountTemplateStatus"),
+										Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.UserClusterAccountTemplateStatus"),
 									},
 								},
 							},
@@ -15358,7 +15358,7 @@ func schema_pkg_apis_management_v1_TeamStatus(ref common.ReferenceCallback) comm
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/v2/pkg/apis/storage/v1.AccountClusterStatus", "github.com/loft-sh/api/v2/pkg/apis/storage/v1.UserClusterAccountTemplateStatus"},
+			"github.com/loft-sh/api/v3/pkg/apis/storage/v1.AccountClusterStatus", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.UserClusterAccountTemplateStatus"},
 	}
 }
 
@@ -15426,20 +15426,20 @@ func schema_pkg_apis_management_v1_User(ref common.ReferenceCallback) common.Ope
 					"spec": {
 						SchemaProps: spec.SchemaProps{
 							Default: map[string]interface{}{},
-							Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/management/v1.UserSpec"),
+							Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/management/v1.UserSpec"),
 						},
 					},
 					"status": {
 						SchemaProps: spec.SchemaProps{
 							Default: map[string]interface{}{},
-							Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/management/v1.UserStatus"),
+							Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/management/v1.UserStatus"),
 						},
 					},
 				},
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/v2/pkg/apis/management/v1.UserSpec", "github.com/loft-sh/api/v2/pkg/apis/management/v1.UserStatus", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
+			"github.com/loft-sh/api/v3/pkg/apis/management/v1.UserSpec", "github.com/loft-sh/api/v3/pkg/apis/management/v1.UserStatus", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
 	}
 }
 
@@ -15476,7 +15476,7 @@ func schema_pkg_apis_management_v1_UserAccessKeys(ref common.ReferenceCallback) 
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/management/v1.OwnedAccessKey"),
+										Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/management/v1.OwnedAccessKey"),
 									},
 								},
 							},
@@ -15486,7 +15486,7 @@ func schema_pkg_apis_management_v1_UserAccessKeys(ref common.ReferenceCallback) 
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/v2/pkg/apis/management/v1.OwnedAccessKey", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
+			"github.com/loft-sh/api/v3/pkg/apis/management/v1.OwnedAccessKey", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
 	}
 }
 
@@ -15523,7 +15523,7 @@ func schema_pkg_apis_management_v1_UserAccessKeysList(ref common.ReferenceCallba
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/management/v1.UserAccessKeys"),
+										Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/management/v1.UserAccessKeys"),
 									},
 								},
 							},
@@ -15534,7 +15534,7 @@ func schema_pkg_apis_management_v1_UserAccessKeysList(ref common.ReferenceCallba
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/v2/pkg/apis/management/v1.UserAccessKeys", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
+			"github.com/loft-sh/api/v3/pkg/apis/management/v1.UserAccessKeys", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
 	}
 }
 
@@ -15571,7 +15571,7 @@ func schema_pkg_apis_management_v1_UserClusters(ref common.ReferenceCallback) co
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/management/v1.ClusterAccounts"),
+										Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/management/v1.ClusterAccounts"),
 									},
 								},
 							},
@@ -15581,7 +15581,7 @@ func schema_pkg_apis_management_v1_UserClusters(ref common.ReferenceCallback) co
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/v2/pkg/apis/management/v1.ClusterAccounts", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
+			"github.com/loft-sh/api/v3/pkg/apis/management/v1.ClusterAccounts", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
 	}
 }
 
@@ -15618,7 +15618,7 @@ func schema_pkg_apis_management_v1_UserClustersList(ref common.ReferenceCallback
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/management/v1.UserClusters"),
+										Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/management/v1.UserClusters"),
 									},
 								},
 							},
@@ -15629,7 +15629,7 @@ func schema_pkg_apis_management_v1_UserClustersList(ref common.ReferenceCallback
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/v2/pkg/apis/management/v1.UserClusters", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
+			"github.com/loft-sh/api/v3/pkg/apis/management/v1.UserClusters", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
 	}
 }
 
@@ -15688,7 +15688,7 @@ func schema_pkg_apis_management_v1_UserInfo(ref common.ReferenceCallback) common
 							Items: &spec.SchemaOrArray{
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
-										Ref: ref("github.com/loft-sh/agentapi/v2/pkg/apis/loft/cluster/v1.EntityInfo"),
+										Ref: ref("github.com/loft-sh/agentapi/v3/pkg/apis/loft/cluster/v1.EntityInfo"),
 									},
 								},
 							},
@@ -15698,7 +15698,7 @@ func schema_pkg_apis_management_v1_UserInfo(ref common.ReferenceCallback) common
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/agentapi/v2/pkg/apis/loft/cluster/v1.EntityInfo"},
+			"github.com/loft-sh/agentapi/v3/pkg/apis/loft/cluster/v1.EntityInfo"},
 	}
 }
 
@@ -15735,7 +15735,7 @@ func schema_pkg_apis_management_v1_UserList(ref common.ReferenceCallback) common
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/management/v1.User"),
+										Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/management/v1.User"),
 									},
 								},
 							},
@@ -15746,7 +15746,7 @@ func schema_pkg_apis_management_v1_UserList(ref common.ReferenceCallback) common
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/v2/pkg/apis/management/v1.User", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
+			"github.com/loft-sh/api/v3/pkg/apis/management/v1.User", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
 	}
 }
 
@@ -15859,7 +15859,7 @@ func schema_pkg_apis_management_v1_UserProfileList(ref common.ReferenceCallback)
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/management/v1.UserProfile"),
+										Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/management/v1.UserProfile"),
 									},
 								},
 							},
@@ -15870,7 +15870,7 @@ func schema_pkg_apis_management_v1_UserProfileList(ref common.ReferenceCallback)
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/v2/pkg/apis/management/v1.UserProfile", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
+			"github.com/loft-sh/api/v3/pkg/apis/management/v1.UserProfile", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
 	}
 }
 
@@ -15979,7 +15979,7 @@ func schema_pkg_apis_management_v1_UserSpec(ref common.ReferenceCallback) common
 					"owner": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Owner holds the owner of this object",
-							Ref:         ref("github.com/loft-sh/api/v2/pkg/apis/storage/v1.UserOrTeam"),
+							Ref:         ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.UserOrTeam"),
 						},
 					},
 					"username": {
@@ -16028,19 +16028,19 @@ func schema_pkg_apis_management_v1_UserSpec(ref common.ReferenceCallback) common
 					"passwordRef": {
 						SchemaProps: spec.SchemaProps{
 							Description: "A reference to the user password",
-							Ref:         ref("github.com/loft-sh/api/v2/pkg/apis/storage/v1.SecretRef"),
+							Ref:         ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.SecretRef"),
 						},
 					},
 					"accessKeysRef": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Deprecated: Use the Access Key CRD instead A reference to the users access keys",
-							Ref:         ref("github.com/loft-sh/api/v2/pkg/apis/storage/v1.SecretRef"),
+							Ref:         ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.SecretRef"),
 						},
 					},
 					"codesRef": {
 						SchemaProps: spec.SchemaProps{
 							Description: "A reference to the users access keys",
-							Ref:         ref("github.com/loft-sh/api/v2/pkg/apis/storage/v1.SecretRef"),
+							Ref:         ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.SecretRef"),
 						},
 					},
 					"imagePullSecrets": {
@@ -16050,7 +16050,7 @@ func schema_pkg_apis_management_v1_UserSpec(ref common.ReferenceCallback) common
 							Items: &spec.SchemaOrArray{
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
-										Ref: ref("github.com/loft-sh/api/v2/pkg/apis/storage/v1.KindSecretRef"),
+										Ref: ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.KindSecretRef"),
 									},
 								},
 							},
@@ -16064,7 +16064,7 @@ func schema_pkg_apis_management_v1_UserSpec(ref common.ReferenceCallback) common
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/storage/v1.UserClusterAccountTemplate"),
+										Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.UserClusterAccountTemplate"),
 									},
 								},
 							},
@@ -16092,7 +16092,7 @@ func schema_pkg_apis_management_v1_UserSpec(ref common.ReferenceCallback) common
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.ClusterRoleRef"),
+										Ref:     ref("github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.ClusterRoleRef"),
 									},
 								},
 							},
@@ -16106,7 +16106,7 @@ func schema_pkg_apis_management_v1_UserSpec(ref common.ReferenceCallback) common
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/storage/v1.Access"),
+										Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.Access"),
 									},
 								},
 							},
@@ -16116,7 +16116,7 @@ func schema_pkg_apis_management_v1_UserSpec(ref common.ReferenceCallback) common
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.ClusterRoleRef", "github.com/loft-sh/api/v2/pkg/apis/storage/v1.Access", "github.com/loft-sh/api/v2/pkg/apis/storage/v1.KindSecretRef", "github.com/loft-sh/api/v2/pkg/apis/storage/v1.SecretRef", "github.com/loft-sh/api/v2/pkg/apis/storage/v1.UserClusterAccountTemplate", "github.com/loft-sh/api/v2/pkg/apis/storage/v1.UserOrTeam"},
+			"github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.ClusterRoleRef", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.Access", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.KindSecretRef", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.SecretRef", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.UserClusterAccountTemplate", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.UserOrTeam"},
 	}
 }
 
@@ -16135,7 +16135,7 @@ func schema_pkg_apis_management_v1_UserStatus(ref common.ReferenceCallback) comm
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/storage/v1.AccountClusterStatus"),
+										Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.AccountClusterStatus"),
 									},
 								},
 							},
@@ -16149,7 +16149,7 @@ func schema_pkg_apis_management_v1_UserStatus(ref common.ReferenceCallback) comm
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/storage/v1.UserClusterAccountTemplateStatus"),
+										Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.UserClusterAccountTemplateStatus"),
 									},
 								},
 							},
@@ -16174,7 +16174,7 @@ func schema_pkg_apis_management_v1_UserStatus(ref common.ReferenceCallback) comm
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/v2/pkg/apis/storage/v1.AccountClusterStatus", "github.com/loft-sh/api/v2/pkg/apis/storage/v1.UserClusterAccountTemplateStatus"},
+			"github.com/loft-sh/api/v3/pkg/apis/storage/v1.AccountClusterStatus", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.UserClusterAccountTemplateStatus"},
 	}
 }
 
@@ -16249,20 +16249,20 @@ func schema_pkg_apis_management_v1_VirtualClusterInstance(ref common.ReferenceCa
 					"spec": {
 						SchemaProps: spec.SchemaProps{
 							Default: map[string]interface{}{},
-							Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/management/v1.VirtualClusterInstanceSpec"),
+							Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/management/v1.VirtualClusterInstanceSpec"),
 						},
 					},
 					"status": {
 						SchemaProps: spec.SchemaProps{
 							Default: map[string]interface{}{},
-							Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/management/v1.VirtualClusterInstanceStatus"),
+							Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/management/v1.VirtualClusterInstanceStatus"),
 						},
 					},
 				},
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/v2/pkg/apis/management/v1.VirtualClusterInstanceSpec", "github.com/loft-sh/api/v2/pkg/apis/management/v1.VirtualClusterInstanceStatus", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
+			"github.com/loft-sh/api/v3/pkg/apis/management/v1.VirtualClusterInstanceSpec", "github.com/loft-sh/api/v3/pkg/apis/management/v1.VirtualClusterInstanceStatus", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
 	}
 }
 
@@ -16296,20 +16296,20 @@ func schema_pkg_apis_management_v1_VirtualClusterInstanceKubeConfig(ref common.R
 					"requestOptions": {
 						SchemaProps: spec.SchemaProps{
 							Default: map[string]interface{}{},
-							Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/management/v1.VirtualClusterInstanceKubeConfigRequestOptions"),
+							Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/management/v1.VirtualClusterInstanceKubeConfigRequestOptions"),
 						},
 					},
 					"status": {
 						SchemaProps: spec.SchemaProps{
 							Default: map[string]interface{}{},
-							Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/management/v1.VirtualClusterInstanceKubeConfigStatus"),
+							Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/management/v1.VirtualClusterInstanceKubeConfigStatus"),
 						},
 					},
 				},
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/v2/pkg/apis/management/v1.VirtualClusterInstanceKubeConfigRequestOptions", "github.com/loft-sh/api/v2/pkg/apis/management/v1.VirtualClusterInstanceKubeConfigStatus", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
+			"github.com/loft-sh/api/v3/pkg/apis/management/v1.VirtualClusterInstanceKubeConfigRequestOptions", "github.com/loft-sh/api/v3/pkg/apis/management/v1.VirtualClusterInstanceKubeConfigStatus", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
 	}
 }
 
@@ -16346,7 +16346,7 @@ func schema_pkg_apis_management_v1_VirtualClusterInstanceKubeConfigList(ref comm
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/management/v1.VirtualClusterInstanceKubeConfig"),
+										Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/management/v1.VirtualClusterInstanceKubeConfig"),
 									},
 								},
 							},
@@ -16357,7 +16357,7 @@ func schema_pkg_apis_management_v1_VirtualClusterInstanceKubeConfigList(ref comm
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/v2/pkg/apis/management/v1.VirtualClusterInstanceKubeConfig", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
+			"github.com/loft-sh/api/v3/pkg/apis/management/v1.VirtualClusterInstanceKubeConfig", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
 	}
 }
 
@@ -16432,7 +16432,7 @@ func schema_pkg_apis_management_v1_VirtualClusterInstanceList(ref common.Referen
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/management/v1.VirtualClusterInstance"),
+										Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/management/v1.VirtualClusterInstance"),
 									},
 								},
 							},
@@ -16443,7 +16443,7 @@ func schema_pkg_apis_management_v1_VirtualClusterInstanceList(ref common.Referen
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/v2/pkg/apis/management/v1.VirtualClusterInstance", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
+			"github.com/loft-sh/api/v3/pkg/apis/management/v1.VirtualClusterInstance", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
 	}
 }
 
@@ -16514,7 +16514,7 @@ func schema_pkg_apis_management_v1_VirtualClusterInstanceLogList(ref common.Refe
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/management/v1.VirtualClusterInstanceLog"),
+										Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/management/v1.VirtualClusterInstanceLog"),
 									},
 								},
 							},
@@ -16525,7 +16525,7 @@ func schema_pkg_apis_management_v1_VirtualClusterInstanceLogList(ref common.Refe
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/v2/pkg/apis/management/v1.VirtualClusterInstanceLog", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
+			"github.com/loft-sh/api/v3/pkg/apis/management/v1.VirtualClusterInstanceLog", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
 	}
 }
 
@@ -16643,26 +16643,26 @@ func schema_pkg_apis_management_v1_VirtualClusterInstanceSpec(ref common.Referen
 					"owner": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Owner holds the owner of this object",
-							Ref:         ref("github.com/loft-sh/api/v2/pkg/apis/storage/v1.UserOrTeam"),
+							Ref:         ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.UserOrTeam"),
 						},
 					},
 					"templateRef": {
 						SchemaProps: spec.SchemaProps{
 							Description: "TemplateRef holds the virtual cluster template reference",
-							Ref:         ref("github.com/loft-sh/api/v2/pkg/apis/storage/v1.TemplateRef"),
+							Ref:         ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.TemplateRef"),
 						},
 					},
 					"template": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Template is the inline template to use for virtual cluster creation. This is mutually exclusive with templateRef.",
-							Ref:         ref("github.com/loft-sh/api/v2/pkg/apis/storage/v1.VirtualClusterTemplateDefinition"),
+							Ref:         ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.VirtualClusterTemplateDefinition"),
 						},
 					},
 					"clusterRef": {
 						SchemaProps: spec.SchemaProps{
 							Description: "ClusterRef is the reference to the connected cluster holding this virtual cluster",
 							Default:     map[string]interface{}{},
-							Ref:         ref("github.com/loft-sh/api/v2/pkg/apis/storage/v1.VirtualClusterClusterRef"),
+							Ref:         ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.VirtualClusterClusterRef"),
 						},
 					},
 					"parameters": {
@@ -16680,7 +16680,7 @@ func schema_pkg_apis_management_v1_VirtualClusterInstanceSpec(ref common.Referen
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.InstanceAccessRule"),
+										Ref:     ref("github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.InstanceAccessRule"),
 									},
 								},
 							},
@@ -16694,7 +16694,7 @@ func schema_pkg_apis_management_v1_VirtualClusterInstanceSpec(ref common.Referen
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/storage/v1.Access"),
+										Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.Access"),
 									},
 								},
 							},
@@ -16704,7 +16704,7 @@ func schema_pkg_apis_management_v1_VirtualClusterInstanceSpec(ref common.Referen
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.InstanceAccessRule", "github.com/loft-sh/api/v2/pkg/apis/storage/v1.Access", "github.com/loft-sh/api/v2/pkg/apis/storage/v1.TemplateRef", "github.com/loft-sh/api/v2/pkg/apis/storage/v1.UserOrTeam", "github.com/loft-sh/api/v2/pkg/apis/storage/v1.VirtualClusterClusterRef", "github.com/loft-sh/api/v2/pkg/apis/storage/v1.VirtualClusterTemplateDefinition"},
+			"github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.InstanceAccessRule", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.Access", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.TemplateRef", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.UserOrTeam", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.VirtualClusterClusterRef", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.VirtualClusterTemplateDefinition"},
 	}
 }
 
@@ -16744,7 +16744,7 @@ func schema_pkg_apis_management_v1_VirtualClusterInstanceStatus(ref common.Refer
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.Condition"),
+										Ref:     ref("github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.Condition"),
 									},
 								},
 							},
@@ -16753,19 +16753,19 @@ func schema_pkg_apis_management_v1_VirtualClusterInstanceStatus(ref common.Refer
 					"virtualClusterObjects": {
 						SchemaProps: spec.SchemaProps{
 							Description: "VirtualClusterObjects are the objects that were applied within the virtual cluster itself",
-							Ref:         ref("github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.ObjectsStatus"),
+							Ref:         ref("github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.ObjectsStatus"),
 						},
 					},
 					"spaceObjects": {
 						SchemaProps: spec.SchemaProps{
 							Description: "SpaceObjects are the objects that were applied within the virtual cluster space",
-							Ref:         ref("github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.ObjectsStatus"),
+							Ref:         ref("github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.ObjectsStatus"),
 						},
 					},
 					"virtualCluster": {
 						SchemaProps: spec.SchemaProps{
 							Description: "VirtualCluster is the template rendered with all the parameters",
-							Ref:         ref("github.com/loft-sh/api/v2/pkg/apis/storage/v1.VirtualClusterTemplateDefinition"),
+							Ref:         ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.VirtualClusterTemplateDefinition"),
 						},
 					},
 					"ignoreReconciliation": {
@@ -16778,7 +16778,7 @@ func schema_pkg_apis_management_v1_VirtualClusterInstanceStatus(ref common.Refer
 					"sleepModeConfig": {
 						SchemaProps: spec.SchemaProps{
 							Description: "SleepModeConfig is the sleep mode config of the space. This will only be shown in the front end.",
-							Ref:         ref("github.com/loft-sh/agentapi/v2/pkg/apis/loft/cluster/v1.SleepModeConfig"),
+							Ref:         ref("github.com/loft-sh/agentapi/v3/pkg/apis/loft/cluster/v1.SleepModeConfig"),
 						},
 					},
 					"canUse": {
@@ -16799,7 +16799,7 @@ func schema_pkg_apis_management_v1_VirtualClusterInstanceStatus(ref common.Refer
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/agentapi/v2/pkg/apis/loft/cluster/v1.SleepModeConfig", "github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.Condition", "github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.ObjectsStatus", "github.com/loft-sh/api/v2/pkg/apis/storage/v1.VirtualClusterTemplateDefinition"},
+			"github.com/loft-sh/agentapi/v3/pkg/apis/loft/cluster/v1.SleepModeConfig", "github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.Condition", "github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.ObjectsStatus", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.VirtualClusterTemplateDefinition"},
 	}
 }
 
@@ -16833,20 +16833,20 @@ func schema_pkg_apis_management_v1_VirtualClusterTemplate(ref common.ReferenceCa
 					"spec": {
 						SchemaProps: spec.SchemaProps{
 							Default: map[string]interface{}{},
-							Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/management/v1.VirtualClusterTemplateSpec"),
+							Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/management/v1.VirtualClusterTemplateSpec"),
 						},
 					},
 					"status": {
 						SchemaProps: spec.SchemaProps{
 							Default: map[string]interface{}{},
-							Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/management/v1.VirtualClusterTemplateStatus"),
+							Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/management/v1.VirtualClusterTemplateStatus"),
 						},
 					},
 				},
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/v2/pkg/apis/management/v1.VirtualClusterTemplateSpec", "github.com/loft-sh/api/v2/pkg/apis/management/v1.VirtualClusterTemplateStatus", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
+			"github.com/loft-sh/api/v3/pkg/apis/management/v1.VirtualClusterTemplateSpec", "github.com/loft-sh/api/v3/pkg/apis/management/v1.VirtualClusterTemplateStatus", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
 	}
 }
 
@@ -16883,7 +16883,7 @@ func schema_pkg_apis_management_v1_VirtualClusterTemplateList(ref common.Referen
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/management/v1.VirtualClusterTemplate"),
+										Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/management/v1.VirtualClusterTemplate"),
 									},
 								},
 							},
@@ -16894,7 +16894,7 @@ func schema_pkg_apis_management_v1_VirtualClusterTemplateList(ref common.Referen
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/v2/pkg/apis/management/v1.VirtualClusterTemplate", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
+			"github.com/loft-sh/api/v3/pkg/apis/management/v1.VirtualClusterTemplate", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
 	}
 }
 
@@ -16922,14 +16922,14 @@ func schema_pkg_apis_management_v1_VirtualClusterTemplateSpec(ref common.Referen
 					"owner": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Owner holds the owner of this object",
-							Ref:         ref("github.com/loft-sh/api/v2/pkg/apis/storage/v1.UserOrTeam"),
+							Ref:         ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.UserOrTeam"),
 						},
 					},
 					"template": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Template holds the virtual cluster template",
 							Default:     map[string]interface{}{},
-							Ref:         ref("github.com/loft-sh/api/v2/pkg/apis/storage/v1.VirtualClusterTemplateDefinition"),
+							Ref:         ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.VirtualClusterTemplateDefinition"),
 						},
 					},
 					"parameters": {
@@ -16940,7 +16940,7 @@ func schema_pkg_apis_management_v1_VirtualClusterTemplateSpec(ref common.Referen
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/storage/v1.AppParameter"),
+										Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.AppParameter"),
 									},
 								},
 							},
@@ -16954,7 +16954,7 @@ func schema_pkg_apis_management_v1_VirtualClusterTemplateSpec(ref common.Referen
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/storage/v1.VirtualClusterTemplateVersion"),
+										Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.VirtualClusterTemplateVersion"),
 									},
 								},
 							},
@@ -16968,7 +16968,7 @@ func schema_pkg_apis_management_v1_VirtualClusterTemplateSpec(ref common.Referen
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/storage/v1.Access"),
+										Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.Access"),
 									},
 								},
 							},
@@ -16977,14 +16977,14 @@ func schema_pkg_apis_management_v1_VirtualClusterTemplateSpec(ref common.Referen
 					"spaceTemplateRef": {
 						SchemaProps: spec.SchemaProps{
 							Description: "DEPRECATED: SpaceTemplate to use to create the virtual cluster space if it does not exist",
-							Ref:         ref("github.com/loft-sh/api/v2/pkg/apis/storage/v1.VirtualClusterTemplateSpaceTemplateRef"),
+							Ref:         ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.VirtualClusterTemplateSpaceTemplateRef"),
 						},
 					},
 				},
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/v2/pkg/apis/storage/v1.Access", "github.com/loft-sh/api/v2/pkg/apis/storage/v1.AppParameter", "github.com/loft-sh/api/v2/pkg/apis/storage/v1.UserOrTeam", "github.com/loft-sh/api/v2/pkg/apis/storage/v1.VirtualClusterTemplateDefinition", "github.com/loft-sh/api/v2/pkg/apis/storage/v1.VirtualClusterTemplateSpaceTemplateRef", "github.com/loft-sh/api/v2/pkg/apis/storage/v1.VirtualClusterTemplateVersion"},
+			"github.com/loft-sh/api/v3/pkg/apis/storage/v1.Access", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.AppParameter", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.UserOrTeam", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.VirtualClusterTemplateDefinition", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.VirtualClusterTemplateSpaceTemplateRef", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.VirtualClusterTemplateVersion"},
 	}
 }
 
@@ -17001,7 +17001,7 @@ func schema_pkg_apis_management_v1_VirtualClusterTemplateStatus(ref common.Refer
 							Items: &spec.SchemaOrArray{
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
-										Ref: ref("github.com/loft-sh/agentapi/v2/pkg/apis/loft/cluster/v1.EntityInfo"),
+										Ref: ref("github.com/loft-sh/agentapi/v3/pkg/apis/loft/cluster/v1.EntityInfo"),
 									},
 								},
 							},
@@ -17011,7 +17011,7 @@ func schema_pkg_apis_management_v1_VirtualClusterTemplateStatus(ref common.Refer
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/agentapi/v2/pkg/apis/loft/cluster/v1.EntityInfo"},
+			"github.com/loft-sh/agentapi/v3/pkg/apis/loft/cluster/v1.EntityInfo"},
 	}
 }
 
@@ -17126,20 +17126,20 @@ func schema_pkg_apis_storage_v1_AccessKey(ref common.ReferenceCallback) common.O
 					"spec": {
 						SchemaProps: spec.SchemaProps{
 							Default: map[string]interface{}{},
-							Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/storage/v1.AccessKeySpec"),
+							Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.AccessKeySpec"),
 						},
 					},
 					"status": {
 						SchemaProps: spec.SchemaProps{
 							Default: map[string]interface{}{},
-							Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/storage/v1.AccessKeyStatus"),
+							Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.AccessKeyStatus"),
 						},
 					},
 				},
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/v2/pkg/apis/storage/v1.AccessKeySpec", "github.com/loft-sh/api/v2/pkg/apis/storage/v1.AccessKeyStatus", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
+			"github.com/loft-sh/api/v3/pkg/apis/storage/v1.AccessKeySpec", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.AccessKeyStatus", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
 	}
 }
 
@@ -17248,7 +17248,7 @@ func schema_pkg_apis_storage_v1_AccessKeyList(ref common.ReferenceCallback) comm
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/storage/v1.AccessKey"),
+										Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.AccessKey"),
 									},
 								},
 							},
@@ -17259,7 +17259,7 @@ func schema_pkg_apis_storage_v1_AccessKeyList(ref common.ReferenceCallback) comm
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/v2/pkg/apis/storage/v1.AccessKey", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
+			"github.com/loft-sh/api/v3/pkg/apis/storage/v1.AccessKey", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
 	}
 }
 
@@ -17358,7 +17358,7 @@ func schema_pkg_apis_storage_v1_AccessKeyScope(ref common.ReferenceCallback) com
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/storage/v1.AccessKeyScopeProject"),
+										Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.AccessKeyScopeProject"),
 									},
 								},
 							},
@@ -17372,7 +17372,7 @@ func schema_pkg_apis_storage_v1_AccessKeyScope(ref common.ReferenceCallback) com
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/storage/v1.AccessKeyScopeSpace"),
+										Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.AccessKeyScopeSpace"),
 									},
 								},
 							},
@@ -17386,7 +17386,7 @@ func schema_pkg_apis_storage_v1_AccessKeyScope(ref common.ReferenceCallback) com
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/storage/v1.AccessKeyScopeVirtualCluster"),
+										Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.AccessKeyScopeVirtualCluster"),
 									},
 								},
 							},
@@ -17400,7 +17400,7 @@ func schema_pkg_apis_storage_v1_AccessKeyScope(ref common.ReferenceCallback) com
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/storage/v1.AccessKeyScopeRule"),
+										Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.AccessKeyScopeRule"),
 									},
 								},
 							},
@@ -17410,7 +17410,7 @@ func schema_pkg_apis_storage_v1_AccessKeyScope(ref common.ReferenceCallback) com
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/v2/pkg/apis/storage/v1.AccessKeyScopeProject", "github.com/loft-sh/api/v2/pkg/apis/storage/v1.AccessKeyScopeRule", "github.com/loft-sh/api/v2/pkg/apis/storage/v1.AccessKeyScopeSpace", "github.com/loft-sh/api/v2/pkg/apis/storage/v1.AccessKeyScopeVirtualCluster"},
+			"github.com/loft-sh/api/v3/pkg/apis/storage/v1.AccessKeyScopeProject", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.AccessKeyScopeRule", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.AccessKeyScopeSpace", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.AccessKeyScopeVirtualCluster"},
 	}
 }
 
@@ -17463,7 +17463,7 @@ func schema_pkg_apis_storage_v1_AccessKeyScopeRule(ref common.ReferenceCallback)
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/storage/v1.GroupResources"),
+										Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.GroupResources"),
 									},
 								},
 							},
@@ -17529,7 +17529,7 @@ func schema_pkg_apis_storage_v1_AccessKeyScopeRule(ref common.ReferenceCallback)
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/storage/v1.AccessKeyVirtualCluster"),
+										Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.AccessKeyVirtualCluster"),
 									},
 								},
 							},
@@ -17539,7 +17539,7 @@ func schema_pkg_apis_storage_v1_AccessKeyScopeRule(ref common.ReferenceCallback)
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/v2/pkg/apis/storage/v1.AccessKeyVirtualCluster", "github.com/loft-sh/api/v2/pkg/apis/storage/v1.GroupResources"},
+			"github.com/loft-sh/api/v3/pkg/apis/storage/v1.AccessKeyVirtualCluster", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.GroupResources"},
 	}
 }
 
@@ -17682,7 +17682,7 @@ func schema_pkg_apis_storage_v1_AccessKeySpec(ref common.ReferenceCallback) comm
 					"scope": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Scope defines the scope of the access key.",
-							Ref:         ref("github.com/loft-sh/api/v2/pkg/apis/storage/v1.AccessKeyScope"),
+							Ref:         ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.AccessKeyScope"),
 						},
 					},
 					"type": {
@@ -17695,7 +17695,7 @@ func schema_pkg_apis_storage_v1_AccessKeySpec(ref common.ReferenceCallback) comm
 					"identity": {
 						SchemaProps: spec.SchemaProps{
 							Description: "If available, contains information about the sso login data for this access key",
-							Ref:         ref("github.com/loft-sh/api/v2/pkg/apis/storage/v1.AccessKeyIdentity"),
+							Ref:         ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.AccessKeyIdentity"),
 						},
 					},
 					"identityRefresh": {
@@ -17707,7 +17707,7 @@ func schema_pkg_apis_storage_v1_AccessKeySpec(ref common.ReferenceCallback) comm
 					"oidcProvider": {
 						SchemaProps: spec.SchemaProps{
 							Description: "If the token is a refresh token, contains information about it",
-							Ref:         ref("github.com/loft-sh/api/v2/pkg/apis/storage/v1.AccessKeyOIDCProvider"),
+							Ref:         ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.AccessKeyOIDCProvider"),
 						},
 					},
 					"parent": {
@@ -17720,14 +17720,14 @@ func schema_pkg_apis_storage_v1_AccessKeySpec(ref common.ReferenceCallback) comm
 					"oidcLogin": {
 						SchemaProps: spec.SchemaProps{
 							Description: "DEPRECATED: Use identity instead If available, contains information about the oidc login data for this access key",
-							Ref:         ref("github.com/loft-sh/api/v2/pkg/apis/storage/v1.AccessKeyOIDC"),
+							Ref:         ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.AccessKeyOIDC"),
 						},
 					},
 				},
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/v2/pkg/apis/storage/v1.AccessKeyIdentity", "github.com/loft-sh/api/v2/pkg/apis/storage/v1.AccessKeyOIDC", "github.com/loft-sh/api/v2/pkg/apis/storage/v1.AccessKeyOIDCProvider", "github.com/loft-sh/api/v2/pkg/apis/storage/v1.AccessKeyScope", "k8s.io/apimachinery/pkg/apis/meta/v1.Time"},
+			"github.com/loft-sh/api/v3/pkg/apis/storage/v1.AccessKeyIdentity", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.AccessKeyOIDC", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.AccessKeyOIDCProvider", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.AccessKeyScope", "k8s.io/apimachinery/pkg/apis/meta/v1.Time"},
 	}
 }
 
@@ -17821,7 +17821,7 @@ func schema_pkg_apis_storage_v1_AccountClusterStatus(ref common.ReferenceCallbac
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/storage/v1.AccountClusterTemplateStatus"),
+										Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.AccountClusterTemplateStatus"),
 									},
 								},
 							},
@@ -17846,7 +17846,7 @@ func schema_pkg_apis_storage_v1_AccountClusterStatus(ref common.ReferenceCallbac
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/v2/pkg/apis/storage/v1.AccountClusterTemplateStatus"},
+			"github.com/loft-sh/api/v3/pkg/apis/storage/v1.AccountClusterTemplateStatus"},
 	}
 }
 
@@ -18027,20 +18027,20 @@ func schema_pkg_apis_storage_v1_App(ref common.ReferenceCallback) common.OpenAPI
 					"spec": {
 						SchemaProps: spec.SchemaProps{
 							Default: map[string]interface{}{},
-							Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/storage/v1.AppSpec"),
+							Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.AppSpec"),
 						},
 					},
 					"status": {
 						SchemaProps: spec.SchemaProps{
 							Default: map[string]interface{}{},
-							Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/storage/v1.AppStatus"),
+							Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.AppStatus"),
 						},
 					},
 				},
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/v2/pkg/apis/storage/v1.AppSpec", "github.com/loft-sh/api/v2/pkg/apis/storage/v1.AppStatus", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
+			"github.com/loft-sh/api/v3/pkg/apis/storage/v1.AppSpec", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.AppStatus", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
 	}
 }
 
@@ -18075,7 +18075,7 @@ func schema_pkg_apis_storage_v1_AppConfig(ref common.ReferenceCallback) common.O
 						SchemaProps: spec.SchemaProps{
 							Description: "Config is the helm config to use to deploy the helm release",
 							Default:     map[string]interface{}{},
-							Ref:         ref("github.com/loft-sh/agentapi/v2/pkg/apis/loft/cluster/v1.HelmReleaseConfig"),
+							Ref:         ref("github.com/loft-sh/agentapi/v3/pkg/apis/loft/cluster/v1.HelmReleaseConfig"),
 						},
 					},
 					"wait": {
@@ -18100,7 +18100,7 @@ func schema_pkg_apis_storage_v1_AppConfig(ref common.ReferenceCallback) common.O
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/storage/v1.AppParameter"),
+										Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.AppParameter"),
 									},
 								},
 							},
@@ -18109,14 +18109,14 @@ func schema_pkg_apis_storage_v1_AppConfig(ref common.ReferenceCallback) common.O
 					"streamContainer": {
 						SchemaProps: spec.SchemaProps{
 							Description: "DEPRECATED: Use config.bash instead StreamContainer can be used to stream a containers logs instead of the helm output.",
-							Ref:         ref("github.com/loft-sh/api/v2/pkg/apis/storage/v1.StreamContainer"),
+							Ref:         ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.StreamContainer"),
 						},
 					},
 				},
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/agentapi/v2/pkg/apis/loft/cluster/v1.HelmReleaseConfig", "github.com/loft-sh/api/v2/pkg/apis/storage/v1.AppParameter", "github.com/loft-sh/api/v2/pkg/apis/storage/v1.StreamContainer"},
+			"github.com/loft-sh/agentapi/v3/pkg/apis/loft/cluster/v1.HelmReleaseConfig", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.AppParameter", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.StreamContainer"},
 	}
 }
 
@@ -18154,7 +18154,7 @@ func schema_pkg_apis_storage_v1_AppList(ref common.ReferenceCallback) common.Ope
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/storage/v1.App"),
+										Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.App"),
 									},
 								},
 							},
@@ -18165,7 +18165,7 @@ func schema_pkg_apis_storage_v1_AppList(ref common.ReferenceCallback) common.Ope
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/v2/pkg/apis/storage/v1.App", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
+			"github.com/loft-sh/api/v3/pkg/apis/storage/v1.App", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
 	}
 }
 
@@ -18304,7 +18304,7 @@ func schema_pkg_apis_storage_v1_AppSpec(ref common.ReferenceCallback) common.Ope
 					"owner": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Owner holds the owner of this object",
-							Ref:         ref("github.com/loft-sh/api/v2/pkg/apis/storage/v1.UserOrTeam"),
+							Ref:         ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.UserOrTeam"),
 						},
 					},
 					"clusters": {
@@ -18362,7 +18362,7 @@ func schema_pkg_apis_storage_v1_AppSpec(ref common.ReferenceCallback) common.Ope
 						SchemaProps: spec.SchemaProps{
 							Description: "Config is the helm config to use to deploy the helm release",
 							Default:     map[string]interface{}{},
-							Ref:         ref("github.com/loft-sh/agentapi/v2/pkg/apis/loft/cluster/v1.HelmReleaseConfig"),
+							Ref:         ref("github.com/loft-sh/agentapi/v3/pkg/apis/loft/cluster/v1.HelmReleaseConfig"),
 						},
 					},
 					"wait": {
@@ -18387,7 +18387,7 @@ func schema_pkg_apis_storage_v1_AppSpec(ref common.ReferenceCallback) common.Ope
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/storage/v1.AppParameter"),
+										Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.AppParameter"),
 									},
 								},
 							},
@@ -18396,7 +18396,7 @@ func schema_pkg_apis_storage_v1_AppSpec(ref common.ReferenceCallback) common.Ope
 					"streamContainer": {
 						SchemaProps: spec.SchemaProps{
 							Description: "DEPRECATED: Use config.bash instead StreamContainer can be used to stream a containers logs instead of the helm output.",
-							Ref:         ref("github.com/loft-sh/api/v2/pkg/apis/storage/v1.StreamContainer"),
+							Ref:         ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.StreamContainer"),
 						},
 					},
 					"versions": {
@@ -18407,7 +18407,7 @@ func schema_pkg_apis_storage_v1_AppSpec(ref common.ReferenceCallback) common.Ope
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/storage/v1.AppVersion"),
+										Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.AppVersion"),
 									},
 								},
 							},
@@ -18421,7 +18421,7 @@ func schema_pkg_apis_storage_v1_AppSpec(ref common.ReferenceCallback) common.Ope
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/storage/v1.Access"),
+										Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.Access"),
 									},
 								},
 							},
@@ -18437,14 +18437,14 @@ func schema_pkg_apis_storage_v1_AppSpec(ref common.ReferenceCallback) common.Ope
 					"helm": {
 						SchemaProps: spec.SchemaProps{
 							Description: "DEPRECATED: Use config instead helm defines the configuration for a helm deployment",
-							Ref:         ref("github.com/loft-sh/api/v2/pkg/apis/storage/v1.HelmConfiguration"),
+							Ref:         ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.HelmConfiguration"),
 						},
 					},
 				},
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/agentapi/v2/pkg/apis/loft/cluster/v1.HelmReleaseConfig", "github.com/loft-sh/api/v2/pkg/apis/storage/v1.Access", "github.com/loft-sh/api/v2/pkg/apis/storage/v1.AppParameter", "github.com/loft-sh/api/v2/pkg/apis/storage/v1.AppVersion", "github.com/loft-sh/api/v2/pkg/apis/storage/v1.HelmConfiguration", "github.com/loft-sh/api/v2/pkg/apis/storage/v1.StreamContainer", "github.com/loft-sh/api/v2/pkg/apis/storage/v1.UserOrTeam"},
+			"github.com/loft-sh/agentapi/v3/pkg/apis/loft/cluster/v1.HelmReleaseConfig", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.Access", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.AppParameter", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.AppVersion", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.HelmConfiguration", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.StreamContainer", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.UserOrTeam"},
 	}
 }
 
@@ -18483,14 +18483,14 @@ func schema_pkg_apis_storage_v1_AppTask(ref common.ReferenceCallback) common.Ope
 						SchemaProps: spec.SchemaProps{
 							Description: "AppReference is the reference to the app to deploy",
 							Default:     map[string]interface{}{},
-							Ref:         ref("github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.AppReference"),
+							Ref:         ref("github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.AppReference"),
 						},
 					},
 				},
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.AppReference"},
+			"github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.AppReference"},
 	}
 }
 
@@ -18525,7 +18525,7 @@ func schema_pkg_apis_storage_v1_AppVersion(ref common.ReferenceCallback) common.
 						SchemaProps: spec.SchemaProps{
 							Description: "Config is the helm config to use to deploy the helm release",
 							Default:     map[string]interface{}{},
-							Ref:         ref("github.com/loft-sh/agentapi/v2/pkg/apis/loft/cluster/v1.HelmReleaseConfig"),
+							Ref:         ref("github.com/loft-sh/agentapi/v3/pkg/apis/loft/cluster/v1.HelmReleaseConfig"),
 						},
 					},
 					"wait": {
@@ -18550,7 +18550,7 @@ func schema_pkg_apis_storage_v1_AppVersion(ref common.ReferenceCallback) common.
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/storage/v1.AppParameter"),
+										Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.AppParameter"),
 									},
 								},
 							},
@@ -18559,7 +18559,7 @@ func schema_pkg_apis_storage_v1_AppVersion(ref common.ReferenceCallback) common.
 					"streamContainer": {
 						SchemaProps: spec.SchemaProps{
 							Description: "DEPRECATED: Use config.bash instead StreamContainer can be used to stream a containers logs instead of the helm output.",
-							Ref:         ref("github.com/loft-sh/api/v2/pkg/apis/storage/v1.StreamContainer"),
+							Ref:         ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.StreamContainer"),
 						},
 					},
 					"version": {
@@ -18573,7 +18573,7 @@ func schema_pkg_apis_storage_v1_AppVersion(ref common.ReferenceCallback) common.
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/agentapi/v2/pkg/apis/loft/cluster/v1.HelmReleaseConfig", "github.com/loft-sh/api/v2/pkg/apis/storage/v1.AppParameter", "github.com/loft-sh/api/v2/pkg/apis/storage/v1.StreamContainer"},
+			"github.com/loft-sh/agentapi/v3/pkg/apis/loft/cluster/v1.HelmReleaseConfig", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.AppParameter", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.StreamContainer"},
 	}
 }
 
@@ -18614,20 +18614,20 @@ func schema_pkg_apis_storage_v1_ArgoIntegrationSpec(ref common.ReferenceCallback
 					"sso": {
 						SchemaProps: spec.SchemaProps{
 							Description: "SSO defines single-sign-on related values for the ArgoCD Integration. Enabling SSO will allow users to authenticate to ArgoCD via Loft.",
-							Ref:         ref("github.com/loft-sh/api/v2/pkg/apis/storage/v1.ArgoSSOSpec"),
+							Ref:         ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.ArgoSSOSpec"),
 						},
 					},
 					"project": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Project defines project related values for the ArgoCD Integration. Enabling Project integration will cause Loft to generate and manage an ArgoCD appProject that corresponds to the Loft Project.",
-							Ref:         ref("github.com/loft-sh/api/v2/pkg/apis/storage/v1.ArgoProjectSpec"),
+							Ref:         ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.ArgoProjectSpec"),
 						},
 					},
 				},
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/v2/pkg/apis/storage/v1.ArgoProjectSpec", "github.com/loft-sh/api/v2/pkg/apis/storage/v1.ArgoSSOSpec"},
+			"github.com/loft-sh/api/v3/pkg/apis/storage/v1.ArgoProjectSpec", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.ArgoSSOSpec"},
 	}
 }
 
@@ -18692,7 +18692,7 @@ func schema_pkg_apis_storage_v1_ArgoProjectRole(ref common.ReferenceCallback) co
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/storage/v1.ArgoProjectPolicyRule"),
+										Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.ArgoProjectPolicyRule"),
 									},
 								},
 							},
@@ -18717,7 +18717,7 @@ func schema_pkg_apis_storage_v1_ArgoProjectRole(ref common.ReferenceCallback) co
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/v2/pkg/apis/storage/v1.ArgoProjectPolicyRule"},
+			"github.com/loft-sh/api/v3/pkg/apis/storage/v1.ArgoProjectPolicyRule"},
 	}
 }
 
@@ -18738,7 +18738,7 @@ func schema_pkg_apis_storage_v1_ArgoProjectSpec(ref common.ReferenceCallback) co
 						SchemaProps: spec.SchemaProps{
 							Description: "Metadata defines additional metadata to attach to the loft created project in ArgoCD.",
 							Default:     map[string]interface{}{},
-							Ref:         ref("github.com/loft-sh/api/v2/pkg/apis/storage/v1.ArgoProjectSpecMetadata"),
+							Ref:         ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.ArgoProjectSpecMetadata"),
 						},
 					},
 					"sourceRepos": {
@@ -18764,7 +18764,7 @@ func schema_pkg_apis_storage_v1_ArgoProjectSpec(ref common.ReferenceCallback) co
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/storage/v1.ArgoProjectRole"),
+										Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.ArgoProjectRole"),
 									},
 								},
 							},
@@ -18774,7 +18774,7 @@ func schema_pkg_apis_storage_v1_ArgoProjectSpec(ref common.ReferenceCallback) co
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/v2/pkg/apis/storage/v1.ArgoProjectRole", "github.com/loft-sh/api/v2/pkg/apis/storage/v1.ArgoProjectSpecMetadata"},
+			"github.com/loft-sh/api/v3/pkg/apis/storage/v1.ArgoProjectRole", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.ArgoProjectSpecMetadata"},
 	}
 }
 
@@ -18948,20 +18948,20 @@ func schema_pkg_apis_storage_v1_Cluster(ref common.ReferenceCallback) common.Ope
 					"spec": {
 						SchemaProps: spec.SchemaProps{
 							Default: map[string]interface{}{},
-							Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/storage/v1.ClusterSpec"),
+							Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.ClusterSpec"),
 						},
 					},
 					"status": {
 						SchemaProps: spec.SchemaProps{
 							Default: map[string]interface{}{},
-							Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/storage/v1.ClusterStatus"),
+							Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.ClusterStatus"),
 						},
 					},
 				},
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/v2/pkg/apis/storage/v1.ClusterSpec", "github.com/loft-sh/api/v2/pkg/apis/storage/v1.ClusterStatus", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
+			"github.com/loft-sh/api/v3/pkg/apis/storage/v1.ClusterSpec", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.ClusterStatus", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
 	}
 }
 
@@ -18995,20 +18995,20 @@ func schema_pkg_apis_storage_v1_ClusterAccess(ref common.ReferenceCallback) comm
 					"spec": {
 						SchemaProps: spec.SchemaProps{
 							Default: map[string]interface{}{},
-							Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/storage/v1.ClusterAccessSpec"),
+							Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.ClusterAccessSpec"),
 						},
 					},
 					"status": {
 						SchemaProps: spec.SchemaProps{
 							Default: map[string]interface{}{},
-							Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/storage/v1.ClusterAccessStatus"),
+							Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.ClusterAccessStatus"),
 						},
 					},
 				},
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/v2/pkg/apis/storage/v1.ClusterAccessSpec", "github.com/loft-sh/api/v2/pkg/apis/storage/v1.ClusterAccessStatus", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
+			"github.com/loft-sh/api/v3/pkg/apis/storage/v1.ClusterAccessSpec", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.ClusterAccessStatus", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
 	}
 }
 
@@ -19046,7 +19046,7 @@ func schema_pkg_apis_storage_v1_ClusterAccessList(ref common.ReferenceCallback) 
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/storage/v1.ClusterAccess"),
+										Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.ClusterAccess"),
 									},
 								},
 							},
@@ -19057,7 +19057,7 @@ func schema_pkg_apis_storage_v1_ClusterAccessList(ref common.ReferenceCallback) 
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/v2/pkg/apis/storage/v1.ClusterAccess", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
+			"github.com/loft-sh/api/v3/pkg/apis/storage/v1.ClusterAccess", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
 	}
 }
 
@@ -19084,7 +19084,7 @@ func schema_pkg_apis_storage_v1_ClusterAccessSpec(ref common.ReferenceCallback) 
 					"owner": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Owner holds the owner of this object",
-							Ref:         ref("github.com/loft-sh/api/v2/pkg/apis/storage/v1.UserOrTeam"),
+							Ref:         ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.UserOrTeam"),
 						},
 					},
 					"clusters": {
@@ -19110,7 +19110,7 @@ func schema_pkg_apis_storage_v1_ClusterAccessSpec(ref common.ReferenceCallback) 
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/storage/v1.Access"),
+										Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.Access"),
 									},
 								},
 							},
@@ -19120,14 +19120,14 @@ func schema_pkg_apis_storage_v1_ClusterAccessSpec(ref common.ReferenceCallback) 
 						SchemaProps: spec.SchemaProps{
 							Description: "LocalClusterAccessTemplate holds the cluster access template",
 							Default:     map[string]interface{}{},
-							Ref:         ref("github.com/loft-sh/api/v2/pkg/apis/storage/v1.LocalClusterAccessTemplate"),
+							Ref:         ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.LocalClusterAccessTemplate"),
 						},
 					},
 				},
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/v2/pkg/apis/storage/v1.Access", "github.com/loft-sh/api/v2/pkg/apis/storage/v1.LocalClusterAccessTemplate", "github.com/loft-sh/api/v2/pkg/apis/storage/v1.UserOrTeam"},
+			"github.com/loft-sh/api/v3/pkg/apis/storage/v1.Access", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.LocalClusterAccessTemplate", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.UserOrTeam"},
 	}
 }
 
@@ -19216,7 +19216,7 @@ func schema_pkg_apis_storage_v1_ClusterList(ref common.ReferenceCallback) common
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/storage/v1.Cluster"),
+										Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.Cluster"),
 									},
 								},
 							},
@@ -19227,7 +19227,7 @@ func schema_pkg_apis_storage_v1_ClusterList(ref common.ReferenceCallback) common
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/v2/pkg/apis/storage/v1.Cluster", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
+			"github.com/loft-sh/api/v3/pkg/apis/storage/v1.Cluster", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
 	}
 }
 
@@ -19287,20 +19287,20 @@ func schema_pkg_apis_storage_v1_ClusterRoleTemplate(ref common.ReferenceCallback
 					"spec": {
 						SchemaProps: spec.SchemaProps{
 							Default: map[string]interface{}{},
-							Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/storage/v1.ClusterRoleTemplateSpec"),
+							Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.ClusterRoleTemplateSpec"),
 						},
 					},
 					"status": {
 						SchemaProps: spec.SchemaProps{
 							Default: map[string]interface{}{},
-							Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/storage/v1.ClusterRoleTemplateStatus"),
+							Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.ClusterRoleTemplateStatus"),
 						},
 					},
 				},
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/v2/pkg/apis/storage/v1.ClusterRoleTemplateSpec", "github.com/loft-sh/api/v2/pkg/apis/storage/v1.ClusterRoleTemplateStatus", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
+			"github.com/loft-sh/api/v3/pkg/apis/storage/v1.ClusterRoleTemplateSpec", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.ClusterRoleTemplateStatus", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
 	}
 }
 
@@ -19338,7 +19338,7 @@ func schema_pkg_apis_storage_v1_ClusterRoleTemplateList(ref common.ReferenceCall
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/storage/v1.ClusterRoleTemplate"),
+										Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.ClusterRoleTemplate"),
 									},
 								},
 							},
@@ -19349,7 +19349,7 @@ func schema_pkg_apis_storage_v1_ClusterRoleTemplateList(ref common.ReferenceCall
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/v2/pkg/apis/storage/v1.ClusterRoleTemplate", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
+			"github.com/loft-sh/api/v3/pkg/apis/storage/v1.ClusterRoleTemplate", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
 	}
 }
 
@@ -19376,7 +19376,7 @@ func schema_pkg_apis_storage_v1_ClusterRoleTemplateSpec(ref common.ReferenceCall
 					"owner": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Owner holds the owner of this object",
-							Ref:         ref("github.com/loft-sh/api/v2/pkg/apis/storage/v1.UserOrTeam"),
+							Ref:         ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.UserOrTeam"),
 						},
 					},
 					"clusters": {
@@ -19409,7 +19409,7 @@ func schema_pkg_apis_storage_v1_ClusterRoleTemplateSpec(ref common.ReferenceCall
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/storage/v1.Access"),
+										Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.Access"),
 									},
 								},
 							},
@@ -19419,20 +19419,20 @@ func schema_pkg_apis_storage_v1_ClusterRoleTemplateSpec(ref common.ReferenceCall
 						SchemaProps: spec.SchemaProps{
 							Description: "ClusterRoleTemplate holds the cluster role template",
 							Default:     map[string]interface{}{},
-							Ref:         ref("github.com/loft-sh/api/v2/pkg/apis/storage/v1.ClusterRoleTemplateTemplate"),
+							Ref:         ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.ClusterRoleTemplateTemplate"),
 						},
 					},
 					"localClusterRoleTemplate": {
 						SchemaProps: spec.SchemaProps{
 							Description: "DEPRECATED: Use ClusterRoleTemplate instead LocalClusterRoleTemplate holds the cluster role template",
-							Ref:         ref("github.com/loft-sh/api/v2/pkg/apis/storage/v1.LocalClusterRoleTemplate"),
+							Ref:         ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.LocalClusterRoleTemplate"),
 						},
 					},
 				},
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/v2/pkg/apis/storage/v1.Access", "github.com/loft-sh/api/v2/pkg/apis/storage/v1.ClusterRoleTemplateTemplate", "github.com/loft-sh/api/v2/pkg/apis/storage/v1.LocalClusterRoleTemplate", "github.com/loft-sh/api/v2/pkg/apis/storage/v1.UserOrTeam"},
+			"github.com/loft-sh/api/v3/pkg/apis/storage/v1.Access", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.ClusterRoleTemplateTemplate", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.LocalClusterRoleTemplate", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.UserOrTeam"},
 	}
 }
 
@@ -19512,14 +19512,14 @@ func schema_pkg_apis_storage_v1_ClusterSpec(ref common.ReferenceCallback) common
 					"owner": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Owner holds the owner of this object",
-							Ref:         ref("github.com/loft-sh/api/v2/pkg/apis/storage/v1.UserOrTeam"),
+							Ref:         ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.UserOrTeam"),
 						},
 					},
 					"config": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Holds a reference to a secret that holds the kube config to access this cluster",
 							Default:     map[string]interface{}{},
-							Ref:         ref("github.com/loft-sh/api/v2/pkg/apis/storage/v1.SecretRef"),
+							Ref:         ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.SecretRef"),
 						},
 					},
 					"local": {
@@ -19544,7 +19544,7 @@ func schema_pkg_apis_storage_v1_ClusterSpec(ref common.ReferenceCallback) common
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/storage/v1.Access"),
+										Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.Access"),
 									},
 								},
 							},
@@ -19554,7 +19554,7 @@ func schema_pkg_apis_storage_v1_ClusterSpec(ref common.ReferenceCallback) common
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/v2/pkg/apis/storage/v1.Access", "github.com/loft-sh/api/v2/pkg/apis/storage/v1.SecretRef", "github.com/loft-sh/api/v2/pkg/apis/storage/v1.UserOrTeam"},
+			"github.com/loft-sh/api/v3/pkg/apis/storage/v1.Access", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.SecretRef", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.UserOrTeam"},
 	}
 }
 
@@ -19685,7 +19685,7 @@ func schema_pkg_apis_storage_v1_HelmChart(ref common.ReferenceCallback) common.O
 						SchemaProps: spec.SchemaProps{
 							Description: "Metadata provides information about a chart",
 							Default:     map[string]interface{}{},
-							Ref:         ref("github.com/loft-sh/agentapi/v2/pkg/apis/loft/cluster/v1.Metadata"),
+							Ref:         ref("github.com/loft-sh/agentapi/v3/pkg/apis/loft/cluster/v1.Metadata"),
 						},
 					},
 					"versions": {
@@ -19707,14 +19707,14 @@ func schema_pkg_apis_storage_v1_HelmChart(ref common.ReferenceCallback) common.O
 						SchemaProps: spec.SchemaProps{
 							Description: "Repository is the repository name of this chart",
 							Default:     map[string]interface{}{},
-							Ref:         ref("github.com/loft-sh/api/v2/pkg/apis/storage/v1.HelmChartRepository"),
+							Ref:         ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.HelmChartRepository"),
 						},
 					},
 				},
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/agentapi/v2/pkg/apis/loft/cluster/v1.Metadata", "github.com/loft-sh/api/v2/pkg/apis/storage/v1.HelmChartRepository"},
+			"github.com/loft-sh/agentapi/v3/pkg/apis/loft/cluster/v1.Metadata", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.HelmChartRepository"},
 	}
 }
 
@@ -19839,7 +19839,7 @@ func schema_pkg_apis_storage_v1_HelmTask(ref common.ReferenceCallback) common.Op
 						SchemaProps: spec.SchemaProps{
 							Description: "Release holds the release information",
 							Default:     map[string]interface{}{},
-							Ref:         ref("github.com/loft-sh/api/v2/pkg/apis/storage/v1.HelmTaskRelease"),
+							Ref:         ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.HelmTaskRelease"),
 						},
 					},
 					"type": {
@@ -19860,7 +19860,7 @@ func schema_pkg_apis_storage_v1_HelmTask(ref common.ReferenceCallback) common.Op
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/v2/pkg/apis/storage/v1.HelmTaskRelease"},
+			"github.com/loft-sh/api/v3/pkg/apis/storage/v1.HelmTaskRelease"},
 	}
 }
 
@@ -19888,7 +19888,7 @@ func schema_pkg_apis_storage_v1_HelmTaskRelease(ref common.ReferenceCallback) co
 						SchemaProps: spec.SchemaProps{
 							Description: "Config is the helm config to use to deploy the release",
 							Default:     map[string]interface{}{},
-							Ref:         ref("github.com/loft-sh/agentapi/v2/pkg/apis/loft/cluster/v1.HelmReleaseConfig"),
+							Ref:         ref("github.com/loft-sh/agentapi/v3/pkg/apis/loft/cluster/v1.HelmReleaseConfig"),
 						},
 					},
 					"labels": {
@@ -19911,7 +19911,7 @@ func schema_pkg_apis_storage_v1_HelmTaskRelease(ref common.ReferenceCallback) co
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/agentapi/v2/pkg/apis/loft/cluster/v1.HelmReleaseConfig"},
+			"github.com/loft-sh/agentapi/v3/pkg/apis/loft/cluster/v1.HelmReleaseConfig"},
 	}
 }
 
@@ -20038,14 +20038,14 @@ func schema_pkg_apis_storage_v1_LocalClusterAccessTemplate(ref common.ReferenceC
 						SchemaProps: spec.SchemaProps{
 							Description: "LocalClusterAccessSpec holds the spec of the cluster access in the cluster",
 							Default:     map[string]interface{}{},
-							Ref:         ref("github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.LocalClusterAccessSpec"),
+							Ref:         ref("github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.LocalClusterAccessSpec"),
 						},
 					},
 				},
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.LocalClusterAccessSpec", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
+			"github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.LocalClusterAccessSpec", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
 	}
 }
 
@@ -20066,14 +20066,14 @@ func schema_pkg_apis_storage_v1_LocalClusterRoleTemplate(ref common.ReferenceCal
 						SchemaProps: spec.SchemaProps{
 							Description: "LocalClusterRoleTemplateSpec holds the spec of the cluster role template in the cluster",
 							Default:     map[string]interface{}{},
-							Ref:         ref("github.com/loft-sh/api/v2/pkg/apis/storage/v1.LocalClusterRoleTemplateSpec"),
+							Ref:         ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.LocalClusterRoleTemplateSpec"),
 						},
 					},
 				},
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/v2/pkg/apis/storage/v1.LocalClusterRoleTemplateSpec", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
+			"github.com/loft-sh/api/v3/pkg/apis/storage/v1.LocalClusterRoleTemplateSpec", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
 	}
 }
 
@@ -20101,14 +20101,14 @@ func schema_pkg_apis_storage_v1_LocalClusterRoleTemplateSpec(ref common.Referenc
 						SchemaProps: spec.SchemaProps{
 							Description: "ClusterRoleTemplate holds the cluster role template",
 							Default:     map[string]interface{}{},
-							Ref:         ref("github.com/loft-sh/api/v2/pkg/apis/storage/v1.ClusterRoleTemplateTemplate"),
+							Ref:         ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.ClusterRoleTemplateTemplate"),
 						},
 					},
 				},
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/v2/pkg/apis/storage/v1.ClusterRoleTemplateTemplate"},
+			"github.com/loft-sh/api/v3/pkg/apis/storage/v1.ClusterRoleTemplateTemplate"},
 	}
 }
 
@@ -20136,7 +20136,7 @@ func schema_pkg_apis_storage_v1_LocalSpaceConstraintSpec(ref common.ReferenceCal
 						SchemaProps: spec.SchemaProps{
 							Description: "SpaceTemplate holds the space configuration",
 							Default:     map[string]interface{}{},
-							Ref:         ref("github.com/loft-sh/api/v2/pkg/apis/storage/v1.ConstraintSpaceTemplate"),
+							Ref:         ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.ConstraintSpaceTemplate"),
 						},
 					},
 					"sync": {
@@ -20150,7 +20150,7 @@ func schema_pkg_apis_storage_v1_LocalSpaceConstraintSpec(ref common.ReferenceCal
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/v2/pkg/apis/storage/v1.ConstraintSpaceTemplate"},
+			"github.com/loft-sh/api/v3/pkg/apis/storage/v1.ConstraintSpaceTemplate"},
 	}
 }
 
@@ -20171,14 +20171,14 @@ func schema_pkg_apis_storage_v1_LocalSpaceConstraintTemplate(ref common.Referenc
 						SchemaProps: spec.SchemaProps{
 							Description: "LocalSpaceConstraintSpec holds the spec of the space constraint in the cluster",
 							Default:     map[string]interface{}{},
-							Ref:         ref("github.com/loft-sh/api/v2/pkg/apis/storage/v1.LocalSpaceConstraintSpec"),
+							Ref:         ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.LocalSpaceConstraintSpec"),
 						},
 					},
 				},
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/v2/pkg/apis/storage/v1.LocalSpaceConstraintSpec", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
+			"github.com/loft-sh/api/v3/pkg/apis/storage/v1.LocalSpaceConstraintSpec", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
 	}
 }
 
@@ -20278,20 +20278,20 @@ func schema_pkg_apis_storage_v1_Project(ref common.ReferenceCallback) common.Ope
 					"spec": {
 						SchemaProps: spec.SchemaProps{
 							Default: map[string]interface{}{},
-							Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/storage/v1.ProjectSpec"),
+							Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.ProjectSpec"),
 						},
 					},
 					"status": {
 						SchemaProps: spec.SchemaProps{
 							Default: map[string]interface{}{},
-							Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/storage/v1.ProjectStatus"),
+							Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.ProjectStatus"),
 						},
 					},
 				},
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/v2/pkg/apis/storage/v1.ProjectSpec", "github.com/loft-sh/api/v2/pkg/apis/storage/v1.ProjectStatus", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
+			"github.com/loft-sh/api/v3/pkg/apis/storage/v1.ProjectSpec", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.ProjectStatus", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
 	}
 }
 
@@ -20329,7 +20329,7 @@ func schema_pkg_apis_storage_v1_ProjectList(ref common.ReferenceCallback) common
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/storage/v1.Project"),
+										Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.Project"),
 									},
 								},
 							},
@@ -20340,7 +20340,7 @@ func schema_pkg_apis_storage_v1_ProjectList(ref common.ReferenceCallback) common
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/v2/pkg/apis/storage/v1.Project", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
+			"github.com/loft-sh/api/v3/pkg/apis/storage/v1.Project", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
 	}
 }
 
@@ -20367,14 +20367,14 @@ func schema_pkg_apis_storage_v1_ProjectSpec(ref common.ReferenceCallback) common
 					"owner": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Owner holds the owner of this object",
-							Ref:         ref("github.com/loft-sh/api/v2/pkg/apis/storage/v1.UserOrTeam"),
+							Ref:         ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.UserOrTeam"),
 						},
 					},
 					"quotas": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Quotas define the quotas inside the project",
 							Default:     map[string]interface{}{},
-							Ref:         ref("github.com/loft-sh/api/v2/pkg/apis/storage/v1.Quotas"),
+							Ref:         ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.Quotas"),
 						},
 					},
 					"allowedClusters": {
@@ -20385,7 +20385,7 @@ func schema_pkg_apis_storage_v1_ProjectSpec(ref common.ReferenceCallback) common
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/storage/v1.AllowedCluster"),
+										Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.AllowedCluster"),
 									},
 								},
 							},
@@ -20399,7 +20399,7 @@ func schema_pkg_apis_storage_v1_ProjectSpec(ref common.ReferenceCallback) common
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/storage/v1.AllowedTemplate"),
+										Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.AllowedTemplate"),
 									},
 								},
 							},
@@ -20413,7 +20413,7 @@ func schema_pkg_apis_storage_v1_ProjectSpec(ref common.ReferenceCallback) common
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/storage/v1.Member"),
+										Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.Member"),
 									},
 								},
 							},
@@ -20427,7 +20427,7 @@ func schema_pkg_apis_storage_v1_ProjectSpec(ref common.ReferenceCallback) common
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/storage/v1.Access"),
+										Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.Access"),
 									},
 								},
 							},
@@ -20436,20 +20436,20 @@ func schema_pkg_apis_storage_v1_ProjectSpec(ref common.ReferenceCallback) common
 					"namespacePattern": {
 						SchemaProps: spec.SchemaProps{
 							Description: "NamespacePattern specifies template patterns to use for creating each space or virtual cluster's namespace",
-							Ref:         ref("github.com/loft-sh/api/v2/pkg/apis/storage/v1.NamespacePattern"),
+							Ref:         ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.NamespacePattern"),
 						},
 					},
 					"argoCD": {
 						SchemaProps: spec.SchemaProps{
 							Description: "ArgoIntegration holds information about ArgoCD Integration",
-							Ref:         ref("github.com/loft-sh/api/v2/pkg/apis/storage/v1.ArgoIntegrationSpec"),
+							Ref:         ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.ArgoIntegrationSpec"),
 						},
 					},
 				},
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/v2/pkg/apis/storage/v1.Access", "github.com/loft-sh/api/v2/pkg/apis/storage/v1.AllowedCluster", "github.com/loft-sh/api/v2/pkg/apis/storage/v1.AllowedTemplate", "github.com/loft-sh/api/v2/pkg/apis/storage/v1.ArgoIntegrationSpec", "github.com/loft-sh/api/v2/pkg/apis/storage/v1.Member", "github.com/loft-sh/api/v2/pkg/apis/storage/v1.NamespacePattern", "github.com/loft-sh/api/v2/pkg/apis/storage/v1.Quotas", "github.com/loft-sh/api/v2/pkg/apis/storage/v1.UserOrTeam"},
+			"github.com/loft-sh/api/v3/pkg/apis/storage/v1.Access", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.AllowedCluster", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.AllowedTemplate", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.ArgoIntegrationSpec", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.Member", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.NamespacePattern", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.Quotas", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.UserOrTeam"},
 	}
 }
 
@@ -20462,7 +20462,7 @@ func schema_pkg_apis_storage_v1_ProjectStatus(ref common.ReferenceCallback) comm
 					"quotas": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Quotas holds the quota status",
-							Ref:         ref("github.com/loft-sh/api/v2/pkg/apis/storage/v1.QuotaStatus"),
+							Ref:         ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.QuotaStatus"),
 						},
 					},
 					"conditions": {
@@ -20473,7 +20473,7 @@ func schema_pkg_apis_storage_v1_ProjectStatus(ref common.ReferenceCallback) comm
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.Condition"),
+										Ref:     ref("github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.Condition"),
 									},
 								},
 							},
@@ -20483,7 +20483,7 @@ func schema_pkg_apis_storage_v1_ProjectStatus(ref common.ReferenceCallback) comm
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.Condition", "github.com/loft-sh/api/v2/pkg/apis/storage/v1.QuotaStatus"},
+			"github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.Condition", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.QuotaStatus"},
 	}
 }
 
@@ -20496,20 +20496,20 @@ func schema_pkg_apis_storage_v1_QuotaStatus(ref common.ReferenceCallback) common
 					"project": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Project is the quota status for the whole project",
-							Ref:         ref("github.com/loft-sh/api/v2/pkg/apis/storage/v1.QuotaStatusProject"),
+							Ref:         ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.QuotaStatusProject"),
 						},
 					},
 					"user": {
 						SchemaProps: spec.SchemaProps{
 							Description: "User is the quota status for each user / team",
-							Ref:         ref("github.com/loft-sh/api/v2/pkg/apis/storage/v1.QuotaStatusUser"),
+							Ref:         ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.QuotaStatusUser"),
 						},
 					},
 				},
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/v2/pkg/apis/storage/v1.QuotaStatusProject", "github.com/loft-sh/api/v2/pkg/apis/storage/v1.QuotaStatusUser"},
+			"github.com/loft-sh/api/v3/pkg/apis/storage/v1.QuotaStatusProject", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.QuotaStatusUser"},
 	}
 }
 
@@ -20583,14 +20583,14 @@ func schema_pkg_apis_storage_v1_QuotaStatusUser(ref common.ReferenceCallback) co
 						SchemaProps: spec.SchemaProps{
 							Description: "Used is the used amount per user / team",
 							Default:     map[string]interface{}{},
-							Ref:         ref("github.com/loft-sh/api/v2/pkg/apis/storage/v1.QuotaStatusUserUsed"),
+							Ref:         ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.QuotaStatusUserUsed"),
 						},
 					},
 				},
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/v2/pkg/apis/storage/v1.QuotaStatusUserUsed"},
+			"github.com/loft-sh/api/v3/pkg/apis/storage/v1.QuotaStatusUserUsed"},
 	}
 }
 
@@ -20759,20 +20759,20 @@ func schema_pkg_apis_storage_v1_SharedSecret(ref common.ReferenceCallback) commo
 					"spec": {
 						SchemaProps: spec.SchemaProps{
 							Default: map[string]interface{}{},
-							Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/storage/v1.SharedSecretSpec"),
+							Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.SharedSecretSpec"),
 						},
 					},
 					"status": {
 						SchemaProps: spec.SchemaProps{
 							Default: map[string]interface{}{},
-							Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/storage/v1.SharedSecretStatus"),
+							Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.SharedSecretStatus"),
 						},
 					},
 				},
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/v2/pkg/apis/storage/v1.SharedSecretSpec", "github.com/loft-sh/api/v2/pkg/apis/storage/v1.SharedSecretStatus", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
+			"github.com/loft-sh/api/v3/pkg/apis/storage/v1.SharedSecretSpec", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.SharedSecretStatus", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
 	}
 }
 
@@ -20810,7 +20810,7 @@ func schema_pkg_apis_storage_v1_SharedSecretList(ref common.ReferenceCallback) c
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/storage/v1.SharedSecret"),
+										Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.SharedSecret"),
 									},
 								},
 							},
@@ -20821,7 +20821,7 @@ func schema_pkg_apis_storage_v1_SharedSecretList(ref common.ReferenceCallback) c
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/v2/pkg/apis/storage/v1.SharedSecret", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
+			"github.com/loft-sh/api/v3/pkg/apis/storage/v1.SharedSecret", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
 	}
 }
 
@@ -20849,7 +20849,7 @@ func schema_pkg_apis_storage_v1_SharedSecretSpec(ref common.ReferenceCallback) c
 					"owner": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Owner holds the owner of this object",
-							Ref:         ref("github.com/loft-sh/api/v2/pkg/apis/storage/v1.UserOrTeam"),
+							Ref:         ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.UserOrTeam"),
 						},
 					},
 					"data": {
@@ -20875,7 +20875,7 @@ func schema_pkg_apis_storage_v1_SharedSecretSpec(ref common.ReferenceCallback) c
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/storage/v1.Access"),
+										Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.Access"),
 									},
 								},
 							},
@@ -20885,7 +20885,7 @@ func schema_pkg_apis_storage_v1_SharedSecretSpec(ref common.ReferenceCallback) c
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/v2/pkg/apis/storage/v1.Access", "github.com/loft-sh/api/v2/pkg/apis/storage/v1.UserOrTeam"},
+			"github.com/loft-sh/api/v3/pkg/apis/storage/v1.Access", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.UserOrTeam"},
 	}
 }
 
@@ -20930,20 +20930,20 @@ func schema_pkg_apis_storage_v1_SpaceConstraint(ref common.ReferenceCallback) co
 					"spec": {
 						SchemaProps: spec.SchemaProps{
 							Default: map[string]interface{}{},
-							Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/storage/v1.SpaceConstraintSpec"),
+							Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.SpaceConstraintSpec"),
 						},
 					},
 					"status": {
 						SchemaProps: spec.SchemaProps{
 							Default: map[string]interface{}{},
-							Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/storage/v1.SpaceConstraintStatus"),
+							Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.SpaceConstraintStatus"),
 						},
 					},
 				},
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/v2/pkg/apis/storage/v1.SpaceConstraintSpec", "github.com/loft-sh/api/v2/pkg/apis/storage/v1.SpaceConstraintStatus", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
+			"github.com/loft-sh/api/v3/pkg/apis/storage/v1.SpaceConstraintSpec", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.SpaceConstraintStatus", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
 	}
 }
 
@@ -20981,7 +20981,7 @@ func schema_pkg_apis_storage_v1_SpaceConstraintList(ref common.ReferenceCallback
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/storage/v1.SpaceConstraint"),
+										Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.SpaceConstraint"),
 									},
 								},
 							},
@@ -20992,7 +20992,7 @@ func schema_pkg_apis_storage_v1_SpaceConstraintList(ref common.ReferenceCallback
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/v2/pkg/apis/storage/v1.SpaceConstraint", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
+			"github.com/loft-sh/api/v3/pkg/apis/storage/v1.SpaceConstraint", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
 	}
 }
 
@@ -21019,7 +21019,7 @@ func schema_pkg_apis_storage_v1_SpaceConstraintSpec(ref common.ReferenceCallback
 					"owner": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Owner holds the owner of this object",
-							Ref:         ref("github.com/loft-sh/api/v2/pkg/apis/storage/v1.UserOrTeam"),
+							Ref:         ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.UserOrTeam"),
 						},
 					},
 					"clusters": {
@@ -21045,7 +21045,7 @@ func schema_pkg_apis_storage_v1_SpaceConstraintSpec(ref common.ReferenceCallback
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/storage/v1.Access"),
+										Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.Access"),
 									},
 								},
 							},
@@ -21055,14 +21055,14 @@ func schema_pkg_apis_storage_v1_SpaceConstraintSpec(ref common.ReferenceCallback
 						SchemaProps: spec.SchemaProps{
 							Description: "LocalSpaceConstraintTemplate holds the space constraint template",
 							Default:     map[string]interface{}{},
-							Ref:         ref("github.com/loft-sh/api/v2/pkg/apis/storage/v1.LocalSpaceConstraintTemplate"),
+							Ref:         ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.LocalSpaceConstraintTemplate"),
 						},
 					},
 				},
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/v2/pkg/apis/storage/v1.Access", "github.com/loft-sh/api/v2/pkg/apis/storage/v1.LocalSpaceConstraintTemplate", "github.com/loft-sh/api/v2/pkg/apis/storage/v1.UserOrTeam"},
+			"github.com/loft-sh/api/v3/pkg/apis/storage/v1.Access", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.LocalSpaceConstraintTemplate", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.UserOrTeam"},
 	}
 }
 
@@ -21100,7 +21100,7 @@ func schema_pkg_apis_storage_v1_SpaceCreationTask(ref common.ReferenceCallback) 
 					"owner": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Owner defines the space owner",
-							Ref:         ref("github.com/loft-sh/api/v2/pkg/apis/storage/v1.UserOrTeam"),
+							Ref:         ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.UserOrTeam"),
 						},
 					},
 					"apps": {
@@ -21111,7 +21111,7 @@ func schema_pkg_apis_storage_v1_SpaceCreationTask(ref common.ReferenceCallback) 
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.AppReference"),
+										Ref:     ref("github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.AppReference"),
 									},
 								},
 							},
@@ -21121,7 +21121,7 @@ func schema_pkg_apis_storage_v1_SpaceCreationTask(ref common.ReferenceCallback) 
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.AppReference", "github.com/loft-sh/api/v2/pkg/apis/storage/v1.UserOrTeam", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
+			"github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.AppReference", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.UserOrTeam", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
 	}
 }
 
@@ -21155,20 +21155,20 @@ func schema_pkg_apis_storage_v1_SpaceInstance(ref common.ReferenceCallback) comm
 					"spec": {
 						SchemaProps: spec.SchemaProps{
 							Default: map[string]interface{}{},
-							Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/storage/v1.SpaceInstanceSpec"),
+							Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.SpaceInstanceSpec"),
 						},
 					},
 					"status": {
 						SchemaProps: spec.SchemaProps{
 							Default: map[string]interface{}{},
-							Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/storage/v1.SpaceInstanceStatus"),
+							Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.SpaceInstanceStatus"),
 						},
 					},
 				},
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/v2/pkg/apis/storage/v1.SpaceInstanceSpec", "github.com/loft-sh/api/v2/pkg/apis/storage/v1.SpaceInstanceStatus", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
+			"github.com/loft-sh/api/v3/pkg/apis/storage/v1.SpaceInstanceSpec", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.SpaceInstanceStatus", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
 	}
 }
 
@@ -21206,7 +21206,7 @@ func schema_pkg_apis_storage_v1_SpaceInstanceList(ref common.ReferenceCallback) 
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/storage/v1.SpaceInstance"),
+										Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.SpaceInstance"),
 									},
 								},
 							},
@@ -21217,7 +21217,7 @@ func schema_pkg_apis_storage_v1_SpaceInstanceList(ref common.ReferenceCallback) 
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/v2/pkg/apis/storage/v1.SpaceInstance", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
+			"github.com/loft-sh/api/v3/pkg/apis/storage/v1.SpaceInstance", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
 	}
 }
 
@@ -21244,26 +21244,26 @@ func schema_pkg_apis_storage_v1_SpaceInstanceSpec(ref common.ReferenceCallback) 
 					"owner": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Owner holds the owner of this object",
-							Ref:         ref("github.com/loft-sh/api/v2/pkg/apis/storage/v1.UserOrTeam"),
+							Ref:         ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.UserOrTeam"),
 						},
 					},
 					"templateRef": {
 						SchemaProps: spec.SchemaProps{
 							Description: "TemplateRef holds the space template reference",
-							Ref:         ref("github.com/loft-sh/api/v2/pkg/apis/storage/v1.TemplateRef"),
+							Ref:         ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.TemplateRef"),
 						},
 					},
 					"template": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Template is the inline template to use for space creation. This is mutually exclusive with templateRef.",
-							Ref:         ref("github.com/loft-sh/api/v2/pkg/apis/storage/v1.SpaceTemplateDefinition"),
+							Ref:         ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.SpaceTemplateDefinition"),
 						},
 					},
 					"clusterRef": {
 						SchemaProps: spec.SchemaProps{
 							Description: "ClusterRef is the reference to the connected cluster holding this space",
 							Default:     map[string]interface{}{},
-							Ref:         ref("github.com/loft-sh/api/v2/pkg/apis/storage/v1.ClusterRef"),
+							Ref:         ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.ClusterRef"),
 						},
 					},
 					"parameters": {
@@ -21281,7 +21281,7 @@ func schema_pkg_apis_storage_v1_SpaceInstanceSpec(ref common.ReferenceCallback) 
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.InstanceAccessRule"),
+										Ref:     ref("github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.InstanceAccessRule"),
 									},
 								},
 							},
@@ -21295,7 +21295,7 @@ func schema_pkg_apis_storage_v1_SpaceInstanceSpec(ref common.ReferenceCallback) 
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/storage/v1.Access"),
+										Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.Access"),
 									},
 								},
 							},
@@ -21305,7 +21305,7 @@ func schema_pkg_apis_storage_v1_SpaceInstanceSpec(ref common.ReferenceCallback) 
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.InstanceAccessRule", "github.com/loft-sh/api/v2/pkg/apis/storage/v1.Access", "github.com/loft-sh/api/v2/pkg/apis/storage/v1.ClusterRef", "github.com/loft-sh/api/v2/pkg/apis/storage/v1.SpaceTemplateDefinition", "github.com/loft-sh/api/v2/pkg/apis/storage/v1.TemplateRef", "github.com/loft-sh/api/v2/pkg/apis/storage/v1.UserOrTeam"},
+			"github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.InstanceAccessRule", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.Access", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.ClusterRef", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.SpaceTemplateDefinition", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.TemplateRef", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.UserOrTeam"},
 	}
 }
 
@@ -21344,7 +21344,7 @@ func schema_pkg_apis_storage_v1_SpaceInstanceStatus(ref common.ReferenceCallback
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.Condition"),
+										Ref:     ref("github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.Condition"),
 									},
 								},
 							},
@@ -21353,13 +21353,13 @@ func schema_pkg_apis_storage_v1_SpaceInstanceStatus(ref common.ReferenceCallback
 					"spaceObjects": {
 						SchemaProps: spec.SchemaProps{
 							Description: "SpaceObjects are the objects that were applied within the virtual cluster space",
-							Ref:         ref("github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.ObjectsStatus"),
+							Ref:         ref("github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.ObjectsStatus"),
 						},
 					},
 					"space": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Space is the template rendered with all the parameters",
-							Ref:         ref("github.com/loft-sh/api/v2/pkg/apis/storage/v1.SpaceTemplateDefinition"),
+							Ref:         ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.SpaceTemplateDefinition"),
 						},
 					},
 					"ignoreReconciliation": {
@@ -21373,7 +21373,7 @@ func schema_pkg_apis_storage_v1_SpaceInstanceStatus(ref common.ReferenceCallback
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.Condition", "github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.ObjectsStatus", "github.com/loft-sh/api/v2/pkg/apis/storage/v1.SpaceTemplateDefinition"},
+			"github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.Condition", "github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.ObjectsStatus", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.SpaceTemplateDefinition"},
 	}
 }
 
@@ -21407,20 +21407,20 @@ func schema_pkg_apis_storage_v1_SpaceTemplate(ref common.ReferenceCallback) comm
 					"spec": {
 						SchemaProps: spec.SchemaProps{
 							Default: map[string]interface{}{},
-							Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/storage/v1.SpaceTemplateSpec"),
+							Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.SpaceTemplateSpec"),
 						},
 					},
 					"status": {
 						SchemaProps: spec.SchemaProps{
 							Default: map[string]interface{}{},
-							Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/storage/v1.SpaceTemplateStatus"),
+							Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.SpaceTemplateStatus"),
 						},
 					},
 				},
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/v2/pkg/apis/storage/v1.SpaceTemplateSpec", "github.com/loft-sh/api/v2/pkg/apis/storage/v1.SpaceTemplateStatus", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
+			"github.com/loft-sh/api/v3/pkg/apis/storage/v1.SpaceTemplateSpec", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.SpaceTemplateStatus", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
 	}
 }
 
@@ -21434,7 +21434,7 @@ func schema_pkg_apis_storage_v1_SpaceTemplateDefinition(ref common.ReferenceCall
 						SchemaProps: spec.SchemaProps{
 							Description: "The space metadata",
 							Default:     map[string]interface{}{},
-							Ref:         ref("github.com/loft-sh/api/v2/pkg/apis/storage/v1.TemplateMetadata"),
+							Ref:         ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.TemplateMetadata"),
 						},
 					},
 					"objects": {
@@ -21452,7 +21452,7 @@ func schema_pkg_apis_storage_v1_SpaceTemplateDefinition(ref common.ReferenceCall
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.TemplateHelmChart"),
+										Ref:     ref("github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.TemplateHelmChart"),
 									},
 								},
 							},
@@ -21466,7 +21466,7 @@ func schema_pkg_apis_storage_v1_SpaceTemplateDefinition(ref common.ReferenceCall
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.AppReference"),
+										Ref:     ref("github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.AppReference"),
 									},
 								},
 							},
@@ -21475,14 +21475,14 @@ func schema_pkg_apis_storage_v1_SpaceTemplateDefinition(ref common.ReferenceCall
 					"access": {
 						SchemaProps: spec.SchemaProps{
 							Description: "The space access",
-							Ref:         ref("github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.InstanceAccess"),
+							Ref:         ref("github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.InstanceAccess"),
 						},
 					},
 				},
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.AppReference", "github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.InstanceAccess", "github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.TemplateHelmChart", "github.com/loft-sh/api/v2/pkg/apis/storage/v1.TemplateMetadata"},
+			"github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.AppReference", "github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.InstanceAccess", "github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.TemplateHelmChart", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.TemplateMetadata"},
 	}
 }
 
@@ -21520,7 +21520,7 @@ func schema_pkg_apis_storage_v1_SpaceTemplateList(ref common.ReferenceCallback) 
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/storage/v1.SpaceTemplate"),
+										Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.SpaceTemplate"),
 									},
 								},
 							},
@@ -21531,7 +21531,7 @@ func schema_pkg_apis_storage_v1_SpaceTemplateList(ref common.ReferenceCallback) 
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/v2/pkg/apis/storage/v1.SpaceTemplate", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
+			"github.com/loft-sh/api/v3/pkg/apis/storage/v1.SpaceTemplate", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
 	}
 }
 
@@ -21559,14 +21559,14 @@ func schema_pkg_apis_storage_v1_SpaceTemplateSpec(ref common.ReferenceCallback) 
 					"owner": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Owner holds the owner of this object",
-							Ref:         ref("github.com/loft-sh/api/v2/pkg/apis/storage/v1.UserOrTeam"),
+							Ref:         ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.UserOrTeam"),
 						},
 					},
 					"template": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Template holds the space template",
 							Default:     map[string]interface{}{},
-							Ref:         ref("github.com/loft-sh/api/v2/pkg/apis/storage/v1.SpaceTemplateDefinition"),
+							Ref:         ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.SpaceTemplateDefinition"),
 						},
 					},
 					"parameters": {
@@ -21577,7 +21577,7 @@ func schema_pkg_apis_storage_v1_SpaceTemplateSpec(ref common.ReferenceCallback) 
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/storage/v1.AppParameter"),
+										Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.AppParameter"),
 									},
 								},
 							},
@@ -21591,7 +21591,7 @@ func schema_pkg_apis_storage_v1_SpaceTemplateSpec(ref common.ReferenceCallback) 
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/storage/v1.SpaceTemplateVersion"),
+										Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.SpaceTemplateVersion"),
 									},
 								},
 							},
@@ -21605,7 +21605,7 @@ func schema_pkg_apis_storage_v1_SpaceTemplateSpec(ref common.ReferenceCallback) 
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/storage/v1.Access"),
+										Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.Access"),
 									},
 								},
 							},
@@ -21615,7 +21615,7 @@ func schema_pkg_apis_storage_v1_SpaceTemplateSpec(ref common.ReferenceCallback) 
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/v2/pkg/apis/storage/v1.Access", "github.com/loft-sh/api/v2/pkg/apis/storage/v1.AppParameter", "github.com/loft-sh/api/v2/pkg/apis/storage/v1.SpaceTemplateDefinition", "github.com/loft-sh/api/v2/pkg/apis/storage/v1.SpaceTemplateVersion", "github.com/loft-sh/api/v2/pkg/apis/storage/v1.UserOrTeam"},
+			"github.com/loft-sh/api/v3/pkg/apis/storage/v1.Access", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.AppParameter", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.SpaceTemplateDefinition", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.SpaceTemplateVersion", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.UserOrTeam"},
 	}
 }
 
@@ -21640,7 +21640,7 @@ func schema_pkg_apis_storage_v1_SpaceTemplateVersion(ref common.ReferenceCallbac
 						SchemaProps: spec.SchemaProps{
 							Description: "Template holds the space template",
 							Default:     map[string]interface{}{},
-							Ref:         ref("github.com/loft-sh/api/v2/pkg/apis/storage/v1.SpaceTemplateDefinition"),
+							Ref:         ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.SpaceTemplateDefinition"),
 						},
 					},
 					"parameters": {
@@ -21651,7 +21651,7 @@ func schema_pkg_apis_storage_v1_SpaceTemplateVersion(ref common.ReferenceCallbac
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/storage/v1.AppParameter"),
+										Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.AppParameter"),
 									},
 								},
 							},
@@ -21668,7 +21668,7 @@ func schema_pkg_apis_storage_v1_SpaceTemplateVersion(ref common.ReferenceCallbac
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/v2/pkg/apis/storage/v1.AppParameter", "github.com/loft-sh/api/v2/pkg/apis/storage/v1.SpaceTemplateDefinition"},
+			"github.com/loft-sh/api/v3/pkg/apis/storage/v1.AppParameter", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.SpaceTemplateDefinition"},
 	}
 }
 
@@ -21709,32 +21709,32 @@ func schema_pkg_apis_storage_v1_Target(ref common.ReferenceCallback) common.Open
 					"spaceInstance": {
 						SchemaProps: spec.SchemaProps{
 							Description: "SpaceInstance defines a space instance as target",
-							Ref:         ref("github.com/loft-sh/api/v2/pkg/apis/storage/v1.TargetInstance"),
+							Ref:         ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.TargetInstance"),
 						},
 					},
 					"virtualClusterInstance": {
 						SchemaProps: spec.SchemaProps{
 							Description: "VirtualClusterInstance defines a virtual cluster instance as target",
-							Ref:         ref("github.com/loft-sh/api/v2/pkg/apis/storage/v1.TargetInstance"),
+							Ref:         ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.TargetInstance"),
 						},
 					},
 					"cluster": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Cluster defines a connected cluster as target",
-							Ref:         ref("github.com/loft-sh/api/v2/pkg/apis/storage/v1.TargetCluster"),
+							Ref:         ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.TargetCluster"),
 						},
 					},
 					"virtualCluster": {
 						SchemaProps: spec.SchemaProps{
 							Description: "VirtualCluster defines a virtual cluster as target",
-							Ref:         ref("github.com/loft-sh/api/v2/pkg/apis/storage/v1.TargetVirtualCluster"),
+							Ref:         ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.TargetVirtualCluster"),
 						},
 					},
 				},
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/v2/pkg/apis/storage/v1.TargetCluster", "github.com/loft-sh/api/v2/pkg/apis/storage/v1.TargetInstance", "github.com/loft-sh/api/v2/pkg/apis/storage/v1.TargetVirtualCluster"},
+			"github.com/loft-sh/api/v3/pkg/apis/storage/v1.TargetCluster", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.TargetInstance", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.TargetVirtualCluster"},
 	}
 }
 
@@ -21852,20 +21852,20 @@ func schema_pkg_apis_storage_v1_Task(ref common.ReferenceCallback) common.OpenAP
 					"spec": {
 						SchemaProps: spec.SchemaProps{
 							Default: map[string]interface{}{},
-							Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/storage/v1.TaskSpec"),
+							Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.TaskSpec"),
 						},
 					},
 					"status": {
 						SchemaProps: spec.SchemaProps{
 							Default: map[string]interface{}{},
-							Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/storage/v1.TaskStatus"),
+							Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.TaskStatus"),
 						},
 					},
 				},
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/v2/pkg/apis/storage/v1.TaskSpec", "github.com/loft-sh/api/v2/pkg/apis/storage/v1.TaskStatus", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
+			"github.com/loft-sh/api/v3/pkg/apis/storage/v1.TaskSpec", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.TaskStatus", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
 	}
 }
 
@@ -21878,32 +21878,32 @@ func schema_pkg_apis_storage_v1_TaskDefinition(ref common.ReferenceCallback) com
 					"appTask": {
 						SchemaProps: spec.SchemaProps{
 							Description: "AppTask is an app task",
-							Ref:         ref("github.com/loft-sh/api/v2/pkg/apis/storage/v1.AppTask"),
+							Ref:         ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.AppTask"),
 						},
 					},
 					"helm": {
 						SchemaProps: spec.SchemaProps{
 							Description: "HelmTask executes a helm command",
-							Ref:         ref("github.com/loft-sh/api/v2/pkg/apis/storage/v1.HelmTask"),
+							Ref:         ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.HelmTask"),
 						},
 					},
 					"spaceCreation": {
 						SchemaProps: spec.SchemaProps{
 							Description: "SpaceCreationTask creates a new space",
-							Ref:         ref("github.com/loft-sh/api/v2/pkg/apis/storage/v1.SpaceCreationTask"),
+							Ref:         ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.SpaceCreationTask"),
 						},
 					},
 					"virtualClusterCreation": {
 						SchemaProps: spec.SchemaProps{
 							Description: "VirtualClusterCreationTask creates a new virtual cluster",
-							Ref:         ref("github.com/loft-sh/api/v2/pkg/apis/storage/v1.VirtualClusterCreationTask"),
+							Ref:         ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.VirtualClusterCreationTask"),
 						},
 					},
 				},
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/v2/pkg/apis/storage/v1.AppTask", "github.com/loft-sh/api/v2/pkg/apis/storage/v1.HelmTask", "github.com/loft-sh/api/v2/pkg/apis/storage/v1.SpaceCreationTask", "github.com/loft-sh/api/v2/pkg/apis/storage/v1.VirtualClusterCreationTask"},
+			"github.com/loft-sh/api/v3/pkg/apis/storage/v1.AppTask", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.HelmTask", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.SpaceCreationTask", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.VirtualClusterCreationTask"},
 	}
 }
 
@@ -21941,7 +21941,7 @@ func schema_pkg_apis_storage_v1_TaskList(ref common.ReferenceCallback) common.Op
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/storage/v1.Task"),
+										Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.Task"),
 									},
 								},
 							},
@@ -21952,7 +21952,7 @@ func schema_pkg_apis_storage_v1_TaskList(ref common.ReferenceCallback) common.Op
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/v2/pkg/apis/storage/v1.Task", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
+			"github.com/loft-sh/api/v3/pkg/apis/storage/v1.Task", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
 	}
 }
 
@@ -21977,7 +21977,7 @@ func schema_pkg_apis_storage_v1_TaskSpec(ref common.ReferenceCallback) common.Op
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/storage/v1.Access"),
+										Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.Access"),
 									},
 								},
 							},
@@ -21986,34 +21986,34 @@ func schema_pkg_apis_storage_v1_TaskSpec(ref common.ReferenceCallback) common.Op
 					"scope": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Scope defines the scope of the access key.",
-							Ref:         ref("github.com/loft-sh/api/v2/pkg/apis/storage/v1.AccessKeyScope"),
+							Ref:         ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.AccessKeyScope"),
 						},
 					},
 					"owner": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Owner holds the owner of this object",
-							Ref:         ref("github.com/loft-sh/api/v2/pkg/apis/storage/v1.UserOrTeam"),
+							Ref:         ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.UserOrTeam"),
 						},
 					},
 					"target": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Target where this task should get executed",
 							Default:     map[string]interface{}{},
-							Ref:         ref("github.com/loft-sh/api/v2/pkg/apis/storage/v1.Target"),
+							Ref:         ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.Target"),
 						},
 					},
 					"task": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Task defines the task to execute",
 							Default:     map[string]interface{}{},
-							Ref:         ref("github.com/loft-sh/api/v2/pkg/apis/storage/v1.TaskDefinition"),
+							Ref:         ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.TaskDefinition"),
 						},
 					},
 				},
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/v2/pkg/apis/storage/v1.Access", "github.com/loft-sh/api/v2/pkg/apis/storage/v1.AccessKeyScope", "github.com/loft-sh/api/v2/pkg/apis/storage/v1.Target", "github.com/loft-sh/api/v2/pkg/apis/storage/v1.TaskDefinition", "github.com/loft-sh/api/v2/pkg/apis/storage/v1.UserOrTeam"},
+			"github.com/loft-sh/api/v3/pkg/apis/storage/v1.Access", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.AccessKeyScope", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.Target", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.TaskDefinition", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.UserOrTeam"},
 	}
 }
 
@@ -22038,7 +22038,7 @@ func schema_pkg_apis_storage_v1_TaskStatus(ref common.ReferenceCallback) common.
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.Condition"),
+										Ref:     ref("github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.Condition"),
 									},
 								},
 							},
@@ -22068,7 +22068,7 @@ func schema_pkg_apis_storage_v1_TaskStatus(ref common.ReferenceCallback) common.
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.Condition", "k8s.io/api/core/v1.ContainerStatus"},
+			"github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.Condition", "k8s.io/api/core/v1.ContainerStatus"},
 	}
 }
 
@@ -22102,20 +22102,20 @@ func schema_pkg_apis_storage_v1_Team(ref common.ReferenceCallback) common.OpenAP
 					"spec": {
 						SchemaProps: spec.SchemaProps{
 							Default: map[string]interface{}{},
-							Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/storage/v1.TeamSpec"),
+							Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.TeamSpec"),
 						},
 					},
 					"status": {
 						SchemaProps: spec.SchemaProps{
 							Default: map[string]interface{}{},
-							Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/storage/v1.TeamStatus"),
+							Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.TeamStatus"),
 						},
 					},
 				},
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/v2/pkg/apis/storage/v1.TeamSpec", "github.com/loft-sh/api/v2/pkg/apis/storage/v1.TeamStatus", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
+			"github.com/loft-sh/api/v3/pkg/apis/storage/v1.TeamSpec", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.TeamStatus", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
 	}
 }
 
@@ -22153,7 +22153,7 @@ func schema_pkg_apis_storage_v1_TeamList(ref common.ReferenceCallback) common.Op
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/storage/v1.Team"),
+										Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.Team"),
 									},
 								},
 							},
@@ -22164,7 +22164,7 @@ func schema_pkg_apis_storage_v1_TeamList(ref common.ReferenceCallback) common.Op
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/v2/pkg/apis/storage/v1.Team", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
+			"github.com/loft-sh/api/v3/pkg/apis/storage/v1.Team", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
 	}
 }
 
@@ -22191,7 +22191,7 @@ func schema_pkg_apis_storage_v1_TeamSpec(ref common.ReferenceCallback) common.Op
 					"owner": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Owner holds the owner of this object",
-							Ref:         ref("github.com/loft-sh/api/v2/pkg/apis/storage/v1.UserOrTeam"),
+							Ref:         ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.UserOrTeam"),
 						},
 					},
 					"username": {
@@ -22238,7 +22238,7 @@ func schema_pkg_apis_storage_v1_TeamSpec(ref common.ReferenceCallback) common.Op
 							Items: &spec.SchemaOrArray{
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
-										Ref: ref("github.com/loft-sh/api/v2/pkg/apis/storage/v1.KindSecretRef"),
+										Ref: ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.KindSecretRef"),
 									},
 								},
 							},
@@ -22252,7 +22252,7 @@ func schema_pkg_apis_storage_v1_TeamSpec(ref common.ReferenceCallback) common.Op
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/storage/v1.UserClusterAccountTemplate"),
+										Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.UserClusterAccountTemplate"),
 									},
 								},
 							},
@@ -22266,7 +22266,7 @@ func schema_pkg_apis_storage_v1_TeamSpec(ref common.ReferenceCallback) common.Op
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.ClusterRoleRef"),
+										Ref:     ref("github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.ClusterRoleRef"),
 									},
 								},
 							},
@@ -22280,7 +22280,7 @@ func schema_pkg_apis_storage_v1_TeamSpec(ref common.ReferenceCallback) common.Op
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/storage/v1.Access"),
+										Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.Access"),
 									},
 								},
 							},
@@ -22290,7 +22290,7 @@ func schema_pkg_apis_storage_v1_TeamSpec(ref common.ReferenceCallback) common.Op
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.ClusterRoleRef", "github.com/loft-sh/api/v2/pkg/apis/storage/v1.Access", "github.com/loft-sh/api/v2/pkg/apis/storage/v1.KindSecretRef", "github.com/loft-sh/api/v2/pkg/apis/storage/v1.UserClusterAccountTemplate", "github.com/loft-sh/api/v2/pkg/apis/storage/v1.UserOrTeam"},
+			"github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.ClusterRoleRef", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.Access", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.KindSecretRef", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.UserClusterAccountTemplate", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.UserOrTeam"},
 	}
 }
 
@@ -22308,7 +22308,7 @@ func schema_pkg_apis_storage_v1_TeamStatus(ref common.ReferenceCallback) common.
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/storage/v1.AccountClusterStatus"),
+										Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.AccountClusterStatus"),
 									},
 								},
 							},
@@ -22322,7 +22322,7 @@ func schema_pkg_apis_storage_v1_TeamStatus(ref common.ReferenceCallback) common.
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/storage/v1.UserClusterAccountTemplateStatus"),
+										Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.UserClusterAccountTemplateStatus"),
 									},
 								},
 							},
@@ -22332,7 +22332,7 @@ func schema_pkg_apis_storage_v1_TeamStatus(ref common.ReferenceCallback) common.
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/v2/pkg/apis/storage/v1.AccountClusterStatus", "github.com/loft-sh/api/v2/pkg/apis/storage/v1.UserClusterAccountTemplateStatus"},
+			"github.com/loft-sh/api/v3/pkg/apis/storage/v1.AccountClusterStatus", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.UserClusterAccountTemplateStatus"},
 	}
 }
 
@@ -22443,20 +22443,20 @@ func schema_pkg_apis_storage_v1_User(ref common.ReferenceCallback) common.OpenAP
 					"spec": {
 						SchemaProps: spec.SchemaProps{
 							Default: map[string]interface{}{},
-							Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/storage/v1.UserSpec"),
+							Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.UserSpec"),
 						},
 					},
 					"status": {
 						SchemaProps: spec.SchemaProps{
 							Default: map[string]interface{}{},
-							Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/storage/v1.UserStatus"),
+							Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.UserStatus"),
 						},
 					},
 				},
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/v2/pkg/apis/storage/v1.UserSpec", "github.com/loft-sh/api/v2/pkg/apis/storage/v1.UserStatus", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
+			"github.com/loft-sh/api/v3/pkg/apis/storage/v1.UserSpec", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.UserStatus", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
 	}
 }
 
@@ -22514,7 +22514,7 @@ func schema_pkg_apis_storage_v1_UserClusterAccountTemplateStatus(ref common.Refe
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/storage/v1.ClusterAccountTemplateClusterStatus"),
+										Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.ClusterAccountTemplateClusterStatus"),
 									},
 								},
 							},
@@ -22545,7 +22545,7 @@ func schema_pkg_apis_storage_v1_UserClusterAccountTemplateStatus(ref common.Refe
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/v2/pkg/apis/storage/v1.ClusterAccountTemplateClusterStatus"},
+			"github.com/loft-sh/api/v3/pkg/apis/storage/v1.ClusterAccountTemplateClusterStatus"},
 	}
 }
 
@@ -22583,7 +22583,7 @@ func schema_pkg_apis_storage_v1_UserList(ref common.ReferenceCallback) common.Op
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/storage/v1.User"),
+										Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.User"),
 									},
 								},
 							},
@@ -22594,7 +22594,7 @@ func schema_pkg_apis_storage_v1_UserList(ref common.ReferenceCallback) common.Op
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/v2/pkg/apis/storage/v1.User", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
+			"github.com/loft-sh/api/v3/pkg/apis/storage/v1.User", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
 	}
 }
 
@@ -22647,7 +22647,7 @@ func schema_pkg_apis_storage_v1_UserSpec(ref common.ReferenceCallback) common.Op
 					"owner": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Owner holds the owner of this object",
-							Ref:         ref("github.com/loft-sh/api/v2/pkg/apis/storage/v1.UserOrTeam"),
+							Ref:         ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.UserOrTeam"),
 						},
 					},
 					"username": {
@@ -22696,19 +22696,19 @@ func schema_pkg_apis_storage_v1_UserSpec(ref common.ReferenceCallback) common.Op
 					"passwordRef": {
 						SchemaProps: spec.SchemaProps{
 							Description: "A reference to the user password",
-							Ref:         ref("github.com/loft-sh/api/v2/pkg/apis/storage/v1.SecretRef"),
+							Ref:         ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.SecretRef"),
 						},
 					},
 					"accessKeysRef": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Deprecated: Use the Access Key CRD instead A reference to the users access keys",
-							Ref:         ref("github.com/loft-sh/api/v2/pkg/apis/storage/v1.SecretRef"),
+							Ref:         ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.SecretRef"),
 						},
 					},
 					"codesRef": {
 						SchemaProps: spec.SchemaProps{
 							Description: "A reference to the users access keys",
-							Ref:         ref("github.com/loft-sh/api/v2/pkg/apis/storage/v1.SecretRef"),
+							Ref:         ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.SecretRef"),
 						},
 					},
 					"imagePullSecrets": {
@@ -22718,7 +22718,7 @@ func schema_pkg_apis_storage_v1_UserSpec(ref common.ReferenceCallback) common.Op
 							Items: &spec.SchemaOrArray{
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
-										Ref: ref("github.com/loft-sh/api/v2/pkg/apis/storage/v1.KindSecretRef"),
+										Ref: ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.KindSecretRef"),
 									},
 								},
 							},
@@ -22732,7 +22732,7 @@ func schema_pkg_apis_storage_v1_UserSpec(ref common.ReferenceCallback) common.Op
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/storage/v1.UserClusterAccountTemplate"),
+										Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.UserClusterAccountTemplate"),
 									},
 								},
 							},
@@ -22760,7 +22760,7 @@ func schema_pkg_apis_storage_v1_UserSpec(ref common.ReferenceCallback) common.Op
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.ClusterRoleRef"),
+										Ref:     ref("github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.ClusterRoleRef"),
 									},
 								},
 							},
@@ -22774,7 +22774,7 @@ func schema_pkg_apis_storage_v1_UserSpec(ref common.ReferenceCallback) common.Op
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/storage/v1.Access"),
+										Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.Access"),
 									},
 								},
 							},
@@ -22784,7 +22784,7 @@ func schema_pkg_apis_storage_v1_UserSpec(ref common.ReferenceCallback) common.Op
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.ClusterRoleRef", "github.com/loft-sh/api/v2/pkg/apis/storage/v1.Access", "github.com/loft-sh/api/v2/pkg/apis/storage/v1.KindSecretRef", "github.com/loft-sh/api/v2/pkg/apis/storage/v1.SecretRef", "github.com/loft-sh/api/v2/pkg/apis/storage/v1.UserClusterAccountTemplate", "github.com/loft-sh/api/v2/pkg/apis/storage/v1.UserOrTeam"},
+			"github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.ClusterRoleRef", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.Access", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.KindSecretRef", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.SecretRef", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.UserClusterAccountTemplate", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.UserOrTeam"},
 	}
 }
 
@@ -22803,7 +22803,7 @@ func schema_pkg_apis_storage_v1_UserStatus(ref common.ReferenceCallback) common.
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/storage/v1.AccountClusterStatus"),
+										Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.AccountClusterStatus"),
 									},
 								},
 							},
@@ -22817,7 +22817,7 @@ func schema_pkg_apis_storage_v1_UserStatus(ref common.ReferenceCallback) common.
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/storage/v1.UserClusterAccountTemplateStatus"),
+										Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.UserClusterAccountTemplateStatus"),
 									},
 								},
 							},
@@ -22842,7 +22842,7 @@ func schema_pkg_apis_storage_v1_UserStatus(ref common.ReferenceCallback) common.
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/v2/pkg/apis/storage/v1.AccountClusterStatus", "github.com/loft-sh/api/v2/pkg/apis/storage/v1.UserClusterAccountTemplateStatus"},
+			"github.com/loft-sh/api/v3/pkg/apis/storage/v1.AccountClusterStatus", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.UserClusterAccountTemplateStatus"},
 	}
 }
 
@@ -22895,14 +22895,14 @@ func schema_pkg_apis_storage_v1_VirtualClusterCreationTask(ref common.ReferenceC
 					"access": {
 						SchemaProps: spec.SchemaProps{
 							Description: "The virtual cluster access",
-							Ref:         ref("github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.InstanceAccess"),
+							Ref:         ref("github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.InstanceAccess"),
 						},
 					},
 					"helmRelease": {
 						SchemaProps: spec.SchemaProps{
 							Description: "The helm release configuration for the virtual cluster.",
 							Default:     map[string]interface{}{},
-							Ref:         ref("github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.VirtualClusterHelmRelease"),
+							Ref:         ref("github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.VirtualClusterHelmRelease"),
 						},
 					},
 					"objects": {
@@ -22927,7 +22927,7 @@ func schema_pkg_apis_storage_v1_VirtualClusterCreationTask(ref common.ReferenceC
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.AppReference"),
+										Ref:     ref("github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.AppReference"),
 									},
 								},
 							},
@@ -22936,14 +22936,14 @@ func schema_pkg_apis_storage_v1_VirtualClusterCreationTask(ref common.ReferenceC
 					"spaceCreation": {
 						SchemaProps: spec.SchemaProps{
 							Description: "SpaceCreationTask creates a new space if defined for the virtual cluster",
-							Ref:         ref("github.com/loft-sh/api/v2/pkg/apis/storage/v1.SpaceCreationTask"),
+							Ref:         ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.SpaceCreationTask"),
 						},
 					},
 				},
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.AppReference", "github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.InstanceAccess", "github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.VirtualClusterHelmRelease", "github.com/loft-sh/api/v2/pkg/apis/storage/v1.SpaceCreationTask", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
+			"github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.AppReference", "github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.InstanceAccess", "github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.VirtualClusterHelmRelease", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.SpaceCreationTask", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
 	}
 }
 
@@ -22977,20 +22977,20 @@ func schema_pkg_apis_storage_v1_VirtualClusterInstance(ref common.ReferenceCallb
 					"spec": {
 						SchemaProps: spec.SchemaProps{
 							Default: map[string]interface{}{},
-							Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/storage/v1.VirtualClusterInstanceSpec"),
+							Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.VirtualClusterInstanceSpec"),
 						},
 					},
 					"status": {
 						SchemaProps: spec.SchemaProps{
 							Default: map[string]interface{}{},
-							Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/storage/v1.VirtualClusterInstanceStatus"),
+							Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.VirtualClusterInstanceStatus"),
 						},
 					},
 				},
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/v2/pkg/apis/storage/v1.VirtualClusterInstanceSpec", "github.com/loft-sh/api/v2/pkg/apis/storage/v1.VirtualClusterInstanceStatus", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
+			"github.com/loft-sh/api/v3/pkg/apis/storage/v1.VirtualClusterInstanceSpec", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.VirtualClusterInstanceStatus", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
 	}
 }
 
@@ -23028,7 +23028,7 @@ func schema_pkg_apis_storage_v1_VirtualClusterInstanceList(ref common.ReferenceC
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/storage/v1.VirtualClusterInstance"),
+										Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.VirtualClusterInstance"),
 									},
 								},
 							},
@@ -23039,7 +23039,7 @@ func schema_pkg_apis_storage_v1_VirtualClusterInstanceList(ref common.ReferenceC
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/v2/pkg/apis/storage/v1.VirtualClusterInstance", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
+			"github.com/loft-sh/api/v3/pkg/apis/storage/v1.VirtualClusterInstance", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
 	}
 }
 
@@ -23066,26 +23066,26 @@ func schema_pkg_apis_storage_v1_VirtualClusterInstanceSpec(ref common.ReferenceC
 					"owner": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Owner holds the owner of this object",
-							Ref:         ref("github.com/loft-sh/api/v2/pkg/apis/storage/v1.UserOrTeam"),
+							Ref:         ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.UserOrTeam"),
 						},
 					},
 					"templateRef": {
 						SchemaProps: spec.SchemaProps{
 							Description: "TemplateRef holds the virtual cluster template reference",
-							Ref:         ref("github.com/loft-sh/api/v2/pkg/apis/storage/v1.TemplateRef"),
+							Ref:         ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.TemplateRef"),
 						},
 					},
 					"template": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Template is the inline template to use for virtual cluster creation. This is mutually exclusive with templateRef.",
-							Ref:         ref("github.com/loft-sh/api/v2/pkg/apis/storage/v1.VirtualClusterTemplateDefinition"),
+							Ref:         ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.VirtualClusterTemplateDefinition"),
 						},
 					},
 					"clusterRef": {
 						SchemaProps: spec.SchemaProps{
 							Description: "ClusterRef is the reference to the connected cluster holding this virtual cluster",
 							Default:     map[string]interface{}{},
-							Ref:         ref("github.com/loft-sh/api/v2/pkg/apis/storage/v1.VirtualClusterClusterRef"),
+							Ref:         ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.VirtualClusterClusterRef"),
 						},
 					},
 					"parameters": {
@@ -23103,7 +23103,7 @@ func schema_pkg_apis_storage_v1_VirtualClusterInstanceSpec(ref common.ReferenceC
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.InstanceAccessRule"),
+										Ref:     ref("github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.InstanceAccessRule"),
 									},
 								},
 							},
@@ -23117,7 +23117,7 @@ func schema_pkg_apis_storage_v1_VirtualClusterInstanceSpec(ref common.ReferenceC
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/storage/v1.Access"),
+										Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.Access"),
 									},
 								},
 							},
@@ -23127,7 +23127,7 @@ func schema_pkg_apis_storage_v1_VirtualClusterInstanceSpec(ref common.ReferenceC
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.InstanceAccessRule", "github.com/loft-sh/api/v2/pkg/apis/storage/v1.Access", "github.com/loft-sh/api/v2/pkg/apis/storage/v1.TemplateRef", "github.com/loft-sh/api/v2/pkg/apis/storage/v1.UserOrTeam", "github.com/loft-sh/api/v2/pkg/apis/storage/v1.VirtualClusterClusterRef", "github.com/loft-sh/api/v2/pkg/apis/storage/v1.VirtualClusterTemplateDefinition"},
+			"github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.InstanceAccessRule", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.Access", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.TemplateRef", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.UserOrTeam", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.VirtualClusterClusterRef", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.VirtualClusterTemplateDefinition"},
 	}
 }
 
@@ -23166,7 +23166,7 @@ func schema_pkg_apis_storage_v1_VirtualClusterInstanceStatus(ref common.Referenc
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.Condition"),
+										Ref:     ref("github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.Condition"),
 									},
 								},
 							},
@@ -23175,19 +23175,19 @@ func schema_pkg_apis_storage_v1_VirtualClusterInstanceStatus(ref common.Referenc
 					"virtualClusterObjects": {
 						SchemaProps: spec.SchemaProps{
 							Description: "VirtualClusterObjects are the objects that were applied within the virtual cluster itself",
-							Ref:         ref("github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.ObjectsStatus"),
+							Ref:         ref("github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.ObjectsStatus"),
 						},
 					},
 					"spaceObjects": {
 						SchemaProps: spec.SchemaProps{
 							Description: "SpaceObjects are the objects that were applied within the virtual cluster space",
-							Ref:         ref("github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.ObjectsStatus"),
+							Ref:         ref("github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.ObjectsStatus"),
 						},
 					},
 					"virtualCluster": {
 						SchemaProps: spec.SchemaProps{
 							Description: "VirtualCluster is the template rendered with all the parameters",
-							Ref:         ref("github.com/loft-sh/api/v2/pkg/apis/storage/v1.VirtualClusterTemplateDefinition"),
+							Ref:         ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.VirtualClusterTemplateDefinition"),
 						},
 					},
 					"ignoreReconciliation": {
@@ -23201,7 +23201,7 @@ func schema_pkg_apis_storage_v1_VirtualClusterInstanceStatus(ref common.Referenc
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.Condition", "github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.ObjectsStatus", "github.com/loft-sh/api/v2/pkg/apis/storage/v1.VirtualClusterTemplateDefinition"},
+			"github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.Condition", "github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.ObjectsStatus", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.VirtualClusterTemplateDefinition"},
 	}
 }
 
@@ -23215,7 +23215,7 @@ func schema_pkg_apis_storage_v1_VirtualClusterSpaceTemplateDefinition(ref common
 						SchemaProps: spec.SchemaProps{
 							Description: "The space metadata",
 							Default:     map[string]interface{}{},
-							Ref:         ref("github.com/loft-sh/api/v2/pkg/apis/storage/v1.TemplateMetadata"),
+							Ref:         ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.TemplateMetadata"),
 						},
 					},
 					"objects": {
@@ -23233,7 +23233,7 @@ func schema_pkg_apis_storage_v1_VirtualClusterSpaceTemplateDefinition(ref common
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.TemplateHelmChart"),
+										Ref:     ref("github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.TemplateHelmChart"),
 									},
 								},
 							},
@@ -23247,7 +23247,7 @@ func schema_pkg_apis_storage_v1_VirtualClusterSpaceTemplateDefinition(ref common
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.AppReference"),
+										Ref:     ref("github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.AppReference"),
 									},
 								},
 							},
@@ -23257,7 +23257,7 @@ func schema_pkg_apis_storage_v1_VirtualClusterSpaceTemplateDefinition(ref common
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.AppReference", "github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.TemplateHelmChart", "github.com/loft-sh/api/v2/pkg/apis/storage/v1.TemplateMetadata"},
+			"github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.AppReference", "github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.TemplateHelmChart", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.TemplateMetadata"},
 	}
 }
 
@@ -23291,20 +23291,20 @@ func schema_pkg_apis_storage_v1_VirtualClusterTemplate(ref common.ReferenceCallb
 					"spec": {
 						SchemaProps: spec.SchemaProps{
 							Default: map[string]interface{}{},
-							Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/storage/v1.VirtualClusterTemplateSpec"),
+							Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.VirtualClusterTemplateSpec"),
 						},
 					},
 					"status": {
 						SchemaProps: spec.SchemaProps{
 							Default: map[string]interface{}{},
-							Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/storage/v1.VirtualClusterTemplateStatus"),
+							Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.VirtualClusterTemplateStatus"),
 						},
 					},
 				},
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/v2/pkg/apis/storage/v1.VirtualClusterTemplateSpec", "github.com/loft-sh/api/v2/pkg/apis/storage/v1.VirtualClusterTemplateStatus", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
+			"github.com/loft-sh/api/v3/pkg/apis/storage/v1.VirtualClusterTemplateSpec", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.VirtualClusterTemplateStatus", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
 	}
 }
 
@@ -23318,7 +23318,7 @@ func schema_pkg_apis_storage_v1_VirtualClusterTemplateDefinition(ref common.Refe
 						SchemaProps: spec.SchemaProps{
 							Description: "The virtual cluster metadata",
 							Default:     map[string]interface{}{},
-							Ref:         ref("github.com/loft-sh/api/v2/pkg/apis/storage/v1.TemplateMetadata"),
+							Ref:         ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.TemplateMetadata"),
 						},
 					},
 					"apps": {
@@ -23329,7 +23329,7 @@ func schema_pkg_apis_storage_v1_VirtualClusterTemplateDefinition(ref common.Refe
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.AppReference"),
+										Ref:     ref("github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.AppReference"),
 									},
 								},
 							},
@@ -23343,7 +23343,7 @@ func schema_pkg_apis_storage_v1_VirtualClusterTemplateDefinition(ref common.Refe
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.TemplateHelmChart"),
+										Ref:     ref("github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.TemplateHelmChart"),
 									},
 								},
 							},
@@ -23359,35 +23359,35 @@ func schema_pkg_apis_storage_v1_VirtualClusterTemplateDefinition(ref common.Refe
 					"access": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Access defines the access of users and teams to the virtual cluster.",
-							Ref:         ref("github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.InstanceAccess"),
+							Ref:         ref("github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.InstanceAccess"),
 						},
 					},
 					"helmRelease": {
 						SchemaProps: spec.SchemaProps{
 							Description: "HelmRelease is the helm release configuration for the virtual cluster.",
 							Default:     map[string]interface{}{},
-							Ref:         ref("github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.VirtualClusterHelmRelease"),
+							Ref:         ref("github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.VirtualClusterHelmRelease"),
 						},
 					},
 					"accessPoint": {
 						SchemaProps: spec.SchemaProps{
 							Description: "AccessPoint defines settings to expose the virtual cluster directly via an ingress rather than through the (default) Loft proxy",
 							Default:     map[string]interface{}{},
-							Ref:         ref("github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.VirtualClusterAccessPoint"),
+							Ref:         ref("github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.VirtualClusterAccessPoint"),
 						},
 					},
 					"spaceTemplate": {
 						SchemaProps: spec.SchemaProps{
 							Description: "SpaceTemplate holds the space template",
 							Default:     map[string]interface{}{},
-							Ref:         ref("github.com/loft-sh/api/v2/pkg/apis/storage/v1.VirtualClusterSpaceTemplateDefinition"),
+							Ref:         ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.VirtualClusterSpaceTemplateDefinition"),
 						},
 					},
 				},
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.AppReference", "github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.InstanceAccess", "github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.TemplateHelmChart", "github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.VirtualClusterAccessPoint", "github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.VirtualClusterHelmRelease", "github.com/loft-sh/api/v2/pkg/apis/storage/v1.TemplateMetadata", "github.com/loft-sh/api/v2/pkg/apis/storage/v1.VirtualClusterSpaceTemplateDefinition"},
+			"github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.AppReference", "github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.InstanceAccess", "github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.TemplateHelmChart", "github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.VirtualClusterAccessPoint", "github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.VirtualClusterHelmRelease", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.TemplateMetadata", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.VirtualClusterSpaceTemplateDefinition"},
 	}
 }
 
@@ -23425,7 +23425,7 @@ func schema_pkg_apis_storage_v1_VirtualClusterTemplateList(ref common.ReferenceC
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/storage/v1.VirtualClusterTemplate"),
+										Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.VirtualClusterTemplate"),
 									},
 								},
 							},
@@ -23436,7 +23436,7 @@ func schema_pkg_apis_storage_v1_VirtualClusterTemplateList(ref common.ReferenceC
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/v2/pkg/apis/storage/v1.VirtualClusterTemplate", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
+			"github.com/loft-sh/api/v3/pkg/apis/storage/v1.VirtualClusterTemplate", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
 	}
 }
 
@@ -23483,14 +23483,14 @@ func schema_pkg_apis_storage_v1_VirtualClusterTemplateSpec(ref common.ReferenceC
 					"owner": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Owner holds the owner of this object",
-							Ref:         ref("github.com/loft-sh/api/v2/pkg/apis/storage/v1.UserOrTeam"),
+							Ref:         ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.UserOrTeam"),
 						},
 					},
 					"template": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Template holds the virtual cluster template",
 							Default:     map[string]interface{}{},
-							Ref:         ref("github.com/loft-sh/api/v2/pkg/apis/storage/v1.VirtualClusterTemplateDefinition"),
+							Ref:         ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.VirtualClusterTemplateDefinition"),
 						},
 					},
 					"parameters": {
@@ -23501,7 +23501,7 @@ func schema_pkg_apis_storage_v1_VirtualClusterTemplateSpec(ref common.ReferenceC
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/storage/v1.AppParameter"),
+										Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.AppParameter"),
 									},
 								},
 							},
@@ -23515,7 +23515,7 @@ func schema_pkg_apis_storage_v1_VirtualClusterTemplateSpec(ref common.ReferenceC
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/storage/v1.VirtualClusterTemplateVersion"),
+										Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.VirtualClusterTemplateVersion"),
 									},
 								},
 							},
@@ -23529,7 +23529,7 @@ func schema_pkg_apis_storage_v1_VirtualClusterTemplateSpec(ref common.ReferenceC
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/storage/v1.Access"),
+										Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.Access"),
 									},
 								},
 							},
@@ -23538,14 +23538,14 @@ func schema_pkg_apis_storage_v1_VirtualClusterTemplateSpec(ref common.ReferenceC
 					"spaceTemplateRef": {
 						SchemaProps: spec.SchemaProps{
 							Description: "DEPRECATED: SpaceTemplate to use to create the virtual cluster space if it does not exist",
-							Ref:         ref("github.com/loft-sh/api/v2/pkg/apis/storage/v1.VirtualClusterTemplateSpaceTemplateRef"),
+							Ref:         ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.VirtualClusterTemplateSpaceTemplateRef"),
 						},
 					},
 				},
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/v2/pkg/apis/storage/v1.Access", "github.com/loft-sh/api/v2/pkg/apis/storage/v1.AppParameter", "github.com/loft-sh/api/v2/pkg/apis/storage/v1.UserOrTeam", "github.com/loft-sh/api/v2/pkg/apis/storage/v1.VirtualClusterTemplateDefinition", "github.com/loft-sh/api/v2/pkg/apis/storage/v1.VirtualClusterTemplateSpaceTemplateRef", "github.com/loft-sh/api/v2/pkg/apis/storage/v1.VirtualClusterTemplateVersion"},
+			"github.com/loft-sh/api/v3/pkg/apis/storage/v1.Access", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.AppParameter", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.UserOrTeam", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.VirtualClusterTemplateDefinition", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.VirtualClusterTemplateSpaceTemplateRef", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.VirtualClusterTemplateVersion"},
 	}
 }
 
@@ -23570,7 +23570,7 @@ func schema_pkg_apis_storage_v1_VirtualClusterTemplateVersion(ref common.Referen
 						SchemaProps: spec.SchemaProps{
 							Description: "Template holds the space template",
 							Default:     map[string]interface{}{},
-							Ref:         ref("github.com/loft-sh/api/v2/pkg/apis/storage/v1.VirtualClusterTemplateDefinition"),
+							Ref:         ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.VirtualClusterTemplateDefinition"),
 						},
 					},
 					"parameters": {
@@ -23581,7 +23581,7 @@ func schema_pkg_apis_storage_v1_VirtualClusterTemplateVersion(ref common.Referen
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/storage/v1.AppParameter"),
+										Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.AppParameter"),
 									},
 								},
 							},
@@ -23598,7 +23598,7 @@ func schema_pkg_apis_storage_v1_VirtualClusterTemplateVersion(ref common.Referen
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/v2/pkg/apis/storage/v1.AppParameter", "github.com/loft-sh/api/v2/pkg/apis/storage/v1.VirtualClusterTemplateDefinition"},
+			"github.com/loft-sh/api/v3/pkg/apis/storage/v1.AppParameter", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.VirtualClusterTemplateDefinition"},
 	}
 }
 
@@ -23631,20 +23631,20 @@ func schema_pkg_apis_virtualcluster_v1_HelmRelease(ref common.ReferenceCallback)
 					"spec": {
 						SchemaProps: spec.SchemaProps{
 							Default: map[string]interface{}{},
-							Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/virtualcluster/v1.HelmReleaseSpec"),
+							Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/virtualcluster/v1.HelmReleaseSpec"),
 						},
 					},
 					"status": {
 						SchemaProps: spec.SchemaProps{
 							Default: map[string]interface{}{},
-							Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/virtualcluster/v1.HelmReleaseStatus"),
+							Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/virtualcluster/v1.HelmReleaseStatus"),
 						},
 					},
 				},
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/v2/pkg/apis/virtualcluster/v1.HelmReleaseSpec", "github.com/loft-sh/api/v2/pkg/apis/virtualcluster/v1.HelmReleaseStatus", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
+			"github.com/loft-sh/api/v3/pkg/apis/virtualcluster/v1.HelmReleaseSpec", "github.com/loft-sh/api/v3/pkg/apis/virtualcluster/v1.HelmReleaseStatus", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
 	}
 }
 
@@ -23681,7 +23681,7 @@ func schema_pkg_apis_virtualcluster_v1_HelmReleaseList(ref common.ReferenceCallb
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/loft-sh/api/v2/pkg/apis/virtualcluster/v1.HelmRelease"),
+										Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/virtualcluster/v1.HelmRelease"),
 									},
 								},
 							},
@@ -23692,7 +23692,7 @@ func schema_pkg_apis_virtualcluster_v1_HelmReleaseList(ref common.ReferenceCallb
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/v2/pkg/apis/virtualcluster/v1.HelmRelease", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
+			"github.com/loft-sh/api/v3/pkg/apis/virtualcluster/v1.HelmRelease", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
 	}
 }
 
@@ -23706,7 +23706,7 @@ func schema_pkg_apis_virtualcluster_v1_HelmReleaseSpec(ref common.ReferenceCallb
 						SchemaProps: spec.SchemaProps{
 							Description: "Chart holds information about a chart that should get deployed",
 							Default:     map[string]interface{}{},
-							Ref:         ref("github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.Chart"),
+							Ref:         ref("github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.Chart"),
 						},
 					},
 					"manifests": {
@@ -23719,7 +23719,7 @@ func schema_pkg_apis_virtualcluster_v1_HelmReleaseSpec(ref common.ReferenceCallb
 					"bash": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Bash holds the bash script to execute in a container in the target",
-							Ref:         ref("github.com/loft-sh/agentapi/v2/pkg/apis/loft/cluster/v1.Bash"),
+							Ref:         ref("github.com/loft-sh/agentapi/v3/pkg/apis/loft/cluster/v1.Bash"),
 						},
 					},
 					"values": {
@@ -23756,7 +23756,7 @@ func schema_pkg_apis_virtualcluster_v1_HelmReleaseSpec(ref common.ReferenceCallb
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/agentapi/v2/pkg/apis/loft/cluster/v1.Bash", "github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1.Chart"},
+			"github.com/loft-sh/agentapi/v3/pkg/apis/loft/cluster/v1.Bash", "github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.Chart"},
 	}
 }
 
@@ -23776,20 +23776,20 @@ func schema_pkg_apis_virtualcluster_v1_HelmReleaseStatus(ref common.ReferenceCal
 					"info": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Info provides information about a release",
-							Ref:         ref("github.com/loft-sh/agentapi/v2/pkg/apis/loft/cluster/v1.Info"),
+							Ref:         ref("github.com/loft-sh/agentapi/v3/pkg/apis/loft/cluster/v1.Info"),
 						},
 					},
 					"metadata": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Metadata provides information about a chart",
-							Ref:         ref("github.com/loft-sh/agentapi/v2/pkg/apis/loft/cluster/v1.Metadata"),
+							Ref:         ref("github.com/loft-sh/agentapi/v3/pkg/apis/loft/cluster/v1.Metadata"),
 						},
 					},
 				},
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/agentapi/v2/pkg/apis/loft/cluster/v1.Info", "github.com/loft-sh/agentapi/v2/pkg/apis/loft/cluster/v1.Metadata"},
+			"github.com/loft-sh/agentapi/v3/pkg/apis/loft/cluster/v1.Info", "github.com/loft-sh/agentapi/v3/pkg/apis/loft/cluster/v1.Metadata"},
 	}
 }
 
@@ -58508,7 +58508,15 @@ func schema_k8sio_api_storage_v1beta1_VolumeNodeResources(ref common.ReferenceCa
 }
 
 func schema_apimachinery_pkg_api_resource_Quantity(ref common.ReferenceCallback) common.OpenAPIDefinition {
-	return common.OpenAPIDefinition{
+	return common.EmbedOpenAPIDefinitionIntoV2Extension(common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "Quantity is a fixed-point representation of a number. It provides convenient marshaling/unmarshaling in JSON and YAML, in addition to String() and AsInt64() accessors.\n\nThe serialization format is:\n\n``` <quantity>        ::= <signedNumber><suffix>\n\n\t(Note that <suffix> may be empty, from the \"\" case in <decimalSI>.)\n\n<digit>           ::= 0 | 1 | ... | 9 <digits>          ::= <digit> | <digit><digits> <number>          ::= <digits> | <digits>.<digits> | <digits>. | .<digits> <sign>            ::= \"+\" | \"-\" <signedNumber>    ::= <number> | <sign><number> <suffix>          ::= <binarySI> | <decimalExponent> | <decimalSI> <binarySI>        ::= Ki | Mi | Gi | Ti | Pi | Ei\n\n\t(International System of units; See: http://physics.nist.gov/cuu/Units/binary.html)\n\n<decimalSI>       ::= m | \"\" | k | M | G | T | P | E\n\n\t(Note that 1024 = 1Ki but 1000 = 1k; I didn't choose the capitalization.)\n\n<decimalExponent> ::= \"e\" <signedNumber> | \"E\" <signedNumber> ```\n\nNo matter which of the three exponent forms is used, no quantity may represent a number greater than 2^63-1 in magnitude, nor may it have more than 3 decimal places. Numbers larger or more precise will be capped or rounded up. (E.g.: 0.1m will rounded up to 1m.) This may be extended in the future if we require larger or smaller quantities.\n\nWhen a Quantity is parsed from a string, it will remember the type of suffix it had, and will use the same type again when it is serialized.\n\nBefore serializing, Quantity will be put in \"canonical form\". This means that Exponent/suffix will be adjusted up or down (with a corresponding increase or decrease in Mantissa) such that:\n\n- No precision is lost - No fractional digits will be emitted - The exponent (or suffix) is as large as possible.\n\nThe sign will be omitted unless the number is negative.\n\nExamples:\n\n- 1.5 will be serialized as \"1500m\" - 1.5Gi will be serialized as \"1536Mi\"\n\nNote that the quantity will NEVER be internally represented by a floating point number. That is the whole point of this exercise.\n\nNon-canonical values will still parse as long as they are well formed, but will be re-emitted in their canonical form. (So always use canonical form, or don't diff.)\n\nThis format is intended to make it difficult to use these numbers without writing some sort of special handling code in the hopes that that will cause implementors to also use a fixed point implementation.",
+				OneOf:       common.GenerateOpenAPIV3OneOfSchema(resource.Quantity{}.OpenAPIV3OneOfTypes()),
+				Format:      resource.Quantity{}.OpenAPISchemaFormat(),
+			},
+		},
+	}, common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
 				Description: "Quantity is a fixed-point representation of a number. It provides convenient marshaling/unmarshaling in JSON and YAML, in addition to String() and AsInt64() accessors.\n\nThe serialization format is:\n\n``` <quantity>        ::= <signedNumber><suffix>\n\n\t(Note that <suffix> may be empty, from the \"\" case in <decimalSI>.)\n\n<digit>           ::= 0 | 1 | ... | 9 <digits>          ::= <digit> | <digit><digits> <number>          ::= <digits> | <digits>.<digits> | <digits>. | .<digits> <sign>            ::= \"+\" | \"-\" <signedNumber>    ::= <number> | <sign><number> <suffix>          ::= <binarySI> | <decimalExponent> | <decimalSI> <binarySI>        ::= Ki | Mi | Gi | Ti | Pi | Ei\n\n\t(International System of units; See: http://physics.nist.gov/cuu/Units/binary.html)\n\n<decimalSI>       ::= m | \"\" | k | M | G | T | P | E\n\n\t(Note that 1024 = 1Ki but 1000 = 1k; I didn't choose the capitalization.)\n\n<decimalExponent> ::= \"e\" <signedNumber> | \"E\" <signedNumber> ```\n\nNo matter which of the three exponent forms is used, no quantity may represent a number greater than 2^63-1 in magnitude, nor may it have more than 3 decimal places. Numbers larger or more precise will be capped or rounded up. (E.g.: 0.1m will rounded up to 1m.) This may be extended in the future if we require larger or smaller quantities.\n\nWhen a Quantity is parsed from a string, it will remember the type of suffix it had, and will use the same type again when it is serialized.\n\nBefore serializing, Quantity will be put in \"canonical form\". This means that Exponent/suffix will be adjusted up or down (with a corresponding increase or decrease in Mantissa) such that:\n\n- No precision is lost - No fractional digits will be emitted - The exponent (or suffix) is as large as possible.\n\nThe sign will be omitted unless the number is negative.\n\nExamples:\n\n- 1.5 will be serialized as \"1500m\" - 1.5Gi will be serialized as \"1536Mi\"\n\nNote that the quantity will NEVER be internally represented by a floating point number. That is the whole point of this exercise.\n\nNon-canonical values will still parse as long as they are well formed, but will be re-emitted in their canonical form. (So always use canonical form, or don't diff.)\n\nThis format is intended to make it difficult to use these numbers without writing some sort of special handling code in the hopes that that will cause implementors to also use a fixed point implementation.",
@@ -58516,7 +58524,7 @@ func schema_apimachinery_pkg_api_resource_Quantity(ref common.ReferenceCallback)
 				Format:      resource.Quantity{}.OpenAPISchemaFormat(),
 			},
 		},
-	}
+	})
 }
 
 func schema_apimachinery_pkg_api_resource_int64Amount(ref common.ReferenceCallback) common.OpenAPIDefinition {
@@ -60901,7 +60909,15 @@ func schema_k8sio_apimachinery_pkg_runtime_Unknown(ref common.ReferenceCallback)
 }
 
 func schema_apimachinery_pkg_util_intstr_IntOrString(ref common.ReferenceCallback) common.OpenAPIDefinition {
-	return common.OpenAPIDefinition{
+	return common.EmbedOpenAPIDefinitionIntoV2Extension(common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "IntOrString is a type that can hold an int32 or a string.  When used in JSON or YAML marshalling and unmarshalling, it produces or consumes the inner type.  This allows you to have, for example, a JSON field that can accept a name or number.",
+				OneOf:       common.GenerateOpenAPIV3OneOfSchema(intstr.IntOrString{}.OpenAPIV3OneOfTypes()),
+				Format:      intstr.IntOrString{}.OpenAPISchemaFormat(),
+			},
+		},
+	}, common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
 				Description: "IntOrString is a type that can hold an int32 or a string.  When used in JSON or YAML marshalling and unmarshalling, it produces or consumes the inner type.  This allows you to have, for example, a JSON field that can accept a name or number.",
@@ -60909,7 +60925,7 @@ func schema_apimachinery_pkg_util_intstr_IntOrString(ref common.ReferenceCallbac
 				Format:      intstr.IntOrString{}.OpenAPISchemaFormat(),
 			},
 		},
-	}
+	})
 }
 
 func schema_k8sio_apimachinery_pkg_version_Info(ref common.ReferenceCallback) common.OpenAPIDefinition {
