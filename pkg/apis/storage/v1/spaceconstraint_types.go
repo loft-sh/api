@@ -1,7 +1,6 @@
 package v1
 
 import (
-	agentstoragev1 "github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 )
 
@@ -69,7 +68,44 @@ type LocalSpaceConstraintTemplate struct {
 
 	// LocalSpaceConstraintSpec holds the spec of the space constraint in the cluster
 	// +optional
-	LocalSpaceConstraintSpec agentstoragev1.LocalSpaceConstraintSpec `json:"spec,omitempty"`
+	LocalSpaceConstraintSpec LocalSpaceConstraintSpec `json:"spec,omitempty"`
+}
+
+type LocalSpaceConstraintSpec struct {
+	// DisplayName is the name that should be shown in the UI
+	// +optional
+	DisplayName string `json:"displayName,omitempty"`
+
+	// Description is the description of this object in
+	// human-readable text.
+	// +optional
+	Description string `json:"description,omitempty"`
+
+	// SpaceTemplate holds the space configuration
+	// +optional
+	SpaceTemplate ConstraintSpaceTemplate `json:"spaceTemplate,omitempty"`
+
+	// Sync specifies if spaces that were created through this space constraint
+	// object should get synced with this object.
+	// +optional
+	Sync bool `json:"sync,omitempty"`
+}
+
+// ConstraintSpaceTemplate defines properties how many spaces can be owned by the account and how they should be created
+type ConstraintSpaceTemplate struct {
+	// The enforced metadata of the space to create. Currently, only annotations and labels are supported
+	// +kubebuilder:pruning:PreserveUnknownFields
+	// +optional
+	metav1.ObjectMeta `json:"metadata,omitempty"`
+
+	// This defines the cluster role that will be used for the rolebinding when
+	// creating a new space for the selected subjects
+	// +optional
+	ClusterRole *string `json:"clusterRole,omitempty"`
+
+	// Objects are Kubernetes style yamls that should get deployed into the space
+	// +optional
+	Objects string `json:"objects,omitempty"`
 }
 
 // SpaceConstraintStatus holds the status of a user access

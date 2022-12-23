@@ -1,6 +1,6 @@
 package token
 
-import storagev1 "github.com/loft-sh/api/v2/pkg/apis/storage/v1"
+import storagev1 "github.com/loft-sh/api/v3/pkg/apis/storage/v1"
 
 type PrivateClaims struct {
 	Loft Loft `json:"loft.sh,omitempty"`
