@@ -13,6 +13,8 @@ import (
 func addKnownTypes(scheme *runtime.Scheme) error {
 	// TODO this will get cleaned up with the scheme types are fixed
 	scheme.AddKnownTypes(SchemeGroupVersion,
+		&AgentAuditEvent{},
+		&AgentAuditEventList{},
 		&Announcement{},
 		&AnnouncementList{},
 		&App{},
@@ -106,6 +108,7 @@ func addKnownTypes(scheme *runtime.Scheme) error {
 
 var (
 	ApiVersion = builders.NewApiVersion("management.loft.sh", "v1").WithResources(
+		management.ManagementAgentAuditEventStorage,
 		management.ManagementAnnouncementStorage,
 		management.ManagementAppStorage,
 		management.ManagementClusterStorage,
@@ -154,6 +157,11 @@ var (
 		management.ManagementOwnedAccessKeyStorage,
 		management.ManagementPolicyViolationStorage,
 		management.ManagementProjectStorage,
+		builders.NewApiResourceWithStorage(
+			management.InternalProjectStatus,
+			func() runtime.Object { return &Project{} },     // Register versioned resource
+			func() runtime.Object { return &ProjectList{} }, // Register versioned resource list
+			management.NewProjectStatusREST),
 		builders.NewApiResourceWithStorage(
 			management.InternalProjectChartInfoREST,
 			func() runtime.Object { return &ProjectChartInfo{} }, // Register versioned resource
@@ -282,6 +290,14 @@ func Kind(kind string) schema.GroupKind {
 // Resource takes an unqualified resource and returns a Group qualified GroupResource
 func Resource(resource string) schema.GroupResource {
 	return SchemeGroupVersion.WithResource(resource).GroupResource()
+}
+
+// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+
+type AgentAuditEventList struct {
+	metav1.TypeMeta `json:",inline"`
+	metav1.ListMeta `json:"metadata,omitempty"`
+	Items           []AgentAuditEvent `json:"items"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object

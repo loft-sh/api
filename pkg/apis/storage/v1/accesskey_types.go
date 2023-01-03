@@ -105,6 +105,11 @@ type AccessKeySpec struct {
 }
 
 type AccessKeyScope struct {
+	// AllowLoftCLI allows certain read-only management requests to
+	// make sure loft cli works correctly with this specific access key.
+	// +optional
+	AllowLoftCLI bool `json:"allowLoftCli,omitempty"`
+
 	// Projects specifies the projects the access key should have access to.
 	// +optional
 	Projects []AccessKeyScopeProject `json:"projects,omitempty"`
@@ -265,22 +270,26 @@ type AccessKeyIdentity struct {
 
 	// The user email
 	// +optional
-	Email string
+	Email string `json:"email,omitempty"`
 
 	// If the user email was verified
 	// +optional
-	EmailVerified bool
+	EmailVerified bool `json:"emailVerified,omitempty"`
 
 	// The groups from the identity provider
 	// +optional
-	Groups []string
+	Groups []string `json:"groups,omitempty"`
+
+	// Connector is the name of the connector this access key was created from
+	// +optional
+	Connector string `json:"connector,omitempty"`
 
 	// ConnectorData holds data used by the connector for subsequent requests after initial
 	// authentication, such as access tokens for upstream providers.
 	//
 	// This data is never shared with end users, OAuth clients, or through the API.
 	// +optional
-	ConnectorData []byte
+	ConnectorData []byte `json:"connectorData,omitempty"`
 }
 
 type AccessKeyOIDCProvider struct {

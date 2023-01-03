@@ -30,56 +30,52 @@ func GetAllApiBuilders() []*builders.APIGroupBuilder {
 	}
 }
 
-var managementApiGroup = builders.NewApiGroupBuilder(
-	"management.loft.sh",
-	"github.com/loft-sh/api/v3/pkg/apis/management").
-	WithUnVersionedApi(management.ApiVersion).
-	WithVersionedApis(
-		managementv1.ApiVersion,
-	).
-	WithRootScopedKinds(
-		"Announcement",
-		"App",
-		"Cluster",
-		"ClusterAccess",
-		"ClusterConnect",
-		"ClusterRoleTemplate",
-		"Config",
-		"DirectClusterEndpointToken",
-		"Event",
-		"Feature",
-		"IngressAuthToken",
-		"License",
-		"LicenseToken",
-		"LoftUpgrade",
-		"OwnedAccessKey",
-		"PolicyViolation",
-		"Project",
-		"ResetAccessKey",
-		"Self",
-		"SelfSubjectAccessReview",
-		"SpaceConstraint",
-		"SpaceTemplate",
-		"SubjectAccessReview",
-		"Task",
-		"Team",
-		"User",
-		"VirtualClusterTemplate",
-	)
-
 func GetManagementAPIBuilder() *builders.APIGroupBuilder {
-	return managementApiGroup
+	return builders.NewApiGroupBuilder(
+		"management.loft.sh",
+		"github.com/loft-sh/api/v3/pkg/apis/management").
+		WithUnVersionedApi(management.ApiVersion).
+		WithVersionedApis(
+			managementv1.ApiVersion,
+		).
+		WithRootScopedKinds(
+			"AgentAuditEvent",
+			"Announcement",
+			"App",
+			"Cluster",
+			"ClusterAccess",
+			"ClusterConnect",
+			"ClusterRoleTemplate",
+			"Config",
+			"DirectClusterEndpointToken",
+			"Event",
+			"Feature",
+			"IngressAuthToken",
+			"License",
+			"LicenseToken",
+			"LoftUpgrade",
+			"OwnedAccessKey",
+			"PolicyViolation",
+			"Project",
+			"ResetAccessKey",
+			"Self",
+			"SelfSubjectAccessReview",
+			"SpaceConstraint",
+			"SpaceTemplate",
+			"SubjectAccessReview",
+			"Task",
+			"Team",
+			"User",
+			"VirtualClusterTemplate",
+		)
 }
-
-var virtualclusterApiGroup = builders.NewApiGroupBuilder(
-	"virtualcluster.loft.sh",
-	"github.com/loft-sh/api/v3/pkg/apis/virtualcluster").
-	WithUnVersionedApi(virtualcluster.ApiVersion).
-	WithVersionedApis(
-		virtualclusterv1.ApiVersion,
-	).
-	WithRootScopedKinds()
-
 func GetVirtualclusterAPIBuilder() *builders.APIGroupBuilder {
-	return virtualclusterApiGroup
+	return builders.NewApiGroupBuilder(
+		"virtualcluster.loft.sh",
+		"github.com/loft-sh/api/v3/pkg/apis/virtualcluster").
+		WithUnVersionedApi(virtualcluster.ApiVersion).
+		WithVersionedApis(
+			virtualclusterv1.ApiVersion,
+		).
+		WithRootScopedKinds()
 }

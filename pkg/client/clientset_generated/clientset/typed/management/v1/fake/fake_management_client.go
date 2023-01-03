@@ -12,6 +12,10 @@ type FakeManagementV1 struct {
 	*testing.Fake
 }
 
+func (c *FakeManagementV1) AgentAuditEvents() v1.AgentAuditEventInterface {
+	return &FakeAgentAuditEvents{c}
+}
+
 func (c *FakeManagementV1) Announcements() v1.AnnouncementInterface {
 	return &FakeAnnouncements{c}
 }

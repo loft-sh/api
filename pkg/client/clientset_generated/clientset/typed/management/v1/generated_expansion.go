@@ -2,6 +2,8 @@
 
 package v1
 
+type AgentAuditEventExpansion interface{}
+
 type AnnouncementExpansion interface{}
 
 type AppExpansion interface{}

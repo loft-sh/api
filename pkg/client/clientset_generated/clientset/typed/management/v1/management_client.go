@@ -12,6 +12,7 @@ import (
 
 type ManagementV1Interface interface {
 	RESTClient() rest.Interface
+	AgentAuditEventsGetter
 	AnnouncementsGetter
 	AppsGetter
 	ClustersGetter
@@ -48,6 +49,10 @@ type ManagementV1Interface interface {
 // ManagementV1Client is used to interact with features provided by the management.loft.sh group.
 type ManagementV1Client struct {
 	restClient rest.Interface
+}
+
+func (c *ManagementV1Client) AgentAuditEvents() AgentAuditEventInterface {
+	return newAgentAuditEvents(c)
 }
 
 func (c *ManagementV1Client) Announcements() AnnouncementInterface {

@@ -66,6 +66,11 @@ type UserSpec struct {
 	// +optional
 	Groups []string `json:"groups,omitempty"`
 
+	// SSOGroups is used to remember groups that were
+	// added from sso.
+	// +optional
+	SSOGroups []string `json:"ssoGroups,omitempty"`
+
 	// A reference to the user password
 	// +optional
 	PasswordRef *SecretRef `json:"passwordRef,omitempty"`

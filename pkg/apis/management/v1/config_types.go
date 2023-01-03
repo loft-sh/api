@@ -3,6 +3,7 @@ package v1
 import (
 	auditv1 "github.com/loft-sh/api/v3/pkg/apis/audit/v1"
 	storagev1 "github.com/loft-sh/api/v3/pkg/apis/storage/v1"
+	uiv1 "github.com/loft-sh/api/v3/pkg/apis/ui/v1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 )
 
@@ -31,9 +32,11 @@ type ConfigSpec struct {
 // ConfigStatus holds the status, which is the parsed raw config
 type ConfigStatus struct {
 	// Authentication holds the information for authentication
+	// +optional
 	Authentication Authentication `json:"auth,omitempty"`
 
 	// OIDC holds oidc provider relevant information
+	// +optional
 	OIDC *OIDC `json:"oidc,omitempty"`
 
 	// Apps holds configuration around apps
@@ -45,7 +48,12 @@ type ConfigStatus struct {
 	Audit *Audit `json:"audit,omitempty"`
 
 	// LoftHost holds the domain where the loft instance is hosted
+	// +optional
 	LoftHost string `json:"loftHost,omitempty"`
+
+	// UISettings holds the settings for modifying the Loft user interface
+	// +optional
+	UISettings *uiv1.UISettingsSpec `json:"uiSettings,omitempty"`
 }
 
 // Audit holds the audit configuration options for loft. Changing any options will require a loft restart
@@ -54,6 +62,10 @@ type Audit struct {
 	// If audit is enabled and incoming api requests will be logged based on the supplied policy.
 	// +optional
 	Enabled bool `json:"enabled,omitempty"`
+
+	// If true, the agent will not send back any audit logs to Loft itself.
+	// +optional
+	DisableAgentSyncBack bool `json:"disableAgentSyncBack,omitempty"`
 
 	// Level is an optional log level for audit logs. Cannot be used together with policy
 	// +optional
@@ -73,6 +85,7 @@ type Audit struct {
 
 	// The path where to save the audit log files. This is required if audit is enabled. Backup log files will
 	// be retained in the same directory.
+	// +optional
 	Path string `json:"path,omitempty"`
 
 	// MaxAge is the maximum number of days to retain old log files based on the
@@ -219,6 +232,7 @@ type Apps struct {
 // PredefinedApp holds information about a predefined app
 type PredefinedApp struct {
 	// Chart holds the repo/chart name of the predefined app
+	// +optional
 	Chart string `json:"chart"`
 
 	// InitialVersion holds the initial version of this app.
@@ -280,10 +294,35 @@ type OIDCClient struct {
 
 // Authentication holds authentication relevant information
 type Authentication struct {
+	Connector `json:",inline"`
+
 	// Password holds password authentication relevant information
 	// +optional
 	Password *AuthenticationPassword `json:"password,omitempty"`
 
+	// Connectors are optional additional connectors for Loft.
+	// +optional
+	Connectors []ConnectorWithName `json:"connectors,omitempty"`
+
+	// Prevents from team creation for the new groups associated with the user at the time of logging in through sso,
+	// Default behaviour is false, this means that teams will be created for new groups.
+	// +optional
+	DisableTeamCreation bool `json:"disableTeamCreation,omitempty"`
+}
+
+type ConnectorWithName struct {
+	// ID is the id that should show up in the url
+	// +optional
+	ID string `json:"id,omitempty"`
+
+	// DisplayName is the name that should show up in the ui
+	// +optional
+	DisplayName string `json:"displayName,omitempty"`
+
+	Connector `json:",inline"`
+}
+
+type Connector struct {
 	// OIDC holds oidc authentication configuration
 	// +optional
 	OIDC *AuthenticationOIDC `json:"oidc,omitempty"`
@@ -307,38 +346,56 @@ type Authentication struct {
 	// SAML holds saml authentication configuration
 	// +optional
 	SAML *AuthenticationSAML `json:"saml,omitempty"`
-
-	// Prevents from team creation for the new groups associated with the user at the time of logging in through sso,
-	// Default behaviour is false, this means that teams will be created for new groups.
-	DisableTeamCreation bool `json:"disableTeamCreation,omitempty"`
 }
 
 type AuthenticationSAML struct {
-	// TODO(ericchiang): A bunch of these fields could be auto-filled if
-	// we supported SAML metadata discovery.
-	//
-	// https://www.oasis-open.org/committees/download.php/35391/sstc-saml-metadata-errata-2.0-wd-04-diff.pdf
+	// If the response assertion status value contains a Destination element, it
+	// must match this value exactly.
+	// Usually looks like https://your-loft-domain/auth/saml/callback
+	RedirectURI string `json:"redirectURI,omitempty"`
+	// SSO URL used for POST value.
+	SSOURL string `json:"ssoURL,omitempty"`
+	// CAData is a base64 encoded string that holds the ca certificate for validating the signature of the SAML response.
+	// Either CAData, CA or InsecureSkipSignatureValidation needs to be defined.
+	// +optional
+	CAData []byte `json:"caData,omitempty"`
 
-	EntityIssuer string `json:"entityIssuer,omitempty"`
-	SSOIssuer    string `json:"ssoIssuer,omitempty"`
-	SSOURL       string `json:"ssoURL,omitempty"`
-
-	// X509 CA file or raw data to verify XML signatures.
-	CA                              string `json:"ca,omitempty"`
-	CAData                          []byte `json:"caData,omitempty"`
-	InsecureSkipSignatureValidation bool   `json:"insecureSkipSignatureValidation,omitempty"`
-
-	// Assertion attribute names to lookup various claims with.
+	// Name of attribute in the returned assertions to map to username
 	UsernameAttr string `json:"usernameAttr,omitempty"`
-	EmailAttr    string `json:"emailAttr,omitempty"`
-	GroupsAttr   string `json:"groupsAttr,omitempty"`
+	// Name of attribute in the returned assertions to map to email
+	EmailAttr string `json:"emailAttr,omitempty"`
+	// Name of attribute in the returned assertions to map to groups
+	// +optional
+	GroupsAttr string `json:"groupsAttr,omitempty"`
+
+	// CA to use when validating the signature of the SAML response.
+	// +optional
+	CA string `json:"ca,omitempty"`
+	// Ignore the ca cert
+	// +optional
+	InsecureSkipSignatureValidation bool `json:"insecureSkipSignatureValidation,omitempty"`
+
+	// When provided Loft will include this as the Issuer value during AuthnRequest.
+	// It will also override the redirectURI as the required audience when evaluating
+	// AudienceRestriction elements in the response.
+	// +optional
+	EntityIssuer string `json:"entityIssuer,omitempty"`
+	// Issuer value expected in the SAML response. Optional.
+	// +optional
+	SSOIssuer string `json:"ssoIssuer,omitempty"`
+
 	// If GroupsDelim is supplied the connector assumes groups are returned as a
 	// single string instead of multiple attribute values. This delimiter will be
 	// used split the groups string.
-	GroupsDelim   string   `json:"groupsDelim,omitempty"`
+	// +optional
+	GroupsDelim string `json:"groupsDelim,omitempty"`
+	// List of groups to filter access based on membership
+	// +optional
 	AllowedGroups []string `json:"allowedGroups,omitempty"`
-	FilterGroups  bool     `json:"filterGroups,omitempty"`
-	RedirectURI   string   `json:"redirectURI,omitempty"`
+	// If used with allowed groups, only forwards the allowed groups and not all
+	// groups specified.
+	// +optional
+	FilterGroups bool `json:"filterGroups,omitempty"`
 
 	// Requested format of the NameID. The NameID value is is mapped to the ID Token
 	// 'sub' claim.
@@ -352,6 +409,7 @@ type AuthenticationSAML struct {
 	//
 	//		urn:oasis:names:tc:SAML:2.0:nameid-format:persistent
 	//
+	// +optional
 	NameIDPolicyFormat string `json:"nameIDPolicyFormat,omitempty"`
 }
 
@@ -361,8 +419,6 @@ type AuthenticationPassword struct {
 }
 
 type AuthenticationMicrosoft struct {
-	AuthenticationClusterAccountTemplates `json:",inline"`
-
 	// Microsoft client id
 	ClientID string `json:"clientId"`
 
@@ -394,11 +450,11 @@ type AuthenticationMicrosoft struct {
 	// Restrict the groups claims to include only the user’s groups that are in the configured groups
 	// +optional
 	UseGroupsAsWhitelist bool `json:"useGroupsAsWhitelist,omitempty"`
+
+	AuthenticationClusterAccountTemplates `json:",inline"`
 }
 
 type AuthenticationGoogle struct {
-	AuthenticationClusterAccountTemplates `json:",inline"`
-
 	// Google client id
 	ClientID string `json:"clientId"`
 
@@ -433,11 +489,11 @@ type AuthenticationGoogle struct {
 	// when listing groups
 	// +optional
 	AdminEmail string `json:"adminEmail,omitempty"`
+
+	AuthenticationClusterAccountTemplates `json:",inline"`
 }
 
 type AuthenticationGitlab struct {
-	AuthenticationClusterAccountTemplates `json:",inline"`
-
 	// Gitlab client id
 	ClientID string `json:"clientId"`
 
@@ -456,11 +512,11 @@ type AuthenticationGitlab struct {
 	// If `groups` is provided, this acts as a whitelist - only the user's GitLab groups that are in the configured `groups` below will go into the groups claim. Conversely, if the user is not in any of the configured `groups`, the user will not be authenticated.
 	// +optional
 	Groups []string `json:"groups,omitempty"`
+
+	AuthenticationClusterAccountTemplates `json:",inline"`
 }
 
 type AuthenticationGithub struct {
-	AuthenticationClusterAccountTemplates `json:",inline"`
-
 	// ClientID holds the github client id
 	ClientID string `json:"clientId,omitempty"`
 
@@ -490,6 +546,8 @@ type AuthenticationGithub struct {
 	// Used to support self-signed or untrusted CA root certificates.
 	// +optional
 	RootCA string `json:"rootCA,omitempty"`
+
+	AuthenticationClusterAccountTemplates `json:",inline"`
 }
 
 // AuthenticationGithubOrg holds org-team filters, in which teams are optional.
@@ -508,8 +566,6 @@ type AuthenticationGithubOrg struct {
 }
 
 type AuthenticationOIDC struct {
-	AuthenticationClusterAccountTemplates `json:",inline"`
-
 	// IssuerURL is the URL the provider signs ID Tokens as. This will be the "iss"
 	// field of all tokens produced by the provider and is used for configuration
 	// discovery.
@@ -519,7 +575,6 @@ type AuthenticationOIDC struct {
 	//
 	// The provider must implement configuration discovery.
 	// See: https://openid.net/specs/openid-connect-discovery-1_0.html#ProviderConfig
-	// +optional
 	IssuerURL string `json:"issuerUrl,omitempty"`
 
 	// ClientID the JWT must be issued for, the "sub" field. This plugin only trusts a single
@@ -528,15 +583,12 @@ type AuthenticationOIDC struct {
 	// The plugin supports the "authorized party" OpenID Connect claim, which allows
 	// specialized providers to issue tokens to a client for a different client.
 	// See: https://openid.net/specs/openid-connect-core-1_0.html#IDToken
-	// +optional
 	ClientID string `json:"clientId,omitempty"`
 
 	// ClientSecret to issue tokens from the OIDC provider
-	// +optional
 	ClientSecret string `json:"clientSecret,omitempty"`
 
 	// loft redirect uri. E.g. https://loft.my.domain/auth/oidc/callback
-	// +optional
 	RedirectURI string `json:"redirectURI,omitempty"`
 
 	// Path to a PEM encoded root certificate of the provider. Optional
@@ -580,6 +632,8 @@ type AuthenticationOIDC struct {
 	// Type of the OIDC to show in the UI. Only for displaying purposes
 	// +optional
 	Type string `json:"type,omitempty"`
+
+	AuthenticationClusterAccountTemplates `json:",inline"`
 }
 
 type AuthenticationClusterAccountTemplates struct {

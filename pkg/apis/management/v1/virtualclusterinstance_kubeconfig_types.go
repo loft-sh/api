@@ -10,11 +10,11 @@ type VirtualClusterInstanceKubeConfig struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
 
-	RequestOptions VirtualClusterInstanceKubeConfigRequestOptions `json:"requestOptions,omitempty"`
-	Status         VirtualClusterInstanceKubeConfigStatus         `json:"status,omitempty"`
+	Spec   VirtualClusterInstanceKubeConfigSpec   `json:"spec,omitempty"`
+	Status VirtualClusterInstanceKubeConfigStatus `json:"status,omitempty"`
 }
 
-type VirtualClusterInstanceKubeConfigRequestOptions struct {
+type VirtualClusterInstanceKubeConfigSpec struct {
 	// CertificateTTL holds the ttl (in seconds) to set for the certificate associated with the
 	// returned kubeconfig.
 	// This field is optional, if no value is provided, the certificate TTL will be set to one day.

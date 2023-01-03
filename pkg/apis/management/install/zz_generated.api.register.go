@@ -22,6 +22,8 @@ func Install(scheme *runtime.Scheme) {
 
 func addKnownTypes(scheme *runtime.Scheme) error {
 	scheme.AddKnownTypes(management.SchemeGroupVersion,
+		&management.AgentAuditEvent{},
+		&management.AgentAuditEventList{},
 		&management.Announcement{},
 		&management.AnnouncementList{},
 		&management.App{},
