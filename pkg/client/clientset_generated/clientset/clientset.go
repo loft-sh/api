@@ -6,9 +6,9 @@ import (
 	"fmt"
 	"net/http"
 
-	managementv1 "github.com/loft-sh/api/v2/pkg/client/clientset_generated/clientset/typed/management/v1"
-	storagev1 "github.com/loft-sh/api/v2/pkg/client/clientset_generated/clientset/typed/storage/v1"
-	virtualclusterv1 "github.com/loft-sh/api/v2/pkg/client/clientset_generated/clientset/typed/virtualcluster/v1"
+	managementv1 "github.com/loft-sh/api/v3/pkg/client/clientset_generated/clientset/typed/management/v1"
+	storagev1 "github.com/loft-sh/api/v3/pkg/client/clientset_generated/clientset/typed/storage/v1"
+	virtualclusterv1 "github.com/loft-sh/api/v3/pkg/client/clientset_generated/clientset/typed/virtualcluster/v1"
 	discovery "k8s.io/client-go/discovery"
 	rest "k8s.io/client-go/rest"
 	flowcontrol "k8s.io/client-go/util/flowcontrol"
@@ -21,8 +21,7 @@ type Interface interface {
 	VirtualclusterV1() virtualclusterv1.VirtualclusterV1Interface
 }
 
-// Clientset contains the clients for groups. Each group has exactly one
-// version included in a Clientset.
+// Clientset contains the clients for groups.
 type Clientset struct {
 	*discovery.DiscoveryClient
 	managementV1     *managementv1.ManagementV1Client

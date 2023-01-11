@@ -19,6 +19,14 @@ type AccessKey struct {
 }
 
 type AccessKeySpec struct {
+	// The display name shown in the UI
+	// +optional
+	DisplayName string `json:"displayName,omitempty"`
+
+	// Description describes an app
+	// +optional
+	Description string `json:"description,omitempty"`
+
 	// The user this access key refers to
 	// +optional
 	User string `json:"user,omitempty"`
@@ -45,10 +53,6 @@ type AccessKeySpec struct {
 	// however will not work to access the api
 	// +optional
 	Disabled bool `json:"disabled,omitempty"`
-
-	// The display name shown in the UI
-	// +optional
-	DisplayName string `json:"displayName,omitempty"`
 
 	// The time to life for this access key
 	// +optional
@@ -101,9 +105,53 @@ type AccessKeySpec struct {
 }
 
 type AccessKeyScope struct {
+	// AllowLoftCLI allows certain read-only management requests to
+	// make sure loft cli works correctly with this specific access key.
+	// +optional
+	AllowLoftCLI bool `json:"allowLoftCli,omitempty"`
+
+	// Projects specifies the projects the access key should have access to.
+	// +optional
+	Projects []AccessKeyScopeProject `json:"projects,omitempty"`
+
+	// Spaces specifies the spaces the access key is allowed to access.
+	// +optional
+	Spaces []AccessKeyScopeSpace `json:"spaces,omitempty"`
+
+	// VirtualClusters specifies the virtual clusters the access key is allowed to access.
+	// +optional
+	VirtualClusters []AccessKeyScopeVirtualCluster `json:"virtualClusters,omitempty"`
+
+	// DEPRECATED: Use Projects, Spaces and VirtualClusters instead
 	// Rules specifies the rules that should apply to the access key.
 	// +optional
 	Rules []AccessKeyScopeRule `json:"rules,omitempty"`
+}
+
+type AccessKeyScopeVirtualCluster struct {
+	// Project is the name of the project.
+	// +optional
+	Project string `json:"project,omitempty"`
+
+	// VirtualCluster is the name of the virtual cluster to access. You can specify * to select all virtual clusters.
+	// +optional
+	VirtualCluster string `json:"virtualCluster,omitempty"`
+}
+
+type AccessKeyScopeSpace struct {
+	// Project is the name of the project.
+	// +optional
+	Project string `json:"project,omitempty"`
+
+	// Space is the name of the space. You can specify * to select all spaces.
+	// +optional
+	Space string `json:"space,omitempty"`
+}
+
+type AccessKeyScopeProject struct {
+	// Project is the name of the project. You can specify * to select all projects.
+	// +optional
+	Project string `json:"project,omitempty"`
 }
 
 // AccessKeyScopeRule describes a rule for the access key
@@ -173,6 +221,10 @@ const (
 	RequestTargetCluster RequestTarget = "Cluster"
 	// RequestTargetVirtualCluster specifies a virtual kubernetes cluster request
 	RequestTargetVirtualCluster RequestTarget = "VirtualCluster"
+	// RequestTargetProjectSpace specifies a project space cluster request
+	RequestTargetProjectSpace RequestTarget = "ProjectSpace"
+	// RequestTargetProjectVirtualCluster specifies a project virtual kubernetes cluster request
+	RequestTargetProjectVirtualCluster RequestTarget = "ProjectVirtualCluster"
 )
 
 // GroupResources represents resource kinds in an API group.
@@ -218,22 +270,26 @@ type AccessKeyIdentity struct {
 
 	// The user email
 	// +optional
-	Email string
+	Email string `json:"email,omitempty"`
 
 	// If the user email was verified
 	// +optional
-	EmailVerified bool
+	EmailVerified bool `json:"emailVerified,omitempty"`
 
 	// The groups from the identity provider
 	// +optional
-	Groups []string
+	Groups []string `json:"groups,omitempty"`
+
+	// Connector is the name of the connector this access key was created from
+	// +optional
+	Connector string `json:"connector,omitempty"`
 
 	// ConnectorData holds data used by the connector for subsequent requests after initial
 	// authentication, such as access tokens for upstream providers.
 	//
 	// This data is never shared with end users, OAuth clients, or through the API.
 	// +optional
-	ConnectorData []byte
+	ConnectorData []byte `json:"connectorData,omitempty"`
 }
 
 type AccessKeyOIDCProvider struct {

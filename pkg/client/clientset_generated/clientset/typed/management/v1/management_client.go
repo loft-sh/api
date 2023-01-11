@@ -5,13 +5,14 @@ package v1
 import (
 	"net/http"
 
-	v1 "github.com/loft-sh/api/v2/pkg/apis/management/v1"
-	"github.com/loft-sh/api/v2/pkg/client/clientset_generated/clientset/scheme"
+	v1 "github.com/loft-sh/api/v3/pkg/apis/management/v1"
+	"github.com/loft-sh/api/v3/pkg/client/clientset_generated/clientset/scheme"
 	rest "k8s.io/client-go/rest"
 )
 
 type ManagementV1Interface interface {
 	RESTClient() rest.Interface
+	AgentAuditEventsGetter
 	AnnouncementsGetter
 	AppsGetter
 	ClustersGetter
@@ -48,6 +49,10 @@ type ManagementV1Interface interface {
 // ManagementV1Client is used to interact with features provided by the management.loft.sh group.
 type ManagementV1Client struct {
 	restClient rest.Interface
+}
+
+func (c *ManagementV1Client) AgentAuditEvents() AgentAuditEventInterface {
+	return newAgentAuditEvents(c)
 }
 
 func (c *ManagementV1Client) Announcements() AnnouncementInterface {

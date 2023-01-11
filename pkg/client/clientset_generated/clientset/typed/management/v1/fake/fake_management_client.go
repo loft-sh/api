@@ -3,13 +3,17 @@
 package fake
 
 import (
-	v1 "github.com/loft-sh/api/v2/pkg/client/clientset_generated/clientset/typed/management/v1"
+	v1 "github.com/loft-sh/api/v3/pkg/client/clientset_generated/clientset/typed/management/v1"
 	rest "k8s.io/client-go/rest"
 	testing "k8s.io/client-go/testing"
 )
 
 type FakeManagementV1 struct {
 	*testing.Fake
+}
+
+func (c *FakeManagementV1) AgentAuditEvents() v1.AgentAuditEventInterface {
+	return &FakeAgentAuditEvents{c}
 }
 
 func (c *FakeManagementV1) Announcements() v1.AnnouncementInterface {

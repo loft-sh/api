@@ -72,16 +72,16 @@ type Info struct {
 }
 
 type InfoMethods struct {
-	SSO      *MethodSSO      `json:"sso,omitempty"`
+	SSO      []*MethodSSO    `json:"sso,omitempty"`
 	Password *MethodPassword `json:"password,omitempty"`
 }
 
 type MethodSSO struct {
-	// Indicates if the authentication method is enabled
-	Enabled bool `json:"enabled,omitempty"`
+	// ID of the SSO to show in the UI. Only for displaying purposes
+	ID string `json:"id,omitempty"`
 
-	// Type of the SSO to show in the UI. Only for displaying purposes
-	Type string `json:"type,omitempty"`
+	// DisplayName of the SSO to show in the UI. Only for displaying purposes
+	DisplayName string `json:"displayName,omitempty"`
 
 	// LoginEndpoint is the path the UI will request a login url from
 	LoginEndpoint string `json:"loginEndpoint,omitempty"`

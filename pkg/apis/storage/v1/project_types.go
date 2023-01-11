@@ -1,7 +1,7 @@
 package v1
 
 import (
-	storagev1 "github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1"
+	storagev1 "github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 )
 
@@ -180,7 +180,28 @@ type QuotaStatus struct {
 	// +optional
 	Project *QuotaStatusProject `json:"project,omitempty"`
 
-	// User is the quota status for each user / team
+	// User is the quota status for each user / team. An example status
+	// could look like this:
+	// status:
+	//   quotas:
+	//     user:
+	//       limit:
+	//         pods: "10"
+	//         spaces: "5"
+	//       users:
+	//         admin:
+	//           used:
+	//             spaces: "3"  # <- calculated in our apiserver
+	//             pods: "8"    # <- the sum calculated from clusters
+	//       clusters:
+	//         cluster-1:  # <- populated by agent from cluster-1
+	//           users:
+	//             admin:
+	//               pods: "3"
+	//         cluster-2:
+	//           users:
+	//             admin:
+	//               pods: "5"
 	// +optional
 	User *QuotaStatusUser `json:"user,omitempty"`
 }
@@ -193,6 +214,10 @@ type QuotaStatusUser struct {
 	// Used is the used amount per user / team
 	// +optional
 	Used QuotaStatusUserUsed `json:"used,omitempty"`
+
+	// Clusters holds the used amount per cluster. Maps cluster name to used resources
+	// +optional
+	Clusters map[string]QuotaStatusUserUsed `json:"clusters,omitempty"`
 }
 
 type QuotaStatusUserUsed struct {
@@ -206,11 +231,22 @@ type QuotaStatusUserUsed struct {
 }
 
 type QuotaStatusProject struct {
-	// Limit is the amount limited
+	// Limit is the amount limited, copied from spec.quotas.project
 	// +optional
 	Limit map[string]string `json:"limit,omitempty"`
 
-	// Used is the amount currently used
+	// Used is the amount currently used across all clusters
+	// +optional
+	Used map[string]string `json:"used,omitempty"`
+
+	// Clusters holds the used amount per cluster. Maps cluster name to used resources
+	// +optional
+	Clusters map[string]QuotaStatusProjectCluster `json:"clusters,omitempty"`
+}
+
+type QuotaStatusProjectCluster struct {
+	// Used is the amount currently used. Maps resource name, such as pods, to their
+	// used amount.
 	// +optional
 	Used map[string]string `json:"used,omitempty"`
 }

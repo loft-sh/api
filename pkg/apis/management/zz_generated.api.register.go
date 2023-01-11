@@ -6,11 +6,12 @@ import (
 	"context"
 	"fmt"
 
-	clusterv1 "github.com/loft-sh/agentapi/v2/pkg/apis/loft/cluster/v1"
-	agentstoragev1 "github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1"
-	auditv1 "github.com/loft-sh/api/v2/pkg/apis/audit/v1"
-	storagev1 "github.com/loft-sh/api/v2/pkg/apis/storage/v1"
-	"github.com/loft-sh/api/v2/pkg/managerfactory"
+	clusterv1 "github.com/loft-sh/agentapi/v3/pkg/apis/loft/cluster/v1"
+	agentstoragev1 "github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1"
+	auditv1 "github.com/loft-sh/api/v3/pkg/apis/audit/v1"
+	storagev1 "github.com/loft-sh/api/v3/pkg/apis/storage/v1"
+	uiv1 "github.com/loft-sh/api/v3/pkg/apis/ui/v1"
+	"github.com/loft-sh/api/v3/pkg/managerfactory"
 	"github.com/loft-sh/apiserver/pkg/builders"
 	policyv1beta1 "github.com/loft-sh/jspolicy/pkg/apis/policy/v1beta1"
 	authorizationv1 "k8s.io/api/authorization/v1"
@@ -25,6 +26,16 @@ import (
 type NewRESTFunc func(factory managerfactory.SharedManagerFactory) rest.Storage
 
 var (
+	ManagementAgentAuditEventStorage = builders.NewApiResourceWithStorage( // Resource status endpoint
+		InternalAgentAuditEvent,
+		func() runtime.Object { return &AgentAuditEvent{} },     // Register versioned resource
+		func() runtime.Object { return &AgentAuditEventList{} }, // Register versioned resource list
+		NewAgentAuditEventsREST,
+	)
+	NewAgentAuditEventsREST = func(getter generic.RESTOptionsGetter) rest.Storage {
+		return NewAgentAuditEventsRESTFunc(Factory)
+	}
+	NewAgentAuditEventsRESTFunc   NewRESTFunc
 	ManagementAnnouncementStorage = builders.NewApiResourceWithStorage( // Resource status endpoint
 		InternalAnnouncement,
 		func() runtime.Object { return &Announcement{} },     // Register versioned resource
@@ -204,7 +215,11 @@ var (
 	NewProjectREST = func(getter generic.RESTOptionsGetter) rest.Storage {
 		return NewProjectRESTFunc(Factory)
 	}
-	NewProjectRESTFunc             NewRESTFunc
+	NewProjectRESTFunc   NewRESTFunc
+	NewProjectStatusREST = func(getter generic.RESTOptionsGetter) rest.Storage {
+		return NewProjectStatusRESTFunc(Factory)
+	}
+	NewProjectStatusRESTFunc       NewRESTFunc
 	ManagementProjectSecretStorage = builders.NewApiResourceWithStorage( // Resource status endpoint
 		InternalProjectSecret,
 		func() runtime.Object { return &ProjectSecret{} },     // Register versioned resource
@@ -345,7 +360,19 @@ var (
 		return NewVirtualClusterTemplateRESTFunc(Factory)
 	}
 	NewVirtualClusterTemplateRESTFunc NewRESTFunc
-	InternalAnnouncement              = builders.NewInternalResource(
+	InternalAgentAuditEvent           = builders.NewInternalResource(
+		"agentauditevents",
+		"AgentAuditEvent",
+		func() runtime.Object { return &AgentAuditEvent{} },
+		func() runtime.Object { return &AgentAuditEventList{} },
+	)
+	InternalAgentAuditEventStatus = builders.NewInternalResourceStatus(
+		"agentauditevents",
+		"AgentAuditEventStatus",
+		func() runtime.Object { return &AgentAuditEvent{} },
+		func() runtime.Object { return &AgentAuditEventList{} },
+	)
+	InternalAnnouncement = builders.NewInternalResource(
 		"announcements",
 		"Announcement",
 		func() runtime.Object { return &Announcement{} },
@@ -915,6 +942,8 @@ var (
 	)
 	// Registered resources and subresources
 	ApiVersion = builders.NewApiGroup("management.loft.sh").WithKinds(
+		InternalAgentAuditEvent,
+		InternalAgentAuditEventStatus,
 		InternalAnnouncement,
 		InternalAnnouncementStatus,
 		InternalApp,
@@ -1031,6 +1060,24 @@ type Level string
 type RequestTarget string
 type Stage string
 
+// +genclient
+// +genclient:nonNamespaced
+// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+
+type AgentAuditEvent struct {
+	metav1.TypeMeta
+	metav1.ObjectMeta
+	Spec   AgentAuditEventSpec
+	Status AgentAuditEventStatus
+}
+
+type AgentAuditEventSpec struct {
+	Events []*auditv1.Event
+}
+
+type AgentAuditEventStatus struct {
+}
+
 type Analytics struct {
 	Endpoint      string
 	BatchEndpoint string
@@ -1083,16 +1130,17 @@ type Apps struct {
 }
 
 type Audit struct {
-	Enabled           bool
-	Level             int
-	Policy            AuditPolicy
-	DataStoreEndpoint string
-	DataStoreMaxAge   *int
-	Path              string
-	MaxAge            int
-	MaxBackups        int
-	MaxSize           int
-	Compress          bool
+	Enabled              bool
+	DisableAgentSyncBack bool
+	Level                int
+	Policy               AuditPolicy
+	DataStoreEndpoint    string
+	DataStoreMaxAge      *int
+	Path                 string
+	MaxAge               int
+	MaxBackups           int
+	MaxSize              int
+	Compress             bool
 }
 
 type AuditPolicy struct {
@@ -1114,13 +1162,9 @@ type AuditPolicyRule struct {
 }
 
 type Authentication struct {
+	Connector
 	Password            *AuthenticationPassword
-	OIDC                *AuthenticationOIDC
-	Github              *AuthenticationGithub
-	Gitlab              *AuthenticationGitlab
-	Google              *AuthenticationGoogle
-	Microsoft           *AuthenticationMicrosoft
-	SAML                *AuthenticationSAML
+	Connectors          []ConnectorWithName
 	DisableTeamCreation bool
 }
 
@@ -1130,13 +1174,13 @@ type AuthenticationClusterAccountTemplates struct {
 }
 
 type AuthenticationGithub struct {
-	AuthenticationClusterAccountTemplates
 	ClientID     string
 	ClientSecret string
 	RedirectURI  string
 	Orgs         []AuthenticationGithubOrg
 	HostName     string
 	RootCA       string
+	AuthenticationClusterAccountTemplates
 }
 
 type AuthenticationGithubOrg struct {
@@ -1145,16 +1189,15 @@ type AuthenticationGithubOrg struct {
 }
 
 type AuthenticationGitlab struct {
-	AuthenticationClusterAccountTemplates
 	ClientID     string
 	ClientSecret string
 	RedirectURI  string
 	BaseURL      string
 	Groups       []string
+	AuthenticationClusterAccountTemplates
 }
 
 type AuthenticationGoogle struct {
-	AuthenticationClusterAccountTemplates
 	ClientID               string
 	ClientSecret           string
 	RedirectURI            string
@@ -1163,6 +1206,7 @@ type AuthenticationGoogle struct {
 	Groups                 []string
 	ServiceAccountFilePath string
 	AdminEmail             string
+	AuthenticationClusterAccountTemplates
 }
 
 type AuthenticationGroupClusterAccountTemplate struct {
@@ -1171,7 +1215,6 @@ type AuthenticationGroupClusterAccountTemplate struct {
 }
 
 type AuthenticationMicrosoft struct {
-	AuthenticationClusterAccountTemplates
 	ClientID             string
 	ClientSecret         string
 	RedirectURI          string
@@ -1179,10 +1222,10 @@ type AuthenticationMicrosoft struct {
 	Groups               []string
 	OnlySecurityGroups   bool
 	UseGroupsAsWhitelist bool
+	AuthenticationClusterAccountTemplates
 }
 
 type AuthenticationOIDC struct {
-	AuthenticationClusterAccountTemplates
 	IssuerURL      string
 	ClientID       string
 	ClientSecret   string
@@ -1196,6 +1239,7 @@ type AuthenticationOIDC struct {
 	GetUserInfo    bool
 	GroupsPrefix   string
 	Type           string
+	AuthenticationClusterAccountTemplates
 }
 
 type AuthenticationPassword struct {
@@ -1203,19 +1247,19 @@ type AuthenticationPassword struct {
 }
 
 type AuthenticationSAML struct {
-	EntityIssuer                    string
-	SSOIssuer                       string
+	RedirectURI                     string
 	SSOURL                          string
-	CA                              string
 	CAData                          []byte
-	InsecureSkipSignatureValidation bool
 	UsernameAttr                    string
 	EmailAttr                       string
 	GroupsAttr                      string
+	CA                              string
+	InsecureSkipSignatureValidation bool
+	EntityIssuer                    string
+	SSOIssuer                       string
 	GroupsDelim                     string
 	AllowedGroups                   []string
 	FilterGroups                    bool
-	RedirectURI                     string
 	NameIDPolicyFormat              string
 }
 
@@ -1390,6 +1434,22 @@ type ConfigStatus struct {
 	Apps           *Apps
 	Audit          *Audit
 	LoftHost       string
+	UISettings     *uiv1.UISettingsSpec
+}
+
+type Connector struct {
+	OIDC      *AuthenticationOIDC
+	Github    *AuthenticationGithub
+	Gitlab    *AuthenticationGitlab
+	Google    *AuthenticationGoogle
+	Microsoft *AuthenticationMicrosoft
+	SAML      *AuthenticationSAML
+}
+
+type ConnectorWithName struct {
+	ID          string
+	DisplayName string
+	Connector
 }
 
 type CustomerInfo struct {
@@ -1429,6 +1489,8 @@ type DirectClusterEndpointToken struct {
 }
 
 type DirectClusterEndpointTokenSpec struct {
+	TTL   int64
+	Scope *storagev1.AccessKeyScope
 }
 
 type DirectClusterEndpointTokenStatus struct {
@@ -1519,13 +1581,12 @@ type KioskSpec struct {
 	LocalClusterAccess    clusterv1.LocalClusterAccess
 	ClusterQuota          clusterv1.ClusterQuota
 	ChartInfo             clusterv1.ChartInfo
-	SpaceConstraint       agentstoragev1.LocalSpaceConstraint
 	StorageClusterAccess  agentstoragev1.LocalClusterAccess
-	ClusterRoleTemplate   agentstoragev1.LocalClusterRoleTemplate
 	StorageClusterQuota   agentstoragev1.ClusterQuota
 	StorageVirtualCluster agentstoragev1.VirtualCluster
 	LocalUser             agentstoragev1.LocalUser
 	LocalTeam             agentstoragev1.LocalTeam
+	UISettings            uiv1.UISettings
 }
 
 type KioskStatus struct {
@@ -1557,6 +1618,7 @@ type LicenseInfo struct {
 	Analytics      Analytics
 	Links          map[string]string
 	BaseDomains    []string
+	IsOffline      bool
 }
 
 type LicenseSpec struct {
@@ -1975,7 +2037,7 @@ type SpaceInstanceStatus struct {
 }
 
 // +genclient
-// +genclient:nonNamespaced
+// +genclient
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
 
 type SpaceTemplate struct {
@@ -2160,11 +2222,11 @@ type VirtualClusterInstance struct {
 type VirtualClusterInstanceKubeConfig struct {
 	metav1.TypeMeta
 	metav1.ObjectMeta
-	RequestOptions VirtualClusterInstanceKubeConfigRequestOptions
-	Status         VirtualClusterInstanceKubeConfigStatus
+	Spec   VirtualClusterInstanceKubeConfigSpec
+	Status VirtualClusterInstanceKubeConfigStatus
 }
 
-type VirtualClusterInstanceKubeConfigRequestOptions struct {
+type VirtualClusterInstanceKubeConfigSpec struct {
 	CertificateTTL *int32
 }
 
@@ -2210,7 +2272,125 @@ type VirtualClusterTemplateStatus struct {
 	Apps []*clusterv1.EntityInfo
 }
 
+// AgentAuditEvent Functions and Structs
 //
+// +k8s:deepcopy-gen=false
+type AgentAuditEventStrategy struct {
+	builders.DefaultStorageStrategy
+}
+
+// +k8s:deepcopy-gen=false
+type AgentAuditEventStatusStrategy struct {
+	builders.DefaultStatusStorageStrategy
+}
+
+// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+
+type AgentAuditEventList struct {
+	metav1.TypeMeta
+	metav1.ListMeta
+	Items []AgentAuditEvent
+}
+
+func (AgentAuditEvent) NewStatus() interface{} {
+	return AgentAuditEventStatus{}
+}
+
+func (pc *AgentAuditEvent) GetStatus() interface{} {
+	return pc.Status
+}
+
+func (pc *AgentAuditEvent) SetStatus(s interface{}) {
+	pc.Status = s.(AgentAuditEventStatus)
+}
+
+func (pc *AgentAuditEvent) GetSpec() interface{} {
+	return pc.Spec
+}
+
+func (pc *AgentAuditEvent) SetSpec(s interface{}) {
+	pc.Spec = s.(AgentAuditEventSpec)
+}
+
+func (pc *AgentAuditEvent) GetObjectMeta() *metav1.ObjectMeta {
+	return &pc.ObjectMeta
+}
+
+func (pc *AgentAuditEvent) SetGeneration(generation int64) {
+	pc.ObjectMeta.Generation = generation
+}
+
+func (pc AgentAuditEvent) GetGeneration() int64 {
+	return pc.ObjectMeta.Generation
+}
+
+// Registry is an interface for things that know how to store AgentAuditEvent.
+// +k8s:deepcopy-gen=false
+type AgentAuditEventRegistry interface {
+	ListAgentAuditEvents(ctx context.Context, options *internalversion.ListOptions) (*AgentAuditEventList, error)
+	GetAgentAuditEvent(ctx context.Context, id string, options *metav1.GetOptions) (*AgentAuditEvent, error)
+	CreateAgentAuditEvent(ctx context.Context, id *AgentAuditEvent) (*AgentAuditEvent, error)
+	UpdateAgentAuditEvent(ctx context.Context, id *AgentAuditEvent) (*AgentAuditEvent, error)
+	DeleteAgentAuditEvent(ctx context.Context, id string) (bool, error)
+}
+
+// NewRegistry returns a new Registry interface for the given Storage. Any mismatched types will panic.
+func NewAgentAuditEventRegistry(sp builders.StandardStorageProvider) AgentAuditEventRegistry {
+	return &storageAgentAuditEvent{sp}
+}
+
+// Implement Registry
+// storage puts strong typing around storage calls
+// +k8s:deepcopy-gen=false
+type storageAgentAuditEvent struct {
+	builders.StandardStorageProvider
+}
+
+func (s *storageAgentAuditEvent) ListAgentAuditEvents(ctx context.Context, options *internalversion.ListOptions) (*AgentAuditEventList, error) {
+	if options != nil && options.FieldSelector != nil && !options.FieldSelector.Empty() {
+		return nil, fmt.Errorf("field selector not supported yet")
+	}
+	st := s.GetStandardStorage()
+	obj, err := st.List(ctx, options)
+	if err != nil {
+		return nil, err
+	}
+	return obj.(*AgentAuditEventList), err
+}
+
+func (s *storageAgentAuditEvent) GetAgentAuditEvent(ctx context.Context, id string, options *metav1.GetOptions) (*AgentAuditEvent, error) {
+	st := s.GetStandardStorage()
+	obj, err := st.Get(ctx, id, options)
+	if err != nil {
+		return nil, err
+	}
+	return obj.(*AgentAuditEvent), nil
+}
+
+func (s *storageAgentAuditEvent) CreateAgentAuditEvent(ctx context.Context, object *AgentAuditEvent) (*AgentAuditEvent, error) {
+	st := s.GetStandardStorage()
+	obj, err := st.Create(ctx, object, nil, &metav1.CreateOptions{})
+	if err != nil {
+		return nil, err
+	}
+	return obj.(*AgentAuditEvent), nil
+}
+
+func (s *storageAgentAuditEvent) UpdateAgentAuditEvent(ctx context.Context, object *AgentAuditEvent) (*AgentAuditEvent, error) {
+	st := s.GetStandardStorage()
+	obj, _, err := st.Update(ctx, object.Name, rest.DefaultUpdatedObjectInfo(object), nil, nil, false, &metav1.UpdateOptions{})
+	if err != nil {
+		return nil, err
+	}
+	return obj.(*AgentAuditEvent), nil
+}
+
+func (s *storageAgentAuditEvent) DeleteAgentAuditEvent(ctx context.Context, id string) (bool, error) {
+	st := s.GetStandardStorage()
+	_, sync, err := st.Delete(ctx, id, nil, &metav1.DeleteOptions{})
+	return sync, err
+}
+
 // Announcement Functions and Structs
 //
 // +k8s:deepcopy-gen=false
@@ -2330,7 +2510,6 @@ func (s *storageAnnouncement) DeleteAnnouncement(ctx context.Context, id string)
 	return sync, err
 }
 
-//
 // App Functions and Structs
 //
 // +k8s:deepcopy-gen=false
@@ -2450,7 +2629,6 @@ func (s *storageApp) DeleteApp(ctx context.Context, id string) (bool, error) {
 	return sync, err
 }
 
-//
 // Cluster Functions and Structs
 //
 // +k8s:deepcopy-gen=false
@@ -2618,7 +2796,6 @@ func (s *storageCluster) DeleteCluster(ctx context.Context, id string) (bool, er
 	return sync, err
 }
 
-//
 // ClusterAccess Functions and Structs
 //
 // +k8s:deepcopy-gen=false
@@ -2738,7 +2915,6 @@ func (s *storageClusterAccess) DeleteClusterAccess(ctx context.Context, id strin
 	return sync, err
 }
 
-//
 // ClusterConnect Functions and Structs
 //
 // +k8s:deepcopy-gen=false
@@ -2858,7 +3034,6 @@ func (s *storageClusterConnect) DeleteClusterConnect(ctx context.Context, id str
 	return sync, err
 }
 
-//
 // ClusterRoleTemplate Functions and Structs
 //
 // +k8s:deepcopy-gen=false
@@ -2978,7 +3153,6 @@ func (s *storageClusterRoleTemplate) DeleteClusterRoleTemplate(ctx context.Conte
 	return sync, err
 }
 
-//
 // Config Functions and Structs
 //
 // +k8s:deepcopy-gen=false
@@ -3098,7 +3272,6 @@ func (s *storageConfig) DeleteConfig(ctx context.Context, id string) (bool, erro
 	return sync, err
 }
 
-//
 // DirectClusterEndpointToken Functions and Structs
 //
 // +k8s:deepcopy-gen=false
@@ -3218,7 +3391,6 @@ func (s *storageDirectClusterEndpointToken) DeleteDirectClusterEndpointToken(ctx
 	return sync, err
 }
 
-//
 // Event Functions and Structs
 //
 // +k8s:deepcopy-gen=false
@@ -3338,7 +3510,6 @@ func (s *storageEvent) DeleteEvent(ctx context.Context, id string) (bool, error)
 	return sync, err
 }
 
-//
 // Feature Functions and Structs
 //
 // +k8s:deepcopy-gen=false
@@ -3458,7 +3629,6 @@ func (s *storageFeature) DeleteFeature(ctx context.Context, id string) (bool, er
 	return sync, err
 }
 
-//
 // IngressAuthToken Functions and Structs
 //
 // +k8s:deepcopy-gen=false
@@ -3578,7 +3748,6 @@ func (s *storageIngressAuthToken) DeleteIngressAuthToken(ctx context.Context, id
 	return sync, err
 }
 
-//
 // Kiosk Functions and Structs
 //
 // +k8s:deepcopy-gen=false
@@ -3698,7 +3867,6 @@ func (s *storageKiosk) DeleteKiosk(ctx context.Context, id string) (bool, error)
 	return sync, err
 }
 
-//
 // License Functions and Structs
 //
 // +k8s:deepcopy-gen=false
@@ -3818,7 +3986,6 @@ func (s *storageLicense) DeleteLicense(ctx context.Context, id string) (bool, er
 	return sync, err
 }
 
-//
 // LicenseToken Functions and Structs
 //
 // +k8s:deepcopy-gen=false
@@ -3938,7 +4105,6 @@ func (s *storageLicenseToken) DeleteLicenseToken(ctx context.Context, id string)
 	return sync, err
 }
 
-//
 // LoftUpgrade Functions and Structs
 //
 // +k8s:deepcopy-gen=false
@@ -4058,7 +4224,6 @@ func (s *storageLoftUpgrade) DeleteLoftUpgrade(ctx context.Context, id string) (
 	return sync, err
 }
 
-//
 // OwnedAccessKey Functions and Structs
 //
 // +k8s:deepcopy-gen=false
@@ -4178,7 +4343,6 @@ func (s *storageOwnedAccessKey) DeleteOwnedAccessKey(ctx context.Context, id str
 	return sync, err
 }
 
-//
 // PolicyViolation Functions and Structs
 //
 // +k8s:deepcopy-gen=false
@@ -4298,7 +4462,6 @@ func (s *storagePolicyViolation) DeletePolicyViolation(ctx context.Context, id s
 	return sync, err
 }
 
-//
 // Project Functions and Structs
 //
 // +k8s:deepcopy-gen=false
@@ -4490,7 +4653,6 @@ func (s *storageProject) DeleteProject(ctx context.Context, id string) (bool, er
 	return sync, err
 }
 
-//
 // ProjectSecret Functions and Structs
 //
 // +k8s:deepcopy-gen=false
@@ -4610,7 +4772,6 @@ func (s *storageProjectSecret) DeleteProjectSecret(ctx context.Context, id strin
 	return sync, err
 }
 
-//
 // ResetAccessKey Functions and Structs
 //
 // +k8s:deepcopy-gen=false
@@ -4730,7 +4891,6 @@ func (s *storageResetAccessKey) DeleteResetAccessKey(ctx context.Context, id str
 	return sync, err
 }
 
-//
 // Self Functions and Structs
 //
 // +k8s:deepcopy-gen=false
@@ -4850,7 +5010,6 @@ func (s *storageSelf) DeleteSelf(ctx context.Context, id string) (bool, error) {
 	return sync, err
 }
 
-//
 // SelfSubjectAccessReview Functions and Structs
 //
 // +k8s:deepcopy-gen=false
@@ -4970,7 +5129,6 @@ func (s *storageSelfSubjectAccessReview) DeleteSelfSubjectAccessReview(ctx conte
 	return sync, err
 }
 
-//
 // SharedSecret Functions and Structs
 //
 // +k8s:deepcopy-gen=false
@@ -5090,7 +5248,6 @@ func (s *storageSharedSecret) DeleteSharedSecret(ctx context.Context, id string)
 	return sync, err
 }
 
-//
 // SpaceConstraint Functions and Structs
 //
 // +k8s:deepcopy-gen=false
@@ -5210,7 +5367,6 @@ func (s *storageSpaceConstraint) DeleteSpaceConstraint(ctx context.Context, id s
 	return sync, err
 }
 
-//
 // SpaceInstance Functions and Structs
 //
 // +k8s:deepcopy-gen=false
@@ -5330,7 +5486,6 @@ func (s *storageSpaceInstance) DeleteSpaceInstance(ctx context.Context, id strin
 	return sync, err
 }
 
-//
 // SpaceTemplate Functions and Structs
 //
 // +k8s:deepcopy-gen=false
@@ -5450,7 +5605,6 @@ func (s *storageSpaceTemplate) DeleteSpaceTemplate(ctx context.Context, id strin
 	return sync, err
 }
 
-//
 // SubjectAccessReview Functions and Structs
 //
 // +k8s:deepcopy-gen=false
@@ -5570,7 +5724,6 @@ func (s *storageSubjectAccessReview) DeleteSubjectAccessReview(ctx context.Conte
 	return sync, err
 }
 
-//
 // Task Functions and Structs
 //
 // +k8s:deepcopy-gen=false
@@ -5698,7 +5851,6 @@ func (s *storageTask) DeleteTask(ctx context.Context, id string) (bool, error) {
 	return sync, err
 }
 
-//
 // Team Functions and Structs
 //
 // +k8s:deepcopy-gen=false
@@ -5834,7 +5986,6 @@ func (s *storageTeam) DeleteTeam(ctx context.Context, id string) (bool, error) {
 	return sync, err
 }
 
-//
 // User Functions and Structs
 //
 // +k8s:deepcopy-gen=false
@@ -5978,7 +6129,6 @@ func (s *storageUser) DeleteUser(ctx context.Context, id string) (bool, error) {
 	return sync, err
 }
 
-//
 // VirtualClusterInstance Functions and Structs
 //
 // +k8s:deepcopy-gen=false
@@ -6114,7 +6264,6 @@ func (s *storageVirtualClusterInstance) DeleteVirtualClusterInstance(ctx context
 	return sync, err
 }
 
-//
 // VirtualClusterTemplate Functions and Structs
 //
 // +k8s:deepcopy-gen=false

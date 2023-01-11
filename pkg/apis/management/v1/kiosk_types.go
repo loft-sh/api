@@ -1,8 +1,9 @@
 package v1
 
 import (
-	clusterv1 "github.com/loft-sh/agentapi/v2/pkg/apis/loft/cluster/v1"
-	storagev1 "github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1"
+	clusterv1 "github.com/loft-sh/agentapi/v3/pkg/apis/loft/cluster/v1"
+	storagev1 "github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1"
+	uiv1 "github.com/loft-sh/api/v3/pkg/apis/ui/v1"
 	"github.com/loft-sh/jspolicy/pkg/apis/policy/v1beta1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 )
@@ -38,13 +39,14 @@ type KioskSpec struct {
 	ChartInfo          clusterv1.ChartInfo          `json:"chartInfo,omitempty"`
 
 	// storage.loft.sh
-	SpaceConstraint       storagev1.LocalSpaceConstraint     `json:"localSpaceConstraint,omitempty"`
-	StorageClusterAccess  storagev1.LocalClusterAccess       `json:"localStorageClusterAccess,omitempty"`
-	ClusterRoleTemplate   storagev1.LocalClusterRoleTemplate `json:"localClusterRoleTemplate,omitempty"`
-	StorageClusterQuota   storagev1.ClusterQuota             `json:"storageClusterQuota,omitempty"`
-	StorageVirtualCluster storagev1.VirtualCluster           `json:"storageVirtualCluster,omitempty"`
-	LocalUser             storagev1.LocalUser                `json:"localUser,omitempty"`
-	LocalTeam             storagev1.LocalTeam                `json:"localTeam,omitempty"`
+	StorageClusterAccess  storagev1.LocalClusterAccess `json:"localStorageClusterAccess,omitempty"`
+	StorageClusterQuota   storagev1.ClusterQuota       `json:"storageClusterQuota,omitempty"`
+	StorageVirtualCluster storagev1.VirtualCluster     `json:"storageVirtualCluster,omitempty"`
+	LocalUser             storagev1.LocalUser          `json:"localUser,omitempty"`
+	LocalTeam             storagev1.LocalTeam          `json:"localTeam,omitempty"`
+
+	// ui.loft.sh
+	UISettings uiv1.UISettings `json:"UISettings,omitempty"`
 }
 
 type KioskStatus struct {

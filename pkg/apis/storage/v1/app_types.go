@@ -1,7 +1,7 @@
 package v1
 
 import (
-	clusterv1 "github.com/loft-sh/agentapi/v2/pkg/apis/loft/cluster/v1"
+	clusterv1 "github.com/loft-sh/agentapi/v3/pkg/apis/loft/cluster/v1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 )
 
@@ -93,6 +93,11 @@ type AppVersion struct {
 }
 
 type AppConfig struct {
+	// DefaultNamespace is the default namespace this app should installed
+	// in.
+	// +optional
+	DefaultNamespace string `json:"defaultNamespace,omitempty"`
+
 	// Readme is a longer markdown string that describes the app.
 	// +optional
 	Readme string `json:"readme,omitempty"`
@@ -124,6 +129,7 @@ type AppConfig struct {
 	// DEPRECATED: Use config.bash instead
 	// StreamContainer can be used to stream a containers logs instead of the helm output.
 	// +optional
+	// +internal
 	StreamContainer *StreamContainer `json:"streamContainer,omitempty"`
 }
 
@@ -183,9 +189,11 @@ type AppParameter struct {
 }
 
 type UserOrTeam struct {
+	// User specifies a Loft user.
 	// +optional
 	User string `json:"user,omitempty"`
 
+	// Team specifies a Loft team.
 	// +optional
 	Team string `json:"team,omitempty"`
 }
