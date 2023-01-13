@@ -30,6 +30,9 @@ type UISettingsSpec struct {
 	// SidebarColor is the color value (ex: "#12345") to use for the sidebar
 	// +optional
 	SidebarColor string `json:"sidebarColor,omitempty"`
+	// AccentColor is the color value (ex: "#12345") to use for the accent
+	// +optional
+	AccentColor string `json:"accentColor,omitempty"`
 }
 
 // UISettingsStatus holds the status
