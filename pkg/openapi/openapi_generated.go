@@ -24215,6 +24215,13 @@ func schema_pkg_apis_ui_v1_UISettingsSpec(ref common.ReferenceCallback) common.O
 							Format:      "",
 						},
 					},
+					"accentColor": {
+						SchemaProps: spec.SchemaProps{
+							Description: "AccentColor is the color value (ex: \"#12345\") to use for the accent",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
 				},
 			},
 		},

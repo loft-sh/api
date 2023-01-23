@@ -2272,6 +2272,7 @@ type VirtualClusterTemplateStatus struct {
 	Apps []*clusterv1.EntityInfo
 }
 
+//
 // AgentAuditEvent Functions and Structs
 //
 // +k8s:deepcopy-gen=false
@@ -2391,6 +2392,7 @@ func (s *storageAgentAuditEvent) DeleteAgentAuditEvent(ctx context.Context, id s
 	return sync, err
 }
 
+//
 // Announcement Functions and Structs
 //
 // +k8s:deepcopy-gen=false
@@ -2510,6 +2512,7 @@ func (s *storageAnnouncement) DeleteAnnouncement(ctx context.Context, id string)
 	return sync, err
 }
 
+//
 // App Functions and Structs
 //
 // +k8s:deepcopy-gen=false
@@ -2629,6 +2632,7 @@ func (s *storageApp) DeleteApp(ctx context.Context, id string) (bool, error) {
 	return sync, err
 }
 
+//
 // Cluster Functions and Structs
 //
 // +k8s:deepcopy-gen=false
@@ -2796,6 +2800,7 @@ func (s *storageCluster) DeleteCluster(ctx context.Context, id string) (bool, er
 	return sync, err
 }
 
+//
 // ClusterAccess Functions and Structs
 //
 // +k8s:deepcopy-gen=false
@@ -2915,6 +2920,7 @@ func (s *storageClusterAccess) DeleteClusterAccess(ctx context.Context, id strin
 	return sync, err
 }
 
+//
 // ClusterConnect Functions and Structs
 //
 // +k8s:deepcopy-gen=false
@@ -3034,6 +3040,7 @@ func (s *storageClusterConnect) DeleteClusterConnect(ctx context.Context, id str
 	return sync, err
 }
 
+//
 // ClusterRoleTemplate Functions and Structs
 //
 // +k8s:deepcopy-gen=false
@@ -3153,6 +3160,7 @@ func (s *storageClusterRoleTemplate) DeleteClusterRoleTemplate(ctx context.Conte
 	return sync, err
 }
 
+//
 // Config Functions and Structs
 //
 // +k8s:deepcopy-gen=false
@@ -3272,6 +3280,7 @@ func (s *storageConfig) DeleteConfig(ctx context.Context, id string) (bool, erro
 	return sync, err
 }
 
+//
 // DirectClusterEndpointToken Functions and Structs
 //
 // +k8s:deepcopy-gen=false
@@ -3391,6 +3400,7 @@ func (s *storageDirectClusterEndpointToken) DeleteDirectClusterEndpointToken(ctx
 	return sync, err
 }
 
+//
 // Event Functions and Structs
 //
 // +k8s:deepcopy-gen=false
@@ -3510,6 +3520,7 @@ func (s *storageEvent) DeleteEvent(ctx context.Context, id string) (bool, error)
 	return sync, err
 }
 
+//
 // Feature Functions and Structs
 //
 // +k8s:deepcopy-gen=false
@@ -3629,6 +3640,7 @@ func (s *storageFeature) DeleteFeature(ctx context.Context, id string) (bool, er
 	return sync, err
 }
 
+//
 // IngressAuthToken Functions and Structs
 //
 // +k8s:deepcopy-gen=false
@@ -3748,6 +3760,7 @@ func (s *storageIngressAuthToken) DeleteIngressAuthToken(ctx context.Context, id
 	return sync, err
 }
 
+//
 // Kiosk Functions and Structs
 //
 // +k8s:deepcopy-gen=false
@@ -3867,6 +3880,7 @@ func (s *storageKiosk) DeleteKiosk(ctx context.Context, id string) (bool, error)
 	return sync, err
 }
 
+//
 // License Functions and Structs
 //
 // +k8s:deepcopy-gen=false
@@ -3986,6 +4000,7 @@ func (s *storageLicense) DeleteLicense(ctx context.Context, id string) (bool, er
 	return sync, err
 }
 
+//
 // LicenseToken Functions and Structs
 //
 // +k8s:deepcopy-gen=false
@@ -4105,6 +4120,7 @@ func (s *storageLicenseToken) DeleteLicenseToken(ctx context.Context, id string)
 	return sync, err
 }
 
+//
 // LoftUpgrade Functions and Structs
 //
 // +k8s:deepcopy-gen=false
@@ -4224,6 +4240,7 @@ func (s *storageLoftUpgrade) DeleteLoftUpgrade(ctx context.Context, id string) (
 	return sync, err
 }
 
+//
 // OwnedAccessKey Functions and Structs
 //
 // +k8s:deepcopy-gen=false
@@ -4343,6 +4360,7 @@ func (s *storageOwnedAccessKey) DeleteOwnedAccessKey(ctx context.Context, id str
 	return sync, err
 }
 
+//
 // PolicyViolation Functions and Structs
 //
 // +k8s:deepcopy-gen=false
@@ -4462,6 +4480,7 @@ func (s *storagePolicyViolation) DeletePolicyViolation(ctx context.Context, id s
 	return sync, err
 }
 
+//
 // Project Functions and Structs
 //
 // +k8s:deepcopy-gen=false
@@ -4653,6 +4672,7 @@ func (s *storageProject) DeleteProject(ctx context.Context, id string) (bool, er
 	return sync, err
 }
 
+//
 // ProjectSecret Functions and Structs
 //
 // +k8s:deepcopy-gen=false
@@ -4772,6 +4792,7 @@ func (s *storageProjectSecret) DeleteProjectSecret(ctx context.Context, id strin
 	return sync, err
 }
 
+//
 // ResetAccessKey Functions and Structs
 //
 // +k8s:deepcopy-gen=false
@@ -4891,6 +4912,7 @@ func (s *storageResetAccessKey) DeleteResetAccessKey(ctx context.Context, id str
 	return sync, err
 }
 
+//
 // Self Functions and Structs
 //
 // +k8s:deepcopy-gen=false
@@ -5010,6 +5032,7 @@ func (s *storageSelf) DeleteSelf(ctx context.Context, id string) (bool, error) {
 	return sync, err
 }
 
+//
 // SelfSubjectAccessReview Functions and Structs
 //
 // +k8s:deepcopy-gen=false
@@ -5129,6 +5152,7 @@ func (s *storageSelfSubjectAccessReview) DeleteSelfSubjectAccessReview(ctx conte
 	return sync, err
 }
 
+//
 // SharedSecret Functions and Structs
 //
 // +k8s:deepcopy-gen=false
@@ -5248,6 +5272,7 @@ func (s *storageSharedSecret) DeleteSharedSecret(ctx context.Context, id string)
 	return sync, err
 }
 
+//
 // SpaceConstraint Functions and Structs
 //
 // +k8s:deepcopy-gen=false
@@ -5367,6 +5392,7 @@ func (s *storageSpaceConstraint) DeleteSpaceConstraint(ctx context.Context, id s
 	return sync, err
 }
 
+//
 // SpaceInstance Functions and Structs
 //
 // +k8s:deepcopy-gen=false
@@ -5486,6 +5512,7 @@ func (s *storageSpaceInstance) DeleteSpaceInstance(ctx context.Context, id strin
 	return sync, err
 }
 
+//
 // SpaceTemplate Functions and Structs
 //
 // +k8s:deepcopy-gen=false
@@ -5605,6 +5632,7 @@ func (s *storageSpaceTemplate) DeleteSpaceTemplate(ctx context.Context, id strin
 	return sync, err
 }
 
+//
 // SubjectAccessReview Functions and Structs
 //
 // +k8s:deepcopy-gen=false
@@ -5724,6 +5752,7 @@ func (s *storageSubjectAccessReview) DeleteSubjectAccessReview(ctx context.Conte
 	return sync, err
 }
 
+//
 // Task Functions and Structs
 //
 // +k8s:deepcopy-gen=false
@@ -5851,6 +5880,7 @@ func (s *storageTask) DeleteTask(ctx context.Context, id string) (bool, error) {
 	return sync, err
 }
 
+//
 // Team Functions and Structs
 //
 // +k8s:deepcopy-gen=false
@@ -5986,6 +6016,7 @@ func (s *storageTeam) DeleteTeam(ctx context.Context, id string) (bool, error) {
 	return sync, err
 }
 
+//
 // User Functions and Structs
 //
 // +k8s:deepcopy-gen=false
@@ -6129,6 +6160,7 @@ func (s *storageUser) DeleteUser(ctx context.Context, id string) (bool, error) {
 	return sync, err
 }
 
+//
 // VirtualClusterInstance Functions and Structs
 //
 // +k8s:deepcopy-gen=false
@@ -6264,6 +6296,7 @@ func (s *storageVirtualClusterInstance) DeleteVirtualClusterInstance(ctx context
 	return sync, err
 }
 
+//
 // VirtualClusterTemplate Functions and Structs
 //
 // +k8s:deepcopy-gen=false
