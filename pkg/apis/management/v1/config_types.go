@@ -308,6 +308,12 @@ type Authentication struct {
 	// Default behaviour is false, this means that teams will be created for new groups.
 	// +optional
 	DisableTeamCreation bool `json:"disableTeamCreation,omitempty"`
+
+	// AccessKeyMaxTTLSeconds is the global maximum lifespan of an accesskey in seconds.
+	// Leaving it 0 or unspecified will disable it.
+	// Specifing 2592000 will mean all keys have a Time-To-Live of 30 days.
+	// +optional
+	AccessKeyMaxTTLSeconds int64 `json:"accessKeyMaxTTLSeconds,omitempty"`
 }
 
 type ConnectorWithName struct {

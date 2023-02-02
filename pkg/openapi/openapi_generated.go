@@ -6847,6 +6847,13 @@ func schema_pkg_apis_management_v1_Authentication(ref common.ReferenceCallback) 
 							Format:      "",
 						},
 					},
+					"accessKeyMaxTTLSeconds": {
+						SchemaProps: spec.SchemaProps{
+							Description: "AccessKeyMaxTTLSeconds is the global maximum lifespan of an accesskey in seconds. Leaving it 0 or unspecified will disable it. Specifing 2592000 will mean all keys have a Time-To-Live of 30 days.",
+							Type:        []string{"integer"},
+							Format:      "int64",
+						},
+					},
 				},
 			},
 		},
