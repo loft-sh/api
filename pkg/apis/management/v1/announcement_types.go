@@ -1,6 +1,7 @@
 package v1
 
 import (
+	admintypes "github.com/loft-sh/external-types/loft-sh/admin-services/pkg/server"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 )
 
@@ -27,7 +28,7 @@ type AnnouncementStatus struct {
 	// +optional
 	Announcement string `json:"announcement,omitempty"`
 
-	// AnalyticsToken is a token signed for the user that is used by the frontend
+	// InstanceTokenAuth is an instance auth token signed for the user that is used by the frontend
 	// +optional
-	AnalyticsToken string `json:"analyticsToken,omitempty"`
+	InstanceTokenAuth *admintypes.InstanceTokenAuth `json:"analyticsToken,omitempty"`
 }

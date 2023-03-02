@@ -26,10 +26,6 @@ type AgentConfigSpec struct {
 	// +optional
 	Instance string `json:"instance,omitempty"`
 
-	// Analytics config for the agent
-	// +optional
-	Analytics *Analytics `json:"analytics,omitempty"`
-
 	// Audit holds the agent audit config
 	// +optional
 	Audit *AgentAuditConfig `json:"audit,omitempty"`

@@ -6,6 +6,7 @@ require (
 	github.com/ghodss/yaml v1.0.0
 	github.com/loft-sh/agentapi/v3 v3.0.0-20230201154334-0e4c325be775
 	github.com/loft-sh/apiserver v0.0.0-20221118114023-11a52e0a20c2
+	github.com/loft-sh/external-types v0.0.2-0.20230301201552-ec939da949b4
 	github.com/loft-sh/jspolicy v0.1.0
 	k8s.io/api v0.25.4
 	k8s.io/apimachinery v0.25.4
@@ -78,12 +79,12 @@ require (
 	go.uber.org/multierr v1.8.0 // indirect
 	go.uber.org/zap v1.23.0 // indirect
 	golang.org/x/mod v0.6.0-dev.0.20220419223038-86c51ed26bb4 // indirect
-	golang.org/x/net v0.2.0 // indirect
+	golang.org/x/net v0.5.0 // indirect
 	golang.org/x/oauth2 v0.2.0 // indirect
 	golang.org/x/sync v0.1.0 // indirect
-	golang.org/x/sys v0.2.0 // indirect
-	golang.org/x/term v0.2.0 // indirect
-	golang.org/x/text v0.4.0 // indirect
+	golang.org/x/sys v0.4.0 // indirect
+	golang.org/x/term v0.4.0 // indirect
+	golang.org/x/text v0.6.0 // indirect
 	golang.org/x/time v0.2.0 // indirect
 	golang.org/x/tools v0.1.12 // indirect
 	google.golang.org/appengine v1.6.7 // indirect

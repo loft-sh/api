@@ -14,6 +14,7 @@ import (
 	management "github.com/loft-sh/api/v3/pkg/apis/management"
 	storagev1 "github.com/loft-sh/api/v3/pkg/apis/storage/v1"
 	uiv1 "github.com/loft-sh/api/v3/pkg/apis/ui/v1"
+	server "github.com/loft-sh/external-types/loft-sh/admin-services/pkg/server"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	conversion "k8s.io/apimachinery/pkg/conversion"
 	runtime "k8s.io/apimachinery/pkg/runtime"
@@ -63,16 +64,6 @@ func RegisterConversions(s *runtime.Scheme) error {
 	}
 	if err := s.AddGeneratedConversionFunc((*management.AgentAuditEventStatus)(nil), (*AgentAuditEventStatus)(nil), func(a, b interface{}, scope conversion.Scope) error {
 		return Convert_management_AgentAuditEventStatus_To_v1_AgentAuditEventStatus(a.(*management.AgentAuditEventStatus), b.(*AgentAuditEventStatus), scope)
-	}); err != nil {
-		return err
-	}
-	if err := s.AddGeneratedConversionFunc((*Analytics)(nil), (*management.Analytics)(nil), func(a, b interface{}, scope conversion.Scope) error {
-		return Convert_v1_Analytics_To_management_Analytics(a.(*Analytics), b.(*management.Analytics), scope)
-	}); err != nil {
-		return err
-	}
-	if err := s.AddGeneratedConversionFunc((*management.Analytics)(nil), (*Analytics)(nil), func(a, b interface{}, scope conversion.Scope) error {
-		return Convert_management_Analytics_To_v1_Analytics(a.(*management.Analytics), b.(*Analytics), scope)
 	}); err != nil {
 		return err
 	}
@@ -666,36 +657,6 @@ func RegisterConversions(s *runtime.Scheme) error {
 	}); err != nil {
 		return err
 	}
-	if err := s.AddGeneratedConversionFunc((*CustomerInfo)(nil), (*management.CustomerInfo)(nil), func(a, b interface{}, scope conversion.Scope) error {
-		return Convert_v1_CustomerInfo_To_management_CustomerInfo(a.(*CustomerInfo), b.(*management.CustomerInfo), scope)
-	}); err != nil {
-		return err
-	}
-	if err := s.AddGeneratedConversionFunc((*management.CustomerInfo)(nil), (*CustomerInfo)(nil), func(a, b interface{}, scope conversion.Scope) error {
-		return Convert_management_CustomerInfo_To_v1_CustomerInfo(a.(*management.CustomerInfo), b.(*CustomerInfo), scope)
-	}); err != nil {
-		return err
-	}
-	if err := s.AddGeneratedConversionFunc((*DefaultPaymentMethod)(nil), (*management.DefaultPaymentMethod)(nil), func(a, b interface{}, scope conversion.Scope) error {
-		return Convert_v1_DefaultPaymentMethod_To_management_DefaultPaymentMethod(a.(*DefaultPaymentMethod), b.(*management.DefaultPaymentMethod), scope)
-	}); err != nil {
-		return err
-	}
-	if err := s.AddGeneratedConversionFunc((*management.DefaultPaymentMethod)(nil), (*DefaultPaymentMethod)(nil), func(a, b interface{}, scope conversion.Scope) error {
-		return Convert_management_DefaultPaymentMethod_To_v1_DefaultPaymentMethod(a.(*management.DefaultPaymentMethod), b.(*DefaultPaymentMethod), scope)
-	}); err != nil {
-		return err
-	}
-	if err := s.AddGeneratedConversionFunc((*DefaultPaymentMethodCard)(nil), (*management.DefaultPaymentMethodCard)(nil), func(a, b interface{}, scope conversion.Scope) error {
-		return Convert_v1_DefaultPaymentMethodCard_To_management_DefaultPaymentMethodCard(a.(*DefaultPaymentMethodCard), b.(*management.DefaultPaymentMethodCard), scope)
-	}); err != nil {
-		return err
-	}
-	if err := s.AddGeneratedConversionFunc((*management.DefaultPaymentMethodCard)(nil), (*DefaultPaymentMethodCard)(nil), func(a, b interface{}, scope conversion.Scope) error {
-		return Convert_management_DefaultPaymentMethodCard_To_v1_DefaultPaymentMethodCard(a.(*management.DefaultPaymentMethodCard), b.(*DefaultPaymentMethodCard), scope)
-	}); err != nil {
-		return err
-	}
 	if err := s.AddGeneratedConversionFunc((*DirectClusterEndpointToken)(nil), (*management.DirectClusterEndpointToken)(nil), func(a, b interface{}, scope conversion.Scope) error {
 		return Convert_v1_DirectClusterEndpointToken_To_management_DirectClusterEndpointToken(a.(*DirectClusterEndpointToken), b.(*management.DirectClusterEndpointToken), scope)
 	}); err != nil {
@@ -916,16 +877,6 @@ func RegisterConversions(s *runtime.Scheme) error {
 	}); err != nil {
 		return err
 	}
-	if err := s.AddGeneratedConversionFunc((*LicenseInfo)(nil), (*management.LicenseInfo)(nil), func(a, b interface{}, scope conversion.Scope) error {
-		return Convert_v1_LicenseInfo_To_management_LicenseInfo(a.(*LicenseInfo), b.(*management.LicenseInfo), scope)
-	}); err != nil {
-		return err
-	}
-	if err := s.AddGeneratedConversionFunc((*management.LicenseInfo)(nil), (*LicenseInfo)(nil), func(a, b interface{}, scope conversion.Scope) error {
-		return Convert_management_LicenseInfo_To_v1_LicenseInfo(a.(*management.LicenseInfo), b.(*LicenseInfo), scope)
-	}); err != nil {
-		return err
-	}
 	if err := s.AddGeneratedConversionFunc((*LicenseList)(nil), (*management.LicenseList)(nil), func(a, b interface{}, scope conversion.Scope) error {
 		return Convert_v1_LicenseList_To_management_LicenseList(a.(*LicenseList), b.(*management.LicenseList), scope)
 	}); err != nil {
@@ -933,6 +884,46 @@ func RegisterConversions(s *runtime.Scheme) error {
 	}
 	if err := s.AddGeneratedConversionFunc((*management.LicenseList)(nil), (*LicenseList)(nil), func(a, b interface{}, scope conversion.Scope) error {
 		return Convert_management_LicenseList_To_v1_LicenseList(a.(*management.LicenseList), b.(*LicenseList), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*LicenseRequest)(nil), (*management.LicenseRequest)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_v1_LicenseRequest_To_management_LicenseRequest(a.(*LicenseRequest), b.(*management.LicenseRequest), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*management.LicenseRequest)(nil), (*LicenseRequest)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_management_LicenseRequest_To_v1_LicenseRequest(a.(*management.LicenseRequest), b.(*LicenseRequest), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*LicenseRequestList)(nil), (*management.LicenseRequestList)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_v1_LicenseRequestList_To_management_LicenseRequestList(a.(*LicenseRequestList), b.(*management.LicenseRequestList), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*management.LicenseRequestList)(nil), (*LicenseRequestList)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_management_LicenseRequestList_To_v1_LicenseRequestList(a.(*management.LicenseRequestList), b.(*LicenseRequestList), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*LicenseRequestSpec)(nil), (*management.LicenseRequestSpec)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_v1_LicenseRequestSpec_To_management_LicenseRequestSpec(a.(*LicenseRequestSpec), b.(*management.LicenseRequestSpec), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*management.LicenseRequestSpec)(nil), (*LicenseRequestSpec)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_management_LicenseRequestSpec_To_v1_LicenseRequestSpec(a.(*management.LicenseRequestSpec), b.(*LicenseRequestSpec), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*LicenseRequestStatus)(nil), (*management.LicenseRequestStatus)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_v1_LicenseRequestStatus_To_management_LicenseRequestStatus(a.(*LicenseRequestStatus), b.(*management.LicenseRequestStatus), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*management.LicenseRequestStatus)(nil), (*LicenseRequestStatus)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_management_LicenseRequestStatus_To_v1_LicenseRequestStatus(a.(*management.LicenseRequestStatus), b.(*LicenseRequestStatus), scope)
 	}); err != nil {
 		return err
 	}
@@ -1093,26 +1084,6 @@ func RegisterConversions(s *runtime.Scheme) error {
 	}
 	if err := s.AddGeneratedConversionFunc((*management.OwnedAccessKeyStatus)(nil), (*OwnedAccessKeyStatus)(nil), func(a, b interface{}, scope conversion.Scope) error {
 		return Convert_management_OwnedAccessKeyStatus_To_v1_OwnedAccessKeyStatus(a.(*management.OwnedAccessKeyStatus), b.(*OwnedAccessKeyStatus), scope)
-	}); err != nil {
-		return err
-	}
-	if err := s.AddGeneratedConversionFunc((*Plan)(nil), (*management.Plan)(nil), func(a, b interface{}, scope conversion.Scope) error {
-		return Convert_v1_Plan_To_management_Plan(a.(*Plan), b.(*management.Plan), scope)
-	}); err != nil {
-		return err
-	}
-	if err := s.AddGeneratedConversionFunc((*management.Plan)(nil), (*Plan)(nil), func(a, b interface{}, scope conversion.Scope) error {
-		return Convert_management_Plan_To_v1_Plan(a.(*management.Plan), b.(*Plan), scope)
-	}); err != nil {
-		return err
-	}
-	if err := s.AddGeneratedConversionFunc((*PlanProduct)(nil), (*management.PlanProduct)(nil), func(a, b interface{}, scope conversion.Scope) error {
-		return Convert_v1_PlanProduct_To_management_PlanProduct(a.(*PlanProduct), b.(*management.PlanProduct), scope)
-	}); err != nil {
-		return err
-	}
-	if err := s.AddGeneratedConversionFunc((*management.PlanProduct)(nil), (*PlanProduct)(nil), func(a, b interface{}, scope conversion.Scope) error {
-		return Convert_management_PlanProduct_To_v1_PlanProduct(a.(*management.PlanProduct), b.(*PlanProduct), scope)
 	}); err != nil {
 		return err
 	}
@@ -1496,16 +1467,6 @@ func RegisterConversions(s *runtime.Scheme) error {
 	}); err != nil {
 		return err
 	}
-	if err := s.AddGeneratedConversionFunc((*Promotions)(nil), (*management.Promotions)(nil), func(a, b interface{}, scope conversion.Scope) error {
-		return Convert_v1_Promotions_To_management_Promotions(a.(*Promotions), b.(*management.Promotions), scope)
-	}); err != nil {
-		return err
-	}
-	if err := s.AddGeneratedConversionFunc((*management.Promotions)(nil), (*Promotions)(nil), func(a, b interface{}, scope conversion.Scope) error {
-		return Convert_management_Promotions_To_v1_Promotions(a.(*management.Promotions), b.(*Promotions), scope)
-	}); err != nil {
-		return err
-	}
 	if err := s.AddGeneratedConversionFunc((*ResetAccessKey)(nil), (*management.ResetAccessKey)(nil), func(a, b interface{}, scope conversion.Scope) error {
 		return Convert_v1_ResetAccessKey_To_management_ResetAccessKey(a.(*ResetAccessKey), b.(*management.ResetAccessKey), scope)
 	}); err != nil {
@@ -1543,26 +1504,6 @@ func RegisterConversions(s *runtime.Scheme) error {
 	}
 	if err := s.AddGeneratedConversionFunc((*management.ResetAccessKeyStatus)(nil), (*ResetAccessKeyStatus)(nil), func(a, b interface{}, scope conversion.Scope) error {
 		return Convert_management_ResetAccessKeyStatus_To_v1_ResetAccessKeyStatus(a.(*management.ResetAccessKeyStatus), b.(*ResetAccessKeyStatus), scope)
-	}); err != nil {
-		return err
-	}
-	if err := s.AddGeneratedConversionFunc((*ResourceLimit)(nil), (*management.ResourceLimit)(nil), func(a, b interface{}, scope conversion.Scope) error {
-		return Convert_v1_ResourceLimit_To_management_ResourceLimit(a.(*ResourceLimit), b.(*management.ResourceLimit), scope)
-	}); err != nil {
-		return err
-	}
-	if err := s.AddGeneratedConversionFunc((*management.ResourceLimit)(nil), (*ResourceLimit)(nil), func(a, b interface{}, scope conversion.Scope) error {
-		return Convert_management_ResourceLimit_To_v1_ResourceLimit(a.(*management.ResourceLimit), b.(*ResourceLimit), scope)
-	}); err != nil {
-		return err
-	}
-	if err := s.AddGeneratedConversionFunc((*ResoureRequests)(nil), (*management.ResoureRequests)(nil), func(a, b interface{}, scope conversion.Scope) error {
-		return Convert_v1_ResoureRequests_To_management_ResoureRequests(a.(*ResoureRequests), b.(*management.ResoureRequests), scope)
-	}); err != nil {
-		return err
-	}
-	if err := s.AddGeneratedConversionFunc((*management.ResoureRequests)(nil), (*ResoureRequests)(nil), func(a, b interface{}, scope conversion.Scope) error {
-		return Convert_management_ResoureRequests_To_v1_ResoureRequests(a.(*management.ResoureRequests), b.(*ResoureRequests), scope)
 	}); err != nil {
 		return err
 	}
@@ -1846,16 +1787,6 @@ func RegisterConversions(s *runtime.Scheme) error {
 	}); err != nil {
 		return err
 	}
-	if err := s.AddGeneratedConversionFunc((*SubscriptionInfo)(nil), (*management.SubscriptionInfo)(nil), func(a, b interface{}, scope conversion.Scope) error {
-		return Convert_v1_SubscriptionInfo_To_management_SubscriptionInfo(a.(*SubscriptionInfo), b.(*management.SubscriptionInfo), scope)
-	}); err != nil {
-		return err
-	}
-	if err := s.AddGeneratedConversionFunc((*management.SubscriptionInfo)(nil), (*SubscriptionInfo)(nil), func(a, b interface{}, scope conversion.Scope) error {
-		return Convert_management_SubscriptionInfo_To_v1_SubscriptionInfo(a.(*management.SubscriptionInfo), b.(*SubscriptionInfo), scope)
-	}); err != nil {
-		return err
-	}
 	if err := s.AddGeneratedConversionFunc((*Task)(nil), (*management.Task)(nil), func(a, b interface{}, scope conversion.Scope) error {
 		return Convert_v1_Task_To_management_Task(a.(*Task), b.(*management.Task), scope)
 	}); err != nil {
@@ -2003,16 +1934,6 @@ func RegisterConversions(s *runtime.Scheme) error {
 	}
 	if err := s.AddGeneratedConversionFunc((*management.TeamStatus)(nil), (*TeamStatus)(nil), func(a, b interface{}, scope conversion.Scope) error {
 		return Convert_management_TeamStatus_To_v1_TeamStatus(a.(*management.TeamStatus), b.(*TeamStatus), scope)
-	}); err != nil {
-		return err
-	}
-	if err := s.AddGeneratedConversionFunc((*TrialPromotion)(nil), (*management.TrialPromotion)(nil), func(a, b interface{}, scope conversion.Scope) error {
-		return Convert_v1_TrialPromotion_To_management_TrialPromotion(a.(*TrialPromotion), b.(*management.TrialPromotion), scope)
-	}); err != nil {
-		return err
-	}
-	if err := s.AddGeneratedConversionFunc((*management.TrialPromotion)(nil), (*TrialPromotion)(nil), func(a, b interface{}, scope conversion.Scope) error {
-		return Convert_management_TrialPromotion_To_v1_TrialPromotion(a.(*management.TrialPromotion), b.(*TrialPromotion), scope)
 	}); err != nil {
 		return err
 	}
@@ -2426,32 +2347,6 @@ func Convert_management_AgentAuditEventStatus_To_v1_AgentAuditEventStatus(in *ma
 	return autoConvert_management_AgentAuditEventStatus_To_v1_AgentAuditEventStatus(in, out, s)
 }
 
-func autoConvert_v1_Analytics_To_management_Analytics(in *Analytics, out *management.Analytics, s conversion.Scope) error {
-	out.Endpoint = in.Endpoint
-	out.BatchEndpoint = in.BatchEndpoint
-	out.Requests = *(*[]management.ResoureRequests)(unsafe.Pointer(&in.Requests))
-	out.Token = in.Token
-	return nil
-}
-
-// Convert_v1_Analytics_To_management_Analytics is an autogenerated conversion function.
-func Convert_v1_Analytics_To_management_Analytics(in *Analytics, out *management.Analytics, s conversion.Scope) error {
-	return autoConvert_v1_Analytics_To_management_Analytics(in, out, s)
-}
-
-func autoConvert_management_Analytics_To_v1_Analytics(in *management.Analytics, out *Analytics, s conversion.Scope) error {
-	out.Endpoint = in.Endpoint
-	out.BatchEndpoint = in.BatchEndpoint
-	out.Requests = *(*[]ResoureRequests)(unsafe.Pointer(&in.Requests))
-	out.Token = in.Token
-	return nil
-}
-
-// Convert_management_Analytics_To_v1_Analytics is an autogenerated conversion function.
-func Convert_management_Analytics_To_v1_Analytics(in *management.Analytics, out *Analytics, s conversion.Scope) error {
-	return autoConvert_management_Analytics_To_v1_Analytics(in, out, s)
-}
-
 func autoConvert_v1_Announcement_To_management_Announcement(in *Announcement, out *management.Announcement, s conversion.Scope) error {
 	out.ObjectMeta = in.ObjectMeta
 	if err := Convert_v1_AnnouncementSpec_To_management_AnnouncementSpec(&in.Spec, &out.Spec, s); err != nil {
@@ -2526,7 +2421,7 @@ func Convert_management_AnnouncementSpec_To_v1_AnnouncementSpec(in *management.A
 
 func autoConvert_v1_AnnouncementStatus_To_management_AnnouncementStatus(in *AnnouncementStatus, out *management.AnnouncementStatus, s conversion.Scope) error {
 	out.Announcement = in.Announcement
-	out.AnalyticsToken = in.AnalyticsToken
+	out.InstanceTokenAuth = (*server.InstanceTokenAuth)(unsafe.Pointer(in.InstanceTokenAuth))
 	return nil
 }
 
@@ -2537,7 +2432,7 @@ func Convert_v1_AnnouncementStatus_To_management_AnnouncementStatus(in *Announce
 
 func autoConvert_management_AnnouncementStatus_To_v1_AnnouncementStatus(in *management.AnnouncementStatus, out *AnnouncementStatus, s conversion.Scope) error {
 	out.Announcement = in.Announcement
-	out.AnalyticsToken = in.AnalyticsToken
+	out.InstanceTokenAuth = (*server.InstanceTokenAuth)(unsafe.Pointer(in.InstanceTokenAuth))
 	return nil
 }
 
@@ -4016,92 +3911,6 @@ func Convert_management_ConnectorWithName_To_v1_ConnectorWithName(in *management
 	return autoConvert_management_ConnectorWithName_To_v1_ConnectorWithName(in, out, s)
 }
 
-func autoConvert_v1_CustomerInfo_To_management_CustomerInfo(in *CustomerInfo, out *management.CustomerInfo, s conversion.Scope) error {
-	out.Company = in.Company
-	out.Email = in.Email
-	out.FirstName = in.FirstName
-	out.LastName = in.LastName
-	out.AddressLine1 = in.AddressLine1
-	out.AddressLine2 = in.AddressLine2
-	out.City = in.City
-	out.PostalCode = in.PostalCode
-	out.Country = in.Country
-	out.Created = in.Created
-	return nil
-}
-
-// Convert_v1_CustomerInfo_To_management_CustomerInfo is an autogenerated conversion function.
-func Convert_v1_CustomerInfo_To_management_CustomerInfo(in *CustomerInfo, out *management.CustomerInfo, s conversion.Scope) error {
-	return autoConvert_v1_CustomerInfo_To_management_CustomerInfo(in, out, s)
-}
-
-func autoConvert_management_CustomerInfo_To_v1_CustomerInfo(in *management.CustomerInfo, out *CustomerInfo, s conversion.Scope) error {
-	out.Company = in.Company
-	out.Email = in.Email
-	out.FirstName = in.FirstName
-	out.LastName = in.LastName
-	out.AddressLine1 = in.AddressLine1
-	out.AddressLine2 = in.AddressLine2
-	out.City = in.City
-	out.PostalCode = in.PostalCode
-	out.Country = in.Country
-	out.Created = in.Created
-	return nil
-}
-
-// Convert_management_CustomerInfo_To_v1_CustomerInfo is an autogenerated conversion function.
-func Convert_management_CustomerInfo_To_v1_CustomerInfo(in *management.CustomerInfo, out *CustomerInfo, s conversion.Scope) error {
-	return autoConvert_management_CustomerInfo_To_v1_CustomerInfo(in, out, s)
-}
-
-func autoConvert_v1_DefaultPaymentMethod_To_management_DefaultPaymentMethod(in *DefaultPaymentMethod, out *management.DefaultPaymentMethod, s conversion.Scope) error {
-	out.Card = (*management.DefaultPaymentMethodCard)(unsafe.Pointer(in.Card))
-	return nil
-}
-
-// Convert_v1_DefaultPaymentMethod_To_management_DefaultPaymentMethod is an autogenerated conversion function.
-func Convert_v1_DefaultPaymentMethod_To_management_DefaultPaymentMethod(in *DefaultPaymentMethod, out *management.DefaultPaymentMethod, s conversion.Scope) error {
-	return autoConvert_v1_DefaultPaymentMethod_To_management_DefaultPaymentMethod(in, out, s)
-}
-
-func autoConvert_management_DefaultPaymentMethod_To_v1_DefaultPaymentMethod(in *management.DefaultPaymentMethod, out *DefaultPaymentMethod, s conversion.Scope) error {
-	out.Card = (*DefaultPaymentMethodCard)(unsafe.Pointer(in.Card))
-	return nil
-}
-
-// Convert_management_DefaultPaymentMethod_To_v1_DefaultPaymentMethod is an autogenerated conversion function.
-func Convert_management_DefaultPaymentMethod_To_v1_DefaultPaymentMethod(in *management.DefaultPaymentMethod, out *DefaultPaymentMethod, s conversion.Scope) error {
-	return autoConvert_management_DefaultPaymentMethod_To_v1_DefaultPaymentMethod(in, out, s)
-}
-
-func autoConvert_v1_DefaultPaymentMethodCard_To_management_DefaultPaymentMethodCard(in *DefaultPaymentMethodCard, out *management.DefaultPaymentMethodCard, s conversion.Scope) error {
-	out.Last4 = in.Last4
-	out.ExpMonth = in.ExpMonth
-	out.ExpYear = in.ExpYear
-	out.Brand = in.Brand
-	out.Funding = in.Funding
-	return nil
-}
-
-// Convert_v1_DefaultPaymentMethodCard_To_management_DefaultPaymentMethodCard is an autogenerated conversion function.
-func Convert_v1_DefaultPaymentMethodCard_To_management_DefaultPaymentMethodCard(in *DefaultPaymentMethodCard, out *management.DefaultPaymentMethodCard, s conversion.Scope) error {
-	return autoConvert_v1_DefaultPaymentMethodCard_To_management_DefaultPaymentMethodCard(in, out, s)
-}
-
-func autoConvert_management_DefaultPaymentMethodCard_To_v1_DefaultPaymentMethodCard(in *management.DefaultPaymentMethodCard, out *DefaultPaymentMethodCard, s conversion.Scope) error {
-	out.Last4 = in.Last4
-	out.ExpMonth = in.ExpMonth
-	out.ExpYear = in.ExpYear
-	out.Brand = in.Brand
-	out.Funding = in.Funding
-	return nil
-}
-
-// Convert_management_DefaultPaymentMethodCard_To_v1_DefaultPaymentMethodCard is an autogenerated conversion function.
-func Convert_management_DefaultPaymentMethodCard_To_v1_DefaultPaymentMethodCard(in *management.DefaultPaymentMethodCard, out *DefaultPaymentMethodCard, s conversion.Scope) error {
-	return autoConvert_management_DefaultPaymentMethodCard_To_v1_DefaultPaymentMethodCard(in, out, s)
-}
-
 func autoConvert_v1_DirectClusterEndpointToken_To_management_DirectClusterEndpointToken(in *DirectClusterEndpointToken, out *management.DirectClusterEndpointToken, s conversion.Scope) error {
 	out.ObjectMeta = in.ObjectMeta
 	if err := Convert_v1_DirectClusterEndpointTokenSpec_To_management_DirectClusterEndpointTokenSpec(&in.Spec, &out.Spec, s); err != nil {
@@ -4656,74 +4465,6 @@ func Convert_management_License_To_v1_License(in *management.License, out *Licen
 	return autoConvert_management_License_To_v1_License(in, out, s)
 }
 
-func autoConvert_v1_LicenseInfo_To_management_LicenseInfo(in *LicenseInfo, out *management.LicenseInfo, s conversion.Scope) error {
-	out.Announcement = in.Announcement
-	out.License = in.License
-	out.CurrentTime = in.CurrentTime
-	out.ResourceLimits = *(*[]management.ResourceLimit)(unsafe.Pointer(&in.ResourceLimits))
-	out.BlockRequests = *(*[]management.ResoureRequests)(unsafe.Pointer(&in.BlockRequests))
-	out.Features = *(*map[string]bool)(unsafe.Pointer(&in.Features))
-	if err := Convert_v1_CustomerInfo_To_management_CustomerInfo(&in.Customer, &out.Customer, s); err != nil {
-		return err
-	}
-	if err := Convert_v1_SubscriptionInfo_To_management_SubscriptionInfo(&in.Subscription, &out.Subscription, s); err != nil {
-		return err
-	}
-	out.Quantity = in.Quantity
-	if err := Convert_v1_Plan_To_management_Plan(&in.Plan, &out.Plan, s); err != nil {
-		return err
-	}
-	if err := Convert_v1_Promotions_To_management_Promotions(&in.Promotions, &out.Promotions, s); err != nil {
-		return err
-	}
-	if err := Convert_v1_Analytics_To_management_Analytics(&in.Analytics, &out.Analytics, s); err != nil {
-		return err
-	}
-	out.Links = *(*map[string]string)(unsafe.Pointer(&in.Links))
-	out.BaseDomains = *(*[]string)(unsafe.Pointer(&in.BaseDomains))
-	out.IsOffline = in.IsOffline
-	return nil
-}
-
-// Convert_v1_LicenseInfo_To_management_LicenseInfo is an autogenerated conversion function.
-func Convert_v1_LicenseInfo_To_management_LicenseInfo(in *LicenseInfo, out *management.LicenseInfo, s conversion.Scope) error {
-	return autoConvert_v1_LicenseInfo_To_management_LicenseInfo(in, out, s)
-}
-
-func autoConvert_management_LicenseInfo_To_v1_LicenseInfo(in *management.LicenseInfo, out *LicenseInfo, s conversion.Scope) error {
-	out.Announcement = in.Announcement
-	out.License = in.License
-	out.CurrentTime = in.CurrentTime
-	out.ResourceLimits = *(*[]ResourceLimit)(unsafe.Pointer(&in.ResourceLimits))
-	out.BlockRequests = *(*[]ResoureRequests)(unsafe.Pointer(&in.BlockRequests))
-	out.Features = *(*map[string]bool)(unsafe.Pointer(&in.Features))
-	if err := Convert_management_CustomerInfo_To_v1_CustomerInfo(&in.Customer, &out.Customer, s); err != nil {
-		return err
-	}
-	if err := Convert_management_SubscriptionInfo_To_v1_SubscriptionInfo(&in.Subscription, &out.Subscription, s); err != nil {
-		return err
-	}
-	out.Quantity = in.Quantity
-	if err := Convert_management_Plan_To_v1_Plan(&in.Plan, &out.Plan, s); err != nil {
-		return err
-	}
-	if err := Convert_management_Promotions_To_v1_Promotions(&in.Promotions, &out.Promotions, s); err != nil {
-		return err
-	}
-	if err := Convert_management_Analytics_To_v1_Analytics(&in.Analytics, &out.Analytics, s); err != nil {
-		return err
-	}
-	out.Links = *(*map[string]string)(unsafe.Pointer(&in.Links))
-	out.BaseDomains = *(*[]string)(unsafe.Pointer(&in.BaseDomains))
-	out.IsOffline = in.IsOffline
-	return nil
-}
-
-// Convert_management_LicenseInfo_To_v1_LicenseInfo is an autogenerated conversion function.
-func Convert_management_LicenseInfo_To_v1_LicenseInfo(in *management.LicenseInfo, out *LicenseInfo, s conversion.Scope) error {
-	return autoConvert_management_LicenseInfo_To_v1_LicenseInfo(in, out, s)
-}
-
 func autoConvert_v1_LicenseList_To_management_LicenseList(in *LicenseList, out *management.LicenseList, s conversion.Scope) error {
 	out.ListMeta = in.ListMeta
 	out.Items = *(*[]management.License)(unsafe.Pointer(&in.Items))
@@ -4746,6 +4487,104 @@ func Convert_management_LicenseList_To_v1_LicenseList(in *management.LicenseList
 	return autoConvert_management_LicenseList_To_v1_LicenseList(in, out, s)
 }
 
+func autoConvert_v1_LicenseRequest_To_management_LicenseRequest(in *LicenseRequest, out *management.LicenseRequest, s conversion.Scope) error {
+	out.ObjectMeta = in.ObjectMeta
+	if err := Convert_v1_LicenseRequestSpec_To_management_LicenseRequestSpec(&in.Spec, &out.Spec, s); err != nil {
+		return err
+	}
+	if err := Convert_v1_LicenseRequestStatus_To_management_LicenseRequestStatus(&in.Status, &out.Status, s); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Convert_v1_LicenseRequest_To_management_LicenseRequest is an autogenerated conversion function.
+func Convert_v1_LicenseRequest_To_management_LicenseRequest(in *LicenseRequest, out *management.LicenseRequest, s conversion.Scope) error {
+	return autoConvert_v1_LicenseRequest_To_management_LicenseRequest(in, out, s)
+}
+
+func autoConvert_management_LicenseRequest_To_v1_LicenseRequest(in *management.LicenseRequest, out *LicenseRequest, s conversion.Scope) error {
+	out.ObjectMeta = in.ObjectMeta
+	if err := Convert_management_LicenseRequestSpec_To_v1_LicenseRequestSpec(&in.Spec, &out.Spec, s); err != nil {
+		return err
+	}
+	if err := Convert_management_LicenseRequestStatus_To_v1_LicenseRequestStatus(&in.Status, &out.Status, s); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Convert_management_LicenseRequest_To_v1_LicenseRequest is an autogenerated conversion function.
+func Convert_management_LicenseRequest_To_v1_LicenseRequest(in *management.LicenseRequest, out *LicenseRequest, s conversion.Scope) error {
+	return autoConvert_management_LicenseRequest_To_v1_LicenseRequest(in, out, s)
+}
+
+func autoConvert_v1_LicenseRequestList_To_management_LicenseRequestList(in *LicenseRequestList, out *management.LicenseRequestList, s conversion.Scope) error {
+	out.ListMeta = in.ListMeta
+	out.Items = *(*[]management.LicenseRequest)(unsafe.Pointer(&in.Items))
+	return nil
+}
+
+// Convert_v1_LicenseRequestList_To_management_LicenseRequestList is an autogenerated conversion function.
+func Convert_v1_LicenseRequestList_To_management_LicenseRequestList(in *LicenseRequestList, out *management.LicenseRequestList, s conversion.Scope) error {
+	return autoConvert_v1_LicenseRequestList_To_management_LicenseRequestList(in, out, s)
+}
+
+func autoConvert_management_LicenseRequestList_To_v1_LicenseRequestList(in *management.LicenseRequestList, out *LicenseRequestList, s conversion.Scope) error {
+	out.ListMeta = in.ListMeta
+	out.Items = *(*[]LicenseRequest)(unsafe.Pointer(&in.Items))
+	return nil
+}
+
+// Convert_management_LicenseRequestList_To_v1_LicenseRequestList is an autogenerated conversion function.
+func Convert_management_LicenseRequestList_To_v1_LicenseRequestList(in *management.LicenseRequestList, out *LicenseRequestList, s conversion.Scope) error {
+	return autoConvert_management_LicenseRequestList_To_v1_LicenseRequestList(in, out, s)
+}
+
+func autoConvert_v1_LicenseRequestSpec_To_management_LicenseRequestSpec(in *LicenseRequestSpec, out *management.LicenseRequestSpec, s conversion.Scope) error {
+	out.Route = in.Route
+	out.Input = in.Input
+	return nil
+}
+
+// Convert_v1_LicenseRequestSpec_To_management_LicenseRequestSpec is an autogenerated conversion function.
+func Convert_v1_LicenseRequestSpec_To_management_LicenseRequestSpec(in *LicenseRequestSpec, out *management.LicenseRequestSpec, s conversion.Scope) error {
+	return autoConvert_v1_LicenseRequestSpec_To_management_LicenseRequestSpec(in, out, s)
+}
+
+func autoConvert_management_LicenseRequestSpec_To_v1_LicenseRequestSpec(in *management.LicenseRequestSpec, out *LicenseRequestSpec, s conversion.Scope) error {
+	out.Route = in.Route
+	out.Input = in.Input
+	return nil
+}
+
+// Convert_management_LicenseRequestSpec_To_v1_LicenseRequestSpec is an autogenerated conversion function.
+func Convert_management_LicenseRequestSpec_To_v1_LicenseRequestSpec(in *management.LicenseRequestSpec, out *LicenseRequestSpec, s conversion.Scope) error {
+	return autoConvert_management_LicenseRequestSpec_To_v1_LicenseRequestSpec(in, out, s)
+}
+
+func autoConvert_v1_LicenseRequestStatus_To_management_LicenseRequestStatus(in *LicenseRequestStatus, out *management.LicenseRequestStatus, s conversion.Scope) error {
+	out.OK = in.OK
+	out.Output = in.Output
+	return nil
+}
+
+// Convert_v1_LicenseRequestStatus_To_management_LicenseRequestStatus is an autogenerated conversion function.
+func Convert_v1_LicenseRequestStatus_To_management_LicenseRequestStatus(in *LicenseRequestStatus, out *management.LicenseRequestStatus, s conversion.Scope) error {
+	return autoConvert_v1_LicenseRequestStatus_To_management_LicenseRequestStatus(in, out, s)
+}
+
+func autoConvert_management_LicenseRequestStatus_To_v1_LicenseRequestStatus(in *management.LicenseRequestStatus, out *LicenseRequestStatus, s conversion.Scope) error {
+	out.OK = in.OK
+	out.Output = in.Output
+	return nil
+}
+
+// Convert_management_LicenseRequestStatus_To_v1_LicenseRequestStatus is an autogenerated conversion function.
+func Convert_management_LicenseRequestStatus_To_v1_LicenseRequestStatus(in *management.LicenseRequestStatus, out *LicenseRequestStatus, s conversion.Scope) error {
+	return autoConvert_management_LicenseRequestStatus_To_v1_LicenseRequestStatus(in, out, s)
+}
+
 func autoConvert_v1_LicenseSpec_To_management_LicenseSpec(in *LicenseSpec, out *management.LicenseSpec, s conversion.Scope) error {
 	return nil
 }
@@ -4765,10 +4604,9 @@ func Convert_management_LicenseSpec_To_v1_LicenseSpec(in *management.LicenseSpec
 }
 
 func autoConvert_v1_LicenseStatus_To_management_LicenseStatus(in *LicenseStatus, out *management.LicenseStatus, s conversion.Scope) error {
-	out.Instance = in.Instance
-	if err := Convert_v1_LicenseInfo_To_management_LicenseInfo(&in.Info, &out.Info, s); err != nil {
-		return err
-	}
+	out.Buttons = *(*server.Buttons)(unsafe.Pointer(&in.Buttons))
+	out.License = (*server.License)(unsafe.Pointer(in.License))
+	out.InstanceID = in.InstanceID
 	return nil
 }
 
@@ -4778,10 +4616,9 @@ func Convert_v1_LicenseStatus_To_management_LicenseStatus(in *LicenseStatus, out
 }
 
 func autoConvert_management_LicenseStatus_To_v1_LicenseStatus(in *management.LicenseStatus, out *LicenseStatus, s conversion.Scope) error {
-	out.Instance = in.Instance
-	if err := Convert_management_LicenseInfo_To_v1_LicenseInfo(&in.Info, &out.Info, s); err != nil {
-		return err
-	}
+	out.Buttons = *(*server.Buttons)(unsafe.Pointer(&in.Buttons))
+	out.License = (*server.License)(unsafe.Pointer(in.License))
+	out.InstanceID = in.InstanceID
 	return nil
 }
 
@@ -4863,7 +4700,7 @@ func Convert_management_LicenseTokenSpec_To_v1_LicenseTokenSpec(in *management.L
 }
 
 func autoConvert_v1_LicenseTokenStatus_To_management_LicenseTokenStatus(in *LicenseTokenStatus, out *management.LicenseTokenStatus, s conversion.Scope) error {
-	out.Token = in.Token
+	out.Token = (*server.InstanceTokenAuth)(unsafe.Pointer(in.Token))
 	return nil
 }
 
@@ -4873,7 +4710,7 @@ func Convert_v1_LicenseTokenStatus_To_management_LicenseTokenStatus(in *LicenseT
 }
 
 func autoConvert_management_LicenseTokenStatus_To_v1_LicenseTokenStatus(in *management.LicenseTokenStatus, out *LicenseTokenStatus, s conversion.Scope) error {
-	out.Token = in.Token
+	out.Token = (*server.InstanceTokenAuth)(unsafe.Pointer(in.Token))
 	return nil
 }
 
@@ -5118,58 +4955,6 @@ func autoConvert_management_OwnedAccessKeyStatus_To_v1_OwnedAccessKeyStatus(in *
 // Convert_management_OwnedAccessKeyStatus_To_v1_OwnedAccessKeyStatus is an autogenerated conversion function.
 func Convert_management_OwnedAccessKeyStatus_To_v1_OwnedAccessKeyStatus(in *management.OwnedAccessKeyStatus, out *OwnedAccessKeyStatus, s conversion.Scope) error {
 	return autoConvert_management_OwnedAccessKeyStatus_To_v1_OwnedAccessKeyStatus(in, out, s)
-}
-
-func autoConvert_v1_Plan_To_management_Plan(in *Plan, out *management.Plan, s conversion.Scope) error {
-	out.Price = in.Price
-	out.Currency = in.Currency
-	out.Interval = in.Interval
-	if err := Convert_v1_PlanProduct_To_management_PlanProduct(&in.Product, &out.Product, s); err != nil {
-		return err
-	}
-	return nil
-}
-
-// Convert_v1_Plan_To_management_Plan is an autogenerated conversion function.
-func Convert_v1_Plan_To_management_Plan(in *Plan, out *management.Plan, s conversion.Scope) error {
-	return autoConvert_v1_Plan_To_management_Plan(in, out, s)
-}
-
-func autoConvert_management_Plan_To_v1_Plan(in *management.Plan, out *Plan, s conversion.Scope) error {
-	out.Price = in.Price
-	out.Currency = in.Currency
-	out.Interval = in.Interval
-	if err := Convert_management_PlanProduct_To_v1_PlanProduct(&in.Product, &out.Product, s); err != nil {
-		return err
-	}
-	return nil
-}
-
-// Convert_management_Plan_To_v1_Plan is an autogenerated conversion function.
-func Convert_management_Plan_To_v1_Plan(in *management.Plan, out *Plan, s conversion.Scope) error {
-	return autoConvert_management_Plan_To_v1_Plan(in, out, s)
-}
-
-func autoConvert_v1_PlanProduct_To_management_PlanProduct(in *PlanProduct, out *management.PlanProduct, s conversion.Scope) error {
-	out.Name = in.Name
-	out.UnitLabel = in.UnitLabel
-	return nil
-}
-
-// Convert_v1_PlanProduct_To_management_PlanProduct is an autogenerated conversion function.
-func Convert_v1_PlanProduct_To_management_PlanProduct(in *PlanProduct, out *management.PlanProduct, s conversion.Scope) error {
-	return autoConvert_v1_PlanProduct_To_management_PlanProduct(in, out, s)
-}
-
-func autoConvert_management_PlanProduct_To_v1_PlanProduct(in *management.PlanProduct, out *PlanProduct, s conversion.Scope) error {
-	out.Name = in.Name
-	out.UnitLabel = in.UnitLabel
-	return nil
-}
-
-// Convert_management_PlanProduct_To_v1_PlanProduct is an autogenerated conversion function.
-func Convert_management_PlanProduct_To_v1_PlanProduct(in *management.PlanProduct, out *PlanProduct, s conversion.Scope) error {
-	return autoConvert_management_PlanProduct_To_v1_PlanProduct(in, out, s)
 }
 
 func autoConvert_v1_PolicyViolation_To_management_PolicyViolation(in *PolicyViolation, out *management.PolicyViolation, s conversion.Scope) error {
@@ -6078,26 +5863,6 @@ func Convert_management_ProjectTemplatesList_To_v1_ProjectTemplatesList(in *mana
 	return autoConvert_management_ProjectTemplatesList_To_v1_ProjectTemplatesList(in, out, s)
 }
 
-func autoConvert_v1_Promotions_To_management_Promotions(in *Promotions, out *management.Promotions, s conversion.Scope) error {
-	out.Trial = (*management.TrialPromotion)(unsafe.Pointer(in.Trial))
-	return nil
-}
-
-// Convert_v1_Promotions_To_management_Promotions is an autogenerated conversion function.
-func Convert_v1_Promotions_To_management_Promotions(in *Promotions, out *management.Promotions, s conversion.Scope) error {
-	return autoConvert_v1_Promotions_To_management_Promotions(in, out, s)
-}
-
-func autoConvert_management_Promotions_To_v1_Promotions(in *management.Promotions, out *Promotions, s conversion.Scope) error {
-	out.Trial = (*TrialPromotion)(unsafe.Pointer(in.Trial))
-	return nil
-}
-
-// Convert_management_Promotions_To_v1_Promotions is an autogenerated conversion function.
-func Convert_management_Promotions_To_v1_Promotions(in *management.Promotions, out *Promotions, s conversion.Scope) error {
-	return autoConvert_management_Promotions_To_v1_Promotions(in, out, s)
-}
-
 func autoConvert_v1_ResetAccessKey_To_management_ResetAccessKey(in *ResetAccessKey, out *management.ResetAccessKey, s conversion.Scope) error {
 	out.ObjectMeta = in.ObjectMeta
 	if err := Convert_v1_ResetAccessKeySpec_To_management_ResetAccessKeySpec(&in.Spec, &out.Spec, s); err != nil {
@@ -6190,62 +5955,6 @@ func autoConvert_management_ResetAccessKeyStatus_To_v1_ResetAccessKeyStatus(in *
 // Convert_management_ResetAccessKeyStatus_To_v1_ResetAccessKeyStatus is an autogenerated conversion function.
 func Convert_management_ResetAccessKeyStatus_To_v1_ResetAccessKeyStatus(in *management.ResetAccessKeyStatus, out *ResetAccessKeyStatus, s conversion.Scope) error {
 	return autoConvert_management_ResetAccessKeyStatus_To_v1_ResetAccessKeyStatus(in, out, s)
-}
-
-func autoConvert_v1_ResourceLimit_To_management_ResourceLimit(in *ResourceLimit, out *management.ResourceLimit, s conversion.Scope) error {
-	out.Group = in.Group
-	out.Version = in.Version
-	out.Kind = in.Kind
-	out.Limit = in.Limit
-	out.AcrossAllClusters = in.AcrossAllClusters
-	out.BlockRequests = *(*[]management.ResoureRequests)(unsafe.Pointer(&in.BlockRequests))
-	return nil
-}
-
-// Convert_v1_ResourceLimit_To_management_ResourceLimit is an autogenerated conversion function.
-func Convert_v1_ResourceLimit_To_management_ResourceLimit(in *ResourceLimit, out *management.ResourceLimit, s conversion.Scope) error {
-	return autoConvert_v1_ResourceLimit_To_management_ResourceLimit(in, out, s)
-}
-
-func autoConvert_management_ResourceLimit_To_v1_ResourceLimit(in *management.ResourceLimit, out *ResourceLimit, s conversion.Scope) error {
-	out.Group = in.Group
-	out.Version = in.Version
-	out.Kind = in.Kind
-	out.Limit = in.Limit
-	out.AcrossAllClusters = in.AcrossAllClusters
-	out.BlockRequests = *(*[]ResoureRequests)(unsafe.Pointer(&in.BlockRequests))
-	return nil
-}
-
-// Convert_management_ResourceLimit_To_v1_ResourceLimit is an autogenerated conversion function.
-func Convert_management_ResourceLimit_To_v1_ResourceLimit(in *management.ResourceLimit, out *ResourceLimit, s conversion.Scope) error {
-	return autoConvert_management_ResourceLimit_To_v1_ResourceLimit(in, out, s)
-}
-
-func autoConvert_v1_ResoureRequests_To_management_ResoureRequests(in *ResoureRequests, out *management.ResoureRequests, s conversion.Scope) error {
-	out.Verbs = *(*[]string)(unsafe.Pointer(&in.Verbs))
-	out.Group = in.Group
-	out.Resource = in.Resource
-	out.Management = in.Management
-	return nil
-}
-
-// Convert_v1_ResoureRequests_To_management_ResoureRequests is an autogenerated conversion function.
-func Convert_v1_ResoureRequests_To_management_ResoureRequests(in *ResoureRequests, out *management.ResoureRequests, s conversion.Scope) error {
-	return autoConvert_v1_ResoureRequests_To_management_ResoureRequests(in, out, s)
-}
-
-func autoConvert_management_ResoureRequests_To_v1_ResoureRequests(in *management.ResoureRequests, out *ResoureRequests, s conversion.Scope) error {
-	out.Verbs = *(*[]string)(unsafe.Pointer(&in.Verbs))
-	out.Group = in.Group
-	out.Resource = in.Resource
-	out.Management = in.Management
-	return nil
-}
-
-// Convert_management_ResoureRequests_To_v1_ResoureRequests is an autogenerated conversion function.
-func Convert_management_ResoureRequests_To_v1_ResoureRequests(in *management.ResoureRequests, out *ResoureRequests, s conversion.Scope) error {
-	return autoConvert_management_ResoureRequests_To_v1_ResoureRequests(in, out, s)
 }
 
 func autoConvert_v1_Self_To_management_Self(in *Self, out *management.Self, s conversion.Scope) error {
@@ -6926,36 +6635,6 @@ func Convert_management_SubjectAccessReviewStatus_To_v1_SubjectAccessReviewStatu
 	return autoConvert_management_SubjectAccessReviewStatus_To_v1_SubjectAccessReviewStatus(in, out, s)
 }
 
-func autoConvert_v1_SubscriptionInfo_To_management_SubscriptionInfo(in *SubscriptionInfo, out *management.SubscriptionInfo, s conversion.Scope) error {
-	out.TrialEnd = in.TrialEnd
-	out.Status = in.Status
-	out.CurrentPeriodEnd = in.CurrentPeriodEnd
-	out.NextInvoice = in.NextInvoice
-	out.DefaultPaymentMethod = (*management.DefaultPaymentMethod)(unsafe.Pointer(in.DefaultPaymentMethod))
-	out.Created = in.Created
-	return nil
-}
-
-// Convert_v1_SubscriptionInfo_To_management_SubscriptionInfo is an autogenerated conversion function.
-func Convert_v1_SubscriptionInfo_To_management_SubscriptionInfo(in *SubscriptionInfo, out *management.SubscriptionInfo, s conversion.Scope) error {
-	return autoConvert_v1_SubscriptionInfo_To_management_SubscriptionInfo(in, out, s)
-}
-
-func autoConvert_management_SubscriptionInfo_To_v1_SubscriptionInfo(in *management.SubscriptionInfo, out *SubscriptionInfo, s conversion.Scope) error {
-	out.TrialEnd = in.TrialEnd
-	out.Status = in.Status
-	out.CurrentPeriodEnd = in.CurrentPeriodEnd
-	out.NextInvoice = in.NextInvoice
-	out.DefaultPaymentMethod = (*DefaultPaymentMethod)(unsafe.Pointer(in.DefaultPaymentMethod))
-	out.Created = in.Created
-	return nil
-}
-
-// Convert_management_SubscriptionInfo_To_v1_SubscriptionInfo is an autogenerated conversion function.
-func Convert_management_SubscriptionInfo_To_v1_SubscriptionInfo(in *management.SubscriptionInfo, out *SubscriptionInfo, s conversion.Scope) error {
-	return autoConvert_management_SubscriptionInfo_To_v1_SubscriptionInfo(in, out, s)
-}
-
 func autoConvert_v1_Task_To_management_Task(in *Task, out *management.Task, s conversion.Scope) error {
 	out.ObjectMeta = in.ObjectMeta
 	if err := Convert_v1_TaskSpec_To_management_TaskSpec(&in.Spec, &out.Spec, s); err != nil {
@@ -7377,30 +7056,6 @@ func autoConvert_management_TeamStatus_To_v1_TeamStatus(in *management.TeamStatu
 // Convert_management_TeamStatus_To_v1_TeamStatus is an autogenerated conversion function.
 func Convert_management_TeamStatus_To_v1_TeamStatus(in *management.TeamStatus, out *TeamStatus, s conversion.Scope) error {
 	return autoConvert_management_TeamStatus_To_v1_TeamStatus(in, out, s)
-}
-
-func autoConvert_v1_TrialPromotion_To_management_TrialPromotion(in *TrialPromotion, out *management.TrialPromotion, s conversion.Scope) error {
-	out.Product = in.Product
-	out.Description = in.Description
-	out.Link = in.Link
-	return nil
-}
-
-// Convert_v1_TrialPromotion_To_management_TrialPromotion is an autogenerated conversion function.
-func Convert_v1_TrialPromotion_To_management_TrialPromotion(in *TrialPromotion, out *management.TrialPromotion, s conversion.Scope) error {
-	return autoConvert_v1_TrialPromotion_To_management_TrialPromotion(in, out, s)
-}
-
-func autoConvert_management_TrialPromotion_To_v1_TrialPromotion(in *management.TrialPromotion, out *TrialPromotion, s conversion.Scope) error {
-	out.Product = in.Product
-	out.Description = in.Description
-	out.Link = in.Link
-	return nil
-}
-
-// Convert_management_TrialPromotion_To_v1_TrialPromotion is an autogenerated conversion function.
-func Convert_management_TrialPromotion_To_v1_TrialPromotion(in *management.TrialPromotion, out *TrialPromotion, s conversion.Scope) error {
-	return autoConvert_management_TrialPromotion_To_v1_TrialPromotion(in, out, s)
 }
 
 func autoConvert_v1_User_To_management_User(in *User, out *management.User, s conversion.Scope) error {
