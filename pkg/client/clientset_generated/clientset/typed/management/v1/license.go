@@ -31,6 +31,8 @@ type LicenseInterface interface {
 	List(ctx context.Context, opts metav1.ListOptions) (*v1.LicenseList, error)
 	Watch(ctx context.Context, opts metav1.ListOptions) (watch.Interface, error)
 	Patch(ctx context.Context, name string, pt types.PatchType, data []byte, opts metav1.PatchOptions, subresources ...string) (result *v1.License, err error)
+	LicenseRequest(ctx context.Context, licenseName string, licenseRequest *v1.LicenseRequest, opts metav1.CreateOptions) (*v1.LicenseRequest, error)
+
 	LicenseExpansion
 }
 
@@ -162,6 +164,20 @@ func (c *licenses) Patch(ctx context.Context, name string, pt types.PatchType, d
 		SubResource(subresources...).
 		VersionedParams(&opts, scheme.ParameterCodec).
 		Body(data).
+		Do(ctx).
+		Into(result)
+	return
+}
+
+// LicenseRequest takes the representation of a licenseRequest and creates it.  Returns the server's representation of the licenseRequest, and an error, if there is any.
+func (c *licenses) LicenseRequest(ctx context.Context, licenseName string, licenseRequest *v1.LicenseRequest, opts metav1.CreateOptions) (result *v1.LicenseRequest, err error) {
+	result = &v1.LicenseRequest{}
+	err = c.client.Post().
+		Resource("licenses").
+		Name(licenseName).
+		SubResource("request").
+		VersionedParams(&opts, scheme.ParameterCodec).
+		Body(licenseRequest).
 		Do(ctx).
 		Into(result)
 	return

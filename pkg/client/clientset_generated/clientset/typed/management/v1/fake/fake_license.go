@@ -115,3 +115,13 @@ func (c *FakeLicenses) Patch(ctx context.Context, name string, pt types.PatchTyp
 	}
 	return obj.(*managementv1.License), err
 }
+
+// LicenseRequest takes the representation of a licenseRequest and creates it.  Returns the server's representation of the licenseRequest, and an error, if there is any.
+func (c *FakeLicenses) LicenseRequest(ctx context.Context, licenseName string, licenseRequest *managementv1.LicenseRequest, opts v1.CreateOptions) (result *managementv1.LicenseRequest, err error) {
+	obj, err := c.Fake.
+		Invokes(testing.NewRootCreateSubresourceAction(licensesResource, licenseName, "request", licenseRequest), &managementv1.LicenseRequest{})
+	if obj == nil {
+		return nil, err
+	}
+	return obj.(*managementv1.LicenseRequest), err
+}

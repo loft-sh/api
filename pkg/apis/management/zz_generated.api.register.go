@@ -13,6 +13,7 @@ import (
 	uiv1 "github.com/loft-sh/api/v3/pkg/apis/ui/v1"
 	"github.com/loft-sh/api/v3/pkg/managerfactory"
 	"github.com/loft-sh/apiserver/pkg/builders"
+	pkgserver "github.com/loft-sh/external-types/loft-sh/admin-services/pkg/server"
 	policyv1beta1 "github.com/loft-sh/jspolicy/pkg/apis/policy/v1beta1"
 	authorizationv1 "k8s.io/api/authorization/v1"
 	"k8s.io/apimachinery/pkg/apis/meta/internalversion"
@@ -576,7 +577,15 @@ var (
 		func() runtime.Object { return &License{} },
 		func() runtime.Object { return &LicenseList{} },
 	)
-	InternalLicenseToken = builders.NewInternalResource(
+	InternalLicenseRequestREST = builders.NewInternalSubresource(
+		"licenses", "LicenseRequest", "request",
+		func() runtime.Object { return &LicenseRequest{} },
+	)
+	NewLicenseRequestREST = func(getter generic.RESTOptionsGetter) rest.Storage {
+		return NewLicenseRequestRESTFunc(Factory)
+	}
+	NewLicenseRequestRESTFunc NewRESTFunc
+	InternalLicenseToken      = builders.NewInternalResource(
 		"licensetokens",
 		"LicenseToken",
 		func() runtime.Object { return &LicenseToken{} },
@@ -976,6 +985,7 @@ var (
 		InternalKioskStatus,
 		InternalLicense,
 		InternalLicenseStatus,
+		InternalLicenseRequestREST,
 		InternalLicenseToken,
 		InternalLicenseTokenStatus,
 		InternalLoftUpgrade,
@@ -1078,13 +1088,6 @@ type AgentAuditEventSpec struct {
 type AgentAuditEventStatus struct {
 }
 
-type Analytics struct {
-	Endpoint      string
-	BatchEndpoint string
-	Requests      []ResoureRequests
-	Token         string
-}
-
 // +genclient
 // +genclient:nonNamespaced
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -1100,8 +1103,8 @@ type AnnouncementSpec struct {
 }
 
 type AnnouncementStatus struct {
-	Announcement   string
-	AnalyticsToken string
+	Announcement      string
+	InstanceTokenAuth *pkgserver.InstanceTokenAuth
 }
 
 // +genclient
@@ -1453,31 +1456,6 @@ type ConnectorWithName struct {
 	Connector
 }
 
-type CustomerInfo struct {
-	Company      string
-	Email        string
-	FirstName    string
-	LastName     string
-	AddressLine1 string
-	AddressLine2 string
-	City         string
-	PostalCode   string
-	Country      string
-	Created      int64
-}
-
-type DefaultPaymentMethod struct {
-	Card *DefaultPaymentMethodCard
-}
-
-type DefaultPaymentMethodCard struct {
-	Last4    string
-	ExpMonth uint64
-	ExpYear  uint64
-	Brand    string
-	Funding  string
-}
-
 // +genclient
 // +genclient:nonNamespaced
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -1604,30 +1582,32 @@ type License struct {
 	Status LicenseStatus
 }
 
-type LicenseInfo struct {
-	Announcement   string
-	License        string
-	CurrentTime    int64
-	ResourceLimits []ResourceLimit
-	BlockRequests  []ResoureRequests
-	Features       map[string]bool
-	Customer       CustomerInfo
-	Subscription   SubscriptionInfo
-	Quantity       int64
-	Plan           Plan
-	Promotions     Promotions
-	Analytics      Analytics
-	Links          map[string]string
-	BaseDomains    []string
-	IsOffline      bool
+// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+
+type LicenseRequest struct {
+	metav1.TypeMeta
+	metav1.ObjectMeta
+	Spec   LicenseRequestSpec
+	Status LicenseRequestStatus
+}
+
+type LicenseRequestSpec struct {
+	Route string
+	Input pkgserver.StandardRequestInputFrontEnd
+}
+
+type LicenseRequestStatus struct {
+	OK     bool
+	Output pkgserver.StandardRequestOutput
 }
 
 type LicenseSpec struct {
 }
 
 type LicenseStatus struct {
-	Instance string
-	Info     LicenseInfo
+	Buttons    pkgserver.Buttons
+	License    *pkgserver.License
+	InstanceID string
 }
 
 // +genclient
@@ -1645,7 +1625,7 @@ type LicenseTokenSpec struct {
 }
 
 type LicenseTokenStatus struct {
-	Token string
+	Token *pkgserver.InstanceTokenAuth
 }
 
 // +genclient
@@ -1697,18 +1677,6 @@ type OwnedAccessKeySpec struct {
 
 type OwnedAccessKeyStatus struct {
 	storagev1.AccessKeyStatus
-}
-
-type Plan struct {
-	Price    int64
-	Currency string
-	Interval string
-	Product  PlanProduct
-}
-
-type PlanProduct struct {
-	Name      string
-	UnitLabel string
 }
 
 // +genclient
@@ -1894,10 +1862,6 @@ type ProjectTemplates struct {
 	SpaceTemplates                []SpaceTemplate
 }
 
-type Promotions struct {
-	Trial *TrialPromotion
-}
-
 // +genclient
 // +genclient:nonNamespaced
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -1915,22 +1879,6 @@ type ResetAccessKeySpec struct {
 
 type ResetAccessKeyStatus struct {
 	storagev1.AccessKeyStatus
-}
-
-type ResourceLimit struct {
-	Group             string
-	Version           string
-	Kind              string
-	Limit             int64
-	AcrossAllClusters bool
-	BlockRequests     []ResoureRequests
-}
-
-type ResoureRequests struct {
-	Verbs      []string
-	Group      string
-	Resource   string
-	Management bool
 }
 
 // +genclient
@@ -2076,15 +2024,6 @@ type SubjectAccessReviewStatus struct {
 	authorizationv1.SubjectAccessReviewStatus
 }
 
-type SubscriptionInfo struct {
-	TrialEnd             int64
-	Status               string
-	CurrentPeriodEnd     int64
-	NextInvoice          int64
-	DefaultPaymentMethod *DefaultPaymentMethod
-	Created              int64
-}
-
 // +genclient
 // +genclient:nonNamespaced
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -2146,12 +2085,6 @@ type TeamSpec struct {
 
 type TeamStatus struct {
 	storagev1.TeamStatus
-}
-
-type TrialPromotion struct {
-	Product     string
-	Description string
-	Link        string
 }
 
 // +genclient
@@ -3886,6 +3819,14 @@ type LicenseList struct {
 	metav1.TypeMeta
 	metav1.ListMeta
 	Items []License
+}
+
+// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+
+type LicenseRequestList struct {
+	metav1.TypeMeta
+	metav1.ListMeta
+	Items []LicenseRequest
 }
 
 func (License) NewStatus() interface{} {

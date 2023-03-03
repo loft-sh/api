@@ -56,6 +56,7 @@ func addKnownTypes(scheme *runtime.Scheme) error {
 		&management.KioskList{},
 		&management.License{},
 		&management.LicenseList{},
+		&management.LicenseRequest{},
 		&management.LicenseToken{},
 		&management.LicenseTokenList{},
 		&management.LoftUpgrade{},
