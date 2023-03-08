@@ -4,7 +4,7 @@ go 1.19
 
 require (
 	github.com/ghodss/yaml v1.0.0
-	github.com/loft-sh/agentapi/v3 v3.0.0-rc.1
+	github.com/loft-sh/agentapi/v3 v3.0.0-rc.2
 	github.com/loft-sh/apiserver v0.0.0-20230203091244-1225c09820b1
 	github.com/loft-sh/external-types v0.0.2-0.20230301201552-ec939da949b4
 	github.com/loft-sh/jspolicy v0.1.0
