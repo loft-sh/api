@@ -6036,6 +6036,8 @@ func autoConvert_v1_SelfStatus_To_management_SelfStatus(in *SelfStatus, out *man
 	out.AccessKeyType = storagev1.AccessKeyType(in.AccessKeyType)
 	out.Subject = in.Subject
 	out.Groups = *(*[]string)(unsafe.Pointer(&in.Groups))
+	out.IntercomHash = in.IntercomHash
+	out.InstanceID = in.InstanceID
 	return nil
 }
 
@@ -6051,6 +6053,8 @@ func autoConvert_management_SelfStatus_To_v1_SelfStatus(in *management.SelfStatu
 	out.AccessKeyType = storagev1.AccessKeyType(in.AccessKeyType)
 	out.Subject = in.Subject
 	out.Groups = *(*[]string)(unsafe.Pointer(&in.Groups))
+	out.IntercomHash = in.IntercomHash
+	out.InstanceID = in.InstanceID
 	return nil
 }
 
