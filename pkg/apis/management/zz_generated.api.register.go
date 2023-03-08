@@ -1902,6 +1902,8 @@ type SelfStatus struct {
 	AccessKeyType storagev1.AccessKeyType
 	Subject       string
 	Groups        []string
+	IntercomHash  string
+	InstanceID    string
 }
 
 // +genclient

@@ -48,6 +48,14 @@ type SelfStatus struct {
 	// The groups of the currently logged in user
 	// +optional
 	Groups []string `json:"groups,omitempty"`
+
+	// IntercomHash is the hmac used to link a user/instance to intercomm
+	// +optional
+	IntercomHash string `json:"intercomHash"`
+
+	// InstanceID is the loft instance id
+	// +optional
+	InstanceID string `json:"instanceID"`
 }
 
 type UserInfo struct {
