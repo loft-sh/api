@@ -21,7 +21,8 @@ type Interface interface {
 	VirtualclusterV1() virtualclusterv1.VirtualclusterV1Interface
 }
 
-// Clientset contains the clients for groups.
+// Clientset contains the clients for groups. Each group has exactly one
+// version included in a Clientset.
 type Clientset struct {
 	*discovery.DiscoveryClient
 	managementV1     *managementv1.ManagementV1Client

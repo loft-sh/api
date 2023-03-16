@@ -1230,19 +1230,23 @@ type AuthenticationMicrosoft struct {
 }
 
 type AuthenticationOIDC struct {
-	IssuerURL      string
-	ClientID       string
-	ClientSecret   string
-	RedirectURI    string
-	CAFile         string
-	InsecureCA     bool
-	UsernameClaim  string
-	UsernamePrefix string
-	GroupsClaim    string
-	Groups         []string
-	GetUserInfo    bool
-	GroupsPrefix   string
-	Type           string
+	IssuerURL              string
+	ClientID               string
+	ClientSecret           string
+	RedirectURI            string
+	CAFile                 string
+	InsecureCA             bool
+	PreferredUsernameClaim string
+	LoftUsernameClaim      string
+	UsernameClaim          string
+	EmailClaim             string
+	UsernamePrefix         string
+	GroupsClaim            string
+	Groups                 []string
+	Scopes                 []string
+	GetUserInfo            bool
+	GroupsPrefix           string
+	Type                   string
 	AuthenticationClusterAccountTemplates
 }
 

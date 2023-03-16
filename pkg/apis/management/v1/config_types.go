@@ -605,9 +605,21 @@ type AuthenticationOIDC struct {
 	// +optional
 	InsecureCA bool `json:"insecureCa,omitempty"`
 
-	// UsernameClaim is the JWT field to use as the user's username.
+	// Configurable key which contains the preferred username claims
+	// +optional
+	PreferredUsernameClaim string `json:"preferredUsername,omitempty"`
+
+	// LoftUsernameClaim is the JWT field to use as the user's username.
+	// +optional
+	LoftUsernameClaim string `json:"loftUsernameClaim,omitempty"`
+
+	// UsernameClaim is the JWT field to use as the user's id.
 	// +optional
 	UsernameClaim string `json:"usernameClaim,omitempty"`
+
+	// EmailClaim is the JWT field to use as the user's email.
+	// +optional
+	EmailClaim string `json:"emailClaim,omitempty"`
 
 	// UsernamePrefix, if specified, causes claims mapping to username to be prefix with
 	// the provided value. A value "oidc:" would result in usernames like "oidc:john".
@@ -624,6 +636,10 @@ type AuthenticationOIDC struct {
 	// of the specified groups.
 	// +optional
 	Groups []string `json:"groups,omitempty"`
+
+	// Scopes that should be sent to the server. If empty, defaults to "email" and "profile".
+	// +optional
+	Scopes []string `json:"scopes,omitempty"`
 
 	// GetUserInfo, if specified, tells the OIDCAuthenticator to try to populate the user's
 	// information from the UserInfo.
