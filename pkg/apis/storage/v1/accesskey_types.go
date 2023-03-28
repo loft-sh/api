@@ -19,14 +19,6 @@ type AccessKey struct {
 }
 
 type AccessKeySpec struct {
-	// The display name shown in the UI
-	// +optional
-	DisplayName string `json:"displayName,omitempty"`
-
-	// Description describes an app
-	// +optional
-	Description string `json:"description,omitempty"`
-
 	// The user this access key refers to
 	// +optional
 	User string `json:"user,omitempty"`
@@ -35,24 +27,30 @@ type AccessKeySpec struct {
 	// +optional
 	Team string `json:"team,omitempty"`
 
-	// Subject is a generic subject that can be used
-	// instead of user or team
-	// +optional
-	Subject string `json:"subject,omitempty"`
-
-	// Groups specifies extra groups to apply when using
-	// this access key
-	// +optional
-	Groups []string `json:"groups,omitempty"`
-
 	// The actual access key that will be used as a bearer token
 	// +optional
 	Key string `json:"key,omitempty"`
+
+	// DEPRECATED: do not use anymore
+	// Parent is used to share OIDC and external token information
+	// with multiple access keys. Since copying an OIDC refresh token
+	// would result in the other access keys becoming invalid after a refresh
+	// parent allows access keys to share that information.
+	//
+	// The use case for this is primarily user generated access keys,
+	// which will have the users current access key as parent if it contains
+	// an OIDC token.
+	// +optional
+	Parent string `json:"parent,omitempty"`
 
 	// If this field is true, the access key is still allowed to exist,
 	// however will not work to access the api
 	// +optional
 	Disabled bool `json:"disabled,omitempty"`
+
+	// The display name shown in the UI
+	// +optional
+	DisplayName string `json:"displayName,omitempty"`
 
 	// The time to life for this access key
 	// +optional
@@ -81,77 +79,21 @@ type AccessKeySpec struct {
 	// +optional
 	IdentityRefresh *metav1.Time `json:"identityRefresh,omitempty"`
 
-	// If the token is a refresh token, contains information about it
-	// +optional
-	OIDCProvider *AccessKeyOIDCProvider `json:"oidcProvider,omitempty"`
-
-	// DEPRECATED: do not use anymore
-	// Parent is used to share OIDC and external token information
-	// with multiple access keys. Since copying an OIDC refresh token
-	// would result in the other access keys becoming invalid after a refresh
-	// parent allows access keys to share that information.
-	//
-	// The use case for this is primarily user generated access keys,
-	// which will have the users current access key as parent if it contains
-	// an OIDC token.
-	// +optional
-	Parent string `json:"parent,omitempty"`
-
 	// DEPRECATED: Use identity instead
 	// If available, contains information about the oidc login data for this
 	// access key
 	// +optional
 	OIDCLogin *AccessKeyOIDC `json:"oidcLogin,omitempty"`
+
+	// If the token is a refresh token, contains information about it
+	// +optional
+	OIDCProvider *AccessKeyOIDCProvider `json:"oidcProvider,omitempty"`
 }
 
 type AccessKeyScope struct {
-	// AllowLoftCLI allows certain read-only management requests to
-	// make sure loft cli works correctly with this specific access key.
-	// +optional
-	AllowLoftCLI bool `json:"allowLoftCli,omitempty"`
-
-	// Projects specifies the projects the access key should have access to.
-	// +optional
-	Projects []AccessKeyScopeProject `json:"projects,omitempty"`
-
-	// Spaces specifies the spaces the access key is allowed to access.
-	// +optional
-	Spaces []AccessKeyScopeSpace `json:"spaces,omitempty"`
-
-	// VirtualClusters specifies the virtual clusters the access key is allowed to access.
-	// +optional
-	VirtualClusters []AccessKeyScopeVirtualCluster `json:"virtualClusters,omitempty"`
-
-	// DEPRECATED: Use Projects, Spaces and VirtualClusters instead
 	// Rules specifies the rules that should apply to the access key.
 	// +optional
 	Rules []AccessKeyScopeRule `json:"rules,omitempty"`
-}
-
-type AccessKeyScopeVirtualCluster struct {
-	// Project is the name of the project.
-	// +optional
-	Project string `json:"project,omitempty"`
-
-	// VirtualCluster is the name of the virtual cluster to access. You can specify * to select all virtual clusters.
-	// +optional
-	VirtualCluster string `json:"virtualCluster,omitempty"`
-}
-
-type AccessKeyScopeSpace struct {
-	// Project is the name of the project.
-	// +optional
-	Project string `json:"project,omitempty"`
-
-	// Space is the name of the space. You can specify * to select all spaces.
-	// +optional
-	Space string `json:"space,omitempty"`
-}
-
-type AccessKeyScopeProject struct {
-	// Project is the name of the project. You can specify * to select all projects.
-	// +optional
-	Project string `json:"project,omitempty"`
 }
 
 // AccessKeyScopeRule describes a rule for the access key
@@ -221,10 +163,6 @@ const (
 	RequestTargetCluster RequestTarget = "Cluster"
 	// RequestTargetVirtualCluster specifies a virtual kubernetes cluster request
 	RequestTargetVirtualCluster RequestTarget = "VirtualCluster"
-	// RequestTargetProjectSpace specifies a project space cluster request
-	RequestTargetProjectSpace RequestTarget = "ProjectSpace"
-	// RequestTargetProjectVirtualCluster specifies a project virtual kubernetes cluster request
-	RequestTargetProjectVirtualCluster RequestTarget = "ProjectVirtualCluster"
 )
 
 // GroupResources represents resource kinds in an API group.
@@ -270,26 +208,22 @@ type AccessKeyIdentity struct {
 
 	// The user email
 	// +optional
-	Email string `json:"email,omitempty"`
+	Email string
 
 	// If the user email was verified
 	// +optional
-	EmailVerified bool `json:"emailVerified,omitempty"`
+	EmailVerified bool
 
 	// The groups from the identity provider
 	// +optional
-	Groups []string `json:"groups,omitempty"`
-
-	// Connector is the name of the connector this access key was created from
-	// +optional
-	Connector string `json:"connector,omitempty"`
+	Groups []string
 
 	// ConnectorData holds data used by the connector for subsequent requests after initial
 	// authentication, such as access tokens for upstream providers.
 	//
 	// This data is never shared with end users, OAuth clients, or through the API.
 	// +optional
-	ConnectorData []byte `json:"connectorData,omitempty"`
+	ConnectorData []byte
 }
 
 type AccessKeyOIDCProvider struct {
@@ -336,7 +270,6 @@ const (
 	AccessKeyTypeNone             AccessKeyType = ""
 	AccessKeyTypeLogin            AccessKeyType = "Login"
 	AccessKeyTypeUser             AccessKeyType = "User"
-	AccessKeyTypeOther            AccessKeyType = "Other"
 	AccessKeyTypeReset            AccessKeyType = "Reset"
 	AccessKeyTypeOIDCRefreshToken AccessKeyType = "OIDCRefreshToken"
 )

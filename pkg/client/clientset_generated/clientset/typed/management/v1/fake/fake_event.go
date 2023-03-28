@@ -5,7 +5,7 @@ package fake
 import (
 	"context"
 
-	managementv1 "github.com/loft-sh/api/v3/pkg/apis/management/v1"
+	managementv1 "github.com/loft-sh/api/v2/pkg/apis/management/v1"
 	v1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	labels "k8s.io/apimachinery/pkg/labels"
 	schema "k8s.io/apimachinery/pkg/runtime/schema"

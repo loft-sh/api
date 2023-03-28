@@ -10,15 +10,13 @@ type ClusterExpansion interface{}
 
 type ClusterAccessExpansion interface{}
 
-type ClusterRoleTemplateExpansion interface{}
+type ClusterAccountTemplateExpansion interface{}
 
-type ProjectExpansion interface{}
+type ClusterRoleTemplateExpansion interface{}
 
 type SharedSecretExpansion interface{}
 
 type SpaceConstraintExpansion interface{}
-
-type SpaceInstanceExpansion interface{}
 
 type SpaceTemplateExpansion interface{}
 
@@ -27,7 +25,5 @@ type TaskExpansion interface{}
 type TeamExpansion interface{}
 
 type UserExpansion interface{}
-
-type VirtualClusterInstanceExpansion interface{}
 
 type VirtualClusterTemplateExpansion interface{}

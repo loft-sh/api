@@ -45,7 +45,6 @@ type LicenseInfo struct {
 	Analytics      Analytics         `json:"analytics,omitempty"`
 	Links          map[string]string `json:"links,omitempty"`
 	BaseDomains    []string          `json:"baseDomains,omitempty"`
-	IsOffline      bool              `json:"isOffline,omitempty"`
 }
 
 type CustomerInfo struct {

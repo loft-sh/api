@@ -35,10 +35,6 @@ const (
 	RequestTargetCluster RequestTarget = "Cluster"
 	// RequestTargetVCluster specifies a virtual kubernetes cluster request
 	RequestTargetVCluster RequestTarget = "VCluster"
-	// RequestTargetProjectSpace specifies a project space request
-	RequestTargetProjectSpace RequestTarget = "ProjectSpace"
-	// RequestTargetProjectVCluster specifies a project vcluster request
-	RequestTargetProjectVCluster RequestTarget = "ProjectVCluster"
 )
 
 func ordLevel(l Level) int {

@@ -1,7 +1,6 @@
 package v1
 
 import (
-	storagev1 "github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 )
 
@@ -17,20 +16,6 @@ type SpaceTemplate struct {
 
 	Spec   SpaceTemplateSpec   `json:"spec,omitempty"`
 	Status SpaceTemplateStatus `json:"status,omitempty"`
-}
-
-func (a *SpaceTemplate) GetVersions() []VersionAccessor {
-	var retVersions []VersionAccessor
-	for _, v := range a.Spec.Versions {
-		b := v
-		retVersions = append(retVersions, &b)
-	}
-
-	return retVersions
-}
-
-func (a *SpaceTemplateVersion) GetVersion() string {
-	return a.Version
 }
 
 func (a *SpaceTemplate) GetOwner() *UserOrTeam {
@@ -67,54 +52,34 @@ type SpaceTemplateSpec struct {
 	// +optional
 	Template SpaceTemplateDefinition `json:"template,omitempty"`
 
-	// Parameters define additional app parameters that will set helm values
-	// +optional
-	Parameters []AppParameter `json:"parameters,omitempty"`
-
-	// Versions are different space template versions that can be referenced as well
-	// +optional
-	Versions []SpaceTemplateVersion `json:"versions,omitempty"`
-
 	// Access holds the access rights for users and teams
 	// +optional
 	Access []Access `json:"access,omitempty"`
-}
-
-type SpaceTemplateVersion struct {
-	// Template holds the space template
-	// +optional
-	Template SpaceTemplateDefinition `json:"template,omitempty"`
-
-	// Parameters define additional app parameters that will set helm values
-	// +optional
-	Parameters []AppParameter `json:"parameters,omitempty"`
-
-	// Version is the version. Needs to be in X.X.X format.
-	// +optional
-	Version string `json:"version,omitempty"`
 }
 
 type SpaceTemplateDefinition struct {
 	// The space metadata
 	// +kubebuilder:pruning:PreserveUnknownFields
 	// +optional
-	TemplateMetadata `json:"metadata,omitempty"`
+	metav1.ObjectMeta `json:"metadata,omitempty"`
 
 	// Objects are Kubernetes style yamls that should get deployed into the virtual cluster
 	// +optional
 	Objects string `json:"objects,omitempty"`
 
-	// Charts are helm charts that should get deployed
-	// +optional
-	Charts []storagev1.TemplateHelmChart `json:"charts,omitempty"`
-
 	// Apps specifies the apps that should get deployed by this template
 	// +optional
-	Apps []storagev1.AppReference `json:"apps,omitempty"`
+	Apps []SpaceAppReference `json:"apps,omitempty"`
+}
 
-	// The space access
+type SpaceAppReference struct {
+	// Name of the target app
 	// +optional
-	Access *storagev1.InstanceAccess `json:"access,omitempty"`
+	Name string `json:"name,omitempty"`
+
+	// ReleaseName of the target app
+	// +optional
+	ReleaseName string `json:"releaseName,omitempty"`
 }
 
 // SpaceTemplateStatus holds the status

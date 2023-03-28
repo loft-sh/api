@@ -1,7 +1,7 @@
 package v1
 
 import (
-	agentstoragev1 "github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1"
+	agentstoragev1 "github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 )
 
@@ -65,11 +65,6 @@ type UserSpec struct {
 	// The groups the user has access to
 	// +optional
 	Groups []string `json:"groups,omitempty"`
-
-	// SSOGroups is used to remember groups that were
-	// added from sso.
-	// +optional
-	SSOGroups []string `json:"ssoGroups,omitempty"`
 
 	// A reference to the user password
 	// +optional

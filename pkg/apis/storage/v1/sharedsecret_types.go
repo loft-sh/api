@@ -62,10 +62,6 @@ type SharedSecretSpec struct {
 
 // Access describes the access to a secret
 type Access struct {
-	// Name is an optional name that is used for this access rule
-	// +optional
-	Name string `json:"name,omitempty"`
-
 	// Verbs is a list of Verbs that apply to ALL the ResourceKinds and AttributeRestrictions contained in this rule. VerbAll represents all kinds.
 	Verbs []string `json:"verbs"`
 

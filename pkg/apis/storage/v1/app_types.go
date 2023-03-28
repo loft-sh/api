@@ -1,7 +1,7 @@
 package v1
 
 import (
-	clusterv1 "github.com/loft-sh/agentapi/v3/pkg/apis/loft/cluster/v1"
+	clusterv1 "github.com/loft-sh/agentapi/v2/pkg/apis/loft/cluster/v1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 )
 
@@ -45,32 +45,33 @@ type AppSpec struct {
 	// +optional
 	Description string `json:"description,omitempty"`
 
+	// Readme is a longer markdown string that describes the app.
+	// +optional
+	Readme string `json:"readme,omitempty"`
+
 	// Owner holds the owner of this object
 	// +optional
 	Owner *UserOrTeam `json:"owner,omitempty"`
 
-	// Clusters are the clusters this app can be installed in.
+	// Icon holds an URL to the app icon
 	// +optional
-	Clusters []string `json:"clusters,omitempty"`
+	Icon string `json:"icon,omitempty"`
 
 	// RecommendedApp specifies where this app should show up as recommended app
 	// +optional
 	RecommendedApp []RecommendedApp `json:"recommendedApp,omitempty"`
 
-	// AppConfig is the app configuration
-	AppConfig `json:",inline"`
-
-	// Versions are different app versions that can be referenced
+	// ReleaseName is the preferred release name of the app
 	// +optional
-	Versions []AppVersion `json:"versions,omitempty"`
+	ReleaseName string `json:"releaseName,omitempty"`
 
-	// Access holds the access rights for users and teams
+	// StreamContainer can be used to stream a containers logs instead of the helm output.
 	// +optional
-	Access []Access `json:"access,omitempty"`
+	StreamContainer *StreamContainer `json:"streamContainer,omitempty"`
 
-	// =======================
-	// DEPRECATED FIELDS BELOW
-	// =======================
+	// Config is the helm config to use to deploy the helm release
+	// +optional
+	Config clusterv1.HelmReleaseSpec `json:"config,omitempty"`
 
 	// DEPRECATED: Use config instead
 	// manifest represents kubernetes resources that will be deployed into the target namespace
@@ -81,34 +82,6 @@ type AppSpec struct {
 	// helm defines the configuration for a helm deployment
 	// +optional
 	Helm *HelmConfiguration `json:"helm,omitempty"`
-}
-
-type AppVersion struct {
-	// AppConfig is the app configuration
-	AppConfig `json:",inline"`
-
-	// Version is the version. Needs to be in X.X.X format.
-	// +optional
-	Version string `json:"version,omitempty"`
-}
-
-type AppConfig struct {
-	// DefaultNamespace is the default namespace this app should installed
-	// in.
-	// +optional
-	DefaultNamespace string `json:"defaultNamespace,omitempty"`
-
-	// Readme is a longer markdown string that describes the app.
-	// +optional
-	Readme string `json:"readme,omitempty"`
-
-	// Icon holds an URL to the app icon
-	// +optional
-	Icon string `json:"icon,omitempty"`
-
-	// Config is the helm config to use to deploy the helm release
-	// +optional
-	Config clusterv1.HelmReleaseConfig `json:"config,omitempty"`
 
 	// Wait determines if Loft should wait during deploy for the app to become ready
 	// +optional
@@ -122,15 +95,9 @@ type AppConfig struct {
 	// +optional
 	Parameters []AppParameter `json:"parameters,omitempty"`
 
-	// =======================
-	// DEPRECATED FIELDS BELOW
-	// =======================
-
-	// DEPRECATED: Use config.bash instead
-	// StreamContainer can be used to stream a containers logs instead of the helm output.
+	// Access holds the access rights for users and teams
 	// +optional
-	// +internal
-	StreamContainer *StreamContainer `json:"streamContainer,omitempty"`
+	Access []Access `json:"access,omitempty"`
 }
 
 type AppParameter struct {
@@ -189,11 +156,9 @@ type AppParameter struct {
 }
 
 type UserOrTeam struct {
-	// User specifies a Loft user.
 	// +optional
 	User string `json:"user,omitempty"`
 
-	// Team specifies a Loft team.
 	// +optional
 	Team string `json:"team,omitempty"`
 }

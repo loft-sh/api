@@ -1,8 +1,8 @@
 package v1
 
 import (
-	clusterv1 "github.com/loft-sh/agentapi/v3/pkg/apis/loft/cluster/v1"
-	storagev1 "github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1"
+	clusterv1 "github.com/loft-sh/agentapi/v2/pkg/apis/loft/cluster/v1"
+	storagev1 "github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1"
 	corev1 "k8s.io/api/core/v1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 )
@@ -73,9 +73,9 @@ type TaskSpec struct {
 }
 
 type TaskDefinition struct {
-	// AppTask is an app task
+	// ApplyTask executes a kubectl apply
 	// +optional
-	AppTask *AppTask `json:"appTask,omitempty"`
+	ApplyTask *ApplyTask `json:"apply,omitempty"`
 
 	// HelmTask executes a helm command
 	// +optional
@@ -85,9 +85,18 @@ type TaskDefinition struct {
 	// +optional
 	SpaceCreationTask *SpaceCreationTask `json:"spaceCreation,omitempty"`
 
-	// VirtualClusterCreationTask creates a new virtual cluster
+	// VirtualClusterCreatioTask creates a new virtual cluster
 	// +optional
 	VirtualClusterCreationTask *VirtualClusterCreationTask `json:"virtualClusterCreation,omitempty"`
+}
+
+type ApplyTask struct {
+	// Manifests are the manifests to apply
+	Manifests string `json:"manifests,omitempty"`
+
+	// Args are extra arguments used to apply the manifests
+	// +optional
+	Args []string `json:"args,omitempty"`
 }
 
 type VirtualClusterCreationTask struct {
@@ -98,11 +107,11 @@ type VirtualClusterCreationTask struct {
 
 	// The virtual cluster access
 	// +optional
-	Access *storagev1.InstanceAccess `json:"access,omitempty"`
+	Access *storagev1.VirtualClusterAccess `json:"access,omitempty"`
 
 	// The helm release configuration for the virtual cluster.
 	// +optional
-	HelmRelease storagev1.VirtualClusterHelmRelease `json:"helmRelease,omitempty"`
+	HelmRelease *storagev1.VirtualClusterHelmRelease `json:"helmRelease,omitempty"`
 
 	// Objects is the optional objects configuration for the virtual cluster
 	// +optional
@@ -114,11 +123,31 @@ type VirtualClusterCreationTask struct {
 
 	// Apps specifies the apps that should get deployed by this template
 	// +optional
-	Apps []storagev1.AppReference `json:"apps,omitempty"`
+	Apps []VirtualClusterCreationAppReference `json:"apps,omitempty"`
 
 	// SpaceCreationTask creates a new space if defined for the virtual cluster
 	// +optional
 	SpaceCreationTask *SpaceCreationTask `json:"spaceCreation,omitempty"`
+}
+
+type VirtualClusterCreationAppReference struct {
+	// Name of the target app
+	// +optional
+	Name string `json:"name,omitempty"`
+
+	// Namespace specifies in which target namespace the app should
+	// get deployed in
+	// +optional
+	Namespace string `json:"namespace,omitempty"`
+
+	// ReleaseName is the name of the app release
+	// +optional
+	ReleaseName string `json:"releaseName,omitempty"`
+
+	// Parameters are additional helm chart values that will get merged
+	// with config and are then used to deploy the helm chart.
+	// +optional
+	Parameters string `json:"parameters,omitempty"`
 }
 
 type SpaceCreationTask struct {
@@ -137,21 +166,22 @@ type SpaceCreationTask struct {
 
 	// Apps specifies the apps that should get deployed by this template
 	// +optional
-	Apps []storagev1.AppReference `json:"apps,omitempty"`
+	Apps []SpaceCreationAppReference `json:"apps,omitempty"`
 }
 
-type AppTask struct {
-	// Type is the task type. Defaults to Upgrade
+type SpaceCreationAppReference struct {
+	// Name of the target app
 	// +optional
-	Type HelmTaskType `json:"type,omitempty"`
+	Name string `json:"name,omitempty"`
 
-	// RollbackRevision is the revision to rollback to
+	// ReleaseName of the target app
 	// +optional
-	RollbackRevision string `json:"rollbackRevision,omitempty"`
+	ReleaseName string `json:"releaseName,omitempty"`
 
-	// AppReference is the reference to the app to deploy
+	// Parameters are additional helm values that are merged
+	// with the original helm values.
 	// +optional
-	AppReference storagev1.AppReference `json:"appReference,omitempty"`
+	Parameters string `json:"parameters,omitempty"`
 }
 
 type HelmTask struct {
@@ -159,6 +189,10 @@ type HelmTask struct {
 	// +optional
 	Release HelmTaskRelease `json:"release,omitempty"`
 
+	// StreamContainer can be used to stream a containers logs instead of the helm output.
+	// +optional
+	StreamContainer *StreamContainer `json:"streamContainer,omitempty"`
+
 	// Type is the task type. Defaults to Upgrade
 	// +optional
 	Type HelmTaskType `json:"type,omitempty"`
@@ -166,6 +200,10 @@ type HelmTask struct {
 	// RollbackRevision is the revision to rollback to
 	// +optional
 	RollbackRevision string `json:"rollbackRevision,omitempty"`
+
+	// Args are extra args to pass to helm
+	// +optional
+	Args []string `json:"args,omitempty"`
 }
 
 type HelmTaskRelease struct {
@@ -176,17 +214,13 @@ type HelmTaskRelease struct {
 	// +optional
 	Namespace string `json:"namespace,omitempty"`
 
-	// Config is the helm config to use to deploy the release
-	// +optional
-	Config clusterv1.HelmReleaseConfig `json:"config,omitempty"`
-
-	// =======================
-	// DEPRECATED FIELDS BELOW
-	// =======================
-
 	// Labels are additional labels for the helm release.
 	// +optional
 	Labels map[string]string `json:"labels,omitempty"`
+
+	// Config is the helm config to use to deploy the release
+	// +optional
+	Config clusterv1.HelmReleaseSpec `json:"config,omitempty"`
 }
 
 type StreamContainer struct {
@@ -239,14 +273,6 @@ const (
 )
 
 type Target struct {
-	// SpaceInstance defines a space instance as target
-	// +optional
-	SpaceInstance *TargetInstance `json:"spaceInstance,omitempty"`
-
-	// VirtualClusterInstance defines a virtual cluster instance as target
-	// +optional
-	VirtualClusterInstance *TargetInstance `json:"virtualClusterInstance,omitempty"`
-
 	// Cluster defines a connected cluster as target
 	// +optional
 	Cluster *TargetCluster `json:"cluster,omitempty"`
@@ -254,16 +280,6 @@ type Target struct {
 	// VirtualCluster defines a virtual cluster as target
 	// +optional
 	VirtualCluster *TargetVirtualCluster `json:"virtualCluster,omitempty"`
-}
-
-type TargetInstance struct {
-	// Name is the name of the instance
-	// +optional
-	Name string `json:"name,omitempty"`
-
-	// Project where the instance is in
-	// +optional
-	Project string `json:"project,omitempty"`
 }
 
 type TargetCluster struct {

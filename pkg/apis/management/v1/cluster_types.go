@@ -1,15 +1,15 @@
 package v1
 
 import (
-	storagev1 "github.com/loft-sh/api/v3/pkg/apis/storage/v1"
+	storagev1 "github.com/loft-sh/api/v2/pkg/apis/storage/v1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 )
 
 // +genclient
 // +genclient:nonNamespaced
-// +genclient:method=ListAccess,verb=get,subresource=memberaccess,result=github.com/loft-sh/api/v3/pkg/apis/management/v1.ClusterMemberAccess
-// +genclient:method=ListMembers,verb=get,subresource=members,result=github.com/loft-sh/api/v3/pkg/apis/management/v1.ClusterMembers
-// +genclient:method=ListVirtualClusterDefaults,verb=get,subresource=virtualclusterdefaults,result=github.com/loft-sh/api/v3/pkg/apis/management/v1.ClusterVirtualClusterDefaults
+// +genclient:method=ListAccess,verb=get,subresource=memberaccess,result=github.com/loft-sh/api/v2/pkg/apis/management/v1.ClusterMemberAccess
+// +genclient:method=ListMembers,verb=get,subresource=members,result=github.com/loft-sh/api/v2/pkg/apis/management/v1.ClusterMembers
+// +genclient:method=ListVirtualClusterDefaults,verb=get,subresource=virtualclusterdefaults,result=github.com/loft-sh/api/v2/pkg/apis/management/v1.ClusterVirtualClusterDefaults
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
 
 // Cluster holds the cluster information

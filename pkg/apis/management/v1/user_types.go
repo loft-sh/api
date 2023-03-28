@@ -1,15 +1,15 @@
 package v1
 
 import (
-	storagev1 "github.com/loft-sh/api/v3/pkg/apis/storage/v1"
+	storagev1 "github.com/loft-sh/api/v2/pkg/apis/storage/v1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 )
 
 // +genclient
 // +genclient:nonNamespaced
-// +genclient:method=GetProfile,verb=get,subresource=profile,result=github.com/loft-sh/api/v3/pkg/apis/management/v1.UserProfile
-// +genclient:method=ListClusters,verb=get,subresource=clusters,result=github.com/loft-sh/api/v3/pkg/apis/management/v1.UserClusters
-// +genclient:method=ListAccessKeys,verb=get,subresource=accesskeys,result=github.com/loft-sh/api/v3/pkg/apis/management/v1.UserAccessKeys
+// +genclient:method=GetProfile,verb=get,subresource=profile,result=github.com/loft-sh/api/v2/pkg/apis/management/v1.UserProfile
+// +genclient:method=ListClusters,verb=get,subresource=clusters,result=github.com/loft-sh/api/v2/pkg/apis/management/v1.UserClusters
+// +genclient:method=ListAccessKeys,verb=get,subresource=accesskeys,result=github.com/loft-sh/api/v2/pkg/apis/management/v1.UserAccessKeys
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
 
 // User holds the user information

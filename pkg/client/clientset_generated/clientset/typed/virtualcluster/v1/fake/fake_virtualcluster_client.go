@@ -3,7 +3,7 @@
 package fake
 
 import (
-	v1 "github.com/loft-sh/api/v3/pkg/client/clientset_generated/clientset/typed/virtualcluster/v1"
+	v1 "github.com/loft-sh/api/v2/pkg/client/clientset_generated/clientset/typed/virtualcluster/v1"
 	rest "k8s.io/client-go/rest"
 	testing "k8s.io/client-go/testing"
 )

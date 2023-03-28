@@ -1,7 +1,7 @@
 package v1
 
 import (
-	rbacv1 "k8s.io/api/rbac/v1"
+	agentstoragev1 "github.com/loft-sh/agentapi/v2/pkg/apis/loft/storage/v1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 )
 
@@ -60,14 +60,9 @@ type ClusterRoleTemplateSpec struct {
 	// +optional
 	Access []Access `json:"access,omitempty"`
 
-	// ClusterRoleTemplate holds the cluster role template
-	// +optional
-	ClusterRoleTemplate ClusterRoleTemplateTemplate `json:"clusterRoleTemplate,omitempty"`
-
-	// DEPRECATED: Use ClusterRoleTemplate instead
 	// LocalClusterRoleTemplate holds the cluster role template
 	// +omitempty
-	LocalClusterRoleTemplate *LocalClusterRoleTemplate `json:"localClusterRoleTemplate,omitempty"`
+	LocalClusterRoleTemplate LocalClusterRoleTemplate `json:"localClusterRoleTemplate,omitempty"`
 }
 
 type LocalClusterRoleTemplate struct {
@@ -78,39 +73,7 @@ type LocalClusterRoleTemplate struct {
 
 	// LocalClusterRoleTemplateSpec holds the spec of the cluster role template in the cluster
 	// +optional
-	LocalClusterRoleTemplateSpec LocalClusterRoleTemplateSpec `json:"spec,omitempty"`
-}
-
-type LocalClusterRoleTemplateSpec struct {
-	// DisplayName is the name that should be shown in the UI
-	// +optional
-	DisplayName string `json:"displayName,omitempty"`
-
-	// Description is the description of this object in
-	// human-readable text.
-	// +optional
-	Description string `json:"description,omitempty"`
-
-	// ClusterRoleTemplate holds the cluster role template
-	// +optional
-	ClusterRoleTemplate ClusterRoleTemplateTemplate `json:"clusterRoleTemplate,omitempty"`
-}
-
-type ClusterRoleTemplateTemplate struct {
-	// Standard object's metadata.
-	// +kubebuilder:pruning:PreserveUnknownFields
-	// +optional
-	metav1.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
-
-	// Rules holds all the PolicyRules for this ClusterRole
-	// +optional
-	Rules []rbacv1.PolicyRule `json:"rules" protobuf:"bytes,2,rep,name=rules"`
-
-	// AggregationRule is an optional field that describes how to build the Rules for this ClusterRole.
-	// If AggregationRule is set, then the Rules are controller managed and direct changes to Rules will be
-	// stomped by the controller.
-	// +optional
-	AggregationRule *rbacv1.AggregationRule `json:"aggregationRule,omitempty" protobuf:"bytes,3,opt,name=aggregationRule"`
+	LocalClusterRoleTemplateSpec agentstoragev1.LocalClusterRoleTemplateSpec `json:"spec,omitempty"`
 }
 
 // ClusterRoleTemplateStatus holds the status of a user access

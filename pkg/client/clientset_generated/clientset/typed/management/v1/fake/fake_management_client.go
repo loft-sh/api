@@ -3,17 +3,13 @@
 package fake
 
 import (
-	v1 "github.com/loft-sh/api/v3/pkg/client/clientset_generated/clientset/typed/management/v1"
+	v1 "github.com/loft-sh/api/v2/pkg/client/clientset_generated/clientset/typed/management/v1"
 	rest "k8s.io/client-go/rest"
 	testing "k8s.io/client-go/testing"
 )
 
 type FakeManagementV1 struct {
 	*testing.Fake
-}
-
-func (c *FakeManagementV1) AgentAuditEvents() v1.AgentAuditEventInterface {
-	return &FakeAgentAuditEvents{c}
 }
 
 func (c *FakeManagementV1) Announcements() v1.AnnouncementInterface {
@@ -30,6 +26,10 @@ func (c *FakeManagementV1) Clusters() v1.ClusterInterface {
 
 func (c *FakeManagementV1) ClusterAccesses() v1.ClusterAccessInterface {
 	return &FakeClusterAccesses{c}
+}
+
+func (c *FakeManagementV1) ClusterAccountTemplates() v1.ClusterAccountTemplateInterface {
+	return &FakeClusterAccountTemplates{c}
 }
 
 func (c *FakeManagementV1) ClusterConnects() v1.ClusterConnectInterface {
@@ -80,14 +80,6 @@ func (c *FakeManagementV1) PolicyViolations() v1.PolicyViolationInterface {
 	return &FakePolicyViolations{c}
 }
 
-func (c *FakeManagementV1) Projects() v1.ProjectInterface {
-	return &FakeProjects{c}
-}
-
-func (c *FakeManagementV1) ProjectSecrets(namespace string) v1.ProjectSecretInterface {
-	return &FakeProjectSecrets{c, namespace}
-}
-
 func (c *FakeManagementV1) ResetAccessKeys() v1.ResetAccessKeyInterface {
 	return &FakeResetAccessKeys{c}
 }
@@ -108,10 +100,6 @@ func (c *FakeManagementV1) SpaceConstraints() v1.SpaceConstraintInterface {
 	return &FakeSpaceConstraints{c}
 }
 
-func (c *FakeManagementV1) SpaceInstances(namespace string) v1.SpaceInstanceInterface {
-	return &FakeSpaceInstances{c, namespace}
-}
-
 func (c *FakeManagementV1) SpaceTemplates() v1.SpaceTemplateInterface {
 	return &FakeSpaceTemplates{c}
 }
@@ -130,10 +118,6 @@ func (c *FakeManagementV1) Teams() v1.TeamInterface {
 
 func (c *FakeManagementV1) Users() v1.UserInterface {
 	return &FakeUsers{c}
-}
-
-func (c *FakeManagementV1) VirtualClusterInstances(namespace string) v1.VirtualClusterInstanceInterface {
-	return &FakeVirtualClusterInstances{c, namespace}
 }
 
 func (c *FakeManagementV1) VirtualClusterTemplates() v1.VirtualClusterTemplateInterface {

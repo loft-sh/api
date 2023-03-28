@@ -29,11 +29,3 @@ type AccessAccessor interface {
 	GetOwner() *UserOrTeam
 	SetOwner(userOrTeam *UserOrTeam)
 }
-
-type VersionsAccessor interface {
-	GetVersions() []VersionAccessor
-}
-
-type VersionAccessor interface {
-	GetVersion() string
-}
