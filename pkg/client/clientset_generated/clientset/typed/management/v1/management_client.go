@@ -5,18 +5,18 @@ package v1
 import (
 	"net/http"
 
-	v1 "github.com/loft-sh/api/v2/pkg/apis/management/v1"
-	"github.com/loft-sh/api/v2/pkg/client/clientset_generated/clientset/scheme"
+	v1 "github.com/loft-sh/api/v3/pkg/apis/management/v1"
+	"github.com/loft-sh/api/v3/pkg/client/clientset_generated/clientset/scheme"
 	rest "k8s.io/client-go/rest"
 )
 
 type ManagementV1Interface interface {
 	RESTClient() rest.Interface
+	AgentAuditEventsGetter
 	AnnouncementsGetter
 	AppsGetter
 	ClustersGetter
 	ClusterAccessesGetter
-	ClusterAccountTemplatesGetter
 	ClusterConnectsGetter
 	ClusterRoleTemplatesGetter
 	ConfigsGetter
@@ -29,22 +29,30 @@ type ManagementV1Interface interface {
 	LoftUpgradesGetter
 	OwnedAccessKeysGetter
 	PolicyViolationsGetter
+	ProjectsGetter
+	ProjectSecretsGetter
 	ResetAccessKeysGetter
 	SelvesGetter
 	SelfSubjectAccessReviewsGetter
 	SharedSecretsGetter
 	SpaceConstraintsGetter
+	SpaceInstancesGetter
 	SpaceTemplatesGetter
 	SubjectAccessReviewsGetter
 	TasksGetter
 	TeamsGetter
 	UsersGetter
+	VirtualClusterInstancesGetter
 	VirtualClusterTemplatesGetter
 }
 
 // ManagementV1Client is used to interact with features provided by the management.loft.sh group.
 type ManagementV1Client struct {
 	restClient rest.Interface
+}
+
+func (c *ManagementV1Client) AgentAuditEvents() AgentAuditEventInterface {
+	return newAgentAuditEvents(c)
 }
 
 func (c *ManagementV1Client) Announcements() AnnouncementInterface {
@@ -61,10 +69,6 @@ func (c *ManagementV1Client) Clusters() ClusterInterface {
 
 func (c *ManagementV1Client) ClusterAccesses() ClusterAccessInterface {
 	return newClusterAccesses(c)
-}
-
-func (c *ManagementV1Client) ClusterAccountTemplates() ClusterAccountTemplateInterface {
-	return newClusterAccountTemplates(c)
 }
 
 func (c *ManagementV1Client) ClusterConnects() ClusterConnectInterface {
@@ -115,6 +119,14 @@ func (c *ManagementV1Client) PolicyViolations() PolicyViolationInterface {
 	return newPolicyViolations(c)
 }
 
+func (c *ManagementV1Client) Projects() ProjectInterface {
+	return newProjects(c)
+}
+
+func (c *ManagementV1Client) ProjectSecrets(namespace string) ProjectSecretInterface {
+	return newProjectSecrets(c, namespace)
+}
+
 func (c *ManagementV1Client) ResetAccessKeys() ResetAccessKeyInterface {
 	return newResetAccessKeys(c)
 }
@@ -135,6 +147,10 @@ func (c *ManagementV1Client) SpaceConstraints() SpaceConstraintInterface {
 	return newSpaceConstraints(c)
 }
 
+func (c *ManagementV1Client) SpaceInstances(namespace string) SpaceInstanceInterface {
+	return newSpaceInstances(c, namespace)
+}
+
 func (c *ManagementV1Client) SpaceTemplates() SpaceTemplateInterface {
 	return newSpaceTemplates(c)
 }
@@ -153,6 +169,10 @@ func (c *ManagementV1Client) Teams() TeamInterface {
 
 func (c *ManagementV1Client) Users() UserInterface {
 	return newUsers(c)
+}
+
+func (c *ManagementV1Client) VirtualClusterInstances(namespace string) VirtualClusterInstanceInterface {
+	return newVirtualClusterInstances(c, namespace)
 }
 
 func (c *ManagementV1Client) VirtualClusterTemplates() VirtualClusterTemplateInterface {

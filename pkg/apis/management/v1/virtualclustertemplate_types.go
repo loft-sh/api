@@ -1,8 +1,8 @@
 package v1
 
 import (
-	clusterv1 "github.com/loft-sh/agentapi/v2/pkg/apis/loft/cluster/v1"
-	storagev1 "github.com/loft-sh/api/v2/pkg/apis/storage/v1"
+	clusterv1 "github.com/loft-sh/agentapi/v3/pkg/apis/loft/cluster/v1"
+	storagev1 "github.com/loft-sh/api/v3/pkg/apis/storage/v1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 )
 
@@ -32,6 +32,16 @@ type VirtualClusterTemplateStatus struct {
 
 	// +optional
 	Apps []*clusterv1.EntityInfo `json:"apps,omitempty"`
+}
+
+func (a *VirtualClusterTemplate) GetVersions() []storagev1.VersionAccessor {
+	var retVersions []storagev1.VersionAccessor
+	for _, v := range a.Spec.Versions {
+		b := v
+		retVersions = append(retVersions, &b)
+	}
+
+	return retVersions
 }
 
 func (a *VirtualClusterTemplate) GetOwner() *storagev1.UserOrTeam {

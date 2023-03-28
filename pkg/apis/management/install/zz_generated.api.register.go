@@ -3,8 +3,8 @@
 package install
 
 import (
-	"github.com/loft-sh/api/v2/pkg/apis/management"
-	v1 "github.com/loft-sh/api/v2/pkg/apis/management/v1"
+	"github.com/loft-sh/api/v3/pkg/apis/management"
+	"github.com/loft-sh/api/v3/pkg/apis/management/v1"
 	"github.com/loft-sh/apiserver/pkg/builders"
 	"k8s.io/apimachinery/pkg/runtime"
 	utilruntime "k8s.io/apimachinery/pkg/util/runtime"
@@ -22,6 +22,8 @@ func Install(scheme *runtime.Scheme) {
 
 func addKnownTypes(scheme *runtime.Scheme) error {
 	scheme.AddKnownTypes(management.SchemeGroupVersion,
+		&management.AgentAuditEvent{},
+		&management.AgentAuditEventList{},
 		&management.Announcement{},
 		&management.AnnouncementList{},
 		&management.App{},
@@ -36,8 +38,6 @@ func addKnownTypes(scheme *runtime.Scheme) error {
 		&management.ClusterVirtualClusterDefaults{},
 		&management.ClusterAccess{},
 		&management.ClusterAccessList{},
-		&management.ClusterAccountTemplate{},
-		&management.ClusterAccountTemplateList{},
 		&management.ClusterConnect{},
 		&management.ClusterConnectList{},
 		&management.ClusterRoleTemplate{},
@@ -56,6 +56,7 @@ func addKnownTypes(scheme *runtime.Scheme) error {
 		&management.KioskList{},
 		&management.License{},
 		&management.LicenseList{},
+		&management.LicenseRequest{},
 		&management.LicenseToken{},
 		&management.LicenseTokenList{},
 		&management.LoftUpgrade{},
@@ -64,6 +65,19 @@ func addKnownTypes(scheme *runtime.Scheme) error {
 		&management.OwnedAccessKeyList{},
 		&management.PolicyViolation{},
 		&management.PolicyViolationList{},
+		&management.Project{},
+		&management.ProjectList{},
+		&management.ProjectChartInfo{},
+		&management.ProjectCharts{},
+		&management.ProjectClusters{},
+		&management.ProjectImportSpace{},
+		&management.ProjectImportVirtualCluster{},
+		&management.ProjectMembers{},
+		&management.ProjectMigrateSpaceInstance{},
+		&management.ProjectMigrateVirtualClusterInstance{},
+		&management.ProjectTemplates{},
+		&management.ProjectSecret{},
+		&management.ProjectSecretList{},
 		&management.ResetAccessKey{},
 		&management.ResetAccessKeyList{},
 		&management.Self{},
@@ -74,6 +88,8 @@ func addKnownTypes(scheme *runtime.Scheme) error {
 		&management.SharedSecretList{},
 		&management.SpaceConstraint{},
 		&management.SpaceConstraintList{},
+		&management.SpaceInstance{},
+		&management.SpaceInstanceList{},
 		&management.SpaceTemplate{},
 		&management.SpaceTemplateList{},
 		&management.SubjectAccessReview{},
@@ -90,6 +106,10 @@ func addKnownTypes(scheme *runtime.Scheme) error {
 		&management.UserAccessKeys{},
 		&management.UserClusters{},
 		&management.UserProfile{},
+		&management.VirtualClusterInstance{},
+		&management.VirtualClusterInstanceList{},
+		&management.VirtualClusterInstanceKubeConfig{},
+		&management.VirtualClusterInstanceLog{},
 		&management.VirtualClusterTemplate{},
 		&management.VirtualClusterTemplateList{},
 	)

@@ -5,7 +5,7 @@ package fake
 import (
 	"context"
 
-	managementv1 "github.com/loft-sh/api/v2/pkg/apis/management/v1"
+	managementv1 "github.com/loft-sh/api/v3/pkg/apis/management/v1"
 	v1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	labels "k8s.io/apimachinery/pkg/labels"
 	schema "k8s.io/apimachinery/pkg/runtime/schema"
@@ -114,4 +114,14 @@ func (c *FakeLicenses) Patch(ctx context.Context, name string, pt types.PatchTyp
 		return nil, err
 	}
 	return obj.(*managementv1.License), err
+}
+
+// LicenseRequest takes the representation of a licenseRequest and creates it.  Returns the server's representation of the licenseRequest, and an error, if there is any.
+func (c *FakeLicenses) LicenseRequest(ctx context.Context, licenseName string, licenseRequest *managementv1.LicenseRequest, opts v1.CreateOptions) (result *managementv1.LicenseRequest, err error) {
+	obj, err := c.Fake.
+		Invokes(testing.NewRootCreateSubresourceAction(licensesResource, licenseName, "request", licenseRequest), &managementv1.LicenseRequest{})
+	if obj == nil {
+		return nil, err
+	}
+	return obj.(*managementv1.LicenseRequest), err
 }

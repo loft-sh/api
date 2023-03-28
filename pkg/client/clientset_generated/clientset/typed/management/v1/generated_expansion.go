@@ -2,6 +2,8 @@
 
 package v1
 
+type AgentAuditEventExpansion interface{}
+
 type AnnouncementExpansion interface{}
 
 type AppExpansion interface{}
@@ -9,8 +11,6 @@ type AppExpansion interface{}
 type ClusterExpansion interface{}
 
 type ClusterAccessExpansion interface{}
-
-type ClusterAccountTemplateExpansion interface{}
 
 type ClusterConnectExpansion interface{}
 
@@ -36,6 +36,10 @@ type OwnedAccessKeyExpansion interface{}
 
 type PolicyViolationExpansion interface{}
 
+type ProjectExpansion interface{}
+
+type ProjectSecretExpansion interface{}
+
 type ResetAccessKeyExpansion interface{}
 
 type SelfExpansion interface{}
@@ -46,6 +50,8 @@ type SharedSecretExpansion interface{}
 
 type SpaceConstraintExpansion interface{}
 
+type SpaceInstanceExpansion interface{}
+
 type SpaceTemplateExpansion interface{}
 
 type SubjectAccessReviewExpansion interface{}
@@ -55,5 +61,7 @@ type TaskExpansion interface{}
 type TeamExpansion interface{}
 
 type UserExpansion interface{}
+
+type VirtualClusterInstanceExpansion interface{}
 
 type VirtualClusterTemplateExpansion interface{}

@@ -1,8 +1,8 @@
 package v1
 
 import (
-	clusterv1 "github.com/loft-sh/agentapi/v2/pkg/apis/loft/cluster/v1"
-	storagev1 "github.com/loft-sh/api/v2/pkg/apis/storage/v1"
+	clusterv1 "github.com/loft-sh/agentapi/v3/pkg/apis/loft/cluster/v1"
+	storagev1 "github.com/loft-sh/api/v3/pkg/apis/storage/v1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 )
 
@@ -48,6 +48,14 @@ type SelfStatus struct {
 	// The groups of the currently logged in user
 	// +optional
 	Groups []string `json:"groups,omitempty"`
+
+	// IntercomHash is the hmac used to link a user/instance to intercomm
+	// +optional
+	IntercomHash string `json:"intercomHash"`
+
+	// InstanceID is the loft instance id
+	// +optional
+	InstanceID string `json:"instanceID"`
 }
 
 type UserInfo struct {
