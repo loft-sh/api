@@ -1,10 +1,10 @@
 module github.com/loft-sh/api/v3
 
-go 1.19
+go 1.20
 
 require (
 	github.com/ghodss/yaml v1.0.0
-	github.com/loft-sh/agentapi/v3 v3.0.0-20230303090111-364570fbb6ea
+	github.com/loft-sh/agentapi/v3 v3.0.0-20230414153514-d81325c4959e
 	github.com/loft-sh/apiserver v0.0.0-20230203091244-1225c09820b1
 	github.com/loft-sh/external-types v0.0.2-0.20230301201552-ec939da949b4
 	github.com/loft-sh/jspolicy v0.1.0
