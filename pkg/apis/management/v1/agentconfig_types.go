@@ -1,6 +1,7 @@
 package v1
 
 import (
+	"github.com/loft-sh/external-types/loft-sh/admin-services/pkg/server"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 )
 
@@ -52,6 +53,9 @@ type AgentConfigSpec struct {
 	// loft api server.
 	// +optional
 	LoftAPIKey string `json:"loftAPIKey,omitempty"`
+
+	// AnalyticsSpec holds info needed for the agent to send analytics data to the analytics backend.
+	AnalyticsSpec AgentAnalyticsSpec `json:"analyticsSpec"`
 }
 
 type AgentAuditConfig struct {
@@ -99,6 +103,12 @@ type AgentAuditConfig struct {
 	// using gzip. The default is not to perform compression.
 	// +optional
 	Compress bool `json:"compress,omitempty"`
+}
+
+// AgentAnalyticsSpec holds info the agent can use to send analytics data to the analytics backend.
+type AgentAnalyticsSpec struct {
+	AnalyticsEndpoint string                    `json:"analyticsEndpoint,omitempty"`
+	InstanceTokenAuth *server.InstanceTokenAuth `json:"instanceTokenAuth,omitempty"`
 }
 
 // AgentConfigStatus holds the status, which is the parsed raw config
