@@ -577,6 +577,13 @@ func (in *Authentication) DeepCopyInto(out *Authentication) {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
+	if in.CustomHttpHeaders != nil {
+		in, out := &in.CustomHttpHeaders, &out.CustomHttpHeaders
+		*out = make(map[string]string, len(*in))
+		for key, val := range *in {
+			(*out)[key] = val
+		}
+	}
 	return
 }
 

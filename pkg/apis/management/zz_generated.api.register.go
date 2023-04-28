@@ -1170,6 +1170,7 @@ type Authentication struct {
 	Connectors             []ConnectorWithName
 	DisableTeamCreation    bool
 	AccessKeyMaxTTLSeconds int64
+	CustomHttpHeaders      map[string]string
 }
 
 type AuthenticationClusterAccountTemplates struct {

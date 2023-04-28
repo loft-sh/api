@@ -314,6 +314,10 @@ type Authentication struct {
 	// Specifing 2592000 will mean all keys have a Time-To-Live of 30 days.
 	// +optional
 	AccessKeyMaxTTLSeconds int64 `json:"accessKeyMaxTTLSeconds,omitempty"`
+
+	// CustomHttpHeaders are additional headers that should be set for the authentication endpoints
+	// +optional
+	CustomHttpHeaders map[string]string `json:"customHttpHeaders,omitempty"`
 }
 
 type ConnectorWithName struct {

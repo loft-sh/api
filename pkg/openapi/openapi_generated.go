@@ -6869,6 +6869,22 @@ func schema_pkg_apis_management_v1_Authentication(ref common.ReferenceCallback) 
 							Format:      "int64",
 						},
 					},
+					"customHttpHeaders": {
+						SchemaProps: spec.SchemaProps{
+							Description: "CustomHttpHeaders are additional headers that should be set for the authentication endpoints",
+							Type:        []string{"object"},
+							AdditionalProperties: &spec.SchemaOrBool{
+								Allows: true,
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: "",
+										Type:    []string{"string"},
+										Format:  "",
+									},
+								},
+							},
+						},
+					},
 				},
 			},
 		},
