@@ -7239,6 +7239,7 @@ func autoConvert_v1_UserProfile_To_management_UserProfile(in *UserProfile, out *
 	out.DisplayName = in.DisplayName
 	out.Username = in.Username
 	out.Password = in.Password
+	out.CurrentPassword = in.CurrentPassword
 	out.Email = in.Email
 	out.Icon = (*string)(unsafe.Pointer(in.Icon))
 	out.Custom = in.Custom
@@ -7255,6 +7256,7 @@ func autoConvert_management_UserProfile_To_v1_UserProfile(in *management.UserPro
 	out.DisplayName = in.DisplayName
 	out.Username = in.Username
 	out.Password = in.Password
+	out.CurrentPassword = in.CurrentPassword
 	out.Email = in.Email
 	out.Icon = (*string)(unsafe.Pointer(in.Icon))
 	out.Custom = in.Custom

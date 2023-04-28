@@ -20,6 +20,9 @@ type UserProfile struct {
 	// Password is the new password of the user
 	// +optional
 	Password string `json:"password,omitempty"`
+	// CurrentPassword is the current password of the user
+	// +optional
+	CurrentPassword string `json:"currentPassword,omitempty"`
 	// Email is the new email of the user
 	// +optional
 	Email string `json:"email,omitempty"`

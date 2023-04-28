@@ -15902,6 +15902,13 @@ func schema_pkg_apis_management_v1_UserProfile(ref common.ReferenceCallback) com
 							Format:      "",
 						},
 					},
+					"currentPassword": {
+						SchemaProps: spec.SchemaProps{
+							Description: "CurrentPassword is the current password of the user",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
 					"email": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Email is the new email of the user",
@@ -23863,6 +23870,13 @@ func schema_pkg_apis_ui_v1_UISettingsSpec(ref common.ReferenceCallback) common.O
 				Description: "UISettingsSpec holds the specification",
 				Type:        []string{"object"},
 				Properties: map[string]spec.Schema{
+					"loftVersion": {
+						SchemaProps: spec.SchemaProps{
+							Description: "LoftVersion holds the current loft version",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
 					"logoURL": {
 						SchemaProps: spec.SchemaProps{
 							Description: "LogoURL is url pointing to the logo to use in the Loft UI, this path must be accessible from clients accessing the Loft UI!",

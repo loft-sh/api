@@ -2130,12 +2130,13 @@ type UserInfo struct {
 type UserProfile struct {
 	metav1.TypeMeta
 	metav1.ObjectMeta
-	DisplayName string
-	Username    string
-	Password    string
-	Email       string
-	Icon        *string
-	Custom      string
+	DisplayName     string
+	Username        string
+	Password        string
+	CurrentPassword string
+	Email           string
+	Icon            *string
+	Custom          string
 }
 
 type UserSpec struct {

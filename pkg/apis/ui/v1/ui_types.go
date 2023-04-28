@@ -16,6 +16,9 @@ type UISettings struct {
 
 // UISettingsSpec holds the specification
 type UISettingsSpec struct {
+	// LoftVersion holds the current loft version
+	// +optional
+	LoftVersion string `json:"loftVersion,omitempty"`
 	// LogoURL is url pointing to the logo to use in the Loft UI, this path must be accessible from clients accessing
 	// the Loft UI!
 	// +optional
