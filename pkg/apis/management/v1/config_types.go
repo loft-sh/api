@@ -315,6 +315,14 @@ type Authentication struct {
 	// +optional
 	AccessKeyMaxTTLSeconds int64 `json:"accessKeyMaxTTLSeconds,omitempty"`
 
+	// LoginAccessKeyTTLSeconds is the time in seconds an access key is kept
+	// until it is deleted.
+	// Leaving it unspecified will default to 20 days.
+	// Setting it to zero will disable the ttl.
+	// Specifing 2592000 will mean all keys have a  default Time-To-Live of 30 days.
+	// +optional
+	LoginAccessKeyTTLSeconds *int64 `json:"loginAccessKeyTTLSeconds,omitempty"`
+
 	// CustomHttpHeaders are additional headers that should be set for the authentication endpoints
 	// +optional
 	CustomHttpHeaders map[string]string `json:"customHttpHeaders,omitempty"`
