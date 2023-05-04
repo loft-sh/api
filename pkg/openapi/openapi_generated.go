@@ -446,6 +446,8 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.UserOrTeam":                                         schema_pkg_apis_storage_v1_UserOrTeam(ref),
 		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.UserSpec":                                           schema_pkg_apis_storage_v1_UserSpec(ref),
 		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.UserStatus":                                         schema_pkg_apis_storage_v1_UserStatus(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.VaultAuthSpec":                                      schema_pkg_apis_storage_v1_VaultAuthSpec(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.VaultIntegrationSpec":                               schema_pkg_apis_storage_v1_VaultIntegrationSpec(ref),
 		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.VirtualClusterClusterRef":                           schema_pkg_apis_storage_v1_VirtualClusterClusterRef(ref),
 		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.VirtualClusterCreationTask":                         schema_pkg_apis_storage_v1_VirtualClusterCreationTask(ref),
 		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.VirtualClusterInstance":                             schema_pkg_apis_storage_v1_VirtualClusterInstance(ref),
@@ -9356,11 +9358,17 @@ func schema_pkg_apis_management_v1_ConfigStatus(ref common.ReferenceCallback) co
 							Ref:         ref("github.com/loft-sh/api/v3/pkg/apis/ui/v1.UISettingsSpec"),
 						},
 					},
+					"vault": {
+						SchemaProps: spec.SchemaProps{
+							Description: "VaultIntegration holds the vault integration configuration",
+							Ref:         ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.VaultIntegrationSpec"),
+						},
+					},
 				},
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/v3/pkg/apis/management/v1.Apps", "github.com/loft-sh/api/v3/pkg/apis/management/v1.Audit", "github.com/loft-sh/api/v3/pkg/apis/management/v1.Authentication", "github.com/loft-sh/api/v3/pkg/apis/management/v1.OIDC", "github.com/loft-sh/api/v3/pkg/apis/ui/v1.UISettingsSpec"},
+			"github.com/loft-sh/api/v3/pkg/apis/management/v1.Apps", "github.com/loft-sh/api/v3/pkg/apis/management/v1.Audit", "github.com/loft-sh/api/v3/pkg/apis/management/v1.Authentication", "github.com/loft-sh/api/v3/pkg/apis/management/v1.OIDC", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.VaultIntegrationSpec", "github.com/loft-sh/api/v3/pkg/apis/ui/v1.UISettingsSpec"},
 	}
 }
 
@@ -12850,11 +12858,17 @@ func schema_pkg_apis_management_v1_ProjectSpec(ref common.ReferenceCallback) com
 							Ref:         ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.ArgoIntegrationSpec"),
 						},
 					},
+					"vault": {
+						SchemaProps: spec.SchemaProps{
+							Description: "VaultIntegration holds information about Vault Integration",
+							Ref:         ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.VaultIntegrationSpec"),
+						},
+					},
 				},
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/v3/pkg/apis/storage/v1.Access", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.AllowedCluster", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.AllowedTemplate", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.ArgoIntegrationSpec", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.Member", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.NamespacePattern", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.Quotas", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.UserOrTeam"},
+			"github.com/loft-sh/api/v3/pkg/apis/storage/v1.Access", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.AllowedCluster", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.AllowedTemplate", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.ArgoIntegrationSpec", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.Member", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.NamespacePattern", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.Quotas", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.UserOrTeam", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.VaultIntegrationSpec"},
 	}
 }
 
@@ -20600,11 +20614,17 @@ func schema_pkg_apis_storage_v1_ProjectSpec(ref common.ReferenceCallback) common
 							Ref:         ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.ArgoIntegrationSpec"),
 						},
 					},
+					"vault": {
+						SchemaProps: spec.SchemaProps{
+							Description: "VaultIntegration holds information about Vault Integration",
+							Ref:         ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.VaultIntegrationSpec"),
+						},
+					},
 				},
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/v3/pkg/apis/storage/v1.Access", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.AllowedCluster", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.AllowedTemplate", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.ArgoIntegrationSpec", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.Member", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.NamespacePattern", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.Quotas", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.UserOrTeam"},
+			"github.com/loft-sh/api/v3/pkg/apis/storage/v1.Access", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.AllowedCluster", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.AllowedTemplate", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.ArgoIntegrationSpec", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.Member", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.NamespacePattern", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.Quotas", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.UserOrTeam", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.VaultIntegrationSpec"},
 	}
 }
 
@@ -23073,6 +23093,88 @@ func schema_pkg_apis_storage_v1_UserStatus(ref common.ReferenceCallback) common.
 		},
 		Dependencies: []string{
 			"github.com/loft-sh/api/v3/pkg/apis/storage/v1.AccountClusterStatus", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.UserClusterAccountTemplateStatus"},
+	}
+}
+
+func schema_pkg_apis_storage_v1_VaultAuthSpec(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"token": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Token defines the token to use for authentication.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"tokenSecretRef": {
+						SchemaProps: spec.SchemaProps{
+							Description: "TokenSecretRef defines the Kubernetes secret to use for token authentication. Will be used if `token` is not provided.\n\nSecret data should contain the `token` key.",
+							Ref:         ref("k8s.io/api/core/v1.SecretKeySelector"),
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			"k8s.io/api/core/v1.SecretKeySelector"},
+	}
+}
+
+func schema_pkg_apis_storage_v1_VaultIntegrationSpec(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"enabled": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Enabled indicates if the Vault Integration is enabled for the project -- this knob only enables the syncing of secrets to or from Vault, but does not setup Kubernetes authentication methods or Kubernetes secrets engines for vclusters.",
+							Type:        []string{"boolean"},
+							Format:      "",
+						},
+					},
+					"address": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Address defines the address of the Vault instance to use for this project. Will default to the `VAULT_ADDR` environment variable if not provided.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"skipTLSVerify": {
+						SchemaProps: spec.SchemaProps{
+							Description: "SkipTLSVerify defines if TLS verification should be skipped when connecting to Vault.",
+							Type:        []string{"boolean"},
+							Format:      "",
+						},
+					},
+					"namespace": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Namespace defines the namespace to use when storing secrets in Vault.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"auth": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Auth defines the authentication method to use for this project.",
+							Ref:         ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.VaultAuthSpec"),
+						},
+					},
+					"syncInterval": {
+						SchemaProps: spec.SchemaProps{
+							Description: "SyncInterval defines the interval at which to sync secrets from Vault. Defaults to `1m.` See https://pkg.go.dev/time#ParseDuration for supported formats.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			"github.com/loft-sh/api/v3/pkg/apis/storage/v1.VaultAuthSpec"},
 	}
 }
 

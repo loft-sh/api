@@ -1686,6 +1686,11 @@ func (in *ConfigStatus) DeepCopyInto(out *ConfigStatus) {
 		*out = new(uiv1.UISettingsSpec)
 		**out = **in
 	}
+	if in.VaultIntegration != nil {
+		in, out := &in.VaultIntegration, &out.VaultIntegration
+		*out = new(storagev1.VaultIntegrationSpec)
+		(*in).DeepCopyInto(*out)
+	}
 	return
 }
 

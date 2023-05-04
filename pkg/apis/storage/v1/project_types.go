@@ -2,6 +2,7 @@ package v1
 
 import (
 	storagev1 "github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1"
+	corev1 "k8s.io/api/core/v1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 )
 
@@ -12,6 +13,15 @@ const (
 	ArgoPreviousClusterAnnotation                = "loft.sh/argo-integration-previous-cluster"
 	ArgoPreviousNamespaceAnnotation              = "loft.sh/argo-integration-previous-namespace"
 	ArgoPreviousVirtualClusterInstanceAnnotation = "loft.sh/argo-integration-previous-virtualclusterinstance"
+)
+
+const (
+	VaultIntegrationSynced storagev1.ConditionType = "VaultIntegrationSynced"
+
+	VaultLastAppliedHashAnnotation                = "loft.sh/vault-integration-last-applied-hash"
+	VaultPreviousClusterAnnotation                = "loft.sh/vault-integration-previous-cluster"
+	VaultPreviousNamespaceAnnotation              = "loft.sh/vault-integration-previous-namespace"
+	VaultPreviousVirtualClusterInstanceAnnotation = "loft.sh/vault-integration-previous-virtualclusterinstance"
 )
 
 var (
@@ -98,6 +108,10 @@ type ProjectSpec struct {
 	// ArgoIntegration holds information about ArgoCD Integration
 	// +optional
 	ArgoIntegration *ArgoIntegrationSpec `json:"argoCD,omitempty"`
+
+	// VaultIntegration holds information about Vault Integration
+	// +optional
+	VaultIntegration *VaultIntegrationSpec `json:"vault,omitempty"`
 }
 
 type NamespacePattern struct {
@@ -355,6 +369,50 @@ type ArgoProjectPolicyRule struct {
 	// always be set to "deny".
 	// +optional
 	Allow bool `json:"permission,omitempty"`
+}
+
+type VaultIntegrationSpec struct {
+	// Enabled indicates if the Vault Integration is enabled for the project -- this knob only
+	// enables the syncing of secrets to or from Vault, but does not setup Kubernetes authentication
+	// methods or Kubernetes secrets engines for vclusters.
+	// +optional
+	Enabled bool `json:"enabled,omitempty"`
+
+	// Address defines the address of the Vault instance to use for this project.
+	// Will default to the `VAULT_ADDR` environment variable if not provided.
+	// +optional
+	Address string `json:"address,omitempty"`
+
+	// SkipTLSVerify defines if TLS verification should be skipped when connecting to Vault.
+	// +optional
+	SkipTLSVerify bool `json:"skipTLSVerify,omitempty"`
+
+	// Namespace defines the namespace to use when storing secrets in Vault.
+	// +optional
+	Namespace string `json:"namespace,omitempty"`
+
+	// Auth defines the authentication method to use for this project.
+	// +optional
+	Auth *VaultAuthSpec `json:"auth,omitempty"`
+
+	// SyncInterval defines the interval at which to sync secrets from Vault.
+	// Defaults to `1m.`
+	// See https://pkg.go.dev/time#ParseDuration for supported formats.
+	// +optional
+	SyncInterval string `json:"syncInterval,omitempty"`
+}
+
+type VaultAuthSpec struct {
+	// Token defines the token to use for authentication.
+	// +optional
+	Token *string `json:"token,omitempty"`
+
+	// TokenSecretRef defines the Kubernetes secret to use for token authentication.
+	// Will be used if `token` is not provided.
+	//
+	// Secret data should contain the `token` key.
+	// +optional
+	TokenSecretRef *corev1.SecretKeySelector `json:"tokenSecretRef,omitempty"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object

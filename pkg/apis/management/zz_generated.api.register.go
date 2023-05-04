@@ -1438,12 +1438,13 @@ type ConfigSpec struct {
 }
 
 type ConfigStatus struct {
-	Authentication Authentication
-	OIDC           *OIDC
-	Apps           *Apps
-	Audit          *Audit
-	LoftHost       string
-	UISettings     *uiv1.UISettingsSpec
+	Authentication   Authentication
+	OIDC             *OIDC
+	Apps             *Apps
+	Audit            *Audit
+	LoftHost         string
+	UISettings       *uiv1.UISettingsSpec
+	VaultIntegration *storagev1.VaultIntegrationSpec
 }
 
 type Connector struct {
@@ -1993,7 +1994,7 @@ type SpaceInstanceStatus struct {
 }
 
 // +genclient
-// +genclient
+// +genclient:nonNamespaced
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
 
 type SpaceTemplate struct {
