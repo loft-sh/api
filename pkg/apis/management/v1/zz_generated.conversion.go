@@ -2671,6 +2671,7 @@ func autoConvert_v1_Authentication_To_management_Authentication(in *Authenticati
 	out.Connectors = *(*[]management.ConnectorWithName)(unsafe.Pointer(&in.Connectors))
 	out.DisableTeamCreation = in.DisableTeamCreation
 	out.AccessKeyMaxTTLSeconds = in.AccessKeyMaxTTLSeconds
+	out.LoginAccessKeyTTLSeconds = (*int64)(unsafe.Pointer(in.LoginAccessKeyTTLSeconds))
 	out.CustomHttpHeaders = *(*map[string]string)(unsafe.Pointer(&in.CustomHttpHeaders))
 	return nil
 }
@@ -2688,6 +2689,7 @@ func autoConvert_management_Authentication_To_v1_Authentication(in *management.A
 	out.Connectors = *(*[]ConnectorWithName)(unsafe.Pointer(&in.Connectors))
 	out.DisableTeamCreation = in.DisableTeamCreation
 	out.AccessKeyMaxTTLSeconds = in.AccessKeyMaxTTLSeconds
+	out.LoginAccessKeyTTLSeconds = (*int64)(unsafe.Pointer(in.LoginAccessKeyTTLSeconds))
 	out.CustomHttpHeaders = *(*map[string]string)(unsafe.Pointer(&in.CustomHttpHeaders))
 	return nil
 }

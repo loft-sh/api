@@ -577,6 +577,11 @@ func (in *Authentication) DeepCopyInto(out *Authentication) {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
+	if in.LoginAccessKeyTTLSeconds != nil {
+		in, out := &in.LoginAccessKeyTTLSeconds, &out.LoginAccessKeyTTLSeconds
+		*out = new(int64)
+		**out = **in
+	}
 	if in.CustomHttpHeaders != nil {
 		in, out := &in.CustomHttpHeaders, &out.CustomHttpHeaders
 		*out = make(map[string]string, len(*in))
@@ -1793,7 +1798,7 @@ func (in *ConfigStatus) DeepCopyInto(out *ConfigStatus) {
 	if in.UISettings != nil {
 		in, out := &in.UISettings, &out.UISettings
 		*out = new(uiv1.UISettingsSpec)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.VaultIntegration != nil {
 		in, out := &in.VaultIntegration, &out.VaultIntegration

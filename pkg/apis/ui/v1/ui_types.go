@@ -36,6 +36,31 @@ type UISettingsSpec struct {
 	// AccentColor is the color value (ex: "#12345") to use for the accent
 	// +optional
 	AccentColor string `json:"accentColor,omitempty"`
+	// CustomCSS holds URLs with custom css files that should be included when loading the UI
+	// +optional
+	CustomCSS []string `json:"customCss,omitempty"`
+	// CustomJavaScript holds URLs with custom js files that should be included when loading the UI
+	// +optional
+	CustomJavaScript []string `json:"customJavaScript,omitempty"`
+	// NavBarButtons holds extra nav bar buttons
+	// +optional
+	NavBarButtons []NavBarButton `json:"navBarButtons,omitempty"`
+}
+
+type NavBarButton struct {
+	// Position holds the position of the button, can be one of:
+	// TopStart, TopEnd, BottomStart, BottomEnd. Defaults to BottomEnd
+	// +optional
+	Position string `json:"position,omitempty"`
+	// Text holds text for the button
+	// +optional
+	Text string `json:"text,omitempty"`
+	// Link holds the link of the navbar button
+	// +optional
+	Link string `json:"link,omitempty"`
+	// Icon holds the url of the icon to display
+	// +optional
+	Icon string `json:"icon,omitempty"`
 }
 
 // UISettingsStatus holds the status

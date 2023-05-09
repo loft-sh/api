@@ -1166,11 +1166,12 @@ type AuditPolicyRule struct {
 
 type Authentication struct {
 	Connector
-	Password               *AuthenticationPassword
-	Connectors             []ConnectorWithName
-	DisableTeamCreation    bool
-	AccessKeyMaxTTLSeconds int64
-	CustomHttpHeaders      map[string]string
+	Password                 *AuthenticationPassword
+	Connectors               []ConnectorWithName
+	DisableTeamCreation      bool
+	AccessKeyMaxTTLSeconds   int64
+	LoginAccessKeyTTLSeconds *int64
+	CustomHttpHeaders        map[string]string
 }
 
 type AuthenticationClusterAccountTemplates struct {
@@ -1994,7 +1995,7 @@ type SpaceInstanceStatus struct {
 }
 
 // +genclient
-// +genclient:nonNamespaced
+// +genclient
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
 
 type SpaceTemplate struct {
