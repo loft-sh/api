@@ -16,6 +16,7 @@ import (
 	pkgserver "github.com/loft-sh/external-types/loft-sh/admin-services/pkg/server"
 	policyv1beta1 "github.com/loft-sh/jspolicy/pkg/apis/policy/v1beta1"
 	authorizationv1 "k8s.io/api/authorization/v1"
+	rbacv1 "k8s.io/api/rbac/v1"
 	"k8s.io/apimachinery/pkg/apis/meta/internalversion"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime"
@@ -900,8 +901,16 @@ var (
 	NewUserClustersREST = func(getter generic.RESTOptionsGetter) rest.Storage {
 		return NewUserClustersRESTFunc(Factory)
 	}
-	NewUserClustersRESTFunc NewRESTFunc
-	InternalUserProfileREST = builders.NewInternalSubresource(
+	NewUserClustersRESTFunc     NewRESTFunc
+	InternalUserPermissionsREST = builders.NewInternalSubresource(
+		"users", "UserPermissions", "permissions",
+		func() runtime.Object { return &UserPermissions{} },
+	)
+	NewUserPermissionsREST = func(getter generic.RESTOptionsGetter) rest.Storage {
+		return NewUserPermissionsRESTFunc(Factory)
+	}
+	NewUserPermissionsRESTFunc NewRESTFunc
+	InternalUserProfileREST    = builders.NewInternalSubresource(
 		"users", "UserProfile", "profile",
 		func() runtime.Object { return &UserProfile{} },
 	)
@@ -1034,6 +1043,7 @@ var (
 		InternalUserStatus,
 		InternalUserAccessKeysREST,
 		InternalUserClustersREST,
+		InternalUserPermissionsREST,
 		InternalUserProfileREST,
 		InternalVirtualClusterInstance,
 		InternalVirtualClusterInstanceStatus,
@@ -2126,6 +2136,22 @@ type UserClusters struct {
 type UserInfo struct {
 	clusterv1.EntityInfo
 	Teams []*clusterv1.EntityInfo
+}
+
+// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+
+type UserPermissions struct {
+	metav1.TypeMeta
+	metav1.ObjectMeta
+	ClusterRoles   []UserPermissionsRole
+	NamespaceRoles []UserPermissionsRole
+}
+
+type UserPermissionsRole struct {
+	ClusterRole string
+	Role        string
+	Namespace   string
+	Rules       []rbacv1.PolicyRule
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -5972,6 +5998,14 @@ type UserClustersList struct {
 	metav1.TypeMeta
 	metav1.ListMeta
 	Items []UserClusters
+}
+
+// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+
+type UserPermissionsList struct {
+	metav1.TypeMeta
+	metav1.ListMeta
+	Items []UserPermissions
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
