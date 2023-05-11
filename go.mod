@@ -4,7 +4,7 @@ go 1.20
 
 require (
 	github.com/ghodss/yaml v1.0.0
-	github.com/loft-sh/agentapi/v3 v3.2.0-beta.0
+	github.com/loft-sh/agentapi/v3 v3.2.0-beta.0.0.20230511071247-c1da3768208d
 	github.com/loft-sh/apiserver v0.0.0-20230203091244-1225c09820b1
 	github.com/loft-sh/external-types v0.0.2-0.20230301201552-ec939da949b4
 	github.com/loft-sh/jspolicy v0.1.0
@@ -105,9 +105,4 @@ require (
 	sigs.k8s.io/json v0.0.0-20221116044647-bc3834ca7abd // indirect
 	sigs.k8s.io/structured-merge-diff/v4 v4.2.3 // indirect
 	sigs.k8s.io/yaml v1.3.0 // indirect
-)
-
-replace (
-	github.com/loft-sh/agentapi/v3 => ./../../agentapi/v3
-	github.com/loft-sh/api/v3 => ./../../api/v3
 )
