@@ -49,6 +49,8 @@ func ordLevel(l Level) int {
 		return 2
 	case LevelRequestResponse:
 		return 3
+	case LevelNone:
+		return 0
 	default:
 		return 0
 	}

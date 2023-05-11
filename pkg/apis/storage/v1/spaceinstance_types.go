@@ -1,12 +1,12 @@
 package v1
 
 import (
-	storagev1 "github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1"
+	agentstoragev1 "github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 )
 
 var (
-	SpaceConditions = []storagev1.ConditionType{
+	SpaceConditions = []agentstoragev1.ConditionType{
 		InstanceScheduled,
 		InstanceTemplateResolved,
 		InstanceSpaceSynced,
@@ -27,11 +27,11 @@ type SpaceInstance struct {
 	Status SpaceInstanceStatus `json:"status,omitempty"`
 }
 
-func (a *SpaceInstance) GetConditions() storagev1.Conditions {
+func (a *SpaceInstance) GetConditions() agentstoragev1.Conditions {
 	return a.Status.Conditions
 }
 
-func (a *SpaceInstance) SetConditions(conditions storagev1.Conditions) {
+func (a *SpaceInstance) SetConditions(conditions agentstoragev1.Conditions) {
 	a.Status.Conditions = conditions
 }
 
@@ -85,7 +85,7 @@ type SpaceInstanceSpec struct {
 	// ExtraAccessRules defines extra rules which users and teams should have which access to the virtual
 	// cluster.
 	// +optional
-	ExtraAccessRules []storagev1.InstanceAccessRule `json:"extraAccessRules,omitempty"`
+	ExtraAccessRules []agentstoragev1.InstanceAccessRule `json:"extraAccessRules,omitempty"`
 
 	// Access holds the access rights for users and teams
 	// +optional
@@ -145,11 +145,11 @@ type SpaceInstanceStatus struct {
 
 	// Conditions holds several conditions the virtual cluster might be in
 	// +optional
-	Conditions storagev1.Conditions `json:"conditions,omitempty"`
+	Conditions agentstoragev1.Conditions `json:"conditions,omitempty"`
 
 	// SpaceObjects are the objects that were applied within the virtual cluster space
 	// +optional
-	SpaceObjects *storagev1.ObjectsStatus `json:"spaceObjects,omitempty"`
+	SpaceObjects *agentstoragev1.ObjectsStatus `json:"spaceObjects,omitempty"`
 
 	// Space is the template rendered with all the parameters
 	// +optional

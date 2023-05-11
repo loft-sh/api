@@ -2,7 +2,7 @@ package v1
 
 import (
 	clusterv1 "github.com/loft-sh/agentapi/v3/pkg/apis/loft/cluster/v1"
-	storagev1 "github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1"
+	agentstoragev1 "github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1"
 	corev1 "k8s.io/api/core/v1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 )
@@ -21,12 +21,12 @@ type Task struct {
 }
 
 // GetConditions returns the set of conditions for this object.
-func (a *Task) GetConditions() storagev1.Conditions {
+func (a *Task) GetConditions() agentstoragev1.Conditions {
 	return a.Status.Conditions
 }
 
 // SetConditions sets the conditions on this object.
-func (a *Task) SetConditions(conditions storagev1.Conditions) {
+func (a *Task) SetConditions(conditions agentstoragev1.Conditions) {
 	a.Status.Conditions = conditions
 }
 
@@ -98,11 +98,11 @@ type VirtualClusterCreationTask struct {
 
 	// The virtual cluster access
 	// +optional
-	Access *storagev1.InstanceAccess `json:"access,omitempty"`
+	Access *agentstoragev1.InstanceAccess `json:"access,omitempty"`
 
 	// The helm release configuration for the virtual cluster.
 	// +optional
-	HelmRelease storagev1.VirtualClusterHelmRelease `json:"helmRelease,omitempty"`
+	HelmRelease agentstoragev1.VirtualClusterHelmRelease `json:"helmRelease,omitempty"`
 
 	// Objects is the optional objects configuration for the virtual cluster
 	// +optional
@@ -114,7 +114,7 @@ type VirtualClusterCreationTask struct {
 
 	// Apps specifies the apps that should get deployed by this template
 	// +optional
-	Apps []storagev1.AppReference `json:"apps,omitempty"`
+	Apps []agentstoragev1.AppReference `json:"apps,omitempty"`
 
 	// SpaceCreationTask creates a new space if defined for the virtual cluster
 	// +optional
@@ -137,7 +137,7 @@ type SpaceCreationTask struct {
 
 	// Apps specifies the apps that should get deployed by this template
 	// +optional
-	Apps []storagev1.AppReference `json:"apps,omitempty"`
+	Apps []agentstoragev1.AppReference `json:"apps,omitempty"`
 }
 
 type AppTask struct {
@@ -151,7 +151,7 @@ type AppTask struct {
 
 	// AppReference is the reference to the app to deploy
 	// +optional
-	AppReference storagev1.AppReference `json:"appReference,omitempty"`
+	AppReference agentstoragev1.AppReference `json:"appReference,omitempty"`
 }
 
 type HelmTask struct {
@@ -206,7 +206,7 @@ type TaskStatus struct {
 
 	// Conditions holds several conditions the virtual cluster might be in
 	// +optional
-	Conditions storagev1.Conditions `json:"conditions,omitempty"`
+	Conditions agentstoragev1.Conditions `json:"conditions,omitempty"`
 
 	// PodPhase describes the phase this task is in
 	// +optional
@@ -224,7 +224,7 @@ type TaskStatus struct {
 // Common ConditionTypes used by Cluster API objects.
 const (
 	// TaskStartedCondition defines the task started condition type that summarizes the operational state of the virtual cluster API object.
-	TaskStartedCondition storagev1.ConditionType = "TaskStarted"
+	TaskStartedCondition agentstoragev1.ConditionType = "TaskStarted"
 )
 
 // HelmTaskType describes the type of a task

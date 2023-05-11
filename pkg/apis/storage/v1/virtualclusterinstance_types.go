@@ -1,22 +1,22 @@
 package v1
 
 import (
-	storagev1 "github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1"
+	agentstoragev1 "github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 )
 
 const (
-	InstanceScheduled            storagev1.ConditionType = "Scheduled"
-	InstanceTemplateSynced       storagev1.ConditionType = "TemplateSynced"
-	InstanceTemplateResolved     storagev1.ConditionType = "TemplateResolved"
-	InstanceSpaceSynced          storagev1.ConditionType = "SpaceSynced"
-	InstanceSpaceReady           storagev1.ConditionType = "SpaceReady"
-	InstanceVirtualClusterSynced storagev1.ConditionType = "VirtualClusterSynced"
-	InstanceVirtualClusterReady  storagev1.ConditionType = "VirtualClusterReady"
+	InstanceScheduled            agentstoragev1.ConditionType = "Scheduled"
+	InstanceTemplateSynced       agentstoragev1.ConditionType = "TemplateSynced"
+	InstanceTemplateResolved     agentstoragev1.ConditionType = "TemplateResolved"
+	InstanceSpaceSynced          agentstoragev1.ConditionType = "SpaceSynced"
+	InstanceSpaceReady           agentstoragev1.ConditionType = "SpaceReady"
+	InstanceVirtualClusterSynced agentstoragev1.ConditionType = "VirtualClusterSynced"
+	InstanceVirtualClusterReady  agentstoragev1.ConditionType = "VirtualClusterReady"
 )
 
 var (
-	VirtualClusterConditions = []storagev1.ConditionType{
+	VirtualClusterConditions = []agentstoragev1.ConditionType{
 		InstanceScheduled,
 		InstanceTemplateResolved,
 		InstanceSpaceSynced,
@@ -40,11 +40,11 @@ type VirtualClusterInstance struct {
 	Status VirtualClusterInstanceStatus `json:"status,omitempty"`
 }
 
-func (a *VirtualClusterInstance) GetConditions() storagev1.Conditions {
+func (a *VirtualClusterInstance) GetConditions() agentstoragev1.Conditions {
 	return a.Status.Conditions
 }
 
-func (a *VirtualClusterInstance) SetConditions(conditions storagev1.Conditions) {
+func (a *VirtualClusterInstance) SetConditions(conditions agentstoragev1.Conditions) {
 	a.Status.Conditions = conditions
 }
 
@@ -98,7 +98,7 @@ type VirtualClusterInstanceSpec struct {
 	// ExtraAccessRules defines extra rules which users and teams should have which access to the virtual
 	// cluster.
 	// +optional
-	ExtraAccessRules []storagev1.InstanceAccessRule `json:"extraAccessRules,omitempty"`
+	ExtraAccessRules []agentstoragev1.InstanceAccessRule `json:"extraAccessRules,omitempty"`
 
 	// Access to the virtual cluster object itself
 	// +optional
@@ -122,15 +122,15 @@ type VirtualClusterInstanceStatus struct {
 
 	// Conditions holds several conditions the virtual cluster might be in
 	// +optional
-	Conditions storagev1.Conditions `json:"conditions,omitempty"`
+	Conditions agentstoragev1.Conditions `json:"conditions,omitempty"`
 
 	// VirtualClusterObjects are the objects that were applied within the virtual cluster itself
 	// +optional
-	VirtualClusterObjects *storagev1.ObjectsStatus `json:"virtualClusterObjects,omitempty"`
+	VirtualClusterObjects *agentstoragev1.ObjectsStatus `json:"virtualClusterObjects,omitempty"`
 
 	// SpaceObjects are the objects that were applied within the virtual cluster space
 	// +optional
-	SpaceObjects *storagev1.ObjectsStatus `json:"spaceObjects,omitempty"`
+	SpaceObjects *agentstoragev1.ObjectsStatus `json:"spaceObjects,omitempty"`
 
 	// VirtualCluster is the template rendered with all the parameters
 	// +optional

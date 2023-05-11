@@ -2,7 +2,7 @@ package install
 
 import (
 	"github.com/loft-sh/api/v3/pkg/apis/management"
-	v1 "github.com/loft-sh/api/v3/pkg/apis/management/v1"
+	managementv1 "github.com/loft-sh/api/v3/pkg/apis/management/v1"
 	"github.com/loft-sh/apiserver/pkg/builders"
 	"k8s.io/apimachinery/pkg/runtime"
 	utilruntime "k8s.io/apimachinery/pkg/util/runtime"
@@ -11,11 +11,11 @@ import (
 func init() {
 	InstallOptions(builders.Scheme)
 	InstallOptions(builders.ParameterScheme)
-	utilruntime.Must(v1.RegisterConversions(builders.ParameterScheme))
+	utilruntime.Must(managementv1.RegisterConversions(builders.ParameterScheme))
 }
 
 func InstallOptions(scheme *runtime.Scheme) {
-	utilruntime.Must(v1.InstallOptions(scheme))
+	utilruntime.Must(managementv1.InstallOptions(scheme))
 	utilruntime.Must(addKnownOptionsTypes(scheme))
 }
 

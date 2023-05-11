@@ -1,13 +1,13 @@
 package v1
 
 import (
-	storagev1 "github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1"
+	agentstoragev1 "github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1"
 	corev1 "k8s.io/api/core/v1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 )
 
 const (
-	ArgoIntegrationSynced storagev1.ConditionType = "ArgoIntegrationSynced"
+	ArgoIntegrationSynced agentstoragev1.ConditionType = "ArgoIntegrationSynced"
 
 	ArgoLastAppliedHashAnnotation                = "loft.sh/argo-integration-last-applied-hash"
 	ArgoPreviousClusterAnnotation                = "loft.sh/argo-integration-previous-cluster"
@@ -16,7 +16,7 @@ const (
 )
 
 const (
-	VaultIntegrationSynced storagev1.ConditionType = "VaultIntegrationSynced"
+	VaultIntegrationSynced agentstoragev1.ConditionType = "VaultIntegrationSynced"
 
 	VaultLastAppliedHashAnnotation                = "loft.sh/vault-integration-last-applied-hash"
 	VaultPreviousClusterAnnotation                = "loft.sh/vault-integration-previous-cluster"
@@ -25,7 +25,7 @@ const (
 )
 
 var (
-	ProjectConditions []storagev1.ConditionType
+	ProjectConditions []agentstoragev1.ConditionType
 )
 
 // +genclient
@@ -42,11 +42,11 @@ type Project struct {
 	Status ProjectStatus `json:"status,omitempty"`
 }
 
-func (a *Project) GetConditions() storagev1.Conditions {
+func (a *Project) GetConditions() agentstoragev1.Conditions {
 	return a.Status.Conditions
 }
 
-func (a *Project) SetConditions(conditions storagev1.Conditions) {
+func (a *Project) SetConditions(conditions agentstoragev1.Conditions) {
 	a.Status.Conditions = conditions
 }
 
@@ -186,7 +186,7 @@ type ProjectStatus struct {
 
 	// Conditions holds several conditions the project might be in
 	// +optional
-	Conditions storagev1.Conditions `json:"conditions,omitempty"`
+	Conditions agentstoragev1.Conditions `json:"conditions,omitempty"`
 }
 
 type QuotaStatus struct {
