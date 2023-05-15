@@ -1858,6 +1858,7 @@ type ProjectSecretSpec struct {
 }
 
 type ProjectSecretStatus struct {
+	Conditions agentstoragev1.Conditions
 }
 
 type ProjectSpec struct {

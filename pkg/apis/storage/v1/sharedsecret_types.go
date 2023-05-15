@@ -1,6 +1,7 @@
 package v1
 
 import (
+	agentstoragev1 "github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 )
 
@@ -15,6 +16,16 @@ type SharedSecret struct {
 
 	Spec   SharedSecretSpec   `json:"spec,omitempty"`
 	Status SharedSecretStatus `json:"status,omitempty"`
+}
+
+// GetConditions implements conditions.Setter
+func (a *SharedSecret) GetConditions() agentstoragev1.Conditions {
+	return a.Status.Conditions
+}
+
+// SetConditions implements conditions.Setter
+func (a *SharedSecret) SetConditions(conditions agentstoragev1.Conditions) {
+	a.Status.Conditions = conditions
 }
 
 func (a *SharedSecret) GetOwner() *UserOrTeam {
@@ -84,6 +95,9 @@ type Access struct {
 
 // SharedSecretStatus holds the status
 type SharedSecretStatus struct {
+	// Conditions holds several conditions the project might be in
+	// +optional
+	Conditions agentstoragev1.Conditions `json:"conditions,omitempty"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object

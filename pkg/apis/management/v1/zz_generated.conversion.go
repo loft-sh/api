@@ -10,6 +10,7 @@ import (
 	unsafe "unsafe"
 
 	clusterv1 "github.com/loft-sh/agentapi/v3/pkg/apis/loft/cluster/v1"
+	loftstoragev1 "github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1"
 	auditv1 "github.com/loft-sh/api/v3/pkg/apis/audit/v1"
 	management "github.com/loft-sh/api/v3/pkg/apis/management"
 	storagev1 "github.com/loft-sh/api/v3/pkg/apis/storage/v1"
@@ -5801,6 +5802,7 @@ func Convert_management_ProjectSecretSpec_To_v1_ProjectSecretSpec(in *management
 }
 
 func autoConvert_v1_ProjectSecretStatus_To_management_ProjectSecretStatus(in *ProjectSecretStatus, out *management.ProjectSecretStatus, s conversion.Scope) error {
+	out.Conditions = *(*loftstoragev1.Conditions)(unsafe.Pointer(&in.Conditions))
 	return nil
 }
 
@@ -5810,6 +5812,7 @@ func Convert_v1_ProjectSecretStatus_To_management_ProjectSecretStatus(in *Projec
 }
 
 func autoConvert_management_ProjectSecretStatus_To_v1_ProjectSecretStatus(in *management.ProjectSecretStatus, out *ProjectSecretStatus, s conversion.Scope) error {
+	out.Conditions = *(*loftstoragev1.Conditions)(unsafe.Pointer(&in.Conditions))
 	return nil
 }
 

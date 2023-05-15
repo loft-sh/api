@@ -16,16 +16,14 @@ const (
 )
 
 const (
-	VaultIntegrationSynced agentstoragev1.ConditionType = "VaultIntegrationSynced"
+	ConditionTypeVaultIntegration agentstoragev1.ConditionType = "VaultIntegration"
+
+	ConditionReasonVaultIntegrationError = "VaultIntegrationError"
 
 	VaultLastAppliedHashAnnotation                = "loft.sh/vault-integration-last-applied-hash"
 	VaultPreviousClusterAnnotation                = "loft.sh/vault-integration-previous-cluster"
 	VaultPreviousNamespaceAnnotation              = "loft.sh/vault-integration-previous-namespace"
 	VaultPreviousVirtualClusterInstanceAnnotation = "loft.sh/vault-integration-previous-virtualclusterinstance"
-)
-
-var (
-	ProjectConditions []agentstoragev1.ConditionType
 )
 
 // +genclient
