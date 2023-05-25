@@ -945,8 +945,16 @@ var (
 	NewVirtualClusterInstanceLogREST = func(getter generic.RESTOptionsGetter) rest.Storage {
 		return NewVirtualClusterInstanceLogRESTFunc(Factory)
 	}
-	NewVirtualClusterInstanceLogRESTFunc NewRESTFunc
-	InternalVirtualClusterTemplate       = builders.NewInternalResource(
+	NewVirtualClusterInstanceLogRESTFunc                 NewRESTFunc
+	InternalVirtualClusterInstanceWorkloadKubeConfigREST = builders.NewInternalSubresource(
+		"virtualclusterinstances", "VirtualClusterInstanceWorkloadKubeConfig", "workloadkubeconfig",
+		func() runtime.Object { return &VirtualClusterInstanceWorkloadKubeConfig{} },
+	)
+	NewVirtualClusterInstanceWorkloadKubeConfigREST = func(getter generic.RESTOptionsGetter) rest.Storage {
+		return NewVirtualClusterInstanceWorkloadKubeConfigRESTFunc(Factory)
+	}
+	NewVirtualClusterInstanceWorkloadKubeConfigRESTFunc NewRESTFunc
+	InternalVirtualClusterTemplate                      = builders.NewInternalResource(
 		"virtualclustertemplates",
 		"VirtualClusterTemplate",
 		func() runtime.Object { return &VirtualClusterTemplate{} },
@@ -1049,6 +1057,7 @@ var (
 		InternalVirtualClusterInstanceStatus,
 		InternalVirtualClusterInstanceKubeConfigREST,
 		InternalVirtualClusterInstanceLogREST,
+		InternalVirtualClusterInstanceWorkloadKubeConfigREST,
 		InternalVirtualClusterTemplate,
 		InternalVirtualClusterTemplateStatus,
 	)
@@ -2221,6 +2230,15 @@ type VirtualClusterInstanceStatus struct {
 	SleepModeConfig *clusterv1.SleepModeConfig
 	CanUse          bool
 	CanUpdate       bool
+}
+
+// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+
+type VirtualClusterInstanceWorkloadKubeConfig struct {
+	metav1.TypeMeta
+	metav1.ObjectMeta
+	KubeConfig string
+	Token      string
 }
 
 // +genclient
@@ -6150,6 +6168,14 @@ type VirtualClusterInstanceLogList struct {
 	metav1.TypeMeta
 	metav1.ListMeta
 	Items []VirtualClusterInstanceLog
+}
+
+// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+
+type VirtualClusterInstanceWorkloadKubeConfigList struct {
+	metav1.TypeMeta
+	metav1.ListMeta
+	Items []VirtualClusterInstanceWorkloadKubeConfig
 }
 
 func (VirtualClusterInstance) NewStatus() interface{} {

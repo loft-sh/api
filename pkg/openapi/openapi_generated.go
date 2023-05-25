@@ -327,6 +327,8 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 		"github.com/loft-sh/api/v3/pkg/apis/management/v1.VirtualClusterInstanceLogOptions":                schema_pkg_apis_management_v1_VirtualClusterInstanceLogOptions(ref),
 		"github.com/loft-sh/api/v3/pkg/apis/management/v1.VirtualClusterInstanceSpec":                      schema_pkg_apis_management_v1_VirtualClusterInstanceSpec(ref),
 		"github.com/loft-sh/api/v3/pkg/apis/management/v1.VirtualClusterInstanceStatus":                    schema_pkg_apis_management_v1_VirtualClusterInstanceStatus(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/management/v1.VirtualClusterInstanceWorkloadKubeConfig":        schema_pkg_apis_management_v1_VirtualClusterInstanceWorkloadKubeConfig(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/management/v1.VirtualClusterInstanceWorkloadKubeConfigList":    schema_pkg_apis_management_v1_VirtualClusterInstanceWorkloadKubeConfigList(ref),
 		"github.com/loft-sh/api/v3/pkg/apis/management/v1.VirtualClusterTemplate":                          schema_pkg_apis_management_v1_VirtualClusterTemplate(ref),
 		"github.com/loft-sh/api/v3/pkg/apis/management/v1.VirtualClusterTemplateList":                      schema_pkg_apis_management_v1_VirtualClusterTemplateList(ref),
 		"github.com/loft-sh/api/v3/pkg/apis/management/v1.VirtualClusterTemplateSpec":                      schema_pkg_apis_management_v1_VirtualClusterTemplateSpec(ref),
@@ -465,6 +467,7 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.VirtualClusterTemplateSpec":                         schema_pkg_apis_storage_v1_VirtualClusterTemplateSpec(ref),
 		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.VirtualClusterTemplateStatus":                       schema_pkg_apis_storage_v1_VirtualClusterTemplateStatus(ref),
 		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.VirtualClusterTemplateVersion":                      schema_pkg_apis_storage_v1_VirtualClusterTemplateVersion(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.WorkloadVirtualClusterTemplateDefinition":           schema_pkg_apis_storage_v1_WorkloadVirtualClusterTemplateDefinition(ref),
 		"github.com/loft-sh/api/v3/pkg/apis/ui/v1.NavBarButton":                                            schema_pkg_apis_ui_v1_NavBarButton(ref),
 		"github.com/loft-sh/api/v3/pkg/apis/ui/v1.UISettings":                                              schema_pkg_apis_ui_v1_UISettings(ref),
 		"github.com/loft-sh/api/v3/pkg/apis/ui/v1.UISettingsSpec":                                          schema_pkg_apis_ui_v1_UISettingsSpec(ref),
@@ -17030,6 +17033,12 @@ func schema_pkg_apis_management_v1_VirtualClusterInstanceSpec(ref common.Referen
 							Ref:         ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.VirtualClusterClusterRef"),
 						},
 					},
+					"workloadClusterRef": {
+						SchemaProps: spec.SchemaProps{
+							Description: "WorkloadClusterRef is the reference to the connected cluster holding this virtual cluster's workloads.",
+							Ref:         ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.VirtualClusterClusterRef"),
+						},
+					},
 					"parameters": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Parameters are values to pass to the template",
@@ -17127,6 +17136,12 @@ func schema_pkg_apis_management_v1_VirtualClusterInstanceStatus(ref common.Refer
 							Ref:         ref("github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.ObjectsStatus"),
 						},
 					},
+					"workloadSpaceObjects": {
+						SchemaProps: spec.SchemaProps{
+							Description: "WorkloadSpaceObjects are the objects that were applied within the virtual cluster workload space",
+							Ref:         ref("github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.ObjectsStatus"),
+						},
+					},
 					"virtualCluster": {
 						SchemaProps: spec.SchemaProps{
 							Description: "VirtualCluster is the template rendered with all the parameters",
@@ -17165,6 +17180,103 @@ func schema_pkg_apis_management_v1_VirtualClusterInstanceStatus(ref common.Refer
 		},
 		Dependencies: []string{
 			"github.com/loft-sh/agentapi/v3/pkg/apis/loft/cluster/v1.SleepModeConfig", "github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.Condition", "github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.ObjectsStatus", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.VirtualClusterTemplateDefinition"},
+	}
+}
+
+func schema_pkg_apis_management_v1_VirtualClusterInstanceWorkloadKubeConfig(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "VirtualClusterInstanceWorkloadKubeConfig holds kube config request and response data for virtual clusters",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"kind": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"apiVersion": {
+						SchemaProps: spec.SchemaProps{
+							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"metadata": {
+						SchemaProps: spec.SchemaProps{
+							Default: map[string]interface{}{},
+							Ref:     ref("k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"),
+						},
+					},
+					"kubeConfig": {
+						SchemaProps: spec.SchemaProps{
+							Description: "KubeConfig holds the workload cluster's kubeconfig to access the virtual cluster",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"token": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Token holds the service account token vcluster should use to connect to the remote cluster",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			"k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
+	}
+}
+
+func schema_pkg_apis_management_v1_VirtualClusterInstanceWorkloadKubeConfigList(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"kind": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"apiVersion": {
+						SchemaProps: spec.SchemaProps{
+							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"metadata": {
+						SchemaProps: spec.SchemaProps{
+							Default: map[string]interface{}{},
+							Ref:     ref("k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"),
+						},
+					},
+					"items": {
+						SchemaProps: spec.SchemaProps{
+							Type: []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/management/v1.VirtualClusterInstanceWorkloadKubeConfig"),
+									},
+								},
+							},
+						},
+					},
+				},
+				Required: []string{"items"},
+			},
+		},
+		Dependencies: []string{
+			"github.com/loft-sh/api/v3/pkg/apis/management/v1.VirtualClusterInstanceWorkloadKubeConfig", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
 	}
 }
 
@@ -23647,6 +23759,12 @@ func schema_pkg_apis_storage_v1_VirtualClusterInstanceSpec(ref common.ReferenceC
 							Ref:         ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.VirtualClusterClusterRef"),
 						},
 					},
+					"workloadClusterRef": {
+						SchemaProps: spec.SchemaProps{
+							Description: "WorkloadClusterRef is the reference to the connected cluster holding this virtual cluster's workloads.",
+							Ref:         ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.VirtualClusterClusterRef"),
+						},
+					},
 					"parameters": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Parameters are values to pass to the template",
@@ -23740,6 +23858,12 @@ func schema_pkg_apis_storage_v1_VirtualClusterInstanceStatus(ref common.Referenc
 					"spaceObjects": {
 						SchemaProps: spec.SchemaProps{
 							Description: "SpaceObjects are the objects that were applied within the virtual cluster space",
+							Ref:         ref("github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.ObjectsStatus"),
+						},
+					},
+					"workloadSpaceObjects": {
+						SchemaProps: spec.SchemaProps{
+							Description: "WorkloadSpaceObjects are the objects that were applied within the virtual cluster workload space",
 							Ref:         ref("github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.ObjectsStatus"),
 						},
 					},
@@ -23942,11 +24066,17 @@ func schema_pkg_apis_storage_v1_VirtualClusterTemplateDefinition(ref common.Refe
 							Ref:         ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.VirtualClusterSpaceTemplateDefinition"),
 						},
 					},
+					"workloadVirtualClusterTemplateDefinition": {
+						SchemaProps: spec.SchemaProps{
+							Description: "WorkloadVirtualClusterTemplateDefinition holds the workload cluster specific deployment options. Needs to be non-nil in order to deploy the virtual cluster in workload cluster mode.",
+							Ref:         ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.WorkloadVirtualClusterTemplateDefinition"),
+						},
+					},
 				},
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.AppReference", "github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.InstanceAccess", "github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.TemplateHelmChart", "github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.VirtualClusterAccessPoint", "github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.VirtualClusterHelmRelease", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.TemplateMetadata", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.VirtualClusterSpaceTemplateDefinition"},
+			"github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.AppReference", "github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.InstanceAccess", "github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.TemplateHelmChart", "github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.VirtualClusterAccessPoint", "github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.VirtualClusterHelmRelease", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.TemplateMetadata", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.VirtualClusterSpaceTemplateDefinition", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.WorkloadVirtualClusterTemplateDefinition"},
 	}
 }
 
@@ -24158,6 +24288,40 @@ func schema_pkg_apis_storage_v1_VirtualClusterTemplateVersion(ref common.Referen
 		},
 		Dependencies: []string{
 			"github.com/loft-sh/api/v3/pkg/apis/storage/v1.AppParameter", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.VirtualClusterTemplateDefinition"},
+	}
+}
+
+func schema_pkg_apis_storage_v1_WorkloadVirtualClusterTemplateDefinition(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"metadata": {
+						SchemaProps: spec.SchemaProps{
+							Description: "The virtual cluster metadata",
+							Default:     map[string]interface{}{},
+							Ref:         ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.TemplateMetadata"),
+						},
+					},
+					"helmRelease": {
+						SchemaProps: spec.SchemaProps{
+							Description: "HelmRelease is the helm release configuration for the virtual cluster.",
+							Ref:         ref("github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.VirtualClusterHelmRelease"),
+						},
+					},
+					"spaceTemplate": {
+						SchemaProps: spec.SchemaProps{
+							Description: "SpaceTemplate holds the space template",
+							Default:     map[string]interface{}{},
+							Ref:         ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.VirtualClusterSpaceTemplateDefinition"),
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			"github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.VirtualClusterHelmRelease", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.TemplateMetadata", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.VirtualClusterSpaceTemplateDefinition"},
 	}
 }
 

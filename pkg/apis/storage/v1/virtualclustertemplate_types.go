@@ -121,6 +121,26 @@ type VirtualClusterTemplateDefinition struct {
 	// SpaceTemplate holds the space template
 	// +optional
 	SpaceTemplate VirtualClusterSpaceTemplateDefinition `json:"spaceTemplate,omitempty"`
+
+	// WorkloadVirtualClusterTemplateDefinition holds the workload cluster specific deployment options. Needs to be non-nil
+	// in order to deploy the virtual cluster in workload cluster mode.
+	// +optional
+	WorkloadVirtualClusterTemplateDefinition *WorkloadVirtualClusterTemplateDefinition `json:"workloadVirtualClusterTemplateDefinition,omitempty"`
+}
+
+type WorkloadVirtualClusterTemplateDefinition struct {
+	// The virtual cluster metadata
+	// +kubebuilder:pruning:PreserveUnknownFields
+	// +optional
+	TemplateMetadata `json:"metadata,omitempty"`
+
+	// HelmRelease is the helm release configuration for the virtual cluster.
+	// +optional
+	HelmRelease *agentstoragev1.VirtualClusterHelmRelease `json:"helmRelease,omitempty"`
+
+	// SpaceTemplate holds the space template
+	// +optional
+	SpaceTemplate VirtualClusterSpaceTemplateDefinition `json:"spaceTemplate,omitempty"`
 }
 
 type VirtualClusterSpaceTemplateDefinition struct {
