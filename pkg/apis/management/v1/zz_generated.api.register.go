@@ -102,6 +102,7 @@ func addKnownTypes(scheme *runtime.Scheme) error {
 		&VirtualClusterInstanceList{},
 		&VirtualClusterInstanceKubeConfig{},
 		&VirtualClusterInstanceLog{},
+		&VirtualClusterInstanceWorkloadKubeConfig{},
 		&VirtualClusterTemplate{},
 		&VirtualClusterTemplateList{},
 	)
@@ -272,6 +273,11 @@ var (
 			func() runtime.Object { return &VirtualClusterInstanceLog{} }, // Register versioned resource
 			nil,
 			management.NewVirtualClusterInstanceLogREST),
+		builders.NewApiResourceWithStorage(
+			management.InternalVirtualClusterInstanceWorkloadKubeConfigREST,
+			func() runtime.Object { return &VirtualClusterInstanceWorkloadKubeConfig{} }, // Register versioned resource
+			nil,
+			management.NewVirtualClusterInstanceWorkloadKubeConfigREST),
 		management.ManagementVirtualClusterTemplateStorage,
 	)
 
@@ -758,6 +764,14 @@ type VirtualClusterInstanceLogList struct {
 	metav1.TypeMeta `json:",inline"`
 	metav1.ListMeta `json:"metadata,omitempty"`
 	Items           []VirtualClusterInstanceLog `json:"items"`
+}
+
+// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+
+type VirtualClusterInstanceWorkloadKubeConfigList struct {
+	metav1.TypeMeta `json:",inline"`
+	metav1.ListMeta `json:"metadata,omitempty"`
+	Items           []VirtualClusterInstanceWorkloadKubeConfig `json:"items"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object

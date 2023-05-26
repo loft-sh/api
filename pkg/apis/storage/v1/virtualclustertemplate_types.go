@@ -1,7 +1,7 @@
 package v1
 
 import (
-	storagev1 "github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1"
+	agentstoragev1 "github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 )
 
@@ -116,7 +116,27 @@ type VirtualClusterTemplateDefinition struct {
 
 	// VirtualClusterCommonSpec defines virtual cluster spec that is common between the virtual
 	// cluster templates, and virtual cluster
-	storagev1.VirtualClusterCommonSpec `json:",inline"`
+	agentstoragev1.VirtualClusterCommonSpec `json:",inline"`
+
+	// SpaceTemplate holds the space template
+	// +optional
+	SpaceTemplate VirtualClusterSpaceTemplateDefinition `json:"spaceTemplate,omitempty"`
+
+	// WorkloadVirtualClusterTemplateDefinition holds the workload cluster specific deployment options. Needs to be non-nil
+	// in order to deploy the virtual cluster in workload cluster mode.
+	// +optional
+	WorkloadVirtualClusterTemplateDefinition *WorkloadVirtualClusterTemplateDefinition `json:"workloadVirtualClusterTemplateDefinition,omitempty"`
+}
+
+type WorkloadVirtualClusterTemplateDefinition struct {
+	// The virtual cluster metadata
+	// +kubebuilder:pruning:PreserveUnknownFields
+	// +optional
+	TemplateMetadata `json:"metadata,omitempty"`
+
+	// HelmRelease is the helm release configuration for the virtual cluster.
+	// +optional
+	HelmRelease *agentstoragev1.VirtualClusterHelmRelease `json:"helmRelease,omitempty"`
 
 	// SpaceTemplate holds the space template
 	// +optional
@@ -135,11 +155,11 @@ type VirtualClusterSpaceTemplateDefinition struct {
 
 	// Charts are helm charts that should get deployed
 	// +optional
-	Charts []storagev1.TemplateHelmChart `json:"charts,omitempty"`
+	Charts []agentstoragev1.TemplateHelmChart `json:"charts,omitempty"`
 
 	// Apps specifies the apps that should get deployed by this template
 	// +optional
-	Apps []storagev1.AppReference `json:"apps,omitempty"`
+	Apps []agentstoragev1.AppReference `json:"apps,omitempty"`
 }
 
 type TemplateMetadata struct {

@@ -327,6 +327,8 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 		"github.com/loft-sh/api/v3/pkg/apis/management/v1.VirtualClusterInstanceLogOptions":                schema_pkg_apis_management_v1_VirtualClusterInstanceLogOptions(ref),
 		"github.com/loft-sh/api/v3/pkg/apis/management/v1.VirtualClusterInstanceSpec":                      schema_pkg_apis_management_v1_VirtualClusterInstanceSpec(ref),
 		"github.com/loft-sh/api/v3/pkg/apis/management/v1.VirtualClusterInstanceStatus":                    schema_pkg_apis_management_v1_VirtualClusterInstanceStatus(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/management/v1.VirtualClusterInstanceWorkloadKubeConfig":        schema_pkg_apis_management_v1_VirtualClusterInstanceWorkloadKubeConfig(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/management/v1.VirtualClusterInstanceWorkloadKubeConfigList":    schema_pkg_apis_management_v1_VirtualClusterInstanceWorkloadKubeConfigList(ref),
 		"github.com/loft-sh/api/v3/pkg/apis/management/v1.VirtualClusterTemplate":                          schema_pkg_apis_management_v1_VirtualClusterTemplate(ref),
 		"github.com/loft-sh/api/v3/pkg/apis/management/v1.VirtualClusterTemplateList":                      schema_pkg_apis_management_v1_VirtualClusterTemplateList(ref),
 		"github.com/loft-sh/api/v3/pkg/apis/management/v1.VirtualClusterTemplateSpec":                      schema_pkg_apis_management_v1_VirtualClusterTemplateSpec(ref),
@@ -465,6 +467,7 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.VirtualClusterTemplateSpec":                         schema_pkg_apis_storage_v1_VirtualClusterTemplateSpec(ref),
 		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.VirtualClusterTemplateStatus":                       schema_pkg_apis_storage_v1_VirtualClusterTemplateStatus(ref),
 		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.VirtualClusterTemplateVersion":                      schema_pkg_apis_storage_v1_VirtualClusterTemplateVersion(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.WorkloadVirtualClusterTemplateDefinition":           schema_pkg_apis_storage_v1_WorkloadVirtualClusterTemplateDefinition(ref),
 		"github.com/loft-sh/api/v3/pkg/apis/ui/v1.NavBarButton":                                            schema_pkg_apis_ui_v1_NavBarButton(ref),
 		"github.com/loft-sh/api/v3/pkg/apis/ui/v1.UISettings":                                              schema_pkg_apis_ui_v1_UISettings(ref),
 		"github.com/loft-sh/api/v3/pkg/apis/ui/v1.UISettingsSpec":                                          schema_pkg_apis_ui_v1_UISettingsSpec(ref),
@@ -3188,7 +3191,8 @@ func schema_apis_loft_cluster_v1_SpaceStatus(ref common.ReferenceCallback) commo
 							Description: "Phase is the current lifecycle phase of the namespace. More info: https://kubernetes.io/docs/tasks/administer-cluster/namespaces/\n\nPossible enum values:\n - `\"Active\"` means the namespace is available for use in the system\n - `\"Terminating\"` means the namespace is undergoing graceful termination",
 							Type:        []string{"string"},
 							Format:      "",
-							Enum:        []interface{}{"Active", "Terminating"}},
+							Enum:        []interface{}{"Active", "Terminating"},
+						},
 					},
 					"sleepModeConfig": {
 						SchemaProps: spec.SchemaProps{
@@ -6870,14 +6874,14 @@ func schema_pkg_apis_management_v1_Authentication(ref common.ReferenceCallback) 
 					},
 					"accessKeyMaxTTLSeconds": {
 						SchemaProps: spec.SchemaProps{
-							Description: "AccessKeyMaxTTLSeconds is the global maximum lifespan of an accesskey in seconds. Leaving it 0 or unspecified will disable it. Specifing 2592000 will mean all keys have a Time-To-Live of 30 days.",
+							Description: "AccessKeyMaxTTLSeconds is the global maximum lifespan of an accesskey in seconds. Leaving it 0 or unspecified will disable it. Specifying 2592000 will mean all keys have a Time-To-Live of 30 days.",
 							Type:        []string{"integer"},
 							Format:      "int64",
 						},
 					},
 					"loginAccessKeyTTLSeconds": {
 						SchemaProps: spec.SchemaProps{
-							Description: "LoginAccessKeyTTLSeconds is the time in seconds an access key is kept until it is deleted. Leaving it unspecified will default to 20 days. Setting it to zero will disable the ttl. Specifing 2592000 will mean all keys have a  default Time-To-Live of 30 days.",
+							Description: "LoginAccessKeyTTLSeconds is the time in seconds an access key is kept until it is deleted. Leaving it unspecified will default to 20 days. Setting it to zero will disable the ttl. Specifying 2592000 will mean all keys have a  default Time-To-Live of 30 days.",
 							Type:        []string{"integer"},
 							Format:      "int64",
 						},
@@ -12762,8 +12766,26 @@ func schema_pkg_apis_management_v1_ProjectSecretStatus(ref common.ReferenceCallb
 			SchemaProps: spec.SchemaProps{
 				Description: "ProjectSecretStatus holds the status",
 				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"conditions": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Conditions holds several conditions the project might be in",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref("github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.Condition"),
+									},
+								},
+							},
+						},
+					},
+				},
 			},
 		},
+		Dependencies: []string{
+			"github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.Condition"},
 	}
 }
 
@@ -13804,8 +13826,26 @@ func schema_pkg_apis_management_v1_SharedSecretStatus(ref common.ReferenceCallba
 			SchemaProps: spec.SchemaProps{
 				Description: "SharedSecretStatus holds the status",
 				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"conditions": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Conditions holds several conditions the project might be in",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref("github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.Condition"),
+									},
+								},
+							},
+						},
+					},
+				},
 			},
 		},
+		Dependencies: []string{
+			"github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.Condition"},
 	}
 }
 
@@ -15056,7 +15096,8 @@ func schema_pkg_apis_management_v1_TaskStatus(ref common.ReferenceCallback) comm
 							Description: "PodPhase describes the phase this task is in\n\nPossible enum values:\n - `\"Failed\"` means that all containers in the pod have terminated, and at least one container has terminated in a failure (exited with a non-zero exit code or was stopped by the system).\n - `\"Pending\"` means the pod has been accepted by the system, but one or more of the containers has not been started. This includes time before being bound to a node, as well as time spent pulling images onto the host.\n - `\"Running\"` means the pod has been bound to a node and all of the containers have been started. At least one container is still running or is in the process of being restarted.\n - `\"Succeeded\"` means that all containers in the pod have voluntarily terminated with a container exit code of 0, and the system is not going to restart any of these containers.\n - `\"Unknown\"` means that for some reason the state of the pod could not be obtained, typically due to an error in communicating with the host of the pod. Deprecated: It isn't being set since 2015 (74da3b14b0c0f658b3bb8d2def5094686d0e9095)",
 							Type:        []string{"string"},
 							Format:      "",
-							Enum:        []interface{}{"Failed", "Pending", "Running", "Succeeded", "Unknown"}},
+							Enum:        []interface{}{"Failed", "Pending", "Running", "Succeeded", "Unknown"},
+						},
 					},
 					"observedGeneration": {
 						SchemaProps: spec.SchemaProps{
@@ -16992,6 +17033,12 @@ func schema_pkg_apis_management_v1_VirtualClusterInstanceSpec(ref common.Referen
 							Ref:         ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.VirtualClusterClusterRef"),
 						},
 					},
+					"workloadClusterRef": {
+						SchemaProps: spec.SchemaProps{
+							Description: "WorkloadClusterRef is the reference to the connected cluster holding this virtual cluster's workloads.",
+							Ref:         ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.VirtualClusterClusterRef"),
+						},
+					},
 					"parameters": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Parameters are values to pass to the template",
@@ -17089,6 +17136,12 @@ func schema_pkg_apis_management_v1_VirtualClusterInstanceStatus(ref common.Refer
 							Ref:         ref("github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.ObjectsStatus"),
 						},
 					},
+					"workloadSpaceObjects": {
+						SchemaProps: spec.SchemaProps{
+							Description: "WorkloadSpaceObjects are the objects that were applied within the virtual cluster workload space",
+							Ref:         ref("github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.ObjectsStatus"),
+						},
+					},
 					"virtualCluster": {
 						SchemaProps: spec.SchemaProps{
 							Description: "VirtualCluster is the template rendered with all the parameters",
@@ -17127,6 +17180,103 @@ func schema_pkg_apis_management_v1_VirtualClusterInstanceStatus(ref common.Refer
 		},
 		Dependencies: []string{
 			"github.com/loft-sh/agentapi/v3/pkg/apis/loft/cluster/v1.SleepModeConfig", "github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.Condition", "github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.ObjectsStatus", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.VirtualClusterTemplateDefinition"},
+	}
+}
+
+func schema_pkg_apis_management_v1_VirtualClusterInstanceWorkloadKubeConfig(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "VirtualClusterInstanceWorkloadKubeConfig holds kube config request and response data for virtual clusters",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"kind": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"apiVersion": {
+						SchemaProps: spec.SchemaProps{
+							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"metadata": {
+						SchemaProps: spec.SchemaProps{
+							Default: map[string]interface{}{},
+							Ref:     ref("k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"),
+						},
+					},
+					"kubeConfig": {
+						SchemaProps: spec.SchemaProps{
+							Description: "KubeConfig holds the workload cluster's kubeconfig to access the virtual cluster",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"token": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Token holds the service account token vcluster should use to connect to the remote cluster",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			"k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
+	}
+}
+
+func schema_pkg_apis_management_v1_VirtualClusterInstanceWorkloadKubeConfigList(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"kind": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"apiVersion": {
+						SchemaProps: spec.SchemaProps{
+							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"metadata": {
+						SchemaProps: spec.SchemaProps{
+							Default: map[string]interface{}{},
+							Ref:     ref("k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"),
+						},
+					},
+					"items": {
+						SchemaProps: spec.SchemaProps{
+							Type: []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/management/v1.VirtualClusterInstanceWorkloadKubeConfig"),
+									},
+								},
+							},
+						},
+					},
+				},
+				Required: []string{"items"},
+			},
+		},
+		Dependencies: []string{
+			"github.com/loft-sh/api/v3/pkg/apis/management/v1.VirtualClusterInstanceWorkloadKubeConfig", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
 	}
 }
 
@@ -21300,8 +21450,26 @@ func schema_pkg_apis_storage_v1_SharedSecretStatus(ref common.ReferenceCallback)
 			SchemaProps: spec.SchemaProps{
 				Description: "SharedSecretStatus holds the status",
 				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"conditions": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Conditions holds several conditions the project might be in",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref("github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.Condition"),
+									},
+								},
+							},
+						},
+					},
+				},
 			},
 		},
+		Dependencies: []string{
+			"github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.Condition"},
 	}
 }
 
@@ -22454,7 +22622,8 @@ func schema_pkg_apis_storage_v1_TaskStatus(ref common.ReferenceCallback) common.
 							Description: "PodPhase describes the phase this task is in\n\nPossible enum values:\n - `\"Failed\"` means that all containers in the pod have terminated, and at least one container has terminated in a failure (exited with a non-zero exit code or was stopped by the system).\n - `\"Pending\"` means the pod has been accepted by the system, but one or more of the containers has not been started. This includes time before being bound to a node, as well as time spent pulling images onto the host.\n - `\"Running\"` means the pod has been bound to a node and all of the containers have been started. At least one container is still running or is in the process of being restarted.\n - `\"Succeeded\"` means that all containers in the pod have voluntarily terminated with a container exit code of 0, and the system is not going to restart any of these containers.\n - `\"Unknown\"` means that for some reason the state of the pod could not be obtained, typically due to an error in communicating with the host of the pod. Deprecated: It isn't being set since 2015 (74da3b14b0c0f658b3bb8d2def5094686d0e9095)",
 							Type:        []string{"string"},
 							Format:      "",
-							Enum:        []interface{}{"Failed", "Pending", "Running", "Succeeded", "Unknown"}},
+							Enum:        []interface{}{"Failed", "Pending", "Running", "Succeeded", "Unknown"},
+						},
 					},
 					"observedGeneration": {
 						SchemaProps: spec.SchemaProps{
@@ -23590,6 +23759,12 @@ func schema_pkg_apis_storage_v1_VirtualClusterInstanceSpec(ref common.ReferenceC
 							Ref:         ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.VirtualClusterClusterRef"),
 						},
 					},
+					"workloadClusterRef": {
+						SchemaProps: spec.SchemaProps{
+							Description: "WorkloadClusterRef is the reference to the connected cluster holding this virtual cluster's workloads.",
+							Ref:         ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.VirtualClusterClusterRef"),
+						},
+					},
 					"parameters": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Parameters are values to pass to the template",
@@ -23683,6 +23858,12 @@ func schema_pkg_apis_storage_v1_VirtualClusterInstanceStatus(ref common.Referenc
 					"spaceObjects": {
 						SchemaProps: spec.SchemaProps{
 							Description: "SpaceObjects are the objects that were applied within the virtual cluster space",
+							Ref:         ref("github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.ObjectsStatus"),
+						},
+					},
+					"workloadSpaceObjects": {
+						SchemaProps: spec.SchemaProps{
+							Description: "WorkloadSpaceObjects are the objects that were applied within the virtual cluster workload space",
 							Ref:         ref("github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.ObjectsStatus"),
 						},
 					},
@@ -23885,11 +24066,17 @@ func schema_pkg_apis_storage_v1_VirtualClusterTemplateDefinition(ref common.Refe
 							Ref:         ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.VirtualClusterSpaceTemplateDefinition"),
 						},
 					},
+					"workloadVirtualClusterTemplateDefinition": {
+						SchemaProps: spec.SchemaProps{
+							Description: "WorkloadVirtualClusterTemplateDefinition holds the workload cluster specific deployment options. Needs to be non-nil in order to deploy the virtual cluster in workload cluster mode.",
+							Ref:         ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.WorkloadVirtualClusterTemplateDefinition"),
+						},
+					},
 				},
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.AppReference", "github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.InstanceAccess", "github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.TemplateHelmChart", "github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.VirtualClusterAccessPoint", "github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.VirtualClusterHelmRelease", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.TemplateMetadata", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.VirtualClusterSpaceTemplateDefinition"},
+			"github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.AppReference", "github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.InstanceAccess", "github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.TemplateHelmChart", "github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.VirtualClusterAccessPoint", "github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.VirtualClusterHelmRelease", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.TemplateMetadata", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.VirtualClusterSpaceTemplateDefinition", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.WorkloadVirtualClusterTemplateDefinition"},
 	}
 }
 
@@ -24101,6 +24288,40 @@ func schema_pkg_apis_storage_v1_VirtualClusterTemplateVersion(ref common.Referen
 		},
 		Dependencies: []string{
 			"github.com/loft-sh/api/v3/pkg/apis/storage/v1.AppParameter", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.VirtualClusterTemplateDefinition"},
+	}
+}
+
+func schema_pkg_apis_storage_v1_WorkloadVirtualClusterTemplateDefinition(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"metadata": {
+						SchemaProps: spec.SchemaProps{
+							Description: "The virtual cluster metadata",
+							Default:     map[string]interface{}{},
+							Ref:         ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.TemplateMetadata"),
+						},
+					},
+					"helmRelease": {
+						SchemaProps: spec.SchemaProps{
+							Description: "HelmRelease is the helm release configuration for the virtual cluster.",
+							Ref:         ref("github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.VirtualClusterHelmRelease"),
+						},
+					},
+					"spaceTemplate": {
+						SchemaProps: spec.SchemaProps{
+							Description: "SpaceTemplate holds the space template",
+							Default:     map[string]interface{}{},
+							Ref:         ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.VirtualClusterSpaceTemplateDefinition"),
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			"github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.VirtualClusterHelmRelease", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.TemplateMetadata", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.VirtualClusterSpaceTemplateDefinition"},
 	}
 }
 
@@ -25162,16 +25383,18 @@ func schema_pkg_apis_policy_v1beta1_JsPolicySpec(ref common.ReferenceCallback) c
 					},
 					"failurePolicy": {
 						SchemaProps: spec.SchemaProps{
-							Description: "FailurePolicy defines how unrecognized errors from the admission endpoint are handled - allowed values are Ignore or Fail. Defaults to Fail.",
+							Description: "FailurePolicy defines how unrecognized errors from the admission endpoint are handled - allowed values are Ignore or Fail. Defaults to Fail.\n\nPossible enum values:\n - `\"Fail\"` means that an error calling the webhook causes the admission to fail.\n - `\"Ignore\"` means that an error calling the webhook is ignored.",
 							Type:        []string{"string"},
 							Format:      "",
+							Enum:        []interface{}{"Fail", "Ignore"},
 						},
 					},
 					"matchPolicy": {
 						SchemaProps: spec.SchemaProps{
-							Description: "matchPolicy defines how the \"rules\" list is used to match incoming requests. Allowed values are \"Exact\" or \"Equivalent\".\n\n- Exact: match a request only if it exactly matches a specified rule. For example, if deployments can be modified via apps/v1, apps/v1beta1, and extensions/v1beta1, but \"rules\" only included `apiGroups:[\"apps\"], apiVersions:[\"v1\"], resources: [\"deployments\"]`, a request to apps/v1beta1 or extensions/v1beta1 would not be sent to the webhook.\n\n- Equivalent: match a request if modifies a resource listed in rules, even via another API group or version. For example, if deployments can be modified via apps/v1, apps/v1beta1, and extensions/v1beta1, and \"rules\" only included `apiGroups:[\"apps\"], apiVersions:[\"v1\"], resources: [\"deployments\"]`, a request to apps/v1beta1 or extensions/v1beta1 would be converted to apps/v1 and sent to the webhook.\n\nDefaults to \"Equivalent\"",
+							Description: "matchPolicy defines how the \"rules\" list is used to match incoming requests. Allowed values are \"Exact\" or \"Equivalent\".\n\n- Exact: match a request only if it exactly matches a specified rule. For example, if deployments can be modified via apps/v1, apps/v1beta1, and extensions/v1beta1, but \"rules\" only included `apiGroups:[\"apps\"], apiVersions:[\"v1\"], resources: [\"deployments\"]`, a request to apps/v1beta1 or extensions/v1beta1 would not be sent to the webhook.\n\n- Equivalent: match a request if modifies a resource listed in rules, even via another API group or version. For example, if deployments can be modified via apps/v1, apps/v1beta1, and extensions/v1beta1, and \"rules\" only included `apiGroups:[\"apps\"], apiVersions:[\"v1\"], resources: [\"deployments\"]`, a request to apps/v1beta1 or extensions/v1beta1 would be converted to apps/v1 and sent to the webhook.\n\nDefaults to \"Equivalent\"\n\nPossible enum values:\n - `\"Equivalent\"` means requests should be sent to the webhook if they modify a resource listed in rules via another API group or version.\n - `\"Exact\"` means requests should only be sent to the webhook if they exactly match a given rule.",
 							Type:        []string{"string"},
 							Format:      "",
+							Enum:        []interface{}{"Equivalent", "Exact"},
 						},
 					},
 					"namespaceSelector": {
@@ -25598,16 +25821,18 @@ func schema_k8sio_api_admissionregistration_v1_MutatingWebhook(ref common.Refere
 					},
 					"failurePolicy": {
 						SchemaProps: spec.SchemaProps{
-							Description: "FailurePolicy defines how unrecognized errors from the admission endpoint are handled - allowed values are Ignore or Fail. Defaults to Fail.",
+							Description: "FailurePolicy defines how unrecognized errors from the admission endpoint are handled - allowed values are Ignore or Fail. Defaults to Fail.\n\nPossible enum values:\n - `\"Fail\"` means that an error calling the webhook causes the admission to fail.\n - `\"Ignore\"` means that an error calling the webhook is ignored.",
 							Type:        []string{"string"},
 							Format:      "",
+							Enum:        []interface{}{"Fail", "Ignore"},
 						},
 					},
 					"matchPolicy": {
 						SchemaProps: spec.SchemaProps{
-							Description: "matchPolicy defines how the \"rules\" list is used to match incoming requests. Allowed values are \"Exact\" or \"Equivalent\".\n\n- Exact: match a request only if it exactly matches a specified rule. For example, if deployments can be modified via apps/v1, apps/v1beta1, and extensions/v1beta1, but \"rules\" only included `apiGroups:[\"apps\"], apiVersions:[\"v1\"], resources: [\"deployments\"]`, a request to apps/v1beta1 or extensions/v1beta1 would not be sent to the webhook.\n\n- Equivalent: match a request if modifies a resource listed in rules, even via another API group or version. For example, if deployments can be modified via apps/v1, apps/v1beta1, and extensions/v1beta1, and \"rules\" only included `apiGroups:[\"apps\"], apiVersions:[\"v1\"], resources: [\"deployments\"]`, a request to apps/v1beta1 or extensions/v1beta1 would be converted to apps/v1 and sent to the webhook.\n\nDefaults to \"Equivalent\"",
+							Description: "matchPolicy defines how the \"rules\" list is used to match incoming requests. Allowed values are \"Exact\" or \"Equivalent\".\n\n- Exact: match a request only if it exactly matches a specified rule. For example, if deployments can be modified via apps/v1, apps/v1beta1, and extensions/v1beta1, but \"rules\" only included `apiGroups:[\"apps\"], apiVersions:[\"v1\"], resources: [\"deployments\"]`, a request to apps/v1beta1 or extensions/v1beta1 would not be sent to the webhook.\n\n- Equivalent: match a request if modifies a resource listed in rules, even via another API group or version. For example, if deployments can be modified via apps/v1, apps/v1beta1, and extensions/v1beta1, and \"rules\" only included `apiGroups:[\"apps\"], apiVersions:[\"v1\"], resources: [\"deployments\"]`, a request to apps/v1beta1 or extensions/v1beta1 would be converted to apps/v1 and sent to the webhook.\n\nDefaults to \"Equivalent\"\n\nPossible enum values:\n - `\"Equivalent\"` means requests should be sent to the webhook if they modify a resource listed in rules via another API group or version.\n - `\"Exact\"` means requests should only be sent to the webhook if they exactly match a given rule.",
 							Type:        []string{"string"},
 							Format:      "",
+							Enum:        []interface{}{"Equivalent", "Exact"},
 						},
 					},
 					"namespaceSelector": {
@@ -25624,9 +25849,10 @@ func schema_k8sio_api_admissionregistration_v1_MutatingWebhook(ref common.Refere
 					},
 					"sideEffects": {
 						SchemaProps: spec.SchemaProps{
-							Description: "SideEffects states whether this webhook has side effects. Acceptable values are: None, NoneOnDryRun (webhooks created via v1beta1 may also specify Some or Unknown). Webhooks with side effects MUST implement a reconciliation system, since a request may be rejected by a future step in the admission chain and the side effects therefore need to be undone. Requests with the dryRun attribute will be auto-rejected if they match a webhook with sideEffects == Unknown or Some.",
+							Description: "SideEffects states whether this webhook has side effects. Acceptable values are: None, NoneOnDryRun (webhooks created via v1beta1 may also specify Some or Unknown). Webhooks with side effects MUST implement a reconciliation system, since a request may be rejected by a future step in the admission chain and the side effects therefore need to be undone. Requests with the dryRun attribute will be auto-rejected if they match a webhook with sideEffects == Unknown or Some.\n\nPossible enum values:\n - `\"None\"` means that calling the webhook will have no side effects.\n - `\"NoneOnDryRun\"` means that calling the webhook will possibly have side effects, but if the request being reviewed has the dry-run attribute, the side effects will be suppressed.\n - `\"Some\"` means that calling the webhook will possibly have side effects. If a request with the dry-run attribute would trigger a call to this webhook, the request will instead fail.\n - `\"Unknown\"` means that no information is known about the side effects of calling the webhook. If a request with the dry-run attribute would trigger a call to this webhook, the request will instead fail.",
 							Type:        []string{"string"},
 							Format:      "",
+							Enum:        []interface{}{"None", "NoneOnDryRun", "Some", "Unknown"},
 						},
 					},
 					"timeoutSeconds": {
@@ -25653,9 +25879,10 @@ func schema_k8sio_api_admissionregistration_v1_MutatingWebhook(ref common.Refere
 					},
 					"reinvocationPolicy": {
 						SchemaProps: spec.SchemaProps{
-							Description: "reinvocationPolicy indicates whether this webhook should be called multiple times as part of a single admission evaluation. Allowed values are \"Never\" and \"IfNeeded\".\n\nNever: the webhook will not be called more than once in a single admission evaluation.\n\nIfNeeded: the webhook will be called at least one additional time as part of the admission evaluation if the object being admitted is modified by other admission plugins after the initial webhook call. Webhooks that specify this option *must* be idempotent, able to process objects they previously admitted. Note: * the number of additional invocations is not guaranteed to be exactly one. * if additional invocations result in further modifications to the object, webhooks are not guaranteed to be invoked again. * webhooks that use this option may be reordered to minimize the number of additional invocations. * to validate an object after all mutations are guaranteed complete, use a validating admission webhook instead.\n\nDefaults to \"Never\".",
+							Description: "reinvocationPolicy indicates whether this webhook should be called multiple times as part of a single admission evaluation. Allowed values are \"Never\" and \"IfNeeded\".\n\nNever: the webhook will not be called more than once in a single admission evaluation.\n\nIfNeeded: the webhook will be called at least one additional time as part of the admission evaluation if the object being admitted is modified by other admission plugins after the initial webhook call. Webhooks that specify this option *must* be idempotent, able to process objects they previously admitted. Note: * the number of additional invocations is not guaranteed to be exactly one. * if additional invocations result in further modifications to the object, webhooks are not guaranteed to be invoked again. * webhooks that use this option may be reordered to minimize the number of additional invocations. * to validate an object after all mutations are guaranteed complete, use a validating admission webhook instead.\n\nDefaults to \"Never\".\n\nPossible enum values:\n - `\"IfNeeded\"` indicates that the webhook may be called at least one additional time as part of the admission evaluation if the object being admitted is modified by other admission plugins after the initial webhook call.\n - `\"Never\"` indicates that the webhook must not be called more than once in a single admission evaluation.",
 							Type:        []string{"string"},
 							Format:      "",
+							Enum:        []interface{}{"IfNeeded", "Never"},
 						},
 					},
 				},
@@ -26036,16 +26263,18 @@ func schema_k8sio_api_admissionregistration_v1_ValidatingWebhook(ref common.Refe
 					},
 					"failurePolicy": {
 						SchemaProps: spec.SchemaProps{
-							Description: "FailurePolicy defines how unrecognized errors from the admission endpoint are handled - allowed values are Ignore or Fail. Defaults to Fail.",
+							Description: "FailurePolicy defines how unrecognized errors from the admission endpoint are handled - allowed values are Ignore or Fail. Defaults to Fail.\n\nPossible enum values:\n - `\"Fail\"` means that an error calling the webhook causes the admission to fail.\n - `\"Ignore\"` means that an error calling the webhook is ignored.",
 							Type:        []string{"string"},
 							Format:      "",
+							Enum:        []interface{}{"Fail", "Ignore"},
 						},
 					},
 					"matchPolicy": {
 						SchemaProps: spec.SchemaProps{
-							Description: "matchPolicy defines how the \"rules\" list is used to match incoming requests. Allowed values are \"Exact\" or \"Equivalent\".\n\n- Exact: match a request only if it exactly matches a specified rule. For example, if deployments can be modified via apps/v1, apps/v1beta1, and extensions/v1beta1, but \"rules\" only included `apiGroups:[\"apps\"], apiVersions:[\"v1\"], resources: [\"deployments\"]`, a request to apps/v1beta1 or extensions/v1beta1 would not be sent to the webhook.\n\n- Equivalent: match a request if modifies a resource listed in rules, even via another API group or version. For example, if deployments can be modified via apps/v1, apps/v1beta1, and extensions/v1beta1, and \"rules\" only included `apiGroups:[\"apps\"], apiVersions:[\"v1\"], resources: [\"deployments\"]`, a request to apps/v1beta1 or extensions/v1beta1 would be converted to apps/v1 and sent to the webhook.\n\nDefaults to \"Equivalent\"",
+							Description: "matchPolicy defines how the \"rules\" list is used to match incoming requests. Allowed values are \"Exact\" or \"Equivalent\".\n\n- Exact: match a request only if it exactly matches a specified rule. For example, if deployments can be modified via apps/v1, apps/v1beta1, and extensions/v1beta1, but \"rules\" only included `apiGroups:[\"apps\"], apiVersions:[\"v1\"], resources: [\"deployments\"]`, a request to apps/v1beta1 or extensions/v1beta1 would not be sent to the webhook.\n\n- Equivalent: match a request if modifies a resource listed in rules, even via another API group or version. For example, if deployments can be modified via apps/v1, apps/v1beta1, and extensions/v1beta1, and \"rules\" only included `apiGroups:[\"apps\"], apiVersions:[\"v1\"], resources: [\"deployments\"]`, a request to apps/v1beta1 or extensions/v1beta1 would be converted to apps/v1 and sent to the webhook.\n\nDefaults to \"Equivalent\"\n\nPossible enum values:\n - `\"Equivalent\"` means requests should be sent to the webhook if they modify a resource listed in rules via another API group or version.\n - `\"Exact\"` means requests should only be sent to the webhook if they exactly match a given rule.",
 							Type:        []string{"string"},
 							Format:      "",
+							Enum:        []interface{}{"Equivalent", "Exact"},
 						},
 					},
 					"namespaceSelector": {
@@ -26062,9 +26291,10 @@ func schema_k8sio_api_admissionregistration_v1_ValidatingWebhook(ref common.Refe
 					},
 					"sideEffects": {
 						SchemaProps: spec.SchemaProps{
-							Description: "SideEffects states whether this webhook has side effects. Acceptable values are: None, NoneOnDryRun (webhooks created via v1beta1 may also specify Some or Unknown). Webhooks with side effects MUST implement a reconciliation system, since a request may be rejected by a future step in the admission chain and the side effects therefore need to be undone. Requests with the dryRun attribute will be auto-rejected if they match a webhook with sideEffects == Unknown or Some.",
+							Description: "SideEffects states whether this webhook has side effects. Acceptable values are: None, NoneOnDryRun (webhooks created via v1beta1 may also specify Some or Unknown). Webhooks with side effects MUST implement a reconciliation system, since a request may be rejected by a future step in the admission chain and the side effects therefore need to be undone. Requests with the dryRun attribute will be auto-rejected if they match a webhook with sideEffects == Unknown or Some.\n\nPossible enum values:\n - `\"None\"` means that calling the webhook will have no side effects.\n - `\"NoneOnDryRun\"` means that calling the webhook will possibly have side effects, but if the request being reviewed has the dry-run attribute, the side effects will be suppressed.\n - `\"Some\"` means that calling the webhook will possibly have side effects. If a request with the dry-run attribute would trigger a call to this webhook, the request will instead fail.\n - `\"Unknown\"` means that no information is known about the side effects of calling the webhook. If a request with the dry-run attribute would trigger a call to this webhook, the request will instead fail.",
 							Type:        []string{"string"},
 							Format:      "",
+							Enum:        []interface{}{"None", "NoneOnDryRun", "Some", "Unknown"},
 						},
 					},
 					"timeoutSeconds": {
@@ -27162,7 +27392,8 @@ func schema_k8sio_api_apps_v1_DaemonSetUpdateStrategy(ref common.ReferenceCallba
 							Description: "Type of daemon set update. Can be \"RollingUpdate\" or \"OnDelete\". Default is RollingUpdate.\n\nPossible enum values:\n - `\"OnDelete\"` Replace the old daemons only when it's killed\n - `\"RollingUpdate\"` Replace the old daemons by new ones using rolling update i.e replace them on each node one after the other.",
 							Type:        []string{"string"},
 							Format:      "",
-							Enum:        []interface{}{"OnDelete", "RollingUpdate"}},
+							Enum:        []interface{}{"OnDelete", "RollingUpdate"},
+						},
 					},
 					"rollingUpdate": {
 						SchemaProps: spec.SchemaProps{
@@ -27511,7 +27742,8 @@ func schema_k8sio_api_apps_v1_DeploymentStrategy(ref common.ReferenceCallback) c
 							Description: "Type of deployment. Can be \"Recreate\" or \"RollingUpdate\". Default is RollingUpdate.\n\nPossible enum values:\n - `\"Recreate\"` Kill all existing pods before creating new ones.\n - `\"RollingUpdate\"` Replace the old ReplicaSets by new one using rolling update i.e gradually scale down the old ReplicaSets and scale up the new one.",
 							Type:        []string{"string"},
 							Format:      "",
-							Enum:        []interface{}{"Recreate", "RollingUpdate"}},
+							Enum:        []interface{}{"Recreate", "RollingUpdate"},
+						},
 					},
 					"rollingUpdate": {
 						SchemaProps: spec.SchemaProps{
@@ -28134,7 +28366,8 @@ func schema_k8sio_api_apps_v1_StatefulSetSpec(ref common.ReferenceCallback) comm
 							Description: "podManagementPolicy controls how pods are created during initial scale up, when replacing pods on nodes, or when scaling down. The default policy is `OrderedReady`, where pods are created in increasing order (pod-0, then pod-1, etc) and the controller will wait until each pod is ready before continuing. When scaling down, the pods are removed in the opposite order. The alternative policy is `Parallel` which will create pods in parallel to match the desired scale without waiting, and on scale down will delete all pods at once.\n\nPossible enum values:\n - `\"OrderedReady\"` will create pods in strictly increasing order on scale up and strictly decreasing order on scale down, progressing only when the previous pod is ready or terminated. At most one pod will be changed at any time.\n - `\"Parallel\"` will create and delete pods as soon as the stateful set replica count is changed, and will not wait for pods to be ready or complete termination.",
 							Type:        []string{"string"},
 							Format:      "",
-							Enum:        []interface{}{"OrderedReady", "Parallel"}},
+							Enum:        []interface{}{"OrderedReady", "Parallel"},
+						},
 					},
 					"updateStrategy": {
 						SchemaProps: spec.SchemaProps{
@@ -28291,7 +28524,8 @@ func schema_k8sio_api_apps_v1_StatefulSetUpdateStrategy(ref common.ReferenceCall
 							Description: "Type indicates the type of the StatefulSetUpdateStrategy. Default is RollingUpdate.\n\nPossible enum values:\n - `\"OnDelete\"` triggers the legacy behavior. Version tracking and ordered rolling restarts are disabled. Pods are recreated from the StatefulSetSpec when they are manually deleted. When a scale operation is performed with this strategy,specification version indicated by the StatefulSet's currentRevision.\n - `\"RollingUpdate\"` indicates that update will be applied to all Pods in the StatefulSet with respect to the StatefulSet ordering constraints. When a scale operation is performed with this strategy, new Pods will be created from the specification version indicated by the StatefulSet's updateRevision.",
 							Type:        []string{"string"},
 							Format:      "",
-							Enum:        []interface{}{"OnDelete", "RollingUpdate"}},
+							Enum:        []interface{}{"OnDelete", "RollingUpdate"},
+						},
 					},
 					"rollingUpdate": {
 						SchemaProps: spec.SchemaProps{
@@ -33457,7 +33691,8 @@ func schema_k8sio_api_autoscaling_v1_MetricSpec(ref common.ReferenceCallback) co
 							Default:     "",
 							Type:        []string{"string"},
 							Format:      "",
-							Enum:        []interface{}{"ContainerResource", "External", "Object", "Pods", "Resource"}},
+							Enum:        []interface{}{"ContainerResource", "External", "Object", "Pods", "Resource"},
+						},
 					},
 					"object": {
 						SchemaProps: spec.SchemaProps{
@@ -33511,7 +33746,8 @@ func schema_k8sio_api_autoscaling_v1_MetricStatus(ref common.ReferenceCallback) 
 							Default:     "",
 							Type:        []string{"string"},
 							Format:      "",
-							Enum:        []interface{}{"ContainerResource", "External", "Object", "Pods", "Resource"}},
+							Enum:        []interface{}{"ContainerResource", "External", "Object", "Pods", "Resource"},
+						},
 					},
 					"object": {
 						SchemaProps: spec.SchemaProps{
@@ -35861,7 +36097,8 @@ func schema_k8sio_api_batch_v1_CronJobSpec(ref common.ReferenceCallback) common.
 							Description: "Specifies how to treat concurrent executions of a Job. Valid values are: - \"Allow\" (default): allows CronJobs to run concurrently; - \"Forbid\": forbids concurrent runs, skipping next run if previous run hasn't finished yet; - \"Replace\": cancels currently running job and replaces it with a new one\n\nPossible enum values:\n - `\"Allow\"` allows CronJobs to run concurrently.\n - `\"Forbid\"` forbids concurrent runs, skipping next run if previous hasn't finished yet.\n - `\"Replace\"` cancels currently running job and replaces it with a new one.",
 							Type:        []string{"string"},
 							Format:      "",
-							Enum:        []interface{}{"Allow", "Forbid", "Replace"}},
+							Enum:        []interface{}{"Allow", "Forbid", "Replace"},
+						},
 					},
 					"suspend": {
 						SchemaProps: spec.SchemaProps{
@@ -36177,9 +36414,10 @@ func schema_k8sio_api_batch_v1_JobSpec(ref common.ReferenceCallback) common.Open
 					},
 					"completionMode": {
 						SchemaProps: spec.SchemaProps{
-							Description: "CompletionMode specifies how Pod completions are tracked. It can be `NonIndexed` (default) or `Indexed`.\n\n`NonIndexed` means that the Job is considered complete when there have been .spec.completions successfully completed Pods. Each Pod completion is homologous to each other.\n\n`Indexed` means that the Pods of a Job get an associated completion index from 0 to (.spec.completions - 1), available in the annotation batch.kubernetes.io/job-completion-index. The Job is considered complete when there is one successfully completed Pod for each index. When value is `Indexed`, .spec.completions must be specified and `.spec.parallelism` must be less than or equal to 10^5. In addition, The Pod name takes the form `$(job-name)-$(index)-$(random-string)`, the Pod hostname takes the form `$(job-name)-$(index)`.\n\nMore completion modes can be added in the future. If the Job controller observes a mode that it doesn't recognize, which is possible during upgrades due to version skew, the controller skips updates for the Job.",
+							Description: "CompletionMode specifies how Pod completions are tracked. It can be `NonIndexed` (default) or `Indexed`.\n\n`NonIndexed` means that the Job is considered complete when there have been .spec.completions successfully completed Pods. Each Pod completion is homologous to each other.\n\n`Indexed` means that the Pods of a Job get an associated completion index from 0 to (.spec.completions - 1), available in the annotation batch.kubernetes.io/job-completion-index. The Job is considered complete when there is one successfully completed Pod for each index. When value is `Indexed`, .spec.completions must be specified and `.spec.parallelism` must be less than or equal to 10^5. In addition, The Pod name takes the form `$(job-name)-$(index)-$(random-string)`, the Pod hostname takes the form `$(job-name)-$(index)`.\n\nMore completion modes can be added in the future. If the Job controller observes a mode that it doesn't recognize, which is possible during upgrades due to version skew, the controller skips updates for the Job.\n\nPossible enum values:\n - `\"Indexed\"` is a Job completion mode. In this mode, the Pods of a Job get an associated completion index from 0 to (.spec.completions - 1). The Job is considered complete when a Pod completes for each completion index.\n - `\"NonIndexed\"` is a Job completion mode. In this mode, the Job is considered complete when there have been .spec.completions successfully completed Pods. Pod completions are homologous to each other.",
 							Type:        []string{"string"},
 							Format:      "",
+							Enum:        []interface{}{"Indexed", "NonIndexed"},
 						},
 					},
 					"suspend": {
@@ -36371,7 +36609,8 @@ func schema_k8sio_api_batch_v1_PodFailurePolicyOnExitCodesRequirement(ref common
 							Default:     "",
 							Type:        []string{"string"},
 							Format:      "",
-							Enum:        []interface{}{"In", "NotIn"}},
+							Enum:        []interface{}{"In", "NotIn"},
+						},
 					},
 					"values": {
 						VendorExtensible: spec.VendorExtensible{
@@ -36443,7 +36682,8 @@ func schema_k8sio_api_batch_v1_PodFailurePolicyRule(ref common.ReferenceCallback
 							Default:     "",
 							Type:        []string{"string"},
 							Format:      "",
-							Enum:        []interface{}{"Count", "FailJob", "Ignore"}},
+							Enum:        []interface{}{"Count", "FailJob", "Ignore"},
+						},
 					},
 					"onExitCodes": {
 						SchemaProps: spec.SchemaProps{
@@ -37590,9 +37830,10 @@ func schema_k8sio_api_core_v1_AzureDiskVolumeSource(ref common.ReferenceCallback
 					},
 					"cachingMode": {
 						SchemaProps: spec.SchemaProps{
-							Description: "cachingMode is the Host Caching mode: None, Read Only, Read Write.",
+							Description: "cachingMode is the Host Caching mode: None, Read Only, Read Write.\n\nPossible enum values:\n - `\"None\"`\n - `\"ReadOnly\"`\n - `\"ReadWrite\"`",
 							Type:        []string{"string"},
 							Format:      "",
+							Enum:        []interface{}{"None", "ReadOnly", "ReadWrite"},
 						},
 					},
 					"fsType": {
@@ -37611,9 +37852,10 @@ func schema_k8sio_api_core_v1_AzureDiskVolumeSource(ref common.ReferenceCallback
 					},
 					"kind": {
 						SchemaProps: spec.SchemaProps{
-							Description: "kind expected values are Shared: multiple blob disks per storage account  Dedicated: single blob disk per storage account  Managed: azure managed data disk (only in managed availability set). defaults to shared",
+							Description: "kind expected values are Shared: multiple blob disks per storage account  Dedicated: single blob disk per storage account  Managed: azure managed data disk (only in managed availability set). defaults to shared\n\nPossible enum values:\n - `\"Dedicated\"`\n - `\"Managed\"`\n - `\"Shared\"`",
 							Type:        []string{"string"},
 							Format:      "",
+							Enum:        []interface{}{"Dedicated", "Managed", "Shared"},
 						},
 					},
 				},
@@ -38898,14 +39140,16 @@ func schema_k8sio_api_core_v1_Container(ref common.ReferenceCallback) common.Ope
 							Description: "Indicate how the termination message should be populated. File will use the contents of terminationMessagePath to populate the container status message on both success and failure. FallbackToLogsOnError will use the last chunk of container log output if the termination message file is empty and the container exited with an error. The log output is limited to 2048 bytes or 80 lines, whichever is smaller. Defaults to File. Cannot be updated.\n\nPossible enum values:\n - `\"FallbackToLogsOnError\"` will read the most recent contents of the container logs for the container status message when the container exits with an error and the terminationMessagePath has no contents.\n - `\"File\"` is the default behavior and will set the container status message to the contents of the container's terminationMessagePath when the container exits.",
 							Type:        []string{"string"},
 							Format:      "",
-							Enum:        []interface{}{"FallbackToLogsOnError", "File"}},
+							Enum:        []interface{}{"FallbackToLogsOnError", "File"},
+						},
 					},
 					"imagePullPolicy": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Image pull policy. One of Always, Never, IfNotPresent. Defaults to Always if :latest tag is specified, or IfNotPresent otherwise. Cannot be updated. More info: https://kubernetes.io/docs/concepts/containers/images#updating-images\n\nPossible enum values:\n - `\"Always\"` means that kubelet always attempts to pull the latest image. Container will fail If the pull fails.\n - `\"IfNotPresent\"` means that kubelet pulls if the image isn't present on disk. Container will fail if the image isn't present and the pull fails.\n - `\"Never\"` means that kubelet never pulls an image, but only uses a local image. Container will fail if the image isn't present",
 							Type:        []string{"string"},
 							Format:      "",
-							Enum:        []interface{}{"Always", "IfNotPresent", "Never"}},
+							Enum:        []interface{}{"Always", "IfNotPresent", "Never"},
+						},
 					},
 					"securityContext": {
 						SchemaProps: spec.SchemaProps{
@@ -39013,7 +39257,8 @@ func schema_k8sio_api_core_v1_ContainerPort(ref common.ReferenceCallback) common
 							Default:     "TCP",
 							Type:        []string{"string"},
 							Format:      "",
-							Enum:        []interface{}{"SCTP", "TCP", "UDP"}},
+							Enum:        []interface{}{"SCTP", "TCP", "UDP"},
+						},
 					},
 					"hostIP": {
 						SchemaProps: spec.SchemaProps{
@@ -39495,7 +39740,8 @@ func schema_k8sio_api_core_v1_EndpointPort(ref common.ReferenceCallback) common.
 							Description: "The IP protocol for this port. Must be UDP, TCP, or SCTP. Default is TCP.\n\nPossible enum values:\n - `\"SCTP\"` is the SCTP protocol.\n - `\"TCP\"` is the TCP protocol.\n - `\"UDP\"` is the UDP protocol.",
 							Type:        []string{"string"},
 							Format:      "",
-							Enum:        []interface{}{"SCTP", "TCP", "UDP"}},
+							Enum:        []interface{}{"SCTP", "TCP", "UDP"},
+						},
 					},
 					"appProtocol": {
 						SchemaProps: spec.SchemaProps{
@@ -39985,14 +40231,16 @@ func schema_k8sio_api_core_v1_EphemeralContainer(ref common.ReferenceCallback) c
 							Description: "Indicate how the termination message should be populated. File will use the contents of terminationMessagePath to populate the container status message on both success and failure. FallbackToLogsOnError will use the last chunk of container log output if the termination message file is empty and the container exited with an error. The log output is limited to 2048 bytes or 80 lines, whichever is smaller. Defaults to File. Cannot be updated.\n\nPossible enum values:\n - `\"FallbackToLogsOnError\"` will read the most recent contents of the container logs for the container status message when the container exits with an error and the terminationMessagePath has no contents.\n - `\"File\"` is the default behavior and will set the container status message to the contents of the container's terminationMessagePath when the container exits.",
 							Type:        []string{"string"},
 							Format:      "",
-							Enum:        []interface{}{"FallbackToLogsOnError", "File"}},
+							Enum:        []interface{}{"FallbackToLogsOnError", "File"},
+						},
 					},
 					"imagePullPolicy": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Image pull policy. One of Always, Never, IfNotPresent. Defaults to Always if :latest tag is specified, or IfNotPresent otherwise. Cannot be updated. More info: https://kubernetes.io/docs/concepts/containers/images#updating-images\n\nPossible enum values:\n - `\"Always\"` means that kubelet always attempts to pull the latest image. Container will fail If the pull fails.\n - `\"IfNotPresent\"` means that kubelet pulls if the image isn't present on disk. Container will fail if the image isn't present and the pull fails.\n - `\"Never\"` means that kubelet never pulls an image, but only uses a local image. Container will fail if the image isn't present",
 							Type:        []string{"string"},
 							Format:      "",
-							Enum:        []interface{}{"Always", "IfNotPresent", "Never"}},
+							Enum:        []interface{}{"Always", "IfNotPresent", "Never"},
+						},
 					},
 					"securityContext": {
 						SchemaProps: spec.SchemaProps{
@@ -40238,14 +40486,16 @@ func schema_k8sio_api_core_v1_EphemeralContainerCommon(ref common.ReferenceCallb
 							Description: "Indicate how the termination message should be populated. File will use the contents of terminationMessagePath to populate the container status message on both success and failure. FallbackToLogsOnError will use the last chunk of container log output if the termination message file is empty and the container exited with an error. The log output is limited to 2048 bytes or 80 lines, whichever is smaller. Defaults to File. Cannot be updated.\n\nPossible enum values:\n - `\"FallbackToLogsOnError\"` will read the most recent contents of the container logs for the container status message when the container exits with an error and the terminationMessagePath has no contents.\n - `\"File\"` is the default behavior and will set the container status message to the contents of the container's terminationMessagePath when the container exits.",
 							Type:        []string{"string"},
 							Format:      "",
-							Enum:        []interface{}{"FallbackToLogsOnError", "File"}},
+							Enum:        []interface{}{"FallbackToLogsOnError", "File"},
+						},
 					},
 					"imagePullPolicy": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Image pull policy. One of Always, Never, IfNotPresent. Defaults to Always if :latest tag is specified, or IfNotPresent otherwise. Cannot be updated. More info: https://kubernetes.io/docs/concepts/containers/images#updating-images\n\nPossible enum values:\n - `\"Always\"` means that kubelet always attempts to pull the latest image. Container will fail If the pull fails.\n - `\"IfNotPresent\"` means that kubelet pulls if the image isn't present on disk. Container will fail if the image isn't present and the pull fails.\n - `\"Never\"` means that kubelet never pulls an image, but only uses a local image. Container will fail if the image isn't present",
 							Type:        []string{"string"},
 							Format:      "",
-							Enum:        []interface{}{"Always", "IfNotPresent", "Never"}},
+							Enum:        []interface{}{"Always", "IfNotPresent", "Never"},
+						},
 					},
 					"securityContext": {
 						SchemaProps: spec.SchemaProps{
@@ -41007,7 +41257,8 @@ func schema_k8sio_api_core_v1_HTTPGetAction(ref common.ReferenceCallback) common
 							Description: "Scheme to use for connecting to the host. Defaults to HTTP.\n\nPossible enum values:\n - `\"HTTP\"` means that the scheme used will be http://\n - `\"HTTPS\"` means that the scheme used will be https://",
 							Type:        []string{"string"},
 							Format:      "",
-							Enum:        []interface{}{"HTTP", "HTTPS"}},
+							Enum:        []interface{}{"HTTP", "HTTPS"},
+						},
 					},
 					"httpHeaders": {
 						SchemaProps: spec.SchemaProps{
@@ -41114,9 +41365,10 @@ func schema_k8sio_api_core_v1_HostPathVolumeSource(ref common.ReferenceCallback)
 					},
 					"type": {
 						SchemaProps: spec.SchemaProps{
-							Description: "type for HostPath Volume Defaults to \"\" More info: https://kubernetes.io/docs/concepts/storage/volumes#hostpath",
+							Description: "type for HostPath Volume Defaults to \"\" More info: https://kubernetes.io/docs/concepts/storage/volumes#hostpath\n\nPossible enum values:\n - `\"\"` For backwards compatible, leave it empty if unset\n - `\"BlockDevice\"` A block device must exist at the given path\n - `\"CharDevice\"` A character device must exist at the given path\n - `\"Directory\"` A directory must exist at the given path\n - `\"DirectoryOrCreate\"` If nothing exists at the given path, an empty directory will be created there as needed with file mode 0755, having the same group and ownership with Kubelet.\n - `\"File\"` A file must exist at the given path\n - `\"FileOrCreate\"` If nothing exists at the given path, an empty file will be created there as needed with file mode 0644, having the same group and ownership with Kubelet.\n - `\"Socket\"` A UNIX socket must exist at the given path",
 							Type:        []string{"string"},
 							Format:      "",
+							Enum:        []interface{}{"", "BlockDevice", "CharDevice", "Directory", "DirectoryOrCreate", "File", "FileOrCreate", "Socket"},
 						},
 					},
 				},
@@ -42062,7 +42314,8 @@ func schema_k8sio_api_core_v1_NamespaceStatus(ref common.ReferenceCallback) comm
 							Description: "Phase is the current lifecycle phase of the namespace. More info: https://kubernetes.io/docs/tasks/administer-cluster/namespaces/\n\nPossible enum values:\n - `\"Active\"` means the namespace is available for use in the system\n - `\"Terminating\"` means the namespace is undergoing graceful termination",
 							Type:        []string{"string"},
 							Format:      "",
-							Enum:        []interface{}{"Active", "Terminating"}},
+							Enum:        []interface{}{"Active", "Terminating"},
+						},
 					},
 					"conditions": {
 						VendorExtensible: spec.VendorExtensible{
@@ -42522,7 +42775,8 @@ func schema_k8sio_api_core_v1_NodeSelectorRequirement(ref common.ReferenceCallba
 							Default:     "",
 							Type:        []string{"string"},
 							Format:      "",
-							Enum:        []interface{}{"DoesNotExist", "Exists", "Gt", "In", "Lt", "NotIn"}},
+							Enum:        []interface{}{"DoesNotExist", "Exists", "Gt", "In", "Lt", "NotIn"},
+						},
 					},
 					"values": {
 						SchemaProps: spec.SchemaProps{
@@ -42719,7 +42973,8 @@ func schema_k8sio_api_core_v1_NodeStatus(ref common.ReferenceCallback) common.Op
 							Description: "NodePhase is the recently observed lifecycle phase of the node. More info: https://kubernetes.io/docs/concepts/nodes/node/#phase The field is never populated, and now is deprecated.\n\nPossible enum values:\n - `\"Pending\"` means the node has been created/added by the system, but not configured.\n - `\"Running\"` means the node has been configured and has Kubernetes components running.\n - `\"Terminated\"` means the node has been removed from the cluster.",
 							Type:        []string{"string"},
 							Format:      "",
-							Enum:        []interface{}{"Pending", "Running", "Terminated"}},
+							Enum:        []interface{}{"Pending", "Running", "Terminated"},
+						},
 					},
 					"conditions": {
 						VendorExtensible: spec.VendorExtensible{
@@ -43287,9 +43542,10 @@ func schema_k8sio_api_core_v1_PersistentVolumeClaimSpec(ref common.ReferenceCall
 					},
 					"volumeMode": {
 						SchemaProps: spec.SchemaProps{
-							Description: "volumeMode defines what type of volume is required by the claim. Value of Filesystem is implied when not included in claim spec.",
+							Description: "volumeMode defines what type of volume is required by the claim. Value of Filesystem is implied when not included in claim spec.\n\nPossible enum values:\n - `\"Block\"` means the volume will not be formatted with a filesystem and will remain a raw block device.\n - `\"Filesystem\"` means the volume will be or is formatted with a filesystem.",
 							Type:        []string{"string"},
 							Format:      "",
+							Enum:        []interface{}{"Block", "Filesystem"},
 						},
 					},
 					"dataSource": {
@@ -43324,7 +43580,8 @@ func schema_k8sio_api_core_v1_PersistentVolumeClaimStatus(ref common.ReferenceCa
 							Description: "phase represents the current phase of PersistentVolumeClaim.\n\nPossible enum values:\n - `\"Bound\"` used for PersistentVolumeClaims that are bound\n - `\"Lost\"` used for PersistentVolumeClaims that lost their underlying PersistentVolume. The claim was bound to a PersistentVolume and this volume does not exist any longer and all data on it was lost.\n - `\"Pending\"` used for PersistentVolumeClaims that are not yet bound",
 							Type:        []string{"string"},
 							Format:      "",
-							Enum:        []interface{}{"Bound", "Lost", "Pending"}},
+							Enum:        []interface{}{"Bound", "Lost", "Pending"},
+						},
 					},
 					"accessModes": {
 						SchemaProps: spec.SchemaProps{
@@ -43393,9 +43650,10 @@ func schema_k8sio_api_core_v1_PersistentVolumeClaimStatus(ref common.ReferenceCa
 					},
 					"resizeStatus": {
 						SchemaProps: spec.SchemaProps{
-							Description: "resizeStatus stores status of resize operation. ResizeStatus is not set by default but when expansion is complete resizeStatus is set to empty string by resize controller or kubelet. This is an alpha field and requires enabling RecoverVolumeExpansionFailure feature.",
+							Description: "resizeStatus stores status of resize operation. ResizeStatus is not set by default but when expansion is complete resizeStatus is set to empty string by resize controller or kubelet. This is an alpha field and requires enabling RecoverVolumeExpansionFailure feature.\n\nPossible enum values:\n - `\"\"` When expansion is complete, the empty string is set by resize controller or kubelet.\n - `\"ControllerExpansionFailed\"` State set when expansion has failed in resize controller with a terminal error. Transient errors such as timeout should not set this status and should leave ResizeStatus unmodified, so as resize controller can resume the volume expansion.\n - `\"ControllerExpansionInProgress\"` State set when resize controller starts expanding the volume in control-plane\n - `\"NodeExpansionFailed\"` State set when expansion has failed in kubelet with a terminal error. Transient errors don't set NodeExpansionFailed.\n - `\"NodeExpansionInProgress\"` State set when kubelet starts expanding the volume.\n - `\"NodeExpansionPending\"` State set when resize controller has finished expanding the volume but further expansion is needed on the node.",
 							Type:        []string{"string"},
 							Format:      "",
+							Enum:        []interface{}{"", "ControllerExpansionFailed", "ControllerExpansionInProgress", "NodeExpansionFailed", "NodeExpansionInProgress", "NodeExpansionPending"},
 						},
 					},
 				},
@@ -43848,7 +44106,8 @@ func schema_k8sio_api_core_v1_PersistentVolumeSpec(ref common.ReferenceCallback)
 							Description: "persistentVolumeReclaimPolicy defines what happens to a persistent volume when released from its claim. Valid options are Retain (default for manually created PersistentVolumes), Delete (default for dynamically provisioned PersistentVolumes), and Recycle (deprecated). Recycle must be supported by the volume plugin underlying this PersistentVolume. More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes#reclaiming\n\nPossible enum values:\n - `\"Delete\"` means the volume will be deleted from Kubernetes on release from its claim. The volume plugin must support Deletion.\n - `\"Recycle\"` means the volume will be recycled back into the pool of unbound persistent volumes on release from its claim. The volume plugin must support Recycling.\n - `\"Retain\"` means the volume will be left in its current phase (Released) for manual reclamation by the administrator. The default policy is Retain.",
 							Type:        []string{"string"},
 							Format:      "",
-							Enum:        []interface{}{"Delete", "Recycle", "Retain"}},
+							Enum:        []interface{}{"Delete", "Recycle", "Retain"},
+						},
 					},
 					"storageClassName": {
 						SchemaProps: spec.SchemaProps{
@@ -43874,9 +44133,10 @@ func schema_k8sio_api_core_v1_PersistentVolumeSpec(ref common.ReferenceCallback)
 					},
 					"volumeMode": {
 						SchemaProps: spec.SchemaProps{
-							Description: "volumeMode defines if a volume is intended to be used with a formatted filesystem or to remain in raw block state. Value of Filesystem is implied when not included in spec.",
+							Description: "volumeMode defines if a volume is intended to be used with a formatted filesystem or to remain in raw block state. Value of Filesystem is implied when not included in spec.\n\nPossible enum values:\n - `\"Block\"` means the volume will not be formatted with a filesystem and will remain a raw block device.\n - `\"Filesystem\"` means the volume will be or is formatted with a filesystem.",
 							Type:        []string{"string"},
 							Format:      "",
+							Enum:        []interface{}{"Block", "Filesystem"},
 						},
 					},
 					"nodeAffinity": {
@@ -43905,7 +44165,8 @@ func schema_k8sio_api_core_v1_PersistentVolumeStatus(ref common.ReferenceCallbac
 							Description: "phase indicates if a volume is available, bound to a claim, or released by a claim. More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes#phase\n\nPossible enum values:\n - `\"Available\"` used for PersistentVolumes that are not yet bound Available volumes are held by the binder and matched to PersistentVolumeClaims\n - `\"Bound\"` used for PersistentVolumes that are bound\n - `\"Failed\"` used for PersistentVolumes that failed to be correctly recycled or deleted after being released from a claim\n - `\"Pending\"` used for PersistentVolumes that are not available\n - `\"Released\"` used for PersistentVolumes where the bound PersistentVolumeClaim was deleted released volumes must be recycled before becoming available again this phase is used by the persistent volume claim binder to signal to another process to reclaim the resource",
 							Type:        []string{"string"},
 							Format:      "",
-							Enum:        []interface{}{"Available", "Bound", "Failed", "Pending", "Released"}},
+							Enum:        []interface{}{"Available", "Bound", "Failed", "Pending", "Released"},
+						},
 					},
 					"message": {
 						SchemaProps: spec.SchemaProps{
@@ -44841,9 +45102,10 @@ func schema_k8sio_api_core_v1_PodSecurityContext(ref common.ReferenceCallback) c
 					},
 					"fsGroupChangePolicy": {
 						SchemaProps: spec.SchemaProps{
-							Description: "fsGroupChangePolicy defines behavior of changing ownership and permission of the volume before being exposed inside Pod. This field will only apply to volume types which support fsGroup based ownership(and permissions). It will have no effect on ephemeral volume types such as: secret, configmaps and emptydir. Valid values are \"OnRootMismatch\" and \"Always\". If not specified, \"Always\" is used. Note that this field cannot be set when spec.os.name is windows.",
+							Description: "fsGroupChangePolicy defines behavior of changing ownership and permission of the volume before being exposed inside Pod. This field will only apply to volume types which support fsGroup based ownership(and permissions). It will have no effect on ephemeral volume types such as: secret, configmaps and emptydir. Valid values are \"OnRootMismatch\" and \"Always\". If not specified, \"Always\" is used. Note that this field cannot be set when spec.os.name is windows.\n\nPossible enum values:\n - `\"Always\"` indicates that volume's ownership and permissions should always be changed whenever volume is mounted inside a Pod. This the default behavior.\n - `\"OnRootMismatch\"` indicates that volume's ownership and permissions will be changed only when permission and ownership of root directory does not match with expected permissions on the volume. This can help shorten the time it takes to change ownership and permissions of a volume.",
 							Type:        []string{"string"},
 							Format:      "",
+							Enum:        []interface{}{"Always", "OnRootMismatch"},
 						},
 					},
 					"seccompProfile": {
@@ -44973,7 +45235,8 @@ func schema_k8sio_api_core_v1_PodSpec(ref common.ReferenceCallback) common.OpenA
 							Description: "Restart policy for all containers within the pod. One of Always, OnFailure, Never. Default to Always. More info: https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#restart-policy\n\nPossible enum values:\n - `\"Always\"`\n - `\"Never\"`\n - `\"OnFailure\"`",
 							Type:        []string{"string"},
 							Format:      "",
-							Enum:        []interface{}{"Always", "Never", "OnFailure"}},
+							Enum:        []interface{}{"Always", "Never", "OnFailure"},
+						},
 					},
 					"terminationGracePeriodSeconds": {
 						SchemaProps: spec.SchemaProps{
@@ -44994,7 +45257,8 @@ func schema_k8sio_api_core_v1_PodSpec(ref common.ReferenceCallback) common.OpenA
 							Description: "Set DNS policy for the pod. Defaults to \"ClusterFirst\". Valid values are 'ClusterFirstWithHostNet', 'ClusterFirst', 'Default' or 'None'. DNS parameters given in DNSConfig will be merged with the policy selected with DNSPolicy. To have DNS options set along with hostNetwork, you have to specify DNS policy explicitly to 'ClusterFirstWithHostNet'.\n\nPossible enum values:\n - `\"ClusterFirst\"` indicates that the pod should use cluster DNS first unless hostNetwork is true, if it is available, then fall back on the default (as determined by kubelet) DNS settings.\n - `\"ClusterFirstWithHostNet\"` indicates that the pod should use cluster DNS first, if it is available, then fall back on the default (as determined by kubelet) DNS settings.\n - `\"Default\"` indicates that the pod should use the default (as determined by kubelet) DNS settings.\n - `\"None\"` indicates that the pod should use empty DNS settings. DNS parameters such as nameservers and search paths should be defined via DNSConfig.",
 							Type:        []string{"string"},
 							Format:      "",
-							Enum:        []interface{}{"ClusterFirst", "ClusterFirstWithHostNet", "Default", "None"}},
+							Enum:        []interface{}{"ClusterFirst", "ClusterFirstWithHostNet", "Default", "None"},
+						},
 					},
 					"nodeSelector": {
 						VendorExtensible: spec.VendorExtensible{
@@ -45210,9 +45474,10 @@ func schema_k8sio_api_core_v1_PodSpec(ref common.ReferenceCallback) common.OpenA
 					},
 					"preemptionPolicy": {
 						SchemaProps: spec.SchemaProps{
-							Description: "PreemptionPolicy is the Policy for preempting pods with lower priority. One of Never, PreemptLowerPriority. Defaults to PreemptLowerPriority if unset.",
+							Description: "PreemptionPolicy is the Policy for preempting pods with lower priority. One of Never, PreemptLowerPriority. Defaults to PreemptLowerPriority if unset.\n\nPossible enum values:\n - `\"Never\"` means that pod never preempts other pods with lower priority.\n - `\"PreemptLowerPriority\"` means that pod can preempt other pods with lower priority.",
 							Type:        []string{"string"},
 							Format:      "",
+							Enum:        []interface{}{"Never", "PreemptLowerPriority"},
 						},
 					},
 					"overhead": {
@@ -45344,7 +45609,8 @@ func schema_k8sio_api_core_v1_PodStatus(ref common.ReferenceCallback) common.Ope
 							Description: "The phase of a Pod is a simple, high-level summary of where the Pod is in its lifecycle. The conditions array, the reason and message fields, and the individual container status arrays contain more detail about the pod's status. There are five possible phase values:\n\nPending: The pod has been accepted by the Kubernetes system, but one or more of the container images has not been created. This includes time before being scheduled as well as time spent downloading images over the network, which could take a while. Running: The pod has been bound to a node, and all of the containers have been created. At least one container is still running, or is in the process of starting or restarting. Succeeded: All containers in the pod have terminated in success, and will not be restarted. Failed: All containers in the pod have terminated, and at least one container has terminated in failure. The container either exited with non-zero status or was terminated by the system. Unknown: For some reason the state of the pod could not be obtained, typically due to an error in communicating with the host of the pod.\n\nMore info: https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle#pod-phase\n\nPossible enum values:\n - `\"Failed\"` means that all containers in the pod have terminated, and at least one container has terminated in a failure (exited with a non-zero exit code or was stopped by the system).\n - `\"Pending\"` means the pod has been accepted by the system, but one or more of the containers has not been started. This includes time before being bound to a node, as well as time spent pulling images onto the host.\n - `\"Running\"` means the pod has been bound to a node and all of the containers have been started. At least one container is still running or is in the process of being restarted.\n - `\"Succeeded\"` means that all containers in the pod have voluntarily terminated with a container exit code of 0, and the system is not going to restart any of these containers.\n - `\"Unknown\"` means that for some reason the state of the pod could not be obtained, typically due to an error in communicating with the host of the pod. Deprecated: It isn't being set since 2015 (74da3b14b0c0f658b3bb8d2def5094686d0e9095)",
 							Type:        []string{"string"},
 							Format:      "",
-							Enum:        []interface{}{"Failed", "Pending", "Running", "Succeeded", "Unknown"}},
+							Enum:        []interface{}{"Failed", "Pending", "Running", "Succeeded", "Unknown"},
+						},
 					},
 					"conditions": {
 						VendorExtensible: spec.VendorExtensible{
@@ -45460,7 +45726,8 @@ func schema_k8sio_api_core_v1_PodStatus(ref common.ReferenceCallback) common.Ope
 							Description: "The Quality of Service (QOS) classification assigned to the pod based on resource requirements See PodQOSClass type for available QOS classes More info: https://git.k8s.io/community/contributors/design-proposals/node/resource-qos.md\n\nPossible enum values:\n - `\"BestEffort\"` is the BestEffort qos class.\n - `\"Burstable\"` is the Burstable qos class.\n - `\"Guaranteed\"` is the Guaranteed qos class.",
 							Type:        []string{"string"},
 							Format:      "",
-							Enum:        []interface{}{"BestEffort", "Burstable", "Guaranteed"}},
+							Enum:        []interface{}{"BestEffort", "Burstable", "Guaranteed"},
+						},
 					},
 					"ephemeralContainerStatuses": {
 						SchemaProps: spec.SchemaProps{
@@ -45670,7 +45937,8 @@ func schema_k8sio_api_core_v1_PortStatus(ref common.ReferenceCallback) common.Op
 							Default:     "",
 							Type:        []string{"string"},
 							Format:      "",
-							Enum:        []interface{}{"SCTP", "TCP", "UDP"}},
+							Enum:        []interface{}{"SCTP", "TCP", "UDP"},
+						},
 					},
 					"error": {
 						SchemaProps: spec.SchemaProps{
@@ -47096,7 +47364,8 @@ func schema_k8sio_api_core_v1_ScopedResourceSelectorRequirement(ref common.Refer
 							Default:     "",
 							Type:        []string{"string"},
 							Format:      "",
-							Enum:        []interface{}{"BestEffort", "CrossNamespacePodAffinity", "NotBestEffort", "NotTerminating", "PriorityClass", "Terminating"}},
+							Enum:        []interface{}{"BestEffort", "CrossNamespacePodAffinity", "NotBestEffort", "NotTerminating", "PriorityClass", "Terminating"},
+						},
 					},
 					"operator": {
 						SchemaProps: spec.SchemaProps{
@@ -47104,7 +47373,8 @@ func schema_k8sio_api_core_v1_ScopedResourceSelectorRequirement(ref common.Refer
 							Default:     "",
 							Type:        []string{"string"},
 							Format:      "",
-							Enum:        []interface{}{"DoesNotExist", "Exists", "In", "NotIn"}},
+							Enum:        []interface{}{"DoesNotExist", "Exists", "In", "NotIn"},
+						},
 					},
 					"values": {
 						SchemaProps: spec.SchemaProps{
@@ -47141,7 +47411,8 @@ func schema_k8sio_api_core_v1_SeccompProfile(ref common.ReferenceCallback) commo
 							Default:     "",
 							Type:        []string{"string"},
 							Format:      "",
-							Enum:        []interface{}{"Localhost", "RuntimeDefault", "Unconfined"}},
+							Enum:        []interface{}{"Localhost", "RuntimeDefault", "Unconfined"},
+						},
 					},
 					"localhostProfile": {
 						SchemaProps: spec.SchemaProps{
@@ -47563,9 +47834,10 @@ func schema_k8sio_api_core_v1_SecurityContext(ref common.ReferenceCallback) comm
 					},
 					"procMount": {
 						SchemaProps: spec.SchemaProps{
-							Description: "procMount denotes the type of proc mount to use for the containers. The default is DefaultProcMount which uses the container runtime defaults for readonly paths and masked paths. This requires the ProcMountType feature flag to be enabled. Note that this field cannot be set when spec.os.name is windows.",
+							Description: "procMount denotes the type of proc mount to use for the containers. The default is DefaultProcMount which uses the container runtime defaults for readonly paths and masked paths. This requires the ProcMountType feature flag to be enabled. Note that this field cannot be set when spec.os.name is windows.\n\nPossible enum values:\n - `\"Default\"` uses the container runtime defaults for readonly and masked paths for /proc. Most container runtimes mask certain paths in /proc to avoid accidental security exposure of special devices or information.\n - `\"Unmasked\"` bypasses the default masking behavior of the container runtime and ensures the newly created /proc the container stays in tact with no modifications.",
 							Type:        []string{"string"},
 							Format:      "",
+							Enum:        []interface{}{"Default", "Unmasked"},
 						},
 					},
 					"seccompProfile": {
@@ -47903,7 +48175,8 @@ func schema_k8sio_api_core_v1_ServicePort(ref common.ReferenceCallback) common.O
 							Default:     "TCP",
 							Type:        []string{"string"},
 							Format:      "",
-							Enum:        []interface{}{"SCTP", "TCP", "UDP"}},
+							Enum:        []interface{}{"SCTP", "TCP", "UDP"},
+						},
 					},
 					"appProtocol": {
 						SchemaProps: spec.SchemaProps{
@@ -48062,7 +48335,8 @@ func schema_k8sio_api_core_v1_ServiceSpec(ref common.ReferenceCallback) common.O
 							Description: "type determines how the Service is exposed. Defaults to ClusterIP. Valid options are ExternalName, ClusterIP, NodePort, and LoadBalancer. \"ClusterIP\" allocates a cluster-internal IP address for load-balancing to endpoints. Endpoints are determined by the selector or if that is not specified, by manual construction of an Endpoints object or EndpointSlice objects. If clusterIP is \"None\", no virtual IP is allocated and the endpoints are published as a set of endpoints rather than a virtual IP. \"NodePort\" builds on ClusterIP and allocates a port on every node which routes to the same endpoints as the clusterIP. \"LoadBalancer\" builds on NodePort and creates an external load-balancer (if supported in the current cloud) which routes to the same endpoints as the clusterIP. \"ExternalName\" aliases this service to the specified externalName. Several other fields do not apply to ExternalName services. More info: https://kubernetes.io/docs/concepts/services-networking/service/#publishing-services-service-types\n\nPossible enum values:\n - `\"ClusterIP\"` means a service will only be accessible inside the cluster, via the cluster IP.\n - `\"ExternalName\"` means a service consists of only a reference to an external name that kubedns or equivalent will return as a CNAME record, with no exposing or proxying of any pods involved.\n - `\"LoadBalancer\"` means a service will be exposed via an external load balancer (if the cloud provider supports it), in addition to 'NodePort' type.\n - `\"NodePort\"` means a service will be exposed on one port of every node, in addition to 'ClusterIP' type.",
 							Type:        []string{"string"},
 							Format:      "",
-							Enum:        []interface{}{"ClusterIP", "ExternalName", "LoadBalancer", "NodePort"}},
+							Enum:        []interface{}{"ClusterIP", "ExternalName", "LoadBalancer", "NodePort"},
+						},
 					},
 					"externalIPs": {
 						SchemaProps: spec.SchemaProps{
@@ -48084,7 +48358,8 @@ func schema_k8sio_api_core_v1_ServiceSpec(ref common.ReferenceCallback) common.O
 							Description: "Supports \"ClientIP\" and \"None\". Used to maintain session affinity. Enable client IP based session affinity. Must be ClientIP or None. Defaults to None. More info: https://kubernetes.io/docs/concepts/services-networking/service/#virtual-ips-and-service-proxies\n\nPossible enum values:\n - `\"ClientIP\"` is the Client IP based.\n - `\"None\"` - no session affinity.",
 							Type:        []string{"string"},
 							Format:      "",
-							Enum:        []interface{}{"ClientIP", "None"}},
+							Enum:        []interface{}{"ClientIP", "None"},
+						},
 					},
 					"loadBalancerIP": {
 						SchemaProps: spec.SchemaProps{
@@ -48120,7 +48395,8 @@ func schema_k8sio_api_core_v1_ServiceSpec(ref common.ReferenceCallback) common.O
 							Description: "externalTrafficPolicy describes how nodes distribute service traffic they receive on one of the Service's \"externally-facing\" addresses (NodePorts, ExternalIPs, and LoadBalancer IPs). If set to \"Local\", the proxy will configure the service in a way that assumes that external load balancers will take care of balancing the service traffic between nodes, and so each node will deliver traffic only to the node-local endpoints of the service, without masquerading the client source IP. (Traffic mistakenly sent to a node with no endpoints will be dropped.) The default value, \"Cluster\", uses the standard behavior of routing to all endpoints evenly (possibly modified by topology and other features). Note that traffic sent to an External IP or LoadBalancer IP from within the cluster will always get \"Cluster\" semantics, but clients sending to a NodePort from within the cluster may need to take traffic policy into account when picking a node.\n\nPossible enum values:\n - `\"Cluster\"` routes traffic to all endpoints.\n - `\"Local\"` preserves the source IP of the traffic by routing only to endpoints on the same node as the traffic was received on (dropping the traffic if there are no local endpoints).",
 							Type:        []string{"string"},
 							Format:      "",
-							Enum:        []interface{}{"Cluster", "Local"}},
+							Enum:        []interface{}{"Cluster", "Local"},
+						},
 					},
 					"healthCheckNodePort": {
 						SchemaProps: spec.SchemaProps{
@@ -48164,9 +48440,10 @@ func schema_k8sio_api_core_v1_ServiceSpec(ref common.ReferenceCallback) common.O
 					},
 					"ipFamilyPolicy": {
 						SchemaProps: spec.SchemaProps{
-							Description: "IPFamilyPolicy represents the dual-stack-ness requested or required by this Service. If there is no value provided, then this field will be set to SingleStack. Services can be \"SingleStack\" (a single IP family), \"PreferDualStack\" (two IP families on dual-stack configured clusters or a single IP family on single-stack clusters), or \"RequireDualStack\" (two IP families on dual-stack configured clusters, otherwise fail). The ipFamilies and clusterIPs fields depend on the value of this field. This field will be wiped when updating a service to type ExternalName.",
+							Description: "IPFamilyPolicy represents the dual-stack-ness requested or required by this Service. If there is no value provided, then this field will be set to SingleStack. Services can be \"SingleStack\" (a single IP family), \"PreferDualStack\" (two IP families on dual-stack configured clusters or a single IP family on single-stack clusters), or \"RequireDualStack\" (two IP families on dual-stack configured clusters, otherwise fail). The ipFamilies and clusterIPs fields depend on the value of this field. This field will be wiped when updating a service to type ExternalName.\n\nPossible enum values:\n - `\"PreferDualStack\"` indicates that this service prefers dual-stack when the cluster is configured for dual-stack. If the cluster is not configured for dual-stack the service will be assigned a single IPFamily. If the IPFamily is not set in service.spec.ipFamilies then the service will be assigned the default IPFamily configured on the cluster\n - `\"RequireDualStack\"` indicates that this service requires dual-stack. Using IPFamilyPolicyRequireDualStack on a single stack cluster will result in validation errors. The IPFamilies (and their order) assigned to this service is based on service.spec.ipFamilies. If service.spec.ipFamilies was not provided then it will be assigned according to how they are configured on the cluster. If service.spec.ipFamilies has only one entry then the alternative IPFamily will be added by apiserver\n - `\"SingleStack\"` indicates that this service is required to have a single IPFamily. The IPFamily assigned is based on the default IPFamily used by the cluster or as identified by service.spec.ipFamilies field",
 							Type:        []string{"string"},
 							Format:      "",
+							Enum:        []interface{}{"PreferDualStack", "RequireDualStack", "SingleStack"},
 						},
 					},
 					"allocateLoadBalancerNodePorts": {
@@ -48185,9 +48462,10 @@ func schema_k8sio_api_core_v1_ServiceSpec(ref common.ReferenceCallback) common.O
 					},
 					"internalTrafficPolicy": {
 						SchemaProps: spec.SchemaProps{
-							Description: "InternalTrafficPolicy describes how nodes distribute service traffic they receive on the ClusterIP. If set to \"Local\", the proxy will assume that pods only want to talk to endpoints of the service on the same node as the pod, dropping the traffic if there are no local endpoints. The default value, \"Cluster\", uses the standard behavior of routing to all endpoints evenly (possibly modified by topology and other features).",
+							Description: "InternalTrafficPolicy describes how nodes distribute service traffic they receive on the ClusterIP. If set to \"Local\", the proxy will assume that pods only want to talk to endpoints of the service on the same node as the pod, dropping the traffic if there are no local endpoints. The default value, \"Cluster\", uses the standard behavior of routing to all endpoints evenly (possibly modified by topology and other features).\n\nPossible enum values:\n - `\"Cluster\"` routes traffic to all endpoints.\n - `\"Local\"` routes traffic only to endpoints on the same node as the client pod (dropping the traffic if there are no local endpoints).",
 							Type:        []string{"string"},
 							Format:      "",
+							Enum:        []interface{}{"Cluster", "Local"},
 						},
 					},
 				},
@@ -48451,7 +48729,8 @@ func schema_k8sio_api_core_v1_Taint(ref common.ReferenceCallback) common.OpenAPI
 							Default:     "",
 							Type:        []string{"string"},
 							Format:      "",
-							Enum:        []interface{}{"NoExecute", "NoSchedule", "PreferNoSchedule"}},
+							Enum:        []interface{}{"NoExecute", "NoSchedule", "PreferNoSchedule"},
+						},
 					},
 					"timeAdded": {
 						SchemaProps: spec.SchemaProps{
@@ -48487,7 +48766,8 @@ func schema_k8sio_api_core_v1_Toleration(ref common.ReferenceCallback) common.Op
 							Description: "Operator represents a key's relationship to the value. Valid operators are Exists and Equal. Defaults to Equal. Exists is equivalent to wildcard for value, so that a pod can tolerate all taints of a particular category.\n\nPossible enum values:\n - `\"Equal\"`\n - `\"Exists\"`",
 							Type:        []string{"string"},
 							Format:      "",
-							Enum:        []interface{}{"Equal", "Exists"}},
+							Enum:        []interface{}{"Equal", "Exists"},
+						},
 					},
 					"value": {
 						SchemaProps: spec.SchemaProps{
@@ -48501,7 +48781,8 @@ func schema_k8sio_api_core_v1_Toleration(ref common.ReferenceCallback) common.Op
 							Description: "Effect indicates the taint effect to match. Empty means match all taint effects. When specified, allowed values are NoSchedule, PreferNoSchedule and NoExecute.\n\nPossible enum values:\n - `\"NoExecute\"` Evict any already-running pods that do not tolerate the taint. Currently enforced by NodeController.\n - `\"NoSchedule\"` Do not allow new pods to schedule onto the node unless they tolerate the taint, but allow all pods submitted to Kubelet without going through the scheduler to start, and allow all already-running pods to continue running. Enforced by the scheduler.\n - `\"PreferNoSchedule\"` Like TaintEffectNoSchedule, but the scheduler tries not to schedule new pods onto the node, rather than prohibiting new pods from scheduling onto the node entirely. Enforced by the scheduler.",
 							Type:        []string{"string"},
 							Format:      "",
-							Enum:        []interface{}{"NoExecute", "NoSchedule", "PreferNoSchedule"}},
+							Enum:        []interface{}{"NoExecute", "NoSchedule", "PreferNoSchedule"},
+						},
 					},
 					"tolerationSeconds": {
 						SchemaProps: spec.SchemaProps{
@@ -48616,7 +48897,8 @@ func schema_k8sio_api_core_v1_TopologySpreadConstraint(ref common.ReferenceCallb
 							Default:     "",
 							Type:        []string{"string"},
 							Format:      "",
-							Enum:        []interface{}{"DoNotSchedule", "ScheduleAnyway"}},
+							Enum:        []interface{}{"DoNotSchedule", "ScheduleAnyway"},
+						},
 					},
 					"labelSelector": {
 						SchemaProps: spec.SchemaProps{
@@ -48633,16 +48915,18 @@ func schema_k8sio_api_core_v1_TopologySpreadConstraint(ref common.ReferenceCallb
 					},
 					"nodeAffinityPolicy": {
 						SchemaProps: spec.SchemaProps{
-							Description: "NodeAffinityPolicy indicates how we will treat Pod's nodeAffinity/nodeSelector when calculating pod topology spread skew. Options are: - Honor: only nodes matching nodeAffinity/nodeSelector are included in the calculations. - Ignore: nodeAffinity/nodeSelector are ignored. All nodes are included in the calculations.\n\nIf this value is nil, the behavior is equivalent to the Honor policy. This is a beta-level feature default enabled by the NodeInclusionPolicyInPodTopologySpread feature flag.",
+							Description: "NodeAffinityPolicy indicates how we will treat Pod's nodeAffinity/nodeSelector when calculating pod topology spread skew. Options are: - Honor: only nodes matching nodeAffinity/nodeSelector are included in the calculations. - Ignore: nodeAffinity/nodeSelector are ignored. All nodes are included in the calculations.\n\nIf this value is nil, the behavior is equivalent to the Honor policy. This is a beta-level feature default enabled by the NodeInclusionPolicyInPodTopologySpread feature flag.\n\nPossible enum values:\n - `\"Honor\"` means use this scheduling directive when calculating pod topology spread skew.\n - `\"Ignore\"` means ignore this scheduling directive when calculating pod topology spread skew.",
 							Type:        []string{"string"},
 							Format:      "",
+							Enum:        []interface{}{"Honor", "Ignore"},
 						},
 					},
 					"nodeTaintsPolicy": {
 						SchemaProps: spec.SchemaProps{
-							Description: "NodeTaintsPolicy indicates how we will treat node taints when calculating pod topology spread skew. Options are: - Honor: nodes without taints, along with tainted nodes for which the incoming pod has a toleration, are included. - Ignore: node taints are ignored. All nodes are included.\n\nIf this value is nil, the behavior is equivalent to the Ignore policy. This is a beta-level feature default enabled by the NodeInclusionPolicyInPodTopologySpread feature flag.",
+							Description: "NodeTaintsPolicy indicates how we will treat node taints when calculating pod topology spread skew. Options are: - Honor: nodes without taints, along with tainted nodes for which the incoming pod has a toleration, are included. - Ignore: node taints are ignored. All nodes are included.\n\nIf this value is nil, the behavior is equivalent to the Ignore policy. This is a beta-level feature default enabled by the NodeInclusionPolicyInPodTopologySpread feature flag.\n\nPossible enum values:\n - `\"Honor\"` means use this scheduling directive when calculating pod topology spread skew.\n - `\"Ignore\"` means ignore this scheduling directive when calculating pod topology spread skew.",
 							Type:        []string{"string"},
 							Format:      "",
+							Enum:        []interface{}{"Honor", "Ignore"},
 						},
 					},
 					"matchLabelKeys": {
@@ -49026,9 +49310,10 @@ func schema_k8sio_api_core_v1_VolumeMount(ref common.ReferenceCallback) common.O
 					},
 					"mountPropagation": {
 						SchemaProps: spec.SchemaProps{
-							Description: "mountPropagation determines how mounts are propagated from the host to container and the other way around. When not set, MountPropagationNone is used. This field is beta in 1.10.",
+							Description: "mountPropagation determines how mounts are propagated from the host to container and the other way around. When not set, MountPropagationNone is used. This field is beta in 1.10.\n\nPossible enum values:\n - `\"Bidirectional\"` means that the volume in a container will receive new mounts from the host or other containers, and its own mounts will be propagated from the container to the host or other containers. Note that this mode is recursively applied to all mounts in the volume (\"rshared\" in Linux terminology).\n - `\"HostToContainer\"` means that the volume in a container will receive new mounts from the host or other containers, but filesystems mounted inside the container won't be propagated to the host or other containers. Note that this mode is recursively applied to all mounts in the volume (\"rslave\" in Linux terminology).\n - `\"None\"` means that the volume in a container will not receive new mounts from the host or other containers, and filesystems mounted inside the container won't be propagated to the host or other containers. Note that this mode corresponds to \"private\" in Linux terminology.",
 							Type:        []string{"string"},
 							Format:      "",
+							Enum:        []interface{}{"Bidirectional", "HostToContainer", "None"},
 						},
 					},
 					"subPathExpr": {
@@ -50887,7 +51172,8 @@ func schema_k8sio_api_extensions_v1beta1_IngressPortStatus(ref common.ReferenceC
 							Default:     "",
 							Type:        []string{"string"},
 							Format:      "",
-							Enum:        []interface{}{"SCTP", "TCP", "UDP"}},
+							Enum:        []interface{}{"SCTP", "TCP", "UDP"},
+						},
 					},
 					"error": {
 						SchemaProps: spec.SchemaProps{
@@ -51294,9 +51580,10 @@ func schema_k8sio_api_extensions_v1beta1_NetworkPolicyPort(ref common.ReferenceC
 				Properties: map[string]spec.Schema{
 					"protocol": {
 						SchemaProps: spec.SchemaProps{
-							Description: "Optional.  The protocol (TCP, UDP, or SCTP) which traffic must match. If not specified, this field defaults to TCP.",
+							Description: "Optional.  The protocol (TCP, UDP, or SCTP) which traffic must match. If not specified, this field defaults to TCP.\n\nPossible enum values:\n - `\"SCTP\"` is the SCTP protocol.\n - `\"TCP\"` is the TCP protocol.\n - `\"UDP\"` is the UDP protocol.",
 							Type:        []string{"string"},
 							Format:      "",
+							Enum:        []interface{}{"SCTP", "TCP", "UDP"},
 						},
 					},
 					"port": {
@@ -52441,9 +52728,10 @@ func schema_k8sio_api_networking_v1_HTTPIngressPath(ref common.ReferenceCallback
 					},
 					"pathType": {
 						SchemaProps: spec.SchemaProps{
-							Description: "PathType determines the interpretation of the Path matching. PathType can be one of the following values: * Exact: Matches the URL path exactly. * Prefix: Matches based on a URL path prefix split by '/'. Matching is\n  done on a path element by element basis. A path element refers is the\n  list of labels in the path split by the '/' separator. A request is a\n  match for path p if every p is an element-wise prefix of p of the\n  request path. Note that if the last element of the path is a substring\n  of the last element in request path, it is not a match (e.g. /foo/bar\n  matches /foo/bar/baz, but does not match /foo/barbaz).\n* ImplementationSpecific: Interpretation of the Path matching is up to\n  the IngressClass. Implementations can treat this as a separate PathType\n  or treat it identically to Prefix or Exact path types.\nImplementations are required to support all path types.",
+							Description: "PathType determines the interpretation of the Path matching. PathType can be one of the following values: * Exact: Matches the URL path exactly. * Prefix: Matches based on a URL path prefix split by '/'. Matching is\n  done on a path element by element basis. A path element refers is the\n  list of labels in the path split by the '/' separator. A request is a\n  match for path p if every p is an element-wise prefix of p of the\n  request path. Note that if the last element of the path is a substring\n  of the last element in request path, it is not a match (e.g. /foo/bar\n  matches /foo/bar/baz, but does not match /foo/barbaz).\n* ImplementationSpecific: Interpretation of the Path matching is up to\n  the IngressClass. Implementations can treat this as a separate PathType\n  or treat it identically to Prefix or Exact path types.\nImplementations are required to support all path types.\n\nPossible enum values:\n - `\"Exact\"` matches the URL path exactly and with case sensitivity.\n - `\"ImplementationSpecific\"` matching is up to the IngressClass. Implementations can treat this as a separate PathType or treat it identically to Prefix or Exact path types.\n - `\"Prefix\"` matches based on a URL path prefix split by '/'. Matching is case sensitive and done on a path element by element basis. A path element refers to the list of labels in the path split by the '/' separator. A request is a match for path p if every p is an element-wise prefix of p of the request path. Note that if the last element of the path is a substring of the last element in request path, it is not a match (e.g. /foo/bar matches /foo/bar/baz, but does not match /foo/barbaz). If multiple matching paths exist in an Ingress spec, the longest matching path is given priority. Examples: - /foo/bar does not match requests to /foo/barbaz - /foo/bar matches request to /foo/bar and /foo/bar/baz - /foo and /foo/ both match requests to /foo and /foo/. If both paths are present in an Ingress spec, the longest matching path (/foo/) is given priority.",
 							Type:        []string{"string"},
 							Format:      "",
+							Enum:        []interface{}{"Exact", "ImplementationSpecific", "Prefix"},
 						},
 					},
 					"backend": {
@@ -52933,7 +53221,8 @@ func schema_k8sio_api_networking_v1_IngressPortStatus(ref common.ReferenceCallba
 							Default:     "",
 							Type:        []string{"string"},
 							Format:      "",
-							Enum:        []interface{}{"SCTP", "TCP", "UDP"}},
+							Enum:        []interface{}{"SCTP", "TCP", "UDP"},
+						},
 					},
 					"error": {
 						SchemaProps: spec.SchemaProps{
@@ -53384,9 +53673,10 @@ func schema_k8sio_api_networking_v1_NetworkPolicyPort(ref common.ReferenceCallba
 				Properties: map[string]spec.Schema{
 					"protocol": {
 						SchemaProps: spec.SchemaProps{
-							Description: "The protocol (TCP, UDP, or SCTP) which traffic must match. If not specified, this field defaults to TCP.",
+							Description: "The protocol (TCP, UDP, or SCTP) which traffic must match. If not specified, this field defaults to TCP.\n\nPossible enum values:\n - `\"SCTP\"` is the SCTP protocol.\n - `\"TCP\"` is the TCP protocol.\n - `\"UDP\"` is the UDP protocol.",
 							Type:        []string{"string"},
 							Format:      "",
+							Enum:        []interface{}{"SCTP", "TCP", "UDP"},
 						},
 					},
 					"port": {
@@ -54016,7 +54306,8 @@ func schema_k8sio_api_networking_v1beta1_IngressPortStatus(ref common.ReferenceC
 							Default:     "",
 							Type:        []string{"string"},
 							Format:      "",
-							Enum:        []interface{}{"SCTP", "TCP", "UDP"}},
+							Enum:        []interface{}{"SCTP", "TCP", "UDP"},
+						},
 					},
 					"error": {
 						SchemaProps: spec.SchemaProps{
@@ -54938,9 +55229,10 @@ func schema_k8sio_api_policy_v1beta1_PodDisruptionBudgetSpec(ref common.Referenc
 					},
 					"unhealthyPodEvictionPolicy": {
 						SchemaProps: spec.SchemaProps{
-							Description: "UnhealthyPodEvictionPolicy defines the criteria for when unhealthy pods should be considered for eviction. Current implementation considers healthy pods, as pods that have status.conditions item with type=\"Ready\",status=\"True\".\n\nValid policies are IfHealthyBudget and AlwaysAllow. If no policy is specified, the default behavior will be used, which corresponds to the IfHealthyBudget policy.\n\nIfHealthyBudget policy means that running pods (status.phase=\"Running\"), but not yet healthy can be evicted only if the guarded application is not disrupted (status.currentHealthy is at least equal to status.desiredHealthy). Healthy pods will be subject to the PDB for eviction.\n\nAlwaysAllow policy means that all running pods (status.phase=\"Running\"), but not yet healthy are considered disrupted and can be evicted regardless of whether the criteria in a PDB is met. This means perspective running pods of a disrupted application might not get a chance to become healthy. Healthy pods will be subject to the PDB for eviction.\n\nAdditional policies may be added in the future. Clients making eviction decisions should disallow eviction of unhealthy pods if they encounter an unrecognized policy in this field.\n\nThis field is alpha-level. The eviction API uses this field when the feature gate PDBUnhealthyPodEvictionPolicy is enabled (disabled by default).",
+							Description: "UnhealthyPodEvictionPolicy defines the criteria for when unhealthy pods should be considered for eviction. Current implementation considers healthy pods, as pods that have status.conditions item with type=\"Ready\",status=\"True\".\n\nValid policies are IfHealthyBudget and AlwaysAllow. If no policy is specified, the default behavior will be used, which corresponds to the IfHealthyBudget policy.\n\nIfHealthyBudget policy means that running pods (status.phase=\"Running\"), but not yet healthy can be evicted only if the guarded application is not disrupted (status.currentHealthy is at least equal to status.desiredHealthy). Healthy pods will be subject to the PDB for eviction.\n\nAlwaysAllow policy means that all running pods (status.phase=\"Running\"), but not yet healthy are considered disrupted and can be evicted regardless of whether the criteria in a PDB is met. This means perspective running pods of a disrupted application might not get a chance to become healthy. Healthy pods will be subject to the PDB for eviction.\n\nAdditional policies may be added in the future. Clients making eviction decisions should disallow eviction of unhealthy pods if they encounter an unrecognized policy in this field.\n\nThis field is alpha-level. The eviction API uses this field when the feature gate PDBUnhealthyPodEvictionPolicy is enabled (disabled by default).\n\nPossible enum values:\n - `\"AlwaysAllow\"` policy means that all running pods (status.phase=\"Running\"), but not yet healthy are considered disrupted and can be evicted regardless of whether the criteria in a PDB is met. This means perspective running pods of a disrupted application might not get a chance to become healthy. Healthy pods will be subject to the PDB for eviction.\n - `\"IfHealthyBudget\"` policy means that running pods (status.phase=\"Running\"), but not yet healthy can be evicted only if the guarded application is not disrupted (status.currentHealthy is at least equal to status.desiredHealthy). Healthy pods will be subject to the PDB for eviction.",
 							Type:        []string{"string"},
 							Format:      "",
+							Enum:        []interface{}{"AlwaysAllow", "IfHealthyBudget"},
 						},
 					},
 				},
@@ -57523,9 +57815,10 @@ func schema_k8sio_api_scheduling_v1_PriorityClass(ref common.ReferenceCallback) 
 					},
 					"preemptionPolicy": {
 						SchemaProps: spec.SchemaProps{
-							Description: "PreemptionPolicy is the Policy for preempting pods with lower priority. One of Never, PreemptLowerPriority. Defaults to PreemptLowerPriority if unset.",
+							Description: "PreemptionPolicy is the Policy for preempting pods with lower priority. One of Never, PreemptLowerPriority. Defaults to PreemptLowerPriority if unset.\n\nPossible enum values:\n - `\"Never\"` means that pod never preempts other pods with lower priority.\n - `\"PreemptLowerPriority\"` means that pod can preempt other pods with lower priority.",
 							Type:        []string{"string"},
 							Format:      "",
+							Enum:        []interface{}{"Never", "PreemptLowerPriority"},
 						},
 					},
 				},
@@ -57640,9 +57933,10 @@ func schema_k8sio_api_scheduling_v1alpha1_PriorityClass(ref common.ReferenceCall
 					},
 					"preemptionPolicy": {
 						SchemaProps: spec.SchemaProps{
-							Description: "PreemptionPolicy is the Policy for preempting pods with lower priority. One of Never, PreemptLowerPriority. Defaults to PreemptLowerPriority if unset.",
+							Description: "PreemptionPolicy is the Policy for preempting pods with lower priority. One of Never, PreemptLowerPriority. Defaults to PreemptLowerPriority if unset.\n\nPossible enum values:\n - `\"Never\"` means that pod never preempts other pods with lower priority.\n - `\"PreemptLowerPriority\"` means that pod can preempt other pods with lower priority.",
 							Type:        []string{"string"},
 							Format:      "",
+							Enum:        []interface{}{"Never", "PreemptLowerPriority"},
 						},
 					},
 				},
@@ -57757,9 +58051,10 @@ func schema_k8sio_api_scheduling_v1beta1_PriorityClass(ref common.ReferenceCallb
 					},
 					"preemptionPolicy": {
 						SchemaProps: spec.SchemaProps{
-							Description: "PreemptionPolicy is the Policy for preempting pods with lower priority. One of Never, PreemptLowerPriority. Defaults to PreemptLowerPriority if unset.",
+							Description: "PreemptionPolicy is the Policy for preempting pods with lower priority. One of Never, PreemptLowerPriority. Defaults to PreemptLowerPriority if unset.\n\nPossible enum values:\n - `\"Never\"` means that pod never preempts other pods with lower priority.\n - `\"PreemptLowerPriority\"` means that pod can preempt other pods with lower priority.",
 							Type:        []string{"string"},
 							Format:      "",
+							Enum:        []interface{}{"Never", "PreemptLowerPriority"},
 						},
 					},
 				},
@@ -58373,9 +58668,10 @@ func schema_k8sio_api_storage_v1_StorageClass(ref common.ReferenceCallback) comm
 					},
 					"reclaimPolicy": {
 						SchemaProps: spec.SchemaProps{
-							Description: "Dynamically provisioned PersistentVolumes of this storage class are created with this reclaimPolicy. Defaults to Delete.",
+							Description: "Dynamically provisioned PersistentVolumes of this storage class are created with this reclaimPolicy. Defaults to Delete.\n\nPossible enum values:\n - `\"Delete\"` means the volume will be deleted from Kubernetes on release from its claim. The volume plugin must support Deletion.\n - `\"Recycle\"` means the volume will be recycled back into the pool of unbound persistent volumes on release from its claim. The volume plugin must support Recycling.\n - `\"Retain\"` means the volume will be left in its current phase (Released) for manual reclamation by the administrator. The default policy is Retain.",
 							Type:        []string{"string"},
 							Format:      "",
+							Enum:        []interface{}{"Delete", "Recycle", "Retain"},
 						},
 					},
 					"mountOptions": {
@@ -58402,9 +58698,10 @@ func schema_k8sio_api_storage_v1_StorageClass(ref common.ReferenceCallback) comm
 					},
 					"volumeBindingMode": {
 						SchemaProps: spec.SchemaProps{
-							Description: "VolumeBindingMode indicates how PersistentVolumeClaims should be provisioned and bound.  When unset, VolumeBindingImmediate is used. This field is only honored by servers that enable the VolumeScheduling feature.",
+							Description: "VolumeBindingMode indicates how PersistentVolumeClaims should be provisioned and bound.  When unset, VolumeBindingImmediate is used. This field is only honored by servers that enable the VolumeScheduling feature.\n\nPossible enum values:\n - `\"Immediate\"` indicates that PersistentVolumeClaims should be immediately provisioned and bound. This is the default mode.\n - `\"WaitForFirstConsumer\"` indicates that PersistentVolumeClaims should not be provisioned and bound until the first Pod is created that references the PeristentVolumeClaim. The volume provisioning and binding will occur during Pod scheduing.",
 							Type:        []string{"string"},
 							Format:      "",
+							Enum:        []interface{}{"Immediate", "WaitForFirstConsumer"},
 						},
 					},
 					"allowedTopologies": {
@@ -59703,9 +60000,10 @@ func schema_k8sio_api_storage_v1beta1_StorageClass(ref common.ReferenceCallback)
 					},
 					"reclaimPolicy": {
 						SchemaProps: spec.SchemaProps{
-							Description: "Dynamically provisioned PersistentVolumes of this storage class are created with this reclaimPolicy. Defaults to Delete.",
+							Description: "Dynamically provisioned PersistentVolumes of this storage class are created with this reclaimPolicy. Defaults to Delete.\n\nPossible enum values:\n - `\"Delete\"` means the volume will be deleted from Kubernetes on release from its claim. The volume plugin must support Deletion.\n - `\"Recycle\"` means the volume will be recycled back into the pool of unbound persistent volumes on release from its claim. The volume plugin must support Recycling.\n - `\"Retain\"` means the volume will be left in its current phase (Released) for manual reclamation by the administrator. The default policy is Retain.",
 							Type:        []string{"string"},
 							Format:      "",
+							Enum:        []interface{}{"Delete", "Recycle", "Retain"},
 						},
 					},
 					"mountOptions": {

@@ -123,3 +123,25 @@ func (c *FakeVirtualClusterInstances) GetKubeConfig(ctx context.Context, virtual
 	}
 	return obj.(*managementv1.VirtualClusterInstanceKubeConfig), err
 }
+
+// CreateWorkloadKubeConfig takes the representation of a virtualClusterInstanceWorkloadKubeConfig and creates it.  Returns the server's representation of the virtualClusterInstanceWorkloadKubeConfig, and an error, if there is any.
+func (c *FakeVirtualClusterInstances) CreateWorkloadKubeConfig(ctx context.Context, virtualClusterInstanceName string, virtualClusterInstanceWorkloadKubeConfig *managementv1.VirtualClusterInstanceWorkloadKubeConfig, opts v1.CreateOptions) (result *managementv1.VirtualClusterInstanceWorkloadKubeConfig, err error) {
+	obj, err := c.Fake.
+		Invokes(testing.NewCreateSubresourceAction(virtualclusterinstancesResource, virtualClusterInstanceName, "workloadkubeconfig", c.ns, virtualClusterInstanceWorkloadKubeConfig), &managementv1.VirtualClusterInstanceWorkloadKubeConfig{})
+
+	if obj == nil {
+		return nil, err
+	}
+	return obj.(*managementv1.VirtualClusterInstanceWorkloadKubeConfig), err
+}
+
+// GetWorkloadKubeConfig takes name of the virtualClusterInstance, and returns the corresponding virtualClusterInstanceWorkloadKubeConfig object, and an error if there is any.
+func (c *FakeVirtualClusterInstances) GetWorkloadKubeConfig(ctx context.Context, virtualClusterInstanceName string, options v1.GetOptions) (result *managementv1.VirtualClusterInstanceWorkloadKubeConfig, err error) {
+	obj, err := c.Fake.
+		Invokes(testing.NewGetSubresourceAction(virtualclusterinstancesResource, c.ns, "workloadkubeconfig", virtualClusterInstanceName), &managementv1.VirtualClusterInstanceWorkloadKubeConfig{})
+
+	if obj == nil {
+		return nil, err
+	}
+	return obj.(*managementv1.VirtualClusterInstanceWorkloadKubeConfig), err
+}
