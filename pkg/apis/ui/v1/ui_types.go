@@ -64,7 +64,4 @@ type NavBarButton struct {
 }
 
 // UISettingsStatus holds the status
-type UISettingsStatus struct {
-	// FeatureEnabled indicates if the UI white label feature is enabled or disabled
-	FeatureEnabled bool `json:"featureEnabled"`
-}
+type UISettingsStatus struct{}
