@@ -125,7 +125,7 @@ type VirtualClusterTemplateDefinition struct {
 	// WorkloadVirtualClusterTemplateDefinition holds the workload cluster specific deployment options. Needs to be non-nil
 	// in order to deploy the virtual cluster in workload cluster mode.
 	// +optional
-	WorkloadVirtualClusterTemplateDefinition *WorkloadVirtualClusterTemplateDefinition `json:"workloadVirtualClusterTemplateDefinition,omitempty"`
+	WorkloadVirtualClusterTemplateDefinition *WorkloadVirtualClusterTemplateDefinition `json:"workloadVirtualClusterTemplate,omitempty"`
 }
 
 type WorkloadVirtualClusterTemplateDefinition struct {

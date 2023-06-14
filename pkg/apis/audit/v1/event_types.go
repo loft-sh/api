@@ -1,7 +1,7 @@
 package v1
 
 import (
-	authnv1 "k8s.io/api/authentication/v1"
+	authenticationv1 "k8s.io/api/authentication/v1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime"
 	"k8s.io/apimachinery/pkg/types"
@@ -103,10 +103,10 @@ type Event struct {
 	// For non-resource requests, this is the lower-cased HTTP method.
 	Verb string `json:"verb" protobuf:"bytes,5,opt,name=verb"`
 	// Authenticated user information.
-	User authnv1.UserInfo `json:"user" protobuf:"bytes,6,opt,name=user"`
+	User authenticationv1.UserInfo `json:"user" protobuf:"bytes,6,opt,name=user"`
 	// Impersonated user information.
 	// +optional
-	ImpersonatedUser *authnv1.UserInfo `json:"impersonatedUser,omitempty" protobuf:"bytes,7,opt,name=impersonatedUser"`
+	ImpersonatedUser *authenticationv1.UserInfo `json:"impersonatedUser,omitempty" protobuf:"bytes,7,opt,name=impersonatedUser"`
 	// Source IPs, from where the request originated and intermediate proxies.
 	// +optional
 	SourceIPs []string `json:"sourceIPs,omitempty" protobuf:"bytes,8,rep,name=sourceIPs"`
