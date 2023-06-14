@@ -24066,7 +24066,7 @@ func schema_pkg_apis_storage_v1_VirtualClusterTemplateDefinition(ref common.Refe
 							Ref:         ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.VirtualClusterSpaceTemplateDefinition"),
 						},
 					},
-					"workloadVirtualClusterTemplateDefinition": {
+					"workloadVirtualClusterTemplate": {
 						SchemaProps: spec.SchemaProps{
 							Description: "WorkloadVirtualClusterTemplateDefinition holds the workload cluster specific deployment options. Needs to be non-nil in order to deploy the virtual cluster in workload cluster mode.",
 							Ref:         ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.WorkloadVirtualClusterTemplateDefinition"),
@@ -24519,17 +24519,6 @@ func schema_pkg_apis_ui_v1_UISettingsStatus(ref common.ReferenceCallback) common
 			SchemaProps: spec.SchemaProps{
 				Description: "UISettingsStatus holds the status",
 				Type:        []string{"object"},
-				Properties: map[string]spec.Schema{
-					"featureEnabled": {
-						SchemaProps: spec.SchemaProps{
-							Description: "FeatureEnabled indicates if the UI white label feature is enabled or disabled",
-							Default:     false,
-							Type:        []string{"boolean"},
-							Format:      "",
-						},
-					},
-				},
-				Required: []string{"featureEnabled"},
 			},
 		},
 	}
