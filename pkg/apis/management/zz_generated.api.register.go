@@ -410,7 +410,15 @@ var (
 		func() runtime.Object { return &Cluster{} },
 		func() runtime.Object { return &ClusterList{} },
 	)
-	InternalClusterChartsREST = builders.NewInternalSubresource(
+	InternalClusterAgentConfigREST = builders.NewInternalSubresource(
+		"clusters", "ClusterAgentConfig", "agentconfig",
+		func() runtime.Object { return &ClusterAgentConfig{} },
+	)
+	NewClusterAgentConfigREST = func(getter generic.RESTOptionsGetter) rest.Storage {
+		return NewClusterAgentConfigRESTFunc(Factory)
+	}
+	NewClusterAgentConfigRESTFunc NewRESTFunc
+	InternalClusterChartsREST     = builders.NewInternalSubresource(
 		"clusters", "ClusterCharts", "charts",
 		func() runtime.Object { return &ClusterCharts{} },
 	)
@@ -976,6 +984,7 @@ var (
 		InternalAppStatus,
 		InternalCluster,
 		InternalClusterStatus,
+		InternalClusterAgentConfigREST,
 		InternalClusterChartsREST,
 		InternalClusterDomainREST,
 		InternalClusterMemberAccessREST,
@@ -1088,6 +1097,23 @@ type AccessKeyType string
 type Level string
 type RequestTarget string
 type Stage string
+
+type AgentAnalyticsSpec struct {
+	AnalyticsEndpoint string
+	InstanceTokenAuth *pkgserver.InstanceTokenAuth
+}
+
+type AgentAuditConfig struct {
+	Enabled              bool
+	DisableAgentSyncBack bool
+	Level                int
+	Policy               AuditPolicy
+	Path                 string
+	MaxAge               int
+	MaxBackups           int
+	MaxSize              int
+	Compress             bool
+}
 
 // +genclient
 // +genclient:nonNamespaced
@@ -1329,6 +1355,18 @@ type ClusterAccessStatus struct {
 type ClusterAccounts struct {
 	Accounts []string
 	Cluster  storagev1.Cluster
+}
+
+// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+
+type ClusterAgentConfig struct {
+	metav1.TypeMeta
+	metav1.ObjectMeta
+	Audit                *AgentAuditConfig
+	DefaultImageRegistry string
+	TokenCaCert          []byte
+	LoftHost             string
+	AnalyticsSpec        AgentAnalyticsSpec
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -2636,6 +2674,14 @@ type ClusterList struct {
 	metav1.TypeMeta
 	metav1.ListMeta
 	Items []Cluster
+}
+
+// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+
+type ClusterAgentConfigList struct {
+	metav1.TypeMeta
+	metav1.ListMeta
+	Items []ClusterAgentConfig
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object

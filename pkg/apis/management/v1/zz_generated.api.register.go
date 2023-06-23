@@ -21,6 +21,7 @@ func addKnownTypes(scheme *runtime.Scheme) error {
 		&AppList{},
 		&Cluster{},
 		&ClusterList{},
+		&ClusterAgentConfig{},
 		&ClusterCharts{},
 		&ClusterDomain{},
 		&ClusterMemberAccess{},
@@ -115,6 +116,11 @@ var (
 		management.ManagementAnnouncementStorage,
 		management.ManagementAppStorage,
 		management.ManagementClusterStorage,
+		builders.NewApiResourceWithStorage(
+			management.InternalClusterAgentConfigREST,
+			func() runtime.Object { return &ClusterAgentConfig{} }, // Register versioned resource
+			nil,
+			management.NewClusterAgentConfigREST),
 		builders.NewApiResourceWithStorage(
 			management.InternalClusterChartsREST,
 			func() runtime.Object { return &ClusterCharts{} }, // Register versioned resource
@@ -340,6 +346,14 @@ type ClusterList struct {
 	metav1.TypeMeta `json:",inline"`
 	metav1.ListMeta `json:"metadata,omitempty"`
 	Items           []Cluster `json:"items"`
+}
+
+// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+
+type ClusterAgentConfigList struct {
+	metav1.TypeMeta `json:",inline"`
+	metav1.ListMeta `json:"metadata,omitempty"`
+	Items           []ClusterAgentConfig `json:"items"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object

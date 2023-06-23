@@ -113,9 +113,7 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 		"github.com/loft-sh/api/v3/pkg/apis/management/v1.AgentAuditEventList":                             schema_pkg_apis_management_v1_AgentAuditEventList(ref),
 		"github.com/loft-sh/api/v3/pkg/apis/management/v1.AgentAuditEventSpec":                             schema_pkg_apis_management_v1_AgentAuditEventSpec(ref),
 		"github.com/loft-sh/api/v3/pkg/apis/management/v1.AgentAuditEventStatus":                           schema_pkg_apis_management_v1_AgentAuditEventStatus(ref),
-		"github.com/loft-sh/api/v3/pkg/apis/management/v1.AgentConfig":                                     schema_pkg_apis_management_v1_AgentConfig(ref),
-		"github.com/loft-sh/api/v3/pkg/apis/management/v1.AgentConfigSpec":                                 schema_pkg_apis_management_v1_AgentConfigSpec(ref),
-		"github.com/loft-sh/api/v3/pkg/apis/management/v1.AgentConfigStatus":                               schema_pkg_apis_management_v1_AgentConfigStatus(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/management/v1.AgentLoftAccess":                                 schema_pkg_apis_management_v1_AgentLoftAccess(ref),
 		"github.com/loft-sh/api/v3/pkg/apis/management/v1.Announcement":                                    schema_pkg_apis_management_v1_Announcement(ref),
 		"github.com/loft-sh/api/v3/pkg/apis/management/v1.AnnouncementList":                                schema_pkg_apis_management_v1_AnnouncementList(ref),
 		"github.com/loft-sh/api/v3/pkg/apis/management/v1.AnnouncementSpec":                                schema_pkg_apis_management_v1_AnnouncementSpec(ref),
@@ -145,6 +143,8 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 		"github.com/loft-sh/api/v3/pkg/apis/management/v1.ClusterAccessSpec":                               schema_pkg_apis_management_v1_ClusterAccessSpec(ref),
 		"github.com/loft-sh/api/v3/pkg/apis/management/v1.ClusterAccessStatus":                             schema_pkg_apis_management_v1_ClusterAccessStatus(ref),
 		"github.com/loft-sh/api/v3/pkg/apis/management/v1.ClusterAccounts":                                 schema_pkg_apis_management_v1_ClusterAccounts(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/management/v1.ClusterAgentConfig":                              schema_pkg_apis_management_v1_ClusterAgentConfig(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/management/v1.ClusterAgentConfigList":                          schema_pkg_apis_management_v1_ClusterAgentConfigList(ref),
 		"github.com/loft-sh/api/v3/pkg/apis/management/v1.ClusterCharts":                                   schema_pkg_apis_management_v1_ClusterCharts(ref),
 		"github.com/loft-sh/api/v3/pkg/apis/management/v1.ClusterChartsList":                               schema_pkg_apis_management_v1_ClusterChartsList(ref),
 		"github.com/loft-sh/api/v3/pkg/apis/management/v1.ClusterConnect":                                  schema_pkg_apis_management_v1_ClusterConnect(ref),
@@ -6046,97 +6046,16 @@ func schema_pkg_apis_management_v1_AgentAuditEventStatus(ref common.ReferenceCal
 	}
 }
 
-func schema_pkg_apis_management_v1_AgentConfig(ref common.ReferenceCallback) common.OpenAPIDefinition {
+func schema_pkg_apis_management_v1_AgentLoftAccess(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
-				Description: "AgentConfig holds the agent loft configuration",
-				Type:        []string{"object"},
-				Properties: map[string]spec.Schema{
-					"kind": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"apiVersion": {
-						SchemaProps: spec.SchemaProps{
-							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"metadata": {
-						SchemaProps: spec.SchemaProps{
-							Default: map[string]interface{}{},
-							Ref:     ref("k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"),
-						},
-					},
-					"spec": {
-						SchemaProps: spec.SchemaProps{
-							Default: map[string]interface{}{},
-							Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/management/v1.AgentConfigSpec"),
-						},
-					},
-					"status": {
-						SchemaProps: spec.SchemaProps{
-							Default: map[string]interface{}{},
-							Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/management/v1.AgentConfigStatus"),
-						},
-					},
-				},
-			},
-		},
-		Dependencies: []string{
-			"github.com/loft-sh/api/v3/pkg/apis/management/v1.AgentConfigSpec", "github.com/loft-sh/api/v3/pkg/apis/management/v1.AgentConfigStatus", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
-	}
-}
-
-func schema_pkg_apis_management_v1_AgentConfigSpec(ref common.ReferenceCallback) common.OpenAPIDefinition {
-	return common.OpenAPIDefinition{
-		Schema: spec.Schema{
-			SchemaProps: spec.SchemaProps{
-				Description: "AgentConfigSpec holds the specification",
+				Description: "AgentLoftAccess holds the config how the agent can reach loft",
 				Type:        []string{"object"},
 				Properties: map[string]spec.Schema{
 					"cluster": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Cluster is the name of the cluster the agent is running in",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"instance": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Instance is the instance identifier of the cluster agent",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"audit": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Audit holds the agent audit config",
-							Ref:         ref("github.com/loft-sh/api/v3/pkg/apis/management/v1.AgentAuditConfig"),
-						},
-					},
-					"defaultImageRegistry": {
-						SchemaProps: spec.SchemaProps{
-							Description: "DefaultImageRegistry defines if we should prefix the virtual cluster image",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"tokenCaCert": {
-						SchemaProps: spec.SchemaProps{
-							Description: "TokenCaCert is the certificate authority the Loft tokens will be signed with",
-							Type:        []string{"string"},
-							Format:      "byte",
-						},
-					},
-					"loftHost": {
-						SchemaProps: spec.SchemaProps{
-							Description: "LoftHost defines the host for the agent's loft instance",
 							Type:        []string{"string"},
 							Format:      "",
 						},
@@ -6155,28 +6074,7 @@ func schema_pkg_apis_management_v1_AgentConfigSpec(ref common.ReferenceCallback)
 							Format:      "",
 						},
 					},
-					"analyticsSpec": {
-						SchemaProps: spec.SchemaProps{
-							Description: "AnalyticsSpec holds info needed for the agent to send analytics data to the analytics backend.",
-							Default:     map[string]interface{}{},
-							Ref:         ref("github.com/loft-sh/api/v3/pkg/apis/management/v1.AgentAnalyticsSpec"),
-						},
-					},
 				},
-				Required: []string{"analyticsSpec"},
-			},
-		},
-		Dependencies: []string{
-			"github.com/loft-sh/api/v3/pkg/apis/management/v1.AgentAnalyticsSpec", "github.com/loft-sh/api/v3/pkg/apis/management/v1.AgentAuditConfig"},
-	}
-}
-
-func schema_pkg_apis_management_v1_AgentConfigStatus(ref common.ReferenceCallback) common.OpenAPIDefinition {
-	return common.OpenAPIDefinition{
-		Schema: spec.Schema{
-			SchemaProps: spec.SchemaProps{
-				Description: "AgentConfigStatus holds the status, which is the parsed raw config",
-				Type:        []string{"object"},
 			},
 		},
 	}
@@ -8183,6 +8081,123 @@ func schema_pkg_apis_management_v1_ClusterAccounts(ref common.ReferenceCallback)
 		},
 		Dependencies: []string{
 			"github.com/loft-sh/api/v3/pkg/apis/storage/v1.Cluster"},
+	}
+}
+
+func schema_pkg_apis_management_v1_ClusterAgentConfig(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"kind": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"apiVersion": {
+						SchemaProps: spec.SchemaProps{
+							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"metadata": {
+						SchemaProps: spec.SchemaProps{
+							Default: map[string]interface{}{},
+							Ref:     ref("k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"),
+						},
+					},
+					"audit": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Audit holds the agent audit config",
+							Ref:         ref("github.com/loft-sh/api/v3/pkg/apis/management/v1.AgentAuditConfig"),
+						},
+					},
+					"defaultImageRegistry": {
+						SchemaProps: spec.SchemaProps{
+							Description: "DefaultImageRegistry defines if we should prefix the virtual cluster image",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"tokenCaCert": {
+						SchemaProps: spec.SchemaProps{
+							Description: "TokenCaCert is the certificate authority the Loft tokens will be signed with",
+							Type:        []string{"string"},
+							Format:      "byte",
+						},
+					},
+					"loftHost": {
+						SchemaProps: spec.SchemaProps{
+							Description: "LoftHost defines the host for the agent's loft instance",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"analyticsSpec": {
+						SchemaProps: spec.SchemaProps{
+							Description: "AnalyticsSpec holds info needed for the agent to send analytics data to the analytics backend.",
+							Default:     map[string]interface{}{},
+							Ref:         ref("github.com/loft-sh/api/v3/pkg/apis/management/v1.AgentAnalyticsSpec"),
+						},
+					},
+				},
+				Required: []string{"analyticsSpec"},
+			},
+		},
+		Dependencies: []string{
+			"github.com/loft-sh/api/v3/pkg/apis/management/v1.AgentAnalyticsSpec", "github.com/loft-sh/api/v3/pkg/apis/management/v1.AgentAuditConfig", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
+	}
+}
+
+func schema_pkg_apis_management_v1_ClusterAgentConfigList(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"kind": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"apiVersion": {
+						SchemaProps: spec.SchemaProps{
+							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"metadata": {
+						SchemaProps: spec.SchemaProps{
+							Default: map[string]interface{}{},
+							Ref:     ref("k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"),
+						},
+					},
+					"items": {
+						SchemaProps: spec.SchemaProps{
+							Type: []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/management/v1.ClusterAgentConfig"),
+									},
+								},
+							},
+						},
+					},
+				},
+				Required: []string{"items"},
+			},
+		},
+		Dependencies: []string{
+			"github.com/loft-sh/api/v3/pkg/apis/management/v1.ClusterAgentConfig", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
 	}
 }
 

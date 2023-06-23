@@ -145,3 +145,13 @@ func (c *FakeClusters) ListVirtualClusterDefaults(ctx context.Context, clusterNa
 	}
 	return obj.(*managementv1.ClusterVirtualClusterDefaults), err
 }
+
+// GetAgentConfig takes name of the cluster, and returns the corresponding clusterAgentConfig object, and an error if there is any.
+func (c *FakeClusters) GetAgentConfig(ctx context.Context, clusterName string, options v1.GetOptions) (result *managementv1.ClusterAgentConfig, err error) {
+	obj, err := c.Fake.
+		Invokes(testing.NewRootGetSubresourceAction(clustersResource, "agentconfig", clusterName), &managementv1.ClusterAgentConfig{})
+	if obj == nil {
+		return nil, err
+	}
+	return obj.(*managementv1.ClusterAgentConfig), err
+}
