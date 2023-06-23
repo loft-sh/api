@@ -30,6 +30,10 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 		"github.com/loft-sh/agentapi/v3/pkg/apis/loft/cluster/v1.ClusterQuotaStatus":                       schema_apis_loft_cluster_v1_ClusterQuotaStatus(ref),
 		"github.com/loft-sh/agentapi/v3/pkg/apis/loft/cluster/v1.EntityInfo":                               schema_apis_loft_cluster_v1_EntityInfo(ref),
 		"github.com/loft-sh/agentapi/v3/pkg/apis/loft/cluster/v1.EpochInfo":                                schema_apis_loft_cluster_v1_EpochInfo(ref),
+		"github.com/loft-sh/agentapi/v3/pkg/apis/loft/cluster/v1.Feature":                                  schema_apis_loft_cluster_v1_Feature(ref),
+		"github.com/loft-sh/agentapi/v3/pkg/apis/loft/cluster/v1.FeatureList":                              schema_apis_loft_cluster_v1_FeatureList(ref),
+		"github.com/loft-sh/agentapi/v3/pkg/apis/loft/cluster/v1.FeatureSpec":                              schema_apis_loft_cluster_v1_FeatureSpec(ref),
+		"github.com/loft-sh/agentapi/v3/pkg/apis/loft/cluster/v1.FeatureStatus":                            schema_apis_loft_cluster_v1_FeatureStatus(ref),
 		"github.com/loft-sh/agentapi/v3/pkg/apis/loft/cluster/v1.HelmRelease":                              schema_apis_loft_cluster_v1_HelmRelease(ref),
 		"github.com/loft-sh/agentapi/v3/pkg/apis/loft/cluster/v1.HelmReleaseApp":                           schema_apis_loft_cluster_v1_HelmReleaseApp(ref),
 		"github.com/loft-sh/agentapi/v3/pkg/apis/loft/cluster/v1.HelmReleaseConfig":                        schema_apis_loft_cluster_v1_HelmReleaseConfig(ref),
@@ -1742,6 +1746,132 @@ func schema_apis_loft_cluster_v1_EpochInfo(ref common.ReferenceCallback) common.
 							Description: "Amount of milliseconds the space has slept in the epoch",
 							Type:        []string{"integer"},
 							Format:      "int64",
+						},
+					},
+				},
+			},
+		},
+	}
+}
+
+func schema_apis_loft_cluster_v1_Feature(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "Feature holds the feature information",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"kind": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"apiVersion": {
+						SchemaProps: spec.SchemaProps{
+							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"metadata": {
+						SchemaProps: spec.SchemaProps{
+							Default: map[string]interface{}{},
+							Ref:     ref("k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"),
+						},
+					},
+					"spec": {
+						SchemaProps: spec.SchemaProps{
+							Default: map[string]interface{}{},
+							Ref:     ref("github.com/loft-sh/agentapi/v3/pkg/apis/loft/cluster/v1.FeatureSpec"),
+						},
+					},
+					"status": {
+						SchemaProps: spec.SchemaProps{
+							Default: map[string]interface{}{},
+							Ref:     ref("github.com/loft-sh/agentapi/v3/pkg/apis/loft/cluster/v1.FeatureStatus"),
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			"github.com/loft-sh/agentapi/v3/pkg/apis/loft/cluster/v1.FeatureSpec", "github.com/loft-sh/agentapi/v3/pkg/apis/loft/cluster/v1.FeatureStatus", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
+	}
+}
+
+func schema_apis_loft_cluster_v1_FeatureList(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"kind": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"apiVersion": {
+						SchemaProps: spec.SchemaProps{
+							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"metadata": {
+						SchemaProps: spec.SchemaProps{
+							Default: map[string]interface{}{},
+							Ref:     ref("k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"),
+						},
+					},
+					"items": {
+						SchemaProps: spec.SchemaProps{
+							Type: []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref("github.com/loft-sh/agentapi/v3/pkg/apis/loft/cluster/v1.Feature"),
+									},
+								},
+							},
+						},
+					},
+				},
+				Required: []string{"items"},
+			},
+		},
+		Dependencies: []string{
+			"github.com/loft-sh/agentapi/v3/pkg/apis/loft/cluster/v1.Feature", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
+	}
+}
+
+func schema_apis_loft_cluster_v1_FeatureSpec(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "FeatureSpec holds the specification",
+				Type:        []string{"object"},
+			},
+		},
+	}
+}
+
+func schema_apis_loft_cluster_v1_FeatureStatus(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "FeatureStatus holds the status",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"enabled": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Enabled signals if the feature is currently enabled or disabled",
+							Type:        []string{"boolean"},
+							Format:      "",
 						},
 					},
 				},
@@ -9912,7 +10042,7 @@ func schema_pkg_apis_management_v1_Feature(ref common.ReferenceCallback) common.
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
-				Description: "User holds the user information",
+				Description: "Feature holds the feature information",
 				Type:        []string{"object"},
 				Properties: map[string]spec.Schema{
 					"kind": {
