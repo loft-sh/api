@@ -44,6 +44,14 @@ func (c *FakeManagementV1) Configs() v1.ConfigInterface {
 	return &FakeConfigs{c}
 }
 
+func (c *FakeManagementV1) DevPodWorkspaceInstances(namespace string) v1.DevPodWorkspaceInstanceInterface {
+	return &FakeDevPodWorkspaceInstances{c, namespace}
+}
+
+func (c *FakeManagementV1) DevPodWorkspaceTemplates() v1.DevPodWorkspaceTemplateInterface {
+	return &FakeDevPodWorkspaceTemplates{c}
+}
+
 func (c *FakeManagementV1) DirectClusterEndpointTokens() v1.DirectClusterEndpointTokenInterface {
 	return &FakeDirectClusterEndpointTokens{c}
 }
@@ -90,6 +98,10 @@ func (c *FakeManagementV1) ProjectSecrets(namespace string) v1.ProjectSecretInte
 
 func (c *FakeManagementV1) ResetAccessKeys() v1.ResetAccessKeyInterface {
 	return &FakeResetAccessKeys{c}
+}
+
+func (c *FakeManagementV1) Runners() v1.RunnerInterface {
+	return &FakeRunners{c}
 }
 
 func (c *FakeManagementV1) Selves() v1.SelfInterface {

@@ -20,6 +20,8 @@ type ManagementV1Interface interface {
 	ClusterConnectsGetter
 	ClusterRoleTemplatesGetter
 	ConfigsGetter
+	DevPodWorkspaceInstancesGetter
+	DevPodWorkspaceTemplatesGetter
 	DirectClusterEndpointTokensGetter
 	EventsGetter
 	FeaturesGetter
@@ -32,6 +34,7 @@ type ManagementV1Interface interface {
 	ProjectsGetter
 	ProjectSecretsGetter
 	ResetAccessKeysGetter
+	RunnersGetter
 	SelvesGetter
 	SelfSubjectAccessReviewsGetter
 	SharedSecretsGetter
@@ -83,6 +86,14 @@ func (c *ManagementV1Client) Configs() ConfigInterface {
 	return newConfigs(c)
 }
 
+func (c *ManagementV1Client) DevPodWorkspaceInstances(namespace string) DevPodWorkspaceInstanceInterface {
+	return newDevPodWorkspaceInstances(c, namespace)
+}
+
+func (c *ManagementV1Client) DevPodWorkspaceTemplates() DevPodWorkspaceTemplateInterface {
+	return newDevPodWorkspaceTemplates(c)
+}
+
 func (c *ManagementV1Client) DirectClusterEndpointTokens() DirectClusterEndpointTokenInterface {
 	return newDirectClusterEndpointTokens(c)
 }
@@ -129,6 +140,10 @@ func (c *ManagementV1Client) ProjectSecrets(namespace string) ProjectSecretInter
 
 func (c *ManagementV1Client) ResetAccessKeys() ResetAccessKeyInterface {
 	return newResetAccessKeys(c)
+}
+
+func (c *ManagementV1Client) Runners() RunnerInterface {
+	return newRunners(c)
 }
 
 func (c *ManagementV1Client) Selves() SelfInterface {

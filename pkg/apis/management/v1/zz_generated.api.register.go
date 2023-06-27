@@ -36,6 +36,11 @@ func addKnownTypes(scheme *runtime.Scheme) error {
 		&ClusterRoleTemplateList{},
 		&Config{},
 		&ConfigList{},
+		&DevPodWorkspaceInstance{},
+		&DevPodWorkspaceInstanceList{},
+		&DevPodWorkspaceInstanceUp{},
+		&DevPodWorkspaceTemplate{},
+		&DevPodWorkspaceTemplateList{},
 		&DirectClusterEndpointToken{},
 		&DirectClusterEndpointTokenList{},
 		&Event{},
@@ -72,6 +77,8 @@ func addKnownTypes(scheme *runtime.Scheme) error {
 		&ProjectSecretList{},
 		&ResetAccessKey{},
 		&ResetAccessKeyList{},
+		&Runner{},
+		&RunnerList{},
 		&Self{},
 		&SelfList{},
 		&SelfSubjectAccessReview{},
@@ -155,6 +162,13 @@ var (
 		management.ManagementClusterConnectStorage,
 		management.ManagementClusterRoleTemplateStorage,
 		management.ManagementConfigStorage,
+		management.ManagementDevPodWorkspaceInstanceStorage,
+		builders.NewApiResourceWithStorage(
+			management.InternalDevPodWorkspaceInstanceUpREST,
+			func() runtime.Object { return &DevPodWorkspaceInstanceUp{} }, // Register versioned resource
+			nil,
+			management.NewDevPodWorkspaceInstanceUpREST),
+		management.ManagementDevPodWorkspaceTemplateStorage,
 		management.ManagementDirectClusterEndpointTokenStorage,
 		management.ManagementEventStorage,
 		management.ManagementFeatureStorage,
@@ -223,6 +237,12 @@ var (
 			management.NewProjectTemplatesREST),
 		management.ManagementProjectSecretStorage,
 		management.ManagementResetAccessKeyStorage,
+		management.ManagementRunnerStorage,
+		builders.NewApiResourceWithStorage(
+			management.InternalRunnerStatus,
+			func() runtime.Object { return &Runner{} },     // Register versioned resource
+			func() runtime.Object { return &RunnerList{} }, // Register versioned resource list
+			management.NewRunnerStatusREST),
 		management.ManagementSelfStorage,
 		management.ManagementSelfSubjectAccessReviewStorage,
 		management.ManagementSharedSecretStorage,
@@ -438,6 +458,30 @@ type ConfigList struct {
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
 
+type DevPodWorkspaceInstanceList struct {
+	metav1.TypeMeta `json:",inline"`
+	metav1.ListMeta `json:"metadata,omitempty"`
+	Items           []DevPodWorkspaceInstance `json:"items"`
+}
+
+// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+
+type DevPodWorkspaceInstanceUpList struct {
+	metav1.TypeMeta `json:",inline"`
+	metav1.ListMeta `json:"metadata,omitempty"`
+	Items           []DevPodWorkspaceInstanceUp `json:"items"`
+}
+
+// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+
+type DevPodWorkspaceTemplateList struct {
+	metav1.TypeMeta `json:",inline"`
+	metav1.ListMeta `json:"metadata,omitempty"`
+	Items           []DevPodWorkspaceTemplate `json:"items"`
+}
+
+// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+
 type DirectClusterEndpointTokenList struct {
 	metav1.TypeMeta `json:",inline"`
 	metav1.ListMeta `json:"metadata,omitempty"`
@@ -618,6 +662,14 @@ type ResetAccessKeyList struct {
 	metav1.TypeMeta `json:",inline"`
 	metav1.ListMeta `json:"metadata,omitempty"`
 	Items           []ResetAccessKey `json:"items"`
+}
+
+// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+
+type RunnerList struct {
+	metav1.TypeMeta `json:",inline"`
+	metav1.ListMeta `json:"metadata,omitempty"`
+	Items           []Runner `json:"items"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object

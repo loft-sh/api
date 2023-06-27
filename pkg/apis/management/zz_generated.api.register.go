@@ -107,7 +107,27 @@ var (
 	NewConfigREST = func(getter generic.RESTOptionsGetter) rest.Storage {
 		return NewConfigRESTFunc(Factory)
 	}
-	NewConfigRESTFunc                           NewRESTFunc
+	NewConfigRESTFunc                        NewRESTFunc
+	ManagementDevPodWorkspaceInstanceStorage = builders.NewApiResourceWithStorage( // Resource status endpoint
+		InternalDevPodWorkspaceInstance,
+		func() runtime.Object { return &DevPodWorkspaceInstance{} },     // Register versioned resource
+		func() runtime.Object { return &DevPodWorkspaceInstanceList{} }, // Register versioned resource list
+		NewDevPodWorkspaceInstanceREST,
+	)
+	NewDevPodWorkspaceInstanceREST = func(getter generic.RESTOptionsGetter) rest.Storage {
+		return NewDevPodWorkspaceInstanceRESTFunc(Factory)
+	}
+	NewDevPodWorkspaceInstanceRESTFunc       NewRESTFunc
+	ManagementDevPodWorkspaceTemplateStorage = builders.NewApiResourceWithStorage( // Resource status endpoint
+		InternalDevPodWorkspaceTemplate,
+		func() runtime.Object { return &DevPodWorkspaceTemplate{} },     // Register versioned resource
+		func() runtime.Object { return &DevPodWorkspaceTemplateList{} }, // Register versioned resource list
+		NewDevPodWorkspaceTemplateREST,
+	)
+	NewDevPodWorkspaceTemplateREST = func(getter generic.RESTOptionsGetter) rest.Storage {
+		return NewDevPodWorkspaceTemplateRESTFunc(Factory)
+	}
+	NewDevPodWorkspaceTemplateRESTFunc          NewRESTFunc
 	ManagementDirectClusterEndpointTokenStorage = builders.NewApiResourceWithStorage( // Resource status endpoint
 		InternalDirectClusterEndpointToken,
 		func() runtime.Object { return &DirectClusterEndpointToken{} },     // Register versioned resource
@@ -242,7 +262,21 @@ var (
 		return NewResetAccessKeyRESTFunc(Factory)
 	}
 	NewResetAccessKeyRESTFunc NewRESTFunc
-	ManagementSelfStorage     = builders.NewApiResourceWithStorage( // Resource status endpoint
+	ManagementRunnerStorage   = builders.NewApiResourceWithStorage( // Resource status endpoint
+		InternalRunner,
+		func() runtime.Object { return &Runner{} },     // Register versioned resource
+		func() runtime.Object { return &RunnerList{} }, // Register versioned resource list
+		NewRunnerREST,
+	)
+	NewRunnerREST = func(getter generic.RESTOptionsGetter) rest.Storage {
+		return NewRunnerRESTFunc(Factory)
+	}
+	NewRunnerRESTFunc   NewRESTFunc
+	NewRunnerStatusREST = func(getter generic.RESTOptionsGetter) rest.Storage {
+		return NewRunnerStatusRESTFunc(Factory)
+	}
+	NewRunnerStatusRESTFunc NewRESTFunc
+	ManagementSelfStorage   = builders.NewApiResourceWithStorage( // Resource status endpoint
 		InternalSelf,
 		func() runtime.Object { return &Self{} },     // Register versioned resource
 		func() runtime.Object { return &SelfList{} }, // Register versioned resource list
@@ -514,6 +548,38 @@ var (
 		func() runtime.Object { return &Config{} },
 		func() runtime.Object { return &ConfigList{} },
 	)
+	InternalDevPodWorkspaceInstance = builders.NewInternalResource(
+		"devpodworkspaceinstances",
+		"DevPodWorkspaceInstance",
+		func() runtime.Object { return &DevPodWorkspaceInstance{} },
+		func() runtime.Object { return &DevPodWorkspaceInstanceList{} },
+	)
+	InternalDevPodWorkspaceInstanceStatus = builders.NewInternalResourceStatus(
+		"devpodworkspaceinstances",
+		"DevPodWorkspaceInstanceStatus",
+		func() runtime.Object { return &DevPodWorkspaceInstance{} },
+		func() runtime.Object { return &DevPodWorkspaceInstanceList{} },
+	)
+	InternalDevPodWorkspaceInstanceUpREST = builders.NewInternalSubresource(
+		"devpodworkspaceinstances", "DevPodWorkspaceInstanceUp", "up",
+		func() runtime.Object { return &DevPodWorkspaceInstanceUp{} },
+	)
+	NewDevPodWorkspaceInstanceUpREST = func(getter generic.RESTOptionsGetter) rest.Storage {
+		return NewDevPodWorkspaceInstanceUpRESTFunc(Factory)
+	}
+	NewDevPodWorkspaceInstanceUpRESTFunc NewRESTFunc
+	InternalDevPodWorkspaceTemplate      = builders.NewInternalResource(
+		"devpodworkspacetemplates",
+		"DevPodWorkspaceTemplate",
+		func() runtime.Object { return &DevPodWorkspaceTemplate{} },
+		func() runtime.Object { return &DevPodWorkspaceTemplateList{} },
+	)
+	InternalDevPodWorkspaceTemplateStatus = builders.NewInternalResourceStatus(
+		"devpodworkspacetemplates",
+		"DevPodWorkspaceTemplateStatus",
+		func() runtime.Object { return &DevPodWorkspaceTemplate{} },
+		func() runtime.Object { return &DevPodWorkspaceTemplateList{} },
+	)
 	InternalDirectClusterEndpointToken = builders.NewInternalResource(
 		"directclusterendpointtokens",
 		"DirectClusterEndpointToken",
@@ -749,6 +815,18 @@ var (
 		"ResetAccessKeyStatus",
 		func() runtime.Object { return &ResetAccessKey{} },
 		func() runtime.Object { return &ResetAccessKeyList{} },
+	)
+	InternalRunner = builders.NewInternalResource(
+		"runners",
+		"Runner",
+		func() runtime.Object { return &Runner{} },
+		func() runtime.Object { return &RunnerList{} },
+	)
+	InternalRunnerStatus = builders.NewInternalResourceStatus(
+		"runners",
+		"RunnerStatus",
+		func() runtime.Object { return &Runner{} },
+		func() runtime.Object { return &RunnerList{} },
 	)
 	InternalSelf = builders.NewInternalResource(
 		"selves",
@@ -999,6 +1077,11 @@ var (
 		InternalClusterRoleTemplateStatus,
 		InternalConfig,
 		InternalConfigStatus,
+		InternalDevPodWorkspaceInstance,
+		InternalDevPodWorkspaceInstanceStatus,
+		InternalDevPodWorkspaceInstanceUpREST,
+		InternalDevPodWorkspaceTemplate,
+		InternalDevPodWorkspaceTemplateStatus,
 		InternalDirectClusterEndpointToken,
 		InternalDirectClusterEndpointTokenStatus,
 		InternalEvent,
@@ -1035,6 +1118,8 @@ var (
 		InternalProjectSecretStatus,
 		InternalResetAccessKey,
 		InternalResetAccessKeyStatus,
+		InternalRunner,
+		InternalRunnerStatus,
 		InternalSelf,
 		InternalSelfStatus,
 		InternalSelfSubjectAccessReview,
@@ -1362,6 +1447,7 @@ type ClusterAccounts struct {
 type ClusterAgentConfig struct {
 	metav1.TypeMeta
 	metav1.ObjectMeta
+	Cluster              string
 	Audit                *AgentAuditConfig
 	DefaultImageRegistry string
 	TokenCaCert          []byte
@@ -1518,6 +1604,51 @@ type ConnectorWithName struct {
 	ID          string
 	DisplayName string
 	Connector
+}
+
+// +genclient
+// +genclient
+// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+
+type DevPodWorkspaceInstance struct {
+	metav1.TypeMeta
+	metav1.ObjectMeta
+	Spec   DevPodWorkspaceInstanceSpec
+	Status DevPodWorkspaceInstanceStatus
+}
+
+type DevPodWorkspaceInstanceSpec struct {
+	storagev1.DevPodWorkspaceInstanceSpec
+}
+
+type DevPodWorkspaceInstanceStatus struct {
+	storagev1.DevPodWorkspaceInstanceStatus
+}
+
+// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+
+type DevPodWorkspaceInstanceUp struct {
+	metav1.TypeMeta
+	metav1.ObjectMeta
+}
+
+// +genclient
+// +genclient:nonNamespaced
+// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+
+type DevPodWorkspaceTemplate struct {
+	metav1.TypeMeta
+	metav1.ObjectMeta
+	Spec   DevPodWorkspaceTemplateSpec
+	Status DevPodWorkspaceTemplateStatus
+}
+
+type DevPodWorkspaceTemplateSpec struct {
+	storagev1.DevPodWorkspaceTemplateSpec
+}
+
+type DevPodWorkspaceTemplateStatus struct {
+	storagev1.DevPodWorkspaceTemplateStatus
 }
 
 // +genclient
@@ -1944,6 +2075,25 @@ type ResetAccessKeySpec struct {
 
 type ResetAccessKeyStatus struct {
 	storagev1.AccessKeyStatus
+}
+
+// +genclient
+// +genclient:nonNamespaced
+// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+
+type Runner struct {
+	metav1.TypeMeta
+	metav1.ObjectMeta
+	Spec   RunnerSpec
+	Status RunnerStatus
+}
+
+type RunnerSpec struct {
+	storagev1.RunnerSpec
+}
+
+type RunnerStatus struct {
+	storagev1.RunnerStatus
 }
 
 // +genclient
@@ -3302,6 +3452,252 @@ func (s *storageConfig) UpdateConfig(ctx context.Context, object *Config) (*Conf
 }
 
 func (s *storageConfig) DeleteConfig(ctx context.Context, id string) (bool, error) {
+	st := s.GetStandardStorage()
+	_, sync, err := st.Delete(ctx, id, nil, &metav1.DeleteOptions{})
+	return sync, err
+}
+
+// DevPodWorkspaceInstance Functions and Structs
+//
+// +k8s:deepcopy-gen=false
+type DevPodWorkspaceInstanceStrategy struct {
+	builders.DefaultStorageStrategy
+}
+
+// +k8s:deepcopy-gen=false
+type DevPodWorkspaceInstanceStatusStrategy struct {
+	builders.DefaultStatusStorageStrategy
+}
+
+// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+
+type DevPodWorkspaceInstanceList struct {
+	metav1.TypeMeta
+	metav1.ListMeta
+	Items []DevPodWorkspaceInstance
+}
+
+// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+
+type DevPodWorkspaceInstanceUpList struct {
+	metav1.TypeMeta
+	metav1.ListMeta
+	Items []DevPodWorkspaceInstanceUp
+}
+
+func (DevPodWorkspaceInstance) NewStatus() interface{} {
+	return DevPodWorkspaceInstanceStatus{}
+}
+
+func (pc *DevPodWorkspaceInstance) GetStatus() interface{} {
+	return pc.Status
+}
+
+func (pc *DevPodWorkspaceInstance) SetStatus(s interface{}) {
+	pc.Status = s.(DevPodWorkspaceInstanceStatus)
+}
+
+func (pc *DevPodWorkspaceInstance) GetSpec() interface{} {
+	return pc.Spec
+}
+
+func (pc *DevPodWorkspaceInstance) SetSpec(s interface{}) {
+	pc.Spec = s.(DevPodWorkspaceInstanceSpec)
+}
+
+func (pc *DevPodWorkspaceInstance) GetObjectMeta() *metav1.ObjectMeta {
+	return &pc.ObjectMeta
+}
+
+func (pc *DevPodWorkspaceInstance) SetGeneration(generation int64) {
+	pc.ObjectMeta.Generation = generation
+}
+
+func (pc DevPodWorkspaceInstance) GetGeneration() int64 {
+	return pc.ObjectMeta.Generation
+}
+
+// Registry is an interface for things that know how to store DevPodWorkspaceInstance.
+// +k8s:deepcopy-gen=false
+type DevPodWorkspaceInstanceRegistry interface {
+	ListDevPodWorkspaceInstances(ctx context.Context, options *internalversion.ListOptions) (*DevPodWorkspaceInstanceList, error)
+	GetDevPodWorkspaceInstance(ctx context.Context, id string, options *metav1.GetOptions) (*DevPodWorkspaceInstance, error)
+	CreateDevPodWorkspaceInstance(ctx context.Context, id *DevPodWorkspaceInstance) (*DevPodWorkspaceInstance, error)
+	UpdateDevPodWorkspaceInstance(ctx context.Context, id *DevPodWorkspaceInstance) (*DevPodWorkspaceInstance, error)
+	DeleteDevPodWorkspaceInstance(ctx context.Context, id string) (bool, error)
+}
+
+// NewRegistry returns a new Registry interface for the given Storage. Any mismatched types will panic.
+func NewDevPodWorkspaceInstanceRegistry(sp builders.StandardStorageProvider) DevPodWorkspaceInstanceRegistry {
+	return &storageDevPodWorkspaceInstance{sp}
+}
+
+// Implement Registry
+// storage puts strong typing around storage calls
+// +k8s:deepcopy-gen=false
+type storageDevPodWorkspaceInstance struct {
+	builders.StandardStorageProvider
+}
+
+func (s *storageDevPodWorkspaceInstance) ListDevPodWorkspaceInstances(ctx context.Context, options *internalversion.ListOptions) (*DevPodWorkspaceInstanceList, error) {
+	if options != nil && options.FieldSelector != nil && !options.FieldSelector.Empty() {
+		return nil, fmt.Errorf("field selector not supported yet")
+	}
+	st := s.GetStandardStorage()
+	obj, err := st.List(ctx, options)
+	if err != nil {
+		return nil, err
+	}
+	return obj.(*DevPodWorkspaceInstanceList), err
+}
+
+func (s *storageDevPodWorkspaceInstance) GetDevPodWorkspaceInstance(ctx context.Context, id string, options *metav1.GetOptions) (*DevPodWorkspaceInstance, error) {
+	st := s.GetStandardStorage()
+	obj, err := st.Get(ctx, id, options)
+	if err != nil {
+		return nil, err
+	}
+	return obj.(*DevPodWorkspaceInstance), nil
+}
+
+func (s *storageDevPodWorkspaceInstance) CreateDevPodWorkspaceInstance(ctx context.Context, object *DevPodWorkspaceInstance) (*DevPodWorkspaceInstance, error) {
+	st := s.GetStandardStorage()
+	obj, err := st.Create(ctx, object, nil, &metav1.CreateOptions{})
+	if err != nil {
+		return nil, err
+	}
+	return obj.(*DevPodWorkspaceInstance), nil
+}
+
+func (s *storageDevPodWorkspaceInstance) UpdateDevPodWorkspaceInstance(ctx context.Context, object *DevPodWorkspaceInstance) (*DevPodWorkspaceInstance, error) {
+	st := s.GetStandardStorage()
+	obj, _, err := st.Update(ctx, object.Name, rest.DefaultUpdatedObjectInfo(object), nil, nil, false, &metav1.UpdateOptions{})
+	if err != nil {
+		return nil, err
+	}
+	return obj.(*DevPodWorkspaceInstance), nil
+}
+
+func (s *storageDevPodWorkspaceInstance) DeleteDevPodWorkspaceInstance(ctx context.Context, id string) (bool, error) {
+	st := s.GetStandardStorage()
+	_, sync, err := st.Delete(ctx, id, nil, &metav1.DeleteOptions{})
+	return sync, err
+}
+
+// DevPodWorkspaceTemplate Functions and Structs
+//
+// +k8s:deepcopy-gen=false
+type DevPodWorkspaceTemplateStrategy struct {
+	builders.DefaultStorageStrategy
+}
+
+// +k8s:deepcopy-gen=false
+type DevPodWorkspaceTemplateStatusStrategy struct {
+	builders.DefaultStatusStorageStrategy
+}
+
+// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+
+type DevPodWorkspaceTemplateList struct {
+	metav1.TypeMeta
+	metav1.ListMeta
+	Items []DevPodWorkspaceTemplate
+}
+
+func (DevPodWorkspaceTemplate) NewStatus() interface{} {
+	return DevPodWorkspaceTemplateStatus{}
+}
+
+func (pc *DevPodWorkspaceTemplate) GetStatus() interface{} {
+	return pc.Status
+}
+
+func (pc *DevPodWorkspaceTemplate) SetStatus(s interface{}) {
+	pc.Status = s.(DevPodWorkspaceTemplateStatus)
+}
+
+func (pc *DevPodWorkspaceTemplate) GetSpec() interface{} {
+	return pc.Spec
+}
+
+func (pc *DevPodWorkspaceTemplate) SetSpec(s interface{}) {
+	pc.Spec = s.(DevPodWorkspaceTemplateSpec)
+}
+
+func (pc *DevPodWorkspaceTemplate) GetObjectMeta() *metav1.ObjectMeta {
+	return &pc.ObjectMeta
+}
+
+func (pc *DevPodWorkspaceTemplate) SetGeneration(generation int64) {
+	pc.ObjectMeta.Generation = generation
+}
+
+func (pc DevPodWorkspaceTemplate) GetGeneration() int64 {
+	return pc.ObjectMeta.Generation
+}
+
+// Registry is an interface for things that know how to store DevPodWorkspaceTemplate.
+// +k8s:deepcopy-gen=false
+type DevPodWorkspaceTemplateRegistry interface {
+	ListDevPodWorkspaceTemplates(ctx context.Context, options *internalversion.ListOptions) (*DevPodWorkspaceTemplateList, error)
+	GetDevPodWorkspaceTemplate(ctx context.Context, id string, options *metav1.GetOptions) (*DevPodWorkspaceTemplate, error)
+	CreateDevPodWorkspaceTemplate(ctx context.Context, id *DevPodWorkspaceTemplate) (*DevPodWorkspaceTemplate, error)
+	UpdateDevPodWorkspaceTemplate(ctx context.Context, id *DevPodWorkspaceTemplate) (*DevPodWorkspaceTemplate, error)
+	DeleteDevPodWorkspaceTemplate(ctx context.Context, id string) (bool, error)
+}
+
+// NewRegistry returns a new Registry interface for the given Storage. Any mismatched types will panic.
+func NewDevPodWorkspaceTemplateRegistry(sp builders.StandardStorageProvider) DevPodWorkspaceTemplateRegistry {
+	return &storageDevPodWorkspaceTemplate{sp}
+}
+
+// Implement Registry
+// storage puts strong typing around storage calls
+// +k8s:deepcopy-gen=false
+type storageDevPodWorkspaceTemplate struct {
+	builders.StandardStorageProvider
+}
+
+func (s *storageDevPodWorkspaceTemplate) ListDevPodWorkspaceTemplates(ctx context.Context, options *internalversion.ListOptions) (*DevPodWorkspaceTemplateList, error) {
+	if options != nil && options.FieldSelector != nil && !options.FieldSelector.Empty() {
+		return nil, fmt.Errorf("field selector not supported yet")
+	}
+	st := s.GetStandardStorage()
+	obj, err := st.List(ctx, options)
+	if err != nil {
+		return nil, err
+	}
+	return obj.(*DevPodWorkspaceTemplateList), err
+}
+
+func (s *storageDevPodWorkspaceTemplate) GetDevPodWorkspaceTemplate(ctx context.Context, id string, options *metav1.GetOptions) (*DevPodWorkspaceTemplate, error) {
+	st := s.GetStandardStorage()
+	obj, err := st.Get(ctx, id, options)
+	if err != nil {
+		return nil, err
+	}
+	return obj.(*DevPodWorkspaceTemplate), nil
+}
+
+func (s *storageDevPodWorkspaceTemplate) CreateDevPodWorkspaceTemplate(ctx context.Context, object *DevPodWorkspaceTemplate) (*DevPodWorkspaceTemplate, error) {
+	st := s.GetStandardStorage()
+	obj, err := st.Create(ctx, object, nil, &metav1.CreateOptions{})
+	if err != nil {
+		return nil, err
+	}
+	return obj.(*DevPodWorkspaceTemplate), nil
+}
+
+func (s *storageDevPodWorkspaceTemplate) UpdateDevPodWorkspaceTemplate(ctx context.Context, object *DevPodWorkspaceTemplate) (*DevPodWorkspaceTemplate, error) {
+	st := s.GetStandardStorage()
+	obj, _, err := st.Update(ctx, object.Name, rest.DefaultUpdatedObjectInfo(object), nil, nil, false, &metav1.UpdateOptions{})
+	if err != nil {
+		return nil, err
+	}
+	return obj.(*DevPodWorkspaceTemplate), nil
+}
+
+func (s *storageDevPodWorkspaceTemplate) DeleteDevPodWorkspaceTemplate(ctx context.Context, id string) (bool, error) {
 	st := s.GetStandardStorage()
 	_, sync, err := st.Delete(ctx, id, nil, &metav1.DeleteOptions{})
 	return sync, err
@@ -4929,6 +5325,125 @@ func (s *storageResetAccessKey) UpdateResetAccessKey(ctx context.Context, object
 }
 
 func (s *storageResetAccessKey) DeleteResetAccessKey(ctx context.Context, id string) (bool, error) {
+	st := s.GetStandardStorage()
+	_, sync, err := st.Delete(ctx, id, nil, &metav1.DeleteOptions{})
+	return sync, err
+}
+
+// Runner Functions and Structs
+//
+// +k8s:deepcopy-gen=false
+type RunnerStrategy struct {
+	builders.DefaultStorageStrategy
+}
+
+// +k8s:deepcopy-gen=false
+type RunnerStatusStrategy struct {
+	builders.DefaultStatusStorageStrategy
+}
+
+// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+
+type RunnerList struct {
+	metav1.TypeMeta
+	metav1.ListMeta
+	Items []Runner
+}
+
+func (Runner) NewStatus() interface{} {
+	return RunnerStatus{}
+}
+
+func (pc *Runner) GetStatus() interface{} {
+	return pc.Status
+}
+
+func (pc *Runner) SetStatus(s interface{}) {
+	pc.Status = s.(RunnerStatus)
+}
+
+func (pc *Runner) GetSpec() interface{} {
+	return pc.Spec
+}
+
+func (pc *Runner) SetSpec(s interface{}) {
+	pc.Spec = s.(RunnerSpec)
+}
+
+func (pc *Runner) GetObjectMeta() *metav1.ObjectMeta {
+	return &pc.ObjectMeta
+}
+
+func (pc *Runner) SetGeneration(generation int64) {
+	pc.ObjectMeta.Generation = generation
+}
+
+func (pc Runner) GetGeneration() int64 {
+	return pc.ObjectMeta.Generation
+}
+
+// Registry is an interface for things that know how to store Runner.
+// +k8s:deepcopy-gen=false
+type RunnerRegistry interface {
+	ListRunners(ctx context.Context, options *internalversion.ListOptions) (*RunnerList, error)
+	GetRunner(ctx context.Context, id string, options *metav1.GetOptions) (*Runner, error)
+	CreateRunner(ctx context.Context, id *Runner) (*Runner, error)
+	UpdateRunner(ctx context.Context, id *Runner) (*Runner, error)
+	DeleteRunner(ctx context.Context, id string) (bool, error)
+}
+
+// NewRegistry returns a new Registry interface for the given Storage. Any mismatched types will panic.
+func NewRunnerRegistry(sp builders.StandardStorageProvider) RunnerRegistry {
+	return &storageRunner{sp}
+}
+
+// Implement Registry
+// storage puts strong typing around storage calls
+// +k8s:deepcopy-gen=false
+type storageRunner struct {
+	builders.StandardStorageProvider
+}
+
+func (s *storageRunner) ListRunners(ctx context.Context, options *internalversion.ListOptions) (*RunnerList, error) {
+	if options != nil && options.FieldSelector != nil && !options.FieldSelector.Empty() {
+		return nil, fmt.Errorf("field selector not supported yet")
+	}
+	st := s.GetStandardStorage()
+	obj, err := st.List(ctx, options)
+	if err != nil {
+		return nil, err
+	}
+	return obj.(*RunnerList), err
+}
+
+func (s *storageRunner) GetRunner(ctx context.Context, id string, options *metav1.GetOptions) (*Runner, error) {
+	st := s.GetStandardStorage()
+	obj, err := st.Get(ctx, id, options)
+	if err != nil {
+		return nil, err
+	}
+	return obj.(*Runner), nil
+}
+
+func (s *storageRunner) CreateRunner(ctx context.Context, object *Runner) (*Runner, error) {
+	st := s.GetStandardStorage()
+	obj, err := st.Create(ctx, object, nil, &metav1.CreateOptions{})
+	if err != nil {
+		return nil, err
+	}
+	return obj.(*Runner), nil
+}
+
+func (s *storageRunner) UpdateRunner(ctx context.Context, object *Runner) (*Runner, error) {
+	st := s.GetStandardStorage()
+	obj, _, err := st.Update(ctx, object.Name, rest.DefaultUpdatedObjectInfo(object), nil, nil, false, &metav1.UpdateOptions{})
+	if err != nil {
+		return nil, err
+	}
+	return obj.(*Runner), nil
+}
+
+func (s *storageRunner) DeleteRunner(ctx context.Context, id string) (bool, error) {
 	st := s.GetStandardStorage()
 	_, sync, err := st.Delete(ctx, id, nil, &metav1.DeleteOptions{})
 	return sync, err
