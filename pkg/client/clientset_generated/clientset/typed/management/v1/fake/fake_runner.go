@@ -114,3 +114,13 @@ func (c *FakeRunners) Patch(ctx context.Context, name string, pt types.PatchType
 	}
 	return obj.(*v1.Runner), err
 }
+
+// GetConfig takes name of the runner, and returns the corresponding runnerConfig object, and an error if there is any.
+func (c *FakeRunners) GetConfig(ctx context.Context, runnerName string, options metav1.GetOptions) (result *v1.RunnerConfig, err error) {
+	obj, err := c.Fake.
+		Invokes(testing.NewRootGetSubresourceAction(runnersResource, "config", runnerName), &v1.RunnerConfig{})
+	if obj == nil {
+		return nil, err
+	}
+	return obj.(*v1.RunnerConfig), err
+}

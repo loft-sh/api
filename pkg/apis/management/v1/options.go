@@ -137,12 +137,79 @@ type UserQuotasOptions struct {
 	Cluster []string `json:"cluster,omitempty"`
 }
 
+// +k8s:conversion-gen:explicit-from=net/url.Values
+// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+
+type DevPodUpOptions struct {
+	metav1.TypeMeta `json:",inline"`
+
+	// Options are the options to pass.
+	// +optional
+	Options string `json:"options,omitempty"`
+}
+
+// +k8s:conversion-gen:explicit-from=net/url.Values
+// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+
+type DevPodDeleteOptions struct {
+	metav1.TypeMeta `json:",inline"`
+
+	// Options are the options to pass.
+	// +optional
+	Options string `json:"options,omitempty"`
+}
+
+// +k8s:conversion-gen:explicit-from=net/url.Values
+// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+
+type DevPodStopOptions struct {
+	metav1.TypeMeta `json:",inline"`
+
+	// Options are the options to pass.
+	// +optional
+	Options string `json:"options,omitempty"`
+}
+
+// +k8s:conversion-gen:explicit-from=net/url.Values
+// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+
+type DevPodStatusOptions struct {
+	metav1.TypeMeta `json:",inline"`
+
+	// Options are the options to pass.
+	// +optional
+	Options string `json:"options,omitempty"`
+}
+
+// +k8s:conversion-gen:explicit-from=net/url.Values
+// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+
+type DevPodSshOptions struct {
+	metav1.TypeMeta `json:",inline"`
+
+	// Options are the options to pass.
+	// +optional
+	Options string `json:"options,omitempty"`
+}
+
 func InstallOptions(scheme *runtime.Scheme) error {
 	return addKnownOptionsTypes(scheme)
 }
 
 func addKnownOptionsTypes(scheme *runtime.Scheme) error {
 	// TODO this will get cleaned up with the scheme types are fixed
-	scheme.AddKnownTypes(SchemeGroupVersion, &VirtualClusterInstanceLogOptions{}, &TaskLogOptions{}, &UserSpacesOptions{}, &UserVirtualClustersOptions{}, &UserQuotasOptions{})
+	scheme.AddKnownTypes(
+		SchemeGroupVersion,
+		&VirtualClusterInstanceLogOptions{},
+		&TaskLogOptions{},
+		&UserSpacesOptions{},
+		&UserVirtualClustersOptions{},
+		&UserQuotasOptions{},
+		&DevPodUpOptions{},
+		&DevPodDeleteOptions{},
+		&DevPodStopOptions{},
+		&DevPodStatusOptions{},
+		&DevPodSshOptions{},
+	)
 	return nil
 }

@@ -38,6 +38,10 @@ func addKnownTypes(scheme *runtime.Scheme) error {
 		&ConfigList{},
 		&DevPodWorkspaceInstance{},
 		&DevPodWorkspaceInstanceList{},
+		&DevPodWorkspaceInstanceDelete{},
+		&DevPodWorkspaceInstanceGetStatus{},
+		&DevPodWorkspaceInstanceSsh{},
+		&DevPodWorkspaceInstanceStop{},
 		&DevPodWorkspaceInstanceUp{},
 		&DevPodWorkspaceTemplate{},
 		&DevPodWorkspaceTemplateList{},
@@ -79,6 +83,7 @@ func addKnownTypes(scheme *runtime.Scheme) error {
 		&ResetAccessKeyList{},
 		&Runner{},
 		&RunnerList{},
+		&RunnerConfig{},
 		&Self{},
 		&SelfList{},
 		&SelfSubjectAccessReview{},
@@ -164,6 +169,26 @@ var (
 		management.ManagementConfigStorage,
 		management.ManagementDevPodWorkspaceInstanceStorage,
 		builders.NewApiResourceWithStorage(
+			management.InternalDevPodWorkspaceInstanceDeleteREST,
+			func() runtime.Object { return &DevPodWorkspaceInstanceDelete{} }, // Register versioned resource
+			nil,
+			management.NewDevPodWorkspaceInstanceDeleteREST),
+		builders.NewApiResourceWithStorage(
+			management.InternalDevPodWorkspaceInstanceGetStatusREST,
+			func() runtime.Object { return &DevPodWorkspaceInstanceGetStatus{} }, // Register versioned resource
+			nil,
+			management.NewDevPodWorkspaceInstanceGetStatusREST),
+		builders.NewApiResourceWithStorage(
+			management.InternalDevPodWorkspaceInstanceSshREST,
+			func() runtime.Object { return &DevPodWorkspaceInstanceSsh{} }, // Register versioned resource
+			nil,
+			management.NewDevPodWorkspaceInstanceSshREST),
+		builders.NewApiResourceWithStorage(
+			management.InternalDevPodWorkspaceInstanceStopREST,
+			func() runtime.Object { return &DevPodWorkspaceInstanceStop{} }, // Register versioned resource
+			nil,
+			management.NewDevPodWorkspaceInstanceStopREST),
+		builders.NewApiResourceWithStorage(
 			management.InternalDevPodWorkspaceInstanceUpREST,
 			func() runtime.Object { return &DevPodWorkspaceInstanceUp{} }, // Register versioned resource
 			nil,
@@ -243,6 +268,11 @@ var (
 			func() runtime.Object { return &Runner{} },     // Register versioned resource
 			func() runtime.Object { return &RunnerList{} }, // Register versioned resource list
 			management.NewRunnerStatusREST),
+		builders.NewApiResourceWithStorage(
+			management.InternalRunnerConfigREST,
+			func() runtime.Object { return &RunnerConfig{} }, // Register versioned resource
+			nil,
+			management.NewRunnerConfigREST),
 		management.ManagementSelfStorage,
 		management.ManagementSelfSubjectAccessReviewStorage,
 		management.ManagementSharedSecretStorage,
@@ -466,6 +496,38 @@ type DevPodWorkspaceInstanceList struct {
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
 
+type DevPodWorkspaceInstanceDeleteList struct {
+	metav1.TypeMeta `json:",inline"`
+	metav1.ListMeta `json:"metadata,omitempty"`
+	Items           []DevPodWorkspaceInstanceDelete `json:"items"`
+}
+
+// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+
+type DevPodWorkspaceInstanceGetStatusList struct {
+	metav1.TypeMeta `json:",inline"`
+	metav1.ListMeta `json:"metadata,omitempty"`
+	Items           []DevPodWorkspaceInstanceGetStatus `json:"items"`
+}
+
+// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+
+type DevPodWorkspaceInstanceSshList struct {
+	metav1.TypeMeta `json:",inline"`
+	metav1.ListMeta `json:"metadata,omitempty"`
+	Items           []DevPodWorkspaceInstanceSsh `json:"items"`
+}
+
+// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+
+type DevPodWorkspaceInstanceStopList struct {
+	metav1.TypeMeta `json:",inline"`
+	metav1.ListMeta `json:"metadata,omitempty"`
+	Items           []DevPodWorkspaceInstanceStop `json:"items"`
+}
+
+// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+
 type DevPodWorkspaceInstanceUpList struct {
 	metav1.TypeMeta `json:",inline"`
 	metav1.ListMeta `json:"metadata,omitempty"`
@@ -670,6 +732,14 @@ type RunnerList struct {
 	metav1.TypeMeta `json:",inline"`
 	metav1.ListMeta `json:"metadata,omitempty"`
 	Items           []Runner `json:"items"`
+}
+
+// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+
+type RunnerConfigList struct {
+	metav1.TypeMeta `json:",inline"`
+	metav1.ListMeta `json:"metadata,omitempty"`
+	Items           []RunnerConfig `json:"items"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object

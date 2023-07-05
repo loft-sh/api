@@ -7,11 +7,13 @@ import (
 
 // +genclient
 // +genclient:nonNamespaced
+// +genclient:method=GetConfig,verb=get,subresource=config,result=github.com/loft-sh/api/v3/pkg/apis/management/v1.RunnerConfig
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
 
 // Runner holds the Runner information
 // +k8s:openapi-gen=true
 // +resource:path=runners,rest=RunnerREST,statusRest=RunnerStatusREST
+// +subresource:request=RunnerConfig,path=config,kind=RunnerConfig,rest=RunnerConfigREST
 type Runner struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`

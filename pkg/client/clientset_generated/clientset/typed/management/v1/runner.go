@@ -31,6 +31,8 @@ type RunnerInterface interface {
 	List(ctx context.Context, opts metav1.ListOptions) (*v1.RunnerList, error)
 	Watch(ctx context.Context, opts metav1.ListOptions) (watch.Interface, error)
 	Patch(ctx context.Context, name string, pt types.PatchType, data []byte, opts metav1.PatchOptions, subresources ...string) (result *v1.Runner, err error)
+	GetConfig(ctx context.Context, runnerName string, options metav1.GetOptions) (*v1.RunnerConfig, error)
+
 	RunnerExpansion
 }
 
@@ -162,6 +164,19 @@ func (c *runners) Patch(ctx context.Context, name string, pt types.PatchType, da
 		SubResource(subresources...).
 		VersionedParams(&opts, scheme.ParameterCodec).
 		Body(data).
+		Do(ctx).
+		Into(result)
+	return
+}
+
+// GetConfig takes name of the runner, and returns the corresponding v1.RunnerConfig object, and an error if there is any.
+func (c *runners) GetConfig(ctx context.Context, runnerName string, options metav1.GetOptions) (result *v1.RunnerConfig, err error) {
+	result = &v1.RunnerConfig{}
+	err = c.client.Get().
+		Resource("runners").
+		Name(runnerName).
+		SubResource("config").
+		VersionedParams(&options, scheme.ParameterCodec).
 		Do(ctx).
 		Into(result)
 	return

@@ -1,6 +1,7 @@
 package v1
 
 import (
+	corev1 "k8s.io/api/core/v1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 )
 
@@ -81,23 +82,39 @@ type DevPodWorkspaceTemplateSpec struct {
 type DevPodWorkspaceTemplateDefinition struct {
 	// Provider holds the DevPod provider configuration
 	Provider DevPodWorkspaceProvider `json:"provider"`
+
+	// Env are environment options to set when using the provider
+	// +optional
+	Env map[string]DevPodProviderOption `json:"env,omitempty"`
 }
 
 type DevPodWorkspaceProvider struct {
-	// Name is the name of the provider
+	// Name is the name of the provider. This can also be an url.
 	Name string `json:"name"`
-
-	// Version is the provider version
-	// +optional
-	Version string `json:"version,omitempty"`
-
-	// Source is the source the provider will be loaded from
-	// +optional
-	Source DevPodProviderSource `json:"source,omitempty"`
 
 	// Options are the provider option values
 	// +optional
-	Options map[string]string `json:"options,omitempty"`
+	Options map[string]DevPodProviderOption `json:"options,omitempty"`
+}
+
+type DevPodProviderOption struct {
+	// Value of this option.
+	// +optional
+	Value string `json:"value,omitempty"`
+
+	// ValueFrom specifies a secret where this value should be taken from.
+	// +optional
+	ValueFrom *DevPodProviderOptionFrom `json:"valueFrom,omitempty"`
+}
+
+type DevPodProviderOptionFrom struct {
+	// ProjectSecretRef is the project secret to use for this value.
+	// +optional
+	ProjectSecretRef *corev1.SecretKeySelector `json:"projectSecretRef,omitempty"`
+
+	// SharedSecretRef is the shared secret to use for this value.
+	// +optional
+	SharedSecretRef *corev1.SecretKeySelector `json:"sharedSecretRef,omitempty"`
 }
 
 type DevPodProviderSource struct {

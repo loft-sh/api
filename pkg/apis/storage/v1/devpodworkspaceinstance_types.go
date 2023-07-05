@@ -5,6 +5,24 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 )
 
+var (
+	DevPodWorkspaceConditions = []agentstoragev1.ConditionType{}
+
+	// DevPodWorkspaceIDLabel holds the actual workspace id of the devpod workspace
+	DevPodWorkspaceIDLabel = "loft.sh/workspace-id"
+
+	// DevPodWorkspaceUIDLabel holds the actual workspace uid of the devpod workspace
+	DevPodWorkspaceUIDLabel = "loft.sh/workspace-uid"
+)
+
+var (
+	DevPodFlagsUp     = "DEVPOD_FLAGS_UP"
+	DevPodFlagsDelete = "DEVPOD_FLAGS_DELETE"
+	DevPodFlagsStatus = "DEVPOD_FLAGS_STATUS"
+	DevPodFlagsSsh    = "DEVPOD_FLAGS_SSH"
+	DevPodFlagsStop   = "DEVPOD_FLAGS_STOP"
+)
+
 // +genclient
 // +genclient:noStatus
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -82,7 +100,7 @@ type DevPodWorkspaceInstanceSpec struct {
 type RunnerRef struct {
 	// Runner is the connected runner the workspace will be created in
 	// +optional
-	Runner string `json:"cluster,omitempty"`
+	Runner string `json:"runner,omitempty"`
 }
 
 type DevPodWorkspaceInstanceStatus struct {
@@ -107,6 +125,10 @@ type DevPodWorkspaceInstanceStatus struct {
 	// Instance is the template rendered with all the parameters
 	// +optional
 	Instance *DevPodWorkspaceTemplateDefinition `json:"instance,omitempty"`
+
+	// IgnoreReconciliation ignores reconciliation for this object
+	// +optional
+	IgnoreReconciliation bool `json:"ignoreReconciliation,omitempty"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object

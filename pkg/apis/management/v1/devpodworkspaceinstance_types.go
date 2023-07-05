@@ -14,6 +14,10 @@ import (
 // +k8s:openapi-gen=true
 // +resource:path=devpodworkspaceinstances,rest=DevPodWorkspaceInstanceREST
 // +subresource:request=DevPodWorkspaceInstanceUp,path=up,kind=DevPodWorkspaceInstanceUp,rest=DevPodWorkspaceInstanceUpREST
+// +subresource:request=DevPodWorkspaceInstanceDelete,path=delete,kind=DevPodWorkspaceInstanceDelete,rest=DevPodWorkspaceInstanceDeleteREST
+// +subresource:request=DevPodWorkspaceInstanceSsh,path=ssh,kind=DevPodWorkspaceInstanceSsh,rest=DevPodWorkspaceInstanceSshREST
+// +subresource:request=DevPodWorkspaceInstanceStop,path=stop,kind=DevPodWorkspaceInstanceStop,rest=DevPodWorkspaceInstanceStopREST
+// +subresource:request=DevPodWorkspaceInstanceGetStatus,path=getstatus,kind=DevPodWorkspaceInstanceGetStatus,rest=DevPodWorkspaceInstanceGetStatusREST
 type DevPodWorkspaceInstance struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
