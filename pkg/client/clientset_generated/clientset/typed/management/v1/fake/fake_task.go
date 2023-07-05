@@ -5,10 +5,9 @@ package fake
 import (
 	"context"
 
-	managementv1 "github.com/loft-sh/api/v3/pkg/apis/management/v1"
-	v1 "k8s.io/apimachinery/pkg/apis/meta/v1"
+	v1 "github.com/loft-sh/api/v3/pkg/apis/management/v1"
+	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	labels "k8s.io/apimachinery/pkg/labels"
-	schema "k8s.io/apimachinery/pkg/runtime/schema"
 	types "k8s.io/apimachinery/pkg/types"
 	watch "k8s.io/apimachinery/pkg/watch"
 	testing "k8s.io/client-go/testing"
@@ -19,24 +18,24 @@ type FakeTasks struct {
 	Fake *FakeManagementV1
 }
 
-var tasksResource = schema.GroupVersionResource{Group: "management.loft.sh", Version: "v1", Resource: "tasks"}
+var tasksResource = v1.SchemeGroupVersion.WithResource("tasks")
 
-var tasksKind = schema.GroupVersionKind{Group: "management.loft.sh", Version: "v1", Kind: "Task"}
+var tasksKind = v1.SchemeGroupVersion.WithKind("Task")
 
 // Get takes name of the task, and returns the corresponding task object, and an error if there is any.
-func (c *FakeTasks) Get(ctx context.Context, name string, options v1.GetOptions) (result *managementv1.Task, err error) {
+func (c *FakeTasks) Get(ctx context.Context, name string, options metav1.GetOptions) (result *v1.Task, err error) {
 	obj, err := c.Fake.
-		Invokes(testing.NewRootGetAction(tasksResource, name), &managementv1.Task{})
+		Invokes(testing.NewRootGetAction(tasksResource, name), &v1.Task{})
 	if obj == nil {
 		return nil, err
 	}
-	return obj.(*managementv1.Task), err
+	return obj.(*v1.Task), err
 }
 
 // List takes label and field selectors, and returns the list of Tasks that match those selectors.
-func (c *FakeTasks) List(ctx context.Context, opts v1.ListOptions) (result *managementv1.TaskList, err error) {
+func (c *FakeTasks) List(ctx context.Context, opts metav1.ListOptions) (result *v1.TaskList, err error) {
 	obj, err := c.Fake.
-		Invokes(testing.NewRootListAction(tasksResource, tasksKind, opts), &managementv1.TaskList{})
+		Invokes(testing.NewRootListAction(tasksResource, tasksKind, opts), &v1.TaskList{})
 	if obj == nil {
 		return nil, err
 	}
@@ -45,8 +44,8 @@ func (c *FakeTasks) List(ctx context.Context, opts v1.ListOptions) (result *mana
 	if label == nil {
 		label = labels.Everything()
 	}
-	list := &managementv1.TaskList{ListMeta: obj.(*managementv1.TaskList).ListMeta}
-	for _, item := range obj.(*managementv1.TaskList).Items {
+	list := &v1.TaskList{ListMeta: obj.(*v1.TaskList).ListMeta}
+	for _, item := range obj.(*v1.TaskList).Items {
 		if label.Matches(labels.Set(item.Labels)) {
 			list.Items = append(list.Items, item)
 		}
@@ -55,63 +54,63 @@ func (c *FakeTasks) List(ctx context.Context, opts v1.ListOptions) (result *mana
 }
 
 // Watch returns a watch.Interface that watches the requested tasks.
-func (c *FakeTasks) Watch(ctx context.Context, opts v1.ListOptions) (watch.Interface, error) {
+func (c *FakeTasks) Watch(ctx context.Context, opts metav1.ListOptions) (watch.Interface, error) {
 	return c.Fake.
 		InvokesWatch(testing.NewRootWatchAction(tasksResource, opts))
 }
 
 // Create takes the representation of a task and creates it.  Returns the server's representation of the task, and an error, if there is any.
-func (c *FakeTasks) Create(ctx context.Context, task *managementv1.Task, opts v1.CreateOptions) (result *managementv1.Task, err error) {
+func (c *FakeTasks) Create(ctx context.Context, task *v1.Task, opts metav1.CreateOptions) (result *v1.Task, err error) {
 	obj, err := c.Fake.
-		Invokes(testing.NewRootCreateAction(tasksResource, task), &managementv1.Task{})
+		Invokes(testing.NewRootCreateAction(tasksResource, task), &v1.Task{})
 	if obj == nil {
 		return nil, err
 	}
-	return obj.(*managementv1.Task), err
+	return obj.(*v1.Task), err
 }
 
 // Update takes the representation of a task and updates it. Returns the server's representation of the task, and an error, if there is any.
-func (c *FakeTasks) Update(ctx context.Context, task *managementv1.Task, opts v1.UpdateOptions) (result *managementv1.Task, err error) {
+func (c *FakeTasks) Update(ctx context.Context, task *v1.Task, opts metav1.UpdateOptions) (result *v1.Task, err error) {
 	obj, err := c.Fake.
-		Invokes(testing.NewRootUpdateAction(tasksResource, task), &managementv1.Task{})
+		Invokes(testing.NewRootUpdateAction(tasksResource, task), &v1.Task{})
 	if obj == nil {
 		return nil, err
 	}
-	return obj.(*managementv1.Task), err
+	return obj.(*v1.Task), err
 }
 
 // UpdateStatus was generated because the type contains a Status member.
 // Add a +genclient:noStatus comment above the type to avoid generating UpdateStatus().
-func (c *FakeTasks) UpdateStatus(ctx context.Context, task *managementv1.Task, opts v1.UpdateOptions) (*managementv1.Task, error) {
+func (c *FakeTasks) UpdateStatus(ctx context.Context, task *v1.Task, opts metav1.UpdateOptions) (*v1.Task, error) {
 	obj, err := c.Fake.
-		Invokes(testing.NewRootUpdateSubresourceAction(tasksResource, "status", task), &managementv1.Task{})
+		Invokes(testing.NewRootUpdateSubresourceAction(tasksResource, "status", task), &v1.Task{})
 	if obj == nil {
 		return nil, err
 	}
-	return obj.(*managementv1.Task), err
+	return obj.(*v1.Task), err
 }
 
 // Delete takes name of the task and deletes it. Returns an error if one occurs.
-func (c *FakeTasks) Delete(ctx context.Context, name string, opts v1.DeleteOptions) error {
+func (c *FakeTasks) Delete(ctx context.Context, name string, opts metav1.DeleteOptions) error {
 	_, err := c.Fake.
-		Invokes(testing.NewRootDeleteActionWithOptions(tasksResource, name, opts), &managementv1.Task{})
+		Invokes(testing.NewRootDeleteActionWithOptions(tasksResource, name, opts), &v1.Task{})
 	return err
 }
 
 // DeleteCollection deletes a collection of objects.
-func (c *FakeTasks) DeleteCollection(ctx context.Context, opts v1.DeleteOptions, listOpts v1.ListOptions) error {
+func (c *FakeTasks) DeleteCollection(ctx context.Context, opts metav1.DeleteOptions, listOpts metav1.ListOptions) error {
 	action := testing.NewRootDeleteCollectionAction(tasksResource, listOpts)
 
-	_, err := c.Fake.Invokes(action, &managementv1.TaskList{})
+	_, err := c.Fake.Invokes(action, &v1.TaskList{})
 	return err
 }
 
 // Patch applies the patch and returns the patched task.
-func (c *FakeTasks) Patch(ctx context.Context, name string, pt types.PatchType, data []byte, opts v1.PatchOptions, subresources ...string) (result *managementv1.Task, err error) {
+func (c *FakeTasks) Patch(ctx context.Context, name string, pt types.PatchType, data []byte, opts metav1.PatchOptions, subresources ...string) (result *v1.Task, err error) {
 	obj, err := c.Fake.
-		Invokes(testing.NewRootPatchSubresourceAction(tasksResource, name, pt, data, subresources...), &managementv1.Task{})
+		Invokes(testing.NewRootPatchSubresourceAction(tasksResource, name, pt, data, subresources...), &v1.Task{})
 	if obj == nil {
 		return nil, err
 	}
-	return obj.(*managementv1.Task), err
+	return obj.(*v1.Task), err
 }

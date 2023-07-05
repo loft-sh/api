@@ -5,10 +5,9 @@ package fake
 import (
 	"context"
 
-	storagev1 "github.com/loft-sh/api/v3/pkg/apis/storage/v1"
-	v1 "k8s.io/apimachinery/pkg/apis/meta/v1"
+	v1 "github.com/loft-sh/api/v3/pkg/apis/storage/v1"
+	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	labels "k8s.io/apimachinery/pkg/labels"
-	schema "k8s.io/apimachinery/pkg/runtime/schema"
 	types "k8s.io/apimachinery/pkg/types"
 	watch "k8s.io/apimachinery/pkg/watch"
 	testing "k8s.io/client-go/testing"
@@ -19,24 +18,24 @@ type FakeVirtualClusterTemplates struct {
 	Fake *FakeStorageV1
 }
 
-var virtualclustertemplatesResource = schema.GroupVersionResource{Group: "storage.loft.sh", Version: "v1", Resource: "virtualclustertemplates"}
+var virtualclustertemplatesResource = v1.SchemeGroupVersion.WithResource("virtualclustertemplates")
 
-var virtualclustertemplatesKind = schema.GroupVersionKind{Group: "storage.loft.sh", Version: "v1", Kind: "VirtualClusterTemplate"}
+var virtualclustertemplatesKind = v1.SchemeGroupVersion.WithKind("VirtualClusterTemplate")
 
 // Get takes name of the virtualClusterTemplate, and returns the corresponding virtualClusterTemplate object, and an error if there is any.
-func (c *FakeVirtualClusterTemplates) Get(ctx context.Context, name string, options v1.GetOptions) (result *storagev1.VirtualClusterTemplate, err error) {
+func (c *FakeVirtualClusterTemplates) Get(ctx context.Context, name string, options metav1.GetOptions) (result *v1.VirtualClusterTemplate, err error) {
 	obj, err := c.Fake.
-		Invokes(testing.NewRootGetAction(virtualclustertemplatesResource, name), &storagev1.VirtualClusterTemplate{})
+		Invokes(testing.NewRootGetAction(virtualclustertemplatesResource, name), &v1.VirtualClusterTemplate{})
 	if obj == nil {
 		return nil, err
 	}
-	return obj.(*storagev1.VirtualClusterTemplate), err
+	return obj.(*v1.VirtualClusterTemplate), err
 }
 
 // List takes label and field selectors, and returns the list of VirtualClusterTemplates that match those selectors.
-func (c *FakeVirtualClusterTemplates) List(ctx context.Context, opts v1.ListOptions) (result *storagev1.VirtualClusterTemplateList, err error) {
+func (c *FakeVirtualClusterTemplates) List(ctx context.Context, opts metav1.ListOptions) (result *v1.VirtualClusterTemplateList, err error) {
 	obj, err := c.Fake.
-		Invokes(testing.NewRootListAction(virtualclustertemplatesResource, virtualclustertemplatesKind, opts), &storagev1.VirtualClusterTemplateList{})
+		Invokes(testing.NewRootListAction(virtualclustertemplatesResource, virtualclustertemplatesKind, opts), &v1.VirtualClusterTemplateList{})
 	if obj == nil {
 		return nil, err
 	}
@@ -45,8 +44,8 @@ func (c *FakeVirtualClusterTemplates) List(ctx context.Context, opts v1.ListOpti
 	if label == nil {
 		label = labels.Everything()
 	}
-	list := &storagev1.VirtualClusterTemplateList{ListMeta: obj.(*storagev1.VirtualClusterTemplateList).ListMeta}
-	for _, item := range obj.(*storagev1.VirtualClusterTemplateList).Items {
+	list := &v1.VirtualClusterTemplateList{ListMeta: obj.(*v1.VirtualClusterTemplateList).ListMeta}
+	for _, item := range obj.(*v1.VirtualClusterTemplateList).Items {
 		if label.Matches(labels.Set(item.Labels)) {
 			list.Items = append(list.Items, item)
 		}
@@ -55,63 +54,63 @@ func (c *FakeVirtualClusterTemplates) List(ctx context.Context, opts v1.ListOpti
 }
 
 // Watch returns a watch.Interface that watches the requested virtualClusterTemplates.
-func (c *FakeVirtualClusterTemplates) Watch(ctx context.Context, opts v1.ListOptions) (watch.Interface, error) {
+func (c *FakeVirtualClusterTemplates) Watch(ctx context.Context, opts metav1.ListOptions) (watch.Interface, error) {
 	return c.Fake.
 		InvokesWatch(testing.NewRootWatchAction(virtualclustertemplatesResource, opts))
 }
 
 // Create takes the representation of a virtualClusterTemplate and creates it.  Returns the server's representation of the virtualClusterTemplate, and an error, if there is any.
-func (c *FakeVirtualClusterTemplates) Create(ctx context.Context, virtualClusterTemplate *storagev1.VirtualClusterTemplate, opts v1.CreateOptions) (result *storagev1.VirtualClusterTemplate, err error) {
+func (c *FakeVirtualClusterTemplates) Create(ctx context.Context, virtualClusterTemplate *v1.VirtualClusterTemplate, opts metav1.CreateOptions) (result *v1.VirtualClusterTemplate, err error) {
 	obj, err := c.Fake.
-		Invokes(testing.NewRootCreateAction(virtualclustertemplatesResource, virtualClusterTemplate), &storagev1.VirtualClusterTemplate{})
+		Invokes(testing.NewRootCreateAction(virtualclustertemplatesResource, virtualClusterTemplate), &v1.VirtualClusterTemplate{})
 	if obj == nil {
 		return nil, err
 	}
-	return obj.(*storagev1.VirtualClusterTemplate), err
+	return obj.(*v1.VirtualClusterTemplate), err
 }
 
 // Update takes the representation of a virtualClusterTemplate and updates it. Returns the server's representation of the virtualClusterTemplate, and an error, if there is any.
-func (c *FakeVirtualClusterTemplates) Update(ctx context.Context, virtualClusterTemplate *storagev1.VirtualClusterTemplate, opts v1.UpdateOptions) (result *storagev1.VirtualClusterTemplate, err error) {
+func (c *FakeVirtualClusterTemplates) Update(ctx context.Context, virtualClusterTemplate *v1.VirtualClusterTemplate, opts metav1.UpdateOptions) (result *v1.VirtualClusterTemplate, err error) {
 	obj, err := c.Fake.
-		Invokes(testing.NewRootUpdateAction(virtualclustertemplatesResource, virtualClusterTemplate), &storagev1.VirtualClusterTemplate{})
+		Invokes(testing.NewRootUpdateAction(virtualclustertemplatesResource, virtualClusterTemplate), &v1.VirtualClusterTemplate{})
 	if obj == nil {
 		return nil, err
 	}
-	return obj.(*storagev1.VirtualClusterTemplate), err
+	return obj.(*v1.VirtualClusterTemplate), err
 }
 
 // UpdateStatus was generated because the type contains a Status member.
 // Add a +genclient:noStatus comment above the type to avoid generating UpdateStatus().
-func (c *FakeVirtualClusterTemplates) UpdateStatus(ctx context.Context, virtualClusterTemplate *storagev1.VirtualClusterTemplate, opts v1.UpdateOptions) (*storagev1.VirtualClusterTemplate, error) {
+func (c *FakeVirtualClusterTemplates) UpdateStatus(ctx context.Context, virtualClusterTemplate *v1.VirtualClusterTemplate, opts metav1.UpdateOptions) (*v1.VirtualClusterTemplate, error) {
 	obj, err := c.Fake.
-		Invokes(testing.NewRootUpdateSubresourceAction(virtualclustertemplatesResource, "status", virtualClusterTemplate), &storagev1.VirtualClusterTemplate{})
+		Invokes(testing.NewRootUpdateSubresourceAction(virtualclustertemplatesResource, "status", virtualClusterTemplate), &v1.VirtualClusterTemplate{})
 	if obj == nil {
 		return nil, err
 	}
-	return obj.(*storagev1.VirtualClusterTemplate), err
+	return obj.(*v1.VirtualClusterTemplate), err
 }
 
 // Delete takes name of the virtualClusterTemplate and deletes it. Returns an error if one occurs.
-func (c *FakeVirtualClusterTemplates) Delete(ctx context.Context, name string, opts v1.DeleteOptions) error {
+func (c *FakeVirtualClusterTemplates) Delete(ctx context.Context, name string, opts metav1.DeleteOptions) error {
 	_, err := c.Fake.
-		Invokes(testing.NewRootDeleteActionWithOptions(virtualclustertemplatesResource, name, opts), &storagev1.VirtualClusterTemplate{})
+		Invokes(testing.NewRootDeleteActionWithOptions(virtualclustertemplatesResource, name, opts), &v1.VirtualClusterTemplate{})
 	return err
 }
 
 // DeleteCollection deletes a collection of objects.
-func (c *FakeVirtualClusterTemplates) DeleteCollection(ctx context.Context, opts v1.DeleteOptions, listOpts v1.ListOptions) error {
+func (c *FakeVirtualClusterTemplates) DeleteCollection(ctx context.Context, opts metav1.DeleteOptions, listOpts metav1.ListOptions) error {
 	action := testing.NewRootDeleteCollectionAction(virtualclustertemplatesResource, listOpts)
 
-	_, err := c.Fake.Invokes(action, &storagev1.VirtualClusterTemplateList{})
+	_, err := c.Fake.Invokes(action, &v1.VirtualClusterTemplateList{})
 	return err
 }
 
 // Patch applies the patch and returns the patched virtualClusterTemplate.
-func (c *FakeVirtualClusterTemplates) Patch(ctx context.Context, name string, pt types.PatchType, data []byte, opts v1.PatchOptions, subresources ...string) (result *storagev1.VirtualClusterTemplate, err error) {
+func (c *FakeVirtualClusterTemplates) Patch(ctx context.Context, name string, pt types.PatchType, data []byte, opts metav1.PatchOptions, subresources ...string) (result *v1.VirtualClusterTemplate, err error) {
 	obj, err := c.Fake.
-		Invokes(testing.NewRootPatchSubresourceAction(virtualclustertemplatesResource, name, pt, data, subresources...), &storagev1.VirtualClusterTemplate{})
+		Invokes(testing.NewRootPatchSubresourceAction(virtualclustertemplatesResource, name, pt, data, subresources...), &v1.VirtualClusterTemplate{})
 	if obj == nil {
 		return nil, err
 	}
-	return obj.(*storagev1.VirtualClusterTemplate), err
+	return obj.(*v1.VirtualClusterTemplate), err
 }

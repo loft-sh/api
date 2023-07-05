@@ -5,10 +5,9 @@ package fake
 import (
 	"context"
 
-	managementv1 "github.com/loft-sh/api/v3/pkg/apis/management/v1"
-	v1 "k8s.io/apimachinery/pkg/apis/meta/v1"
+	v1 "github.com/loft-sh/api/v3/pkg/apis/management/v1"
+	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	labels "k8s.io/apimachinery/pkg/labels"
-	schema "k8s.io/apimachinery/pkg/runtime/schema"
 	types "k8s.io/apimachinery/pkg/types"
 	watch "k8s.io/apimachinery/pkg/watch"
 	testing "k8s.io/client-go/testing"
@@ -19,24 +18,24 @@ type FakeDevPodWorkspaceTemplates struct {
 	Fake *FakeManagementV1
 }
 
-var devpodworkspacetemplatesResource = schema.GroupVersionResource{Group: "management.loft.sh", Version: "v1", Resource: "devpodworkspacetemplates"}
+var devpodworkspacetemplatesResource = v1.SchemeGroupVersion.WithResource("devpodworkspacetemplates")
 
-var devpodworkspacetemplatesKind = schema.GroupVersionKind{Group: "management.loft.sh", Version: "v1", Kind: "DevPodWorkspaceTemplate"}
+var devpodworkspacetemplatesKind = v1.SchemeGroupVersion.WithKind("DevPodWorkspaceTemplate")
 
 // Get takes name of the devPodWorkspaceTemplate, and returns the corresponding devPodWorkspaceTemplate object, and an error if there is any.
-func (c *FakeDevPodWorkspaceTemplates) Get(ctx context.Context, name string, options v1.GetOptions) (result *managementv1.DevPodWorkspaceTemplate, err error) {
+func (c *FakeDevPodWorkspaceTemplates) Get(ctx context.Context, name string, options metav1.GetOptions) (result *v1.DevPodWorkspaceTemplate, err error) {
 	obj, err := c.Fake.
-		Invokes(testing.NewRootGetAction(devpodworkspacetemplatesResource, name), &managementv1.DevPodWorkspaceTemplate{})
+		Invokes(testing.NewRootGetAction(devpodworkspacetemplatesResource, name), &v1.DevPodWorkspaceTemplate{})
 	if obj == nil {
 		return nil, err
 	}
-	return obj.(*managementv1.DevPodWorkspaceTemplate), err
+	return obj.(*v1.DevPodWorkspaceTemplate), err
 }
 
 // List takes label and field selectors, and returns the list of DevPodWorkspaceTemplates that match those selectors.
-func (c *FakeDevPodWorkspaceTemplates) List(ctx context.Context, opts v1.ListOptions) (result *managementv1.DevPodWorkspaceTemplateList, err error) {
+func (c *FakeDevPodWorkspaceTemplates) List(ctx context.Context, opts metav1.ListOptions) (result *v1.DevPodWorkspaceTemplateList, err error) {
 	obj, err := c.Fake.
-		Invokes(testing.NewRootListAction(devpodworkspacetemplatesResource, devpodworkspacetemplatesKind, opts), &managementv1.DevPodWorkspaceTemplateList{})
+		Invokes(testing.NewRootListAction(devpodworkspacetemplatesResource, devpodworkspacetemplatesKind, opts), &v1.DevPodWorkspaceTemplateList{})
 	if obj == nil {
 		return nil, err
 	}
@@ -45,8 +44,8 @@ func (c *FakeDevPodWorkspaceTemplates) List(ctx context.Context, opts v1.ListOpt
 	if label == nil {
 		label = labels.Everything()
 	}
-	list := &managementv1.DevPodWorkspaceTemplateList{ListMeta: obj.(*managementv1.DevPodWorkspaceTemplateList).ListMeta}
-	for _, item := range obj.(*managementv1.DevPodWorkspaceTemplateList).Items {
+	list := &v1.DevPodWorkspaceTemplateList{ListMeta: obj.(*v1.DevPodWorkspaceTemplateList).ListMeta}
+	for _, item := range obj.(*v1.DevPodWorkspaceTemplateList).Items {
 		if label.Matches(labels.Set(item.Labels)) {
 			list.Items = append(list.Items, item)
 		}
@@ -55,63 +54,63 @@ func (c *FakeDevPodWorkspaceTemplates) List(ctx context.Context, opts v1.ListOpt
 }
 
 // Watch returns a watch.Interface that watches the requested devPodWorkspaceTemplates.
-func (c *FakeDevPodWorkspaceTemplates) Watch(ctx context.Context, opts v1.ListOptions) (watch.Interface, error) {
+func (c *FakeDevPodWorkspaceTemplates) Watch(ctx context.Context, opts metav1.ListOptions) (watch.Interface, error) {
 	return c.Fake.
 		InvokesWatch(testing.NewRootWatchAction(devpodworkspacetemplatesResource, opts))
 }
 
 // Create takes the representation of a devPodWorkspaceTemplate and creates it.  Returns the server's representation of the devPodWorkspaceTemplate, and an error, if there is any.
-func (c *FakeDevPodWorkspaceTemplates) Create(ctx context.Context, devPodWorkspaceTemplate *managementv1.DevPodWorkspaceTemplate, opts v1.CreateOptions) (result *managementv1.DevPodWorkspaceTemplate, err error) {
+func (c *FakeDevPodWorkspaceTemplates) Create(ctx context.Context, devPodWorkspaceTemplate *v1.DevPodWorkspaceTemplate, opts metav1.CreateOptions) (result *v1.DevPodWorkspaceTemplate, err error) {
 	obj, err := c.Fake.
-		Invokes(testing.NewRootCreateAction(devpodworkspacetemplatesResource, devPodWorkspaceTemplate), &managementv1.DevPodWorkspaceTemplate{})
+		Invokes(testing.NewRootCreateAction(devpodworkspacetemplatesResource, devPodWorkspaceTemplate), &v1.DevPodWorkspaceTemplate{})
 	if obj == nil {
 		return nil, err
 	}
-	return obj.(*managementv1.DevPodWorkspaceTemplate), err
+	return obj.(*v1.DevPodWorkspaceTemplate), err
 }
 
 // Update takes the representation of a devPodWorkspaceTemplate and updates it. Returns the server's representation of the devPodWorkspaceTemplate, and an error, if there is any.
-func (c *FakeDevPodWorkspaceTemplates) Update(ctx context.Context, devPodWorkspaceTemplate *managementv1.DevPodWorkspaceTemplate, opts v1.UpdateOptions) (result *managementv1.DevPodWorkspaceTemplate, err error) {
+func (c *FakeDevPodWorkspaceTemplates) Update(ctx context.Context, devPodWorkspaceTemplate *v1.DevPodWorkspaceTemplate, opts metav1.UpdateOptions) (result *v1.DevPodWorkspaceTemplate, err error) {
 	obj, err := c.Fake.
-		Invokes(testing.NewRootUpdateAction(devpodworkspacetemplatesResource, devPodWorkspaceTemplate), &managementv1.DevPodWorkspaceTemplate{})
+		Invokes(testing.NewRootUpdateAction(devpodworkspacetemplatesResource, devPodWorkspaceTemplate), &v1.DevPodWorkspaceTemplate{})
 	if obj == nil {
 		return nil, err
 	}
-	return obj.(*managementv1.DevPodWorkspaceTemplate), err
+	return obj.(*v1.DevPodWorkspaceTemplate), err
 }
 
 // UpdateStatus was generated because the type contains a Status member.
 // Add a +genclient:noStatus comment above the type to avoid generating UpdateStatus().
-func (c *FakeDevPodWorkspaceTemplates) UpdateStatus(ctx context.Context, devPodWorkspaceTemplate *managementv1.DevPodWorkspaceTemplate, opts v1.UpdateOptions) (*managementv1.DevPodWorkspaceTemplate, error) {
+func (c *FakeDevPodWorkspaceTemplates) UpdateStatus(ctx context.Context, devPodWorkspaceTemplate *v1.DevPodWorkspaceTemplate, opts metav1.UpdateOptions) (*v1.DevPodWorkspaceTemplate, error) {
 	obj, err := c.Fake.
-		Invokes(testing.NewRootUpdateSubresourceAction(devpodworkspacetemplatesResource, "status", devPodWorkspaceTemplate), &managementv1.DevPodWorkspaceTemplate{})
+		Invokes(testing.NewRootUpdateSubresourceAction(devpodworkspacetemplatesResource, "status", devPodWorkspaceTemplate), &v1.DevPodWorkspaceTemplate{})
 	if obj == nil {
 		return nil, err
 	}
-	return obj.(*managementv1.DevPodWorkspaceTemplate), err
+	return obj.(*v1.DevPodWorkspaceTemplate), err
 }
 
 // Delete takes name of the devPodWorkspaceTemplate and deletes it. Returns an error if one occurs.
-func (c *FakeDevPodWorkspaceTemplates) Delete(ctx context.Context, name string, opts v1.DeleteOptions) error {
+func (c *FakeDevPodWorkspaceTemplates) Delete(ctx context.Context, name string, opts metav1.DeleteOptions) error {
 	_, err := c.Fake.
-		Invokes(testing.NewRootDeleteActionWithOptions(devpodworkspacetemplatesResource, name, opts), &managementv1.DevPodWorkspaceTemplate{})
+		Invokes(testing.NewRootDeleteActionWithOptions(devpodworkspacetemplatesResource, name, opts), &v1.DevPodWorkspaceTemplate{})
 	return err
 }
 
 // DeleteCollection deletes a collection of objects.
-func (c *FakeDevPodWorkspaceTemplates) DeleteCollection(ctx context.Context, opts v1.DeleteOptions, listOpts v1.ListOptions) error {
+func (c *FakeDevPodWorkspaceTemplates) DeleteCollection(ctx context.Context, opts metav1.DeleteOptions, listOpts metav1.ListOptions) error {
 	action := testing.NewRootDeleteCollectionAction(devpodworkspacetemplatesResource, listOpts)
 
-	_, err := c.Fake.Invokes(action, &managementv1.DevPodWorkspaceTemplateList{})
+	_, err := c.Fake.Invokes(action, &v1.DevPodWorkspaceTemplateList{})
 	return err
 }
 
 // Patch applies the patch and returns the patched devPodWorkspaceTemplate.
-func (c *FakeDevPodWorkspaceTemplates) Patch(ctx context.Context, name string, pt types.PatchType, data []byte, opts v1.PatchOptions, subresources ...string) (result *managementv1.DevPodWorkspaceTemplate, err error) {
+func (c *FakeDevPodWorkspaceTemplates) Patch(ctx context.Context, name string, pt types.PatchType, data []byte, opts metav1.PatchOptions, subresources ...string) (result *v1.DevPodWorkspaceTemplate, err error) {
 	obj, err := c.Fake.
-		Invokes(testing.NewRootPatchSubresourceAction(devpodworkspacetemplatesResource, name, pt, data, subresources...), &managementv1.DevPodWorkspaceTemplate{})
+		Invokes(testing.NewRootPatchSubresourceAction(devpodworkspacetemplatesResource, name, pt, data, subresources...), &v1.DevPodWorkspaceTemplate{})
 	if obj == nil {
 		return nil, err
 	}
-	return obj.(*managementv1.DevPodWorkspaceTemplate), err
+	return obj.(*v1.DevPodWorkspaceTemplate), err
 }

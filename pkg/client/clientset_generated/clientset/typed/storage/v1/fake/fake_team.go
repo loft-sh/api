@@ -5,10 +5,9 @@ package fake
 import (
 	"context"
 
-	storagev1 "github.com/loft-sh/api/v3/pkg/apis/storage/v1"
-	v1 "k8s.io/apimachinery/pkg/apis/meta/v1"
+	v1 "github.com/loft-sh/api/v3/pkg/apis/storage/v1"
+	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	labels "k8s.io/apimachinery/pkg/labels"
-	schema "k8s.io/apimachinery/pkg/runtime/schema"
 	types "k8s.io/apimachinery/pkg/types"
 	watch "k8s.io/apimachinery/pkg/watch"
 	testing "k8s.io/client-go/testing"
@@ -19,24 +18,24 @@ type FakeTeams struct {
 	Fake *FakeStorageV1
 }
 
-var teamsResource = schema.GroupVersionResource{Group: "storage.loft.sh", Version: "v1", Resource: "teams"}
+var teamsResource = v1.SchemeGroupVersion.WithResource("teams")
 
-var teamsKind = schema.GroupVersionKind{Group: "storage.loft.sh", Version: "v1", Kind: "Team"}
+var teamsKind = v1.SchemeGroupVersion.WithKind("Team")
 
 // Get takes name of the team, and returns the corresponding team object, and an error if there is any.
-func (c *FakeTeams) Get(ctx context.Context, name string, options v1.GetOptions) (result *storagev1.Team, err error) {
+func (c *FakeTeams) Get(ctx context.Context, name string, options metav1.GetOptions) (result *v1.Team, err error) {
 	obj, err := c.Fake.
-		Invokes(testing.NewRootGetAction(teamsResource, name), &storagev1.Team{})
+		Invokes(testing.NewRootGetAction(teamsResource, name), &v1.Team{})
 	if obj == nil {
 		return nil, err
 	}
-	return obj.(*storagev1.Team), err
+	return obj.(*v1.Team), err
 }
 
 // List takes label and field selectors, and returns the list of Teams that match those selectors.
-func (c *FakeTeams) List(ctx context.Context, opts v1.ListOptions) (result *storagev1.TeamList, err error) {
+func (c *FakeTeams) List(ctx context.Context, opts metav1.ListOptions) (result *v1.TeamList, err error) {
 	obj, err := c.Fake.
-		Invokes(testing.NewRootListAction(teamsResource, teamsKind, opts), &storagev1.TeamList{})
+		Invokes(testing.NewRootListAction(teamsResource, teamsKind, opts), &v1.TeamList{})
 	if obj == nil {
 		return nil, err
 	}
@@ -45,8 +44,8 @@ func (c *FakeTeams) List(ctx context.Context, opts v1.ListOptions) (result *stor
 	if label == nil {
 		label = labels.Everything()
 	}
-	list := &storagev1.TeamList{ListMeta: obj.(*storagev1.TeamList).ListMeta}
-	for _, item := range obj.(*storagev1.TeamList).Items {
+	list := &v1.TeamList{ListMeta: obj.(*v1.TeamList).ListMeta}
+	for _, item := range obj.(*v1.TeamList).Items {
 		if label.Matches(labels.Set(item.Labels)) {
 			list.Items = append(list.Items, item)
 		}
@@ -55,63 +54,63 @@ func (c *FakeTeams) List(ctx context.Context, opts v1.ListOptions) (result *stor
 }
 
 // Watch returns a watch.Interface that watches the requested teams.
-func (c *FakeTeams) Watch(ctx context.Context, opts v1.ListOptions) (watch.Interface, error) {
+func (c *FakeTeams) Watch(ctx context.Context, opts metav1.ListOptions) (watch.Interface, error) {
 	return c.Fake.
 		InvokesWatch(testing.NewRootWatchAction(teamsResource, opts))
 }
 
 // Create takes the representation of a team and creates it.  Returns the server's representation of the team, and an error, if there is any.
-func (c *FakeTeams) Create(ctx context.Context, team *storagev1.Team, opts v1.CreateOptions) (result *storagev1.Team, err error) {
+func (c *FakeTeams) Create(ctx context.Context, team *v1.Team, opts metav1.CreateOptions) (result *v1.Team, err error) {
 	obj, err := c.Fake.
-		Invokes(testing.NewRootCreateAction(teamsResource, team), &storagev1.Team{})
+		Invokes(testing.NewRootCreateAction(teamsResource, team), &v1.Team{})
 	if obj == nil {
 		return nil, err
 	}
-	return obj.(*storagev1.Team), err
+	return obj.(*v1.Team), err
 }
 
 // Update takes the representation of a team and updates it. Returns the server's representation of the team, and an error, if there is any.
-func (c *FakeTeams) Update(ctx context.Context, team *storagev1.Team, opts v1.UpdateOptions) (result *storagev1.Team, err error) {
+func (c *FakeTeams) Update(ctx context.Context, team *v1.Team, opts metav1.UpdateOptions) (result *v1.Team, err error) {
 	obj, err := c.Fake.
-		Invokes(testing.NewRootUpdateAction(teamsResource, team), &storagev1.Team{})
+		Invokes(testing.NewRootUpdateAction(teamsResource, team), &v1.Team{})
 	if obj == nil {
 		return nil, err
 	}
-	return obj.(*storagev1.Team), err
+	return obj.(*v1.Team), err
 }
 
 // UpdateStatus was generated because the type contains a Status member.
 // Add a +genclient:noStatus comment above the type to avoid generating UpdateStatus().
-func (c *FakeTeams) UpdateStatus(ctx context.Context, team *storagev1.Team, opts v1.UpdateOptions) (*storagev1.Team, error) {
+func (c *FakeTeams) UpdateStatus(ctx context.Context, team *v1.Team, opts metav1.UpdateOptions) (*v1.Team, error) {
 	obj, err := c.Fake.
-		Invokes(testing.NewRootUpdateSubresourceAction(teamsResource, "status", team), &storagev1.Team{})
+		Invokes(testing.NewRootUpdateSubresourceAction(teamsResource, "status", team), &v1.Team{})
 	if obj == nil {
 		return nil, err
 	}
-	return obj.(*storagev1.Team), err
+	return obj.(*v1.Team), err
 }
 
 // Delete takes name of the team and deletes it. Returns an error if one occurs.
-func (c *FakeTeams) Delete(ctx context.Context, name string, opts v1.DeleteOptions) error {
+func (c *FakeTeams) Delete(ctx context.Context, name string, opts metav1.DeleteOptions) error {
 	_, err := c.Fake.
-		Invokes(testing.NewRootDeleteActionWithOptions(teamsResource, name, opts), &storagev1.Team{})
+		Invokes(testing.NewRootDeleteActionWithOptions(teamsResource, name, opts), &v1.Team{})
 	return err
 }
 
 // DeleteCollection deletes a collection of objects.
-func (c *FakeTeams) DeleteCollection(ctx context.Context, opts v1.DeleteOptions, listOpts v1.ListOptions) error {
+func (c *FakeTeams) DeleteCollection(ctx context.Context, opts metav1.DeleteOptions, listOpts metav1.ListOptions) error {
 	action := testing.NewRootDeleteCollectionAction(teamsResource, listOpts)
 
-	_, err := c.Fake.Invokes(action, &storagev1.TeamList{})
+	_, err := c.Fake.Invokes(action, &v1.TeamList{})
 	return err
 }
 
 // Patch applies the patch and returns the patched team.
-func (c *FakeTeams) Patch(ctx context.Context, name string, pt types.PatchType, data []byte, opts v1.PatchOptions, subresources ...string) (result *storagev1.Team, err error) {
+func (c *FakeTeams) Patch(ctx context.Context, name string, pt types.PatchType, data []byte, opts metav1.PatchOptions, subresources ...string) (result *v1.Team, err error) {
 	obj, err := c.Fake.
-		Invokes(testing.NewRootPatchSubresourceAction(teamsResource, name, pt, data, subresources...), &storagev1.Team{})
+		Invokes(testing.NewRootPatchSubresourceAction(teamsResource, name, pt, data, subresources...), &v1.Team{})
 	if obj == nil {
 		return nil, err
 	}
-	return obj.(*storagev1.Team), err
+	return obj.(*v1.Team), err
 }

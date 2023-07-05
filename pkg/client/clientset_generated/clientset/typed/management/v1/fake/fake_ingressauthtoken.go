@@ -5,10 +5,9 @@ package fake
 import (
 	"context"
 
-	managementv1 "github.com/loft-sh/api/v3/pkg/apis/management/v1"
-	v1 "k8s.io/apimachinery/pkg/apis/meta/v1"
+	v1 "github.com/loft-sh/api/v3/pkg/apis/management/v1"
+	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	labels "k8s.io/apimachinery/pkg/labels"
-	schema "k8s.io/apimachinery/pkg/runtime/schema"
 	types "k8s.io/apimachinery/pkg/types"
 	watch "k8s.io/apimachinery/pkg/watch"
 	testing "k8s.io/client-go/testing"
@@ -19,24 +18,24 @@ type FakeIngressAuthTokens struct {
 	Fake *FakeManagementV1
 }
 
-var ingressauthtokensResource = schema.GroupVersionResource{Group: "management.loft.sh", Version: "v1", Resource: "ingressauthtokens"}
+var ingressauthtokensResource = v1.SchemeGroupVersion.WithResource("ingressauthtokens")
 
-var ingressauthtokensKind = schema.GroupVersionKind{Group: "management.loft.sh", Version: "v1", Kind: "IngressAuthToken"}
+var ingressauthtokensKind = v1.SchemeGroupVersion.WithKind("IngressAuthToken")
 
 // Get takes name of the ingressAuthToken, and returns the corresponding ingressAuthToken object, and an error if there is any.
-func (c *FakeIngressAuthTokens) Get(ctx context.Context, name string, options v1.GetOptions) (result *managementv1.IngressAuthToken, err error) {
+func (c *FakeIngressAuthTokens) Get(ctx context.Context, name string, options metav1.GetOptions) (result *v1.IngressAuthToken, err error) {
 	obj, err := c.Fake.
-		Invokes(testing.NewRootGetAction(ingressauthtokensResource, name), &managementv1.IngressAuthToken{})
+		Invokes(testing.NewRootGetAction(ingressauthtokensResource, name), &v1.IngressAuthToken{})
 	if obj == nil {
 		return nil, err
 	}
-	return obj.(*managementv1.IngressAuthToken), err
+	return obj.(*v1.IngressAuthToken), err
 }
 
 // List takes label and field selectors, and returns the list of IngressAuthTokens that match those selectors.
-func (c *FakeIngressAuthTokens) List(ctx context.Context, opts v1.ListOptions) (result *managementv1.IngressAuthTokenList, err error) {
+func (c *FakeIngressAuthTokens) List(ctx context.Context, opts metav1.ListOptions) (result *v1.IngressAuthTokenList, err error) {
 	obj, err := c.Fake.
-		Invokes(testing.NewRootListAction(ingressauthtokensResource, ingressauthtokensKind, opts), &managementv1.IngressAuthTokenList{})
+		Invokes(testing.NewRootListAction(ingressauthtokensResource, ingressauthtokensKind, opts), &v1.IngressAuthTokenList{})
 	if obj == nil {
 		return nil, err
 	}
@@ -45,8 +44,8 @@ func (c *FakeIngressAuthTokens) List(ctx context.Context, opts v1.ListOptions) (
 	if label == nil {
 		label = labels.Everything()
 	}
-	list := &managementv1.IngressAuthTokenList{ListMeta: obj.(*managementv1.IngressAuthTokenList).ListMeta}
-	for _, item := range obj.(*managementv1.IngressAuthTokenList).Items {
+	list := &v1.IngressAuthTokenList{ListMeta: obj.(*v1.IngressAuthTokenList).ListMeta}
+	for _, item := range obj.(*v1.IngressAuthTokenList).Items {
 		if label.Matches(labels.Set(item.Labels)) {
 			list.Items = append(list.Items, item)
 		}
@@ -55,63 +54,63 @@ func (c *FakeIngressAuthTokens) List(ctx context.Context, opts v1.ListOptions) (
 }
 
 // Watch returns a watch.Interface that watches the requested ingressAuthTokens.
-func (c *FakeIngressAuthTokens) Watch(ctx context.Context, opts v1.ListOptions) (watch.Interface, error) {
+func (c *FakeIngressAuthTokens) Watch(ctx context.Context, opts metav1.ListOptions) (watch.Interface, error) {
 	return c.Fake.
 		InvokesWatch(testing.NewRootWatchAction(ingressauthtokensResource, opts))
 }
 
 // Create takes the representation of a ingressAuthToken and creates it.  Returns the server's representation of the ingressAuthToken, and an error, if there is any.
-func (c *FakeIngressAuthTokens) Create(ctx context.Context, ingressAuthToken *managementv1.IngressAuthToken, opts v1.CreateOptions) (result *managementv1.IngressAuthToken, err error) {
+func (c *FakeIngressAuthTokens) Create(ctx context.Context, ingressAuthToken *v1.IngressAuthToken, opts metav1.CreateOptions) (result *v1.IngressAuthToken, err error) {
 	obj, err := c.Fake.
-		Invokes(testing.NewRootCreateAction(ingressauthtokensResource, ingressAuthToken), &managementv1.IngressAuthToken{})
+		Invokes(testing.NewRootCreateAction(ingressauthtokensResource, ingressAuthToken), &v1.IngressAuthToken{})
 	if obj == nil {
 		return nil, err
 	}
-	return obj.(*managementv1.IngressAuthToken), err
+	return obj.(*v1.IngressAuthToken), err
 }
 
 // Update takes the representation of a ingressAuthToken and updates it. Returns the server's representation of the ingressAuthToken, and an error, if there is any.
-func (c *FakeIngressAuthTokens) Update(ctx context.Context, ingressAuthToken *managementv1.IngressAuthToken, opts v1.UpdateOptions) (result *managementv1.IngressAuthToken, err error) {
+func (c *FakeIngressAuthTokens) Update(ctx context.Context, ingressAuthToken *v1.IngressAuthToken, opts metav1.UpdateOptions) (result *v1.IngressAuthToken, err error) {
 	obj, err := c.Fake.
-		Invokes(testing.NewRootUpdateAction(ingressauthtokensResource, ingressAuthToken), &managementv1.IngressAuthToken{})
+		Invokes(testing.NewRootUpdateAction(ingressauthtokensResource, ingressAuthToken), &v1.IngressAuthToken{})
 	if obj == nil {
 		return nil, err
 	}
-	return obj.(*managementv1.IngressAuthToken), err
+	return obj.(*v1.IngressAuthToken), err
 }
 
 // UpdateStatus was generated because the type contains a Status member.
 // Add a +genclient:noStatus comment above the type to avoid generating UpdateStatus().
-func (c *FakeIngressAuthTokens) UpdateStatus(ctx context.Context, ingressAuthToken *managementv1.IngressAuthToken, opts v1.UpdateOptions) (*managementv1.IngressAuthToken, error) {
+func (c *FakeIngressAuthTokens) UpdateStatus(ctx context.Context, ingressAuthToken *v1.IngressAuthToken, opts metav1.UpdateOptions) (*v1.IngressAuthToken, error) {
 	obj, err := c.Fake.
-		Invokes(testing.NewRootUpdateSubresourceAction(ingressauthtokensResource, "status", ingressAuthToken), &managementv1.IngressAuthToken{})
+		Invokes(testing.NewRootUpdateSubresourceAction(ingressauthtokensResource, "status", ingressAuthToken), &v1.IngressAuthToken{})
 	if obj == nil {
 		return nil, err
 	}
-	return obj.(*managementv1.IngressAuthToken), err
+	return obj.(*v1.IngressAuthToken), err
 }
 
 // Delete takes name of the ingressAuthToken and deletes it. Returns an error if one occurs.
-func (c *FakeIngressAuthTokens) Delete(ctx context.Context, name string, opts v1.DeleteOptions) error {
+func (c *FakeIngressAuthTokens) Delete(ctx context.Context, name string, opts metav1.DeleteOptions) error {
 	_, err := c.Fake.
-		Invokes(testing.NewRootDeleteActionWithOptions(ingressauthtokensResource, name, opts), &managementv1.IngressAuthToken{})
+		Invokes(testing.NewRootDeleteActionWithOptions(ingressauthtokensResource, name, opts), &v1.IngressAuthToken{})
 	return err
 }
 
 // DeleteCollection deletes a collection of objects.
-func (c *FakeIngressAuthTokens) DeleteCollection(ctx context.Context, opts v1.DeleteOptions, listOpts v1.ListOptions) error {
+func (c *FakeIngressAuthTokens) DeleteCollection(ctx context.Context, opts metav1.DeleteOptions, listOpts metav1.ListOptions) error {
 	action := testing.NewRootDeleteCollectionAction(ingressauthtokensResource, listOpts)
 
-	_, err := c.Fake.Invokes(action, &managementv1.IngressAuthTokenList{})
+	_, err := c.Fake.Invokes(action, &v1.IngressAuthTokenList{})
 	return err
 }
 
 // Patch applies the patch and returns the patched ingressAuthToken.
-func (c *FakeIngressAuthTokens) Patch(ctx context.Context, name string, pt types.PatchType, data []byte, opts v1.PatchOptions, subresources ...string) (result *managementv1.IngressAuthToken, err error) {
+func (c *FakeIngressAuthTokens) Patch(ctx context.Context, name string, pt types.PatchType, data []byte, opts metav1.PatchOptions, subresources ...string) (result *v1.IngressAuthToken, err error) {
 	obj, err := c.Fake.
-		Invokes(testing.NewRootPatchSubresourceAction(ingressauthtokensResource, name, pt, data, subresources...), &managementv1.IngressAuthToken{})
+		Invokes(testing.NewRootPatchSubresourceAction(ingressauthtokensResource, name, pt, data, subresources...), &v1.IngressAuthToken{})
 	if obj == nil {
 		return nil, err
 	}
-	return obj.(*managementv1.IngressAuthToken), err
+	return obj.(*v1.IngressAuthToken), err
 }

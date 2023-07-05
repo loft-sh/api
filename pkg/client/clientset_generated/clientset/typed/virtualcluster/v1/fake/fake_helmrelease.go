@@ -5,10 +5,9 @@ package fake
 import (
 	"context"
 
-	virtualclusterv1 "github.com/loft-sh/api/v3/pkg/apis/virtualcluster/v1"
-	v1 "k8s.io/apimachinery/pkg/apis/meta/v1"
+	v1 "github.com/loft-sh/api/v3/pkg/apis/virtualcluster/v1"
+	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	labels "k8s.io/apimachinery/pkg/labels"
-	schema "k8s.io/apimachinery/pkg/runtime/schema"
 	types "k8s.io/apimachinery/pkg/types"
 	watch "k8s.io/apimachinery/pkg/watch"
 	testing "k8s.io/client-go/testing"
@@ -20,25 +19,25 @@ type FakeHelmReleases struct {
 	ns   string
 }
 
-var helmreleasesResource = schema.GroupVersionResource{Group: "virtualcluster.loft.sh", Version: "v1", Resource: "helmreleases"}
+var helmreleasesResource = v1.SchemeGroupVersion.WithResource("helmreleases")
 
-var helmreleasesKind = schema.GroupVersionKind{Group: "virtualcluster.loft.sh", Version: "v1", Kind: "HelmRelease"}
+var helmreleasesKind = v1.SchemeGroupVersion.WithKind("HelmRelease")
 
 // Get takes name of the helmRelease, and returns the corresponding helmRelease object, and an error if there is any.
-func (c *FakeHelmReleases) Get(ctx context.Context, name string, options v1.GetOptions) (result *virtualclusterv1.HelmRelease, err error) {
+func (c *FakeHelmReleases) Get(ctx context.Context, name string, options metav1.GetOptions) (result *v1.HelmRelease, err error) {
 	obj, err := c.Fake.
-		Invokes(testing.NewGetAction(helmreleasesResource, c.ns, name), &virtualclusterv1.HelmRelease{})
+		Invokes(testing.NewGetAction(helmreleasesResource, c.ns, name), &v1.HelmRelease{})
 
 	if obj == nil {
 		return nil, err
 	}
-	return obj.(*virtualclusterv1.HelmRelease), err
+	return obj.(*v1.HelmRelease), err
 }
 
 // List takes label and field selectors, and returns the list of HelmReleases that match those selectors.
-func (c *FakeHelmReleases) List(ctx context.Context, opts v1.ListOptions) (result *virtualclusterv1.HelmReleaseList, err error) {
+func (c *FakeHelmReleases) List(ctx context.Context, opts metav1.ListOptions) (result *v1.HelmReleaseList, err error) {
 	obj, err := c.Fake.
-		Invokes(testing.NewListAction(helmreleasesResource, helmreleasesKind, c.ns, opts), &virtualclusterv1.HelmReleaseList{})
+		Invokes(testing.NewListAction(helmreleasesResource, helmreleasesKind, c.ns, opts), &v1.HelmReleaseList{})
 
 	if obj == nil {
 		return nil, err
@@ -48,8 +47,8 @@ func (c *FakeHelmReleases) List(ctx context.Context, opts v1.ListOptions) (resul
 	if label == nil {
 		label = labels.Everything()
 	}
-	list := &virtualclusterv1.HelmReleaseList{ListMeta: obj.(*virtualclusterv1.HelmReleaseList).ListMeta}
-	for _, item := range obj.(*virtualclusterv1.HelmReleaseList).Items {
+	list := &v1.HelmReleaseList{ListMeta: obj.(*v1.HelmReleaseList).ListMeta}
+	for _, item := range obj.(*v1.HelmReleaseList).Items {
 		if label.Matches(labels.Set(item.Labels)) {
 			list.Items = append(list.Items, item)
 		}
@@ -58,69 +57,69 @@ func (c *FakeHelmReleases) List(ctx context.Context, opts v1.ListOptions) (resul
 }
 
 // Watch returns a watch.Interface that watches the requested helmReleases.
-func (c *FakeHelmReleases) Watch(ctx context.Context, opts v1.ListOptions) (watch.Interface, error) {
+func (c *FakeHelmReleases) Watch(ctx context.Context, opts metav1.ListOptions) (watch.Interface, error) {
 	return c.Fake.
 		InvokesWatch(testing.NewWatchAction(helmreleasesResource, c.ns, opts))
 
 }
 
 // Create takes the representation of a helmRelease and creates it.  Returns the server's representation of the helmRelease, and an error, if there is any.
-func (c *FakeHelmReleases) Create(ctx context.Context, helmRelease *virtualclusterv1.HelmRelease, opts v1.CreateOptions) (result *virtualclusterv1.HelmRelease, err error) {
+func (c *FakeHelmReleases) Create(ctx context.Context, helmRelease *v1.HelmRelease, opts metav1.CreateOptions) (result *v1.HelmRelease, err error) {
 	obj, err := c.Fake.
-		Invokes(testing.NewCreateAction(helmreleasesResource, c.ns, helmRelease), &virtualclusterv1.HelmRelease{})
+		Invokes(testing.NewCreateAction(helmreleasesResource, c.ns, helmRelease), &v1.HelmRelease{})
 
 	if obj == nil {
 		return nil, err
 	}
-	return obj.(*virtualclusterv1.HelmRelease), err
+	return obj.(*v1.HelmRelease), err
 }
 
 // Update takes the representation of a helmRelease and updates it. Returns the server's representation of the helmRelease, and an error, if there is any.
-func (c *FakeHelmReleases) Update(ctx context.Context, helmRelease *virtualclusterv1.HelmRelease, opts v1.UpdateOptions) (result *virtualclusterv1.HelmRelease, err error) {
+func (c *FakeHelmReleases) Update(ctx context.Context, helmRelease *v1.HelmRelease, opts metav1.UpdateOptions) (result *v1.HelmRelease, err error) {
 	obj, err := c.Fake.
-		Invokes(testing.NewUpdateAction(helmreleasesResource, c.ns, helmRelease), &virtualclusterv1.HelmRelease{})
+		Invokes(testing.NewUpdateAction(helmreleasesResource, c.ns, helmRelease), &v1.HelmRelease{})
 
 	if obj == nil {
 		return nil, err
 	}
-	return obj.(*virtualclusterv1.HelmRelease), err
+	return obj.(*v1.HelmRelease), err
 }
 
 // UpdateStatus was generated because the type contains a Status member.
 // Add a +genclient:noStatus comment above the type to avoid generating UpdateStatus().
-func (c *FakeHelmReleases) UpdateStatus(ctx context.Context, helmRelease *virtualclusterv1.HelmRelease, opts v1.UpdateOptions) (*virtualclusterv1.HelmRelease, error) {
+func (c *FakeHelmReleases) UpdateStatus(ctx context.Context, helmRelease *v1.HelmRelease, opts metav1.UpdateOptions) (*v1.HelmRelease, error) {
 	obj, err := c.Fake.
-		Invokes(testing.NewUpdateSubresourceAction(helmreleasesResource, "status", c.ns, helmRelease), &virtualclusterv1.HelmRelease{})
+		Invokes(testing.NewUpdateSubresourceAction(helmreleasesResource, "status", c.ns, helmRelease), &v1.HelmRelease{})
 
 	if obj == nil {
 		return nil, err
 	}
-	return obj.(*virtualclusterv1.HelmRelease), err
+	return obj.(*v1.HelmRelease), err
 }
 
 // Delete takes name of the helmRelease and deletes it. Returns an error if one occurs.
-func (c *FakeHelmReleases) Delete(ctx context.Context, name string, opts v1.DeleteOptions) error {
+func (c *FakeHelmReleases) Delete(ctx context.Context, name string, opts metav1.DeleteOptions) error {
 	_, err := c.Fake.
-		Invokes(testing.NewDeleteActionWithOptions(helmreleasesResource, c.ns, name, opts), &virtualclusterv1.HelmRelease{})
+		Invokes(testing.NewDeleteActionWithOptions(helmreleasesResource, c.ns, name, opts), &v1.HelmRelease{})
 
 	return err
 }
 
 // DeleteCollection deletes a collection of objects.
-func (c *FakeHelmReleases) DeleteCollection(ctx context.Context, opts v1.DeleteOptions, listOpts v1.ListOptions) error {
+func (c *FakeHelmReleases) DeleteCollection(ctx context.Context, opts metav1.DeleteOptions, listOpts metav1.ListOptions) error {
 	action := testing.NewDeleteCollectionAction(helmreleasesResource, c.ns, listOpts)
 
-	_, err := c.Fake.Invokes(action, &virtualclusterv1.HelmReleaseList{})
+	_, err := c.Fake.Invokes(action, &v1.HelmReleaseList{})
 	return err
 }
 
 // Patch applies the patch and returns the patched helmRelease.
-func (c *FakeHelmReleases) Patch(ctx context.Context, name string, pt types.PatchType, data []byte, opts v1.PatchOptions, subresources ...string) (result *virtualclusterv1.HelmRelease, err error) {
+func (c *FakeHelmReleases) Patch(ctx context.Context, name string, pt types.PatchType, data []byte, opts metav1.PatchOptions, subresources ...string) (result *v1.HelmRelease, err error) {
 	obj, err := c.Fake.
-		Invokes(testing.NewPatchSubresourceAction(helmreleasesResource, c.ns, name, pt, data, subresources...), &virtualclusterv1.HelmRelease{})
+		Invokes(testing.NewPatchSubresourceAction(helmreleasesResource, c.ns, name, pt, data, subresources...), &v1.HelmRelease{})
 
 	if obj == nil {
 		return nil, err
 	}
-	return obj.(*virtualclusterv1.HelmRelease), err
+	return obj.(*v1.HelmRelease), err
 }
