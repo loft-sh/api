@@ -1411,6 +1411,7 @@ type AuthenticationOIDC struct {
 	ClientID               string
 	ClientSecret           string
 	RedirectURI            string
+	PostLogoutRedirectURI  string
 	CAFile                 string
 	InsecureCA             bool
 	PreferredUsernameClaim string

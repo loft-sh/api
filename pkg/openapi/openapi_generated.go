@@ -7538,6 +7538,13 @@ func schema_pkg_apis_management_v1_AuthenticationOIDC(ref common.ReferenceCallba
 							Format:      "",
 						},
 					},
+					"postLogoutRedirectURI": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Loft URI to be redirected to after successful logout by OIDC Provider",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
 					"caFile": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Path to a PEM encoded root certificate of the provider. Optional",
