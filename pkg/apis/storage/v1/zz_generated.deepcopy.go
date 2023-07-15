@@ -1516,6 +1516,13 @@ func (in *DevPodWorkspaceProvider) DeepCopyInto(out *DevPodWorkspaceProvider) {
 			(*out)[key] = *val.DeepCopy()
 		}
 	}
+	if in.Env != nil {
+		in, out := &in.Env, &out.Env
+		*out = make(map[string]DevPodProviderOption, len(*in))
+		for key, val := range *in {
+			(*out)[key] = *val.DeepCopy()
+		}
+	}
 	return
 }
 
@@ -1561,8 +1568,18 @@ func (in *DevPodWorkspaceTemplate) DeepCopyObject() runtime.Object {
 func (in *DevPodWorkspaceTemplateDefinition) DeepCopyInto(out *DevPodWorkspaceTemplateDefinition) {
 	*out = *in
 	in.Provider.DeepCopyInto(&out.Provider)
-	if in.Env != nil {
-		in, out := &in.Env, &out.Env
+	if in.SpaceTemplate != nil {
+		in, out := &in.SpaceTemplate, &out.SpaceTemplate
+		*out = new(TemplateRef)
+		**out = **in
+	}
+	if in.VirtualClusterTemplate != nil {
+		in, out := &in.VirtualClusterTemplate, &out.VirtualClusterTemplate
+		*out = new(TemplateRef)
+		**out = **in
+	}
+	if in.WorkspaceEnv != nil {
+		in, out := &in.WorkspaceEnv, &out.WorkspaceEnv
 		*out = make(map[string]DevPodProviderOption, len(*in))
 		for key, val := range *in {
 			(*out)[key] = *val.DeepCopy()

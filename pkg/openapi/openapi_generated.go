@@ -21937,6 +21937,21 @@ func schema_pkg_apis_storage_v1_DevPodWorkspaceProvider(ref common.ReferenceCall
 							},
 						},
 					},
+					"env": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Env are environment options to set when using the provider.",
+							Type:        []string{"object"},
+							AdditionalProperties: &spec.SchemaOrBool{
+								Allows: true,
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.DevPodProviderOption"),
+									},
+								},
+							},
+						},
+					},
 				},
 				Required: []string{"name"},
 			},
@@ -22006,9 +22021,21 @@ func schema_pkg_apis_storage_v1_DevPodWorkspaceTemplateDefinition(ref common.Ref
 							Ref:         ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.DevPodWorkspaceProvider"),
 						},
 					},
-					"env": {
+					"spaceTemplate": {
 						SchemaProps: spec.SchemaProps{
-							Description: "Env are environment options to set when using the provider",
+							Description: "SpaceTemplate is the space that should get created for this DevPod. If this is specified, the Kubernetes provider will be selected automatically.",
+							Ref:         ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.TemplateRef"),
+						},
+					},
+					"virtualClusterTemplate": {
+						SchemaProps: spec.SchemaProps{
+							Description: "VirtualClusterTemplate is the virtual cluster that should get created for this DevPod. If this is specified, the Kubernetes provider will be selected automatically.",
+							Ref:         ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.TemplateRef"),
+						},
+					},
+					"workspaceEnv": {
+						SchemaProps: spec.SchemaProps{
+							Description: "WorkspaceEnv are environment variables that should be available within the created workspace.",
 							Type:        []string{"object"},
 							AdditionalProperties: &spec.SchemaOrBool{
 								Allows: true,
@@ -22026,7 +22053,7 @@ func schema_pkg_apis_storage_v1_DevPodWorkspaceTemplateDefinition(ref common.Ref
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/v3/pkg/apis/storage/v1.DevPodProviderOption", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.DevPodWorkspaceProvider"},
+			"github.com/loft-sh/api/v3/pkg/apis/storage/v1.DevPodProviderOption", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.DevPodWorkspaceProvider", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.TemplateRef"},
 	}
 }
 
