@@ -83,9 +83,19 @@ type DevPodWorkspaceTemplateDefinition struct {
 	// Provider holds the DevPod provider configuration
 	Provider DevPodWorkspaceProvider `json:"provider"`
 
-	// Env are environment options to set when using the provider
+	// SpaceTemplate is the space that should get created for this DevPod. If this is specified, the
+	// Kubernetes provider will be selected automatically.
 	// +optional
-	Env map[string]DevPodProviderOption `json:"env,omitempty"`
+	SpaceTemplate *TemplateRef `json:"spaceTemplate,omitempty"`
+
+	// VirtualClusterTemplate is the virtual cluster that should get created for this DevPod. If this is specified, the
+	// Kubernetes provider will be selected automatically.
+	// +optional
+	VirtualClusterTemplate *TemplateRef `json:"virtualClusterTemplate,omitempty"`
+
+	// WorkspaceEnv are environment variables that should be available within the created workspace.
+	// +optional
+	WorkspaceEnv map[string]DevPodProviderOption `json:"workspaceEnv,omitempty"`
 }
 
 type DevPodWorkspaceProvider struct {
@@ -95,6 +105,10 @@ type DevPodWorkspaceProvider struct {
 	// Options are the provider option values
 	// +optional
 	Options map[string]DevPodProviderOption `json:"options,omitempty"`
+
+	// Env are environment options to set when using the provider.
+	// +optional
+	Env map[string]DevPodProviderOption `json:"env,omitempty"`
 }
 
 type DevPodProviderOption struct {

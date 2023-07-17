@@ -85,6 +85,9 @@ type MethodSSO struct {
 
 	// LoginEndpoint is the path the UI will request a login url from
 	LoginEndpoint string `json:"loginEndpoint,omitempty"`
+
+	// LogoutEndpoint is the path the UI will request a logout url from
+	LogoutEndpoint string `json:"logoutEndpoint,omitempty"`
 }
 
 type MethodPassword struct {

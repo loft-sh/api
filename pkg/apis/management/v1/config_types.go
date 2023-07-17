@@ -613,6 +613,10 @@ type AuthenticationOIDC struct {
 	// loft redirect uri. E.g. https://loft.my.domain/auth/oidc/callback
 	RedirectURI string `json:"redirectURI,omitempty"`
 
+	// Loft URI to be redirected to after successful logout by OIDC Provider
+	// +optional
+	PostLogoutRedirectURI string `json:"postLogoutRedirectURI,omitempty"`
+
 	// Path to a PEM encoded root certificate of the provider. Optional
 	// +optional
 	CAFile string `json:"caFile,omitempty"`

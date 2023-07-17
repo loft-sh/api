@@ -3387,6 +3387,7 @@ func autoConvert_v1_AuthenticationOIDC_To_management_AuthenticationOIDC(in *Auth
 	out.ClientID = in.ClientID
 	out.ClientSecret = in.ClientSecret
 	out.RedirectURI = in.RedirectURI
+	out.PostLogoutRedirectURI = in.PostLogoutRedirectURI
 	out.CAFile = in.CAFile
 	out.InsecureCA = in.InsecureCA
 	out.PreferredUsernameClaim = in.PreferredUsernameClaim
@@ -3416,6 +3417,7 @@ func autoConvert_management_AuthenticationOIDC_To_v1_AuthenticationOIDC(in *mana
 	out.ClientID = in.ClientID
 	out.ClientSecret = in.ClientSecret
 	out.RedirectURI = in.RedirectURI
+	out.PostLogoutRedirectURI = in.PostLogoutRedirectURI
 	out.CAFile = in.CAFile
 	out.InsecureCA = in.InsecureCA
 	out.PreferredUsernameClaim = in.PreferredUsernameClaim
