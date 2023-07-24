@@ -13,6 +13,12 @@ var (
 
 	// DevPodWorkspaceUIDLabel holds the actual workspace uid of the devpod workspace
 	DevPodWorkspaceUIDLabel = "loft.sh/workspace-uid"
+
+	// DevPodWorkspacePictureAnnotation holds the workspace picture url of the devpod workspace
+	DevPodWorkspacePictureAnnotation = "loft.sh/workspace-picture"
+
+	// DevPodWorkspaceSourceAnnotation holds the workspace source of the devpod workspace
+	DevPodWorkspaceSourceAnnotation = "loft.sh/workspace-source"
 )
 
 var (
