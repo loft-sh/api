@@ -10680,7 +10680,6 @@ func schema_pkg_apis_management_v1_DevPodWorkspaceTemplateSpec(ref common.Refere
 						},
 					},
 				},
-				Required: []string{"template"},
 			},
 		},
 		Dependencies: []string{
@@ -14220,11 +14219,32 @@ func schema_pkg_apis_management_v1_ProjectTemplates(ref common.ReferenceCallback
 							},
 						},
 					},
+					"defaultDevPodWorkspaceTemplate": {
+						SchemaProps: spec.SchemaProps{
+							Description: "DefaultDevPodWorkspaceTemplate",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"devPodWorkspaceTemplates": {
+						SchemaProps: spec.SchemaProps{
+							Description: "DevPodWorkspaceTemplates holds all the allowed space templates",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/management/v1.DevPodWorkspaceTemplate"),
+									},
+								},
+							},
+						},
+					},
 				},
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/v3/pkg/apis/management/v1.SpaceTemplate", "github.com/loft-sh/api/v3/pkg/apis/management/v1.VirtualClusterTemplate", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
+			"github.com/loft-sh/api/v3/pkg/apis/management/v1.DevPodWorkspaceTemplate", "github.com/loft-sh/api/v3/pkg/apis/management/v1.SpaceTemplate", "github.com/loft-sh/api/v3/pkg/apis/management/v1.VirtualClusterTemplate", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
 	}
 }
 
@@ -22183,7 +22203,6 @@ func schema_pkg_apis_storage_v1_DevPodWorkspaceTemplateSpec(ref common.Reference
 						},
 					},
 				},
-				Required: []string{"template"},
 			},
 		},
 		Dependencies: []string{

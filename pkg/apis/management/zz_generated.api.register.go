@@ -1450,7 +1450,7 @@ type AuthenticationSAML struct {
 }
 
 // +genclient
-// +genclient
+// +genclient:nonNamespaced
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
 
 type Cluster struct {
@@ -1707,7 +1707,7 @@ type DevPodWorkspaceInstanceUp struct {
 }
 
 // +genclient
-// +genclient:nonNamespaced
+// +genclient
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
 
 type DevPodWorkspaceTemplate struct {
@@ -2126,10 +2126,12 @@ type ProjectStatus struct {
 type ProjectTemplates struct {
 	metav1.TypeMeta
 	metav1.ObjectMeta
-	DefaultVirtualClusterTemplate string
-	VirtualClusterTemplates       []VirtualClusterTemplate
-	DefaultSpaceTemplate          string
-	SpaceTemplates                []SpaceTemplate
+	DefaultVirtualClusterTemplate  string
+	VirtualClusterTemplates        []VirtualClusterTemplate
+	DefaultSpaceTemplate           string
+	SpaceTemplates                 []SpaceTemplate
+	DefaultDevPodWorkspaceTemplate string
+	DevPodWorkspaceTemplates       []DevPodWorkspaceTemplate
 }
 
 // +genclient
