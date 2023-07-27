@@ -251,7 +251,17 @@ var (
 	NewProjectSecretREST = func(getter generic.RESTOptionsGetter) rest.Storage {
 		return NewProjectSecretRESTFunc(Factory)
 	}
-	NewProjectSecretRESTFunc        NewRESTFunc
+	NewProjectSecretRESTFunc       NewRESTFunc
+	ManagementRedirectTokenStorage = builders.NewApiResourceWithStorage( // Resource status endpoint
+		InternalRedirectToken,
+		func() runtime.Object { return &RedirectToken{} },     // Register versioned resource
+		func() runtime.Object { return &RedirectTokenList{} }, // Register versioned resource list
+		NewRedirectTokenREST,
+	)
+	NewRedirectTokenREST = func(getter generic.RESTOptionsGetter) rest.Storage {
+		return NewRedirectTokenRESTFunc(Factory)
+	}
+	NewRedirectTokenRESTFunc        NewRESTFunc
 	ManagementResetAccessKeyStorage = builders.NewApiResourceWithStorage( // Resource status endpoint
 		InternalResetAccessKey,
 		func() runtime.Object { return &ResetAccessKey{} },     // Register versioned resource
@@ -836,6 +846,18 @@ var (
 		func() runtime.Object { return &ProjectSecret{} },
 		func() runtime.Object { return &ProjectSecretList{} },
 	)
+	InternalRedirectToken = builders.NewInternalResource(
+		"redirecttokens",
+		"RedirectToken",
+		func() runtime.Object { return &RedirectToken{} },
+		func() runtime.Object { return &RedirectTokenList{} },
+	)
+	InternalRedirectTokenStatus = builders.NewInternalResourceStatus(
+		"redirecttokens",
+		"RedirectTokenStatus",
+		func() runtime.Object { return &RedirectToken{} },
+		func() runtime.Object { return &RedirectTokenList{} },
+	)
 	InternalResetAccessKey = builders.NewInternalResource(
 		"resetaccesskeys",
 		"ResetAccessKey",
@@ -1160,6 +1182,8 @@ var (
 		InternalProjectTemplatesREST,
 		InternalProjectSecret,
 		InternalProjectSecretStatus,
+		InternalRedirectToken,
+		InternalRedirectTokenStatus,
 		InternalResetAccessKey,
 		InternalResetAccessKeyStatus,
 		InternalRunner,
@@ -1633,6 +1657,7 @@ type ConfigStatus struct {
 	Apps             *Apps
 	Audit            *Audit
 	LoftHost         string
+	DevPodSubDomain  string
 	UISettings       *uiv1.UISettingsSpec
 	VaultIntegration *storagev1.VaultIntegrationSpec
 }
@@ -2132,6 +2157,25 @@ type ProjectTemplates struct {
 	SpaceTemplates                 []SpaceTemplate
 	DefaultDevPodWorkspaceTemplate string
 	DevPodWorkspaceTemplates       []DevPodWorkspaceTemplate
+}
+
+// +genclient
+// +genclient:nonNamespaced
+// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+
+type RedirectToken struct {
+	metav1.TypeMeta
+	metav1.ObjectMeta
+	Spec   RedirectTokenSpec
+	Status RedirectTokenStatus
+}
+
+type RedirectTokenSpec struct {
+	Token string
+}
+
+type RedirectTokenStatus struct {
+	RedirectURL string
 }
 
 // +genclient
@@ -5322,6 +5366,125 @@ func (s *storageProjectSecret) UpdateProjectSecret(ctx context.Context, object *
 }
 
 func (s *storageProjectSecret) DeleteProjectSecret(ctx context.Context, id string) (bool, error) {
+	st := s.GetStandardStorage()
+	_, sync, err := st.Delete(ctx, id, nil, &metav1.DeleteOptions{})
+	return sync, err
+}
+
+// RedirectToken Functions and Structs
+//
+// +k8s:deepcopy-gen=false
+type RedirectTokenStrategy struct {
+	builders.DefaultStorageStrategy
+}
+
+// +k8s:deepcopy-gen=false
+type RedirectTokenStatusStrategy struct {
+	builders.DefaultStatusStorageStrategy
+}
+
+// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+
+type RedirectTokenList struct {
+	metav1.TypeMeta
+	metav1.ListMeta
+	Items []RedirectToken
+}
+
+func (RedirectToken) NewStatus() interface{} {
+	return RedirectTokenStatus{}
+}
+
+func (pc *RedirectToken) GetStatus() interface{} {
+	return pc.Status
+}
+
+func (pc *RedirectToken) SetStatus(s interface{}) {
+	pc.Status = s.(RedirectTokenStatus)
+}
+
+func (pc *RedirectToken) GetSpec() interface{} {
+	return pc.Spec
+}
+
+func (pc *RedirectToken) SetSpec(s interface{}) {
+	pc.Spec = s.(RedirectTokenSpec)
+}
+
+func (pc *RedirectToken) GetObjectMeta() *metav1.ObjectMeta {
+	return &pc.ObjectMeta
+}
+
+func (pc *RedirectToken) SetGeneration(generation int64) {
+	pc.ObjectMeta.Generation = generation
+}
+
+func (pc RedirectToken) GetGeneration() int64 {
+	return pc.ObjectMeta.Generation
+}
+
+// Registry is an interface for things that know how to store RedirectToken.
+// +k8s:deepcopy-gen=false
+type RedirectTokenRegistry interface {
+	ListRedirectTokens(ctx context.Context, options *internalversion.ListOptions) (*RedirectTokenList, error)
+	GetRedirectToken(ctx context.Context, id string, options *metav1.GetOptions) (*RedirectToken, error)
+	CreateRedirectToken(ctx context.Context, id *RedirectToken) (*RedirectToken, error)
+	UpdateRedirectToken(ctx context.Context, id *RedirectToken) (*RedirectToken, error)
+	DeleteRedirectToken(ctx context.Context, id string) (bool, error)
+}
+
+// NewRegistry returns a new Registry interface for the given Storage. Any mismatched types will panic.
+func NewRedirectTokenRegistry(sp builders.StandardStorageProvider) RedirectTokenRegistry {
+	return &storageRedirectToken{sp}
+}
+
+// Implement Registry
+// storage puts strong typing around storage calls
+// +k8s:deepcopy-gen=false
+type storageRedirectToken struct {
+	builders.StandardStorageProvider
+}
+
+func (s *storageRedirectToken) ListRedirectTokens(ctx context.Context, options *internalversion.ListOptions) (*RedirectTokenList, error) {
+	if options != nil && options.FieldSelector != nil && !options.FieldSelector.Empty() {
+		return nil, fmt.Errorf("field selector not supported yet")
+	}
+	st := s.GetStandardStorage()
+	obj, err := st.List(ctx, options)
+	if err != nil {
+		return nil, err
+	}
+	return obj.(*RedirectTokenList), err
+}
+
+func (s *storageRedirectToken) GetRedirectToken(ctx context.Context, id string, options *metav1.GetOptions) (*RedirectToken, error) {
+	st := s.GetStandardStorage()
+	obj, err := st.Get(ctx, id, options)
+	if err != nil {
+		return nil, err
+	}
+	return obj.(*RedirectToken), nil
+}
+
+func (s *storageRedirectToken) CreateRedirectToken(ctx context.Context, object *RedirectToken) (*RedirectToken, error) {
+	st := s.GetStandardStorage()
+	obj, err := st.Create(ctx, object, nil, &metav1.CreateOptions{})
+	if err != nil {
+		return nil, err
+	}
+	return obj.(*RedirectToken), nil
+}
+
+func (s *storageRedirectToken) UpdateRedirectToken(ctx context.Context, object *RedirectToken) (*RedirectToken, error) {
+	st := s.GetStandardStorage()
+	obj, _, err := st.Update(ctx, object.Name, rest.DefaultUpdatedObjectInfo(object), nil, nil, false, &metav1.UpdateOptions{})
+	if err != nil {
+		return nil, err
+	}
+	return obj.(*RedirectToken), nil
+}
+
+func (s *storageRedirectToken) DeleteRedirectToken(ctx context.Context, id string) (bool, error) {
 	st := s.GetStandardStorage()
 	_, sync, err := st.Delete(ctx, id, nil, &metav1.DeleteOptions{})
 	return sync, err

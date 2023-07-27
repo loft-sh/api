@@ -33,6 +33,7 @@ type ManagementV1Interface interface {
 	PolicyViolationsGetter
 	ProjectsGetter
 	ProjectSecretsGetter
+	RedirectTokensGetter
 	ResetAccessKeysGetter
 	RunnersGetter
 	SelvesGetter
@@ -136,6 +137,10 @@ func (c *ManagementV1Client) Projects() ProjectInterface {
 
 func (c *ManagementV1Client) ProjectSecrets(namespace string) ProjectSecretInterface {
 	return newProjectSecrets(c, namespace)
+}
+
+func (c *ManagementV1Client) RedirectTokens() RedirectTokenInterface {
+	return newRedirectTokens(c)
 }
 
 func (c *ManagementV1Client) ResetAccessKeys() ResetAccessKeyInterface {

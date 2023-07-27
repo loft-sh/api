@@ -1739,6 +1739,46 @@ func RegisterConversions(s *runtime.Scheme) error {
 	}); err != nil {
 		return err
 	}
+	if err := s.AddGeneratedConversionFunc((*RedirectToken)(nil), (*management.RedirectToken)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_v1_RedirectToken_To_management_RedirectToken(a.(*RedirectToken), b.(*management.RedirectToken), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*management.RedirectToken)(nil), (*RedirectToken)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_management_RedirectToken_To_v1_RedirectToken(a.(*management.RedirectToken), b.(*RedirectToken), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*RedirectTokenList)(nil), (*management.RedirectTokenList)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_v1_RedirectTokenList_To_management_RedirectTokenList(a.(*RedirectTokenList), b.(*management.RedirectTokenList), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*management.RedirectTokenList)(nil), (*RedirectTokenList)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_management_RedirectTokenList_To_v1_RedirectTokenList(a.(*management.RedirectTokenList), b.(*RedirectTokenList), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*RedirectTokenSpec)(nil), (*management.RedirectTokenSpec)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_v1_RedirectTokenSpec_To_management_RedirectTokenSpec(a.(*RedirectTokenSpec), b.(*management.RedirectTokenSpec), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*management.RedirectTokenSpec)(nil), (*RedirectTokenSpec)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_management_RedirectTokenSpec_To_v1_RedirectTokenSpec(a.(*management.RedirectTokenSpec), b.(*RedirectTokenSpec), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*RedirectTokenStatus)(nil), (*management.RedirectTokenStatus)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_v1_RedirectTokenStatus_To_management_RedirectTokenStatus(a.(*RedirectTokenStatus), b.(*management.RedirectTokenStatus), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*management.RedirectTokenStatus)(nil), (*RedirectTokenStatus)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_management_RedirectTokenStatus_To_v1_RedirectTokenStatus(a.(*management.RedirectTokenStatus), b.(*RedirectTokenStatus), scope)
+	}); err != nil {
+		return err
+	}
 	if err := s.AddGeneratedConversionFunc((*ResetAccessKey)(nil), (*management.ResetAccessKey)(nil), func(a, b interface{}, scope conversion.Scope) error {
 		return Convert_v1_ResetAccessKey_To_management_ResetAccessKey(a.(*ResetAccessKey), b.(*management.ResetAccessKey), scope)
 	}); err != nil {
@@ -4368,6 +4408,7 @@ func autoConvert_v1_ConfigStatus_To_management_ConfigStatus(in *ConfigStatus, ou
 	out.Apps = (*management.Apps)(unsafe.Pointer(in.Apps))
 	out.Audit = (*management.Audit)(unsafe.Pointer(in.Audit))
 	out.LoftHost = in.LoftHost
+	out.DevPodSubDomain = in.DevPodSubDomain
 	out.UISettings = (*uiv1.UISettingsSpec)(unsafe.Pointer(in.UISettings))
 	out.VaultIntegration = (*storagev1.VaultIntegrationSpec)(unsafe.Pointer(in.VaultIntegration))
 	return nil
@@ -4386,6 +4427,7 @@ func autoConvert_management_ConfigStatus_To_v1_ConfigStatus(in *management.Confi
 	out.Apps = (*Apps)(unsafe.Pointer(in.Apps))
 	out.Audit = (*Audit)(unsafe.Pointer(in.Audit))
 	out.LoftHost = in.LoftHost
+	out.DevPodSubDomain = in.DevPodSubDomain
 	out.UISettings = (*uiv1.UISettingsSpec)(unsafe.Pointer(in.UISettings))
 	out.VaultIntegration = (*storagev1.VaultIntegrationSpec)(unsafe.Pointer(in.VaultIntegration))
 	return nil
@@ -4607,6 +4649,7 @@ func Convert_url_Values_To_v1_DevPodStopOptions(in *url.Values, out *DevPodStopO
 }
 
 func autoConvert_v1_DevPodUpOptions_To_management_DevPodUpOptions(in *DevPodUpOptions, out *management.DevPodUpOptions, s conversion.Scope) error {
+	out.WebMode = in.WebMode
 	out.Options = in.Options
 	return nil
 }
@@ -4617,6 +4660,7 @@ func Convert_v1_DevPodUpOptions_To_management_DevPodUpOptions(in *DevPodUpOption
 }
 
 func autoConvert_management_DevPodUpOptions_To_v1_DevPodUpOptions(in *management.DevPodUpOptions, out *DevPodUpOptions, s conversion.Scope) error {
+	out.WebMode = in.WebMode
 	out.Options = in.Options
 	return nil
 }
@@ -4629,6 +4673,13 @@ func Convert_management_DevPodUpOptions_To_v1_DevPodUpOptions(in *management.Dev
 func autoConvert_url_Values_To_v1_DevPodUpOptions(in *url.Values, out *DevPodUpOptions, s conversion.Scope) error {
 	// WARNING: Field TypeMeta does not have json tag, skipping.
 
+	if values, ok := map[string][]string(*in)["webMode"]; ok && len(values) > 0 {
+		if err := runtime.Convert_Slice_string_To_bool(&values, &out.WebMode, s); err != nil {
+			return err
+		}
+	} else {
+		out.WebMode = false
+	}
 	if values, ok := map[string][]string(*in)["options"]; ok && len(values) > 0 {
 		if err := runtime.Convert_Slice_string_To_string(&values, &out.Options, s); err != nil {
 			return err
@@ -6998,6 +7049,100 @@ func autoConvert_management_ProjectTemplatesList_To_v1_ProjectTemplatesList(in *
 // Convert_management_ProjectTemplatesList_To_v1_ProjectTemplatesList is an autogenerated conversion function.
 func Convert_management_ProjectTemplatesList_To_v1_ProjectTemplatesList(in *management.ProjectTemplatesList, out *ProjectTemplatesList, s conversion.Scope) error {
 	return autoConvert_management_ProjectTemplatesList_To_v1_ProjectTemplatesList(in, out, s)
+}
+
+func autoConvert_v1_RedirectToken_To_management_RedirectToken(in *RedirectToken, out *management.RedirectToken, s conversion.Scope) error {
+	out.ObjectMeta = in.ObjectMeta
+	if err := Convert_v1_RedirectTokenSpec_To_management_RedirectTokenSpec(&in.Spec, &out.Spec, s); err != nil {
+		return err
+	}
+	if err := Convert_v1_RedirectTokenStatus_To_management_RedirectTokenStatus(&in.Status, &out.Status, s); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Convert_v1_RedirectToken_To_management_RedirectToken is an autogenerated conversion function.
+func Convert_v1_RedirectToken_To_management_RedirectToken(in *RedirectToken, out *management.RedirectToken, s conversion.Scope) error {
+	return autoConvert_v1_RedirectToken_To_management_RedirectToken(in, out, s)
+}
+
+func autoConvert_management_RedirectToken_To_v1_RedirectToken(in *management.RedirectToken, out *RedirectToken, s conversion.Scope) error {
+	out.ObjectMeta = in.ObjectMeta
+	if err := Convert_management_RedirectTokenSpec_To_v1_RedirectTokenSpec(&in.Spec, &out.Spec, s); err != nil {
+		return err
+	}
+	if err := Convert_management_RedirectTokenStatus_To_v1_RedirectTokenStatus(&in.Status, &out.Status, s); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Convert_management_RedirectToken_To_v1_RedirectToken is an autogenerated conversion function.
+func Convert_management_RedirectToken_To_v1_RedirectToken(in *management.RedirectToken, out *RedirectToken, s conversion.Scope) error {
+	return autoConvert_management_RedirectToken_To_v1_RedirectToken(in, out, s)
+}
+
+func autoConvert_v1_RedirectTokenList_To_management_RedirectTokenList(in *RedirectTokenList, out *management.RedirectTokenList, s conversion.Scope) error {
+	out.ListMeta = in.ListMeta
+	out.Items = *(*[]management.RedirectToken)(unsafe.Pointer(&in.Items))
+	return nil
+}
+
+// Convert_v1_RedirectTokenList_To_management_RedirectTokenList is an autogenerated conversion function.
+func Convert_v1_RedirectTokenList_To_management_RedirectTokenList(in *RedirectTokenList, out *management.RedirectTokenList, s conversion.Scope) error {
+	return autoConvert_v1_RedirectTokenList_To_management_RedirectTokenList(in, out, s)
+}
+
+func autoConvert_management_RedirectTokenList_To_v1_RedirectTokenList(in *management.RedirectTokenList, out *RedirectTokenList, s conversion.Scope) error {
+	out.ListMeta = in.ListMeta
+	out.Items = *(*[]RedirectToken)(unsafe.Pointer(&in.Items))
+	return nil
+}
+
+// Convert_management_RedirectTokenList_To_v1_RedirectTokenList is an autogenerated conversion function.
+func Convert_management_RedirectTokenList_To_v1_RedirectTokenList(in *management.RedirectTokenList, out *RedirectTokenList, s conversion.Scope) error {
+	return autoConvert_management_RedirectTokenList_To_v1_RedirectTokenList(in, out, s)
+}
+
+func autoConvert_v1_RedirectTokenSpec_To_management_RedirectTokenSpec(in *RedirectTokenSpec, out *management.RedirectTokenSpec, s conversion.Scope) error {
+	out.Token = in.Token
+	return nil
+}
+
+// Convert_v1_RedirectTokenSpec_To_management_RedirectTokenSpec is an autogenerated conversion function.
+func Convert_v1_RedirectTokenSpec_To_management_RedirectTokenSpec(in *RedirectTokenSpec, out *management.RedirectTokenSpec, s conversion.Scope) error {
+	return autoConvert_v1_RedirectTokenSpec_To_management_RedirectTokenSpec(in, out, s)
+}
+
+func autoConvert_management_RedirectTokenSpec_To_v1_RedirectTokenSpec(in *management.RedirectTokenSpec, out *RedirectTokenSpec, s conversion.Scope) error {
+	out.Token = in.Token
+	return nil
+}
+
+// Convert_management_RedirectTokenSpec_To_v1_RedirectTokenSpec is an autogenerated conversion function.
+func Convert_management_RedirectTokenSpec_To_v1_RedirectTokenSpec(in *management.RedirectTokenSpec, out *RedirectTokenSpec, s conversion.Scope) error {
+	return autoConvert_management_RedirectTokenSpec_To_v1_RedirectTokenSpec(in, out, s)
+}
+
+func autoConvert_v1_RedirectTokenStatus_To_management_RedirectTokenStatus(in *RedirectTokenStatus, out *management.RedirectTokenStatus, s conversion.Scope) error {
+	out.RedirectURL = in.RedirectURL
+	return nil
+}
+
+// Convert_v1_RedirectTokenStatus_To_management_RedirectTokenStatus is an autogenerated conversion function.
+func Convert_v1_RedirectTokenStatus_To_management_RedirectTokenStatus(in *RedirectTokenStatus, out *management.RedirectTokenStatus, s conversion.Scope) error {
+	return autoConvert_v1_RedirectTokenStatus_To_management_RedirectTokenStatus(in, out, s)
+}
+
+func autoConvert_management_RedirectTokenStatus_To_v1_RedirectTokenStatus(in *management.RedirectTokenStatus, out *RedirectTokenStatus, s conversion.Scope) error {
+	out.RedirectURL = in.RedirectURL
+	return nil
+}
+
+// Convert_management_RedirectTokenStatus_To_v1_RedirectTokenStatus is an autogenerated conversion function.
+func Convert_management_RedirectTokenStatus_To_v1_RedirectTokenStatus(in *management.RedirectTokenStatus, out *RedirectTokenStatus, s conversion.Scope) error {
+	return autoConvert_management_RedirectTokenStatus_To_v1_RedirectTokenStatus(in, out, s)
 }
 
 func autoConvert_v1_ResetAccessKey_To_management_ResetAccessKey(in *ResetAccessKey, out *management.ResetAccessKey, s conversion.Scope) error {
