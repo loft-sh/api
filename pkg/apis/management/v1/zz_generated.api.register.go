@@ -79,8 +79,6 @@ func addKnownTypes(scheme *runtime.Scheme) error {
 		&ProjectTemplates{},
 		&ProjectSecret{},
 		&ProjectSecretList{},
-		&RedirectToken{},
-		&RedirectTokenList{},
 		&ResetAccessKey{},
 		&ResetAccessKeyList{},
 		&Runner{},
@@ -263,7 +261,6 @@ var (
 			nil,
 			management.NewProjectTemplatesREST),
 		management.ManagementProjectSecretStorage,
-		management.ManagementRedirectTokenStorage,
 		management.ManagementResetAccessKeyStorage,
 		management.ManagementRunnerStorage,
 		builders.NewApiResourceWithStorage(
@@ -719,14 +716,6 @@ type ProjectSecretList struct {
 	metav1.TypeMeta `json:",inline"`
 	metav1.ListMeta `json:"metadata,omitempty"`
 	Items           []ProjectSecret `json:"items"`
-}
-
-// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
-
-type RedirectTokenList struct {
-	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
-	Items           []RedirectToken `json:"items"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object

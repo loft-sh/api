@@ -279,11 +279,6 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 		"github.com/loft-sh/api/v3/pkg/apis/management/v1.ProjectStatus":                                   schema_pkg_apis_management_v1_ProjectStatus(ref),
 		"github.com/loft-sh/api/v3/pkg/apis/management/v1.ProjectTemplates":                                schema_pkg_apis_management_v1_ProjectTemplates(ref),
 		"github.com/loft-sh/api/v3/pkg/apis/management/v1.ProjectTemplatesList":                            schema_pkg_apis_management_v1_ProjectTemplatesList(ref),
-		"github.com/loft-sh/api/v3/pkg/apis/management/v1.RedirectToken":                                   schema_pkg_apis_management_v1_RedirectToken(ref),
-		"github.com/loft-sh/api/v3/pkg/apis/management/v1.RedirectTokenClaims":                             schema_pkg_apis_management_v1_RedirectTokenClaims(ref),
-		"github.com/loft-sh/api/v3/pkg/apis/management/v1.RedirectTokenList":                               schema_pkg_apis_management_v1_RedirectTokenList(ref),
-		"github.com/loft-sh/api/v3/pkg/apis/management/v1.RedirectTokenSpec":                               schema_pkg_apis_management_v1_RedirectTokenSpec(ref),
-		"github.com/loft-sh/api/v3/pkg/apis/management/v1.RedirectTokenStatus":                             schema_pkg_apis_management_v1_RedirectTokenStatus(ref),
 		"github.com/loft-sh/api/v3/pkg/apis/management/v1.ResetAccessKey":                                  schema_pkg_apis_management_v1_ResetAccessKey(ref),
 		"github.com/loft-sh/api/v3/pkg/apis/management/v1.ResetAccessKeyList":                              schema_pkg_apis_management_v1_ResetAccessKeyList(ref),
 		"github.com/loft-sh/api/v3/pkg/apis/management/v1.ResetAccessKeySpec":                              schema_pkg_apis_management_v1_ResetAccessKeySpec(ref),
@@ -9566,14 +9561,7 @@ func schema_pkg_apis_management_v1_ConfigStatus(ref common.ReferenceCallback) co
 					},
 					"loftHost": {
 						SchemaProps: spec.SchemaProps{
-							Description: "LoftHost holds the domain where the loft instance is hosted. This should not include https or http. E.g. loft.my-domain.com",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"devPodSubDomain": {
-						SchemaProps: spec.SchemaProps{
-							Description: "DevPodSubDomain holds a subdomain in the following form *.workspace.my-domain.com",
+							Description: "LoftHost holds the domain where the loft instance is hosted",
 							Type:        []string{"string"},
 							Format:      "",
 						},
@@ -9861,13 +9849,6 @@ func schema_pkg_apis_management_v1_DevPodUpOptions(ref common.ReferenceCallback)
 						SchemaProps: spec.SchemaProps{
 							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
 							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"webMode": {
-						SchemaProps: spec.SchemaProps{
-							Description: "WebMode executes the up command directly.",
-							Type:        []string{"boolean"},
 							Format:      "",
 						},
 					},
@@ -10665,7 +10646,7 @@ func schema_pkg_apis_management_v1_DevPodWorkspaceTemplateSpec(ref common.Refere
 					},
 					"template": {
 						SchemaProps: spec.SchemaProps{
-							Description: "Template holds the DevPod workspace template",
+							Description: "Provider holds the DevPod machine template",
 							Default:     map[string]interface{}{},
 							Ref:         ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.DevPodWorkspaceTemplateDefinition"),
 						},
@@ -14315,160 +14296,6 @@ func schema_pkg_apis_management_v1_ProjectTemplatesList(ref common.ReferenceCall
 	}
 }
 
-func schema_pkg_apis_management_v1_RedirectToken(ref common.ReferenceCallback) common.OpenAPIDefinition {
-	return common.OpenAPIDefinition{
-		Schema: spec.Schema{
-			SchemaProps: spec.SchemaProps{
-				Description: "RedirectToken holds the object information",
-				Type:        []string{"object"},
-				Properties: map[string]spec.Schema{
-					"kind": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"apiVersion": {
-						SchemaProps: spec.SchemaProps{
-							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"metadata": {
-						SchemaProps: spec.SchemaProps{
-							Default: map[string]interface{}{},
-							Ref:     ref("k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"),
-						},
-					},
-					"spec": {
-						SchemaProps: spec.SchemaProps{
-							Default: map[string]interface{}{},
-							Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/management/v1.RedirectTokenSpec"),
-						},
-					},
-					"status": {
-						SchemaProps: spec.SchemaProps{
-							Default: map[string]interface{}{},
-							Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/management/v1.RedirectTokenStatus"),
-						},
-					},
-				},
-			},
-		},
-		Dependencies: []string{
-			"github.com/loft-sh/api/v3/pkg/apis/management/v1.RedirectTokenSpec", "github.com/loft-sh/api/v3/pkg/apis/management/v1.RedirectTokenStatus", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
-	}
-}
-
-func schema_pkg_apis_management_v1_RedirectTokenClaims(ref common.ReferenceCallback) common.OpenAPIDefinition {
-	return common.OpenAPIDefinition{
-		Schema: spec.Schema{
-			SchemaProps: spec.SchemaProps{
-				Description: "RedirectTokenClaims holds the private claims of the redirect token",
-				Type:        []string{"object"},
-				Properties: map[string]spec.Schema{
-					"url": {
-						SchemaProps: spec.SchemaProps{
-							Description: "URL is the url to redirect to.",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-				},
-			},
-		},
-	}
-}
-
-func schema_pkg_apis_management_v1_RedirectTokenList(ref common.ReferenceCallback) common.OpenAPIDefinition {
-	return common.OpenAPIDefinition{
-		Schema: spec.Schema{
-			SchemaProps: spec.SchemaProps{
-				Type: []string{"object"},
-				Properties: map[string]spec.Schema{
-					"kind": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"apiVersion": {
-						SchemaProps: spec.SchemaProps{
-							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"metadata": {
-						SchemaProps: spec.SchemaProps{
-							Default: map[string]interface{}{},
-							Ref:     ref("k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"),
-						},
-					},
-					"items": {
-						SchemaProps: spec.SchemaProps{
-							Type: []string{"array"},
-							Items: &spec.SchemaOrArray{
-								Schema: &spec.Schema{
-									SchemaProps: spec.SchemaProps{
-										Default: map[string]interface{}{},
-										Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/management/v1.RedirectToken"),
-									},
-								},
-							},
-						},
-					},
-				},
-				Required: []string{"items"},
-			},
-		},
-		Dependencies: []string{
-			"github.com/loft-sh/api/v3/pkg/apis/management/v1.RedirectToken", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
-	}
-}
-
-func schema_pkg_apis_management_v1_RedirectTokenSpec(ref common.ReferenceCallback) common.OpenAPIDefinition {
-	return common.OpenAPIDefinition{
-		Schema: spec.Schema{
-			SchemaProps: spec.SchemaProps{
-				Description: "RedirectTokenSpec holds the object specification",
-				Type:        []string{"object"},
-				Properties: map[string]spec.Schema{
-					"token": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Token is the token that includes the redirect request",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-				},
-			},
-		},
-	}
-}
-
-func schema_pkg_apis_management_v1_RedirectTokenStatus(ref common.ReferenceCallback) common.OpenAPIDefinition {
-	return common.OpenAPIDefinition{
-		Schema: spec.Schema{
-			SchemaProps: spec.SchemaProps{
-				Description: "RedirectTokenStatus holds the object status",
-				Type:        []string{"object"},
-				Properties: map[string]spec.Schema{
-					"redirectURL": {
-						SchemaProps: spec.SchemaProps{
-							Type:   []string{"string"},
-							Format: "",
-						},
-					},
-				},
-			},
-		},
-	}
-}
-
 func schema_pkg_apis_management_v1_ResetAccessKey(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
@@ -16758,7 +16585,7 @@ func schema_pkg_apis_management_v1_TaskStatus(ref common.ReferenceCallback) comm
 					},
 					"containerState": {
 						SchemaProps: spec.SchemaProps{
-							Description: "DEPRECATED: This is not set anymore after migrating to runners ContainerState describes the container state of the task",
+							Description: "ContainerState describes the container state of the task",
 							Ref:         ref("k8s.io/api/core/v1.ContainerStatus"),
 						},
 					},
@@ -22342,7 +22169,7 @@ func schema_pkg_apis_storage_v1_DevPodWorkspaceTemplateSpec(ref common.Reference
 					},
 					"template": {
 						SchemaProps: spec.SchemaProps{
-							Description: "Template holds the DevPod workspace template",
+							Description: "Provider holds the DevPod machine template",
 							Default:     map[string]interface{}{},
 							Ref:         ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.DevPodWorkspaceTemplateDefinition"),
 						},
@@ -25143,7 +24970,7 @@ func schema_pkg_apis_storage_v1_TaskStatus(ref common.ReferenceCallback) common.
 					},
 					"containerState": {
 						SchemaProps: spec.SchemaProps{
-							Description: "DEPRECATED: This is not set anymore after migrating to runners ContainerState describes the container state of the task",
+							Description: "ContainerState describes the container state of the task",
 							Ref:         ref("k8s.io/api/core/v1.ContainerStatus"),
 						},
 					},

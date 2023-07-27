@@ -143,10 +143,6 @@ type UserQuotasOptions struct {
 type DevPodUpOptions struct {
 	metav1.TypeMeta `json:",inline"`
 
-	// WebMode executes the up command directly.
-	// +optional
-	WebMode bool `json:"webMode,omitempty"`
-
 	// Options are the options to pass.
 	// +optional
 	Options string `json:"options,omitempty"`

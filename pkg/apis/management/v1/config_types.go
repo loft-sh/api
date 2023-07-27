@@ -47,13 +47,9 @@ type ConfigStatus struct {
 	// +optional
 	Audit *Audit `json:"audit,omitempty"`
 
-	// LoftHost holds the domain where the loft instance is hosted. This should not include https or http. E.g. loft.my-domain.com
+	// LoftHost holds the domain where the loft instance is hosted
 	// +optional
 	LoftHost string `json:"loftHost,omitempty"`
-
-	// DevPodSubDomain holds a subdomain in the following form *.workspace.my-domain.com
-	// +optional
-	DevPodSubDomain string `json:"devPodSubDomain,omitempty"`
 
 	// UISettings holds the settings for modifying the Loft user interface
 	// +optional

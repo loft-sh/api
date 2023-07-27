@@ -44,8 +44,6 @@ type ProjectExpansion interface{}
 
 type ProjectSecretExpansion interface{}
 
-type RedirectTokenExpansion interface{}
-
 type ResetAccessKeyExpansion interface{}
 
 type RunnerExpansion interface{}
