@@ -96,6 +96,10 @@ func (c *FakeManagementV1) ProjectSecrets(namespace string) v1.ProjectSecretInte
 	return &FakeProjectSecrets{c, namespace}
 }
 
+func (c *FakeManagementV1) RedirectTokens() v1.RedirectTokenInterface {
+	return &FakeRedirectTokens{c}
+}
+
 func (c *FakeManagementV1) ResetAccessKeys() v1.ResetAccessKeyInterface {
 	return &FakeResetAccessKeys{c}
 }
