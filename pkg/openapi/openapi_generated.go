@@ -422,6 +422,10 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.ClusterSpec":                                        schema_pkg_apis_storage_v1_ClusterSpec(ref),
 		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.ClusterStatus":                                      schema_pkg_apis_storage_v1_ClusterStatus(ref),
 		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.ConstraintSpaceTemplate":                            schema_pkg_apis_storage_v1_ConstraintSpaceTemplate(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.DevPodCommandDeleteOptions":                         schema_pkg_apis_storage_v1_DevPodCommandDeleteOptions(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.DevPodCommandStatusOptions":                         schema_pkg_apis_storage_v1_DevPodCommandStatusOptions(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.DevPodCommandStopOptions":                           schema_pkg_apis_storage_v1_DevPodCommandStopOptions(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.DevPodCommandUpOptions":                             schema_pkg_apis_storage_v1_DevPodCommandUpOptions(ref),
 		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.DevPodProviderOption":                               schema_pkg_apis_storage_v1_DevPodProviderOption(ref),
 		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.DevPodProviderOptionFrom":                           schema_pkg_apis_storage_v1_DevPodProviderOptionFrom(ref),
 		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.DevPodProviderSource":                               schema_pkg_apis_storage_v1_DevPodProviderSource(ref),
@@ -10307,6 +10311,13 @@ func schema_pkg_apis_management_v1_DevPodWorkspaceInstanceStatus(ref common.Refe
 				Description: "DevPodWorkspaceInstanceStatus holds the status",
 				Type:        []string{"object"},
 				Properties: map[string]spec.Schema{
+					"lastWorkspaceStatus": {
+						SchemaProps: spec.SchemaProps{
+							Description: "LastWorkspaceStatus is the last workspace status reported by the runner.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
 					"phase": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Phase describes the current phase the DevPod machine instance is in",
@@ -21783,6 +21794,207 @@ func schema_pkg_apis_storage_v1_ConstraintSpaceTemplate(ref common.ReferenceCall
 	}
 }
 
+func schema_pkg_apis_storage_v1_DevPodCommandDeleteOptions(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"ignoreNotFound": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"boolean"},
+							Format: "",
+						},
+					},
+					"force": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"boolean"},
+							Format: "",
+						},
+					},
+					"gracePeriod": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"string"},
+							Format: "",
+						},
+					},
+				},
+			},
+		},
+	}
+}
+
+func schema_pkg_apis_storage_v1_DevPodCommandStatusOptions(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"containerStatus": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"boolean"},
+							Format: "",
+						},
+					},
+				},
+			},
+		},
+	}
+}
+
+func schema_pkg_apis_storage_v1_DevPodCommandStopOptions(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+			},
+		},
+	}
+}
+
+func schema_pkg_apis_storage_v1_DevPodCommandUpOptions(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"id": {
+						SchemaProps: spec.SchemaProps{
+							Description: "up options",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"source": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"string"},
+							Format: "",
+						},
+					},
+					"ide": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"string"},
+							Format: "",
+						},
+					},
+					"ideOptions": {
+						SchemaProps: spec.SchemaProps{
+							Type: []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: "",
+										Type:    []string{"string"},
+										Format:  "",
+									},
+								},
+							},
+						},
+					},
+					"prebuildRepositories": {
+						SchemaProps: spec.SchemaProps{
+							Type: []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: "",
+										Type:    []string{"string"},
+										Format:  "",
+									},
+								},
+							},
+						},
+					},
+					"devContainerPath": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"string"},
+							Format: "",
+						},
+					},
+					"workspaceEnv": {
+						SchemaProps: spec.SchemaProps{
+							Type: []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: "",
+										Type:    []string{"string"},
+										Format:  "",
+									},
+								},
+							},
+						},
+					},
+					"recreate": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"boolean"},
+							Format: "",
+						},
+					},
+					"proxy": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"boolean"},
+							Format: "",
+						},
+					},
+					"disableDaemon": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"boolean"},
+							Format: "",
+						},
+					},
+					"daemonInterval": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"string"},
+							Format: "",
+						},
+					},
+					"repository": {
+						SchemaProps: spec.SchemaProps{
+							Description: "build options",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"skipPush": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"boolean"},
+							Format: "",
+						},
+					},
+					"platform": {
+						SchemaProps: spec.SchemaProps{
+							Type: []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: "",
+										Type:    []string{"string"},
+										Format:  "",
+									},
+								},
+							},
+						},
+					},
+					"forceBuild": {
+						SchemaProps: spec.SchemaProps{
+							Description: "TESTING",
+							Type:        []string{"boolean"},
+							Format:      "",
+						},
+					},
+					"forceInternalBuildKit": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"boolean"},
+							Format: "",
+						},
+					},
+				},
+			},
+		},
+	}
+}
+
 func schema_pkg_apis_storage_v1_DevPodProviderOption(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
@@ -22045,6 +22257,13 @@ func schema_pkg_apis_storage_v1_DevPodWorkspaceInstanceStatus(ref common.Referen
 			SchemaProps: spec.SchemaProps{
 				Type: []string{"object"},
 				Properties: map[string]spec.Schema{
+					"lastWorkspaceStatus": {
+						SchemaProps: spec.SchemaProps{
+							Description: "LastWorkspaceStatus is the last workspace status reported by the runner.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
 					"phase": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Phase describes the current phase the DevPod machine instance is in",
