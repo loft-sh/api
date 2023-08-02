@@ -6,7 +6,10 @@ import (
 )
 
 var (
-	DevPodWorkspaceConditions = []agentstoragev1.ConditionType{}
+	DevPodWorkspaceConditions = []agentstoragev1.ConditionType{
+		InstanceScheduled,
+		InstanceTemplateResolved,
+	}
 
 	// DevPodWorkspaceIDLabel holds the actual workspace id of the devpod workspace
 	DevPodWorkspaceIDLabel = "loft.sh/workspace-id"
