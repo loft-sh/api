@@ -3860,6 +3860,13 @@ func (in *ProjectClusters) DeepCopyInto(out *ProjectClusters) {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
+	if in.Runners != nil {
+		in, out := &in.Runners, &out.Runners
+		*out = make([]Runner, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
+	}
 	return
 }
 

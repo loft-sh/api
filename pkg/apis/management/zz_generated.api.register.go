@@ -2047,6 +2047,7 @@ type ProjectClusters struct {
 	metav1.TypeMeta
 	metav1.ObjectMeta
 	Clusters []Cluster
+	Runners  []Runner
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -2198,7 +2199,7 @@ type ResetAccessKeyStatus struct {
 }
 
 // +genclient
-// +genclient:nonNamespaced
+// +genclient
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
 
 type Runner struct {
