@@ -279,6 +279,11 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 		"github.com/loft-sh/api/v3/pkg/apis/management/v1.ProjectStatus":                                   schema_pkg_apis_management_v1_ProjectStatus(ref),
 		"github.com/loft-sh/api/v3/pkg/apis/management/v1.ProjectTemplates":                                schema_pkg_apis_management_v1_ProjectTemplates(ref),
 		"github.com/loft-sh/api/v3/pkg/apis/management/v1.ProjectTemplatesList":                            schema_pkg_apis_management_v1_ProjectTemplatesList(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/management/v1.RedirectToken":                                   schema_pkg_apis_management_v1_RedirectToken(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/management/v1.RedirectTokenClaims":                             schema_pkg_apis_management_v1_RedirectTokenClaims(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/management/v1.RedirectTokenList":                               schema_pkg_apis_management_v1_RedirectTokenList(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/management/v1.RedirectTokenSpec":                               schema_pkg_apis_management_v1_RedirectTokenSpec(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/management/v1.RedirectTokenStatus":                             schema_pkg_apis_management_v1_RedirectTokenStatus(ref),
 		"github.com/loft-sh/api/v3/pkg/apis/management/v1.ResetAccessKey":                                  schema_pkg_apis_management_v1_ResetAccessKey(ref),
 		"github.com/loft-sh/api/v3/pkg/apis/management/v1.ResetAccessKeyList":                              schema_pkg_apis_management_v1_ResetAccessKeyList(ref),
 		"github.com/loft-sh/api/v3/pkg/apis/management/v1.ResetAccessKeySpec":                              schema_pkg_apis_management_v1_ResetAccessKeySpec(ref),
@@ -417,6 +422,10 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.ClusterSpec":                                        schema_pkg_apis_storage_v1_ClusterSpec(ref),
 		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.ClusterStatus":                                      schema_pkg_apis_storage_v1_ClusterStatus(ref),
 		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.ConstraintSpaceTemplate":                            schema_pkg_apis_storage_v1_ConstraintSpaceTemplate(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.DevPodCommandDeleteOptions":                         schema_pkg_apis_storage_v1_DevPodCommandDeleteOptions(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.DevPodCommandStatusOptions":                         schema_pkg_apis_storage_v1_DevPodCommandStatusOptions(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.DevPodCommandStopOptions":                           schema_pkg_apis_storage_v1_DevPodCommandStopOptions(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.DevPodCommandUpOptions":                             schema_pkg_apis_storage_v1_DevPodCommandUpOptions(ref),
 		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.DevPodProviderOption":                               schema_pkg_apis_storage_v1_DevPodProviderOption(ref),
 		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.DevPodProviderOptionFrom":                           schema_pkg_apis_storage_v1_DevPodProviderOptionFrom(ref),
 		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.DevPodProviderSource":                               schema_pkg_apis_storage_v1_DevPodProviderSource(ref),
@@ -521,6 +530,7 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.VirtualClusterTemplateStatus":                       schema_pkg_apis_storage_v1_VirtualClusterTemplateStatus(ref),
 		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.VirtualClusterTemplateVersion":                      schema_pkg_apis_storage_v1_VirtualClusterTemplateVersion(ref),
 		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.WorkloadVirtualClusterTemplateDefinition":           schema_pkg_apis_storage_v1_WorkloadVirtualClusterTemplateDefinition(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.WorkspaceStatusResult":                              schema_pkg_apis_storage_v1_WorkspaceStatusResult(ref),
 		"github.com/loft-sh/api/v3/pkg/apis/ui/v1.NavBarButton":                                            schema_pkg_apis_ui_v1_NavBarButton(ref),
 		"github.com/loft-sh/api/v3/pkg/apis/ui/v1.UISettings":                                              schema_pkg_apis_ui_v1_UISettings(ref),
 		"github.com/loft-sh/api/v3/pkg/apis/ui/v1.UISettingsSpec":                                          schema_pkg_apis_ui_v1_UISettingsSpec(ref),
@@ -9561,7 +9571,14 @@ func schema_pkg_apis_management_v1_ConfigStatus(ref common.ReferenceCallback) co
 					},
 					"loftHost": {
 						SchemaProps: spec.SchemaProps{
-							Description: "LoftHost holds the domain where the loft instance is hosted",
+							Description: "LoftHost holds the domain where the loft instance is hosted. This should not include https or http. E.g. loft.my-domain.com",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"devPodSubDomain": {
+						SchemaProps: spec.SchemaProps{
+							Description: "DevPodSubDomain holds a subdomain in the following form *.workspace.my-domain.com",
 							Type:        []string{"string"},
 							Format:      "",
 						},
@@ -9849,6 +9866,13 @@ func schema_pkg_apis_management_v1_DevPodUpOptions(ref common.ReferenceCallback)
 						SchemaProps: spec.SchemaProps{
 							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
 							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"webMode": {
+						SchemaProps: spec.SchemaProps{
+							Description: "WebMode executes the up command directly.",
+							Type:        []string{"boolean"},
 							Format:      "",
 						},
 					},
@@ -10288,6 +10312,13 @@ func schema_pkg_apis_management_v1_DevPodWorkspaceInstanceStatus(ref common.Refe
 				Description: "DevPodWorkspaceInstanceStatus holds the status",
 				Type:        []string{"object"},
 				Properties: map[string]spec.Schema{
+					"lastWorkspaceStatus": {
+						SchemaProps: spec.SchemaProps{
+							Description: "LastWorkspaceStatus is the last workspace status reported by the runner.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
 					"phase": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Phase describes the current phase the DevPod machine instance is in",
@@ -10646,7 +10677,7 @@ func schema_pkg_apis_management_v1_DevPodWorkspaceTemplateSpec(ref common.Refere
 					},
 					"template": {
 						SchemaProps: spec.SchemaProps{
-							Description: "Provider holds the DevPod machine template",
+							Description: "Template holds the DevPod workspace template",
 							Default:     map[string]interface{}{},
 							Ref:         ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.DevPodWorkspaceTemplateDefinition"),
 						},
@@ -10680,7 +10711,6 @@ func schema_pkg_apis_management_v1_DevPodWorkspaceTemplateSpec(ref common.Refere
 						},
 					},
 				},
-				Required: []string{"template"},
 			},
 		},
 		Dependencies: []string{
@@ -13097,11 +13127,25 @@ func schema_pkg_apis_management_v1_ProjectClusters(ref common.ReferenceCallback)
 							},
 						},
 					},
+					"runners": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Runners holds all the allowed runners",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/management/v1.Runner"),
+									},
+								},
+							},
+						},
+					},
 				},
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/v3/pkg/apis/management/v1.Cluster", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
+			"github.com/loft-sh/api/v3/pkg/apis/management/v1.Cluster", "github.com/loft-sh/api/v3/pkg/apis/management/v1.Runner", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
 	}
 }
 
@@ -14220,11 +14264,32 @@ func schema_pkg_apis_management_v1_ProjectTemplates(ref common.ReferenceCallback
 							},
 						},
 					},
+					"defaultDevPodWorkspaceTemplate": {
+						SchemaProps: spec.SchemaProps{
+							Description: "DefaultDevPodWorkspaceTemplate",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"devPodWorkspaceTemplates": {
+						SchemaProps: spec.SchemaProps{
+							Description: "DevPodWorkspaceTemplates holds all the allowed space templates",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/management/v1.DevPodWorkspaceTemplate"),
+									},
+								},
+							},
+						},
+					},
 				},
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/v3/pkg/apis/management/v1.SpaceTemplate", "github.com/loft-sh/api/v3/pkg/apis/management/v1.VirtualClusterTemplate", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
+			"github.com/loft-sh/api/v3/pkg/apis/management/v1.DevPodWorkspaceTemplate", "github.com/loft-sh/api/v3/pkg/apis/management/v1.SpaceTemplate", "github.com/loft-sh/api/v3/pkg/apis/management/v1.VirtualClusterTemplate", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
 	}
 }
 
@@ -14273,6 +14338,160 @@ func schema_pkg_apis_management_v1_ProjectTemplatesList(ref common.ReferenceCall
 		},
 		Dependencies: []string{
 			"github.com/loft-sh/api/v3/pkg/apis/management/v1.ProjectTemplates", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
+	}
+}
+
+func schema_pkg_apis_management_v1_RedirectToken(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "RedirectToken holds the object information",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"kind": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"apiVersion": {
+						SchemaProps: spec.SchemaProps{
+							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"metadata": {
+						SchemaProps: spec.SchemaProps{
+							Default: map[string]interface{}{},
+							Ref:     ref("k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"),
+						},
+					},
+					"spec": {
+						SchemaProps: spec.SchemaProps{
+							Default: map[string]interface{}{},
+							Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/management/v1.RedirectTokenSpec"),
+						},
+					},
+					"status": {
+						SchemaProps: spec.SchemaProps{
+							Default: map[string]interface{}{},
+							Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/management/v1.RedirectTokenStatus"),
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			"github.com/loft-sh/api/v3/pkg/apis/management/v1.RedirectTokenSpec", "github.com/loft-sh/api/v3/pkg/apis/management/v1.RedirectTokenStatus", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
+	}
+}
+
+func schema_pkg_apis_management_v1_RedirectTokenClaims(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "RedirectTokenClaims holds the private claims of the redirect token",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"url": {
+						SchemaProps: spec.SchemaProps{
+							Description: "URL is the url to redirect to.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+				},
+			},
+		},
+	}
+}
+
+func schema_pkg_apis_management_v1_RedirectTokenList(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"kind": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"apiVersion": {
+						SchemaProps: spec.SchemaProps{
+							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"metadata": {
+						SchemaProps: spec.SchemaProps{
+							Default: map[string]interface{}{},
+							Ref:     ref("k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"),
+						},
+					},
+					"items": {
+						SchemaProps: spec.SchemaProps{
+							Type: []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/management/v1.RedirectToken"),
+									},
+								},
+							},
+						},
+					},
+				},
+				Required: []string{"items"},
+			},
+		},
+		Dependencies: []string{
+			"github.com/loft-sh/api/v3/pkg/apis/management/v1.RedirectToken", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
+	}
+}
+
+func schema_pkg_apis_management_v1_RedirectTokenSpec(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "RedirectTokenSpec holds the object specification",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"token": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Token is the token that includes the redirect request",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+				},
+			},
+		},
+	}
+}
+
+func schema_pkg_apis_management_v1_RedirectTokenStatus(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "RedirectTokenStatus holds the object status",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"redirectURL": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"string"},
+							Format: "",
+						},
+					},
+				},
+			},
+		},
 	}
 }
 
@@ -16565,7 +16784,7 @@ func schema_pkg_apis_management_v1_TaskStatus(ref common.ReferenceCallback) comm
 					},
 					"containerState": {
 						SchemaProps: spec.SchemaProps{
-							Description: "ContainerState describes the container state of the task",
+							Description: "DEPRECATED: This is not set anymore after migrating to runners ContainerState describes the container state of the task",
 							Ref:         ref("k8s.io/api/core/v1.ContainerStatus"),
 						},
 					},
@@ -21590,6 +21809,207 @@ func schema_pkg_apis_storage_v1_ConstraintSpaceTemplate(ref common.ReferenceCall
 	}
 }
 
+func schema_pkg_apis_storage_v1_DevPodCommandDeleteOptions(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"ignoreNotFound": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"boolean"},
+							Format: "",
+						},
+					},
+					"force": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"boolean"},
+							Format: "",
+						},
+					},
+					"gracePeriod": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"string"},
+							Format: "",
+						},
+					},
+				},
+			},
+		},
+	}
+}
+
+func schema_pkg_apis_storage_v1_DevPodCommandStatusOptions(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"containerStatus": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"boolean"},
+							Format: "",
+						},
+					},
+				},
+			},
+		},
+	}
+}
+
+func schema_pkg_apis_storage_v1_DevPodCommandStopOptions(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+			},
+		},
+	}
+}
+
+func schema_pkg_apis_storage_v1_DevPodCommandUpOptions(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"id": {
+						SchemaProps: spec.SchemaProps{
+							Description: "up options",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"source": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"string"},
+							Format: "",
+						},
+					},
+					"ide": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"string"},
+							Format: "",
+						},
+					},
+					"ideOptions": {
+						SchemaProps: spec.SchemaProps{
+							Type: []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: "",
+										Type:    []string{"string"},
+										Format:  "",
+									},
+								},
+							},
+						},
+					},
+					"prebuildRepositories": {
+						SchemaProps: spec.SchemaProps{
+							Type: []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: "",
+										Type:    []string{"string"},
+										Format:  "",
+									},
+								},
+							},
+						},
+					},
+					"devContainerPath": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"string"},
+							Format: "",
+						},
+					},
+					"workspaceEnv": {
+						SchemaProps: spec.SchemaProps{
+							Type: []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: "",
+										Type:    []string{"string"},
+										Format:  "",
+									},
+								},
+							},
+						},
+					},
+					"recreate": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"boolean"},
+							Format: "",
+						},
+					},
+					"proxy": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"boolean"},
+							Format: "",
+						},
+					},
+					"disableDaemon": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"boolean"},
+							Format: "",
+						},
+					},
+					"daemonInterval": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"string"},
+							Format: "",
+						},
+					},
+					"repository": {
+						SchemaProps: spec.SchemaProps{
+							Description: "build options",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"skipPush": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"boolean"},
+							Format: "",
+						},
+					},
+					"platform": {
+						SchemaProps: spec.SchemaProps{
+							Type: []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: "",
+										Type:    []string{"string"},
+										Format:  "",
+									},
+								},
+							},
+						},
+					},
+					"forceBuild": {
+						SchemaProps: spec.SchemaProps{
+							Description: "TESTING",
+							Type:        []string{"boolean"},
+							Format:      "",
+						},
+					},
+					"forceInternalBuildKit": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"boolean"},
+							Format: "",
+						},
+					},
+				},
+			},
+		},
+	}
+}
+
 func schema_pkg_apis_storage_v1_DevPodProviderOption(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
@@ -21852,6 +22272,13 @@ func schema_pkg_apis_storage_v1_DevPodWorkspaceInstanceStatus(ref common.Referen
 			SchemaProps: spec.SchemaProps{
 				Type: []string{"object"},
 				Properties: map[string]spec.Schema{
+					"lastWorkspaceStatus": {
+						SchemaProps: spec.SchemaProps{
+							Description: "LastWorkspaceStatus is the last workspace status reported by the runner.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
 					"phase": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Phase describes the current phase the DevPod machine instance is in",
@@ -22149,7 +22576,7 @@ func schema_pkg_apis_storage_v1_DevPodWorkspaceTemplateSpec(ref common.Reference
 					},
 					"template": {
 						SchemaProps: spec.SchemaProps{
-							Description: "Provider holds the DevPod machine template",
+							Description: "Template holds the DevPod workspace template",
 							Default:     map[string]interface{}{},
 							Ref:         ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.DevPodWorkspaceTemplateDefinition"),
 						},
@@ -22183,7 +22610,6 @@ func schema_pkg_apis_storage_v1_DevPodWorkspaceTemplateSpec(ref common.Reference
 						},
 					},
 				},
-				Required: []string{"template"},
 			},
 		},
 		Dependencies: []string{
@@ -24951,7 +25377,7 @@ func schema_pkg_apis_storage_v1_TaskStatus(ref common.ReferenceCallback) common.
 					},
 					"containerState": {
 						SchemaProps: spec.SchemaProps{
-							Description: "ContainerState describes the container state of the task",
+							Description: "DEPRECATED: This is not set anymore after migrating to runners ContainerState describes the container state of the task",
 							Ref:         ref("k8s.io/api/core/v1.ContainerStatus"),
 						},
 					},
@@ -26639,6 +27065,42 @@ func schema_pkg_apis_storage_v1_WorkloadVirtualClusterTemplateDefinition(ref com
 		},
 		Dependencies: []string{
 			"github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.VirtualClusterHelmRelease", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.TemplateMetadata", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.VirtualClusterSpaceTemplateDefinition"},
+	}
+}
+
+func schema_pkg_apis_storage_v1_WorkspaceStatusResult(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"id": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"string"},
+							Format: "",
+						},
+					},
+					"context": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"string"},
+							Format: "",
+						},
+					},
+					"provider": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"string"},
+							Format: "",
+						},
+					},
+					"state": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"string"},
+							Format: "",
+						},
+					},
+				},
+			},
+		},
 	}
 }
 

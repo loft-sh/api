@@ -6,13 +6,22 @@ import (
 )
 
 var (
-	DevPodWorkspaceConditions = []agentstoragev1.ConditionType{}
+	DevPodWorkspaceConditions = []agentstoragev1.ConditionType{
+		InstanceScheduled,
+		InstanceTemplateResolved,
+	}
 
 	// DevPodWorkspaceIDLabel holds the actual workspace id of the devpod workspace
 	DevPodWorkspaceIDLabel = "loft.sh/workspace-id"
 
 	// DevPodWorkspaceUIDLabel holds the actual workspace uid of the devpod workspace
 	DevPodWorkspaceUIDLabel = "loft.sh/workspace-uid"
+
+	// DevPodWorkspacePictureAnnotation holds the workspace picture url of the devpod workspace
+	DevPodWorkspacePictureAnnotation = "loft.sh/workspace-picture"
+
+	// DevPodWorkspaceSourceAnnotation holds the workspace source of the devpod workspace
+	DevPodWorkspaceSourceAnnotation = "loft.sh/workspace-source"
 )
 
 var (
@@ -104,6 +113,10 @@ type RunnerRef struct {
 }
 
 type DevPodWorkspaceInstanceStatus struct {
+	// LastWorkspaceStatus is the last workspace status reported by the runner.
+	// +optional
+	LastWorkspaceStatus WorkspaceStatus `json:"lastWorkspaceStatus,omitempty"`
+
 	// Phase describes the current phase the DevPod machine instance is in
 	// +optional
 	Phase InstancePhase `json:"phase,omitempty"`
@@ -129,6 +142,65 @@ type DevPodWorkspaceInstanceStatus struct {
 	// IgnoreReconciliation ignores reconciliation for this object
 	// +optional
 	IgnoreReconciliation bool `json:"ignoreReconciliation,omitempty"`
+}
+
+type WorkspaceStatusResult struct {
+	ID       string `json:"id,omitempty"`
+	Context  string `json:"context,omitempty"`
+	Provider string `json:"provider,omitempty"`
+	State    string `json:"state,omitempty"`
+}
+
+var AllowedWorkspaceStatus = []WorkspaceStatus{
+	WorkspaceStatusNotFound,
+	WorkspaceStatusStopped,
+	WorkspaceStatusBusy,
+	WorkspaceStatusRunning,
+}
+
+type WorkspaceStatus string
+
+var (
+	WorkspaceStatusNotFound WorkspaceStatus = "NotFound"
+	WorkspaceStatusStopped  WorkspaceStatus = "Stopped"
+	WorkspaceStatusBusy     WorkspaceStatus = "Busy"
+	WorkspaceStatusRunning  WorkspaceStatus = "Running"
+)
+
+type DevPodCommandStopOptions struct{}
+
+type DevPodCommandDeleteOptions struct {
+	IgnoreNotFound bool   `json:"ignoreNotFound,omitempty"`
+	Force          bool   `json:"force,omitempty"`
+	GracePeriod    string `json:"gracePeriod,omitempty"`
+}
+
+type DevPodCommandStatusOptions struct {
+	ContainerStatus bool `json:"containerStatus,omitempty"`
+}
+
+type DevPodCommandUpOptions struct {
+	// up options
+	ID                   string   `json:"id,omitempty"`
+	Source               string   `json:"source,omitempty"`
+	IDE                  string   `json:"ide,omitempty"`
+	IDEOptions           []string `json:"ideOptions,omitempty"`
+	PrebuildRepositories []string `json:"prebuildRepositories,omitempty"`
+	DevContainerPath     string   `json:"devContainerPath,omitempty"`
+	WorkspaceEnv         []string `json:"workspaceEnv,omitempty"`
+	Recreate             bool     `json:"recreate,omitempty"`
+	Proxy                bool     `json:"proxy,omitempty"`
+	DisableDaemon        bool     `json:"disableDaemon,omitempty"`
+	DaemonInterval       string   `json:"daemonInterval,omitempty"`
+
+	// build options
+	Repository string   `json:"repository,omitempty"`
+	SkipPush   bool     `json:"skipPush,omitempty"`
+	Platform   []string `json:"platform,omitempty"`
+
+	// TESTING
+	ForceBuild            bool `json:"forceBuild,omitempty"`
+	ForceInternalBuildKit bool `json:"forceInternalBuildKit,omitempty"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object

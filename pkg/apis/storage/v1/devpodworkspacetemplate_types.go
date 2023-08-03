@@ -67,8 +67,8 @@ type DevPodWorkspaceTemplateSpec struct {
 	// +optional
 	Parameters []AppParameter `json:"parameters,omitempty"`
 
-	// Provider holds the DevPod machine template
-	Template DevPodWorkspaceTemplateDefinition `json:"template"`
+	// Template holds the DevPod workspace template
+	Template DevPodWorkspaceTemplateDefinition `json:"template,omitempty"`
 
 	// Versions are different versions of the template that can be referenced as well
 	// +optional

@@ -58,6 +58,7 @@ func GetManagementAPIBuilder() *builders.APIGroupBuilder {
 			"OwnedAccessKey",
 			"PolicyViolation",
 			"Project",
+			"RedirectToken",
 			"ResetAccessKey",
 			"Runner",
 			"Self",
