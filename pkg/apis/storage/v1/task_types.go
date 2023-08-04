@@ -216,6 +216,7 @@ type TaskStatus struct {
 	// +optional
 	ObservedGeneration int64 `json:"observedGeneration,omitempty"`
 
+	// DEPRECATED: This is not set anymore after migrating to runners
 	// ContainerState describes the container state of the task
 	// +optional
 	ContainerState *corev1.ContainerStatus `json:"containerState,omitempty"`

@@ -32,8 +32,20 @@ func (c *FakeStorageV1) ClusterRoleTemplates() v1.ClusterRoleTemplateInterface {
 	return &FakeClusterRoleTemplates{c}
 }
 
+func (c *FakeStorageV1) DevPodWorkspaceInstances(namespace string) v1.DevPodWorkspaceInstanceInterface {
+	return &FakeDevPodWorkspaceInstances{c, namespace}
+}
+
+func (c *FakeStorageV1) DevPodWorkspaceTemplates() v1.DevPodWorkspaceTemplateInterface {
+	return &FakeDevPodWorkspaceTemplates{c}
+}
+
 func (c *FakeStorageV1) Projects() v1.ProjectInterface {
 	return &FakeProjects{c}
+}
+
+func (c *FakeStorageV1) Runners() v1.RunnerInterface {
+	return &FakeRunners{c}
 }
 
 func (c *FakeStorageV1) SharedSecrets(namespace string) v1.SharedSecretInterface {

@@ -47,9 +47,13 @@ type ConfigStatus struct {
 	// +optional
 	Audit *Audit `json:"audit,omitempty"`
 
-	// LoftHost holds the domain where the loft instance is hosted
+	// LoftHost holds the domain where the loft instance is hosted. This should not include https or http. E.g. loft.my-domain.com
 	// +optional
 	LoftHost string `json:"loftHost,omitempty"`
+
+	// DevPodSubDomain holds a subdomain in the following form *.workspace.my-domain.com
+	// +optional
+	DevPodSubDomain string `json:"devPodSubDomain,omitempty"`
 
 	// UISettings holds the settings for modifying the Loft user interface
 	// +optional
@@ -612,6 +616,10 @@ type AuthenticationOIDC struct {
 
 	// loft redirect uri. E.g. https://loft.my.domain/auth/oidc/callback
 	RedirectURI string `json:"redirectURI,omitempty"`
+
+	// Loft URI to be redirected to after successful logout by OIDC Provider
+	// +optional
+	PostLogoutRedirectURI string `json:"postLogoutRedirectURI,omitempty"`
 
 	// Path to a PEM encoded root certificate of the provider. Optional
 	// +optional

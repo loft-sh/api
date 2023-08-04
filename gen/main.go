@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"log"
 
 	"github.com/ghodss/yaml"
@@ -44,7 +43,7 @@ func main() {
 			log.Fatal(err)
 		}
 
-		fmt.Println(string(out))
+		log.Println(string(out))
 	} else {
 		log.Fatal("Not found")
 	}

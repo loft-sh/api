@@ -18,6 +18,10 @@ type ClusterRoleTemplateExpansion interface{}
 
 type ConfigExpansion interface{}
 
+type DevPodWorkspaceInstanceExpansion interface{}
+
+type DevPodWorkspaceTemplateExpansion interface{}
+
 type DirectClusterEndpointTokenExpansion interface{}
 
 type EventExpansion interface{}
@@ -40,7 +44,11 @@ type ProjectExpansion interface{}
 
 type ProjectSecretExpansion interface{}
 
+type RedirectTokenExpansion interface{}
+
 type ResetAccessKeyExpansion interface{}
+
+type RunnerExpansion interface{}
 
 type SelfExpansion interface{}
 

@@ -86,6 +86,11 @@ type ProjectSpec struct {
 	// +optional
 	AllowedClusters []AllowedCluster `json:"allowedClusters,omitempty"`
 
+	// AllowedRunners are target runners that are allowed to target with
+	// DevPod environments.
+	// +optional
+	AllowedRunners []AllowedRunner `json:"allowedRunners,omitempty"`
+
 	// AllowedTemplates are the templates that are allowed to use in this
 	// project.
 	// +optional
@@ -132,12 +137,13 @@ type Quotas struct {
 }
 
 var (
-	SpaceTemplateKind          = "SpaceTemplate"
-	VirtualClusterTemplateKind = "VirtualClusterTemplate"
+	SpaceTemplateKind           = "SpaceTemplate"
+	VirtualClusterTemplateKind  = "VirtualClusterTemplate"
+	DevPodWorkspaceTemplateKind = "DevPodWorkspaceTemplate"
 )
 
 type AllowedTemplate struct {
-	// Kind of the template that is allowed. Currently only supports VirtualClusterTemplate & SpaceTemplate
+	// Kind of the template that is allowed. Currently only supports DevPodWorkspaceTemplate, VirtualClusterTemplate & SpaceTemplate
 	// +optional
 	Kind string `json:"kind,omitempty"`
 
@@ -171,8 +177,14 @@ type Member struct {
 	ClusterRole string `json:"clusterRole,omitempty"`
 }
 
+type AllowedRunner struct {
+	// Name is the name of the runner that is allowed to create an environment in.
+	// +optional
+	Name string `json:"name,omitempty"`
+}
+
 type AllowedCluster struct {
-	// Name is the name of the cluster that is allowed to create an environment in
+	// Name is the name of the cluster that is allowed to create an environment in.
 	// +optional
 	Name string `json:"name,omitempty"`
 }

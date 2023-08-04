@@ -5,10 +5,9 @@ package fake
 import (
 	"context"
 
-	managementv1 "github.com/loft-sh/api/v3/pkg/apis/management/v1"
-	v1 "k8s.io/apimachinery/pkg/apis/meta/v1"
+	v1 "github.com/loft-sh/api/v3/pkg/apis/management/v1"
+	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	labels "k8s.io/apimachinery/pkg/labels"
-	schema "k8s.io/apimachinery/pkg/runtime/schema"
 	types "k8s.io/apimachinery/pkg/types"
 	watch "k8s.io/apimachinery/pkg/watch"
 	testing "k8s.io/client-go/testing"
@@ -19,24 +18,24 @@ type FakeSelves struct {
 	Fake *FakeManagementV1
 }
 
-var selvesResource = schema.GroupVersionResource{Group: "management.loft.sh", Version: "v1", Resource: "selves"}
+var selvesResource = v1.SchemeGroupVersion.WithResource("selves")
 
-var selvesKind = schema.GroupVersionKind{Group: "management.loft.sh", Version: "v1", Kind: "Self"}
+var selvesKind = v1.SchemeGroupVersion.WithKind("Self")
 
 // Get takes name of the self, and returns the corresponding self object, and an error if there is any.
-func (c *FakeSelves) Get(ctx context.Context, name string, options v1.GetOptions) (result *managementv1.Self, err error) {
+func (c *FakeSelves) Get(ctx context.Context, name string, options metav1.GetOptions) (result *v1.Self, err error) {
 	obj, err := c.Fake.
-		Invokes(testing.NewRootGetAction(selvesResource, name), &managementv1.Self{})
+		Invokes(testing.NewRootGetAction(selvesResource, name), &v1.Self{})
 	if obj == nil {
 		return nil, err
 	}
-	return obj.(*managementv1.Self), err
+	return obj.(*v1.Self), err
 }
 
 // List takes label and field selectors, and returns the list of Selves that match those selectors.
-func (c *FakeSelves) List(ctx context.Context, opts v1.ListOptions) (result *managementv1.SelfList, err error) {
+func (c *FakeSelves) List(ctx context.Context, opts metav1.ListOptions) (result *v1.SelfList, err error) {
 	obj, err := c.Fake.
-		Invokes(testing.NewRootListAction(selvesResource, selvesKind, opts), &managementv1.SelfList{})
+		Invokes(testing.NewRootListAction(selvesResource, selvesKind, opts), &v1.SelfList{})
 	if obj == nil {
 		return nil, err
 	}
@@ -45,8 +44,8 @@ func (c *FakeSelves) List(ctx context.Context, opts v1.ListOptions) (result *man
 	if label == nil {
 		label = labels.Everything()
 	}
-	list := &managementv1.SelfList{ListMeta: obj.(*managementv1.SelfList).ListMeta}
-	for _, item := range obj.(*managementv1.SelfList).Items {
+	list := &v1.SelfList{ListMeta: obj.(*v1.SelfList).ListMeta}
+	for _, item := range obj.(*v1.SelfList).Items {
 		if label.Matches(labels.Set(item.Labels)) {
 			list.Items = append(list.Items, item)
 		}
@@ -55,63 +54,63 @@ func (c *FakeSelves) List(ctx context.Context, opts v1.ListOptions) (result *man
 }
 
 // Watch returns a watch.Interface that watches the requested selves.
-func (c *FakeSelves) Watch(ctx context.Context, opts v1.ListOptions) (watch.Interface, error) {
+func (c *FakeSelves) Watch(ctx context.Context, opts metav1.ListOptions) (watch.Interface, error) {
 	return c.Fake.
 		InvokesWatch(testing.NewRootWatchAction(selvesResource, opts))
 }
 
 // Create takes the representation of a self and creates it.  Returns the server's representation of the self, and an error, if there is any.
-func (c *FakeSelves) Create(ctx context.Context, self *managementv1.Self, opts v1.CreateOptions) (result *managementv1.Self, err error) {
+func (c *FakeSelves) Create(ctx context.Context, self *v1.Self, opts metav1.CreateOptions) (result *v1.Self, err error) {
 	obj, err := c.Fake.
-		Invokes(testing.NewRootCreateAction(selvesResource, self), &managementv1.Self{})
+		Invokes(testing.NewRootCreateAction(selvesResource, self), &v1.Self{})
 	if obj == nil {
 		return nil, err
 	}
-	return obj.(*managementv1.Self), err
+	return obj.(*v1.Self), err
 }
 
 // Update takes the representation of a self and updates it. Returns the server's representation of the self, and an error, if there is any.
-func (c *FakeSelves) Update(ctx context.Context, self *managementv1.Self, opts v1.UpdateOptions) (result *managementv1.Self, err error) {
+func (c *FakeSelves) Update(ctx context.Context, self *v1.Self, opts metav1.UpdateOptions) (result *v1.Self, err error) {
 	obj, err := c.Fake.
-		Invokes(testing.NewRootUpdateAction(selvesResource, self), &managementv1.Self{})
+		Invokes(testing.NewRootUpdateAction(selvesResource, self), &v1.Self{})
 	if obj == nil {
 		return nil, err
 	}
-	return obj.(*managementv1.Self), err
+	return obj.(*v1.Self), err
 }
 
 // UpdateStatus was generated because the type contains a Status member.
 // Add a +genclient:noStatus comment above the type to avoid generating UpdateStatus().
-func (c *FakeSelves) UpdateStatus(ctx context.Context, self *managementv1.Self, opts v1.UpdateOptions) (*managementv1.Self, error) {
+func (c *FakeSelves) UpdateStatus(ctx context.Context, self *v1.Self, opts metav1.UpdateOptions) (*v1.Self, error) {
 	obj, err := c.Fake.
-		Invokes(testing.NewRootUpdateSubresourceAction(selvesResource, "status", self), &managementv1.Self{})
+		Invokes(testing.NewRootUpdateSubresourceAction(selvesResource, "status", self), &v1.Self{})
 	if obj == nil {
 		return nil, err
 	}
-	return obj.(*managementv1.Self), err
+	return obj.(*v1.Self), err
 }
 
 // Delete takes name of the self and deletes it. Returns an error if one occurs.
-func (c *FakeSelves) Delete(ctx context.Context, name string, opts v1.DeleteOptions) error {
+func (c *FakeSelves) Delete(ctx context.Context, name string, opts metav1.DeleteOptions) error {
 	_, err := c.Fake.
-		Invokes(testing.NewRootDeleteActionWithOptions(selvesResource, name, opts), &managementv1.Self{})
+		Invokes(testing.NewRootDeleteActionWithOptions(selvesResource, name, opts), &v1.Self{})
 	return err
 }
 
 // DeleteCollection deletes a collection of objects.
-func (c *FakeSelves) DeleteCollection(ctx context.Context, opts v1.DeleteOptions, listOpts v1.ListOptions) error {
+func (c *FakeSelves) DeleteCollection(ctx context.Context, opts metav1.DeleteOptions, listOpts metav1.ListOptions) error {
 	action := testing.NewRootDeleteCollectionAction(selvesResource, listOpts)
 
-	_, err := c.Fake.Invokes(action, &managementv1.SelfList{})
+	_, err := c.Fake.Invokes(action, &v1.SelfList{})
 	return err
 }
 
 // Patch applies the patch and returns the patched self.
-func (c *FakeSelves) Patch(ctx context.Context, name string, pt types.PatchType, data []byte, opts v1.PatchOptions, subresources ...string) (result *managementv1.Self, err error) {
+func (c *FakeSelves) Patch(ctx context.Context, name string, pt types.PatchType, data []byte, opts metav1.PatchOptions, subresources ...string) (result *v1.Self, err error) {
 	obj, err := c.Fake.
-		Invokes(testing.NewRootPatchSubresourceAction(selvesResource, name, pt, data, subresources...), &managementv1.Self{})
+		Invokes(testing.NewRootPatchSubresourceAction(selvesResource, name, pt, data, subresources...), &v1.Self{})
 	if obj == nil {
 		return nil, err
 	}
-	return obj.(*managementv1.Self), err
+	return obj.(*v1.Self), err
 }

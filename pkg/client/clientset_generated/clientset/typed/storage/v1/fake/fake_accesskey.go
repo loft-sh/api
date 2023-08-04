@@ -5,10 +5,9 @@ package fake
 import (
 	"context"
 
-	storagev1 "github.com/loft-sh/api/v3/pkg/apis/storage/v1"
-	v1 "k8s.io/apimachinery/pkg/apis/meta/v1"
+	v1 "github.com/loft-sh/api/v3/pkg/apis/storage/v1"
+	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	labels "k8s.io/apimachinery/pkg/labels"
-	schema "k8s.io/apimachinery/pkg/runtime/schema"
 	types "k8s.io/apimachinery/pkg/types"
 	watch "k8s.io/apimachinery/pkg/watch"
 	testing "k8s.io/client-go/testing"
@@ -19,24 +18,24 @@ type FakeAccessKeys struct {
 	Fake *FakeStorageV1
 }
 
-var accesskeysResource = schema.GroupVersionResource{Group: "storage.loft.sh", Version: "v1", Resource: "accesskeys"}
+var accesskeysResource = v1.SchemeGroupVersion.WithResource("accesskeys")
 
-var accesskeysKind = schema.GroupVersionKind{Group: "storage.loft.sh", Version: "v1", Kind: "AccessKey"}
+var accesskeysKind = v1.SchemeGroupVersion.WithKind("AccessKey")
 
 // Get takes name of the accessKey, and returns the corresponding accessKey object, and an error if there is any.
-func (c *FakeAccessKeys) Get(ctx context.Context, name string, options v1.GetOptions) (result *storagev1.AccessKey, err error) {
+func (c *FakeAccessKeys) Get(ctx context.Context, name string, options metav1.GetOptions) (result *v1.AccessKey, err error) {
 	obj, err := c.Fake.
-		Invokes(testing.NewRootGetAction(accesskeysResource, name), &storagev1.AccessKey{})
+		Invokes(testing.NewRootGetAction(accesskeysResource, name), &v1.AccessKey{})
 	if obj == nil {
 		return nil, err
 	}
-	return obj.(*storagev1.AccessKey), err
+	return obj.(*v1.AccessKey), err
 }
 
 // List takes label and field selectors, and returns the list of AccessKeys that match those selectors.
-func (c *FakeAccessKeys) List(ctx context.Context, opts v1.ListOptions) (result *storagev1.AccessKeyList, err error) {
+func (c *FakeAccessKeys) List(ctx context.Context, opts metav1.ListOptions) (result *v1.AccessKeyList, err error) {
 	obj, err := c.Fake.
-		Invokes(testing.NewRootListAction(accesskeysResource, accesskeysKind, opts), &storagev1.AccessKeyList{})
+		Invokes(testing.NewRootListAction(accesskeysResource, accesskeysKind, opts), &v1.AccessKeyList{})
 	if obj == nil {
 		return nil, err
 	}
@@ -45,8 +44,8 @@ func (c *FakeAccessKeys) List(ctx context.Context, opts v1.ListOptions) (result 
 	if label == nil {
 		label = labels.Everything()
 	}
-	list := &storagev1.AccessKeyList{ListMeta: obj.(*storagev1.AccessKeyList).ListMeta}
-	for _, item := range obj.(*storagev1.AccessKeyList).Items {
+	list := &v1.AccessKeyList{ListMeta: obj.(*v1.AccessKeyList).ListMeta}
+	for _, item := range obj.(*v1.AccessKeyList).Items {
 		if label.Matches(labels.Set(item.Labels)) {
 			list.Items = append(list.Items, item)
 		}
@@ -55,63 +54,63 @@ func (c *FakeAccessKeys) List(ctx context.Context, opts v1.ListOptions) (result 
 }
 
 // Watch returns a watch.Interface that watches the requested accessKeys.
-func (c *FakeAccessKeys) Watch(ctx context.Context, opts v1.ListOptions) (watch.Interface, error) {
+func (c *FakeAccessKeys) Watch(ctx context.Context, opts metav1.ListOptions) (watch.Interface, error) {
 	return c.Fake.
 		InvokesWatch(testing.NewRootWatchAction(accesskeysResource, opts))
 }
 
 // Create takes the representation of a accessKey and creates it.  Returns the server's representation of the accessKey, and an error, if there is any.
-func (c *FakeAccessKeys) Create(ctx context.Context, accessKey *storagev1.AccessKey, opts v1.CreateOptions) (result *storagev1.AccessKey, err error) {
+func (c *FakeAccessKeys) Create(ctx context.Context, accessKey *v1.AccessKey, opts metav1.CreateOptions) (result *v1.AccessKey, err error) {
 	obj, err := c.Fake.
-		Invokes(testing.NewRootCreateAction(accesskeysResource, accessKey), &storagev1.AccessKey{})
+		Invokes(testing.NewRootCreateAction(accesskeysResource, accessKey), &v1.AccessKey{})
 	if obj == nil {
 		return nil, err
 	}
-	return obj.(*storagev1.AccessKey), err
+	return obj.(*v1.AccessKey), err
 }
 
 // Update takes the representation of a accessKey and updates it. Returns the server's representation of the accessKey, and an error, if there is any.
-func (c *FakeAccessKeys) Update(ctx context.Context, accessKey *storagev1.AccessKey, opts v1.UpdateOptions) (result *storagev1.AccessKey, err error) {
+func (c *FakeAccessKeys) Update(ctx context.Context, accessKey *v1.AccessKey, opts metav1.UpdateOptions) (result *v1.AccessKey, err error) {
 	obj, err := c.Fake.
-		Invokes(testing.NewRootUpdateAction(accesskeysResource, accessKey), &storagev1.AccessKey{})
+		Invokes(testing.NewRootUpdateAction(accesskeysResource, accessKey), &v1.AccessKey{})
 	if obj == nil {
 		return nil, err
 	}
-	return obj.(*storagev1.AccessKey), err
+	return obj.(*v1.AccessKey), err
 }
 
 // UpdateStatus was generated because the type contains a Status member.
 // Add a +genclient:noStatus comment above the type to avoid generating UpdateStatus().
-func (c *FakeAccessKeys) UpdateStatus(ctx context.Context, accessKey *storagev1.AccessKey, opts v1.UpdateOptions) (*storagev1.AccessKey, error) {
+func (c *FakeAccessKeys) UpdateStatus(ctx context.Context, accessKey *v1.AccessKey, opts metav1.UpdateOptions) (*v1.AccessKey, error) {
 	obj, err := c.Fake.
-		Invokes(testing.NewRootUpdateSubresourceAction(accesskeysResource, "status", accessKey), &storagev1.AccessKey{})
+		Invokes(testing.NewRootUpdateSubresourceAction(accesskeysResource, "status", accessKey), &v1.AccessKey{})
 	if obj == nil {
 		return nil, err
 	}
-	return obj.(*storagev1.AccessKey), err
+	return obj.(*v1.AccessKey), err
 }
 
 // Delete takes name of the accessKey and deletes it. Returns an error if one occurs.
-func (c *FakeAccessKeys) Delete(ctx context.Context, name string, opts v1.DeleteOptions) error {
+func (c *FakeAccessKeys) Delete(ctx context.Context, name string, opts metav1.DeleteOptions) error {
 	_, err := c.Fake.
-		Invokes(testing.NewRootDeleteActionWithOptions(accesskeysResource, name, opts), &storagev1.AccessKey{})
+		Invokes(testing.NewRootDeleteActionWithOptions(accesskeysResource, name, opts), &v1.AccessKey{})
 	return err
 }
 
 // DeleteCollection deletes a collection of objects.
-func (c *FakeAccessKeys) DeleteCollection(ctx context.Context, opts v1.DeleteOptions, listOpts v1.ListOptions) error {
+func (c *FakeAccessKeys) DeleteCollection(ctx context.Context, opts metav1.DeleteOptions, listOpts metav1.ListOptions) error {
 	action := testing.NewRootDeleteCollectionAction(accesskeysResource, listOpts)
 
-	_, err := c.Fake.Invokes(action, &storagev1.AccessKeyList{})
+	_, err := c.Fake.Invokes(action, &v1.AccessKeyList{})
 	return err
 }
 
 // Patch applies the patch and returns the patched accessKey.
-func (c *FakeAccessKeys) Patch(ctx context.Context, name string, pt types.PatchType, data []byte, opts v1.PatchOptions, subresources ...string) (result *storagev1.AccessKey, err error) {
+func (c *FakeAccessKeys) Patch(ctx context.Context, name string, pt types.PatchType, data []byte, opts metav1.PatchOptions, subresources ...string) (result *v1.AccessKey, err error) {
 	obj, err := c.Fake.
-		Invokes(testing.NewRootPatchSubresourceAction(accesskeysResource, name, pt, data, subresources...), &storagev1.AccessKey{})
+		Invokes(testing.NewRootPatchSubresourceAction(accesskeysResource, name, pt, data, subresources...), &v1.AccessKey{})
 	if obj == nil {
 		return nil, err
 	}
-	return obj.(*storagev1.AccessKey), err
+	return obj.(*v1.AccessKey), err
 }

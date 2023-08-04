@@ -8,7 +8,7 @@ import (
 // +genclient:nonNamespaced
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
 
-// User holds the user information
+// Feature holds the feature information
 // +k8s:openapi-gen=true
 // +resource:path=features,rest=FeatureREST
 type Feature struct {

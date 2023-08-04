@@ -12,7 +12,13 @@ type ClusterAccessExpansion interface{}
 
 type ClusterRoleTemplateExpansion interface{}
 
+type DevPodWorkspaceInstanceExpansion interface{}
+
+type DevPodWorkspaceTemplateExpansion interface{}
+
 type ProjectExpansion interface{}
+
+type RunnerExpansion interface{}
 
 type SharedSecretExpansion interface{}
 

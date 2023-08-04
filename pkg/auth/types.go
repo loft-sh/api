@@ -85,6 +85,9 @@ type MethodSSO struct {
 
 	// LoginEndpoint is the path the UI will request a login url from
 	LoginEndpoint string `json:"loginEndpoint,omitempty"`
+
+	// LogoutEndpoint is the path the UI will request a logout url from
+	LogoutEndpoint string `json:"logoutEndpoint,omitempty"`
 }
 
 type MethodPassword struct {
@@ -100,7 +103,6 @@ type Version struct {
 	Major   string `json:"major,omitempty"`
 	Minor   string `json:"minor,omitempty"`
 
-	Instance    string `json:"instance,omitempty"`
 	KubeVersion string `json:"kubeVersion,omitempty"`
 
 	NewerVersion  string `json:"newerVersion,omitempty"`

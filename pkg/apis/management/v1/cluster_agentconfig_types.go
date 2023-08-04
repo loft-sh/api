@@ -7,25 +7,15 @@ import (
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
 
-// AgentConfig holds the agent loft configuration
-// +k8s:openapi-gen=true
-type AgentConfig struct {
+// ClusterAgentConfig holds the loft agent configuration
+// +subresource-request
+type ClusterAgentConfig struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
 
-	Spec   AgentConfigSpec   `json:"spec,omitempty"`
-	Status AgentConfigStatus `json:"status,omitempty"`
-}
-
-// AgentConfigSpec holds the specification
-type AgentConfigSpec struct {
-	// Cluster is the name of the cluster the agent is running in
+	// Cluster is the cluster the agent is running in.
 	// +optional
 	Cluster string `json:"cluster,omitempty"`
-
-	// Instance is the instance identifier of the cluster agent
-	// +optional
-	Instance string `json:"instance,omitempty"`
 
 	// Audit holds the agent audit config
 	// +optional
@@ -44,6 +34,16 @@ type AgentConfigSpec struct {
 	// +optional
 	LoftHost string `json:"loftHost,omitempty"`
 
+	// AnalyticsSpec holds info needed for the agent to send analytics data to the analytics backend.
+	AnalyticsSpec AgentAnalyticsSpec `json:"analyticsSpec"`
+}
+
+// AgentLoftAccess holds the config how the agent can reach loft
+type AgentLoftAccess struct {
+	// Cluster is the name of the cluster the agent is running in
+	// +optional
+	Cluster string `json:"cluster,omitempty"`
+
 	// LoftAPIHost defines the host for the loft api. If empty, Loft will
 	// create an ssh tunnel to the agent pod.
 	// +optional
@@ -53,9 +53,6 @@ type AgentConfigSpec struct {
 	// loft api server.
 	// +optional
 	LoftAPIKey string `json:"loftAPIKey,omitempty"`
-
-	// AnalyticsSpec holds info needed for the agent to send analytics data to the analytics backend.
-	AnalyticsSpec AgentAnalyticsSpec `json:"analyticsSpec"`
 }
 
 type AgentAuditConfig struct {
@@ -109,8 +106,4 @@ type AgentAuditConfig struct {
 type AgentAnalyticsSpec struct {
 	AnalyticsEndpoint string                    `json:"analyticsEndpoint,omitempty"`
 	InstanceTokenAuth *server.InstanceTokenAuth `json:"instanceTokenAuth,omitempty"`
-}
-
-// AgentConfigStatus holds the status, which is the parsed raw config
-type AgentConfigStatus struct {
 }

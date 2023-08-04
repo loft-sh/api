@@ -6,6 +6,8 @@ type PrivateClaims struct {
 	Loft Loft `json:"loft.sh,omitempty"`
 }
 
+const LoftAdminKind = "LoftAdmin"
+
 type Loft struct {
 	// The UID of the user or team that this token is for
 	UID string `json:"uid,omitempty"`

@@ -1,6 +1,8 @@
 package managerfactory
 
 import (
+	"context"
+
 	"k8s.io/client-go/rest"
 	"sigs.k8s.io/controller-runtime/pkg/client"
 )
@@ -13,8 +15,8 @@ type SharedManagerFactory interface {
 
 // ClusterClientAccess holds the functions for cluster access
 type ClusterClientAccess interface {
-	Config() (*rest.Config, error)
-	UncachedClient() (client.Client, error)
+	Config(ctx context.Context) (*rest.Config, error)
+	UncachedClient(ctx context.Context) (client.Client, error)
 }
 
 // ManagementClientAccess holds the functions for management access

@@ -128,3 +128,57 @@ type UserQuotasOptions struct {
 	// +optional
 	Cluster []string `json:"cluster,omitempty"`
 }
+
+// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+
+type DevPodUpOptions struct {
+	metav1.TypeMeta `json:",inline"`
+
+	// WebMode executes the up command directly.
+	// +optional
+	WebMode bool `json:"webMode,omitempty"`
+
+	// Options are the options to pass.
+	// +optional
+	Options string `json:"options,omitempty"`
+}
+
+// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+
+type DevPodDeleteOptions struct {
+	metav1.TypeMeta `json:",inline"`
+
+	// Options are the options to pass.
+	// +optional
+	Options string `json:"options,omitempty"`
+}
+
+// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+
+type DevPodStopOptions struct {
+	metav1.TypeMeta `json:",inline"`
+
+	// Options are the options to pass.
+	// +optional
+	Options string `json:"options,omitempty"`
+}
+
+// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+
+type DevPodStatusOptions struct {
+	metav1.TypeMeta `json:",inline"`
+
+	// Options are the options to pass.
+	// +optional
+	Options string `json:"options,omitempty"`
+}
+
+// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+
+type DevPodSshOptions struct {
+	metav1.TypeMeta `json:",inline"`
+
+	// Options are the options to pass.
+	// +optional
+	Options string `json:"options,omitempty"`
+}

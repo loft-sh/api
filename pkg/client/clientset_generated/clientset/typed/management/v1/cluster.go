@@ -34,6 +34,7 @@ type ClusterInterface interface {
 	ListAccess(ctx context.Context, clusterName string, options metav1.GetOptions) (*v1.ClusterMemberAccess, error)
 	ListMembers(ctx context.Context, clusterName string, options metav1.GetOptions) (*v1.ClusterMembers, error)
 	ListVirtualClusterDefaults(ctx context.Context, clusterName string, options metav1.GetOptions) (*v1.ClusterVirtualClusterDefaults, error)
+	GetAgentConfig(ctx context.Context, clusterName string, options metav1.GetOptions) (*v1.ClusterAgentConfig, error)
 
 	ClusterExpansion
 }
@@ -204,6 +205,19 @@ func (c *clusters) ListVirtualClusterDefaults(ctx context.Context, clusterName s
 		Resource("clusters").
 		Name(clusterName).
 		SubResource("virtualclusterdefaults").
+		VersionedParams(&options, scheme.ParameterCodec).
+		Do(ctx).
+		Into(result)
+	return
+}
+
+// GetAgentConfig takes name of the cluster, and returns the corresponding v1.ClusterAgentConfig object, and an error if there is any.
+func (c *clusters) GetAgentConfig(ctx context.Context, clusterName string, options metav1.GetOptions) (result *v1.ClusterAgentConfig, err error) {
+	result = &v1.ClusterAgentConfig{}
+	err = c.client.Get().
+		Resource("clusters").
+		Name(clusterName).
+		SubResource("agentconfig").
 		VersionedParams(&options, scheme.ParameterCodec).
 		Do(ctx).
 		Into(result)

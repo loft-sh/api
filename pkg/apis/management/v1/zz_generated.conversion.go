@@ -29,6 +29,26 @@ func init() {
 // RegisterConversions adds conversion functions to the given scheme.
 // Public to allow building arbitrary schemes.
 func RegisterConversions(s *runtime.Scheme) error {
+	if err := s.AddGeneratedConversionFunc((*AgentAnalyticsSpec)(nil), (*management.AgentAnalyticsSpec)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_v1_AgentAnalyticsSpec_To_management_AgentAnalyticsSpec(a.(*AgentAnalyticsSpec), b.(*management.AgentAnalyticsSpec), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*management.AgentAnalyticsSpec)(nil), (*AgentAnalyticsSpec)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_management_AgentAnalyticsSpec_To_v1_AgentAnalyticsSpec(a.(*management.AgentAnalyticsSpec), b.(*AgentAnalyticsSpec), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*AgentAuditConfig)(nil), (*management.AgentAuditConfig)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_v1_AgentAuditConfig_To_management_AgentAuditConfig(a.(*AgentAuditConfig), b.(*management.AgentAuditConfig), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*management.AgentAuditConfig)(nil), (*AgentAuditConfig)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_management_AgentAuditConfig_To_v1_AgentAuditConfig(a.(*management.AgentAuditConfig), b.(*AgentAuditConfig), scope)
+	}); err != nil {
+		return err
+	}
 	if err := s.AddGeneratedConversionFunc((*AgentAuditEvent)(nil), (*management.AgentAuditEvent)(nil), func(a, b interface{}, scope conversion.Scope) error {
 		return Convert_v1_AgentAuditEvent_To_management_AgentAuditEvent(a.(*AgentAuditEvent), b.(*management.AgentAuditEvent), scope)
 	}); err != nil {
@@ -359,6 +379,26 @@ func RegisterConversions(s *runtime.Scheme) error {
 	}); err != nil {
 		return err
 	}
+	if err := s.AddGeneratedConversionFunc((*ClusterAgentConfig)(nil), (*management.ClusterAgentConfig)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_v1_ClusterAgentConfig_To_management_ClusterAgentConfig(a.(*ClusterAgentConfig), b.(*management.ClusterAgentConfig), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*management.ClusterAgentConfig)(nil), (*ClusterAgentConfig)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_management_ClusterAgentConfig_To_v1_ClusterAgentConfig(a.(*management.ClusterAgentConfig), b.(*ClusterAgentConfig), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*ClusterAgentConfigList)(nil), (*management.ClusterAgentConfigList)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_v1_ClusterAgentConfigList_To_management_ClusterAgentConfigList(a.(*ClusterAgentConfigList), b.(*management.ClusterAgentConfigList), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*management.ClusterAgentConfigList)(nil), (*ClusterAgentConfigList)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_management_ClusterAgentConfigList_To_v1_ClusterAgentConfigList(a.(*management.ClusterAgentConfigList), b.(*ClusterAgentConfigList), scope)
+	}); err != nil {
+		return err
+	}
 	if err := s.AddGeneratedConversionFunc((*ClusterCharts)(nil), (*management.ClusterCharts)(nil), func(a, b interface{}, scope conversion.Scope) error {
 		return Convert_v1_ClusterCharts_To_management_ClusterCharts(a.(*ClusterCharts), b.(*management.ClusterCharts), scope)
 	}); err != nil {
@@ -656,6 +696,236 @@ func RegisterConversions(s *runtime.Scheme) error {
 	}
 	if err := s.AddGeneratedConversionFunc((*management.ConnectorWithName)(nil), (*ConnectorWithName)(nil), func(a, b interface{}, scope conversion.Scope) error {
 		return Convert_management_ConnectorWithName_To_v1_ConnectorWithName(a.(*management.ConnectorWithName), b.(*ConnectorWithName), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*DevPodDeleteOptions)(nil), (*management.DevPodDeleteOptions)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_v1_DevPodDeleteOptions_To_management_DevPodDeleteOptions(a.(*DevPodDeleteOptions), b.(*management.DevPodDeleteOptions), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*management.DevPodDeleteOptions)(nil), (*DevPodDeleteOptions)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_management_DevPodDeleteOptions_To_v1_DevPodDeleteOptions(a.(*management.DevPodDeleteOptions), b.(*DevPodDeleteOptions), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*DevPodSshOptions)(nil), (*management.DevPodSshOptions)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_v1_DevPodSshOptions_To_management_DevPodSshOptions(a.(*DevPodSshOptions), b.(*management.DevPodSshOptions), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*management.DevPodSshOptions)(nil), (*DevPodSshOptions)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_management_DevPodSshOptions_To_v1_DevPodSshOptions(a.(*management.DevPodSshOptions), b.(*DevPodSshOptions), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*DevPodStatusOptions)(nil), (*management.DevPodStatusOptions)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_v1_DevPodStatusOptions_To_management_DevPodStatusOptions(a.(*DevPodStatusOptions), b.(*management.DevPodStatusOptions), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*management.DevPodStatusOptions)(nil), (*DevPodStatusOptions)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_management_DevPodStatusOptions_To_v1_DevPodStatusOptions(a.(*management.DevPodStatusOptions), b.(*DevPodStatusOptions), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*DevPodStopOptions)(nil), (*management.DevPodStopOptions)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_v1_DevPodStopOptions_To_management_DevPodStopOptions(a.(*DevPodStopOptions), b.(*management.DevPodStopOptions), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*management.DevPodStopOptions)(nil), (*DevPodStopOptions)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_management_DevPodStopOptions_To_v1_DevPodStopOptions(a.(*management.DevPodStopOptions), b.(*DevPodStopOptions), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*DevPodUpOptions)(nil), (*management.DevPodUpOptions)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_v1_DevPodUpOptions_To_management_DevPodUpOptions(a.(*DevPodUpOptions), b.(*management.DevPodUpOptions), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*management.DevPodUpOptions)(nil), (*DevPodUpOptions)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_management_DevPodUpOptions_To_v1_DevPodUpOptions(a.(*management.DevPodUpOptions), b.(*DevPodUpOptions), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*DevPodWorkspaceInstance)(nil), (*management.DevPodWorkspaceInstance)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_v1_DevPodWorkspaceInstance_To_management_DevPodWorkspaceInstance(a.(*DevPodWorkspaceInstance), b.(*management.DevPodWorkspaceInstance), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*management.DevPodWorkspaceInstance)(nil), (*DevPodWorkspaceInstance)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_management_DevPodWorkspaceInstance_To_v1_DevPodWorkspaceInstance(a.(*management.DevPodWorkspaceInstance), b.(*DevPodWorkspaceInstance), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*DevPodWorkspaceInstanceDelete)(nil), (*management.DevPodWorkspaceInstanceDelete)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_v1_DevPodWorkspaceInstanceDelete_To_management_DevPodWorkspaceInstanceDelete(a.(*DevPodWorkspaceInstanceDelete), b.(*management.DevPodWorkspaceInstanceDelete), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*management.DevPodWorkspaceInstanceDelete)(nil), (*DevPodWorkspaceInstanceDelete)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_management_DevPodWorkspaceInstanceDelete_To_v1_DevPodWorkspaceInstanceDelete(a.(*management.DevPodWorkspaceInstanceDelete), b.(*DevPodWorkspaceInstanceDelete), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*DevPodWorkspaceInstanceDeleteList)(nil), (*management.DevPodWorkspaceInstanceDeleteList)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_v1_DevPodWorkspaceInstanceDeleteList_To_management_DevPodWorkspaceInstanceDeleteList(a.(*DevPodWorkspaceInstanceDeleteList), b.(*management.DevPodWorkspaceInstanceDeleteList), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*management.DevPodWorkspaceInstanceDeleteList)(nil), (*DevPodWorkspaceInstanceDeleteList)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_management_DevPodWorkspaceInstanceDeleteList_To_v1_DevPodWorkspaceInstanceDeleteList(a.(*management.DevPodWorkspaceInstanceDeleteList), b.(*DevPodWorkspaceInstanceDeleteList), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*DevPodWorkspaceInstanceGetStatus)(nil), (*management.DevPodWorkspaceInstanceGetStatus)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_v1_DevPodWorkspaceInstanceGetStatus_To_management_DevPodWorkspaceInstanceGetStatus(a.(*DevPodWorkspaceInstanceGetStatus), b.(*management.DevPodWorkspaceInstanceGetStatus), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*management.DevPodWorkspaceInstanceGetStatus)(nil), (*DevPodWorkspaceInstanceGetStatus)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_management_DevPodWorkspaceInstanceGetStatus_To_v1_DevPodWorkspaceInstanceGetStatus(a.(*management.DevPodWorkspaceInstanceGetStatus), b.(*DevPodWorkspaceInstanceGetStatus), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*DevPodWorkspaceInstanceGetStatusList)(nil), (*management.DevPodWorkspaceInstanceGetStatusList)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_v1_DevPodWorkspaceInstanceGetStatusList_To_management_DevPodWorkspaceInstanceGetStatusList(a.(*DevPodWorkspaceInstanceGetStatusList), b.(*management.DevPodWorkspaceInstanceGetStatusList), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*management.DevPodWorkspaceInstanceGetStatusList)(nil), (*DevPodWorkspaceInstanceGetStatusList)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_management_DevPodWorkspaceInstanceGetStatusList_To_v1_DevPodWorkspaceInstanceGetStatusList(a.(*management.DevPodWorkspaceInstanceGetStatusList), b.(*DevPodWorkspaceInstanceGetStatusList), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*DevPodWorkspaceInstanceList)(nil), (*management.DevPodWorkspaceInstanceList)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_v1_DevPodWorkspaceInstanceList_To_management_DevPodWorkspaceInstanceList(a.(*DevPodWorkspaceInstanceList), b.(*management.DevPodWorkspaceInstanceList), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*management.DevPodWorkspaceInstanceList)(nil), (*DevPodWorkspaceInstanceList)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_management_DevPodWorkspaceInstanceList_To_v1_DevPodWorkspaceInstanceList(a.(*management.DevPodWorkspaceInstanceList), b.(*DevPodWorkspaceInstanceList), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*DevPodWorkspaceInstanceSpec)(nil), (*management.DevPodWorkspaceInstanceSpec)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_v1_DevPodWorkspaceInstanceSpec_To_management_DevPodWorkspaceInstanceSpec(a.(*DevPodWorkspaceInstanceSpec), b.(*management.DevPodWorkspaceInstanceSpec), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*management.DevPodWorkspaceInstanceSpec)(nil), (*DevPodWorkspaceInstanceSpec)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_management_DevPodWorkspaceInstanceSpec_To_v1_DevPodWorkspaceInstanceSpec(a.(*management.DevPodWorkspaceInstanceSpec), b.(*DevPodWorkspaceInstanceSpec), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*DevPodWorkspaceInstanceSsh)(nil), (*management.DevPodWorkspaceInstanceSsh)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_v1_DevPodWorkspaceInstanceSsh_To_management_DevPodWorkspaceInstanceSsh(a.(*DevPodWorkspaceInstanceSsh), b.(*management.DevPodWorkspaceInstanceSsh), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*management.DevPodWorkspaceInstanceSsh)(nil), (*DevPodWorkspaceInstanceSsh)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_management_DevPodWorkspaceInstanceSsh_To_v1_DevPodWorkspaceInstanceSsh(a.(*management.DevPodWorkspaceInstanceSsh), b.(*DevPodWorkspaceInstanceSsh), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*DevPodWorkspaceInstanceSshList)(nil), (*management.DevPodWorkspaceInstanceSshList)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_v1_DevPodWorkspaceInstanceSshList_To_management_DevPodWorkspaceInstanceSshList(a.(*DevPodWorkspaceInstanceSshList), b.(*management.DevPodWorkspaceInstanceSshList), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*management.DevPodWorkspaceInstanceSshList)(nil), (*DevPodWorkspaceInstanceSshList)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_management_DevPodWorkspaceInstanceSshList_To_v1_DevPodWorkspaceInstanceSshList(a.(*management.DevPodWorkspaceInstanceSshList), b.(*DevPodWorkspaceInstanceSshList), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*DevPodWorkspaceInstanceStatus)(nil), (*management.DevPodWorkspaceInstanceStatus)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_v1_DevPodWorkspaceInstanceStatus_To_management_DevPodWorkspaceInstanceStatus(a.(*DevPodWorkspaceInstanceStatus), b.(*management.DevPodWorkspaceInstanceStatus), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*management.DevPodWorkspaceInstanceStatus)(nil), (*DevPodWorkspaceInstanceStatus)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_management_DevPodWorkspaceInstanceStatus_To_v1_DevPodWorkspaceInstanceStatus(a.(*management.DevPodWorkspaceInstanceStatus), b.(*DevPodWorkspaceInstanceStatus), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*DevPodWorkspaceInstanceStop)(nil), (*management.DevPodWorkspaceInstanceStop)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_v1_DevPodWorkspaceInstanceStop_To_management_DevPodWorkspaceInstanceStop(a.(*DevPodWorkspaceInstanceStop), b.(*management.DevPodWorkspaceInstanceStop), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*management.DevPodWorkspaceInstanceStop)(nil), (*DevPodWorkspaceInstanceStop)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_management_DevPodWorkspaceInstanceStop_To_v1_DevPodWorkspaceInstanceStop(a.(*management.DevPodWorkspaceInstanceStop), b.(*DevPodWorkspaceInstanceStop), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*DevPodWorkspaceInstanceStopList)(nil), (*management.DevPodWorkspaceInstanceStopList)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_v1_DevPodWorkspaceInstanceStopList_To_management_DevPodWorkspaceInstanceStopList(a.(*DevPodWorkspaceInstanceStopList), b.(*management.DevPodWorkspaceInstanceStopList), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*management.DevPodWorkspaceInstanceStopList)(nil), (*DevPodWorkspaceInstanceStopList)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_management_DevPodWorkspaceInstanceStopList_To_v1_DevPodWorkspaceInstanceStopList(a.(*management.DevPodWorkspaceInstanceStopList), b.(*DevPodWorkspaceInstanceStopList), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*DevPodWorkspaceInstanceUp)(nil), (*management.DevPodWorkspaceInstanceUp)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_v1_DevPodWorkspaceInstanceUp_To_management_DevPodWorkspaceInstanceUp(a.(*DevPodWorkspaceInstanceUp), b.(*management.DevPodWorkspaceInstanceUp), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*management.DevPodWorkspaceInstanceUp)(nil), (*DevPodWorkspaceInstanceUp)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_management_DevPodWorkspaceInstanceUp_To_v1_DevPodWorkspaceInstanceUp(a.(*management.DevPodWorkspaceInstanceUp), b.(*DevPodWorkspaceInstanceUp), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*DevPodWorkspaceInstanceUpList)(nil), (*management.DevPodWorkspaceInstanceUpList)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_v1_DevPodWorkspaceInstanceUpList_To_management_DevPodWorkspaceInstanceUpList(a.(*DevPodWorkspaceInstanceUpList), b.(*management.DevPodWorkspaceInstanceUpList), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*management.DevPodWorkspaceInstanceUpList)(nil), (*DevPodWorkspaceInstanceUpList)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_management_DevPodWorkspaceInstanceUpList_To_v1_DevPodWorkspaceInstanceUpList(a.(*management.DevPodWorkspaceInstanceUpList), b.(*DevPodWorkspaceInstanceUpList), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*DevPodWorkspaceTemplate)(nil), (*management.DevPodWorkspaceTemplate)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_v1_DevPodWorkspaceTemplate_To_management_DevPodWorkspaceTemplate(a.(*DevPodWorkspaceTemplate), b.(*management.DevPodWorkspaceTemplate), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*management.DevPodWorkspaceTemplate)(nil), (*DevPodWorkspaceTemplate)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_management_DevPodWorkspaceTemplate_To_v1_DevPodWorkspaceTemplate(a.(*management.DevPodWorkspaceTemplate), b.(*DevPodWorkspaceTemplate), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*DevPodWorkspaceTemplateList)(nil), (*management.DevPodWorkspaceTemplateList)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_v1_DevPodWorkspaceTemplateList_To_management_DevPodWorkspaceTemplateList(a.(*DevPodWorkspaceTemplateList), b.(*management.DevPodWorkspaceTemplateList), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*management.DevPodWorkspaceTemplateList)(nil), (*DevPodWorkspaceTemplateList)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_management_DevPodWorkspaceTemplateList_To_v1_DevPodWorkspaceTemplateList(a.(*management.DevPodWorkspaceTemplateList), b.(*DevPodWorkspaceTemplateList), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*DevPodWorkspaceTemplateSpec)(nil), (*management.DevPodWorkspaceTemplateSpec)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_v1_DevPodWorkspaceTemplateSpec_To_management_DevPodWorkspaceTemplateSpec(a.(*DevPodWorkspaceTemplateSpec), b.(*management.DevPodWorkspaceTemplateSpec), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*management.DevPodWorkspaceTemplateSpec)(nil), (*DevPodWorkspaceTemplateSpec)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_management_DevPodWorkspaceTemplateSpec_To_v1_DevPodWorkspaceTemplateSpec(a.(*management.DevPodWorkspaceTemplateSpec), b.(*DevPodWorkspaceTemplateSpec), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*DevPodWorkspaceTemplateStatus)(nil), (*management.DevPodWorkspaceTemplateStatus)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_v1_DevPodWorkspaceTemplateStatus_To_management_DevPodWorkspaceTemplateStatus(a.(*DevPodWorkspaceTemplateStatus), b.(*management.DevPodWorkspaceTemplateStatus), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*management.DevPodWorkspaceTemplateStatus)(nil), (*DevPodWorkspaceTemplateStatus)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_management_DevPodWorkspaceTemplateStatus_To_v1_DevPodWorkspaceTemplateStatus(a.(*management.DevPodWorkspaceTemplateStatus), b.(*DevPodWorkspaceTemplateStatus), scope)
 	}); err != nil {
 		return err
 	}
@@ -1469,6 +1739,46 @@ func RegisterConversions(s *runtime.Scheme) error {
 	}); err != nil {
 		return err
 	}
+	if err := s.AddGeneratedConversionFunc((*RedirectToken)(nil), (*management.RedirectToken)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_v1_RedirectToken_To_management_RedirectToken(a.(*RedirectToken), b.(*management.RedirectToken), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*management.RedirectToken)(nil), (*RedirectToken)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_management_RedirectToken_To_v1_RedirectToken(a.(*management.RedirectToken), b.(*RedirectToken), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*RedirectTokenList)(nil), (*management.RedirectTokenList)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_v1_RedirectTokenList_To_management_RedirectTokenList(a.(*RedirectTokenList), b.(*management.RedirectTokenList), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*management.RedirectTokenList)(nil), (*RedirectTokenList)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_management_RedirectTokenList_To_v1_RedirectTokenList(a.(*management.RedirectTokenList), b.(*RedirectTokenList), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*RedirectTokenSpec)(nil), (*management.RedirectTokenSpec)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_v1_RedirectTokenSpec_To_management_RedirectTokenSpec(a.(*RedirectTokenSpec), b.(*management.RedirectTokenSpec), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*management.RedirectTokenSpec)(nil), (*RedirectTokenSpec)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_management_RedirectTokenSpec_To_v1_RedirectTokenSpec(a.(*management.RedirectTokenSpec), b.(*RedirectTokenSpec), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*RedirectTokenStatus)(nil), (*management.RedirectTokenStatus)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_v1_RedirectTokenStatus_To_management_RedirectTokenStatus(a.(*RedirectTokenStatus), b.(*management.RedirectTokenStatus), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*management.RedirectTokenStatus)(nil), (*RedirectTokenStatus)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_management_RedirectTokenStatus_To_v1_RedirectTokenStatus(a.(*management.RedirectTokenStatus), b.(*RedirectTokenStatus), scope)
+	}); err != nil {
+		return err
+	}
 	if err := s.AddGeneratedConversionFunc((*ResetAccessKey)(nil), (*management.ResetAccessKey)(nil), func(a, b interface{}, scope conversion.Scope) error {
 		return Convert_v1_ResetAccessKey_To_management_ResetAccessKey(a.(*ResetAccessKey), b.(*management.ResetAccessKey), scope)
 	}); err != nil {
@@ -1506,6 +1816,66 @@ func RegisterConversions(s *runtime.Scheme) error {
 	}
 	if err := s.AddGeneratedConversionFunc((*management.ResetAccessKeyStatus)(nil), (*ResetAccessKeyStatus)(nil), func(a, b interface{}, scope conversion.Scope) error {
 		return Convert_management_ResetAccessKeyStatus_To_v1_ResetAccessKeyStatus(a.(*management.ResetAccessKeyStatus), b.(*ResetAccessKeyStatus), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*Runner)(nil), (*management.Runner)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_v1_Runner_To_management_Runner(a.(*Runner), b.(*management.Runner), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*management.Runner)(nil), (*Runner)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_management_Runner_To_v1_Runner(a.(*management.Runner), b.(*Runner), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*RunnerConfig)(nil), (*management.RunnerConfig)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_v1_RunnerConfig_To_management_RunnerConfig(a.(*RunnerConfig), b.(*management.RunnerConfig), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*management.RunnerConfig)(nil), (*RunnerConfig)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_management_RunnerConfig_To_v1_RunnerConfig(a.(*management.RunnerConfig), b.(*RunnerConfig), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*RunnerConfigList)(nil), (*management.RunnerConfigList)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_v1_RunnerConfigList_To_management_RunnerConfigList(a.(*RunnerConfigList), b.(*management.RunnerConfigList), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*management.RunnerConfigList)(nil), (*RunnerConfigList)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_management_RunnerConfigList_To_v1_RunnerConfigList(a.(*management.RunnerConfigList), b.(*RunnerConfigList), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*RunnerList)(nil), (*management.RunnerList)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_v1_RunnerList_To_management_RunnerList(a.(*RunnerList), b.(*management.RunnerList), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*management.RunnerList)(nil), (*RunnerList)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_management_RunnerList_To_v1_RunnerList(a.(*management.RunnerList), b.(*RunnerList), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*RunnerSpec)(nil), (*management.RunnerSpec)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_v1_RunnerSpec_To_management_RunnerSpec(a.(*RunnerSpec), b.(*management.RunnerSpec), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*management.RunnerSpec)(nil), (*RunnerSpec)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_management_RunnerSpec_To_v1_RunnerSpec(a.(*management.RunnerSpec), b.(*RunnerSpec), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*RunnerStatus)(nil), (*management.RunnerStatus)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_v1_RunnerStatus_To_management_RunnerStatus(a.(*RunnerStatus), b.(*management.RunnerStatus), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*management.RunnerStatus)(nil), (*RunnerStatus)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_management_RunnerStatus_To_v1_RunnerStatus(a.(*management.RunnerStatus), b.(*RunnerStatus), scope)
 	}); err != nil {
 		return err
 	}
@@ -2279,6 +2649,31 @@ func RegisterConversions(s *runtime.Scheme) error {
 	}); err != nil {
 		return err
 	}
+	if err := s.AddGeneratedConversionFunc((*url.Values)(nil), (*DevPodDeleteOptions)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_url_Values_To_v1_DevPodDeleteOptions(a.(*url.Values), b.(*DevPodDeleteOptions), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*url.Values)(nil), (*DevPodSshOptions)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_url_Values_To_v1_DevPodSshOptions(a.(*url.Values), b.(*DevPodSshOptions), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*url.Values)(nil), (*DevPodStatusOptions)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_url_Values_To_v1_DevPodStatusOptions(a.(*url.Values), b.(*DevPodStatusOptions), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*url.Values)(nil), (*DevPodStopOptions)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_url_Values_To_v1_DevPodStopOptions(a.(*url.Values), b.(*DevPodStopOptions), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*url.Values)(nil), (*DevPodUpOptions)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_url_Values_To_v1_DevPodUpOptions(a.(*url.Values), b.(*DevPodUpOptions), scope)
+	}); err != nil {
+		return err
+	}
 	if err := s.AddGeneratedConversionFunc((*url.Values)(nil), (*TaskLogOptions)(nil), func(a, b interface{}, scope conversion.Scope) error {
 		return Convert_url_Values_To_v1_TaskLogOptions(a.(*url.Values), b.(*TaskLogOptions), scope)
 	}); err != nil {
@@ -2305,6 +2700,68 @@ func RegisterConversions(s *runtime.Scheme) error {
 		return err
 	}
 	return nil
+}
+
+func autoConvert_v1_AgentAnalyticsSpec_To_management_AgentAnalyticsSpec(in *AgentAnalyticsSpec, out *management.AgentAnalyticsSpec, s conversion.Scope) error {
+	out.AnalyticsEndpoint = in.AnalyticsEndpoint
+	out.InstanceTokenAuth = (*server.InstanceTokenAuth)(unsafe.Pointer(in.InstanceTokenAuth))
+	return nil
+}
+
+// Convert_v1_AgentAnalyticsSpec_To_management_AgentAnalyticsSpec is an autogenerated conversion function.
+func Convert_v1_AgentAnalyticsSpec_To_management_AgentAnalyticsSpec(in *AgentAnalyticsSpec, out *management.AgentAnalyticsSpec, s conversion.Scope) error {
+	return autoConvert_v1_AgentAnalyticsSpec_To_management_AgentAnalyticsSpec(in, out, s)
+}
+
+func autoConvert_management_AgentAnalyticsSpec_To_v1_AgentAnalyticsSpec(in *management.AgentAnalyticsSpec, out *AgentAnalyticsSpec, s conversion.Scope) error {
+	out.AnalyticsEndpoint = in.AnalyticsEndpoint
+	out.InstanceTokenAuth = (*server.InstanceTokenAuth)(unsafe.Pointer(in.InstanceTokenAuth))
+	return nil
+}
+
+// Convert_management_AgentAnalyticsSpec_To_v1_AgentAnalyticsSpec is an autogenerated conversion function.
+func Convert_management_AgentAnalyticsSpec_To_v1_AgentAnalyticsSpec(in *management.AgentAnalyticsSpec, out *AgentAnalyticsSpec, s conversion.Scope) error {
+	return autoConvert_management_AgentAnalyticsSpec_To_v1_AgentAnalyticsSpec(in, out, s)
+}
+
+func autoConvert_v1_AgentAuditConfig_To_management_AgentAuditConfig(in *AgentAuditConfig, out *management.AgentAuditConfig, s conversion.Scope) error {
+	out.Enabled = in.Enabled
+	out.DisableAgentSyncBack = in.DisableAgentSyncBack
+	out.Level = in.Level
+	if err := Convert_v1_AuditPolicy_To_management_AuditPolicy(&in.Policy, &out.Policy, s); err != nil {
+		return err
+	}
+	out.Path = in.Path
+	out.MaxAge = in.MaxAge
+	out.MaxBackups = in.MaxBackups
+	out.MaxSize = in.MaxSize
+	out.Compress = in.Compress
+	return nil
+}
+
+// Convert_v1_AgentAuditConfig_To_management_AgentAuditConfig is an autogenerated conversion function.
+func Convert_v1_AgentAuditConfig_To_management_AgentAuditConfig(in *AgentAuditConfig, out *management.AgentAuditConfig, s conversion.Scope) error {
+	return autoConvert_v1_AgentAuditConfig_To_management_AgentAuditConfig(in, out, s)
+}
+
+func autoConvert_management_AgentAuditConfig_To_v1_AgentAuditConfig(in *management.AgentAuditConfig, out *AgentAuditConfig, s conversion.Scope) error {
+	out.Enabled = in.Enabled
+	out.DisableAgentSyncBack = in.DisableAgentSyncBack
+	out.Level = in.Level
+	if err := Convert_management_AuditPolicy_To_v1_AuditPolicy(&in.Policy, &out.Policy, s); err != nil {
+		return err
+	}
+	out.Path = in.Path
+	out.MaxAge = in.MaxAge
+	out.MaxBackups = in.MaxBackups
+	out.MaxSize = in.MaxSize
+	out.Compress = in.Compress
+	return nil
+}
+
+// Convert_management_AgentAuditConfig_To_v1_AgentAuditConfig is an autogenerated conversion function.
+func Convert_management_AgentAuditConfig_To_v1_AgentAuditConfig(in *management.AgentAuditConfig, out *AgentAuditConfig, s conversion.Scope) error {
+	return autoConvert_management_AgentAuditConfig_To_v1_AgentAuditConfig(in, out, s)
 }
 
 func autoConvert_v1_AgentAuditEvent_To_management_AgentAuditEvent(in *AgentAuditEvent, out *management.AgentAuditEvent, s conversion.Scope) error {
@@ -2970,6 +3427,7 @@ func autoConvert_v1_AuthenticationOIDC_To_management_AuthenticationOIDC(in *Auth
 	out.ClientID = in.ClientID
 	out.ClientSecret = in.ClientSecret
 	out.RedirectURI = in.RedirectURI
+	out.PostLogoutRedirectURI = in.PostLogoutRedirectURI
 	out.CAFile = in.CAFile
 	out.InsecureCA = in.InsecureCA
 	out.PreferredUsernameClaim = in.PreferredUsernameClaim
@@ -2999,6 +3457,7 @@ func autoConvert_management_AuthenticationOIDC_To_v1_AuthenticationOIDC(in *mana
 	out.ClientID = in.ClientID
 	out.ClientSecret = in.ClientSecret
 	out.RedirectURI = in.RedirectURI
+	out.PostLogoutRedirectURI = in.PostLogoutRedirectURI
 	out.CAFile = in.CAFile
 	out.InsecureCA = in.InsecureCA
 	out.PreferredUsernameClaim = in.PreferredUsernameClaim
@@ -3243,6 +3702,64 @@ func autoConvert_management_ClusterAccounts_To_v1_ClusterAccounts(in *management
 // Convert_management_ClusterAccounts_To_v1_ClusterAccounts is an autogenerated conversion function.
 func Convert_management_ClusterAccounts_To_v1_ClusterAccounts(in *management.ClusterAccounts, out *ClusterAccounts, s conversion.Scope) error {
 	return autoConvert_management_ClusterAccounts_To_v1_ClusterAccounts(in, out, s)
+}
+
+func autoConvert_v1_ClusterAgentConfig_To_management_ClusterAgentConfig(in *ClusterAgentConfig, out *management.ClusterAgentConfig, s conversion.Scope) error {
+	out.ObjectMeta = in.ObjectMeta
+	out.Cluster = in.Cluster
+	out.Audit = (*management.AgentAuditConfig)(unsafe.Pointer(in.Audit))
+	out.DefaultImageRegistry = in.DefaultImageRegistry
+	out.TokenCaCert = *(*[]byte)(unsafe.Pointer(&in.TokenCaCert))
+	out.LoftHost = in.LoftHost
+	if err := Convert_v1_AgentAnalyticsSpec_To_management_AgentAnalyticsSpec(&in.AnalyticsSpec, &out.AnalyticsSpec, s); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Convert_v1_ClusterAgentConfig_To_management_ClusterAgentConfig is an autogenerated conversion function.
+func Convert_v1_ClusterAgentConfig_To_management_ClusterAgentConfig(in *ClusterAgentConfig, out *management.ClusterAgentConfig, s conversion.Scope) error {
+	return autoConvert_v1_ClusterAgentConfig_To_management_ClusterAgentConfig(in, out, s)
+}
+
+func autoConvert_management_ClusterAgentConfig_To_v1_ClusterAgentConfig(in *management.ClusterAgentConfig, out *ClusterAgentConfig, s conversion.Scope) error {
+	out.ObjectMeta = in.ObjectMeta
+	out.Cluster = in.Cluster
+	out.Audit = (*AgentAuditConfig)(unsafe.Pointer(in.Audit))
+	out.DefaultImageRegistry = in.DefaultImageRegistry
+	out.TokenCaCert = *(*[]byte)(unsafe.Pointer(&in.TokenCaCert))
+	out.LoftHost = in.LoftHost
+	if err := Convert_management_AgentAnalyticsSpec_To_v1_AgentAnalyticsSpec(&in.AnalyticsSpec, &out.AnalyticsSpec, s); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Convert_management_ClusterAgentConfig_To_v1_ClusterAgentConfig is an autogenerated conversion function.
+func Convert_management_ClusterAgentConfig_To_v1_ClusterAgentConfig(in *management.ClusterAgentConfig, out *ClusterAgentConfig, s conversion.Scope) error {
+	return autoConvert_management_ClusterAgentConfig_To_v1_ClusterAgentConfig(in, out, s)
+}
+
+func autoConvert_v1_ClusterAgentConfigList_To_management_ClusterAgentConfigList(in *ClusterAgentConfigList, out *management.ClusterAgentConfigList, s conversion.Scope) error {
+	out.ListMeta = in.ListMeta
+	out.Items = *(*[]management.ClusterAgentConfig)(unsafe.Pointer(&in.Items))
+	return nil
+}
+
+// Convert_v1_ClusterAgentConfigList_To_management_ClusterAgentConfigList is an autogenerated conversion function.
+func Convert_v1_ClusterAgentConfigList_To_management_ClusterAgentConfigList(in *ClusterAgentConfigList, out *management.ClusterAgentConfigList, s conversion.Scope) error {
+	return autoConvert_v1_ClusterAgentConfigList_To_management_ClusterAgentConfigList(in, out, s)
+}
+
+func autoConvert_management_ClusterAgentConfigList_To_v1_ClusterAgentConfigList(in *management.ClusterAgentConfigList, out *ClusterAgentConfigList, s conversion.Scope) error {
+	out.ListMeta = in.ListMeta
+	out.Items = *(*[]ClusterAgentConfig)(unsafe.Pointer(&in.Items))
+	return nil
+}
+
+// Convert_management_ClusterAgentConfigList_To_v1_ClusterAgentConfigList is an autogenerated conversion function.
+func Convert_management_ClusterAgentConfigList_To_v1_ClusterAgentConfigList(in *management.ClusterAgentConfigList, out *ClusterAgentConfigList, s conversion.Scope) error {
+	return autoConvert_management_ClusterAgentConfigList_To_v1_ClusterAgentConfigList(in, out, s)
 }
 
 func autoConvert_v1_ClusterCharts_To_management_ClusterCharts(in *ClusterCharts, out *management.ClusterCharts, s conversion.Scope) error {
@@ -3891,6 +4408,7 @@ func autoConvert_v1_ConfigStatus_To_management_ConfigStatus(in *ConfigStatus, ou
 	out.Apps = (*management.Apps)(unsafe.Pointer(in.Apps))
 	out.Audit = (*management.Audit)(unsafe.Pointer(in.Audit))
 	out.LoftHost = in.LoftHost
+	out.DevPodSubDomain = in.DevPodSubDomain
 	out.UISettings = (*uiv1.UISettingsSpec)(unsafe.Pointer(in.UISettings))
 	out.VaultIntegration = (*storagev1.VaultIntegrationSpec)(unsafe.Pointer(in.VaultIntegration))
 	return nil
@@ -3909,6 +4427,7 @@ func autoConvert_management_ConfigStatus_To_v1_ConfigStatus(in *management.Confi
 	out.Apps = (*Apps)(unsafe.Pointer(in.Apps))
 	out.Audit = (*Audit)(unsafe.Pointer(in.Audit))
 	out.LoftHost = in.LoftHost
+	out.DevPodSubDomain = in.DevPodSubDomain
 	out.UISettings = (*uiv1.UISettingsSpec)(unsafe.Pointer(in.UISettings))
 	out.VaultIntegration = (*storagev1.VaultIntegrationSpec)(unsafe.Pointer(in.VaultIntegration))
 	return nil
@@ -3975,6 +4494,603 @@ func autoConvert_management_ConnectorWithName_To_v1_ConnectorWithName(in *manage
 // Convert_management_ConnectorWithName_To_v1_ConnectorWithName is an autogenerated conversion function.
 func Convert_management_ConnectorWithName_To_v1_ConnectorWithName(in *management.ConnectorWithName, out *ConnectorWithName, s conversion.Scope) error {
 	return autoConvert_management_ConnectorWithName_To_v1_ConnectorWithName(in, out, s)
+}
+
+func autoConvert_v1_DevPodDeleteOptions_To_management_DevPodDeleteOptions(in *DevPodDeleteOptions, out *management.DevPodDeleteOptions, s conversion.Scope) error {
+	out.Options = in.Options
+	return nil
+}
+
+// Convert_v1_DevPodDeleteOptions_To_management_DevPodDeleteOptions is an autogenerated conversion function.
+func Convert_v1_DevPodDeleteOptions_To_management_DevPodDeleteOptions(in *DevPodDeleteOptions, out *management.DevPodDeleteOptions, s conversion.Scope) error {
+	return autoConvert_v1_DevPodDeleteOptions_To_management_DevPodDeleteOptions(in, out, s)
+}
+
+func autoConvert_management_DevPodDeleteOptions_To_v1_DevPodDeleteOptions(in *management.DevPodDeleteOptions, out *DevPodDeleteOptions, s conversion.Scope) error {
+	out.Options = in.Options
+	return nil
+}
+
+// Convert_management_DevPodDeleteOptions_To_v1_DevPodDeleteOptions is an autogenerated conversion function.
+func Convert_management_DevPodDeleteOptions_To_v1_DevPodDeleteOptions(in *management.DevPodDeleteOptions, out *DevPodDeleteOptions, s conversion.Scope) error {
+	return autoConvert_management_DevPodDeleteOptions_To_v1_DevPodDeleteOptions(in, out, s)
+}
+
+func autoConvert_url_Values_To_v1_DevPodDeleteOptions(in *url.Values, out *DevPodDeleteOptions, s conversion.Scope) error {
+	// WARNING: Field TypeMeta does not have json tag, skipping.
+
+	if values, ok := map[string][]string(*in)["options"]; ok && len(values) > 0 {
+		if err := runtime.Convert_Slice_string_To_string(&values, &out.Options, s); err != nil {
+			return err
+		}
+	} else {
+		out.Options = ""
+	}
+	return nil
+}
+
+// Convert_url_Values_To_v1_DevPodDeleteOptions is an autogenerated conversion function.
+func Convert_url_Values_To_v1_DevPodDeleteOptions(in *url.Values, out *DevPodDeleteOptions, s conversion.Scope) error {
+	return autoConvert_url_Values_To_v1_DevPodDeleteOptions(in, out, s)
+}
+
+func autoConvert_v1_DevPodSshOptions_To_management_DevPodSshOptions(in *DevPodSshOptions, out *management.DevPodSshOptions, s conversion.Scope) error {
+	out.Options = in.Options
+	return nil
+}
+
+// Convert_v1_DevPodSshOptions_To_management_DevPodSshOptions is an autogenerated conversion function.
+func Convert_v1_DevPodSshOptions_To_management_DevPodSshOptions(in *DevPodSshOptions, out *management.DevPodSshOptions, s conversion.Scope) error {
+	return autoConvert_v1_DevPodSshOptions_To_management_DevPodSshOptions(in, out, s)
+}
+
+func autoConvert_management_DevPodSshOptions_To_v1_DevPodSshOptions(in *management.DevPodSshOptions, out *DevPodSshOptions, s conversion.Scope) error {
+	out.Options = in.Options
+	return nil
+}
+
+// Convert_management_DevPodSshOptions_To_v1_DevPodSshOptions is an autogenerated conversion function.
+func Convert_management_DevPodSshOptions_To_v1_DevPodSshOptions(in *management.DevPodSshOptions, out *DevPodSshOptions, s conversion.Scope) error {
+	return autoConvert_management_DevPodSshOptions_To_v1_DevPodSshOptions(in, out, s)
+}
+
+func autoConvert_url_Values_To_v1_DevPodSshOptions(in *url.Values, out *DevPodSshOptions, s conversion.Scope) error {
+	// WARNING: Field TypeMeta does not have json tag, skipping.
+
+	if values, ok := map[string][]string(*in)["options"]; ok && len(values) > 0 {
+		if err := runtime.Convert_Slice_string_To_string(&values, &out.Options, s); err != nil {
+			return err
+		}
+	} else {
+		out.Options = ""
+	}
+	return nil
+}
+
+// Convert_url_Values_To_v1_DevPodSshOptions is an autogenerated conversion function.
+func Convert_url_Values_To_v1_DevPodSshOptions(in *url.Values, out *DevPodSshOptions, s conversion.Scope) error {
+	return autoConvert_url_Values_To_v1_DevPodSshOptions(in, out, s)
+}
+
+func autoConvert_v1_DevPodStatusOptions_To_management_DevPodStatusOptions(in *DevPodStatusOptions, out *management.DevPodStatusOptions, s conversion.Scope) error {
+	out.Options = in.Options
+	return nil
+}
+
+// Convert_v1_DevPodStatusOptions_To_management_DevPodStatusOptions is an autogenerated conversion function.
+func Convert_v1_DevPodStatusOptions_To_management_DevPodStatusOptions(in *DevPodStatusOptions, out *management.DevPodStatusOptions, s conversion.Scope) error {
+	return autoConvert_v1_DevPodStatusOptions_To_management_DevPodStatusOptions(in, out, s)
+}
+
+func autoConvert_management_DevPodStatusOptions_To_v1_DevPodStatusOptions(in *management.DevPodStatusOptions, out *DevPodStatusOptions, s conversion.Scope) error {
+	out.Options = in.Options
+	return nil
+}
+
+// Convert_management_DevPodStatusOptions_To_v1_DevPodStatusOptions is an autogenerated conversion function.
+func Convert_management_DevPodStatusOptions_To_v1_DevPodStatusOptions(in *management.DevPodStatusOptions, out *DevPodStatusOptions, s conversion.Scope) error {
+	return autoConvert_management_DevPodStatusOptions_To_v1_DevPodStatusOptions(in, out, s)
+}
+
+func autoConvert_url_Values_To_v1_DevPodStatusOptions(in *url.Values, out *DevPodStatusOptions, s conversion.Scope) error {
+	// WARNING: Field TypeMeta does not have json tag, skipping.
+
+	if values, ok := map[string][]string(*in)["options"]; ok && len(values) > 0 {
+		if err := runtime.Convert_Slice_string_To_string(&values, &out.Options, s); err != nil {
+			return err
+		}
+	} else {
+		out.Options = ""
+	}
+	return nil
+}
+
+// Convert_url_Values_To_v1_DevPodStatusOptions is an autogenerated conversion function.
+func Convert_url_Values_To_v1_DevPodStatusOptions(in *url.Values, out *DevPodStatusOptions, s conversion.Scope) error {
+	return autoConvert_url_Values_To_v1_DevPodStatusOptions(in, out, s)
+}
+
+func autoConvert_v1_DevPodStopOptions_To_management_DevPodStopOptions(in *DevPodStopOptions, out *management.DevPodStopOptions, s conversion.Scope) error {
+	out.Options = in.Options
+	return nil
+}
+
+// Convert_v1_DevPodStopOptions_To_management_DevPodStopOptions is an autogenerated conversion function.
+func Convert_v1_DevPodStopOptions_To_management_DevPodStopOptions(in *DevPodStopOptions, out *management.DevPodStopOptions, s conversion.Scope) error {
+	return autoConvert_v1_DevPodStopOptions_To_management_DevPodStopOptions(in, out, s)
+}
+
+func autoConvert_management_DevPodStopOptions_To_v1_DevPodStopOptions(in *management.DevPodStopOptions, out *DevPodStopOptions, s conversion.Scope) error {
+	out.Options = in.Options
+	return nil
+}
+
+// Convert_management_DevPodStopOptions_To_v1_DevPodStopOptions is an autogenerated conversion function.
+func Convert_management_DevPodStopOptions_To_v1_DevPodStopOptions(in *management.DevPodStopOptions, out *DevPodStopOptions, s conversion.Scope) error {
+	return autoConvert_management_DevPodStopOptions_To_v1_DevPodStopOptions(in, out, s)
+}
+
+func autoConvert_url_Values_To_v1_DevPodStopOptions(in *url.Values, out *DevPodStopOptions, s conversion.Scope) error {
+	// WARNING: Field TypeMeta does not have json tag, skipping.
+
+	if values, ok := map[string][]string(*in)["options"]; ok && len(values) > 0 {
+		if err := runtime.Convert_Slice_string_To_string(&values, &out.Options, s); err != nil {
+			return err
+		}
+	} else {
+		out.Options = ""
+	}
+	return nil
+}
+
+// Convert_url_Values_To_v1_DevPodStopOptions is an autogenerated conversion function.
+func Convert_url_Values_To_v1_DevPodStopOptions(in *url.Values, out *DevPodStopOptions, s conversion.Scope) error {
+	return autoConvert_url_Values_To_v1_DevPodStopOptions(in, out, s)
+}
+
+func autoConvert_v1_DevPodUpOptions_To_management_DevPodUpOptions(in *DevPodUpOptions, out *management.DevPodUpOptions, s conversion.Scope) error {
+	out.WebMode = in.WebMode
+	out.Options = in.Options
+	return nil
+}
+
+// Convert_v1_DevPodUpOptions_To_management_DevPodUpOptions is an autogenerated conversion function.
+func Convert_v1_DevPodUpOptions_To_management_DevPodUpOptions(in *DevPodUpOptions, out *management.DevPodUpOptions, s conversion.Scope) error {
+	return autoConvert_v1_DevPodUpOptions_To_management_DevPodUpOptions(in, out, s)
+}
+
+func autoConvert_management_DevPodUpOptions_To_v1_DevPodUpOptions(in *management.DevPodUpOptions, out *DevPodUpOptions, s conversion.Scope) error {
+	out.WebMode = in.WebMode
+	out.Options = in.Options
+	return nil
+}
+
+// Convert_management_DevPodUpOptions_To_v1_DevPodUpOptions is an autogenerated conversion function.
+func Convert_management_DevPodUpOptions_To_v1_DevPodUpOptions(in *management.DevPodUpOptions, out *DevPodUpOptions, s conversion.Scope) error {
+	return autoConvert_management_DevPodUpOptions_To_v1_DevPodUpOptions(in, out, s)
+}
+
+func autoConvert_url_Values_To_v1_DevPodUpOptions(in *url.Values, out *DevPodUpOptions, s conversion.Scope) error {
+	// WARNING: Field TypeMeta does not have json tag, skipping.
+
+	if values, ok := map[string][]string(*in)["webMode"]; ok && len(values) > 0 {
+		if err := runtime.Convert_Slice_string_To_bool(&values, &out.WebMode, s); err != nil {
+			return err
+		}
+	} else {
+		out.WebMode = false
+	}
+	if values, ok := map[string][]string(*in)["options"]; ok && len(values) > 0 {
+		if err := runtime.Convert_Slice_string_To_string(&values, &out.Options, s); err != nil {
+			return err
+		}
+	} else {
+		out.Options = ""
+	}
+	return nil
+}
+
+// Convert_url_Values_To_v1_DevPodUpOptions is an autogenerated conversion function.
+func Convert_url_Values_To_v1_DevPodUpOptions(in *url.Values, out *DevPodUpOptions, s conversion.Scope) error {
+	return autoConvert_url_Values_To_v1_DevPodUpOptions(in, out, s)
+}
+
+func autoConvert_v1_DevPodWorkspaceInstance_To_management_DevPodWorkspaceInstance(in *DevPodWorkspaceInstance, out *management.DevPodWorkspaceInstance, s conversion.Scope) error {
+	out.ObjectMeta = in.ObjectMeta
+	if err := Convert_v1_DevPodWorkspaceInstanceSpec_To_management_DevPodWorkspaceInstanceSpec(&in.Spec, &out.Spec, s); err != nil {
+		return err
+	}
+	if err := Convert_v1_DevPodWorkspaceInstanceStatus_To_management_DevPodWorkspaceInstanceStatus(&in.Status, &out.Status, s); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Convert_v1_DevPodWorkspaceInstance_To_management_DevPodWorkspaceInstance is an autogenerated conversion function.
+func Convert_v1_DevPodWorkspaceInstance_To_management_DevPodWorkspaceInstance(in *DevPodWorkspaceInstance, out *management.DevPodWorkspaceInstance, s conversion.Scope) error {
+	return autoConvert_v1_DevPodWorkspaceInstance_To_management_DevPodWorkspaceInstance(in, out, s)
+}
+
+func autoConvert_management_DevPodWorkspaceInstance_To_v1_DevPodWorkspaceInstance(in *management.DevPodWorkspaceInstance, out *DevPodWorkspaceInstance, s conversion.Scope) error {
+	out.ObjectMeta = in.ObjectMeta
+	if err := Convert_management_DevPodWorkspaceInstanceSpec_To_v1_DevPodWorkspaceInstanceSpec(&in.Spec, &out.Spec, s); err != nil {
+		return err
+	}
+	if err := Convert_management_DevPodWorkspaceInstanceStatus_To_v1_DevPodWorkspaceInstanceStatus(&in.Status, &out.Status, s); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Convert_management_DevPodWorkspaceInstance_To_v1_DevPodWorkspaceInstance is an autogenerated conversion function.
+func Convert_management_DevPodWorkspaceInstance_To_v1_DevPodWorkspaceInstance(in *management.DevPodWorkspaceInstance, out *DevPodWorkspaceInstance, s conversion.Scope) error {
+	return autoConvert_management_DevPodWorkspaceInstance_To_v1_DevPodWorkspaceInstance(in, out, s)
+}
+
+func autoConvert_v1_DevPodWorkspaceInstanceDelete_To_management_DevPodWorkspaceInstanceDelete(in *DevPodWorkspaceInstanceDelete, out *management.DevPodWorkspaceInstanceDelete, s conversion.Scope) error {
+	out.ObjectMeta = in.ObjectMeta
+	return nil
+}
+
+// Convert_v1_DevPodWorkspaceInstanceDelete_To_management_DevPodWorkspaceInstanceDelete is an autogenerated conversion function.
+func Convert_v1_DevPodWorkspaceInstanceDelete_To_management_DevPodWorkspaceInstanceDelete(in *DevPodWorkspaceInstanceDelete, out *management.DevPodWorkspaceInstanceDelete, s conversion.Scope) error {
+	return autoConvert_v1_DevPodWorkspaceInstanceDelete_To_management_DevPodWorkspaceInstanceDelete(in, out, s)
+}
+
+func autoConvert_management_DevPodWorkspaceInstanceDelete_To_v1_DevPodWorkspaceInstanceDelete(in *management.DevPodWorkspaceInstanceDelete, out *DevPodWorkspaceInstanceDelete, s conversion.Scope) error {
+	out.ObjectMeta = in.ObjectMeta
+	return nil
+}
+
+// Convert_management_DevPodWorkspaceInstanceDelete_To_v1_DevPodWorkspaceInstanceDelete is an autogenerated conversion function.
+func Convert_management_DevPodWorkspaceInstanceDelete_To_v1_DevPodWorkspaceInstanceDelete(in *management.DevPodWorkspaceInstanceDelete, out *DevPodWorkspaceInstanceDelete, s conversion.Scope) error {
+	return autoConvert_management_DevPodWorkspaceInstanceDelete_To_v1_DevPodWorkspaceInstanceDelete(in, out, s)
+}
+
+func autoConvert_v1_DevPodWorkspaceInstanceDeleteList_To_management_DevPodWorkspaceInstanceDeleteList(in *DevPodWorkspaceInstanceDeleteList, out *management.DevPodWorkspaceInstanceDeleteList, s conversion.Scope) error {
+	out.ListMeta = in.ListMeta
+	out.Items = *(*[]management.DevPodWorkspaceInstanceDelete)(unsafe.Pointer(&in.Items))
+	return nil
+}
+
+// Convert_v1_DevPodWorkspaceInstanceDeleteList_To_management_DevPodWorkspaceInstanceDeleteList is an autogenerated conversion function.
+func Convert_v1_DevPodWorkspaceInstanceDeleteList_To_management_DevPodWorkspaceInstanceDeleteList(in *DevPodWorkspaceInstanceDeleteList, out *management.DevPodWorkspaceInstanceDeleteList, s conversion.Scope) error {
+	return autoConvert_v1_DevPodWorkspaceInstanceDeleteList_To_management_DevPodWorkspaceInstanceDeleteList(in, out, s)
+}
+
+func autoConvert_management_DevPodWorkspaceInstanceDeleteList_To_v1_DevPodWorkspaceInstanceDeleteList(in *management.DevPodWorkspaceInstanceDeleteList, out *DevPodWorkspaceInstanceDeleteList, s conversion.Scope) error {
+	out.ListMeta = in.ListMeta
+	out.Items = *(*[]DevPodWorkspaceInstanceDelete)(unsafe.Pointer(&in.Items))
+	return nil
+}
+
+// Convert_management_DevPodWorkspaceInstanceDeleteList_To_v1_DevPodWorkspaceInstanceDeleteList is an autogenerated conversion function.
+func Convert_management_DevPodWorkspaceInstanceDeleteList_To_v1_DevPodWorkspaceInstanceDeleteList(in *management.DevPodWorkspaceInstanceDeleteList, out *DevPodWorkspaceInstanceDeleteList, s conversion.Scope) error {
+	return autoConvert_management_DevPodWorkspaceInstanceDeleteList_To_v1_DevPodWorkspaceInstanceDeleteList(in, out, s)
+}
+
+func autoConvert_v1_DevPodWorkspaceInstanceGetStatus_To_management_DevPodWorkspaceInstanceGetStatus(in *DevPodWorkspaceInstanceGetStatus, out *management.DevPodWorkspaceInstanceGetStatus, s conversion.Scope) error {
+	out.ObjectMeta = in.ObjectMeta
+	return nil
+}
+
+// Convert_v1_DevPodWorkspaceInstanceGetStatus_To_management_DevPodWorkspaceInstanceGetStatus is an autogenerated conversion function.
+func Convert_v1_DevPodWorkspaceInstanceGetStatus_To_management_DevPodWorkspaceInstanceGetStatus(in *DevPodWorkspaceInstanceGetStatus, out *management.DevPodWorkspaceInstanceGetStatus, s conversion.Scope) error {
+	return autoConvert_v1_DevPodWorkspaceInstanceGetStatus_To_management_DevPodWorkspaceInstanceGetStatus(in, out, s)
+}
+
+func autoConvert_management_DevPodWorkspaceInstanceGetStatus_To_v1_DevPodWorkspaceInstanceGetStatus(in *management.DevPodWorkspaceInstanceGetStatus, out *DevPodWorkspaceInstanceGetStatus, s conversion.Scope) error {
+	out.ObjectMeta = in.ObjectMeta
+	return nil
+}
+
+// Convert_management_DevPodWorkspaceInstanceGetStatus_To_v1_DevPodWorkspaceInstanceGetStatus is an autogenerated conversion function.
+func Convert_management_DevPodWorkspaceInstanceGetStatus_To_v1_DevPodWorkspaceInstanceGetStatus(in *management.DevPodWorkspaceInstanceGetStatus, out *DevPodWorkspaceInstanceGetStatus, s conversion.Scope) error {
+	return autoConvert_management_DevPodWorkspaceInstanceGetStatus_To_v1_DevPodWorkspaceInstanceGetStatus(in, out, s)
+}
+
+func autoConvert_v1_DevPodWorkspaceInstanceGetStatusList_To_management_DevPodWorkspaceInstanceGetStatusList(in *DevPodWorkspaceInstanceGetStatusList, out *management.DevPodWorkspaceInstanceGetStatusList, s conversion.Scope) error {
+	out.ListMeta = in.ListMeta
+	out.Items = *(*[]management.DevPodWorkspaceInstanceGetStatus)(unsafe.Pointer(&in.Items))
+	return nil
+}
+
+// Convert_v1_DevPodWorkspaceInstanceGetStatusList_To_management_DevPodWorkspaceInstanceGetStatusList is an autogenerated conversion function.
+func Convert_v1_DevPodWorkspaceInstanceGetStatusList_To_management_DevPodWorkspaceInstanceGetStatusList(in *DevPodWorkspaceInstanceGetStatusList, out *management.DevPodWorkspaceInstanceGetStatusList, s conversion.Scope) error {
+	return autoConvert_v1_DevPodWorkspaceInstanceGetStatusList_To_management_DevPodWorkspaceInstanceGetStatusList(in, out, s)
+}
+
+func autoConvert_management_DevPodWorkspaceInstanceGetStatusList_To_v1_DevPodWorkspaceInstanceGetStatusList(in *management.DevPodWorkspaceInstanceGetStatusList, out *DevPodWorkspaceInstanceGetStatusList, s conversion.Scope) error {
+	out.ListMeta = in.ListMeta
+	out.Items = *(*[]DevPodWorkspaceInstanceGetStatus)(unsafe.Pointer(&in.Items))
+	return nil
+}
+
+// Convert_management_DevPodWorkspaceInstanceGetStatusList_To_v1_DevPodWorkspaceInstanceGetStatusList is an autogenerated conversion function.
+func Convert_management_DevPodWorkspaceInstanceGetStatusList_To_v1_DevPodWorkspaceInstanceGetStatusList(in *management.DevPodWorkspaceInstanceGetStatusList, out *DevPodWorkspaceInstanceGetStatusList, s conversion.Scope) error {
+	return autoConvert_management_DevPodWorkspaceInstanceGetStatusList_To_v1_DevPodWorkspaceInstanceGetStatusList(in, out, s)
+}
+
+func autoConvert_v1_DevPodWorkspaceInstanceList_To_management_DevPodWorkspaceInstanceList(in *DevPodWorkspaceInstanceList, out *management.DevPodWorkspaceInstanceList, s conversion.Scope) error {
+	out.ListMeta = in.ListMeta
+	out.Items = *(*[]management.DevPodWorkspaceInstance)(unsafe.Pointer(&in.Items))
+	return nil
+}
+
+// Convert_v1_DevPodWorkspaceInstanceList_To_management_DevPodWorkspaceInstanceList is an autogenerated conversion function.
+func Convert_v1_DevPodWorkspaceInstanceList_To_management_DevPodWorkspaceInstanceList(in *DevPodWorkspaceInstanceList, out *management.DevPodWorkspaceInstanceList, s conversion.Scope) error {
+	return autoConvert_v1_DevPodWorkspaceInstanceList_To_management_DevPodWorkspaceInstanceList(in, out, s)
+}
+
+func autoConvert_management_DevPodWorkspaceInstanceList_To_v1_DevPodWorkspaceInstanceList(in *management.DevPodWorkspaceInstanceList, out *DevPodWorkspaceInstanceList, s conversion.Scope) error {
+	out.ListMeta = in.ListMeta
+	out.Items = *(*[]DevPodWorkspaceInstance)(unsafe.Pointer(&in.Items))
+	return nil
+}
+
+// Convert_management_DevPodWorkspaceInstanceList_To_v1_DevPodWorkspaceInstanceList is an autogenerated conversion function.
+func Convert_management_DevPodWorkspaceInstanceList_To_v1_DevPodWorkspaceInstanceList(in *management.DevPodWorkspaceInstanceList, out *DevPodWorkspaceInstanceList, s conversion.Scope) error {
+	return autoConvert_management_DevPodWorkspaceInstanceList_To_v1_DevPodWorkspaceInstanceList(in, out, s)
+}
+
+func autoConvert_v1_DevPodWorkspaceInstanceSpec_To_management_DevPodWorkspaceInstanceSpec(in *DevPodWorkspaceInstanceSpec, out *management.DevPodWorkspaceInstanceSpec, s conversion.Scope) error {
+	out.DevPodWorkspaceInstanceSpec = in.DevPodWorkspaceInstanceSpec
+	return nil
+}
+
+// Convert_v1_DevPodWorkspaceInstanceSpec_To_management_DevPodWorkspaceInstanceSpec is an autogenerated conversion function.
+func Convert_v1_DevPodWorkspaceInstanceSpec_To_management_DevPodWorkspaceInstanceSpec(in *DevPodWorkspaceInstanceSpec, out *management.DevPodWorkspaceInstanceSpec, s conversion.Scope) error {
+	return autoConvert_v1_DevPodWorkspaceInstanceSpec_To_management_DevPodWorkspaceInstanceSpec(in, out, s)
+}
+
+func autoConvert_management_DevPodWorkspaceInstanceSpec_To_v1_DevPodWorkspaceInstanceSpec(in *management.DevPodWorkspaceInstanceSpec, out *DevPodWorkspaceInstanceSpec, s conversion.Scope) error {
+	out.DevPodWorkspaceInstanceSpec = in.DevPodWorkspaceInstanceSpec
+	return nil
+}
+
+// Convert_management_DevPodWorkspaceInstanceSpec_To_v1_DevPodWorkspaceInstanceSpec is an autogenerated conversion function.
+func Convert_management_DevPodWorkspaceInstanceSpec_To_v1_DevPodWorkspaceInstanceSpec(in *management.DevPodWorkspaceInstanceSpec, out *DevPodWorkspaceInstanceSpec, s conversion.Scope) error {
+	return autoConvert_management_DevPodWorkspaceInstanceSpec_To_v1_DevPodWorkspaceInstanceSpec(in, out, s)
+}
+
+func autoConvert_v1_DevPodWorkspaceInstanceSsh_To_management_DevPodWorkspaceInstanceSsh(in *DevPodWorkspaceInstanceSsh, out *management.DevPodWorkspaceInstanceSsh, s conversion.Scope) error {
+	out.ObjectMeta = in.ObjectMeta
+	return nil
+}
+
+// Convert_v1_DevPodWorkspaceInstanceSsh_To_management_DevPodWorkspaceInstanceSsh is an autogenerated conversion function.
+func Convert_v1_DevPodWorkspaceInstanceSsh_To_management_DevPodWorkspaceInstanceSsh(in *DevPodWorkspaceInstanceSsh, out *management.DevPodWorkspaceInstanceSsh, s conversion.Scope) error {
+	return autoConvert_v1_DevPodWorkspaceInstanceSsh_To_management_DevPodWorkspaceInstanceSsh(in, out, s)
+}
+
+func autoConvert_management_DevPodWorkspaceInstanceSsh_To_v1_DevPodWorkspaceInstanceSsh(in *management.DevPodWorkspaceInstanceSsh, out *DevPodWorkspaceInstanceSsh, s conversion.Scope) error {
+	out.ObjectMeta = in.ObjectMeta
+	return nil
+}
+
+// Convert_management_DevPodWorkspaceInstanceSsh_To_v1_DevPodWorkspaceInstanceSsh is an autogenerated conversion function.
+func Convert_management_DevPodWorkspaceInstanceSsh_To_v1_DevPodWorkspaceInstanceSsh(in *management.DevPodWorkspaceInstanceSsh, out *DevPodWorkspaceInstanceSsh, s conversion.Scope) error {
+	return autoConvert_management_DevPodWorkspaceInstanceSsh_To_v1_DevPodWorkspaceInstanceSsh(in, out, s)
+}
+
+func autoConvert_v1_DevPodWorkspaceInstanceSshList_To_management_DevPodWorkspaceInstanceSshList(in *DevPodWorkspaceInstanceSshList, out *management.DevPodWorkspaceInstanceSshList, s conversion.Scope) error {
+	out.ListMeta = in.ListMeta
+	out.Items = *(*[]management.DevPodWorkspaceInstanceSsh)(unsafe.Pointer(&in.Items))
+	return nil
+}
+
+// Convert_v1_DevPodWorkspaceInstanceSshList_To_management_DevPodWorkspaceInstanceSshList is an autogenerated conversion function.
+func Convert_v1_DevPodWorkspaceInstanceSshList_To_management_DevPodWorkspaceInstanceSshList(in *DevPodWorkspaceInstanceSshList, out *management.DevPodWorkspaceInstanceSshList, s conversion.Scope) error {
+	return autoConvert_v1_DevPodWorkspaceInstanceSshList_To_management_DevPodWorkspaceInstanceSshList(in, out, s)
+}
+
+func autoConvert_management_DevPodWorkspaceInstanceSshList_To_v1_DevPodWorkspaceInstanceSshList(in *management.DevPodWorkspaceInstanceSshList, out *DevPodWorkspaceInstanceSshList, s conversion.Scope) error {
+	out.ListMeta = in.ListMeta
+	out.Items = *(*[]DevPodWorkspaceInstanceSsh)(unsafe.Pointer(&in.Items))
+	return nil
+}
+
+// Convert_management_DevPodWorkspaceInstanceSshList_To_v1_DevPodWorkspaceInstanceSshList is an autogenerated conversion function.
+func Convert_management_DevPodWorkspaceInstanceSshList_To_v1_DevPodWorkspaceInstanceSshList(in *management.DevPodWorkspaceInstanceSshList, out *DevPodWorkspaceInstanceSshList, s conversion.Scope) error {
+	return autoConvert_management_DevPodWorkspaceInstanceSshList_To_v1_DevPodWorkspaceInstanceSshList(in, out, s)
+}
+
+func autoConvert_v1_DevPodWorkspaceInstanceStatus_To_management_DevPodWorkspaceInstanceStatus(in *DevPodWorkspaceInstanceStatus, out *management.DevPodWorkspaceInstanceStatus, s conversion.Scope) error {
+	out.DevPodWorkspaceInstanceStatus = in.DevPodWorkspaceInstanceStatus
+	return nil
+}
+
+// Convert_v1_DevPodWorkspaceInstanceStatus_To_management_DevPodWorkspaceInstanceStatus is an autogenerated conversion function.
+func Convert_v1_DevPodWorkspaceInstanceStatus_To_management_DevPodWorkspaceInstanceStatus(in *DevPodWorkspaceInstanceStatus, out *management.DevPodWorkspaceInstanceStatus, s conversion.Scope) error {
+	return autoConvert_v1_DevPodWorkspaceInstanceStatus_To_management_DevPodWorkspaceInstanceStatus(in, out, s)
+}
+
+func autoConvert_management_DevPodWorkspaceInstanceStatus_To_v1_DevPodWorkspaceInstanceStatus(in *management.DevPodWorkspaceInstanceStatus, out *DevPodWorkspaceInstanceStatus, s conversion.Scope) error {
+	out.DevPodWorkspaceInstanceStatus = in.DevPodWorkspaceInstanceStatus
+	return nil
+}
+
+// Convert_management_DevPodWorkspaceInstanceStatus_To_v1_DevPodWorkspaceInstanceStatus is an autogenerated conversion function.
+func Convert_management_DevPodWorkspaceInstanceStatus_To_v1_DevPodWorkspaceInstanceStatus(in *management.DevPodWorkspaceInstanceStatus, out *DevPodWorkspaceInstanceStatus, s conversion.Scope) error {
+	return autoConvert_management_DevPodWorkspaceInstanceStatus_To_v1_DevPodWorkspaceInstanceStatus(in, out, s)
+}
+
+func autoConvert_v1_DevPodWorkspaceInstanceStop_To_management_DevPodWorkspaceInstanceStop(in *DevPodWorkspaceInstanceStop, out *management.DevPodWorkspaceInstanceStop, s conversion.Scope) error {
+	out.ObjectMeta = in.ObjectMeta
+	return nil
+}
+
+// Convert_v1_DevPodWorkspaceInstanceStop_To_management_DevPodWorkspaceInstanceStop is an autogenerated conversion function.
+func Convert_v1_DevPodWorkspaceInstanceStop_To_management_DevPodWorkspaceInstanceStop(in *DevPodWorkspaceInstanceStop, out *management.DevPodWorkspaceInstanceStop, s conversion.Scope) error {
+	return autoConvert_v1_DevPodWorkspaceInstanceStop_To_management_DevPodWorkspaceInstanceStop(in, out, s)
+}
+
+func autoConvert_management_DevPodWorkspaceInstanceStop_To_v1_DevPodWorkspaceInstanceStop(in *management.DevPodWorkspaceInstanceStop, out *DevPodWorkspaceInstanceStop, s conversion.Scope) error {
+	out.ObjectMeta = in.ObjectMeta
+	return nil
+}
+
+// Convert_management_DevPodWorkspaceInstanceStop_To_v1_DevPodWorkspaceInstanceStop is an autogenerated conversion function.
+func Convert_management_DevPodWorkspaceInstanceStop_To_v1_DevPodWorkspaceInstanceStop(in *management.DevPodWorkspaceInstanceStop, out *DevPodWorkspaceInstanceStop, s conversion.Scope) error {
+	return autoConvert_management_DevPodWorkspaceInstanceStop_To_v1_DevPodWorkspaceInstanceStop(in, out, s)
+}
+
+func autoConvert_v1_DevPodWorkspaceInstanceStopList_To_management_DevPodWorkspaceInstanceStopList(in *DevPodWorkspaceInstanceStopList, out *management.DevPodWorkspaceInstanceStopList, s conversion.Scope) error {
+	out.ListMeta = in.ListMeta
+	out.Items = *(*[]management.DevPodWorkspaceInstanceStop)(unsafe.Pointer(&in.Items))
+	return nil
+}
+
+// Convert_v1_DevPodWorkspaceInstanceStopList_To_management_DevPodWorkspaceInstanceStopList is an autogenerated conversion function.
+func Convert_v1_DevPodWorkspaceInstanceStopList_To_management_DevPodWorkspaceInstanceStopList(in *DevPodWorkspaceInstanceStopList, out *management.DevPodWorkspaceInstanceStopList, s conversion.Scope) error {
+	return autoConvert_v1_DevPodWorkspaceInstanceStopList_To_management_DevPodWorkspaceInstanceStopList(in, out, s)
+}
+
+func autoConvert_management_DevPodWorkspaceInstanceStopList_To_v1_DevPodWorkspaceInstanceStopList(in *management.DevPodWorkspaceInstanceStopList, out *DevPodWorkspaceInstanceStopList, s conversion.Scope) error {
+	out.ListMeta = in.ListMeta
+	out.Items = *(*[]DevPodWorkspaceInstanceStop)(unsafe.Pointer(&in.Items))
+	return nil
+}
+
+// Convert_management_DevPodWorkspaceInstanceStopList_To_v1_DevPodWorkspaceInstanceStopList is an autogenerated conversion function.
+func Convert_management_DevPodWorkspaceInstanceStopList_To_v1_DevPodWorkspaceInstanceStopList(in *management.DevPodWorkspaceInstanceStopList, out *DevPodWorkspaceInstanceStopList, s conversion.Scope) error {
+	return autoConvert_management_DevPodWorkspaceInstanceStopList_To_v1_DevPodWorkspaceInstanceStopList(in, out, s)
+}
+
+func autoConvert_v1_DevPodWorkspaceInstanceUp_To_management_DevPodWorkspaceInstanceUp(in *DevPodWorkspaceInstanceUp, out *management.DevPodWorkspaceInstanceUp, s conversion.Scope) error {
+	out.ObjectMeta = in.ObjectMeta
+	return nil
+}
+
+// Convert_v1_DevPodWorkspaceInstanceUp_To_management_DevPodWorkspaceInstanceUp is an autogenerated conversion function.
+func Convert_v1_DevPodWorkspaceInstanceUp_To_management_DevPodWorkspaceInstanceUp(in *DevPodWorkspaceInstanceUp, out *management.DevPodWorkspaceInstanceUp, s conversion.Scope) error {
+	return autoConvert_v1_DevPodWorkspaceInstanceUp_To_management_DevPodWorkspaceInstanceUp(in, out, s)
+}
+
+func autoConvert_management_DevPodWorkspaceInstanceUp_To_v1_DevPodWorkspaceInstanceUp(in *management.DevPodWorkspaceInstanceUp, out *DevPodWorkspaceInstanceUp, s conversion.Scope) error {
+	out.ObjectMeta = in.ObjectMeta
+	return nil
+}
+
+// Convert_management_DevPodWorkspaceInstanceUp_To_v1_DevPodWorkspaceInstanceUp is an autogenerated conversion function.
+func Convert_management_DevPodWorkspaceInstanceUp_To_v1_DevPodWorkspaceInstanceUp(in *management.DevPodWorkspaceInstanceUp, out *DevPodWorkspaceInstanceUp, s conversion.Scope) error {
+	return autoConvert_management_DevPodWorkspaceInstanceUp_To_v1_DevPodWorkspaceInstanceUp(in, out, s)
+}
+
+func autoConvert_v1_DevPodWorkspaceInstanceUpList_To_management_DevPodWorkspaceInstanceUpList(in *DevPodWorkspaceInstanceUpList, out *management.DevPodWorkspaceInstanceUpList, s conversion.Scope) error {
+	out.ListMeta = in.ListMeta
+	out.Items = *(*[]management.DevPodWorkspaceInstanceUp)(unsafe.Pointer(&in.Items))
+	return nil
+}
+
+// Convert_v1_DevPodWorkspaceInstanceUpList_To_management_DevPodWorkspaceInstanceUpList is an autogenerated conversion function.
+func Convert_v1_DevPodWorkspaceInstanceUpList_To_management_DevPodWorkspaceInstanceUpList(in *DevPodWorkspaceInstanceUpList, out *management.DevPodWorkspaceInstanceUpList, s conversion.Scope) error {
+	return autoConvert_v1_DevPodWorkspaceInstanceUpList_To_management_DevPodWorkspaceInstanceUpList(in, out, s)
+}
+
+func autoConvert_management_DevPodWorkspaceInstanceUpList_To_v1_DevPodWorkspaceInstanceUpList(in *management.DevPodWorkspaceInstanceUpList, out *DevPodWorkspaceInstanceUpList, s conversion.Scope) error {
+	out.ListMeta = in.ListMeta
+	out.Items = *(*[]DevPodWorkspaceInstanceUp)(unsafe.Pointer(&in.Items))
+	return nil
+}
+
+// Convert_management_DevPodWorkspaceInstanceUpList_To_v1_DevPodWorkspaceInstanceUpList is an autogenerated conversion function.
+func Convert_management_DevPodWorkspaceInstanceUpList_To_v1_DevPodWorkspaceInstanceUpList(in *management.DevPodWorkspaceInstanceUpList, out *DevPodWorkspaceInstanceUpList, s conversion.Scope) error {
+	return autoConvert_management_DevPodWorkspaceInstanceUpList_To_v1_DevPodWorkspaceInstanceUpList(in, out, s)
+}
+
+func autoConvert_v1_DevPodWorkspaceTemplate_To_management_DevPodWorkspaceTemplate(in *DevPodWorkspaceTemplate, out *management.DevPodWorkspaceTemplate, s conversion.Scope) error {
+	out.ObjectMeta = in.ObjectMeta
+	if err := Convert_v1_DevPodWorkspaceTemplateSpec_To_management_DevPodWorkspaceTemplateSpec(&in.Spec, &out.Spec, s); err != nil {
+		return err
+	}
+	if err := Convert_v1_DevPodWorkspaceTemplateStatus_To_management_DevPodWorkspaceTemplateStatus(&in.Status, &out.Status, s); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Convert_v1_DevPodWorkspaceTemplate_To_management_DevPodWorkspaceTemplate is an autogenerated conversion function.
+func Convert_v1_DevPodWorkspaceTemplate_To_management_DevPodWorkspaceTemplate(in *DevPodWorkspaceTemplate, out *management.DevPodWorkspaceTemplate, s conversion.Scope) error {
+	return autoConvert_v1_DevPodWorkspaceTemplate_To_management_DevPodWorkspaceTemplate(in, out, s)
+}
+
+func autoConvert_management_DevPodWorkspaceTemplate_To_v1_DevPodWorkspaceTemplate(in *management.DevPodWorkspaceTemplate, out *DevPodWorkspaceTemplate, s conversion.Scope) error {
+	out.ObjectMeta = in.ObjectMeta
+	if err := Convert_management_DevPodWorkspaceTemplateSpec_To_v1_DevPodWorkspaceTemplateSpec(&in.Spec, &out.Spec, s); err != nil {
+		return err
+	}
+	if err := Convert_management_DevPodWorkspaceTemplateStatus_To_v1_DevPodWorkspaceTemplateStatus(&in.Status, &out.Status, s); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Convert_management_DevPodWorkspaceTemplate_To_v1_DevPodWorkspaceTemplate is an autogenerated conversion function.
+func Convert_management_DevPodWorkspaceTemplate_To_v1_DevPodWorkspaceTemplate(in *management.DevPodWorkspaceTemplate, out *DevPodWorkspaceTemplate, s conversion.Scope) error {
+	return autoConvert_management_DevPodWorkspaceTemplate_To_v1_DevPodWorkspaceTemplate(in, out, s)
+}
+
+func autoConvert_v1_DevPodWorkspaceTemplateList_To_management_DevPodWorkspaceTemplateList(in *DevPodWorkspaceTemplateList, out *management.DevPodWorkspaceTemplateList, s conversion.Scope) error {
+	out.ListMeta = in.ListMeta
+	out.Items = *(*[]management.DevPodWorkspaceTemplate)(unsafe.Pointer(&in.Items))
+	return nil
+}
+
+// Convert_v1_DevPodWorkspaceTemplateList_To_management_DevPodWorkspaceTemplateList is an autogenerated conversion function.
+func Convert_v1_DevPodWorkspaceTemplateList_To_management_DevPodWorkspaceTemplateList(in *DevPodWorkspaceTemplateList, out *management.DevPodWorkspaceTemplateList, s conversion.Scope) error {
+	return autoConvert_v1_DevPodWorkspaceTemplateList_To_management_DevPodWorkspaceTemplateList(in, out, s)
+}
+
+func autoConvert_management_DevPodWorkspaceTemplateList_To_v1_DevPodWorkspaceTemplateList(in *management.DevPodWorkspaceTemplateList, out *DevPodWorkspaceTemplateList, s conversion.Scope) error {
+	out.ListMeta = in.ListMeta
+	out.Items = *(*[]DevPodWorkspaceTemplate)(unsafe.Pointer(&in.Items))
+	return nil
+}
+
+// Convert_management_DevPodWorkspaceTemplateList_To_v1_DevPodWorkspaceTemplateList is an autogenerated conversion function.
+func Convert_management_DevPodWorkspaceTemplateList_To_v1_DevPodWorkspaceTemplateList(in *management.DevPodWorkspaceTemplateList, out *DevPodWorkspaceTemplateList, s conversion.Scope) error {
+	return autoConvert_management_DevPodWorkspaceTemplateList_To_v1_DevPodWorkspaceTemplateList(in, out, s)
+}
+
+func autoConvert_v1_DevPodWorkspaceTemplateSpec_To_management_DevPodWorkspaceTemplateSpec(in *DevPodWorkspaceTemplateSpec, out *management.DevPodWorkspaceTemplateSpec, s conversion.Scope) error {
+	out.DevPodWorkspaceTemplateSpec = in.DevPodWorkspaceTemplateSpec
+	return nil
+}
+
+// Convert_v1_DevPodWorkspaceTemplateSpec_To_management_DevPodWorkspaceTemplateSpec is an autogenerated conversion function.
+func Convert_v1_DevPodWorkspaceTemplateSpec_To_management_DevPodWorkspaceTemplateSpec(in *DevPodWorkspaceTemplateSpec, out *management.DevPodWorkspaceTemplateSpec, s conversion.Scope) error {
+	return autoConvert_v1_DevPodWorkspaceTemplateSpec_To_management_DevPodWorkspaceTemplateSpec(in, out, s)
+}
+
+func autoConvert_management_DevPodWorkspaceTemplateSpec_To_v1_DevPodWorkspaceTemplateSpec(in *management.DevPodWorkspaceTemplateSpec, out *DevPodWorkspaceTemplateSpec, s conversion.Scope) error {
+	out.DevPodWorkspaceTemplateSpec = in.DevPodWorkspaceTemplateSpec
+	return nil
+}
+
+// Convert_management_DevPodWorkspaceTemplateSpec_To_v1_DevPodWorkspaceTemplateSpec is an autogenerated conversion function.
+func Convert_management_DevPodWorkspaceTemplateSpec_To_v1_DevPodWorkspaceTemplateSpec(in *management.DevPodWorkspaceTemplateSpec, out *DevPodWorkspaceTemplateSpec, s conversion.Scope) error {
+	return autoConvert_management_DevPodWorkspaceTemplateSpec_To_v1_DevPodWorkspaceTemplateSpec(in, out, s)
+}
+
+func autoConvert_v1_DevPodWorkspaceTemplateStatus_To_management_DevPodWorkspaceTemplateStatus(in *DevPodWorkspaceTemplateStatus, out *management.DevPodWorkspaceTemplateStatus, s conversion.Scope) error {
+	out.DevPodWorkspaceTemplateStatus = in.DevPodWorkspaceTemplateStatus
+	return nil
+}
+
+// Convert_v1_DevPodWorkspaceTemplateStatus_To_management_DevPodWorkspaceTemplateStatus is an autogenerated conversion function.
+func Convert_v1_DevPodWorkspaceTemplateStatus_To_management_DevPodWorkspaceTemplateStatus(in *DevPodWorkspaceTemplateStatus, out *management.DevPodWorkspaceTemplateStatus, s conversion.Scope) error {
+	return autoConvert_v1_DevPodWorkspaceTemplateStatus_To_management_DevPodWorkspaceTemplateStatus(in, out, s)
+}
+
+func autoConvert_management_DevPodWorkspaceTemplateStatus_To_v1_DevPodWorkspaceTemplateStatus(in *management.DevPodWorkspaceTemplateStatus, out *DevPodWorkspaceTemplateStatus, s conversion.Scope) error {
+	out.DevPodWorkspaceTemplateStatus = in.DevPodWorkspaceTemplateStatus
+	return nil
+}
+
+// Convert_management_DevPodWorkspaceTemplateStatus_To_v1_DevPodWorkspaceTemplateStatus is an autogenerated conversion function.
+func Convert_management_DevPodWorkspaceTemplateStatus_To_v1_DevPodWorkspaceTemplateStatus(in *management.DevPodWorkspaceTemplateStatus, out *DevPodWorkspaceTemplateStatus, s conversion.Scope) error {
+	return autoConvert_management_DevPodWorkspaceTemplateStatus_To_v1_DevPodWorkspaceTemplateStatus(in, out, s)
 }
 
 func autoConvert_v1_DirectClusterEndpointToken_To_management_DirectClusterEndpointToken(in *DirectClusterEndpointToken, out *management.DirectClusterEndpointToken, s conversion.Scope) error {
@@ -5328,6 +6444,7 @@ func Convert_management_ProjectChartsList_To_v1_ProjectChartsList(in *management
 func autoConvert_v1_ProjectClusters_To_management_ProjectClusters(in *ProjectClusters, out *management.ProjectClusters, s conversion.Scope) error {
 	out.ObjectMeta = in.ObjectMeta
 	out.Clusters = *(*[]management.Cluster)(unsafe.Pointer(&in.Clusters))
+	out.Runners = *(*[]management.Runner)(unsafe.Pointer(&in.Runners))
 	return nil
 }
 
@@ -5339,6 +6456,7 @@ func Convert_v1_ProjectClusters_To_management_ProjectClusters(in *ProjectCluster
 func autoConvert_management_ProjectClusters_To_v1_ProjectClusters(in *management.ProjectClusters, out *ProjectClusters, s conversion.Scope) error {
 	out.ObjectMeta = in.ObjectMeta
 	out.Clusters = *(*[]Cluster)(unsafe.Pointer(&in.Clusters))
+	out.Runners = *(*[]Runner)(unsafe.Pointer(&in.Runners))
 	return nil
 }
 
@@ -5887,6 +7005,8 @@ func autoConvert_v1_ProjectTemplates_To_management_ProjectTemplates(in *ProjectT
 	out.VirtualClusterTemplates = *(*[]management.VirtualClusterTemplate)(unsafe.Pointer(&in.VirtualClusterTemplates))
 	out.DefaultSpaceTemplate = in.DefaultSpaceTemplate
 	out.SpaceTemplates = *(*[]management.SpaceTemplate)(unsafe.Pointer(&in.SpaceTemplates))
+	out.DefaultDevPodWorkspaceTemplate = in.DefaultDevPodWorkspaceTemplate
+	out.DevPodWorkspaceTemplates = *(*[]management.DevPodWorkspaceTemplate)(unsafe.Pointer(&in.DevPodWorkspaceTemplates))
 	return nil
 }
 
@@ -5901,6 +7021,8 @@ func autoConvert_management_ProjectTemplates_To_v1_ProjectTemplates(in *manageme
 	out.VirtualClusterTemplates = *(*[]VirtualClusterTemplate)(unsafe.Pointer(&in.VirtualClusterTemplates))
 	out.DefaultSpaceTemplate = in.DefaultSpaceTemplate
 	out.SpaceTemplates = *(*[]SpaceTemplate)(unsafe.Pointer(&in.SpaceTemplates))
+	out.DefaultDevPodWorkspaceTemplate = in.DefaultDevPodWorkspaceTemplate
+	out.DevPodWorkspaceTemplates = *(*[]DevPodWorkspaceTemplate)(unsafe.Pointer(&in.DevPodWorkspaceTemplates))
 	return nil
 }
 
@@ -5929,6 +7051,100 @@ func autoConvert_management_ProjectTemplatesList_To_v1_ProjectTemplatesList(in *
 // Convert_management_ProjectTemplatesList_To_v1_ProjectTemplatesList is an autogenerated conversion function.
 func Convert_management_ProjectTemplatesList_To_v1_ProjectTemplatesList(in *management.ProjectTemplatesList, out *ProjectTemplatesList, s conversion.Scope) error {
 	return autoConvert_management_ProjectTemplatesList_To_v1_ProjectTemplatesList(in, out, s)
+}
+
+func autoConvert_v1_RedirectToken_To_management_RedirectToken(in *RedirectToken, out *management.RedirectToken, s conversion.Scope) error {
+	out.ObjectMeta = in.ObjectMeta
+	if err := Convert_v1_RedirectTokenSpec_To_management_RedirectTokenSpec(&in.Spec, &out.Spec, s); err != nil {
+		return err
+	}
+	if err := Convert_v1_RedirectTokenStatus_To_management_RedirectTokenStatus(&in.Status, &out.Status, s); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Convert_v1_RedirectToken_To_management_RedirectToken is an autogenerated conversion function.
+func Convert_v1_RedirectToken_To_management_RedirectToken(in *RedirectToken, out *management.RedirectToken, s conversion.Scope) error {
+	return autoConvert_v1_RedirectToken_To_management_RedirectToken(in, out, s)
+}
+
+func autoConvert_management_RedirectToken_To_v1_RedirectToken(in *management.RedirectToken, out *RedirectToken, s conversion.Scope) error {
+	out.ObjectMeta = in.ObjectMeta
+	if err := Convert_management_RedirectTokenSpec_To_v1_RedirectTokenSpec(&in.Spec, &out.Spec, s); err != nil {
+		return err
+	}
+	if err := Convert_management_RedirectTokenStatus_To_v1_RedirectTokenStatus(&in.Status, &out.Status, s); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Convert_management_RedirectToken_To_v1_RedirectToken is an autogenerated conversion function.
+func Convert_management_RedirectToken_To_v1_RedirectToken(in *management.RedirectToken, out *RedirectToken, s conversion.Scope) error {
+	return autoConvert_management_RedirectToken_To_v1_RedirectToken(in, out, s)
+}
+
+func autoConvert_v1_RedirectTokenList_To_management_RedirectTokenList(in *RedirectTokenList, out *management.RedirectTokenList, s conversion.Scope) error {
+	out.ListMeta = in.ListMeta
+	out.Items = *(*[]management.RedirectToken)(unsafe.Pointer(&in.Items))
+	return nil
+}
+
+// Convert_v1_RedirectTokenList_To_management_RedirectTokenList is an autogenerated conversion function.
+func Convert_v1_RedirectTokenList_To_management_RedirectTokenList(in *RedirectTokenList, out *management.RedirectTokenList, s conversion.Scope) error {
+	return autoConvert_v1_RedirectTokenList_To_management_RedirectTokenList(in, out, s)
+}
+
+func autoConvert_management_RedirectTokenList_To_v1_RedirectTokenList(in *management.RedirectTokenList, out *RedirectTokenList, s conversion.Scope) error {
+	out.ListMeta = in.ListMeta
+	out.Items = *(*[]RedirectToken)(unsafe.Pointer(&in.Items))
+	return nil
+}
+
+// Convert_management_RedirectTokenList_To_v1_RedirectTokenList is an autogenerated conversion function.
+func Convert_management_RedirectTokenList_To_v1_RedirectTokenList(in *management.RedirectTokenList, out *RedirectTokenList, s conversion.Scope) error {
+	return autoConvert_management_RedirectTokenList_To_v1_RedirectTokenList(in, out, s)
+}
+
+func autoConvert_v1_RedirectTokenSpec_To_management_RedirectTokenSpec(in *RedirectTokenSpec, out *management.RedirectTokenSpec, s conversion.Scope) error {
+	out.Token = in.Token
+	return nil
+}
+
+// Convert_v1_RedirectTokenSpec_To_management_RedirectTokenSpec is an autogenerated conversion function.
+func Convert_v1_RedirectTokenSpec_To_management_RedirectTokenSpec(in *RedirectTokenSpec, out *management.RedirectTokenSpec, s conversion.Scope) error {
+	return autoConvert_v1_RedirectTokenSpec_To_management_RedirectTokenSpec(in, out, s)
+}
+
+func autoConvert_management_RedirectTokenSpec_To_v1_RedirectTokenSpec(in *management.RedirectTokenSpec, out *RedirectTokenSpec, s conversion.Scope) error {
+	out.Token = in.Token
+	return nil
+}
+
+// Convert_management_RedirectTokenSpec_To_v1_RedirectTokenSpec is an autogenerated conversion function.
+func Convert_management_RedirectTokenSpec_To_v1_RedirectTokenSpec(in *management.RedirectTokenSpec, out *RedirectTokenSpec, s conversion.Scope) error {
+	return autoConvert_management_RedirectTokenSpec_To_v1_RedirectTokenSpec(in, out, s)
+}
+
+func autoConvert_v1_RedirectTokenStatus_To_management_RedirectTokenStatus(in *RedirectTokenStatus, out *management.RedirectTokenStatus, s conversion.Scope) error {
+	out.RedirectURL = in.RedirectURL
+	return nil
+}
+
+// Convert_v1_RedirectTokenStatus_To_management_RedirectTokenStatus is an autogenerated conversion function.
+func Convert_v1_RedirectTokenStatus_To_management_RedirectTokenStatus(in *RedirectTokenStatus, out *management.RedirectTokenStatus, s conversion.Scope) error {
+	return autoConvert_v1_RedirectTokenStatus_To_management_RedirectTokenStatus(in, out, s)
+}
+
+func autoConvert_management_RedirectTokenStatus_To_v1_RedirectTokenStatus(in *management.RedirectTokenStatus, out *RedirectTokenStatus, s conversion.Scope) error {
+	out.RedirectURL = in.RedirectURL
+	return nil
+}
+
+// Convert_management_RedirectTokenStatus_To_v1_RedirectTokenStatus is an autogenerated conversion function.
+func Convert_management_RedirectTokenStatus_To_v1_RedirectTokenStatus(in *management.RedirectTokenStatus, out *RedirectTokenStatus, s conversion.Scope) error {
+	return autoConvert_management_RedirectTokenStatus_To_v1_RedirectTokenStatus(in, out, s)
 }
 
 func autoConvert_v1_ResetAccessKey_To_management_ResetAccessKey(in *ResetAccessKey, out *management.ResetAccessKey, s conversion.Scope) error {
@@ -6023,6 +7239,144 @@ func autoConvert_management_ResetAccessKeyStatus_To_v1_ResetAccessKeyStatus(in *
 // Convert_management_ResetAccessKeyStatus_To_v1_ResetAccessKeyStatus is an autogenerated conversion function.
 func Convert_management_ResetAccessKeyStatus_To_v1_ResetAccessKeyStatus(in *management.ResetAccessKeyStatus, out *ResetAccessKeyStatus, s conversion.Scope) error {
 	return autoConvert_management_ResetAccessKeyStatus_To_v1_ResetAccessKeyStatus(in, out, s)
+}
+
+func autoConvert_v1_Runner_To_management_Runner(in *Runner, out *management.Runner, s conversion.Scope) error {
+	out.ObjectMeta = in.ObjectMeta
+	if err := Convert_v1_RunnerSpec_To_management_RunnerSpec(&in.Spec, &out.Spec, s); err != nil {
+		return err
+	}
+	if err := Convert_v1_RunnerStatus_To_management_RunnerStatus(&in.Status, &out.Status, s); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Convert_v1_Runner_To_management_Runner is an autogenerated conversion function.
+func Convert_v1_Runner_To_management_Runner(in *Runner, out *management.Runner, s conversion.Scope) error {
+	return autoConvert_v1_Runner_To_management_Runner(in, out, s)
+}
+
+func autoConvert_management_Runner_To_v1_Runner(in *management.Runner, out *Runner, s conversion.Scope) error {
+	out.ObjectMeta = in.ObjectMeta
+	if err := Convert_management_RunnerSpec_To_v1_RunnerSpec(&in.Spec, &out.Spec, s); err != nil {
+		return err
+	}
+	if err := Convert_management_RunnerStatus_To_v1_RunnerStatus(&in.Status, &out.Status, s); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Convert_management_Runner_To_v1_Runner is an autogenerated conversion function.
+func Convert_management_Runner_To_v1_Runner(in *management.Runner, out *Runner, s conversion.Scope) error {
+	return autoConvert_management_Runner_To_v1_Runner(in, out, s)
+}
+
+func autoConvert_v1_RunnerConfig_To_management_RunnerConfig(in *RunnerConfig, out *management.RunnerConfig, s conversion.Scope) error {
+	out.ObjectMeta = in.ObjectMeta
+	out.TokenCaCert = *(*[]byte)(unsafe.Pointer(&in.TokenCaCert))
+	return nil
+}
+
+// Convert_v1_RunnerConfig_To_management_RunnerConfig is an autogenerated conversion function.
+func Convert_v1_RunnerConfig_To_management_RunnerConfig(in *RunnerConfig, out *management.RunnerConfig, s conversion.Scope) error {
+	return autoConvert_v1_RunnerConfig_To_management_RunnerConfig(in, out, s)
+}
+
+func autoConvert_management_RunnerConfig_To_v1_RunnerConfig(in *management.RunnerConfig, out *RunnerConfig, s conversion.Scope) error {
+	out.ObjectMeta = in.ObjectMeta
+	out.TokenCaCert = *(*[]byte)(unsafe.Pointer(&in.TokenCaCert))
+	return nil
+}
+
+// Convert_management_RunnerConfig_To_v1_RunnerConfig is an autogenerated conversion function.
+func Convert_management_RunnerConfig_To_v1_RunnerConfig(in *management.RunnerConfig, out *RunnerConfig, s conversion.Scope) error {
+	return autoConvert_management_RunnerConfig_To_v1_RunnerConfig(in, out, s)
+}
+
+func autoConvert_v1_RunnerConfigList_To_management_RunnerConfigList(in *RunnerConfigList, out *management.RunnerConfigList, s conversion.Scope) error {
+	out.ListMeta = in.ListMeta
+	out.Items = *(*[]management.RunnerConfig)(unsafe.Pointer(&in.Items))
+	return nil
+}
+
+// Convert_v1_RunnerConfigList_To_management_RunnerConfigList is an autogenerated conversion function.
+func Convert_v1_RunnerConfigList_To_management_RunnerConfigList(in *RunnerConfigList, out *management.RunnerConfigList, s conversion.Scope) error {
+	return autoConvert_v1_RunnerConfigList_To_management_RunnerConfigList(in, out, s)
+}
+
+func autoConvert_management_RunnerConfigList_To_v1_RunnerConfigList(in *management.RunnerConfigList, out *RunnerConfigList, s conversion.Scope) error {
+	out.ListMeta = in.ListMeta
+	out.Items = *(*[]RunnerConfig)(unsafe.Pointer(&in.Items))
+	return nil
+}
+
+// Convert_management_RunnerConfigList_To_v1_RunnerConfigList is an autogenerated conversion function.
+func Convert_management_RunnerConfigList_To_v1_RunnerConfigList(in *management.RunnerConfigList, out *RunnerConfigList, s conversion.Scope) error {
+	return autoConvert_management_RunnerConfigList_To_v1_RunnerConfigList(in, out, s)
+}
+
+func autoConvert_v1_RunnerList_To_management_RunnerList(in *RunnerList, out *management.RunnerList, s conversion.Scope) error {
+	out.ListMeta = in.ListMeta
+	out.Items = *(*[]management.Runner)(unsafe.Pointer(&in.Items))
+	return nil
+}
+
+// Convert_v1_RunnerList_To_management_RunnerList is an autogenerated conversion function.
+func Convert_v1_RunnerList_To_management_RunnerList(in *RunnerList, out *management.RunnerList, s conversion.Scope) error {
+	return autoConvert_v1_RunnerList_To_management_RunnerList(in, out, s)
+}
+
+func autoConvert_management_RunnerList_To_v1_RunnerList(in *management.RunnerList, out *RunnerList, s conversion.Scope) error {
+	out.ListMeta = in.ListMeta
+	out.Items = *(*[]Runner)(unsafe.Pointer(&in.Items))
+	return nil
+}
+
+// Convert_management_RunnerList_To_v1_RunnerList is an autogenerated conversion function.
+func Convert_management_RunnerList_To_v1_RunnerList(in *management.RunnerList, out *RunnerList, s conversion.Scope) error {
+	return autoConvert_management_RunnerList_To_v1_RunnerList(in, out, s)
+}
+
+func autoConvert_v1_RunnerSpec_To_management_RunnerSpec(in *RunnerSpec, out *management.RunnerSpec, s conversion.Scope) error {
+	out.RunnerSpec = in.RunnerSpec
+	return nil
+}
+
+// Convert_v1_RunnerSpec_To_management_RunnerSpec is an autogenerated conversion function.
+func Convert_v1_RunnerSpec_To_management_RunnerSpec(in *RunnerSpec, out *management.RunnerSpec, s conversion.Scope) error {
+	return autoConvert_v1_RunnerSpec_To_management_RunnerSpec(in, out, s)
+}
+
+func autoConvert_management_RunnerSpec_To_v1_RunnerSpec(in *management.RunnerSpec, out *RunnerSpec, s conversion.Scope) error {
+	out.RunnerSpec = in.RunnerSpec
+	return nil
+}
+
+// Convert_management_RunnerSpec_To_v1_RunnerSpec is an autogenerated conversion function.
+func Convert_management_RunnerSpec_To_v1_RunnerSpec(in *management.RunnerSpec, out *RunnerSpec, s conversion.Scope) error {
+	return autoConvert_management_RunnerSpec_To_v1_RunnerSpec(in, out, s)
+}
+
+func autoConvert_v1_RunnerStatus_To_management_RunnerStatus(in *RunnerStatus, out *management.RunnerStatus, s conversion.Scope) error {
+	out.RunnerStatus = in.RunnerStatus
+	return nil
+}
+
+// Convert_v1_RunnerStatus_To_management_RunnerStatus is an autogenerated conversion function.
+func Convert_v1_RunnerStatus_To_management_RunnerStatus(in *RunnerStatus, out *management.RunnerStatus, s conversion.Scope) error {
+	return autoConvert_v1_RunnerStatus_To_management_RunnerStatus(in, out, s)
+}
+
+func autoConvert_management_RunnerStatus_To_v1_RunnerStatus(in *management.RunnerStatus, out *RunnerStatus, s conversion.Scope) error {
+	out.RunnerStatus = in.RunnerStatus
+	return nil
+}
+
+// Convert_management_RunnerStatus_To_v1_RunnerStatus is an autogenerated conversion function.
+func Convert_management_RunnerStatus_To_v1_RunnerStatus(in *management.RunnerStatus, out *RunnerStatus, s conversion.Scope) error {
+	return autoConvert_management_RunnerStatus_To_v1_RunnerStatus(in, out, s)
 }
 
 func autoConvert_v1_Self_To_management_Self(in *Self, out *management.Self, s conversion.Scope) error {
