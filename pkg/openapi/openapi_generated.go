@@ -9876,6 +9876,13 @@ func schema_pkg_apis_management_v1_DevPodUpOptions(ref common.ReferenceCallback)
 							Format:      "",
 						},
 					},
+					"debug": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Debug includes debug logs.",
+							Type:        []string{"boolean"},
+							Format:      "",
+						},
+					},
 					"options": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Options are the options to pass.",
@@ -27693,6 +27700,14 @@ func schema_loft_sh_admin_services_pkg_server_License(ref common.ReferenceCallba
 						SchemaProps: spec.SchemaProps{
 							Description: "Analytics indicates the analytics endpoints and which requests should be sent to the analytics server.",
 							Ref:         ref("github.com/loft-sh/external-types/loft-sh/admin-services/pkg/server.Analytics"),
+						},
+					},
+					"domainToken": {
+						SchemaProps: spec.SchemaProps{
+							Description: "DomainToken holds the JWT with the URL that the Loft instance is publicly available on. (via Loft router)",
+							Default:     "",
+							Type:        []string{"string"},
+							Format:      "",
 						},
 					},
 				},
