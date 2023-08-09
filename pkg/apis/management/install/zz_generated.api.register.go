@@ -94,6 +94,7 @@ func addKnownTypes(scheme *runtime.Scheme) error {
 		&management.ResetAccessKeyList{},
 		&management.Runner{},
 		&management.RunnerList{},
+		&management.RunnerAccessKey{},
 		&management.RunnerConfig{},
 		&management.Self{},
 		&management.SelfList{},
