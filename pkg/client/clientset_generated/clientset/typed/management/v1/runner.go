@@ -32,6 +32,7 @@ type RunnerInterface interface {
 	Watch(ctx context.Context, opts metav1.ListOptions) (watch.Interface, error)
 	Patch(ctx context.Context, name string, pt types.PatchType, data []byte, opts metav1.PatchOptions, subresources ...string) (result *v1.Runner, err error)
 	GetConfig(ctx context.Context, runnerName string, options metav1.GetOptions) (*v1.RunnerConfig, error)
+	GetAccessKey(ctx context.Context, runnerName string, options metav1.GetOptions) (*v1.RunnerAccessKey, error)
 
 	RunnerExpansion
 }
@@ -176,6 +177,19 @@ func (c *runners) GetConfig(ctx context.Context, runnerName string, options meta
 		Resource("runners").
 		Name(runnerName).
 		SubResource("config").
+		VersionedParams(&options, scheme.ParameterCodec).
+		Do(ctx).
+		Into(result)
+	return
+}
+
+// GetAccessKey takes name of the runner, and returns the corresponding v1.RunnerAccessKey object, and an error if there is any.
+func (c *runners) GetAccessKey(ctx context.Context, runnerName string, options metav1.GetOptions) (result *v1.RunnerAccessKey, err error) {
+	result = &v1.RunnerAccessKey{}
+	err = c.client.Get().
+		Resource("runners").
+		Name(runnerName).
+		SubResource("accesskey").
 		VersionedParams(&options, scheme.ParameterCodec).
 		Do(ctx).
 		Into(result)

@@ -124,3 +124,13 @@ func (c *FakeRunners) GetConfig(ctx context.Context, runnerName string, options 
 	}
 	return obj.(*v1.RunnerConfig), err
 }
+
+// GetAccessKey takes name of the runner, and returns the corresponding runnerAccessKey object, and an error if there is any.
+func (c *FakeRunners) GetAccessKey(ctx context.Context, runnerName string, options metav1.GetOptions) (result *v1.RunnerAccessKey, err error) {
+	obj, err := c.Fake.
+		Invokes(testing.NewRootGetSubresourceAction(runnersResource, "accesskey", runnerName), &v1.RunnerAccessKey{})
+	if obj == nil {
+		return nil, err
+	}
+	return obj.(*v1.RunnerAccessKey), err
+}

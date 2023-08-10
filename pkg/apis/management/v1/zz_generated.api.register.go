@@ -85,6 +85,7 @@ func addKnownTypes(scheme *runtime.Scheme) error {
 		&ResetAccessKeyList{},
 		&Runner{},
 		&RunnerList{},
+		&RunnerAccessKey{},
 		&RunnerConfig{},
 		&Self{},
 		&SelfList{},
@@ -271,6 +272,11 @@ var (
 			func() runtime.Object { return &Runner{} },     // Register versioned resource
 			func() runtime.Object { return &RunnerList{} }, // Register versioned resource list
 			management.NewRunnerStatusREST),
+		builders.NewApiResourceWithStorage(
+			management.InternalRunnerAccessKeyREST,
+			func() runtime.Object { return &RunnerAccessKey{} }, // Register versioned resource
+			nil,
+			management.NewRunnerAccessKeyREST),
 		builders.NewApiResourceWithStorage(
 			management.InternalRunnerConfigREST,
 			func() runtime.Object { return &RunnerConfig{} }, // Register versioned resource
@@ -743,6 +749,14 @@ type RunnerList struct {
 	metav1.TypeMeta `json:",inline"`
 	metav1.ListMeta `json:"metadata,omitempty"`
 	Items           []Runner `json:"items"`
+}
+
+// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+
+type RunnerAccessKeyList struct {
+	metav1.TypeMeta `json:",inline"`
+	metav1.ListMeta `json:"metadata,omitempty"`
+	Items           []RunnerAccessKey `json:"items"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object

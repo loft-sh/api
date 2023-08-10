@@ -61,6 +61,10 @@ type ClusterSpec struct {
 	// +optional
 	ManagementNamespace string `json:"managementNamespace,omitempty"`
 
+	// If unusable is true, no spaces or virtual clusters can be scheduled on this cluster.
+	// +optional
+	Unusable bool `json:"unusable,omitempty"`
+
 	// Access holds the access rights for users and teams
 	// +optional
 	Access []Access `json:"access,omitempty"`

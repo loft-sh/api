@@ -882,7 +882,15 @@ var (
 		func() runtime.Object { return &Runner{} },
 		func() runtime.Object { return &RunnerList{} },
 	)
-	InternalRunnerConfigREST = builders.NewInternalSubresource(
+	InternalRunnerAccessKeyREST = builders.NewInternalSubresource(
+		"runners", "RunnerAccessKey", "accesskey",
+		func() runtime.Object { return &RunnerAccessKey{} },
+	)
+	NewRunnerAccessKeyREST = func(getter generic.RESTOptionsGetter) rest.Storage {
+		return NewRunnerAccessKeyRESTFunc(Factory)
+	}
+	NewRunnerAccessKeyRESTFunc NewRESTFunc
+	InternalRunnerConfigREST   = builders.NewInternalSubresource(
 		"runners", "RunnerConfig", "config",
 		func() runtime.Object { return &RunnerConfig{} },
 	)
@@ -1188,6 +1196,7 @@ var (
 		InternalResetAccessKeyStatus,
 		InternalRunner,
 		InternalRunnerStatus,
+		InternalRunnerAccessKeyREST,
 		InternalRunnerConfigREST,
 		InternalSelf,
 		InternalSelfStatus,
@@ -2207,6 +2216,14 @@ type Runner struct {
 	metav1.ObjectMeta
 	Spec   RunnerSpec
 	Status RunnerStatus
+}
+
+// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+
+type RunnerAccessKey struct {
+	metav1.TypeMeta
+	metav1.ObjectMeta
+	AccessKey string
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -5628,6 +5645,14 @@ type RunnerList struct {
 	metav1.TypeMeta
 	metav1.ListMeta
 	Items []Runner
+}
+
+// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+
+type RunnerAccessKeyList struct {
+	metav1.TypeMeta
+	metav1.ListMeta
+	Items []RunnerAccessKey
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
