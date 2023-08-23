@@ -289,6 +289,8 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 		"github.com/loft-sh/api/v3/pkg/apis/management/v1.ResetAccessKeySpec":                              schema_pkg_apis_management_v1_ResetAccessKeySpec(ref),
 		"github.com/loft-sh/api/v3/pkg/apis/management/v1.ResetAccessKeyStatus":                            schema_pkg_apis_management_v1_ResetAccessKeyStatus(ref),
 		"github.com/loft-sh/api/v3/pkg/apis/management/v1.Runner":                                          schema_pkg_apis_management_v1_Runner(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/management/v1.RunnerAccessKey":                                 schema_pkg_apis_management_v1_RunnerAccessKey(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/management/v1.RunnerAccessKeyList":                             schema_pkg_apis_management_v1_RunnerAccessKeyList(ref),
 		"github.com/loft-sh/api/v3/pkg/apis/management/v1.RunnerConfig":                                    schema_pkg_apis_management_v1_RunnerConfig(ref),
 		"github.com/loft-sh/api/v3/pkg/apis/management/v1.RunnerConfigList":                                schema_pkg_apis_management_v1_RunnerConfigList(ref),
 		"github.com/loft-sh/api/v3/pkg/apis/management/v1.RunnerList":                                      schema_pkg_apis_management_v1_RunnerList(ref),
@@ -466,7 +468,12 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.QuotaStatusUserUsed":                                schema_pkg_apis_storage_v1_QuotaStatusUserUsed(ref),
 		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.Quotas":                                             schema_pkg_apis_storage_v1_Quotas(ref),
 		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.Runner":                                             schema_pkg_apis_storage_v1_Runner(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.RunnerClusterRef":                                   schema_pkg_apis_storage_v1_RunnerClusterRef(ref),
 		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.RunnerList":                                         schema_pkg_apis_storage_v1_RunnerList(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.RunnerPersistentVolumeClaimTemplate":                schema_pkg_apis_storage_v1_RunnerPersistentVolumeClaimTemplate(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.RunnerPersistentVolumeClaimTemplateSpec":            schema_pkg_apis_storage_v1_RunnerPersistentVolumeClaimTemplateSpec(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.RunnerPodTemplate":                                  schema_pkg_apis_storage_v1_RunnerPodTemplate(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.RunnerPodTemplateSpec":                              schema_pkg_apis_storage_v1_RunnerPodTemplateSpec(ref),
 		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.RunnerRef":                                          schema_pkg_apis_storage_v1_RunnerRef(ref),
 		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.RunnerSpec":                                         schema_pkg_apis_storage_v1_RunnerSpec(ref),
 		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.RunnerStatus":                                       schema_pkg_apis_storage_v1_RunnerStatus(ref),
@@ -3613,6 +3620,13 @@ func schema_apis_loft_cluster_v1_VirtualClusterSpec(ref common.ReferenceCallback
 							Ref:         ref("github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.VirtualClusterAccessPoint"),
 						},
 					},
+					"forwardToken": {
+						SchemaProps: spec.SchemaProps{
+							Description: "ForwardToken signals the proxy to pass through the used token to the virtual Kubernetes api server and do a TokenReview there.",
+							Type:        []string{"boolean"},
+							Format:      "",
+						},
+					},
 					"pod": {
 						SchemaProps: spec.SchemaProps{
 							Description: "DEPRECATED: don't use anymore A label selector to select the virtual cluster pod to route incoming requests to.",
@@ -5253,6 +5267,13 @@ func schema_apis_loft_storage_v1_VirtualClusterCommonSpec(ref common.ReferenceCa
 							Ref:         ref("github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.VirtualClusterAccessPoint"),
 						},
 					},
+					"forwardToken": {
+						SchemaProps: spec.SchemaProps{
+							Description: "ForwardToken signals the proxy to pass through the used token to the virtual Kubernetes api server and do a TokenReview there.",
+							Type:        []string{"boolean"},
+							Format:      "",
+						},
+					},
 				},
 			},
 		},
@@ -5475,6 +5496,13 @@ func schema_apis_loft_storage_v1_VirtualClusterSpec(ref common.ReferenceCallback
 							Description: "AccessPoint defines settings to expose the virtual cluster directly via an ingress rather than through the (default) Loft proxy",
 							Default:     map[string]interface{}{},
 							Ref:         ref("github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.VirtualClusterAccessPoint"),
+						},
+					},
+					"forwardToken": {
+						SchemaProps: spec.SchemaProps{
+							Description: "ForwardToken signals the proxy to pass through the used token to the virtual Kubernetes api server and do a TokenReview there.",
+							Type:        []string{"boolean"},
+							Format:      "",
 						},
 					},
 					"pod": {
@@ -9260,6 +9288,13 @@ func schema_pkg_apis_management_v1_ClusterSpec(ref common.ReferenceCallback) com
 							Format:      "",
 						},
 					},
+					"unusable": {
+						SchemaProps: spec.SchemaProps{
+							Description: "If unusable is true, no spaces or virtual clusters can be scheduled on this cluster.",
+							Type:        []string{"boolean"},
+							Format:      "",
+						},
+					},
 					"access": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Access holds the access rights for users and teams",
@@ -9872,6 +9907,13 @@ func schema_pkg_apis_management_v1_DevPodUpOptions(ref common.ReferenceCallback)
 					"webMode": {
 						SchemaProps: spec.SchemaProps{
 							Description: "WebMode executes the up command directly.",
+							Type:        []string{"boolean"},
+							Format:      "",
+						},
+					},
+					"debug": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Debug includes debug logs.",
 							Type:        []string{"boolean"},
 							Format:      "",
 						},
@@ -12243,6 +12285,13 @@ func schema_pkg_apis_management_v1_OIDC(ref common.ReferenceCallback) common.Ope
 					"enabled": {
 						SchemaProps: spec.SchemaProps{
 							Description: "If true indicates that loft will act as an OIDC server",
+							Type:        []string{"boolean"},
+							Format:      "",
+						},
+					},
+					"wildcardRedirect": {
+						SchemaProps: spec.SchemaProps{
+							Description: "If true indicates that loft will allow wildcard '*' in client redirectURIs",
 							Type:        []string{"boolean"},
 							Format:      "",
 						},
@@ -14793,6 +14842,96 @@ func schema_pkg_apis_management_v1_Runner(ref common.ReferenceCallback) common.O
 	}
 }
 
+func schema_pkg_apis_management_v1_RunnerAccessKey(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "RunnerAccessKey holds the access key for the runner",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"kind": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"apiVersion": {
+						SchemaProps: spec.SchemaProps{
+							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"metadata": {
+						SchemaProps: spec.SchemaProps{
+							Default: map[string]interface{}{},
+							Ref:     ref("k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"),
+						},
+					},
+					"accessKey": {
+						SchemaProps: spec.SchemaProps{
+							Description: "AccessKey is the access key used by the runner",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			"k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
+	}
+}
+
+func schema_pkg_apis_management_v1_RunnerAccessKeyList(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"kind": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"apiVersion": {
+						SchemaProps: spec.SchemaProps{
+							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"metadata": {
+						SchemaProps: spec.SchemaProps{
+							Default: map[string]interface{}{},
+							Ref:     ref("k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"),
+						},
+					},
+					"items": {
+						SchemaProps: spec.SchemaProps{
+							Type: []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/management/v1.RunnerAccessKey"),
+									},
+								},
+							},
+						},
+					},
+				},
+				Required: []string{"items"},
+			},
+		},
+		Dependencies: []string{
+			"github.com/loft-sh/api/v3/pkg/apis/management/v1.RunnerAccessKey", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
+	}
+}
+
 func schema_pkg_apis_management_v1_RunnerConfig(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
@@ -14952,10 +15091,23 @@ func schema_pkg_apis_management_v1_RunnerSpec(ref common.ReferenceCallback) comm
 							Format:      "",
 						},
 					},
+					"clusterRef": {
+						SchemaProps: spec.SchemaProps{
+							Description: "If ClusterRef is defined, Loft will schedule the runner on the given cluster.",
+							Ref:         ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.RunnerClusterRef"),
+						},
+					},
 					"owner": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Owner holds the owner of this object",
 							Ref:         ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.UserOrTeam"),
+						},
+					},
+					"unusable": {
+						SchemaProps: spec.SchemaProps{
+							Description: "If unusable is true, no DevPod workspaces can be scheduled on this runner.",
+							Type:        []string{"boolean"},
+							Format:      "",
 						},
 					},
 					"access": {
@@ -14976,7 +15128,7 @@ func schema_pkg_apis_management_v1_RunnerSpec(ref common.ReferenceCallback) comm
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/v3/pkg/apis/storage/v1.Access", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.UserOrTeam"},
+			"github.com/loft-sh/api/v3/pkg/apis/storage/v1.Access", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.RunnerClusterRef", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.UserOrTeam"},
 	}
 }
 
@@ -14986,8 +15138,47 @@ func schema_pkg_apis_management_v1_RunnerStatus(ref common.ReferenceCallback) co
 			SchemaProps: spec.SchemaProps{
 				Description: "RunnerStatus holds the status",
 				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"phase": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Phase describes the current phase the space instance is in",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"reason": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Reason describes the reason in machine-readable form",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"message": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Message describes the reason in human-readable form",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"conditions": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Conditions holds several conditions the virtual cluster might be in",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref("github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.Condition"),
+									},
+								},
+							},
+						},
+					},
+				},
 			},
 		},
+		Dependencies: []string{
+			"github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.Condition"},
 	}
 }
 
@@ -15091,6 +15282,15 @@ func schema_pkg_apis_management_v1_SelfSpec(ref common.ReferenceCallback) common
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
 				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"accessKey": {
+						SchemaProps: spec.SchemaProps{
+							Description: "AccessKey is an optional access key to use instead of the provided one",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+				},
 			},
 		},
 	}
@@ -15121,6 +15321,12 @@ func schema_pkg_apis_management_v1_SelfStatus(ref common.ReferenceCallback) comm
 							Format:      "",
 						},
 					},
+					"accessKeyScope": {
+						SchemaProps: spec.SchemaProps{
+							Description: "The scope of the currently used access key",
+							Ref:         ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.AccessKeyScope"),
+						},
+					},
 					"accessKeyType": {
 						SchemaProps: spec.SchemaProps{
 							Description: "The type of the currently used access key",
@@ -15131,6 +15337,13 @@ func schema_pkg_apis_management_v1_SelfStatus(ref common.ReferenceCallback) comm
 					"subject": {
 						SchemaProps: spec.SchemaProps{
 							Description: "The subject of the currently logged in user",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"uid": {
+						SchemaProps: spec.SchemaProps{
+							Description: "UID is the user uid",
 							Type:        []string{"string"},
 							Format:      "",
 						},
@@ -15170,7 +15383,7 @@ func schema_pkg_apis_management_v1_SelfStatus(ref common.ReferenceCallback) comm
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/agentapi/v3/pkg/apis/loft/cluster/v1.EntityInfo", "github.com/loft-sh/api/v3/pkg/apis/management/v1.UserInfo"},
+			"github.com/loft-sh/agentapi/v3/pkg/apis/loft/cluster/v1.EntityInfo", "github.com/loft-sh/api/v3/pkg/apis/management/v1.UserInfo", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.AccessKeyScope"},
 	}
 }
 
@@ -21720,6 +21933,13 @@ func schema_pkg_apis_storage_v1_ClusterSpec(ref common.ReferenceCallback) common
 							Format:      "",
 						},
 					},
+					"unusable": {
+						SchemaProps: spec.SchemaProps{
+							Description: "If unusable is true, no spaces or virtual clusters can be scheduled on this cluster.",
+							Type:        []string{"boolean"},
+							Format:      "",
+						},
+					},
 					"access": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Access holds the access rights for users and teams",
@@ -23870,6 +24090,46 @@ func schema_pkg_apis_storage_v1_Runner(ref common.ReferenceCallback) common.Open
 	}
 }
 
+func schema_pkg_apis_storage_v1_RunnerClusterRef(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"cluster": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Cluster is the connected cluster the space will be created in",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"namespace": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Namespace is the namespace inside the connected cluster holding the space",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"persistentVolumeClaimTemplate": {
+						SchemaProps: spec.SchemaProps{
+							Description: "PersistentVolumeClaimTemplate holds additional options for the persistent volume claim",
+							Ref:         ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.RunnerPersistentVolumeClaimTemplate"),
+						},
+					},
+					"podTemplate": {
+						SchemaProps: spec.SchemaProps{
+							Description: "PodTemplate holds additional options for the runner pod",
+							Ref:         ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.RunnerPodTemplate"),
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			"github.com/loft-sh/api/v3/pkg/apis/storage/v1.RunnerPersistentVolumeClaimTemplate", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.RunnerPodTemplate"},
+	}
+}
+
 func schema_pkg_apis_storage_v1_RunnerList(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
@@ -23919,6 +24179,251 @@ func schema_pkg_apis_storage_v1_RunnerList(ref common.ReferenceCallback) common.
 	}
 }
 
+func schema_pkg_apis_storage_v1_RunnerPersistentVolumeClaimTemplate(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"metadata": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Metadata holds the template metadata",
+							Default:     map[string]interface{}{},
+							Ref:         ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.TemplateMetadata"),
+						},
+					},
+					"spec": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Spec holds the template spec",
+							Default:     map[string]interface{}{},
+							Ref:         ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.RunnerPersistentVolumeClaimTemplateSpec"),
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			"github.com/loft-sh/api/v3/pkg/apis/storage/v1.RunnerPersistentVolumeClaimTemplateSpec", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.TemplateMetadata"},
+	}
+}
+
+func schema_pkg_apis_storage_v1_RunnerPersistentVolumeClaimTemplateSpec(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"accessModes": {
+						SchemaProps: spec.SchemaProps{
+							Description: "accessModes contains the desired access modes the volume should have. More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes#access-modes-1",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: "",
+										Type:    []string{"string"},
+										Format:  "",
+									},
+								},
+							},
+						},
+					},
+					"storageClassName": {
+						SchemaProps: spec.SchemaProps{
+							Description: "storageClassName is the name of the StorageClass required by the claim. More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes#class-1",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"storageSize": {
+						SchemaProps: spec.SchemaProps{
+							Description: "storageSize is the size of the storage to reserve for the pvc",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+				},
+			},
+		},
+	}
+}
+
+func schema_pkg_apis_storage_v1_RunnerPodTemplate(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"metadata": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Metadata holds the template metadata",
+							Default:     map[string]interface{}{},
+							Ref:         ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.TemplateMetadata"),
+						},
+					},
+					"spec": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Spec holds the template spec",
+							Default:     map[string]interface{}{},
+							Ref:         ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.RunnerPodTemplateSpec"),
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			"github.com/loft-sh/api/v3/pkg/apis/storage/v1.RunnerPodTemplateSpec", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.TemplateMetadata"},
+	}
+}
+
+func schema_pkg_apis_storage_v1_RunnerPodTemplateSpec(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"image": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Runner pod image to use other than default",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"resource": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Resources requirements",
+							Default:     map[string]interface{}{},
+							Ref:         ref("k8s.io/api/core/v1.ResourceRequirements"),
+						},
+					},
+					"envFrom": {
+						SchemaProps: spec.SchemaProps{
+							Description: "List of sources to populate environment variables in the container. The keys defined within a source must be a C_IDENTIFIER. All invalid keys will be reported as an event when the container is starting. When a key exists in multiple sources, the value associated with the last source will take precedence. Values defined by an Env with a duplicate key will take precedence. Cannot be updated.",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref("k8s.io/api/core/v1.EnvFromSource"),
+									},
+								},
+							},
+						},
+					},
+					"env": {
+						SchemaProps: spec.SchemaProps{
+							Description: "List of environment variables to set in the container. Cannot be updated.",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref("k8s.io/api/core/v1.EnvVar"),
+									},
+								},
+							},
+						},
+					},
+					"nodeSelector": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Set the NodeSelector for the Runner Pod",
+							Type:        []string{"object"},
+							AdditionalProperties: &spec.SchemaOrBool{
+								Allows: true,
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: "",
+										Type:    []string{"string"},
+										Format:  "",
+									},
+								},
+							},
+						},
+					},
+					"affinity": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Set the Affinity for the Runner Pod",
+							Ref:         ref("k8s.io/api/core/v1.Affinity"),
+						},
+					},
+					"tolerations": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Set the Tolerations for the Runner Pod",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref("k8s.io/api/core/v1.Toleration"),
+									},
+								},
+							},
+						},
+					},
+					"volumeMounts": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Set Volume Mounts for the Runner Pod",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref("k8s.io/api/core/v1.VolumeMount"),
+									},
+								},
+							},
+						},
+					},
+					"volumes": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Set Volumes for the Runner Pod",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref("k8s.io/api/core/v1.Volume"),
+									},
+								},
+							},
+						},
+					},
+					"initContainers": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Set up Init Containers for the Runner",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref("k8s.io/api/core/v1.Container"),
+									},
+								},
+							},
+						},
+					},
+					"hostAliases": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Set host aliases for the Runner Pod",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref("k8s.io/api/core/v1.HostAlias"),
+									},
+								},
+							},
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			"k8s.io/api/core/v1.Affinity", "k8s.io/api/core/v1.Container", "k8s.io/api/core/v1.EnvFromSource", "k8s.io/api/core/v1.EnvVar", "k8s.io/api/core/v1.HostAlias", "k8s.io/api/core/v1.ResourceRequirements", "k8s.io/api/core/v1.Toleration", "k8s.io/api/core/v1.Volume", "k8s.io/api/core/v1.VolumeMount"},
+	}
+}
+
 func schema_pkg_apis_storage_v1_RunnerRef(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
@@ -23958,10 +24463,23 @@ func schema_pkg_apis_storage_v1_RunnerSpec(ref common.ReferenceCallback) common.
 							Format:      "",
 						},
 					},
+					"clusterRef": {
+						SchemaProps: spec.SchemaProps{
+							Description: "If ClusterRef is defined, Loft will schedule the runner on the given cluster.",
+							Ref:         ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.RunnerClusterRef"),
+						},
+					},
 					"owner": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Owner holds the owner of this object",
 							Ref:         ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.UserOrTeam"),
+						},
+					},
+					"unusable": {
+						SchemaProps: spec.SchemaProps{
+							Description: "If unusable is true, no DevPod workspaces can be scheduled on this runner.",
+							Type:        []string{"boolean"},
+							Format:      "",
 						},
 					},
 					"access": {
@@ -23982,7 +24500,7 @@ func schema_pkg_apis_storage_v1_RunnerSpec(ref common.ReferenceCallback) common.
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/v3/pkg/apis/storage/v1.Access", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.UserOrTeam"},
+			"github.com/loft-sh/api/v3/pkg/apis/storage/v1.Access", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.RunnerClusterRef", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.UserOrTeam"},
 	}
 }
 
@@ -23991,8 +24509,47 @@ func schema_pkg_apis_storage_v1_RunnerStatus(ref common.ReferenceCallback) commo
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
 				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"phase": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Phase describes the current phase the space instance is in",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"reason": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Reason describes the reason in machine-readable form",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"message": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Message describes the reason in human-readable form",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"conditions": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Conditions holds several conditions the virtual cluster might be in",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref("github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.Condition"),
+									},
+								},
+							},
+						},
+					},
+				},
 			},
 		},
+		Dependencies: []string{
+			"github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.Condition"},
 	}
 }
 
@@ -26802,6 +27359,13 @@ func schema_pkg_apis_storage_v1_VirtualClusterTemplateDefinition(ref common.Refe
 							Ref:         ref("github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.VirtualClusterAccessPoint"),
 						},
 					},
+					"forwardToken": {
+						SchemaProps: spec.SchemaProps{
+							Description: "ForwardToken signals the proxy to pass through the used token to the virtual Kubernetes api server and do a TokenReview there.",
+							Type:        []string{"boolean"},
+							Format:      "",
+						},
+					},
 					"spaceTemplate": {
 						SchemaProps: spec.SchemaProps{
 							Description: "SpaceTemplate holds the space template",
@@ -27693,6 +28257,14 @@ func schema_loft_sh_admin_services_pkg_server_License(ref common.ReferenceCallba
 						SchemaProps: spec.SchemaProps{
 							Description: "Analytics indicates the analytics endpoints and which requests should be sent to the analytics server.",
 							Ref:         ref("github.com/loft-sh/external-types/loft-sh/admin-services/pkg/server.Analytics"),
+						},
+					},
+					"domainToken": {
+						SchemaProps: spec.SchemaProps{
+							Description: "DomainToken holds the JWT with the URL that the Loft instance is publicly available on. (via Loft router)",
+							Default:     "",
+							Type:        []string{"string"},
+							Format:      "",
 						},
 					},
 				},

@@ -280,6 +280,9 @@ type OIDC struct {
 	// If true indicates that loft will act as an OIDC server
 	Enabled bool `json:"enabled,omitempty"`
 
+	// If true indicates that loft will allow wildcard '*' in client redirectURIs
+	WildcardRedirect bool `json:"wildcardRedirect,omitempty"`
+
 	// The clients that are allowed to request loft tokens
 	Clients []OIDCClient `json:"clients,omitempty"`
 }

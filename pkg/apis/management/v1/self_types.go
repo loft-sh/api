@@ -22,6 +22,9 @@ type Self struct {
 }
 
 type SelfSpec struct {
+	// AccessKey is an optional access key to use instead of the provided one
+	// +optional
+	AccessKey string `json:"accessKey,omitempty"`
 }
 
 type SelfStatus struct {
@@ -37,6 +40,10 @@ type SelfStatus struct {
 	// +optional
 	AccessKey string `json:"accessKey,omitempty"`
 
+	// The scope of the currently used access key
+	// +optional
+	AccessKeyScope *storagev1.AccessKeyScope `json:"accessKeyScope,omitempty"`
+
 	// The type of the currently used access key
 	// +optional
 	AccessKeyType storagev1.AccessKeyType `json:"accessKeyType,omitempty"`
@@ -44,6 +51,10 @@ type SelfStatus struct {
 	// The subject of the currently logged in user
 	// +optional
 	Subject string `json:"subject,omitempty"`
+
+	// UID is the user uid
+	// +optional
+	UID string `json:"uid,omitempty"`
 
 	// The groups of the currently logged in user
 	// +optional

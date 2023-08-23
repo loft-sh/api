@@ -147,6 +147,10 @@ type DevPodUpOptions struct {
 	// +optional
 	WebMode bool `json:"webMode,omitempty"`
 
+	// Debug includes debug logs.
+	// +optional
+	Debug bool `json:"debug,omitempty"`
+
 	// Options are the options to pass.
 	// +optional
 	Options string `json:"options,omitempty"`
