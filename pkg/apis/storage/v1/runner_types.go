@@ -130,8 +130,6 @@ type RunnerPodTemplateSpec struct {
 	// List of environment variables to set in the container.
 	// Cannot be updated.
 	// +optional
-	// +patchMergeKey=name
-	// +patchStrategy=merge
 	Env []corev1.EnvVar `json:"env,omitempty"`
 
 	// Set the NodeSelector for the Runner Pod

@@ -1952,8 +1952,9 @@ type LoftUpgradeStatus struct {
 }
 
 type OIDC struct {
-	Enabled bool
-	Clients []OIDCClient
+	Enabled          bool
+	WildcardRedirect bool
+	Clients          []OIDCClient
 }
 
 type OIDCClient struct {
@@ -2208,7 +2209,7 @@ type ResetAccessKeyStatus struct {
 }
 
 // +genclient
-// +genclient
+// +genclient:nonNamespaced
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
 
 type Runner struct {
@@ -2254,17 +2255,20 @@ type Self struct {
 }
 
 type SelfSpec struct {
+	AccessKey string
 }
 
 type SelfStatus struct {
-	User          *UserInfo
-	Team          *clusterv1.EntityInfo
-	AccessKey     string
-	AccessKeyType storagev1.AccessKeyType
-	Subject       string
-	Groups        []string
-	IntercomHash  string
-	InstanceID    string
+	User           *UserInfo
+	Team           *clusterv1.EntityInfo
+	AccessKey      string
+	AccessKeyScope *storagev1.AccessKeyScope
+	AccessKeyType  storagev1.AccessKeyType
+	Subject        string
+	UID            string
+	Groups         []string
+	IntercomHash   string
+	InstanceID     string
 }
 
 // +genclient

@@ -5069,6 +5069,11 @@ func (in *SelfStatus) DeepCopyInto(out *SelfStatus) {
 		*out = new(clusterv1.EntityInfo)
 		**out = **in
 	}
+	if in.AccessKeyScope != nil {
+		in, out := &in.AccessKeyScope, &out.AccessKeyScope
+		*out = new(storagev1.AccessKeyScope)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.Groups != nil {
 		in, out := &in.Groups, &out.Groups
 		*out = make([]string, len(*in))

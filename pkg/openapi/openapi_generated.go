@@ -12268,6 +12268,13 @@ func schema_pkg_apis_management_v1_OIDC(ref common.ReferenceCallback) common.Ope
 							Format:      "",
 						},
 					},
+					"wildcardRedirect": {
+						SchemaProps: spec.SchemaProps{
+							Description: "If true indicates that loft will allow wildcard '*' in client redirectURIs",
+							Type:        []string{"boolean"},
+							Format:      "",
+						},
+					},
 					"clients": {
 						SchemaProps: spec.SchemaProps{
 							Description: "The clients that are allowed to request loft tokens",
@@ -15254,6 +15261,15 @@ func schema_pkg_apis_management_v1_SelfSpec(ref common.ReferenceCallback) common
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
 				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"accessKey": {
+						SchemaProps: spec.SchemaProps{
+							Description: "AccessKey is an optional access key to use instead of the provided one",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+				},
 			},
 		},
 	}
@@ -15284,6 +15300,12 @@ func schema_pkg_apis_management_v1_SelfStatus(ref common.ReferenceCallback) comm
 							Format:      "",
 						},
 					},
+					"accessKeyScope": {
+						SchemaProps: spec.SchemaProps{
+							Description: "The scope of the currently used access key",
+							Ref:         ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.AccessKeyScope"),
+						},
+					},
 					"accessKeyType": {
 						SchemaProps: spec.SchemaProps{
 							Description: "The type of the currently used access key",
@@ -15294,6 +15316,13 @@ func schema_pkg_apis_management_v1_SelfStatus(ref common.ReferenceCallback) comm
 					"subject": {
 						SchemaProps: spec.SchemaProps{
 							Description: "The subject of the currently logged in user",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"uid": {
+						SchemaProps: spec.SchemaProps{
+							Description: "UID is the user uid",
 							Type:        []string{"string"},
 							Format:      "",
 						},
@@ -15333,7 +15362,7 @@ func schema_pkg_apis_management_v1_SelfStatus(ref common.ReferenceCallback) comm
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/agentapi/v3/pkg/apis/loft/cluster/v1.EntityInfo", "github.com/loft-sh/api/v3/pkg/apis/management/v1.UserInfo"},
+			"github.com/loft-sh/agentapi/v3/pkg/apis/loft/cluster/v1.EntityInfo", "github.com/loft-sh/api/v3/pkg/apis/management/v1.UserInfo", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.AccessKeyScope"},
 	}
 }
 
@@ -24261,12 +24290,6 @@ func schema_pkg_apis_storage_v1_RunnerPodTemplateSpec(ref common.ReferenceCallba
 						},
 					},
 					"env": {
-						VendorExtensible: spec.VendorExtensible{
-							Extensions: spec.Extensions{
-								"x-kubernetes-patch-merge-key": "name",
-								"x-kubernetes-patch-strategy":  "merge",
-							},
-						},
 						SchemaProps: spec.SchemaProps{
 							Description: "List of environment variables to set in the container. Cannot be updated.",
 							Type:        []string{"array"},

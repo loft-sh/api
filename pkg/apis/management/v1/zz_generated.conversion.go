@@ -6028,6 +6028,7 @@ func Convert_management_LoftUpgradeStatus_To_v1_LoftUpgradeStatus(in *management
 
 func autoConvert_v1_OIDC_To_management_OIDC(in *OIDC, out *management.OIDC, s conversion.Scope) error {
 	out.Enabled = in.Enabled
+	out.WildcardRedirect = in.WildcardRedirect
 	out.Clients = *(*[]management.OIDCClient)(unsafe.Pointer(&in.Clients))
 	return nil
 }
@@ -6039,6 +6040,7 @@ func Convert_v1_OIDC_To_management_OIDC(in *OIDC, out *management.OIDC, s conver
 
 func autoConvert_management_OIDC_To_v1_OIDC(in *management.OIDC, out *OIDC, s conversion.Scope) error {
 	out.Enabled = in.Enabled
+	out.WildcardRedirect = in.WildcardRedirect
 	out.Clients = *(*[]OIDCClient)(unsafe.Pointer(&in.Clients))
 	return nil
 }
@@ -7507,6 +7509,7 @@ func Convert_management_SelfList_To_v1_SelfList(in *management.SelfList, out *Se
 }
 
 func autoConvert_v1_SelfSpec_To_management_SelfSpec(in *SelfSpec, out *management.SelfSpec, s conversion.Scope) error {
+	out.AccessKey = in.AccessKey
 	return nil
 }
 
@@ -7516,6 +7519,7 @@ func Convert_v1_SelfSpec_To_management_SelfSpec(in *SelfSpec, out *management.Se
 }
 
 func autoConvert_management_SelfSpec_To_v1_SelfSpec(in *management.SelfSpec, out *SelfSpec, s conversion.Scope) error {
+	out.AccessKey = in.AccessKey
 	return nil
 }
 
@@ -7528,8 +7532,10 @@ func autoConvert_v1_SelfStatus_To_management_SelfStatus(in *SelfStatus, out *man
 	out.User = (*management.UserInfo)(unsafe.Pointer(in.User))
 	out.Team = (*clusterv1.EntityInfo)(unsafe.Pointer(in.Team))
 	out.AccessKey = in.AccessKey
+	out.AccessKeyScope = (*storagev1.AccessKeyScope)(unsafe.Pointer(in.AccessKeyScope))
 	out.AccessKeyType = storagev1.AccessKeyType(in.AccessKeyType)
 	out.Subject = in.Subject
+	out.UID = in.UID
 	out.Groups = *(*[]string)(unsafe.Pointer(&in.Groups))
 	out.IntercomHash = in.IntercomHash
 	out.InstanceID = in.InstanceID
@@ -7545,8 +7551,10 @@ func autoConvert_management_SelfStatus_To_v1_SelfStatus(in *management.SelfStatu
 	out.User = (*UserInfo)(unsafe.Pointer(in.User))
 	out.Team = (*clusterv1.EntityInfo)(unsafe.Pointer(in.Team))
 	out.AccessKey = in.AccessKey
+	out.AccessKeyScope = (*storagev1.AccessKeyScope)(unsafe.Pointer(in.AccessKeyScope))
 	out.AccessKeyType = storagev1.AccessKeyType(in.AccessKeyType)
 	out.Subject = in.Subject
+	out.UID = in.UID
 	out.Groups = *(*[]string)(unsafe.Pointer(&in.Groups))
 	out.IntercomHash = in.IntercomHash
 	out.InstanceID = in.InstanceID
