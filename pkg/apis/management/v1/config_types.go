@@ -57,7 +57,7 @@ type ConfigStatus struct {
 
 	// UISettings holds the settings for modifying the Loft user interface
 	// +optional
-	UISettings *uiv1.UISettingsSpec `json:"uiSettings,omitempty"`
+	UISettings *uiv1.UISettingsConfig `json:"uiSettings,omitempty"`
 
 	// VaultIntegration holds the vault integration configuration
 	// +optional

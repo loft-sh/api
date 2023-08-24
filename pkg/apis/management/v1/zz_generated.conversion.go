@@ -4429,7 +4429,7 @@ func autoConvert_v1_ConfigStatus_To_management_ConfigStatus(in *ConfigStatus, ou
 	out.Audit = (*management.Audit)(unsafe.Pointer(in.Audit))
 	out.LoftHost = in.LoftHost
 	out.DevPodSubDomain = in.DevPodSubDomain
-	out.UISettings = (*uiv1.UISettingsSpec)(unsafe.Pointer(in.UISettings))
+	out.UISettings = (*uiv1.UISettingsConfig)(unsafe.Pointer(in.UISettings))
 	out.VaultIntegration = (*storagev1.VaultIntegrationSpec)(unsafe.Pointer(in.VaultIntegration))
 	return nil
 }
@@ -4448,7 +4448,7 @@ func autoConvert_management_ConfigStatus_To_v1_ConfigStatus(in *management.Confi
 	out.Audit = (*Audit)(unsafe.Pointer(in.Audit))
 	out.LoftHost = in.LoftHost
 	out.DevPodSubDomain = in.DevPodSubDomain
-	out.UISettings = (*uiv1.UISettingsSpec)(unsafe.Pointer(in.UISettings))
+	out.UISettings = (*uiv1.UISettingsConfig)(unsafe.Pointer(in.UISettings))
 	out.VaultIntegration = (*storagev1.VaultIntegrationSpec)(unsafe.Pointer(in.VaultIntegration))
 	return nil
 }
