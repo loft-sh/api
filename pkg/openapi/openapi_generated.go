@@ -540,6 +540,7 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.WorkspaceStatusResult":                              schema_pkg_apis_storage_v1_WorkspaceStatusResult(ref),
 		"github.com/loft-sh/api/v3/pkg/apis/ui/v1.NavBarButton":                                            schema_pkg_apis_ui_v1_NavBarButton(ref),
 		"github.com/loft-sh/api/v3/pkg/apis/ui/v1.UISettings":                                              schema_pkg_apis_ui_v1_UISettings(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/ui/v1.UISettingsConfig":                                        schema_pkg_apis_ui_v1_UISettingsConfig(ref),
 		"github.com/loft-sh/api/v3/pkg/apis/ui/v1.UISettingsSpec":                                          schema_pkg_apis_ui_v1_UISettingsSpec(ref),
 		"github.com/loft-sh/api/v3/pkg/apis/ui/v1.UISettingsStatus":                                        schema_pkg_apis_ui_v1_UISettingsStatus(ref),
 		"github.com/loft-sh/api/v3/pkg/apis/virtualcluster/v1.HelmRelease":                                 schema_pkg_apis_virtualcluster_v1_HelmRelease(ref),
@@ -9621,7 +9622,7 @@ func schema_pkg_apis_management_v1_ConfigStatus(ref common.ReferenceCallback) co
 					"uiSettings": {
 						SchemaProps: spec.SchemaProps{
 							Description: "UISettings holds the settings for modifying the Loft user interface",
-							Ref:         ref("github.com/loft-sh/api/v3/pkg/apis/ui/v1.UISettingsSpec"),
+							Ref:         ref("github.com/loft-sh/api/v3/pkg/apis/ui/v1.UISettingsConfig"),
 						},
 					},
 					"vault": {
@@ -9634,7 +9635,7 @@ func schema_pkg_apis_management_v1_ConfigStatus(ref common.ReferenceCallback) co
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/v3/pkg/apis/management/v1.Apps", "github.com/loft-sh/api/v3/pkg/apis/management/v1.Audit", "github.com/loft-sh/api/v3/pkg/apis/management/v1.Authentication", "github.com/loft-sh/api/v3/pkg/apis/management/v1.OIDC", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.VaultIntegrationSpec", "github.com/loft-sh/api/v3/pkg/apis/ui/v1.UISettingsSpec"},
+			"github.com/loft-sh/api/v3/pkg/apis/management/v1.Apps", "github.com/loft-sh/api/v3/pkg/apis/management/v1.Audit", "github.com/loft-sh/api/v3/pkg/apis/management/v1.Authentication", "github.com/loft-sh/api/v3/pkg/apis/management/v1.OIDC", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.VaultIntegrationSpec", "github.com/loft-sh/api/v3/pkg/apis/ui/v1.UISettingsConfig"},
 	}
 }
 
@@ -27755,12 +27756,11 @@ func schema_pkg_apis_ui_v1_UISettings(ref common.ReferenceCallback) common.OpenA
 	}
 }
 
-func schema_pkg_apis_ui_v1_UISettingsSpec(ref common.ReferenceCallback) common.OpenAPIDefinition {
+func schema_pkg_apis_ui_v1_UISettingsConfig(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
-				Description: "UISettingsSpec holds the specification",
-				Type:        []string{"object"},
+				Type: []string{"object"},
 				Properties: map[string]spec.Schema{
 					"loftVersion": {
 						SchemaProps: spec.SchemaProps{
@@ -27771,7 +27771,14 @@ func schema_pkg_apis_ui_v1_UISettingsSpec(ref common.ReferenceCallback) common.O
 					},
 					"logoURL": {
 						SchemaProps: spec.SchemaProps{
-							Description: "LogoURL is url pointing to the logo to use in the Loft UI, this path must be accessible from clients accessing the Loft UI!",
+							Description: "LogoURL is url pointing to the logo to use in the Loft UI. This path must be accessible for clients accessing the Loft UI!",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"logoWithWordmarkURL": {
+						SchemaProps: spec.SchemaProps{
+							Description: "LogoWithWordmarkURL is url pointing to the logo, including the wordmark, to use in the Loft UI. This path must be accessible for clients accessing the Loft UI!",
 							Type:        []string{"string"},
 							Format:      "",
 						},
@@ -27846,6 +27853,121 @@ func schema_pkg_apis_ui_v1_UISettingsSpec(ref common.ReferenceCallback) common.O
 									},
 								},
 							},
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			"github.com/loft-sh/api/v3/pkg/apis/ui/v1.NavBarButton"},
+	}
+}
+
+func schema_pkg_apis_ui_v1_UISettingsSpec(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "UISettingsSpec holds the specification",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"loftVersion": {
+						SchemaProps: spec.SchemaProps{
+							Description: "LoftVersion holds the current loft version",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"logoURL": {
+						SchemaProps: spec.SchemaProps{
+							Description: "LogoURL is url pointing to the logo to use in the Loft UI. This path must be accessible for clients accessing the Loft UI!",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"logoWithWordmarkURL": {
+						SchemaProps: spec.SchemaProps{
+							Description: "LogoWithWordmarkURL is url pointing to the logo, including the wordmark, to use in the Loft UI. This path must be accessible for clients accessing the Loft UI!",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"legalTemplate": {
+						SchemaProps: spec.SchemaProps{
+							Description: "LegalTemplate is a text (html) string containing the legal template to prompt to users when authenticating to Loft",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"primaryColor": {
+						SchemaProps: spec.SchemaProps{
+							Description: "PrimaryColor is the color value (ex: \"#12345\") to use as the primary color",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"sidebarColor": {
+						SchemaProps: spec.SchemaProps{
+							Description: "SidebarColor is the color value (ex: \"#12345\") to use for the sidebar",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"accentColor": {
+						SchemaProps: spec.SchemaProps{
+							Description: "AccentColor is the color value (ex: \"#12345\") to use for the accent",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"customCss": {
+						SchemaProps: spec.SchemaProps{
+							Description: "CustomCSS holds URLs with custom css files that should be included when loading the UI",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: "",
+										Type:    []string{"string"},
+										Format:  "",
+									},
+								},
+							},
+						},
+					},
+					"customJavaScript": {
+						SchemaProps: spec.SchemaProps{
+							Description: "CustomJavaScript holds URLs with custom js files that should be included when loading the UI",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: "",
+										Type:    []string{"string"},
+										Format:  "",
+									},
+								},
+							},
+						},
+					},
+					"navBarButtons": {
+						SchemaProps: spec.SchemaProps{
+							Description: "NavBarButtons holds extra nav bar buttons",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/ui/v1.NavBarButton"),
+									},
+								},
+							},
+						},
+					},
+					"productName": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Name is the name of the product",
+							Type:        []string{"string"},
+							Format:      "",
 						},
 					},
 				},

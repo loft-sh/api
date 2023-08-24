@@ -1814,7 +1814,7 @@ func (in *ConfigStatus) DeepCopyInto(out *ConfigStatus) {
 	}
 	if in.UISettings != nil {
 		in, out := &in.UISettings, &out.UISettings
-		*out = new(uiv1.UISettingsSpec)
+		*out = new(uiv1.UISettingsConfig)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.VaultIntegration != nil {

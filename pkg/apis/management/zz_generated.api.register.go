@@ -1483,7 +1483,7 @@ type AuthenticationSAML struct {
 }
 
 // +genclient
-// +genclient
+// +genclient:nonNamespaced
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
 
 type Cluster struct {
@@ -1667,7 +1667,7 @@ type ConfigStatus struct {
 	Audit            *Audit
 	LoftHost         string
 	DevPodSubDomain  string
-	UISettings       *uiv1.UISettingsSpec
+	UISettings       *uiv1.UISettingsConfig
 	VaultIntegration *storagev1.VaultIntegrationSpec
 }
 
