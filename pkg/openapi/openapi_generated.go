@@ -10410,11 +10410,17 @@ func schema_pkg_apis_management_v1_DevPodWorkspaceInstanceStatus(ref common.Refe
 							Format:      "",
 						},
 					},
+					"sleepModeConfig": {
+						SchemaProps: spec.SchemaProps{
+							Description: "SleepModeConfig is the sleep mode config of the workspace. This will only be shown in the front end.",
+							Ref:         ref("github.com/loft-sh/agentapi/v3/pkg/apis/loft/cluster/v1.SleepModeConfig"),
+						},
+					},
 				},
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.Condition", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.DevPodWorkspaceTemplateDefinition"},
+			"github.com/loft-sh/agentapi/v3/pkg/apis/loft/cluster/v1.SleepModeConfig", "github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.Condition", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.DevPodWorkspaceTemplateDefinition"},
 	}
 }
 
@@ -14031,6 +14037,12 @@ func schema_pkg_apis_management_v1_ProjectSecretSpec(ref common.ReferenceCallbac
 							Format:      "",
 						},
 					},
+					"owner": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Owner holds the owner of this object",
+							Ref:         ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.UserOrTeam"),
+						},
+					},
 					"data": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Data contains the secret data. Each key must consist of alphanumeric characters, '-', '_' or '.'. The serialized form of the secret data is a base64 encoded string, representing the arbitrary (possibly non-string) data value here. Described in https://tools.ietf.org/html/rfc4648#section-4",
@@ -14046,9 +14058,25 @@ func schema_pkg_apis_management_v1_ProjectSecretSpec(ref common.ReferenceCallbac
 							},
 						},
 					},
+					"access": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Access holds the access rights for users and teams",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.Access"),
+									},
+								},
+							},
+						},
+					},
 				},
 			},
 		},
+		Dependencies: []string{
+			"github.com/loft-sh/api/v3/pkg/apis/storage/v1.Access", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.UserOrTeam"},
 	}
 }
 

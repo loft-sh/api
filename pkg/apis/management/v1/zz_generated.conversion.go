@@ -4926,6 +4926,7 @@ func Convert_management_DevPodWorkspaceInstanceSshList_To_v1_DevPodWorkspaceInst
 
 func autoConvert_v1_DevPodWorkspaceInstanceStatus_To_management_DevPodWorkspaceInstanceStatus(in *DevPodWorkspaceInstanceStatus, out *management.DevPodWorkspaceInstanceStatus, s conversion.Scope) error {
 	out.DevPodWorkspaceInstanceStatus = in.DevPodWorkspaceInstanceStatus
+	out.SleepModeConfig = (*clusterv1.SleepModeConfig)(unsafe.Pointer(in.SleepModeConfig))
 	return nil
 }
 
@@ -4936,6 +4937,7 @@ func Convert_v1_DevPodWorkspaceInstanceStatus_To_management_DevPodWorkspaceInsta
 
 func autoConvert_management_DevPodWorkspaceInstanceStatus_To_v1_DevPodWorkspaceInstanceStatus(in *management.DevPodWorkspaceInstanceStatus, out *DevPodWorkspaceInstanceStatus, s conversion.Scope) error {
 	out.DevPodWorkspaceInstanceStatus = in.DevPodWorkspaceInstanceStatus
+	out.SleepModeConfig = (*clusterv1.SleepModeConfig)(unsafe.Pointer(in.SleepModeConfig))
 	return nil
 }
 
@@ -6949,7 +6951,9 @@ func Convert_management_ProjectSecretList_To_v1_ProjectSecretList(in *management
 func autoConvert_v1_ProjectSecretSpec_To_management_ProjectSecretSpec(in *ProjectSecretSpec, out *management.ProjectSecretSpec, s conversion.Scope) error {
 	out.DisplayName = in.DisplayName
 	out.Description = in.Description
+	out.Owner = (*storagev1.UserOrTeam)(unsafe.Pointer(in.Owner))
 	out.Data = *(*map[string][]byte)(unsafe.Pointer(&in.Data))
+	out.Access = *(*[]storagev1.Access)(unsafe.Pointer(&in.Access))
 	return nil
 }
 
@@ -6961,7 +6965,9 @@ func Convert_v1_ProjectSecretSpec_To_management_ProjectSecretSpec(in *ProjectSec
 func autoConvert_management_ProjectSecretSpec_To_v1_ProjectSecretSpec(in *management.ProjectSecretSpec, out *ProjectSecretSpec, s conversion.Scope) error {
 	out.DisplayName = in.DisplayName
 	out.Description = in.Description
+	out.Owner = (*storagev1.UserOrTeam)(unsafe.Pointer(in.Owner))
 	out.Data = *(*map[string][]byte)(unsafe.Pointer(&in.Data))
+	out.Access = *(*[]storagev1.Access)(unsafe.Pointer(&in.Access))
 	return nil
 }
 
