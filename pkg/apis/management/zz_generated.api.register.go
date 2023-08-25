@@ -2143,7 +2143,9 @@ type ProjectSecret struct {
 type ProjectSecretSpec struct {
 	DisplayName string
 	Description string
+	Owner       *storagev1.UserOrTeam
 	Data        map[string][]byte
+	Access      []storagev1.Access
 }
 
 type ProjectSecretStatus struct {
