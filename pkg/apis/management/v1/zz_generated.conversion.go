@@ -4926,6 +4926,7 @@ func Convert_management_DevPodWorkspaceInstanceSshList_To_v1_DevPodWorkspaceInst
 
 func autoConvert_v1_DevPodWorkspaceInstanceStatus_To_management_DevPodWorkspaceInstanceStatus(in *DevPodWorkspaceInstanceStatus, out *management.DevPodWorkspaceInstanceStatus, s conversion.Scope) error {
 	out.DevPodWorkspaceInstanceStatus = in.DevPodWorkspaceInstanceStatus
+	out.SleepModeConfig = (*clusterv1.SleepModeConfig)(unsafe.Pointer(in.SleepModeConfig))
 	return nil
 }
 
@@ -4936,6 +4937,7 @@ func Convert_v1_DevPodWorkspaceInstanceStatus_To_management_DevPodWorkspaceInsta
 
 func autoConvert_management_DevPodWorkspaceInstanceStatus_To_v1_DevPodWorkspaceInstanceStatus(in *management.DevPodWorkspaceInstanceStatus, out *DevPodWorkspaceInstanceStatus, s conversion.Scope) error {
 	out.DevPodWorkspaceInstanceStatus = in.DevPodWorkspaceInstanceStatus
+	out.SleepModeConfig = (*clusterv1.SleepModeConfig)(unsafe.Pointer(in.SleepModeConfig))
 	return nil
 }
 

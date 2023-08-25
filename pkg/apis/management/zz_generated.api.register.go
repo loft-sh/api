@@ -1483,7 +1483,7 @@ type AuthenticationSAML struct {
 }
 
 // +genclient
-// +genclient:nonNamespaced
+// +genclient
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
 
 type Cluster struct {
@@ -1724,6 +1724,7 @@ type DevPodWorkspaceInstanceSsh struct {
 
 type DevPodWorkspaceInstanceStatus struct {
 	storagev1.DevPodWorkspaceInstanceStatus
+	SleepModeConfig *clusterv1.SleepModeConfig
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object

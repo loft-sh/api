@@ -2266,6 +2266,11 @@ func (in *DevPodWorkspaceInstanceSshList) DeepCopyObject() runtime.Object {
 func (in *DevPodWorkspaceInstanceStatus) DeepCopyInto(out *DevPodWorkspaceInstanceStatus) {
 	*out = *in
 	in.DevPodWorkspaceInstanceStatus.DeepCopyInto(&out.DevPodWorkspaceInstanceStatus)
+	if in.SleepModeConfig != nil {
+		in, out := &in.SleepModeConfig, &out.SleepModeConfig
+		*out = new(clusterv1.SleepModeConfig)
+		(*in).DeepCopyInto(*out)
+	}
 	return
 }
 

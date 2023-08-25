@@ -10410,11 +10410,17 @@ func schema_pkg_apis_management_v1_DevPodWorkspaceInstanceStatus(ref common.Refe
 							Format:      "",
 						},
 					},
+					"sleepModeConfig": {
+						SchemaProps: spec.SchemaProps{
+							Description: "SleepModeConfig is the sleep mode config of the workspace. This will only be shown in the front end.",
+							Ref:         ref("github.com/loft-sh/agentapi/v3/pkg/apis/loft/cluster/v1.SleepModeConfig"),
+						},
+					},
 				},
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.Condition", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.DevPodWorkspaceTemplateDefinition"},
+			"github.com/loft-sh/agentapi/v3/pkg/apis/loft/cluster/v1.SleepModeConfig", "github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.Condition", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.DevPodWorkspaceTemplateDefinition"},
 	}
 }
 
