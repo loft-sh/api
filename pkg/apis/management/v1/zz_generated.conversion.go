@@ -4429,7 +4429,7 @@ func autoConvert_v1_ConfigStatus_To_management_ConfigStatus(in *ConfigStatus, ou
 	out.Audit = (*management.Audit)(unsafe.Pointer(in.Audit))
 	out.LoftHost = in.LoftHost
 	out.DevPodSubDomain = in.DevPodSubDomain
-	out.UISettings = (*uiv1.UISettingsSpec)(unsafe.Pointer(in.UISettings))
+	out.UISettings = (*uiv1.UISettingsConfig)(unsafe.Pointer(in.UISettings))
 	out.VaultIntegration = (*storagev1.VaultIntegrationSpec)(unsafe.Pointer(in.VaultIntegration))
 	return nil
 }
@@ -4448,7 +4448,7 @@ func autoConvert_management_ConfigStatus_To_v1_ConfigStatus(in *management.Confi
 	out.Audit = (*Audit)(unsafe.Pointer(in.Audit))
 	out.LoftHost = in.LoftHost
 	out.DevPodSubDomain = in.DevPodSubDomain
-	out.UISettings = (*uiv1.UISettingsSpec)(unsafe.Pointer(in.UISettings))
+	out.UISettings = (*uiv1.UISettingsConfig)(unsafe.Pointer(in.UISettings))
 	out.VaultIntegration = (*storagev1.VaultIntegrationSpec)(unsafe.Pointer(in.VaultIntegration))
 	return nil
 }
@@ -4926,6 +4926,7 @@ func Convert_management_DevPodWorkspaceInstanceSshList_To_v1_DevPodWorkspaceInst
 
 func autoConvert_v1_DevPodWorkspaceInstanceStatus_To_management_DevPodWorkspaceInstanceStatus(in *DevPodWorkspaceInstanceStatus, out *management.DevPodWorkspaceInstanceStatus, s conversion.Scope) error {
 	out.DevPodWorkspaceInstanceStatus = in.DevPodWorkspaceInstanceStatus
+	out.SleepModeConfig = (*clusterv1.SleepModeConfig)(unsafe.Pointer(in.SleepModeConfig))
 	return nil
 }
 
@@ -4936,6 +4937,7 @@ func Convert_v1_DevPodWorkspaceInstanceStatus_To_management_DevPodWorkspaceInsta
 
 func autoConvert_management_DevPodWorkspaceInstanceStatus_To_v1_DevPodWorkspaceInstanceStatus(in *management.DevPodWorkspaceInstanceStatus, out *DevPodWorkspaceInstanceStatus, s conversion.Scope) error {
 	out.DevPodWorkspaceInstanceStatus = in.DevPodWorkspaceInstanceStatus
+	out.SleepModeConfig = (*clusterv1.SleepModeConfig)(unsafe.Pointer(in.SleepModeConfig))
 	return nil
 }
 
@@ -6028,6 +6030,7 @@ func Convert_management_LoftUpgradeStatus_To_v1_LoftUpgradeStatus(in *management
 
 func autoConvert_v1_OIDC_To_management_OIDC(in *OIDC, out *management.OIDC, s conversion.Scope) error {
 	out.Enabled = in.Enabled
+	out.WildcardRedirect = in.WildcardRedirect
 	out.Clients = *(*[]management.OIDCClient)(unsafe.Pointer(&in.Clients))
 	return nil
 }
@@ -6039,6 +6042,7 @@ func Convert_v1_OIDC_To_management_OIDC(in *OIDC, out *management.OIDC, s conver
 
 func autoConvert_management_OIDC_To_v1_OIDC(in *management.OIDC, out *OIDC, s conversion.Scope) error {
 	out.Enabled = in.Enabled
+	out.WildcardRedirect = in.WildcardRedirect
 	out.Clients = *(*[]OIDCClient)(unsafe.Pointer(&in.Clients))
 	return nil
 }
@@ -6947,7 +6951,9 @@ func Convert_management_ProjectSecretList_To_v1_ProjectSecretList(in *management
 func autoConvert_v1_ProjectSecretSpec_To_management_ProjectSecretSpec(in *ProjectSecretSpec, out *management.ProjectSecretSpec, s conversion.Scope) error {
 	out.DisplayName = in.DisplayName
 	out.Description = in.Description
+	out.Owner = (*storagev1.UserOrTeam)(unsafe.Pointer(in.Owner))
 	out.Data = *(*map[string][]byte)(unsafe.Pointer(&in.Data))
+	out.Access = *(*[]storagev1.Access)(unsafe.Pointer(&in.Access))
 	return nil
 }
 
@@ -6959,7 +6965,9 @@ func Convert_v1_ProjectSecretSpec_To_management_ProjectSecretSpec(in *ProjectSec
 func autoConvert_management_ProjectSecretSpec_To_v1_ProjectSecretSpec(in *management.ProjectSecretSpec, out *ProjectSecretSpec, s conversion.Scope) error {
 	out.DisplayName = in.DisplayName
 	out.Description = in.Description
+	out.Owner = (*storagev1.UserOrTeam)(unsafe.Pointer(in.Owner))
 	out.Data = *(*map[string][]byte)(unsafe.Pointer(&in.Data))
+	out.Access = *(*[]storagev1.Access)(unsafe.Pointer(&in.Access))
 	return nil
 }
 
@@ -7507,6 +7515,7 @@ func Convert_management_SelfList_To_v1_SelfList(in *management.SelfList, out *Se
 }
 
 func autoConvert_v1_SelfSpec_To_management_SelfSpec(in *SelfSpec, out *management.SelfSpec, s conversion.Scope) error {
+	out.AccessKey = in.AccessKey
 	return nil
 }
 
@@ -7516,6 +7525,7 @@ func Convert_v1_SelfSpec_To_management_SelfSpec(in *SelfSpec, out *management.Se
 }
 
 func autoConvert_management_SelfSpec_To_v1_SelfSpec(in *management.SelfSpec, out *SelfSpec, s conversion.Scope) error {
+	out.AccessKey = in.AccessKey
 	return nil
 }
 
@@ -7528,8 +7538,10 @@ func autoConvert_v1_SelfStatus_To_management_SelfStatus(in *SelfStatus, out *man
 	out.User = (*management.UserInfo)(unsafe.Pointer(in.User))
 	out.Team = (*clusterv1.EntityInfo)(unsafe.Pointer(in.Team))
 	out.AccessKey = in.AccessKey
+	out.AccessKeyScope = (*storagev1.AccessKeyScope)(unsafe.Pointer(in.AccessKeyScope))
 	out.AccessKeyType = storagev1.AccessKeyType(in.AccessKeyType)
 	out.Subject = in.Subject
+	out.UID = in.UID
 	out.Groups = *(*[]string)(unsafe.Pointer(&in.Groups))
 	out.IntercomHash = in.IntercomHash
 	out.InstanceID = in.InstanceID
@@ -7545,8 +7557,10 @@ func autoConvert_management_SelfStatus_To_v1_SelfStatus(in *management.SelfStatu
 	out.User = (*UserInfo)(unsafe.Pointer(in.User))
 	out.Team = (*clusterv1.EntityInfo)(unsafe.Pointer(in.Team))
 	out.AccessKey = in.AccessKey
+	out.AccessKeyScope = (*storagev1.AccessKeyScope)(unsafe.Pointer(in.AccessKeyScope))
 	out.AccessKeyType = storagev1.AccessKeyType(in.AccessKeyType)
 	out.Subject = in.Subject
+	out.UID = in.UID
 	out.Groups = *(*[]string)(unsafe.Pointer(&in.Groups))
 	out.IntercomHash = in.IntercomHash
 	out.InstanceID = in.InstanceID

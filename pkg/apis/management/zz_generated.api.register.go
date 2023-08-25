@@ -1667,7 +1667,7 @@ type ConfigStatus struct {
 	Audit            *Audit
 	LoftHost         string
 	DevPodSubDomain  string
-	UISettings       *uiv1.UISettingsSpec
+	UISettings       *uiv1.UISettingsConfig
 	VaultIntegration *storagev1.VaultIntegrationSpec
 }
 
@@ -1724,6 +1724,7 @@ type DevPodWorkspaceInstanceSsh struct {
 
 type DevPodWorkspaceInstanceStatus struct {
 	storagev1.DevPodWorkspaceInstanceStatus
+	SleepModeConfig *clusterv1.SleepModeConfig
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -1952,8 +1953,9 @@ type LoftUpgradeStatus struct {
 }
 
 type OIDC struct {
-	Enabled bool
-	Clients []OIDCClient
+	Enabled          bool
+	WildcardRedirect bool
+	Clients          []OIDCClient
 }
 
 type OIDCClient struct {
@@ -2141,7 +2143,9 @@ type ProjectSecret struct {
 type ProjectSecretSpec struct {
 	DisplayName string
 	Description string
+	Owner       *storagev1.UserOrTeam
 	Data        map[string][]byte
+	Access      []storagev1.Access
 }
 
 type ProjectSecretStatus struct {
@@ -2254,17 +2258,20 @@ type Self struct {
 }
 
 type SelfSpec struct {
+	AccessKey string
 }
 
 type SelfStatus struct {
-	User          *UserInfo
-	Team          *clusterv1.EntityInfo
-	AccessKey     string
-	AccessKeyType storagev1.AccessKeyType
-	Subject       string
-	Groups        []string
-	IntercomHash  string
-	InstanceID    string
+	User           *UserInfo
+	Team           *clusterv1.EntityInfo
+	AccessKey      string
+	AccessKeyScope *storagev1.AccessKeyScope
+	AccessKeyType  storagev1.AccessKeyType
+	Subject        string
+	UID            string
+	Groups         []string
+	IntercomHash   string
+	InstanceID     string
 }
 
 // +genclient

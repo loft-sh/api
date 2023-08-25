@@ -2,6 +2,12 @@ package v1
 
 import metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 
+const (
+	ProductNameLoft        = "Loft"
+	ProductNameVClusterPro = "vCluster Pro"
+	ProductNameDevPodPro   = "DevPod Pro"
+)
+
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
 
 // UISettings holds the loft ui configuration settings
@@ -16,13 +22,25 @@ type UISettings struct {
 
 // UISettingsSpec holds the specification
 type UISettingsSpec struct {
+	UISettingsConfig `json:",inline"`
+
+	// Name is the name of the product
+	// +optional
+	ProductName string `json:"productName,omitempty"`
+}
+
+type UISettingsConfig struct {
 	// LoftVersion holds the current loft version
 	// +optional
 	LoftVersion string `json:"loftVersion,omitempty"`
-	// LogoURL is url pointing to the logo to use in the Loft UI, this path must be accessible from clients accessing
+	// LogoURL is url pointing to the logo to use in the Loft UI. This path must be accessible for clients accessing
 	// the Loft UI!
 	// +optional
 	LogoURL string `json:"logoURL,omitempty"`
+	// LogoWithWordmarkURL is url pointing to the logo, including the wordmark, to use in the Loft UI. This path must be accessible for clients accessing
+	// the Loft UI!
+	// +optional
+	LogoWithWordmarkURL string `json:"logoWithWordmarkURL,omitempty"`
 	// LegalTemplate is a text (html) string containing the legal template to prompt to users when authenticating to
 	// Loft
 	// +optional

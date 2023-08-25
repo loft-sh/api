@@ -540,6 +540,7 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.WorkspaceStatusResult":                              schema_pkg_apis_storage_v1_WorkspaceStatusResult(ref),
 		"github.com/loft-sh/api/v3/pkg/apis/ui/v1.NavBarButton":                                            schema_pkg_apis_ui_v1_NavBarButton(ref),
 		"github.com/loft-sh/api/v3/pkg/apis/ui/v1.UISettings":                                              schema_pkg_apis_ui_v1_UISettings(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/ui/v1.UISettingsConfig":                                        schema_pkg_apis_ui_v1_UISettingsConfig(ref),
 		"github.com/loft-sh/api/v3/pkg/apis/ui/v1.UISettingsSpec":                                          schema_pkg_apis_ui_v1_UISettingsSpec(ref),
 		"github.com/loft-sh/api/v3/pkg/apis/ui/v1.UISettingsStatus":                                        schema_pkg_apis_ui_v1_UISettingsStatus(ref),
 		"github.com/loft-sh/api/v3/pkg/apis/virtualcluster/v1.HelmRelease":                                 schema_pkg_apis_virtualcluster_v1_HelmRelease(ref),
@@ -3620,6 +3621,13 @@ func schema_apis_loft_cluster_v1_VirtualClusterSpec(ref common.ReferenceCallback
 							Ref:         ref("github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.VirtualClusterAccessPoint"),
 						},
 					},
+					"forwardToken": {
+						SchemaProps: spec.SchemaProps{
+							Description: "ForwardToken signals the proxy to pass through the used token to the virtual Kubernetes api server and do a TokenReview there.",
+							Type:        []string{"boolean"},
+							Format:      "",
+						},
+					},
 					"pod": {
 						SchemaProps: spec.SchemaProps{
 							Description: "DEPRECATED: don't use anymore A label selector to select the virtual cluster pod to route incoming requests to.",
@@ -5260,6 +5268,13 @@ func schema_apis_loft_storage_v1_VirtualClusterCommonSpec(ref common.ReferenceCa
 							Ref:         ref("github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.VirtualClusterAccessPoint"),
 						},
 					},
+					"forwardToken": {
+						SchemaProps: spec.SchemaProps{
+							Description: "ForwardToken signals the proxy to pass through the used token to the virtual Kubernetes api server and do a TokenReview there.",
+							Type:        []string{"boolean"},
+							Format:      "",
+						},
+					},
 				},
 			},
 		},
@@ -5482,6 +5497,13 @@ func schema_apis_loft_storage_v1_VirtualClusterSpec(ref common.ReferenceCallback
 							Description: "AccessPoint defines settings to expose the virtual cluster directly via an ingress rather than through the (default) Loft proxy",
 							Default:     map[string]interface{}{},
 							Ref:         ref("github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.VirtualClusterAccessPoint"),
+						},
+					},
+					"forwardToken": {
+						SchemaProps: spec.SchemaProps{
+							Description: "ForwardToken signals the proxy to pass through the used token to the virtual Kubernetes api server and do a TokenReview there.",
+							Type:        []string{"boolean"},
+							Format:      "",
 						},
 					},
 					"pod": {
@@ -9600,7 +9622,7 @@ func schema_pkg_apis_management_v1_ConfigStatus(ref common.ReferenceCallback) co
 					"uiSettings": {
 						SchemaProps: spec.SchemaProps{
 							Description: "UISettings holds the settings for modifying the Loft user interface",
-							Ref:         ref("github.com/loft-sh/api/v3/pkg/apis/ui/v1.UISettingsSpec"),
+							Ref:         ref("github.com/loft-sh/api/v3/pkg/apis/ui/v1.UISettingsConfig"),
 						},
 					},
 					"vault": {
@@ -9613,7 +9635,7 @@ func schema_pkg_apis_management_v1_ConfigStatus(ref common.ReferenceCallback) co
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/v3/pkg/apis/management/v1.Apps", "github.com/loft-sh/api/v3/pkg/apis/management/v1.Audit", "github.com/loft-sh/api/v3/pkg/apis/management/v1.Authentication", "github.com/loft-sh/api/v3/pkg/apis/management/v1.OIDC", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.VaultIntegrationSpec", "github.com/loft-sh/api/v3/pkg/apis/ui/v1.UISettingsSpec"},
+			"github.com/loft-sh/api/v3/pkg/apis/management/v1.Apps", "github.com/loft-sh/api/v3/pkg/apis/management/v1.Audit", "github.com/loft-sh/api/v3/pkg/apis/management/v1.Authentication", "github.com/loft-sh/api/v3/pkg/apis/management/v1.OIDC", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.VaultIntegrationSpec", "github.com/loft-sh/api/v3/pkg/apis/ui/v1.UISettingsConfig"},
 	}
 }
 
@@ -10388,11 +10410,17 @@ func schema_pkg_apis_management_v1_DevPodWorkspaceInstanceStatus(ref common.Refe
 							Format:      "",
 						},
 					},
+					"sleepModeConfig": {
+						SchemaProps: spec.SchemaProps{
+							Description: "SleepModeConfig is the sleep mode config of the workspace. This will only be shown in the front end.",
+							Ref:         ref("github.com/loft-sh/agentapi/v3/pkg/apis/loft/cluster/v1.SleepModeConfig"),
+						},
+					},
 				},
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.Condition", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.DevPodWorkspaceTemplateDefinition"},
+			"github.com/loft-sh/agentapi/v3/pkg/apis/loft/cluster/v1.SleepModeConfig", "github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.Condition", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.DevPodWorkspaceTemplateDefinition"},
 	}
 }
 
@@ -12268,6 +12296,13 @@ func schema_pkg_apis_management_v1_OIDC(ref common.ReferenceCallback) common.Ope
 							Format:      "",
 						},
 					},
+					"wildcardRedirect": {
+						SchemaProps: spec.SchemaProps{
+							Description: "If true indicates that loft will allow wildcard '*' in client redirectURIs",
+							Type:        []string{"boolean"},
+							Format:      "",
+						},
+					},
 					"clients": {
 						SchemaProps: spec.SchemaProps{
 							Description: "The clients that are allowed to request loft tokens",
@@ -14002,6 +14037,12 @@ func schema_pkg_apis_management_v1_ProjectSecretSpec(ref common.ReferenceCallbac
 							Format:      "",
 						},
 					},
+					"owner": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Owner holds the owner of this object",
+							Ref:         ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.UserOrTeam"),
+						},
+					},
 					"data": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Data contains the secret data. Each key must consist of alphanumeric characters, '-', '_' or '.'. The serialized form of the secret data is a base64 encoded string, representing the arbitrary (possibly non-string) data value here. Described in https://tools.ietf.org/html/rfc4648#section-4",
@@ -14017,9 +14058,25 @@ func schema_pkg_apis_management_v1_ProjectSecretSpec(ref common.ReferenceCallbac
 							},
 						},
 					},
+					"access": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Access holds the access rights for users and teams",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.Access"),
+									},
+								},
+							},
+						},
+					},
 				},
 			},
 		},
+		Dependencies: []string{
+			"github.com/loft-sh/api/v3/pkg/apis/storage/v1.Access", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.UserOrTeam"},
 	}
 }
 
@@ -15254,6 +15311,15 @@ func schema_pkg_apis_management_v1_SelfSpec(ref common.ReferenceCallback) common
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
 				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"accessKey": {
+						SchemaProps: spec.SchemaProps{
+							Description: "AccessKey is an optional access key to use instead of the provided one",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+				},
 			},
 		},
 	}
@@ -15284,6 +15350,12 @@ func schema_pkg_apis_management_v1_SelfStatus(ref common.ReferenceCallback) comm
 							Format:      "",
 						},
 					},
+					"accessKeyScope": {
+						SchemaProps: spec.SchemaProps{
+							Description: "The scope of the currently used access key",
+							Ref:         ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.AccessKeyScope"),
+						},
+					},
 					"accessKeyType": {
 						SchemaProps: spec.SchemaProps{
 							Description: "The type of the currently used access key",
@@ -15294,6 +15366,13 @@ func schema_pkg_apis_management_v1_SelfStatus(ref common.ReferenceCallback) comm
 					"subject": {
 						SchemaProps: spec.SchemaProps{
 							Description: "The subject of the currently logged in user",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"uid": {
+						SchemaProps: spec.SchemaProps{
+							Description: "UID is the user uid",
 							Type:        []string{"string"},
 							Format:      "",
 						},
@@ -15333,7 +15412,7 @@ func schema_pkg_apis_management_v1_SelfStatus(ref common.ReferenceCallback) comm
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/agentapi/v3/pkg/apis/loft/cluster/v1.EntityInfo", "github.com/loft-sh/api/v3/pkg/apis/management/v1.UserInfo"},
+			"github.com/loft-sh/agentapi/v3/pkg/apis/loft/cluster/v1.EntityInfo", "github.com/loft-sh/api/v3/pkg/apis/management/v1.UserInfo", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.AccessKeyScope"},
 	}
 }
 
@@ -24261,12 +24340,6 @@ func schema_pkg_apis_storage_v1_RunnerPodTemplateSpec(ref common.ReferenceCallba
 						},
 					},
 					"env": {
-						VendorExtensible: spec.VendorExtensible{
-							Extensions: spec.Extensions{
-								"x-kubernetes-patch-merge-key": "name",
-								"x-kubernetes-patch-strategy":  "merge",
-							},
-						},
 						SchemaProps: spec.SchemaProps{
 							Description: "List of environment variables to set in the container. Cannot be updated.",
 							Type:        []string{"array"},
@@ -27315,6 +27388,13 @@ func schema_pkg_apis_storage_v1_VirtualClusterTemplateDefinition(ref common.Refe
 							Ref:         ref("github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.VirtualClusterAccessPoint"),
 						},
 					},
+					"forwardToken": {
+						SchemaProps: spec.SchemaProps{
+							Description: "ForwardToken signals the proxy to pass through the used token to the virtual Kubernetes api server and do a TokenReview there.",
+							Type:        []string{"boolean"},
+							Format:      "",
+						},
+					},
 					"spaceTemplate": {
 						SchemaProps: spec.SchemaProps{
 							Description: "SpaceTemplate holds the space template",
@@ -27704,12 +27784,11 @@ func schema_pkg_apis_ui_v1_UISettings(ref common.ReferenceCallback) common.OpenA
 	}
 }
 
-func schema_pkg_apis_ui_v1_UISettingsSpec(ref common.ReferenceCallback) common.OpenAPIDefinition {
+func schema_pkg_apis_ui_v1_UISettingsConfig(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
-				Description: "UISettingsSpec holds the specification",
-				Type:        []string{"object"},
+				Type: []string{"object"},
 				Properties: map[string]spec.Schema{
 					"loftVersion": {
 						SchemaProps: spec.SchemaProps{
@@ -27720,7 +27799,14 @@ func schema_pkg_apis_ui_v1_UISettingsSpec(ref common.ReferenceCallback) common.O
 					},
 					"logoURL": {
 						SchemaProps: spec.SchemaProps{
-							Description: "LogoURL is url pointing to the logo to use in the Loft UI, this path must be accessible from clients accessing the Loft UI!",
+							Description: "LogoURL is url pointing to the logo to use in the Loft UI. This path must be accessible for clients accessing the Loft UI!",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"logoWithWordmarkURL": {
+						SchemaProps: spec.SchemaProps{
+							Description: "LogoWithWordmarkURL is url pointing to the logo, including the wordmark, to use in the Loft UI. This path must be accessible for clients accessing the Loft UI!",
 							Type:        []string{"string"},
 							Format:      "",
 						},
@@ -27795,6 +27881,121 @@ func schema_pkg_apis_ui_v1_UISettingsSpec(ref common.ReferenceCallback) common.O
 									},
 								},
 							},
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			"github.com/loft-sh/api/v3/pkg/apis/ui/v1.NavBarButton"},
+	}
+}
+
+func schema_pkg_apis_ui_v1_UISettingsSpec(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "UISettingsSpec holds the specification",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"loftVersion": {
+						SchemaProps: spec.SchemaProps{
+							Description: "LoftVersion holds the current loft version",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"logoURL": {
+						SchemaProps: spec.SchemaProps{
+							Description: "LogoURL is url pointing to the logo to use in the Loft UI. This path must be accessible for clients accessing the Loft UI!",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"logoWithWordmarkURL": {
+						SchemaProps: spec.SchemaProps{
+							Description: "LogoWithWordmarkURL is url pointing to the logo, including the wordmark, to use in the Loft UI. This path must be accessible for clients accessing the Loft UI!",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"legalTemplate": {
+						SchemaProps: spec.SchemaProps{
+							Description: "LegalTemplate is a text (html) string containing the legal template to prompt to users when authenticating to Loft",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"primaryColor": {
+						SchemaProps: spec.SchemaProps{
+							Description: "PrimaryColor is the color value (ex: \"#12345\") to use as the primary color",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"sidebarColor": {
+						SchemaProps: spec.SchemaProps{
+							Description: "SidebarColor is the color value (ex: \"#12345\") to use for the sidebar",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"accentColor": {
+						SchemaProps: spec.SchemaProps{
+							Description: "AccentColor is the color value (ex: \"#12345\") to use for the accent",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"customCss": {
+						SchemaProps: spec.SchemaProps{
+							Description: "CustomCSS holds URLs with custom css files that should be included when loading the UI",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: "",
+										Type:    []string{"string"},
+										Format:  "",
+									},
+								},
+							},
+						},
+					},
+					"customJavaScript": {
+						SchemaProps: spec.SchemaProps{
+							Description: "CustomJavaScript holds URLs with custom js files that should be included when loading the UI",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: "",
+										Type:    []string{"string"},
+										Format:  "",
+									},
+								},
+							},
+						},
+					},
+					"navBarButtons": {
+						SchemaProps: spec.SchemaProps{
+							Description: "NavBarButtons holds extra nav bar buttons",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/ui/v1.NavBarButton"),
+									},
+								},
+							},
+						},
+					},
+					"productName": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Name is the name of the product",
+							Type:        []string{"string"},
+							Format:      "",
 						},
 					},
 				},

@@ -57,7 +57,7 @@ type ConfigStatus struct {
 
 	// UISettings holds the settings for modifying the Loft user interface
 	// +optional
-	UISettings *uiv1.UISettingsSpec `json:"uiSettings,omitempty"`
+	UISettings *uiv1.UISettingsConfig `json:"uiSettings,omitempty"`
 
 	// VaultIntegration holds the vault integration configuration
 	// +optional
@@ -279,6 +279,9 @@ type PredefinedApp struct {
 type OIDC struct {
 	// If true indicates that loft will act as an OIDC server
 	Enabled bool `json:"enabled,omitempty"`
+
+	// If true indicates that loft will allow wildcard '*' in client redirectURIs
+	WildcardRedirect bool `json:"wildcardRedirect,omitempty"`
 
 	// The clients that are allowed to request loft tokens
 	Clients []OIDCClient `json:"clients,omitempty"`
