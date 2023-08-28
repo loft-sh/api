@@ -4,8 +4,8 @@ import metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 
 const (
 	ProductNameLoft        = "Loft"
-	ProductNameVClusterPro = "vCluster Pro"
-	ProductNameDevPodPro   = "DevPod Pro"
+	ProductNameVClusterPro = "vCluster.Pro"
+	ProductNameDevPodPro   = "DevPod.Pro"
 )
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
