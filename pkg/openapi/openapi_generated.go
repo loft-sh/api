@@ -491,6 +491,7 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.SpaceInstanceList":                                  schema_pkg_apis_storage_v1_SpaceInstanceList(ref),
 		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.SpaceInstanceSpec":                                  schema_pkg_apis_storage_v1_SpaceInstanceSpec(ref),
 		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.SpaceInstanceStatus":                                schema_pkg_apis_storage_v1_SpaceInstanceStatus(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.SpaceInstanceTemplateDefinition":                    schema_pkg_apis_storage_v1_SpaceInstanceTemplateDefinition(ref),
 		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.SpaceTemplate":                                      schema_pkg_apis_storage_v1_SpaceTemplate(ref),
 		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.SpaceTemplateDefinition":                            schema_pkg_apis_storage_v1_SpaceTemplateDefinition(ref),
 		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.SpaceTemplateList":                                  schema_pkg_apis_storage_v1_SpaceTemplateList(ref),
@@ -528,6 +529,7 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.VirtualClusterInstanceList":                         schema_pkg_apis_storage_v1_VirtualClusterInstanceList(ref),
 		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.VirtualClusterInstanceSpec":                         schema_pkg_apis_storage_v1_VirtualClusterInstanceSpec(ref),
 		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.VirtualClusterInstanceStatus":                       schema_pkg_apis_storage_v1_VirtualClusterInstanceStatus(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.VirtualClusterInstanceTemplateDefinition":           schema_pkg_apis_storage_v1_VirtualClusterInstanceTemplateDefinition(ref),
 		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.VirtualClusterSpaceTemplateDefinition":              schema_pkg_apis_storage_v1_VirtualClusterSpaceTemplateDefinition(ref),
 		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.VirtualClusterTemplate":                             schema_pkg_apis_storage_v1_VirtualClusterTemplate(ref),
 		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.VirtualClusterTemplateDefinition":                   schema_pkg_apis_storage_v1_VirtualClusterTemplateDefinition(ref),
@@ -25279,6 +25281,28 @@ func schema_pkg_apis_storage_v1_SpaceInstanceStatus(ref common.ReferenceCallback
 	}
 }
 
+func schema_pkg_apis_storage_v1_SpaceInstanceTemplateDefinition(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "SpaceInstanceTemplateDefinition holds the space instance template",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"metadata": {
+						SchemaProps: spec.SchemaProps{
+							Description: "The space instance metadata",
+							Default:     map[string]interface{}{},
+							Ref:         ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.TemplateMetadata"),
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			"github.com/loft-sh/api/v3/pkg/apis/storage/v1.TemplateMetadata"},
+	}
+}
+
 func schema_pkg_apis_storage_v1_SpaceTemplate(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
@@ -25339,6 +25363,13 @@ func schema_pkg_apis_storage_v1_SpaceTemplateDefinition(ref common.ReferenceCall
 							Ref:         ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.TemplateMetadata"),
 						},
 					},
+					"instanceTemplate": {
+						SchemaProps: spec.SchemaProps{
+							Description: "InstanceTemplate holds the space instance template",
+							Default:     map[string]interface{}{},
+							Ref:         ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.SpaceInstanceTemplateDefinition"),
+						},
+					},
 					"objects": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Objects are Kubernetes style yamls that should get deployed into the virtual cluster",
@@ -25384,7 +25415,7 @@ func schema_pkg_apis_storage_v1_SpaceTemplateDefinition(ref common.ReferenceCall
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.AppReference", "github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.InstanceAccess", "github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.TemplateHelmChart", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.TemplateMetadata"},
+			"github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.AppReference", "github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.InstanceAccess", "github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.TemplateHelmChart", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.SpaceInstanceTemplateDefinition", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.TemplateMetadata"},
 	}
 }
 
@@ -27217,6 +27248,28 @@ func schema_pkg_apis_storage_v1_VirtualClusterInstanceStatus(ref common.Referenc
 	}
 }
 
+func schema_pkg_apis_storage_v1_VirtualClusterInstanceTemplateDefinition(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "VirtualClusterInstanceTemplateDefinition holds the virtual cluster instance template",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"metadata": {
+						SchemaProps: spec.SchemaProps{
+							Description: "The virtual cluster instance metadata",
+							Default:     map[string]interface{}{},
+							Ref:         ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.TemplateMetadata"),
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			"github.com/loft-sh/api/v3/pkg/apis/storage/v1.TemplateMetadata"},
+	}
+}
+
 func schema_pkg_apis_storage_v1_VirtualClusterSpaceTemplateDefinition(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
@@ -27333,6 +27386,13 @@ func schema_pkg_apis_storage_v1_VirtualClusterTemplateDefinition(ref common.Refe
 							Ref:         ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.TemplateMetadata"),
 						},
 					},
+					"instanceTemplate": {
+						SchemaProps: spec.SchemaProps{
+							Description: "InstanceTemplate holds the virtual cluster instance template",
+							Default:     map[string]interface{}{},
+							Ref:         ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.VirtualClusterInstanceTemplateDefinition"),
+						},
+					},
 					"apps": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Apps specifies the apps that should get deployed by this template",
@@ -27412,7 +27472,7 @@ func schema_pkg_apis_storage_v1_VirtualClusterTemplateDefinition(ref common.Refe
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.AppReference", "github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.InstanceAccess", "github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.TemplateHelmChart", "github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.VirtualClusterAccessPoint", "github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.VirtualClusterHelmRelease", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.TemplateMetadata", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.VirtualClusterSpaceTemplateDefinition", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.WorkloadVirtualClusterTemplateDefinition"},
+			"github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.AppReference", "github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.InstanceAccess", "github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.TemplateHelmChart", "github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.VirtualClusterAccessPoint", "github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.VirtualClusterHelmRelease", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.TemplateMetadata", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.VirtualClusterInstanceTemplateDefinition", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.VirtualClusterSpaceTemplateDefinition", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.WorkloadVirtualClusterTemplateDefinition"},
 	}
 }
 
