@@ -87,7 +87,7 @@ func ReplaceWithHeader(use, content string) string {
 
 	paddingSize := (maxChar - 2 - len(productName) - len(use)) / 2
 
-	separator := strings.Repeat("#", maxChar)
+	separator := strings.Repeat("#", paddingSize*2+len(productName)+len(use)+2+1)
 	padding := strings.Repeat("#", paddingSize)
 
 	return fmt.Sprintf(`%s

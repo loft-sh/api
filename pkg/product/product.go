@@ -1,7 +1,6 @@
 package product
 
 import (
-	"context"
 	"fmt"
 	"os"
 	"sync"
@@ -33,20 +32,20 @@ func IsProduct(products ...ProductType) bool {
 type ProductType string
 
 const (
-	Loft        = "loft"
-	DevPodPro   = "devpod-pro"
-	VClusterPro = "vcluster-pro"
+	Loft        ProductType = "loft"
+	DevPodPro   ProductType = "devpod-pro"
+	VClusterPro ProductType = "vcluster-pro"
 )
 
 func loadProductVar() {
 	productEnv := os.Getenv("PRODUCT")
-	if productEnv == DevPodPro {
+	if productEnv == string(DevPodPro) {
 		product = DevPodPro
-	} else if productEnv == VClusterPro {
+	} else if productEnv == string(VClusterPro) {
 		product = VClusterPro
-	} else if productEnv == Loft {
+	} else if productEnv == string(Loft) {
 		product = Loft
 	} else if productEnv != "" {
-		klog.FromContext(context.TODO()).Error(fmt.Errorf("unrecognized product %s", productEnv), "error parsing product")
+		klog.TODO().Error(fmt.Errorf("unrecognized product %s", productEnv), "error parsing product", "product", productEnv)
 	}
 }
