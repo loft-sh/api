@@ -114,6 +114,10 @@ type VirtualClusterTemplateDefinition struct {
 	// +optional
 	TemplateMetadata `json:"metadata,omitempty"`
 
+	// InstanceTemplate holds the virtual cluster instance template
+	// +optional
+	InstanceTemplate VirtualClusterInstanceTemplateDefinition `json:"instanceTemplate,omitempty"`
+
 	// VirtualClusterCommonSpec defines virtual cluster spec that is common between the virtual
 	// cluster templates, and virtual cluster
 	agentstoragev1.VirtualClusterCommonSpec `json:",inline"`
@@ -160,6 +164,14 @@ type VirtualClusterSpaceTemplateDefinition struct {
 	// Apps specifies the apps that should get deployed by this template
 	// +optional
 	Apps []agentstoragev1.AppReference `json:"apps,omitempty"`
+}
+
+// VirtualClusterInstanceTemplateDefinition holds the virtual cluster instance template
+type VirtualClusterInstanceTemplateDefinition struct {
+	// The virtual cluster instance metadata
+	// +kubebuilder:pruning:PreserveUnknownFields
+	// +optional
+	TemplateMetadata `json:"metadata,omitempty"`
 }
 
 type TemplateMetadata struct {

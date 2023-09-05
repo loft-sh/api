@@ -100,6 +100,10 @@ type SpaceTemplateDefinition struct {
 	// +optional
 	TemplateMetadata `json:"metadata,omitempty"`
 
+	// InstanceTemplate holds the space instance template
+	// +optional
+	InstanceTemplate SpaceInstanceTemplateDefinition `json:"instanceTemplate,omitempty"`
+
 	// Objects are Kubernetes style yamls that should get deployed into the virtual cluster
 	// +optional
 	Objects string `json:"objects,omitempty"`
@@ -115,6 +119,14 @@ type SpaceTemplateDefinition struct {
 	// The space access
 	// +optional
 	Access *agentstoragev1.InstanceAccess `json:"access,omitempty"`
+}
+
+// SpaceInstanceTemplateDefinition holds the space instance template
+type SpaceInstanceTemplateDefinition struct {
+	// The space instance metadata
+	// +kubebuilder:pruning:PreserveUnknownFields
+	// +optional
+	TemplateMetadata `json:"metadata,omitempty"`
 }
 
 // SpaceTemplateStatus holds the status
