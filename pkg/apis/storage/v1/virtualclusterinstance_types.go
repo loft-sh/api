@@ -6,13 +6,14 @@ import (
 )
 
 const (
-	InstanceScheduled            agentstoragev1.ConditionType = "Scheduled"
-	InstanceTemplateSynced       agentstoragev1.ConditionType = "TemplateSynced"
-	InstanceTemplateResolved     agentstoragev1.ConditionType = "TemplateResolved"
-	InstanceSpaceSynced          agentstoragev1.ConditionType = "SpaceSynced"
-	InstanceSpaceReady           agentstoragev1.ConditionType = "SpaceReady"
-	InstanceVirtualClusterSynced agentstoragev1.ConditionType = "VirtualClusterSynced"
-	InstanceVirtualClusterReady  agentstoragev1.ConditionType = "VirtualClusterReady"
+	InstanceScheduled             agentstoragev1.ConditionType = "Scheduled"
+	InstanceTemplateSynced        agentstoragev1.ConditionType = "TemplateSynced"
+	InstanceTemplateResolved      agentstoragev1.ConditionType = "TemplateResolved"
+	InstanceSpaceSynced           agentstoragev1.ConditionType = "SpaceSynced"
+	InstanceSpaceReady            agentstoragev1.ConditionType = "SpaceReady"
+	InstanceVirtualClusterSynced  agentstoragev1.ConditionType = "VirtualClusterSynced"
+	InstanceVirtualClusterReady   agentstoragev1.ConditionType = "VirtualClusterReady"
+	InstanceProjectsSecretsSynced agentstoragev1.ConditionType = "ProjectSecretsSynced"
 
 	// Workload VirtualCluster conditions
 
