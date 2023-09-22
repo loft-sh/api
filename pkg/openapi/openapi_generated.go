@@ -467,6 +467,7 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.QuotaStatusUser":                                    schema_pkg_apis_storage_v1_QuotaStatusUser(ref),
 		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.QuotaStatusUserUsed":                                schema_pkg_apis_storage_v1_QuotaStatusUserUsed(ref),
 		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.Quotas":                                             schema_pkg_apis_storage_v1_Quotas(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.RequireTemplate":                                    schema_pkg_apis_storage_v1_RequireTemplate(ref),
 		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.Runner":                                             schema_pkg_apis_storage_v1_Runner(ref),
 		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.RunnerClusterRef":                                   schema_pkg_apis_storage_v1_RunnerClusterRef(ref),
 		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.RunnerList":                                         schema_pkg_apis_storage_v1_RunnerList(ref),
@@ -14187,6 +14188,13 @@ func schema_pkg_apis_management_v1_ProjectSpec(ref common.ReferenceCallback) com
 							},
 						},
 					},
+					"requireTemplate": {
+						SchemaProps: spec.SchemaProps{
+							Description: "RequireTemplate configures if a template is required for instance creation.",
+							Default:     map[string]interface{}{},
+							Ref:         ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.RequireTemplate"),
+						},
+					},
 					"members": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Members are the users and teams that are part of this project",
@@ -14237,7 +14245,7 @@ func schema_pkg_apis_management_v1_ProjectSpec(ref common.ReferenceCallback) com
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/v3/pkg/apis/storage/v1.Access", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.AllowedCluster", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.AllowedRunner", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.AllowedTemplate", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.ArgoIntegrationSpec", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.Member", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.NamespacePattern", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.Quotas", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.UserOrTeam", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.VaultIntegrationSpec"},
+			"github.com/loft-sh/api/v3/pkg/apis/storage/v1.Access", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.AllowedCluster", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.AllowedRunner", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.AllowedTemplate", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.ArgoIntegrationSpec", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.Member", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.NamespacePattern", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.Quotas", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.RequireTemplate", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.UserOrTeam", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.VaultIntegrationSpec"},
 	}
 }
 
@@ -23715,6 +23723,13 @@ func schema_pkg_apis_storage_v1_ProjectSpec(ref common.ReferenceCallback) common
 							},
 						},
 					},
+					"requireTemplate": {
+						SchemaProps: spec.SchemaProps{
+							Description: "RequireTemplate configures if a template is required for instance creation.",
+							Default:     map[string]interface{}{},
+							Ref:         ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.RequireTemplate"),
+						},
+					},
 					"members": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Members are the users and teams that are part of this project",
@@ -23765,7 +23780,7 @@ func schema_pkg_apis_storage_v1_ProjectSpec(ref common.ReferenceCallback) common
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/v3/pkg/apis/storage/v1.Access", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.AllowedCluster", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.AllowedRunner", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.AllowedTemplate", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.ArgoIntegrationSpec", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.Member", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.NamespacePattern", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.Quotas", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.UserOrTeam", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.VaultIntegrationSpec"},
+			"github.com/loft-sh/api/v3/pkg/apis/storage/v1.Access", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.AllowedCluster", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.AllowedRunner", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.AllowedTemplate", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.ArgoIntegrationSpec", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.Member", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.NamespacePattern", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.Quotas", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.RequireTemplate", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.UserOrTeam", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.VaultIntegrationSpec"},
 	}
 }
 
@@ -24066,6 +24081,25 @@ func schema_pkg_apis_storage_v1_Quotas(ref common.ReferenceCallback) common.Open
 									},
 								},
 							},
+						},
+					},
+				},
+			},
+		},
+	}
+}
+
+func schema_pkg_apis_storage_v1_RequireTemplate(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"disabled": {
+						SchemaProps: spec.SchemaProps{
+							Description: "If true, all users within the project will be allowed to create a new instance without a template. By default, only admins are allowed to create a new instance without a template.",
+							Type:        []string{"boolean"},
+							Format:      "",
 						},
 					},
 				},
