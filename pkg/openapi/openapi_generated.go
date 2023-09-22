@@ -27898,9 +27898,9 @@ func schema_pkg_apis_ui_v1_UISettingsConfig(ref common.ReferenceCallback) common
 							Format:      "",
 						},
 					},
-					"logoWithWordmarkURL": {
+					"logoBackgroundColor": {
 						SchemaProps: spec.SchemaProps{
-							Description: "LogoWithWordmarkURL is url pointing to the logo, including the wordmark, to use in the Loft UI. This path must be accessible for clients accessing the Loft UI!",
+							Description: "LogoBackgroundColor is the color value (ex: \"#12345\") to use as the background color for the logo",
 							Type:        []string{"string"},
 							Format:      "",
 						},
@@ -28006,9 +28006,9 @@ func schema_pkg_apis_ui_v1_UISettingsSpec(ref common.ReferenceCallback) common.O
 							Format:      "",
 						},
 					},
-					"logoWithWordmarkURL": {
+					"logoBackgroundColor": {
 						SchemaProps: spec.SchemaProps{
-							Description: "LogoWithWordmarkURL is url pointing to the logo, including the wordmark, to use in the Loft UI. This path must be accessible for clients accessing the Loft UI!",
+							Description: "LogoBackgroundColor is the color value (ex: \"#12345\") to use as the background color for the logo",
 							Type:        []string{"string"},
 							Format:      "",
 						},
