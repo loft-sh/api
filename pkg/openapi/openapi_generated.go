@@ -102,6 +102,7 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 		"github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.VirtualClusterHelmRelease":                schema_apis_loft_storage_v1_VirtualClusterHelmRelease(ref),
 		"github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.VirtualClusterHelmReleaseStatus":          schema_apis_loft_storage_v1_VirtualClusterHelmReleaseStatus(ref),
 		"github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.VirtualClusterList":                       schema_apis_loft_storage_v1_VirtualClusterList(ref),
+		"github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.VirtualClusterProSpec":                    schema_apis_loft_storage_v1_VirtualClusterProSpec(ref),
 		"github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.VirtualClusterSpec":                       schema_apis_loft_storage_v1_VirtualClusterSpec(ref),
 		"github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.VirtualClusterStatus":                     schema_apis_loft_storage_v1_VirtualClusterStatus(ref),
 		"github.com/loft-sh/api/v3/pkg/apis/audit/v1.Event":                                                schema_pkg_apis_audit_v1_Event(ref),
@@ -3610,6 +3611,13 @@ func schema_apis_loft_cluster_v1_VirtualClusterSpec(ref common.ReferenceCallback
 							Ref:         ref("github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.InstanceAccess"),
 						},
 					},
+					"pro": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Pro defines the pro settings for the virtual cluster",
+							Default:     map[string]interface{}{},
+							Ref:         ref("github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.VirtualClusterProSpec"),
+						},
+					},
 					"helmRelease": {
 						SchemaProps: spec.SchemaProps{
 							Description: "HelmRelease is the helm release configuration for the virtual cluster.",
@@ -3647,7 +3655,7 @@ func schema_apis_loft_cluster_v1_VirtualClusterSpec(ref common.ReferenceCallback
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.AppReference", "github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.InstanceAccess", "github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.PodSelector", "github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.SecretRef", "github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.TemplateHelmChart", "github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.VirtualClusterAccessPoint", "github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.VirtualClusterHelmRelease"},
+			"github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.AppReference", "github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.InstanceAccess", "github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.PodSelector", "github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.SecretRef", "github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.TemplateHelmChart", "github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.VirtualClusterAccessPoint", "github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.VirtualClusterHelmRelease", "github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.VirtualClusterProSpec"},
 	}
 }
 
@@ -5257,6 +5265,13 @@ func schema_apis_loft_storage_v1_VirtualClusterCommonSpec(ref common.ReferenceCa
 							Ref:         ref("github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.InstanceAccess"),
 						},
 					},
+					"pro": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Pro defines the pro settings for the virtual cluster",
+							Default:     map[string]interface{}{},
+							Ref:         ref("github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.VirtualClusterProSpec"),
+						},
+					},
 					"helmRelease": {
 						SchemaProps: spec.SchemaProps{
 							Description: "HelmRelease is the helm release configuration for the virtual cluster.",
@@ -5282,7 +5297,7 @@ func schema_apis_loft_storage_v1_VirtualClusterCommonSpec(ref common.ReferenceCa
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.AppReference", "github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.InstanceAccess", "github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.TemplateHelmChart", "github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.VirtualClusterAccessPoint", "github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.VirtualClusterHelmRelease"},
+			"github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.AppReference", "github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.InstanceAccess", "github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.TemplateHelmChart", "github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.VirtualClusterAccessPoint", "github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.VirtualClusterHelmRelease", "github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.VirtualClusterProSpec"},
 	}
 }
 
@@ -5441,6 +5456,25 @@ func schema_apis_loft_storage_v1_VirtualClusterList(ref common.ReferenceCallback
 	}
 }
 
+func schema_apis_loft_storage_v1_VirtualClusterProSpec(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"enabled": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Enabled defines if the virtual cluster is a pro cluster or not",
+							Type:        []string{"boolean"},
+							Format:      "",
+						},
+					},
+				},
+			},
+		},
+	}
+}
+
 func schema_apis_loft_storage_v1_VirtualClusterSpec(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
@@ -5488,6 +5522,13 @@ func schema_apis_loft_storage_v1_VirtualClusterSpec(ref common.ReferenceCallback
 							Ref:         ref("github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.InstanceAccess"),
 						},
 					},
+					"pro": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Pro defines the pro settings for the virtual cluster",
+							Default:     map[string]interface{}{},
+							Ref:         ref("github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.VirtualClusterProSpec"),
+						},
+					},
 					"helmRelease": {
 						SchemaProps: spec.SchemaProps{
 							Description: "HelmRelease is the helm release configuration for the virtual cluster.",
@@ -5525,7 +5566,7 @@ func schema_apis_loft_storage_v1_VirtualClusterSpec(ref common.ReferenceCallback
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.AppReference", "github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.InstanceAccess", "github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.PodSelector", "github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.SecretRef", "github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.TemplateHelmChart", "github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.VirtualClusterAccessPoint", "github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.VirtualClusterHelmRelease"},
+			"github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.AppReference", "github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.InstanceAccess", "github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.PodSelector", "github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.SecretRef", "github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.TemplateHelmChart", "github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.VirtualClusterAccessPoint", "github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.VirtualClusterHelmRelease", "github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.VirtualClusterProSpec"},
 	}
 }
 
@@ -27468,6 +27509,13 @@ func schema_pkg_apis_storage_v1_VirtualClusterTemplateDefinition(ref common.Refe
 							Ref:         ref("github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.InstanceAccess"),
 						},
 					},
+					"pro": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Pro defines the pro settings for the virtual cluster",
+							Default:     map[string]interface{}{},
+							Ref:         ref("github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.VirtualClusterProSpec"),
+						},
+					},
 					"helmRelease": {
 						SchemaProps: spec.SchemaProps{
 							Description: "HelmRelease is the helm release configuration for the virtual cluster.",
@@ -27506,7 +27554,7 @@ func schema_pkg_apis_storage_v1_VirtualClusterTemplateDefinition(ref common.Refe
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.AppReference", "github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.InstanceAccess", "github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.TemplateHelmChart", "github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.VirtualClusterAccessPoint", "github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.VirtualClusterHelmRelease", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.TemplateMetadata", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.VirtualClusterInstanceTemplateDefinition", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.VirtualClusterSpaceTemplateDefinition", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.WorkloadVirtualClusterTemplateDefinition"},
+			"github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.AppReference", "github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.InstanceAccess", "github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.TemplateHelmChart", "github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.VirtualClusterAccessPoint", "github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.VirtualClusterHelmRelease", "github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.VirtualClusterProSpec", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.TemplateMetadata", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.VirtualClusterInstanceTemplateDefinition", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.VirtualClusterSpaceTemplateDefinition", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.WorkloadVirtualClusterTemplateDefinition"},
 	}
 }
 
@@ -27898,9 +27946,9 @@ func schema_pkg_apis_ui_v1_UISettingsConfig(ref common.ReferenceCallback) common
 							Format:      "",
 						},
 					},
-					"logoWithWordmarkURL": {
+					"logoBackgroundColor": {
 						SchemaProps: spec.SchemaProps{
-							Description: "LogoWithWordmarkURL is url pointing to the logo, including the wordmark, to use in the Loft UI. This path must be accessible for clients accessing the Loft UI!",
+							Description: "LogoBackgroundColor is the color value (ex: \"#12345\") to use as the background color for the logo",
 							Type:        []string{"string"},
 							Format:      "",
 						},
@@ -28006,9 +28054,9 @@ func schema_pkg_apis_ui_v1_UISettingsSpec(ref common.ReferenceCallback) common.O
 							Format:      "",
 						},
 					},
-					"logoWithWordmarkURL": {
+					"logoBackgroundColor": {
 						SchemaProps: spec.SchemaProps{
-							Description: "LogoWithWordmarkURL is url pointing to the logo, including the wordmark, to use in the Loft UI. This path must be accessible for clients accessing the Loft UI!",
+							Description: "LogoBackgroundColor is the color value (ex: \"#12345\") to use as the background color for the logo",
 							Type:        []string{"string"},
 							Format:      "",
 						},
