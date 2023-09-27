@@ -13455,6 +13455,13 @@ func schema_pkg_apis_management_v1_ProjectImportVirtualCluster(ref common.Refere
 							Ref:         ref("github.com/loft-sh/api/v3/pkg/apis/management/v1.ProjectImportVirtualClusterSource"),
 						},
 					},
+					"upgradeToPro": {
+						SchemaProps: spec.SchemaProps{
+							Description: "UpgradeToPro indicates whether we should upgrade to Pro on import",
+							Type:        []string{"boolean"},
+							Format:      "",
+						},
+					},
 				},
 				Required: []string{"sourceVirtualCluster"},
 			},
