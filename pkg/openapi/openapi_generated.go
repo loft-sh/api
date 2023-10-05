@@ -5321,6 +5321,20 @@ func schema_apis_loft_storage_v1_VirtualClusterHelmChart(ref common.ReferenceCal
 							Format:      "",
 						},
 					},
+					"username": {
+						SchemaProps: spec.SchemaProps{
+							Description: "The username that is required for this repository",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"password": {
+						SchemaProps: spec.SchemaProps{
+							Description: "The password that is required for this repository",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
 					"version": {
 						SchemaProps: spec.SchemaProps{
 							Description: "the version of the helm chart to use",
