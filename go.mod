@@ -4,15 +4,14 @@ go 1.21.1
 
 require (
 	github.com/ghodss/yaml v1.0.0
-	github.com/loft-sh/agentapi/v3 v3.3.0-beta.2
+	github.com/loft-sh/admin-apis v0.0.0-20231005083919-a177d920e993
+	github.com/loft-sh/agentapi/v3 v3.3.0-beta.3
 	github.com/loft-sh/apiserver v0.0.0-20230628051307-f26967fbb40f
-	github.com/loft-sh/external-types v0.0.2-0.20230301201552-ec939da949b4
 	github.com/loft-sh/jspolicy v0.1.0
 	k8s.io/api v0.27.3
 	k8s.io/apimachinery v0.27.3
 	k8s.io/apiserver v0.27.3
 	k8s.io/client-go v0.27.3
-	k8s.io/klog/v2 v2.100.2-0.20230613134558-6632ba5cc9a5
 	k8s.io/kube-openapi v0.0.0-20230501164219-8b0f38b5fd1f
 	sigs.k8s.io/controller-runtime v0.15.0
 	sigs.k8s.io/controller-tools v0.10.0
@@ -106,6 +105,7 @@ require (
 	gopkg.in/yaml.v3 v3.0.1 // indirect
 	k8s.io/apiextensions-apiserver v0.27.2 // indirect
 	k8s.io/component-base v0.27.3 // indirect
+	k8s.io/klog/v2 v2.100.2-0.20230613134558-6632ba5cc9a5 // indirect
 	k8s.io/utils v0.0.0-20230505201702-9f6742963106 // indirect
 	sigs.k8s.io/apiserver-network-proxy/konnectivity-client v0.1.3 // indirect
 	sigs.k8s.io/json v0.0.0-20221116044647-bc3834ca7abd // indirect
