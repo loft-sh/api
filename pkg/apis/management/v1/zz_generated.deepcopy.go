@@ -3207,7 +3207,7 @@ func (in *LicenseStatus) DeepCopyInto(out *LicenseStatus) {
 		in, out := &in.ResourceUsage, &out.ResourceUsage
 		*out = make(map[string]licenseapi.ResourceCount, len(*in))
 		for key, val := range *in {
-			(*out)[key] = val
+			(*out)[key] = *val.DeepCopy()
 		}
 	}
 	return
