@@ -25111,10 +25111,11 @@ func schema_pkg_apis_storage_v1_RancherIntegrationSpec(ref common.ReferenceCallb
 			SchemaProps: spec.SchemaProps{
 				Type: []string{"object"},
 				Properties: map[string]spec.Schema{
-					"tokenSecretRef": {
+					"enabled": {
 						SchemaProps: spec.SchemaProps{
-							Description: "TokenSecretRef defines the Kubernetes secret to use for token authentication.",
-							Ref:         ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.SecretRef"),
+							Description: "Enabled indicates if the Rancher Project Integration is enabled for this project.",
+							Type:        []string{"boolean"},
+							Format:      "",
 						},
 					},
 					"url": {
@@ -25155,7 +25156,7 @@ func schema_pkg_apis_storage_v1_RancherIntegrationSpec(ref common.ReferenceCallb
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/v3/pkg/apis/storage/v1.ImportVirtualClustersSpec", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.RancherProjectRef", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.SecretRef", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.SyncMembersSpec"},
+			"github.com/loft-sh/api/v3/pkg/apis/storage/v1.ImportVirtualClustersSpec", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.RancherProjectRef", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.SyncMembersSpec"},
 	}
 }
 

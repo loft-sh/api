@@ -441,8 +441,9 @@ type VaultAuthSpec struct {
 }
 
 type RancherIntegrationSpec struct {
-	// TokenSecretRef defines the Kubernetes secret to use for token authentication.
-	TokenSecretRef *SecretRef `json:"tokenSecretRef,omitempty"`
+	// Enabled indicates if the Rancher Project Integration is enabled for this project.
+	// +optional
+	Enabled bool `json:"enabled,omitempty"`
 
 	// URL defines the address of the Rancher instance to use for this project.
 	URL string `json:"url,omitempty"`
