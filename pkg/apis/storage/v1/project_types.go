@@ -119,6 +119,10 @@ type ProjectSpec struct {
 	// VaultIntegration holds information about Vault Integration
 	// +optional
 	VaultIntegration *VaultIntegrationSpec `json:"vault,omitempty"`
+
+	// RancherIntegration holds information about Rancher Integration
+	// +optional
+	RancherIntegration *RancherIntegrationSpec `json:"rancher,omitempty"`
 }
 
 type RequireTemplate struct {
@@ -434,6 +438,58 @@ type VaultAuthSpec struct {
 	// Secret data should contain the `token` key.
 	// +optional
 	TokenSecretRef *corev1.SecretKeySelector `json:"tokenSecretRef,omitempty"`
+}
+
+type RancherIntegrationSpec struct {
+	// TokenSecretRef defines the Kubernetes secret to use for token authentication.
+	TokenSecretRef *SecretRef `json:"tokenSecretRef,omitempty"`
+
+	// URL defines the address of the Rancher instance to use for this project.
+	URL string `json:"url,omitempty"`
+
+	// SkipTLSVerify defines if TLS verification should be skipped when connecting to Rancher.
+	// +optional
+	SkipTLSVerify bool `json:"skipTLSVerify,omitempty"`
+
+	// ProjectRef defines references to rancher project, required for syncMembers and syncVirtualClusters.syncMembers
+	// +optional
+	ProjectRef *RancherProjectRef `json:"projectRef,omitempty"`
+
+	// ImportVirtualClusters defines settings to import virtual clusters to Rancher on creation
+	// +optional
+	ImportVirtualClusters ImportVirtualClustersSpec `json:"importVirtualClusters,omitempty"`
+
+	// SyncMembers defines settings to sync Rancher project members to the loft project
+	// +optional
+	SyncMembers SyncMembersSpec `json:"syncMembers,omitempty"`
+}
+
+type RancherProjectRef struct {
+	// Cluster defines the Rancher cluster ID
+	// Needs to be the same id within Loft
+	Cluster string `json:"cluster,omitempty"`
+
+	// Project defines the Rancher project ID
+	Project string `json:"project,omitempty"`
+}
+
+type ImportVirtualClustersSpec struct {
+	// Enabled indicates if virtual clusters created within this project should get synced to Rancher.
+	// If projectRef is defined, will also automatically add the created namespace to the Rancher project.
+	Enabled bool `json:"enabled,omitempty"`
+}
+
+type SyncMembersSpec struct {
+	// Enabled indicates whether to sync rancher project members to the loft project.
+	Enabled bool `json:"enabled,omitempty"`
+
+	// MemberRole indicates the loft role to use for a rancher project member
+	// +optional
+	MemberRole string `json:"memberRole,omitempty"`
+
+	// OwnerRole indicates the loft role to use for a rancher project owner
+	// +optional
+	OwnerRole string `json:"ownerRole,omitempty"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object

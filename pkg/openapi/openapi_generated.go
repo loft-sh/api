@@ -467,6 +467,7 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.HelmConfiguration":                               schema_pkg_apis_storage_v1_HelmConfiguration(ref),
 		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.HelmTask":                                        schema_pkg_apis_storage_v1_HelmTask(ref),
 		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.HelmTaskRelease":                                 schema_pkg_apis_storage_v1_HelmTaskRelease(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.ImportVirtualClustersSpec":                       schema_pkg_apis_storage_v1_ImportVirtualClustersSpec(ref),
 		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.InstanceDeployedAppStatus":                       schema_pkg_apis_storage_v1_InstanceDeployedAppStatus(ref),
 		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.KindSecretRef":                                   schema_pkg_apis_storage_v1_KindSecretRef(ref),
 		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.LocalClusterAccessTemplate":                      schema_pkg_apis_storage_v1_LocalClusterAccessTemplate(ref),
@@ -486,6 +487,8 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.QuotaStatusUser":                                 schema_pkg_apis_storage_v1_QuotaStatusUser(ref),
 		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.QuotaStatusUserUsed":                             schema_pkg_apis_storage_v1_QuotaStatusUserUsed(ref),
 		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.Quotas":                                          schema_pkg_apis_storage_v1_Quotas(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.RancherIntegrationSpec":                          schema_pkg_apis_storage_v1_RancherIntegrationSpec(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.RancherProjectRef":                               schema_pkg_apis_storage_v1_RancherProjectRef(ref),
 		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.RequireTemplate":                                 schema_pkg_apis_storage_v1_RequireTemplate(ref),
 		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.Runner":                                          schema_pkg_apis_storage_v1_Runner(ref),
 		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.RunnerClusterRef":                                schema_pkg_apis_storage_v1_RunnerClusterRef(ref),
@@ -519,6 +522,7 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.SpaceTemplateStatus":                             schema_pkg_apis_storage_v1_SpaceTemplateStatus(ref),
 		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.SpaceTemplateVersion":                            schema_pkg_apis_storage_v1_SpaceTemplateVersion(ref),
 		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.StreamContainer":                                 schema_pkg_apis_storage_v1_StreamContainer(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.SyncMembersSpec":                                 schema_pkg_apis_storage_v1_SyncMembersSpec(ref),
 		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.Target":                                          schema_pkg_apis_storage_v1_Target(ref),
 		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.TargetCluster":                                   schema_pkg_apis_storage_v1_TargetCluster(ref),
 		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.TargetInstance":                                  schema_pkg_apis_storage_v1_TargetInstance(ref),
@@ -15222,11 +15226,17 @@ func schema_pkg_apis_management_v1_ProjectSpec(ref common.ReferenceCallback) com
 							Ref:         ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.VaultIntegrationSpec"),
 						},
 					},
+					"rancher": {
+						SchemaProps: spec.SchemaProps{
+							Description: "RancherIntegration holds information about Rancher Integration",
+							Ref:         ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.RancherIntegrationSpec"),
+						},
+					},
 				},
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/v3/pkg/apis/storage/v1.Access", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.AllowedCluster", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.AllowedRunner", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.AllowedTemplate", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.ArgoIntegrationSpec", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.Member", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.NamespacePattern", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.Quotas", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.RequireTemplate", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.UserOrTeam", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.VaultIntegrationSpec"},
+			"github.com/loft-sh/api/v3/pkg/apis/storage/v1.Access", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.AllowedCluster", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.AllowedRunner", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.AllowedTemplate", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.ArgoIntegrationSpec", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.Member", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.NamespacePattern", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.Quotas", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.RancherIntegrationSpec", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.RequireTemplate", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.UserOrTeam", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.VaultIntegrationSpec"},
 	}
 }
 
@@ -24200,6 +24210,25 @@ func schema_pkg_apis_storage_v1_HelmTaskRelease(ref common.ReferenceCallback) co
 	}
 }
 
+func schema_pkg_apis_storage_v1_ImportVirtualClustersSpec(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"enabled": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Enabled indicates if virtual clusters created within this project should get synced to Rancher. If projectRef is defined, will also automatically add the created namespace to the Rancher project.",
+							Type:        []string{"boolean"},
+							Format:      "",
+						},
+					},
+				},
+			},
+		},
+	}
+}
+
 func schema_pkg_apis_storage_v1_InstanceDeployedAppStatus(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
@@ -24757,11 +24786,17 @@ func schema_pkg_apis_storage_v1_ProjectSpec(ref common.ReferenceCallback) common
 							Ref:         ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.VaultIntegrationSpec"),
 						},
 					},
+					"rancher": {
+						SchemaProps: spec.SchemaProps{
+							Description: "RancherIntegration holds information about Rancher Integration",
+							Ref:         ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.RancherIntegrationSpec"),
+						},
+					},
 				},
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/v3/pkg/apis/storage/v1.Access", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.AllowedCluster", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.AllowedRunner", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.AllowedTemplate", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.ArgoIntegrationSpec", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.Member", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.NamespacePattern", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.Quotas", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.RequireTemplate", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.UserOrTeam", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.VaultIntegrationSpec"},
+			"github.com/loft-sh/api/v3/pkg/apis/storage/v1.Access", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.AllowedCluster", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.AllowedRunner", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.AllowedTemplate", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.ArgoIntegrationSpec", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.Member", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.NamespacePattern", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.Quotas", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.RancherIntegrationSpec", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.RequireTemplate", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.UserOrTeam", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.VaultIntegrationSpec"},
 	}
 }
 
@@ -25062,6 +25097,86 @@ func schema_pkg_apis_storage_v1_Quotas(ref common.ReferenceCallback) common.Open
 									},
 								},
 							},
+						},
+					},
+				},
+			},
+		},
+	}
+}
+
+func schema_pkg_apis_storage_v1_RancherIntegrationSpec(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"tokenSecretRef": {
+						SchemaProps: spec.SchemaProps{
+							Description: "TokenSecretRef defines the Kubernetes secret to use for token authentication.",
+							Ref:         ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.SecretRef"),
+						},
+					},
+					"url": {
+						SchemaProps: spec.SchemaProps{
+							Description: "URL defines the address of the Rancher instance to use for this project.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"skipTLSVerify": {
+						SchemaProps: spec.SchemaProps{
+							Description: "SkipTLSVerify defines if TLS verification should be skipped when connecting to Rancher.",
+							Type:        []string{"boolean"},
+							Format:      "",
+						},
+					},
+					"projectRef": {
+						SchemaProps: spec.SchemaProps{
+							Description: "ProjectRef defines references to rancher project, required for syncMembers and syncVirtualClusters.syncMembers",
+							Ref:         ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.RancherProjectRef"),
+						},
+					},
+					"importVirtualClusters": {
+						SchemaProps: spec.SchemaProps{
+							Description: "ImportVirtualClusters defines settings to import virtual clusters to Rancher on creation",
+							Default:     map[string]interface{}{},
+							Ref:         ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.ImportVirtualClustersSpec"),
+						},
+					},
+					"syncMembers": {
+						SchemaProps: spec.SchemaProps{
+							Description: "SyncMembers defines settings to sync Rancher project members to the loft project",
+							Default:     map[string]interface{}{},
+							Ref:         ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.SyncMembersSpec"),
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			"github.com/loft-sh/api/v3/pkg/apis/storage/v1.ImportVirtualClustersSpec", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.RancherProjectRef", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.SecretRef", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.SyncMembersSpec"},
+	}
+}
+
+func schema_pkg_apis_storage_v1_RancherProjectRef(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"cluster": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Cluster defines the Rancher cluster ID Needs to be the same id within Loft",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"project": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Project defines the Rancher project ID",
+							Type:        []string{"string"},
+							Format:      "",
 						},
 					},
 				},
@@ -26645,6 +26760,39 @@ func schema_pkg_apis_storage_v1_StreamContainer(ref common.ReferenceCallback) co
 		},
 		Dependencies: []string{
 			"k8s.io/apimachinery/pkg/apis/meta/v1.LabelSelector"},
+	}
+}
+
+func schema_pkg_apis_storage_v1_SyncMembersSpec(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"enabled": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Enabled indicates whether to sync rancher project members to the loft project.",
+							Type:        []string{"boolean"},
+							Format:      "",
+						},
+					},
+					"memberRole": {
+						SchemaProps: spec.SchemaProps{
+							Description: "MemberRole indicates the loft role to use for a rancher project member",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"ownerRole": {
+						SchemaProps: spec.SchemaProps{
+							Description: "OwnerRole indicates the loft role to use for a rancher project owner",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+				},
+			},
+		},
 	}
 }
 
