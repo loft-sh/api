@@ -155,6 +155,7 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 		"github.com/loft-sh/api/v3/pkg/apis/management/v1.AuthenticationMicrosoft":                      schema_pkg_apis_management_v1_AuthenticationMicrosoft(ref),
 		"github.com/loft-sh/api/v3/pkg/apis/management/v1.AuthenticationOIDC":                           schema_pkg_apis_management_v1_AuthenticationOIDC(ref),
 		"github.com/loft-sh/api/v3/pkg/apis/management/v1.AuthenticationPassword":                       schema_pkg_apis_management_v1_AuthenticationPassword(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/management/v1.AuthenticationRancher":                        schema_pkg_apis_management_v1_AuthenticationRancher(ref),
 		"github.com/loft-sh/api/v3/pkg/apis/management/v1.AuthenticationSAML":                           schema_pkg_apis_management_v1_AuthenticationSAML(ref),
 		"github.com/loft-sh/api/v3/pkg/apis/management/v1.Cluster":                                      schema_pkg_apis_management_v1_Cluster(ref),
 		"github.com/loft-sh/api/v3/pkg/apis/management/v1.ClusterAccess":                                schema_pkg_apis_management_v1_ClusterAccess(ref),
@@ -7855,6 +7856,12 @@ func schema_pkg_apis_management_v1_Authentication(ref common.ReferenceCallback) 
 							Ref:         ref("github.com/loft-sh/api/v3/pkg/apis/management/v1.AuthenticationSAML"),
 						},
 					},
+					"rancher": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Rancher holds the rancher authentication options",
+							Ref:         ref("github.com/loft-sh/api/v3/pkg/apis/management/v1.AuthenticationRancher"),
+						},
+					},
 					"password": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Password holds password authentication relevant information",
@@ -7916,7 +7923,7 @@ func schema_pkg_apis_management_v1_Authentication(ref common.ReferenceCallback) 
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/v3/pkg/apis/management/v1.AuthenticationGithub", "github.com/loft-sh/api/v3/pkg/apis/management/v1.AuthenticationGitlab", "github.com/loft-sh/api/v3/pkg/apis/management/v1.AuthenticationGoogle", "github.com/loft-sh/api/v3/pkg/apis/management/v1.AuthenticationMicrosoft", "github.com/loft-sh/api/v3/pkg/apis/management/v1.AuthenticationOIDC", "github.com/loft-sh/api/v3/pkg/apis/management/v1.AuthenticationPassword", "github.com/loft-sh/api/v3/pkg/apis/management/v1.AuthenticationSAML", "github.com/loft-sh/api/v3/pkg/apis/management/v1.ConnectorWithName"},
+			"github.com/loft-sh/api/v3/pkg/apis/management/v1.AuthenticationGithub", "github.com/loft-sh/api/v3/pkg/apis/management/v1.AuthenticationGitlab", "github.com/loft-sh/api/v3/pkg/apis/management/v1.AuthenticationGoogle", "github.com/loft-sh/api/v3/pkg/apis/management/v1.AuthenticationMicrosoft", "github.com/loft-sh/api/v3/pkg/apis/management/v1.AuthenticationOIDC", "github.com/loft-sh/api/v3/pkg/apis/management/v1.AuthenticationPassword", "github.com/loft-sh/api/v3/pkg/apis/management/v1.AuthenticationRancher", "github.com/loft-sh/api/v3/pkg/apis/management/v1.AuthenticationSAML", "github.com/loft-sh/api/v3/pkg/apis/management/v1.ConnectorWithName"},
 	}
 }
 
@@ -8640,6 +8647,39 @@ func schema_pkg_apis_management_v1_AuthenticationPassword(ref common.ReferenceCa
 					"disabled": {
 						SchemaProps: spec.SchemaProps{
 							Description: "If true login via password is disabled",
+							Type:        []string{"boolean"},
+							Format:      "",
+						},
+					},
+				},
+			},
+		},
+	}
+}
+
+func schema_pkg_apis_management_v1_AuthenticationRancher(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"host": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Host holds the rancher host, e.g. my-domain.com",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"bearerToken": {
+						SchemaProps: spec.SchemaProps{
+							Description: "BearerToken holds the rancher API key in token username and password form. E.g. my-token:my-secret",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"insecure": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Insecure tells Loft if the Rancher endpoint is insecure.",
 							Type:        []string{"boolean"},
 							Format:      "",
 						},
@@ -25114,20 +25154,6 @@ func schema_pkg_apis_storage_v1_RancherIntegrationSpec(ref common.ReferenceCallb
 					"enabled": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Enabled indicates if the Rancher Project Integration is enabled for this project.",
-							Type:        []string{"boolean"},
-							Format:      "",
-						},
-					},
-					"url": {
-						SchemaProps: spec.SchemaProps{
-							Description: "URL defines the address of the Rancher instance to use for this project.",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"skipTLSVerify": {
-						SchemaProps: spec.SchemaProps{
-							Description: "SkipTLSVerify defines if TLS verification should be skipped when connecting to Rancher.",
 							Type:        []string{"boolean"},
 							Format:      "",
 						},

@@ -445,13 +445,6 @@ type RancherIntegrationSpec struct {
 	// +optional
 	Enabled bool `json:"enabled,omitempty"`
 
-	// URL defines the address of the Rancher instance to use for this project.
-	URL string `json:"url,omitempty"`
-
-	// SkipTLSVerify defines if TLS verification should be skipped when connecting to Rancher.
-	// +optional
-	SkipTLSVerify bool `json:"skipTLSVerify,omitempty"`
-
 	// ProjectRef defines references to rancher project, required for syncMembers and syncVirtualClusters.syncMembers
 	// +optional
 	ProjectRef *RancherProjectRef `json:"projectRef,omitempty"`
