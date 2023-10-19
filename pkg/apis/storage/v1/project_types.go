@@ -7,6 +7,10 @@ import (
 )
 
 const (
+	RancherIntegrationSynced agentstoragev1.ConditionType = "RancherIntegrationSynced"
+)
+
+const (
 	ArgoIntegrationSynced agentstoragev1.ConditionType = "ArgoIntegrationSynced"
 
 	ArgoLastAppliedHashAnnotation                = "loft.sh/argo-integration-last-applied-hash"
@@ -447,7 +451,7 @@ type RancherIntegrationSpec struct {
 
 	// ProjectRef defines references to rancher project, required for syncMembers and syncVirtualClusters.syncMembers
 	// +optional
-	ProjectRef *RancherProjectRef `json:"projectRef,omitempty"`
+	ProjectRef RancherProjectRef `json:"projectRef,omitempty"`
 
 	// ImportVirtualClusters defines settings to import virtual clusters to Rancher on creation
 	// +optional
@@ -477,13 +481,9 @@ type SyncMembersSpec struct {
 	// Enabled indicates whether to sync rancher project members to the loft project.
 	Enabled bool `json:"enabled,omitempty"`
 
-	// MemberRole indicates the loft role to use for a rancher project member
+	// RoleMapping indicates an optional role mapping from a rancher role to a loft role.
 	// +optional
-	MemberRole string `json:"memberRole,omitempty"`
-
-	// OwnerRole indicates the loft role to use for a rancher project owner
-	// +optional
-	OwnerRole string `json:"ownerRole,omitempty"`
+	RoleMapping map[string]string `json:"roleMapping,omitempty"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
