@@ -26,14 +26,21 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 		"github.com/loft-sh/admin-apis/pkg/licenseapi.GenericRequestOutput":                             schema_loft_sh_admin_apis_pkg_licenseapi_GenericRequestOutput(ref),
 		"github.com/loft-sh/admin-apis/pkg/licenseapi.InstanceTokenAuth":                                schema_loft_sh_admin_apis_pkg_licenseapi_InstanceTokenAuth(ref),
 		"github.com/loft-sh/admin-apis/pkg/licenseapi.InstanceTokenClaims":                              schema_loft_sh_admin_apis_pkg_licenseapi_InstanceTokenClaims(ref),
+		"github.com/loft-sh/admin-apis/pkg/licenseapi.Invoice":                                          schema_loft_sh_admin_apis_pkg_licenseapi_Invoice(ref),
 		"github.com/loft-sh/admin-apis/pkg/licenseapi.License":                                          schema_loft_sh_admin_apis_pkg_licenseapi_License(ref),
 		"github.com/loft-sh/admin-apis/pkg/licenseapi.LicenseAPIRoute":                                  schema_loft_sh_admin_apis_pkg_licenseapi_LicenseAPIRoute(ref),
 		"github.com/loft-sh/admin-apis/pkg/licenseapi.LicenseAPIRoutes":                                 schema_loft_sh_admin_apis_pkg_licenseapi_LicenseAPIRoutes(ref),
 		"github.com/loft-sh/admin-apis/pkg/licenseapi.Limit":                                            schema_loft_sh_admin_apis_pkg_licenseapi_Limit(ref),
 		"github.com/loft-sh/admin-apis/pkg/licenseapi.Module":                                           schema_loft_sh_admin_apis_pkg_licenseapi_Module(ref),
 		"github.com/loft-sh/admin-apis/pkg/licenseapi.OfflineLicenseKeyClaims":                          schema_loft_sh_admin_apis_pkg_licenseapi_OfflineLicenseKeyClaims(ref),
+		"github.com/loft-sh/admin-apis/pkg/licenseapi.Plan":                                             schema_loft_sh_admin_apis_pkg_licenseapi_Plan(ref),
+		"github.com/loft-sh/admin-apis/pkg/licenseapi.PlanExpiration":                                   schema_loft_sh_admin_apis_pkg_licenseapi_PlanExpiration(ref),
+		"github.com/loft-sh/admin-apis/pkg/licenseapi.PlanPeriod":                                       schema_loft_sh_admin_apis_pkg_licenseapi_PlanPeriod(ref),
+		"github.com/loft-sh/admin-apis/pkg/licenseapi.PlanPrice":                                        schema_loft_sh_admin_apis_pkg_licenseapi_PlanPrice(ref),
+		"github.com/loft-sh/admin-apis/pkg/licenseapi.PriceTier":                                        schema_loft_sh_admin_apis_pkg_licenseapi_PriceTier(ref),
 		"github.com/loft-sh/admin-apis/pkg/licenseapi.Request":                                          schema_loft_sh_admin_apis_pkg_licenseapi_Request(ref),
 		"github.com/loft-sh/admin-apis/pkg/licenseapi.ResourceCount":                                    schema_loft_sh_admin_apis_pkg_licenseapi_ResourceCount(ref),
+		"github.com/loft-sh/admin-apis/pkg/licenseapi.TierResource":                                     schema_loft_sh_admin_apis_pkg_licenseapi_TierResource(ref),
 		"github.com/loft-sh/admin-apis/pkg/licenseapi.Trial":                                            schema_loft_sh_admin_apis_pkg_licenseapi_Trial(ref),
 		"github.com/loft-sh/agentapi/v3/pkg/apis/loft/cluster/v1.AppliedMetadata":                       schema_apis_loft_cluster_v1_AppliedMetadata(ref),
 		"github.com/loft-sh/agentapi/v3/pkg/apis/loft/cluster/v1.AppliedObject":                         schema_apis_loft_cluster_v1_AppliedObject(ref),
@@ -155,6 +162,7 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 		"github.com/loft-sh/api/v3/pkg/apis/management/v1.AuthenticationMicrosoft":                      schema_pkg_apis_management_v1_AuthenticationMicrosoft(ref),
 		"github.com/loft-sh/api/v3/pkg/apis/management/v1.AuthenticationOIDC":                           schema_pkg_apis_management_v1_AuthenticationOIDC(ref),
 		"github.com/loft-sh/api/v3/pkg/apis/management/v1.AuthenticationPassword":                       schema_pkg_apis_management_v1_AuthenticationPassword(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/management/v1.AuthenticationRancher":                        schema_pkg_apis_management_v1_AuthenticationRancher(ref),
 		"github.com/loft-sh/api/v3/pkg/apis/management/v1.AuthenticationSAML":                           schema_pkg_apis_management_v1_AuthenticationSAML(ref),
 		"github.com/loft-sh/api/v3/pkg/apis/management/v1.Cluster":                                      schema_pkg_apis_management_v1_Cluster(ref),
 		"github.com/loft-sh/api/v3/pkg/apis/management/v1.ClusterAccess":                                schema_pkg_apis_management_v1_ClusterAccess(ref),
@@ -467,6 +475,7 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.HelmConfiguration":                               schema_pkg_apis_storage_v1_HelmConfiguration(ref),
 		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.HelmTask":                                        schema_pkg_apis_storage_v1_HelmTask(ref),
 		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.HelmTaskRelease":                                 schema_pkg_apis_storage_v1_HelmTaskRelease(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.ImportVirtualClustersSpec":                       schema_pkg_apis_storage_v1_ImportVirtualClustersSpec(ref),
 		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.InstanceDeployedAppStatus":                       schema_pkg_apis_storage_v1_InstanceDeployedAppStatus(ref),
 		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.KindSecretRef":                                   schema_pkg_apis_storage_v1_KindSecretRef(ref),
 		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.LocalClusterAccessTemplate":                      schema_pkg_apis_storage_v1_LocalClusterAccessTemplate(ref),
@@ -486,6 +495,8 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.QuotaStatusUser":                                 schema_pkg_apis_storage_v1_QuotaStatusUser(ref),
 		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.QuotaStatusUserUsed":                             schema_pkg_apis_storage_v1_QuotaStatusUserUsed(ref),
 		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.Quotas":                                          schema_pkg_apis_storage_v1_Quotas(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.RancherIntegrationSpec":                          schema_pkg_apis_storage_v1_RancherIntegrationSpec(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.RancherProjectRef":                               schema_pkg_apis_storage_v1_RancherProjectRef(ref),
 		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.RequireTemplate":                                 schema_pkg_apis_storage_v1_RequireTemplate(ref),
 		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.Runner":                                          schema_pkg_apis_storage_v1_Runner(ref),
 		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.RunnerClusterRef":                                schema_pkg_apis_storage_v1_RunnerClusterRef(ref),
@@ -519,6 +530,7 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.SpaceTemplateStatus":                             schema_pkg_apis_storage_v1_SpaceTemplateStatus(ref),
 		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.SpaceTemplateVersion":                            schema_pkg_apis_storage_v1_SpaceTemplateVersion(ref),
 		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.StreamContainer":                                 schema_pkg_apis_storage_v1_StreamContainer(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.SyncMembersSpec":                                 schema_pkg_apis_storage_v1_SyncMembersSpec(ref),
 		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.Target":                                          schema_pkg_apis_storage_v1_Target(ref),
 		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.TargetCluster":                                   schema_pkg_apis_storage_v1_TargetCluster(ref),
 		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.TargetInstance":                                  schema_pkg_apis_storage_v1_TargetInstance(ref),
@@ -1490,7 +1502,7 @@ func schema_loft_sh_admin_apis_pkg_licenseapi_Feature(ref common.ReferenceCallba
 				Properties: map[string]spec.Schema{
 					"name": {
 						SchemaProps: spec.SchemaProps{
-							Description: "Name is the name of the feature This cannot be FeatureName because it needs to be downward compatible e.g. older Loft version doesn't know a newer feature but it will still be received and still needs to be rendered in the license view",
+							Description: "Name is the name of the feature (FeatureName) This cannot be FeatureName because it needs to be downward compatible e.g. older Loft version doesn't know a newer feature but it will still be received and still needs to be rendered in the license view",
 							Default:     "",
 							Type:        []string{"string"},
 							Format:      "",
@@ -1525,21 +1537,6 @@ func schema_loft_sh_admin_apis_pkg_licenseapi_Feature(ref common.ReferenceCallba
 					"labels": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Labels contains a list of labels to be displayed for this feature (e.g. alpha, beta)",
-							Type:        []string{"array"},
-							Items: &spec.SchemaOrArray{
-								Schema: &spec.Schema{
-									SchemaProps: spec.SchemaProps{
-										Default: "",
-										Type:    []string{"string"},
-										Format:  "",
-									},
-								},
-							},
-						},
-					},
-					"packages": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Packages contains a list of ids of the product packages that contain this feature",
 							Type:        []string{"array"},
 							Items: &spec.SchemaOrArray{
 								Schema: &spec.Schema{
@@ -1687,6 +1684,40 @@ func schema_loft_sh_admin_apis_pkg_licenseapi_InstanceTokenClaims(ref common.Ref
 	}
 }
 
+func schema_loft_sh_admin_apis_pkg_licenseapi_Invoice(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "Invoice provides details about an invoice",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"date": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Date contains the unix timestamp marking the date this invoices was or will be created",
+							Type:        []string{"integer"},
+							Format:      "int64",
+						},
+					},
+					"total": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Total is the total of the invoice",
+							Type:        []string{"integer"},
+							Format:      "int64",
+						},
+					},
+					"currency": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Currency specifies the currency of Total in 3-character ISO 4217 code Default is: \"\" (representing USD)",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+				},
+			},
+		},
+	}
+}
+
 func schema_loft_sh_admin_apis_pkg_licenseapi_License(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
@@ -1754,19 +1785,6 @@ func schema_loft_sh_admin_apis_pkg_licenseapi_License(ref common.ReferenceCallba
 							},
 						},
 					},
-					"trials": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Trials is a list of trials.",
-							Type:        []string{"array"},
-							Items: &spec.SchemaOrArray{
-								Schema: &spec.Schema{
-									SchemaProps: spec.SchemaProps{
-										Ref: ref("github.com/loft-sh/admin-apis/pkg/licenseapi.Trial"),
-									},
-								},
-							},
-						},
-					},
 					"block": {
 						SchemaProps: spec.SchemaProps{
 							Description: "BlockRequests specifies which requests the product should block when a limit is exceeded.",
@@ -1794,11 +1812,25 @@ func schema_loft_sh_admin_apis_pkg_licenseapi_License(ref common.ReferenceCallba
 							Ref:     ref("github.com/loft-sh/admin-apis/pkg/licenseapi.LicenseAPIRoutes"),
 						},
 					},
+					"plans": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Plans contains a list of plans",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref("github.com/loft-sh/admin-apis/pkg/licenseapi.Plan"),
+									},
+								},
+							},
+						},
+					},
 				},
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/admin-apis/pkg/licenseapi.Analytics", "github.com/loft-sh/admin-apis/pkg/licenseapi.Announcement", "github.com/loft-sh/admin-apis/pkg/licenseapi.BlockRequest", "github.com/loft-sh/admin-apis/pkg/licenseapi.Button", "github.com/loft-sh/admin-apis/pkg/licenseapi.LicenseAPIRoutes", "github.com/loft-sh/admin-apis/pkg/licenseapi.Module", "github.com/loft-sh/admin-apis/pkg/licenseapi.Trial"},
+			"github.com/loft-sh/admin-apis/pkg/licenseapi.Analytics", "github.com/loft-sh/admin-apis/pkg/licenseapi.Announcement", "github.com/loft-sh/admin-apis/pkg/licenseapi.BlockRequest", "github.com/loft-sh/admin-apis/pkg/licenseapi.Button", "github.com/loft-sh/admin-apis/pkg/licenseapi.LicenseAPIRoutes", "github.com/loft-sh/admin-apis/pkg/licenseapi.Module", "github.com/loft-sh/admin-apis/pkg/licenseapi.Plan"},
 	}
 }
 
@@ -1821,6 +1853,13 @@ func schema_loft_sh_admin_apis_pkg_licenseapi_LicenseAPIRoute(ref common.Referen
 							Format: "",
 						},
 					},
+					"direct": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Tells the frontend whether to make a direct request or to make it via the backend (via generic license api request)",
+							Type:        []string{"boolean"},
+							Format:      "",
+						},
+					},
 				},
 			},
 		},
@@ -1835,6 +1874,30 @@ func schema_loft_sh_admin_apis_pkg_licenseapi_LicenseAPIRoutes(ref common.Refere
 				Type:        []string{"object"},
 				Properties: map[string]spec.Schema{
 					"chatAuth": {
+						SchemaProps: spec.SchemaProps{
+							Default: map[string]interface{}{},
+							Ref:     ref("github.com/loft-sh/admin-apis/pkg/licenseapi.LicenseAPIRoute"),
+						},
+					},
+					"featureDetails": {
+						SchemaProps: spec.SchemaProps{
+							Default: map[string]interface{}{},
+							Ref:     ref("github.com/loft-sh/admin-apis/pkg/licenseapi.LicenseAPIRoute"),
+						},
+					},
+					"featureSetup": {
+						SchemaProps: spec.SchemaProps{
+							Default: map[string]interface{}{},
+							Ref:     ref("github.com/loft-sh/admin-apis/pkg/licenseapi.LicenseAPIRoute"),
+						},
+					},
+					"checkout": {
+						SchemaProps: spec.SchemaProps{
+							Default: map[string]interface{}{},
+							Ref:     ref("github.com/loft-sh/admin-apis/pkg/licenseapi.LicenseAPIRoute"),
+						},
+					},
+					"portal": {
 						SchemaProps: spec.SchemaProps{
 							Default: map[string]interface{}{},
 							Ref:     ref("github.com/loft-sh/admin-apis/pkg/licenseapi.LicenseAPIRoute"),
@@ -1857,7 +1920,7 @@ func schema_loft_sh_admin_apis_pkg_licenseapi_Limit(ref common.ReferenceCallback
 				Properties: map[string]spec.Schema{
 					"name": {
 						SchemaProps: spec.SchemaProps{
-							Description: "Name is the name of the resource.",
+							Description: "Name is the name of the resource (ResourceName)",
 							Type:        []string{"string"},
 							Format:      "",
 						},
@@ -1867,12 +1930,6 @@ func schema_loft_sh_admin_apis_pkg_licenseapi_Limit(ref common.ReferenceCallback
 							Description: "DisplayName is for display purposes.",
 							Type:        []string{"string"},
 							Format:      "",
-						},
-					},
-					"adjustButton": {
-						SchemaProps: spec.SchemaProps{
-							Description: "AdjustButton is the button to be shown for adjusting the limit (e.g. buying more seats)",
-							Ref:         ref("github.com/loft-sh/admin-apis/pkg/licenseapi.Button"),
 						},
 					},
 					"quantity": {
@@ -1885,7 +1942,7 @@ func schema_loft_sh_admin_apis_pkg_licenseapi_Limit(ref common.ReferenceCallback
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/admin-apis/pkg/licenseapi.Button", "github.com/loft-sh/admin-apis/pkg/licenseapi.ResourceCount"},
+			"github.com/loft-sh/admin-apis/pkg/licenseapi.ResourceCount"},
 	}
 }
 
@@ -1898,12 +1955,19 @@ func schema_loft_sh_admin_apis_pkg_licenseapi_Module(ref common.ReferenceCallbac
 				Properties: map[string]spec.Schema{
 					"name": {
 						SchemaProps: spec.SchemaProps{
-							Default: "",
-							Type:    []string{"string"},
-							Format:  "",
+							Description: "Name of the module (ModuleName)",
+							Default:     "",
+							Type:        []string{"string"},
+							Format:      "",
 						},
 					},
 					"displayName": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"string"},
+							Format: "",
+						},
+					},
+					"status": {
 						SchemaProps: spec.SchemaProps{
 							Type:   []string{"string"},
 							Format: "",
@@ -1958,6 +2022,295 @@ func schema_loft_sh_admin_apis_pkg_licenseapi_OfflineLicenseKeyClaims(ref common
 		},
 		Dependencies: []string{
 			"github.com/loft-sh/admin-apis/pkg/licenseapi.License"},
+	}
+}
+
+func schema_loft_sh_admin_apis_pkg_licenseapi_Plan(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "Plan definition",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"displayName": {
+						SchemaProps: spec.SchemaProps{
+							Description: "DisplayName is the display name of the plan",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"status": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Status is the status of the plan There should only be 1 active plan at the top-level (not including AddOns) The respective price in Prices will have the active status as well",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"period": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Period provides information about the plan's current period This is nil unless this is the active plan",
+							Ref:         ref("github.com/loft-sh/admin-apis/pkg/licenseapi.PlanPeriod"),
+						},
+					},
+					"trial": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Trial provides details about a planned, ongoing or expired trial",
+							Ref:         ref("github.com/loft-sh/admin-apis/pkg/licenseapi.Trial"),
+						},
+					},
+					"invoice": {
+						SchemaProps: spec.SchemaProps{
+							Description: "UpcomingInvoice provides a preview of the next invoice that will be created for this Plan",
+							Ref:         ref("github.com/loft-sh/admin-apis/pkg/licenseapi.Invoice"),
+						},
+					},
+					"features": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Features is a list of features included in the plan",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: "",
+										Type:    []string{"string"},
+										Format:  "",
+									},
+								},
+							},
+						},
+					},
+					"limits": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Limits is a list of resources included in the plan and their limits",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref("github.com/loft-sh/admin-apis/pkg/licenseapi.Limit"),
+									},
+								},
+							},
+						},
+					},
+					"prices": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Prices provides details about the available prices (depending on the interval, for example)",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref("github.com/loft-sh/admin-apis/pkg/licenseapi.PlanPrice"),
+									},
+								},
+							},
+						},
+					},
+					"addons": {
+						SchemaProps: spec.SchemaProps{
+							Description: "AddOns are plans that can be added to this plan",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref("github.com/loft-sh/admin-apis/pkg/licenseapi.Plan"),
+									},
+								},
+							},
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			"github.com/loft-sh/admin-apis/pkg/licenseapi.Invoice", "github.com/loft-sh/admin-apis/pkg/licenseapi.Limit", "github.com/loft-sh/admin-apis/pkg/licenseapi.Plan", "github.com/loft-sh/admin-apis/pkg/licenseapi.PlanPeriod", "github.com/loft-sh/admin-apis/pkg/licenseapi.PlanPrice", "github.com/loft-sh/admin-apis/pkg/licenseapi.Trial"},
+	}
+}
+
+func schema_loft_sh_admin_apis_pkg_licenseapi_PlanExpiration(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "PlanExpiration provides details about the expiration of a plan",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"expiresAt": {
+						SchemaProps: spec.SchemaProps{
+							Description: "ExpiresAt is the unix timestamp of when the plan expires",
+							Type:        []string{"integer"},
+							Format:      "int64",
+						},
+					},
+					"upgradesTo": {
+						SchemaProps: spec.SchemaProps{
+							Description: "UpgradesTo states the name of the plan that is replacing the current one upon its expiration If this is nil, then this plan just expires (i.e. the subscription may be canceled, paused, etc.)",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+				},
+			},
+		},
+	}
+}
+
+func schema_loft_sh_admin_apis_pkg_licenseapi_PlanPeriod(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "PlanPeriod provides details about the period of the plan",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"start": {
+						SchemaProps: spec.SchemaProps{
+							Description: "CurrentPeriodStart contains the unix timestamp marking the start of the current period",
+							Type:        []string{"integer"},
+							Format:      "int64",
+						},
+					},
+					"end": {
+						SchemaProps: spec.SchemaProps{
+							Description: "CurrentPeriodEnd contains the unix timestamp marking the end of the current period",
+							Type:        []string{"integer"},
+							Format:      "int64",
+						},
+					},
+				},
+			},
+		},
+	}
+}
+
+func schema_loft_sh_admin_apis_pkg_licenseapi_PlanPrice(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "PlanPrice defines a price for the plan",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"id": {
+						SchemaProps: spec.SchemaProps{
+							Description: "ID of the price",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"status": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Status is the status of the price (PlanStatus) If the plan is active, one of its prices must be active as well",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"interval": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Interval contains the time span of each period (e.g. month, year)",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"intervalCount": {
+						SchemaProps: spec.SchemaProps{
+							Description: "IntervalCount specifies if the number of intervals (e.g. 3 [months])",
+							Type:        []string{"number"},
+							Format:      "double",
+						},
+					},
+					"exp": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Expiration provides information about when this plan expires",
+							Ref:         ref("github.com/loft-sh/admin-apis/pkg/licenseapi.PlanExpiration"),
+						},
+					},
+					"quantity": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Quantity sets the quantity the TierResource is supposed to be at If this is the active price, then this is the subscription quantity (currently purchased quantity)",
+							Type:        []string{"number"},
+							Format:      "double",
+						},
+					},
+					"resource": {
+						SchemaProps: spec.SchemaProps{
+							Description: "TierResource provides details about the main resource the tier quantity relates to This may be nil for plans that don't have their quantity tied to a resource",
+							Ref:         ref("github.com/loft-sh/admin-apis/pkg/licenseapi.TierResource"),
+						},
+					},
+					"tierMode": {
+						SchemaProps: spec.SchemaProps{
+							Description: "TierMode defines how tiers should be used",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"tiers": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Tiers is a list of tiers in this plan",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref("github.com/loft-sh/admin-apis/pkg/licenseapi.PriceTier"),
+									},
+								},
+							},
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			"github.com/loft-sh/admin-apis/pkg/licenseapi.PlanExpiration", "github.com/loft-sh/admin-apis/pkg/licenseapi.PriceTier", "github.com/loft-sh/admin-apis/pkg/licenseapi.TierResource"},
+	}
+}
+
+func schema_loft_sh_admin_apis_pkg_licenseapi_PriceTier(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "PriceTier defines a tier within a plan",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"min": {
+						SchemaProps: spec.SchemaProps{
+							Description: "MinQuantity is the quantity included in this plan",
+							Type:        []string{"number"},
+							Format:      "double",
+						},
+					},
+					"max": {
+						SchemaProps: spec.SchemaProps{
+							Description: "MaxQuantity is the max quantity that can be purchased",
+							Type:        []string{"number"},
+							Format:      "double",
+						},
+					},
+					"unitPrice": {
+						SchemaProps: spec.SchemaProps{
+							Description: "UnitPrice is the price per unit in this tier",
+							Type:        []string{"number"},
+							Format:      "double",
+						},
+					},
+					"flatFee": {
+						SchemaProps: spec.SchemaProps{
+							Description: "FlatFee is the flat fee for this tier",
+							Type:        []string{"number"},
+							Format:      "double",
+						},
+					},
+					"currency": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Currency specifies the currency of UnitPrice and FlatFee in 3-character ISO 4217 code Default is: \"\" (representing USD)",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+				},
+			},
+		},
 	}
 }
 
@@ -2037,6 +2390,33 @@ func schema_loft_sh_admin_apis_pkg_licenseapi_ResourceCount(ref common.Reference
 	}
 }
 
+func schema_loft_sh_admin_apis_pkg_licenseapi_TierResource(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "TierResource provides details about the main resource the tier quantity relates to",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"name": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Name of the resource (ResourceName)",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"status": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Status defines which resources will be counted towards the limit (e.g. active, total, total created etc.)",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+				},
+			},
+		},
+	}
+}
+
 func schema_loft_sh_admin_apis_pkg_licenseapi_Trial(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
@@ -2044,9 +2424,9 @@ func schema_loft_sh_admin_apis_pkg_licenseapi_Trial(ref common.ReferenceCallback
 				Description: "Trial represents a trial",
 				Type:        []string{"object"},
 				Properties: map[string]spec.Schema{
-					"name": {
+					"id": {
 						SchemaProps: spec.SchemaProps{
-							Description: "Name is the unique id of this trial",
+							Description: "ID is the unique id of this trial",
 							Type:        []string{"string"},
 							Format:      "",
 						},
@@ -2074,7 +2454,14 @@ func schema_loft_sh_admin_apis_pkg_licenseapi_Trial(ref common.ReferenceCallback
 					},
 					"status": {
 						SchemaProps: spec.SchemaProps{
-							Description: "Status is the status of this trial",
+							Description: "Status is the status of this trial (TrialStatus)",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"downgradesTo": {
+						SchemaProps: spec.SchemaProps{
+							Description: "DowngradesTo states the name of the plan that is replacing the current one once the trial expires If this is nil, then this plan just expires (i.e. the subscription may be canceled, paused, etc.)",
 							Type:        []string{"string"},
 							Format:      "",
 						},
@@ -2713,7 +3100,7 @@ func schema_apis_loft_cluster_v1_FeatureStatus(ref common.ReferenceCallback) com
 				Properties: map[string]spec.Schema{
 					"name": {
 						SchemaProps: spec.SchemaProps{
-							Description: "Name is the name of the feature This cannot be FeatureName because it needs to be downward compatible e.g. older Loft version doesn't know a newer feature but it will still be received and still needs to be rendered in the license view",
+							Description: "Name is the name of the feature (FeatureName) This cannot be FeatureName because it needs to be downward compatible e.g. older Loft version doesn't know a newer feature but it will still be received and still needs to be rendered in the license view",
 							Default:     "",
 							Type:        []string{"string"},
 							Format:      "",
@@ -2748,21 +3135,6 @@ func schema_apis_loft_cluster_v1_FeatureStatus(ref common.ReferenceCallback) com
 					"labels": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Labels contains a list of labels to be displayed for this feature (e.g. alpha, beta)",
-							Type:        []string{"array"},
-							Items: &spec.SchemaOrArray{
-								Schema: &spec.Schema{
-									SchemaProps: spec.SchemaProps{
-										Default: "",
-										Type:    []string{"string"},
-										Format:  "",
-									},
-								},
-							},
-						},
-					},
-					"packages": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Packages contains a list of ids of the product packages that contain this feature",
 							Type:        []string{"array"},
 							Items: &spec.SchemaOrArray{
 								Schema: &spec.Schema{
@@ -7851,6 +8223,12 @@ func schema_pkg_apis_management_v1_Authentication(ref common.ReferenceCallback) 
 							Ref:         ref("github.com/loft-sh/api/v3/pkg/apis/management/v1.AuthenticationSAML"),
 						},
 					},
+					"rancher": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Rancher holds the rancher authentication options",
+							Ref:         ref("github.com/loft-sh/api/v3/pkg/apis/management/v1.AuthenticationRancher"),
+						},
+					},
 					"password": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Password holds password authentication relevant information",
@@ -7912,7 +8290,7 @@ func schema_pkg_apis_management_v1_Authentication(ref common.ReferenceCallback) 
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/v3/pkg/apis/management/v1.AuthenticationGithub", "github.com/loft-sh/api/v3/pkg/apis/management/v1.AuthenticationGitlab", "github.com/loft-sh/api/v3/pkg/apis/management/v1.AuthenticationGoogle", "github.com/loft-sh/api/v3/pkg/apis/management/v1.AuthenticationMicrosoft", "github.com/loft-sh/api/v3/pkg/apis/management/v1.AuthenticationOIDC", "github.com/loft-sh/api/v3/pkg/apis/management/v1.AuthenticationPassword", "github.com/loft-sh/api/v3/pkg/apis/management/v1.AuthenticationSAML", "github.com/loft-sh/api/v3/pkg/apis/management/v1.ConnectorWithName"},
+			"github.com/loft-sh/api/v3/pkg/apis/management/v1.AuthenticationGithub", "github.com/loft-sh/api/v3/pkg/apis/management/v1.AuthenticationGitlab", "github.com/loft-sh/api/v3/pkg/apis/management/v1.AuthenticationGoogle", "github.com/loft-sh/api/v3/pkg/apis/management/v1.AuthenticationMicrosoft", "github.com/loft-sh/api/v3/pkg/apis/management/v1.AuthenticationOIDC", "github.com/loft-sh/api/v3/pkg/apis/management/v1.AuthenticationPassword", "github.com/loft-sh/api/v3/pkg/apis/management/v1.AuthenticationRancher", "github.com/loft-sh/api/v3/pkg/apis/management/v1.AuthenticationSAML", "github.com/loft-sh/api/v3/pkg/apis/management/v1.ConnectorWithName"},
 	}
 }
 
@@ -8636,6 +9014,39 @@ func schema_pkg_apis_management_v1_AuthenticationPassword(ref common.ReferenceCa
 					"disabled": {
 						SchemaProps: spec.SchemaProps{
 							Description: "If true login via password is disabled",
+							Type:        []string{"boolean"},
+							Format:      "",
+						},
+					},
+				},
+			},
+		},
+	}
+}
+
+func schema_pkg_apis_management_v1_AuthenticationRancher(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"host": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Host holds the rancher host, e.g. my-domain.com",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"bearerToken": {
+						SchemaProps: spec.SchemaProps{
+							Description: "BearerToken holds the rancher API key in token username and password form. E.g. my-token:my-secret",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"insecure": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Insecure tells Loft if the Rancher endpoint is insecure.",
 							Type:        []string{"boolean"},
 							Format:      "",
 						},
@@ -12200,7 +12611,7 @@ func schema_pkg_apis_management_v1_FeatureStatus(ref common.ReferenceCallback) c
 				Properties: map[string]spec.Schema{
 					"name": {
 						SchemaProps: spec.SchemaProps{
-							Description: "Name is the name of the feature This cannot be FeatureName because it needs to be downward compatible e.g. older Loft version doesn't know a newer feature but it will still be received and still needs to be rendered in the license view",
+							Description: "Name is the name of the feature (FeatureName) This cannot be FeatureName because it needs to be downward compatible e.g. older Loft version doesn't know a newer feature but it will still be received and still needs to be rendered in the license view",
 							Default:     "",
 							Type:        []string{"string"},
 							Format:      "",
@@ -12235,21 +12646,6 @@ func schema_pkg_apis_management_v1_FeatureStatus(ref common.ReferenceCallback) c
 					"labels": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Labels contains a list of labels to be displayed for this feature (e.g. alpha, beta)",
-							Type:        []string{"array"},
-							Items: &spec.SchemaOrArray{
-								Schema: &spec.Schema{
-									SchemaProps: spec.SchemaProps{
-										Default: "",
-										Type:    []string{"string"},
-										Format:  "",
-									},
-								},
-							},
-						},
-					},
-					"packages": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Packages contains a list of ids of the product packages that contain this feature",
 							Type:        []string{"array"},
 							Items: &spec.SchemaOrArray{
 								Schema: &spec.Schema{
@@ -15222,11 +15618,17 @@ func schema_pkg_apis_management_v1_ProjectSpec(ref common.ReferenceCallback) com
 							Ref:         ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.VaultIntegrationSpec"),
 						},
 					},
+					"rancher": {
+						SchemaProps: spec.SchemaProps{
+							Description: "RancherIntegration holds information about Rancher Integration",
+							Ref:         ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.RancherIntegrationSpec"),
+						},
+					},
 				},
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/v3/pkg/apis/storage/v1.Access", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.AllowedCluster", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.AllowedRunner", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.AllowedTemplate", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.ArgoIntegrationSpec", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.Member", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.NamespacePattern", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.Quotas", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.RequireTemplate", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.UserOrTeam", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.VaultIntegrationSpec"},
+			"github.com/loft-sh/api/v3/pkg/apis/storage/v1.Access", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.AllowedCluster", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.AllowedRunner", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.AllowedTemplate", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.ArgoIntegrationSpec", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.Member", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.NamespacePattern", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.Quotas", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.RancherIntegrationSpec", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.RequireTemplate", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.UserOrTeam", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.VaultIntegrationSpec"},
 	}
 }
 
@@ -24200,6 +24602,25 @@ func schema_pkg_apis_storage_v1_HelmTaskRelease(ref common.ReferenceCallback) co
 	}
 }
 
+func schema_pkg_apis_storage_v1_ImportVirtualClustersSpec(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"enabled": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Enabled indicates if virtual clusters created within this project should get synced to Rancher. If projectRef is defined, will also automatically add the created namespace to the Rancher project.",
+							Type:        []string{"boolean"},
+							Format:      "",
+						},
+					},
+				},
+			},
+		},
+	}
+}
+
 func schema_pkg_apis_storage_v1_InstanceDeployedAppStatus(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
@@ -24757,11 +25178,17 @@ func schema_pkg_apis_storage_v1_ProjectSpec(ref common.ReferenceCallback) common
 							Ref:         ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.VaultIntegrationSpec"),
 						},
 					},
+					"rancher": {
+						SchemaProps: spec.SchemaProps{
+							Description: "RancherIntegration holds information about Rancher Integration",
+							Ref:         ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.RancherIntegrationSpec"),
+						},
+					},
 				},
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/v3/pkg/apis/storage/v1.Access", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.AllowedCluster", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.AllowedRunner", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.AllowedTemplate", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.ArgoIntegrationSpec", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.Member", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.NamespacePattern", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.Quotas", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.RequireTemplate", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.UserOrTeam", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.VaultIntegrationSpec"},
+			"github.com/loft-sh/api/v3/pkg/apis/storage/v1.Access", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.AllowedCluster", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.AllowedRunner", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.AllowedTemplate", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.ArgoIntegrationSpec", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.Member", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.NamespacePattern", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.Quotas", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.RancherIntegrationSpec", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.RequireTemplate", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.UserOrTeam", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.VaultIntegrationSpec"},
 	}
 }
 
@@ -25062,6 +25489,74 @@ func schema_pkg_apis_storage_v1_Quotas(ref common.ReferenceCallback) common.Open
 									},
 								},
 							},
+						},
+					},
+				},
+			},
+		},
+	}
+}
+
+func schema_pkg_apis_storage_v1_RancherIntegrationSpec(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"enabled": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Enabled indicates if the Rancher Project Integration is enabled for this project.",
+							Type:        []string{"boolean"},
+							Format:      "",
+						},
+					},
+					"projectRef": {
+						SchemaProps: spec.SchemaProps{
+							Description: "ProjectRef defines references to rancher project, required for syncMembers and syncVirtualClusters.syncMembers",
+							Default:     map[string]interface{}{},
+							Ref:         ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.RancherProjectRef"),
+						},
+					},
+					"importVirtualClusters": {
+						SchemaProps: spec.SchemaProps{
+							Description: "ImportVirtualClusters defines settings to import virtual clusters to Rancher on creation",
+							Default:     map[string]interface{}{},
+							Ref:         ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.ImportVirtualClustersSpec"),
+						},
+					},
+					"syncMembers": {
+						SchemaProps: spec.SchemaProps{
+							Description: "SyncMembers defines settings to sync Rancher project members to the loft project",
+							Default:     map[string]interface{}{},
+							Ref:         ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.SyncMembersSpec"),
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			"github.com/loft-sh/api/v3/pkg/apis/storage/v1.ImportVirtualClustersSpec", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.RancherProjectRef", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.SyncMembersSpec"},
+	}
+}
+
+func schema_pkg_apis_storage_v1_RancherProjectRef(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"cluster": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Cluster defines the Rancher cluster ID Needs to be the same id within Loft",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"project": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Project defines the Rancher project ID",
+							Type:        []string{"string"},
+							Format:      "",
 						},
 					},
 				},
@@ -26645,6 +27140,41 @@ func schema_pkg_apis_storage_v1_StreamContainer(ref common.ReferenceCallback) co
 		},
 		Dependencies: []string{
 			"k8s.io/apimachinery/pkg/apis/meta/v1.LabelSelector"},
+	}
+}
+
+func schema_pkg_apis_storage_v1_SyncMembersSpec(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"enabled": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Enabled indicates whether to sync rancher project members to the loft project.",
+							Type:        []string{"boolean"},
+							Format:      "",
+						},
+					},
+					"roleMapping": {
+						SchemaProps: spec.SchemaProps{
+							Description: "RoleMapping indicates an optional role mapping from a rancher role to a loft role.",
+							Type:        []string{"object"},
+							AdditionalProperties: &spec.SchemaOrBool{
+								Allows: true,
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: "",
+										Type:    []string{"string"},
+										Format:  "",
+									},
+								},
+							},
+						},
+					},
+				},
+			},
+		},
 	}
 }
 
