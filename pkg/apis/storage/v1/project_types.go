@@ -7,10 +7,6 @@ import (
 )
 
 const (
-	RancherIntegrationSynced agentstoragev1.ConditionType = "RancherIntegrationSynced"
-)
-
-const (
 	ArgoIntegrationSynced agentstoragev1.ConditionType = "ArgoIntegrationSynced"
 
 	ArgoLastAppliedHashAnnotation                = "loft.sh/argo-integration-last-applied-hash"
@@ -28,6 +24,12 @@ const (
 	VaultPreviousClusterAnnotation                = "loft.sh/vault-integration-previous-cluster"
 	VaultPreviousNamespaceAnnotation              = "loft.sh/vault-integration-previous-namespace"
 	VaultPreviousVirtualClusterInstanceAnnotation = "loft.sh/vault-integration-previous-virtualclusterinstance"
+)
+
+const (
+	RancherIntegrationSynced agentstoragev1.ConditionType = "RancherIntegrationSynced"
+
+	RancherLastAppliedHashAnnotation = "loft.sh/rancher-integration-last-applied-hash"
 )
 
 // +genclient
