@@ -97,7 +97,8 @@ type DevPodWorkspaceInstanceSpec struct {
 	// +optional
 	RunnerRef RunnerRef `json:"runnerRef,omitempty"`
 
-	// Parameters are values to pass to the template
+	// Parameters are values to pass to the template.
+	// The values should be encoded as YAML string where each parameter is represented as a top-level field key.
 	// +optional
 	Parameters string `json:"parameters,omitempty"`
 

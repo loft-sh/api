@@ -11568,7 +11568,7 @@ func schema_pkg_apis_management_v1_DevPodWorkspaceInstanceSpec(ref common.Refere
 					},
 					"parameters": {
 						SchemaProps: spec.SchemaProps{
-							Description: "Parameters are values to pass to the template",
+							Description: "Parameters are values to pass to the template. The values should be encoded as YAML string where each parameter is represented as a top-level field key.",
 							Type:        []string{"string"},
 							Format:      "",
 						},
@@ -17519,7 +17519,7 @@ func schema_pkg_apis_management_v1_SpaceInstanceSpec(ref common.ReferenceCallbac
 					},
 					"parameters": {
 						SchemaProps: spec.SchemaProps{
-							Description: "Parameters are values to pass to the template",
+							Description: "Parameters are values to pass to the template. The values should be encoded as YAML string where each parameter is represented as a top-level field key.",
 							Type:        []string{"string"},
 							Format:      "",
 						},
@@ -20370,7 +20370,7 @@ func schema_pkg_apis_management_v1_VirtualClusterInstanceSpec(ref common.Referen
 					},
 					"parameters": {
 						SchemaProps: spec.SchemaProps{
-							Description: "Parameters are values to pass to the template",
+							Description: "Parameters are values to pass to the template. The values should be encoded as YAML string where each parameter is represented as a top-level field key.",
 							Type:        []string{"string"},
 							Format:      "",
 						},
@@ -23899,7 +23899,7 @@ func schema_pkg_apis_storage_v1_DevPodWorkspaceInstanceSpec(ref common.Reference
 					},
 					"parameters": {
 						SchemaProps: spec.SchemaProps{
-							Description: "Parameters are values to pass to the template",
+							Description: "Parameters are values to pass to the template. The values should be encoded as YAML string where each parameter is represented as a top-level field key.",
 							Type:        []string{"string"},
 							Format:      "",
 						},
@@ -26700,7 +26700,7 @@ func schema_pkg_apis_storage_v1_SpaceInstanceSpec(ref common.ReferenceCallback) 
 					},
 					"parameters": {
 						SchemaProps: spec.SchemaProps{
-							Description: "Parameters are values to pass to the template",
+							Description: "Parameters are values to pass to the template. The values should be encoded as YAML string where each parameter is represented as a top-level field key.",
 							Type:        []string{"string"},
 							Format:      "",
 						},
@@ -28690,7 +28690,7 @@ func schema_pkg_apis_storage_v1_VirtualClusterInstanceSpec(ref common.ReferenceC
 					},
 					"parameters": {
 						SchemaProps: spec.SchemaProps{
-							Description: "Parameters are values to pass to the template",
+							Description: "Parameters are values to pass to the template. The values should be encoded as YAML string where each parameter is represented as a top-level field key.",
 							Type:        []string{"string"},
 							Format:      "",
 						},
