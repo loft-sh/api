@@ -24633,6 +24633,22 @@ func schema_pkg_apis_storage_v1_ImportVirtualClustersSpec(ref common.ReferenceCa
 							Format:      "",
 						},
 					},
+					"roleMapping": {
+						SchemaProps: spec.SchemaProps{
+							Description: "RoleMapping indicates an optional role mapping from a rancher project role to a rancher cluster role. Map to an empty role to exclude users and groups with that role from being synced.",
+							Type:        []string{"object"},
+							AdditionalProperties: &spec.SchemaOrBool{
+								Allows: true,
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: "",
+										Type:    []string{"string"},
+										Format:  "",
+									},
+								},
+							},
+						},
+					},
 				},
 			},
 		},
@@ -27176,7 +27192,7 @@ func schema_pkg_apis_storage_v1_SyncMembersSpec(ref common.ReferenceCallback) co
 					},
 					"roleMapping": {
 						SchemaProps: spec.SchemaProps{
-							Description: "RoleMapping indicates an optional role mapping from a rancher role to a loft role.",
+							Description: "RoleMapping indicates an optional role mapping from a rancher role to a loft role. Map to an empty role to exclude users and groups with that role from being synced.",
 							Type:        []string{"object"},
 							AdditionalProperties: &spec.SchemaOrBool{
 								Allows: true,

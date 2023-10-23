@@ -477,13 +477,19 @@ type ImportVirtualClustersSpec struct {
 	// Enabled indicates if virtual clusters created within this project should get synced to Rancher.
 	// If projectRef is defined, will also automatically add the created namespace to the Rancher project.
 	Enabled bool `json:"enabled,omitempty"`
+
+	// RoleMapping indicates an optional role mapping from a rancher project role to a rancher cluster role. Map to an empty role to exclude users and groups with that role from
+	// being synced.
+	// +optional
+	RoleMapping map[string]string `json:"roleMapping,omitempty"`
 }
 
 type SyncMembersSpec struct {
 	// Enabled indicates whether to sync rancher project members to the loft project.
 	Enabled bool `json:"enabled,omitempty"`
 
-	// RoleMapping indicates an optional role mapping from a rancher role to a loft role.
+	// RoleMapping indicates an optional role mapping from a rancher role to a loft role. Map to an empty role to exclude users and groups with that role from
+	// being synced.
 	// +optional
 	RoleMapping map[string]string `json:"roleMapping,omitempty"`
 }
