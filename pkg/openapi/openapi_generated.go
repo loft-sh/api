@@ -24626,13 +24626,6 @@ func schema_pkg_apis_storage_v1_ImportVirtualClustersSpec(ref common.ReferenceCa
 			SchemaProps: spec.SchemaProps{
 				Type: []string{"object"},
 				Properties: map[string]spec.Schema{
-					"enabled": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Enabled indicates if virtual clusters created within this project should get synced to Rancher. If projectRef is defined, will also automatically add the created namespace to the Rancher project.",
-							Type:        []string{"boolean"},
-							Format:      "",
-						},
-					},
 					"roleMapping": {
 						SchemaProps: spec.SchemaProps{
 							Description: "RoleMapping indicates an optional role mapping from a rancher project role to a rancher cluster role. Map to an empty role to exclude users and groups with that role from being synced.",
