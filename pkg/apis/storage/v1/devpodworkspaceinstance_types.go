@@ -22,6 +22,9 @@ var (
 
 	// DevPodWorkspaceSourceAnnotation holds the workspace source of the devpod workspace
 	DevPodWorkspaceSourceAnnotation = "loft.sh/workspace-source"
+
+	// DevPodWorkspaceRunnerEndpointAnnotation holds the workspace runner endpoint of the devpod workspace
+	DevPodWorkspaceRunnerEndpointAnnotation = "loft.sh/runner-endpoint"
 )
 
 var (

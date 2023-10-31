@@ -16531,6 +16531,13 @@ func schema_pkg_apis_management_v1_RunnerSpec(ref common.ReferenceCallback) comm
 							Format:      "",
 						},
 					},
+					"endpoint": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Endpoint is the hostname used to connect directly to the runner",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
 					"clusterRef": {
 						SchemaProps: spec.SchemaProps{
 							Description: "If ClusterRef is defined, Loft will schedule the runner on the given cluster.",
@@ -26027,6 +26034,13 @@ func schema_pkg_apis_storage_v1_RunnerSpec(ref common.ReferenceCallback) common.
 					"description": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Description describes a cluster access object",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"endpoint": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Endpoint is the hostname used to connect directly to the runner",
 							Type:        []string{"string"},
 							Format:      "",
 						},
