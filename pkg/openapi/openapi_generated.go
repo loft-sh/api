@@ -1909,6 +1909,24 @@ func schema_loft_sh_admin_apis_pkg_licenseapi_LicenseAPIRoutes(ref common.Refere
 							Ref:     ref("github.com/loft-sh/admin-apis/pkg/licenseapi.LicenseAPIRoute"),
 						},
 					},
+					"featurePreview": {
+						SchemaProps: spec.SchemaProps{
+							Default: map[string]interface{}{},
+							Ref:     ref("github.com/loft-sh/admin-apis/pkg/licenseapi.LicenseAPIRoute"),
+						},
+					},
+					"moduleActivation": {
+						SchemaProps: spec.SchemaProps{
+							Default: map[string]interface{}{},
+							Ref:     ref("github.com/loft-sh/admin-apis/pkg/licenseapi.LicenseAPIRoute"),
+						},
+					},
+					"modulePreview": {
+						SchemaProps: spec.SchemaProps{
+							Default: map[string]interface{}{},
+							Ref:     ref("github.com/loft-sh/admin-apis/pkg/licenseapi.LicenseAPIRoute"),
+						},
+					},
 					"checkout": {
 						SchemaProps: spec.SchemaProps{
 							Default: map[string]interface{}{},
@@ -2050,6 +2068,13 @@ func schema_loft_sh_admin_apis_pkg_licenseapi_Plan(ref common.ReferenceCallback)
 				Description: "Plan definition",
 				Type:        []string{"object"},
 				Properties: map[string]spec.Schema{
+					"id": {
+						SchemaProps: spec.SchemaProps{
+							Description: "ID of the plan",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
 					"displayName": {
 						SchemaProps: spec.SchemaProps{
 							Description: "DisplayName is the display name of the plan",
@@ -4240,6 +4265,13 @@ func schema_apis_loft_cluster_v1_SleepModeConfigSpec(ref common.ReferenceCallbac
 					"ignoreResourceNames": {
 						SchemaProps: spec.SchemaProps{
 							Description: "IgnoreResourceNames are ignored resources and names",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"ignoreUserAgents": {
+						SchemaProps: spec.SchemaProps{
+							Description: "IgnoreUseragents are ignored user agents with trailing wildcards '*' allowed. comma separated",
 							Type:        []string{"string"},
 							Format:      "",
 						},
