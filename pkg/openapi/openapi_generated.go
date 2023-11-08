@@ -1909,6 +1909,24 @@ func schema_loft_sh_admin_apis_pkg_licenseapi_LicenseAPIRoutes(ref common.Refere
 							Ref:     ref("github.com/loft-sh/admin-apis/pkg/licenseapi.LicenseAPIRoute"),
 						},
 					},
+					"featurePreview": {
+						SchemaProps: spec.SchemaProps{
+							Default: map[string]interface{}{},
+							Ref:     ref("github.com/loft-sh/admin-apis/pkg/licenseapi.LicenseAPIRoute"),
+						},
+					},
+					"moduleActivation": {
+						SchemaProps: spec.SchemaProps{
+							Default: map[string]interface{}{},
+							Ref:     ref("github.com/loft-sh/admin-apis/pkg/licenseapi.LicenseAPIRoute"),
+						},
+					},
+					"modulePreview": {
+						SchemaProps: spec.SchemaProps{
+							Default: map[string]interface{}{},
+							Ref:     ref("github.com/loft-sh/admin-apis/pkg/licenseapi.LicenseAPIRoute"),
+						},
+					},
 					"checkout": {
 						SchemaProps: spec.SchemaProps{
 							Default: map[string]interface{}{},
@@ -2050,6 +2068,13 @@ func schema_loft_sh_admin_apis_pkg_licenseapi_Plan(ref common.ReferenceCallback)
 				Description: "Plan definition",
 				Type:        []string{"object"},
 				Properties: map[string]spec.Schema{
+					"id": {
+						SchemaProps: spec.SchemaProps{
+							Description: "ID of the plan",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
 					"displayName": {
 						SchemaProps: spec.SchemaProps{
 							Description: "DisplayName is the display name of the plan",
@@ -4240,6 +4265,13 @@ func schema_apis_loft_cluster_v1_SleepModeConfigSpec(ref common.ReferenceCallbac
 					"ignoreResourceNames": {
 						SchemaProps: spec.SchemaProps{
 							Description: "IgnoreResourceNames are ignored resources and names",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"ignoreUserAgents": {
+						SchemaProps: spec.SchemaProps{
+							Description: "IgnoreUseragents are ignored user agents with trailing wildcards '*' allowed. comma separated",
 							Type:        []string{"string"},
 							Format:      "",
 						},
@@ -16531,6 +16563,13 @@ func schema_pkg_apis_management_v1_RunnerSpec(ref common.ReferenceCallback) comm
 							Format:      "",
 						},
 					},
+					"endpoint": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Endpoint is the hostname used to connect directly to the runner",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
 					"clusterRef": {
 						SchemaProps: spec.SchemaProps{
 							Description: "If ClusterRef is defined, Loft will schedule the runner on the given cluster.",
@@ -24626,13 +24665,6 @@ func schema_pkg_apis_storage_v1_ImportVirtualClustersSpec(ref common.ReferenceCa
 			SchemaProps: spec.SchemaProps{
 				Type: []string{"object"},
 				Properties: map[string]spec.Schema{
-					"enabled": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Enabled indicates if virtual clusters created within this project should get synced to Rancher. If projectRef is defined, will also automatically add the created namespace to the Rancher project.",
-							Type:        []string{"boolean"},
-							Format:      "",
-						},
-					},
 					"roleMapping": {
 						SchemaProps: spec.SchemaProps{
 							Description: "RoleMapping indicates an optional role mapping from a rancher project role to a rancher cluster role. Map to an empty role to exclude users and groups with that role from being synced.",
@@ -26034,6 +26066,13 @@ func schema_pkg_apis_storage_v1_RunnerSpec(ref common.ReferenceCallback) common.
 					"description": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Description describes a cluster access object",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"endpoint": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Endpoint is the hostname used to connect directly to the runner",
 							Type:        []string{"string"},
 							Format:      "",
 						},
