@@ -40,6 +40,10 @@ func (c *FakeStorageV1) DevPodWorkspaceTemplates() v1.DevPodWorkspaceTemplateInt
 	return &FakeDevPodWorkspaceTemplates{c}
 }
 
+func (c *FakeStorageV1) NetworkPeers() v1.NetworkPeerInterface {
+	return &FakeNetworkPeers{c}
+}
+
 func (c *FakeStorageV1) Projects() v1.ProjectInterface {
 	return &FakeProjects{c}
 }
