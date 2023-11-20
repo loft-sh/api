@@ -4168,13 +4168,6 @@ func schema_apis_loft_cluster_v1_SleepModeConfigSpec(ref common.ReferenceCallbac
 							Format:      "int64",
 						},
 					},
-					"deleteAllPods": {
-						SchemaProps: spec.SchemaProps{
-							Description: "If true will delete all pods on sleep in the space regardless of if they have a parent set",
-							Type:        []string{"boolean"},
-							Format:      "",
-						},
-					},
 					"deleteAfter": {
 						SchemaProps: spec.SchemaProps{
 							Description: "DeleteAfter specifies after how many seconds of inactivity the space should be deleted",
