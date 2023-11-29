@@ -19,6 +19,9 @@ func addKnownTypes(scheme *runtime.Scheme) error {
 		&AnnouncementList{},
 		&App{},
 		&AppList{},
+		&Backup{},
+		&BackupList{},
+		&BackupApply{},
 		&Cluster{},
 		&ClusterList{},
 		&ClusterAgentConfig{},
@@ -130,6 +133,12 @@ var (
 		management.ManagementAgentAuditEventStorage,
 		management.ManagementAnnouncementStorage,
 		management.ManagementAppStorage,
+		management.ManagementBackupStorage,
+		builders.NewApiResourceWithStorage(
+			management.InternalBackupApplyREST,
+			func() runtime.Object { return &BackupApply{} }, // Register versioned resource
+			nil,
+			management.NewBackupApplyREST),
 		management.ManagementClusterStorage,
 		builders.NewApiResourceWithStorage(
 			management.InternalClusterAgentConfigREST,
@@ -397,6 +406,22 @@ type AppList struct {
 	metav1.TypeMeta `json:",inline"`
 	metav1.ListMeta `json:"metadata,omitempty"`
 	Items           []App `json:"items"`
+}
+
+// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+
+type BackupList struct {
+	metav1.TypeMeta `json:",inline"`
+	metav1.ListMeta `json:"metadata,omitempty"`
+	Items           []Backup `json:"items"`
+}
+
+// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+
+type BackupApplyList struct {
+	metav1.TypeMeta `json:",inline"`
+	metav1.ListMeta `json:"metadata,omitempty"`
+	Items           []BackupApply `json:"items"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object

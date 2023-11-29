@@ -42,6 +42,7 @@ func GetManagementAPIBuilder() *builders.APIGroupBuilder {
 			"AgentAuditEvent",
 			"Announcement",
 			"App",
+			"Backup",
 			"Cluster",
 			"ClusterAccess",
 			"ClusterConnect",

@@ -329,6 +329,76 @@ func RegisterConversions(s *runtime.Scheme) error {
 	}); err != nil {
 		return err
 	}
+	if err := s.AddGeneratedConversionFunc((*Backup)(nil), (*management.Backup)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_v1_Backup_To_management_Backup(a.(*Backup), b.(*management.Backup), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*management.Backup)(nil), (*Backup)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_management_Backup_To_v1_Backup(a.(*management.Backup), b.(*Backup), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*BackupApply)(nil), (*management.BackupApply)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_v1_BackupApply_To_management_BackupApply(a.(*BackupApply), b.(*management.BackupApply), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*management.BackupApply)(nil), (*BackupApply)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_management_BackupApply_To_v1_BackupApply(a.(*management.BackupApply), b.(*BackupApply), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*BackupApplyList)(nil), (*management.BackupApplyList)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_v1_BackupApplyList_To_management_BackupApplyList(a.(*BackupApplyList), b.(*management.BackupApplyList), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*management.BackupApplyList)(nil), (*BackupApplyList)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_management_BackupApplyList_To_v1_BackupApplyList(a.(*management.BackupApplyList), b.(*BackupApplyList), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*BackupApplySpec)(nil), (*management.BackupApplySpec)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_v1_BackupApplySpec_To_management_BackupApplySpec(a.(*BackupApplySpec), b.(*management.BackupApplySpec), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*management.BackupApplySpec)(nil), (*BackupApplySpec)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_management_BackupApplySpec_To_v1_BackupApplySpec(a.(*management.BackupApplySpec), b.(*BackupApplySpec), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*BackupList)(nil), (*management.BackupList)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_v1_BackupList_To_management_BackupList(a.(*BackupList), b.(*management.BackupList), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*management.BackupList)(nil), (*BackupList)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_management_BackupList_To_v1_BackupList(a.(*management.BackupList), b.(*BackupList), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*BackupSpec)(nil), (*management.BackupSpec)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_v1_BackupSpec_To_management_BackupSpec(a.(*BackupSpec), b.(*management.BackupSpec), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*management.BackupSpec)(nil), (*BackupSpec)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_management_BackupSpec_To_v1_BackupSpec(a.(*management.BackupSpec), b.(*BackupSpec), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*BackupStatus)(nil), (*management.BackupStatus)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_v1_BackupStatus_To_management_BackupStatus(a.(*BackupStatus), b.(*management.BackupStatus), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*management.BackupStatus)(nil), (*BackupStatus)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_management_BackupStatus_To_v1_BackupStatus(a.(*management.BackupStatus), b.(*BackupStatus), scope)
+	}); err != nil {
+		return err
+	}
 	if err := s.AddGeneratedConversionFunc((*Cluster)(nil), (*management.Cluster)(nil), func(a, b interface{}, scope conversion.Scope) error {
 		return Convert_v1_Cluster_To_management_Cluster(a.(*Cluster), b.(*management.Cluster), scope)
 	}); err != nil {
@@ -2679,6 +2749,11 @@ func RegisterConversions(s *runtime.Scheme) error {
 	}); err != nil {
 		return err
 	}
+	if err := s.AddGeneratedConversionFunc((*url.Values)(nil), (*BackupApplyOptions)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_url_Values_To_v1_BackupApplyOptions(a.(*url.Values), b.(*BackupApplyOptions), scope)
+	}); err != nil {
+		return err
+	}
 	if err := s.AddGeneratedConversionFunc((*url.Values)(nil), (*DevPodDeleteOptions)(nil), func(a, b interface{}, scope conversion.Scope) error {
 		return Convert_url_Values_To_v1_DevPodDeleteOptions(a.(*url.Values), b.(*DevPodDeleteOptions), scope)
 	}); err != nil {
@@ -3598,6 +3673,177 @@ func autoConvert_management_AuthenticationSAML_To_v1_AuthenticationSAML(in *mana
 // Convert_management_AuthenticationSAML_To_v1_AuthenticationSAML is an autogenerated conversion function.
 func Convert_management_AuthenticationSAML_To_v1_AuthenticationSAML(in *management.AuthenticationSAML, out *AuthenticationSAML, s conversion.Scope) error {
 	return autoConvert_management_AuthenticationSAML_To_v1_AuthenticationSAML(in, out, s)
+}
+
+func autoConvert_v1_Backup_To_management_Backup(in *Backup, out *management.Backup, s conversion.Scope) error {
+	out.ObjectMeta = in.ObjectMeta
+	if err := Convert_v1_BackupSpec_To_management_BackupSpec(&in.Spec, &out.Spec, s); err != nil {
+		return err
+	}
+	if err := Convert_v1_BackupStatus_To_management_BackupStatus(&in.Status, &out.Status, s); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Convert_v1_Backup_To_management_Backup is an autogenerated conversion function.
+func Convert_v1_Backup_To_management_Backup(in *Backup, out *management.Backup, s conversion.Scope) error {
+	return autoConvert_v1_Backup_To_management_Backup(in, out, s)
+}
+
+func autoConvert_management_Backup_To_v1_Backup(in *management.Backup, out *Backup, s conversion.Scope) error {
+	out.ObjectMeta = in.ObjectMeta
+	if err := Convert_management_BackupSpec_To_v1_BackupSpec(&in.Spec, &out.Spec, s); err != nil {
+		return err
+	}
+	if err := Convert_management_BackupStatus_To_v1_BackupStatus(&in.Status, &out.Status, s); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Convert_management_Backup_To_v1_Backup is an autogenerated conversion function.
+func Convert_management_Backup_To_v1_Backup(in *management.Backup, out *Backup, s conversion.Scope) error {
+	return autoConvert_management_Backup_To_v1_Backup(in, out, s)
+}
+
+func autoConvert_v1_BackupApply_To_management_BackupApply(in *BackupApply, out *management.BackupApply, s conversion.Scope) error {
+	out.ObjectMeta = in.ObjectMeta
+	if err := Convert_v1_BackupApplySpec_To_management_BackupApplySpec(&in.Spec, &out.Spec, s); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Convert_v1_BackupApply_To_management_BackupApply is an autogenerated conversion function.
+func Convert_v1_BackupApply_To_management_BackupApply(in *BackupApply, out *management.BackupApply, s conversion.Scope) error {
+	return autoConvert_v1_BackupApply_To_management_BackupApply(in, out, s)
+}
+
+func autoConvert_management_BackupApply_To_v1_BackupApply(in *management.BackupApply, out *BackupApply, s conversion.Scope) error {
+	out.ObjectMeta = in.ObjectMeta
+	if err := Convert_management_BackupApplySpec_To_v1_BackupApplySpec(&in.Spec, &out.Spec, s); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Convert_management_BackupApply_To_v1_BackupApply is an autogenerated conversion function.
+func Convert_management_BackupApply_To_v1_BackupApply(in *management.BackupApply, out *BackupApply, s conversion.Scope) error {
+	return autoConvert_management_BackupApply_To_v1_BackupApply(in, out, s)
+}
+
+func autoConvert_v1_BackupApplyList_To_management_BackupApplyList(in *BackupApplyList, out *management.BackupApplyList, s conversion.Scope) error {
+	out.ListMeta = in.ListMeta
+	out.Items = *(*[]management.BackupApply)(unsafe.Pointer(&in.Items))
+	return nil
+}
+
+// Convert_v1_BackupApplyList_To_management_BackupApplyList is an autogenerated conversion function.
+func Convert_v1_BackupApplyList_To_management_BackupApplyList(in *BackupApplyList, out *management.BackupApplyList, s conversion.Scope) error {
+	return autoConvert_v1_BackupApplyList_To_management_BackupApplyList(in, out, s)
+}
+
+func autoConvert_management_BackupApplyList_To_v1_BackupApplyList(in *management.BackupApplyList, out *BackupApplyList, s conversion.Scope) error {
+	out.ListMeta = in.ListMeta
+	out.Items = *(*[]BackupApply)(unsafe.Pointer(&in.Items))
+	return nil
+}
+
+// Convert_management_BackupApplyList_To_v1_BackupApplyList is an autogenerated conversion function.
+func Convert_management_BackupApplyList_To_v1_BackupApplyList(in *management.BackupApplyList, out *BackupApplyList, s conversion.Scope) error {
+	return autoConvert_management_BackupApplyList_To_v1_BackupApplyList(in, out, s)
+}
+
+func autoConvert_url_Values_To_v1_BackupApplyOptions(in *url.Values, out *BackupApplyOptions, s conversion.Scope) error {
+	// WARNING: Field TypeMeta does not have json tag, skipping.
+
+	return nil
+}
+
+// Convert_url_Values_To_v1_BackupApplyOptions is an autogenerated conversion function.
+func Convert_url_Values_To_v1_BackupApplyOptions(in *url.Values, out *BackupApplyOptions, s conversion.Scope) error {
+	return autoConvert_url_Values_To_v1_BackupApplyOptions(in, out, s)
+}
+
+func autoConvert_v1_BackupApplySpec_To_management_BackupApplySpec(in *BackupApplySpec, out *management.BackupApplySpec, s conversion.Scope) error {
+	out.Raw = in.Raw
+	return nil
+}
+
+// Convert_v1_BackupApplySpec_To_management_BackupApplySpec is an autogenerated conversion function.
+func Convert_v1_BackupApplySpec_To_management_BackupApplySpec(in *BackupApplySpec, out *management.BackupApplySpec, s conversion.Scope) error {
+	return autoConvert_v1_BackupApplySpec_To_management_BackupApplySpec(in, out, s)
+}
+
+func autoConvert_management_BackupApplySpec_To_v1_BackupApplySpec(in *management.BackupApplySpec, out *BackupApplySpec, s conversion.Scope) error {
+	out.Raw = in.Raw
+	return nil
+}
+
+// Convert_management_BackupApplySpec_To_v1_BackupApplySpec is an autogenerated conversion function.
+func Convert_management_BackupApplySpec_To_v1_BackupApplySpec(in *management.BackupApplySpec, out *BackupApplySpec, s conversion.Scope) error {
+	return autoConvert_management_BackupApplySpec_To_v1_BackupApplySpec(in, out, s)
+}
+
+func autoConvert_v1_BackupList_To_management_BackupList(in *BackupList, out *management.BackupList, s conversion.Scope) error {
+	out.ListMeta = in.ListMeta
+	out.Items = *(*[]management.Backup)(unsafe.Pointer(&in.Items))
+	return nil
+}
+
+// Convert_v1_BackupList_To_management_BackupList is an autogenerated conversion function.
+func Convert_v1_BackupList_To_management_BackupList(in *BackupList, out *management.BackupList, s conversion.Scope) error {
+	return autoConvert_v1_BackupList_To_management_BackupList(in, out, s)
+}
+
+func autoConvert_management_BackupList_To_v1_BackupList(in *management.BackupList, out *BackupList, s conversion.Scope) error {
+	out.ListMeta = in.ListMeta
+	out.Items = *(*[]Backup)(unsafe.Pointer(&in.Items))
+	return nil
+}
+
+// Convert_management_BackupList_To_v1_BackupList is an autogenerated conversion function.
+func Convert_management_BackupList_To_v1_BackupList(in *management.BackupList, out *BackupList, s conversion.Scope) error {
+	return autoConvert_management_BackupList_To_v1_BackupList(in, out, s)
+}
+
+func autoConvert_v1_BackupSpec_To_management_BackupSpec(in *BackupSpec, out *management.BackupSpec, s conversion.Scope) error {
+	return nil
+}
+
+// Convert_v1_BackupSpec_To_management_BackupSpec is an autogenerated conversion function.
+func Convert_v1_BackupSpec_To_management_BackupSpec(in *BackupSpec, out *management.BackupSpec, s conversion.Scope) error {
+	return autoConvert_v1_BackupSpec_To_management_BackupSpec(in, out, s)
+}
+
+func autoConvert_management_BackupSpec_To_v1_BackupSpec(in *management.BackupSpec, out *BackupSpec, s conversion.Scope) error {
+	return nil
+}
+
+// Convert_management_BackupSpec_To_v1_BackupSpec is an autogenerated conversion function.
+func Convert_management_BackupSpec_To_v1_BackupSpec(in *management.BackupSpec, out *BackupSpec, s conversion.Scope) error {
+	return autoConvert_management_BackupSpec_To_v1_BackupSpec(in, out, s)
+}
+
+func autoConvert_v1_BackupStatus_To_management_BackupStatus(in *BackupStatus, out *management.BackupStatus, s conversion.Scope) error {
+	out.RawBackup = in.RawBackup
+	return nil
+}
+
+// Convert_v1_BackupStatus_To_management_BackupStatus is an autogenerated conversion function.
+func Convert_v1_BackupStatus_To_management_BackupStatus(in *BackupStatus, out *management.BackupStatus, s conversion.Scope) error {
+	return autoConvert_v1_BackupStatus_To_management_BackupStatus(in, out, s)
+}
+
+func autoConvert_management_BackupStatus_To_v1_BackupStatus(in *management.BackupStatus, out *BackupStatus, s conversion.Scope) error {
+	out.RawBackup = in.RawBackup
+	return nil
+}
+
+// Convert_management_BackupStatus_To_v1_BackupStatus is an autogenerated conversion function.
+func Convert_management_BackupStatus_To_v1_BackupStatus(in *management.BackupStatus, out *BackupStatus, s conversion.Scope) error {
+	return autoConvert_management_BackupStatus_To_v1_BackupStatus(in, out, s)
 }
 
 func autoConvert_v1_Cluster_To_management_Cluster(in *Cluster, out *management.Cluster, s conversion.Scope) error {

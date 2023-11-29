@@ -4,7 +4,7 @@ package install
 
 import (
 	"github.com/loft-sh/api/v3/pkg/apis/management"
-	"github.com/loft-sh/api/v3/pkg/apis/management/v1"
+	v1 "github.com/loft-sh/api/v3/pkg/apis/management/v1"
 	"github.com/loft-sh/apiserver/pkg/builders"
 	"k8s.io/apimachinery/pkg/runtime"
 	utilruntime "k8s.io/apimachinery/pkg/util/runtime"
@@ -28,6 +28,9 @@ func addKnownTypes(scheme *runtime.Scheme) error {
 		&management.AnnouncementList{},
 		&management.App{},
 		&management.AppList{},
+		&management.Backup{},
+		&management.BackupList{},
+		&management.BackupApply{},
 		&management.Cluster{},
 		&management.ClusterList{},
 		&management.ClusterAgentConfig{},

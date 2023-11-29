@@ -57,7 +57,17 @@ var (
 	NewAppREST = func(getter generic.RESTOptionsGetter) rest.Storage {
 		return NewAppRESTFunc(Factory)
 	}
-	NewAppRESTFunc           NewRESTFunc
+	NewAppRESTFunc          NewRESTFunc
+	ManagementBackupStorage = builders.NewApiResourceWithStorage( // Resource status endpoint
+		InternalBackup,
+		func() runtime.Object { return &Backup{} },     // Register versioned resource
+		func() runtime.Object { return &BackupList{} }, // Register versioned resource list
+		NewBackupREST,
+	)
+	NewBackupREST = func(getter generic.RESTOptionsGetter) rest.Storage {
+		return NewBackupRESTFunc(Factory)
+	}
+	NewBackupRESTFunc        NewRESTFunc
 	ManagementClusterStorage = builders.NewApiResourceWithStorage( // Resource status endpoint
 		InternalCluster,
 		func() runtime.Object { return &Cluster{} },     // Register versioned resource
@@ -442,7 +452,27 @@ var (
 		func() runtime.Object { return &App{} },
 		func() runtime.Object { return &AppList{} },
 	)
-	InternalCluster = builders.NewInternalResource(
+	InternalBackup = builders.NewInternalResource(
+		"backups",
+		"Backup",
+		func() runtime.Object { return &Backup{} },
+		func() runtime.Object { return &BackupList{} },
+	)
+	InternalBackupStatus = builders.NewInternalResourceStatus(
+		"backups",
+		"BackupStatus",
+		func() runtime.Object { return &Backup{} },
+		func() runtime.Object { return &BackupList{} },
+	)
+	InternalBackupApplyREST = builders.NewInternalSubresource(
+		"backups", "BackupApply", "apply",
+		func() runtime.Object { return &BackupApply{} },
+	)
+	NewBackupApplyREST = func(getter generic.RESTOptionsGetter) rest.Storage {
+		return NewBackupApplyRESTFunc(Factory)
+	}
+	NewBackupApplyRESTFunc NewRESTFunc
+	InternalCluster        = builders.NewInternalResource(
 		"clusters",
 		"Cluster",
 		func() runtime.Object { return &Cluster{} },
@@ -1130,6 +1160,9 @@ var (
 		InternalAnnouncementStatus,
 		InternalApp,
 		InternalAppStatus,
+		InternalBackup,
+		InternalBackupStatus,
+		InternalBackupApplyREST,
 		InternalCluster,
 		InternalClusterStatus,
 		InternalClusterAgentConfigREST,
@@ -1485,6 +1518,36 @@ type AuthenticationSAML struct {
 	AllowedGroups                   []string
 	FilterGroups                    bool
 	NameIDPolicyFormat              string
+}
+
+// +genclient
+// +genclient:nonNamespaced
+// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+
+type Backup struct {
+	metav1.TypeMeta
+	metav1.ObjectMeta
+	Spec   BackupSpec
+	Status BackupStatus
+}
+
+// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+
+type BackupApply struct {
+	metav1.TypeMeta
+	metav1.ObjectMeta
+	Spec BackupApplySpec
+}
+
+type BackupApplySpec struct {
+	Raw string
+}
+
+type BackupSpec struct {
+}
+
+type BackupStatus struct {
+	RawBackup string
 }
 
 // +genclient
@@ -2963,6 +3026,133 @@ func (s *storageApp) UpdateApp(ctx context.Context, object *App) (*App, error) {
 }
 
 func (s *storageApp) DeleteApp(ctx context.Context, id string) (bool, error) {
+	st := s.GetStandardStorage()
+	_, sync, err := st.Delete(ctx, id, nil, &metav1.DeleteOptions{})
+	return sync, err
+}
+
+// Backup Functions and Structs
+//
+// +k8s:deepcopy-gen=false
+type BackupStrategy struct {
+	builders.DefaultStorageStrategy
+}
+
+// +k8s:deepcopy-gen=false
+type BackupStatusStrategy struct {
+	builders.DefaultStatusStorageStrategy
+}
+
+// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+
+type BackupList struct {
+	metav1.TypeMeta
+	metav1.ListMeta
+	Items []Backup
+}
+
+// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+
+type BackupApplyList struct {
+	metav1.TypeMeta
+	metav1.ListMeta
+	Items []BackupApply
+}
+
+func (Backup) NewStatus() interface{} {
+	return BackupStatus{}
+}
+
+func (pc *Backup) GetStatus() interface{} {
+	return pc.Status
+}
+
+func (pc *Backup) SetStatus(s interface{}) {
+	pc.Status = s.(BackupStatus)
+}
+
+func (pc *Backup) GetSpec() interface{} {
+	return pc.Spec
+}
+
+func (pc *Backup) SetSpec(s interface{}) {
+	pc.Spec = s.(BackupSpec)
+}
+
+func (pc *Backup) GetObjectMeta() *metav1.ObjectMeta {
+	return &pc.ObjectMeta
+}
+
+func (pc *Backup) SetGeneration(generation int64) {
+	pc.ObjectMeta.Generation = generation
+}
+
+func (pc Backup) GetGeneration() int64 {
+	return pc.ObjectMeta.Generation
+}
+
+// Registry is an interface for things that know how to store Backup.
+// +k8s:deepcopy-gen=false
+type BackupRegistry interface {
+	ListBackups(ctx context.Context, options *internalversion.ListOptions) (*BackupList, error)
+	GetBackup(ctx context.Context, id string, options *metav1.GetOptions) (*Backup, error)
+	CreateBackup(ctx context.Context, id *Backup) (*Backup, error)
+	UpdateBackup(ctx context.Context, id *Backup) (*Backup, error)
+	DeleteBackup(ctx context.Context, id string) (bool, error)
+}
+
+// NewRegistry returns a new Registry interface for the given Storage. Any mismatched types will panic.
+func NewBackupRegistry(sp builders.StandardStorageProvider) BackupRegistry {
+	return &storageBackup{sp}
+}
+
+// Implement Registry
+// storage puts strong typing around storage calls
+// +k8s:deepcopy-gen=false
+type storageBackup struct {
+	builders.StandardStorageProvider
+}
+
+func (s *storageBackup) ListBackups(ctx context.Context, options *internalversion.ListOptions) (*BackupList, error) {
+	if options != nil && options.FieldSelector != nil && !options.FieldSelector.Empty() {
+		return nil, fmt.Errorf("field selector not supported yet")
+	}
+	st := s.GetStandardStorage()
+	obj, err := st.List(ctx, options)
+	if err != nil {
+		return nil, err
+	}
+	return obj.(*BackupList), err
+}
+
+func (s *storageBackup) GetBackup(ctx context.Context, id string, options *metav1.GetOptions) (*Backup, error) {
+	st := s.GetStandardStorage()
+	obj, err := st.Get(ctx, id, options)
+	if err != nil {
+		return nil, err
+	}
+	return obj.(*Backup), nil
+}
+
+func (s *storageBackup) CreateBackup(ctx context.Context, object *Backup) (*Backup, error) {
+	st := s.GetStandardStorage()
+	obj, err := st.Create(ctx, object, nil, &metav1.CreateOptions{})
+	if err != nil {
+		return nil, err
+	}
+	return obj.(*Backup), nil
+}
+
+func (s *storageBackup) UpdateBackup(ctx context.Context, object *Backup) (*Backup, error) {
+	st := s.GetStandardStorage()
+	obj, _, err := st.Update(ctx, object.Name, rest.DefaultUpdatedObjectInfo(object), nil, nil, false, &metav1.UpdateOptions{})
+	if err != nil {
+		return nil, err
+	}
+	return obj.(*Backup), nil
+}
+
+func (s *storageBackup) DeleteBackup(ctx context.Context, id string) (bool, error) {
 	st := s.GetStandardStorage()
 	_, sync, err := st.Delete(ctx, id, nil, &metav1.DeleteOptions{})
 	return sync, err
