@@ -9855,6 +9855,13 @@ func schema_pkg_apis_management_v1_ClusterAgentConfig(ref common.ReferenceCallba
 							Format:      "",
 						},
 					},
+					"loftInstanceID": {
+						SchemaProps: spec.SchemaProps{
+							Description: "LoftInstanceID defines the instance id from the loft instance",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
 					"analyticsSpec": {
 						SchemaProps: spec.SchemaProps{
 							Description: "AnalyticsSpec holds info needed for the agent to send analytics data to the analytics backend.",

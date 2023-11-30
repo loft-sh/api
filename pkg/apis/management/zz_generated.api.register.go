@@ -1599,6 +1599,7 @@ type ClusterAgentConfig struct {
 	DefaultImageRegistry string
 	TokenCaCert          []byte
 	LoftHost             string
+	LoftInstanceID       string
 	AnalyticsSpec        AgentAnalyticsSpec
 }
 
@@ -1947,7 +1948,7 @@ type KioskStatus struct {
 }
 
 // +genclient
-// +genclient
+// +genclient:nonNamespaced
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
 
 type License struct {
