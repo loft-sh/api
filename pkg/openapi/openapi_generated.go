@@ -164,6 +164,14 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 		"github.com/loft-sh/api/v3/pkg/apis/management/v1.AuthenticationPassword":                       schema_pkg_apis_management_v1_AuthenticationPassword(ref),
 		"github.com/loft-sh/api/v3/pkg/apis/management/v1.AuthenticationRancher":                        schema_pkg_apis_management_v1_AuthenticationRancher(ref),
 		"github.com/loft-sh/api/v3/pkg/apis/management/v1.AuthenticationSAML":                           schema_pkg_apis_management_v1_AuthenticationSAML(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/management/v1.Backup":                                       schema_pkg_apis_management_v1_Backup(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/management/v1.BackupApply":                                  schema_pkg_apis_management_v1_BackupApply(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/management/v1.BackupApplyList":                              schema_pkg_apis_management_v1_BackupApplyList(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/management/v1.BackupApplyOptions":                           schema_pkg_apis_management_v1_BackupApplyOptions(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/management/v1.BackupApplySpec":                              schema_pkg_apis_management_v1_BackupApplySpec(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/management/v1.BackupList":                                   schema_pkg_apis_management_v1_BackupList(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/management/v1.BackupSpec":                                   schema_pkg_apis_management_v1_BackupSpec(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/management/v1.BackupStatus":                                 schema_pkg_apis_management_v1_BackupStatus(ref),
 		"github.com/loft-sh/api/v3/pkg/apis/management/v1.Cluster":                                      schema_pkg_apis_management_v1_Cluster(ref),
 		"github.com/loft-sh/api/v3/pkg/apis/management/v1.ClusterAccess":                                schema_pkg_apis_management_v1_ClusterAccess(ref),
 		"github.com/loft-sh/api/v3/pkg/apis/management/v1.ClusterAccessList":                            schema_pkg_apis_management_v1_ClusterAccessList(ref),
@@ -216,6 +224,8 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 		"github.com/loft-sh/api/v3/pkg/apis/management/v1.DevPodWorkspaceInstanceSpec":                  schema_pkg_apis_management_v1_DevPodWorkspaceInstanceSpec(ref),
 		"github.com/loft-sh/api/v3/pkg/apis/management/v1.DevPodWorkspaceInstanceSsh":                   schema_pkg_apis_management_v1_DevPodWorkspaceInstanceSsh(ref),
 		"github.com/loft-sh/api/v3/pkg/apis/management/v1.DevPodWorkspaceInstanceSshList":               schema_pkg_apis_management_v1_DevPodWorkspaceInstanceSshList(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/management/v1.DevPodWorkspaceInstanceState":                 schema_pkg_apis_management_v1_DevPodWorkspaceInstanceState(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/management/v1.DevPodWorkspaceInstanceStateList":             schema_pkg_apis_management_v1_DevPodWorkspaceInstanceStateList(ref),
 		"github.com/loft-sh/api/v3/pkg/apis/management/v1.DevPodWorkspaceInstanceStatus":                schema_pkg_apis_management_v1_DevPodWorkspaceInstanceStatus(ref),
 		"github.com/loft-sh/api/v3/pkg/apis/management/v1.DevPodWorkspaceInstanceStop":                  schema_pkg_apis_management_v1_DevPodWorkspaceInstanceStop(ref),
 		"github.com/loft-sh/api/v3/pkg/apis/management/v1.DevPodWorkspaceInstanceStopList":              schema_pkg_apis_management_v1_DevPodWorkspaceInstanceStopList(ref),
@@ -9222,6 +9232,265 @@ func schema_pkg_apis_management_v1_AuthenticationSAML(ref common.ReferenceCallba
 	}
 }
 
+func schema_pkg_apis_management_v1_Backup(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "Backup holds the Backup information",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"kind": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"apiVersion": {
+						SchemaProps: spec.SchemaProps{
+							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"metadata": {
+						SchemaProps: spec.SchemaProps{
+							Default: map[string]interface{}{},
+							Ref:     ref("k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"),
+						},
+					},
+					"spec": {
+						SchemaProps: spec.SchemaProps{
+							Default: map[string]interface{}{},
+							Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/management/v1.BackupSpec"),
+						},
+					},
+					"status": {
+						SchemaProps: spec.SchemaProps{
+							Default: map[string]interface{}{},
+							Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/management/v1.BackupStatus"),
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			"github.com/loft-sh/api/v3/pkg/apis/management/v1.BackupSpec", "github.com/loft-sh/api/v3/pkg/apis/management/v1.BackupStatus", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
+	}
+}
+
+func schema_pkg_apis_management_v1_BackupApply(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"kind": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"apiVersion": {
+						SchemaProps: spec.SchemaProps{
+							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"metadata": {
+						SchemaProps: spec.SchemaProps{
+							Default: map[string]interface{}{},
+							Ref:     ref("k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"),
+						},
+					},
+					"spec": {
+						SchemaProps: spec.SchemaProps{
+							Default: map[string]interface{}{},
+							Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/management/v1.BackupApplySpec"),
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			"github.com/loft-sh/api/v3/pkg/apis/management/v1.BackupApplySpec", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
+	}
+}
+
+func schema_pkg_apis_management_v1_BackupApplyList(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"kind": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"apiVersion": {
+						SchemaProps: spec.SchemaProps{
+							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"metadata": {
+						SchemaProps: spec.SchemaProps{
+							Default: map[string]interface{}{},
+							Ref:     ref("k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"),
+						},
+					},
+					"items": {
+						SchemaProps: spec.SchemaProps{
+							Type: []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/management/v1.BackupApply"),
+									},
+								},
+							},
+						},
+					},
+				},
+				Required: []string{"items"},
+			},
+		},
+		Dependencies: []string{
+			"github.com/loft-sh/api/v3/pkg/apis/management/v1.BackupApply", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
+	}
+}
+
+func schema_pkg_apis_management_v1_BackupApplyOptions(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"kind": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"apiVersion": {
+						SchemaProps: spec.SchemaProps{
+							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+				},
+			},
+		},
+	}
+}
+
+func schema_pkg_apis_management_v1_BackupApplySpec(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "BackupApplySpec defines the desired state of BackupApply",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"raw": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Raw is the raw backup to apply",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+				},
+			},
+		},
+	}
+}
+
+func schema_pkg_apis_management_v1_BackupList(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"kind": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"apiVersion": {
+						SchemaProps: spec.SchemaProps{
+							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"metadata": {
+						SchemaProps: spec.SchemaProps{
+							Default: map[string]interface{}{},
+							Ref:     ref("k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"),
+						},
+					},
+					"items": {
+						SchemaProps: spec.SchemaProps{
+							Type: []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/management/v1.Backup"),
+									},
+								},
+							},
+						},
+					},
+				},
+				Required: []string{"items"},
+			},
+		},
+		Dependencies: []string{
+			"github.com/loft-sh/api/v3/pkg/apis/management/v1.Backup", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
+	}
+}
+
+func schema_pkg_apis_management_v1_BackupSpec(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "BackupSpec holds the spec",
+				Type:        []string{"object"},
+			},
+		},
+	}
+}
+
+func schema_pkg_apis_management_v1_BackupStatus(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "BackupStatus holds the status",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"rawBackup": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"string"},
+							Format: "",
+						},
+					},
+				},
+			},
+		},
+	}
+}
+
 func schema_pkg_apis_management_v1_Cluster(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
@@ -9584,6 +9853,13 @@ func schema_pkg_apis_management_v1_ClusterAgentConfig(ref common.ReferenceCallba
 					"loftHost": {
 						SchemaProps: spec.SchemaProps{
 							Description: "LoftHost defines the host for the agent's loft instance",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"loftInstanceID": {
+						SchemaProps: spec.SchemaProps{
+							Description: "LoftInstanceID defines the instance id from the loft instance",
 							Type:        []string{"string"},
 							Format:      "",
 						},
@@ -11710,6 +11986,95 @@ func schema_pkg_apis_management_v1_DevPodWorkspaceInstanceSshList(ref common.Ref
 		},
 		Dependencies: []string{
 			"github.com/loft-sh/api/v3/pkg/apis/management/v1.DevPodWorkspaceInstanceSsh", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
+	}
+}
+
+func schema_pkg_apis_management_v1_DevPodWorkspaceInstanceState(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"kind": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"apiVersion": {
+						SchemaProps: spec.SchemaProps{
+							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"metadata": {
+						SchemaProps: spec.SchemaProps{
+							Default: map[string]interface{}{},
+							Ref:     ref("k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"),
+						},
+					},
+					"state": {
+						SchemaProps: spec.SchemaProps{
+							Description: "State holds the workspaces state as given by 'devpod export'",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			"k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
+	}
+}
+
+func schema_pkg_apis_management_v1_DevPodWorkspaceInstanceStateList(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"kind": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"apiVersion": {
+						SchemaProps: spec.SchemaProps{
+							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"metadata": {
+						SchemaProps: spec.SchemaProps{
+							Default: map[string]interface{}{},
+							Ref:     ref("k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"),
+						},
+					},
+					"items": {
+						SchemaProps: spec.SchemaProps{
+							Type: []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/management/v1.DevPodWorkspaceInstanceState"),
+									},
+								},
+							},
+						},
+					},
+				},
+				Required: []string{"items"},
+			},
+		},
+		Dependencies: []string{
+			"github.com/loft-sh/api/v3/pkg/apis/management/v1.DevPodWorkspaceInstanceState", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
 	}
 }
 
