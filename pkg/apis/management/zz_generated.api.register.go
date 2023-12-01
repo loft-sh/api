@@ -167,7 +167,11 @@ var (
 	NewFeatureREST = func(getter generic.RESTOptionsGetter) rest.Storage {
 		return NewFeatureRESTFunc(Factory)
 	}
-	NewFeatureRESTFunc                NewRESTFunc
+	NewFeatureRESTFunc   NewRESTFunc
+	NewFeatureStatusREST = func(getter generic.RESTOptionsGetter) rest.Storage {
+		return NewFeatureStatusRESTFunc(Factory)
+	}
+	NewFeatureStatusRESTFunc          NewRESTFunc
 	ManagementIngressAuthTokenStorage = builders.NewApiResourceWithStorage( // Resource status endpoint
 		InternalIngressAuthToken,
 		func() runtime.Object { return &IngressAuthToken{} },     // Register versioned resource

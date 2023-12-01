@@ -209,6 +209,11 @@ var (
 		management.ManagementDirectClusterEndpointTokenStorage,
 		management.ManagementEventStorage,
 		management.ManagementFeatureStorage,
+		builders.NewApiResourceWithStorage(
+			management.InternalFeatureStatus,
+			func() runtime.Object { return &Feature{} },     // Register versioned resource
+			func() runtime.Object { return &FeatureList{} }, // Register versioned resource list
+			management.NewFeatureStatusREST),
 		management.ManagementIngressAuthTokenStorage,
 		management.ManagementKioskStorage,
 		management.ManagementLicenseStorage,
