@@ -111,3 +111,25 @@ func (c *FakeDevPodWorkspaceInstances) Patch(ctx context.Context, name string, p
 	}
 	return obj.(*v1.DevPodWorkspaceInstance), err
 }
+
+// GetState takes name of the devPodWorkspaceInstance, and returns the corresponding devPodWorkspaceInstanceState object, and an error if there is any.
+func (c *FakeDevPodWorkspaceInstances) GetState(ctx context.Context, devPodWorkspaceInstanceName string, options metav1.GetOptions) (result *v1.DevPodWorkspaceInstanceState, err error) {
+	obj, err := c.Fake.
+		Invokes(testing.NewGetSubresourceAction(devpodworkspaceinstancesResource, c.ns, "state", devPodWorkspaceInstanceName), &v1.DevPodWorkspaceInstanceState{})
+
+	if obj == nil {
+		return nil, err
+	}
+	return obj.(*v1.DevPodWorkspaceInstanceState), err
+}
+
+// SetState takes the representation of a devPodWorkspaceInstanceState and creates it.  Returns the server's representation of the devPodWorkspaceInstanceState, and an error, if there is any.
+func (c *FakeDevPodWorkspaceInstances) SetState(ctx context.Context, devPodWorkspaceInstanceName string, devPodWorkspaceInstanceState *v1.DevPodWorkspaceInstanceState, opts metav1.CreateOptions) (result *v1.DevPodWorkspaceInstanceState, err error) {
+	obj, err := c.Fake.
+		Invokes(testing.NewCreateSubresourceAction(devpodworkspaceinstancesResource, devPodWorkspaceInstanceName, "state", c.ns, devPodWorkspaceInstanceState), &v1.DevPodWorkspaceInstanceState{})
+
+	if obj == nil {
+		return nil, err
+	}
+	return obj.(*v1.DevPodWorkspaceInstanceState), err
+}

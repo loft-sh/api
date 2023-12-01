@@ -627,7 +627,15 @@ var (
 	NewDevPodWorkspaceInstanceSshREST = func(getter generic.RESTOptionsGetter) rest.Storage {
 		return NewDevPodWorkspaceInstanceSshRESTFunc(Factory)
 	}
-	NewDevPodWorkspaceInstanceSshRESTFunc   NewRESTFunc
+	NewDevPodWorkspaceInstanceSshRESTFunc    NewRESTFunc
+	InternalDevPodWorkspaceInstanceStateREST = builders.NewInternalSubresource(
+		"devpodworkspaceinstances", "DevPodWorkspaceInstanceState", "state",
+		func() runtime.Object { return &DevPodWorkspaceInstanceState{} },
+	)
+	NewDevPodWorkspaceInstanceStateREST = func(getter generic.RESTOptionsGetter) rest.Storage {
+		return NewDevPodWorkspaceInstanceStateRESTFunc(Factory)
+	}
+	NewDevPodWorkspaceInstanceStateRESTFunc NewRESTFunc
 	InternalDevPodWorkspaceInstanceStopREST = builders.NewInternalSubresource(
 		"devpodworkspaceinstances", "DevPodWorkspaceInstanceStop", "stop",
 		func() runtime.Object { return &DevPodWorkspaceInstanceStop{} },
@@ -1189,6 +1197,7 @@ var (
 		InternalDevPodWorkspaceInstanceDeleteREST,
 		InternalDevPodWorkspaceInstanceGetStatusREST,
 		InternalDevPodWorkspaceInstanceSshREST,
+		InternalDevPodWorkspaceInstanceStateREST,
 		InternalDevPodWorkspaceInstanceStopREST,
 		InternalDevPodWorkspaceInstanceUpREST,
 		InternalDevPodWorkspaceTemplate,
@@ -1795,6 +1804,14 @@ type DevPodWorkspaceInstanceSsh struct {
 	metav1.ObjectMeta
 }
 
+// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+
+type DevPodWorkspaceInstanceState struct {
+	metav1.TypeMeta
+	metav1.ObjectMeta
+	State string
+}
+
 type DevPodWorkspaceInstanceStatus struct {
 	storagev1.DevPodWorkspaceInstanceStatus
 	SleepModeConfig *clusterv1.SleepModeConfig
@@ -1952,7 +1969,7 @@ type KioskStatus struct {
 }
 
 // +genclient
-// +genclient:nonNamespaced
+// +genclient
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
 
 type License struct {
@@ -3856,6 +3873,14 @@ type DevPodWorkspaceInstanceSshList struct {
 	metav1.TypeMeta
 	metav1.ListMeta
 	Items []DevPodWorkspaceInstanceSsh
+}
+
+// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+
+type DevPodWorkspaceInstanceStateList struct {
+	metav1.TypeMeta
+	metav1.ListMeta
+	Items []DevPodWorkspaceInstanceState
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object

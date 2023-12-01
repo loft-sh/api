@@ -44,6 +44,7 @@ func addKnownTypes(scheme *runtime.Scheme) error {
 		&DevPodWorkspaceInstanceDelete{},
 		&DevPodWorkspaceInstanceGetStatus{},
 		&DevPodWorkspaceInstanceSsh{},
+		&DevPodWorkspaceInstanceState{},
 		&DevPodWorkspaceInstanceStop{},
 		&DevPodWorkspaceInstanceUp{},
 		&DevPodWorkspaceTemplate{},
@@ -195,6 +196,11 @@ var (
 			func() runtime.Object { return &DevPodWorkspaceInstanceSsh{} }, // Register versioned resource
 			nil,
 			management.NewDevPodWorkspaceInstanceSshREST),
+		builders.NewApiResourceWithStorage(
+			management.InternalDevPodWorkspaceInstanceStateREST,
+			func() runtime.Object { return &DevPodWorkspaceInstanceState{} }, // Register versioned resource
+			nil,
+			management.NewDevPodWorkspaceInstanceStateREST),
 		builders.NewApiResourceWithStorage(
 			management.InternalDevPodWorkspaceInstanceStopREST,
 			func() runtime.Object { return &DevPodWorkspaceInstanceStop{} }, // Register versioned resource
@@ -555,6 +561,14 @@ type DevPodWorkspaceInstanceSshList struct {
 	metav1.TypeMeta `json:",inline"`
 	metav1.ListMeta `json:"metadata,omitempty"`
 	Items           []DevPodWorkspaceInstanceSsh `json:"items"`
+}
+
+// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+
+type DevPodWorkspaceInstanceStateList struct {
+	metav1.TypeMeta `json:",inline"`
+	metav1.ListMeta `json:"metadata,omitempty"`
+	Items           []DevPodWorkspaceInstanceState `json:"items"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
