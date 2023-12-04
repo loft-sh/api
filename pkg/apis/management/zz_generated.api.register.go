@@ -456,7 +456,15 @@ var (
 		func() runtime.Object { return &App{} },
 		func() runtime.Object { return &AppList{} },
 	)
-	InternalBackup = builders.NewInternalResource(
+	InternalAppCredentialsREST = builders.NewInternalSubresource(
+		"apps", "AppCredentials", "credentials",
+		func() runtime.Object { return &AppCredentials{} },
+	)
+	NewAppCredentialsREST = func(getter generic.RESTOptionsGetter) rest.Storage {
+		return NewAppCredentialsRESTFunc(Factory)
+	}
+	NewAppCredentialsRESTFunc NewRESTFunc
+	InternalBackup            = builders.NewInternalResource(
 		"backups",
 		"Backup",
 		func() runtime.Object { return &Backup{} },
@@ -1172,6 +1180,7 @@ var (
 		InternalAnnouncementStatus,
 		InternalApp,
 		InternalAppStatus,
+		InternalAppCredentialsREST,
 		InternalBackup,
 		InternalBackupStatus,
 		InternalBackupApplyREST,
@@ -1370,6 +1379,14 @@ type App struct {
 	Status AppStatus
 }
 
+// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+
+type AppCredentials struct {
+	metav1.TypeMeta
+	metav1.ObjectMeta
+	ProjectSecretRefs map[string]string
+}
+
 type AppSpec struct {
 	storagev1.AppSpec
 }
@@ -1564,7 +1581,7 @@ type BackupStatus struct {
 }
 
 // +genclient
-// +genclient
+// +genclient:nonNamespaced
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
 
 type Cluster struct {
@@ -1969,7 +1986,7 @@ type KioskStatus struct {
 }
 
 // +genclient
-// +genclient
+// +genclient:nonNamespaced
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
 
 type License struct {
@@ -2952,6 +2969,14 @@ type AppList struct {
 	metav1.TypeMeta
 	metav1.ListMeta
 	Items []App
+}
+
+// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+
+type AppCredentialsList struct {
+	metav1.TypeMeta
+	metav1.ListMeta
+	Items []AppCredentials
 }
 
 func (App) NewStatus() interface{} {

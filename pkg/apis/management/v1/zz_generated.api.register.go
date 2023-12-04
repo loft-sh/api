@@ -19,6 +19,7 @@ func addKnownTypes(scheme *runtime.Scheme) error {
 		&AnnouncementList{},
 		&App{},
 		&AppList{},
+		&AppCredentials{},
 		&Backup{},
 		&BackupList{},
 		&BackupApply{},
@@ -134,6 +135,11 @@ var (
 		management.ManagementAgentAuditEventStorage,
 		management.ManagementAnnouncementStorage,
 		management.ManagementAppStorage,
+		builders.NewApiResourceWithStorage(
+			management.InternalAppCredentialsREST,
+			func() runtime.Object { return &AppCredentials{} }, // Register versioned resource
+			nil,
+			management.NewAppCredentialsREST),
 		management.ManagementBackupStorage,
 		builders.NewApiResourceWithStorage(
 			management.InternalBackupApplyREST,
@@ -417,6 +423,14 @@ type AppList struct {
 	metav1.TypeMeta `json:",inline"`
 	metav1.ListMeta `json:"metadata,omitempty"`
 	Items           []App `json:"items"`
+}
+
+// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+
+type AppCredentialsList struct {
+	metav1.TypeMeta `json:",inline"`
+	metav1.ListMeta `json:"metadata,omitempty"`
+	Items           []AppCredentials `json:"items"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object

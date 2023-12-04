@@ -28,6 +28,7 @@ func addKnownTypes(scheme *runtime.Scheme) error {
 		&management.AnnouncementList{},
 		&management.App{},
 		&management.AppList{},
+		&management.AppCredentials{},
 		&management.Backup{},
 		&management.BackupList{},
 		&management.BackupApply{},
