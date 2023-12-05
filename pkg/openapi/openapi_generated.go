@@ -92,6 +92,7 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 		"github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.AccessQuota":                           schema_apis_loft_storage_v1_AccessQuota(ref),
 		"github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.AppReference":                          schema_apis_loft_storage_v1_AppReference(ref),
 		"github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.Chart":                                 schema_apis_loft_storage_v1_Chart(ref),
+		"github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.ChartSecretRef":                        schema_apis_loft_storage_v1_ChartSecretRef(ref),
 		"github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.ChartStatus":                           schema_apis_loft_storage_v1_ChartStatus(ref),
 		"github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.ClusterQuota":                          schema_apis_loft_storage_v1_ClusterQuota(ref),
 		"github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.ClusterQuotaList":                      schema_apis_loft_storage_v1_ClusterQuotaList(ref),
@@ -116,6 +117,7 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 		"github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.LocalUserStatus":                       schema_apis_loft_storage_v1_LocalUserStatus(ref),
 		"github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.ObjectsStatus":                         schema_apis_loft_storage_v1_ObjectsStatus(ref),
 		"github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.PodSelector":                           schema_apis_loft_storage_v1_PodSelector(ref),
+		"github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.ProjectSecretRef":                      schema_apis_loft_storage_v1_ProjectSecretRef(ref),
 		"github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.SecretRef":                             schema_apis_loft_storage_v1_SecretRef(ref),
 		"github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.TemplateHelmChart":                     schema_apis_loft_storage_v1_TemplateHelmChart(ref),
 		"github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.UserOrTeam":                            schema_apis_loft_storage_v1_UserOrTeam(ref),
@@ -145,6 +147,8 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 		"github.com/loft-sh/api/v3/pkg/apis/management/v1.AnnouncementSpec":                             schema_pkg_apis_management_v1_AnnouncementSpec(ref),
 		"github.com/loft-sh/api/v3/pkg/apis/management/v1.AnnouncementStatus":                           schema_pkg_apis_management_v1_AnnouncementStatus(ref),
 		"github.com/loft-sh/api/v3/pkg/apis/management/v1.App":                                          schema_pkg_apis_management_v1_App(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/management/v1.AppCredentials":                               schema_pkg_apis_management_v1_AppCredentials(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/management/v1.AppCredentialsList":                           schema_pkg_apis_management_v1_AppCredentialsList(ref),
 		"github.com/loft-sh/api/v3/pkg/apis/management/v1.AppList":                                      schema_pkg_apis_management_v1_AppList(ref),
 		"github.com/loft-sh/api/v3/pkg/apis/management/v1.AppSpec":                                      schema_pkg_apis_management_v1_AppSpec(ref),
 		"github.com/loft-sh/api/v3/pkg/apis/management/v1.AppStatus":                                    schema_pkg_apis_management_v1_AppStatus(ref),
@@ -5167,11 +5171,23 @@ func schema_apis_loft_storage_v1_Chart(ref common.ReferenceCallback) common.Open
 							Format:      "",
 						},
 					},
+					"usernameRef": {
+						SchemaProps: spec.SchemaProps{
+							Description: "The username that is required for this repository",
+							Ref:         ref("github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.ChartSecretRef"),
+						},
+					},
 					"password": {
 						SchemaProps: spec.SchemaProps{
 							Description: "The password that is required for this repository",
 							Type:        []string{"string"},
 							Format:      "",
+						},
+					},
+					"passwordRef": {
+						SchemaProps: spec.SchemaProps{
+							Description: "The password that is required for this repository",
+							Ref:         ref("github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.ChartSecretRef"),
 						},
 					},
 					"insecureSkipTlsVerify": {
@@ -5184,6 +5200,28 @@ func schema_apis_loft_storage_v1_Chart(ref common.ReferenceCallback) common.Open
 				},
 			},
 		},
+		Dependencies: []string{
+			"github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.ChartSecretRef"},
+	}
+}
+
+func schema_apis_loft_storage_v1_ChartSecretRef(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"projectSecretRef": {
+						SchemaProps: spec.SchemaProps{
+							Description: "ProjectSecretRef holds the reference to a project secret",
+							Ref:         ref("github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.ProjectSecretRef"),
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			"github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.ProjectSecretRef"},
 	}
 }
 
@@ -6268,6 +6306,39 @@ func schema_apis_loft_storage_v1_PodSelector(ref common.ReferenceCallback) commo
 	}
 }
 
+func schema_apis_loft_storage_v1_ProjectSecretRef(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"project": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Project is the project name where the secret is located in.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"name": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Name of the project secret to use.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"key": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Key of the project secret to use.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+				},
+			},
+		},
+	}
+}
+
 func schema_apis_loft_storage_v1_SecretRef(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
@@ -6333,11 +6404,23 @@ func schema_apis_loft_storage_v1_TemplateHelmChart(ref common.ReferenceCallback)
 							Format:      "",
 						},
 					},
+					"usernameRef": {
+						SchemaProps: spec.SchemaProps{
+							Description: "The username that is required for this repository",
+							Ref:         ref("github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.ChartSecretRef"),
+						},
+					},
 					"password": {
 						SchemaProps: spec.SchemaProps{
 							Description: "The password that is required for this repository",
 							Type:        []string{"string"},
 							Format:      "",
+						},
+					},
+					"passwordRef": {
+						SchemaProps: spec.SchemaProps{
+							Description: "The password that is required for this repository",
+							Ref:         ref("github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.ChartSecretRef"),
 						},
 					},
 					"insecureSkipTlsVerify": {
@@ -6385,6 +6468,8 @@ func schema_apis_loft_storage_v1_TemplateHelmChart(ref common.ReferenceCallback)
 				},
 			},
 		},
+		Dependencies: []string{
+			"github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1.ChartSecretRef"},
 	}
 }
 
@@ -7663,6 +7748,104 @@ func schema_pkg_apis_management_v1_App(ref common.ReferenceCallback) common.Open
 		},
 		Dependencies: []string{
 			"github.com/loft-sh/api/v3/pkg/apis/management/v1.AppSpec", "github.com/loft-sh/api/v3/pkg/apis/management/v1.AppStatus", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
+	}
+}
+
+func schema_pkg_apis_management_v1_AppCredentials(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"kind": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"apiVersion": {
+						SchemaProps: spec.SchemaProps{
+							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"metadata": {
+						SchemaProps: spec.SchemaProps{
+							Default: map[string]interface{}{},
+							Ref:     ref("k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"),
+						},
+					},
+					"projectSecretRefs": {
+						SchemaProps: spec.SchemaProps{
+							Description: "ProjectSecretRefs holds the resolved secret values for the project secret refs.",
+							Type:        []string{"object"},
+							AdditionalProperties: &spec.SchemaOrBool{
+								Allows: true,
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: "",
+										Type:    []string{"string"},
+										Format:  "",
+									},
+								},
+							},
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			"k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
+	}
+}
+
+func schema_pkg_apis_management_v1_AppCredentialsList(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"kind": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"apiVersion": {
+						SchemaProps: spec.SchemaProps{
+							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"metadata": {
+						SchemaProps: spec.SchemaProps{
+							Default: map[string]interface{}{},
+							Ref:     ref("k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"),
+						},
+					},
+					"items": {
+						SchemaProps: spec.SchemaProps{
+							Type: []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/management/v1.AppCredentials"),
+									},
+								},
+							},
+						},
+					},
+				},
+				Required: []string{"items"},
+			},
+		},
+		Dependencies: []string{
+			"github.com/loft-sh/api/v3/pkg/apis/management/v1.AppCredentials", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
 	}
 }
 

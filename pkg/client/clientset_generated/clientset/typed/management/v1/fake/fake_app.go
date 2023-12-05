@@ -114,3 +114,13 @@ func (c *FakeApps) Patch(ctx context.Context, name string, pt types.PatchType, d
 	}
 	return obj.(*v1.App), err
 }
+
+// GetCredentials takes name of the app, and returns the corresponding appCredentials object, and an error if there is any.
+func (c *FakeApps) GetCredentials(ctx context.Context, appName string, options metav1.GetOptions) (result *v1.AppCredentials, err error) {
+	obj, err := c.Fake.
+		Invokes(testing.NewRootGetSubresourceAction(appsResource, "credentials", appName), &v1.AppCredentials{})
+	if obj == nil {
+		return nil, err
+	}
+	return obj.(*v1.AppCredentials), err
+}
