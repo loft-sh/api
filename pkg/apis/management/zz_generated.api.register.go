@@ -612,30 +612,30 @@ var (
 		func() runtime.Object { return &DevPodWorkspaceInstance{} },
 		func() runtime.Object { return &DevPodWorkspaceInstanceList{} },
 	)
-	InternalDevPodWorkspaceInstanceDeleteREST = builders.NewInternalSubresource(
-		"devpodworkspaceinstances", "DevPodWorkspaceInstanceDelete", "delete",
-		func() runtime.Object { return &DevPodWorkspaceInstanceDelete{} },
+	InternalDevPodDeleteOptionsREST = builders.NewInternalSubresource(
+		"devpodworkspaceinstances", "DevPodDeleteOptions", "delete",
+		func() runtime.Object { return &DevPodDeleteOptions{} },
 	)
-	NewDevPodWorkspaceInstanceDeleteREST = func(getter generic.RESTOptionsGetter) rest.Storage {
-		return NewDevPodWorkspaceInstanceDeleteRESTFunc(Factory)
+	NewDevPodDeleteOptionsREST = func(getter generic.RESTOptionsGetter) rest.Storage {
+		return NewDevPodDeleteOptionsRESTFunc(Factory)
 	}
-	NewDevPodWorkspaceInstanceDeleteRESTFunc     NewRESTFunc
-	InternalDevPodWorkspaceInstanceGetStatusREST = builders.NewInternalSubresource(
-		"devpodworkspaceinstances", "DevPodWorkspaceInstanceGetStatus", "getstatus",
-		func() runtime.Object { return &DevPodWorkspaceInstanceGetStatus{} },
+	NewDevPodDeleteOptionsRESTFunc  NewRESTFunc
+	InternalDevPodStatusOptionsREST = builders.NewInternalSubresource(
+		"devpodworkspaceinstances", "DevPodStatusOptions", "getstatus",
+		func() runtime.Object { return &DevPodStatusOptions{} },
 	)
-	NewDevPodWorkspaceInstanceGetStatusREST = func(getter generic.RESTOptionsGetter) rest.Storage {
-		return NewDevPodWorkspaceInstanceGetStatusRESTFunc(Factory)
+	NewDevPodStatusOptionsREST = func(getter generic.RESTOptionsGetter) rest.Storage {
+		return NewDevPodStatusOptionsRESTFunc(Factory)
 	}
-	NewDevPodWorkspaceInstanceGetStatusRESTFunc NewRESTFunc
-	InternalDevPodWorkspaceInstanceSshREST      = builders.NewInternalSubresource(
-		"devpodworkspaceinstances", "DevPodWorkspaceInstanceSsh", "ssh",
-		func() runtime.Object { return &DevPodWorkspaceInstanceSsh{} },
+	NewDevPodStatusOptionsRESTFunc NewRESTFunc
+	InternalDevPodSshOptionsREST   = builders.NewInternalSubresource(
+		"devpodworkspaceinstances", "DevPodSshOptions", "ssh",
+		func() runtime.Object { return &DevPodSshOptions{} },
 	)
-	NewDevPodWorkspaceInstanceSshREST = func(getter generic.RESTOptionsGetter) rest.Storage {
-		return NewDevPodWorkspaceInstanceSshRESTFunc(Factory)
+	NewDevPodSshOptionsREST = func(getter generic.RESTOptionsGetter) rest.Storage {
+		return NewDevPodSshOptionsRESTFunc(Factory)
 	}
-	NewDevPodWorkspaceInstanceSshRESTFunc    NewRESTFunc
+	NewDevPodSshOptionsRESTFunc              NewRESTFunc
 	InternalDevPodWorkspaceInstanceStateREST = builders.NewInternalSubresource(
 		"devpodworkspaceinstances", "DevPodWorkspaceInstanceState", "state",
 		func() runtime.Object { return &DevPodWorkspaceInstanceState{} },
@@ -644,23 +644,23 @@ var (
 		return NewDevPodWorkspaceInstanceStateRESTFunc(Factory)
 	}
 	NewDevPodWorkspaceInstanceStateRESTFunc NewRESTFunc
-	InternalDevPodWorkspaceInstanceStopREST = builders.NewInternalSubresource(
-		"devpodworkspaceinstances", "DevPodWorkspaceInstanceStop", "stop",
-		func() runtime.Object { return &DevPodWorkspaceInstanceStop{} },
+	InternalDevPodStopOptionsREST           = builders.NewInternalSubresource(
+		"devpodworkspaceinstances", "DevPodStopOptions", "stop",
+		func() runtime.Object { return &DevPodStopOptions{} },
 	)
-	NewDevPodWorkspaceInstanceStopREST = func(getter generic.RESTOptionsGetter) rest.Storage {
-		return NewDevPodWorkspaceInstanceStopRESTFunc(Factory)
+	NewDevPodStopOptionsREST = func(getter generic.RESTOptionsGetter) rest.Storage {
+		return NewDevPodStopOptionsRESTFunc(Factory)
 	}
-	NewDevPodWorkspaceInstanceStopRESTFunc NewRESTFunc
-	InternalDevPodWorkspaceInstanceUpREST  = builders.NewInternalSubresource(
-		"devpodworkspaceinstances", "DevPodWorkspaceInstanceUp", "up",
-		func() runtime.Object { return &DevPodWorkspaceInstanceUp{} },
+	NewDevPodStopOptionsRESTFunc NewRESTFunc
+	InternalDevPodUpOptionsREST  = builders.NewInternalSubresource(
+		"devpodworkspaceinstances", "DevPodUpOptions", "up",
+		func() runtime.Object { return &DevPodUpOptions{} },
 	)
-	NewDevPodWorkspaceInstanceUpREST = func(getter generic.RESTOptionsGetter) rest.Storage {
-		return NewDevPodWorkspaceInstanceUpRESTFunc(Factory)
+	NewDevPodUpOptionsREST = func(getter generic.RESTOptionsGetter) rest.Storage {
+		return NewDevPodUpOptionsRESTFunc(Factory)
 	}
-	NewDevPodWorkspaceInstanceUpRESTFunc NewRESTFunc
-	InternalDevPodWorkspaceTemplate      = builders.NewInternalResource(
+	NewDevPodUpOptionsRESTFunc      NewRESTFunc
+	InternalDevPodWorkspaceTemplate = builders.NewInternalResource(
 		"devpodworkspacetemplates",
 		"DevPodWorkspaceTemplate",
 		func() runtime.Object { return &DevPodWorkspaceTemplate{} },
@@ -1203,12 +1203,12 @@ var (
 		InternalConfigStatus,
 		InternalDevPodWorkspaceInstance,
 		InternalDevPodWorkspaceInstanceStatus,
-		InternalDevPodWorkspaceInstanceDeleteREST,
-		InternalDevPodWorkspaceInstanceGetStatusREST,
-		InternalDevPodWorkspaceInstanceSshREST,
+		InternalDevPodDeleteOptionsREST,
+		InternalDevPodStatusOptionsREST,
+		InternalDevPodSshOptionsREST,
 		InternalDevPodWorkspaceInstanceStateREST,
-		InternalDevPodWorkspaceInstanceStopREST,
-		InternalDevPodWorkspaceInstanceUpREST,
+		InternalDevPodStopOptionsREST,
+		InternalDevPodUpOptionsREST,
 		InternalDevPodWorkspaceTemplate,
 		InternalDevPodWorkspaceTemplateStatus,
 		InternalDirectClusterEndpointToken,
@@ -1785,6 +1785,43 @@ type ConnectorWithName struct {
 	Connector
 }
 
+// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+
+type DevPodDeleteOptions struct {
+	metav1.TypeMeta
+	Options string
+}
+
+// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+
+type DevPodSshOptions struct {
+	metav1.TypeMeta
+	Options string
+}
+
+// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+
+type DevPodStatusOptions struct {
+	metav1.TypeMeta
+	Options string
+}
+
+// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+
+type DevPodStopOptions struct {
+	metav1.TypeMeta
+	Options string
+}
+
+// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+
+type DevPodUpOptions struct {
+	metav1.TypeMeta
+	WebMode bool
+	Debug   bool
+	Options string
+}
+
 // +genclient
 // +genclient
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -1796,29 +1833,8 @@ type DevPodWorkspaceInstance struct {
 	Status DevPodWorkspaceInstanceStatus
 }
 
-// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
-
-type DevPodWorkspaceInstanceDelete struct {
-	metav1.TypeMeta
-	metav1.ObjectMeta
-}
-
-// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
-
-type DevPodWorkspaceInstanceGetStatus struct {
-	metav1.TypeMeta
-	metav1.ObjectMeta
-}
-
 type DevPodWorkspaceInstanceSpec struct {
 	storagev1.DevPodWorkspaceInstanceSpec
-}
-
-// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
-
-type DevPodWorkspaceInstanceSsh struct {
-	metav1.TypeMeta
-	metav1.ObjectMeta
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -1832,20 +1848,6 @@ type DevPodWorkspaceInstanceState struct {
 type DevPodWorkspaceInstanceStatus struct {
 	storagev1.DevPodWorkspaceInstanceStatus
 	SleepModeConfig *clusterv1.SleepModeConfig
-}
-
-// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
-
-type DevPodWorkspaceInstanceStop struct {
-	metav1.TypeMeta
-	metav1.ObjectMeta
-}
-
-// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
-
-type DevPodWorkspaceInstanceUp struct {
-	metav1.TypeMeta
-	metav1.ObjectMeta
 }
 
 // +genclient
@@ -3878,26 +3880,26 @@ type DevPodWorkspaceInstanceList struct {
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
 
-type DevPodWorkspaceInstanceDeleteList struct {
+type DevPodDeleteOptionsList struct {
 	metav1.TypeMeta
 	metav1.ListMeta
-	Items []DevPodWorkspaceInstanceDelete
+	Items []DevPodDeleteOptions
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
 
-type DevPodWorkspaceInstanceGetStatusList struct {
+type DevPodStatusOptionsList struct {
 	metav1.TypeMeta
 	metav1.ListMeta
-	Items []DevPodWorkspaceInstanceGetStatus
+	Items []DevPodStatusOptions
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
 
-type DevPodWorkspaceInstanceSshList struct {
+type DevPodSshOptionsList struct {
 	metav1.TypeMeta
 	metav1.ListMeta
-	Items []DevPodWorkspaceInstanceSsh
+	Items []DevPodSshOptions
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -3910,18 +3912,18 @@ type DevPodWorkspaceInstanceStateList struct {
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
 
-type DevPodWorkspaceInstanceStopList struct {
+type DevPodStopOptionsList struct {
 	metav1.TypeMeta
 	metav1.ListMeta
-	Items []DevPodWorkspaceInstanceStop
+	Items []DevPodStopOptions
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
 
-type DevPodWorkspaceInstanceUpList struct {
+type DevPodUpOptionsList struct {
 	metav1.TypeMeta
 	metav1.ListMeta
-	Items []DevPodWorkspaceInstanceUp
+	Items []DevPodUpOptions
 }
 
 func (DevPodWorkspaceInstance) NewStatus() interface{} {

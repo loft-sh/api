@@ -16,11 +16,11 @@ import (
 // DevPodWorkspaceInstance holds the DevPodWorkspaceInstance information
 // +k8s:openapi-gen=true
 // +resource:path=devpodworkspaceinstances,rest=DevPodWorkspaceInstanceREST
-// +subresource:request=DevPodWorkspaceInstanceUp,path=up,kind=DevPodWorkspaceInstanceUp,rest=DevPodWorkspaceInstanceUpREST
-// +subresource:request=DevPodWorkspaceInstanceDelete,path=delete,kind=DevPodWorkspaceInstanceDelete,rest=DevPodWorkspaceInstanceDeleteREST
-// +subresource:request=DevPodWorkspaceInstanceSsh,path=ssh,kind=DevPodWorkspaceInstanceSsh,rest=DevPodWorkspaceInstanceSshREST
-// +subresource:request=DevPodWorkspaceInstanceStop,path=stop,kind=DevPodWorkspaceInstanceStop,rest=DevPodWorkspaceInstanceStopREST
-// +subresource:request=DevPodWorkspaceInstanceGetStatus,path=getstatus,kind=DevPodWorkspaceInstanceGetStatus,rest=DevPodWorkspaceInstanceGetStatusREST
+// +subresource:request=DevPodUpOptions,path=up,kind=DevPodUpOptions,rest=DevPodUpOptionsREST
+// +subresource:request=DevPodDeleteOptions,path=delete,kind=DevPodDeleteOptions,rest=DevPodDeleteOptionsREST
+// +subresource:request=DevPodSshOptions,path=ssh,kind=DevPodSshOptions,rest=DevPodSshOptionsREST
+// +subresource:request=DevPodStopOptions,path=stop,kind=DevPodStopOptions,rest=DevPodStopOptionsREST
+// +subresource:request=DevPodStatusOptions,path=getstatus,kind=DevPodStatusOptions,rest=DevPodStatusOptionsREST
 // +subresource:request=DevPodWorkspaceInstanceState,path=state,kind=DevPodWorkspaceInstanceState,rest=DevPodWorkspaceInstanceStateREST
 type DevPodWorkspaceInstance struct {
 	metav1.TypeMeta   `json:",inline"`
