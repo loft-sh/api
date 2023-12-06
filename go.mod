@@ -5,7 +5,7 @@ go 1.21.4
 require (
 	github.com/ghodss/yaml v1.0.0
 	github.com/loft-sh/admin-apis v0.0.0-20231102064836-7a6574be5f16
-	github.com/loft-sh/agentapi/v3 v3.4.0-beta.1
+	github.com/loft-sh/agentapi/v3 v3.4.0-beta.3
 	github.com/loft-sh/apiserver v0.0.0-20231018103030-cf3977856bec
 	github.com/loft-sh/jspolicy v0.1.0
 	k8s.io/api v0.28.4
@@ -101,7 +101,7 @@ require (
 	gopkg.in/inf.v0 v0.9.1 // indirect
 	gopkg.in/yaml.v2 v2.4.0 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
-	k8s.io/apiextensions-apiserver v0.28.3 // indirect
+	k8s.io/apiextensions-apiserver v0.28.4 // indirect
 	k8s.io/component-base v0.28.4 // indirect
 	k8s.io/utils v0.0.0-20230726121419-3b25d923346b // indirect
 	sigs.k8s.io/apiserver-network-proxy/konnectivity-client v0.28.1 // indirect
