@@ -178,6 +178,8 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 		"github.com/loft-sh/api/v3/pkg/apis/management/v1.BackupStatus":                                 schema_pkg_apis_management_v1_BackupStatus(ref),
 		"github.com/loft-sh/api/v3/pkg/apis/management/v1.Cluster":                                      schema_pkg_apis_management_v1_Cluster(ref),
 		"github.com/loft-sh/api/v3/pkg/apis/management/v1.ClusterAccess":                                schema_pkg_apis_management_v1_ClusterAccess(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/management/v1.ClusterAccessKey":                             schema_pkg_apis_management_v1_ClusterAccessKey(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/management/v1.ClusterAccessKeyList":                         schema_pkg_apis_management_v1_ClusterAccessKeyList(ref),
 		"github.com/loft-sh/api/v3/pkg/apis/management/v1.ClusterAccessList":                            schema_pkg_apis_management_v1_ClusterAccessList(ref),
 		"github.com/loft-sh/api/v3/pkg/apis/management/v1.ClusterAccessSpec":                            schema_pkg_apis_management_v1_ClusterAccessSpec(ref),
 		"github.com/loft-sh/api/v3/pkg/apis/management/v1.ClusterAccessStatus":                          schema_pkg_apis_management_v1_ClusterAccessStatus(ref),
@@ -9760,6 +9762,117 @@ func schema_pkg_apis_management_v1_ClusterAccess(ref common.ReferenceCallback) c
 		},
 		Dependencies: []string{
 			"github.com/loft-sh/api/v3/pkg/apis/management/v1.ClusterAccessSpec", "github.com/loft-sh/api/v3/pkg/apis/management/v1.ClusterAccessStatus", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
+	}
+}
+
+func schema_pkg_apis_management_v1_ClusterAccessKey(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "ClusterAccessKey holds the access key for the cluster",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"kind": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"apiVersion": {
+						SchemaProps: spec.SchemaProps{
+							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"metadata": {
+						SchemaProps: spec.SchemaProps{
+							Default: map[string]interface{}{},
+							Ref:     ref("k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"),
+						},
+					},
+					"accessKey": {
+						SchemaProps: spec.SchemaProps{
+							Description: "AccessKey is the access key used by the agent",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"loftHost": {
+						SchemaProps: spec.SchemaProps{
+							Description: "LoftHost is the loft host used by the agent",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"insecure": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Insecure signals if the loft host is insecure",
+							Type:        []string{"boolean"},
+							Format:      "",
+						},
+					},
+					"caCert": {
+						SchemaProps: spec.SchemaProps{
+							Description: "CaCert is an optional ca cert to use for the loft host connection",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			"k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
+	}
+}
+
+func schema_pkg_apis_management_v1_ClusterAccessKeyList(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"kind": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"apiVersion": {
+						SchemaProps: spec.SchemaProps{
+							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"metadata": {
+						SchemaProps: spec.SchemaProps{
+							Default: map[string]interface{}{},
+							Ref:     ref("k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"),
+						},
+					},
+					"items": {
+						SchemaProps: spec.SchemaProps{
+							Type: []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/management/v1.ClusterAccessKey"),
+									},
+								},
+							},
+						},
+					},
+				},
+				Required: []string{"items"},
+			},
+		},
+		Dependencies: []string{
+			"github.com/loft-sh/api/v3/pkg/apis/management/v1.ClusterAccessKey", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
 	}
 }
 

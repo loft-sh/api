@@ -34,6 +34,7 @@ func addKnownTypes(scheme *runtime.Scheme) error {
 		&management.BackupApply{},
 		&management.Cluster{},
 		&management.ClusterList{},
+		&management.ClusterAccessKey{},
 		&management.ClusterAgentConfig{},
 		&management.ClusterCharts{},
 		&management.ClusterDomain{},
