@@ -496,6 +496,14 @@ var (
 		func() runtime.Object { return &Cluster{} },
 		func() runtime.Object { return &ClusterList{} },
 	)
+	InternalClusterAccessKeyREST = builders.NewInternalSubresource(
+		"clusters", "ClusterAccessKey", "accesskey",
+		func() runtime.Object { return &ClusterAccessKey{} },
+	)
+	NewClusterAccessKeyREST = func(getter generic.RESTOptionsGetter) rest.Storage {
+		return NewClusterAccessKeyRESTFunc(Factory)
+	}
+	NewClusterAccessKeyRESTFunc    NewRESTFunc
 	InternalClusterAgentConfigREST = builders.NewInternalSubresource(
 		"clusters", "ClusterAgentConfig", "agentconfig",
 		func() runtime.Object { return &ClusterAgentConfig{} },
@@ -1186,6 +1194,7 @@ var (
 		InternalBackupApplyREST,
 		InternalCluster,
 		InternalClusterStatus,
+		InternalClusterAccessKeyREST,
 		InternalClusterAgentConfigREST,
 		InternalClusterChartsREST,
 		InternalClusterDomainREST,
@@ -1581,7 +1590,7 @@ type BackupStatus struct {
 }
 
 // +genclient
-// +genclient:nonNamespaced
+// +genclient
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
 
 type Cluster struct {
@@ -1600,6 +1609,17 @@ type ClusterAccess struct {
 	metav1.ObjectMeta
 	Spec   ClusterAccessSpec
 	Status ClusterAccessStatus
+}
+
+// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+
+type ClusterAccessKey struct {
+	metav1.TypeMeta
+	metav1.ObjectMeta
+	AccessKey string
+	LoftHost  string
+	Insecure  bool
+	CaCert    string
 }
 
 type ClusterAccessSpec struct {
@@ -1731,6 +1751,7 @@ type ClusterSpec struct {
 
 type ClusterStatus struct {
 	storagev1.ClusterStatus
+	Online bool
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -1988,7 +2009,7 @@ type KioskStatus struct {
 }
 
 // +genclient
-// +genclient:nonNamespaced
+// +genclient
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
 
 type License struct {
@@ -3225,6 +3246,14 @@ type ClusterList struct {
 	metav1.TypeMeta
 	metav1.ListMeta
 	Items []Cluster
+}
+
+// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+
+type ClusterAccessKeyList struct {
+	metav1.TypeMeta
+	metav1.ListMeta
+	Items []ClusterAccessKey
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
