@@ -596,6 +596,7 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 		"github.com/loft-sh/api/v3/pkg/apis/virtualcluster/v1.HelmReleaseList":                          schema_pkg_apis_virtualcluster_v1_HelmReleaseList(ref),
 		"github.com/loft-sh/api/v3/pkg/apis/virtualcluster/v1.HelmReleaseSpec":                          schema_pkg_apis_virtualcluster_v1_HelmReleaseSpec(ref),
 		"github.com/loft-sh/api/v3/pkg/apis/virtualcluster/v1.HelmReleaseStatus":                        schema_pkg_apis_virtualcluster_v1_HelmReleaseStatus(ref),
+		"github.com/loft-sh/jspolicy/pkg/apis/policy/v1beta1.Condition":                                 schema_pkg_apis_policy_v1beta1_Condition(ref),
 		"github.com/loft-sh/jspolicy/pkg/apis/policy/v1beta1.JsPolicy":                                  schema_pkg_apis_policy_v1beta1_JsPolicy(ref),
 		"github.com/loft-sh/jspolicy/pkg/apis/policy/v1beta1.JsPolicyBundle":                            schema_pkg_apis_policy_v1beta1_JsPolicyBundle(ref),
 		"github.com/loft-sh/jspolicy/pkg/apis/policy/v1beta1.JsPolicyBundleList":                        schema_pkg_apis_policy_v1beta1_JsPolicyBundleList(ref),
@@ -11273,6 +11274,13 @@ func schema_pkg_apis_management_v1_ClusterStatus(ref common.ReferenceCallback) c
 						SchemaProps: spec.SchemaProps{
 							Type:   []string{"string"},
 							Format: "",
+						},
+					},
+					"online": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Online is whether the cluster is currently connected to the coordination server.",
+							Type:        []string{"boolean"},
+							Format:      "",
 						},
 					},
 				},
@@ -25846,18 +25854,18 @@ func schema_pkg_apis_storage_v1_NetworkPeerStatus(ref common.ReferenceCallback) 
 			SchemaProps: spec.SchemaProps{
 				Type: []string{"object"},
 				Properties: map[string]spec.Schema{
-					"homeDerpRegion": {
-						SchemaProps: spec.SchemaProps{
-							Description: "HomeDerpRegion is the currently preferred DERP region by the network peer",
-							Type:        []string{"integer"},
-							Format:      "int32",
-						},
-					},
 					"lastSeen": {
 						SchemaProps: spec.SchemaProps{
 							Description: "LastSeen is when the network peer was last online. It is not updated when Online is true.",
 							Type:        []string{"string"},
 							Format:      "",
+						},
+					},
+					"homeDerpRegion": {
+						SchemaProps: spec.SchemaProps{
+							Description: "HomeDerpRegion is the currently preferred DERP region by the network peer",
+							Type:        []string{"integer"},
+							Format:      "int32",
 						},
 					},
 					"online": {
@@ -30746,6 +30754,66 @@ func schema_pkg_apis_virtualcluster_v1_HelmReleaseStatus(ref common.ReferenceCal
 	}
 }
 
+func schema_pkg_apis_policy_v1beta1_Condition(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "Condition defines an observation of a Cluster API resource operational state.",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"type": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Type of condition in CamelCase or in foo.example.com/CamelCase. Many .condition.type values are consistent across resources like Available, but because arbitrary conditions can be useful (see .node.status.conditions), the ability to deconflict is important.",
+							Default:     "",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"status": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Status of the condition, one of True, False, Unknown.",
+							Default:     "",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"severity": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Severity provides an explicit classification of Reason code, so the users or machines can immediately understand the current situation and act accordingly. The Severity field MUST be set only when Status=False.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"lastTransitionTime": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Last time the condition transitioned from one status to another. This should be when the underlying condition changed. If that is not known, then using the time when the API field changed is acceptable.",
+							Default:     map[string]interface{}{},
+							Ref:         ref("k8s.io/apimachinery/pkg/apis/meta/v1.Time"),
+						},
+					},
+					"reason": {
+						SchemaProps: spec.SchemaProps{
+							Description: "The reason for the condition's last transition in CamelCase. The specific API may choose whether this field is considered a guaranteed API. This field may not be empty.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"message": {
+						SchemaProps: spec.SchemaProps{
+							Description: "A human readable message indicating details about the transition. This field may be empty.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+				},
+				Required: []string{"type", "status"},
+			},
+		},
+		Dependencies: []string{
+			"k8s.io/apimachinery/pkg/apis/meta/v1.Time"},
+	}
+}
+
 func schema_pkg_apis_policy_v1beta1_JsPolicy(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
@@ -31149,16 +31217,37 @@ func schema_pkg_apis_policy_v1beta1_JsPolicyStatus(ref common.ReferenceCallback)
 					},
 					"reason": {
 						SchemaProps: spec.SchemaProps{
-							Description: "Reason holds the error in machine readable language if the webhook is in a failed state",
+							Description: "Reason holds the error in machine-readable language if the webhook is in a failed state",
 							Type:        []string{"string"},
 							Format:      "",
 						},
 					},
 					"message": {
 						SchemaProps: spec.SchemaProps{
-							Description: "Message describes the error in human readable language if the webhook is in a failed state",
+							Description: "Message describes the error in human-readable language if the webhook is in a failed state",
 							Type:        []string{"string"},
 							Format:      "",
+						},
+					},
+					"conditions": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Conditions holds several conditions the virtual cluster might be in",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref("github.com/loft-sh/jspolicy/pkg/apis/policy/v1beta1.Condition"),
+									},
+								},
+							},
+						},
+					},
+					"observedGeneration": {
+						SchemaProps: spec.SchemaProps{
+							Description: "ObservedGeneration is the latest generation observed by the controller.",
+							Type:        []string{"integer"},
+							Format:      "int64",
 						},
 					},
 					"bundleHash": {
@@ -31171,6 +31260,8 @@ func schema_pkg_apis_policy_v1beta1_JsPolicyStatus(ref common.ReferenceCallback)
 				},
 			},
 		},
+		Dependencies: []string{
+			"github.com/loft-sh/jspolicy/pkg/apis/policy/v1beta1.Condition"},
 	}
 }
 

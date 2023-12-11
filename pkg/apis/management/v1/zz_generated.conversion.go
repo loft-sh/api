@@ -4662,6 +4662,7 @@ func Convert_management_ClusterSpec_To_v1_ClusterSpec(in *management.ClusterSpec
 
 func autoConvert_v1_ClusterStatus_To_management_ClusterStatus(in *ClusterStatus, out *management.ClusterStatus, s conversion.Scope) error {
 	out.ClusterStatus = in.ClusterStatus
+	out.Online = in.Online
 	return nil
 }
 
@@ -4672,6 +4673,7 @@ func Convert_v1_ClusterStatus_To_management_ClusterStatus(in *ClusterStatus, out
 
 func autoConvert_management_ClusterStatus_To_v1_ClusterStatus(in *management.ClusterStatus, out *ClusterStatus, s conversion.Scope) error {
 	out.ClusterStatus = in.ClusterStatus
+	out.Online = in.Online
 	return nil
 }
 

@@ -1751,6 +1751,7 @@ type ClusterSpec struct {
 
 type ClusterStatus struct {
 	storagev1.ClusterStatus
+	Online bool
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object

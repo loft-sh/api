@@ -41,6 +41,10 @@ type ClusterSpec struct {
 // ClusterStatus holds the status
 type ClusterStatus struct {
 	storagev1.ClusterStatus `json:",inline"`
+	// Online is whether the cluster is currently connected to the coordination
+	// server.
+	// +optional
+	Online bool `json:"online,omitempty"`
 }
 
 func (a *Cluster) GetOwner() *storagev1.UserOrTeam {
