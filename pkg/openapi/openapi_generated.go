@@ -445,6 +445,8 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.ArgoProjectSpec":                                 schema_pkg_apis_storage_v1_ArgoProjectSpec(ref),
 		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.ArgoProjectSpecMetadata":                         schema_pkg_apis_storage_v1_ArgoProjectSpecMetadata(ref),
 		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.ArgoSSOSpec":                                     schema_pkg_apis_storage_v1_ArgoSSOSpec(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.AutomaticImport":                                 schema_pkg_apis_storage_v1_AutomaticImport(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.AutomaticImportVirtualClusters":                  schema_pkg_apis_storage_v1_AutomaticImportVirtualClusters(ref),
 		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.Chart":                                           schema_pkg_apis_storage_v1_Chart(ref),
 		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.Cluster":                                         schema_pkg_apis_storage_v1_Cluster(ref),
 		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.ClusterAccess":                                   schema_pkg_apis_storage_v1_ClusterAccess(ref),
@@ -15339,6 +15341,13 @@ func schema_pkg_apis_management_v1_ProjectImportVirtualCluster(ref common.Refere
 							Format:      "",
 						},
 					},
+					"skipHelmDeploy": {
+						SchemaProps: spec.SchemaProps{
+							Description: "SkipHelmDeploy will skip management of the vClusters helm deployment",
+							Type:        []string{"boolean"},
+							Format:      "",
+						},
+					},
 				},
 				Required: []string{"sourceVirtualCluster"},
 			},
@@ -15423,6 +15432,12 @@ func schema_pkg_apis_management_v1_ProjectImportVirtualClusterSource(ref common.
 							Format:      "",
 						},
 					},
+					"owner": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Owner of the virtual cluster to import",
+							Ref:         ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.UserOrTeam"),
+						},
+					},
 					"importName": {
 						SchemaProps: spec.SchemaProps{
 							Description: "ImportName is an optional name to use as the virtualclusterinstance name, if not provided the vcluster name will be used",
@@ -15433,6 +15448,8 @@ func schema_pkg_apis_management_v1_ProjectImportVirtualClusterSource(ref common.
 				},
 			},
 		},
+		Dependencies: []string{
+			"github.com/loft-sh/api/v3/pkg/apis/storage/v1.UserOrTeam"},
 	}
 }
 
@@ -16154,6 +16171,13 @@ func schema_pkg_apis_management_v1_ProjectSpec(ref common.ReferenceCallback) com
 							Ref:         ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.NamespacePattern"),
 						},
 					},
+					"automaticImport": {
+						SchemaProps: spec.SchemaProps{
+							Description: "AutomaticImport imports vClusters & Namespace automatically",
+							Default:     map[string]interface{}{},
+							Ref:         ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.AutomaticImport"),
+						},
+					},
 					"argoCD": {
 						SchemaProps: spec.SchemaProps{
 							Description: "ArgoIntegration holds information about ArgoCD Integration",
@@ -16176,7 +16200,7 @@ func schema_pkg_apis_management_v1_ProjectSpec(ref common.ReferenceCallback) com
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/v3/pkg/apis/storage/v1.Access", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.AllowedCluster", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.AllowedRunner", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.AllowedTemplate", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.ArgoIntegrationSpec", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.Member", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.NamespacePattern", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.Quotas", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.RancherIntegrationSpec", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.RequireTemplate", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.UserOrTeam", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.VaultIntegrationSpec"},
+			"github.com/loft-sh/api/v3/pkg/apis/storage/v1.Access", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.AllowedCluster", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.AllowedRunner", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.AllowedTemplate", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.ArgoIntegrationSpec", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.AutomaticImport", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.Member", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.NamespacePattern", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.Quotas", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.RancherIntegrationSpec", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.RequireTemplate", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.UserOrTeam", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.VaultIntegrationSpec"},
 	}
 }
 
@@ -23244,6 +23268,47 @@ func schema_pkg_apis_storage_v1_ArgoSSOSpec(ref common.ReferenceCallback) common
 	}
 }
 
+func schema_pkg_apis_storage_v1_AutomaticImport(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"virtualClusters": {
+						SchemaProps: spec.SchemaProps{
+							Description: "VirtualClusters defines automatic virtual cluster import options.",
+							Default:     map[string]interface{}{},
+							Ref:         ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.AutomaticImportVirtualClusters"),
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			"github.com/loft-sh/api/v3/pkg/apis/storage/v1.AutomaticImportVirtualClusters"},
+	}
+}
+
+func schema_pkg_apis_storage_v1_AutomaticImportVirtualClusters(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"enabled": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Enabled specifies if automatic virtual cluster import should be enabled for this project.",
+							Default:     false,
+							Type:        []string{"boolean"},
+							Format:      "",
+						},
+					},
+				},
+			},
+		},
+	}
+}
+
 func schema_pkg_apis_storage_v1_Chart(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
@@ -26093,6 +26158,13 @@ func schema_pkg_apis_storage_v1_ProjectSpec(ref common.ReferenceCallback) common
 							Ref:         ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.NamespacePattern"),
 						},
 					},
+					"automaticImport": {
+						SchemaProps: spec.SchemaProps{
+							Description: "AutomaticImport imports vClusters & Namespace automatically",
+							Default:     map[string]interface{}{},
+							Ref:         ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.AutomaticImport"),
+						},
+					},
 					"argoCD": {
 						SchemaProps: spec.SchemaProps{
 							Description: "ArgoIntegration holds information about ArgoCD Integration",
@@ -26115,7 +26187,7 @@ func schema_pkg_apis_storage_v1_ProjectSpec(ref common.ReferenceCallback) common
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/v3/pkg/apis/storage/v1.Access", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.AllowedCluster", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.AllowedRunner", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.AllowedTemplate", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.ArgoIntegrationSpec", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.Member", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.NamespacePattern", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.Quotas", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.RancherIntegrationSpec", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.RequireTemplate", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.UserOrTeam", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.VaultIntegrationSpec"},
+			"github.com/loft-sh/api/v3/pkg/apis/storage/v1.Access", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.AllowedCluster", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.AllowedRunner", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.AllowedTemplate", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.ArgoIntegrationSpec", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.AutomaticImport", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.Member", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.NamespacePattern", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.Quotas", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.RancherIntegrationSpec", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.RequireTemplate", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.UserOrTeam", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.VaultIntegrationSpec"},
 	}
 }
 

@@ -2009,7 +2009,7 @@ type KioskStatus struct {
 }
 
 // +genclient
-// +genclient
+// +genclient:nonNamespaced
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
 
 type License struct {
@@ -2215,12 +2215,14 @@ type ProjectImportVirtualCluster struct {
 	metav1.ObjectMeta
 	SourceVirtualCluster ProjectImportVirtualClusterSource
 	UpgradeToPro         bool
+	SkipHelmDeploy       bool
 }
 
 type ProjectImportVirtualClusterSource struct {
 	Name       string
 	Namespace  string
 	Cluster    string
+	Owner      *storagev1.UserOrTeam
 	ImportName string
 }
 
