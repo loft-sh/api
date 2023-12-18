@@ -6938,6 +6938,7 @@ func autoConvert_v1_ProjectImportVirtualCluster_To_management_ProjectImportVirtu
 		return err
 	}
 	out.UpgradeToPro = in.UpgradeToPro
+	out.SkipHelmDeploy = in.SkipHelmDeploy
 	return nil
 }
 
@@ -6952,6 +6953,7 @@ func autoConvert_management_ProjectImportVirtualCluster_To_v1_ProjectImportVirtu
 		return err
 	}
 	out.UpgradeToPro = in.UpgradeToPro
+	out.SkipHelmDeploy = in.SkipHelmDeploy
 	return nil
 }
 
@@ -6986,6 +6988,7 @@ func autoConvert_v1_ProjectImportVirtualClusterSource_To_management_ProjectImpor
 	out.Name = in.Name
 	out.Namespace = in.Namespace
 	out.Cluster = in.Cluster
+	out.Owner = (*storagev1.UserOrTeam)(unsafe.Pointer(in.Owner))
 	out.ImportName = in.ImportName
 	return nil
 }
@@ -6999,6 +7002,7 @@ func autoConvert_management_ProjectImportVirtualClusterSource_To_v1_ProjectImpor
 	out.Name = in.Name
 	out.Namespace = in.Namespace
 	out.Cluster = in.Cluster
+	out.Owner = (*storagev1.UserOrTeam)(unsafe.Pointer(in.Owner))
 	out.ImportName = in.ImportName
 	return nil
 }
