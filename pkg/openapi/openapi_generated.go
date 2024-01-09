@@ -185,6 +185,7 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 		"github.com/loft-sh/api/v3/pkg/apis/management/v1.ClusterAccessStatus":                          schema_pkg_apis_management_v1_ClusterAccessStatus(ref),
 		"github.com/loft-sh/api/v3/pkg/apis/management/v1.ClusterAccounts":                              schema_pkg_apis_management_v1_ClusterAccounts(ref),
 		"github.com/loft-sh/api/v3/pkg/apis/management/v1.ClusterAgentConfig":                           schema_pkg_apis_management_v1_ClusterAgentConfig(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/management/v1.ClusterAgentConfigCommon":                     schema_pkg_apis_management_v1_ClusterAgentConfigCommon(ref),
 		"github.com/loft-sh/api/v3/pkg/apis/management/v1.ClusterAgentConfigList":                       schema_pkg_apis_management_v1_ClusterAgentConfigList(ref),
 		"github.com/loft-sh/api/v3/pkg/apis/management/v1.ClusterCharts":                                schema_pkg_apis_management_v1_ClusterCharts(ref),
 		"github.com/loft-sh/api/v3/pkg/apis/management/v1.ClusterChartsList":                            schema_pkg_apis_management_v1_ClusterChartsList(ref),
@@ -418,6 +419,7 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.AccessKeyOIDC":                                   schema_pkg_apis_storage_v1_AccessKeyOIDC(ref),
 		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.AccessKeyOIDCProvider":                           schema_pkg_apis_storage_v1_AccessKeyOIDCProvider(ref),
 		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.AccessKeyScope":                                  schema_pkg_apis_storage_v1_AccessKeyScope(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.AccessKeyScopeCluster":                           schema_pkg_apis_storage_v1_AccessKeyScopeCluster(ref),
 		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.AccessKeyScopeProject":                           schema_pkg_apis_storage_v1_AccessKeyScopeProject(ref),
 		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.AccessKeyScopeRule":                              schema_pkg_apis_storage_v1_AccessKeyScopeRule(ref),
 		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.AccessKeyScopeSpace":                             schema_pkg_apis_storage_v1_AccessKeyScopeSpace(ref),
@@ -10171,6 +10173,69 @@ func schema_pkg_apis_management_v1_ClusterAgentConfig(ref common.ReferenceCallba
 		},
 		Dependencies: []string{
 			"github.com/loft-sh/api/v3/pkg/apis/management/v1.AgentAnalyticsSpec", "github.com/loft-sh/api/v3/pkg/apis/management/v1.AgentAuditConfig", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
+	}
+}
+
+func schema_pkg_apis_management_v1_ClusterAgentConfigCommon(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"cluster": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Cluster is the cluster the agent is running in.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"audit": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Audit holds the agent audit config",
+							Ref:         ref("github.com/loft-sh/api/v3/pkg/apis/management/v1.AgentAuditConfig"),
+						},
+					},
+					"defaultImageRegistry": {
+						SchemaProps: spec.SchemaProps{
+							Description: "DefaultImageRegistry defines if we should prefix the virtual cluster image",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"tokenCaCert": {
+						SchemaProps: spec.SchemaProps{
+							Description: "TokenCaCert is the certificate authority the Loft tokens will be signed with",
+							Type:        []string{"string"},
+							Format:      "byte",
+						},
+					},
+					"loftHost": {
+						SchemaProps: spec.SchemaProps{
+							Description: "LoftHost defines the host for the agent's loft instance",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"loftInstanceID": {
+						SchemaProps: spec.SchemaProps{
+							Description: "LoftInstanceID defines the instance id from the loft instance",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"analyticsSpec": {
+						SchemaProps: spec.SchemaProps{
+							Description: "AnalyticsSpec holds info needed for the agent to send analytics data to the analytics backend.",
+							Default:     map[string]interface{}{},
+							Ref:         ref("github.com/loft-sh/api/v3/pkg/apis/management/v1.AgentAnalyticsSpec"),
+						},
+					},
+				},
+				Required: []string{"analyticsSpec"},
+			},
+		},
+		Dependencies: []string{
+			"github.com/loft-sh/api/v3/pkg/apis/management/v1.AgentAnalyticsSpec", "github.com/loft-sh/api/v3/pkg/apis/management/v1.AgentAuditConfig"},
 	}
 }
 
@@ -21771,6 +21836,20 @@ func schema_pkg_apis_storage_v1_AccessKeyScope(ref common.ReferenceCallback) com
 							},
 						},
 					},
+					"clusters": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Clusters specifies the project cluster the access key is allowed to access.",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.AccessKeyScopeCluster"),
+									},
+								},
+							},
+						},
+					},
 					"rules": {
 						SchemaProps: spec.SchemaProps{
 							Description: "DEPRECATED: Use Projects, Spaces and VirtualClusters instead Rules specifies the rules that should apply to the access key.",
@@ -21789,7 +21868,26 @@ func schema_pkg_apis_storage_v1_AccessKeyScope(ref common.ReferenceCallback) com
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/v3/pkg/apis/storage/v1.AccessKeyScopeProject", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.AccessKeyScopeRule", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.AccessKeyScopeSpace", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.AccessKeyScopeVirtualCluster"},
+			"github.com/loft-sh/api/v3/pkg/apis/storage/v1.AccessKeyScopeCluster", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.AccessKeyScopeProject", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.AccessKeyScopeRule", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.AccessKeyScopeSpace", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.AccessKeyScopeVirtualCluster"},
+	}
+}
+
+func schema_pkg_apis_storage_v1_AccessKeyScopeCluster(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"cluster": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Cluster is the name of the cluster to access. You can specify * to select all clusters.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+				},
+			},
+		},
 	}
 }
 
