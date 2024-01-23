@@ -5,7 +5,7 @@ go 1.21.5
 require (
 	github.com/ghodss/yaml v1.0.0
 	github.com/loft-sh/admin-apis v0.0.0-20231102064836-7a6574be5f16
-	github.com/loft-sh/agentapi/v3 v3.4.0-beta.11
+	github.com/loft-sh/agentapi/v3 v3.4.0-beta.11.0.20240123085027-6a14cb1334b1
 	github.com/loft-sh/apiserver v0.0.0-20240110162222-7923cde3a92d
 	github.com/loft-sh/jspolicy v0.2.2
 	k8s.io/api v0.28.4
