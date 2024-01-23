@@ -1502,6 +1502,13 @@ func schema_loft_sh_admin_apis_pkg_licenseapi_Button(ref common.ReferenceCallbac
 				Description: "Button is an object that represents a button in the Loft UI that links to some external service for handling operations for licensing for example.",
 				Type:        []string{"object"},
 				Properties: map[string]spec.Schema{
+					"name": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Name is the name of the button (ButtonName). Optional.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
 					"url": {
 						SchemaProps: spec.SchemaProps{
 							Description: "URL is the link at the other end of the button.",
