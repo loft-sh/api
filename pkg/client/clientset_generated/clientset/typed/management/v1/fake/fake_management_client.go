@@ -24,6 +24,10 @@ func (c *FakeManagementV1) Apps() v1.AppInterface {
 	return &FakeApps{c}
 }
 
+func (c *FakeManagementV1) Backups() v1.BackupInterface {
+	return &FakeBackups{c}
+}
+
 func (c *FakeManagementV1) Clusters() v1.ClusterInterface {
 	return &FakeClusters{c}
 }

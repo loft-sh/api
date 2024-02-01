@@ -12,6 +12,10 @@ type ClusterAgentConfig struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
 
+	ClusterAgentConfigCommon `json:",inline"`
+}
+
+type ClusterAgentConfigCommon struct {
 	// Cluster is the cluster the agent is running in.
 	// +optional
 	Cluster string `json:"cluster,omitempty"`
@@ -32,6 +36,10 @@ type ClusterAgentConfig struct {
 	// LoftHost defines the host for the agent's loft instance
 	// +optional
 	LoftHost string `json:"loftHost,omitempty"`
+
+	// LoftInstanceID defines the instance id from the loft instance
+	// +optional
+	LoftInstanceID string `json:"loftInstanceID,omitempty"`
 
 	// AnalyticsSpec holds info needed for the agent to send analytics data to the analytics backend.
 	AnalyticsSpec AgentAnalyticsSpec `json:"analyticsSpec"`

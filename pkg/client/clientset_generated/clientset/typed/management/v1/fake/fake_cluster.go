@@ -154,3 +154,13 @@ func (c *FakeClusters) GetAgentConfig(ctx context.Context, clusterName string, o
 	}
 	return obj.(*v1.ClusterAgentConfig), err
 }
+
+// GetAccessKey takes name of the cluster, and returns the corresponding clusterAccessKey object, and an error if there is any.
+func (c *FakeClusters) GetAccessKey(ctx context.Context, clusterName string, options metav1.GetOptions) (result *v1.ClusterAccessKey, err error) {
+	obj, err := c.Fake.
+		Invokes(testing.NewRootGetSubresourceAction(clustersResource, "accesskey", clusterName), &v1.ClusterAccessKey{})
+	if obj == nil {
+		return nil, err
+	}
+	return obj.(*v1.ClusterAccessKey), err
+}
