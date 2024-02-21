@@ -30702,6 +30702,13 @@ func schema_pkg_apis_ui_v1_UISettingsSpec(ref common.ReferenceCallback) common.O
 							Format:      "",
 						},
 					},
+					"offline": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Offline is true if loft is running in an airgapped environment",
+							Type:        []string{"boolean"},
+							Format:      "",
+						},
+					},
 				},
 			},
 		},
