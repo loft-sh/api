@@ -29,6 +29,10 @@ type UISettingsSpec struct {
 	// Name is the name of the product
 	// +optional
 	ProductName string `json:"productName,omitempty"`
+
+	// Offline is true if loft is running in an airgapped environment
+	// +optional
+	Offline bool `json:"offline,omitempty"`
 }
 
 type UISettingsConfig struct {
