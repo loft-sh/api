@@ -22683,7 +22683,7 @@ func schema_pkg_apis_storage_v1_AppParameter(ref common.ReferenceCallback) commo
 					},
 					"type": {
 						SchemaProps: spec.SchemaProps{
-							Description: "Type of the parameter. Can be one of: string, multiline, boolean, enum and password",
+							Description: "Type of the parameter. Can be one of: string, multiline, boolean, number and password",
 							Type:        []string{"string"},
 							Format:      "",
 						},
