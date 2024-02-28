@@ -147,7 +147,7 @@ type AppParameter struct {
 	Description string `json:"description,omitempty"`
 
 	// Type of the parameter. Can be one of:
-	// string, multiline, boolean, enum and password
+	// string, multiline, boolean, number and password
 	// +optional
 	Type string `json:"type,omitempty"`
 
