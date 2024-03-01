@@ -22690,7 +22690,7 @@ func schema_pkg_apis_storage_v1_AppParameter(ref common.ReferenceCallback) commo
 					},
 					"options": {
 						SchemaProps: spec.SchemaProps{
-							Description: "Options are the options if type is enum",
+							Description: "Options is a slice of strings, where each string represents a mutually exclusive choice.",
 							Type:        []string{"array"},
 							Items: &spec.SchemaOrArray{
 								Schema: &spec.Schema{
