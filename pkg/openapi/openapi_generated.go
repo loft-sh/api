@@ -12102,6 +12102,13 @@ func schema_pkg_apis_management_v1_DevPodUpOptions(ref common.ReferenceCallback)
 							Format:      "",
 						},
 					},
+					"cliMode": {
+						SchemaProps: spec.SchemaProps{
+							Description: "CLIMode executes the up command directly.",
+							Type:        []string{"boolean"},
+							Format:      "",
+						},
+					},
 					"debug": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Debug includes debug logs.",
