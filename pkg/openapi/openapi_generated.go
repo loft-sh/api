@@ -470,6 +470,7 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.DevPodCommandStatusOptions":                      schema_pkg_apis_storage_v1_DevPodCommandStatusOptions(ref),
 		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.DevPodCommandStopOptions":                        schema_pkg_apis_storage_v1_DevPodCommandStopOptions(ref),
 		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.DevPodCommandUpOptions":                          schema_pkg_apis_storage_v1_DevPodCommandUpOptions(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.DevPodProjectSpec":                               schema_pkg_apis_storage_v1_DevPodProjectSpec(ref),
 		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.DevPodProviderOption":                            schema_pkg_apis_storage_v1_DevPodProviderOption(ref),
 		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.DevPodProviderOptionFrom":                        schema_pkg_apis_storage_v1_DevPodProviderOptionFrom(ref),
 		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.DevPodProviderSource":                            schema_pkg_apis_storage_v1_DevPodProviderSource(ref),
@@ -484,6 +485,7 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.DevPodWorkspaceTemplateSpec":                     schema_pkg_apis_storage_v1_DevPodWorkspaceTemplateSpec(ref),
 		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.DevPodWorkspaceTemplateStatus":                   schema_pkg_apis_storage_v1_DevPodWorkspaceTemplateStatus(ref),
 		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.DevPodWorkspaceTemplateVersion":                  schema_pkg_apis_storage_v1_DevPodWorkspaceTemplateVersion(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.GitProjectSpec":                                  schema_pkg_apis_storage_v1_GitProjectSpec(ref),
 		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.GroupResources":                                  schema_pkg_apis_storage_v1_GroupResources(ref),
 		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.HelmChart":                                       schema_pkg_apis_storage_v1_HelmChart(ref),
 		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.HelmChartRepository":                             schema_pkg_apis_storage_v1_HelmChartRepository(ref),
@@ -3626,6 +3628,13 @@ func schema_apis_loft_cluster_v1_LastActivityInfo(ref common.ReferenceCallback) 
 							Description: "VirtualCluster is the virtual cluster this activity happened in",
 							Type:        []string{"string"},
 							Format:      "",
+						},
+					},
+					"metricsRefreshInterval": {
+						SchemaProps: spec.SchemaProps{
+							Description: "MetricsRefreshInterval is the activity refresh interval. This is used to prevent sleeping instances if the last activity metrics have not been refreshed within the interval. Useful for metrics based activty tracking.",
+							Type:        []string{"integer"},
+							Format:      "int64",
 						},
 					},
 				},
@@ -16257,11 +16266,17 @@ func schema_pkg_apis_management_v1_ProjectSpec(ref common.ReferenceCallback) com
 							Ref:         ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.RancherIntegrationSpec"),
 						},
 					},
+					"devPod": {
+						SchemaProps: spec.SchemaProps{
+							Description: "DevPod holds DevPod specific configuration for project",
+							Ref:         ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.DevPodProjectSpec"),
+						},
+					},
 				},
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/v3/pkg/apis/storage/v1.Access", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.AllowedCluster", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.AllowedRunner", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.AllowedTemplate", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.ArgoIntegrationSpec", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.AutomaticImport", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.Member", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.NamespacePattern", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.Quotas", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.RancherIntegrationSpec", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.RequireTemplate", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.UserOrTeam", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.VaultIntegrationSpec"},
+			"github.com/loft-sh/api/v3/pkg/apis/storage/v1.Access", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.AllowedCluster", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.AllowedRunner", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.AllowedTemplate", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.ArgoIntegrationSpec", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.AutomaticImport", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.DevPodProjectSpec", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.Member", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.NamespacePattern", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.Quotas", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.RancherIntegrationSpec", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.RequireTemplate", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.UserOrTeam", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.VaultIntegrationSpec"},
 	}
 }
 
@@ -24373,6 +24388,25 @@ func schema_pkg_apis_storage_v1_DevPodCommandUpOptions(ref common.ReferenceCallb
 	}
 }
 
+func schema_pkg_apis_storage_v1_DevPodProjectSpec(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"git": {
+						SchemaProps: spec.SchemaProps{
+							Ref: ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.GitProjectSpec"),
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			"github.com/loft-sh/api/v3/pkg/apis/storage/v1.GitProjectSpec"},
+	}
+}
+
 func schema_pkg_apis_storage_v1_DevPodProviderOption(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
@@ -24838,6 +24872,13 @@ func schema_pkg_apis_storage_v1_DevPodWorkspaceTemplateDefinition(ref common.Ref
 							},
 						},
 					},
+					"useProjectGitCredentials": {
+						SchemaProps: spec.SchemaProps{
+							Description: "UseProjectGitCredentials specifies if the project git credentials should be used instead of local ones for this workspace",
+							Type:        []string{"boolean"},
+							Format:      "",
+						},
+					},
 				},
 				Required: []string{"provider"},
 			},
@@ -25030,6 +25071,33 @@ func schema_pkg_apis_storage_v1_DevPodWorkspaceTemplateVersion(ref common.Refere
 		},
 		Dependencies: []string{
 			"github.com/loft-sh/api/v3/pkg/apis/storage/v1.AppParameter", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.DevPodWorkspaceTemplateDefinition"},
+	}
+}
+
+func schema_pkg_apis_storage_v1_GitProjectSpec(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"token": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Token defines the token to use for authentication.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"tokenSecretRef": {
+						SchemaProps: spec.SchemaProps{
+							Description: "TokenSecretRef defines the project secret to use for token authentication. Will be used if `Token` is not provided.",
+							Ref:         ref("k8s.io/api/core/v1.SecretKeySelector"),
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			"k8s.io/api/core/v1.SecretKeySelector"},
 	}
 }
 
@@ -26276,11 +26344,17 @@ func schema_pkg_apis_storage_v1_ProjectSpec(ref common.ReferenceCallback) common
 							Ref:         ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.RancherIntegrationSpec"),
 						},
 					},
+					"devPod": {
+						SchemaProps: spec.SchemaProps{
+							Description: "DevPod holds DevPod specific configuration for project",
+							Ref:         ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.DevPodProjectSpec"),
+						},
+					},
 				},
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/v3/pkg/apis/storage/v1.Access", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.AllowedCluster", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.AllowedRunner", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.AllowedTemplate", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.ArgoIntegrationSpec", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.AutomaticImport", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.Member", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.NamespacePattern", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.Quotas", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.RancherIntegrationSpec", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.RequireTemplate", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.UserOrTeam", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.VaultIntegrationSpec"},
+			"github.com/loft-sh/api/v3/pkg/apis/storage/v1.Access", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.AllowedCluster", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.AllowedRunner", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.AllowedTemplate", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.ArgoIntegrationSpec", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.AutomaticImport", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.DevPodProjectSpec", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.Member", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.NamespacePattern", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.Quotas", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.RancherIntegrationSpec", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.RequireTemplate", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.UserOrTeam", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.VaultIntegrationSpec"},
 	}
 }
 
@@ -30712,6 +30786,13 @@ func schema_pkg_apis_ui_v1_UISettingsSpec(ref common.ReferenceCallback) common.O
 					"offline": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Offline is true if loft is running in an airgapped environment",
+							Type:        []string{"boolean"},
+							Format:      "",
+						},
+					},
+					"hasHelmRelease": {
+						SchemaProps: spec.SchemaProps{
+							Description: "HasHelmRelease indicates whether loft has been installed via Helm",
 							Type:        []string{"boolean"},
 							Format:      "",
 						},
