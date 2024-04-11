@@ -30797,6 +30797,13 @@ func schema_pkg_apis_ui_v1_UISettingsSpec(ref common.ReferenceCallback) common.O
 							Format:      "",
 						},
 					},
+					"defaultVClusterVersion": {
+						SchemaProps: spec.SchemaProps{
+							Description: "DefaultVClusterVersion is the default version of vClusters",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
 				},
 			},
 		},

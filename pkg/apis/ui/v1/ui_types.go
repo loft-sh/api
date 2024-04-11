@@ -36,6 +36,9 @@ type UISettingsSpec struct {
 
 	// HasHelmRelease indicates whether loft has been installed via Helm
 	HasHelmRelease bool `json:"hasHelmRelease,omitempty"`
+
+	// DefaultVClusterVersion is the default version of vClusters
+	DefaultVClusterVersion string `json:"defaultVClusterVersion,omitempty"`
 }
 
 type UISettingsConfig struct {
