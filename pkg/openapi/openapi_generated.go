@@ -21805,6 +21805,20 @@ func schema_pkg_apis_storage_v1_AccessKeyScope(ref common.ReferenceCallback) com
 							Format:      "",
 						},
 					},
+					"allowNetworkPeering": {
+						SchemaProps: spec.SchemaProps{
+							Description: "AllowNetworkPeering allows the access key user to join the overlay network.",
+							Type:        []string{"boolean"},
+							Format:      "",
+						},
+					},
+					"allowAgentless": {
+						SchemaProps: spec.SchemaProps{
+							Description: "AllowAgentless allows a vCluster to enroll by itself to the platform without the need for a platform agent to be deployed.",
+							Type:        []string{"boolean"},
+							Format:      "",
+						},
+					},
 					"projects": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Projects specifies the projects the access key should have access to.",

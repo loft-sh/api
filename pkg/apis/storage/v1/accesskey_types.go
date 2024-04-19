@@ -110,6 +110,16 @@ type AccessKeyScope struct {
 	// +optional
 	AllowLoftCLI bool `json:"allowLoftCli,omitempty"`
 
+	// AllowNetworkPeering allows the access key user to join the
+	// overlay network.
+	// +optional
+	AllowNetworkPeering bool `json:"allowNetworkPeering,omitempty"`
+
+	// AllowAgentless allows a vCluster to enroll by itself to the platform
+	// without the need for a platform agent to be deployed.
+	// +optional
+	AllowAgentless bool `json:"allowAgentless,omitempty"`
+
 	// Projects specifies the projects the access key should have access to.
 	// +optional
 	Projects []AccessKeyScopeProject `json:"projects,omitempty"`
