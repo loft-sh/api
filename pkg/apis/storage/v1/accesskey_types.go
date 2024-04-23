@@ -105,20 +105,9 @@ type AccessKeySpec struct {
 }
 
 type AccessKeyScope struct {
-	// AllowLoftCLI allows certain read-only management requests to
-	// make sure loft cli works correctly with this specific access key.
+	// Roles is a set of managed permissions to apply to the access key.
 	// +optional
-	AllowLoftCLI bool `json:"allowLoftCli,omitempty"`
-
-	// AllowNetworkPeering allows the access key user to join the
-	// overlay network.
-	// +optional
-	AllowNetworkPeering bool `json:"allowNetworkPeering,omitempty"`
-
-	// AllowAgentless allows a vCluster to enroll by itself to the platform
-	// without the need for a platform agent to be deployed.
-	// +optional
-	AllowAgentless bool `json:"allowAgentless,omitempty"`
+	Roles []AccessKeyScopeRole `json:"roles,omitempty"`
 
 	// Projects specifies the projects the access key should have access to.
 	// +optional
@@ -140,7 +129,53 @@ type AccessKeyScope struct {
 	// Rules specifies the rules that should apply to the access key.
 	// +optional
 	Rules []AccessKeyScopeRule `json:"rules,omitempty"`
+
+	// AllowLoftCLI allows certain read-only management requests to
+	// make sure loft cli works correctly with this specific access key.
+	//
+	// Deprecated: Use the `roles` field instead
+	//  ```yaml
+	//  # Example:
+	//  roles:
+	//    - role: loftCLI
+	//  ```
+	// +optional
+	AllowLoftCLI bool `json:"allowLoftCli,omitempty"`
 }
+
+func (a AccessKeyScope) ContainsRole(val AccessKeyScopeRoleName) bool {
+	if a.AllowLoftCLI && val == AccessKeyScopeRoleLoftCLI {
+		return true
+	}
+
+	for _, entry := range a.Roles {
+		if entry.Role == val {
+			return true
+		}
+
+		// (ThomasK33): As the vcluster role implicitly allows network peering
+		// add a dedicated role check here
+		if entry.Role == AccessKeyScopeRoleVCluster && val == AccessKeyScopeRoleNetworkPeer {
+			return true
+		}
+	}
+
+	return false
+}
+
+type AccessKeyScopeRole struct {
+	// Role is the name of the role to apply to the access key scope.
+	// +optional
+	Role AccessKeyScopeRoleName `json:"role,omitempty"`
+}
+
+type AccessKeyScopeRoleName string
+
+const (
+	AccessKeyScopeRoleVCluster    AccessKeyScopeRoleName = "vcluster"
+	AccessKeyScopeRoleNetworkPeer AccessKeyScopeRoleName = "network-peer"
+	AccessKeyScopeRoleLoftCLI     AccessKeyScopeRoleName = "loft-cli"
+)
 
 type AccessKeyScopeCluster struct {
 	// Cluster is the name of the cluster to access. You can specify * to select all clusters.

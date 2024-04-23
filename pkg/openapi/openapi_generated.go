@@ -421,6 +421,7 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.AccessKeyScope":                                  schema_pkg_apis_storage_v1_AccessKeyScope(ref),
 		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.AccessKeyScopeCluster":                           schema_pkg_apis_storage_v1_AccessKeyScopeCluster(ref),
 		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.AccessKeyScopeProject":                           schema_pkg_apis_storage_v1_AccessKeyScopeProject(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.AccessKeyScopeRole":                              schema_pkg_apis_storage_v1_AccessKeyScopeRole(ref),
 		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.AccessKeyScopeRule":                              schema_pkg_apis_storage_v1_AccessKeyScopeRule(ref),
 		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.AccessKeyScopeSpace":                             schema_pkg_apis_storage_v1_AccessKeyScopeSpace(ref),
 		"github.com/loft-sh/api/v3/pkg/apis/storage/v1.AccessKeyScopeVirtualCluster":                    schema_pkg_apis_storage_v1_AccessKeyScopeVirtualCluster(ref),
@@ -21805,25 +21806,18 @@ func schema_pkg_apis_storage_v1_AccessKeyScope(ref common.ReferenceCallback) com
 			SchemaProps: spec.SchemaProps{
 				Type: []string{"object"},
 				Properties: map[string]spec.Schema{
-					"allowLoftCli": {
+					"roles": {
 						SchemaProps: spec.SchemaProps{
-							Description: "AllowLoftCLI allows certain read-only management requests to make sure loft cli works correctly with this specific access key.",
-							Type:        []string{"boolean"},
-							Format:      "",
-						},
-					},
-					"allowNetworkPeering": {
-						SchemaProps: spec.SchemaProps{
-							Description: "AllowNetworkPeering allows the access key user to join the overlay network.",
-							Type:        []string{"boolean"},
-							Format:      "",
-						},
-					},
-					"allowAgentless": {
-						SchemaProps: spec.SchemaProps{
-							Description: "AllowAgentless allows a vCluster to enroll by itself to the platform without the need for a platform agent to be deployed.",
-							Type:        []string{"boolean"},
-							Format:      "",
+							Description: "Roles is a set of managed permissions to apply to the access key.",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.AccessKeyScopeRole"),
+									},
+								},
+							},
 						},
 					},
 					"projects": {
@@ -21896,11 +21890,18 @@ func schema_pkg_apis_storage_v1_AccessKeyScope(ref common.ReferenceCallback) com
 							},
 						},
 					},
+					"allowLoftCli": {
+						SchemaProps: spec.SchemaProps{
+							Description: "AllowLoftCLI allows certain read-only management requests to make sure loft cli works correctly with this specific access key.\n\nDeprecated: Use the `roles` field instead\n ```yaml\n # Example:\n roles:\n   - role: loftCLI\n ```",
+							Type:        []string{"boolean"},
+							Format:      "",
+						},
+					},
 				},
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/v3/pkg/apis/storage/v1.AccessKeyScopeCluster", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.AccessKeyScopeProject", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.AccessKeyScopeRule", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.AccessKeyScopeSpace", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.AccessKeyScopeVirtualCluster"},
+			"github.com/loft-sh/api/v3/pkg/apis/storage/v1.AccessKeyScopeCluster", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.AccessKeyScopeProject", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.AccessKeyScopeRole", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.AccessKeyScopeRule", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.AccessKeyScopeSpace", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.AccessKeyScopeVirtualCluster"},
 	}
 }
 
@@ -21932,6 +21933,25 @@ func schema_pkg_apis_storage_v1_AccessKeyScopeProject(ref common.ReferenceCallba
 					"project": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Project is the name of the project. You can specify * to select all projects.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+				},
+			},
+		},
+	}
+}
+
+func schema_pkg_apis_storage_v1_AccessKeyScopeRole(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"role": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Role is the name of the role to apply to the access key scope.",
 							Type:        []string{"string"},
 							Format:      "",
 						},
