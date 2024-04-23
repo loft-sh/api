@@ -21040,6 +21040,13 @@ func schema_pkg_apis_management_v1_VirtualClusterInstanceSpec(ref common.Referen
 							},
 						},
 					},
+					"networkPeer": {
+						SchemaProps: spec.SchemaProps{
+							Description: "NetworkPeer specifies if the cluster is connected via tailscalel. When this is specified, the vCluster will not be scheduled to any connected cluster and no templates will be applied to it.",
+							Type:        []string{"boolean"},
+							Format:      "",
+						},
+					},
 				},
 			},
 		},
@@ -29890,6 +29897,13 @@ func schema_pkg_apis_storage_v1_VirtualClusterInstanceSpec(ref common.ReferenceC
 									},
 								},
 							},
+						},
+					},
+					"networkPeer": {
+						SchemaProps: spec.SchemaProps{
+							Description: "NetworkPeer specifies if the cluster is connected via tailscalel. When this is specified, the vCluster will not be scheduled to any connected cluster and no templates will be applied to it.",
+							Type:        []string{"boolean"},
+							Format:      "",
 						},
 					},
 				},
