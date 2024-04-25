@@ -24592,7 +24592,15 @@ func schema_pkg_apis_storage_v1_DevPodProjectSpec(ref common.ReferenceCallback) 
 				Properties: map[string]spec.Schema{
 					"git": {
 						SchemaProps: spec.SchemaProps{
-							Ref: ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.GitProjectSpec"),
+							Description: "Git defines additional git related settings like credentials",
+							Ref:         ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.GitProjectSpec"),
+						},
+					},
+					"fallbackImage": {
+						SchemaProps: spec.SchemaProps{
+							Description: "FallbackImage defines an image all workspace will fall back to if no devcontainer.json could be detected",
+							Type:        []string{"string"},
+							Format:      "",
 						},
 					},
 				},
