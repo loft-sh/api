@@ -217,6 +217,10 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 		"github.com/loft-sh/api/v3/pkg/apis/management/v1.ConfigStatus":                                 schema_pkg_apis_management_v1_ConfigStatus(ref),
 		"github.com/loft-sh/api/v3/pkg/apis/management/v1.Connector":                                    schema_pkg_apis_management_v1_Connector(ref),
 		"github.com/loft-sh/api/v3/pkg/apis/management/v1.ConnectorWithName":                            schema_pkg_apis_management_v1_ConnectorWithName(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/management/v1.ConvertVirtualClusterConfig":                  schema_pkg_apis_management_v1_ConvertVirtualClusterConfig(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/management/v1.ConvertVirtualClusterConfigList":              schema_pkg_apis_management_v1_ConvertVirtualClusterConfigList(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/management/v1.ConvertVirtualClusterConfigSpec":              schema_pkg_apis_management_v1_ConvertVirtualClusterConfigSpec(ref),
+		"github.com/loft-sh/api/v3/pkg/apis/management/v1.ConvertVirtualClusterConfigStatus":            schema_pkg_apis_management_v1_ConvertVirtualClusterConfigStatus(ref),
 		"github.com/loft-sh/api/v3/pkg/apis/management/v1.DevPodDeleteOptions":                          schema_pkg_apis_management_v1_DevPodDeleteOptions(ref),
 		"github.com/loft-sh/api/v3/pkg/apis/management/v1.DevPodDeleteOptionsList":                      schema_pkg_apis_management_v1_DevPodDeleteOptionsList(ref),
 		"github.com/loft-sh/api/v3/pkg/apis/management/v1.DevPodSshOptions":                             schema_pkg_apis_management_v1_DevPodSshOptions(ref),
@@ -11758,6 +11762,157 @@ func schema_pkg_apis_management_v1_ConnectorWithName(ref common.ReferenceCallbac
 		},
 		Dependencies: []string{
 			"github.com/loft-sh/api/v3/pkg/apis/management/v1.AuthenticationGithub", "github.com/loft-sh/api/v3/pkg/apis/management/v1.AuthenticationGitlab", "github.com/loft-sh/api/v3/pkg/apis/management/v1.AuthenticationGoogle", "github.com/loft-sh/api/v3/pkg/apis/management/v1.AuthenticationMicrosoft", "github.com/loft-sh/api/v3/pkg/apis/management/v1.AuthenticationOIDC", "github.com/loft-sh/api/v3/pkg/apis/management/v1.AuthenticationSAML"},
+	}
+}
+
+func schema_pkg_apis_management_v1_ConvertVirtualClusterConfig(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "ConvertVirtualClusterConfig holds config request and response data for virtual clusters",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"kind": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"apiVersion": {
+						SchemaProps: spec.SchemaProps{
+							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"metadata": {
+						SchemaProps: spec.SchemaProps{
+							Default: map[string]interface{}{},
+							Ref:     ref("k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"),
+						},
+					},
+					"spec": {
+						SchemaProps: spec.SchemaProps{
+							Default: map[string]interface{}{},
+							Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/management/v1.ConvertVirtualClusterConfigSpec"),
+						},
+					},
+					"status": {
+						SchemaProps: spec.SchemaProps{
+							Default: map[string]interface{}{},
+							Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/management/v1.ConvertVirtualClusterConfigStatus"),
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			"github.com/loft-sh/api/v3/pkg/apis/management/v1.ConvertVirtualClusterConfigSpec", "github.com/loft-sh/api/v3/pkg/apis/management/v1.ConvertVirtualClusterConfigStatus", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
+	}
+}
+
+func schema_pkg_apis_management_v1_ConvertVirtualClusterConfigList(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"kind": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"apiVersion": {
+						SchemaProps: spec.SchemaProps{
+							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"metadata": {
+						SchemaProps: spec.SchemaProps{
+							Default: map[string]interface{}{},
+							Ref:     ref("k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"),
+						},
+					},
+					"items": {
+						SchemaProps: spec.SchemaProps{
+							Type: []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref("github.com/loft-sh/api/v3/pkg/apis/management/v1.ConvertVirtualClusterConfig"),
+									},
+								},
+							},
+						},
+					},
+				},
+				Required: []string{"items"},
+			},
+		},
+		Dependencies: []string{
+			"github.com/loft-sh/api/v3/pkg/apis/management/v1.ConvertVirtualClusterConfig", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
+	}
+}
+
+func schema_pkg_apis_management_v1_ConvertVirtualClusterConfigSpec(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "ConvertVirtualClusterConfigSpec holds the specification",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"distro": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Distro is the distro to be used for the config",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"values": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Values are the config values for the virtual cluster",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+				},
+			},
+		},
+	}
+}
+
+func schema_pkg_apis_management_v1_ConvertVirtualClusterConfigStatus(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "ConvertVirtualClusterConfigStatus holds the status",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"values": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Values are the converted config values for the virtual cluster",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"converted": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Converted signals if the Values have been converted from the old format",
+							Default:     false,
+							Type:        []string{"boolean"},
+							Format:      "",
+						},
+					},
+				},
+				Required: []string{"converted"},
+			},
+		},
 	}
 }
 

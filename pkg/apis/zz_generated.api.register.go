@@ -48,6 +48,7 @@ func GetManagementAPIBuilder() *builders.APIGroupBuilder {
 			"ClusterConnect",
 			"ClusterRoleTemplate",
 			"Config",
+			"ConvertVirtualClusterConfig",
 			"DevPodWorkspaceTemplate",
 			"DirectClusterEndpointToken",
 			"Event",

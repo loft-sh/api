@@ -117,7 +117,17 @@ var (
 	NewConfigREST = func(getter generic.RESTOptionsGetter) rest.Storage {
 		return NewConfigRESTFunc(Factory)
 	}
-	NewConfigRESTFunc                        NewRESTFunc
+	NewConfigRESTFunc                            NewRESTFunc
+	ManagementConvertVirtualClusterConfigStorage = builders.NewApiResourceWithStorage( // Resource status endpoint
+		InternalConvertVirtualClusterConfig,
+		func() runtime.Object { return &ConvertVirtualClusterConfig{} },     // Register versioned resource
+		func() runtime.Object { return &ConvertVirtualClusterConfigList{} }, // Register versioned resource list
+		NewConvertVirtualClusterConfigREST,
+	)
+	NewConvertVirtualClusterConfigREST = func(getter generic.RESTOptionsGetter) rest.Storage {
+		return NewConvertVirtualClusterConfigRESTFunc(Factory)
+	}
+	NewConvertVirtualClusterConfigRESTFunc   NewRESTFunc
 	ManagementDevPodWorkspaceInstanceStorage = builders.NewApiResourceWithStorage( // Resource status endpoint
 		InternalDevPodWorkspaceInstance,
 		func() runtime.Object { return &DevPodWorkspaceInstance{} },     // Register versioned resource
@@ -607,6 +617,18 @@ var (
 		"ConfigStatus",
 		func() runtime.Object { return &Config{} },
 		func() runtime.Object { return &ConfigList{} },
+	)
+	InternalConvertVirtualClusterConfig = builders.NewInternalResource(
+		"convertvirtualclusterconfig",
+		"ConvertVirtualClusterConfig",
+		func() runtime.Object { return &ConvertVirtualClusterConfig{} },
+		func() runtime.Object { return &ConvertVirtualClusterConfigList{} },
+	)
+	InternalConvertVirtualClusterConfigStatus = builders.NewInternalResourceStatus(
+		"convertvirtualclusterconfig",
+		"ConvertVirtualClusterConfigStatus",
+		func() runtime.Object { return &ConvertVirtualClusterConfig{} },
+		func() runtime.Object { return &ConvertVirtualClusterConfigList{} },
 	)
 	InternalDevPodWorkspaceInstance = builders.NewInternalResource(
 		"devpodworkspaceinstances",
@@ -1210,6 +1232,8 @@ var (
 		InternalClusterRoleTemplateStatus,
 		InternalConfig,
 		InternalConfigStatus,
+		InternalConvertVirtualClusterConfig,
+		InternalConvertVirtualClusterConfigStatus,
 		InternalDevPodWorkspaceInstance,
 		InternalDevPodWorkspaceInstanceStatus,
 		InternalDevPodDeleteOptionsREST,
@@ -1808,6 +1832,27 @@ type ConnectorWithName struct {
 	ID          string `json:"id,omitempty"`
 	DisplayName string `json:"displayName,omitempty"`
 	Connector   `json:",inline"`
+}
+
+// +genclient
+// +genclient:nonNamespaced
+// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+
+type ConvertVirtualClusterConfig struct {
+	metav1.TypeMeta   `json:",inline"`
+	metav1.ObjectMeta `json:"metadata,omitempty"`
+	Spec              ConvertVirtualClusterConfigSpec   `json:"spec,omitempty"`
+	Status            ConvertVirtualClusterConfigStatus `json:"status,omitempty"`
+}
+
+type ConvertVirtualClusterConfigSpec struct {
+	Distro string `json:"distro,omitempty"`
+	Values string `json:"values,omitempty"`
+}
+
+type ConvertVirtualClusterConfigStatus struct {
+	Values    string `json:"values,omitempty"`
+	Converted bool   `json:"converted"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -3889,6 +3934,125 @@ func (s *storageConfig) UpdateConfig(ctx context.Context, object *Config) (*Conf
 }
 
 func (s *storageConfig) DeleteConfig(ctx context.Context, id string) (bool, error) {
+	st := s.GetStandardStorage()
+	_, sync, err := st.Delete(ctx, id, nil, &metav1.DeleteOptions{})
+	return sync, err
+}
+
+// ConvertVirtualClusterConfig Functions and Structs
+//
+// +k8s:deepcopy-gen=false
+type ConvertVirtualClusterConfigStrategy struct {
+	builders.DefaultStorageStrategy
+}
+
+// +k8s:deepcopy-gen=false
+type ConvertVirtualClusterConfigStatusStrategy struct {
+	builders.DefaultStatusStorageStrategy
+}
+
+// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+
+type ConvertVirtualClusterConfigList struct {
+	metav1.TypeMeta `json:",inline"`
+	metav1.ListMeta `json:"metadata,omitempty"`
+	Items           []ConvertVirtualClusterConfig `json:"items"`
+}
+
+func (ConvertVirtualClusterConfig) NewStatus() interface{} {
+	return ConvertVirtualClusterConfigStatus{}
+}
+
+func (pc *ConvertVirtualClusterConfig) GetStatus() interface{} {
+	return pc.Status
+}
+
+func (pc *ConvertVirtualClusterConfig) SetStatus(s interface{}) {
+	pc.Status = s.(ConvertVirtualClusterConfigStatus)
+}
+
+func (pc *ConvertVirtualClusterConfig) GetSpec() interface{} {
+	return pc.Spec
+}
+
+func (pc *ConvertVirtualClusterConfig) SetSpec(s interface{}) {
+	pc.Spec = s.(ConvertVirtualClusterConfigSpec)
+}
+
+func (pc *ConvertVirtualClusterConfig) GetObjectMeta() *metav1.ObjectMeta {
+	return &pc.ObjectMeta
+}
+
+func (pc *ConvertVirtualClusterConfig) SetGeneration(generation int64) {
+	pc.ObjectMeta.Generation = generation
+}
+
+func (pc ConvertVirtualClusterConfig) GetGeneration() int64 {
+	return pc.ObjectMeta.Generation
+}
+
+// Registry is an interface for things that know how to store ConvertVirtualClusterConfig.
+// +k8s:deepcopy-gen=false
+type ConvertVirtualClusterConfigRegistry interface {
+	ListConvertVirtualClusterConfigs(ctx context.Context, options *internalversion.ListOptions) (*ConvertVirtualClusterConfigList, error)
+	GetConvertVirtualClusterConfig(ctx context.Context, id string, options *metav1.GetOptions) (*ConvertVirtualClusterConfig, error)
+	CreateConvertVirtualClusterConfig(ctx context.Context, id *ConvertVirtualClusterConfig) (*ConvertVirtualClusterConfig, error)
+	UpdateConvertVirtualClusterConfig(ctx context.Context, id *ConvertVirtualClusterConfig) (*ConvertVirtualClusterConfig, error)
+	DeleteConvertVirtualClusterConfig(ctx context.Context, id string) (bool, error)
+}
+
+// NewRegistry returns a new Registry interface for the given Storage. Any mismatched types will panic.
+func NewConvertVirtualClusterConfigRegistry(sp builders.StandardStorageProvider) ConvertVirtualClusterConfigRegistry {
+	return &storageConvertVirtualClusterConfig{sp}
+}
+
+// Implement Registry
+// storage puts strong typing around storage calls
+// +k8s:deepcopy-gen=false
+type storageConvertVirtualClusterConfig struct {
+	builders.StandardStorageProvider
+}
+
+func (s *storageConvertVirtualClusterConfig) ListConvertVirtualClusterConfigs(ctx context.Context, options *internalversion.ListOptions) (*ConvertVirtualClusterConfigList, error) {
+	if options != nil && options.FieldSelector != nil && !options.FieldSelector.Empty() {
+		return nil, fmt.Errorf("field selector not supported yet")
+	}
+	st := s.GetStandardStorage()
+	obj, err := st.List(ctx, options)
+	if err != nil {
+		return nil, err
+	}
+	return obj.(*ConvertVirtualClusterConfigList), err
+}
+
+func (s *storageConvertVirtualClusterConfig) GetConvertVirtualClusterConfig(ctx context.Context, id string, options *metav1.GetOptions) (*ConvertVirtualClusterConfig, error) {
+	st := s.GetStandardStorage()
+	obj, err := st.Get(ctx, id, options)
+	if err != nil {
+		return nil, err
+	}
+	return obj.(*ConvertVirtualClusterConfig), nil
+}
+
+func (s *storageConvertVirtualClusterConfig) CreateConvertVirtualClusterConfig(ctx context.Context, object *ConvertVirtualClusterConfig) (*ConvertVirtualClusterConfig, error) {
+	st := s.GetStandardStorage()
+	obj, err := st.Create(ctx, object, nil, &metav1.CreateOptions{})
+	if err != nil {
+		return nil, err
+	}
+	return obj.(*ConvertVirtualClusterConfig), nil
+}
+
+func (s *storageConvertVirtualClusterConfig) UpdateConvertVirtualClusterConfig(ctx context.Context, object *ConvertVirtualClusterConfig) (*ConvertVirtualClusterConfig, error) {
+	st := s.GetStandardStorage()
+	obj, _, err := st.Update(ctx, object.Name, rest.DefaultUpdatedObjectInfo(object), nil, nil, false, &metav1.UpdateOptions{})
+	if err != nil {
+		return nil, err
+	}
+	return obj.(*ConvertVirtualClusterConfig), nil
+}
+
+func (s *storageConvertVirtualClusterConfig) DeleteConvertVirtualClusterConfig(ctx context.Context, id string) (bool, error) {
 	st := s.GetStandardStorage()
 	_, sync, err := st.Delete(ctx, id, nil, &metav1.DeleteOptions{})
 	return sync, err

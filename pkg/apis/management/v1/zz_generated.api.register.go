@@ -41,6 +41,8 @@ func addKnownTypes(scheme *runtime.Scheme) error {
 		&ClusterRoleTemplateList{},
 		&Config{},
 		&ConfigList{},
+		&ConvertVirtualClusterConfig{},
+		&ConvertVirtualClusterConfigList{},
 		&DevPodWorkspaceInstance{},
 		&DevPodWorkspaceInstanceList{},
 		&DevPodDeleteOptions{},
@@ -192,6 +194,7 @@ var (
 		management.ManagementClusterConnectStorage,
 		management.ManagementClusterRoleTemplateStorage,
 		management.ManagementConfigStorage,
+		management.ManagementConvertVirtualClusterConfigStorage,
 		management.ManagementDevPodWorkspaceInstanceStorage,
 		builders.NewApiResourceWithStorage(
 			management.InternalDevPodDeleteOptionsREST,
@@ -557,6 +560,14 @@ type ConfigList struct {
 	metav1.TypeMeta `json:",inline"`
 	metav1.ListMeta `json:"metadata,omitempty"`
 	Items           []Config `json:"items"`
+}
+
+// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+
+type ConvertVirtualClusterConfigList struct {
+	metav1.TypeMeta `json:",inline"`
+	metav1.ListMeta `json:"metadata,omitempty"`
+	Items           []ConvertVirtualClusterConfig `json:"items"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
