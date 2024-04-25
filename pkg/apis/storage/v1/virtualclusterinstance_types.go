@@ -15,6 +15,8 @@ const (
 	InstanceVirtualClusterReady   agentstoragev1.ConditionType = "VirtualClusterReady"
 	InstanceProjectsSecretsSynced agentstoragev1.ConditionType = "ProjectSecretsSynced"
 
+	InstanceVirtualClusterAppsAndObjectsSynced agentstoragev1.ConditionType = "VirtualClusterAppsAndObjectsSynced"
+
 	// Workload VirtualCluster conditions
 
 	InstanceWorkloadSpaceSynced               agentstoragev1.ConditionType = "WorkloadSpaceSynced"
