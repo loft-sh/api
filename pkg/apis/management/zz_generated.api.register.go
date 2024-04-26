@@ -2035,7 +2035,7 @@ type KioskStatus struct {
 }
 
 // +genclient
-// +genclient:nonNamespaced
+// +genclient
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
 
 type License struct {
@@ -2712,6 +2712,7 @@ type VirtualClusterInstanceStatus struct {
 	SleepModeConfig                        *clusterv1.SleepModeConfig `json:"sleepModeConfig,omitempty"`
 	CanUse                                 bool                       `json:"canUse,omitempty"`
 	CanUpdate                              bool                       `json:"canUpdate,omitempty"`
+	Online                                 bool                       `json:"online,omitempty"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object

@@ -119,7 +119,7 @@ type VirtualClusterInstanceSpec struct {
 	// +optional
 	Access []Access `json:"access,omitempty"`
 
-	// NetworkPeer specifies if the cluster is connected via tailscalel.
+	// NetworkPeer specifies if the cluster is connected via tailscale.
 	// When this is specified, the vCluster will not be scheduled to any connected cluster
 	// and no templates will be applied to it.
 	// +optional

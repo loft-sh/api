@@ -169,6 +169,8 @@ type AccessKeyScopeRole struct {
 	Role AccessKeyScopeRoleName `json:"role,omitempty"`
 }
 
+// AccessKeyScopeRoleName is the role name for a given scope
+// +enum
 type AccessKeyScopeRoleName string
 
 const (

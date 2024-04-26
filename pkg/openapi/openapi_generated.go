@@ -21048,7 +21048,7 @@ func schema_pkg_apis_management_v1_VirtualClusterInstanceSpec(ref common.Referen
 					},
 					"networkPeer": {
 						SchemaProps: spec.SchemaProps{
-							Description: "NetworkPeer specifies if the cluster is connected via tailscalel. When this is specified, the vCluster will not be scheduled to any connected cluster and no templates will be applied to it.",
+							Description: "NetworkPeer specifies if the cluster is connected via tailscale. When this is specified, the vCluster will not be scheduled to any connected cluster and no templates will be applied to it.",
 							Type:        []string{"boolean"},
 							Format:      "",
 						},
@@ -21150,6 +21150,13 @@ func schema_pkg_apis_management_v1_VirtualClusterInstanceStatus(ref common.Refer
 					"canUpdate": {
 						SchemaProps: spec.SchemaProps{
 							Description: "CanUpdate specifies if the requester can update the instance",
+							Type:        []string{"boolean"},
+							Format:      "",
+						},
+					},
+					"online": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Online specifies if there is at least one network peer available for an agentless vCluster.",
 							Type:        []string{"boolean"},
 							Format:      "",
 						},
@@ -21956,9 +21963,10 @@ func schema_pkg_apis_storage_v1_AccessKeyScopeRole(ref common.ReferenceCallback)
 				Properties: map[string]spec.Schema{
 					"role": {
 						SchemaProps: spec.SchemaProps{
-							Description: "Role is the name of the role to apply to the access key scope.",
+							Description: "Role is the name of the role to apply to the access key scope.\n\nPossible enum values:\n - `\"loft-cli\"`\n - `\"network-peer\"`\n - `\"vcluster\"`",
 							Type:        []string{"string"},
 							Format:      "",
+							Enum:        []interface{}{"loft-cli", "network-peer", "vcluster"},
 						},
 					},
 				},
@@ -29934,7 +29942,7 @@ func schema_pkg_apis_storage_v1_VirtualClusterInstanceSpec(ref common.ReferenceC
 					},
 					"networkPeer": {
 						SchemaProps: spec.SchemaProps{
-							Description: "NetworkPeer specifies if the cluster is connected via tailscalel. When this is specified, the vCluster will not be scheduled to any connected cluster and no templates will be applied to it.",
+							Description: "NetworkPeer specifies if the cluster is connected via tailscale. When this is specified, the vCluster will not be scheduled to any connected cluster and no templates will be applied to it.",
 							Type:        []string{"boolean"},
 							Format:      "",
 						},

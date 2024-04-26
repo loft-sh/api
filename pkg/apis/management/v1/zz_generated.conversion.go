@@ -9725,6 +9725,7 @@ func autoConvert_v1_VirtualClusterInstanceStatus_To_management_VirtualClusterIns
 	out.SleepModeConfig = (*clusterv1.SleepModeConfig)(unsafe.Pointer(in.SleepModeConfig))
 	out.CanUse = in.CanUse
 	out.CanUpdate = in.CanUpdate
+	out.Online = in.Online
 	return nil
 }
 
@@ -9738,6 +9739,7 @@ func autoConvert_management_VirtualClusterInstanceStatus_To_v1_VirtualClusterIns
 	out.SleepModeConfig = (*clusterv1.SleepModeConfig)(unsafe.Pointer(in.SleepModeConfig))
 	out.CanUse = in.CanUse
 	out.CanUpdate = in.CanUpdate
+	out.Online = in.Online
 	return nil
 }
 
