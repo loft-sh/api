@@ -1748,15 +1748,15 @@ func (in *DevPodWorkspaceTemplate) DeepCopyObject() runtime.Object {
 func (in *DevPodWorkspaceTemplateDefinition) DeepCopyInto(out *DevPodWorkspaceTemplateDefinition) {
 	*out = *in
 	in.Provider.DeepCopyInto(&out.Provider)
-	if in.SpaceTemplate != nil {
-		in, out := &in.SpaceTemplate, &out.SpaceTemplate
+	if in.SpaceTemplateRef != nil {
+		in, out := &in.SpaceTemplateRef, &out.SpaceTemplateRef
 		*out = new(TemplateRef)
 		**out = **in
 	}
-	if in.VirtualClusterTemplate != nil {
-		in, out := &in.VirtualClusterTemplate, &out.VirtualClusterTemplate
-		*out = new(TemplateRef)
-		**out = **in
+	if in.SpaceTemplate != nil {
+		in, out := &in.SpaceTemplate, &out.SpaceTemplate
+		*out = new(SpaceTemplateDefinition)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.WorkspaceEnv != nil {
 		in, out := &in.WorkspaceEnv, &out.WorkspaceEnv

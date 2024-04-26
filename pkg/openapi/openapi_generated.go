@@ -25049,16 +25049,16 @@ func schema_pkg_apis_storage_v1_DevPodWorkspaceTemplateDefinition(ref common.Ref
 							Ref:         ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.DevPodWorkspaceProvider"),
 						},
 					},
-					"spaceTemplate": {
+					"spaceTemplateRef": {
 						SchemaProps: spec.SchemaProps{
-							Description: "SpaceTemplate is the space that should get created for this DevPod. If this is specified, the Kubernetes provider will be selected automatically.",
+							Description: "SpaceTemplateRef is a reference to the space that should get created for this DevPod. If this is specified, the kubernetes provider will be selected automatically.",
 							Ref:         ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.TemplateRef"),
 						},
 					},
-					"virtualClusterTemplate": {
+					"spaceTemplate": {
 						SchemaProps: spec.SchemaProps{
-							Description: "VirtualClusterTemplate is the virtual cluster that should get created for this DevPod. If this is specified, the Kubernetes provider will be selected automatically.",
-							Ref:         ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.TemplateRef"),
+							Description: "SpaceTemplate is the inline template for a space that should get created for this DevPod. If this is specified, the kubernetes provider will be selected automatically.",
+							Ref:         ref("github.com/loft-sh/api/v3/pkg/apis/storage/v1.SpaceTemplateDefinition"),
 						},
 					},
 					"workspaceEnv": {
@@ -25088,7 +25088,7 @@ func schema_pkg_apis_storage_v1_DevPodWorkspaceTemplateDefinition(ref common.Ref
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/v3/pkg/apis/storage/v1.DevPodProviderOption", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.DevPodWorkspaceProvider", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.TemplateRef"},
+			"github.com/loft-sh/api/v3/pkg/apis/storage/v1.DevPodProviderOption", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.DevPodWorkspaceProvider", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.SpaceTemplateDefinition", "github.com/loft-sh/api/v3/pkg/apis/storage/v1.TemplateRef"},
 	}
 }
 
