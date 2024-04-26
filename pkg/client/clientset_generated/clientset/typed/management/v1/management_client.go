@@ -32,7 +32,6 @@ type ManagementV1Interface interface {
 	LicenseTokensGetter
 	LoftUpgradesGetter
 	OwnedAccessKeysGetter
-	PolicyViolationsGetter
 	ProjectsGetter
 	ProjectSecretsGetter
 	RedirectTokensGetter
@@ -135,10 +134,6 @@ func (c *ManagementV1Client) LoftUpgrades() LoftUpgradeInterface {
 
 func (c *ManagementV1Client) OwnedAccessKeys() OwnedAccessKeyInterface {
 	return newOwnedAccessKeys(c)
-}
-
-func (c *ManagementV1Client) PolicyViolations() PolicyViolationInterface {
-	return newPolicyViolations(c)
 }
 
 func (c *ManagementV1Client) Projects() ProjectInterface {

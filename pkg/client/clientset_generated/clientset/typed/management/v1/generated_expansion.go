@@ -42,8 +42,6 @@ type LoftUpgradeExpansion interface{}
 
 type OwnedAccessKeyExpansion interface{}
 
-type PolicyViolationExpansion interface{}
-
 type ProjectExpansion interface{}
 
 type ProjectSecretExpansion interface{}
