@@ -118,10 +118,6 @@ type ProjectSpec struct {
 	// +optional
 	NamespacePattern *NamespacePattern `json:"namespacePattern,omitempty"`
 
-	// AutomaticImport imports vClusters & Namespace automatically
-	// +optional
-	AutomaticImport AutomaticImport `json:"automaticImport,omitempty"`
-
 	// ArgoIntegration holds information about ArgoCD Integration
 	// +optional
 	ArgoIntegration *ArgoIntegrationSpec `json:"argoCD,omitempty"`
@@ -137,18 +133,6 @@ type ProjectSpec struct {
 	// DevPod holds DevPod specific configuration for project
 	// +optional
 	DevPod *DevPodProjectSpec `json:"devPod,omitempty"`
-}
-
-type AutomaticImport struct {
-	// VirtualClusters defines automatic virtual cluster import options.
-	// +optional
-	VirtualClusters AutomaticImportVirtualClusters `json:"virtualClusters,omitempty"`
-}
-
-type AutomaticImportVirtualClusters struct {
-	// Enabled specifies if automatic virtual cluster import should be enabled for this project.
-	// +optional
-	Enabled bool `json:"enabled"`
 }
 
 type RequireTemplate struct {
