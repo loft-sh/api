@@ -4,7 +4,7 @@
 
 // +k8s:openapi-gen=true
 // +k8s:deepcopy-gen=package,register
-// +k8s:conversion-gen=github.com/loft-sh/api/v3/pkg/apis/management
+// +k8s:conversion-gen=github.com/loft-sh/api/v4/pkg/apis/management
 // +k8s:defaulter-gen=TypeMeta
 // +groupName=management.loft.sh
-package v1 // import "github.com/loft-sh/api/v3/pkg/apis/management/v1"
+package v1 // import "github.com/loft-sh/api/v4/pkg/apis/management/v1"

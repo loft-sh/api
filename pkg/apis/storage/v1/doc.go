@@ -10,4 +10,4 @@
 // +k8s:deepcopy-gen=package
 // +k8s:defaulter-gen=TypeMeta
 // +groupName=storage.loft.sh
-package v1 // import "github.com/loft-sh/api/v3/apis/storage/v1"
+package v1 // import "github.com/loft-sh/api/v4/apis/storage/v1"

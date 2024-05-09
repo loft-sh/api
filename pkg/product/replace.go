@@ -12,14 +12,14 @@ import (
 //
 // It replaces "loft" with the specific product name:
 //   - "devpod pro" for product.DevPodPro
-//   - "vcluster pro" for product.VClusterPro
+//   - "vcluster platform" for product.VClusterPro
 //   - No replacement for product.Loft
 //
 // This handles case insensitive replaces like "loft" -> "devpod pro".
 //
 // It also handles case sensitive replaces:
 //   - "Loft" -> "DevPod.Pro" for product.DevPodPro
-//   - "Loft" -> "vCluster.Pro" for product.VClusterPro
+//   - "Loft" -> "vCluster Platform" for product.VClusterPro
 //
 // This allows customizing command usage text for different products.
 //
@@ -40,8 +40,8 @@ func Replace(content string) string {
 		content = strings.Replace(content, "loft.sh", "vcluster.pro", -1)
 		content = strings.Replace(content, "loft.host", "vcluster.host", -1)
 
-		content = strings.Replace(content, "loft", "vcluster pro", -1)
-		content = strings.Replace(content, "Loft", "vCluster.Pro", -1)
+		content = strings.Replace(content, "loft", "vcluster platform", -1)
+		content = strings.Replace(content, "Loft", "vCluster Platform", -1)
 	case licenseapi.Loft:
 	}
 
@@ -55,14 +55,14 @@ func Replace(content string) string {
 // The product name replacements are:
 //
 //   - "devpod pro" for product.DevPodPro
-//   - "vcluster pro" for product.VClusterPro
+//   - "vcluster platform" for product.VClusterPro
 //   - No replacement for product.Loft
 //
 // This handles case insensitive replaces like "loft" -> "devpod pro".
 //
 // It also handles case sensitive replaces:
 //   - "Loft" -> "DevPod.Pro" for product.DevPodPro
-//   - "Loft" -> "vCluster.Pro" for product.VClusterPro
+//   - "Loft" -> "vCluster Platform" for product.VClusterPro
 //
 // Parameters:
 //   - use: The usage string
@@ -79,7 +79,7 @@ func ReplaceWithHeader(use, content string) string {
 	case licenseapi.DevPodPro:
 		productName = "devpod pro"
 	case licenseapi.VClusterPro:
-		productName = "vcluster pro"
+		productName = "vcluster platform"
 	case licenseapi.Loft:
 	}
 

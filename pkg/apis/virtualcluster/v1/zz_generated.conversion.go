@@ -8,7 +8,7 @@ package v1
 import (
 	unsafe "unsafe"
 
-	virtualcluster "github.com/loft-sh/api/v3/pkg/apis/virtualcluster"
+	virtualcluster "github.com/loft-sh/api/v4/pkg/apis/virtualcluster"
 	conversion "k8s.io/apimachinery/pkg/conversion"
 	runtime "k8s.io/apimachinery/pkg/runtime"
 )

@@ -6,7 +6,7 @@ type ProductName string
 
 const (
 	ProductNameLoft        ProductName = "Loft"
-	ProductNameVClusterPro ProductName = "vCluster.Pro"
+	ProductNameVClusterPro ProductName = "vCluster Platform"
 	ProductNameDevPodPro   ProductName = "DevPod.Pro"
 )
 

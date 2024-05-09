@@ -1,13 +1,13 @@
 package v1
 
 import (
-	storagev1 "github.com/loft-sh/api/v3/pkg/apis/storage/v1"
+	storagev1 "github.com/loft-sh/api/v4/pkg/apis/storage/v1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 )
 
 // +genclient
 // +genclient:nonNamespaced
-// +genclient:method=GetCredentials,verb=get,subresource=credentials,result=github.com/loft-sh/api/v3/pkg/apis/management/v1.AppCredentials
+// +genclient:method=GetCredentials,verb=get,subresource=credentials,result=github.com/loft-sh/api/v4/pkg/apis/management/v1.AppCredentials
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
 
 // App holds the information

@@ -7,12 +7,12 @@ import (
 	"fmt"
 
 	pkglicenseapi "github.com/loft-sh/admin-apis/pkg/licenseapi"
-	clusterv1 "github.com/loft-sh/agentapi/v3/pkg/apis/loft/cluster/v1"
-	agentstoragev1 "github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1"
-	auditv1 "github.com/loft-sh/api/v3/pkg/apis/audit/v1"
-	storagev1 "github.com/loft-sh/api/v3/pkg/apis/storage/v1"
-	uiv1 "github.com/loft-sh/api/v3/pkg/apis/ui/v1"
-	"github.com/loft-sh/api/v3/pkg/managerfactory"
+	clusterv1 "github.com/loft-sh/agentapi/v4/pkg/apis/loft/cluster/v1"
+	agentstoragev1 "github.com/loft-sh/agentapi/v4/pkg/apis/loft/storage/v1"
+	auditv1 "github.com/loft-sh/api/v4/pkg/apis/audit/v1"
+	storagev1 "github.com/loft-sh/api/v4/pkg/apis/storage/v1"
+	uiv1 "github.com/loft-sh/api/v4/pkg/apis/ui/v1"
+	"github.com/loft-sh/api/v4/pkg/managerfactory"
 	"github.com/loft-sh/apiserver/pkg/builders"
 	policyv1beta1 "github.com/loft-sh/jspolicy/pkg/apis/policy/v1beta1"
 	authorizationv1 "k8s.io/api/authorization/v1"
@@ -2035,7 +2035,7 @@ type KioskStatus struct {
 }
 
 // +genclient
-// +genclient
+// +genclient:nonNamespaced
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
 
 type License struct {
