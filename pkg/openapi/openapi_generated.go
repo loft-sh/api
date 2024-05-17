@@ -24891,6 +24891,14 @@ func schema_pkg_apis_storage_v1_DevPodWorkspaceTemplateDefinition(ref common.Ref
 							Format:      "",
 						},
 					},
+					"gitCloneStrategy": {
+						SchemaProps: spec.SchemaProps{
+							Description: "GitCloneStrategy specifies how git based workspace are being cloned. Can be \"\" (full, default), treeless, blobless or shallow\n\nPossible enum values:\n - `\"\"`\n - `\"blobless\"`\n - `\"shallow\"`\n - `\"treeless\"`",
+							Type:        []string{"string"},
+							Format:      "",
+							Enum:        []interface{}{"", "blobless", "shallow", "treeless"},
+						},
+					},
 				},
 				Required: []string{"provider"},
 			},
