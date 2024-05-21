@@ -10152,6 +10152,13 @@ func schema_pkg_apis_management_v1_ClusterAgentConfig(ref common.ReferenceCallba
 							Format:      "",
 						},
 					},
+					"projectNamespacePrefix": {
+						SchemaProps: spec.SchemaProps{
+							Description: "ProjectNamespacePrefix holds the prefix for loft project namespaces. Omitted defaults to \"loft-p-\"",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
 					"loftInstanceID": {
 						SchemaProps: spec.SchemaProps{
 							Description: "LoftInstanceID defines the instance id from the loft instance",
@@ -10211,6 +10218,13 @@ func schema_pkg_apis_management_v1_ClusterAgentConfigCommon(ref common.Reference
 					"loftHost": {
 						SchemaProps: spec.SchemaProps{
 							Description: "LoftHost defines the host for the agent's loft instance",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"projectNamespacePrefix": {
+						SchemaProps: spec.SchemaProps{
+							Description: "ProjectNamespacePrefix holds the prefix for loft project namespaces. Omitted defaults to \"loft-p-\"",
 							Type:        []string{"string"},
 							Format:      "",
 						},
@@ -11614,6 +11628,13 @@ func schema_pkg_apis_management_v1_ConfigStatus(ref common.ReferenceCallback) co
 					"loftHost": {
 						SchemaProps: spec.SchemaProps{
 							Description: "LoftHost holds the domain where the loft instance is hosted. This should not include https or http. E.g. loft.my-domain.com",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"projectNamespacePrefix": {
+						SchemaProps: spec.SchemaProps{
+							Description: "ProjectNamespacePrefix holds the prefix for loft project namespaces. Omitted defaults to \"loft-p-\"",
 							Type:        []string{"string"},
 							Format:      "",
 						},
@@ -17440,7 +17461,6 @@ func schema_pkg_apis_management_v1_SelfStatus(ref common.ReferenceCallback) comm
 					"chatAuthToken": {
 						SchemaProps: spec.SchemaProps{
 							Description: "ChatAuthToken is the token used to authenticate with the in-product chat widget in the UI",
-							Default:     "",
 							Type:        []string{"string"},
 							Format:      "",
 						},
@@ -17448,7 +17468,13 @@ func schema_pkg_apis_management_v1_SelfStatus(ref common.ReferenceCallback) comm
 					"instanceID": {
 						SchemaProps: spec.SchemaProps{
 							Description: "InstanceID is the loft instance id",
-							Default:     "",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"projectNamespacePrefix": {
+						SchemaProps: spec.SchemaProps{
+							Description: "ProjectNamespacePrefix is the prefix used to name project namespaces after defaulting has been applied",
 							Type:        []string{"string"},
 							Format:      "",
 						},
