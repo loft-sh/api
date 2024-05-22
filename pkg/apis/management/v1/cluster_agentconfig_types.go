@@ -37,9 +37,9 @@ type ClusterAgentConfigCommon struct {
 	// +optional
 	LoftHost string `json:"loftHost,omitempty"`
 
-	// ProjectNamespacePrefix holds the prefix for loft project namespaces. Omitted defaults to "loft-p-"
+	// ProjectNamespacePrefix holds the prefix for loft project namespaces
 	// +optional
-	ProjectNamespacePrefix *string `json:"projectNamespacePrefix,omitempty"`
+	ProjectNamespacePrefix string `json:"projectNamespacePrefix,omitempty"`
 
 	// LoftInstanceID defines the instance id from the loft instance
 	// +optional

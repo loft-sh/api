@@ -10154,7 +10154,7 @@ func schema_pkg_apis_management_v1_ClusterAgentConfig(ref common.ReferenceCallba
 					},
 					"projectNamespacePrefix": {
 						SchemaProps: spec.SchemaProps{
-							Description: "ProjectNamespacePrefix holds the prefix for loft project namespaces. Omitted defaults to \"loft-p-\"",
+							Description: "ProjectNamespacePrefix holds the prefix for loft project namespaces",
 							Type:        []string{"string"},
 							Format:      "",
 						},
@@ -10224,7 +10224,7 @@ func schema_pkg_apis_management_v1_ClusterAgentConfigCommon(ref common.Reference
 					},
 					"projectNamespacePrefix": {
 						SchemaProps: spec.SchemaProps{
-							Description: "ProjectNamespacePrefix holds the prefix for loft project namespaces. Omitted defaults to \"loft-p-\"",
+							Description: "ProjectNamespacePrefix holds the prefix for loft project namespaces",
 							Type:        []string{"string"},
 							Format:      "",
 						},
@@ -11634,7 +11634,7 @@ func schema_pkg_apis_management_v1_ConfigStatus(ref common.ReferenceCallback) co
 					},
 					"projectNamespacePrefix": {
 						SchemaProps: spec.SchemaProps{
-							Description: "ProjectNamespacePrefix holds the prefix for loft project namespaces. Omitted defaults to \"loft-p-\"",
+							Description: "ProjectNamespacePrefix holds the prefix for loft project namespaces. Omitted defaults to \"p-\"",
 							Type:        []string{"string"},
 							Format:      "",
 						},

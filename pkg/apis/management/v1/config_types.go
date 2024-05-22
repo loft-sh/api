@@ -51,7 +51,7 @@ type ConfigStatus struct {
 	// +optional
 	LoftHost string `json:"loftHost,omitempty"`
 
-	// ProjectNamespacePrefix holds the prefix for loft project namespaces. Omitted defaults to "loft-p-"
+	// ProjectNamespacePrefix holds the prefix for loft project namespaces. Omitted defaults to "p-"
 	// +optional
 	ProjectNamespacePrefix *string `json:"projectNamespacePrefix,omitempty"`
 

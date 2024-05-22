@@ -1653,7 +1653,7 @@ type ClusterAgentConfigCommon struct {
 	DefaultImageRegistry   string             `json:"defaultImageRegistry,omitempty"`
 	TokenCaCert            []byte             `json:"tokenCaCert,omitempty"`
 	LoftHost               string             `json:"loftHost,omitempty"`
-	ProjectNamespacePrefix *string            `json:"projectNamespacePrefix,omitempty"`
+	ProjectNamespacePrefix string             `json:"projectNamespacePrefix,omitempty"`
 	LoftInstanceID         string             `json:"loftInstanceID,omitempty"`
 	AnalyticsSpec          AgentAnalyticsSpec `json:"analyticsSpec"`
 }
@@ -2037,7 +2037,7 @@ type KioskStatus struct {
 }
 
 // +genclient
-// +genclient:nonNamespaced
+// +genclient
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
 
 type License struct {

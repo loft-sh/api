@@ -1301,11 +1301,6 @@ func (in *ClusterAgentConfigCommon) DeepCopyInto(out *ClusterAgentConfigCommon) 
 		*out = make([]byte, len(*in))
 		copy(*out, *in)
 	}
-	if in.ProjectNamespacePrefix != nil {
-		in, out := &in.ProjectNamespacePrefix, &out.ProjectNamespacePrefix
-		*out = new(string)
-		**out = **in
-	}
 	out.AnalyticsSpec = in.AnalyticsSpec
 	return
 }

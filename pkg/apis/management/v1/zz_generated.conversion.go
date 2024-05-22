@@ -4148,7 +4148,7 @@ func autoConvert_v1_ClusterAgentConfigCommon_To_management_ClusterAgentConfigCom
 	out.DefaultImageRegistry = in.DefaultImageRegistry
 	out.TokenCaCert = *(*[]byte)(unsafe.Pointer(&in.TokenCaCert))
 	out.LoftHost = in.LoftHost
-	out.ProjectNamespacePrefix = (*string)(unsafe.Pointer(in.ProjectNamespacePrefix))
+	out.ProjectNamespacePrefix = in.ProjectNamespacePrefix
 	out.LoftInstanceID = in.LoftInstanceID
 	if err := Convert_v1_AgentAnalyticsSpec_To_management_AgentAnalyticsSpec(&in.AnalyticsSpec, &out.AnalyticsSpec, s); err != nil {
 		return err
@@ -4167,7 +4167,7 @@ func autoConvert_management_ClusterAgentConfigCommon_To_v1_ClusterAgentConfigCom
 	out.DefaultImageRegistry = in.DefaultImageRegistry
 	out.TokenCaCert = *(*[]byte)(unsafe.Pointer(&in.TokenCaCert))
 	out.LoftHost = in.LoftHost
-	out.ProjectNamespacePrefix = (*string)(unsafe.Pointer(in.ProjectNamespacePrefix))
+	out.ProjectNamespacePrefix = in.ProjectNamespacePrefix
 	out.LoftInstanceID = in.LoftInstanceID
 	if err := Convert_management_AgentAnalyticsSpec_To_v1_AgentAnalyticsSpec(&in.AnalyticsSpec, &out.AnalyticsSpec, s); err != nil {
 		return err
