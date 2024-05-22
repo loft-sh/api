@@ -49,23 +49,6 @@ type ClusterAgentConfigCommon struct {
 	AnalyticsSpec AgentAnalyticsSpec `json:"analyticsSpec"`
 }
 
-// AgentLoftAccess holds the config how the agent can reach loft
-type AgentLoftAccess struct {
-	// Cluster is the name of the cluster the agent is running in
-	// +optional
-	Cluster string `json:"cluster,omitempty"`
-
-	// LoftAPIHost defines the host for the loft api. If empty, Loft will
-	// create an ssh tunnel to the agent pod.
-	// +optional
-	LoftAPIHost string `json:"loftAPIHost,omitempty"`
-
-	// LoftAPIKey defines the api key the agent should use to connect to the
-	// loft api server.
-	// +optional
-	LoftAPIKey string `json:"loftAPIKey,omitempty"`
-}
-
 type AgentAuditConfig struct {
 	// If audit is enabled and incoming api requests will be logged based on the supplied policy.
 	// +optional

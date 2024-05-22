@@ -141,7 +141,6 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 		"github.com/loft-sh/api/v4/pkg/apis/management/v1.AgentAuditEventList":                          schema_pkg_apis_management_v1_AgentAuditEventList(ref),
 		"github.com/loft-sh/api/v4/pkg/apis/management/v1.AgentAuditEventSpec":                          schema_pkg_apis_management_v1_AgentAuditEventSpec(ref),
 		"github.com/loft-sh/api/v4/pkg/apis/management/v1.AgentAuditEventStatus":                        schema_pkg_apis_management_v1_AgentAuditEventStatus(ref),
-		"github.com/loft-sh/api/v4/pkg/apis/management/v1.AgentLoftAccess":                              schema_pkg_apis_management_v1_AgentLoftAccess(ref),
 		"github.com/loft-sh/api/v4/pkg/apis/management/v1.Announcement":                                 schema_pkg_apis_management_v1_Announcement(ref),
 		"github.com/loft-sh/api/v4/pkg/apis/management/v1.AnnouncementList":                             schema_pkg_apis_management_v1_AnnouncementList(ref),
 		"github.com/loft-sh/api/v4/pkg/apis/management/v1.AnnouncementSpec":                             schema_pkg_apis_management_v1_AnnouncementSpec(ref),
@@ -7540,40 +7539,6 @@ func schema_pkg_apis_management_v1_AgentAuditEventStatus(ref common.ReferenceCal
 			SchemaProps: spec.SchemaProps{
 				Description: "AgentAuditEventStatus holds the status",
 				Type:        []string{"object"},
-			},
-		},
-	}
-}
-
-func schema_pkg_apis_management_v1_AgentLoftAccess(ref common.ReferenceCallback) common.OpenAPIDefinition {
-	return common.OpenAPIDefinition{
-		Schema: spec.Schema{
-			SchemaProps: spec.SchemaProps{
-				Description: "AgentLoftAccess holds the config how the agent can reach loft",
-				Type:        []string{"object"},
-				Properties: map[string]spec.Schema{
-					"cluster": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Cluster is the name of the cluster the agent is running in",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"loftAPIHost": {
-						SchemaProps: spec.SchemaProps{
-							Description: "LoftAPIHost defines the host for the loft api. If empty, Loft will create an ssh tunnel to the agent pod.",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"loftAPIKey": {
-						SchemaProps: spec.SchemaProps{
-							Description: "LoftAPIKey defines the api key the agent should use to connect to the loft api server.",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-				},
 			},
 		},
 	}
@@ -17179,9 +17144,9 @@ func schema_pkg_apis_management_v1_RunnerSpec(ref common.ReferenceCallback) comm
 							Format:      "",
 						},
 					},
-					"endpoint": {
+					"networkPeerName": {
 						SchemaProps: spec.SchemaProps{
-							Description: "Endpoint is the hostname used to connect directly to the runner",
+							Description: "NetworkPeerName is the network peer name used to connect directly to the runner",
 							Type:        []string{"string"},
 							Format:      "",
 						},
@@ -21980,10 +21945,10 @@ func schema_pkg_apis_storage_v1_AccessKeyScopeRole(ref common.ReferenceCallback)
 				Properties: map[string]spec.Schema{
 					"role": {
 						SchemaProps: spec.SchemaProps{
-							Description: "Role is the name of the role to apply to the access key scope.\n\nPossible enum values:\n - `\"loft-cli\"`\n - `\"network-peer\"`\n - `\"vcluster\"`",
+							Description: "Role is the name of the role to apply to the access key scope.\n\nPossible enum values:\n - `\"agent\"`\n - `\"loft-cli\"`\n - `\"network-peer\"`\n - `\"runner\"`\n - `\"vcluster\"`",
 							Type:        []string{"string"},
 							Format:      "",
-							Enum:        []interface{}{"loft-cli", "network-peer", "vcluster"},
+							Enum:        []interface{}{"agent", "loft-cli", "network-peer", "runner", "vcluster"},
 						},
 					},
 				},
@@ -27209,9 +27174,9 @@ func schema_pkg_apis_storage_v1_RunnerSpec(ref common.ReferenceCallback) common.
 							Format:      "",
 						},
 					},
-					"endpoint": {
+					"networkPeerName": {
 						SchemaProps: spec.SchemaProps{
-							Description: "Endpoint is the hostname used to connect directly to the runner",
+							Description: "NetworkPeerName is the network peer name used to connect directly to the runner",
 							Type:        []string{"string"},
 							Format:      "",
 						},
