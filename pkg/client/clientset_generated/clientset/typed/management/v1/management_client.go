@@ -18,7 +18,6 @@ type ManagementV1Interface interface {
 	BackupsGetter
 	ClustersGetter
 	ClusterAccessesGetter
-	ClusterConnectsGetter
 	ClusterRoleTemplatesGetter
 	ConfigsGetter
 	ConvertVirtualClusterConfigsGetter
@@ -78,10 +77,6 @@ func (c *ManagementV1Client) Clusters() ClusterInterface {
 
 func (c *ManagementV1Client) ClusterAccesses() ClusterAccessInterface {
 	return newClusterAccesses(c)
-}
-
-func (c *ManagementV1Client) ClusterConnects() ClusterConnectInterface {
-	return newClusterConnects(c)
 }
 
 func (c *ManagementV1Client) ClusterRoleTemplates() ClusterRoleTemplateInterface {

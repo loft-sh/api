@@ -45,7 +45,6 @@ func GetManagementAPIBuilder() *builders.APIGroupBuilder {
 			"Backup",
 			"Cluster",
 			"ClusterAccess",
-			"ClusterConnect",
 			"ClusterRoleTemplate",
 			"Config",
 			"ConvertVirtualClusterConfig",

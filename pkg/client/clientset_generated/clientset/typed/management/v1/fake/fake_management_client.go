@@ -36,10 +36,6 @@ func (c *FakeManagementV1) ClusterAccesses() v1.ClusterAccessInterface {
 	return &FakeClusterAccesses{c}
 }
 
-func (c *FakeManagementV1) ClusterConnects() v1.ClusterConnectInterface {
-	return &FakeClusterConnects{c}
-}
-
 func (c *FakeManagementV1) ClusterRoleTemplates() v1.ClusterRoleTemplateInterface {
 	return &FakeClusterRoleTemplates{c}
 }

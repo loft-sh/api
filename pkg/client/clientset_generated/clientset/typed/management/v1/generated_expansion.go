@@ -14,8 +14,6 @@ type ClusterExpansion interface{}
 
 type ClusterAccessExpansion interface{}
 
-type ClusterConnectExpansion interface{}
-
 type ClusterRoleTemplateExpansion interface{}
 
 type ConfigExpansion interface{}

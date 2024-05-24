@@ -35,8 +35,6 @@ func addKnownTypes(scheme *runtime.Scheme) error {
 		&ClusterVirtualClusterDefaults{},
 		&ClusterAccess{},
 		&ClusterAccessList{},
-		&ClusterConnect{},
-		&ClusterConnectList{},
 		&ClusterRoleTemplate{},
 		&ClusterRoleTemplateList{},
 		&Config{},
@@ -189,7 +187,6 @@ var (
 			nil,
 			management.NewClusterVirtualClusterDefaultsREST),
 		management.ManagementClusterAccessStorage,
-		management.ManagementClusterConnectStorage,
 		management.ManagementClusterRoleTemplateStorage,
 		management.ManagementConfigStorage,
 		management.ManagementConvertVirtualClusterConfigStorage,
@@ -533,14 +530,6 @@ type ClusterAccessList struct {
 	metav1.TypeMeta `json:",inline"`
 	metav1.ListMeta `json:"metadata,omitempty"`
 	Items           []ClusterAccess `json:"items"`
-}
-
-// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
-
-type ClusterConnectList struct {
-	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
-	Items           []ClusterConnect `json:"items"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object

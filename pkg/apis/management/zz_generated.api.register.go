@@ -87,17 +87,7 @@ var (
 	NewClusterAccessREST = func(getter generic.RESTOptionsGetter) rest.Storage {
 		return NewClusterAccessRESTFunc(Factory)
 	}
-	NewClusterAccessRESTFunc        NewRESTFunc
-	ManagementClusterConnectStorage = builders.NewApiResourceWithStorage( // Resource status endpoint
-		InternalClusterConnect,
-		func() runtime.Object { return &ClusterConnect{} },     // Register versioned resource
-		func() runtime.Object { return &ClusterConnectList{} }, // Register versioned resource list
-		NewClusterConnectREST,
-	)
-	NewClusterConnectREST = func(getter generic.RESTOptionsGetter) rest.Storage {
-		return NewClusterConnectRESTFunc(Factory)
-	}
-	NewClusterConnectRESTFunc            NewRESTFunc
+	NewClusterAccessRESTFunc             NewRESTFunc
 	ManagementClusterRoleTemplateStorage = builders.NewApiResourceWithStorage( // Resource status endpoint
 		InternalClusterRoleTemplate,
 		func() runtime.Object { return &ClusterRoleTemplate{} },     // Register versioned resource
@@ -571,18 +561,6 @@ var (
 		"ClusterAccessStatus",
 		func() runtime.Object { return &ClusterAccess{} },
 		func() runtime.Object { return &ClusterAccessList{} },
-	)
-	InternalClusterConnect = builders.NewInternalResource(
-		"clusterconnect",
-		"ClusterConnect",
-		func() runtime.Object { return &ClusterConnect{} },
-		func() runtime.Object { return &ClusterConnectList{} },
-	)
-	InternalClusterConnectStatus = builders.NewInternalResourceStatus(
-		"clusterconnect",
-		"ClusterConnectStatus",
-		func() runtime.Object { return &ClusterConnect{} },
-		func() runtime.Object { return &ClusterConnectList{} },
 	)
 	InternalClusterRoleTemplate = builders.NewInternalResource(
 		"clusterroletemplates",
@@ -1204,8 +1182,6 @@ var (
 		InternalClusterVirtualClusterDefaultsREST,
 		InternalClusterAccess,
 		InternalClusterAccessStatus,
-		InternalClusterConnect,
-		InternalClusterConnectStatus,
 		InternalClusterRoleTemplate,
 		InternalClusterRoleTemplateStatus,
 		InternalConfig,
@@ -1667,29 +1643,6 @@ type ClusterCharts struct {
 	Busy              bool                  `json:"busy,omitempty"`
 }
 
-// +genclient
-// +genclient:nonNamespaced
-// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
-
-type ClusterConnect struct {
-	metav1.TypeMeta   `json:",inline"`
-	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              ClusterConnectSpec   `json:"spec,omitempty"`
-	Status            ClusterConnectStatus `json:"status,omitempty"`
-}
-
-type ClusterConnectSpec struct {
-	Config          string  `json:"config,omitempty"`
-	AdminUser       string  `json:"adminUser,omitempty"`
-	ClusterTemplate Cluster `json:"clusterTemplate,omitempty"`
-}
-
-type ClusterConnectStatus struct {
-	Failed  bool   `json:"failed,omitempty"`
-	Reason  string `json:"reason,omitempty"`
-	Message string `json:"message,omitempty"`
-}
-
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
 
 type ClusterDomain struct {
@@ -2037,7 +1990,7 @@ type KioskStatus struct {
 }
 
 // +genclient
-// +genclient
+// +genclient:nonNamespaced
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
 
 type License struct {
@@ -3536,125 +3489,6 @@ func (s *storageClusterAccess) UpdateClusterAccess(ctx context.Context, object *
 }
 
 func (s *storageClusterAccess) DeleteClusterAccess(ctx context.Context, id string) (bool, error) {
-	st := s.GetStandardStorage()
-	_, sync, err := st.Delete(ctx, id, nil, &metav1.DeleteOptions{})
-	return sync, err
-}
-
-// ClusterConnect Functions and Structs
-//
-// +k8s:deepcopy-gen=false
-type ClusterConnectStrategy struct {
-	builders.DefaultStorageStrategy
-}
-
-// +k8s:deepcopy-gen=false
-type ClusterConnectStatusStrategy struct {
-	builders.DefaultStatusStorageStrategy
-}
-
-// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
-
-type ClusterConnectList struct {
-	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
-	Items           []ClusterConnect `json:"items"`
-}
-
-func (ClusterConnect) NewStatus() interface{} {
-	return ClusterConnectStatus{}
-}
-
-func (pc *ClusterConnect) GetStatus() interface{} {
-	return pc.Status
-}
-
-func (pc *ClusterConnect) SetStatus(s interface{}) {
-	pc.Status = s.(ClusterConnectStatus)
-}
-
-func (pc *ClusterConnect) GetSpec() interface{} {
-	return pc.Spec
-}
-
-func (pc *ClusterConnect) SetSpec(s interface{}) {
-	pc.Spec = s.(ClusterConnectSpec)
-}
-
-func (pc *ClusterConnect) GetObjectMeta() *metav1.ObjectMeta {
-	return &pc.ObjectMeta
-}
-
-func (pc *ClusterConnect) SetGeneration(generation int64) {
-	pc.ObjectMeta.Generation = generation
-}
-
-func (pc ClusterConnect) GetGeneration() int64 {
-	return pc.ObjectMeta.Generation
-}
-
-// Registry is an interface for things that know how to store ClusterConnect.
-// +k8s:deepcopy-gen=false
-type ClusterConnectRegistry interface {
-	ListClusterConnects(ctx context.Context, options *internalversion.ListOptions) (*ClusterConnectList, error)
-	GetClusterConnect(ctx context.Context, id string, options *metav1.GetOptions) (*ClusterConnect, error)
-	CreateClusterConnect(ctx context.Context, id *ClusterConnect) (*ClusterConnect, error)
-	UpdateClusterConnect(ctx context.Context, id *ClusterConnect) (*ClusterConnect, error)
-	DeleteClusterConnect(ctx context.Context, id string) (bool, error)
-}
-
-// NewRegistry returns a new Registry interface for the given Storage. Any mismatched types will panic.
-func NewClusterConnectRegistry(sp builders.StandardStorageProvider) ClusterConnectRegistry {
-	return &storageClusterConnect{sp}
-}
-
-// Implement Registry
-// storage puts strong typing around storage calls
-// +k8s:deepcopy-gen=false
-type storageClusterConnect struct {
-	builders.StandardStorageProvider
-}
-
-func (s *storageClusterConnect) ListClusterConnects(ctx context.Context, options *internalversion.ListOptions) (*ClusterConnectList, error) {
-	if options != nil && options.FieldSelector != nil && !options.FieldSelector.Empty() {
-		return nil, fmt.Errorf("field selector not supported yet")
-	}
-	st := s.GetStandardStorage()
-	obj, err := st.List(ctx, options)
-	if err != nil {
-		return nil, err
-	}
-	return obj.(*ClusterConnectList), err
-}
-
-func (s *storageClusterConnect) GetClusterConnect(ctx context.Context, id string, options *metav1.GetOptions) (*ClusterConnect, error) {
-	st := s.GetStandardStorage()
-	obj, err := st.Get(ctx, id, options)
-	if err != nil {
-		return nil, err
-	}
-	return obj.(*ClusterConnect), nil
-}
-
-func (s *storageClusterConnect) CreateClusterConnect(ctx context.Context, object *ClusterConnect) (*ClusterConnect, error) {
-	st := s.GetStandardStorage()
-	obj, err := st.Create(ctx, object, nil, &metav1.CreateOptions{})
-	if err != nil {
-		return nil, err
-	}
-	return obj.(*ClusterConnect), nil
-}
-
-func (s *storageClusterConnect) UpdateClusterConnect(ctx context.Context, object *ClusterConnect) (*ClusterConnect, error) {
-	st := s.GetStandardStorage()
-	obj, _, err := st.Update(ctx, object.Name, rest.DefaultUpdatedObjectInfo(object), nil, nil, false, &metav1.UpdateOptions{})
-	if err != nil {
-		return nil, err
-	}
-	return obj.(*ClusterConnect), nil
-}
-
-func (s *storageClusterConnect) DeleteClusterConnect(ctx context.Context, id string) (bool, error) {
 	st := s.GetStandardStorage()
 	_, sync, err := st.Delete(ctx, id, nil, &metav1.DeleteOptions{})
 	return sync, err

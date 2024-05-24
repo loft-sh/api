@@ -44,8 +44,6 @@ func addKnownTypes(scheme *runtime.Scheme) error {
 		&management.ClusterVirtualClusterDefaults{},
 		&management.ClusterAccess{},
 		&management.ClusterAccessList{},
-		&management.ClusterConnect{},
-		&management.ClusterConnectList{},
 		&management.ClusterRoleTemplate{},
 		&management.ClusterRoleTemplateList{},
 		&management.Config{},
