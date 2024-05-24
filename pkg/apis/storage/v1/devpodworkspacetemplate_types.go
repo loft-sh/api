@@ -101,6 +101,10 @@ type DevPodWorkspaceTemplateDefinition struct {
 	// +optional
 	UseProjectGitCredentials bool `json:"useProjectGitCredentials,omitempty"`
 
+	// UseProjectSSHCredentials specifies if the project ssh credentials should be used instead of local ones for this workspace
+	// +optional
+	UseProjectSSHCredentials bool `json:"useProjectSSHCredentials,omitempty"`
+
 	// GitCloneStrategy specifies how git based workspace are being cloned. Can be "" (full, default), treeless, blobless or shallow
 	// +optional
 	GitCloneStrategy GitCloneStrategy `json:"gitCloneStrategy,omitempty"`

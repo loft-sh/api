@@ -523,6 +523,7 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 		"github.com/loft-sh/api/v4/pkg/apis/storage/v1.RunnerRef":                                       schema_pkg_apis_storage_v1_RunnerRef(ref),
 		"github.com/loft-sh/api/v4/pkg/apis/storage/v1.RunnerSpec":                                      schema_pkg_apis_storage_v1_RunnerSpec(ref),
 		"github.com/loft-sh/api/v4/pkg/apis/storage/v1.RunnerStatus":                                    schema_pkg_apis_storage_v1_RunnerStatus(ref),
+		"github.com/loft-sh/api/v4/pkg/apis/storage/v1.SSHProjectSpec":                                  schema_pkg_apis_storage_v1_SSHProjectSpec(ref),
 		"github.com/loft-sh/api/v4/pkg/apis/storage/v1.SecretRef":                                       schema_pkg_apis_storage_v1_SecretRef(ref),
 		"github.com/loft-sh/api/v4/pkg/apis/storage/v1.SharedSecret":                                    schema_pkg_apis_storage_v1_SharedSecret(ref),
 		"github.com/loft-sh/api/v4/pkg/apis/storage/v1.SharedSecretList":                                schema_pkg_apis_storage_v1_SharedSecretList(ref),
@@ -24231,6 +24232,12 @@ func schema_pkg_apis_storage_v1_DevPodProjectSpec(ref common.ReferenceCallback) 
 							Ref:         ref("github.com/loft-sh/api/v4/pkg/apis/storage/v1.GitProjectSpec"),
 						},
 					},
+					"ssh": {
+						SchemaProps: spec.SchemaProps{
+							Description: "SSH defines additional ssh related settings like private keys, to be specified as base64 encoded strings.",
+							Ref:         ref("github.com/loft-sh/api/v4/pkg/apis/storage/v1.SSHProjectSpec"),
+						},
+					},
 					"fallbackImage": {
 						SchemaProps: spec.SchemaProps{
 							Description: "FallbackImage defines an image all workspace will fall back to if no devcontainer.json could be detected",
@@ -24242,7 +24249,7 @@ func schema_pkg_apis_storage_v1_DevPodProjectSpec(ref common.ReferenceCallback) 
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/v4/pkg/apis/storage/v1.GitProjectSpec"},
+			"github.com/loft-sh/api/v4/pkg/apis/storage/v1.GitProjectSpec", "github.com/loft-sh/api/v4/pkg/apis/storage/v1.SSHProjectSpec"},
 	}
 }
 
@@ -24714,6 +24721,13 @@ func schema_pkg_apis_storage_v1_DevPodWorkspaceTemplateDefinition(ref common.Ref
 					"useProjectGitCredentials": {
 						SchemaProps: spec.SchemaProps{
 							Description: "UseProjectGitCredentials specifies if the project git credentials should be used instead of local ones for this workspace",
+							Type:        []string{"boolean"},
+							Format:      "",
+						},
+					},
+					"useProjectSSHCredentials": {
+						SchemaProps: spec.SchemaProps{
+							Description: "UseProjectSSHCredentials specifies if the project ssh credentials should be used instead of local ones for this workspace",
 							Type:        []string{"boolean"},
 							Format:      "",
 						},
@@ -27104,6 +27118,33 @@ func schema_pkg_apis_storage_v1_RunnerStatus(ref common.ReferenceCallback) commo
 		},
 		Dependencies: []string{
 			"github.com/loft-sh/agentapi/v4/pkg/apis/loft/storage/v1.Condition"},
+	}
+}
+
+func schema_pkg_apis_storage_v1_SSHProjectSpec(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"token": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Token defines the private ssh key to use for authentication, this is a base64 encoded string.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"tokenSecretRef": {
+						SchemaProps: spec.SchemaProps{
+							Description: "TokenSecretRef defines the project secret to use as private ssh key for authentication. Will be used if `Token` is not provided.",
+							Ref:         ref("k8s.io/api/core/v1.SecretKeySelector"),
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			"k8s.io/api/core/v1.SecretKeySelector"},
 	}
 }
 
