@@ -33,6 +33,12 @@ type UISettingsSpec struct {
 	// Offline is true if loft is running in an airgapped environment
 	// +optional
 	Offline bool `json:"offline,omitempty"`
+
+	// HasHelmRelease indicates whether loft has been installed via Helm
+	HasHelmRelease bool `json:"hasHelmRelease,omitempty"`
+
+	// DefaultVClusterVersion is the default version of vClusters
+	DefaultVClusterVersion string `json:"defaultVClusterVersion,omitempty"`
 }
 
 type UISettingsConfig struct {

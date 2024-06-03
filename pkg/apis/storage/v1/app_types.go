@@ -151,7 +151,7 @@ type AppParameter struct {
 	// +optional
 	Type string `json:"type,omitempty"`
 
-	// Options are the options if type is enum
+	// Options is a slice of strings, where each string represents a mutually exclusive choice.
 	// +optional
 	Options []string `json:"options,omitempty"`
 
