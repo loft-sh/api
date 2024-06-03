@@ -7,7 +7,7 @@ import (
 
 // +genclient
 // +genclient:nonNamespaced
-// +genclient:method=LicenseRequest,verb=create,subresource=request,input=github.com/loft-sh/api/v4/pkg/apis/management/v1.LicenseRequest,result=github.com/loft-sh/api/v4/pkg/apis/management/v1.LicenseRequest
+// +genclient:method=LicenseRequest,verb=create,subresource=request,input=github.com/loft-sh/api/v3/pkg/apis/management/v1.LicenseRequest,result=github.com/loft-sh/api/v3/pkg/apis/management/v1.LicenseRequest
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
 
 // License holds the license information

@@ -3,8 +3,8 @@
 package install
 
 import (
-	"github.com/loft-sh/api/v4/pkg/apis/management"
-	v1 "github.com/loft-sh/api/v4/pkg/apis/management/v1"
+	"github.com/loft-sh/api/v3/pkg/apis/management"
+	v1 "github.com/loft-sh/api/v3/pkg/apis/management/v1"
 	"github.com/loft-sh/apiserver/pkg/builders"
 	"k8s.io/apimachinery/pkg/runtime"
 	utilruntime "k8s.io/apimachinery/pkg/util/runtime"
@@ -44,12 +44,12 @@ func addKnownTypes(scheme *runtime.Scheme) error {
 		&management.ClusterVirtualClusterDefaults{},
 		&management.ClusterAccess{},
 		&management.ClusterAccessList{},
+		&management.ClusterConnect{},
+		&management.ClusterConnectList{},
 		&management.ClusterRoleTemplate{},
 		&management.ClusterRoleTemplateList{},
 		&management.Config{},
 		&management.ConfigList{},
-		&management.ConvertVirtualClusterConfig{},
-		&management.ConvertVirtualClusterConfigList{},
 		&management.DevPodWorkspaceInstance{},
 		&management.DevPodWorkspaceInstanceList{},
 		&management.DevPodDeleteOptions{},
@@ -79,6 +79,8 @@ func addKnownTypes(scheme *runtime.Scheme) error {
 		&management.LoftUpgradeList{},
 		&management.OwnedAccessKey{},
 		&management.OwnedAccessKeyList{},
+		&management.PolicyViolation{},
+		&management.PolicyViolationList{},
 		&management.Project{},
 		&management.ProjectList{},
 		&management.ProjectChartInfo{},

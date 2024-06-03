@@ -83,15 +83,15 @@ type DevPodWorkspaceTemplateDefinition struct {
 	// Provider holds the DevPod provider configuration
 	Provider DevPodWorkspaceProvider `json:"provider"`
 
-	// SpaceTemplateRef is a reference to the space that should get created for this DevPod.
-	// If this is specified, the kubernetes provider will be selected automatically.
+	// SpaceTemplate is the space that should get created for this DevPod. If this is specified, the
+	// Kubernetes provider will be selected automatically.
 	// +optional
-	SpaceTemplateRef *TemplateRef `json:"spaceTemplateRef,omitempty"`
+	SpaceTemplate *TemplateRef `json:"spaceTemplate,omitempty"`
 
-	// SpaceTemplate is the inline template for a space that should get created for this DevPod.
-	// If this is specified, the kubernetes provider will be selected automatically.
+	// VirtualClusterTemplate is the virtual cluster that should get created for this DevPod. If this is specified, the
+	// Kubernetes provider will be selected automatically.
 	// +optional
-	SpaceTemplate *SpaceTemplateDefinition `json:"spaceTemplate,omitempty"`
+	VirtualClusterTemplate *TemplateRef `json:"virtualClusterTemplate,omitempty"`
 
 	// WorkspaceEnv are environment variables that should be available within the created workspace.
 	// +optional
@@ -100,26 +100,7 @@ type DevPodWorkspaceTemplateDefinition struct {
 	// UseProjectGitCredentials specifies if the project git credentials should be used instead of local ones for this workspace
 	// +optional
 	UseProjectGitCredentials bool `json:"useProjectGitCredentials,omitempty"`
-
-	// UseProjectSSHCredentials specifies if the project ssh credentials should be used instead of local ones for this workspace
-	// +optional
-	UseProjectSSHCredentials bool `json:"useProjectSSHCredentials,omitempty"`
-
-	// GitCloneStrategy specifies how git based workspace are being cloned. Can be "" (full, default), treeless, blobless or shallow
-	// +optional
-	GitCloneStrategy GitCloneStrategy `json:"gitCloneStrategy,omitempty"`
 }
-
-// +enum
-type GitCloneStrategy string
-
-// WARN: Need to match https://github.com/loft-sh/devpod/pkg/git/clone.go
-const (
-	FullCloneStrategy     GitCloneStrategy = ""
-	BloblessCloneStrategy GitCloneStrategy = "blobless"
-	TreelessCloneStrategy GitCloneStrategy = "treeless"
-	ShallowCloneStrategy  GitCloneStrategy = "shallow"
-)
 
 type DevPodWorkspaceProvider struct {
 	// Name is the name of the provider. This can also be an url.

@@ -1,16 +1,16 @@
 package v1
 
 import (
-	clusterv1 "github.com/loft-sh/agentapi/v4/pkg/apis/loft/cluster/v1"
-	agentstoragev1 "github.com/loft-sh/agentapi/v4/pkg/apis/loft/storage/v1"
-	storagev1 "github.com/loft-sh/api/v4/pkg/apis/storage/v1"
+	clusterv1 "github.com/loft-sh/agentapi/v3/pkg/apis/loft/cluster/v1"
+	agentstoragev1 "github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1"
+	storagev1 "github.com/loft-sh/api/v3/pkg/apis/storage/v1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 )
 
 // +genclient
 // +genclient:noStatus
-// +genclient:method=GetState,verb=get,subresource=state,result=github.com/loft-sh/api/v4/pkg/apis/management/v1.DevPodWorkspaceInstanceState
-// +genclient:method=SetState,verb=create,subresource=state,input=github.com/loft-sh/api/v4/pkg/apis/management/v1.DevPodWorkspaceInstanceState,result=github.com/loft-sh/api/v4/pkg/apis/management/v1.DevPodWorkspaceInstanceState
+// +genclient:method=GetState,verb=get,subresource=state,result=github.com/loft-sh/api/v3/pkg/apis/management/v1.DevPodWorkspaceInstanceState
+// +genclient:method=SetState,verb=create,subresource=state,input=github.com/loft-sh/api/v3/pkg/apis/management/v1.DevPodWorkspaceInstanceState,result=github.com/loft-sh/api/v3/pkg/apis/management/v1.DevPodWorkspaceInstanceState
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
 
 // DevPodWorkspaceInstance holds the DevPodWorkspaceInstance information
