@@ -1137,16 +1137,8 @@ var (
 	NewVirtualClusterInstanceLogREST = func(getter generic.RESTOptionsGetter) rest.Storage {
 		return NewVirtualClusterInstanceLogRESTFunc(Factory)
 	}
-	NewVirtualClusterInstanceLogRESTFunc                 NewRESTFunc
-	InternalVirtualClusterInstanceWorkloadKubeConfigREST = builders.NewInternalSubresource(
-		"virtualclusterinstances", "VirtualClusterInstanceWorkloadKubeConfig", "workloadkubeconfig",
-		func() runtime.Object { return &VirtualClusterInstanceWorkloadKubeConfig{} },
-	)
-	NewVirtualClusterInstanceWorkloadKubeConfigREST = func(getter generic.RESTOptionsGetter) rest.Storage {
-		return NewVirtualClusterInstanceWorkloadKubeConfigRESTFunc(Factory)
-	}
-	NewVirtualClusterInstanceWorkloadKubeConfigRESTFunc NewRESTFunc
-	InternalVirtualClusterTemplate                      = builders.NewInternalResource(
+	NewVirtualClusterInstanceLogRESTFunc NewRESTFunc
+	InternalVirtualClusterTemplate       = builders.NewInternalResource(
 		"virtualclustertemplates",
 		"VirtualClusterTemplate",
 		func() runtime.Object { return &VirtualClusterTemplate{} },
@@ -1269,7 +1261,6 @@ var (
 		InternalVirtualClusterInstanceStatus,
 		InternalVirtualClusterInstanceKubeConfigREST,
 		InternalVirtualClusterInstanceLogREST,
-		InternalVirtualClusterInstanceWorkloadKubeConfigREST,
 		InternalVirtualClusterTemplate,
 		InternalVirtualClusterTemplateStatus,
 	)
@@ -1990,7 +1981,7 @@ type KioskStatus struct {
 }
 
 // +genclient
-// +genclient
+// +genclient:nonNamespaced
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
 
 type License struct {
@@ -2669,15 +2660,6 @@ type VirtualClusterInstanceStatus struct {
 	CanUse                                 bool                       `json:"canUse,omitempty"`
 	CanUpdate                              bool                       `json:"canUpdate,omitempty"`
 	Online                                 bool                       `json:"online,omitempty"`
-}
-
-// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
-
-type VirtualClusterInstanceWorkloadKubeConfig struct {
-	metav1.TypeMeta   `json:",inline"`
-	metav1.ObjectMeta `json:"metadata,omitempty"`
-	KubeConfig        string `json:"kubeConfig,omitempty"`
-	Token             string `json:"token,omitempty"`
 }
 
 // +genclient
@@ -7179,14 +7161,6 @@ type VirtualClusterInstanceLogList struct {
 	metav1.TypeMeta `json:",inline"`
 	metav1.ListMeta `json:"metadata,omitempty"`
 	Items           []VirtualClusterInstanceLog `json:"items"`
-}
-
-// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
-
-type VirtualClusterInstanceWorkloadKubeConfigList struct {
-	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
-	Items           []VirtualClusterInstanceWorkloadKubeConfig `json:"items"`
 }
 
 func (VirtualClusterInstance) NewStatus() interface{} {
