@@ -5,8 +5,8 @@ package v1
 import (
 	"net/http"
 
-	v1 "github.com/loft-sh/api/v4/pkg/apis/management/v1"
-	"github.com/loft-sh/api/v4/pkg/client/clientset_generated/clientset/scheme"
+	v1 "github.com/loft-sh/api/v3/pkg/apis/management/v1"
+	"github.com/loft-sh/api/v3/pkg/client/clientset_generated/clientset/scheme"
 	rest "k8s.io/client-go/rest"
 )
 
@@ -18,9 +18,9 @@ type ManagementV1Interface interface {
 	BackupsGetter
 	ClustersGetter
 	ClusterAccessesGetter
+	ClusterConnectsGetter
 	ClusterRoleTemplatesGetter
 	ConfigsGetter
-	ConvertVirtualClusterConfigsGetter
 	DevPodWorkspaceInstancesGetter
 	DevPodWorkspaceTemplatesGetter
 	DirectClusterEndpointTokensGetter
@@ -31,6 +31,7 @@ type ManagementV1Interface interface {
 	LicenseTokensGetter
 	LoftUpgradesGetter
 	OwnedAccessKeysGetter
+	PolicyViolationsGetter
 	ProjectsGetter
 	ProjectSecretsGetter
 	RedirectTokensGetter
@@ -79,16 +80,16 @@ func (c *ManagementV1Client) ClusterAccesses() ClusterAccessInterface {
 	return newClusterAccesses(c)
 }
 
+func (c *ManagementV1Client) ClusterConnects() ClusterConnectInterface {
+	return newClusterConnects(c)
+}
+
 func (c *ManagementV1Client) ClusterRoleTemplates() ClusterRoleTemplateInterface {
 	return newClusterRoleTemplates(c)
 }
 
 func (c *ManagementV1Client) Configs() ConfigInterface {
 	return newConfigs(c)
-}
-
-func (c *ManagementV1Client) ConvertVirtualClusterConfigs() ConvertVirtualClusterConfigInterface {
-	return newConvertVirtualClusterConfigs(c)
 }
 
 func (c *ManagementV1Client) DevPodWorkspaceInstances(namespace string) DevPodWorkspaceInstanceInterface {
@@ -129,6 +130,10 @@ func (c *ManagementV1Client) LoftUpgrades() LoftUpgradeInterface {
 
 func (c *ManagementV1Client) OwnedAccessKeys() OwnedAccessKeyInterface {
 	return newOwnedAccessKeys(c)
+}
+
+func (c *ManagementV1Client) PolicyViolations() PolicyViolationInterface {
+	return newPolicyViolations(c)
 }
 
 func (c *ManagementV1Client) Projects() ProjectInterface {

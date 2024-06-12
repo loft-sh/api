@@ -6,4 +6,4 @@
 // +k8s:deepcopy-gen=package,register
 // +k8s:defaulter-gen=TypeMeta
 // +groupName=ui.loft.sh
-package v1 // import "github.com/loft-sh/api/v4/pkg/apis/ui/v1"
+package v1 // import "github.com/loft-sh/api/v3/pkg/apis/ui/v1"
