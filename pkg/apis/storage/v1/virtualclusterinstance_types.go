@@ -1,7 +1,7 @@
 package v1
 
 import (
-	agentstoragev1 "github.com/loft-sh/agentapi/v4/pkg/apis/loft/storage/v1"
+	agentstoragev1 "github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 )
 
@@ -16,16 +16,26 @@ const (
 	InstanceProjectsSecretsSynced agentstoragev1.ConditionType = "ProjectSecretsSynced"
 
 	InstanceVirtualClusterAppsAndObjectsSynced agentstoragev1.ConditionType = "VirtualClusterAppsAndObjectsSynced"
+
+	// Workload VirtualCluster conditions
+
+	InstanceWorkloadSpaceSynced               agentstoragev1.ConditionType = "WorkloadSpaceSynced"
+	InstanceWorkloadSpaceReady                agentstoragev1.ConditionType = "WorkloadSpaceReady"
+	InstanceWorkloadVirtualClusterSynced      agentstoragev1.ConditionType = "WorkloadVirtualClusterSynced"
+	InstanceWorkloadVirtualClusterTokenSynced agentstoragev1.ConditionType = "WorkloadVirtualClusterTokenSynced"
+	InstanceWorkloadVirtualClusterReady       agentstoragev1.ConditionType = "WorkloadVirtualClusterReady"
 )
 
-var VirtualClusterConditions = []agentstoragev1.ConditionType{
-	InstanceScheduled,
-	InstanceTemplateResolved,
-	InstanceSpaceSynced,
-	InstanceSpaceReady,
-	InstanceVirtualClusterSynced,
-	InstanceVirtualClusterReady,
-}
+var (
+	VirtualClusterConditions = []agentstoragev1.ConditionType{
+		InstanceScheduled,
+		InstanceTemplateResolved,
+		InstanceSpaceSynced,
+		InstanceSpaceReady,
+		InstanceVirtualClusterSynced,
+		InstanceVirtualClusterReady,
+	}
+)
 
 // +genclient
 // +genclient:noStatus
@@ -92,6 +102,11 @@ type VirtualClusterInstanceSpec struct {
 	// +optional
 	ClusterRef VirtualClusterClusterRef `json:"clusterRef,omitempty"`
 
+	// WorkloadClusterRef is the reference to the connected cluster holding
+	// this virtual cluster's workloads.
+	// +optional
+	WorkloadClusterRef *VirtualClusterClusterRef `json:"workloadClusterRef,omitempty"`
+
 	// Parameters are values to pass to the template.
 	// The values should be encoded as YAML string where each parameter is represented as a top-level field key.
 	// +optional
@@ -105,12 +120,6 @@ type VirtualClusterInstanceSpec struct {
 	// Access to the virtual cluster object itself
 	// +optional
 	Access []Access `json:"access,omitempty"`
-
-	// NetworkPeer specifies if the cluster is connected via tailscale.
-	// When this is specified, the vCluster will not be scheduled to any connected cluster
-	// and no templates will be applied to it.
-	// +optional
-	NetworkPeer bool `json:"networkPeer,omitempty"`
 }
 
 type VirtualClusterInstanceStatus struct {
@@ -139,6 +148,10 @@ type VirtualClusterInstanceStatus struct {
 	// SpaceObjects are the objects that were applied within the virtual cluster space
 	// +optional
 	SpaceObjects *agentstoragev1.ObjectsStatus `json:"spaceObjects,omitempty"`
+
+	// WorkloadSpaceObjects are the objects that were applied within the virtual cluster workload space
+	// +optional
+	WorkloadSpaceObjects *agentstoragev1.ObjectsStatus `json:"workloadSpaceObjects,omitempty"`
 
 	// VirtualCluster is the template rendered with all the parameters
 	// +optional
