@@ -1,9 +1,9 @@
 package v1
 
 import (
-	auditv1 "github.com/loft-sh/api/v4/pkg/apis/audit/v1"
-	storagev1 "github.com/loft-sh/api/v4/pkg/apis/storage/v1"
-	uiv1 "github.com/loft-sh/api/v4/pkg/apis/ui/v1"
+	auditv1 "github.com/loft-sh/api/v3/pkg/apis/audit/v1"
+	storagev1 "github.com/loft-sh/api/v3/pkg/apis/storage/v1"
+	uiv1 "github.com/loft-sh/api/v3/pkg/apis/ui/v1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 )
 
@@ -50,10 +50,6 @@ type ConfigStatus struct {
 	// LoftHost holds the domain where the loft instance is hosted. This should not include https or http. E.g. loft.my-domain.com
 	// +optional
 	LoftHost string `json:"loftHost,omitempty"`
-
-	// ProjectNamespacePrefix holds the prefix for loft project namespaces. Omitted defaults to "p-"
-	// +optional
-	ProjectNamespacePrefix *string `json:"projectNamespacePrefix,omitempty"`
 
 	// DevPodSubDomain holds a subdomain in the following form *.workspace.my-domain.com
 	// +optional

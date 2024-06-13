@@ -14,11 +14,11 @@ type ClusterExpansion interface{}
 
 type ClusterAccessExpansion interface{}
 
+type ClusterConnectExpansion interface{}
+
 type ClusterRoleTemplateExpansion interface{}
 
 type ConfigExpansion interface{}
-
-type ConvertVirtualClusterConfigExpansion interface{}
 
 type DevPodWorkspaceInstanceExpansion interface{}
 
@@ -39,6 +39,8 @@ type LicenseTokenExpansion interface{}
 type LoftUpgradeExpansion interface{}
 
 type OwnedAccessKeyExpansion interface{}
+
+type PolicyViolationExpansion interface{}
 
 type ProjectExpansion interface{}
 
