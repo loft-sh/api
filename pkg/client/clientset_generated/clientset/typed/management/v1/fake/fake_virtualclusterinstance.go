@@ -5,7 +5,7 @@ package fake
 import (
 	"context"
 
-	v1 "github.com/loft-sh/api/v4/pkg/apis/management/v1"
+	v1 "github.com/loft-sh/api/v3/pkg/apis/management/v1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	labels "k8s.io/apimachinery/pkg/labels"
 	types "k8s.io/apimachinery/pkg/types"
@@ -121,4 +121,26 @@ func (c *FakeVirtualClusterInstances) GetKubeConfig(ctx context.Context, virtual
 		return nil, err
 	}
 	return obj.(*v1.VirtualClusterInstanceKubeConfig), err
+}
+
+// CreateWorkloadKubeConfig takes the representation of a virtualClusterInstanceWorkloadKubeConfig and creates it.  Returns the server's representation of the virtualClusterInstanceWorkloadKubeConfig, and an error, if there is any.
+func (c *FakeVirtualClusterInstances) CreateWorkloadKubeConfig(ctx context.Context, virtualClusterInstanceName string, virtualClusterInstanceWorkloadKubeConfig *v1.VirtualClusterInstanceWorkloadKubeConfig, opts metav1.CreateOptions) (result *v1.VirtualClusterInstanceWorkloadKubeConfig, err error) {
+	obj, err := c.Fake.
+		Invokes(testing.NewCreateSubresourceAction(virtualclusterinstancesResource, virtualClusterInstanceName, "workloadkubeconfig", c.ns, virtualClusterInstanceWorkloadKubeConfig), &v1.VirtualClusterInstanceWorkloadKubeConfig{})
+
+	if obj == nil {
+		return nil, err
+	}
+	return obj.(*v1.VirtualClusterInstanceWorkloadKubeConfig), err
+}
+
+// GetWorkloadKubeConfig takes name of the virtualClusterInstance, and returns the corresponding virtualClusterInstanceWorkloadKubeConfig object, and an error if there is any.
+func (c *FakeVirtualClusterInstances) GetWorkloadKubeConfig(ctx context.Context, virtualClusterInstanceName string, options metav1.GetOptions) (result *v1.VirtualClusterInstanceWorkloadKubeConfig, err error) {
+	obj, err := c.Fake.
+		Invokes(testing.NewGetSubresourceAction(virtualclusterinstancesResource, c.ns, "workloadkubeconfig", virtualClusterInstanceName), &v1.VirtualClusterInstanceWorkloadKubeConfig{})
+
+	if obj == nil {
+		return nil, err
+	}
+	return obj.(*v1.VirtualClusterInstanceWorkloadKubeConfig), err
 }

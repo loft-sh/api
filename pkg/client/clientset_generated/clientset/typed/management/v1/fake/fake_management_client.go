@@ -3,7 +3,7 @@
 package fake
 
 import (
-	v1 "github.com/loft-sh/api/v4/pkg/client/clientset_generated/clientset/typed/management/v1"
+	v1 "github.com/loft-sh/api/v3/pkg/client/clientset_generated/clientset/typed/management/v1"
 	rest "k8s.io/client-go/rest"
 	testing "k8s.io/client-go/testing"
 )
@@ -36,16 +36,16 @@ func (c *FakeManagementV1) ClusterAccesses() v1.ClusterAccessInterface {
 	return &FakeClusterAccesses{c}
 }
 
+func (c *FakeManagementV1) ClusterConnects() v1.ClusterConnectInterface {
+	return &FakeClusterConnects{c}
+}
+
 func (c *FakeManagementV1) ClusterRoleTemplates() v1.ClusterRoleTemplateInterface {
 	return &FakeClusterRoleTemplates{c}
 }
 
 func (c *FakeManagementV1) Configs() v1.ConfigInterface {
 	return &FakeConfigs{c}
-}
-
-func (c *FakeManagementV1) ConvertVirtualClusterConfigs() v1.ConvertVirtualClusterConfigInterface {
-	return &FakeConvertVirtualClusterConfigs{c}
 }
 
 func (c *FakeManagementV1) DevPodWorkspaceInstances(namespace string) v1.DevPodWorkspaceInstanceInterface {
@@ -86,6 +86,10 @@ func (c *FakeManagementV1) LoftUpgrades() v1.LoftUpgradeInterface {
 
 func (c *FakeManagementV1) OwnedAccessKeys() v1.OwnedAccessKeyInterface {
 	return &FakeOwnedAccessKeys{c}
+}
+
+func (c *FakeManagementV1) PolicyViolations() v1.PolicyViolationInterface {
+	return &FakePolicyViolations{c}
 }
 
 func (c *FakeManagementV1) Projects() v1.ProjectInterface {

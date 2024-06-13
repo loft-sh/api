@@ -6,8 +6,8 @@ import (
 	"context"
 	"time"
 
-	v1 "github.com/loft-sh/api/v4/pkg/apis/management/v1"
-	scheme "github.com/loft-sh/api/v4/pkg/client/clientset_generated/clientset/scheme"
+	v1 "github.com/loft-sh/api/v3/pkg/apis/management/v1"
+	scheme "github.com/loft-sh/api/v3/pkg/client/clientset_generated/clientset/scheme"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	types "k8s.io/apimachinery/pkg/types"
 	watch "k8s.io/apimachinery/pkg/watch"
@@ -31,6 +31,8 @@ type VirtualClusterInstanceInterface interface {
 	Watch(ctx context.Context, opts metav1.ListOptions) (watch.Interface, error)
 	Patch(ctx context.Context, name string, pt types.PatchType, data []byte, opts metav1.PatchOptions, subresources ...string) (result *v1.VirtualClusterInstance, err error)
 	GetKubeConfig(ctx context.Context, virtualClusterInstanceName string, virtualClusterInstanceKubeConfig *v1.VirtualClusterInstanceKubeConfig, opts metav1.CreateOptions) (*v1.VirtualClusterInstanceKubeConfig, error)
+	CreateWorkloadKubeConfig(ctx context.Context, virtualClusterInstanceName string, virtualClusterInstanceWorkloadKubeConfig *v1.VirtualClusterInstanceWorkloadKubeConfig, opts metav1.CreateOptions) (*v1.VirtualClusterInstanceWorkloadKubeConfig, error)
+	GetWorkloadKubeConfig(ctx context.Context, virtualClusterInstanceName string, options metav1.GetOptions) (*v1.VirtualClusterInstanceWorkloadKubeConfig, error)
 
 	VirtualClusterInstanceExpansion
 }
@@ -173,6 +175,35 @@ func (c *virtualClusterInstances) GetKubeConfig(ctx context.Context, virtualClus
 		SubResource("kubeconfig").
 		VersionedParams(&opts, scheme.ParameterCodec).
 		Body(virtualClusterInstanceKubeConfig).
+		Do(ctx).
+		Into(result)
+	return
+}
+
+// CreateWorkloadKubeConfig takes the representation of a virtualClusterInstanceWorkloadKubeConfig and creates it.  Returns the server's representation of the virtualClusterInstanceWorkloadKubeConfig, and an error, if there is any.
+func (c *virtualClusterInstances) CreateWorkloadKubeConfig(ctx context.Context, virtualClusterInstanceName string, virtualClusterInstanceWorkloadKubeConfig *v1.VirtualClusterInstanceWorkloadKubeConfig, opts metav1.CreateOptions) (result *v1.VirtualClusterInstanceWorkloadKubeConfig, err error) {
+	result = &v1.VirtualClusterInstanceWorkloadKubeConfig{}
+	err = c.client.Post().
+		Namespace(c.ns).
+		Resource("virtualclusterinstances").
+		Name(virtualClusterInstanceName).
+		SubResource("workloadkubeconfig").
+		VersionedParams(&opts, scheme.ParameterCodec).
+		Body(virtualClusterInstanceWorkloadKubeConfig).
+		Do(ctx).
+		Into(result)
+	return
+}
+
+// GetWorkloadKubeConfig takes name of the virtualClusterInstance, and returns the corresponding v1.VirtualClusterInstanceWorkloadKubeConfig object, and an error if there is any.
+func (c *virtualClusterInstances) GetWorkloadKubeConfig(ctx context.Context, virtualClusterInstanceName string, options metav1.GetOptions) (result *v1.VirtualClusterInstanceWorkloadKubeConfig, err error) {
+	result = &v1.VirtualClusterInstanceWorkloadKubeConfig{}
+	err = c.client.Get().
+		Namespace(c.ns).
+		Resource("virtualclusterinstances").
+		Name(virtualClusterInstanceName).
+		SubResource("workloadkubeconfig").
+		VersionedParams(&options, scheme.ParameterCodec).
 		Do(ctx).
 		Into(result)
 	return
