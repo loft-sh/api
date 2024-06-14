@@ -1,7 +1,6 @@
 package v1
 
 import (
-	agentstoragev1 "github.com/loft-sh/agentapi/v4/pkg/apis/loft/storage/v1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 )
 
@@ -120,7 +119,7 @@ type VirtualClusterTemplateDefinition struct {
 
 	// VirtualClusterCommonSpec defines virtual cluster spec that is common between the virtual
 	// cluster templates, and virtual cluster
-	agentstoragev1.VirtualClusterCommonSpec `json:",inline"`
+	VirtualClusterCommonSpec `json:",inline"`
 
 	// SpaceTemplate holds the space template
 	// +optional
@@ -139,11 +138,11 @@ type VirtualClusterSpaceTemplateDefinition struct {
 
 	// Charts are helm charts that should get deployed
 	// +optional
-	Charts []agentstoragev1.TemplateHelmChart `json:"charts,omitempty"`
+	Charts []TemplateHelmChart `json:"charts,omitempty"`
 
 	// Apps specifies the apps that should get deployed by this template
 	// +optional
-	Apps []agentstoragev1.AppReference `json:"apps,omitempty"`
+	Apps []AppReference `json:"apps,omitempty"`
 }
 
 // VirtualClusterInstanceTemplateDefinition holds the virtual cluster instance template

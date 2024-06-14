@@ -4,7 +4,7 @@ package install
 
 import (
 	"github.com/loft-sh/api/v4/pkg/apis/management"
-	"github.com/loft-sh/api/v4/pkg/apis/management/v1"
+	v1 "github.com/loft-sh/api/v4/pkg/apis/management/v1"
 	"github.com/loft-sh/apiserver/pkg/builders"
 	"k8s.io/apimachinery/pkg/runtime"
 	utilruntime "k8s.io/apimachinery/pkg/util/runtime"
@@ -85,7 +85,6 @@ func addKnownTypes(scheme *runtime.Scheme) error {
 		&management.ProjectCharts{},
 		&management.ProjectClusters{},
 		&management.ProjectImportSpace{},
-		&management.ProjectImportVirtualCluster{},
 		&management.ProjectMembers{},
 		&management.ProjectMigrateSpaceInstance{},
 		&management.ProjectMigrateVirtualClusterInstance{},
@@ -94,6 +93,8 @@ func addKnownTypes(scheme *runtime.Scheme) error {
 		&management.ProjectSecretList{},
 		&management.RedirectToken{},
 		&management.RedirectTokenList{},
+		&management.RegisterVirtualCluster{},
+		&management.RegisterVirtualClusterList{},
 		&management.ResetAccessKey{},
 		&management.ResetAccessKeyList{},
 		&management.Runner{},
@@ -106,8 +107,6 @@ func addKnownTypes(scheme *runtime.Scheme) error {
 		&management.SelfSubjectAccessReviewList{},
 		&management.SharedSecret{},
 		&management.SharedSecretList{},
-		&management.SpaceConstraint{},
-		&management.SpaceConstraintList{},
 		&management.SpaceInstance{},
 		&management.SpaceInstanceList{},
 		&management.SpaceTemplate{},
@@ -129,6 +128,7 @@ func addKnownTypes(scheme *runtime.Scheme) error {
 		&management.UserProfile{},
 		&management.VirtualClusterInstance{},
 		&management.VirtualClusterInstanceList{},
+		&management.VirtualClusterAccessKey{},
 		&management.VirtualClusterInstanceKubeConfig{},
 		&management.VirtualClusterInstanceLog{},
 		&management.VirtualClusterTemplate{},

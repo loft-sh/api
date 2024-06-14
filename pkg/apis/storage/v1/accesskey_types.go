@@ -174,6 +174,14 @@ type AccessKeyScopeRole struct {
 	// Role is the name of the role to apply to the access key scope.
 	// +optional
 	Role AccessKeyScopeRoleName `json:"role,omitempty"`
+
+	// Projects specifies the projects the access key should have access to.
+	// +optional
+	Projects []string `json:"projects,omitempty"`
+
+	// VirtualClusters specifies the virtual clusters the access key is allowed to access.
+	// +optional
+	VirtualClusters []string `json:"virtualClusters,omitempty"`
 }
 
 // AccessKeyScopeRoleName is the role name for a given scope
@@ -285,8 +293,6 @@ const (
 	RequestTargetManagement RequestTarget = "Management"
 	// RequestTargetCluster specifies a connected kubernetes cluster request
 	RequestTargetCluster RequestTarget = "Cluster"
-	// RequestTargetVirtualCluster specifies a virtual kubernetes cluster request
-	RequestTargetVirtualCluster RequestTarget = "VirtualCluster"
 	// RequestTargetProjectSpace specifies a project space cluster request
 	RequestTargetProjectSpace RequestTarget = "ProjectSpace"
 	// RequestTargetProjectVirtualCluster specifies a project virtual kubernetes cluster request

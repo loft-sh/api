@@ -97,6 +97,10 @@ type DevPodWorkspaceTemplateDefinition struct {
 	// +optional
 	WorkspaceEnv map[string]DevPodProviderOption `json:"workspaceEnv,omitempty"`
 
+	// InstanceTemplate holds the workspace instance template
+	// +optional
+	InstanceTemplate DevPodWorkspaceInstanceTemplateDefinition `json:"instanceTemplate,omitempty"`
+
 	// UseProjectGitCredentials specifies if the project git credentials should be used instead of local ones for this workspace
 	// +optional
 	UseProjectGitCredentials bool `json:"useProjectGitCredentials,omitempty"`
@@ -132,6 +136,13 @@ type DevPodWorkspaceProvider struct {
 	// Env are environment options to set when using the provider.
 	// +optional
 	Env map[string]DevPodProviderOption `json:"env,omitempty"`
+}
+
+type DevPodWorkspaceInstanceTemplateDefinition struct {
+	// The virtual cluster instance metadata
+	// +kubebuilder:pruning:PreserveUnknownFields
+	// +optional
+	TemplateMetadata `json:"metadata,omitempty"`
 }
 
 type DevPodProviderOption struct {
