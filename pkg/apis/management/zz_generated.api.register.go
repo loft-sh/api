@@ -886,13 +886,13 @@ var (
 		func() runtime.Object { return &RedirectTokenList{} },
 	)
 	InternalRegisterVirtualCluster = builders.NewInternalResource(
-		"registervirtualcluster",
+		"registervirtualclusters",
 		"RegisterVirtualCluster",
 		func() runtime.Object { return &RegisterVirtualCluster{} },
 		func() runtime.Object { return &RegisterVirtualClusterList{} },
 	)
 	InternalRegisterVirtualClusterStatus = builders.NewInternalResourceStatus(
-		"registervirtualcluster",
+		"registervirtualclusters",
 		"RegisterVirtualClusterStatus",
 		func() runtime.Object { return &RegisterVirtualCluster{} },
 		func() runtime.Object { return &RegisterVirtualClusterList{} },
