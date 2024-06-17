@@ -120,6 +120,8 @@ func addKnownTypes(scheme *runtime.Scheme) error {
 		&management.TeamList{},
 		&management.TeamAccessKeys{},
 		&management.TeamClusters{},
+		&management.TranslateVClusterResourceName{},
+		&management.TranslateVClusterResourceNameList{},
 		&management.User{},
 		&management.UserList{},
 		&management.UserAccessKeys{},

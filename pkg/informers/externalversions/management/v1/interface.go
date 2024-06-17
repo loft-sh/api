@@ -74,6 +74,8 @@ type Interface interface {
 	Tasks() TaskInformer
 	// Teams returns a TeamInformer.
 	Teams() TeamInformer
+	// TranslateVClusterResourceNames returns a TranslateVClusterResourceNameInformer.
+	TranslateVClusterResourceNames() TranslateVClusterResourceNameInformer
 	// Users returns a UserInformer.
 	Users() UserInformer
 	// VirtualClusterInstances returns a VirtualClusterInstanceInformer.
@@ -256,6 +258,11 @@ func (v *version) Tasks() TaskInformer {
 // Teams returns a TeamInformer.
 func (v *version) Teams() TeamInformer {
 	return &teamInformer{factory: v.factory, tweakListOptions: v.tweakListOptions}
+}
+
+// TranslateVClusterResourceNames returns a TranslateVClusterResourceNameInformer.
+func (v *version) TranslateVClusterResourceNames() TranslateVClusterResourceNameInformer {
+	return &translateVClusterResourceNameInformer{factory: v.factory, tweakListOptions: v.tweakListOptions}
 }
 
 // Users returns a UserInformer.

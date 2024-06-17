@@ -150,6 +150,10 @@ type TaskListerExpansion interface{}
 // TeamLister.
 type TeamListerExpansion interface{}
 
+// TranslateVClusterResourceNameListerExpansion allows custom methods to be added to
+// TranslateVClusterResourceNameLister.
+type TranslateVClusterResourceNameListerExpansion interface{}
+
 // UserListerExpansion allows custom methods to be added to
 // UserLister.
 type UserListerExpansion interface{}

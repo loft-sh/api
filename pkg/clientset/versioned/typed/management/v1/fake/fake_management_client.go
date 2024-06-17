@@ -144,6 +144,10 @@ func (c *FakeManagementV1) Teams() v1.TeamInterface {
 	return &FakeTeams{c}
 }
 
+func (c *FakeManagementV1) TranslateVClusterResourceNames() v1.TranslateVClusterResourceNameInterface {
+	return &FakeTranslateVClusterResourceNames{c}
+}
+
 func (c *FakeManagementV1) Users() v1.UserInterface {
 	return &FakeUsers{c}
 }

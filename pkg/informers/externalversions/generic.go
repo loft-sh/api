@@ -105,6 +105,8 @@ func (f *sharedInformerFactory) ForResource(resource schema.GroupVersionResource
 		return &genericInformer{resource: resource.GroupResource(), informer: f.Management().V1().Tasks().Informer()}, nil
 	case v1.SchemeGroupVersion.WithResource("teams"):
 		return &genericInformer{resource: resource.GroupResource(), informer: f.Management().V1().Teams().Informer()}, nil
+	case v1.SchemeGroupVersion.WithResource("translatevclusterresourcenames"):
+		return &genericInformer{resource: resource.GroupResource(), informer: f.Management().V1().TranslateVClusterResourceNames().Informer()}, nil
 	case v1.SchemeGroupVersion.WithResource("users"):
 		return &genericInformer{resource: resource.GroupResource(), informer: f.Management().V1().Users().Informer()}, nil
 	case v1.SchemeGroupVersion.WithResource("virtualclusterinstances"):

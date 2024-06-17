@@ -111,6 +111,8 @@ func addKnownTypes(scheme *runtime.Scheme) error {
 		&TeamList{},
 		&TeamAccessKeys{},
 		&TeamClusters{},
+		&TranslateVClusterResourceName{},
+		&TranslateVClusterResourceNameList{},
 		&User{},
 		&UserList{},
 		&UserAccessKeys{},
@@ -329,6 +331,7 @@ var (
 			func() runtime.Object { return &TeamClusters{} }, // Register versioned resource
 			nil,
 			management.NewTeamClustersREST),
+		management.ManagementTranslateVClusterResourceNameStorage,
 		management.ManagementUserStorage,
 		builders.NewApiResourceWithStorage(
 			management.InternalUserAccessKeysREST,
@@ -908,6 +911,14 @@ type TeamClustersList struct {
 	metav1.TypeMeta `json:",inline"`
 	metav1.ListMeta `json:"metadata,omitempty"`
 	Items           []TeamClusters `json:"items"`
+}
+
+// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+
+type TranslateVClusterResourceNameList struct {
+	metav1.TypeMeta `json:",inline"`
+	metav1.ListMeta `json:"metadata,omitempty"`
+	Items           []TranslateVClusterResourceName `json:"items"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object

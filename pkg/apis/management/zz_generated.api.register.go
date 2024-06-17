@@ -378,8 +378,18 @@ var (
 	NewTeamREST = func(getter generic.RESTOptionsGetter) rest.Storage {
 		return NewTeamRESTFunc(Factory)
 	}
-	NewTeamRESTFunc       NewRESTFunc
-	ManagementUserStorage = builders.NewApiResourceWithStorage( // Resource status endpoint
+	NewTeamRESTFunc                                NewRESTFunc
+	ManagementTranslateVClusterResourceNameStorage = builders.NewApiResourceWithStorage( // Resource status endpoint
+		InternalTranslateVClusterResourceName,
+		func() runtime.Object { return &TranslateVClusterResourceName{} },     // Register versioned resource
+		func() runtime.Object { return &TranslateVClusterResourceNameList{} }, // Register versioned resource list
+		NewTranslateVClusterResourceNameREST,
+	)
+	NewTranslateVClusterResourceNameREST = func(getter generic.RESTOptionsGetter) rest.Storage {
+		return NewTranslateVClusterResourceNameRESTFunc(Factory)
+	}
+	NewTranslateVClusterResourceNameRESTFunc NewRESTFunc
+	ManagementUserStorage                    = builders.NewApiResourceWithStorage( // Resource status endpoint
 		InternalUser,
 		func() runtime.Object { return &User{} },     // Register versioned resource
 		func() runtime.Object { return &UserList{} }, // Register versioned resource list
@@ -1056,8 +1066,20 @@ var (
 	NewTeamClustersREST = func(getter generic.RESTOptionsGetter) rest.Storage {
 		return NewTeamClustersRESTFunc(Factory)
 	}
-	NewTeamClustersRESTFunc NewRESTFunc
-	InternalUser            = builders.NewInternalResource(
+	NewTeamClustersRESTFunc               NewRESTFunc
+	InternalTranslateVClusterResourceName = builders.NewInternalResource(
+		"translatevclusterresourcenames",
+		"TranslateVClusterResourceName",
+		func() runtime.Object { return &TranslateVClusterResourceName{} },
+		func() runtime.Object { return &TranslateVClusterResourceNameList{} },
+	)
+	InternalTranslateVClusterResourceNameStatus = builders.NewInternalResourceStatus(
+		"translatevclusterresourcenames",
+		"TranslateVClusterResourceNameStatus",
+		func() runtime.Object { return &TranslateVClusterResourceName{} },
+		func() runtime.Object { return &TranslateVClusterResourceNameList{} },
+	)
+	InternalUser = builders.NewInternalResource(
 		"users",
 		"User",
 		func() runtime.Object { return &User{} },
@@ -1249,6 +1271,8 @@ var (
 		InternalTeamStatus,
 		InternalTeamAccessKeysREST,
 		InternalTeamClustersREST,
+		InternalTranslateVClusterResourceName,
+		InternalTranslateVClusterResourceNameStatus,
 		InternalUser,
 		InternalUserStatus,
 		InternalUserAccessKeysREST,
@@ -1953,7 +1977,7 @@ type KioskStatus struct {
 }
 
 // +genclient
-// +genclient
+// +genclient:nonNamespaced
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
 
 type License struct {
@@ -2501,6 +2525,27 @@ type TeamSpec struct {
 
 type TeamStatus struct {
 	storagev1.TeamStatus `json:",inline"`
+}
+
+// +genclient
+// +genclient:nonNamespaced
+// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+
+type TranslateVClusterResourceName struct {
+	metav1.TypeMeta   `json:",inline"`
+	metav1.ObjectMeta `json:"metadata,omitempty"`
+	Spec              TranslateVClusterResourceNameSpec   `json:"spec,omitempty"`
+	Status            TranslateVClusterResourceNameStatus `json:"status,omitempty"`
+}
+
+type TranslateVClusterResourceNameSpec struct {
+	Name         string `json:"name"`
+	Namespace    string `json:"namespace"`
+	VClusterName string `json:"vclusterName"`
+}
+
+type TranslateVClusterResourceNameStatus struct {
+	Name string `json:"name,omitempty"`
 }
 
 // +genclient
@@ -6929,6 +6974,125 @@ func (s *storageTeam) UpdateTeam(ctx context.Context, object *Team) (*Team, erro
 }
 
 func (s *storageTeam) DeleteTeam(ctx context.Context, id string) (bool, error) {
+	st := s.GetStandardStorage()
+	_, sync, err := st.Delete(ctx, id, nil, &metav1.DeleteOptions{})
+	return sync, err
+}
+
+// TranslateVClusterResourceName Functions and Structs
+//
+// +k8s:deepcopy-gen=false
+type TranslateVClusterResourceNameStrategy struct {
+	builders.DefaultStorageStrategy
+}
+
+// +k8s:deepcopy-gen=false
+type TranslateVClusterResourceNameStatusStrategy struct {
+	builders.DefaultStatusStorageStrategy
+}
+
+// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+
+type TranslateVClusterResourceNameList struct {
+	metav1.TypeMeta `json:",inline"`
+	metav1.ListMeta `json:"metadata,omitempty"`
+	Items           []TranslateVClusterResourceName `json:"items"`
+}
+
+func (TranslateVClusterResourceName) NewStatus() interface{} {
+	return TranslateVClusterResourceNameStatus{}
+}
+
+func (pc *TranslateVClusterResourceName) GetStatus() interface{} {
+	return pc.Status
+}
+
+func (pc *TranslateVClusterResourceName) SetStatus(s interface{}) {
+	pc.Status = s.(TranslateVClusterResourceNameStatus)
+}
+
+func (pc *TranslateVClusterResourceName) GetSpec() interface{} {
+	return pc.Spec
+}
+
+func (pc *TranslateVClusterResourceName) SetSpec(s interface{}) {
+	pc.Spec = s.(TranslateVClusterResourceNameSpec)
+}
+
+func (pc *TranslateVClusterResourceName) GetObjectMeta() *metav1.ObjectMeta {
+	return &pc.ObjectMeta
+}
+
+func (pc *TranslateVClusterResourceName) SetGeneration(generation int64) {
+	pc.ObjectMeta.Generation = generation
+}
+
+func (pc TranslateVClusterResourceName) GetGeneration() int64 {
+	return pc.ObjectMeta.Generation
+}
+
+// Registry is an interface for things that know how to store TranslateVClusterResourceName.
+// +k8s:deepcopy-gen=false
+type TranslateVClusterResourceNameRegistry interface {
+	ListTranslateVClusterResourceNames(ctx context.Context, options *internalversion.ListOptions) (*TranslateVClusterResourceNameList, error)
+	GetTranslateVClusterResourceName(ctx context.Context, id string, options *metav1.GetOptions) (*TranslateVClusterResourceName, error)
+	CreateTranslateVClusterResourceName(ctx context.Context, id *TranslateVClusterResourceName) (*TranslateVClusterResourceName, error)
+	UpdateTranslateVClusterResourceName(ctx context.Context, id *TranslateVClusterResourceName) (*TranslateVClusterResourceName, error)
+	DeleteTranslateVClusterResourceName(ctx context.Context, id string) (bool, error)
+}
+
+// NewRegistry returns a new Registry interface for the given Storage. Any mismatched types will panic.
+func NewTranslateVClusterResourceNameRegistry(sp builders.StandardStorageProvider) TranslateVClusterResourceNameRegistry {
+	return &storageTranslateVClusterResourceName{sp}
+}
+
+// Implement Registry
+// storage puts strong typing around storage calls
+// +k8s:deepcopy-gen=false
+type storageTranslateVClusterResourceName struct {
+	builders.StandardStorageProvider
+}
+
+func (s *storageTranslateVClusterResourceName) ListTranslateVClusterResourceNames(ctx context.Context, options *internalversion.ListOptions) (*TranslateVClusterResourceNameList, error) {
+	if options != nil && options.FieldSelector != nil && !options.FieldSelector.Empty() {
+		return nil, fmt.Errorf("field selector not supported yet")
+	}
+	st := s.GetStandardStorage()
+	obj, err := st.List(ctx, options)
+	if err != nil {
+		return nil, err
+	}
+	return obj.(*TranslateVClusterResourceNameList), err
+}
+
+func (s *storageTranslateVClusterResourceName) GetTranslateVClusterResourceName(ctx context.Context, id string, options *metav1.GetOptions) (*TranslateVClusterResourceName, error) {
+	st := s.GetStandardStorage()
+	obj, err := st.Get(ctx, id, options)
+	if err != nil {
+		return nil, err
+	}
+	return obj.(*TranslateVClusterResourceName), nil
+}
+
+func (s *storageTranslateVClusterResourceName) CreateTranslateVClusterResourceName(ctx context.Context, object *TranslateVClusterResourceName) (*TranslateVClusterResourceName, error) {
+	st := s.GetStandardStorage()
+	obj, err := st.Create(ctx, object, nil, &metav1.CreateOptions{})
+	if err != nil {
+		return nil, err
+	}
+	return obj.(*TranslateVClusterResourceName), nil
+}
+
+func (s *storageTranslateVClusterResourceName) UpdateTranslateVClusterResourceName(ctx context.Context, object *TranslateVClusterResourceName) (*TranslateVClusterResourceName, error) {
+	st := s.GetStandardStorage()
+	obj, _, err := st.Update(ctx, object.Name, rest.DefaultUpdatedObjectInfo(object), nil, nil, false, &metav1.UpdateOptions{})
+	if err != nil {
+		return nil, err
+	}
+	return obj.(*TranslateVClusterResourceName), nil
+}
+
+func (s *storageTranslateVClusterResourceName) DeleteTranslateVClusterResourceName(ctx context.Context, id string) (bool, error) {
 	st := s.GetStandardStorage()
 	_, sync, err := st.Delete(ctx, id, nil, &metav1.DeleteOptions{})
 	return sync, err

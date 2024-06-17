@@ -68,6 +68,8 @@ type TaskExpansion interface{}
 
 type TeamExpansion interface{}
 
+type TranslateVClusterResourceNameExpansion interface{}
+
 type UserExpansion interface{}
 
 type VirtualClusterInstanceExpansion interface{}
