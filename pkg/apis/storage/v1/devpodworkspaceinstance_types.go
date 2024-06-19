@@ -1,7 +1,7 @@
 package v1
 
 import (
-	agentstoragev1 "github.com/loft-sh/agentapi/v4/pkg/apis/loft/storage/v1"
+	agentstoragev1 "github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 )
 
@@ -23,8 +23,8 @@ var (
 	// DevPodWorkspaceSourceAnnotation holds the workspace source of the devpod workspace
 	DevPodWorkspaceSourceAnnotation = "loft.sh/workspace-source"
 
-	// DevPodWorkspaceRunnerNetworkPeerAnnotation holds the workspace runner network peer name of the devpod workspace
-	DevPodWorkspaceRunnerNetworkPeerAnnotation = "loft.sh/runner-network-peer-name"
+	// DevPodWorkspaceRunnerEndpointAnnotation holds the workspace runner endpoint of the devpod workspace
+	DevPodWorkspaceRunnerEndpointAnnotation = "loft.sh/runner-endpoint"
 )
 
 var (

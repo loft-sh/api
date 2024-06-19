@@ -1,7 +1,8 @@
 package v1
 
 import (
-	storagev1 "github.com/loft-sh/api/v4/pkg/apis/storage/v1"
+	clusterv1 "github.com/loft-sh/agentapi/v3/pkg/apis/loft/cluster/v1"
+	storagev1 "github.com/loft-sh/api/v3/pkg/apis/storage/v1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 )
 
@@ -31,10 +32,10 @@ type TaskStatus struct {
 	storagev1.TaskStatus `json:",inline"`
 
 	// +optional
-	Owner *storagev1.UserOrTeamEntity `json:"owner,omitempty"`
+	Owner *clusterv1.UserOrTeam `json:"owner,omitempty"`
 
 	// +optional
-	Cluster *storagev1.EntityInfo `json:"cluster,omitempty"`
+	Cluster *clusterv1.EntityInfo `json:"cluster,omitempty"`
 }
 
 func (a *Task) GetOwner() *storagev1.UserOrTeam {

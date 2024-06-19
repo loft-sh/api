@@ -1,9 +1,9 @@
 package v1
 
 import (
-	auditv1 "github.com/loft-sh/api/v4/pkg/apis/audit/v1"
-	storagev1 "github.com/loft-sh/api/v4/pkg/apis/storage/v1"
-	uiv1 "github.com/loft-sh/api/v4/pkg/apis/ui/v1"
+	auditv1 "github.com/loft-sh/api/v3/pkg/apis/audit/v1"
+	storagev1 "github.com/loft-sh/api/v3/pkg/apis/storage/v1"
+	uiv1 "github.com/loft-sh/api/v3/pkg/apis/ui/v1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 )
 
@@ -50,10 +50,6 @@ type ConfigStatus struct {
 	// LoftHost holds the domain where the loft instance is hosted. This should not include https or http. E.g. loft.my-domain.com
 	// +optional
 	LoftHost string `json:"loftHost,omitempty"`
-
-	// ProjectNamespacePrefix holds the prefix for loft project namespaces. Omitted defaults to "p-"
-	// +optional
-	ProjectNamespacePrefix *string `json:"projectNamespacePrefix,omitempty"`
 
 	// DevPodSubDomain holds a subdomain in the following form *.workspace.my-domain.com
 	// +optional
@@ -501,6 +497,8 @@ type AuthenticationMicrosoft struct {
 	// Restrict the groups claims to include only the user’s groups that are in the configured groups
 	// +optional
 	UseGroupsAsWhitelist bool `json:"useGroupsAsWhitelist,omitempty"`
+
+	AuthenticationClusterAccountTemplates `json:",inline"`
 }
 
 type AuthenticationGoogle struct {
@@ -538,6 +536,8 @@ type AuthenticationGoogle struct {
 	// when listing groups
 	// +optional
 	AdminEmail string `json:"adminEmail,omitempty"`
+
+	AuthenticationClusterAccountTemplates `json:",inline"`
 }
 
 type AuthenticationGitlab struct {
@@ -559,6 +559,8 @@ type AuthenticationGitlab struct {
 	// If `groups` is provided, this acts as a whitelist - only the user's GitLab groups that are in the configured `groups` below will go into the groups claim. Conversely, if the user is not in any of the configured `groups`, the user will not be authenticated.
 	// +optional
 	Groups []string `json:"groups,omitempty"`
+
+	AuthenticationClusterAccountTemplates `json:",inline"`
 }
 
 type AuthenticationGithub struct {
@@ -591,6 +593,8 @@ type AuthenticationGithub struct {
 	// Used to support self-signed or untrusted CA root certificates.
 	// +optional
 	RootCA string `json:"rootCA,omitempty"`
+
+	AuthenticationClusterAccountTemplates `json:",inline"`
 }
 
 // AuthenticationGithubOrg holds org-team filters, in which teams are optional.
@@ -695,4 +699,26 @@ type AuthenticationOIDC struct {
 	// Type of the OIDC to show in the UI. Only for displaying purposes
 	// +optional
 	Type string `json:"type,omitempty"`
+
+	AuthenticationClusterAccountTemplates `json:",inline"`
+}
+
+type AuthenticationClusterAccountTemplates struct {
+	// Cluster Account Templates that will be applied for users logging in through this authentication
+	// +optional
+	ClusterAccountTemplates []storagev1.UserClusterAccountTemplate `json:"clusterAccountTemplates,omitempty"`
+
+	// A mapping between groups and cluster account templates. If the user has a certain group, the cluster
+	// account template will be added during creation
+	// +optional
+	GroupClusterAccountTemplates []AuthenticationGroupClusterAccountTemplate `json:"groupClusterAccountTemplates,omitempty"`
+}
+
+type AuthenticationGroupClusterAccountTemplate struct {
+	// Group is the name of the group that should be matched
+	Group string `json:"group"`
+
+	// Cluster Account Templates that will be applied for users logging in through this authentication
+	// +optional
+	ClusterAccountTemplates []storagev1.UserClusterAccountTemplate `json:"clusterAccountTemplates,omitempty"`
 }
