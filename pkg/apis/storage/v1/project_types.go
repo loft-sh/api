@@ -1,7 +1,7 @@
 package v1
 
 import (
-	agentstoragev1 "github.com/loft-sh/agentapi/v4/pkg/apis/loft/storage/v1"
+	agentstoragev1 "github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1"
 	corev1 "k8s.io/api/core/v1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 )
@@ -118,6 +118,10 @@ type ProjectSpec struct {
 	// +optional
 	NamespacePattern *NamespacePattern `json:"namespacePattern,omitempty"`
 
+	// AutomaticImport imports vClusters & Namespace automatically
+	// +optional
+	AutomaticImport AutomaticImport `json:"automaticImport,omitempty"`
+
 	// ArgoIntegration holds information about ArgoCD Integration
 	// +optional
 	ArgoIntegration *ArgoIntegrationSpec `json:"argoCD,omitempty"`
@@ -133,6 +137,18 @@ type ProjectSpec struct {
 	// DevPod holds DevPod specific configuration for project
 	// +optional
 	DevPod *DevPodProjectSpec `json:"devPod,omitempty"`
+}
+
+type AutomaticImport struct {
+	// VirtualClusters defines automatic virtual cluster import options.
+	// +optional
+	VirtualClusters AutomaticImportVirtualClusters `json:"virtualClusters,omitempty"`
+}
+
+type AutomaticImportVirtualClusters struct {
+	// Enabled specifies if automatic virtual cluster import should be enabled for this project.
+	// +optional
+	Enabled bool `json:"enabled"`
 }
 
 type RequireTemplate struct {
@@ -500,18 +516,8 @@ type SyncMembersSpec struct {
 }
 
 type DevPodProjectSpec struct {
-	// Git defines additional git related settings like credentials
 	// +optional
 	Git *GitProjectSpec `json:"git,omitempty"`
-
-	// SSH defines additional ssh related settings like private keys, to be
-	// specified as base64 encoded strings.
-	// +optional
-	SSH *SSHProjectSpec `json:"ssh,omitempty"`
-
-	// FallbackImage defines an image all workspace will fall back to if no devcontainer.json could be detected
-	// +optional
-	FallbackImage string `json:"fallbackImage,omitempty"`
 }
 
 type GitProjectSpec struct {
@@ -520,18 +526,6 @@ type GitProjectSpec struct {
 	Token string `json:"token,omitempty"`
 
 	// TokenSecretRef defines the project secret to use for token authentication.
-	// Will be used if `Token` is not provided.
-	// +optional
-	TokenProjectSecretRef *corev1.SecretKeySelector `json:"tokenSecretRef,omitempty"`
-}
-
-type SSHProjectSpec struct {
-	// Token defines the private ssh key to use for authentication,
-	// this is a base64 encoded string.
-	// +optional
-	Token string `json:"token,omitempty"`
-
-	// TokenSecretRef defines the project secret to use as private ssh key for authentication.
 	// Will be used if `Token` is not provided.
 	// +optional
 	TokenProjectSecretRef *corev1.SecretKeySelector `json:"tokenSecretRef,omitempty"`
