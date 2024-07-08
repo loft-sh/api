@@ -3295,6 +3295,7 @@ func autoConvert_v1_Authentication_To_management_Authentication(in *Authenticati
 	out.Password = (*management.AuthenticationPassword)(unsafe.Pointer(in.Password))
 	out.Connectors = *(*[]management.ConnectorWithName)(unsafe.Pointer(&in.Connectors))
 	out.DisableTeamCreation = in.DisableTeamCreation
+	out.DisableUserCreation = in.DisableUserCreation
 	out.AccessKeyMaxTTLSeconds = in.AccessKeyMaxTTLSeconds
 	out.LoginAccessKeyTTLSeconds = (*int64)(unsafe.Pointer(in.LoginAccessKeyTTLSeconds))
 	out.CustomHttpHeaders = *(*map[string]string)(unsafe.Pointer(&in.CustomHttpHeaders))
@@ -3314,6 +3315,7 @@ func autoConvert_management_Authentication_To_v1_Authentication(in *management.A
 	out.Password = (*AuthenticationPassword)(unsafe.Pointer(in.Password))
 	out.Connectors = *(*[]ConnectorWithName)(unsafe.Pointer(&in.Connectors))
 	out.DisableTeamCreation = in.DisableTeamCreation
+	out.DisableUserCreation = in.DisableUserCreation
 	out.AccessKeyMaxTTLSeconds = in.AccessKeyMaxTTLSeconds
 	out.LoginAccessKeyTTLSeconds = (*int64)(unsafe.Pointer(in.LoginAccessKeyTTLSeconds))
 	out.CustomHttpHeaders = *(*map[string]string)(unsafe.Pointer(&in.CustomHttpHeaders))
@@ -4763,6 +4765,7 @@ func Convert_management_ConvertVirtualClusterConfigList_To_v1_ConvertVirtualClus
 }
 
 func autoConvert_v1_ConvertVirtualClusterConfigSpec_To_management_ConvertVirtualClusterConfigSpec(in *ConvertVirtualClusterConfigSpec, out *management.ConvertVirtualClusterConfigSpec, s conversion.Scope) error {
+	out.Annotations = *(*map[string]string)(unsafe.Pointer(&in.Annotations))
 	out.Distro = in.Distro
 	out.Values = in.Values
 	return nil
@@ -4774,6 +4777,7 @@ func Convert_v1_ConvertVirtualClusterConfigSpec_To_management_ConvertVirtualClus
 }
 
 func autoConvert_management_ConvertVirtualClusterConfigSpec_To_v1_ConvertVirtualClusterConfigSpec(in *management.ConvertVirtualClusterConfigSpec, out *ConvertVirtualClusterConfigSpec, s conversion.Scope) error {
+	out.Annotations = *(*map[string]string)(unsafe.Pointer(&in.Annotations))
 	out.Distro = in.Distro
 	out.Values = in.Values
 	return nil

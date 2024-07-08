@@ -5569,6 +5569,13 @@ func schema_pkg_apis_management_v1_Authentication(ref common.ReferenceCallback) 
 							Format:      "",
 						},
 					},
+					"disableUserCreation": {
+						SchemaProps: spec.SchemaProps{
+							Description: "DisableUserCreation prevents the SSO connectors from creating a new user on a users initial signin through sso. Default behaviour is false, this means that a new user object will be created once a user without a Kubernetes user object logs in.",
+							Type:        []string{"boolean"},
+							Format:      "",
+						},
+					},
 					"accessKeyMaxTTLSeconds": {
 						SchemaProps: spec.SchemaProps{
 							Description: "AccessKeyMaxTTLSeconds is the global maximum lifespan of an accesskey in seconds. Leaving it 0 or unspecified will disable it. Specifying 2592000 will mean all keys have a Time-To-Live of 30 days.",
@@ -8562,6 +8569,22 @@ func schema_pkg_apis_management_v1_ConvertVirtualClusterConfigSpec(ref common.Re
 				Description: "ConvertVirtualClusterConfigSpec holds the specification",
 				Type:        []string{"object"},
 				Properties: map[string]spec.Schema{
+					"annotations": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Annotations are annotations on the virtual cluster",
+							Type:        []string{"object"},
+							AdditionalProperties: &spec.SchemaOrBool{
+								Allows: true,
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: "",
+										Type:    []string{"string"},
+										Format:  "",
+									},
+								},
+							},
+						},
+					},
 					"distro": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Distro is the distro to be used for the config",
@@ -28095,10 +28118,9 @@ func schema_pkg_apis_policy_v1beta1_JsPolicySpec(ref common.ReferenceCallback) c
 					},
 					"scope": {
 						SchemaProps: spec.SchemaProps{
-							Description: "scope specifies the scope of this rule. Valid values are \"Cluster\", \"Namespaced\", and \"*\" \"Cluster\" means that only cluster-scoped resources will match this rule. Namespace API objects are cluster-scoped. \"Namespaced\" means that only namespaced resources will match this rule. \"*\" means that there are no scope restrictions. Subresources match the scope of their parent resource. Default is \"*\".\n\n\nPossible enum values:\n - `\"*\"` means that all scopes are included.\n - `\"Cluster\"` means that scope is limited to cluster-scoped objects. Namespace objects are cluster-scoped.\n - `\"Namespaced\"` means that scope is limited to namespaced objects.",
+							Description: "scope specifies the scope of this rule. Valid values are \"Cluster\", \"Namespaced\", and \"*\" \"Cluster\" means that only cluster-scoped resources will match this rule. Namespace API objects are cluster-scoped. \"Namespaced\" means that only namespaced resources will match this rule. \"*\" means that there are no scope restrictions. Subresources match the scope of their parent resource. Default is \"*\".",
 							Type:        []string{"string"},
 							Format:      "",
-							Enum:        []interface{}{"*", "Cluster", "Namespaced"},
 						},
 					},
 					"failurePolicy": {
@@ -29059,10 +29081,9 @@ func schema_k8sio_api_admissionregistration_v1_NamedRuleWithOperations(ref commo
 					},
 					"scope": {
 						SchemaProps: spec.SchemaProps{
-							Description: "scope specifies the scope of this rule. Valid values are \"Cluster\", \"Namespaced\", and \"*\" \"Cluster\" means that only cluster-scoped resources will match this rule. Namespace API objects are cluster-scoped. \"Namespaced\" means that only namespaced resources will match this rule. \"*\" means that there are no scope restrictions. Subresources match the scope of their parent resource. Default is \"*\".\n\n\nPossible enum values:\n - `\"*\"` means that all scopes are included.\n - `\"Cluster\"` means that scope is limited to cluster-scoped objects. Namespace objects are cluster-scoped.\n - `\"Namespaced\"` means that scope is limited to namespaced objects.",
+							Description: "scope specifies the scope of this rule. Valid values are \"Cluster\", \"Namespaced\", and \"*\" \"Cluster\" means that only cluster-scoped resources will match this rule. Namespace API objects are cluster-scoped. \"Namespaced\" means that only namespaced resources will match this rule. \"*\" means that there are no scope restrictions. Subresources match the scope of their parent resource. Default is \"*\".",
 							Type:        []string{"string"},
 							Format:      "",
-							Enum:        []interface{}{"*", "Cluster", "Namespaced"},
 						},
 					},
 				},
@@ -29224,10 +29245,9 @@ func schema_k8sio_api_admissionregistration_v1_Rule(ref common.ReferenceCallback
 					},
 					"scope": {
 						SchemaProps: spec.SchemaProps{
-							Description: "scope specifies the scope of this rule. Valid values are \"Cluster\", \"Namespaced\", and \"*\" \"Cluster\" means that only cluster-scoped resources will match this rule. Namespace API objects are cluster-scoped. \"Namespaced\" means that only namespaced resources will match this rule. \"*\" means that there are no scope restrictions. Subresources match the scope of their parent resource. Default is \"*\".\n\n\nPossible enum values:\n - `\"*\"` means that all scopes are included.\n - `\"Cluster\"` means that scope is limited to cluster-scoped objects. Namespace objects are cluster-scoped.\n - `\"Namespaced\"` means that scope is limited to namespaced objects.",
+							Description: "scope specifies the scope of this rule. Valid values are \"Cluster\", \"Namespaced\", and \"*\" \"Cluster\" means that only cluster-scoped resources will match this rule. Namespace API objects are cluster-scoped. \"Namespaced\" means that only namespaced resources will match this rule. \"*\" means that there are no scope restrictions. Subresources match the scope of their parent resource. Default is \"*\".",
 							Type:        []string{"string"},
 							Format:      "",
-							Enum:        []interface{}{"*", "Cluster", "Namespaced"},
 						},
 					},
 				},
@@ -29326,10 +29346,9 @@ func schema_k8sio_api_admissionregistration_v1_RuleWithOperations(ref common.Ref
 					},
 					"scope": {
 						SchemaProps: spec.SchemaProps{
-							Description: "scope specifies the scope of this rule. Valid values are \"Cluster\", \"Namespaced\", and \"*\" \"Cluster\" means that only cluster-scoped resources will match this rule. Namespace API objects are cluster-scoped. \"Namespaced\" means that only namespaced resources will match this rule. \"*\" means that there are no scope restrictions. Subresources match the scope of their parent resource. Default is \"*\".\n\n\nPossible enum values:\n - `\"*\"` means that all scopes are included.\n - `\"Cluster\"` means that scope is limited to cluster-scoped objects. Namespace objects are cluster-scoped.\n - `\"Namespaced\"` means that scope is limited to namespaced objects.",
+							Description: "scope specifies the scope of this rule. Valid values are \"Cluster\", \"Namespaced\", and \"*\" \"Cluster\" means that only cluster-scoped resources will match this rule. Namespace API objects are cluster-scoped. \"Namespaced\" means that only namespaced resources will match this rule. \"*\" means that there are no scope restrictions. Subresources match the scope of their parent resource. Default is \"*\".",
 							Type:        []string{"string"},
 							Format:      "",
-							Enum:        []interface{}{"*", "Cluster", "Namespaced"},
 						},
 					},
 				},
@@ -30725,10 +30744,9 @@ func schema_k8sio_api_admissionregistration_v1beta1_NamedRuleWithOperations(ref 
 					},
 					"scope": {
 						SchemaProps: spec.SchemaProps{
-							Description: "scope specifies the scope of this rule. Valid values are \"Cluster\", \"Namespaced\", and \"*\" \"Cluster\" means that only cluster-scoped resources will match this rule. Namespace API objects are cluster-scoped. \"Namespaced\" means that only namespaced resources will match this rule. \"*\" means that there are no scope restrictions. Subresources match the scope of their parent resource. Default is \"*\".\n\n\nPossible enum values:\n - `\"*\"` means that all scopes are included.\n - `\"Cluster\"` means that scope is limited to cluster-scoped objects. Namespace objects are cluster-scoped.\n - `\"Namespaced\"` means that scope is limited to namespaced objects.",
+							Description: "scope specifies the scope of this rule. Valid values are \"Cluster\", \"Namespaced\", and \"*\" \"Cluster\" means that only cluster-scoped resources will match this rule. Namespace API objects are cluster-scoped. \"Namespaced\" means that only namespaced resources will match this rule. \"*\" means that there are no scope restrictions. Subresources match the scope of their parent resource. Default is \"*\".",
 							Type:        []string{"string"},
 							Format:      "",
-							Enum:        []interface{}{"*", "Cluster", "Namespaced"},
 						},
 					},
 				},

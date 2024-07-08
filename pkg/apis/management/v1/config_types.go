@@ -328,6 +328,12 @@ type Authentication struct {
 	// +optional
 	DisableTeamCreation bool `json:"disableTeamCreation,omitempty"`
 
+	// DisableUserCreation prevents the SSO connectors from creating a new user on a users initial signin through sso.
+	// Default behaviour is false, this means that a new user object will be created once a user without
+	// a Kubernetes user object logs in.
+	// +optional
+	DisableUserCreation bool `json:"disableUserCreation,omitempty"`
+
 	// AccessKeyMaxTTLSeconds is the global maximum lifespan of an accesskey in seconds.
 	// Leaving it 0 or unspecified will disable it.
 	// Specifying 2592000 will mean all keys have a Time-To-Live of 30 days.
