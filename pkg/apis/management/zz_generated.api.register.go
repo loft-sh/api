@@ -1438,6 +1438,7 @@ type Authentication struct {
 	Password                 *AuthenticationPassword `json:"password,omitempty"`
 	Connectors               []ConnectorWithName     `json:"connectors,omitempty"`
 	DisableTeamCreation      bool                    `json:"disableTeamCreation,omitempty"`
+	DisableUserCreation      bool                    `json:"disableUserCreation,omitempty"`
 	AccessKeyMaxTTLSeconds   int64                   `json:"accessKeyMaxTTLSeconds,omitempty"`
 	LoginAccessKeyTTLSeconds *int64                  `json:"loginAccessKeyTTLSeconds,omitempty"`
 	CustomHttpHeaders        map[string]string       `json:"customHttpHeaders,omitempty"`
@@ -1775,8 +1776,9 @@ type ConvertVirtualClusterConfig struct {
 }
 
 type ConvertVirtualClusterConfigSpec struct {
-	Distro string `json:"distro,omitempty"`
-	Values string `json:"values,omitempty"`
+	Annotations map[string]string `json:"annotations,omitempty"`
+	Distro      string            `json:"distro,omitempty"`
+	Values      string            `json:"values,omitempty"`
 }
 
 type ConvertVirtualClusterConfigStatus struct {
@@ -1977,7 +1979,7 @@ type KioskStatus struct {
 }
 
 // +genclient
-// +genclient
+// +genclient:nonNamespaced
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
 
 type License struct {
@@ -2426,7 +2428,7 @@ type SpaceInstanceStatus struct {
 }
 
 // +genclient
-// +genclient:nonNamespaced
+// +genclient
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
 
 type SpaceTemplate struct {
