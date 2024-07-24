@@ -77,6 +77,8 @@ func addKnownTypes(scheme *runtime.Scheme) error {
 		&management.LicenseTokenList{},
 		&management.LoftUpgrade{},
 		&management.LoftUpgradeList{},
+		&management.OIDCClient{},
+		&management.OIDCClientList{},
 		&management.OwnedAccessKey{},
 		&management.OwnedAccessKeyList{},
 		&management.Project{},

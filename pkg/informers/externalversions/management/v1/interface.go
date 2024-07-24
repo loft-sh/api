@@ -44,6 +44,8 @@ type Interface interface {
 	LicenseTokens() LicenseTokenInformer
 	// LoftUpgrades returns a LoftUpgradeInformer.
 	LoftUpgrades() LoftUpgradeInformer
+	// OIDCClients returns a OIDCClientInformer.
+	OIDCClients() OIDCClientInformer
 	// OwnedAccessKeys returns a OwnedAccessKeyInformer.
 	OwnedAccessKeys() OwnedAccessKeyInformer
 	// Projects returns a ProjectInformer.
@@ -183,6 +185,11 @@ func (v *version) LicenseTokens() LicenseTokenInformer {
 // LoftUpgrades returns a LoftUpgradeInformer.
 func (v *version) LoftUpgrades() LoftUpgradeInformer {
 	return &loftUpgradeInformer{factory: v.factory, tweakListOptions: v.tweakListOptions}
+}
+
+// OIDCClients returns a OIDCClientInformer.
+func (v *version) OIDCClients() OIDCClientInformer {
+	return &oIDCClientInformer{factory: v.factory, namespace: v.namespace, tweakListOptions: v.tweakListOptions}
 }
 
 // OwnedAccessKeys returns a OwnedAccessKeyInformer.
