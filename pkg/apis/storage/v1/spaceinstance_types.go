@@ -1,7 +1,7 @@
 package v1
 
 import (
-	agentstoragev1 "github.com/loft-sh/agentapi/v4/pkg/apis/loft/storage/v1"
+	agentstoragev1 "github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 )
 
@@ -86,7 +86,7 @@ type SpaceInstanceSpec struct {
 	// ExtraAccessRules defines extra rules which users and teams should have which access to the virtual
 	// cluster.
 	// +optional
-	ExtraAccessRules []InstanceAccessRule `json:"extraAccessRules,omitempty"`
+	ExtraAccessRules []agentstoragev1.InstanceAccessRule `json:"extraAccessRules,omitempty"`
 
 	// Access holds the access rights for users and teams
 	// +optional
@@ -150,7 +150,7 @@ type SpaceInstanceStatus struct {
 
 	// SpaceObjects are the objects that were applied within the virtual cluster space
 	// +optional
-	SpaceObjects *ObjectsStatus `json:"spaceObjects,omitempty"`
+	SpaceObjects *agentstoragev1.ObjectsStatus `json:"spaceObjects,omitempty"`
 
 	// Space is the template rendered with all the parameters
 	// +optional

@@ -27,7 +27,7 @@ func StartCmd() string {
 	case licenseapi.DevPodPro:
 		loginCmd = "devpod pro start"
 	case licenseapi.VClusterPro:
-		loginCmd = "vcluster platform start"
+		loginCmd = "vcluster pro start"
 	case licenseapi.Loft:
 	}
 
@@ -57,7 +57,7 @@ func ResetPassword() string {
 	case licenseapi.DevPodPro:
 		return "devpod pro reset password"
 	case licenseapi.VClusterPro:
-		return "vcluster platform reset password"
+		return "vcluster pro reset password"
 	case licenseapi.Loft:
 	}
 
