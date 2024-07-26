@@ -213,6 +213,9 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 		"github.com/loft-sh/api/v4/pkg/apis/management/v1.LoftUpgradeStatus":                          schema_pkg_apis_management_v1_LoftUpgradeStatus(ref),
 		"github.com/loft-sh/api/v4/pkg/apis/management/v1.OIDC":                                       schema_pkg_apis_management_v1_OIDC(ref),
 		"github.com/loft-sh/api/v4/pkg/apis/management/v1.OIDCClient":                                 schema_pkg_apis_management_v1_OIDCClient(ref),
+		"github.com/loft-sh/api/v4/pkg/apis/management/v1.OIDCClientList":                             schema_pkg_apis_management_v1_OIDCClientList(ref),
+		"github.com/loft-sh/api/v4/pkg/apis/management/v1.OIDCClientSpec":                             schema_pkg_apis_management_v1_OIDCClientSpec(ref),
+		"github.com/loft-sh/api/v4/pkg/apis/management/v1.OIDCClientStatus":                           schema_pkg_apis_management_v1_OIDCClientStatus(ref),
 		"github.com/loft-sh/api/v4/pkg/apis/management/v1.OwnedAccessKey":                             schema_pkg_apis_management_v1_OwnedAccessKey(ref),
 		"github.com/loft-sh/api/v4/pkg/apis/management/v1.OwnedAccessKeyList":                         schema_pkg_apis_management_v1_OwnedAccessKeyList(ref),
 		"github.com/loft-sh/api/v4/pkg/apis/management/v1.OwnedAccessKeySpec":                         schema_pkg_apis_management_v1_OwnedAccessKeySpec(ref),
@@ -11111,7 +11114,7 @@ func schema_pkg_apis_management_v1_OIDC(ref common.ReferenceCallback) common.Ope
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/loft-sh/api/v4/pkg/apis/management/v1.OIDCClient"),
+										Ref:     ref("github.com/loft-sh/api/v4/pkg/apis/management/v1.OIDCClientSpec"),
 									},
 								},
 							},
@@ -11121,7 +11124,7 @@ func schema_pkg_apis_management_v1_OIDC(ref common.ReferenceCallback) common.Ope
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/v4/pkg/apis/management/v1.OIDCClient"},
+			"github.com/loft-sh/api/v4/pkg/apis/management/v1.OIDCClientSpec"},
 	}
 }
 
@@ -11129,7 +11132,102 @@ func schema_pkg_apis_management_v1_OIDCClient(ref common.ReferenceCallback) comm
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
-				Description: "OIDCClient holds information about a client",
+				Description: "OIDCClient represents an OIDC client to use with Loft as an OIDC provider",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"kind": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"apiVersion": {
+						SchemaProps: spec.SchemaProps{
+							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"metadata": {
+						SchemaProps: spec.SchemaProps{
+							Default: map[string]interface{}{},
+							Ref:     ref("k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"),
+						},
+					},
+					"spec": {
+						SchemaProps: spec.SchemaProps{
+							Default: map[string]interface{}{},
+							Ref:     ref("github.com/loft-sh/api/v4/pkg/apis/management/v1.OIDCClientSpec"),
+						},
+					},
+					"status": {
+						SchemaProps: spec.SchemaProps{
+							Default: map[string]interface{}{},
+							Ref:     ref("github.com/loft-sh/api/v4/pkg/apis/management/v1.OIDCClientStatus"),
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			"github.com/loft-sh/api/v4/pkg/apis/management/v1.OIDCClientSpec", "github.com/loft-sh/api/v4/pkg/apis/management/v1.OIDCClientStatus", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
+	}
+}
+
+func schema_pkg_apis_management_v1_OIDCClientList(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"kind": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"apiVersion": {
+						SchemaProps: spec.SchemaProps{
+							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"metadata": {
+						SchemaProps: spec.SchemaProps{
+							Default: map[string]interface{}{},
+							Ref:     ref("k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"),
+						},
+					},
+					"items": {
+						SchemaProps: spec.SchemaProps{
+							Type: []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref("github.com/loft-sh/api/v4/pkg/apis/management/v1.OIDCClient"),
+									},
+								},
+							},
+						},
+					},
+				},
+				Required: []string{"items"},
+			},
+		},
+		Dependencies: []string{
+			"github.com/loft-sh/api/v4/pkg/apis/management/v1.OIDCClient", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
+	}
+}
+
+func schema_pkg_apis_management_v1_OIDCClientSpec(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "OIDCClientSpec holds the specification",
 				Type:        []string{"object"},
 				Properties: map[string]spec.Schema{
 					"name": {
@@ -11170,6 +11268,17 @@ func schema_pkg_apis_management_v1_OIDCClient(ref common.ReferenceCallback) comm
 					},
 				},
 				Required: []string{"redirectURIs"},
+			},
+		},
+	}
+}
+
+func schema_pkg_apis_management_v1_OIDCClientStatus(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "OIDCClientStatus holds the status",
+				Type:        []string{"object"},
 			},
 		},
 	}

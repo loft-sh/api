@@ -68,6 +68,8 @@ func addKnownTypes(scheme *runtime.Scheme) error {
 		&LicenseTokenList{},
 		&LoftUpgrade{},
 		&LoftUpgradeList{},
+		&OIDCClient{},
+		&OIDCClientList{},
 		&OwnedAccessKey{},
 		&OwnedAccessKeyList{},
 		&Project{},
@@ -241,6 +243,7 @@ var (
 			management.NewLicenseRequestREST),
 		management.ManagementLicenseTokenStorage,
 		management.ManagementLoftUpgradeStorage,
+		management.ManagementOIDCClientStorage,
 		management.ManagementOwnedAccessKeyStorage,
 		management.ManagementProjectStorage,
 		builders.NewApiResourceWithStorage(
@@ -687,6 +690,14 @@ type LoftUpgradeList struct {
 	metav1.TypeMeta `json:",inline"`
 	metav1.ListMeta `json:"metadata,omitempty"`
 	Items           []LoftUpgrade `json:"items"`
+}
+
+// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+
+type OIDCClientList struct {
+	metav1.TypeMeta `json:",inline"`
+	metav1.ListMeta `json:"metadata,omitempty"`
+	Items           []OIDCClient `json:"items"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
