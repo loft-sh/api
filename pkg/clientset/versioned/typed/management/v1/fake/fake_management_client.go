@@ -84,6 +84,10 @@ func (c *FakeManagementV1) LoftUpgrades() v1.LoftUpgradeInterface {
 	return &FakeLoftUpgrades{c}
 }
 
+func (c *FakeManagementV1) OIDCClients(namespace string) v1.OIDCClientInterface {
+	return &FakeOIDCClients{c, namespace}
+}
+
 func (c *FakeManagementV1) OwnedAccessKeys() v1.OwnedAccessKeyInterface {
 	return &FakeOwnedAccessKeys{c}
 }

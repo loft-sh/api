@@ -75,6 +75,8 @@ func (f *sharedInformerFactory) ForResource(resource schema.GroupVersionResource
 		return &genericInformer{resource: resource.GroupResource(), informer: f.Management().V1().LicenseTokens().Informer()}, nil
 	case v1.SchemeGroupVersion.WithResource("loftupgrades"):
 		return &genericInformer{resource: resource.GroupResource(), informer: f.Management().V1().LoftUpgrades().Informer()}, nil
+	case v1.SchemeGroupVersion.WithResource("oidcclients"):
+		return &genericInformer{resource: resource.GroupResource(), informer: f.Management().V1().OIDCClients().Informer()}, nil
 	case v1.SchemeGroupVersion.WithResource("ownedaccesskeys"):
 		return &genericInformer{resource: resource.GroupResource(), informer: f.Management().V1().OwnedAccessKeys().Informer()}, nil
 	case v1.SchemeGroupVersion.WithResource("projects"):
