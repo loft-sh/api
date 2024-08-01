@@ -8299,7 +8299,7 @@ func schema_pkg_apis_management_v1_ConfigStatus(ref common.ReferenceCallback) co
 					},
 					"oidc": {
 						SchemaProps: spec.SchemaProps{
-							Description: "OIDC holds oidc provider relevant information",
+							Description: "DEPRECATED: Use OIDC Client secrets instead. OIDC holds oidc provider relevant information",
 							Ref:         ref("github.com/loft-sh/api/v4/pkg/apis/management/v1.OIDC"),
 						},
 					},

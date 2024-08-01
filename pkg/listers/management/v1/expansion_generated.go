@@ -82,10 +82,6 @@ type LoftUpgradeListerExpansion interface{}
 // OIDCClientLister.
 type OIDCClientListerExpansion interface{}
 
-// OIDCClientNamespaceListerExpansion allows custom methods to be added to
-// OIDCClientNamespaceLister.
-type OIDCClientNamespaceListerExpansion interface{}
-
 // OwnedAccessKeyListerExpansion allows custom methods to be added to
 // OwnedAccessKeyLister.
 type OwnedAccessKeyListerExpansion interface{}

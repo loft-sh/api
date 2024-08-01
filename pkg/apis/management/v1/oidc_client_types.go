@@ -5,6 +5,7 @@ import (
 )
 
 // +genclient
+// +genclient:nonNamespaced
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
 
 // OIDCClient represents an OIDC client to use with Loft as an OIDC provider

@@ -35,6 +35,7 @@ type ConfigStatus struct {
 	// +optional
 	Authentication Authentication `json:"auth,omitempty"`
 
+	// DEPRECATED: Use OIDC Client secrets instead.
 	// OIDC holds oidc provider relevant information
 	// +optional
 	OIDC *OIDC `json:"oidc,omitempty"`
