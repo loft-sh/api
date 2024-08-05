@@ -17,7 +17,7 @@ import (
 // OIDCClientsGetter has a method to return a OIDCClientInterface.
 // A group's client should implement this interface.
 type OIDCClientsGetter interface {
-	OIDCClients(namespace string) OIDCClientInterface
+	OIDCClients() OIDCClientInterface
 }
 
 // OIDCClientInterface has methods to work with OIDCClient resources.
@@ -37,14 +37,12 @@ type OIDCClientInterface interface {
 // oIDCClients implements OIDCClientInterface
 type oIDCClients struct {
 	client rest.Interface
-	ns     string
 }
 
 // newOIDCClients returns a OIDCClients
-func newOIDCClients(c *ManagementV1Client, namespace string) *oIDCClients {
+func newOIDCClients(c *ManagementV1Client) *oIDCClients {
 	return &oIDCClients{
 		client: c.RESTClient(),
-		ns:     namespace,
 	}
 }
 
@@ -52,7 +50,6 @@ func newOIDCClients(c *ManagementV1Client, namespace string) *oIDCClients {
 func (c *oIDCClients) Get(ctx context.Context, name string, options metav1.GetOptions) (result *v1.OIDCClient, err error) {
 	result = &v1.OIDCClient{}
 	err = c.client.Get().
-		Namespace(c.ns).
 		Resource("oidcclients").
 		Name(name).
 		VersionedParams(&options, scheme.ParameterCodec).
@@ -69,7 +66,6 @@ func (c *oIDCClients) List(ctx context.Context, opts metav1.ListOptions) (result
 	}
 	result = &v1.OIDCClientList{}
 	err = c.client.Get().
-		Namespace(c.ns).
 		Resource("oidcclients").
 		VersionedParams(&opts, scheme.ParameterCodec).
 		Timeout(timeout).
@@ -86,7 +82,6 @@ func (c *oIDCClients) Watch(ctx context.Context, opts metav1.ListOptions) (watch
 	}
 	opts.Watch = true
 	return c.client.Get().
-		Namespace(c.ns).
 		Resource("oidcclients").
 		VersionedParams(&opts, scheme.ParameterCodec).
 		Timeout(timeout).
@@ -97,7 +92,6 @@ func (c *oIDCClients) Watch(ctx context.Context, opts metav1.ListOptions) (watch
 func (c *oIDCClients) Create(ctx context.Context, oIDCClient *v1.OIDCClient, opts metav1.CreateOptions) (result *v1.OIDCClient, err error) {
 	result = &v1.OIDCClient{}
 	err = c.client.Post().
-		Namespace(c.ns).
 		Resource("oidcclients").
 		VersionedParams(&opts, scheme.ParameterCodec).
 		Body(oIDCClient).
@@ -110,7 +104,6 @@ func (c *oIDCClients) Create(ctx context.Context, oIDCClient *v1.OIDCClient, opt
 func (c *oIDCClients) Update(ctx context.Context, oIDCClient *v1.OIDCClient, opts metav1.UpdateOptions) (result *v1.OIDCClient, err error) {
 	result = &v1.OIDCClient{}
 	err = c.client.Put().
-		Namespace(c.ns).
 		Resource("oidcclients").
 		Name(oIDCClient.Name).
 		VersionedParams(&opts, scheme.ParameterCodec).
@@ -125,7 +118,6 @@ func (c *oIDCClients) Update(ctx context.Context, oIDCClient *v1.OIDCClient, opt
 func (c *oIDCClients) UpdateStatus(ctx context.Context, oIDCClient *v1.OIDCClient, opts metav1.UpdateOptions) (result *v1.OIDCClient, err error) {
 	result = &v1.OIDCClient{}
 	err = c.client.Put().
-		Namespace(c.ns).
 		Resource("oidcclients").
 		Name(oIDCClient.Name).
 		SubResource("status").
@@ -139,7 +131,6 @@ func (c *oIDCClients) UpdateStatus(ctx context.Context, oIDCClient *v1.OIDCClien
 // Delete takes name of the oIDCClient and deletes it. Returns an error if one occurs.
 func (c *oIDCClients) Delete(ctx context.Context, name string, opts metav1.DeleteOptions) error {
 	return c.client.Delete().
-		Namespace(c.ns).
 		Resource("oidcclients").
 		Name(name).
 		Body(&opts).
@@ -154,7 +145,6 @@ func (c *oIDCClients) DeleteCollection(ctx context.Context, opts metav1.DeleteOp
 		timeout = time.Duration(*listOpts.TimeoutSeconds) * time.Second
 	}
 	return c.client.Delete().
-		Namespace(c.ns).
 		Resource("oidcclients").
 		VersionedParams(&listOpts, scheme.ParameterCodec).
 		Timeout(timeout).
@@ -167,7 +157,6 @@ func (c *oIDCClients) DeleteCollection(ctx context.Context, opts metav1.DeleteOp
 func (c *oIDCClients) Patch(ctx context.Context, name string, pt types.PatchType, data []byte, opts metav1.PatchOptions, subresources ...string) (result *v1.OIDCClient, err error) {
 	result = &v1.OIDCClient{}
 	err = c.client.Patch(pt).
-		Namespace(c.ns).
 		Resource("oidcclients").
 		Name(name).
 		SubResource(subresources...).

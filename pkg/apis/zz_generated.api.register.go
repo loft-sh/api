@@ -56,6 +56,7 @@ func GetManagementAPIBuilder() *builders.APIGroupBuilder {
 			"License",
 			"LicenseToken",
 			"LoftUpgrade",
+			"OIDCClient",
 			"OwnedAccessKey",
 			"Project",
 			"RedirectToken",

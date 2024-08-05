@@ -135,6 +135,16 @@ func (c *FakeProjects) ListTemplates(ctx context.Context, projectName string, op
 	return obj.(*v1.ProjectTemplates), err
 }
 
+// ListRunners takes name of the project, and returns the corresponding projectRunners object, and an error if there is any.
+func (c *FakeProjects) ListRunners(ctx context.Context, projectName string, options metav1.GetOptions) (result *v1.ProjectRunners, err error) {
+	obj, err := c.Fake.
+		Invokes(testing.NewRootGetSubresourceAction(projectsResource, "runners", projectName), &v1.ProjectRunners{})
+	if obj == nil {
+		return nil, err
+	}
+	return obj.(*v1.ProjectRunners), err
+}
+
 // ListClusters takes name of the project, and returns the corresponding projectClusters object, and an error if there is any.
 func (c *FakeProjects) ListClusters(ctx context.Context, projectName string, options metav1.GetOptions) (result *v1.ProjectClusters, err error) {
 	obj, err := c.Fake.

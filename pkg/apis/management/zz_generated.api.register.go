@@ -885,7 +885,15 @@ var (
 		return NewProjectMigrateVirtualClusterInstanceRESTFunc(Factory)
 	}
 	NewProjectMigrateVirtualClusterInstanceRESTFunc NewRESTFunc
-	InternalProjectTemplatesREST                    = builders.NewInternalSubresource(
+	InternalProjectRunnersREST                      = builders.NewInternalSubresource(
+		"projects", "ProjectRunners", "runners",
+		func() runtime.Object { return &ProjectRunners{} },
+	)
+	NewProjectRunnersREST = func(getter generic.RESTOptionsGetter) rest.Storage {
+		return NewProjectRunnersRESTFunc(Factory)
+	}
+	NewProjectRunnersRESTFunc    NewRESTFunc
+	InternalProjectTemplatesREST = builders.NewInternalSubresource(
 		"projects", "ProjectTemplates", "templates",
 		func() runtime.Object { return &ProjectTemplates{} },
 	)
@@ -1263,6 +1271,7 @@ var (
 		InternalProjectMembersREST,
 		InternalProjectMigrateSpaceInstanceREST,
 		InternalProjectMigrateVirtualClusterInstanceREST,
+		InternalProjectRunnersREST,
 		InternalProjectTemplatesREST,
 		InternalProjectSecret,
 		InternalProjectSecretStatus,
@@ -2086,7 +2095,7 @@ type OIDC struct {
 }
 
 // +genclient
-// +genclient
+// +genclient:nonNamespaced
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
 
 type OIDCClient struct {
@@ -2232,6 +2241,14 @@ type ProjectMigrateVirtualClusterInstance struct {
 type ProjectMigrateVirtualClusterInstanceSource struct {
 	Name      string `json:"name,omitempty"`
 	Namespace string `json:"namespace,omitempty"`
+}
+
+// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+
+type ProjectRunners struct {
+	metav1.TypeMeta   `json:",inline"`
+	metav1.ObjectMeta `json:"metadata,omitempty"`
+	Runners           []Runner `json:"runners,omitempty"`
 }
 
 // +genclient
@@ -5442,6 +5459,14 @@ type ProjectMigrateVirtualClusterInstanceList struct {
 	metav1.TypeMeta `json:",inline"`
 	metav1.ListMeta `json:"metadata,omitempty"`
 	Items           []ProjectMigrateVirtualClusterInstance `json:"items"`
+}
+
+// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+
+type ProjectRunnersList struct {
+	metav1.TypeMeta `json:",inline"`
+	metav1.ListMeta `json:"metadata,omitempty"`
+	Items           []ProjectRunners `json:"items"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object

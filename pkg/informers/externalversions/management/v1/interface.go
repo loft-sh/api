@@ -189,7 +189,7 @@ func (v *version) LoftUpgrades() LoftUpgradeInformer {
 
 // OIDCClients returns a OIDCClientInformer.
 func (v *version) OIDCClients() OIDCClientInformer {
-	return &oIDCClientInformer{factory: v.factory, namespace: v.namespace, tweakListOptions: v.tweakListOptions}
+	return &oIDCClientInformer{factory: v.factory, tweakListOptions: v.tweakListOptions}
 }
 
 // OwnedAccessKeys returns a OwnedAccessKeyInformer.
