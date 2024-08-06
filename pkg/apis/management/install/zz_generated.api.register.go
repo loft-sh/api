@@ -90,6 +90,7 @@ func addKnownTypes(scheme *runtime.Scheme) error {
 		&management.ProjectMembers{},
 		&management.ProjectMigrateSpaceInstance{},
 		&management.ProjectMigrateVirtualClusterInstance{},
+		&management.ProjectRunners{},
 		&management.ProjectTemplates{},
 		&management.ProjectSecret{},
 		&management.ProjectSecretList{},

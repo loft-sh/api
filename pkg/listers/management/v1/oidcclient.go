@@ -15,8 +15,9 @@ type OIDCClientLister interface {
 	// List lists all OIDCClients in the indexer.
 	// Objects returned here must be treated as read-only.
 	List(selector labels.Selector) (ret []*v1.OIDCClient, err error)
-	// OIDCClients returns an object that can list and get OIDCClients.
-	OIDCClients(namespace string) OIDCClientNamespaceLister
+	// Get retrieves the OIDCClient from the index for a given name.
+	// Objects returned here must be treated as read-only.
+	Get(name string) (*v1.OIDCClient, error)
 	OIDCClientListerExpansion
 }
 
@@ -38,41 +39,9 @@ func (s *oIDCClientLister) List(selector labels.Selector) (ret []*v1.OIDCClient,
 	return ret, err
 }
 
-// OIDCClients returns an object that can list and get OIDCClients.
-func (s *oIDCClientLister) OIDCClients(namespace string) OIDCClientNamespaceLister {
-	return oIDCClientNamespaceLister{indexer: s.indexer, namespace: namespace}
-}
-
-// OIDCClientNamespaceLister helps list and get OIDCClients.
-// All objects returned here must be treated as read-only.
-type OIDCClientNamespaceLister interface {
-	// List lists all OIDCClients in the indexer for a given namespace.
-	// Objects returned here must be treated as read-only.
-	List(selector labels.Selector) (ret []*v1.OIDCClient, err error)
-	// Get retrieves the OIDCClient from the indexer for a given namespace and name.
-	// Objects returned here must be treated as read-only.
-	Get(name string) (*v1.OIDCClient, error)
-	OIDCClientNamespaceListerExpansion
-}
-
-// oIDCClientNamespaceLister implements the OIDCClientNamespaceLister
-// interface.
-type oIDCClientNamespaceLister struct {
-	indexer   cache.Indexer
-	namespace string
-}
-
-// List lists all OIDCClients in the indexer for a given namespace.
-func (s oIDCClientNamespaceLister) List(selector labels.Selector) (ret []*v1.OIDCClient, err error) {
-	err = cache.ListAllByNamespace(s.indexer, s.namespace, selector, func(m interface{}) {
-		ret = append(ret, m.(*v1.OIDCClient))
-	})
-	return ret, err
-}
-
-// Get retrieves the OIDCClient from the indexer for a given namespace and name.
-func (s oIDCClientNamespaceLister) Get(name string) (*v1.OIDCClient, error) {
-	obj, exists, err := s.indexer.GetByKey(s.namespace + "/" + name)
+// Get retrieves the OIDCClient from the index for a given name.
+func (s *oIDCClientLister) Get(name string) (*v1.OIDCClient, error) {
+	obj, exists, err := s.indexer.GetByKey(name)
 	if err != nil {
 		return nil, err
 	}

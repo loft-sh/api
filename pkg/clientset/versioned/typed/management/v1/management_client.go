@@ -129,8 +129,8 @@ func (c *ManagementV1Client) LoftUpgrades() LoftUpgradeInterface {
 	return newLoftUpgrades(c)
 }
 
-func (c *ManagementV1Client) OIDCClients(namespace string) OIDCClientInterface {
-	return newOIDCClients(c, namespace)
+func (c *ManagementV1Client) OIDCClients() OIDCClientInterface {
+	return newOIDCClients(c)
 }
 
 func (c *ManagementV1Client) OwnedAccessKeys() OwnedAccessKeyInterface {
