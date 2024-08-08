@@ -12,6 +12,9 @@ var RunnerConditions = []agentstoragev1.ConditionType{
 
 const (
 	RunnerDeployed agentstoragev1.ConditionType = "Deployed"
+
+	// BuiltinRunnerName is the name for the control plane runner
+	BuiltinRunnerName = "local"
 )
 
 // +genclient
