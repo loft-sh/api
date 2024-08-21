@@ -1780,6 +1780,7 @@ type ConfigStatus struct {
 	DevPodSubDomain        string                          `json:"devPodSubDomain,omitempty"`
 	UISettings             *uiv1.UISettingsConfig          `json:"uiSettings,omitempty"`
 	VaultIntegration       *storagev1.VaultIntegrationSpec `json:"vault,omitempty"`
+	DisableConfigEndpoint  bool                            `json:"disableConfigEndpoint,omitempty"`
 }
 
 type Connector struct {
@@ -2012,7 +2013,7 @@ type KioskStatus struct {
 }
 
 // +genclient
-// +genclient
+// +genclient:nonNamespaced
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
 
 type License struct {
@@ -2483,7 +2484,7 @@ type SpaceInstanceStatus struct {
 }
 
 // +genclient
-// +genclient
+// +genclient:nonNamespaced
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
 
 type SpaceTemplate struct {

@@ -4674,6 +4674,7 @@ func autoConvert_v1_ConfigStatus_To_management_ConfigStatus(in *ConfigStatus, ou
 	out.DevPodSubDomain = in.DevPodSubDomain
 	out.UISettings = (*uiv1.UISettingsConfig)(unsafe.Pointer(in.UISettings))
 	out.VaultIntegration = (*storagev1.VaultIntegrationSpec)(unsafe.Pointer(in.VaultIntegration))
+	out.DisableConfigEndpoint = in.DisableConfigEndpoint
 	return nil
 }
 
@@ -4694,6 +4695,7 @@ func autoConvert_management_ConfigStatus_To_v1_ConfigStatus(in *management.Confi
 	out.DevPodSubDomain = in.DevPodSubDomain
 	out.UISettings = (*uiv1.UISettingsConfig)(unsafe.Pointer(in.UISettings))
 	out.VaultIntegration = (*storagev1.VaultIntegrationSpec)(unsafe.Pointer(in.VaultIntegration))
+	out.DisableConfigEndpoint = in.DisableConfigEndpoint
 	return nil
 }
 

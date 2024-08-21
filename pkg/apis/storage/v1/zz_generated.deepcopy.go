@@ -1619,6 +1619,11 @@ func (in *DevPodWorkspaceInstanceStatus) DeepCopyInto(out *DevPodWorkspaceInstan
 		*out = new(DevPodWorkspaceTemplateDefinition)
 		(*in).DeepCopyInto(*out)
 	}
+	if in.ClusterRef != nil {
+		in, out := &in.ClusterRef, &out.ClusterRef
+		*out = new(ClusterRef)
+		**out = **in
+	}
 	return
 }
 
