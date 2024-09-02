@@ -2537,9 +2537,23 @@ func schema_apis_loft_cluster_v1_Bash(ref common.ReferenceCallback) common.OpenA
 							Format:      "",
 						},
 					},
+					"podSecurityContext": {
+						SchemaProps: spec.SchemaProps{
+							Description: "PodSecurityContext for the bash pod.",
+							Ref:         ref("k8s.io/api/core/v1.PodSecurityContext"),
+						},
+					},
+					"securityContext": {
+						SchemaProps: spec.SchemaProps{
+							Description: "SecurityContext for the bash container.",
+							Ref:         ref("k8s.io/api/core/v1.SecurityContext"),
+						},
+					},
 				},
 			},
 		},
+		Dependencies: []string{
+			"k8s.io/api/core/v1.PodSecurityContext", "k8s.io/api/core/v1.SecurityContext"},
 	}
 }
 
