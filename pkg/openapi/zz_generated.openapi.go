@@ -21616,6 +21616,18 @@ func schema_pkg_apis_storage_v1_DevPodWorkspaceTemplateDefinition(ref common.Ref
 							Ref:         ref("github.com/loft-sh/api/v4/pkg/apis/storage/v1.SpaceTemplateDefinition"),
 						},
 					},
+					"virtualClusterTemplateRef": {
+						SchemaProps: spec.SchemaProps{
+							Description: "VirtualClusterTemplateRef is a reference to the virtual cluster that should get created for this DevPod. If this is specified, the kubernetes provider will be selected automatically.",
+							Ref:         ref("github.com/loft-sh/api/v4/pkg/apis/storage/v1.TemplateRef"),
+						},
+					},
+					"virtualClusterTemplate": {
+						SchemaProps: spec.SchemaProps{
+							Description: "VirtualClusterTemplate is the inline template for a virtual cluster that should get created for this DevPod. If this is specified, the kubernetes provider will be selected automatically.",
+							Ref:         ref("github.com/loft-sh/api/v4/pkg/apis/storage/v1.VirtualClusterTemplateDefinition"),
+						},
+					},
 					"workspaceEnv": {
 						SchemaProps: spec.SchemaProps{
 							Description: "WorkspaceEnv are environment variables that should be available within the created workspace.",
@@ -21680,7 +21692,7 @@ func schema_pkg_apis_storage_v1_DevPodWorkspaceTemplateDefinition(ref common.Ref
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/v4/pkg/apis/storage/v1.DevPodProviderOption", "github.com/loft-sh/api/v4/pkg/apis/storage/v1.DevPodWorkspaceInstanceTemplateDefinition", "github.com/loft-sh/api/v4/pkg/apis/storage/v1.DevPodWorkspaceProvider", "github.com/loft-sh/api/v4/pkg/apis/storage/v1.SpaceTemplateDefinition", "github.com/loft-sh/api/v4/pkg/apis/storage/v1.TemplateRef"},
+			"github.com/loft-sh/api/v4/pkg/apis/storage/v1.DevPodProviderOption", "github.com/loft-sh/api/v4/pkg/apis/storage/v1.DevPodWorkspaceInstanceTemplateDefinition", "github.com/loft-sh/api/v4/pkg/apis/storage/v1.DevPodWorkspaceProvider", "github.com/loft-sh/api/v4/pkg/apis/storage/v1.SpaceTemplateDefinition", "github.com/loft-sh/api/v4/pkg/apis/storage/v1.TemplateRef", "github.com/loft-sh/api/v4/pkg/apis/storage/v1.VirtualClusterTemplateDefinition"},
 	}
 }
 
@@ -28435,9 +28447,10 @@ func schema_pkg_apis_policy_v1beta1_JsPolicySpec(ref common.ReferenceCallback) c
 					},
 					"scope": {
 						SchemaProps: spec.SchemaProps{
-							Description: "scope specifies the scope of this rule. Valid values are \"Cluster\", \"Namespaced\", and \"*\" \"Cluster\" means that only cluster-scoped resources will match this rule. Namespace API objects are cluster-scoped. \"Namespaced\" means that only namespaced resources will match this rule. \"*\" means that there are no scope restrictions. Subresources match the scope of their parent resource. Default is \"*\".",
+							Description: "scope specifies the scope of this rule. Valid values are \"Cluster\", \"Namespaced\", and \"*\" \"Cluster\" means that only cluster-scoped resources will match this rule. Namespace API objects are cluster-scoped. \"Namespaced\" means that only namespaced resources will match this rule. \"*\" means that there are no scope restrictions. Subresources match the scope of their parent resource. Default is \"*\".\n\n\nPossible enum values:\n - `\"*\"` means that all scopes are included.\n - `\"Cluster\"` means that scope is limited to cluster-scoped objects. Namespace objects are cluster-scoped.\n - `\"Namespaced\"` means that scope is limited to namespaced objects.",
 							Type:        []string{"string"},
 							Format:      "",
+							Enum:        []interface{}{"*", "Cluster", "Namespaced"},
 						},
 					},
 					"failurePolicy": {
@@ -29398,9 +29411,10 @@ func schema_k8sio_api_admissionregistration_v1_NamedRuleWithOperations(ref commo
 					},
 					"scope": {
 						SchemaProps: spec.SchemaProps{
-							Description: "scope specifies the scope of this rule. Valid values are \"Cluster\", \"Namespaced\", and \"*\" \"Cluster\" means that only cluster-scoped resources will match this rule. Namespace API objects are cluster-scoped. \"Namespaced\" means that only namespaced resources will match this rule. \"*\" means that there are no scope restrictions. Subresources match the scope of their parent resource. Default is \"*\".",
+							Description: "scope specifies the scope of this rule. Valid values are \"Cluster\", \"Namespaced\", and \"*\" \"Cluster\" means that only cluster-scoped resources will match this rule. Namespace API objects are cluster-scoped. \"Namespaced\" means that only namespaced resources will match this rule. \"*\" means that there are no scope restrictions. Subresources match the scope of their parent resource. Default is \"*\".\n\n\nPossible enum values:\n - `\"*\"` means that all scopes are included.\n - `\"Cluster\"` means that scope is limited to cluster-scoped objects. Namespace objects are cluster-scoped.\n - `\"Namespaced\"` means that scope is limited to namespaced objects.",
 							Type:        []string{"string"},
 							Format:      "",
+							Enum:        []interface{}{"*", "Cluster", "Namespaced"},
 						},
 					},
 				},
@@ -29562,9 +29576,10 @@ func schema_k8sio_api_admissionregistration_v1_Rule(ref common.ReferenceCallback
 					},
 					"scope": {
 						SchemaProps: spec.SchemaProps{
-							Description: "scope specifies the scope of this rule. Valid values are \"Cluster\", \"Namespaced\", and \"*\" \"Cluster\" means that only cluster-scoped resources will match this rule. Namespace API objects are cluster-scoped. \"Namespaced\" means that only namespaced resources will match this rule. \"*\" means that there are no scope restrictions. Subresources match the scope of their parent resource. Default is \"*\".",
+							Description: "scope specifies the scope of this rule. Valid values are \"Cluster\", \"Namespaced\", and \"*\" \"Cluster\" means that only cluster-scoped resources will match this rule. Namespace API objects are cluster-scoped. \"Namespaced\" means that only namespaced resources will match this rule. \"*\" means that there are no scope restrictions. Subresources match the scope of their parent resource. Default is \"*\".\n\n\nPossible enum values:\n - `\"*\"` means that all scopes are included.\n - `\"Cluster\"` means that scope is limited to cluster-scoped objects. Namespace objects are cluster-scoped.\n - `\"Namespaced\"` means that scope is limited to namespaced objects.",
 							Type:        []string{"string"},
 							Format:      "",
+							Enum:        []interface{}{"*", "Cluster", "Namespaced"},
 						},
 					},
 				},
@@ -29663,9 +29678,10 @@ func schema_k8sio_api_admissionregistration_v1_RuleWithOperations(ref common.Ref
 					},
 					"scope": {
 						SchemaProps: spec.SchemaProps{
-							Description: "scope specifies the scope of this rule. Valid values are \"Cluster\", \"Namespaced\", and \"*\" \"Cluster\" means that only cluster-scoped resources will match this rule. Namespace API objects are cluster-scoped. \"Namespaced\" means that only namespaced resources will match this rule. \"*\" means that there are no scope restrictions. Subresources match the scope of their parent resource. Default is \"*\".",
+							Description: "scope specifies the scope of this rule. Valid values are \"Cluster\", \"Namespaced\", and \"*\" \"Cluster\" means that only cluster-scoped resources will match this rule. Namespace API objects are cluster-scoped. \"Namespaced\" means that only namespaced resources will match this rule. \"*\" means that there are no scope restrictions. Subresources match the scope of their parent resource. Default is \"*\".\n\n\nPossible enum values:\n - `\"*\"` means that all scopes are included.\n - `\"Cluster\"` means that scope is limited to cluster-scoped objects. Namespace objects are cluster-scoped.\n - `\"Namespaced\"` means that scope is limited to namespaced objects.",
 							Type:        []string{"string"},
 							Format:      "",
+							Enum:        []interface{}{"*", "Cluster", "Namespaced"},
 						},
 					},
 				},
@@ -29888,6 +29904,7 @@ func schema_k8sio_api_admissionregistration_v1_ValidatingAdmissionPolicyBindingL
 						},
 					},
 				},
+				Required: []string{"items"},
 			},
 		},
 		Dependencies: []string{
@@ -29993,6 +30010,7 @@ func schema_k8sio_api_admissionregistration_v1_ValidatingAdmissionPolicyList(ref
 						},
 					},
 				},
+				Required: []string{"items"},
 			},
 		},
 		Dependencies: []string{
@@ -31061,9 +31079,10 @@ func schema_k8sio_api_admissionregistration_v1beta1_NamedRuleWithOperations(ref 
 					},
 					"scope": {
 						SchemaProps: spec.SchemaProps{
-							Description: "scope specifies the scope of this rule. Valid values are \"Cluster\", \"Namespaced\", and \"*\" \"Cluster\" means that only cluster-scoped resources will match this rule. Namespace API objects are cluster-scoped. \"Namespaced\" means that only namespaced resources will match this rule. \"*\" means that there are no scope restrictions. Subresources match the scope of their parent resource. Default is \"*\".",
+							Description: "scope specifies the scope of this rule. Valid values are \"Cluster\", \"Namespaced\", and \"*\" \"Cluster\" means that only cluster-scoped resources will match this rule. Namespace API objects are cluster-scoped. \"Namespaced\" means that only namespaced resources will match this rule. \"*\" means that there are no scope restrictions. Subresources match the scope of their parent resource. Default is \"*\".\n\n\nPossible enum values:\n - `\"*\"` means that all scopes are included.\n - `\"Cluster\"` means that scope is limited to cluster-scoped objects. Namespace objects are cluster-scoped.\n - `\"Namespaced\"` means that scope is limited to namespaced objects.",
 							Type:        []string{"string"},
 							Format:      "",
+							Enum:        []interface{}{"*", "Cluster", "Namespaced"},
 						},
 					},
 				},
@@ -31370,6 +31389,7 @@ func schema_k8sio_api_admissionregistration_v1beta1_ValidatingAdmissionPolicyBin
 						},
 					},
 				},
+				Required: []string{"items"},
 			},
 		},
 		Dependencies: []string{
@@ -31475,6 +31495,7 @@ func schema_k8sio_api_admissionregistration_v1beta1_ValidatingAdmissionPolicyLis
 						},
 					},
 				},
+				Required: []string{"items"},
 			},
 		},
 		Dependencies: []string{
