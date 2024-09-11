@@ -32,6 +32,10 @@ func (c *FakeStorageV1) ClusterRoleTemplates() v1.ClusterRoleTemplateInterface {
 	return &FakeClusterRoleTemplates{c}
 }
 
+func (c *FakeStorageV1) DevPodEnvironmentTemplates() v1.DevPodEnvironmentTemplateInterface {
+	return &FakeDevPodEnvironmentTemplates{c}
+}
+
 func (c *FakeStorageV1) DevPodWorkspaceInstances(namespace string) v1.DevPodWorkspaceInstanceInterface {
 	return &FakeDevPodWorkspaceInstances{c, namespace}
 }

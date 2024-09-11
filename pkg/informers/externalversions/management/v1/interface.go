@@ -26,6 +26,8 @@ type Interface interface {
 	Configs() ConfigInformer
 	// ConvertVirtualClusterConfigs returns a ConvertVirtualClusterConfigInformer.
 	ConvertVirtualClusterConfigs() ConvertVirtualClusterConfigInformer
+	// DevPodEnvironmentTemplates returns a DevPodEnvironmentTemplateInformer.
+	DevPodEnvironmentTemplates() DevPodEnvironmentTemplateInformer
 	// DevPodWorkspaceInstances returns a DevPodWorkspaceInstanceInformer.
 	DevPodWorkspaceInstances() DevPodWorkspaceInstanceInformer
 	// DevPodWorkspaceTemplates returns a DevPodWorkspaceTemplateInformer.
@@ -140,6 +142,11 @@ func (v *version) Configs() ConfigInformer {
 // ConvertVirtualClusterConfigs returns a ConvertVirtualClusterConfigInformer.
 func (v *version) ConvertVirtualClusterConfigs() ConvertVirtualClusterConfigInformer {
 	return &convertVirtualClusterConfigInformer{factory: v.factory, tweakListOptions: v.tweakListOptions}
+}
+
+// DevPodEnvironmentTemplates returns a DevPodEnvironmentTemplateInformer.
+func (v *version) DevPodEnvironmentTemplates() DevPodEnvironmentTemplateInformer {
+	return &devPodEnvironmentTemplateInformer{factory: v.factory, tweakListOptions: v.tweakListOptions}
 }
 
 // DevPodWorkspaceInstances returns a DevPodWorkspaceInstanceInformer.

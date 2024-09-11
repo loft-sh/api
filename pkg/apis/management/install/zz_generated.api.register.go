@@ -50,6 +50,8 @@ func addKnownTypes(scheme *runtime.Scheme) error {
 		&management.ConfigList{},
 		&management.ConvertVirtualClusterConfig{},
 		&management.ConvertVirtualClusterConfigList{},
+		&management.DevPodEnvironmentTemplate{},
+		&management.DevPodEnvironmentTemplateList{},
 		&management.DevPodWorkspaceInstance{},
 		&management.DevPodWorkspaceInstanceList{},
 		&management.DevPodDeleteOptions{},
