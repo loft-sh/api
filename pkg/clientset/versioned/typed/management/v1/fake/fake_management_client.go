@@ -48,6 +48,10 @@ func (c *FakeManagementV1) ConvertVirtualClusterConfigs() v1.ConvertVirtualClust
 	return &FakeConvertVirtualClusterConfigs{c}
 }
 
+func (c *FakeManagementV1) DevPodEnvironmentTemplates() v1.DevPodEnvironmentTemplateInterface {
+	return &FakeDevPodEnvironmentTemplates{c}
+}
+
 func (c *FakeManagementV1) DevPodWorkspaceInstances(namespace string) v1.DevPodWorkspaceInstanceInterface {
 	return &FakeDevPodWorkspaceInstances{c, namespace}
 }

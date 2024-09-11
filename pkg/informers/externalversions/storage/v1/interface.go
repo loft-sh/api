@@ -18,6 +18,8 @@ type Interface interface {
 	ClusterAccesses() ClusterAccessInformer
 	// ClusterRoleTemplates returns a ClusterRoleTemplateInformer.
 	ClusterRoleTemplates() ClusterRoleTemplateInformer
+	// DevPodEnvironmentTemplates returns a DevPodEnvironmentTemplateInformer.
+	DevPodEnvironmentTemplates() DevPodEnvironmentTemplateInformer
 	// DevPodWorkspaceInstances returns a DevPodWorkspaceInstanceInformer.
 	DevPodWorkspaceInstances() DevPodWorkspaceInstanceInformer
 	// DevPodWorkspaceTemplates returns a DevPodWorkspaceTemplateInformer.
@@ -80,6 +82,11 @@ func (v *version) ClusterAccesses() ClusterAccessInformer {
 // ClusterRoleTemplates returns a ClusterRoleTemplateInformer.
 func (v *version) ClusterRoleTemplates() ClusterRoleTemplateInformer {
 	return &clusterRoleTemplateInformer{factory: v.factory, tweakListOptions: v.tweakListOptions}
+}
+
+// DevPodEnvironmentTemplates returns a DevPodEnvironmentTemplateInformer.
+func (v *version) DevPodEnvironmentTemplates() DevPodEnvironmentTemplateInformer {
+	return &devPodEnvironmentTemplateInformer{factory: v.factory, tweakListOptions: v.tweakListOptions}
 }
 
 // DevPodWorkspaceInstances returns a DevPodWorkspaceInstanceInformer.
