@@ -628,13 +628,13 @@ var (
 		func() runtime.Object { return &ConvertVirtualClusterConfigList{} },
 	)
 	InternalDevPodEnvironmentTemplate = builders.NewInternalResource(
-		"devpodenvironmenttemplate",
+		"devpodenvironmenttemplates",
 		"DevPodEnvironmentTemplate",
 		func() runtime.Object { return &DevPodEnvironmentTemplate{} },
 		func() runtime.Object { return &DevPodEnvironmentTemplateList{} },
 	)
 	InternalDevPodEnvironmentTemplateStatus = builders.NewInternalResourceStatus(
-		"devpodenvironmenttemplate",
+		"devpodenvironmenttemplates",
 		"DevPodEnvironmentTemplateStatus",
 		func() runtime.Object { return &DevPodEnvironmentTemplate{} },
 		func() runtime.Object { return &DevPodEnvironmentTemplateList{} },
@@ -1623,7 +1623,7 @@ type BackupStatus struct {
 }
 
 // +genclient
-// +genclient:nonNamespaced
+// +genclient
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
 
 type Cluster struct {
