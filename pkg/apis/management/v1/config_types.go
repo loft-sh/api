@@ -35,7 +35,6 @@ type ConfigStatus struct {
 	// +optional
 	Authentication Authentication `json:"auth,omitempty"`
 
-	// DEPRECATED: Use OIDC Client secrets instead.
 	// OIDC holds oidc provider relevant information
 	// +optional
 	OIDC *OIDC `json:"oidc,omitempty"`
@@ -291,6 +290,7 @@ type OIDC struct {
 	// If true indicates that loft will allow wildcard '*' in client redirectURIs
 	WildcardRedirect bool `json:"wildcardRedirect,omitempty"`
 
+	// DEPRECATED: Use OIDC Client secrets or /oidcclients endpoint instead.
 	// The clients that are allowed to request loft tokens
 	Clients []OIDCClientSpec `json:"clients,omitempty"`
 }

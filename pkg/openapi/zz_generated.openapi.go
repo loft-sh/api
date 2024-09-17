@@ -8333,7 +8333,7 @@ func schema_pkg_apis_management_v1_ConfigStatus(ref common.ReferenceCallback) co
 					},
 					"oidc": {
 						SchemaProps: spec.SchemaProps{
-							Description: "DEPRECATED: Use OIDC Client secrets instead. OIDC holds oidc provider relevant information",
+							Description: "OIDC holds oidc provider relevant information",
 							Ref:         ref("github.com/loft-sh/api/v4/pkg/apis/management/v1.OIDC"),
 						},
 					},
@@ -11346,7 +11346,7 @@ func schema_pkg_apis_management_v1_OIDC(ref common.ReferenceCallback) common.Ope
 					},
 					"clients": {
 						SchemaProps: spec.SchemaProps{
-							Description: "The clients that are allowed to request loft tokens",
+							Description: "DEPRECATED: Use OIDC Client secrets or /oidcclients endpoint instead. The clients that are allowed to request loft tokens",
 							Type:        []string{"array"},
 							Items: &spec.SchemaOrArray{
 								Schema: &spec.Schema{
