@@ -35,8 +35,7 @@ type ConfigStatus struct {
 	// +optional
 	Authentication Authentication `json:"auth,omitempty"`
 
-	// DEPRECATED: Use OIDC Client secrets instead.
-	// OIDC holds oidc provider relevant information
+	// DEPRECATED: Configure the OIDC clients using either the OIDC Client UI or a secret. By default, vCluster Platform as an OIDC Provider is enabled but does not function without OIDC clients.
 	// +optional
 	OIDC *OIDC `json:"oidc,omitempty"`
 
