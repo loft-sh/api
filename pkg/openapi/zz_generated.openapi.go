@@ -416,6 +416,7 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 		"github.com/loft-sh/api/v4/pkg/apis/storage/v1.DevPodEnvironmentTemplate":                     schema_pkg_apis_storage_v1_DevPodEnvironmentTemplate(ref),
 		"github.com/loft-sh/api/v4/pkg/apis/storage/v1.DevPodEnvironmentTemplateList":                 schema_pkg_apis_storage_v1_DevPodEnvironmentTemplateList(ref),
 		"github.com/loft-sh/api/v4/pkg/apis/storage/v1.DevPodEnvironmentTemplateSpec":                 schema_pkg_apis_storage_v1_DevPodEnvironmentTemplateSpec(ref),
+		"github.com/loft-sh/api/v4/pkg/apis/storage/v1.DevPodEnvironmentTemplateVersion":              schema_pkg_apis_storage_v1_DevPodEnvironmentTemplateVersion(ref),
 		"github.com/loft-sh/api/v4/pkg/apis/storage/v1.DevPodProjectSpec":                             schema_pkg_apis_storage_v1_DevPodProjectSpec(ref),
 		"github.com/loft-sh/api/v4/pkg/apis/storage/v1.DevPodProviderOption":                          schema_pkg_apis_storage_v1_DevPodProviderOption(ref),
 		"github.com/loft-sh/api/v4/pkg/apis/storage/v1.DevPodProviderOptionFrom":                      schema_pkg_apis_storage_v1_DevPodProviderOptionFrom(ref),
@@ -3766,7 +3767,7 @@ func schema_apis_loft_cluster_v1_SleepModeConfigSpec(ref common.ReferenceCallbac
 					},
 					"timezone": {
 						SchemaProps: spec.SchemaProps{
-							Description: "Timezone specifies time zone used for scheduled space operations. Defaults to UTC. Accepts the same format as time.LoadLocation() in Go (https://pkg.go.dev/time#LoadLocation). The value should be a location name corresponding to a file in the IANA Time Zone database, such as \"America/New_York\".",
+							Description: "Timezone specifies time zone used for scheduled space operations. Defaults to UTC. Accepts the same format as time.LoadLocation() in Go (https://pkg.go.dev/time#LoadLocation). The value should be a location name corresponding to a file in the IANA Time Zone database, such as \"America/New_York\". See also: https://en.wikipedia.org/wiki/List_of_tz_database_time_zones",
 							Type:        []string{"string"},
 							Format:      "",
 						},
@@ -8914,11 +8915,25 @@ func schema_pkg_apis_management_v1_DevPodEnvironmentTemplateSpec(ref common.Refe
 							},
 						},
 					},
+					"versions": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Versions are different versions of the template that can be referenced as well",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref("github.com/loft-sh/api/v4/pkg/apis/storage/v1.DevPodEnvironmentTemplateVersion"),
+									},
+								},
+							},
+						},
+					},
 				},
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/v4/pkg/apis/storage/v1.Access", "github.com/loft-sh/api/v4/pkg/apis/storage/v1.GitEnvironmentTemplate", "github.com/loft-sh/api/v4/pkg/apis/storage/v1.UserOrTeam"},
+			"github.com/loft-sh/api/v4/pkg/apis/storage/v1.Access", "github.com/loft-sh/api/v4/pkg/apis/storage/v1.DevPodEnvironmentTemplateVersion", "github.com/loft-sh/api/v4/pkg/apis/storage/v1.GitEnvironmentTemplate", "github.com/loft-sh/api/v4/pkg/apis/storage/v1.UserOrTeam"},
 	}
 }
 
@@ -13374,11 +13389,32 @@ func schema_pkg_apis_management_v1_ProjectTemplates(ref common.ReferenceCallback
 							},
 						},
 					},
+					"devPodEnvironmentTemplates": {
+						SchemaProps: spec.SchemaProps{
+							Description: "DevPodEnvironmentTemplates holds all the allowed environment templates",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref("github.com/loft-sh/api/v4/pkg/apis/management/v1.DevPodEnvironmentTemplate"),
+									},
+								},
+							},
+						},
+					},
+					"defaultDevPodEnvironmentTemplate": {
+						SchemaProps: spec.SchemaProps{
+							Description: "DefaultDevPodEnvironmentTemplate",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
 				},
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/v4/pkg/apis/management/v1.DevPodWorkspaceTemplate", "github.com/loft-sh/api/v4/pkg/apis/management/v1.SpaceTemplate", "github.com/loft-sh/api/v4/pkg/apis/management/v1.VirtualClusterTemplate", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
+			"github.com/loft-sh/api/v4/pkg/apis/management/v1.DevPodEnvironmentTemplate", "github.com/loft-sh/api/v4/pkg/apis/management/v1.DevPodWorkspaceTemplate", "github.com/loft-sh/api/v4/pkg/apis/management/v1.SpaceTemplate", "github.com/loft-sh/api/v4/pkg/apis/management/v1.VirtualClusterTemplate", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
 	}
 }
 
@@ -21488,11 +21524,53 @@ func schema_pkg_apis_storage_v1_DevPodEnvironmentTemplateSpec(ref common.Referen
 							},
 						},
 					},
+					"versions": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Versions are different versions of the template that can be referenced as well",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref("github.com/loft-sh/api/v4/pkg/apis/storage/v1.DevPodEnvironmentTemplateVersion"),
+									},
+								},
+							},
+						},
+					},
 				},
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/v4/pkg/apis/storage/v1.Access", "github.com/loft-sh/api/v4/pkg/apis/storage/v1.GitEnvironmentTemplate", "github.com/loft-sh/api/v4/pkg/apis/storage/v1.UserOrTeam"},
+			"github.com/loft-sh/api/v4/pkg/apis/storage/v1.Access", "github.com/loft-sh/api/v4/pkg/apis/storage/v1.DevPodEnvironmentTemplateVersion", "github.com/loft-sh/api/v4/pkg/apis/storage/v1.GitEnvironmentTemplate", "github.com/loft-sh/api/v4/pkg/apis/storage/v1.UserOrTeam"},
+	}
+}
+
+func schema_pkg_apis_storage_v1_DevPodEnvironmentTemplateVersion(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"git": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Git holds the GitEnvironmentTemplate",
+							Default:     map[string]interface{}{},
+							Ref:         ref("github.com/loft-sh/api/v4/pkg/apis/storage/v1.GitEnvironmentTemplate"),
+						},
+					},
+					"version": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Version is the version. Needs to be in X.X.X format.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			"github.com/loft-sh/api/v4/pkg/apis/storage/v1.GitEnvironmentTemplate"},
 	}
 }
 
@@ -22424,6 +22502,13 @@ func schema_pkg_apis_storage_v1_GitEnvironmentTemplate(ref common.ReferenceCallb
 						SchemaProps: spec.SchemaProps{
 							Description: "SubPath stores subpath within Repositor where environment spec is",
 							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"useProjectGitCredentials": {
+						SchemaProps: spec.SchemaProps{
+							Description: "UseProjectGitCredentials specifies if the project git credentials should be used instead of local ones for this environment",
+							Type:        []string{"boolean"},
 							Format:      "",
 						},
 					},
@@ -28945,9 +29030,10 @@ func schema_pkg_apis_policy_v1beta1_JsPolicySpec(ref common.ReferenceCallback) c
 					},
 					"scope": {
 						SchemaProps: spec.SchemaProps{
-							Description: "scope specifies the scope of this rule. Valid values are \"Cluster\", \"Namespaced\", and \"*\" \"Cluster\" means that only cluster-scoped resources will match this rule. Namespace API objects are cluster-scoped. \"Namespaced\" means that only namespaced resources will match this rule. \"*\" means that there are no scope restrictions. Subresources match the scope of their parent resource. Default is \"*\".",
+							Description: "scope specifies the scope of this rule. Valid values are \"Cluster\", \"Namespaced\", and \"*\" \"Cluster\" means that only cluster-scoped resources will match this rule. Namespace API objects are cluster-scoped. \"Namespaced\" means that only namespaced resources will match this rule. \"*\" means that there are no scope restrictions. Subresources match the scope of their parent resource. Default is \"*\".\n\n\nPossible enum values:\n - `\"*\"` means that all scopes are included.\n - `\"Cluster\"` means that scope is limited to cluster-scoped objects. Namespace objects are cluster-scoped.\n - `\"Namespaced\"` means that scope is limited to namespaced objects.",
 							Type:        []string{"string"},
 							Format:      "",
+							Enum:        []interface{}{"*", "Cluster", "Namespaced"},
 						},
 					},
 					"failurePolicy": {
@@ -29908,9 +29994,10 @@ func schema_k8sio_api_admissionregistration_v1_NamedRuleWithOperations(ref commo
 					},
 					"scope": {
 						SchemaProps: spec.SchemaProps{
-							Description: "scope specifies the scope of this rule. Valid values are \"Cluster\", \"Namespaced\", and \"*\" \"Cluster\" means that only cluster-scoped resources will match this rule. Namespace API objects are cluster-scoped. \"Namespaced\" means that only namespaced resources will match this rule. \"*\" means that there are no scope restrictions. Subresources match the scope of their parent resource. Default is \"*\".",
+							Description: "scope specifies the scope of this rule. Valid values are \"Cluster\", \"Namespaced\", and \"*\" \"Cluster\" means that only cluster-scoped resources will match this rule. Namespace API objects are cluster-scoped. \"Namespaced\" means that only namespaced resources will match this rule. \"*\" means that there are no scope restrictions. Subresources match the scope of their parent resource. Default is \"*\".\n\n\nPossible enum values:\n - `\"*\"` means that all scopes are included.\n - `\"Cluster\"` means that scope is limited to cluster-scoped objects. Namespace objects are cluster-scoped.\n - `\"Namespaced\"` means that scope is limited to namespaced objects.",
 							Type:        []string{"string"},
 							Format:      "",
+							Enum:        []interface{}{"*", "Cluster", "Namespaced"},
 						},
 					},
 				},
@@ -30072,9 +30159,10 @@ func schema_k8sio_api_admissionregistration_v1_Rule(ref common.ReferenceCallback
 					},
 					"scope": {
 						SchemaProps: spec.SchemaProps{
-							Description: "scope specifies the scope of this rule. Valid values are \"Cluster\", \"Namespaced\", and \"*\" \"Cluster\" means that only cluster-scoped resources will match this rule. Namespace API objects are cluster-scoped. \"Namespaced\" means that only namespaced resources will match this rule. \"*\" means that there are no scope restrictions. Subresources match the scope of their parent resource. Default is \"*\".",
+							Description: "scope specifies the scope of this rule. Valid values are \"Cluster\", \"Namespaced\", and \"*\" \"Cluster\" means that only cluster-scoped resources will match this rule. Namespace API objects are cluster-scoped. \"Namespaced\" means that only namespaced resources will match this rule. \"*\" means that there are no scope restrictions. Subresources match the scope of their parent resource. Default is \"*\".\n\n\nPossible enum values:\n - `\"*\"` means that all scopes are included.\n - `\"Cluster\"` means that scope is limited to cluster-scoped objects. Namespace objects are cluster-scoped.\n - `\"Namespaced\"` means that scope is limited to namespaced objects.",
 							Type:        []string{"string"},
 							Format:      "",
+							Enum:        []interface{}{"*", "Cluster", "Namespaced"},
 						},
 					},
 				},
@@ -30173,9 +30261,10 @@ func schema_k8sio_api_admissionregistration_v1_RuleWithOperations(ref common.Ref
 					},
 					"scope": {
 						SchemaProps: spec.SchemaProps{
-							Description: "scope specifies the scope of this rule. Valid values are \"Cluster\", \"Namespaced\", and \"*\" \"Cluster\" means that only cluster-scoped resources will match this rule. Namespace API objects are cluster-scoped. \"Namespaced\" means that only namespaced resources will match this rule. \"*\" means that there are no scope restrictions. Subresources match the scope of their parent resource. Default is \"*\".",
+							Description: "scope specifies the scope of this rule. Valid values are \"Cluster\", \"Namespaced\", and \"*\" \"Cluster\" means that only cluster-scoped resources will match this rule. Namespace API objects are cluster-scoped. \"Namespaced\" means that only namespaced resources will match this rule. \"*\" means that there are no scope restrictions. Subresources match the scope of their parent resource. Default is \"*\".\n\n\nPossible enum values:\n - `\"*\"` means that all scopes are included.\n - `\"Cluster\"` means that scope is limited to cluster-scoped objects. Namespace objects are cluster-scoped.\n - `\"Namespaced\"` means that scope is limited to namespaced objects.",
 							Type:        []string{"string"},
 							Format:      "",
+							Enum:        []interface{}{"*", "Cluster", "Namespaced"},
 						},
 					},
 				},
@@ -31573,9 +31662,10 @@ func schema_k8sio_api_admissionregistration_v1beta1_NamedRuleWithOperations(ref 
 					},
 					"scope": {
 						SchemaProps: spec.SchemaProps{
-							Description: "scope specifies the scope of this rule. Valid values are \"Cluster\", \"Namespaced\", and \"*\" \"Cluster\" means that only cluster-scoped resources will match this rule. Namespace API objects are cluster-scoped. \"Namespaced\" means that only namespaced resources will match this rule. \"*\" means that there are no scope restrictions. Subresources match the scope of their parent resource. Default is \"*\".",
+							Description: "scope specifies the scope of this rule. Valid values are \"Cluster\", \"Namespaced\", and \"*\" \"Cluster\" means that only cluster-scoped resources will match this rule. Namespace API objects are cluster-scoped. \"Namespaced\" means that only namespaced resources will match this rule. \"*\" means that there are no scope restrictions. Subresources match the scope of their parent resource. Default is \"*\".\n\n\nPossible enum values:\n - `\"*\"` means that all scopes are included.\n - `\"Cluster\"` means that scope is limited to cluster-scoped objects. Namespace objects are cluster-scoped.\n - `\"Namespaced\"` means that scope is limited to namespaced objects.",
 							Type:        []string{"string"},
 							Format:      "",
+							Enum:        []interface{}{"*", "Cluster", "Namespaced"},
 						},
 					},
 				},
