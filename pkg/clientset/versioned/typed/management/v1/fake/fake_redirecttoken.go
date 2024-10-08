@@ -24,20 +24,22 @@ var redirecttokensKind = v1.SchemeGroupVersion.WithKind("RedirectToken")
 
 // Get takes name of the redirectToken, and returns the corresponding redirectToken object, and an error if there is any.
 func (c *FakeRedirectTokens) Get(ctx context.Context, name string, options metav1.GetOptions) (result *v1.RedirectToken, err error) {
+	emptyResult := &v1.RedirectToken{}
 	obj, err := c.Fake.
-		Invokes(testing.NewRootGetAction(redirecttokensResource, name), &v1.RedirectToken{})
+		Invokes(testing.NewRootGetActionWithOptions(redirecttokensResource, name, options), emptyResult)
 	if obj == nil {
-		return nil, err
+		return emptyResult, err
 	}
 	return obj.(*v1.RedirectToken), err
 }
 
 // List takes label and field selectors, and returns the list of RedirectTokens that match those selectors.
 func (c *FakeRedirectTokens) List(ctx context.Context, opts metav1.ListOptions) (result *v1.RedirectTokenList, err error) {
+	emptyResult := &v1.RedirectTokenList{}
 	obj, err := c.Fake.
-		Invokes(testing.NewRootListAction(redirecttokensResource, redirecttokensKind, opts), &v1.RedirectTokenList{})
+		Invokes(testing.NewRootListActionWithOptions(redirecttokensResource, redirecttokensKind, opts), emptyResult)
 	if obj == nil {
-		return nil, err
+		return emptyResult, err
 	}
 
 	label, _, _ := testing.ExtractFromListOptions(opts)
@@ -56,36 +58,39 @@ func (c *FakeRedirectTokens) List(ctx context.Context, opts metav1.ListOptions) 
 // Watch returns a watch.Interface that watches the requested redirectTokens.
 func (c *FakeRedirectTokens) Watch(ctx context.Context, opts metav1.ListOptions) (watch.Interface, error) {
 	return c.Fake.
-		InvokesWatch(testing.NewRootWatchAction(redirecttokensResource, opts))
+		InvokesWatch(testing.NewRootWatchActionWithOptions(redirecttokensResource, opts))
 }
 
 // Create takes the representation of a redirectToken and creates it.  Returns the server's representation of the redirectToken, and an error, if there is any.
 func (c *FakeRedirectTokens) Create(ctx context.Context, redirectToken *v1.RedirectToken, opts metav1.CreateOptions) (result *v1.RedirectToken, err error) {
+	emptyResult := &v1.RedirectToken{}
 	obj, err := c.Fake.
-		Invokes(testing.NewRootCreateAction(redirecttokensResource, redirectToken), &v1.RedirectToken{})
+		Invokes(testing.NewRootCreateActionWithOptions(redirecttokensResource, redirectToken, opts), emptyResult)
 	if obj == nil {
-		return nil, err
+		return emptyResult, err
 	}
 	return obj.(*v1.RedirectToken), err
 }
 
 // Update takes the representation of a redirectToken and updates it. Returns the server's representation of the redirectToken, and an error, if there is any.
 func (c *FakeRedirectTokens) Update(ctx context.Context, redirectToken *v1.RedirectToken, opts metav1.UpdateOptions) (result *v1.RedirectToken, err error) {
+	emptyResult := &v1.RedirectToken{}
 	obj, err := c.Fake.
-		Invokes(testing.NewRootUpdateAction(redirecttokensResource, redirectToken), &v1.RedirectToken{})
+		Invokes(testing.NewRootUpdateActionWithOptions(redirecttokensResource, redirectToken, opts), emptyResult)
 	if obj == nil {
-		return nil, err
+		return emptyResult, err
 	}
 	return obj.(*v1.RedirectToken), err
 }
 
 // UpdateStatus was generated because the type contains a Status member.
 // Add a +genclient:noStatus comment above the type to avoid generating UpdateStatus().
-func (c *FakeRedirectTokens) UpdateStatus(ctx context.Context, redirectToken *v1.RedirectToken, opts metav1.UpdateOptions) (*v1.RedirectToken, error) {
+func (c *FakeRedirectTokens) UpdateStatus(ctx context.Context, redirectToken *v1.RedirectToken, opts metav1.UpdateOptions) (result *v1.RedirectToken, err error) {
+	emptyResult := &v1.RedirectToken{}
 	obj, err := c.Fake.
-		Invokes(testing.NewRootUpdateSubresourceAction(redirecttokensResource, "status", redirectToken), &v1.RedirectToken{})
+		Invokes(testing.NewRootUpdateSubresourceActionWithOptions(redirecttokensResource, "status", redirectToken, opts), emptyResult)
 	if obj == nil {
-		return nil, err
+		return emptyResult, err
 	}
 	return obj.(*v1.RedirectToken), err
 }
@@ -99,7 +104,7 @@ func (c *FakeRedirectTokens) Delete(ctx context.Context, name string, opts metav
 
 // DeleteCollection deletes a collection of objects.
 func (c *FakeRedirectTokens) DeleteCollection(ctx context.Context, opts metav1.DeleteOptions, listOpts metav1.ListOptions) error {
-	action := testing.NewRootDeleteCollectionAction(redirecttokensResource, listOpts)
+	action := testing.NewRootDeleteCollectionActionWithOptions(redirecttokensResource, opts, listOpts)
 
 	_, err := c.Fake.Invokes(action, &v1.RedirectTokenList{})
 	return err
@@ -107,10 +112,11 @@ func (c *FakeRedirectTokens) DeleteCollection(ctx context.Context, opts metav1.D
 
 // Patch applies the patch and returns the patched redirectToken.
 func (c *FakeRedirectTokens) Patch(ctx context.Context, name string, pt types.PatchType, data []byte, opts metav1.PatchOptions, subresources ...string) (result *v1.RedirectToken, err error) {
+	emptyResult := &v1.RedirectToken{}
 	obj, err := c.Fake.
-		Invokes(testing.NewRootPatchSubresourceAction(redirecttokensResource, name, pt, data, subresources...), &v1.RedirectToken{})
+		Invokes(testing.NewRootPatchSubresourceActionWithOptions(redirecttokensResource, name, pt, data, opts, subresources...), emptyResult)
 	if obj == nil {
-		return nil, err
+		return emptyResult, err
 	}
 	return obj.(*v1.RedirectToken), err
 }

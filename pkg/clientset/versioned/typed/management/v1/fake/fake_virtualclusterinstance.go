@@ -25,22 +25,24 @@ var virtualclusterinstancesKind = v1.SchemeGroupVersion.WithKind("VirtualCluster
 
 // Get takes name of the virtualClusterInstance, and returns the corresponding virtualClusterInstance object, and an error if there is any.
 func (c *FakeVirtualClusterInstances) Get(ctx context.Context, name string, options metav1.GetOptions) (result *v1.VirtualClusterInstance, err error) {
+	emptyResult := &v1.VirtualClusterInstance{}
 	obj, err := c.Fake.
-		Invokes(testing.NewGetAction(virtualclusterinstancesResource, c.ns, name), &v1.VirtualClusterInstance{})
+		Invokes(testing.NewGetActionWithOptions(virtualclusterinstancesResource, c.ns, name, options), emptyResult)
 
 	if obj == nil {
-		return nil, err
+		return emptyResult, err
 	}
 	return obj.(*v1.VirtualClusterInstance), err
 }
 
 // List takes label and field selectors, and returns the list of VirtualClusterInstances that match those selectors.
 func (c *FakeVirtualClusterInstances) List(ctx context.Context, opts metav1.ListOptions) (result *v1.VirtualClusterInstanceList, err error) {
+	emptyResult := &v1.VirtualClusterInstanceList{}
 	obj, err := c.Fake.
-		Invokes(testing.NewListAction(virtualclusterinstancesResource, virtualclusterinstancesKind, c.ns, opts), &v1.VirtualClusterInstanceList{})
+		Invokes(testing.NewListActionWithOptions(virtualclusterinstancesResource, virtualclusterinstancesKind, c.ns, opts), emptyResult)
 
 	if obj == nil {
-		return nil, err
+		return emptyResult, err
 	}
 
 	label, _, _ := testing.ExtractFromListOptions(opts)
@@ -59,28 +61,30 @@ func (c *FakeVirtualClusterInstances) List(ctx context.Context, opts metav1.List
 // Watch returns a watch.Interface that watches the requested virtualClusterInstances.
 func (c *FakeVirtualClusterInstances) Watch(ctx context.Context, opts metav1.ListOptions) (watch.Interface, error) {
 	return c.Fake.
-		InvokesWatch(testing.NewWatchAction(virtualclusterinstancesResource, c.ns, opts))
+		InvokesWatch(testing.NewWatchActionWithOptions(virtualclusterinstancesResource, c.ns, opts))
 
 }
 
 // Create takes the representation of a virtualClusterInstance and creates it.  Returns the server's representation of the virtualClusterInstance, and an error, if there is any.
 func (c *FakeVirtualClusterInstances) Create(ctx context.Context, virtualClusterInstance *v1.VirtualClusterInstance, opts metav1.CreateOptions) (result *v1.VirtualClusterInstance, err error) {
+	emptyResult := &v1.VirtualClusterInstance{}
 	obj, err := c.Fake.
-		Invokes(testing.NewCreateAction(virtualclusterinstancesResource, c.ns, virtualClusterInstance), &v1.VirtualClusterInstance{})
+		Invokes(testing.NewCreateActionWithOptions(virtualclusterinstancesResource, c.ns, virtualClusterInstance, opts), emptyResult)
 
 	if obj == nil {
-		return nil, err
+		return emptyResult, err
 	}
 	return obj.(*v1.VirtualClusterInstance), err
 }
 
 // Update takes the representation of a virtualClusterInstance and updates it. Returns the server's representation of the virtualClusterInstance, and an error, if there is any.
 func (c *FakeVirtualClusterInstances) Update(ctx context.Context, virtualClusterInstance *v1.VirtualClusterInstance, opts metav1.UpdateOptions) (result *v1.VirtualClusterInstance, err error) {
+	emptyResult := &v1.VirtualClusterInstance{}
 	obj, err := c.Fake.
-		Invokes(testing.NewUpdateAction(virtualclusterinstancesResource, c.ns, virtualClusterInstance), &v1.VirtualClusterInstance{})
+		Invokes(testing.NewUpdateActionWithOptions(virtualclusterinstancesResource, c.ns, virtualClusterInstance, opts), emptyResult)
 
 	if obj == nil {
-		return nil, err
+		return emptyResult, err
 	}
 	return obj.(*v1.VirtualClusterInstance), err
 }
@@ -95,7 +99,7 @@ func (c *FakeVirtualClusterInstances) Delete(ctx context.Context, name string, o
 
 // DeleteCollection deletes a collection of objects.
 func (c *FakeVirtualClusterInstances) DeleteCollection(ctx context.Context, opts metav1.DeleteOptions, listOpts metav1.ListOptions) error {
-	action := testing.NewDeleteCollectionAction(virtualclusterinstancesResource, c.ns, listOpts)
+	action := testing.NewDeleteCollectionActionWithOptions(virtualclusterinstancesResource, c.ns, opts, listOpts)
 
 	_, err := c.Fake.Invokes(action, &v1.VirtualClusterInstanceList{})
 	return err
@@ -103,33 +107,36 @@ func (c *FakeVirtualClusterInstances) DeleteCollection(ctx context.Context, opts
 
 // Patch applies the patch and returns the patched virtualClusterInstance.
 func (c *FakeVirtualClusterInstances) Patch(ctx context.Context, name string, pt types.PatchType, data []byte, opts metav1.PatchOptions, subresources ...string) (result *v1.VirtualClusterInstance, err error) {
+	emptyResult := &v1.VirtualClusterInstance{}
 	obj, err := c.Fake.
-		Invokes(testing.NewPatchSubresourceAction(virtualclusterinstancesResource, c.ns, name, pt, data, subresources...), &v1.VirtualClusterInstance{})
+		Invokes(testing.NewPatchSubresourceActionWithOptions(virtualclusterinstancesResource, c.ns, name, pt, data, opts, subresources...), emptyResult)
 
 	if obj == nil {
-		return nil, err
+		return emptyResult, err
 	}
 	return obj.(*v1.VirtualClusterInstance), err
 }
 
 // GetKubeConfig takes the representation of a virtualClusterInstanceKubeConfig and creates it.  Returns the server's representation of the virtualClusterInstanceKubeConfig, and an error, if there is any.
 func (c *FakeVirtualClusterInstances) GetKubeConfig(ctx context.Context, virtualClusterInstanceName string, virtualClusterInstanceKubeConfig *v1.VirtualClusterInstanceKubeConfig, opts metav1.CreateOptions) (result *v1.VirtualClusterInstanceKubeConfig, err error) {
+	emptyResult := &v1.VirtualClusterInstanceKubeConfig{}
 	obj, err := c.Fake.
-		Invokes(testing.NewCreateSubresourceAction(virtualclusterinstancesResource, virtualClusterInstanceName, "kubeconfig", c.ns, virtualClusterInstanceKubeConfig), &v1.VirtualClusterInstanceKubeConfig{})
+		Invokes(testing.NewCreateSubresourceActionWithOptions(virtualclusterinstancesResource, virtualClusterInstanceName, "kubeconfig", c.ns, virtualClusterInstanceKubeConfig, opts), emptyResult)
 
 	if obj == nil {
-		return nil, err
+		return emptyResult, err
 	}
 	return obj.(*v1.VirtualClusterInstanceKubeConfig), err
 }
 
 // GetAccessKey takes name of the virtualClusterInstance, and returns the corresponding virtualClusterAccessKey object, and an error if there is any.
 func (c *FakeVirtualClusterInstances) GetAccessKey(ctx context.Context, virtualClusterInstanceName string, options metav1.GetOptions) (result *v1.VirtualClusterAccessKey, err error) {
+	emptyResult := &v1.VirtualClusterAccessKey{}
 	obj, err := c.Fake.
-		Invokes(testing.NewGetSubresourceAction(virtualclusterinstancesResource, c.ns, "accesskey", virtualClusterInstanceName), &v1.VirtualClusterAccessKey{})
+		Invokes(testing.NewGetSubresourceActionWithOptions(virtualclusterinstancesResource, c.ns, "accesskey", virtualClusterInstanceName, options), emptyResult)
 
 	if obj == nil {
-		return nil, err
+		return emptyResult, err
 	}
 	return obj.(*v1.VirtualClusterAccessKey), err
 }

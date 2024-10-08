@@ -24,20 +24,22 @@ var clustersKind = v1.SchemeGroupVersion.WithKind("Cluster")
 
 // Get takes name of the cluster, and returns the corresponding cluster object, and an error if there is any.
 func (c *FakeClusters) Get(ctx context.Context, name string, options metav1.GetOptions) (result *v1.Cluster, err error) {
+	emptyResult := &v1.Cluster{}
 	obj, err := c.Fake.
-		Invokes(testing.NewRootGetAction(clustersResource, name), &v1.Cluster{})
+		Invokes(testing.NewRootGetActionWithOptions(clustersResource, name, options), emptyResult)
 	if obj == nil {
-		return nil, err
+		return emptyResult, err
 	}
 	return obj.(*v1.Cluster), err
 }
 
 // List takes label and field selectors, and returns the list of Clusters that match those selectors.
 func (c *FakeClusters) List(ctx context.Context, opts metav1.ListOptions) (result *v1.ClusterList, err error) {
+	emptyResult := &v1.ClusterList{}
 	obj, err := c.Fake.
-		Invokes(testing.NewRootListAction(clustersResource, clustersKind, opts), &v1.ClusterList{})
+		Invokes(testing.NewRootListActionWithOptions(clustersResource, clustersKind, opts), emptyResult)
 	if obj == nil {
-		return nil, err
+		return emptyResult, err
 	}
 
 	label, _, _ := testing.ExtractFromListOptions(opts)
@@ -56,36 +58,39 @@ func (c *FakeClusters) List(ctx context.Context, opts metav1.ListOptions) (resul
 // Watch returns a watch.Interface that watches the requested clusters.
 func (c *FakeClusters) Watch(ctx context.Context, opts metav1.ListOptions) (watch.Interface, error) {
 	return c.Fake.
-		InvokesWatch(testing.NewRootWatchAction(clustersResource, opts))
+		InvokesWatch(testing.NewRootWatchActionWithOptions(clustersResource, opts))
 }
 
 // Create takes the representation of a cluster and creates it.  Returns the server's representation of the cluster, and an error, if there is any.
 func (c *FakeClusters) Create(ctx context.Context, cluster *v1.Cluster, opts metav1.CreateOptions) (result *v1.Cluster, err error) {
+	emptyResult := &v1.Cluster{}
 	obj, err := c.Fake.
-		Invokes(testing.NewRootCreateAction(clustersResource, cluster), &v1.Cluster{})
+		Invokes(testing.NewRootCreateActionWithOptions(clustersResource, cluster, opts), emptyResult)
 	if obj == nil {
-		return nil, err
+		return emptyResult, err
 	}
 	return obj.(*v1.Cluster), err
 }
 
 // Update takes the representation of a cluster and updates it. Returns the server's representation of the cluster, and an error, if there is any.
 func (c *FakeClusters) Update(ctx context.Context, cluster *v1.Cluster, opts metav1.UpdateOptions) (result *v1.Cluster, err error) {
+	emptyResult := &v1.Cluster{}
 	obj, err := c.Fake.
-		Invokes(testing.NewRootUpdateAction(clustersResource, cluster), &v1.Cluster{})
+		Invokes(testing.NewRootUpdateActionWithOptions(clustersResource, cluster, opts), emptyResult)
 	if obj == nil {
-		return nil, err
+		return emptyResult, err
 	}
 	return obj.(*v1.Cluster), err
 }
 
 // UpdateStatus was generated because the type contains a Status member.
 // Add a +genclient:noStatus comment above the type to avoid generating UpdateStatus().
-func (c *FakeClusters) UpdateStatus(ctx context.Context, cluster *v1.Cluster, opts metav1.UpdateOptions) (*v1.Cluster, error) {
+func (c *FakeClusters) UpdateStatus(ctx context.Context, cluster *v1.Cluster, opts metav1.UpdateOptions) (result *v1.Cluster, err error) {
+	emptyResult := &v1.Cluster{}
 	obj, err := c.Fake.
-		Invokes(testing.NewRootUpdateSubresourceAction(clustersResource, "status", cluster), &v1.Cluster{})
+		Invokes(testing.NewRootUpdateSubresourceActionWithOptions(clustersResource, "status", cluster, opts), emptyResult)
 	if obj == nil {
-		return nil, err
+		return emptyResult, err
 	}
 	return obj.(*v1.Cluster), err
 }
@@ -99,7 +104,7 @@ func (c *FakeClusters) Delete(ctx context.Context, name string, opts metav1.Dele
 
 // DeleteCollection deletes a collection of objects.
 func (c *FakeClusters) DeleteCollection(ctx context.Context, opts metav1.DeleteOptions, listOpts metav1.ListOptions) error {
-	action := testing.NewRootDeleteCollectionAction(clustersResource, listOpts)
+	action := testing.NewRootDeleteCollectionActionWithOptions(clustersResource, opts, listOpts)
 
 	_, err := c.Fake.Invokes(action, &v1.ClusterList{})
 	return err
@@ -107,60 +112,66 @@ func (c *FakeClusters) DeleteCollection(ctx context.Context, opts metav1.DeleteO
 
 // Patch applies the patch and returns the patched cluster.
 func (c *FakeClusters) Patch(ctx context.Context, name string, pt types.PatchType, data []byte, opts metav1.PatchOptions, subresources ...string) (result *v1.Cluster, err error) {
+	emptyResult := &v1.Cluster{}
 	obj, err := c.Fake.
-		Invokes(testing.NewRootPatchSubresourceAction(clustersResource, name, pt, data, subresources...), &v1.Cluster{})
+		Invokes(testing.NewRootPatchSubresourceActionWithOptions(clustersResource, name, pt, data, opts, subresources...), emptyResult)
 	if obj == nil {
-		return nil, err
+		return emptyResult, err
 	}
 	return obj.(*v1.Cluster), err
 }
 
 // ListAccess takes name of the cluster, and returns the corresponding clusterMemberAccess object, and an error if there is any.
 func (c *FakeClusters) ListAccess(ctx context.Context, clusterName string, options metav1.GetOptions) (result *v1.ClusterMemberAccess, err error) {
+	emptyResult := &v1.ClusterMemberAccess{}
 	obj, err := c.Fake.
-		Invokes(testing.NewRootGetSubresourceAction(clustersResource, "memberaccess", clusterName), &v1.ClusterMemberAccess{})
+		Invokes(testing.NewRootGetSubresourceActionWithOptions(clustersResource, "memberaccess", clusterName, options), emptyResult)
 	if obj == nil {
-		return nil, err
+		return emptyResult, err
 	}
 	return obj.(*v1.ClusterMemberAccess), err
 }
 
 // ListMembers takes name of the cluster, and returns the corresponding clusterMembers object, and an error if there is any.
 func (c *FakeClusters) ListMembers(ctx context.Context, clusterName string, options metav1.GetOptions) (result *v1.ClusterMembers, err error) {
+	emptyResult := &v1.ClusterMembers{}
 	obj, err := c.Fake.
-		Invokes(testing.NewRootGetSubresourceAction(clustersResource, "members", clusterName), &v1.ClusterMembers{})
+		Invokes(testing.NewRootGetSubresourceActionWithOptions(clustersResource, "members", clusterName, options), emptyResult)
 	if obj == nil {
-		return nil, err
+		return emptyResult, err
 	}
 	return obj.(*v1.ClusterMembers), err
 }
 
 // ListVirtualClusterDefaults takes name of the cluster, and returns the corresponding clusterVirtualClusterDefaults object, and an error if there is any.
 func (c *FakeClusters) ListVirtualClusterDefaults(ctx context.Context, clusterName string, options metav1.GetOptions) (result *v1.ClusterVirtualClusterDefaults, err error) {
+	emptyResult := &v1.ClusterVirtualClusterDefaults{}
 	obj, err := c.Fake.
-		Invokes(testing.NewRootGetSubresourceAction(clustersResource, "virtualclusterdefaults", clusterName), &v1.ClusterVirtualClusterDefaults{})
+		Invokes(testing.NewRootGetSubresourceActionWithOptions(clustersResource, "virtualclusterdefaults", clusterName, options), emptyResult)
 	if obj == nil {
-		return nil, err
+		return emptyResult, err
 	}
 	return obj.(*v1.ClusterVirtualClusterDefaults), err
 }
 
 // GetAgentConfig takes name of the cluster, and returns the corresponding clusterAgentConfig object, and an error if there is any.
 func (c *FakeClusters) GetAgentConfig(ctx context.Context, clusterName string, options metav1.GetOptions) (result *v1.ClusterAgentConfig, err error) {
+	emptyResult := &v1.ClusterAgentConfig{}
 	obj, err := c.Fake.
-		Invokes(testing.NewRootGetSubresourceAction(clustersResource, "agentconfig", clusterName), &v1.ClusterAgentConfig{})
+		Invokes(testing.NewRootGetSubresourceActionWithOptions(clustersResource, "agentconfig", clusterName, options), emptyResult)
 	if obj == nil {
-		return nil, err
+		return emptyResult, err
 	}
 	return obj.(*v1.ClusterAgentConfig), err
 }
 
 // GetAccessKey takes name of the cluster, and returns the corresponding clusterAccessKey object, and an error if there is any.
 func (c *FakeClusters) GetAccessKey(ctx context.Context, clusterName string, options metav1.GetOptions) (result *v1.ClusterAccessKey, err error) {
+	emptyResult := &v1.ClusterAccessKey{}
 	obj, err := c.Fake.
-		Invokes(testing.NewRootGetSubresourceAction(clustersResource, "accesskey", clusterName), &v1.ClusterAccessKey{})
+		Invokes(testing.NewRootGetSubresourceActionWithOptions(clustersResource, "accesskey", clusterName, options), emptyResult)
 	if obj == nil {
-		return nil, err
+		return emptyResult, err
 	}
 	return obj.(*v1.ClusterAccessKey), err
 }
