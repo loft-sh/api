@@ -25,22 +25,24 @@ var projectsecretsKind = v1.SchemeGroupVersion.WithKind("ProjectSecret")
 
 // Get takes name of the projectSecret, and returns the corresponding projectSecret object, and an error if there is any.
 func (c *FakeProjectSecrets) Get(ctx context.Context, name string, options metav1.GetOptions) (result *v1.ProjectSecret, err error) {
+	emptyResult := &v1.ProjectSecret{}
 	obj, err := c.Fake.
-		Invokes(testing.NewGetAction(projectsecretsResource, c.ns, name), &v1.ProjectSecret{})
+		Invokes(testing.NewGetActionWithOptions(projectsecretsResource, c.ns, name, options), emptyResult)
 
 	if obj == nil {
-		return nil, err
+		return emptyResult, err
 	}
 	return obj.(*v1.ProjectSecret), err
 }
 
 // List takes label and field selectors, and returns the list of ProjectSecrets that match those selectors.
 func (c *FakeProjectSecrets) List(ctx context.Context, opts metav1.ListOptions) (result *v1.ProjectSecretList, err error) {
+	emptyResult := &v1.ProjectSecretList{}
 	obj, err := c.Fake.
-		Invokes(testing.NewListAction(projectsecretsResource, projectsecretsKind, c.ns, opts), &v1.ProjectSecretList{})
+		Invokes(testing.NewListActionWithOptions(projectsecretsResource, projectsecretsKind, c.ns, opts), emptyResult)
 
 	if obj == nil {
-		return nil, err
+		return emptyResult, err
 	}
 
 	label, _, _ := testing.ExtractFromListOptions(opts)
@@ -59,28 +61,30 @@ func (c *FakeProjectSecrets) List(ctx context.Context, opts metav1.ListOptions) 
 // Watch returns a watch.Interface that watches the requested projectSecrets.
 func (c *FakeProjectSecrets) Watch(ctx context.Context, opts metav1.ListOptions) (watch.Interface, error) {
 	return c.Fake.
-		InvokesWatch(testing.NewWatchAction(projectsecretsResource, c.ns, opts))
+		InvokesWatch(testing.NewWatchActionWithOptions(projectsecretsResource, c.ns, opts))
 
 }
 
 // Create takes the representation of a projectSecret and creates it.  Returns the server's representation of the projectSecret, and an error, if there is any.
 func (c *FakeProjectSecrets) Create(ctx context.Context, projectSecret *v1.ProjectSecret, opts metav1.CreateOptions) (result *v1.ProjectSecret, err error) {
+	emptyResult := &v1.ProjectSecret{}
 	obj, err := c.Fake.
-		Invokes(testing.NewCreateAction(projectsecretsResource, c.ns, projectSecret), &v1.ProjectSecret{})
+		Invokes(testing.NewCreateActionWithOptions(projectsecretsResource, c.ns, projectSecret, opts), emptyResult)
 
 	if obj == nil {
-		return nil, err
+		return emptyResult, err
 	}
 	return obj.(*v1.ProjectSecret), err
 }
 
 // Update takes the representation of a projectSecret and updates it. Returns the server's representation of the projectSecret, and an error, if there is any.
 func (c *FakeProjectSecrets) Update(ctx context.Context, projectSecret *v1.ProjectSecret, opts metav1.UpdateOptions) (result *v1.ProjectSecret, err error) {
+	emptyResult := &v1.ProjectSecret{}
 	obj, err := c.Fake.
-		Invokes(testing.NewUpdateAction(projectsecretsResource, c.ns, projectSecret), &v1.ProjectSecret{})
+		Invokes(testing.NewUpdateActionWithOptions(projectsecretsResource, c.ns, projectSecret, opts), emptyResult)
 
 	if obj == nil {
-		return nil, err
+		return emptyResult, err
 	}
 	return obj.(*v1.ProjectSecret), err
 }
@@ -95,7 +99,7 @@ func (c *FakeProjectSecrets) Delete(ctx context.Context, name string, opts metav
 
 // DeleteCollection deletes a collection of objects.
 func (c *FakeProjectSecrets) DeleteCollection(ctx context.Context, opts metav1.DeleteOptions, listOpts metav1.ListOptions) error {
-	action := testing.NewDeleteCollectionAction(projectsecretsResource, c.ns, listOpts)
+	action := testing.NewDeleteCollectionActionWithOptions(projectsecretsResource, c.ns, opts, listOpts)
 
 	_, err := c.Fake.Invokes(action, &v1.ProjectSecretList{})
 	return err
@@ -103,11 +107,12 @@ func (c *FakeProjectSecrets) DeleteCollection(ctx context.Context, opts metav1.D
 
 // Patch applies the patch and returns the patched projectSecret.
 func (c *FakeProjectSecrets) Patch(ctx context.Context, name string, pt types.PatchType, data []byte, opts metav1.PatchOptions, subresources ...string) (result *v1.ProjectSecret, err error) {
+	emptyResult := &v1.ProjectSecret{}
 	obj, err := c.Fake.
-		Invokes(testing.NewPatchSubresourceAction(projectsecretsResource, c.ns, name, pt, data, subresources...), &v1.ProjectSecret{})
+		Invokes(testing.NewPatchSubresourceActionWithOptions(projectsecretsResource, c.ns, name, pt, data, opts, subresources...), emptyResult)
 
 	if obj == nil {
-		return nil, err
+		return emptyResult, err
 	}
 	return obj.(*v1.ProjectSecret), err
 }

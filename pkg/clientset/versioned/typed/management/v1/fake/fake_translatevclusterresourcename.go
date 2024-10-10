@@ -24,20 +24,22 @@ var translatevclusterresourcenamesKind = v1.SchemeGroupVersion.WithKind("Transla
 
 // Get takes name of the translateVClusterResourceName, and returns the corresponding translateVClusterResourceName object, and an error if there is any.
 func (c *FakeTranslateVClusterResourceNames) Get(ctx context.Context, name string, options metav1.GetOptions) (result *v1.TranslateVClusterResourceName, err error) {
+	emptyResult := &v1.TranslateVClusterResourceName{}
 	obj, err := c.Fake.
-		Invokes(testing.NewRootGetAction(translatevclusterresourcenamesResource, name), &v1.TranslateVClusterResourceName{})
+		Invokes(testing.NewRootGetActionWithOptions(translatevclusterresourcenamesResource, name, options), emptyResult)
 	if obj == nil {
-		return nil, err
+		return emptyResult, err
 	}
 	return obj.(*v1.TranslateVClusterResourceName), err
 }
 
 // List takes label and field selectors, and returns the list of TranslateVClusterResourceNames that match those selectors.
 func (c *FakeTranslateVClusterResourceNames) List(ctx context.Context, opts metav1.ListOptions) (result *v1.TranslateVClusterResourceNameList, err error) {
+	emptyResult := &v1.TranslateVClusterResourceNameList{}
 	obj, err := c.Fake.
-		Invokes(testing.NewRootListAction(translatevclusterresourcenamesResource, translatevclusterresourcenamesKind, opts), &v1.TranslateVClusterResourceNameList{})
+		Invokes(testing.NewRootListActionWithOptions(translatevclusterresourcenamesResource, translatevclusterresourcenamesKind, opts), emptyResult)
 	if obj == nil {
-		return nil, err
+		return emptyResult, err
 	}
 
 	label, _, _ := testing.ExtractFromListOptions(opts)
@@ -56,36 +58,39 @@ func (c *FakeTranslateVClusterResourceNames) List(ctx context.Context, opts meta
 // Watch returns a watch.Interface that watches the requested translateVClusterResourceNames.
 func (c *FakeTranslateVClusterResourceNames) Watch(ctx context.Context, opts metav1.ListOptions) (watch.Interface, error) {
 	return c.Fake.
-		InvokesWatch(testing.NewRootWatchAction(translatevclusterresourcenamesResource, opts))
+		InvokesWatch(testing.NewRootWatchActionWithOptions(translatevclusterresourcenamesResource, opts))
 }
 
 // Create takes the representation of a translateVClusterResourceName and creates it.  Returns the server's representation of the translateVClusterResourceName, and an error, if there is any.
 func (c *FakeTranslateVClusterResourceNames) Create(ctx context.Context, translateVClusterResourceName *v1.TranslateVClusterResourceName, opts metav1.CreateOptions) (result *v1.TranslateVClusterResourceName, err error) {
+	emptyResult := &v1.TranslateVClusterResourceName{}
 	obj, err := c.Fake.
-		Invokes(testing.NewRootCreateAction(translatevclusterresourcenamesResource, translateVClusterResourceName), &v1.TranslateVClusterResourceName{})
+		Invokes(testing.NewRootCreateActionWithOptions(translatevclusterresourcenamesResource, translateVClusterResourceName, opts), emptyResult)
 	if obj == nil {
-		return nil, err
+		return emptyResult, err
 	}
 	return obj.(*v1.TranslateVClusterResourceName), err
 }
 
 // Update takes the representation of a translateVClusterResourceName and updates it. Returns the server's representation of the translateVClusterResourceName, and an error, if there is any.
 func (c *FakeTranslateVClusterResourceNames) Update(ctx context.Context, translateVClusterResourceName *v1.TranslateVClusterResourceName, opts metav1.UpdateOptions) (result *v1.TranslateVClusterResourceName, err error) {
+	emptyResult := &v1.TranslateVClusterResourceName{}
 	obj, err := c.Fake.
-		Invokes(testing.NewRootUpdateAction(translatevclusterresourcenamesResource, translateVClusterResourceName), &v1.TranslateVClusterResourceName{})
+		Invokes(testing.NewRootUpdateActionWithOptions(translatevclusterresourcenamesResource, translateVClusterResourceName, opts), emptyResult)
 	if obj == nil {
-		return nil, err
+		return emptyResult, err
 	}
 	return obj.(*v1.TranslateVClusterResourceName), err
 }
 
 // UpdateStatus was generated because the type contains a Status member.
 // Add a +genclient:noStatus comment above the type to avoid generating UpdateStatus().
-func (c *FakeTranslateVClusterResourceNames) UpdateStatus(ctx context.Context, translateVClusterResourceName *v1.TranslateVClusterResourceName, opts metav1.UpdateOptions) (*v1.TranslateVClusterResourceName, error) {
+func (c *FakeTranslateVClusterResourceNames) UpdateStatus(ctx context.Context, translateVClusterResourceName *v1.TranslateVClusterResourceName, opts metav1.UpdateOptions) (result *v1.TranslateVClusterResourceName, err error) {
+	emptyResult := &v1.TranslateVClusterResourceName{}
 	obj, err := c.Fake.
-		Invokes(testing.NewRootUpdateSubresourceAction(translatevclusterresourcenamesResource, "status", translateVClusterResourceName), &v1.TranslateVClusterResourceName{})
+		Invokes(testing.NewRootUpdateSubresourceActionWithOptions(translatevclusterresourcenamesResource, "status", translateVClusterResourceName, opts), emptyResult)
 	if obj == nil {
-		return nil, err
+		return emptyResult, err
 	}
 	return obj.(*v1.TranslateVClusterResourceName), err
 }
@@ -99,7 +104,7 @@ func (c *FakeTranslateVClusterResourceNames) Delete(ctx context.Context, name st
 
 // DeleteCollection deletes a collection of objects.
 func (c *FakeTranslateVClusterResourceNames) DeleteCollection(ctx context.Context, opts metav1.DeleteOptions, listOpts metav1.ListOptions) error {
-	action := testing.NewRootDeleteCollectionAction(translatevclusterresourcenamesResource, listOpts)
+	action := testing.NewRootDeleteCollectionActionWithOptions(translatevclusterresourcenamesResource, opts, listOpts)
 
 	_, err := c.Fake.Invokes(action, &v1.TranslateVClusterResourceNameList{})
 	return err
@@ -107,10 +112,11 @@ func (c *FakeTranslateVClusterResourceNames) DeleteCollection(ctx context.Contex
 
 // Patch applies the patch and returns the patched translateVClusterResourceName.
 func (c *FakeTranslateVClusterResourceNames) Patch(ctx context.Context, name string, pt types.PatchType, data []byte, opts metav1.PatchOptions, subresources ...string) (result *v1.TranslateVClusterResourceName, err error) {
+	emptyResult := &v1.TranslateVClusterResourceName{}
 	obj, err := c.Fake.
-		Invokes(testing.NewRootPatchSubresourceAction(translatevclusterresourcenamesResource, name, pt, data, subresources...), &v1.TranslateVClusterResourceName{})
+		Invokes(testing.NewRootPatchSubresourceActionWithOptions(translatevclusterresourcenamesResource, name, pt, data, opts, subresources...), emptyResult)
 	if obj == nil {
-		return nil, err
+		return emptyResult, err
 	}
 	return obj.(*v1.TranslateVClusterResourceName), err
 }

@@ -24,20 +24,22 @@ var selvesKind = v1.SchemeGroupVersion.WithKind("Self")
 
 // Get takes name of the self, and returns the corresponding self object, and an error if there is any.
 func (c *FakeSelves) Get(ctx context.Context, name string, options metav1.GetOptions) (result *v1.Self, err error) {
+	emptyResult := &v1.Self{}
 	obj, err := c.Fake.
-		Invokes(testing.NewRootGetAction(selvesResource, name), &v1.Self{})
+		Invokes(testing.NewRootGetActionWithOptions(selvesResource, name, options), emptyResult)
 	if obj == nil {
-		return nil, err
+		return emptyResult, err
 	}
 	return obj.(*v1.Self), err
 }
 
 // List takes label and field selectors, and returns the list of Selves that match those selectors.
 func (c *FakeSelves) List(ctx context.Context, opts metav1.ListOptions) (result *v1.SelfList, err error) {
+	emptyResult := &v1.SelfList{}
 	obj, err := c.Fake.
-		Invokes(testing.NewRootListAction(selvesResource, selvesKind, opts), &v1.SelfList{})
+		Invokes(testing.NewRootListActionWithOptions(selvesResource, selvesKind, opts), emptyResult)
 	if obj == nil {
-		return nil, err
+		return emptyResult, err
 	}
 
 	label, _, _ := testing.ExtractFromListOptions(opts)
@@ -56,36 +58,39 @@ func (c *FakeSelves) List(ctx context.Context, opts metav1.ListOptions) (result 
 // Watch returns a watch.Interface that watches the requested selves.
 func (c *FakeSelves) Watch(ctx context.Context, opts metav1.ListOptions) (watch.Interface, error) {
 	return c.Fake.
-		InvokesWatch(testing.NewRootWatchAction(selvesResource, opts))
+		InvokesWatch(testing.NewRootWatchActionWithOptions(selvesResource, opts))
 }
 
 // Create takes the representation of a self and creates it.  Returns the server's representation of the self, and an error, if there is any.
 func (c *FakeSelves) Create(ctx context.Context, self *v1.Self, opts metav1.CreateOptions) (result *v1.Self, err error) {
+	emptyResult := &v1.Self{}
 	obj, err := c.Fake.
-		Invokes(testing.NewRootCreateAction(selvesResource, self), &v1.Self{})
+		Invokes(testing.NewRootCreateActionWithOptions(selvesResource, self, opts), emptyResult)
 	if obj == nil {
-		return nil, err
+		return emptyResult, err
 	}
 	return obj.(*v1.Self), err
 }
 
 // Update takes the representation of a self and updates it. Returns the server's representation of the self, and an error, if there is any.
 func (c *FakeSelves) Update(ctx context.Context, self *v1.Self, opts metav1.UpdateOptions) (result *v1.Self, err error) {
+	emptyResult := &v1.Self{}
 	obj, err := c.Fake.
-		Invokes(testing.NewRootUpdateAction(selvesResource, self), &v1.Self{})
+		Invokes(testing.NewRootUpdateActionWithOptions(selvesResource, self, opts), emptyResult)
 	if obj == nil {
-		return nil, err
+		return emptyResult, err
 	}
 	return obj.(*v1.Self), err
 }
 
 // UpdateStatus was generated because the type contains a Status member.
 // Add a +genclient:noStatus comment above the type to avoid generating UpdateStatus().
-func (c *FakeSelves) UpdateStatus(ctx context.Context, self *v1.Self, opts metav1.UpdateOptions) (*v1.Self, error) {
+func (c *FakeSelves) UpdateStatus(ctx context.Context, self *v1.Self, opts metav1.UpdateOptions) (result *v1.Self, err error) {
+	emptyResult := &v1.Self{}
 	obj, err := c.Fake.
-		Invokes(testing.NewRootUpdateSubresourceAction(selvesResource, "status", self), &v1.Self{})
+		Invokes(testing.NewRootUpdateSubresourceActionWithOptions(selvesResource, "status", self, opts), emptyResult)
 	if obj == nil {
-		return nil, err
+		return emptyResult, err
 	}
 	return obj.(*v1.Self), err
 }
@@ -99,7 +104,7 @@ func (c *FakeSelves) Delete(ctx context.Context, name string, opts metav1.Delete
 
 // DeleteCollection deletes a collection of objects.
 func (c *FakeSelves) DeleteCollection(ctx context.Context, opts metav1.DeleteOptions, listOpts metav1.ListOptions) error {
-	action := testing.NewRootDeleteCollectionAction(selvesResource, listOpts)
+	action := testing.NewRootDeleteCollectionActionWithOptions(selvesResource, opts, listOpts)
 
 	_, err := c.Fake.Invokes(action, &v1.SelfList{})
 	return err
@@ -107,10 +112,11 @@ func (c *FakeSelves) DeleteCollection(ctx context.Context, opts metav1.DeleteOpt
 
 // Patch applies the patch and returns the patched self.
 func (c *FakeSelves) Patch(ctx context.Context, name string, pt types.PatchType, data []byte, opts metav1.PatchOptions, subresources ...string) (result *v1.Self, err error) {
+	emptyResult := &v1.Self{}
 	obj, err := c.Fake.
-		Invokes(testing.NewRootPatchSubresourceAction(selvesResource, name, pt, data, subresources...), &v1.Self{})
+		Invokes(testing.NewRootPatchSubresourceActionWithOptions(selvesResource, name, pt, data, opts, subresources...), emptyResult)
 	if obj == nil {
-		return nil, err
+		return emptyResult, err
 	}
 	return obj.(*v1.Self), err
 }

@@ -24,20 +24,22 @@ var registervirtualclustersKind = v1.SchemeGroupVersion.WithKind("RegisterVirtua
 
 // Get takes name of the registerVirtualCluster, and returns the corresponding registerVirtualCluster object, and an error if there is any.
 func (c *FakeRegisterVirtualClusters) Get(ctx context.Context, name string, options metav1.GetOptions) (result *v1.RegisterVirtualCluster, err error) {
+	emptyResult := &v1.RegisterVirtualCluster{}
 	obj, err := c.Fake.
-		Invokes(testing.NewRootGetAction(registervirtualclustersResource, name), &v1.RegisterVirtualCluster{})
+		Invokes(testing.NewRootGetActionWithOptions(registervirtualclustersResource, name, options), emptyResult)
 	if obj == nil {
-		return nil, err
+		return emptyResult, err
 	}
 	return obj.(*v1.RegisterVirtualCluster), err
 }
 
 // List takes label and field selectors, and returns the list of RegisterVirtualClusters that match those selectors.
 func (c *FakeRegisterVirtualClusters) List(ctx context.Context, opts metav1.ListOptions) (result *v1.RegisterVirtualClusterList, err error) {
+	emptyResult := &v1.RegisterVirtualClusterList{}
 	obj, err := c.Fake.
-		Invokes(testing.NewRootListAction(registervirtualclustersResource, registervirtualclustersKind, opts), &v1.RegisterVirtualClusterList{})
+		Invokes(testing.NewRootListActionWithOptions(registervirtualclustersResource, registervirtualclustersKind, opts), emptyResult)
 	if obj == nil {
-		return nil, err
+		return emptyResult, err
 	}
 
 	label, _, _ := testing.ExtractFromListOptions(opts)
@@ -56,36 +58,39 @@ func (c *FakeRegisterVirtualClusters) List(ctx context.Context, opts metav1.List
 // Watch returns a watch.Interface that watches the requested registerVirtualClusters.
 func (c *FakeRegisterVirtualClusters) Watch(ctx context.Context, opts metav1.ListOptions) (watch.Interface, error) {
 	return c.Fake.
-		InvokesWatch(testing.NewRootWatchAction(registervirtualclustersResource, opts))
+		InvokesWatch(testing.NewRootWatchActionWithOptions(registervirtualclustersResource, opts))
 }
 
 // Create takes the representation of a registerVirtualCluster and creates it.  Returns the server's representation of the registerVirtualCluster, and an error, if there is any.
 func (c *FakeRegisterVirtualClusters) Create(ctx context.Context, registerVirtualCluster *v1.RegisterVirtualCluster, opts metav1.CreateOptions) (result *v1.RegisterVirtualCluster, err error) {
+	emptyResult := &v1.RegisterVirtualCluster{}
 	obj, err := c.Fake.
-		Invokes(testing.NewRootCreateAction(registervirtualclustersResource, registerVirtualCluster), &v1.RegisterVirtualCluster{})
+		Invokes(testing.NewRootCreateActionWithOptions(registervirtualclustersResource, registerVirtualCluster, opts), emptyResult)
 	if obj == nil {
-		return nil, err
+		return emptyResult, err
 	}
 	return obj.(*v1.RegisterVirtualCluster), err
 }
 
 // Update takes the representation of a registerVirtualCluster and updates it. Returns the server's representation of the registerVirtualCluster, and an error, if there is any.
 func (c *FakeRegisterVirtualClusters) Update(ctx context.Context, registerVirtualCluster *v1.RegisterVirtualCluster, opts metav1.UpdateOptions) (result *v1.RegisterVirtualCluster, err error) {
+	emptyResult := &v1.RegisterVirtualCluster{}
 	obj, err := c.Fake.
-		Invokes(testing.NewRootUpdateAction(registervirtualclustersResource, registerVirtualCluster), &v1.RegisterVirtualCluster{})
+		Invokes(testing.NewRootUpdateActionWithOptions(registervirtualclustersResource, registerVirtualCluster, opts), emptyResult)
 	if obj == nil {
-		return nil, err
+		return emptyResult, err
 	}
 	return obj.(*v1.RegisterVirtualCluster), err
 }
 
 // UpdateStatus was generated because the type contains a Status member.
 // Add a +genclient:noStatus comment above the type to avoid generating UpdateStatus().
-func (c *FakeRegisterVirtualClusters) UpdateStatus(ctx context.Context, registerVirtualCluster *v1.RegisterVirtualCluster, opts metav1.UpdateOptions) (*v1.RegisterVirtualCluster, error) {
+func (c *FakeRegisterVirtualClusters) UpdateStatus(ctx context.Context, registerVirtualCluster *v1.RegisterVirtualCluster, opts metav1.UpdateOptions) (result *v1.RegisterVirtualCluster, err error) {
+	emptyResult := &v1.RegisterVirtualCluster{}
 	obj, err := c.Fake.
-		Invokes(testing.NewRootUpdateSubresourceAction(registervirtualclustersResource, "status", registerVirtualCluster), &v1.RegisterVirtualCluster{})
+		Invokes(testing.NewRootUpdateSubresourceActionWithOptions(registervirtualclustersResource, "status", registerVirtualCluster, opts), emptyResult)
 	if obj == nil {
-		return nil, err
+		return emptyResult, err
 	}
 	return obj.(*v1.RegisterVirtualCluster), err
 }
@@ -99,7 +104,7 @@ func (c *FakeRegisterVirtualClusters) Delete(ctx context.Context, name string, o
 
 // DeleteCollection deletes a collection of objects.
 func (c *FakeRegisterVirtualClusters) DeleteCollection(ctx context.Context, opts metav1.DeleteOptions, listOpts metav1.ListOptions) error {
-	action := testing.NewRootDeleteCollectionAction(registervirtualclustersResource, listOpts)
+	action := testing.NewRootDeleteCollectionActionWithOptions(registervirtualclustersResource, opts, listOpts)
 
 	_, err := c.Fake.Invokes(action, &v1.RegisterVirtualClusterList{})
 	return err
@@ -107,10 +112,11 @@ func (c *FakeRegisterVirtualClusters) DeleteCollection(ctx context.Context, opts
 
 // Patch applies the patch and returns the patched registerVirtualCluster.
 func (c *FakeRegisterVirtualClusters) Patch(ctx context.Context, name string, pt types.PatchType, data []byte, opts metav1.PatchOptions, subresources ...string) (result *v1.RegisterVirtualCluster, err error) {
+	emptyResult := &v1.RegisterVirtualCluster{}
 	obj, err := c.Fake.
-		Invokes(testing.NewRootPatchSubresourceAction(registervirtualclustersResource, name, pt, data, subresources...), &v1.RegisterVirtualCluster{})
+		Invokes(testing.NewRootPatchSubresourceActionWithOptions(registervirtualclustersResource, name, pt, data, opts, subresources...), emptyResult)
 	if obj == nil {
-		return nil, err
+		return emptyResult, err
 	}
 	return obj.(*v1.RegisterVirtualCluster), err
 }
