@@ -24,20 +24,22 @@ var announcementsKind = v1.SchemeGroupVersion.WithKind("Announcement")
 
 // Get takes name of the announcement, and returns the corresponding announcement object, and an error if there is any.
 func (c *FakeAnnouncements) Get(ctx context.Context, name string, options metav1.GetOptions) (result *v1.Announcement, err error) {
+	emptyResult := &v1.Announcement{}
 	obj, err := c.Fake.
-		Invokes(testing.NewRootGetAction(announcementsResource, name), &v1.Announcement{})
+		Invokes(testing.NewRootGetActionWithOptions(announcementsResource, name, options), emptyResult)
 	if obj == nil {
-		return nil, err
+		return emptyResult, err
 	}
 	return obj.(*v1.Announcement), err
 }
 
 // List takes label and field selectors, and returns the list of Announcements that match those selectors.
 func (c *FakeAnnouncements) List(ctx context.Context, opts metav1.ListOptions) (result *v1.AnnouncementList, err error) {
+	emptyResult := &v1.AnnouncementList{}
 	obj, err := c.Fake.
-		Invokes(testing.NewRootListAction(announcementsResource, announcementsKind, opts), &v1.AnnouncementList{})
+		Invokes(testing.NewRootListActionWithOptions(announcementsResource, announcementsKind, opts), emptyResult)
 	if obj == nil {
-		return nil, err
+		return emptyResult, err
 	}
 
 	label, _, _ := testing.ExtractFromListOptions(opts)
@@ -56,36 +58,39 @@ func (c *FakeAnnouncements) List(ctx context.Context, opts metav1.ListOptions) (
 // Watch returns a watch.Interface that watches the requested announcements.
 func (c *FakeAnnouncements) Watch(ctx context.Context, opts metav1.ListOptions) (watch.Interface, error) {
 	return c.Fake.
-		InvokesWatch(testing.NewRootWatchAction(announcementsResource, opts))
+		InvokesWatch(testing.NewRootWatchActionWithOptions(announcementsResource, opts))
 }
 
 // Create takes the representation of a announcement and creates it.  Returns the server's representation of the announcement, and an error, if there is any.
 func (c *FakeAnnouncements) Create(ctx context.Context, announcement *v1.Announcement, opts metav1.CreateOptions) (result *v1.Announcement, err error) {
+	emptyResult := &v1.Announcement{}
 	obj, err := c.Fake.
-		Invokes(testing.NewRootCreateAction(announcementsResource, announcement), &v1.Announcement{})
+		Invokes(testing.NewRootCreateActionWithOptions(announcementsResource, announcement, opts), emptyResult)
 	if obj == nil {
-		return nil, err
+		return emptyResult, err
 	}
 	return obj.(*v1.Announcement), err
 }
 
 // Update takes the representation of a announcement and updates it. Returns the server's representation of the announcement, and an error, if there is any.
 func (c *FakeAnnouncements) Update(ctx context.Context, announcement *v1.Announcement, opts metav1.UpdateOptions) (result *v1.Announcement, err error) {
+	emptyResult := &v1.Announcement{}
 	obj, err := c.Fake.
-		Invokes(testing.NewRootUpdateAction(announcementsResource, announcement), &v1.Announcement{})
+		Invokes(testing.NewRootUpdateActionWithOptions(announcementsResource, announcement, opts), emptyResult)
 	if obj == nil {
-		return nil, err
+		return emptyResult, err
 	}
 	return obj.(*v1.Announcement), err
 }
 
 // UpdateStatus was generated because the type contains a Status member.
 // Add a +genclient:noStatus comment above the type to avoid generating UpdateStatus().
-func (c *FakeAnnouncements) UpdateStatus(ctx context.Context, announcement *v1.Announcement, opts metav1.UpdateOptions) (*v1.Announcement, error) {
+func (c *FakeAnnouncements) UpdateStatus(ctx context.Context, announcement *v1.Announcement, opts metav1.UpdateOptions) (result *v1.Announcement, err error) {
+	emptyResult := &v1.Announcement{}
 	obj, err := c.Fake.
-		Invokes(testing.NewRootUpdateSubresourceAction(announcementsResource, "status", announcement), &v1.Announcement{})
+		Invokes(testing.NewRootUpdateSubresourceActionWithOptions(announcementsResource, "status", announcement, opts), emptyResult)
 	if obj == nil {
-		return nil, err
+		return emptyResult, err
 	}
 	return obj.(*v1.Announcement), err
 }
@@ -99,7 +104,7 @@ func (c *FakeAnnouncements) Delete(ctx context.Context, name string, opts metav1
 
 // DeleteCollection deletes a collection of objects.
 func (c *FakeAnnouncements) DeleteCollection(ctx context.Context, opts metav1.DeleteOptions, listOpts metav1.ListOptions) error {
-	action := testing.NewRootDeleteCollectionAction(announcementsResource, listOpts)
+	action := testing.NewRootDeleteCollectionActionWithOptions(announcementsResource, opts, listOpts)
 
 	_, err := c.Fake.Invokes(action, &v1.AnnouncementList{})
 	return err
@@ -107,10 +112,11 @@ func (c *FakeAnnouncements) DeleteCollection(ctx context.Context, opts metav1.De
 
 // Patch applies the patch and returns the patched announcement.
 func (c *FakeAnnouncements) Patch(ctx context.Context, name string, pt types.PatchType, data []byte, opts metav1.PatchOptions, subresources ...string) (result *v1.Announcement, err error) {
+	emptyResult := &v1.Announcement{}
 	obj, err := c.Fake.
-		Invokes(testing.NewRootPatchSubresourceAction(announcementsResource, name, pt, data, subresources...), &v1.Announcement{})
+		Invokes(testing.NewRootPatchSubresourceActionWithOptions(announcementsResource, name, pt, data, opts, subresources...), emptyResult)
 	if obj == nil {
-		return nil, err
+		return emptyResult, err
 	}
 	return obj.(*v1.Announcement), err
 }

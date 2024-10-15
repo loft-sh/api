@@ -24,20 +24,22 @@ var licensesKind = v1.SchemeGroupVersion.WithKind("License")
 
 // Get takes name of the license, and returns the corresponding license object, and an error if there is any.
 func (c *FakeLicenses) Get(ctx context.Context, name string, options metav1.GetOptions) (result *v1.License, err error) {
+	emptyResult := &v1.License{}
 	obj, err := c.Fake.
-		Invokes(testing.NewRootGetAction(licensesResource, name), &v1.License{})
+		Invokes(testing.NewRootGetActionWithOptions(licensesResource, name, options), emptyResult)
 	if obj == nil {
-		return nil, err
+		return emptyResult, err
 	}
 	return obj.(*v1.License), err
 }
 
 // List takes label and field selectors, and returns the list of Licenses that match those selectors.
 func (c *FakeLicenses) List(ctx context.Context, opts metav1.ListOptions) (result *v1.LicenseList, err error) {
+	emptyResult := &v1.LicenseList{}
 	obj, err := c.Fake.
-		Invokes(testing.NewRootListAction(licensesResource, licensesKind, opts), &v1.LicenseList{})
+		Invokes(testing.NewRootListActionWithOptions(licensesResource, licensesKind, opts), emptyResult)
 	if obj == nil {
-		return nil, err
+		return emptyResult, err
 	}
 
 	label, _, _ := testing.ExtractFromListOptions(opts)
@@ -56,36 +58,39 @@ func (c *FakeLicenses) List(ctx context.Context, opts metav1.ListOptions) (resul
 // Watch returns a watch.Interface that watches the requested licenses.
 func (c *FakeLicenses) Watch(ctx context.Context, opts metav1.ListOptions) (watch.Interface, error) {
 	return c.Fake.
-		InvokesWatch(testing.NewRootWatchAction(licensesResource, opts))
+		InvokesWatch(testing.NewRootWatchActionWithOptions(licensesResource, opts))
 }
 
 // Create takes the representation of a license and creates it.  Returns the server's representation of the license, and an error, if there is any.
 func (c *FakeLicenses) Create(ctx context.Context, license *v1.License, opts metav1.CreateOptions) (result *v1.License, err error) {
+	emptyResult := &v1.License{}
 	obj, err := c.Fake.
-		Invokes(testing.NewRootCreateAction(licensesResource, license), &v1.License{})
+		Invokes(testing.NewRootCreateActionWithOptions(licensesResource, license, opts), emptyResult)
 	if obj == nil {
-		return nil, err
+		return emptyResult, err
 	}
 	return obj.(*v1.License), err
 }
 
 // Update takes the representation of a license and updates it. Returns the server's representation of the license, and an error, if there is any.
 func (c *FakeLicenses) Update(ctx context.Context, license *v1.License, opts metav1.UpdateOptions) (result *v1.License, err error) {
+	emptyResult := &v1.License{}
 	obj, err := c.Fake.
-		Invokes(testing.NewRootUpdateAction(licensesResource, license), &v1.License{})
+		Invokes(testing.NewRootUpdateActionWithOptions(licensesResource, license, opts), emptyResult)
 	if obj == nil {
-		return nil, err
+		return emptyResult, err
 	}
 	return obj.(*v1.License), err
 }
 
 // UpdateStatus was generated because the type contains a Status member.
 // Add a +genclient:noStatus comment above the type to avoid generating UpdateStatus().
-func (c *FakeLicenses) UpdateStatus(ctx context.Context, license *v1.License, opts metav1.UpdateOptions) (*v1.License, error) {
+func (c *FakeLicenses) UpdateStatus(ctx context.Context, license *v1.License, opts metav1.UpdateOptions) (result *v1.License, err error) {
+	emptyResult := &v1.License{}
 	obj, err := c.Fake.
-		Invokes(testing.NewRootUpdateSubresourceAction(licensesResource, "status", license), &v1.License{})
+		Invokes(testing.NewRootUpdateSubresourceActionWithOptions(licensesResource, "status", license, opts), emptyResult)
 	if obj == nil {
-		return nil, err
+		return emptyResult, err
 	}
 	return obj.(*v1.License), err
 }
@@ -99,7 +104,7 @@ func (c *FakeLicenses) Delete(ctx context.Context, name string, opts metav1.Dele
 
 // DeleteCollection deletes a collection of objects.
 func (c *FakeLicenses) DeleteCollection(ctx context.Context, opts metav1.DeleteOptions, listOpts metav1.ListOptions) error {
-	action := testing.NewRootDeleteCollectionAction(licensesResource, listOpts)
+	action := testing.NewRootDeleteCollectionActionWithOptions(licensesResource, opts, listOpts)
 
 	_, err := c.Fake.Invokes(action, &v1.LicenseList{})
 	return err
@@ -107,20 +112,22 @@ func (c *FakeLicenses) DeleteCollection(ctx context.Context, opts metav1.DeleteO
 
 // Patch applies the patch and returns the patched license.
 func (c *FakeLicenses) Patch(ctx context.Context, name string, pt types.PatchType, data []byte, opts metav1.PatchOptions, subresources ...string) (result *v1.License, err error) {
+	emptyResult := &v1.License{}
 	obj, err := c.Fake.
-		Invokes(testing.NewRootPatchSubresourceAction(licensesResource, name, pt, data, subresources...), &v1.License{})
+		Invokes(testing.NewRootPatchSubresourceActionWithOptions(licensesResource, name, pt, data, opts, subresources...), emptyResult)
 	if obj == nil {
-		return nil, err
+		return emptyResult, err
 	}
 	return obj.(*v1.License), err
 }
 
 // LicenseRequest takes the representation of a licenseRequest and creates it.  Returns the server's representation of the licenseRequest, and an error, if there is any.
 func (c *FakeLicenses) LicenseRequest(ctx context.Context, licenseName string, licenseRequest *v1.LicenseRequest, opts metav1.CreateOptions) (result *v1.LicenseRequest, err error) {
+	emptyResult := &v1.LicenseRequest{}
 	obj, err := c.Fake.
-		Invokes(testing.NewRootCreateSubresourceAction(licensesResource, licenseName, "request", licenseRequest), &v1.LicenseRequest{})
+		Invokes(testing.NewRootCreateSubresourceActionWithOptions(licensesResource, licenseName, "request", licenseRequest, opts), emptyResult)
 	if obj == nil {
-		return nil, err
+		return emptyResult, err
 	}
 	return obj.(*v1.LicenseRequest), err
 }
