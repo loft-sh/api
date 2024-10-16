@@ -24,20 +24,22 @@ var subjectaccessreviewsKind = v1.SchemeGroupVersion.WithKind("SubjectAccessRevi
 
 // Get takes name of the subjectAccessReview, and returns the corresponding subjectAccessReview object, and an error if there is any.
 func (c *FakeSubjectAccessReviews) Get(ctx context.Context, name string, options metav1.GetOptions) (result *v1.SubjectAccessReview, err error) {
+	emptyResult := &v1.SubjectAccessReview{}
 	obj, err := c.Fake.
-		Invokes(testing.NewRootGetAction(subjectaccessreviewsResource, name), &v1.SubjectAccessReview{})
+		Invokes(testing.NewRootGetActionWithOptions(subjectaccessreviewsResource, name, options), emptyResult)
 	if obj == nil {
-		return nil, err
+		return emptyResult, err
 	}
 	return obj.(*v1.SubjectAccessReview), err
 }
 
 // List takes label and field selectors, and returns the list of SubjectAccessReviews that match those selectors.
 func (c *FakeSubjectAccessReviews) List(ctx context.Context, opts metav1.ListOptions) (result *v1.SubjectAccessReviewList, err error) {
+	emptyResult := &v1.SubjectAccessReviewList{}
 	obj, err := c.Fake.
-		Invokes(testing.NewRootListAction(subjectaccessreviewsResource, subjectaccessreviewsKind, opts), &v1.SubjectAccessReviewList{})
+		Invokes(testing.NewRootListActionWithOptions(subjectaccessreviewsResource, subjectaccessreviewsKind, opts), emptyResult)
 	if obj == nil {
-		return nil, err
+		return emptyResult, err
 	}
 
 	label, _, _ := testing.ExtractFromListOptions(opts)
@@ -56,36 +58,39 @@ func (c *FakeSubjectAccessReviews) List(ctx context.Context, opts metav1.ListOpt
 // Watch returns a watch.Interface that watches the requested subjectAccessReviews.
 func (c *FakeSubjectAccessReviews) Watch(ctx context.Context, opts metav1.ListOptions) (watch.Interface, error) {
 	return c.Fake.
-		InvokesWatch(testing.NewRootWatchAction(subjectaccessreviewsResource, opts))
+		InvokesWatch(testing.NewRootWatchActionWithOptions(subjectaccessreviewsResource, opts))
 }
 
 // Create takes the representation of a subjectAccessReview and creates it.  Returns the server's representation of the subjectAccessReview, and an error, if there is any.
 func (c *FakeSubjectAccessReviews) Create(ctx context.Context, subjectAccessReview *v1.SubjectAccessReview, opts metav1.CreateOptions) (result *v1.SubjectAccessReview, err error) {
+	emptyResult := &v1.SubjectAccessReview{}
 	obj, err := c.Fake.
-		Invokes(testing.NewRootCreateAction(subjectaccessreviewsResource, subjectAccessReview), &v1.SubjectAccessReview{})
+		Invokes(testing.NewRootCreateActionWithOptions(subjectaccessreviewsResource, subjectAccessReview, opts), emptyResult)
 	if obj == nil {
-		return nil, err
+		return emptyResult, err
 	}
 	return obj.(*v1.SubjectAccessReview), err
 }
 
 // Update takes the representation of a subjectAccessReview and updates it. Returns the server's representation of the subjectAccessReview, and an error, if there is any.
 func (c *FakeSubjectAccessReviews) Update(ctx context.Context, subjectAccessReview *v1.SubjectAccessReview, opts metav1.UpdateOptions) (result *v1.SubjectAccessReview, err error) {
+	emptyResult := &v1.SubjectAccessReview{}
 	obj, err := c.Fake.
-		Invokes(testing.NewRootUpdateAction(subjectaccessreviewsResource, subjectAccessReview), &v1.SubjectAccessReview{})
+		Invokes(testing.NewRootUpdateActionWithOptions(subjectaccessreviewsResource, subjectAccessReview, opts), emptyResult)
 	if obj == nil {
-		return nil, err
+		return emptyResult, err
 	}
 	return obj.(*v1.SubjectAccessReview), err
 }
 
 // UpdateStatus was generated because the type contains a Status member.
 // Add a +genclient:noStatus comment above the type to avoid generating UpdateStatus().
-func (c *FakeSubjectAccessReviews) UpdateStatus(ctx context.Context, subjectAccessReview *v1.SubjectAccessReview, opts metav1.UpdateOptions) (*v1.SubjectAccessReview, error) {
+func (c *FakeSubjectAccessReviews) UpdateStatus(ctx context.Context, subjectAccessReview *v1.SubjectAccessReview, opts metav1.UpdateOptions) (result *v1.SubjectAccessReview, err error) {
+	emptyResult := &v1.SubjectAccessReview{}
 	obj, err := c.Fake.
-		Invokes(testing.NewRootUpdateSubresourceAction(subjectaccessreviewsResource, "status", subjectAccessReview), &v1.SubjectAccessReview{})
+		Invokes(testing.NewRootUpdateSubresourceActionWithOptions(subjectaccessreviewsResource, "status", subjectAccessReview, opts), emptyResult)
 	if obj == nil {
-		return nil, err
+		return emptyResult, err
 	}
 	return obj.(*v1.SubjectAccessReview), err
 }
@@ -99,7 +104,7 @@ func (c *FakeSubjectAccessReviews) Delete(ctx context.Context, name string, opts
 
 // DeleteCollection deletes a collection of objects.
 func (c *FakeSubjectAccessReviews) DeleteCollection(ctx context.Context, opts metav1.DeleteOptions, listOpts metav1.ListOptions) error {
-	action := testing.NewRootDeleteCollectionAction(subjectaccessreviewsResource, listOpts)
+	action := testing.NewRootDeleteCollectionActionWithOptions(subjectaccessreviewsResource, opts, listOpts)
 
 	_, err := c.Fake.Invokes(action, &v1.SubjectAccessReviewList{})
 	return err
@@ -107,10 +112,11 @@ func (c *FakeSubjectAccessReviews) DeleteCollection(ctx context.Context, opts me
 
 // Patch applies the patch and returns the patched subjectAccessReview.
 func (c *FakeSubjectAccessReviews) Patch(ctx context.Context, name string, pt types.PatchType, data []byte, opts metav1.PatchOptions, subresources ...string) (result *v1.SubjectAccessReview, err error) {
+	emptyResult := &v1.SubjectAccessReview{}
 	obj, err := c.Fake.
-		Invokes(testing.NewRootPatchSubresourceAction(subjectaccessreviewsResource, name, pt, data, subresources...), &v1.SubjectAccessReview{})
+		Invokes(testing.NewRootPatchSubresourceActionWithOptions(subjectaccessreviewsResource, name, pt, data, opts, subresources...), emptyResult)
 	if obj == nil {
-		return nil, err
+		return emptyResult, err
 	}
 	return obj.(*v1.SubjectAccessReview), err
 }

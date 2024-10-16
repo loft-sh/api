@@ -24,20 +24,22 @@ var convertvirtualclusterconfigsKind = v1.SchemeGroupVersion.WithKind("ConvertVi
 
 // Get takes name of the convertVirtualClusterConfig, and returns the corresponding convertVirtualClusterConfig object, and an error if there is any.
 func (c *FakeConvertVirtualClusterConfigs) Get(ctx context.Context, name string, options metav1.GetOptions) (result *v1.ConvertVirtualClusterConfig, err error) {
+	emptyResult := &v1.ConvertVirtualClusterConfig{}
 	obj, err := c.Fake.
-		Invokes(testing.NewRootGetAction(convertvirtualclusterconfigsResource, name), &v1.ConvertVirtualClusterConfig{})
+		Invokes(testing.NewRootGetActionWithOptions(convertvirtualclusterconfigsResource, name, options), emptyResult)
 	if obj == nil {
-		return nil, err
+		return emptyResult, err
 	}
 	return obj.(*v1.ConvertVirtualClusterConfig), err
 }
 
 // List takes label and field selectors, and returns the list of ConvertVirtualClusterConfigs that match those selectors.
 func (c *FakeConvertVirtualClusterConfigs) List(ctx context.Context, opts metav1.ListOptions) (result *v1.ConvertVirtualClusterConfigList, err error) {
+	emptyResult := &v1.ConvertVirtualClusterConfigList{}
 	obj, err := c.Fake.
-		Invokes(testing.NewRootListAction(convertvirtualclusterconfigsResource, convertvirtualclusterconfigsKind, opts), &v1.ConvertVirtualClusterConfigList{})
+		Invokes(testing.NewRootListActionWithOptions(convertvirtualclusterconfigsResource, convertvirtualclusterconfigsKind, opts), emptyResult)
 	if obj == nil {
-		return nil, err
+		return emptyResult, err
 	}
 
 	label, _, _ := testing.ExtractFromListOptions(opts)
@@ -56,36 +58,39 @@ func (c *FakeConvertVirtualClusterConfigs) List(ctx context.Context, opts metav1
 // Watch returns a watch.Interface that watches the requested convertVirtualClusterConfigs.
 func (c *FakeConvertVirtualClusterConfigs) Watch(ctx context.Context, opts metav1.ListOptions) (watch.Interface, error) {
 	return c.Fake.
-		InvokesWatch(testing.NewRootWatchAction(convertvirtualclusterconfigsResource, opts))
+		InvokesWatch(testing.NewRootWatchActionWithOptions(convertvirtualclusterconfigsResource, opts))
 }
 
 // Create takes the representation of a convertVirtualClusterConfig and creates it.  Returns the server's representation of the convertVirtualClusterConfig, and an error, if there is any.
 func (c *FakeConvertVirtualClusterConfigs) Create(ctx context.Context, convertVirtualClusterConfig *v1.ConvertVirtualClusterConfig, opts metav1.CreateOptions) (result *v1.ConvertVirtualClusterConfig, err error) {
+	emptyResult := &v1.ConvertVirtualClusterConfig{}
 	obj, err := c.Fake.
-		Invokes(testing.NewRootCreateAction(convertvirtualclusterconfigsResource, convertVirtualClusterConfig), &v1.ConvertVirtualClusterConfig{})
+		Invokes(testing.NewRootCreateActionWithOptions(convertvirtualclusterconfigsResource, convertVirtualClusterConfig, opts), emptyResult)
 	if obj == nil {
-		return nil, err
+		return emptyResult, err
 	}
 	return obj.(*v1.ConvertVirtualClusterConfig), err
 }
 
 // Update takes the representation of a convertVirtualClusterConfig and updates it. Returns the server's representation of the convertVirtualClusterConfig, and an error, if there is any.
 func (c *FakeConvertVirtualClusterConfigs) Update(ctx context.Context, convertVirtualClusterConfig *v1.ConvertVirtualClusterConfig, opts metav1.UpdateOptions) (result *v1.ConvertVirtualClusterConfig, err error) {
+	emptyResult := &v1.ConvertVirtualClusterConfig{}
 	obj, err := c.Fake.
-		Invokes(testing.NewRootUpdateAction(convertvirtualclusterconfigsResource, convertVirtualClusterConfig), &v1.ConvertVirtualClusterConfig{})
+		Invokes(testing.NewRootUpdateActionWithOptions(convertvirtualclusterconfigsResource, convertVirtualClusterConfig, opts), emptyResult)
 	if obj == nil {
-		return nil, err
+		return emptyResult, err
 	}
 	return obj.(*v1.ConvertVirtualClusterConfig), err
 }
 
 // UpdateStatus was generated because the type contains a Status member.
 // Add a +genclient:noStatus comment above the type to avoid generating UpdateStatus().
-func (c *FakeConvertVirtualClusterConfigs) UpdateStatus(ctx context.Context, convertVirtualClusterConfig *v1.ConvertVirtualClusterConfig, opts metav1.UpdateOptions) (*v1.ConvertVirtualClusterConfig, error) {
+func (c *FakeConvertVirtualClusterConfigs) UpdateStatus(ctx context.Context, convertVirtualClusterConfig *v1.ConvertVirtualClusterConfig, opts metav1.UpdateOptions) (result *v1.ConvertVirtualClusterConfig, err error) {
+	emptyResult := &v1.ConvertVirtualClusterConfig{}
 	obj, err := c.Fake.
-		Invokes(testing.NewRootUpdateSubresourceAction(convertvirtualclusterconfigsResource, "status", convertVirtualClusterConfig), &v1.ConvertVirtualClusterConfig{})
+		Invokes(testing.NewRootUpdateSubresourceActionWithOptions(convertvirtualclusterconfigsResource, "status", convertVirtualClusterConfig, opts), emptyResult)
 	if obj == nil {
-		return nil, err
+		return emptyResult, err
 	}
 	return obj.(*v1.ConvertVirtualClusterConfig), err
 }
@@ -99,7 +104,7 @@ func (c *FakeConvertVirtualClusterConfigs) Delete(ctx context.Context, name stri
 
 // DeleteCollection deletes a collection of objects.
 func (c *FakeConvertVirtualClusterConfigs) DeleteCollection(ctx context.Context, opts metav1.DeleteOptions, listOpts metav1.ListOptions) error {
-	action := testing.NewRootDeleteCollectionAction(convertvirtualclusterconfigsResource, listOpts)
+	action := testing.NewRootDeleteCollectionActionWithOptions(convertvirtualclusterconfigsResource, opts, listOpts)
 
 	_, err := c.Fake.Invokes(action, &v1.ConvertVirtualClusterConfigList{})
 	return err
@@ -107,10 +112,11 @@ func (c *FakeConvertVirtualClusterConfigs) DeleteCollection(ctx context.Context,
 
 // Patch applies the patch and returns the patched convertVirtualClusterConfig.
 func (c *FakeConvertVirtualClusterConfigs) Patch(ctx context.Context, name string, pt types.PatchType, data []byte, opts metav1.PatchOptions, subresources ...string) (result *v1.ConvertVirtualClusterConfig, err error) {
+	emptyResult := &v1.ConvertVirtualClusterConfig{}
 	obj, err := c.Fake.
-		Invokes(testing.NewRootPatchSubresourceAction(convertvirtualclusterconfigsResource, name, pt, data, subresources...), &v1.ConvertVirtualClusterConfig{})
+		Invokes(testing.NewRootPatchSubresourceActionWithOptions(convertvirtualclusterconfigsResource, name, pt, data, opts, subresources...), emptyResult)
 	if obj == nil {
-		return nil, err
+		return emptyResult, err
 	}
 	return obj.(*v1.ConvertVirtualClusterConfig), err
 }

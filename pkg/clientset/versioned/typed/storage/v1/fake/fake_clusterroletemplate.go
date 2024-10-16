@@ -24,20 +24,22 @@ var clusterroletemplatesKind = v1.SchemeGroupVersion.WithKind("ClusterRoleTempla
 
 // Get takes name of the clusterRoleTemplate, and returns the corresponding clusterRoleTemplate object, and an error if there is any.
 func (c *FakeClusterRoleTemplates) Get(ctx context.Context, name string, options metav1.GetOptions) (result *v1.ClusterRoleTemplate, err error) {
+	emptyResult := &v1.ClusterRoleTemplate{}
 	obj, err := c.Fake.
-		Invokes(testing.NewRootGetAction(clusterroletemplatesResource, name), &v1.ClusterRoleTemplate{})
+		Invokes(testing.NewRootGetActionWithOptions(clusterroletemplatesResource, name, options), emptyResult)
 	if obj == nil {
-		return nil, err
+		return emptyResult, err
 	}
 	return obj.(*v1.ClusterRoleTemplate), err
 }
 
 // List takes label and field selectors, and returns the list of ClusterRoleTemplates that match those selectors.
 func (c *FakeClusterRoleTemplates) List(ctx context.Context, opts metav1.ListOptions) (result *v1.ClusterRoleTemplateList, err error) {
+	emptyResult := &v1.ClusterRoleTemplateList{}
 	obj, err := c.Fake.
-		Invokes(testing.NewRootListAction(clusterroletemplatesResource, clusterroletemplatesKind, opts), &v1.ClusterRoleTemplateList{})
+		Invokes(testing.NewRootListActionWithOptions(clusterroletemplatesResource, clusterroletemplatesKind, opts), emptyResult)
 	if obj == nil {
-		return nil, err
+		return emptyResult, err
 	}
 
 	label, _, _ := testing.ExtractFromListOptions(opts)
@@ -56,36 +58,39 @@ func (c *FakeClusterRoleTemplates) List(ctx context.Context, opts metav1.ListOpt
 // Watch returns a watch.Interface that watches the requested clusterRoleTemplates.
 func (c *FakeClusterRoleTemplates) Watch(ctx context.Context, opts metav1.ListOptions) (watch.Interface, error) {
 	return c.Fake.
-		InvokesWatch(testing.NewRootWatchAction(clusterroletemplatesResource, opts))
+		InvokesWatch(testing.NewRootWatchActionWithOptions(clusterroletemplatesResource, opts))
 }
 
 // Create takes the representation of a clusterRoleTemplate and creates it.  Returns the server's representation of the clusterRoleTemplate, and an error, if there is any.
 func (c *FakeClusterRoleTemplates) Create(ctx context.Context, clusterRoleTemplate *v1.ClusterRoleTemplate, opts metav1.CreateOptions) (result *v1.ClusterRoleTemplate, err error) {
+	emptyResult := &v1.ClusterRoleTemplate{}
 	obj, err := c.Fake.
-		Invokes(testing.NewRootCreateAction(clusterroletemplatesResource, clusterRoleTemplate), &v1.ClusterRoleTemplate{})
+		Invokes(testing.NewRootCreateActionWithOptions(clusterroletemplatesResource, clusterRoleTemplate, opts), emptyResult)
 	if obj == nil {
-		return nil, err
+		return emptyResult, err
 	}
 	return obj.(*v1.ClusterRoleTemplate), err
 }
 
 // Update takes the representation of a clusterRoleTemplate and updates it. Returns the server's representation of the clusterRoleTemplate, and an error, if there is any.
 func (c *FakeClusterRoleTemplates) Update(ctx context.Context, clusterRoleTemplate *v1.ClusterRoleTemplate, opts metav1.UpdateOptions) (result *v1.ClusterRoleTemplate, err error) {
+	emptyResult := &v1.ClusterRoleTemplate{}
 	obj, err := c.Fake.
-		Invokes(testing.NewRootUpdateAction(clusterroletemplatesResource, clusterRoleTemplate), &v1.ClusterRoleTemplate{})
+		Invokes(testing.NewRootUpdateActionWithOptions(clusterroletemplatesResource, clusterRoleTemplate, opts), emptyResult)
 	if obj == nil {
-		return nil, err
+		return emptyResult, err
 	}
 	return obj.(*v1.ClusterRoleTemplate), err
 }
 
 // UpdateStatus was generated because the type contains a Status member.
 // Add a +genclient:noStatus comment above the type to avoid generating UpdateStatus().
-func (c *FakeClusterRoleTemplates) UpdateStatus(ctx context.Context, clusterRoleTemplate *v1.ClusterRoleTemplate, opts metav1.UpdateOptions) (*v1.ClusterRoleTemplate, error) {
+func (c *FakeClusterRoleTemplates) UpdateStatus(ctx context.Context, clusterRoleTemplate *v1.ClusterRoleTemplate, opts metav1.UpdateOptions) (result *v1.ClusterRoleTemplate, err error) {
+	emptyResult := &v1.ClusterRoleTemplate{}
 	obj, err := c.Fake.
-		Invokes(testing.NewRootUpdateSubresourceAction(clusterroletemplatesResource, "status", clusterRoleTemplate), &v1.ClusterRoleTemplate{})
+		Invokes(testing.NewRootUpdateSubresourceActionWithOptions(clusterroletemplatesResource, "status", clusterRoleTemplate, opts), emptyResult)
 	if obj == nil {
-		return nil, err
+		return emptyResult, err
 	}
 	return obj.(*v1.ClusterRoleTemplate), err
 }
@@ -99,7 +104,7 @@ func (c *FakeClusterRoleTemplates) Delete(ctx context.Context, name string, opts
 
 // DeleteCollection deletes a collection of objects.
 func (c *FakeClusterRoleTemplates) DeleteCollection(ctx context.Context, opts metav1.DeleteOptions, listOpts metav1.ListOptions) error {
-	action := testing.NewRootDeleteCollectionAction(clusterroletemplatesResource, listOpts)
+	action := testing.NewRootDeleteCollectionActionWithOptions(clusterroletemplatesResource, opts, listOpts)
 
 	_, err := c.Fake.Invokes(action, &v1.ClusterRoleTemplateList{})
 	return err
@@ -107,10 +112,11 @@ func (c *FakeClusterRoleTemplates) DeleteCollection(ctx context.Context, opts me
 
 // Patch applies the patch and returns the patched clusterRoleTemplate.
 func (c *FakeClusterRoleTemplates) Patch(ctx context.Context, name string, pt types.PatchType, data []byte, opts metav1.PatchOptions, subresources ...string) (result *v1.ClusterRoleTemplate, err error) {
+	emptyResult := &v1.ClusterRoleTemplate{}
 	obj, err := c.Fake.
-		Invokes(testing.NewRootPatchSubresourceAction(clusterroletemplatesResource, name, pt, data, subresources...), &v1.ClusterRoleTemplate{})
+		Invokes(testing.NewRootPatchSubresourceActionWithOptions(clusterroletemplatesResource, name, pt, data, opts, subresources...), emptyResult)
 	if obj == nil {
-		return nil, err
+		return emptyResult, err
 	}
 	return obj.(*v1.ClusterRoleTemplate), err
 }
