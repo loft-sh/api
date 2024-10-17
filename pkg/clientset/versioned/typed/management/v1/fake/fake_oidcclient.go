@@ -24,20 +24,22 @@ var oidcclientsKind = v1.SchemeGroupVersion.WithKind("OIDCClient")
 
 // Get takes name of the oIDCClient, and returns the corresponding oIDCClient object, and an error if there is any.
 func (c *FakeOIDCClients) Get(ctx context.Context, name string, options metav1.GetOptions) (result *v1.OIDCClient, err error) {
+	emptyResult := &v1.OIDCClient{}
 	obj, err := c.Fake.
-		Invokes(testing.NewRootGetAction(oidcclientsResource, name), &v1.OIDCClient{})
+		Invokes(testing.NewRootGetActionWithOptions(oidcclientsResource, name, options), emptyResult)
 	if obj == nil {
-		return nil, err
+		return emptyResult, err
 	}
 	return obj.(*v1.OIDCClient), err
 }
 
 // List takes label and field selectors, and returns the list of OIDCClients that match those selectors.
 func (c *FakeOIDCClients) List(ctx context.Context, opts metav1.ListOptions) (result *v1.OIDCClientList, err error) {
+	emptyResult := &v1.OIDCClientList{}
 	obj, err := c.Fake.
-		Invokes(testing.NewRootListAction(oidcclientsResource, oidcclientsKind, opts), &v1.OIDCClientList{})
+		Invokes(testing.NewRootListActionWithOptions(oidcclientsResource, oidcclientsKind, opts), emptyResult)
 	if obj == nil {
-		return nil, err
+		return emptyResult, err
 	}
 
 	label, _, _ := testing.ExtractFromListOptions(opts)
@@ -56,36 +58,39 @@ func (c *FakeOIDCClients) List(ctx context.Context, opts metav1.ListOptions) (re
 // Watch returns a watch.Interface that watches the requested oIDCClients.
 func (c *FakeOIDCClients) Watch(ctx context.Context, opts metav1.ListOptions) (watch.Interface, error) {
 	return c.Fake.
-		InvokesWatch(testing.NewRootWatchAction(oidcclientsResource, opts))
+		InvokesWatch(testing.NewRootWatchActionWithOptions(oidcclientsResource, opts))
 }
 
 // Create takes the representation of a oIDCClient and creates it.  Returns the server's representation of the oIDCClient, and an error, if there is any.
 func (c *FakeOIDCClients) Create(ctx context.Context, oIDCClient *v1.OIDCClient, opts metav1.CreateOptions) (result *v1.OIDCClient, err error) {
+	emptyResult := &v1.OIDCClient{}
 	obj, err := c.Fake.
-		Invokes(testing.NewRootCreateAction(oidcclientsResource, oIDCClient), &v1.OIDCClient{})
+		Invokes(testing.NewRootCreateActionWithOptions(oidcclientsResource, oIDCClient, opts), emptyResult)
 	if obj == nil {
-		return nil, err
+		return emptyResult, err
 	}
 	return obj.(*v1.OIDCClient), err
 }
 
 // Update takes the representation of a oIDCClient and updates it. Returns the server's representation of the oIDCClient, and an error, if there is any.
 func (c *FakeOIDCClients) Update(ctx context.Context, oIDCClient *v1.OIDCClient, opts metav1.UpdateOptions) (result *v1.OIDCClient, err error) {
+	emptyResult := &v1.OIDCClient{}
 	obj, err := c.Fake.
-		Invokes(testing.NewRootUpdateAction(oidcclientsResource, oIDCClient), &v1.OIDCClient{})
+		Invokes(testing.NewRootUpdateActionWithOptions(oidcclientsResource, oIDCClient, opts), emptyResult)
 	if obj == nil {
-		return nil, err
+		return emptyResult, err
 	}
 	return obj.(*v1.OIDCClient), err
 }
 
 // UpdateStatus was generated because the type contains a Status member.
 // Add a +genclient:noStatus comment above the type to avoid generating UpdateStatus().
-func (c *FakeOIDCClients) UpdateStatus(ctx context.Context, oIDCClient *v1.OIDCClient, opts metav1.UpdateOptions) (*v1.OIDCClient, error) {
+func (c *FakeOIDCClients) UpdateStatus(ctx context.Context, oIDCClient *v1.OIDCClient, opts metav1.UpdateOptions) (result *v1.OIDCClient, err error) {
+	emptyResult := &v1.OIDCClient{}
 	obj, err := c.Fake.
-		Invokes(testing.NewRootUpdateSubresourceAction(oidcclientsResource, "status", oIDCClient), &v1.OIDCClient{})
+		Invokes(testing.NewRootUpdateSubresourceActionWithOptions(oidcclientsResource, "status", oIDCClient, opts), emptyResult)
 	if obj == nil {
-		return nil, err
+		return emptyResult, err
 	}
 	return obj.(*v1.OIDCClient), err
 }
@@ -99,7 +104,7 @@ func (c *FakeOIDCClients) Delete(ctx context.Context, name string, opts metav1.D
 
 // DeleteCollection deletes a collection of objects.
 func (c *FakeOIDCClients) DeleteCollection(ctx context.Context, opts metav1.DeleteOptions, listOpts metav1.ListOptions) error {
-	action := testing.NewRootDeleteCollectionAction(oidcclientsResource, listOpts)
+	action := testing.NewRootDeleteCollectionActionWithOptions(oidcclientsResource, opts, listOpts)
 
 	_, err := c.Fake.Invokes(action, &v1.OIDCClientList{})
 	return err
@@ -107,10 +112,11 @@ func (c *FakeOIDCClients) DeleteCollection(ctx context.Context, opts metav1.Dele
 
 // Patch applies the patch and returns the patched oIDCClient.
 func (c *FakeOIDCClients) Patch(ctx context.Context, name string, pt types.PatchType, data []byte, opts metav1.PatchOptions, subresources ...string) (result *v1.OIDCClient, err error) {
+	emptyResult := &v1.OIDCClient{}
 	obj, err := c.Fake.
-		Invokes(testing.NewRootPatchSubresourceAction(oidcclientsResource, name, pt, data, subresources...), &v1.OIDCClient{})
+		Invokes(testing.NewRootPatchSubresourceActionWithOptions(oidcclientsResource, name, pt, data, opts, subresources...), emptyResult)
 	if obj == nil {
-		return nil, err
+		return emptyResult, err
 	}
 	return obj.(*v1.OIDCClient), err
 }

@@ -24,20 +24,22 @@ var selfsubjectaccessreviewsKind = v1.SchemeGroupVersion.WithKind("SelfSubjectAc
 
 // Get takes name of the selfSubjectAccessReview, and returns the corresponding selfSubjectAccessReview object, and an error if there is any.
 func (c *FakeSelfSubjectAccessReviews) Get(ctx context.Context, name string, options metav1.GetOptions) (result *v1.SelfSubjectAccessReview, err error) {
+	emptyResult := &v1.SelfSubjectAccessReview{}
 	obj, err := c.Fake.
-		Invokes(testing.NewRootGetAction(selfsubjectaccessreviewsResource, name), &v1.SelfSubjectAccessReview{})
+		Invokes(testing.NewRootGetActionWithOptions(selfsubjectaccessreviewsResource, name, options), emptyResult)
 	if obj == nil {
-		return nil, err
+		return emptyResult, err
 	}
 	return obj.(*v1.SelfSubjectAccessReview), err
 }
 
 // List takes label and field selectors, and returns the list of SelfSubjectAccessReviews that match those selectors.
 func (c *FakeSelfSubjectAccessReviews) List(ctx context.Context, opts metav1.ListOptions) (result *v1.SelfSubjectAccessReviewList, err error) {
+	emptyResult := &v1.SelfSubjectAccessReviewList{}
 	obj, err := c.Fake.
-		Invokes(testing.NewRootListAction(selfsubjectaccessreviewsResource, selfsubjectaccessreviewsKind, opts), &v1.SelfSubjectAccessReviewList{})
+		Invokes(testing.NewRootListActionWithOptions(selfsubjectaccessreviewsResource, selfsubjectaccessreviewsKind, opts), emptyResult)
 	if obj == nil {
-		return nil, err
+		return emptyResult, err
 	}
 
 	label, _, _ := testing.ExtractFromListOptions(opts)
@@ -56,36 +58,39 @@ func (c *FakeSelfSubjectAccessReviews) List(ctx context.Context, opts metav1.Lis
 // Watch returns a watch.Interface that watches the requested selfSubjectAccessReviews.
 func (c *FakeSelfSubjectAccessReviews) Watch(ctx context.Context, opts metav1.ListOptions) (watch.Interface, error) {
 	return c.Fake.
-		InvokesWatch(testing.NewRootWatchAction(selfsubjectaccessreviewsResource, opts))
+		InvokesWatch(testing.NewRootWatchActionWithOptions(selfsubjectaccessreviewsResource, opts))
 }
 
 // Create takes the representation of a selfSubjectAccessReview and creates it.  Returns the server's representation of the selfSubjectAccessReview, and an error, if there is any.
 func (c *FakeSelfSubjectAccessReviews) Create(ctx context.Context, selfSubjectAccessReview *v1.SelfSubjectAccessReview, opts metav1.CreateOptions) (result *v1.SelfSubjectAccessReview, err error) {
+	emptyResult := &v1.SelfSubjectAccessReview{}
 	obj, err := c.Fake.
-		Invokes(testing.NewRootCreateAction(selfsubjectaccessreviewsResource, selfSubjectAccessReview), &v1.SelfSubjectAccessReview{})
+		Invokes(testing.NewRootCreateActionWithOptions(selfsubjectaccessreviewsResource, selfSubjectAccessReview, opts), emptyResult)
 	if obj == nil {
-		return nil, err
+		return emptyResult, err
 	}
 	return obj.(*v1.SelfSubjectAccessReview), err
 }
 
 // Update takes the representation of a selfSubjectAccessReview and updates it. Returns the server's representation of the selfSubjectAccessReview, and an error, if there is any.
 func (c *FakeSelfSubjectAccessReviews) Update(ctx context.Context, selfSubjectAccessReview *v1.SelfSubjectAccessReview, opts metav1.UpdateOptions) (result *v1.SelfSubjectAccessReview, err error) {
+	emptyResult := &v1.SelfSubjectAccessReview{}
 	obj, err := c.Fake.
-		Invokes(testing.NewRootUpdateAction(selfsubjectaccessreviewsResource, selfSubjectAccessReview), &v1.SelfSubjectAccessReview{})
+		Invokes(testing.NewRootUpdateActionWithOptions(selfsubjectaccessreviewsResource, selfSubjectAccessReview, opts), emptyResult)
 	if obj == nil {
-		return nil, err
+		return emptyResult, err
 	}
 	return obj.(*v1.SelfSubjectAccessReview), err
 }
 
 // UpdateStatus was generated because the type contains a Status member.
 // Add a +genclient:noStatus comment above the type to avoid generating UpdateStatus().
-func (c *FakeSelfSubjectAccessReviews) UpdateStatus(ctx context.Context, selfSubjectAccessReview *v1.SelfSubjectAccessReview, opts metav1.UpdateOptions) (*v1.SelfSubjectAccessReview, error) {
+func (c *FakeSelfSubjectAccessReviews) UpdateStatus(ctx context.Context, selfSubjectAccessReview *v1.SelfSubjectAccessReview, opts metav1.UpdateOptions) (result *v1.SelfSubjectAccessReview, err error) {
+	emptyResult := &v1.SelfSubjectAccessReview{}
 	obj, err := c.Fake.
-		Invokes(testing.NewRootUpdateSubresourceAction(selfsubjectaccessreviewsResource, "status", selfSubjectAccessReview), &v1.SelfSubjectAccessReview{})
+		Invokes(testing.NewRootUpdateSubresourceActionWithOptions(selfsubjectaccessreviewsResource, "status", selfSubjectAccessReview, opts), emptyResult)
 	if obj == nil {
-		return nil, err
+		return emptyResult, err
 	}
 	return obj.(*v1.SelfSubjectAccessReview), err
 }
@@ -99,7 +104,7 @@ func (c *FakeSelfSubjectAccessReviews) Delete(ctx context.Context, name string, 
 
 // DeleteCollection deletes a collection of objects.
 func (c *FakeSelfSubjectAccessReviews) DeleteCollection(ctx context.Context, opts metav1.DeleteOptions, listOpts metav1.ListOptions) error {
-	action := testing.NewRootDeleteCollectionAction(selfsubjectaccessreviewsResource, listOpts)
+	action := testing.NewRootDeleteCollectionActionWithOptions(selfsubjectaccessreviewsResource, opts, listOpts)
 
 	_, err := c.Fake.Invokes(action, &v1.SelfSubjectAccessReviewList{})
 	return err
@@ -107,10 +112,11 @@ func (c *FakeSelfSubjectAccessReviews) DeleteCollection(ctx context.Context, opt
 
 // Patch applies the patch and returns the patched selfSubjectAccessReview.
 func (c *FakeSelfSubjectAccessReviews) Patch(ctx context.Context, name string, pt types.PatchType, data []byte, opts metav1.PatchOptions, subresources ...string) (result *v1.SelfSubjectAccessReview, err error) {
+	emptyResult := &v1.SelfSubjectAccessReview{}
 	obj, err := c.Fake.
-		Invokes(testing.NewRootPatchSubresourceAction(selfsubjectaccessreviewsResource, name, pt, data, subresources...), &v1.SelfSubjectAccessReview{})
+		Invokes(testing.NewRootPatchSubresourceActionWithOptions(selfsubjectaccessreviewsResource, name, pt, data, opts, subresources...), emptyResult)
 	if obj == nil {
-		return nil, err
+		return emptyResult, err
 	}
 	return obj.(*v1.SelfSubjectAccessReview), err
 }

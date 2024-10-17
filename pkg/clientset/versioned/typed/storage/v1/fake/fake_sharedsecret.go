@@ -25,22 +25,24 @@ var sharedsecretsKind = v1.SchemeGroupVersion.WithKind("SharedSecret")
 
 // Get takes name of the sharedSecret, and returns the corresponding sharedSecret object, and an error if there is any.
 func (c *FakeSharedSecrets) Get(ctx context.Context, name string, options metav1.GetOptions) (result *v1.SharedSecret, err error) {
+	emptyResult := &v1.SharedSecret{}
 	obj, err := c.Fake.
-		Invokes(testing.NewGetAction(sharedsecretsResource, c.ns, name), &v1.SharedSecret{})
+		Invokes(testing.NewGetActionWithOptions(sharedsecretsResource, c.ns, name, options), emptyResult)
 
 	if obj == nil {
-		return nil, err
+		return emptyResult, err
 	}
 	return obj.(*v1.SharedSecret), err
 }
 
 // List takes label and field selectors, and returns the list of SharedSecrets that match those selectors.
 func (c *FakeSharedSecrets) List(ctx context.Context, opts metav1.ListOptions) (result *v1.SharedSecretList, err error) {
+	emptyResult := &v1.SharedSecretList{}
 	obj, err := c.Fake.
-		Invokes(testing.NewListAction(sharedsecretsResource, sharedsecretsKind, c.ns, opts), &v1.SharedSecretList{})
+		Invokes(testing.NewListActionWithOptions(sharedsecretsResource, sharedsecretsKind, c.ns, opts), emptyResult)
 
 	if obj == nil {
-		return nil, err
+		return emptyResult, err
 	}
 
 	label, _, _ := testing.ExtractFromListOptions(opts)
@@ -59,40 +61,43 @@ func (c *FakeSharedSecrets) List(ctx context.Context, opts metav1.ListOptions) (
 // Watch returns a watch.Interface that watches the requested sharedSecrets.
 func (c *FakeSharedSecrets) Watch(ctx context.Context, opts metav1.ListOptions) (watch.Interface, error) {
 	return c.Fake.
-		InvokesWatch(testing.NewWatchAction(sharedsecretsResource, c.ns, opts))
+		InvokesWatch(testing.NewWatchActionWithOptions(sharedsecretsResource, c.ns, opts))
 
 }
 
 // Create takes the representation of a sharedSecret and creates it.  Returns the server's representation of the sharedSecret, and an error, if there is any.
 func (c *FakeSharedSecrets) Create(ctx context.Context, sharedSecret *v1.SharedSecret, opts metav1.CreateOptions) (result *v1.SharedSecret, err error) {
+	emptyResult := &v1.SharedSecret{}
 	obj, err := c.Fake.
-		Invokes(testing.NewCreateAction(sharedsecretsResource, c.ns, sharedSecret), &v1.SharedSecret{})
+		Invokes(testing.NewCreateActionWithOptions(sharedsecretsResource, c.ns, sharedSecret, opts), emptyResult)
 
 	if obj == nil {
-		return nil, err
+		return emptyResult, err
 	}
 	return obj.(*v1.SharedSecret), err
 }
 
 // Update takes the representation of a sharedSecret and updates it. Returns the server's representation of the sharedSecret, and an error, if there is any.
 func (c *FakeSharedSecrets) Update(ctx context.Context, sharedSecret *v1.SharedSecret, opts metav1.UpdateOptions) (result *v1.SharedSecret, err error) {
+	emptyResult := &v1.SharedSecret{}
 	obj, err := c.Fake.
-		Invokes(testing.NewUpdateAction(sharedsecretsResource, c.ns, sharedSecret), &v1.SharedSecret{})
+		Invokes(testing.NewUpdateActionWithOptions(sharedsecretsResource, c.ns, sharedSecret, opts), emptyResult)
 
 	if obj == nil {
-		return nil, err
+		return emptyResult, err
 	}
 	return obj.(*v1.SharedSecret), err
 }
 
 // UpdateStatus was generated because the type contains a Status member.
 // Add a +genclient:noStatus comment above the type to avoid generating UpdateStatus().
-func (c *FakeSharedSecrets) UpdateStatus(ctx context.Context, sharedSecret *v1.SharedSecret, opts metav1.UpdateOptions) (*v1.SharedSecret, error) {
+func (c *FakeSharedSecrets) UpdateStatus(ctx context.Context, sharedSecret *v1.SharedSecret, opts metav1.UpdateOptions) (result *v1.SharedSecret, err error) {
+	emptyResult := &v1.SharedSecret{}
 	obj, err := c.Fake.
-		Invokes(testing.NewUpdateSubresourceAction(sharedsecretsResource, "status", c.ns, sharedSecret), &v1.SharedSecret{})
+		Invokes(testing.NewUpdateSubresourceActionWithOptions(sharedsecretsResource, "status", c.ns, sharedSecret, opts), emptyResult)
 
 	if obj == nil {
-		return nil, err
+		return emptyResult, err
 	}
 	return obj.(*v1.SharedSecret), err
 }
@@ -107,7 +112,7 @@ func (c *FakeSharedSecrets) Delete(ctx context.Context, name string, opts metav1
 
 // DeleteCollection deletes a collection of objects.
 func (c *FakeSharedSecrets) DeleteCollection(ctx context.Context, opts metav1.DeleteOptions, listOpts metav1.ListOptions) error {
-	action := testing.NewDeleteCollectionAction(sharedsecretsResource, c.ns, listOpts)
+	action := testing.NewDeleteCollectionActionWithOptions(sharedsecretsResource, c.ns, opts, listOpts)
 
 	_, err := c.Fake.Invokes(action, &v1.SharedSecretList{})
 	return err
@@ -115,11 +120,12 @@ func (c *FakeSharedSecrets) DeleteCollection(ctx context.Context, opts metav1.De
 
 // Patch applies the patch and returns the patched sharedSecret.
 func (c *FakeSharedSecrets) Patch(ctx context.Context, name string, pt types.PatchType, data []byte, opts metav1.PatchOptions, subresources ...string) (result *v1.SharedSecret, err error) {
+	emptyResult := &v1.SharedSecret{}
 	obj, err := c.Fake.
-		Invokes(testing.NewPatchSubresourceAction(sharedsecretsResource, c.ns, name, pt, data, subresources...), &v1.SharedSecret{})
+		Invokes(testing.NewPatchSubresourceActionWithOptions(sharedsecretsResource, c.ns, name, pt, data, opts, subresources...), emptyResult)
 
 	if obj == nil {
-		return nil, err
+		return emptyResult, err
 	}
 	return obj.(*v1.SharedSecret), err
 }

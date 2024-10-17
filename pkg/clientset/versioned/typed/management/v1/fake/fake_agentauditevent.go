@@ -24,20 +24,22 @@ var agentauditeventsKind = v1.SchemeGroupVersion.WithKind("AgentAuditEvent")
 
 // Get takes name of the agentAuditEvent, and returns the corresponding agentAuditEvent object, and an error if there is any.
 func (c *FakeAgentAuditEvents) Get(ctx context.Context, name string, options metav1.GetOptions) (result *v1.AgentAuditEvent, err error) {
+	emptyResult := &v1.AgentAuditEvent{}
 	obj, err := c.Fake.
-		Invokes(testing.NewRootGetAction(agentauditeventsResource, name), &v1.AgentAuditEvent{})
+		Invokes(testing.NewRootGetActionWithOptions(agentauditeventsResource, name, options), emptyResult)
 	if obj == nil {
-		return nil, err
+		return emptyResult, err
 	}
 	return obj.(*v1.AgentAuditEvent), err
 }
 
 // List takes label and field selectors, and returns the list of AgentAuditEvents that match those selectors.
 func (c *FakeAgentAuditEvents) List(ctx context.Context, opts metav1.ListOptions) (result *v1.AgentAuditEventList, err error) {
+	emptyResult := &v1.AgentAuditEventList{}
 	obj, err := c.Fake.
-		Invokes(testing.NewRootListAction(agentauditeventsResource, agentauditeventsKind, opts), &v1.AgentAuditEventList{})
+		Invokes(testing.NewRootListActionWithOptions(agentauditeventsResource, agentauditeventsKind, opts), emptyResult)
 	if obj == nil {
-		return nil, err
+		return emptyResult, err
 	}
 
 	label, _, _ := testing.ExtractFromListOptions(opts)
@@ -56,36 +58,39 @@ func (c *FakeAgentAuditEvents) List(ctx context.Context, opts metav1.ListOptions
 // Watch returns a watch.Interface that watches the requested agentAuditEvents.
 func (c *FakeAgentAuditEvents) Watch(ctx context.Context, opts metav1.ListOptions) (watch.Interface, error) {
 	return c.Fake.
-		InvokesWatch(testing.NewRootWatchAction(agentauditeventsResource, opts))
+		InvokesWatch(testing.NewRootWatchActionWithOptions(agentauditeventsResource, opts))
 }
 
 // Create takes the representation of a agentAuditEvent and creates it.  Returns the server's representation of the agentAuditEvent, and an error, if there is any.
 func (c *FakeAgentAuditEvents) Create(ctx context.Context, agentAuditEvent *v1.AgentAuditEvent, opts metav1.CreateOptions) (result *v1.AgentAuditEvent, err error) {
+	emptyResult := &v1.AgentAuditEvent{}
 	obj, err := c.Fake.
-		Invokes(testing.NewRootCreateAction(agentauditeventsResource, agentAuditEvent), &v1.AgentAuditEvent{})
+		Invokes(testing.NewRootCreateActionWithOptions(agentauditeventsResource, agentAuditEvent, opts), emptyResult)
 	if obj == nil {
-		return nil, err
+		return emptyResult, err
 	}
 	return obj.(*v1.AgentAuditEvent), err
 }
 
 // Update takes the representation of a agentAuditEvent and updates it. Returns the server's representation of the agentAuditEvent, and an error, if there is any.
 func (c *FakeAgentAuditEvents) Update(ctx context.Context, agentAuditEvent *v1.AgentAuditEvent, opts metav1.UpdateOptions) (result *v1.AgentAuditEvent, err error) {
+	emptyResult := &v1.AgentAuditEvent{}
 	obj, err := c.Fake.
-		Invokes(testing.NewRootUpdateAction(agentauditeventsResource, agentAuditEvent), &v1.AgentAuditEvent{})
+		Invokes(testing.NewRootUpdateActionWithOptions(agentauditeventsResource, agentAuditEvent, opts), emptyResult)
 	if obj == nil {
-		return nil, err
+		return emptyResult, err
 	}
 	return obj.(*v1.AgentAuditEvent), err
 }
 
 // UpdateStatus was generated because the type contains a Status member.
 // Add a +genclient:noStatus comment above the type to avoid generating UpdateStatus().
-func (c *FakeAgentAuditEvents) UpdateStatus(ctx context.Context, agentAuditEvent *v1.AgentAuditEvent, opts metav1.UpdateOptions) (*v1.AgentAuditEvent, error) {
+func (c *FakeAgentAuditEvents) UpdateStatus(ctx context.Context, agentAuditEvent *v1.AgentAuditEvent, opts metav1.UpdateOptions) (result *v1.AgentAuditEvent, err error) {
+	emptyResult := &v1.AgentAuditEvent{}
 	obj, err := c.Fake.
-		Invokes(testing.NewRootUpdateSubresourceAction(agentauditeventsResource, "status", agentAuditEvent), &v1.AgentAuditEvent{})
+		Invokes(testing.NewRootUpdateSubresourceActionWithOptions(agentauditeventsResource, "status", agentAuditEvent, opts), emptyResult)
 	if obj == nil {
-		return nil, err
+		return emptyResult, err
 	}
 	return obj.(*v1.AgentAuditEvent), err
 }
@@ -99,7 +104,7 @@ func (c *FakeAgentAuditEvents) Delete(ctx context.Context, name string, opts met
 
 // DeleteCollection deletes a collection of objects.
 func (c *FakeAgentAuditEvents) DeleteCollection(ctx context.Context, opts metav1.DeleteOptions, listOpts metav1.ListOptions) error {
-	action := testing.NewRootDeleteCollectionAction(agentauditeventsResource, listOpts)
+	action := testing.NewRootDeleteCollectionActionWithOptions(agentauditeventsResource, opts, listOpts)
 
 	_, err := c.Fake.Invokes(action, &v1.AgentAuditEventList{})
 	return err
@@ -107,10 +112,11 @@ func (c *FakeAgentAuditEvents) DeleteCollection(ctx context.Context, opts metav1
 
 // Patch applies the patch and returns the patched agentAuditEvent.
 func (c *FakeAgentAuditEvents) Patch(ctx context.Context, name string, pt types.PatchType, data []byte, opts metav1.PatchOptions, subresources ...string) (result *v1.AgentAuditEvent, err error) {
+	emptyResult := &v1.AgentAuditEvent{}
 	obj, err := c.Fake.
-		Invokes(testing.NewRootPatchSubresourceAction(agentauditeventsResource, name, pt, data, subresources...), &v1.AgentAuditEvent{})
+		Invokes(testing.NewRootPatchSubresourceActionWithOptions(agentauditeventsResource, name, pt, data, opts, subresources...), emptyResult)
 	if obj == nil {
-		return nil, err
+		return emptyResult, err
 	}
 	return obj.(*v1.AgentAuditEvent), err
 }

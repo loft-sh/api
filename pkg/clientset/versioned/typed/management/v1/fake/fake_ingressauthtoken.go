@@ -24,20 +24,22 @@ var ingressauthtokensKind = v1.SchemeGroupVersion.WithKind("IngressAuthToken")
 
 // Get takes name of the ingressAuthToken, and returns the corresponding ingressAuthToken object, and an error if there is any.
 func (c *FakeIngressAuthTokens) Get(ctx context.Context, name string, options metav1.GetOptions) (result *v1.IngressAuthToken, err error) {
+	emptyResult := &v1.IngressAuthToken{}
 	obj, err := c.Fake.
-		Invokes(testing.NewRootGetAction(ingressauthtokensResource, name), &v1.IngressAuthToken{})
+		Invokes(testing.NewRootGetActionWithOptions(ingressauthtokensResource, name, options), emptyResult)
 	if obj == nil {
-		return nil, err
+		return emptyResult, err
 	}
 	return obj.(*v1.IngressAuthToken), err
 }
 
 // List takes label and field selectors, and returns the list of IngressAuthTokens that match those selectors.
 func (c *FakeIngressAuthTokens) List(ctx context.Context, opts metav1.ListOptions) (result *v1.IngressAuthTokenList, err error) {
+	emptyResult := &v1.IngressAuthTokenList{}
 	obj, err := c.Fake.
-		Invokes(testing.NewRootListAction(ingressauthtokensResource, ingressauthtokensKind, opts), &v1.IngressAuthTokenList{})
+		Invokes(testing.NewRootListActionWithOptions(ingressauthtokensResource, ingressauthtokensKind, opts), emptyResult)
 	if obj == nil {
-		return nil, err
+		return emptyResult, err
 	}
 
 	label, _, _ := testing.ExtractFromListOptions(opts)
@@ -56,36 +58,39 @@ func (c *FakeIngressAuthTokens) List(ctx context.Context, opts metav1.ListOption
 // Watch returns a watch.Interface that watches the requested ingressAuthTokens.
 func (c *FakeIngressAuthTokens) Watch(ctx context.Context, opts metav1.ListOptions) (watch.Interface, error) {
 	return c.Fake.
-		InvokesWatch(testing.NewRootWatchAction(ingressauthtokensResource, opts))
+		InvokesWatch(testing.NewRootWatchActionWithOptions(ingressauthtokensResource, opts))
 }
 
 // Create takes the representation of a ingressAuthToken and creates it.  Returns the server's representation of the ingressAuthToken, and an error, if there is any.
 func (c *FakeIngressAuthTokens) Create(ctx context.Context, ingressAuthToken *v1.IngressAuthToken, opts metav1.CreateOptions) (result *v1.IngressAuthToken, err error) {
+	emptyResult := &v1.IngressAuthToken{}
 	obj, err := c.Fake.
-		Invokes(testing.NewRootCreateAction(ingressauthtokensResource, ingressAuthToken), &v1.IngressAuthToken{})
+		Invokes(testing.NewRootCreateActionWithOptions(ingressauthtokensResource, ingressAuthToken, opts), emptyResult)
 	if obj == nil {
-		return nil, err
+		return emptyResult, err
 	}
 	return obj.(*v1.IngressAuthToken), err
 }
 
 // Update takes the representation of a ingressAuthToken and updates it. Returns the server's representation of the ingressAuthToken, and an error, if there is any.
 func (c *FakeIngressAuthTokens) Update(ctx context.Context, ingressAuthToken *v1.IngressAuthToken, opts metav1.UpdateOptions) (result *v1.IngressAuthToken, err error) {
+	emptyResult := &v1.IngressAuthToken{}
 	obj, err := c.Fake.
-		Invokes(testing.NewRootUpdateAction(ingressauthtokensResource, ingressAuthToken), &v1.IngressAuthToken{})
+		Invokes(testing.NewRootUpdateActionWithOptions(ingressauthtokensResource, ingressAuthToken, opts), emptyResult)
 	if obj == nil {
-		return nil, err
+		return emptyResult, err
 	}
 	return obj.(*v1.IngressAuthToken), err
 }
 
 // UpdateStatus was generated because the type contains a Status member.
 // Add a +genclient:noStatus comment above the type to avoid generating UpdateStatus().
-func (c *FakeIngressAuthTokens) UpdateStatus(ctx context.Context, ingressAuthToken *v1.IngressAuthToken, opts metav1.UpdateOptions) (*v1.IngressAuthToken, error) {
+func (c *FakeIngressAuthTokens) UpdateStatus(ctx context.Context, ingressAuthToken *v1.IngressAuthToken, opts metav1.UpdateOptions) (result *v1.IngressAuthToken, err error) {
+	emptyResult := &v1.IngressAuthToken{}
 	obj, err := c.Fake.
-		Invokes(testing.NewRootUpdateSubresourceAction(ingressauthtokensResource, "status", ingressAuthToken), &v1.IngressAuthToken{})
+		Invokes(testing.NewRootUpdateSubresourceActionWithOptions(ingressauthtokensResource, "status", ingressAuthToken, opts), emptyResult)
 	if obj == nil {
-		return nil, err
+		return emptyResult, err
 	}
 	return obj.(*v1.IngressAuthToken), err
 }
@@ -99,7 +104,7 @@ func (c *FakeIngressAuthTokens) Delete(ctx context.Context, name string, opts me
 
 // DeleteCollection deletes a collection of objects.
 func (c *FakeIngressAuthTokens) DeleteCollection(ctx context.Context, opts metav1.DeleteOptions, listOpts metav1.ListOptions) error {
-	action := testing.NewRootDeleteCollectionAction(ingressauthtokensResource, listOpts)
+	action := testing.NewRootDeleteCollectionActionWithOptions(ingressauthtokensResource, opts, listOpts)
 
 	_, err := c.Fake.Invokes(action, &v1.IngressAuthTokenList{})
 	return err
@@ -107,10 +112,11 @@ func (c *FakeIngressAuthTokens) DeleteCollection(ctx context.Context, opts metav
 
 // Patch applies the patch and returns the patched ingressAuthToken.
 func (c *FakeIngressAuthTokens) Patch(ctx context.Context, name string, pt types.PatchType, data []byte, opts metav1.PatchOptions, subresources ...string) (result *v1.IngressAuthToken, err error) {
+	emptyResult := &v1.IngressAuthToken{}
 	obj, err := c.Fake.
-		Invokes(testing.NewRootPatchSubresourceAction(ingressauthtokensResource, name, pt, data, subresources...), &v1.IngressAuthToken{})
+		Invokes(testing.NewRootPatchSubresourceActionWithOptions(ingressauthtokensResource, name, pt, data, opts, subresources...), emptyResult)
 	if obj == nil {
-		return nil, err
+		return emptyResult, err
 	}
 	return obj.(*v1.IngressAuthToken), err
 }

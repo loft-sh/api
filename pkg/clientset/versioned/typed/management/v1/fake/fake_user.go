@@ -24,20 +24,22 @@ var usersKind = v1.SchemeGroupVersion.WithKind("User")
 
 // Get takes name of the user, and returns the corresponding user object, and an error if there is any.
 func (c *FakeUsers) Get(ctx context.Context, name string, options metav1.GetOptions) (result *v1.User, err error) {
+	emptyResult := &v1.User{}
 	obj, err := c.Fake.
-		Invokes(testing.NewRootGetAction(usersResource, name), &v1.User{})
+		Invokes(testing.NewRootGetActionWithOptions(usersResource, name, options), emptyResult)
 	if obj == nil {
-		return nil, err
+		return emptyResult, err
 	}
 	return obj.(*v1.User), err
 }
 
 // List takes label and field selectors, and returns the list of Users that match those selectors.
 func (c *FakeUsers) List(ctx context.Context, opts metav1.ListOptions) (result *v1.UserList, err error) {
+	emptyResult := &v1.UserList{}
 	obj, err := c.Fake.
-		Invokes(testing.NewRootListAction(usersResource, usersKind, opts), &v1.UserList{})
+		Invokes(testing.NewRootListActionWithOptions(usersResource, usersKind, opts), emptyResult)
 	if obj == nil {
-		return nil, err
+		return emptyResult, err
 	}
 
 	label, _, _ := testing.ExtractFromListOptions(opts)
@@ -56,36 +58,39 @@ func (c *FakeUsers) List(ctx context.Context, opts metav1.ListOptions) (result *
 // Watch returns a watch.Interface that watches the requested users.
 func (c *FakeUsers) Watch(ctx context.Context, opts metav1.ListOptions) (watch.Interface, error) {
 	return c.Fake.
-		InvokesWatch(testing.NewRootWatchAction(usersResource, opts))
+		InvokesWatch(testing.NewRootWatchActionWithOptions(usersResource, opts))
 }
 
 // Create takes the representation of a user and creates it.  Returns the server's representation of the user, and an error, if there is any.
 func (c *FakeUsers) Create(ctx context.Context, user *v1.User, opts metav1.CreateOptions) (result *v1.User, err error) {
+	emptyResult := &v1.User{}
 	obj, err := c.Fake.
-		Invokes(testing.NewRootCreateAction(usersResource, user), &v1.User{})
+		Invokes(testing.NewRootCreateActionWithOptions(usersResource, user, opts), emptyResult)
 	if obj == nil {
-		return nil, err
+		return emptyResult, err
 	}
 	return obj.(*v1.User), err
 }
 
 // Update takes the representation of a user and updates it. Returns the server's representation of the user, and an error, if there is any.
 func (c *FakeUsers) Update(ctx context.Context, user *v1.User, opts metav1.UpdateOptions) (result *v1.User, err error) {
+	emptyResult := &v1.User{}
 	obj, err := c.Fake.
-		Invokes(testing.NewRootUpdateAction(usersResource, user), &v1.User{})
+		Invokes(testing.NewRootUpdateActionWithOptions(usersResource, user, opts), emptyResult)
 	if obj == nil {
-		return nil, err
+		return emptyResult, err
 	}
 	return obj.(*v1.User), err
 }
 
 // UpdateStatus was generated because the type contains a Status member.
 // Add a +genclient:noStatus comment above the type to avoid generating UpdateStatus().
-func (c *FakeUsers) UpdateStatus(ctx context.Context, user *v1.User, opts metav1.UpdateOptions) (*v1.User, error) {
+func (c *FakeUsers) UpdateStatus(ctx context.Context, user *v1.User, opts metav1.UpdateOptions) (result *v1.User, err error) {
+	emptyResult := &v1.User{}
 	obj, err := c.Fake.
-		Invokes(testing.NewRootUpdateSubresourceAction(usersResource, "status", user), &v1.User{})
+		Invokes(testing.NewRootUpdateSubresourceActionWithOptions(usersResource, "status", user, opts), emptyResult)
 	if obj == nil {
-		return nil, err
+		return emptyResult, err
 	}
 	return obj.(*v1.User), err
 }
@@ -99,7 +104,7 @@ func (c *FakeUsers) Delete(ctx context.Context, name string, opts metav1.DeleteO
 
 // DeleteCollection deletes a collection of objects.
 func (c *FakeUsers) DeleteCollection(ctx context.Context, opts metav1.DeleteOptions, listOpts metav1.ListOptions) error {
-	action := testing.NewRootDeleteCollectionAction(usersResource, listOpts)
+	action := testing.NewRootDeleteCollectionActionWithOptions(usersResource, opts, listOpts)
 
 	_, err := c.Fake.Invokes(action, &v1.UserList{})
 	return err
@@ -107,40 +112,44 @@ func (c *FakeUsers) DeleteCollection(ctx context.Context, opts metav1.DeleteOpti
 
 // Patch applies the patch and returns the patched user.
 func (c *FakeUsers) Patch(ctx context.Context, name string, pt types.PatchType, data []byte, opts metav1.PatchOptions, subresources ...string) (result *v1.User, err error) {
+	emptyResult := &v1.User{}
 	obj, err := c.Fake.
-		Invokes(testing.NewRootPatchSubresourceAction(usersResource, name, pt, data, subresources...), &v1.User{})
+		Invokes(testing.NewRootPatchSubresourceActionWithOptions(usersResource, name, pt, data, opts, subresources...), emptyResult)
 	if obj == nil {
-		return nil, err
+		return emptyResult, err
 	}
 	return obj.(*v1.User), err
 }
 
 // GetProfile takes name of the user, and returns the corresponding userProfile object, and an error if there is any.
 func (c *FakeUsers) GetProfile(ctx context.Context, userName string, options metav1.GetOptions) (result *v1.UserProfile, err error) {
+	emptyResult := &v1.UserProfile{}
 	obj, err := c.Fake.
-		Invokes(testing.NewRootGetSubresourceAction(usersResource, "profile", userName), &v1.UserProfile{})
+		Invokes(testing.NewRootGetSubresourceActionWithOptions(usersResource, "profile", userName, options), emptyResult)
 	if obj == nil {
-		return nil, err
+		return emptyResult, err
 	}
 	return obj.(*v1.UserProfile), err
 }
 
 // ListClusters takes name of the user, and returns the corresponding userClusters object, and an error if there is any.
 func (c *FakeUsers) ListClusters(ctx context.Context, userName string, options metav1.GetOptions) (result *v1.UserClusters, err error) {
+	emptyResult := &v1.UserClusters{}
 	obj, err := c.Fake.
-		Invokes(testing.NewRootGetSubresourceAction(usersResource, "clusters", userName), &v1.UserClusters{})
+		Invokes(testing.NewRootGetSubresourceActionWithOptions(usersResource, "clusters", userName, options), emptyResult)
 	if obj == nil {
-		return nil, err
+		return emptyResult, err
 	}
 	return obj.(*v1.UserClusters), err
 }
 
 // ListAccessKeys takes name of the user, and returns the corresponding userAccessKeys object, and an error if there is any.
 func (c *FakeUsers) ListAccessKeys(ctx context.Context, userName string, options metav1.GetOptions) (result *v1.UserAccessKeys, err error) {
+	emptyResult := &v1.UserAccessKeys{}
 	obj, err := c.Fake.
-		Invokes(testing.NewRootGetSubresourceAction(usersResource, "accesskeys", userName), &v1.UserAccessKeys{})
+		Invokes(testing.NewRootGetSubresourceActionWithOptions(usersResource, "accesskeys", userName, options), emptyResult)
 	if obj == nil {
-		return nil, err
+		return emptyResult, err
 	}
 	return obj.(*v1.UserAccessKeys), err
 }
