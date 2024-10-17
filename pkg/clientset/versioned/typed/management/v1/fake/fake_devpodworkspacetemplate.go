@@ -24,20 +24,22 @@ var devpodworkspacetemplatesKind = v1.SchemeGroupVersion.WithKind("DevPodWorkspa
 
 // Get takes name of the devPodWorkspaceTemplate, and returns the corresponding devPodWorkspaceTemplate object, and an error if there is any.
 func (c *FakeDevPodWorkspaceTemplates) Get(ctx context.Context, name string, options metav1.GetOptions) (result *v1.DevPodWorkspaceTemplate, err error) {
+	emptyResult := &v1.DevPodWorkspaceTemplate{}
 	obj, err := c.Fake.
-		Invokes(testing.NewRootGetAction(devpodworkspacetemplatesResource, name), &v1.DevPodWorkspaceTemplate{})
+		Invokes(testing.NewRootGetActionWithOptions(devpodworkspacetemplatesResource, name, options), emptyResult)
 	if obj == nil {
-		return nil, err
+		return emptyResult, err
 	}
 	return obj.(*v1.DevPodWorkspaceTemplate), err
 }
 
 // List takes label and field selectors, and returns the list of DevPodWorkspaceTemplates that match those selectors.
 func (c *FakeDevPodWorkspaceTemplates) List(ctx context.Context, opts metav1.ListOptions) (result *v1.DevPodWorkspaceTemplateList, err error) {
+	emptyResult := &v1.DevPodWorkspaceTemplateList{}
 	obj, err := c.Fake.
-		Invokes(testing.NewRootListAction(devpodworkspacetemplatesResource, devpodworkspacetemplatesKind, opts), &v1.DevPodWorkspaceTemplateList{})
+		Invokes(testing.NewRootListActionWithOptions(devpodworkspacetemplatesResource, devpodworkspacetemplatesKind, opts), emptyResult)
 	if obj == nil {
-		return nil, err
+		return emptyResult, err
 	}
 
 	label, _, _ := testing.ExtractFromListOptions(opts)
@@ -56,36 +58,39 @@ func (c *FakeDevPodWorkspaceTemplates) List(ctx context.Context, opts metav1.Lis
 // Watch returns a watch.Interface that watches the requested devPodWorkspaceTemplates.
 func (c *FakeDevPodWorkspaceTemplates) Watch(ctx context.Context, opts metav1.ListOptions) (watch.Interface, error) {
 	return c.Fake.
-		InvokesWatch(testing.NewRootWatchAction(devpodworkspacetemplatesResource, opts))
+		InvokesWatch(testing.NewRootWatchActionWithOptions(devpodworkspacetemplatesResource, opts))
 }
 
 // Create takes the representation of a devPodWorkspaceTemplate and creates it.  Returns the server's representation of the devPodWorkspaceTemplate, and an error, if there is any.
 func (c *FakeDevPodWorkspaceTemplates) Create(ctx context.Context, devPodWorkspaceTemplate *v1.DevPodWorkspaceTemplate, opts metav1.CreateOptions) (result *v1.DevPodWorkspaceTemplate, err error) {
+	emptyResult := &v1.DevPodWorkspaceTemplate{}
 	obj, err := c.Fake.
-		Invokes(testing.NewRootCreateAction(devpodworkspacetemplatesResource, devPodWorkspaceTemplate), &v1.DevPodWorkspaceTemplate{})
+		Invokes(testing.NewRootCreateActionWithOptions(devpodworkspacetemplatesResource, devPodWorkspaceTemplate, opts), emptyResult)
 	if obj == nil {
-		return nil, err
+		return emptyResult, err
 	}
 	return obj.(*v1.DevPodWorkspaceTemplate), err
 }
 
 // Update takes the representation of a devPodWorkspaceTemplate and updates it. Returns the server's representation of the devPodWorkspaceTemplate, and an error, if there is any.
 func (c *FakeDevPodWorkspaceTemplates) Update(ctx context.Context, devPodWorkspaceTemplate *v1.DevPodWorkspaceTemplate, opts metav1.UpdateOptions) (result *v1.DevPodWorkspaceTemplate, err error) {
+	emptyResult := &v1.DevPodWorkspaceTemplate{}
 	obj, err := c.Fake.
-		Invokes(testing.NewRootUpdateAction(devpodworkspacetemplatesResource, devPodWorkspaceTemplate), &v1.DevPodWorkspaceTemplate{})
+		Invokes(testing.NewRootUpdateActionWithOptions(devpodworkspacetemplatesResource, devPodWorkspaceTemplate, opts), emptyResult)
 	if obj == nil {
-		return nil, err
+		return emptyResult, err
 	}
 	return obj.(*v1.DevPodWorkspaceTemplate), err
 }
 
 // UpdateStatus was generated because the type contains a Status member.
 // Add a +genclient:noStatus comment above the type to avoid generating UpdateStatus().
-func (c *FakeDevPodWorkspaceTemplates) UpdateStatus(ctx context.Context, devPodWorkspaceTemplate *v1.DevPodWorkspaceTemplate, opts metav1.UpdateOptions) (*v1.DevPodWorkspaceTemplate, error) {
+func (c *FakeDevPodWorkspaceTemplates) UpdateStatus(ctx context.Context, devPodWorkspaceTemplate *v1.DevPodWorkspaceTemplate, opts metav1.UpdateOptions) (result *v1.DevPodWorkspaceTemplate, err error) {
+	emptyResult := &v1.DevPodWorkspaceTemplate{}
 	obj, err := c.Fake.
-		Invokes(testing.NewRootUpdateSubresourceAction(devpodworkspacetemplatesResource, "status", devPodWorkspaceTemplate), &v1.DevPodWorkspaceTemplate{})
+		Invokes(testing.NewRootUpdateSubresourceActionWithOptions(devpodworkspacetemplatesResource, "status", devPodWorkspaceTemplate, opts), emptyResult)
 	if obj == nil {
-		return nil, err
+		return emptyResult, err
 	}
 	return obj.(*v1.DevPodWorkspaceTemplate), err
 }
@@ -99,7 +104,7 @@ func (c *FakeDevPodWorkspaceTemplates) Delete(ctx context.Context, name string, 
 
 // DeleteCollection deletes a collection of objects.
 func (c *FakeDevPodWorkspaceTemplates) DeleteCollection(ctx context.Context, opts metav1.DeleteOptions, listOpts metav1.ListOptions) error {
-	action := testing.NewRootDeleteCollectionAction(devpodworkspacetemplatesResource, listOpts)
+	action := testing.NewRootDeleteCollectionActionWithOptions(devpodworkspacetemplatesResource, opts, listOpts)
 
 	_, err := c.Fake.Invokes(action, &v1.DevPodWorkspaceTemplateList{})
 	return err
@@ -107,10 +112,11 @@ func (c *FakeDevPodWorkspaceTemplates) DeleteCollection(ctx context.Context, opt
 
 // Patch applies the patch and returns the patched devPodWorkspaceTemplate.
 func (c *FakeDevPodWorkspaceTemplates) Patch(ctx context.Context, name string, pt types.PatchType, data []byte, opts metav1.PatchOptions, subresources ...string) (result *v1.DevPodWorkspaceTemplate, err error) {
+	emptyResult := &v1.DevPodWorkspaceTemplate{}
 	obj, err := c.Fake.
-		Invokes(testing.NewRootPatchSubresourceAction(devpodworkspacetemplatesResource, name, pt, data, subresources...), &v1.DevPodWorkspaceTemplate{})
+		Invokes(testing.NewRootPatchSubresourceActionWithOptions(devpodworkspacetemplatesResource, name, pt, data, opts, subresources...), emptyResult)
 	if obj == nil {
-		return nil, err
+		return emptyResult, err
 	}
 	return obj.(*v1.DevPodWorkspaceTemplate), err
 }

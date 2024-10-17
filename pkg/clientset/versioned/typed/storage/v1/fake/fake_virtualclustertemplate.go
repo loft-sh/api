@@ -24,20 +24,22 @@ var virtualclustertemplatesKind = v1.SchemeGroupVersion.WithKind("VirtualCluster
 
 // Get takes name of the virtualClusterTemplate, and returns the corresponding virtualClusterTemplate object, and an error if there is any.
 func (c *FakeVirtualClusterTemplates) Get(ctx context.Context, name string, options metav1.GetOptions) (result *v1.VirtualClusterTemplate, err error) {
+	emptyResult := &v1.VirtualClusterTemplate{}
 	obj, err := c.Fake.
-		Invokes(testing.NewRootGetAction(virtualclustertemplatesResource, name), &v1.VirtualClusterTemplate{})
+		Invokes(testing.NewRootGetActionWithOptions(virtualclustertemplatesResource, name, options), emptyResult)
 	if obj == nil {
-		return nil, err
+		return emptyResult, err
 	}
 	return obj.(*v1.VirtualClusterTemplate), err
 }
 
 // List takes label and field selectors, and returns the list of VirtualClusterTemplates that match those selectors.
 func (c *FakeVirtualClusterTemplates) List(ctx context.Context, opts metav1.ListOptions) (result *v1.VirtualClusterTemplateList, err error) {
+	emptyResult := &v1.VirtualClusterTemplateList{}
 	obj, err := c.Fake.
-		Invokes(testing.NewRootListAction(virtualclustertemplatesResource, virtualclustertemplatesKind, opts), &v1.VirtualClusterTemplateList{})
+		Invokes(testing.NewRootListActionWithOptions(virtualclustertemplatesResource, virtualclustertemplatesKind, opts), emptyResult)
 	if obj == nil {
-		return nil, err
+		return emptyResult, err
 	}
 
 	label, _, _ := testing.ExtractFromListOptions(opts)
@@ -56,36 +58,39 @@ func (c *FakeVirtualClusterTemplates) List(ctx context.Context, opts metav1.List
 // Watch returns a watch.Interface that watches the requested virtualClusterTemplates.
 func (c *FakeVirtualClusterTemplates) Watch(ctx context.Context, opts metav1.ListOptions) (watch.Interface, error) {
 	return c.Fake.
-		InvokesWatch(testing.NewRootWatchAction(virtualclustertemplatesResource, opts))
+		InvokesWatch(testing.NewRootWatchActionWithOptions(virtualclustertemplatesResource, opts))
 }
 
 // Create takes the representation of a virtualClusterTemplate and creates it.  Returns the server's representation of the virtualClusterTemplate, and an error, if there is any.
 func (c *FakeVirtualClusterTemplates) Create(ctx context.Context, virtualClusterTemplate *v1.VirtualClusterTemplate, opts metav1.CreateOptions) (result *v1.VirtualClusterTemplate, err error) {
+	emptyResult := &v1.VirtualClusterTemplate{}
 	obj, err := c.Fake.
-		Invokes(testing.NewRootCreateAction(virtualclustertemplatesResource, virtualClusterTemplate), &v1.VirtualClusterTemplate{})
+		Invokes(testing.NewRootCreateActionWithOptions(virtualclustertemplatesResource, virtualClusterTemplate, opts), emptyResult)
 	if obj == nil {
-		return nil, err
+		return emptyResult, err
 	}
 	return obj.(*v1.VirtualClusterTemplate), err
 }
 
 // Update takes the representation of a virtualClusterTemplate and updates it. Returns the server's representation of the virtualClusterTemplate, and an error, if there is any.
 func (c *FakeVirtualClusterTemplates) Update(ctx context.Context, virtualClusterTemplate *v1.VirtualClusterTemplate, opts metav1.UpdateOptions) (result *v1.VirtualClusterTemplate, err error) {
+	emptyResult := &v1.VirtualClusterTemplate{}
 	obj, err := c.Fake.
-		Invokes(testing.NewRootUpdateAction(virtualclustertemplatesResource, virtualClusterTemplate), &v1.VirtualClusterTemplate{})
+		Invokes(testing.NewRootUpdateActionWithOptions(virtualclustertemplatesResource, virtualClusterTemplate, opts), emptyResult)
 	if obj == nil {
-		return nil, err
+		return emptyResult, err
 	}
 	return obj.(*v1.VirtualClusterTemplate), err
 }
 
 // UpdateStatus was generated because the type contains a Status member.
 // Add a +genclient:noStatus comment above the type to avoid generating UpdateStatus().
-func (c *FakeVirtualClusterTemplates) UpdateStatus(ctx context.Context, virtualClusterTemplate *v1.VirtualClusterTemplate, opts metav1.UpdateOptions) (*v1.VirtualClusterTemplate, error) {
+func (c *FakeVirtualClusterTemplates) UpdateStatus(ctx context.Context, virtualClusterTemplate *v1.VirtualClusterTemplate, opts metav1.UpdateOptions) (result *v1.VirtualClusterTemplate, err error) {
+	emptyResult := &v1.VirtualClusterTemplate{}
 	obj, err := c.Fake.
-		Invokes(testing.NewRootUpdateSubresourceAction(virtualclustertemplatesResource, "status", virtualClusterTemplate), &v1.VirtualClusterTemplate{})
+		Invokes(testing.NewRootUpdateSubresourceActionWithOptions(virtualclustertemplatesResource, "status", virtualClusterTemplate, opts), emptyResult)
 	if obj == nil {
-		return nil, err
+		return emptyResult, err
 	}
 	return obj.(*v1.VirtualClusterTemplate), err
 }
@@ -99,7 +104,7 @@ func (c *FakeVirtualClusterTemplates) Delete(ctx context.Context, name string, o
 
 // DeleteCollection deletes a collection of objects.
 func (c *FakeVirtualClusterTemplates) DeleteCollection(ctx context.Context, opts metav1.DeleteOptions, listOpts metav1.ListOptions) error {
-	action := testing.NewRootDeleteCollectionAction(virtualclustertemplatesResource, listOpts)
+	action := testing.NewRootDeleteCollectionActionWithOptions(virtualclustertemplatesResource, opts, listOpts)
 
 	_, err := c.Fake.Invokes(action, &v1.VirtualClusterTemplateList{})
 	return err
@@ -107,10 +112,11 @@ func (c *FakeVirtualClusterTemplates) DeleteCollection(ctx context.Context, opts
 
 // Patch applies the patch and returns the patched virtualClusterTemplate.
 func (c *FakeVirtualClusterTemplates) Patch(ctx context.Context, name string, pt types.PatchType, data []byte, opts metav1.PatchOptions, subresources ...string) (result *v1.VirtualClusterTemplate, err error) {
+	emptyResult := &v1.VirtualClusterTemplate{}
 	obj, err := c.Fake.
-		Invokes(testing.NewRootPatchSubresourceAction(virtualclustertemplatesResource, name, pt, data, subresources...), &v1.VirtualClusterTemplate{})
+		Invokes(testing.NewRootPatchSubresourceActionWithOptions(virtualclustertemplatesResource, name, pt, data, opts, subresources...), emptyResult)
 	if obj == nil {
-		return nil, err
+		return emptyResult, err
 	}
 	return obj.(*v1.VirtualClusterTemplate), err
 }

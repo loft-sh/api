@@ -24,20 +24,22 @@ var directclusterendpointtokensKind = v1.SchemeGroupVersion.WithKind("DirectClus
 
 // Get takes name of the directClusterEndpointToken, and returns the corresponding directClusterEndpointToken object, and an error if there is any.
 func (c *FakeDirectClusterEndpointTokens) Get(ctx context.Context, name string, options metav1.GetOptions) (result *v1.DirectClusterEndpointToken, err error) {
+	emptyResult := &v1.DirectClusterEndpointToken{}
 	obj, err := c.Fake.
-		Invokes(testing.NewRootGetAction(directclusterendpointtokensResource, name), &v1.DirectClusterEndpointToken{})
+		Invokes(testing.NewRootGetActionWithOptions(directclusterendpointtokensResource, name, options), emptyResult)
 	if obj == nil {
-		return nil, err
+		return emptyResult, err
 	}
 	return obj.(*v1.DirectClusterEndpointToken), err
 }
 
 // List takes label and field selectors, and returns the list of DirectClusterEndpointTokens that match those selectors.
 func (c *FakeDirectClusterEndpointTokens) List(ctx context.Context, opts metav1.ListOptions) (result *v1.DirectClusterEndpointTokenList, err error) {
+	emptyResult := &v1.DirectClusterEndpointTokenList{}
 	obj, err := c.Fake.
-		Invokes(testing.NewRootListAction(directclusterendpointtokensResource, directclusterendpointtokensKind, opts), &v1.DirectClusterEndpointTokenList{})
+		Invokes(testing.NewRootListActionWithOptions(directclusterendpointtokensResource, directclusterendpointtokensKind, opts), emptyResult)
 	if obj == nil {
-		return nil, err
+		return emptyResult, err
 	}
 
 	label, _, _ := testing.ExtractFromListOptions(opts)
@@ -56,36 +58,39 @@ func (c *FakeDirectClusterEndpointTokens) List(ctx context.Context, opts metav1.
 // Watch returns a watch.Interface that watches the requested directClusterEndpointTokens.
 func (c *FakeDirectClusterEndpointTokens) Watch(ctx context.Context, opts metav1.ListOptions) (watch.Interface, error) {
 	return c.Fake.
-		InvokesWatch(testing.NewRootWatchAction(directclusterendpointtokensResource, opts))
+		InvokesWatch(testing.NewRootWatchActionWithOptions(directclusterendpointtokensResource, opts))
 }
 
 // Create takes the representation of a directClusterEndpointToken and creates it.  Returns the server's representation of the directClusterEndpointToken, and an error, if there is any.
 func (c *FakeDirectClusterEndpointTokens) Create(ctx context.Context, directClusterEndpointToken *v1.DirectClusterEndpointToken, opts metav1.CreateOptions) (result *v1.DirectClusterEndpointToken, err error) {
+	emptyResult := &v1.DirectClusterEndpointToken{}
 	obj, err := c.Fake.
-		Invokes(testing.NewRootCreateAction(directclusterendpointtokensResource, directClusterEndpointToken), &v1.DirectClusterEndpointToken{})
+		Invokes(testing.NewRootCreateActionWithOptions(directclusterendpointtokensResource, directClusterEndpointToken, opts), emptyResult)
 	if obj == nil {
-		return nil, err
+		return emptyResult, err
 	}
 	return obj.(*v1.DirectClusterEndpointToken), err
 }
 
 // Update takes the representation of a directClusterEndpointToken and updates it. Returns the server's representation of the directClusterEndpointToken, and an error, if there is any.
 func (c *FakeDirectClusterEndpointTokens) Update(ctx context.Context, directClusterEndpointToken *v1.DirectClusterEndpointToken, opts metav1.UpdateOptions) (result *v1.DirectClusterEndpointToken, err error) {
+	emptyResult := &v1.DirectClusterEndpointToken{}
 	obj, err := c.Fake.
-		Invokes(testing.NewRootUpdateAction(directclusterendpointtokensResource, directClusterEndpointToken), &v1.DirectClusterEndpointToken{})
+		Invokes(testing.NewRootUpdateActionWithOptions(directclusterendpointtokensResource, directClusterEndpointToken, opts), emptyResult)
 	if obj == nil {
-		return nil, err
+		return emptyResult, err
 	}
 	return obj.(*v1.DirectClusterEndpointToken), err
 }
 
 // UpdateStatus was generated because the type contains a Status member.
 // Add a +genclient:noStatus comment above the type to avoid generating UpdateStatus().
-func (c *FakeDirectClusterEndpointTokens) UpdateStatus(ctx context.Context, directClusterEndpointToken *v1.DirectClusterEndpointToken, opts metav1.UpdateOptions) (*v1.DirectClusterEndpointToken, error) {
+func (c *FakeDirectClusterEndpointTokens) UpdateStatus(ctx context.Context, directClusterEndpointToken *v1.DirectClusterEndpointToken, opts metav1.UpdateOptions) (result *v1.DirectClusterEndpointToken, err error) {
+	emptyResult := &v1.DirectClusterEndpointToken{}
 	obj, err := c.Fake.
-		Invokes(testing.NewRootUpdateSubresourceAction(directclusterendpointtokensResource, "status", directClusterEndpointToken), &v1.DirectClusterEndpointToken{})
+		Invokes(testing.NewRootUpdateSubresourceActionWithOptions(directclusterendpointtokensResource, "status", directClusterEndpointToken, opts), emptyResult)
 	if obj == nil {
-		return nil, err
+		return emptyResult, err
 	}
 	return obj.(*v1.DirectClusterEndpointToken), err
 }
@@ -99,7 +104,7 @@ func (c *FakeDirectClusterEndpointTokens) Delete(ctx context.Context, name strin
 
 // DeleteCollection deletes a collection of objects.
 func (c *FakeDirectClusterEndpointTokens) DeleteCollection(ctx context.Context, opts metav1.DeleteOptions, listOpts metav1.ListOptions) error {
-	action := testing.NewRootDeleteCollectionAction(directclusterendpointtokensResource, listOpts)
+	action := testing.NewRootDeleteCollectionActionWithOptions(directclusterendpointtokensResource, opts, listOpts)
 
 	_, err := c.Fake.Invokes(action, &v1.DirectClusterEndpointTokenList{})
 	return err
@@ -107,10 +112,11 @@ func (c *FakeDirectClusterEndpointTokens) DeleteCollection(ctx context.Context, 
 
 // Patch applies the patch and returns the patched directClusterEndpointToken.
 func (c *FakeDirectClusterEndpointTokens) Patch(ctx context.Context, name string, pt types.PatchType, data []byte, opts metav1.PatchOptions, subresources ...string) (result *v1.DirectClusterEndpointToken, err error) {
+	emptyResult := &v1.DirectClusterEndpointToken{}
 	obj, err := c.Fake.
-		Invokes(testing.NewRootPatchSubresourceAction(directclusterendpointtokensResource, name, pt, data, subresources...), &v1.DirectClusterEndpointToken{})
+		Invokes(testing.NewRootPatchSubresourceActionWithOptions(directclusterendpointtokensResource, name, pt, data, opts, subresources...), emptyResult)
 	if obj == nil {
-		return nil, err
+		return emptyResult, err
 	}
 	return obj.(*v1.DirectClusterEndpointToken), err
 }
