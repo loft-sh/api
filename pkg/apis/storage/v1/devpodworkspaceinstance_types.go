@@ -112,6 +112,10 @@ type DevPodWorkspaceInstanceSpec struct {
 	// Access to the DevPod machine instance object itself
 	// +optional
 	Access []Access `json:"access,omitempty"`
+
+	// PreventWakeUpOnConnection is used to prevent workspace that uses sleep mode from waking up on incomming ssh connection.
+	// +optional
+	PreventWakeUpOnConnection bool `json:"preventWakeUpOnConnection,omitempty"`
 }
 
 type RunnerRef struct {

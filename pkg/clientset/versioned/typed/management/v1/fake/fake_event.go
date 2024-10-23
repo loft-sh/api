@@ -24,20 +24,22 @@ var eventsKind = v1.SchemeGroupVersion.WithKind("Event")
 
 // Get takes name of the event, and returns the corresponding event object, and an error if there is any.
 func (c *FakeEvents) Get(ctx context.Context, name string, options metav1.GetOptions) (result *v1.Event, err error) {
+	emptyResult := &v1.Event{}
 	obj, err := c.Fake.
-		Invokes(testing.NewRootGetAction(eventsResource, name), &v1.Event{})
+		Invokes(testing.NewRootGetActionWithOptions(eventsResource, name, options), emptyResult)
 	if obj == nil {
-		return nil, err
+		return emptyResult, err
 	}
 	return obj.(*v1.Event), err
 }
 
 // List takes label and field selectors, and returns the list of Events that match those selectors.
 func (c *FakeEvents) List(ctx context.Context, opts metav1.ListOptions) (result *v1.EventList, err error) {
+	emptyResult := &v1.EventList{}
 	obj, err := c.Fake.
-		Invokes(testing.NewRootListAction(eventsResource, eventsKind, opts), &v1.EventList{})
+		Invokes(testing.NewRootListActionWithOptions(eventsResource, eventsKind, opts), emptyResult)
 	if obj == nil {
-		return nil, err
+		return emptyResult, err
 	}
 
 	label, _, _ := testing.ExtractFromListOptions(opts)
@@ -56,36 +58,39 @@ func (c *FakeEvents) List(ctx context.Context, opts metav1.ListOptions) (result 
 // Watch returns a watch.Interface that watches the requested events.
 func (c *FakeEvents) Watch(ctx context.Context, opts metav1.ListOptions) (watch.Interface, error) {
 	return c.Fake.
-		InvokesWatch(testing.NewRootWatchAction(eventsResource, opts))
+		InvokesWatch(testing.NewRootWatchActionWithOptions(eventsResource, opts))
 }
 
 // Create takes the representation of a event and creates it.  Returns the server's representation of the event, and an error, if there is any.
 func (c *FakeEvents) Create(ctx context.Context, event *v1.Event, opts metav1.CreateOptions) (result *v1.Event, err error) {
+	emptyResult := &v1.Event{}
 	obj, err := c.Fake.
-		Invokes(testing.NewRootCreateAction(eventsResource, event), &v1.Event{})
+		Invokes(testing.NewRootCreateActionWithOptions(eventsResource, event, opts), emptyResult)
 	if obj == nil {
-		return nil, err
+		return emptyResult, err
 	}
 	return obj.(*v1.Event), err
 }
 
 // Update takes the representation of a event and updates it. Returns the server's representation of the event, and an error, if there is any.
 func (c *FakeEvents) Update(ctx context.Context, event *v1.Event, opts metav1.UpdateOptions) (result *v1.Event, err error) {
+	emptyResult := &v1.Event{}
 	obj, err := c.Fake.
-		Invokes(testing.NewRootUpdateAction(eventsResource, event), &v1.Event{})
+		Invokes(testing.NewRootUpdateActionWithOptions(eventsResource, event, opts), emptyResult)
 	if obj == nil {
-		return nil, err
+		return emptyResult, err
 	}
 	return obj.(*v1.Event), err
 }
 
 // UpdateStatus was generated because the type contains a Status member.
 // Add a +genclient:noStatus comment above the type to avoid generating UpdateStatus().
-func (c *FakeEvents) UpdateStatus(ctx context.Context, event *v1.Event, opts metav1.UpdateOptions) (*v1.Event, error) {
+func (c *FakeEvents) UpdateStatus(ctx context.Context, event *v1.Event, opts metav1.UpdateOptions) (result *v1.Event, err error) {
+	emptyResult := &v1.Event{}
 	obj, err := c.Fake.
-		Invokes(testing.NewRootUpdateSubresourceAction(eventsResource, "status", event), &v1.Event{})
+		Invokes(testing.NewRootUpdateSubresourceActionWithOptions(eventsResource, "status", event, opts), emptyResult)
 	if obj == nil {
-		return nil, err
+		return emptyResult, err
 	}
 	return obj.(*v1.Event), err
 }
@@ -99,7 +104,7 @@ func (c *FakeEvents) Delete(ctx context.Context, name string, opts metav1.Delete
 
 // DeleteCollection deletes a collection of objects.
 func (c *FakeEvents) DeleteCollection(ctx context.Context, opts metav1.DeleteOptions, listOpts metav1.ListOptions) error {
-	action := testing.NewRootDeleteCollectionAction(eventsResource, listOpts)
+	action := testing.NewRootDeleteCollectionActionWithOptions(eventsResource, opts, listOpts)
 
 	_, err := c.Fake.Invokes(action, &v1.EventList{})
 	return err
@@ -107,10 +112,11 @@ func (c *FakeEvents) DeleteCollection(ctx context.Context, opts metav1.DeleteOpt
 
 // Patch applies the patch and returns the patched event.
 func (c *FakeEvents) Patch(ctx context.Context, name string, pt types.PatchType, data []byte, opts metav1.PatchOptions, subresources ...string) (result *v1.Event, err error) {
+	emptyResult := &v1.Event{}
 	obj, err := c.Fake.
-		Invokes(testing.NewRootPatchSubresourceAction(eventsResource, name, pt, data, subresources...), &v1.Event{})
+		Invokes(testing.NewRootPatchSubresourceActionWithOptions(eventsResource, name, pt, data, opts, subresources...), emptyResult)
 	if obj == nil {
-		return nil, err
+		return emptyResult, err
 	}
 	return obj.(*v1.Event), err
 }

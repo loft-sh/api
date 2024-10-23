@@ -24,20 +24,22 @@ var spacetemplatesKind = v1.SchemeGroupVersion.WithKind("SpaceTemplate")
 
 // Get takes name of the spaceTemplate, and returns the corresponding spaceTemplate object, and an error if there is any.
 func (c *FakeSpaceTemplates) Get(ctx context.Context, name string, options metav1.GetOptions) (result *v1.SpaceTemplate, err error) {
+	emptyResult := &v1.SpaceTemplate{}
 	obj, err := c.Fake.
-		Invokes(testing.NewRootGetAction(spacetemplatesResource, name), &v1.SpaceTemplate{})
+		Invokes(testing.NewRootGetActionWithOptions(spacetemplatesResource, name, options), emptyResult)
 	if obj == nil {
-		return nil, err
+		return emptyResult, err
 	}
 	return obj.(*v1.SpaceTemplate), err
 }
 
 // List takes label and field selectors, and returns the list of SpaceTemplates that match those selectors.
 func (c *FakeSpaceTemplates) List(ctx context.Context, opts metav1.ListOptions) (result *v1.SpaceTemplateList, err error) {
+	emptyResult := &v1.SpaceTemplateList{}
 	obj, err := c.Fake.
-		Invokes(testing.NewRootListAction(spacetemplatesResource, spacetemplatesKind, opts), &v1.SpaceTemplateList{})
+		Invokes(testing.NewRootListActionWithOptions(spacetemplatesResource, spacetemplatesKind, opts), emptyResult)
 	if obj == nil {
-		return nil, err
+		return emptyResult, err
 	}
 
 	label, _, _ := testing.ExtractFromListOptions(opts)
@@ -56,36 +58,39 @@ func (c *FakeSpaceTemplates) List(ctx context.Context, opts metav1.ListOptions) 
 // Watch returns a watch.Interface that watches the requested spaceTemplates.
 func (c *FakeSpaceTemplates) Watch(ctx context.Context, opts metav1.ListOptions) (watch.Interface, error) {
 	return c.Fake.
-		InvokesWatch(testing.NewRootWatchAction(spacetemplatesResource, opts))
+		InvokesWatch(testing.NewRootWatchActionWithOptions(spacetemplatesResource, opts))
 }
 
 // Create takes the representation of a spaceTemplate and creates it.  Returns the server's representation of the spaceTemplate, and an error, if there is any.
 func (c *FakeSpaceTemplates) Create(ctx context.Context, spaceTemplate *v1.SpaceTemplate, opts metav1.CreateOptions) (result *v1.SpaceTemplate, err error) {
+	emptyResult := &v1.SpaceTemplate{}
 	obj, err := c.Fake.
-		Invokes(testing.NewRootCreateAction(spacetemplatesResource, spaceTemplate), &v1.SpaceTemplate{})
+		Invokes(testing.NewRootCreateActionWithOptions(spacetemplatesResource, spaceTemplate, opts), emptyResult)
 	if obj == nil {
-		return nil, err
+		return emptyResult, err
 	}
 	return obj.(*v1.SpaceTemplate), err
 }
 
 // Update takes the representation of a spaceTemplate and updates it. Returns the server's representation of the spaceTemplate, and an error, if there is any.
 func (c *FakeSpaceTemplates) Update(ctx context.Context, spaceTemplate *v1.SpaceTemplate, opts metav1.UpdateOptions) (result *v1.SpaceTemplate, err error) {
+	emptyResult := &v1.SpaceTemplate{}
 	obj, err := c.Fake.
-		Invokes(testing.NewRootUpdateAction(spacetemplatesResource, spaceTemplate), &v1.SpaceTemplate{})
+		Invokes(testing.NewRootUpdateActionWithOptions(spacetemplatesResource, spaceTemplate, opts), emptyResult)
 	if obj == nil {
-		return nil, err
+		return emptyResult, err
 	}
 	return obj.(*v1.SpaceTemplate), err
 }
 
 // UpdateStatus was generated because the type contains a Status member.
 // Add a +genclient:noStatus comment above the type to avoid generating UpdateStatus().
-func (c *FakeSpaceTemplates) UpdateStatus(ctx context.Context, spaceTemplate *v1.SpaceTemplate, opts metav1.UpdateOptions) (*v1.SpaceTemplate, error) {
+func (c *FakeSpaceTemplates) UpdateStatus(ctx context.Context, spaceTemplate *v1.SpaceTemplate, opts metav1.UpdateOptions) (result *v1.SpaceTemplate, err error) {
+	emptyResult := &v1.SpaceTemplate{}
 	obj, err := c.Fake.
-		Invokes(testing.NewRootUpdateSubresourceAction(spacetemplatesResource, "status", spaceTemplate), &v1.SpaceTemplate{})
+		Invokes(testing.NewRootUpdateSubresourceActionWithOptions(spacetemplatesResource, "status", spaceTemplate, opts), emptyResult)
 	if obj == nil {
-		return nil, err
+		return emptyResult, err
 	}
 	return obj.(*v1.SpaceTemplate), err
 }
@@ -99,7 +104,7 @@ func (c *FakeSpaceTemplates) Delete(ctx context.Context, name string, opts metav
 
 // DeleteCollection deletes a collection of objects.
 func (c *FakeSpaceTemplates) DeleteCollection(ctx context.Context, opts metav1.DeleteOptions, listOpts metav1.ListOptions) error {
-	action := testing.NewRootDeleteCollectionAction(spacetemplatesResource, listOpts)
+	action := testing.NewRootDeleteCollectionActionWithOptions(spacetemplatesResource, opts, listOpts)
 
 	_, err := c.Fake.Invokes(action, &v1.SpaceTemplateList{})
 	return err
@@ -107,10 +112,11 @@ func (c *FakeSpaceTemplates) DeleteCollection(ctx context.Context, opts metav1.D
 
 // Patch applies the patch and returns the patched spaceTemplate.
 func (c *FakeSpaceTemplates) Patch(ctx context.Context, name string, pt types.PatchType, data []byte, opts metav1.PatchOptions, subresources ...string) (result *v1.SpaceTemplate, err error) {
+	emptyResult := &v1.SpaceTemplate{}
 	obj, err := c.Fake.
-		Invokes(testing.NewRootPatchSubresourceAction(spacetemplatesResource, name, pt, data, subresources...), &v1.SpaceTemplate{})
+		Invokes(testing.NewRootPatchSubresourceActionWithOptions(spacetemplatesResource, name, pt, data, opts, subresources...), emptyResult)
 	if obj == nil {
-		return nil, err
+		return emptyResult, err
 	}
 	return obj.(*v1.SpaceTemplate), err
 }

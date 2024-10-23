@@ -24,20 +24,22 @@ var devpodenvironmenttemplatesKind = v1.SchemeGroupVersion.WithKind("DevPodEnvir
 
 // Get takes name of the devPodEnvironmentTemplate, and returns the corresponding devPodEnvironmentTemplate object, and an error if there is any.
 func (c *FakeDevPodEnvironmentTemplates) Get(ctx context.Context, name string, options metav1.GetOptions) (result *v1.DevPodEnvironmentTemplate, err error) {
+	emptyResult := &v1.DevPodEnvironmentTemplate{}
 	obj, err := c.Fake.
-		Invokes(testing.NewRootGetAction(devpodenvironmenttemplatesResource, name), &v1.DevPodEnvironmentTemplate{})
+		Invokes(testing.NewRootGetActionWithOptions(devpodenvironmenttemplatesResource, name, options), emptyResult)
 	if obj == nil {
-		return nil, err
+		return emptyResult, err
 	}
 	return obj.(*v1.DevPodEnvironmentTemplate), err
 }
 
 // List takes label and field selectors, and returns the list of DevPodEnvironmentTemplates that match those selectors.
 func (c *FakeDevPodEnvironmentTemplates) List(ctx context.Context, opts metav1.ListOptions) (result *v1.DevPodEnvironmentTemplateList, err error) {
+	emptyResult := &v1.DevPodEnvironmentTemplateList{}
 	obj, err := c.Fake.
-		Invokes(testing.NewRootListAction(devpodenvironmenttemplatesResource, devpodenvironmenttemplatesKind, opts), &v1.DevPodEnvironmentTemplateList{})
+		Invokes(testing.NewRootListActionWithOptions(devpodenvironmenttemplatesResource, devpodenvironmenttemplatesKind, opts), emptyResult)
 	if obj == nil {
-		return nil, err
+		return emptyResult, err
 	}
 
 	label, _, _ := testing.ExtractFromListOptions(opts)
@@ -56,25 +58,27 @@ func (c *FakeDevPodEnvironmentTemplates) List(ctx context.Context, opts metav1.L
 // Watch returns a watch.Interface that watches the requested devPodEnvironmentTemplates.
 func (c *FakeDevPodEnvironmentTemplates) Watch(ctx context.Context, opts metav1.ListOptions) (watch.Interface, error) {
 	return c.Fake.
-		InvokesWatch(testing.NewRootWatchAction(devpodenvironmenttemplatesResource, opts))
+		InvokesWatch(testing.NewRootWatchActionWithOptions(devpodenvironmenttemplatesResource, opts))
 }
 
 // Create takes the representation of a devPodEnvironmentTemplate and creates it.  Returns the server's representation of the devPodEnvironmentTemplate, and an error, if there is any.
 func (c *FakeDevPodEnvironmentTemplates) Create(ctx context.Context, devPodEnvironmentTemplate *v1.DevPodEnvironmentTemplate, opts metav1.CreateOptions) (result *v1.DevPodEnvironmentTemplate, err error) {
+	emptyResult := &v1.DevPodEnvironmentTemplate{}
 	obj, err := c.Fake.
-		Invokes(testing.NewRootCreateAction(devpodenvironmenttemplatesResource, devPodEnvironmentTemplate), &v1.DevPodEnvironmentTemplate{})
+		Invokes(testing.NewRootCreateActionWithOptions(devpodenvironmenttemplatesResource, devPodEnvironmentTemplate, opts), emptyResult)
 	if obj == nil {
-		return nil, err
+		return emptyResult, err
 	}
 	return obj.(*v1.DevPodEnvironmentTemplate), err
 }
 
 // Update takes the representation of a devPodEnvironmentTemplate and updates it. Returns the server's representation of the devPodEnvironmentTemplate, and an error, if there is any.
 func (c *FakeDevPodEnvironmentTemplates) Update(ctx context.Context, devPodEnvironmentTemplate *v1.DevPodEnvironmentTemplate, opts metav1.UpdateOptions) (result *v1.DevPodEnvironmentTemplate, err error) {
+	emptyResult := &v1.DevPodEnvironmentTemplate{}
 	obj, err := c.Fake.
-		Invokes(testing.NewRootUpdateAction(devpodenvironmenttemplatesResource, devPodEnvironmentTemplate), &v1.DevPodEnvironmentTemplate{})
+		Invokes(testing.NewRootUpdateActionWithOptions(devpodenvironmenttemplatesResource, devPodEnvironmentTemplate, opts), emptyResult)
 	if obj == nil {
-		return nil, err
+		return emptyResult, err
 	}
 	return obj.(*v1.DevPodEnvironmentTemplate), err
 }
@@ -88,7 +92,7 @@ func (c *FakeDevPodEnvironmentTemplates) Delete(ctx context.Context, name string
 
 // DeleteCollection deletes a collection of objects.
 func (c *FakeDevPodEnvironmentTemplates) DeleteCollection(ctx context.Context, opts metav1.DeleteOptions, listOpts metav1.ListOptions) error {
-	action := testing.NewRootDeleteCollectionAction(devpodenvironmenttemplatesResource, listOpts)
+	action := testing.NewRootDeleteCollectionActionWithOptions(devpodenvironmenttemplatesResource, opts, listOpts)
 
 	_, err := c.Fake.Invokes(action, &v1.DevPodEnvironmentTemplateList{})
 	return err
@@ -96,10 +100,11 @@ func (c *FakeDevPodEnvironmentTemplates) DeleteCollection(ctx context.Context, o
 
 // Patch applies the patch and returns the patched devPodEnvironmentTemplate.
 func (c *FakeDevPodEnvironmentTemplates) Patch(ctx context.Context, name string, pt types.PatchType, data []byte, opts metav1.PatchOptions, subresources ...string) (result *v1.DevPodEnvironmentTemplate, err error) {
+	emptyResult := &v1.DevPodEnvironmentTemplate{}
 	obj, err := c.Fake.
-		Invokes(testing.NewRootPatchSubresourceAction(devpodenvironmenttemplatesResource, name, pt, data, subresources...), &v1.DevPodEnvironmentTemplate{})
+		Invokes(testing.NewRootPatchSubresourceActionWithOptions(devpodenvironmenttemplatesResource, name, pt, data, opts, subresources...), emptyResult)
 	if obj == nil {
-		return nil, err
+		return emptyResult, err
 	}
 	return obj.(*v1.DevPodEnvironmentTemplate), err
 }

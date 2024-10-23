@@ -24,20 +24,22 @@ var resetaccesskeysKind = v1.SchemeGroupVersion.WithKind("ResetAccessKey")
 
 // Get takes name of the resetAccessKey, and returns the corresponding resetAccessKey object, and an error if there is any.
 func (c *FakeResetAccessKeys) Get(ctx context.Context, name string, options metav1.GetOptions) (result *v1.ResetAccessKey, err error) {
+	emptyResult := &v1.ResetAccessKey{}
 	obj, err := c.Fake.
-		Invokes(testing.NewRootGetAction(resetaccesskeysResource, name), &v1.ResetAccessKey{})
+		Invokes(testing.NewRootGetActionWithOptions(resetaccesskeysResource, name, options), emptyResult)
 	if obj == nil {
-		return nil, err
+		return emptyResult, err
 	}
 	return obj.(*v1.ResetAccessKey), err
 }
 
 // List takes label and field selectors, and returns the list of ResetAccessKeys that match those selectors.
 func (c *FakeResetAccessKeys) List(ctx context.Context, opts metav1.ListOptions) (result *v1.ResetAccessKeyList, err error) {
+	emptyResult := &v1.ResetAccessKeyList{}
 	obj, err := c.Fake.
-		Invokes(testing.NewRootListAction(resetaccesskeysResource, resetaccesskeysKind, opts), &v1.ResetAccessKeyList{})
+		Invokes(testing.NewRootListActionWithOptions(resetaccesskeysResource, resetaccesskeysKind, opts), emptyResult)
 	if obj == nil {
-		return nil, err
+		return emptyResult, err
 	}
 
 	label, _, _ := testing.ExtractFromListOptions(opts)
@@ -56,36 +58,39 @@ func (c *FakeResetAccessKeys) List(ctx context.Context, opts metav1.ListOptions)
 // Watch returns a watch.Interface that watches the requested resetAccessKeys.
 func (c *FakeResetAccessKeys) Watch(ctx context.Context, opts metav1.ListOptions) (watch.Interface, error) {
 	return c.Fake.
-		InvokesWatch(testing.NewRootWatchAction(resetaccesskeysResource, opts))
+		InvokesWatch(testing.NewRootWatchActionWithOptions(resetaccesskeysResource, opts))
 }
 
 // Create takes the representation of a resetAccessKey and creates it.  Returns the server's representation of the resetAccessKey, and an error, if there is any.
 func (c *FakeResetAccessKeys) Create(ctx context.Context, resetAccessKey *v1.ResetAccessKey, opts metav1.CreateOptions) (result *v1.ResetAccessKey, err error) {
+	emptyResult := &v1.ResetAccessKey{}
 	obj, err := c.Fake.
-		Invokes(testing.NewRootCreateAction(resetaccesskeysResource, resetAccessKey), &v1.ResetAccessKey{})
+		Invokes(testing.NewRootCreateActionWithOptions(resetaccesskeysResource, resetAccessKey, opts), emptyResult)
 	if obj == nil {
-		return nil, err
+		return emptyResult, err
 	}
 	return obj.(*v1.ResetAccessKey), err
 }
 
 // Update takes the representation of a resetAccessKey and updates it. Returns the server's representation of the resetAccessKey, and an error, if there is any.
 func (c *FakeResetAccessKeys) Update(ctx context.Context, resetAccessKey *v1.ResetAccessKey, opts metav1.UpdateOptions) (result *v1.ResetAccessKey, err error) {
+	emptyResult := &v1.ResetAccessKey{}
 	obj, err := c.Fake.
-		Invokes(testing.NewRootUpdateAction(resetaccesskeysResource, resetAccessKey), &v1.ResetAccessKey{})
+		Invokes(testing.NewRootUpdateActionWithOptions(resetaccesskeysResource, resetAccessKey, opts), emptyResult)
 	if obj == nil {
-		return nil, err
+		return emptyResult, err
 	}
 	return obj.(*v1.ResetAccessKey), err
 }
 
 // UpdateStatus was generated because the type contains a Status member.
 // Add a +genclient:noStatus comment above the type to avoid generating UpdateStatus().
-func (c *FakeResetAccessKeys) UpdateStatus(ctx context.Context, resetAccessKey *v1.ResetAccessKey, opts metav1.UpdateOptions) (*v1.ResetAccessKey, error) {
+func (c *FakeResetAccessKeys) UpdateStatus(ctx context.Context, resetAccessKey *v1.ResetAccessKey, opts metav1.UpdateOptions) (result *v1.ResetAccessKey, err error) {
+	emptyResult := &v1.ResetAccessKey{}
 	obj, err := c.Fake.
-		Invokes(testing.NewRootUpdateSubresourceAction(resetaccesskeysResource, "status", resetAccessKey), &v1.ResetAccessKey{})
+		Invokes(testing.NewRootUpdateSubresourceActionWithOptions(resetaccesskeysResource, "status", resetAccessKey, opts), emptyResult)
 	if obj == nil {
-		return nil, err
+		return emptyResult, err
 	}
 	return obj.(*v1.ResetAccessKey), err
 }
@@ -99,7 +104,7 @@ func (c *FakeResetAccessKeys) Delete(ctx context.Context, name string, opts meta
 
 // DeleteCollection deletes a collection of objects.
 func (c *FakeResetAccessKeys) DeleteCollection(ctx context.Context, opts metav1.DeleteOptions, listOpts metav1.ListOptions) error {
-	action := testing.NewRootDeleteCollectionAction(resetaccesskeysResource, listOpts)
+	action := testing.NewRootDeleteCollectionActionWithOptions(resetaccesskeysResource, opts, listOpts)
 
 	_, err := c.Fake.Invokes(action, &v1.ResetAccessKeyList{})
 	return err
@@ -107,10 +112,11 @@ func (c *FakeResetAccessKeys) DeleteCollection(ctx context.Context, opts metav1.
 
 // Patch applies the patch and returns the patched resetAccessKey.
 func (c *FakeResetAccessKeys) Patch(ctx context.Context, name string, pt types.PatchType, data []byte, opts metav1.PatchOptions, subresources ...string) (result *v1.ResetAccessKey, err error) {
+	emptyResult := &v1.ResetAccessKey{}
 	obj, err := c.Fake.
-		Invokes(testing.NewRootPatchSubresourceAction(resetaccesskeysResource, name, pt, data, subresources...), &v1.ResetAccessKey{})
+		Invokes(testing.NewRootPatchSubresourceActionWithOptions(resetaccesskeysResource, name, pt, data, opts, subresources...), emptyResult)
 	if obj == nil {
-		return nil, err
+		return emptyResult, err
 	}
 	return obj.(*v1.ResetAccessKey), err
 }
