@@ -28483,7 +28483,7 @@ func schema_pkg_apis_ui_v1_UISettingsSpec(ref common.ReferenceCallback) common.O
 					},
 					"hasHelmRelease": {
 						SchemaProps: spec.SchemaProps{
-							Description: "HasHelmRelease indicates whether loft has been installed via Helm",
+							Description: "HasHelmRelease indicates whether the vCluster Platform instance has been installed via Helm",
 							Type:        []string{"boolean"},
 							Format:      "",
 						},
@@ -28492,6 +28492,13 @@ func schema_pkg_apis_ui_v1_UISettingsSpec(ref common.ReferenceCallback) common.O
 						SchemaProps: spec.SchemaProps{
 							Description: "DefaultVClusterVersion is the default version of vClusters",
 							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"loftHosted": {
+						SchemaProps: spec.SchemaProps{
+							Description: "LoftHosted indicates whether the vCluster Platform instance is hosted and operated by Loft Labs Inc.",
+							Type:        []string{"boolean"},
 							Format:      "",
 						},
 					},
