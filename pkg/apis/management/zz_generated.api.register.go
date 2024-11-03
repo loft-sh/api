@@ -1194,7 +1194,15 @@ var (
 	NewVirtualClusterAccessKeyREST = func(getter generic.RESTOptionsGetter) rest.Storage {
 		return NewVirtualClusterAccessKeyRESTFunc(Factory)
 	}
-	NewVirtualClusterAccessKeyRESTFunc           NewRESTFunc
+	NewVirtualClusterAccessKeyRESTFunc         NewRESTFunc
+	InternalVirtualClusterExternalDatabaseREST = builders.NewInternalSubresource(
+		"virtualclusterinstances", "VirtualClusterExternalDatabase", "externaldatabase",
+		func() runtime.Object { return &VirtualClusterExternalDatabase{} },
+	)
+	NewVirtualClusterExternalDatabaseREST = func(getter generic.RESTOptionsGetter) rest.Storage {
+		return NewVirtualClusterExternalDatabaseRESTFunc(Factory)
+	}
+	NewVirtualClusterExternalDatabaseRESTFunc    NewRESTFunc
 	InternalVirtualClusterInstanceKubeConfigREST = builders.NewInternalSubresource(
 		"virtualclusterinstances", "VirtualClusterInstanceKubeConfig", "kubeconfig",
 		func() runtime.Object { return &VirtualClusterInstanceKubeConfig{} },
@@ -1339,6 +1347,7 @@ var (
 		InternalVirtualClusterInstance,
 		InternalVirtualClusterInstanceStatus,
 		InternalVirtualClusterAccessKeyREST,
+		InternalVirtualClusterExternalDatabaseREST,
 		InternalVirtualClusterInstanceKubeConfigREST,
 		InternalVirtualClusterInstanceLogREST,
 		InternalVirtualClusterTemplate,
@@ -2727,6 +2736,23 @@ type VirtualClusterAccessKey struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
 	AccessKey         string `json:"accessKey,omitempty"`
+}
+
+// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+
+type VirtualClusterExternalDatabase struct {
+	metav1.TypeMeta   `json:",inline"`
+	metav1.ObjectMeta `json:"metadata,omitempty"`
+	Spec              VirtualClusterExternalDatabaseSpec   `json:"spec,omitempty"`
+	Status            VirtualClusterExternalDatabaseStatus `json:"status,omitempty"`
+}
+
+type VirtualClusterExternalDatabaseSpec struct {
+	Connector string `json:"connector,omitempty"`
+}
+
+type VirtualClusterExternalDatabaseStatus struct {
+	DataSource string `json:"dataSource,omitempty"`
 }
 
 // +genclient
@@ -7624,6 +7650,14 @@ type VirtualClusterAccessKeyList struct {
 	metav1.TypeMeta `json:",inline"`
 	metav1.ListMeta `json:"metadata,omitempty"`
 	Items           []VirtualClusterAccessKey `json:"items"`
+}
+
+// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+
+type VirtualClusterExternalDatabaseList struct {
+	metav1.TypeMeta `json:",inline"`
+	metav1.ListMeta `json:"metadata,omitempty"`
+	Items           []VirtualClusterExternalDatabase `json:"items"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object

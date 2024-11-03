@@ -342,6 +342,10 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 		"github.com/loft-sh/api/v4/pkg/apis/management/v1.UserVirtualClustersOptions":                 schema_pkg_apis_management_v1_UserVirtualClustersOptions(ref),
 		"github.com/loft-sh/api/v4/pkg/apis/management/v1.VirtualClusterAccessKey":                    schema_pkg_apis_management_v1_VirtualClusterAccessKey(ref),
 		"github.com/loft-sh/api/v4/pkg/apis/management/v1.VirtualClusterAccessKeyList":                schema_pkg_apis_management_v1_VirtualClusterAccessKeyList(ref),
+		"github.com/loft-sh/api/v4/pkg/apis/management/v1.VirtualClusterExternalDatabase":             schema_pkg_apis_management_v1_VirtualClusterExternalDatabase(ref),
+		"github.com/loft-sh/api/v4/pkg/apis/management/v1.VirtualClusterExternalDatabaseList":         schema_pkg_apis_management_v1_VirtualClusterExternalDatabaseList(ref),
+		"github.com/loft-sh/api/v4/pkg/apis/management/v1.VirtualClusterExternalDatabaseSpec":         schema_pkg_apis_management_v1_VirtualClusterExternalDatabaseSpec(ref),
+		"github.com/loft-sh/api/v4/pkg/apis/management/v1.VirtualClusterExternalDatabaseStatus":       schema_pkg_apis_management_v1_VirtualClusterExternalDatabaseStatus(ref),
 		"github.com/loft-sh/api/v4/pkg/apis/management/v1.VirtualClusterInstance":                     schema_pkg_apis_management_v1_VirtualClusterInstance(ref),
 		"github.com/loft-sh/api/v4/pkg/apis/management/v1.VirtualClusterInstanceKubeConfig":           schema_pkg_apis_management_v1_VirtualClusterInstanceKubeConfig(ref),
 		"github.com/loft-sh/api/v4/pkg/apis/management/v1.VirtualClusterInstanceKubeConfigList":       schema_pkg_apis_management_v1_VirtualClusterInstanceKubeConfigList(ref),
@@ -17712,6 +17716,139 @@ func schema_pkg_apis_management_v1_VirtualClusterAccessKeyList(ref common.Refere
 	}
 }
 
+func schema_pkg_apis_management_v1_VirtualClusterExternalDatabase(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "VirtualClusterExternalDatabase holds kube config request and response data for virtual clusters",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"kind": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"apiVersion": {
+						SchemaProps: spec.SchemaProps{
+							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"metadata": {
+						SchemaProps: spec.SchemaProps{
+							Default: map[string]interface{}{},
+							Ref:     ref("k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"),
+						},
+					},
+					"spec": {
+						SchemaProps: spec.SchemaProps{
+							Default: map[string]interface{}{},
+							Ref:     ref("github.com/loft-sh/api/v4/pkg/apis/management/v1.VirtualClusterExternalDatabaseSpec"),
+						},
+					},
+					"status": {
+						SchemaProps: spec.SchemaProps{
+							Default: map[string]interface{}{},
+							Ref:     ref("github.com/loft-sh/api/v4/pkg/apis/management/v1.VirtualClusterExternalDatabaseStatus"),
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			"github.com/loft-sh/api/v4/pkg/apis/management/v1.VirtualClusterExternalDatabaseSpec", "github.com/loft-sh/api/v4/pkg/apis/management/v1.VirtualClusterExternalDatabaseStatus", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
+	}
+}
+
+func schema_pkg_apis_management_v1_VirtualClusterExternalDatabaseList(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"kind": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"apiVersion": {
+						SchemaProps: spec.SchemaProps{
+							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"metadata": {
+						SchemaProps: spec.SchemaProps{
+							Default: map[string]interface{}{},
+							Ref:     ref("k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"),
+						},
+					},
+					"items": {
+						SchemaProps: spec.SchemaProps{
+							Type: []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref("github.com/loft-sh/api/v4/pkg/apis/management/v1.VirtualClusterExternalDatabase"),
+									},
+								},
+							},
+						},
+					},
+				},
+				Required: []string{"items"},
+			},
+		},
+		Dependencies: []string{
+			"github.com/loft-sh/api/v4/pkg/apis/management/v1.VirtualClusterExternalDatabase", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
+	}
+}
+
+func schema_pkg_apis_management_v1_VirtualClusterExternalDatabaseSpec(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"connector": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Connector specifies the secret that should be used to connect to an external database server. The connection is used to manage a user and database for the vCluster. A data source endpoint constructed from the created user and database is returned on status. The secret specified by connector should contain the following fields: endpoint - the endpoint where the database server can be accessed user - the database username password - the password for the database username port - the port to be used in conjunction with the endpoint to connect to the databse server. This is commonly 3306",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+				},
+			},
+		},
+	}
+}
+
+func schema_pkg_apis_management_v1_VirtualClusterExternalDatabaseStatus(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"dataSource": {
+						SchemaProps: spec.SchemaProps{
+							Description: "DataSource holds a datasource endpoint constructed from the vCluster's designated user and database. The user and database are created from the given connector.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+				},
+			},
+		},
+	}
+}
+
 func schema_pkg_apis_management_v1_VirtualClusterInstance(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
@@ -28483,7 +28620,7 @@ func schema_pkg_apis_ui_v1_UISettingsSpec(ref common.ReferenceCallback) common.O
 					},
 					"hasHelmRelease": {
 						SchemaProps: spec.SchemaProps{
-							Description: "HasHelmRelease indicates whether loft has been installed via Helm",
+							Description: "HasHelmRelease indicates whether the vCluster Platform instance has been installed via Helm",
 							Type:        []string{"boolean"},
 							Format:      "",
 						},
@@ -28492,6 +28629,13 @@ func schema_pkg_apis_ui_v1_UISettingsSpec(ref common.ReferenceCallback) common.O
 						SchemaProps: spec.SchemaProps{
 							Description: "DefaultVClusterVersion is the default version of vClusters",
 							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"loftHosted": {
+						SchemaProps: spec.SchemaProps{
+							Description: "LoftHosted indicates whether the vCluster Platform instance is hosted and operated by Loft Labs Inc.",
+							Type:        []string{"boolean"},
 							Format:      "",
 						},
 					},
@@ -29239,10 +29383,9 @@ func schema_k8sio_api_admissionregistration_v1_NamedRuleWithOperations(ref commo
 					},
 					"scope": {
 						SchemaProps: spec.SchemaProps{
-							Description: "scope specifies the scope of this rule. Valid values are \"Cluster\", \"Namespaced\", and \"*\" \"Cluster\" means that only cluster-scoped resources will match this rule. Namespace API objects are cluster-scoped. \"Namespaced\" means that only namespaced resources will match this rule. \"*\" means that there are no scope restrictions. Subresources match the scope of their parent resource. Default is \"*\".\n\n\nPossible enum values:\n - `\"*\"` means that all scopes are included.\n - `\"Cluster\"` means that scope is limited to cluster-scoped objects. Namespace objects are cluster-scoped.\n - `\"Namespaced\"` means that scope is limited to namespaced objects.",
+							Description: "scope specifies the scope of this rule. Valid values are \"Cluster\", \"Namespaced\", and \"*\" \"Cluster\" means that only cluster-scoped resources will match this rule. Namespace API objects are cluster-scoped. \"Namespaced\" means that only namespaced resources will match this rule. \"*\" means that there are no scope restrictions. Subresources match the scope of their parent resource. Default is \"*\".",
 							Type:        []string{"string"},
 							Format:      "",
-							Enum:        []interface{}{"*", "Cluster", "Namespaced"},
 						},
 					},
 				},
@@ -29404,10 +29547,9 @@ func schema_k8sio_api_admissionregistration_v1_Rule(ref common.ReferenceCallback
 					},
 					"scope": {
 						SchemaProps: spec.SchemaProps{
-							Description: "scope specifies the scope of this rule. Valid values are \"Cluster\", \"Namespaced\", and \"*\" \"Cluster\" means that only cluster-scoped resources will match this rule. Namespace API objects are cluster-scoped. \"Namespaced\" means that only namespaced resources will match this rule. \"*\" means that there are no scope restrictions. Subresources match the scope of their parent resource. Default is \"*\".\n\n\nPossible enum values:\n - `\"*\"` means that all scopes are included.\n - `\"Cluster\"` means that scope is limited to cluster-scoped objects. Namespace objects are cluster-scoped.\n - `\"Namespaced\"` means that scope is limited to namespaced objects.",
+							Description: "scope specifies the scope of this rule. Valid values are \"Cluster\", \"Namespaced\", and \"*\" \"Cluster\" means that only cluster-scoped resources will match this rule. Namespace API objects are cluster-scoped. \"Namespaced\" means that only namespaced resources will match this rule. \"*\" means that there are no scope restrictions. Subresources match the scope of their parent resource. Default is \"*\".",
 							Type:        []string{"string"},
 							Format:      "",
-							Enum:        []interface{}{"*", "Cluster", "Namespaced"},
 						},
 					},
 				},
@@ -29506,10 +29648,9 @@ func schema_k8sio_api_admissionregistration_v1_RuleWithOperations(ref common.Ref
 					},
 					"scope": {
 						SchemaProps: spec.SchemaProps{
-							Description: "scope specifies the scope of this rule. Valid values are \"Cluster\", \"Namespaced\", and \"*\" \"Cluster\" means that only cluster-scoped resources will match this rule. Namespace API objects are cluster-scoped. \"Namespaced\" means that only namespaced resources will match this rule. \"*\" means that there are no scope restrictions. Subresources match the scope of their parent resource. Default is \"*\".\n\n\nPossible enum values:\n - `\"*\"` means that all scopes are included.\n - `\"Cluster\"` means that scope is limited to cluster-scoped objects. Namespace objects are cluster-scoped.\n - `\"Namespaced\"` means that scope is limited to namespaced objects.",
+							Description: "scope specifies the scope of this rule. Valid values are \"Cluster\", \"Namespaced\", and \"*\" \"Cluster\" means that only cluster-scoped resources will match this rule. Namespace API objects are cluster-scoped. \"Namespaced\" means that only namespaced resources will match this rule. \"*\" means that there are no scope restrictions. Subresources match the scope of their parent resource. Default is \"*\".",
 							Type:        []string{"string"},
 							Format:      "",
-							Enum:        []interface{}{"*", "Cluster", "Namespaced"},
 						},
 					},
 				},
@@ -30907,10 +31048,9 @@ func schema_k8sio_api_admissionregistration_v1beta1_NamedRuleWithOperations(ref 
 					},
 					"scope": {
 						SchemaProps: spec.SchemaProps{
-							Description: "scope specifies the scope of this rule. Valid values are \"Cluster\", \"Namespaced\", and \"*\" \"Cluster\" means that only cluster-scoped resources will match this rule. Namespace API objects are cluster-scoped. \"Namespaced\" means that only namespaced resources will match this rule. \"*\" means that there are no scope restrictions. Subresources match the scope of their parent resource. Default is \"*\".\n\n\nPossible enum values:\n - `\"*\"` means that all scopes are included.\n - `\"Cluster\"` means that scope is limited to cluster-scoped objects. Namespace objects are cluster-scoped.\n - `\"Namespaced\"` means that scope is limited to namespaced objects.",
+							Description: "scope specifies the scope of this rule. Valid values are \"Cluster\", \"Namespaced\", and \"*\" \"Cluster\" means that only cluster-scoped resources will match this rule. Namespace API objects are cluster-scoped. \"Namespaced\" means that only namespaced resources will match this rule. \"*\" means that there are no scope restrictions. Subresources match the scope of their parent resource. Default is \"*\".",
 							Type:        []string{"string"},
 							Format:      "",
-							Enum:        []interface{}{"*", "Cluster", "Namespaced"},
 						},
 					},
 				},
