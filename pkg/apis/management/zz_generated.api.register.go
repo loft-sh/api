@@ -1632,6 +1632,11 @@ type BackupStatus struct {
 	RawBackup string `json:"rawBackup,omitempty"`
 }
 
+type Cloud struct {
+	ReleaseChannel    string            `json:"releaseChannel,omitempty"`
+	MaintenanceWindow MaintenanceWindow `json:"maintenanceWindow,omitempty"`
+}
+
 // +genclient
 // +genclient
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -1815,6 +1820,7 @@ type ConfigStatus struct {
 	UISettings             *uiv1.UISettingsConfig          `json:"uiSettings,omitempty"`
 	VaultIntegration       *storagev1.VaultIntegrationSpec `json:"vault,omitempty"`
 	DisableConfigEndpoint  bool                            `json:"disableConfigEndpoint,omitempty"`
+	Cloud                  *Cloud                          `json:"cloud,omitempty"`
 }
 
 type Connector struct {
@@ -2065,7 +2071,7 @@ type KioskStatus struct {
 }
 
 // +genclient
-// +genclient
+// +genclient:nonNamespaced
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
 
 type License struct {
@@ -2139,6 +2145,11 @@ type LoftUpgradeSpec struct {
 }
 
 type LoftUpgradeStatus struct {
+}
+
+type MaintenanceWindow struct {
+	DayOfWeek  string `json:"dayOfWeek,omitempty"`
+	TimeWindow string `json:"timeWindow,omitempty"`
 }
 
 type OIDC struct {

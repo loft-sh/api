@@ -114,6 +114,7 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 		"github.com/loft-sh/api/v4/pkg/apis/management/v1.BackupList":                                 schema_pkg_apis_management_v1_BackupList(ref),
 		"github.com/loft-sh/api/v4/pkg/apis/management/v1.BackupSpec":                                 schema_pkg_apis_management_v1_BackupSpec(ref),
 		"github.com/loft-sh/api/v4/pkg/apis/management/v1.BackupStatus":                               schema_pkg_apis_management_v1_BackupStatus(ref),
+		"github.com/loft-sh/api/v4/pkg/apis/management/v1.Cloud":                                      schema_pkg_apis_management_v1_Cloud(ref),
 		"github.com/loft-sh/api/v4/pkg/apis/management/v1.Cluster":                                    schema_pkg_apis_management_v1_Cluster(ref),
 		"github.com/loft-sh/api/v4/pkg/apis/management/v1.ClusterAccess":                              schema_pkg_apis_management_v1_ClusterAccess(ref),
 		"github.com/loft-sh/api/v4/pkg/apis/management/v1.ClusterAccessKey":                           schema_pkg_apis_management_v1_ClusterAccessKey(ref),
@@ -217,6 +218,7 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 		"github.com/loft-sh/api/v4/pkg/apis/management/v1.LoftUpgradeList":                            schema_pkg_apis_management_v1_LoftUpgradeList(ref),
 		"github.com/loft-sh/api/v4/pkg/apis/management/v1.LoftUpgradeSpec":                            schema_pkg_apis_management_v1_LoftUpgradeSpec(ref),
 		"github.com/loft-sh/api/v4/pkg/apis/management/v1.LoftUpgradeStatus":                          schema_pkg_apis_management_v1_LoftUpgradeStatus(ref),
+		"github.com/loft-sh/api/v4/pkg/apis/management/v1.MaintenanceWindow":                          schema_pkg_apis_management_v1_MaintenanceWindow(ref),
 		"github.com/loft-sh/api/v4/pkg/apis/management/v1.OIDC":                                       schema_pkg_apis_management_v1_OIDC(ref),
 		"github.com/loft-sh/api/v4/pkg/apis/management/v1.OIDCClient":                                 schema_pkg_apis_management_v1_OIDCClient(ref),
 		"github.com/loft-sh/api/v4/pkg/apis/management/v1.OIDCClientList":                             schema_pkg_apis_management_v1_OIDCClientList(ref),
@@ -6591,6 +6593,34 @@ func schema_pkg_apis_management_v1_BackupStatus(ref common.ReferenceCallback) co
 	}
 }
 
+func schema_pkg_apis_management_v1_Cloud(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"releaseChannel": {
+						SchemaProps: spec.SchemaProps{
+							Description: "ReleaseChannel specifies the release channel for the cloud configuration. This can be used to determine which updates or versions are applied.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"maintenanceWindow": {
+						SchemaProps: spec.SchemaProps{
+							Description: "MaintenanceWindow specifies the maintenance window for the cloud configuration. This is a structured representation of the time window during which maintenance can occur.",
+							Default:     map[string]interface{}{},
+							Ref:         ref("github.com/loft-sh/api/v4/pkg/apis/management/v1.MaintenanceWindow"),
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			"github.com/loft-sh/api/v4/pkg/apis/management/v1.MaintenanceWindow"},
+	}
+}
+
 func schema_pkg_apis_management_v1_Cluster(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
@@ -8416,11 +8446,17 @@ func schema_pkg_apis_management_v1_ConfigStatus(ref common.ReferenceCallback) co
 							Format:      "",
 						},
 					},
+					"cloud": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Cloud holkds the settings to be used exclusively in vCluster Cloud based environments and deployments.",
+							Ref:         ref("github.com/loft-sh/api/v4/pkg/apis/management/v1.Cloud"),
+						},
+					},
 				},
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/v4/pkg/apis/management/v1.Apps", "github.com/loft-sh/api/v4/pkg/apis/management/v1.Audit", "github.com/loft-sh/api/v4/pkg/apis/management/v1.Authentication", "github.com/loft-sh/api/v4/pkg/apis/management/v1.OIDC", "github.com/loft-sh/api/v4/pkg/apis/storage/v1.VaultIntegrationSpec", "github.com/loft-sh/api/v4/pkg/apis/ui/v1.UISettingsConfig"},
+			"github.com/loft-sh/api/v4/pkg/apis/management/v1.Apps", "github.com/loft-sh/api/v4/pkg/apis/management/v1.Audit", "github.com/loft-sh/api/v4/pkg/apis/management/v1.Authentication", "github.com/loft-sh/api/v4/pkg/apis/management/v1.Cloud", "github.com/loft-sh/api/v4/pkg/apis/management/v1.OIDC", "github.com/loft-sh/api/v4/pkg/apis/storage/v1.VaultIntegrationSpec", "github.com/loft-sh/api/v4/pkg/apis/ui/v1.UISettingsConfig"},
 	}
 }
 
@@ -11373,6 +11409,32 @@ func schema_pkg_apis_management_v1_LoftUpgradeStatus(ref common.ReferenceCallbac
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
 				Type: []string{"object"},
+			},
+		},
+	}
+}
+
+func schema_pkg_apis_management_v1_MaintenanceWindow(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"dayOfWeek": {
+						SchemaProps: spec.SchemaProps{
+							Description: "DayOfWeek specifies the day of the week for the maintenance window. It should be a string representing the day, e.g., \"Monday\", \"Tuesday\", etc.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"timeWindow": {
+						SchemaProps: spec.SchemaProps{
+							Description: "TimeWindow specifies the time window for the maintenance. It should be a string representing the time range in 24-hour format, in UTC, e.g., \"02:00-03:00\".",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+				},
 			},
 		},
 	}
@@ -29383,9 +29445,10 @@ func schema_k8sio_api_admissionregistration_v1_NamedRuleWithOperations(ref commo
 					},
 					"scope": {
 						SchemaProps: spec.SchemaProps{
-							Description: "scope specifies the scope of this rule. Valid values are \"Cluster\", \"Namespaced\", and \"*\" \"Cluster\" means that only cluster-scoped resources will match this rule. Namespace API objects are cluster-scoped. \"Namespaced\" means that only namespaced resources will match this rule. \"*\" means that there are no scope restrictions. Subresources match the scope of their parent resource. Default is \"*\".",
+							Description: "scope specifies the scope of this rule. Valid values are \"Cluster\", \"Namespaced\", and \"*\" \"Cluster\" means that only cluster-scoped resources will match this rule. Namespace API objects are cluster-scoped. \"Namespaced\" means that only namespaced resources will match this rule. \"*\" means that there are no scope restrictions. Subresources match the scope of their parent resource. Default is \"*\".\n\n\nPossible enum values:\n - `\"*\"` means that all scopes are included.\n - `\"Cluster\"` means that scope is limited to cluster-scoped objects. Namespace objects are cluster-scoped.\n - `\"Namespaced\"` means that scope is limited to namespaced objects.",
 							Type:        []string{"string"},
 							Format:      "",
+							Enum:        []interface{}{"*", "Cluster", "Namespaced"},
 						},
 					},
 				},
@@ -29547,9 +29610,10 @@ func schema_k8sio_api_admissionregistration_v1_Rule(ref common.ReferenceCallback
 					},
 					"scope": {
 						SchemaProps: spec.SchemaProps{
-							Description: "scope specifies the scope of this rule. Valid values are \"Cluster\", \"Namespaced\", and \"*\" \"Cluster\" means that only cluster-scoped resources will match this rule. Namespace API objects are cluster-scoped. \"Namespaced\" means that only namespaced resources will match this rule. \"*\" means that there are no scope restrictions. Subresources match the scope of their parent resource. Default is \"*\".",
+							Description: "scope specifies the scope of this rule. Valid values are \"Cluster\", \"Namespaced\", and \"*\" \"Cluster\" means that only cluster-scoped resources will match this rule. Namespace API objects are cluster-scoped. \"Namespaced\" means that only namespaced resources will match this rule. \"*\" means that there are no scope restrictions. Subresources match the scope of their parent resource. Default is \"*\".\n\n\nPossible enum values:\n - `\"*\"` means that all scopes are included.\n - `\"Cluster\"` means that scope is limited to cluster-scoped objects. Namespace objects are cluster-scoped.\n - `\"Namespaced\"` means that scope is limited to namespaced objects.",
 							Type:        []string{"string"},
 							Format:      "",
+							Enum:        []interface{}{"*", "Cluster", "Namespaced"},
 						},
 					},
 				},
@@ -29648,9 +29712,10 @@ func schema_k8sio_api_admissionregistration_v1_RuleWithOperations(ref common.Ref
 					},
 					"scope": {
 						SchemaProps: spec.SchemaProps{
-							Description: "scope specifies the scope of this rule. Valid values are \"Cluster\", \"Namespaced\", and \"*\" \"Cluster\" means that only cluster-scoped resources will match this rule. Namespace API objects are cluster-scoped. \"Namespaced\" means that only namespaced resources will match this rule. \"*\" means that there are no scope restrictions. Subresources match the scope of their parent resource. Default is \"*\".",
+							Description: "scope specifies the scope of this rule. Valid values are \"Cluster\", \"Namespaced\", and \"*\" \"Cluster\" means that only cluster-scoped resources will match this rule. Namespace API objects are cluster-scoped. \"Namespaced\" means that only namespaced resources will match this rule. \"*\" means that there are no scope restrictions. Subresources match the scope of their parent resource. Default is \"*\".\n\n\nPossible enum values:\n - `\"*\"` means that all scopes are included.\n - `\"Cluster\"` means that scope is limited to cluster-scoped objects. Namespace objects are cluster-scoped.\n - `\"Namespaced\"` means that scope is limited to namespaced objects.",
 							Type:        []string{"string"},
 							Format:      "",
+							Enum:        []interface{}{"*", "Cluster", "Namespaced"},
 						},
 					},
 				},
@@ -31048,9 +31113,10 @@ func schema_k8sio_api_admissionregistration_v1beta1_NamedRuleWithOperations(ref 
 					},
 					"scope": {
 						SchemaProps: spec.SchemaProps{
-							Description: "scope specifies the scope of this rule. Valid values are \"Cluster\", \"Namespaced\", and \"*\" \"Cluster\" means that only cluster-scoped resources will match this rule. Namespace API objects are cluster-scoped. \"Namespaced\" means that only namespaced resources will match this rule. \"*\" means that there are no scope restrictions. Subresources match the scope of their parent resource. Default is \"*\".",
+							Description: "scope specifies the scope of this rule. Valid values are \"Cluster\", \"Namespaced\", and \"*\" \"Cluster\" means that only cluster-scoped resources will match this rule. Namespace API objects are cluster-scoped. \"Namespaced\" means that only namespaced resources will match this rule. \"*\" means that there are no scope restrictions. Subresources match the scope of their parent resource. Default is \"*\".\n\n\nPossible enum values:\n - `\"*\"` means that all scopes are included.\n - `\"Cluster\"` means that scope is limited to cluster-scoped objects. Namespace objects are cluster-scoped.\n - `\"Namespaced\"` means that scope is limited to namespaced objects.",
 							Type:        []string{"string"},
 							Format:      "",
+							Enum:        []interface{}{"*", "Cluster", "Namespaced"},
 						},
 					},
 				},
