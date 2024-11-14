@@ -399,6 +399,16 @@ func RegisterConversions(s *runtime.Scheme) error {
 	}); err != nil {
 		return err
 	}
+	if err := s.AddGeneratedConversionFunc((*Cloud)(nil), (*management.Cloud)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_v1_Cloud_To_management_Cloud(a.(*Cloud), b.(*management.Cloud), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*management.Cloud)(nil), (*Cloud)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_management_Cloud_To_v1_Cloud(a.(*management.Cloud), b.(*Cloud), scope)
+	}); err != nil {
+		return err
+	}
 	if err := s.AddGeneratedConversionFunc((*Cluster)(nil), (*management.Cluster)(nil), func(a, b interface{}, scope conversion.Scope) error {
 		return Convert_v1_Cluster_To_management_Cluster(a.(*Cluster), b.(*management.Cluster), scope)
 	}); err != nil {
@@ -1416,6 +1426,16 @@ func RegisterConversions(s *runtime.Scheme) error {
 	}
 	if err := s.AddGeneratedConversionFunc((*management.LoftUpgradeStatus)(nil), (*LoftUpgradeStatus)(nil), func(a, b interface{}, scope conversion.Scope) error {
 		return Convert_management_LoftUpgradeStatus_To_v1_LoftUpgradeStatus(a.(*management.LoftUpgradeStatus), b.(*LoftUpgradeStatus), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*MaintenanceWindow)(nil), (*management.MaintenanceWindow)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_v1_MaintenanceWindow_To_management_MaintenanceWindow(a.(*MaintenanceWindow), b.(*management.MaintenanceWindow), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*management.MaintenanceWindow)(nil), (*MaintenanceWindow)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_management_MaintenanceWindow_To_v1_MaintenanceWindow(a.(*management.MaintenanceWindow), b.(*MaintenanceWindow), scope)
 	}); err != nil {
 		return err
 	}
@@ -2659,6 +2679,46 @@ func RegisterConversions(s *runtime.Scheme) error {
 	}); err != nil {
 		return err
 	}
+	if err := s.AddGeneratedConversionFunc((*VirtualClusterExternalDatabase)(nil), (*management.VirtualClusterExternalDatabase)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_v1_VirtualClusterExternalDatabase_To_management_VirtualClusterExternalDatabase(a.(*VirtualClusterExternalDatabase), b.(*management.VirtualClusterExternalDatabase), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*management.VirtualClusterExternalDatabase)(nil), (*VirtualClusterExternalDatabase)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_management_VirtualClusterExternalDatabase_To_v1_VirtualClusterExternalDatabase(a.(*management.VirtualClusterExternalDatabase), b.(*VirtualClusterExternalDatabase), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*VirtualClusterExternalDatabaseList)(nil), (*management.VirtualClusterExternalDatabaseList)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_v1_VirtualClusterExternalDatabaseList_To_management_VirtualClusterExternalDatabaseList(a.(*VirtualClusterExternalDatabaseList), b.(*management.VirtualClusterExternalDatabaseList), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*management.VirtualClusterExternalDatabaseList)(nil), (*VirtualClusterExternalDatabaseList)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_management_VirtualClusterExternalDatabaseList_To_v1_VirtualClusterExternalDatabaseList(a.(*management.VirtualClusterExternalDatabaseList), b.(*VirtualClusterExternalDatabaseList), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*VirtualClusterExternalDatabaseSpec)(nil), (*management.VirtualClusterExternalDatabaseSpec)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_v1_VirtualClusterExternalDatabaseSpec_To_management_VirtualClusterExternalDatabaseSpec(a.(*VirtualClusterExternalDatabaseSpec), b.(*management.VirtualClusterExternalDatabaseSpec), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*management.VirtualClusterExternalDatabaseSpec)(nil), (*VirtualClusterExternalDatabaseSpec)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_management_VirtualClusterExternalDatabaseSpec_To_v1_VirtualClusterExternalDatabaseSpec(a.(*management.VirtualClusterExternalDatabaseSpec), b.(*VirtualClusterExternalDatabaseSpec), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*VirtualClusterExternalDatabaseStatus)(nil), (*management.VirtualClusterExternalDatabaseStatus)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_v1_VirtualClusterExternalDatabaseStatus_To_management_VirtualClusterExternalDatabaseStatus(a.(*VirtualClusterExternalDatabaseStatus), b.(*management.VirtualClusterExternalDatabaseStatus), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*management.VirtualClusterExternalDatabaseStatus)(nil), (*VirtualClusterExternalDatabaseStatus)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_management_VirtualClusterExternalDatabaseStatus_To_v1_VirtualClusterExternalDatabaseStatus(a.(*management.VirtualClusterExternalDatabaseStatus), b.(*VirtualClusterExternalDatabaseStatus), scope)
+	}); err != nil {
+		return err
+	}
 	if err := s.AddGeneratedConversionFunc((*VirtualClusterInstance)(nil), (*management.VirtualClusterInstance)(nil), func(a, b interface{}, scope conversion.Scope) error {
 		return Convert_v1_VirtualClusterInstance_To_management_VirtualClusterInstance(a.(*VirtualClusterInstance), b.(*management.VirtualClusterInstance), scope)
 	}); err != nil {
@@ -3880,6 +3940,32 @@ func Convert_management_BackupStatus_To_v1_BackupStatus(in *management.BackupSta
 	return autoConvert_management_BackupStatus_To_v1_BackupStatus(in, out, s)
 }
 
+func autoConvert_v1_Cloud_To_management_Cloud(in *Cloud, out *management.Cloud, s conversion.Scope) error {
+	out.ReleaseChannel = in.ReleaseChannel
+	if err := Convert_v1_MaintenanceWindow_To_management_MaintenanceWindow(&in.MaintenanceWindow, &out.MaintenanceWindow, s); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Convert_v1_Cloud_To_management_Cloud is an autogenerated conversion function.
+func Convert_v1_Cloud_To_management_Cloud(in *Cloud, out *management.Cloud, s conversion.Scope) error {
+	return autoConvert_v1_Cloud_To_management_Cloud(in, out, s)
+}
+
+func autoConvert_management_Cloud_To_v1_Cloud(in *management.Cloud, out *Cloud, s conversion.Scope) error {
+	out.ReleaseChannel = in.ReleaseChannel
+	if err := Convert_management_MaintenanceWindow_To_v1_MaintenanceWindow(&in.MaintenanceWindow, &out.MaintenanceWindow, s); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Convert_management_Cloud_To_v1_Cloud is an autogenerated conversion function.
+func Convert_management_Cloud_To_v1_Cloud(in *management.Cloud, out *Cloud, s conversion.Scope) error {
+	return autoConvert_management_Cloud_To_v1_Cloud(in, out, s)
+}
+
 func autoConvert_v1_Cluster_To_management_Cluster(in *Cluster, out *management.Cluster, s conversion.Scope) error {
 	out.ObjectMeta = in.ObjectMeta
 	if err := Convert_v1_ClusterSpec_To_management_ClusterSpec(&in.Spec, &out.Spec, s); err != nil {
@@ -4717,6 +4803,7 @@ func autoConvert_v1_ConfigStatus_To_management_ConfigStatus(in *ConfigStatus, ou
 	out.UISettings = (*uiv1.UISettingsConfig)(unsafe.Pointer(in.UISettings))
 	out.VaultIntegration = (*storagev1.VaultIntegrationSpec)(unsafe.Pointer(in.VaultIntegration))
 	out.DisableConfigEndpoint = in.DisableConfigEndpoint
+	out.Cloud = (*management.Cloud)(unsafe.Pointer(in.Cloud))
 	return nil
 }
 
@@ -4738,6 +4825,7 @@ func autoConvert_management_ConfigStatus_To_v1_ConfigStatus(in *management.Confi
 	out.UISettings = (*uiv1.UISettingsConfig)(unsafe.Pointer(in.UISettings))
 	out.VaultIntegration = (*storagev1.VaultIntegrationSpec)(unsafe.Pointer(in.VaultIntegration))
 	out.DisableConfigEndpoint = in.DisableConfigEndpoint
+	out.Cloud = (*Cloud)(unsafe.Pointer(in.Cloud))
 	return nil
 }
 
@@ -6447,6 +6535,28 @@ func autoConvert_management_LoftUpgradeStatus_To_v1_LoftUpgradeStatus(in *manage
 // Convert_management_LoftUpgradeStatus_To_v1_LoftUpgradeStatus is an autogenerated conversion function.
 func Convert_management_LoftUpgradeStatus_To_v1_LoftUpgradeStatus(in *management.LoftUpgradeStatus, out *LoftUpgradeStatus, s conversion.Scope) error {
 	return autoConvert_management_LoftUpgradeStatus_To_v1_LoftUpgradeStatus(in, out, s)
+}
+
+func autoConvert_v1_MaintenanceWindow_To_management_MaintenanceWindow(in *MaintenanceWindow, out *management.MaintenanceWindow, s conversion.Scope) error {
+	out.DayOfWeek = in.DayOfWeek
+	out.TimeWindow = in.TimeWindow
+	return nil
+}
+
+// Convert_v1_MaintenanceWindow_To_management_MaintenanceWindow is an autogenerated conversion function.
+func Convert_v1_MaintenanceWindow_To_management_MaintenanceWindow(in *MaintenanceWindow, out *management.MaintenanceWindow, s conversion.Scope) error {
+	return autoConvert_v1_MaintenanceWindow_To_management_MaintenanceWindow(in, out, s)
+}
+
+func autoConvert_management_MaintenanceWindow_To_v1_MaintenanceWindow(in *management.MaintenanceWindow, out *MaintenanceWindow, s conversion.Scope) error {
+	out.DayOfWeek = in.DayOfWeek
+	out.TimeWindow = in.TimeWindow
+	return nil
+}
+
+// Convert_management_MaintenanceWindow_To_v1_MaintenanceWindow is an autogenerated conversion function.
+func Convert_management_MaintenanceWindow_To_v1_MaintenanceWindow(in *management.MaintenanceWindow, out *MaintenanceWindow, s conversion.Scope) error {
+	return autoConvert_management_MaintenanceWindow_To_v1_MaintenanceWindow(in, out, s)
 }
 
 func autoConvert_v1_OIDC_To_management_OIDC(in *OIDC, out *management.OIDC, s conversion.Scope) error {
@@ -9530,6 +9640,100 @@ func autoConvert_management_VirtualClusterAccessKeyList_To_v1_VirtualClusterAcce
 // Convert_management_VirtualClusterAccessKeyList_To_v1_VirtualClusterAccessKeyList is an autogenerated conversion function.
 func Convert_management_VirtualClusterAccessKeyList_To_v1_VirtualClusterAccessKeyList(in *management.VirtualClusterAccessKeyList, out *VirtualClusterAccessKeyList, s conversion.Scope) error {
 	return autoConvert_management_VirtualClusterAccessKeyList_To_v1_VirtualClusterAccessKeyList(in, out, s)
+}
+
+func autoConvert_v1_VirtualClusterExternalDatabase_To_management_VirtualClusterExternalDatabase(in *VirtualClusterExternalDatabase, out *management.VirtualClusterExternalDatabase, s conversion.Scope) error {
+	out.ObjectMeta = in.ObjectMeta
+	if err := Convert_v1_VirtualClusterExternalDatabaseSpec_To_management_VirtualClusterExternalDatabaseSpec(&in.Spec, &out.Spec, s); err != nil {
+		return err
+	}
+	if err := Convert_v1_VirtualClusterExternalDatabaseStatus_To_management_VirtualClusterExternalDatabaseStatus(&in.Status, &out.Status, s); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Convert_v1_VirtualClusterExternalDatabase_To_management_VirtualClusterExternalDatabase is an autogenerated conversion function.
+func Convert_v1_VirtualClusterExternalDatabase_To_management_VirtualClusterExternalDatabase(in *VirtualClusterExternalDatabase, out *management.VirtualClusterExternalDatabase, s conversion.Scope) error {
+	return autoConvert_v1_VirtualClusterExternalDatabase_To_management_VirtualClusterExternalDatabase(in, out, s)
+}
+
+func autoConvert_management_VirtualClusterExternalDatabase_To_v1_VirtualClusterExternalDatabase(in *management.VirtualClusterExternalDatabase, out *VirtualClusterExternalDatabase, s conversion.Scope) error {
+	out.ObjectMeta = in.ObjectMeta
+	if err := Convert_management_VirtualClusterExternalDatabaseSpec_To_v1_VirtualClusterExternalDatabaseSpec(&in.Spec, &out.Spec, s); err != nil {
+		return err
+	}
+	if err := Convert_management_VirtualClusterExternalDatabaseStatus_To_v1_VirtualClusterExternalDatabaseStatus(&in.Status, &out.Status, s); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Convert_management_VirtualClusterExternalDatabase_To_v1_VirtualClusterExternalDatabase is an autogenerated conversion function.
+func Convert_management_VirtualClusterExternalDatabase_To_v1_VirtualClusterExternalDatabase(in *management.VirtualClusterExternalDatabase, out *VirtualClusterExternalDatabase, s conversion.Scope) error {
+	return autoConvert_management_VirtualClusterExternalDatabase_To_v1_VirtualClusterExternalDatabase(in, out, s)
+}
+
+func autoConvert_v1_VirtualClusterExternalDatabaseList_To_management_VirtualClusterExternalDatabaseList(in *VirtualClusterExternalDatabaseList, out *management.VirtualClusterExternalDatabaseList, s conversion.Scope) error {
+	out.ListMeta = in.ListMeta
+	out.Items = *(*[]management.VirtualClusterExternalDatabase)(unsafe.Pointer(&in.Items))
+	return nil
+}
+
+// Convert_v1_VirtualClusterExternalDatabaseList_To_management_VirtualClusterExternalDatabaseList is an autogenerated conversion function.
+func Convert_v1_VirtualClusterExternalDatabaseList_To_management_VirtualClusterExternalDatabaseList(in *VirtualClusterExternalDatabaseList, out *management.VirtualClusterExternalDatabaseList, s conversion.Scope) error {
+	return autoConvert_v1_VirtualClusterExternalDatabaseList_To_management_VirtualClusterExternalDatabaseList(in, out, s)
+}
+
+func autoConvert_management_VirtualClusterExternalDatabaseList_To_v1_VirtualClusterExternalDatabaseList(in *management.VirtualClusterExternalDatabaseList, out *VirtualClusterExternalDatabaseList, s conversion.Scope) error {
+	out.ListMeta = in.ListMeta
+	out.Items = *(*[]VirtualClusterExternalDatabase)(unsafe.Pointer(&in.Items))
+	return nil
+}
+
+// Convert_management_VirtualClusterExternalDatabaseList_To_v1_VirtualClusterExternalDatabaseList is an autogenerated conversion function.
+func Convert_management_VirtualClusterExternalDatabaseList_To_v1_VirtualClusterExternalDatabaseList(in *management.VirtualClusterExternalDatabaseList, out *VirtualClusterExternalDatabaseList, s conversion.Scope) error {
+	return autoConvert_management_VirtualClusterExternalDatabaseList_To_v1_VirtualClusterExternalDatabaseList(in, out, s)
+}
+
+func autoConvert_v1_VirtualClusterExternalDatabaseSpec_To_management_VirtualClusterExternalDatabaseSpec(in *VirtualClusterExternalDatabaseSpec, out *management.VirtualClusterExternalDatabaseSpec, s conversion.Scope) error {
+	out.Connector = in.Connector
+	return nil
+}
+
+// Convert_v1_VirtualClusterExternalDatabaseSpec_To_management_VirtualClusterExternalDatabaseSpec is an autogenerated conversion function.
+func Convert_v1_VirtualClusterExternalDatabaseSpec_To_management_VirtualClusterExternalDatabaseSpec(in *VirtualClusterExternalDatabaseSpec, out *management.VirtualClusterExternalDatabaseSpec, s conversion.Scope) error {
+	return autoConvert_v1_VirtualClusterExternalDatabaseSpec_To_management_VirtualClusterExternalDatabaseSpec(in, out, s)
+}
+
+func autoConvert_management_VirtualClusterExternalDatabaseSpec_To_v1_VirtualClusterExternalDatabaseSpec(in *management.VirtualClusterExternalDatabaseSpec, out *VirtualClusterExternalDatabaseSpec, s conversion.Scope) error {
+	out.Connector = in.Connector
+	return nil
+}
+
+// Convert_management_VirtualClusterExternalDatabaseSpec_To_v1_VirtualClusterExternalDatabaseSpec is an autogenerated conversion function.
+func Convert_management_VirtualClusterExternalDatabaseSpec_To_v1_VirtualClusterExternalDatabaseSpec(in *management.VirtualClusterExternalDatabaseSpec, out *VirtualClusterExternalDatabaseSpec, s conversion.Scope) error {
+	return autoConvert_management_VirtualClusterExternalDatabaseSpec_To_v1_VirtualClusterExternalDatabaseSpec(in, out, s)
+}
+
+func autoConvert_v1_VirtualClusterExternalDatabaseStatus_To_management_VirtualClusterExternalDatabaseStatus(in *VirtualClusterExternalDatabaseStatus, out *management.VirtualClusterExternalDatabaseStatus, s conversion.Scope) error {
+	out.DataSource = in.DataSource
+	return nil
+}
+
+// Convert_v1_VirtualClusterExternalDatabaseStatus_To_management_VirtualClusterExternalDatabaseStatus is an autogenerated conversion function.
+func Convert_v1_VirtualClusterExternalDatabaseStatus_To_management_VirtualClusterExternalDatabaseStatus(in *VirtualClusterExternalDatabaseStatus, out *management.VirtualClusterExternalDatabaseStatus, s conversion.Scope) error {
+	return autoConvert_v1_VirtualClusterExternalDatabaseStatus_To_management_VirtualClusterExternalDatabaseStatus(in, out, s)
+}
+
+func autoConvert_management_VirtualClusterExternalDatabaseStatus_To_v1_VirtualClusterExternalDatabaseStatus(in *management.VirtualClusterExternalDatabaseStatus, out *VirtualClusterExternalDatabaseStatus, s conversion.Scope) error {
+	out.DataSource = in.DataSource
+	return nil
+}
+
+// Convert_management_VirtualClusterExternalDatabaseStatus_To_v1_VirtualClusterExternalDatabaseStatus is an autogenerated conversion function.
+func Convert_management_VirtualClusterExternalDatabaseStatus_To_v1_VirtualClusterExternalDatabaseStatus(in *management.VirtualClusterExternalDatabaseStatus, out *VirtualClusterExternalDatabaseStatus, s conversion.Scope) error {
+	return autoConvert_management_VirtualClusterExternalDatabaseStatus_To_v1_VirtualClusterExternalDatabaseStatus(in, out, s)
 }
 
 func autoConvert_v1_VirtualClusterInstance_To_management_VirtualClusterInstance(in *VirtualClusterInstance, out *management.VirtualClusterInstance, s conversion.Scope) error {
