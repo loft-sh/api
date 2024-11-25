@@ -60,6 +60,8 @@ func addKnownTypes(scheme *runtime.Scheme) error {
 		&management.DevPodWorkspaceInstanceState{},
 		&management.DevPodStopOptions{},
 		&management.DevPodUpOptions{},
+		&management.DevPodWorkspacePreset{},
+		&management.DevPodWorkspacePresetList{},
 		&management.DevPodWorkspaceTemplate{},
 		&management.DevPodWorkspaceTemplateList{},
 		&management.DirectClusterEndpointToken{},

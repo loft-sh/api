@@ -51,6 +51,8 @@ func addKnownTypes(scheme *runtime.Scheme) error {
 		&DevPodWorkspaceInstanceState{},
 		&DevPodStopOptions{},
 		&DevPodUpOptions{},
+		&DevPodWorkspacePreset{},
+		&DevPodWorkspacePresetList{},
 		&DevPodWorkspaceTemplate{},
 		&DevPodWorkspaceTemplateList{},
 		&DirectClusterEndpointToken{},
@@ -229,6 +231,7 @@ var (
 			func() runtime.Object { return &DevPodUpOptions{} }, // Register versioned resource
 			nil,
 			management.NewDevPodUpOptionsREST),
+		management.ManagementDevPodWorkspacePresetStorage,
 		management.ManagementDevPodWorkspaceTemplateStorage,
 		management.ManagementDirectClusterEndpointTokenStorage,
 		management.ManagementEventStorage,
@@ -633,6 +636,14 @@ type DevPodUpOptionsList struct {
 	metav1.TypeMeta `json:",inline"`
 	metav1.ListMeta `json:"metadata,omitempty"`
 	Items           []DevPodUpOptions `json:"items"`
+}
+
+// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+
+type DevPodWorkspacePresetList struct {
+	metav1.TypeMeta `json:",inline"`
+	metav1.ListMeta `json:"metadata,omitempty"`
+	Items           []DevPodWorkspacePreset `json:"items"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
