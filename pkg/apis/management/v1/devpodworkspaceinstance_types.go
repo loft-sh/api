@@ -22,6 +22,7 @@ import (
 // +subresource:request=DevPodStopOptions,path=stop,kind=DevPodStopOptions,rest=DevPodStopOptionsREST
 // +subresource:request=DevPodStatusOptions,path=getstatus,kind=DevPodStatusOptions,rest=DevPodStatusOptionsREST
 // +subresource:request=DevPodWorkspaceInstanceState,path=state,kind=DevPodWorkspaceInstanceState,rest=DevPodWorkspaceInstanceStateREST
+// +subresource:request=DevPodWorkspaceInstanceTroubleshoot,path=troubleshoot,kind=DevPodWorkspaceInstanceTroubleshoot,rest=DevPodWorkspaceInstanceTroubleshootREST
 type DevPodWorkspaceInstance struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`

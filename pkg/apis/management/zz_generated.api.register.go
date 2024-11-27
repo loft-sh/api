@@ -15,6 +15,7 @@ import (
 	"github.com/loft-sh/api/v4/pkg/managerfactory"
 	"github.com/loft-sh/apiserver/pkg/builders"
 	authorizationv1 "k8s.io/api/authorization/v1"
+	corev1 "k8s.io/api/core/v1"
 	rbacv1 "k8s.io/api/rbac/v1"
 	"k8s.io/apimachinery/pkg/apis/meta/internalversion"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
@@ -700,8 +701,16 @@ var (
 	NewDevPodStopOptionsREST = func(getter generic.RESTOptionsGetter) rest.Storage {
 		return NewDevPodStopOptionsRESTFunc(Factory)
 	}
-	NewDevPodStopOptionsRESTFunc NewRESTFunc
-	InternalDevPodUpOptionsREST  = builders.NewInternalSubresource(
+	NewDevPodStopOptionsRESTFunc                    NewRESTFunc
+	InternalDevPodWorkspaceInstanceTroubleshootREST = builders.NewInternalSubresource(
+		"devpodworkspaceinstances", "DevPodWorkspaceInstanceTroubleshoot", "troubleshoot",
+		func() runtime.Object { return &DevPodWorkspaceInstanceTroubleshoot{} },
+	)
+	NewDevPodWorkspaceInstanceTroubleshootREST = func(getter generic.RESTOptionsGetter) rest.Storage {
+		return NewDevPodWorkspaceInstanceTroubleshootRESTFunc(Factory)
+	}
+	NewDevPodWorkspaceInstanceTroubleshootRESTFunc NewRESTFunc
+	InternalDevPodUpOptionsREST                    = builders.NewInternalSubresource(
 		"devpodworkspaceinstances", "DevPodUpOptions", "up",
 		func() runtime.Object { return &DevPodUpOptions{} },
 	)
@@ -1292,6 +1301,7 @@ var (
 		InternalDevPodSshOptionsREST,
 		InternalDevPodWorkspaceInstanceStateREST,
 		InternalDevPodStopOptionsREST,
+		InternalDevPodWorkspaceInstanceTroubleshootREST,
 		InternalDevPodUpOptionsREST,
 		InternalDevPodWorkspacePreset,
 		InternalDevPodWorkspacePresetStatus,
@@ -1966,6 +1976,19 @@ type DevPodWorkspaceInstanceState struct {
 type DevPodWorkspaceInstanceStatus struct {
 	storagev1.DevPodWorkspaceInstanceStatus `json:",inline"`
 	SleepModeConfig                         *clusterv1.SleepModeConfig `json:"sleepModeConfig,omitempty"`
+}
+
+// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+
+type DevPodWorkspaceInstanceTroubleshoot struct {
+	metav1.TypeMeta   `json:",inline"`
+	metav1.ObjectMeta `json:"metadata,omitempty"`
+	State             string                             `json:"state,omitempty"`
+	Workspace         *DevPodWorkspaceInstance           `json:"workspace,omitempty"`
+	Template          *storagev1.DevPodWorkspaceTemplate `json:"template,omitempty"`
+	Pods              []corev1.Pod                       `json:"pods,omitempty"`
+	PVCs              []corev1.PersistentVolumeClaim     `json:"pvcs,omitempty"`
+	Errors            []string                           `json:"errors,omitempty"`
 }
 
 // +genclient
@@ -4204,6 +4227,14 @@ type DevPodStopOptionsList struct {
 	metav1.TypeMeta `json:",inline"`
 	metav1.ListMeta `json:"metadata,omitempty"`
 	Items           []DevPodStopOptions `json:"items"`
+}
+
+// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+
+type DevPodWorkspaceInstanceTroubleshootList struct {
+	metav1.TypeMeta `json:",inline"`
+	metav1.ListMeta `json:"metadata,omitempty"`
+	Items           []DevPodWorkspaceInstanceTroubleshoot `json:"items"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
