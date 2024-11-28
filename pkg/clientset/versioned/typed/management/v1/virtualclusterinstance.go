@@ -31,6 +31,7 @@ type VirtualClusterInstanceInterface interface {
 	Patch(ctx context.Context, name string, pt types.PatchType, data []byte, opts metav1.PatchOptions, subresources ...string) (result *v1.VirtualClusterInstance, err error)
 	GetKubeConfig(ctx context.Context, virtualClusterInstanceName string, virtualClusterInstanceKubeConfig *v1.VirtualClusterInstanceKubeConfig, opts metav1.CreateOptions) (*v1.VirtualClusterInstanceKubeConfig, error)
 	GetAccessKey(ctx context.Context, virtualClusterInstanceName string, options metav1.GetOptions) (*v1.VirtualClusterAccessKey, error)
+	GetExternalDatabase(ctx context.Context, virtualClusterInstanceName string, virtualClusterExternalDatabase *v1.VirtualClusterExternalDatabase, opts metav1.CreateOptions) (*v1.VirtualClusterExternalDatabase, error)
 
 	VirtualClusterInstanceExpansion
 }
@@ -77,6 +78,21 @@ func (c *virtualClusterInstances) GetAccessKey(ctx context.Context, virtualClust
 		Name(virtualClusterInstanceName).
 		SubResource("accesskey").
 		VersionedParams(&options, scheme.ParameterCodec).
+		Do(ctx).
+		Into(result)
+	return
+}
+
+// GetExternalDatabase takes the representation of a virtualClusterExternalDatabase and creates it.  Returns the server's representation of the virtualClusterExternalDatabase, and an error, if there is any.
+func (c *virtualClusterInstances) GetExternalDatabase(ctx context.Context, virtualClusterInstanceName string, virtualClusterExternalDatabase *v1.VirtualClusterExternalDatabase, opts metav1.CreateOptions) (result *v1.VirtualClusterExternalDatabase, err error) {
+	result = &v1.VirtualClusterExternalDatabase{}
+	err = c.GetClient().Post().
+		Namespace(c.GetNamespace()).
+		Resource("virtualclusterinstances").
+		Name(virtualClusterInstanceName).
+		SubResource("externaldatabase").
+		VersionedParams(&opts, scheme.ParameterCodec).
+		Body(virtualClusterExternalDatabase).
 		Do(ctx).
 		Into(result)
 	return
