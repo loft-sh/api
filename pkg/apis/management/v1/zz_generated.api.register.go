@@ -157,6 +157,11 @@ var (
 			management.NewBackupApplyREST),
 		management.ManagementClusterStorage,
 		builders.NewApiResourceWithStorage(
+			management.InternalClusterStatus,
+			func() runtime.Object { return &Cluster{} },     // Register versioned resource
+			func() runtime.Object { return &ClusterList{} }, // Register versioned resource list
+			management.NewClusterStatusREST),
+		builders.NewApiResourceWithStorage(
 			management.InternalClusterAccessKeyREST,
 			func() runtime.Object { return &ClusterAccessKey{} }, // Register versioned resource
 			nil,

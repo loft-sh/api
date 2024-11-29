@@ -77,7 +77,11 @@ var (
 	NewClusterREST = func(getter generic.RESTOptionsGetter) rest.Storage {
 		return NewClusterRESTFunc(Factory)
 	}
-	NewClusterRESTFunc             NewRESTFunc
+	NewClusterRESTFunc   NewRESTFunc
+	NewClusterStatusREST = func(getter generic.RESTOptionsGetter) rest.Storage {
+		return NewClusterStatusRESTFunc(Factory)
+	}
+	NewClusterStatusRESTFunc       NewRESTFunc
 	ManagementClusterAccessStorage = builders.NewApiResourceWithStorage( // Resource status endpoint
 		InternalClusterAccess,
 		func() runtime.Object { return &ClusterAccess{} },     // Register versioned resource
@@ -1855,6 +1859,7 @@ type ConfigStatus struct {
 	VaultIntegration       *storagev1.VaultIntegrationSpec `json:"vault,omitempty"`
 	DisableConfigEndpoint  bool                            `json:"disableConfigEndpoint,omitempty"`
 	Cloud                  *Cloud                          `json:"cloud,omitempty"`
+	CostControl            *CostControl                    `json:"costControl,omitempty"`
 }
 
 type Connector struct {
@@ -1892,6 +1897,25 @@ type ConvertVirtualClusterConfigSpec struct {
 type ConvertVirtualClusterConfigStatus struct {
 	Values    string `json:"values,omitempty"`
 	Converted bool   `json:"converted"`
+}
+
+type CostControl struct {
+	Enabled        *bool                `json:"enabled,omitempty"`
+	GlobalMetrics  *storagev1.Metrics   `json:"globalMetrics,omitempty"`
+	ClusterMetrics *storagev1.Metrics   `json:"clusterMetrics,omitempty"`
+	Settings       *CostControlSettings `json:"settings,omitempty"`
+}
+
+type CostControlResourcePrice struct {
+	Price      float64 `json:"price,omitempty"`
+	TimePeriod string  `json:"timePeriod,omitempty"`
+}
+
+type CostControlSettings struct {
+	PriceCurrency               string                    `json:"priceCurrency,omitempty"`
+	AvgCPUPricePerNode          *CostControlResourcePrice `json:"averageCPUPricePerNode,omitempty"`
+	AvgRAMPricePerNode          *CostControlResourcePrice `json:"averageRAMPricePerNode,omitempty"`
+	ControlPlanePricePerCluster *CostControlResourcePrice `json:"controlPlanePricePerCluster,omitempty"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object

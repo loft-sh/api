@@ -156,6 +156,9 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 		"github.com/loft-sh/api/v4/pkg/apis/management/v1.ConvertVirtualClusterConfigList":            schema_pkg_apis_management_v1_ConvertVirtualClusterConfigList(ref),
 		"github.com/loft-sh/api/v4/pkg/apis/management/v1.ConvertVirtualClusterConfigSpec":            schema_pkg_apis_management_v1_ConvertVirtualClusterConfigSpec(ref),
 		"github.com/loft-sh/api/v4/pkg/apis/management/v1.ConvertVirtualClusterConfigStatus":          schema_pkg_apis_management_v1_ConvertVirtualClusterConfigStatus(ref),
+		"github.com/loft-sh/api/v4/pkg/apis/management/v1.CostControl":                                schema_pkg_apis_management_v1_CostControl(ref),
+		"github.com/loft-sh/api/v4/pkg/apis/management/v1.CostControlResourcePrice":                   schema_pkg_apis_management_v1_CostControlResourcePrice(ref),
+		"github.com/loft-sh/api/v4/pkg/apis/management/v1.CostControlSettings":                        schema_pkg_apis_management_v1_CostControlSettings(ref),
 		"github.com/loft-sh/api/v4/pkg/apis/management/v1.DevPodDeleteOptions":                        schema_pkg_apis_management_v1_DevPodDeleteOptions(ref),
 		"github.com/loft-sh/api/v4/pkg/apis/management/v1.DevPodDeleteOptionsList":                    schema_pkg_apis_management_v1_DevPodDeleteOptionsList(ref),
 		"github.com/loft-sh/api/v4/pkg/apis/management/v1.DevPodEnvironmentTemplate":                  schema_pkg_apis_management_v1_DevPodEnvironmentTemplate(ref),
@@ -476,6 +479,7 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 		"github.com/loft-sh/api/v4/pkg/apis/storage/v1.LocalClusterRoleTemplate":                      schema_pkg_apis_storage_v1_LocalClusterRoleTemplate(ref),
 		"github.com/loft-sh/api/v4/pkg/apis/storage/v1.LocalClusterRoleTemplateSpec":                  schema_pkg_apis_storage_v1_LocalClusterRoleTemplateSpec(ref),
 		"github.com/loft-sh/api/v4/pkg/apis/storage/v1.Member":                                        schema_pkg_apis_storage_v1_Member(ref),
+		"github.com/loft-sh/api/v4/pkg/apis/storage/v1.Metrics":                                       schema_pkg_apis_storage_v1_Metrics(ref),
 		"github.com/loft-sh/api/v4/pkg/apis/storage/v1.NamespacePattern":                              schema_pkg_apis_storage_v1_NamespacePattern(ref),
 		"github.com/loft-sh/api/v4/pkg/apis/storage/v1.NetworkPeer":                                   schema_pkg_apis_storage_v1_NetworkPeer(ref),
 		"github.com/loft-sh/api/v4/pkg/apis/storage/v1.NetworkPeerList":                               schema_pkg_apis_storage_v1_NetworkPeerList(ref),
@@ -527,6 +531,7 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 		"github.com/loft-sh/api/v4/pkg/apis/storage/v1.SpaceTemplateSpec":                             schema_pkg_apis_storage_v1_SpaceTemplateSpec(ref),
 		"github.com/loft-sh/api/v4/pkg/apis/storage/v1.SpaceTemplateStatus":                           schema_pkg_apis_storage_v1_SpaceTemplateStatus(ref),
 		"github.com/loft-sh/api/v4/pkg/apis/storage/v1.SpaceTemplateVersion":                          schema_pkg_apis_storage_v1_SpaceTemplateVersion(ref),
+		"github.com/loft-sh/api/v4/pkg/apis/storage/v1.Storage":                                       schema_pkg_apis_storage_v1_Storage(ref),
 		"github.com/loft-sh/api/v4/pkg/apis/storage/v1.StreamContainer":                               schema_pkg_apis_storage_v1_StreamContainer(ref),
 		"github.com/loft-sh/api/v4/pkg/apis/storage/v1.SyncMembersSpec":                               schema_pkg_apis_storage_v1_SyncMembersSpec(ref),
 		"github.com/loft-sh/api/v4/pkg/apis/storage/v1.Target":                                        schema_pkg_apis_storage_v1_Target(ref),
@@ -8121,11 +8126,17 @@ func schema_pkg_apis_management_v1_ClusterSpec(ref common.ReferenceCallback) com
 							},
 						},
 					},
+					"metrics": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Metrics holds the cluster's metrics backend configuration",
+							Ref:         ref("github.com/loft-sh/api/v4/pkg/apis/storage/v1.Metrics"),
+						},
+					},
 				},
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/v4/pkg/apis/storage/v1.Access", "github.com/loft-sh/api/v4/pkg/apis/storage/v1.SecretRef", "github.com/loft-sh/api/v4/pkg/apis/storage/v1.UserOrTeam"},
+			"github.com/loft-sh/api/v4/pkg/apis/storage/v1.Access", "github.com/loft-sh/api/v4/pkg/apis/storage/v1.Metrics", "github.com/loft-sh/api/v4/pkg/apis/storage/v1.SecretRef", "github.com/loft-sh/api/v4/pkg/apis/storage/v1.UserOrTeam"},
 	}
 }
 
@@ -8154,6 +8165,20 @@ func schema_pkg_apis_management_v1_ClusterStatus(ref common.ReferenceCallback) c
 							Format: "",
 						},
 					},
+					"conditions": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Conditions holds several conditions the cluster might be in",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref("github.com/loft-sh/agentapi/v4/pkg/apis/loft/storage/v1.Condition"),
+									},
+								},
+							},
+						},
+					},
 					"online": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Online is whether the cluster is currently connected to the coordination server.",
@@ -8164,6 +8189,8 @@ func schema_pkg_apis_management_v1_ClusterStatus(ref common.ReferenceCallback) c
 				},
 			},
 		},
+		Dependencies: []string{
+			"github.com/loft-sh/agentapi/v4/pkg/apis/loft/storage/v1.Condition"},
 	}
 }
 
@@ -8465,15 +8492,21 @@ func schema_pkg_apis_management_v1_ConfigStatus(ref common.ReferenceCallback) co
 					},
 					"cloud": {
 						SchemaProps: spec.SchemaProps{
-							Description: "Cloud holkds the settings to be used exclusively in vCluster Cloud based environments and deployments.",
+							Description: "Cloud holds the settings to be used exclusively in vCluster Cloud based environments and deployments.",
 							Ref:         ref("github.com/loft-sh/api/v4/pkg/apis/management/v1.Cloud"),
+						},
+					},
+					"costControl": {
+						SchemaProps: spec.SchemaProps{
+							Description: "CostControl holds the settings related to the Cost Control ROI dashboard and its metrics gathering infrastructure",
+							Ref:         ref("github.com/loft-sh/api/v4/pkg/apis/management/v1.CostControl"),
 						},
 					},
 				},
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/v4/pkg/apis/management/v1.Apps", "github.com/loft-sh/api/v4/pkg/apis/management/v1.Audit", "github.com/loft-sh/api/v4/pkg/apis/management/v1.Authentication", "github.com/loft-sh/api/v4/pkg/apis/management/v1.Cloud", "github.com/loft-sh/api/v4/pkg/apis/management/v1.OIDC", "github.com/loft-sh/api/v4/pkg/apis/storage/v1.VaultIntegrationSpec", "github.com/loft-sh/api/v4/pkg/apis/ui/v1.UISettingsConfig"},
+			"github.com/loft-sh/api/v4/pkg/apis/management/v1.Apps", "github.com/loft-sh/api/v4/pkg/apis/management/v1.Audit", "github.com/loft-sh/api/v4/pkg/apis/management/v1.Authentication", "github.com/loft-sh/api/v4/pkg/apis/management/v1.Cloud", "github.com/loft-sh/api/v4/pkg/apis/management/v1.CostControl", "github.com/loft-sh/api/v4/pkg/apis/management/v1.OIDC", "github.com/loft-sh/api/v4/pkg/apis/storage/v1.VaultIntegrationSpec", "github.com/loft-sh/api/v4/pkg/apis/ui/v1.UISettingsConfig"},
 	}
 }
 
@@ -8755,6 +8788,110 @@ func schema_pkg_apis_management_v1_ConvertVirtualClusterConfigStatus(ref common.
 				Required: []string{"converted"},
 			},
 		},
+	}
+}
+
+func schema_pkg_apis_management_v1_CostControl(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"enabled": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Enabled specifies whether the ROI dashboard should be available in the UI, and if the metrics infrastructure that provides dashboard data is deployed",
+							Type:        []string{"boolean"},
+							Format:      "",
+						},
+					},
+					"globalMetrics": {
+						SchemaProps: spec.SchemaProps{
+							Description: "GlobalMetrics are settings for the global metrics backend. This aggregates metrics for the Cost Control Dashboard across all connected clusters",
+							Ref:         ref("github.com/loft-sh/api/v4/pkg/apis/storage/v1.Metrics"),
+						},
+					},
+					"clusterMetrics": {
+						SchemaProps: spec.SchemaProps{
+							Description: "ClusterMetrics are settings for each cluster's metrics backend. These settings apply all connected clusters unless overridden by modifying the Cluster's spec.",
+							Ref:         ref("github.com/loft-sh/api/v4/pkg/apis/storage/v1.Metrics"),
+						},
+					},
+					"settings": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Settings specify price-related settings that are taken into account for the ROI dashboard calculations.",
+							Ref:         ref("github.com/loft-sh/api/v4/pkg/apis/management/v1.CostControlSettings"),
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			"github.com/loft-sh/api/v4/pkg/apis/management/v1.CostControlSettings", "github.com/loft-sh/api/v4/pkg/apis/storage/v1.Metrics"},
+	}
+}
+
+func schema_pkg_apis_management_v1_CostControlResourcePrice(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"price": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Price specifies the price.",
+							Type:        []string{"number"},
+							Format:      "double",
+						},
+					},
+					"timePeriod": {
+						SchemaProps: spec.SchemaProps{
+							Description: "TimePeriod specifies the time period for the price.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+				},
+			},
+		},
+	}
+}
+
+func schema_pkg_apis_management_v1_CostControlSettings(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"priceCurrency": {
+						SchemaProps: spec.SchemaProps{
+							Description: "PriceCurrency specifies the currency.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"averageCPUPricePerNode": {
+						SchemaProps: spec.SchemaProps{
+							Description: "AvgCPUPricePerNode specifies the average CPU price per node.",
+							Ref:         ref("github.com/loft-sh/api/v4/pkg/apis/management/v1.CostControlResourcePrice"),
+						},
+					},
+					"averageRAMPricePerNode": {
+						SchemaProps: spec.SchemaProps{
+							Description: "AvgRAMPricePerNode specifies the average RAM price per node.",
+							Ref:         ref("github.com/loft-sh/api/v4/pkg/apis/management/v1.CostControlResourcePrice"),
+						},
+					},
+					"controlPlanePricePerCluster": {
+						SchemaProps: spec.SchemaProps{
+							Description: "ControlPlanePricePerCluster specifies the price of one physical cluster.",
+							Ref:         ref("github.com/loft-sh/api/v4/pkg/apis/management/v1.CostControlResourcePrice"),
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			"github.com/loft-sh/api/v4/pkg/apis/management/v1.CostControlResourcePrice"},
 	}
 }
 
@@ -21709,11 +21846,17 @@ func schema_pkg_apis_storage_v1_ClusterSpec(ref common.ReferenceCallback) common
 							},
 						},
 					},
+					"metrics": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Metrics holds the cluster's metrics backend configuration",
+							Ref:         ref("github.com/loft-sh/api/v4/pkg/apis/storage/v1.Metrics"),
+						},
+					},
 				},
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/v4/pkg/apis/storage/v1.Access", "github.com/loft-sh/api/v4/pkg/apis/storage/v1.SecretRef", "github.com/loft-sh/api/v4/pkg/apis/storage/v1.UserOrTeam"},
+			"github.com/loft-sh/api/v4/pkg/apis/storage/v1.Access", "github.com/loft-sh/api/v4/pkg/apis/storage/v1.Metrics", "github.com/loft-sh/api/v4/pkg/apis/storage/v1.SecretRef", "github.com/loft-sh/api/v4/pkg/apis/storage/v1.UserOrTeam"},
 	}
 }
 
@@ -21742,9 +21885,25 @@ func schema_pkg_apis_storage_v1_ClusterStatus(ref common.ReferenceCallback) comm
 							Format: "",
 						},
 					},
+					"conditions": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Conditions holds several conditions the cluster might be in",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref("github.com/loft-sh/agentapi/v4/pkg/apis/loft/storage/v1.Condition"),
+									},
+								},
+							},
+						},
+					},
 				},
 			},
 		},
+		Dependencies: []string{
+			"github.com/loft-sh/agentapi/v4/pkg/apis/loft/storage/v1.Condition"},
 	}
 }
 
@@ -24177,6 +24336,27 @@ func schema_pkg_apis_storage_v1_Member(ref common.ReferenceCallback) common.Open
 				},
 			},
 		},
+	}
+}
+
+func schema_pkg_apis_storage_v1_Metrics(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"storage": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Storage contains settings related to the metrics backend's persistent volume configuration",
+							Default:     map[string]interface{}{},
+							Ref:         ref("github.com/loft-sh/api/v4/pkg/apis/storage/v1.Storage"),
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			"github.com/loft-sh/api/v4/pkg/apis/storage/v1.Storage"},
 	}
 }
 
@@ -26737,6 +26917,32 @@ func schema_pkg_apis_storage_v1_SpaceTemplateVersion(ref common.ReferenceCallbac
 		},
 		Dependencies: []string{
 			"github.com/loft-sh/api/v4/pkg/apis/storage/v1.AppParameter", "github.com/loft-sh/api/v4/pkg/apis/storage/v1.SpaceTemplateDefinition"},
+	}
+}
+
+func schema_pkg_apis_storage_v1_Storage(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"storageClass": {
+						SchemaProps: spec.SchemaProps{
+							Description: "StorageClass the storage class to use when provisioning the metrics backend's persistent volume If set to \"-\" or \"\" dynamic provisioning is disabled If set to undefined or null (the default), the cluster's default storage class is used for provisioning",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"size": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Size the size of the metrics backend's persistent volume",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+				},
+			},
+		},
 	}
 }
 
@@ -30214,9 +30420,10 @@ func schema_k8sio_api_admissionregistration_v1_NamedRuleWithOperations(ref commo
 					},
 					"scope": {
 						SchemaProps: spec.SchemaProps{
-							Description: "scope specifies the scope of this rule. Valid values are \"Cluster\", \"Namespaced\", and \"*\" \"Cluster\" means that only cluster-scoped resources will match this rule. Namespace API objects are cluster-scoped. \"Namespaced\" means that only namespaced resources will match this rule. \"*\" means that there are no scope restrictions. Subresources match the scope of their parent resource. Default is \"*\".",
+							Description: "scope specifies the scope of this rule. Valid values are \"Cluster\", \"Namespaced\", and \"*\" \"Cluster\" means that only cluster-scoped resources will match this rule. Namespace API objects are cluster-scoped. \"Namespaced\" means that only namespaced resources will match this rule. \"*\" means that there are no scope restrictions. Subresources match the scope of their parent resource. Default is \"*\".\n\n\nPossible enum values:\n - `\"*\"` means that all scopes are included.\n - `\"Cluster\"` means that scope is limited to cluster-scoped objects. Namespace objects are cluster-scoped.\n - `\"Namespaced\"` means that scope is limited to namespaced objects.",
 							Type:        []string{"string"},
 							Format:      "",
+							Enum:        []interface{}{"*", "Cluster", "Namespaced"},
 						},
 					},
 				},
@@ -30378,9 +30585,10 @@ func schema_k8sio_api_admissionregistration_v1_Rule(ref common.ReferenceCallback
 					},
 					"scope": {
 						SchemaProps: spec.SchemaProps{
-							Description: "scope specifies the scope of this rule. Valid values are \"Cluster\", \"Namespaced\", and \"*\" \"Cluster\" means that only cluster-scoped resources will match this rule. Namespace API objects are cluster-scoped. \"Namespaced\" means that only namespaced resources will match this rule. \"*\" means that there are no scope restrictions. Subresources match the scope of their parent resource. Default is \"*\".",
+							Description: "scope specifies the scope of this rule. Valid values are \"Cluster\", \"Namespaced\", and \"*\" \"Cluster\" means that only cluster-scoped resources will match this rule. Namespace API objects are cluster-scoped. \"Namespaced\" means that only namespaced resources will match this rule. \"*\" means that there are no scope restrictions. Subresources match the scope of their parent resource. Default is \"*\".\n\n\nPossible enum values:\n - `\"*\"` means that all scopes are included.\n - `\"Cluster\"` means that scope is limited to cluster-scoped objects. Namespace objects are cluster-scoped.\n - `\"Namespaced\"` means that scope is limited to namespaced objects.",
 							Type:        []string{"string"},
 							Format:      "",
+							Enum:        []interface{}{"*", "Cluster", "Namespaced"},
 						},
 					},
 				},
@@ -30479,9 +30687,10 @@ func schema_k8sio_api_admissionregistration_v1_RuleWithOperations(ref common.Ref
 					},
 					"scope": {
 						SchemaProps: spec.SchemaProps{
-							Description: "scope specifies the scope of this rule. Valid values are \"Cluster\", \"Namespaced\", and \"*\" \"Cluster\" means that only cluster-scoped resources will match this rule. Namespace API objects are cluster-scoped. \"Namespaced\" means that only namespaced resources will match this rule. \"*\" means that there are no scope restrictions. Subresources match the scope of their parent resource. Default is \"*\".",
+							Description: "scope specifies the scope of this rule. Valid values are \"Cluster\", \"Namespaced\", and \"*\" \"Cluster\" means that only cluster-scoped resources will match this rule. Namespace API objects are cluster-scoped. \"Namespaced\" means that only namespaced resources will match this rule. \"*\" means that there are no scope restrictions. Subresources match the scope of their parent resource. Default is \"*\".\n\n\nPossible enum values:\n - `\"*\"` means that all scopes are included.\n - `\"Cluster\"` means that scope is limited to cluster-scoped objects. Namespace objects are cluster-scoped.\n - `\"Namespaced\"` means that scope is limited to namespaced objects.",
 							Type:        []string{"string"},
 							Format:      "",
+							Enum:        []interface{}{"*", "Cluster", "Namespaced"},
 						},
 					},
 				},
@@ -31879,9 +32088,10 @@ func schema_k8sio_api_admissionregistration_v1beta1_NamedRuleWithOperations(ref 
 					},
 					"scope": {
 						SchemaProps: spec.SchemaProps{
-							Description: "scope specifies the scope of this rule. Valid values are \"Cluster\", \"Namespaced\", and \"*\" \"Cluster\" means that only cluster-scoped resources will match this rule. Namespace API objects are cluster-scoped. \"Namespaced\" means that only namespaced resources will match this rule. \"*\" means that there are no scope restrictions. Subresources match the scope of their parent resource. Default is \"*\".",
+							Description: "scope specifies the scope of this rule. Valid values are \"Cluster\", \"Namespaced\", and \"*\" \"Cluster\" means that only cluster-scoped resources will match this rule. Namespace API objects are cluster-scoped. \"Namespaced\" means that only namespaced resources will match this rule. \"*\" means that there are no scope restrictions. Subresources match the scope of their parent resource. Default is \"*\".\n\n\nPossible enum values:\n - `\"*\"` means that all scopes are included.\n - `\"Cluster\"` means that scope is limited to cluster-scoped objects. Namespace objects are cluster-scoped.\n - `\"Namespaced\"` means that scope is limited to namespaced objects.",
 							Type:        []string{"string"},
 							Format:      "",
+							Enum:        []interface{}{"*", "Cluster", "Namespaced"},
 						},
 					},
 				},
