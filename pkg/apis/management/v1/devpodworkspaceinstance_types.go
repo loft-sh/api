@@ -11,6 +11,7 @@ import (
 // +genclient:noStatus
 // +genclient:method=GetState,verb=get,subresource=state,result=github.com/loft-sh/api/v4/pkg/apis/management/v1.DevPodWorkspaceInstanceState
 // +genclient:method=SetState,verb=create,subresource=state,input=github.com/loft-sh/api/v4/pkg/apis/management/v1.DevPodWorkspaceInstanceState,result=github.com/loft-sh/api/v4/pkg/apis/management/v1.DevPodWorkspaceInstanceState
+// +genclient:method=Troubleshoot,verb=get,subresource=troubleshoot,result=github.com/loft-sh/api/v4/pkg/apis/management/v1.DevPodWorkspaceInstanceTroubleshoot
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
 
 // DevPodWorkspaceInstance holds the DevPodWorkspaceInstance information
