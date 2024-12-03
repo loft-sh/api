@@ -114,6 +114,7 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 		"github.com/loft-sh/api/v4/pkg/apis/management/v1.BackupList":                                 schema_pkg_apis_management_v1_BackupList(ref),
 		"github.com/loft-sh/api/v4/pkg/apis/management/v1.BackupSpec":                                 schema_pkg_apis_management_v1_BackupSpec(ref),
 		"github.com/loft-sh/api/v4/pkg/apis/management/v1.BackupStatus":                               schema_pkg_apis_management_v1_BackupStatus(ref),
+		"github.com/loft-sh/api/v4/pkg/apis/management/v1.Cloud":                                      schema_pkg_apis_management_v1_Cloud(ref),
 		"github.com/loft-sh/api/v4/pkg/apis/management/v1.Cluster":                                    schema_pkg_apis_management_v1_Cluster(ref),
 		"github.com/loft-sh/api/v4/pkg/apis/management/v1.ClusterAccess":                              schema_pkg_apis_management_v1_ClusterAccess(ref),
 		"github.com/loft-sh/api/v4/pkg/apis/management/v1.ClusterAccessKey":                           schema_pkg_apis_management_v1_ClusterAccessKey(ref),
@@ -155,6 +156,11 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 		"github.com/loft-sh/api/v4/pkg/apis/management/v1.ConvertVirtualClusterConfigList":            schema_pkg_apis_management_v1_ConvertVirtualClusterConfigList(ref),
 		"github.com/loft-sh/api/v4/pkg/apis/management/v1.ConvertVirtualClusterConfigSpec":            schema_pkg_apis_management_v1_ConvertVirtualClusterConfigSpec(ref),
 		"github.com/loft-sh/api/v4/pkg/apis/management/v1.ConvertVirtualClusterConfigStatus":          schema_pkg_apis_management_v1_ConvertVirtualClusterConfigStatus(ref),
+		"github.com/loft-sh/api/v4/pkg/apis/management/v1.CostControl":                                schema_pkg_apis_management_v1_CostControl(ref),
+		"github.com/loft-sh/api/v4/pkg/apis/management/v1.CostControlClusterConfig":                   schema_pkg_apis_management_v1_CostControlClusterConfig(ref),
+		"github.com/loft-sh/api/v4/pkg/apis/management/v1.CostControlGlobalConfig":                    schema_pkg_apis_management_v1_CostControlGlobalConfig(ref),
+		"github.com/loft-sh/api/v4/pkg/apis/management/v1.CostControlResourcePrice":                   schema_pkg_apis_management_v1_CostControlResourcePrice(ref),
+		"github.com/loft-sh/api/v4/pkg/apis/management/v1.CostControlSettings":                        schema_pkg_apis_management_v1_CostControlSettings(ref),
 		"github.com/loft-sh/api/v4/pkg/apis/management/v1.DevPodDeleteOptions":                        schema_pkg_apis_management_v1_DevPodDeleteOptions(ref),
 		"github.com/loft-sh/api/v4/pkg/apis/management/v1.DevPodDeleteOptionsList":                    schema_pkg_apis_management_v1_DevPodDeleteOptionsList(ref),
 		"github.com/loft-sh/api/v4/pkg/apis/management/v1.DevPodEnvironmentTemplate":                  schema_pkg_apis_management_v1_DevPodEnvironmentTemplate(ref),
@@ -175,6 +181,13 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 		"github.com/loft-sh/api/v4/pkg/apis/management/v1.DevPodWorkspaceInstanceState":               schema_pkg_apis_management_v1_DevPodWorkspaceInstanceState(ref),
 		"github.com/loft-sh/api/v4/pkg/apis/management/v1.DevPodWorkspaceInstanceStateList":           schema_pkg_apis_management_v1_DevPodWorkspaceInstanceStateList(ref),
 		"github.com/loft-sh/api/v4/pkg/apis/management/v1.DevPodWorkspaceInstanceStatus":              schema_pkg_apis_management_v1_DevPodWorkspaceInstanceStatus(ref),
+		"github.com/loft-sh/api/v4/pkg/apis/management/v1.DevPodWorkspaceInstanceTroubleshoot":        schema_pkg_apis_management_v1_DevPodWorkspaceInstanceTroubleshoot(ref),
+		"github.com/loft-sh/api/v4/pkg/apis/management/v1.DevPodWorkspaceInstanceTroubleshootList":    schema_pkg_apis_management_v1_DevPodWorkspaceInstanceTroubleshootList(ref),
+		"github.com/loft-sh/api/v4/pkg/apis/management/v1.DevPodWorkspacePreset":                      schema_pkg_apis_management_v1_DevPodWorkspacePreset(ref),
+		"github.com/loft-sh/api/v4/pkg/apis/management/v1.DevPodWorkspacePresetList":                  schema_pkg_apis_management_v1_DevPodWorkspacePresetList(ref),
+		"github.com/loft-sh/api/v4/pkg/apis/management/v1.DevPodWorkspacePresetSource":                schema_pkg_apis_management_v1_DevPodWorkspacePresetSource(ref),
+		"github.com/loft-sh/api/v4/pkg/apis/management/v1.DevPodWorkspacePresetSpec":                  schema_pkg_apis_management_v1_DevPodWorkspacePresetSpec(ref),
+		"github.com/loft-sh/api/v4/pkg/apis/management/v1.DevPodWorkspacePresetStatus":                schema_pkg_apis_management_v1_DevPodWorkspacePresetStatus(ref),
 		"github.com/loft-sh/api/v4/pkg/apis/management/v1.DevPodWorkspaceTemplate":                    schema_pkg_apis_management_v1_DevPodWorkspaceTemplate(ref),
 		"github.com/loft-sh/api/v4/pkg/apis/management/v1.DevPodWorkspaceTemplateList":                schema_pkg_apis_management_v1_DevPodWorkspaceTemplateList(ref),
 		"github.com/loft-sh/api/v4/pkg/apis/management/v1.DevPodWorkspaceTemplateSpec":                schema_pkg_apis_management_v1_DevPodWorkspaceTemplateSpec(ref),
@@ -191,7 +204,6 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 		"github.com/loft-sh/api/v4/pkg/apis/management/v1.FeatureList":                                schema_pkg_apis_management_v1_FeatureList(ref),
 		"github.com/loft-sh/api/v4/pkg/apis/management/v1.FeatureSpec":                                schema_pkg_apis_management_v1_FeatureSpec(ref),
 		"github.com/loft-sh/api/v4/pkg/apis/management/v1.FeatureStatus":                              schema_pkg_apis_management_v1_FeatureStatus(ref),
-		"github.com/loft-sh/api/v4/pkg/apis/management/v1.GitEnvironmentTemplate":                     schema_pkg_apis_management_v1_GitEnvironmentTemplate(ref),
 		"github.com/loft-sh/api/v4/pkg/apis/management/v1.GroupResources":                             schema_pkg_apis_management_v1_GroupResources(ref),
 		"github.com/loft-sh/api/v4/pkg/apis/management/v1.IngressAuthToken":                           schema_pkg_apis_management_v1_IngressAuthToken(ref),
 		"github.com/loft-sh/api/v4/pkg/apis/management/v1.IngressAuthTokenList":                       schema_pkg_apis_management_v1_IngressAuthTokenList(ref),
@@ -217,6 +229,7 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 		"github.com/loft-sh/api/v4/pkg/apis/management/v1.LoftUpgradeList":                            schema_pkg_apis_management_v1_LoftUpgradeList(ref),
 		"github.com/loft-sh/api/v4/pkg/apis/management/v1.LoftUpgradeSpec":                            schema_pkg_apis_management_v1_LoftUpgradeSpec(ref),
 		"github.com/loft-sh/api/v4/pkg/apis/management/v1.LoftUpgradeStatus":                          schema_pkg_apis_management_v1_LoftUpgradeStatus(ref),
+		"github.com/loft-sh/api/v4/pkg/apis/management/v1.MaintenanceWindow":                          schema_pkg_apis_management_v1_MaintenanceWindow(ref),
 		"github.com/loft-sh/api/v4/pkg/apis/management/v1.OIDC":                                       schema_pkg_apis_management_v1_OIDC(ref),
 		"github.com/loft-sh/api/v4/pkg/apis/management/v1.OIDCClient":                                 schema_pkg_apis_management_v1_OIDCClient(ref),
 		"github.com/loft-sh/api/v4/pkg/apis/management/v1.OIDCClientList":                             schema_pkg_apis_management_v1_OIDCClientList(ref),
@@ -342,6 +355,10 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 		"github.com/loft-sh/api/v4/pkg/apis/management/v1.UserVirtualClustersOptions":                 schema_pkg_apis_management_v1_UserVirtualClustersOptions(ref),
 		"github.com/loft-sh/api/v4/pkg/apis/management/v1.VirtualClusterAccessKey":                    schema_pkg_apis_management_v1_VirtualClusterAccessKey(ref),
 		"github.com/loft-sh/api/v4/pkg/apis/management/v1.VirtualClusterAccessKeyList":                schema_pkg_apis_management_v1_VirtualClusterAccessKeyList(ref),
+		"github.com/loft-sh/api/v4/pkg/apis/management/v1.VirtualClusterExternalDatabase":             schema_pkg_apis_management_v1_VirtualClusterExternalDatabase(ref),
+		"github.com/loft-sh/api/v4/pkg/apis/management/v1.VirtualClusterExternalDatabaseList":         schema_pkg_apis_management_v1_VirtualClusterExternalDatabaseList(ref),
+		"github.com/loft-sh/api/v4/pkg/apis/management/v1.VirtualClusterExternalDatabaseSpec":         schema_pkg_apis_management_v1_VirtualClusterExternalDatabaseSpec(ref),
+		"github.com/loft-sh/api/v4/pkg/apis/management/v1.VirtualClusterExternalDatabaseStatus":       schema_pkg_apis_management_v1_VirtualClusterExternalDatabaseStatus(ref),
 		"github.com/loft-sh/api/v4/pkg/apis/management/v1.VirtualClusterInstance":                     schema_pkg_apis_management_v1_VirtualClusterInstance(ref),
 		"github.com/loft-sh/api/v4/pkg/apis/management/v1.VirtualClusterInstanceKubeConfig":           schema_pkg_apis_management_v1_VirtualClusterInstanceKubeConfig(ref),
 		"github.com/loft-sh/api/v4/pkg/apis/management/v1.VirtualClusterInstanceKubeConfigList":       schema_pkg_apis_management_v1_VirtualClusterInstanceKubeConfigList(ref),
@@ -415,8 +432,10 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 		"github.com/loft-sh/api/v4/pkg/apis/storage/v1.DevPodCommandStopOptions":                      schema_pkg_apis_storage_v1_DevPodCommandStopOptions(ref),
 		"github.com/loft-sh/api/v4/pkg/apis/storage/v1.DevPodCommandUpOptions":                        schema_pkg_apis_storage_v1_DevPodCommandUpOptions(ref),
 		"github.com/loft-sh/api/v4/pkg/apis/storage/v1.DevPodEnvironmentTemplate":                     schema_pkg_apis_storage_v1_DevPodEnvironmentTemplate(ref),
+		"github.com/loft-sh/api/v4/pkg/apis/storage/v1.DevPodEnvironmentTemplateDefinition":           schema_pkg_apis_storage_v1_DevPodEnvironmentTemplateDefinition(ref),
 		"github.com/loft-sh/api/v4/pkg/apis/storage/v1.DevPodEnvironmentTemplateList":                 schema_pkg_apis_storage_v1_DevPodEnvironmentTemplateList(ref),
 		"github.com/loft-sh/api/v4/pkg/apis/storage/v1.DevPodEnvironmentTemplateSpec":                 schema_pkg_apis_storage_v1_DevPodEnvironmentTemplateSpec(ref),
+		"github.com/loft-sh/api/v4/pkg/apis/storage/v1.DevPodEnvironmentTemplateStatus":               schema_pkg_apis_storage_v1_DevPodEnvironmentTemplateStatus(ref),
 		"github.com/loft-sh/api/v4/pkg/apis/storage/v1.DevPodEnvironmentTemplateVersion":              schema_pkg_apis_storage_v1_DevPodEnvironmentTemplateVersion(ref),
 		"github.com/loft-sh/api/v4/pkg/apis/storage/v1.DevPodProjectSpec":                             schema_pkg_apis_storage_v1_DevPodProjectSpec(ref),
 		"github.com/loft-sh/api/v4/pkg/apis/storage/v1.DevPodProviderOption":                          schema_pkg_apis_storage_v1_DevPodProviderOption(ref),
@@ -427,6 +446,12 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 		"github.com/loft-sh/api/v4/pkg/apis/storage/v1.DevPodWorkspaceInstanceSpec":                   schema_pkg_apis_storage_v1_DevPodWorkspaceInstanceSpec(ref),
 		"github.com/loft-sh/api/v4/pkg/apis/storage/v1.DevPodWorkspaceInstanceStatus":                 schema_pkg_apis_storage_v1_DevPodWorkspaceInstanceStatus(ref),
 		"github.com/loft-sh/api/v4/pkg/apis/storage/v1.DevPodWorkspaceInstanceTemplateDefinition":     schema_pkg_apis_storage_v1_DevPodWorkspaceInstanceTemplateDefinition(ref),
+		"github.com/loft-sh/api/v4/pkg/apis/storage/v1.DevPodWorkspacePreset":                         schema_pkg_apis_storage_v1_DevPodWorkspacePreset(ref),
+		"github.com/loft-sh/api/v4/pkg/apis/storage/v1.DevPodWorkspacePresetList":                     schema_pkg_apis_storage_v1_DevPodWorkspacePresetList(ref),
+		"github.com/loft-sh/api/v4/pkg/apis/storage/v1.DevPodWorkspacePresetSource":                   schema_pkg_apis_storage_v1_DevPodWorkspacePresetSource(ref),
+		"github.com/loft-sh/api/v4/pkg/apis/storage/v1.DevPodWorkspacePresetSpec":                     schema_pkg_apis_storage_v1_DevPodWorkspacePresetSpec(ref),
+		"github.com/loft-sh/api/v4/pkg/apis/storage/v1.DevPodWorkspacePresetStatus":                   schema_pkg_apis_storage_v1_DevPodWorkspacePresetStatus(ref),
+		"github.com/loft-sh/api/v4/pkg/apis/storage/v1.DevPodWorkspacePresetVersion":                  schema_pkg_apis_storage_v1_DevPodWorkspacePresetVersion(ref),
 		"github.com/loft-sh/api/v4/pkg/apis/storage/v1.DevPodWorkspaceProvider":                       schema_pkg_apis_storage_v1_DevPodWorkspaceProvider(ref),
 		"github.com/loft-sh/api/v4/pkg/apis/storage/v1.DevPodWorkspaceTemplate":                       schema_pkg_apis_storage_v1_DevPodWorkspaceTemplate(ref),
 		"github.com/loft-sh/api/v4/pkg/apis/storage/v1.DevPodWorkspaceTemplateDefinition":             schema_pkg_apis_storage_v1_DevPodWorkspaceTemplateDefinition(ref),
@@ -456,13 +481,16 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 		"github.com/loft-sh/api/v4/pkg/apis/storage/v1.LocalClusterRoleTemplate":                      schema_pkg_apis_storage_v1_LocalClusterRoleTemplate(ref),
 		"github.com/loft-sh/api/v4/pkg/apis/storage/v1.LocalClusterRoleTemplateSpec":                  schema_pkg_apis_storage_v1_LocalClusterRoleTemplateSpec(ref),
 		"github.com/loft-sh/api/v4/pkg/apis/storage/v1.Member":                                        schema_pkg_apis_storage_v1_Member(ref),
+		"github.com/loft-sh/api/v4/pkg/apis/storage/v1.Metrics":                                       schema_pkg_apis_storage_v1_Metrics(ref),
 		"github.com/loft-sh/api/v4/pkg/apis/storage/v1.NamespacePattern":                              schema_pkg_apis_storage_v1_NamespacePattern(ref),
 		"github.com/loft-sh/api/v4/pkg/apis/storage/v1.NetworkPeer":                                   schema_pkg_apis_storage_v1_NetworkPeer(ref),
 		"github.com/loft-sh/api/v4/pkg/apis/storage/v1.NetworkPeerList":                               schema_pkg_apis_storage_v1_NetworkPeerList(ref),
 		"github.com/loft-sh/api/v4/pkg/apis/storage/v1.NetworkPeerSpec":                               schema_pkg_apis_storage_v1_NetworkPeerSpec(ref),
 		"github.com/loft-sh/api/v4/pkg/apis/storage/v1.NetworkPeerStatus":                             schema_pkg_apis_storage_v1_NetworkPeerStatus(ref),
 		"github.com/loft-sh/api/v4/pkg/apis/storage/v1.ObjectsStatus":                                 schema_pkg_apis_storage_v1_ObjectsStatus(ref),
+		"github.com/loft-sh/api/v4/pkg/apis/storage/v1.OpenCost":                                      schema_pkg_apis_storage_v1_OpenCost(ref),
 		"github.com/loft-sh/api/v4/pkg/apis/storage/v1.PodSelector":                                   schema_pkg_apis_storage_v1_PodSelector(ref),
+		"github.com/loft-sh/api/v4/pkg/apis/storage/v1.PresetRef":                                     schema_pkg_apis_storage_v1_PresetRef(ref),
 		"github.com/loft-sh/api/v4/pkg/apis/storage/v1.Project":                                       schema_pkg_apis_storage_v1_Project(ref),
 		"github.com/loft-sh/api/v4/pkg/apis/storage/v1.ProjectList":                                   schema_pkg_apis_storage_v1_ProjectList(ref),
 		"github.com/loft-sh/api/v4/pkg/apis/storage/v1.ProjectSpec":                                   schema_pkg_apis_storage_v1_ProjectSpec(ref),
@@ -475,6 +503,7 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 		"github.com/loft-sh/api/v4/pkg/apis/storage/v1.Quotas":                                        schema_pkg_apis_storage_v1_Quotas(ref),
 		"github.com/loft-sh/api/v4/pkg/apis/storage/v1.RancherIntegrationSpec":                        schema_pkg_apis_storage_v1_RancherIntegrationSpec(ref),
 		"github.com/loft-sh/api/v4/pkg/apis/storage/v1.RancherProjectRef":                             schema_pkg_apis_storage_v1_RancherProjectRef(ref),
+		"github.com/loft-sh/api/v4/pkg/apis/storage/v1.RequirePreset":                                 schema_pkg_apis_storage_v1_RequirePreset(ref),
 		"github.com/loft-sh/api/v4/pkg/apis/storage/v1.RequireTemplate":                               schema_pkg_apis_storage_v1_RequireTemplate(ref),
 		"github.com/loft-sh/api/v4/pkg/apis/storage/v1.Runner":                                        schema_pkg_apis_storage_v1_Runner(ref),
 		"github.com/loft-sh/api/v4/pkg/apis/storage/v1.RunnerClusterRef":                              schema_pkg_apis_storage_v1_RunnerClusterRef(ref),
@@ -505,6 +534,7 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 		"github.com/loft-sh/api/v4/pkg/apis/storage/v1.SpaceTemplateSpec":                             schema_pkg_apis_storage_v1_SpaceTemplateSpec(ref),
 		"github.com/loft-sh/api/v4/pkg/apis/storage/v1.SpaceTemplateStatus":                           schema_pkg_apis_storage_v1_SpaceTemplateStatus(ref),
 		"github.com/loft-sh/api/v4/pkg/apis/storage/v1.SpaceTemplateVersion":                          schema_pkg_apis_storage_v1_SpaceTemplateVersion(ref),
+		"github.com/loft-sh/api/v4/pkg/apis/storage/v1.Storage":                                       schema_pkg_apis_storage_v1_Storage(ref),
 		"github.com/loft-sh/api/v4/pkg/apis/storage/v1.StreamContainer":                               schema_pkg_apis_storage_v1_StreamContainer(ref),
 		"github.com/loft-sh/api/v4/pkg/apis/storage/v1.SyncMembersSpec":                               schema_pkg_apis_storage_v1_SyncMembersSpec(ref),
 		"github.com/loft-sh/api/v4/pkg/apis/storage/v1.Target":                                        schema_pkg_apis_storage_v1_Target(ref),
@@ -553,6 +583,7 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 		"github.com/loft-sh/api/v4/pkg/apis/storage/v1.VirtualClusterTemplateSpec":                    schema_pkg_apis_storage_v1_VirtualClusterTemplateSpec(ref),
 		"github.com/loft-sh/api/v4/pkg/apis/storage/v1.VirtualClusterTemplateStatus":                  schema_pkg_apis_storage_v1_VirtualClusterTemplateStatus(ref),
 		"github.com/loft-sh/api/v4/pkg/apis/storage/v1.VirtualClusterTemplateVersion":                 schema_pkg_apis_storage_v1_VirtualClusterTemplateVersion(ref),
+		"github.com/loft-sh/api/v4/pkg/apis/storage/v1.WorkspaceRef":                                  schema_pkg_apis_storage_v1_WorkspaceRef(ref),
 		"github.com/loft-sh/api/v4/pkg/apis/storage/v1.WorkspaceStatusResult":                         schema_pkg_apis_storage_v1_WorkspaceStatusResult(ref),
 		"github.com/loft-sh/api/v4/pkg/apis/ui/v1.NavBarButton":                                       schema_pkg_apis_ui_v1_NavBarButton(ref),
 		"github.com/loft-sh/api/v4/pkg/apis/ui/v1.UISettings":                                         schema_pkg_apis_ui_v1_UISettings(ref),
@@ -6587,6 +6618,34 @@ func schema_pkg_apis_management_v1_BackupStatus(ref common.ReferenceCallback) co
 	}
 }
 
+func schema_pkg_apis_management_v1_Cloud(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"releaseChannel": {
+						SchemaProps: spec.SchemaProps{
+							Description: "ReleaseChannel specifies the release channel for the cloud configuration. This can be used to determine which updates or versions are applied.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"maintenanceWindow": {
+						SchemaProps: spec.SchemaProps{
+							Description: "MaintenanceWindow specifies the maintenance window for the cloud configuration. This is a structured representation of the time window during which maintenance can occur.",
+							Default:     map[string]interface{}{},
+							Ref:         ref("github.com/loft-sh/api/v4/pkg/apis/management/v1.MaintenanceWindow"),
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			"github.com/loft-sh/api/v4/pkg/apis/management/v1.MaintenanceWindow"},
+	}
+}
+
 func schema_pkg_apis_management_v1_Cluster(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
@@ -8070,11 +8129,23 @@ func schema_pkg_apis_management_v1_ClusterSpec(ref common.ReferenceCallback) com
 							},
 						},
 					},
+					"metrics": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Metrics holds the cluster's metrics backend configuration",
+							Ref:         ref("github.com/loft-sh/api/v4/pkg/apis/storage/v1.Metrics"),
+						},
+					},
+					"opencost": {
+						SchemaProps: spec.SchemaProps{
+							Description: "OpenCost holds the cluster's OpenCost backend configuration",
+							Ref:         ref("github.com/loft-sh/api/v4/pkg/apis/storage/v1.OpenCost"),
+						},
+					},
 				},
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/v4/pkg/apis/storage/v1.Access", "github.com/loft-sh/api/v4/pkg/apis/storage/v1.SecretRef", "github.com/loft-sh/api/v4/pkg/apis/storage/v1.UserOrTeam"},
+			"github.com/loft-sh/api/v4/pkg/apis/storage/v1.Access", "github.com/loft-sh/api/v4/pkg/apis/storage/v1.Metrics", "github.com/loft-sh/api/v4/pkg/apis/storage/v1.OpenCost", "github.com/loft-sh/api/v4/pkg/apis/storage/v1.SecretRef", "github.com/loft-sh/api/v4/pkg/apis/storage/v1.UserOrTeam"},
 	}
 }
 
@@ -8103,6 +8174,20 @@ func schema_pkg_apis_management_v1_ClusterStatus(ref common.ReferenceCallback) c
 							Format: "",
 						},
 					},
+					"conditions": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Conditions holds several conditions the cluster might be in",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref("github.com/loft-sh/agentapi/v4/pkg/apis/loft/storage/v1.Condition"),
+									},
+								},
+							},
+						},
+					},
 					"online": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Online is whether the cluster is currently connected to the coordination server.",
@@ -8113,6 +8198,8 @@ func schema_pkg_apis_management_v1_ClusterStatus(ref common.ReferenceCallback) c
 				},
 			},
 		},
+		Dependencies: []string{
+			"github.com/loft-sh/agentapi/v4/pkg/apis/loft/storage/v1.Condition"},
 	}
 }
 
@@ -8412,11 +8499,23 @@ func schema_pkg_apis_management_v1_ConfigStatus(ref common.ReferenceCallback) co
 							Format:      "",
 						},
 					},
+					"cloud": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Cloud holds the settings to be used exclusively in vCluster Cloud based environments and deployments.",
+							Ref:         ref("github.com/loft-sh/api/v4/pkg/apis/management/v1.Cloud"),
+						},
+					},
+					"costControl": {
+						SchemaProps: spec.SchemaProps{
+							Description: "CostControl holds the settings related to the Cost Control ROI dashboard and its metrics gathering infrastructure",
+							Ref:         ref("github.com/loft-sh/api/v4/pkg/apis/management/v1.CostControl"),
+						},
+					},
 				},
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/v4/pkg/apis/management/v1.Apps", "github.com/loft-sh/api/v4/pkg/apis/management/v1.Audit", "github.com/loft-sh/api/v4/pkg/apis/management/v1.Authentication", "github.com/loft-sh/api/v4/pkg/apis/management/v1.OIDC", "github.com/loft-sh/api/v4/pkg/apis/storage/v1.VaultIntegrationSpec", "github.com/loft-sh/api/v4/pkg/apis/ui/v1.UISettingsConfig"},
+			"github.com/loft-sh/api/v4/pkg/apis/management/v1.Apps", "github.com/loft-sh/api/v4/pkg/apis/management/v1.Audit", "github.com/loft-sh/api/v4/pkg/apis/management/v1.Authentication", "github.com/loft-sh/api/v4/pkg/apis/management/v1.Cloud", "github.com/loft-sh/api/v4/pkg/apis/management/v1.CostControl", "github.com/loft-sh/api/v4/pkg/apis/management/v1.OIDC", "github.com/loft-sh/api/v4/pkg/apis/storage/v1.VaultIntegrationSpec", "github.com/loft-sh/api/v4/pkg/apis/ui/v1.UISettingsConfig"},
 	}
 }
 
@@ -8701,6 +8800,158 @@ func schema_pkg_apis_management_v1_ConvertVirtualClusterConfigStatus(ref common.
 	}
 }
 
+func schema_pkg_apis_management_v1_CostControl(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"enabled": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Enabled specifies whether the ROI dashboard should be available in the UI, and if the metrics infrastructure that provides dashboard data is deployed",
+							Type:        []string{"boolean"},
+							Format:      "",
+						},
+					},
+					"global": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Global are settings for globally managed components",
+							Default:     map[string]interface{}{},
+							Ref:         ref("github.com/loft-sh/api/v4/pkg/apis/management/v1.CostControlGlobalConfig"),
+						},
+					},
+					"cluster": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Cluster are settings for each cluster's managed components. These settings apply to all connected clusters unless overridden by modifying the Cluster's spec",
+							Default:     map[string]interface{}{},
+							Ref:         ref("github.com/loft-sh/api/v4/pkg/apis/management/v1.CostControlClusterConfig"),
+						},
+					},
+					"settings": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Settings specify price-related settings that are taken into account for the ROI dashboard calculations.",
+							Ref:         ref("github.com/loft-sh/api/v4/pkg/apis/management/v1.CostControlSettings"),
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			"github.com/loft-sh/api/v4/pkg/apis/management/v1.CostControlClusterConfig", "github.com/loft-sh/api/v4/pkg/apis/management/v1.CostControlGlobalConfig", "github.com/loft-sh/api/v4/pkg/apis/management/v1.CostControlSettings"},
+	}
+}
+
+func schema_pkg_apis_management_v1_CostControlClusterConfig(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"metrics": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Metrics are settings applied to metric infrastructure in each connected cluster. These can be overridden in individual clusters by modifying the Cluster's spec",
+							Ref:         ref("github.com/loft-sh/api/v4/pkg/apis/storage/v1.Metrics"),
+						},
+					},
+					"opencost": {
+						SchemaProps: spec.SchemaProps{
+							Description: "OpenCost are settings applied to OpenCost deployments in each connected cluster. These can be overridden in individual clusters by modifying the Cluster's spec",
+							Ref:         ref("github.com/loft-sh/api/v4/pkg/apis/storage/v1.OpenCost"),
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			"github.com/loft-sh/api/v4/pkg/apis/storage/v1.Metrics", "github.com/loft-sh/api/v4/pkg/apis/storage/v1.OpenCost"},
+	}
+}
+
+func schema_pkg_apis_management_v1_CostControlGlobalConfig(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"metrics": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Metrics these settings apply to metric infrastructure used to aggregate metrics across all connected clusters",
+							Ref:         ref("github.com/loft-sh/api/v4/pkg/apis/storage/v1.Metrics"),
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			"github.com/loft-sh/api/v4/pkg/apis/storage/v1.Metrics"},
+	}
+}
+
+func schema_pkg_apis_management_v1_CostControlResourcePrice(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"price": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Price specifies the price.",
+							Type:        []string{"number"},
+							Format:      "double",
+						},
+					},
+					"timePeriod": {
+						SchemaProps: spec.SchemaProps{
+							Description: "TimePeriod specifies the time period for the price.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+				},
+			},
+		},
+	}
+}
+
+func schema_pkg_apis_management_v1_CostControlSettings(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"priceCurrency": {
+						SchemaProps: spec.SchemaProps{
+							Description: "PriceCurrency specifies the currency.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"averageCPUPricePerNode": {
+						SchemaProps: spec.SchemaProps{
+							Description: "AvgCPUPricePerNode specifies the average CPU price per node.",
+							Ref:         ref("github.com/loft-sh/api/v4/pkg/apis/management/v1.CostControlResourcePrice"),
+						},
+					},
+					"averageRAMPricePerNode": {
+						SchemaProps: spec.SchemaProps{
+							Description: "AvgRAMPricePerNode specifies the average RAM price per node.",
+							Ref:         ref("github.com/loft-sh/api/v4/pkg/apis/management/v1.CostControlResourcePrice"),
+						},
+					},
+					"controlPlanePricePerCluster": {
+						SchemaProps: spec.SchemaProps{
+							Description: "ControlPlanePricePerCluster specifies the price of one physical cluster.",
+							Ref:         ref("github.com/loft-sh/api/v4/pkg/apis/management/v1.CostControlResourcePrice"),
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			"github.com/loft-sh/api/v4/pkg/apis/management/v1.CostControlResourcePrice"},
+	}
+}
+
 func schema_pkg_apis_management_v1_DevPodDeleteOptions(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
@@ -8891,11 +9142,11 @@ func schema_pkg_apis_management_v1_DevPodEnvironmentTemplateSpec(ref common.Refe
 							Format:      "",
 						},
 					},
-					"git": {
+					"description": {
 						SchemaProps: spec.SchemaProps{
-							Description: "Git holds configuration for git environment spec source",
-							Default:     map[string]interface{}{},
-							Ref:         ref("github.com/loft-sh/api/v4/pkg/apis/storage/v1.GitEnvironmentTemplate"),
+							Description: "Description describes the environment template",
+							Type:        []string{"string"},
+							Format:      "",
 						},
 					},
 					"owner": {
@@ -8918,6 +9169,12 @@ func schema_pkg_apis_management_v1_DevPodEnvironmentTemplateSpec(ref common.Refe
 							},
 						},
 					},
+					"template": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Template is the inline template to use for DevPod environments",
+							Ref:         ref("github.com/loft-sh/api/v4/pkg/apis/storage/v1.DevPodEnvironmentTemplateDefinition"),
+						},
+					},
 					"versions": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Versions are different versions of the template that can be referenced as well",
@@ -8936,7 +9193,7 @@ func schema_pkg_apis_management_v1_DevPodEnvironmentTemplateSpec(ref common.Refe
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/v4/pkg/apis/storage/v1.Access", "github.com/loft-sh/api/v4/pkg/apis/storage/v1.DevPodEnvironmentTemplateVersion", "github.com/loft-sh/api/v4/pkg/apis/storage/v1.GitEnvironmentTemplate", "github.com/loft-sh/api/v4/pkg/apis/storage/v1.UserOrTeam"},
+			"github.com/loft-sh/api/v4/pkg/apis/storage/v1.Access", "github.com/loft-sh/api/v4/pkg/apis/storage/v1.DevPodEnvironmentTemplateDefinition", "github.com/loft-sh/api/v4/pkg/apis/storage/v1.DevPodEnvironmentTemplateVersion", "github.com/loft-sh/api/v4/pkg/apis/storage/v1.UserOrTeam"},
 	}
 }
 
@@ -9418,6 +9675,12 @@ func schema_pkg_apis_management_v1_DevPodWorkspaceInstanceSpec(ref common.Refere
 							Ref:         ref("github.com/loft-sh/api/v4/pkg/apis/storage/v1.UserOrTeam"),
 						},
 					},
+					"presetRef": {
+						SchemaProps: spec.SchemaProps{
+							Description: "PresetRef holds the DevPodWorkspacePreset template reference",
+							Ref:         ref("github.com/loft-sh/api/v4/pkg/apis/storage/v1.PresetRef"),
+						},
+					},
 					"templateRef": {
 						SchemaProps: spec.SchemaProps{
 							Description: "TemplateRef holds the DevPod machine template reference",
@@ -9427,7 +9690,6 @@ func schema_pkg_apis_management_v1_DevPodWorkspaceInstanceSpec(ref common.Refere
 					"environmentRef": {
 						SchemaProps: spec.SchemaProps{
 							Description: "EnvironmentRef is the reference to DevPodEnvironmentTemplate that should be used",
-							Default:     map[string]interface{}{},
 							Ref:         ref("github.com/loft-sh/api/v4/pkg/apis/storage/v1.EnvironmentRef"),
 						},
 					},
@@ -9476,7 +9738,7 @@ func schema_pkg_apis_management_v1_DevPodWorkspaceInstanceSpec(ref common.Refere
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/v4/pkg/apis/storage/v1.Access", "github.com/loft-sh/api/v4/pkg/apis/storage/v1.DevPodWorkspaceTemplateDefinition", "github.com/loft-sh/api/v4/pkg/apis/storage/v1.EnvironmentRef", "github.com/loft-sh/api/v4/pkg/apis/storage/v1.RunnerRef", "github.com/loft-sh/api/v4/pkg/apis/storage/v1.TemplateRef", "github.com/loft-sh/api/v4/pkg/apis/storage/v1.UserOrTeam"},
+			"github.com/loft-sh/api/v4/pkg/apis/storage/v1.Access", "github.com/loft-sh/api/v4/pkg/apis/storage/v1.DevPodWorkspaceTemplateDefinition", "github.com/loft-sh/api/v4/pkg/apis/storage/v1.EnvironmentRef", "github.com/loft-sh/api/v4/pkg/apis/storage/v1.PresetRef", "github.com/loft-sh/api/v4/pkg/apis/storage/v1.RunnerRef", "github.com/loft-sh/api/v4/pkg/apis/storage/v1.TemplateRef", "github.com/loft-sh/api/v4/pkg/apis/storage/v1.UserOrTeam"},
 	}
 }
 
@@ -9648,6 +9910,365 @@ func schema_pkg_apis_management_v1_DevPodWorkspaceInstanceStatus(ref common.Refe
 		},
 		Dependencies: []string{
 			"github.com/loft-sh/agentapi/v4/pkg/apis/loft/cluster/v1.SleepModeConfig", "github.com/loft-sh/agentapi/v4/pkg/apis/loft/storage/v1.Condition", "github.com/loft-sh/api/v4/pkg/apis/storage/v1.ClusterRef", "github.com/loft-sh/api/v4/pkg/apis/storage/v1.DevPodWorkspaceTemplateDefinition"},
+	}
+}
+
+func schema_pkg_apis_management_v1_DevPodWorkspaceInstanceTroubleshoot(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"kind": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"apiVersion": {
+						SchemaProps: spec.SchemaProps{
+							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"metadata": {
+						SchemaProps: spec.SchemaProps{
+							Default: map[string]interface{}{},
+							Ref:     ref("k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"),
+						},
+					},
+					"state": {
+						SchemaProps: spec.SchemaProps{
+							Description: "State holds the workspaces state as given by 'devpod export'",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"workspace": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Workspace holds the workspace's instance object data",
+							Ref:         ref("github.com/loft-sh/api/v4/pkg/apis/management/v1.DevPodWorkspaceInstance"),
+						},
+					},
+					"template": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Template holds the workspace instance's template used to create it. This is the raw template, not the rendered one.",
+							Ref:         ref("github.com/loft-sh/api/v4/pkg/apis/storage/v1.DevPodWorkspaceTemplate"),
+						},
+					},
+					"pods": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Pods is a list of pod objects that are linked to the workspace.",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref("k8s.io/api/core/v1.Pod"),
+									},
+								},
+							},
+						},
+					},
+					"pvcs": {
+						SchemaProps: spec.SchemaProps{
+							Description: "PVCs is a list of PVC objects that are linked to the workspace.",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref("k8s.io/api/core/v1.PersistentVolumeClaim"),
+									},
+								},
+							},
+						},
+					},
+					"errors": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Errors is a list of errors that occurred while trying to collect informations for troubleshooting.",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: "",
+										Type:    []string{"string"},
+										Format:  "",
+									},
+								},
+							},
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			"github.com/loft-sh/api/v4/pkg/apis/management/v1.DevPodWorkspaceInstance", "github.com/loft-sh/api/v4/pkg/apis/storage/v1.DevPodWorkspaceTemplate", "k8s.io/api/core/v1.PersistentVolumeClaim", "k8s.io/api/core/v1.Pod", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
+	}
+}
+
+func schema_pkg_apis_management_v1_DevPodWorkspaceInstanceTroubleshootList(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"kind": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"apiVersion": {
+						SchemaProps: spec.SchemaProps{
+							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"metadata": {
+						SchemaProps: spec.SchemaProps{
+							Default: map[string]interface{}{},
+							Ref:     ref("k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"),
+						},
+					},
+					"items": {
+						SchemaProps: spec.SchemaProps{
+							Type: []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref("github.com/loft-sh/api/v4/pkg/apis/management/v1.DevPodWorkspaceInstanceTroubleshoot"),
+									},
+								},
+							},
+						},
+					},
+				},
+				Required: []string{"items"},
+			},
+		},
+		Dependencies: []string{
+			"github.com/loft-sh/api/v4/pkg/apis/management/v1.DevPodWorkspaceInstanceTroubleshoot", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
+	}
+}
+
+func schema_pkg_apis_management_v1_DevPodWorkspacePreset(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "DevPodWorkspacePreset",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"kind": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"apiVersion": {
+						SchemaProps: spec.SchemaProps{
+							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"metadata": {
+						SchemaProps: spec.SchemaProps{
+							Default: map[string]interface{}{},
+							Ref:     ref("k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"),
+						},
+					},
+					"spec": {
+						SchemaProps: spec.SchemaProps{
+							Default: map[string]interface{}{},
+							Ref:     ref("github.com/loft-sh/api/v4/pkg/apis/management/v1.DevPodWorkspacePresetSpec"),
+						},
+					},
+					"status": {
+						SchemaProps: spec.SchemaProps{
+							Default: map[string]interface{}{},
+							Ref:     ref("github.com/loft-sh/api/v4/pkg/apis/management/v1.DevPodWorkspacePresetStatus"),
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			"github.com/loft-sh/api/v4/pkg/apis/management/v1.DevPodWorkspacePresetSpec", "github.com/loft-sh/api/v4/pkg/apis/management/v1.DevPodWorkspacePresetStatus", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
+	}
+}
+
+func schema_pkg_apis_management_v1_DevPodWorkspacePresetList(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"kind": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"apiVersion": {
+						SchemaProps: spec.SchemaProps{
+							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"metadata": {
+						SchemaProps: spec.SchemaProps{
+							Default: map[string]interface{}{},
+							Ref:     ref("k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"),
+						},
+					},
+					"items": {
+						SchemaProps: spec.SchemaProps{
+							Type: []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref("github.com/loft-sh/api/v4/pkg/apis/management/v1.DevPodWorkspacePreset"),
+									},
+								},
+							},
+						},
+					},
+				},
+				Required: []string{"items"},
+			},
+		},
+		Dependencies: []string{
+			"github.com/loft-sh/api/v4/pkg/apis/management/v1.DevPodWorkspacePreset", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
+	}
+}
+
+func schema_pkg_apis_management_v1_DevPodWorkspacePresetSource(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "DevPodWorkspacePresetSource",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"git": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Git stores path to git repo to use as workspace source",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"image": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Image stores container image to use as workspace source",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+				},
+			},
+		},
+	}
+}
+
+func schema_pkg_apis_management_v1_DevPodWorkspacePresetSpec(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "DevPodWorkspacePresetSpec holds the specification",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"displayName": {
+						SchemaProps: spec.SchemaProps{
+							Description: "DisplayName is the name that should be displayed in the UI",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"source": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Source stores inline path of project source",
+							Ref:         ref("github.com/loft-sh/api/v4/pkg/apis/storage/v1.DevPodWorkspacePresetSource"),
+						},
+					},
+					"infrastructureRef": {
+						SchemaProps: spec.SchemaProps{
+							Description: "InfrastructureRef stores reference to DevPodWorkspaceTemplate to use",
+							Ref:         ref("github.com/loft-sh/api/v4/pkg/apis/storage/v1.TemplateRef"),
+						},
+					},
+					"environmentRef": {
+						SchemaProps: spec.SchemaProps{
+							Description: "EnvironmentRef stores reference to DevPodEnvironmentTemplate",
+							Ref:         ref("github.com/loft-sh/api/v4/pkg/apis/storage/v1.EnvironmentRef"),
+						},
+					},
+					"useProjectGitCredentials": {
+						SchemaProps: spec.SchemaProps{
+							Description: "UseProjectGitCredentials specifies if the project git credentials should be used instead of local ones for this environment",
+							Type:        []string{"boolean"},
+							Format:      "",
+						},
+					},
+					"owner": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Owner holds the owner of this object",
+							Ref:         ref("github.com/loft-sh/api/v4/pkg/apis/storage/v1.UserOrTeam"),
+						},
+					},
+					"access": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Access to the DevPod machine instance object itself",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref("github.com/loft-sh/api/v4/pkg/apis/storage/v1.Access"),
+									},
+								},
+							},
+						},
+					},
+					"versions": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Versions are different versions of the template that can be referenced as well",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref("github.com/loft-sh/api/v4/pkg/apis/storage/v1.DevPodWorkspacePresetVersion"),
+									},
+								},
+							},
+						},
+					},
+				},
+				Required: []string{"source", "infrastructureRef"},
+			},
+		},
+		Dependencies: []string{
+			"github.com/loft-sh/api/v4/pkg/apis/storage/v1.Access", "github.com/loft-sh/api/v4/pkg/apis/storage/v1.DevPodWorkspacePresetSource", "github.com/loft-sh/api/v4/pkg/apis/storage/v1.DevPodWorkspacePresetVersion", "github.com/loft-sh/api/v4/pkg/apis/storage/v1.EnvironmentRef", "github.com/loft-sh/api/v4/pkg/apis/storage/v1.TemplateRef", "github.com/loft-sh/api/v4/pkg/apis/storage/v1.UserOrTeam"},
+	}
+}
+
+func schema_pkg_apis_management_v1_DevPodWorkspacePresetStatus(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "DevPodWorkspacePresetStatus holds the status",
+				Type:        []string{"object"},
+			},
+		},
 	}
 }
 
@@ -10424,42 +11045,6 @@ func schema_pkg_apis_management_v1_FeatureStatus(ref common.ReferenceCallback) c
 					},
 				},
 				Required: []string{"name"},
-			},
-		},
-	}
-}
-
-func schema_pkg_apis_management_v1_GitEnvironmentTemplate(ref common.ReferenceCallback) common.OpenAPIDefinition {
-	return common.OpenAPIDefinition{
-		Schema: spec.Schema{
-			SchemaProps: spec.SchemaProps{
-				Description: "GitEnvironmentTemplate stores configuration of Git environment template source",
-				Type:        []string{"object"},
-				Properties: map[string]spec.Schema{
-					"repository": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Repository stores repository URL for Git environment spec source",
-							Default:     "",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"revision": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Revision stores revision to checkout in repository",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"subpath": {
-						SchemaProps: spec.SchemaProps{
-							Description: "SubPath stores subpath within Repositor where environment spec is",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-				},
-				Required: []string{"repository"},
 			},
 		},
 	}
@@ -11369,6 +11954,32 @@ func schema_pkg_apis_management_v1_LoftUpgradeStatus(ref common.ReferenceCallbac
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
 				Type: []string{"object"},
+			},
+		},
+	}
+}
+
+func schema_pkg_apis_management_v1_MaintenanceWindow(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"dayOfWeek": {
+						SchemaProps: spec.SchemaProps{
+							Description: "DayOfWeek specifies the day of the week for the maintenance window. It should be a string representing the day, e.g., \"Monday\", \"Tuesday\", etc.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"timeWindow": {
+						SchemaProps: spec.SchemaProps{
+							Description: "TimeWindow specifies the time window for the maintenance. It should be a string representing the time range in 24-hour format, in UTC, e.g., \"02:00-03:00\".",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+				},
 			},
 		},
 	}
@@ -13209,6 +13820,13 @@ func schema_pkg_apis_management_v1_ProjectSpec(ref common.ReferenceCallback) com
 							Ref:         ref("github.com/loft-sh/api/v4/pkg/apis/storage/v1.RequireTemplate"),
 						},
 					},
+					"requirePreset": {
+						SchemaProps: spec.SchemaProps{
+							Description: "RequirePreset configures if a preset is required for instance creation.",
+							Default:     map[string]interface{}{},
+							Ref:         ref("github.com/loft-sh/api/v4/pkg/apis/storage/v1.RequirePreset"),
+						},
+					},
 					"members": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Members are the users and teams that are part of this project",
@@ -13271,7 +13889,7 @@ func schema_pkg_apis_management_v1_ProjectSpec(ref common.ReferenceCallback) com
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/v4/pkg/apis/storage/v1.Access", "github.com/loft-sh/api/v4/pkg/apis/storage/v1.AllowedCluster", "github.com/loft-sh/api/v4/pkg/apis/storage/v1.AllowedRunner", "github.com/loft-sh/api/v4/pkg/apis/storage/v1.AllowedTemplate", "github.com/loft-sh/api/v4/pkg/apis/storage/v1.ArgoIntegrationSpec", "github.com/loft-sh/api/v4/pkg/apis/storage/v1.DevPodProjectSpec", "github.com/loft-sh/api/v4/pkg/apis/storage/v1.Member", "github.com/loft-sh/api/v4/pkg/apis/storage/v1.NamespacePattern", "github.com/loft-sh/api/v4/pkg/apis/storage/v1.Quotas", "github.com/loft-sh/api/v4/pkg/apis/storage/v1.RancherIntegrationSpec", "github.com/loft-sh/api/v4/pkg/apis/storage/v1.RequireTemplate", "github.com/loft-sh/api/v4/pkg/apis/storage/v1.UserOrTeam", "github.com/loft-sh/api/v4/pkg/apis/storage/v1.VaultIntegrationSpec"},
+			"github.com/loft-sh/api/v4/pkg/apis/storage/v1.Access", "github.com/loft-sh/api/v4/pkg/apis/storage/v1.AllowedCluster", "github.com/loft-sh/api/v4/pkg/apis/storage/v1.AllowedRunner", "github.com/loft-sh/api/v4/pkg/apis/storage/v1.AllowedTemplate", "github.com/loft-sh/api/v4/pkg/apis/storage/v1.ArgoIntegrationSpec", "github.com/loft-sh/api/v4/pkg/apis/storage/v1.DevPodProjectSpec", "github.com/loft-sh/api/v4/pkg/apis/storage/v1.Member", "github.com/loft-sh/api/v4/pkg/apis/storage/v1.NamespacePattern", "github.com/loft-sh/api/v4/pkg/apis/storage/v1.Quotas", "github.com/loft-sh/api/v4/pkg/apis/storage/v1.RancherIntegrationSpec", "github.com/loft-sh/api/v4/pkg/apis/storage/v1.RequirePreset", "github.com/loft-sh/api/v4/pkg/apis/storage/v1.RequireTemplate", "github.com/loft-sh/api/v4/pkg/apis/storage/v1.UserOrTeam", "github.com/loft-sh/api/v4/pkg/apis/storage/v1.VaultIntegrationSpec"},
 	}
 }
 
@@ -13413,6 +14031,20 @@ func schema_pkg_apis_management_v1_ProjectTemplates(ref common.ReferenceCallback
 							},
 						},
 					},
+					"devPodWorkspacePresets": {
+						SchemaProps: spec.SchemaProps{
+							Description: "DevPodWorkspacePresets holds all the allowed workspace presets",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref("github.com/loft-sh/api/v4/pkg/apis/management/v1.DevPodWorkspacePreset"),
+									},
+								},
+							},
+						},
+					},
 					"defaultDevPodEnvironmentTemplate": {
 						SchemaProps: spec.SchemaProps{
 							Description: "DefaultDevPodEnvironmentTemplate",
@@ -13424,7 +14056,7 @@ func schema_pkg_apis_management_v1_ProjectTemplates(ref common.ReferenceCallback
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/v4/pkg/apis/management/v1.DevPodEnvironmentTemplate", "github.com/loft-sh/api/v4/pkg/apis/management/v1.DevPodWorkspaceTemplate", "github.com/loft-sh/api/v4/pkg/apis/management/v1.SpaceTemplate", "github.com/loft-sh/api/v4/pkg/apis/management/v1.VirtualClusterTemplate", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
+			"github.com/loft-sh/api/v4/pkg/apis/management/v1.DevPodEnvironmentTemplate", "github.com/loft-sh/api/v4/pkg/apis/management/v1.DevPodWorkspacePreset", "github.com/loft-sh/api/v4/pkg/apis/management/v1.DevPodWorkspaceTemplate", "github.com/loft-sh/api/v4/pkg/apis/management/v1.SpaceTemplate", "github.com/loft-sh/api/v4/pkg/apis/management/v1.VirtualClusterTemplate", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
 	}
 }
 
@@ -17712,6 +18344,139 @@ func schema_pkg_apis_management_v1_VirtualClusterAccessKeyList(ref common.Refere
 	}
 }
 
+func schema_pkg_apis_management_v1_VirtualClusterExternalDatabase(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "VirtualClusterExternalDatabase holds kube config request and response data for virtual clusters",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"kind": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"apiVersion": {
+						SchemaProps: spec.SchemaProps{
+							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"metadata": {
+						SchemaProps: spec.SchemaProps{
+							Default: map[string]interface{}{},
+							Ref:     ref("k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"),
+						},
+					},
+					"spec": {
+						SchemaProps: spec.SchemaProps{
+							Default: map[string]interface{}{},
+							Ref:     ref("github.com/loft-sh/api/v4/pkg/apis/management/v1.VirtualClusterExternalDatabaseSpec"),
+						},
+					},
+					"status": {
+						SchemaProps: spec.SchemaProps{
+							Default: map[string]interface{}{},
+							Ref:     ref("github.com/loft-sh/api/v4/pkg/apis/management/v1.VirtualClusterExternalDatabaseStatus"),
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			"github.com/loft-sh/api/v4/pkg/apis/management/v1.VirtualClusterExternalDatabaseSpec", "github.com/loft-sh/api/v4/pkg/apis/management/v1.VirtualClusterExternalDatabaseStatus", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
+	}
+}
+
+func schema_pkg_apis_management_v1_VirtualClusterExternalDatabaseList(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"kind": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"apiVersion": {
+						SchemaProps: spec.SchemaProps{
+							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"metadata": {
+						SchemaProps: spec.SchemaProps{
+							Default: map[string]interface{}{},
+							Ref:     ref("k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"),
+						},
+					},
+					"items": {
+						SchemaProps: spec.SchemaProps{
+							Type: []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref("github.com/loft-sh/api/v4/pkg/apis/management/v1.VirtualClusterExternalDatabase"),
+									},
+								},
+							},
+						},
+					},
+				},
+				Required: []string{"items"},
+			},
+		},
+		Dependencies: []string{
+			"github.com/loft-sh/api/v4/pkg/apis/management/v1.VirtualClusterExternalDatabase", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
+	}
+}
+
+func schema_pkg_apis_management_v1_VirtualClusterExternalDatabaseSpec(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"connector": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Connector specifies the secret that should be used to connect to an external database server. The connection is used to manage a user and database for the vCluster. A data source endpoint constructed from the created user and database is returned on status. The secret specified by connector should contain the following fields: endpoint - the endpoint where the database server can be accessed user - the database username password - the password for the database username port - the port to be used in conjunction with the endpoint to connect to the databse server. This is commonly 3306",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+				},
+			},
+		},
+	}
+}
+
+func schema_pkg_apis_management_v1_VirtualClusterExternalDatabaseStatus(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"dataSource": {
+						SchemaProps: spec.SchemaProps{
+							Description: "DataSource holds a datasource endpoint constructed from the vCluster's designated user and database. The user and database are created from the given connector.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+				},
+			},
+		},
+	}
+}
+
 func schema_pkg_apis_management_v1_VirtualClusterInstance(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
@@ -21138,11 +21903,23 @@ func schema_pkg_apis_storage_v1_ClusterSpec(ref common.ReferenceCallback) common
 							},
 						},
 					},
+					"metrics": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Metrics holds the cluster's metrics backend configuration",
+							Ref:         ref("github.com/loft-sh/api/v4/pkg/apis/storage/v1.Metrics"),
+						},
+					},
+					"opencost": {
+						SchemaProps: spec.SchemaProps{
+							Description: "OpenCost holds the cluster's OpenCost backend configuration",
+							Ref:         ref("github.com/loft-sh/api/v4/pkg/apis/storage/v1.OpenCost"),
+						},
+					},
 				},
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/v4/pkg/apis/storage/v1.Access", "github.com/loft-sh/api/v4/pkg/apis/storage/v1.SecretRef", "github.com/loft-sh/api/v4/pkg/apis/storage/v1.UserOrTeam"},
+			"github.com/loft-sh/api/v4/pkg/apis/storage/v1.Access", "github.com/loft-sh/api/v4/pkg/apis/storage/v1.Metrics", "github.com/loft-sh/api/v4/pkg/apis/storage/v1.OpenCost", "github.com/loft-sh/api/v4/pkg/apis/storage/v1.SecretRef", "github.com/loft-sh/api/v4/pkg/apis/storage/v1.UserOrTeam"},
 	}
 }
 
@@ -21171,9 +21948,25 @@ func schema_pkg_apis_storage_v1_ClusterStatus(ref common.ReferenceCallback) comm
 							Format: "",
 						},
 					},
+					"conditions": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Conditions holds several conditions the cluster might be in",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref("github.com/loft-sh/agentapi/v4/pkg/apis/loft/storage/v1.Condition"),
+									},
+								},
+							},
+						},
+					},
 				},
 			},
 		},
+		Dependencies: []string{
+			"github.com/loft-sh/agentapi/v4/pkg/apis/loft/storage/v1.Condition"},
 	}
 }
 
@@ -21437,11 +22230,44 @@ func schema_pkg_apis_storage_v1_DevPodEnvironmentTemplate(ref common.ReferenceCa
 							Ref:     ref("github.com/loft-sh/api/v4/pkg/apis/storage/v1.DevPodEnvironmentTemplateSpec"),
 						},
 					},
+					"status": {
+						SchemaProps: spec.SchemaProps{
+							Default: map[string]interface{}{},
+							Ref:     ref("github.com/loft-sh/api/v4/pkg/apis/storage/v1.DevPodEnvironmentTemplateStatus"),
+						},
+					},
 				},
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/v4/pkg/apis/storage/v1.DevPodEnvironmentTemplateSpec", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
+			"github.com/loft-sh/api/v4/pkg/apis/storage/v1.DevPodEnvironmentTemplateSpec", "github.com/loft-sh/api/v4/pkg/apis/storage/v1.DevPodEnvironmentTemplateStatus", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
+	}
+}
+
+func schema_pkg_apis_storage_v1_DevPodEnvironmentTemplateDefinition(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"git": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Git holds configuration for git environment spec source",
+							Ref:         ref("github.com/loft-sh/api/v4/pkg/apis/storage/v1.GitEnvironmentTemplate"),
+						},
+					},
+					"inline": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Inline holds an inline devcontainer.json definition",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			"github.com/loft-sh/api/v4/pkg/apis/storage/v1.GitEnvironmentTemplate"},
 	}
 }
 
@@ -21507,11 +22333,11 @@ func schema_pkg_apis_storage_v1_DevPodEnvironmentTemplateSpec(ref common.Referen
 							Format:      "",
 						},
 					},
-					"git": {
+					"description": {
 						SchemaProps: spec.SchemaProps{
-							Description: "Git holds configuration for git environment spec source",
-							Default:     map[string]interface{}{},
-							Ref:         ref("github.com/loft-sh/api/v4/pkg/apis/storage/v1.GitEnvironmentTemplate"),
+							Description: "Description describes the environment template",
+							Type:        []string{"string"},
+							Format:      "",
 						},
 					},
 					"owner": {
@@ -21534,6 +22360,12 @@ func schema_pkg_apis_storage_v1_DevPodEnvironmentTemplateSpec(ref common.Referen
 							},
 						},
 					},
+					"template": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Template is the inline template to use for DevPod environments",
+							Ref:         ref("github.com/loft-sh/api/v4/pkg/apis/storage/v1.DevPodEnvironmentTemplateDefinition"),
+						},
+					},
 					"versions": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Versions are different versions of the template that can be referenced as well",
@@ -21552,7 +22384,18 @@ func schema_pkg_apis_storage_v1_DevPodEnvironmentTemplateSpec(ref common.Referen
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/v4/pkg/apis/storage/v1.Access", "github.com/loft-sh/api/v4/pkg/apis/storage/v1.DevPodEnvironmentTemplateVersion", "github.com/loft-sh/api/v4/pkg/apis/storage/v1.GitEnvironmentTemplate", "github.com/loft-sh/api/v4/pkg/apis/storage/v1.UserOrTeam"},
+			"github.com/loft-sh/api/v4/pkg/apis/storage/v1.Access", "github.com/loft-sh/api/v4/pkg/apis/storage/v1.DevPodEnvironmentTemplateDefinition", "github.com/loft-sh/api/v4/pkg/apis/storage/v1.DevPodEnvironmentTemplateVersion", "github.com/loft-sh/api/v4/pkg/apis/storage/v1.UserOrTeam"},
+	}
+}
+
+func schema_pkg_apis_storage_v1_DevPodEnvironmentTemplateStatus(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "DevPodEnvironmentTemplateStatus holds the status",
+				Type:        []string{"object"},
+			},
+		},
 	}
 }
 
@@ -21562,11 +22405,11 @@ func schema_pkg_apis_storage_v1_DevPodEnvironmentTemplateVersion(ref common.Refe
 			SchemaProps: spec.SchemaProps{
 				Type: []string{"object"},
 				Properties: map[string]spec.Schema{
-					"git": {
+					"template": {
 						SchemaProps: spec.SchemaProps{
-							Description: "Git holds the GitEnvironmentTemplate",
+							Description: "Template holds the environment template definition",
 							Default:     map[string]interface{}{},
-							Ref:         ref("github.com/loft-sh/api/v4/pkg/apis/storage/v1.GitEnvironmentTemplate"),
+							Ref:         ref("github.com/loft-sh/api/v4/pkg/apis/storage/v1.DevPodEnvironmentTemplateDefinition"),
 						},
 					},
 					"version": {
@@ -21580,7 +22423,7 @@ func schema_pkg_apis_storage_v1_DevPodEnvironmentTemplateVersion(ref common.Refe
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/v4/pkg/apis/storage/v1.GitEnvironmentTemplate"},
+			"github.com/loft-sh/api/v4/pkg/apis/storage/v1.DevPodEnvironmentTemplateDefinition"},
 	}
 }
 
@@ -21825,6 +22668,12 @@ func schema_pkg_apis_storage_v1_DevPodWorkspaceInstanceSpec(ref common.Reference
 							Ref:         ref("github.com/loft-sh/api/v4/pkg/apis/storage/v1.UserOrTeam"),
 						},
 					},
+					"presetRef": {
+						SchemaProps: spec.SchemaProps{
+							Description: "PresetRef holds the DevPodWorkspacePreset template reference",
+							Ref:         ref("github.com/loft-sh/api/v4/pkg/apis/storage/v1.PresetRef"),
+						},
+					},
 					"templateRef": {
 						SchemaProps: spec.SchemaProps{
 							Description: "TemplateRef holds the DevPod machine template reference",
@@ -21834,7 +22683,6 @@ func schema_pkg_apis_storage_v1_DevPodWorkspaceInstanceSpec(ref common.Reference
 					"environmentRef": {
 						SchemaProps: spec.SchemaProps{
 							Description: "EnvironmentRef is the reference to DevPodEnvironmentTemplate that should be used",
-							Default:     map[string]interface{}{},
 							Ref:         ref("github.com/loft-sh/api/v4/pkg/apis/storage/v1.EnvironmentRef"),
 						},
 					},
@@ -21883,7 +22731,7 @@ func schema_pkg_apis_storage_v1_DevPodWorkspaceInstanceSpec(ref common.Reference
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/v4/pkg/apis/storage/v1.Access", "github.com/loft-sh/api/v4/pkg/apis/storage/v1.DevPodWorkspaceTemplateDefinition", "github.com/loft-sh/api/v4/pkg/apis/storage/v1.EnvironmentRef", "github.com/loft-sh/api/v4/pkg/apis/storage/v1.RunnerRef", "github.com/loft-sh/api/v4/pkg/apis/storage/v1.TemplateRef", "github.com/loft-sh/api/v4/pkg/apis/storage/v1.UserOrTeam"},
+			"github.com/loft-sh/api/v4/pkg/apis/storage/v1.Access", "github.com/loft-sh/api/v4/pkg/apis/storage/v1.DevPodWorkspaceTemplateDefinition", "github.com/loft-sh/api/v4/pkg/apis/storage/v1.EnvironmentRef", "github.com/loft-sh/api/v4/pkg/apis/storage/v1.PresetRef", "github.com/loft-sh/api/v4/pkg/apis/storage/v1.RunnerRef", "github.com/loft-sh/api/v4/pkg/apis/storage/v1.TemplateRef", "github.com/loft-sh/api/v4/pkg/apis/storage/v1.UserOrTeam"},
 	}
 }
 
@@ -21980,6 +22828,266 @@ func schema_pkg_apis_storage_v1_DevPodWorkspaceInstanceTemplateDefinition(ref co
 		},
 		Dependencies: []string{
 			"github.com/loft-sh/api/v4/pkg/apis/storage/v1.TemplateMetadata"},
+	}
+}
+
+func schema_pkg_apis_storage_v1_DevPodWorkspacePreset(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "DevPodWorkspacePreset",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"kind": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"apiVersion": {
+						SchemaProps: spec.SchemaProps{
+							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"metadata": {
+						SchemaProps: spec.SchemaProps{
+							Default: map[string]interface{}{},
+							Ref:     ref("k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"),
+						},
+					},
+					"spec": {
+						SchemaProps: spec.SchemaProps{
+							Default: map[string]interface{}{},
+							Ref:     ref("github.com/loft-sh/api/v4/pkg/apis/storage/v1.DevPodWorkspacePresetSpec"),
+						},
+					},
+					"status": {
+						SchemaProps: spec.SchemaProps{
+							Default: map[string]interface{}{},
+							Ref:     ref("github.com/loft-sh/api/v4/pkg/apis/storage/v1.DevPodWorkspacePresetStatus"),
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			"github.com/loft-sh/api/v4/pkg/apis/storage/v1.DevPodWorkspacePresetSpec", "github.com/loft-sh/api/v4/pkg/apis/storage/v1.DevPodWorkspacePresetStatus", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
+	}
+}
+
+func schema_pkg_apis_storage_v1_DevPodWorkspacePresetList(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "DevPodWorkspacePresetList contains a list of DevPodWorkspacePreset objects",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"kind": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"apiVersion": {
+						SchemaProps: spec.SchemaProps{
+							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"metadata": {
+						SchemaProps: spec.SchemaProps{
+							Default: map[string]interface{}{},
+							Ref:     ref("k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"),
+						},
+					},
+					"items": {
+						SchemaProps: spec.SchemaProps{
+							Type: []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref("github.com/loft-sh/api/v4/pkg/apis/storage/v1.DevPodWorkspacePreset"),
+									},
+								},
+							},
+						},
+					},
+				},
+				Required: []string{"items"},
+			},
+		},
+		Dependencies: []string{
+			"github.com/loft-sh/api/v4/pkg/apis/storage/v1.DevPodWorkspacePreset", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
+	}
+}
+
+func schema_pkg_apis_storage_v1_DevPodWorkspacePresetSource(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"git": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Git stores path to git repo to use as workspace source",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"image": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Image stores container image to use as workspace source",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+				},
+			},
+		},
+	}
+}
+
+func schema_pkg_apis_storage_v1_DevPodWorkspacePresetSpec(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"displayName": {
+						SchemaProps: spec.SchemaProps{
+							Description: "DisplayName is the name that should be displayed in the UI",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"source": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Source stores inline path of project source",
+							Ref:         ref("github.com/loft-sh/api/v4/pkg/apis/storage/v1.DevPodWorkspacePresetSource"),
+						},
+					},
+					"infrastructureRef": {
+						SchemaProps: spec.SchemaProps{
+							Description: "InfrastructureRef stores reference to DevPodWorkspaceTemplate to use",
+							Ref:         ref("github.com/loft-sh/api/v4/pkg/apis/storage/v1.TemplateRef"),
+						},
+					},
+					"environmentRef": {
+						SchemaProps: spec.SchemaProps{
+							Description: "EnvironmentRef stores reference to DevPodEnvironmentTemplate",
+							Ref:         ref("github.com/loft-sh/api/v4/pkg/apis/storage/v1.EnvironmentRef"),
+						},
+					},
+					"useProjectGitCredentials": {
+						SchemaProps: spec.SchemaProps{
+							Description: "UseProjectGitCredentials specifies if the project git credentials should be used instead of local ones for this environment",
+							Type:        []string{"boolean"},
+							Format:      "",
+						},
+					},
+					"owner": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Owner holds the owner of this object",
+							Ref:         ref("github.com/loft-sh/api/v4/pkg/apis/storage/v1.UserOrTeam"),
+						},
+					},
+					"access": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Access to the DevPod machine instance object itself",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref("github.com/loft-sh/api/v4/pkg/apis/storage/v1.Access"),
+									},
+								},
+							},
+						},
+					},
+					"versions": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Versions are different versions of the template that can be referenced as well",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref("github.com/loft-sh/api/v4/pkg/apis/storage/v1.DevPodWorkspacePresetVersion"),
+									},
+								},
+							},
+						},
+					},
+				},
+				Required: []string{"source", "infrastructureRef"},
+			},
+		},
+		Dependencies: []string{
+			"github.com/loft-sh/api/v4/pkg/apis/storage/v1.Access", "github.com/loft-sh/api/v4/pkg/apis/storage/v1.DevPodWorkspacePresetSource", "github.com/loft-sh/api/v4/pkg/apis/storage/v1.DevPodWorkspacePresetVersion", "github.com/loft-sh/api/v4/pkg/apis/storage/v1.EnvironmentRef", "github.com/loft-sh/api/v4/pkg/apis/storage/v1.TemplateRef", "github.com/loft-sh/api/v4/pkg/apis/storage/v1.UserOrTeam"},
+	}
+}
+
+func schema_pkg_apis_storage_v1_DevPodWorkspacePresetStatus(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "DevPodWorkspacePresetStatus holds the status",
+				Type:        []string{"object"},
+			},
+		},
+	}
+}
+
+func schema_pkg_apis_storage_v1_DevPodWorkspacePresetVersion(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"version": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Version is the version. Needs to be in X.X.X format.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"source": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Source stores inline path of project source",
+							Ref:         ref("github.com/loft-sh/api/v4/pkg/apis/storage/v1.DevPodWorkspacePresetSource"),
+						},
+					},
+					"infrastructureRef": {
+						SchemaProps: spec.SchemaProps{
+							Description: "InfrastructureRef stores reference to DevPodWorkspaceTemplate to use",
+							Ref:         ref("github.com/loft-sh/api/v4/pkg/apis/storage/v1.TemplateRef"),
+						},
+					},
+					"environmentRef": {
+						SchemaProps: spec.SchemaProps{
+							Description: "EnvironmentRef stores reference to DevPodEnvironmentTemplate",
+							Ref:         ref("github.com/loft-sh/api/v4/pkg/apis/storage/v1.EnvironmentRef"),
+						},
+					},
+					"useProjectGitCredentials": {
+						SchemaProps: spec.SchemaProps{
+							Description: "UseProjectGitCredentials specifies if the project git credentials should be used instead of local ones for this environment",
+							Type:        []string{"boolean"},
+							Format:      "",
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			"github.com/loft-sh/api/v4/pkg/apis/storage/v1.DevPodWorkspacePresetSource", "github.com/loft-sh/api/v4/pkg/apis/storage/v1.EnvironmentRef", "github.com/loft-sh/api/v4/pkg/apis/storage/v1.TemplateRef"},
 	}
 }
 
@@ -22470,6 +23578,13 @@ func schema_pkg_apis_storage_v1_EnvironmentRef(ref common.ReferenceCallback) com
 						SchemaProps: spec.SchemaProps{
 							Description: "Name is the name of DevPodEnvironmentTemplate this references",
 							Default:     "",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"version": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Version is the version of DevPodEnvironmentTemplate this references",
 							Type:        []string{"string"},
 							Format:      "",
 						},
@@ -23287,6 +24402,47 @@ func schema_pkg_apis_storage_v1_Member(ref common.ReferenceCallback) common.Open
 	}
 }
 
+func schema_pkg_apis_storage_v1_Metrics(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"replicas": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Replicas is the number of desired replicas.",
+							Type:        []string{"integer"},
+							Format:      "int32",
+						},
+					},
+					"resources": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Resources are compute resource required by the metrics backend",
+							Ref:         ref("k8s.io/api/core/v1.ResourceRequirements"),
+						},
+					},
+					"retention": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Retention is the metrics data retention period. Default is 1y",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"storage": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Storage contains settings related to the metrics backend's persistent volume configuration",
+							Default:     map[string]interface{}{},
+							Ref:         ref("github.com/loft-sh/api/v4/pkg/apis/storage/v1.Storage"),
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			"github.com/loft-sh/api/v4/pkg/apis/storage/v1.Storage", "k8s.io/api/core/v1.ResourceRequirements"},
+	}
+}
+
 func schema_pkg_apis_storage_v1_NamespacePattern(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
@@ -23727,6 +24883,33 @@ func schema_pkg_apis_storage_v1_ObjectsStatus(ref common.ReferenceCallback) comm
 	}
 }
 
+func schema_pkg_apis_storage_v1_OpenCost(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"replicas": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Replicas is the number of desired replicas.",
+							Type:        []string{"integer"},
+							Format:      "int32",
+						},
+					},
+					"resources": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Resources are compute resource required by the OpenCost backend",
+							Ref:         ref("k8s.io/api/core/v1.ResourceRequirements"),
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			"k8s.io/api/core/v1.ResourceRequirements"},
+	}
+}
+
 func schema_pkg_apis_storage_v1_PodSelector(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
@@ -23752,6 +24935,34 @@ func schema_pkg_apis_storage_v1_PodSelector(ref common.ReferenceCallback) common
 		},
 		Dependencies: []string{
 			"k8s.io/apimachinery/pkg/apis/meta/v1.LabelSelector"},
+	}
+}
+
+func schema_pkg_apis_storage_v1_PresetRef(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"name": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Name is the name of DevPodWorkspacePreset",
+							Default:     "",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"version": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Version holds the preset version to use. Version is expected to be in semantic versioning format. Alternatively, you can also exchange major, minor or patch with an 'x' to tell Loft to automatically select the latest major, minor or patch version.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+				},
+				Required: []string{"name"},
+			},
+		},
 	}
 }
 
@@ -23933,6 +25144,13 @@ func schema_pkg_apis_storage_v1_ProjectSpec(ref common.ReferenceCallback) common
 							Ref:         ref("github.com/loft-sh/api/v4/pkg/apis/storage/v1.RequireTemplate"),
 						},
 					},
+					"requirePreset": {
+						SchemaProps: spec.SchemaProps{
+							Description: "RequirePreset configures if a preset is required for instance creation.",
+							Default:     map[string]interface{}{},
+							Ref:         ref("github.com/loft-sh/api/v4/pkg/apis/storage/v1.RequirePreset"),
+						},
+					},
 					"members": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Members are the users and teams that are part of this project",
@@ -23995,7 +25213,7 @@ func schema_pkg_apis_storage_v1_ProjectSpec(ref common.ReferenceCallback) common
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/v4/pkg/apis/storage/v1.Access", "github.com/loft-sh/api/v4/pkg/apis/storage/v1.AllowedCluster", "github.com/loft-sh/api/v4/pkg/apis/storage/v1.AllowedRunner", "github.com/loft-sh/api/v4/pkg/apis/storage/v1.AllowedTemplate", "github.com/loft-sh/api/v4/pkg/apis/storage/v1.ArgoIntegrationSpec", "github.com/loft-sh/api/v4/pkg/apis/storage/v1.DevPodProjectSpec", "github.com/loft-sh/api/v4/pkg/apis/storage/v1.Member", "github.com/loft-sh/api/v4/pkg/apis/storage/v1.NamespacePattern", "github.com/loft-sh/api/v4/pkg/apis/storage/v1.Quotas", "github.com/loft-sh/api/v4/pkg/apis/storage/v1.RancherIntegrationSpec", "github.com/loft-sh/api/v4/pkg/apis/storage/v1.RequireTemplate", "github.com/loft-sh/api/v4/pkg/apis/storage/v1.UserOrTeam", "github.com/loft-sh/api/v4/pkg/apis/storage/v1.VaultIntegrationSpec"},
+			"github.com/loft-sh/api/v4/pkg/apis/storage/v1.Access", "github.com/loft-sh/api/v4/pkg/apis/storage/v1.AllowedCluster", "github.com/loft-sh/api/v4/pkg/apis/storage/v1.AllowedRunner", "github.com/loft-sh/api/v4/pkg/apis/storage/v1.AllowedTemplate", "github.com/loft-sh/api/v4/pkg/apis/storage/v1.ArgoIntegrationSpec", "github.com/loft-sh/api/v4/pkg/apis/storage/v1.DevPodProjectSpec", "github.com/loft-sh/api/v4/pkg/apis/storage/v1.Member", "github.com/loft-sh/api/v4/pkg/apis/storage/v1.NamespacePattern", "github.com/loft-sh/api/v4/pkg/apis/storage/v1.Quotas", "github.com/loft-sh/api/v4/pkg/apis/storage/v1.RancherIntegrationSpec", "github.com/loft-sh/api/v4/pkg/apis/storage/v1.RequirePreset", "github.com/loft-sh/api/v4/pkg/apis/storage/v1.RequireTemplate", "github.com/loft-sh/api/v4/pkg/apis/storage/v1.UserOrTeam", "github.com/loft-sh/api/v4/pkg/apis/storage/v1.VaultIntegrationSpec"},
 	}
 }
 
@@ -24363,6 +25581,25 @@ func schema_pkg_apis_storage_v1_RancherProjectRef(ref common.ReferenceCallback) 
 						SchemaProps: spec.SchemaProps{
 							Description: "Project defines the Rancher project ID",
 							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+				},
+			},
+		},
+	}
+}
+
+func schema_pkg_apis_storage_v1_RequirePreset(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"disabled": {
+						SchemaProps: spec.SchemaProps{
+							Description: "If true, all users within the project will not be allowed to create a new instance without a preset. By default, all users are allowed to create a new instance without a preset.",
+							Type:        []string{"boolean"},
 							Format:      "",
 						},
 					},
@@ -25790,6 +27027,32 @@ func schema_pkg_apis_storage_v1_SpaceTemplateVersion(ref common.ReferenceCallbac
 		},
 		Dependencies: []string{
 			"github.com/loft-sh/api/v4/pkg/apis/storage/v1.AppParameter", "github.com/loft-sh/api/v4/pkg/apis/storage/v1.SpaceTemplateDefinition"},
+	}
+}
+
+func schema_pkg_apis_storage_v1_Storage(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"storageClass": {
+						SchemaProps: spec.SchemaProps{
+							Description: "StorageClass the storage class to use when provisioning the metrics backend's persistent volume If set to \"-\" or \"\" dynamic provisioning is disabled If set to undefined or null (the default), the cluster's default storage class is used for provisioning",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"size": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Size the size of the metrics backend's persistent volume",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+				},
+			},
+		},
 	}
 }
 
@@ -28137,6 +29400,27 @@ func schema_pkg_apis_storage_v1_VirtualClusterTemplateVersion(ref common.Referen
 	}
 }
 
+func schema_pkg_apis_storage_v1_WorkspaceRef(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"name": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Name is the name of DevPodWorkspaceTemplate this references",
+							Default:     "",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+				},
+				Required: []string{"name"},
+			},
+		},
+	}
+}
+
 func schema_pkg_apis_storage_v1_WorkspaceStatusResult(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
@@ -28483,7 +29767,7 @@ func schema_pkg_apis_ui_v1_UISettingsSpec(ref common.ReferenceCallback) common.O
 					},
 					"hasHelmRelease": {
 						SchemaProps: spec.SchemaProps{
-							Description: "HasHelmRelease indicates whether loft has been installed via Helm",
+							Description: "HasHelmRelease indicates whether the vCluster Platform instance has been installed via Helm",
 							Type:        []string{"boolean"},
 							Format:      "",
 						},
@@ -28492,6 +29776,13 @@ func schema_pkg_apis_ui_v1_UISettingsSpec(ref common.ReferenceCallback) common.O
 						SchemaProps: spec.SchemaProps{
 							Description: "DefaultVClusterVersion is the default version of vClusters",
 							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"loftHosted": {
+						SchemaProps: spec.SchemaProps{
+							Description: "LoftHosted indicates whether the vCluster Platform instance is hosted and operated by Loft Labs Inc.",
+							Type:        []string{"boolean"},
 							Format:      "",
 						},
 					},
