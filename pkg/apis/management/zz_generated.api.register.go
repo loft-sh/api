@@ -1900,10 +1900,19 @@ type ConvertVirtualClusterConfigStatus struct {
 }
 
 type CostControl struct {
-	Enabled        *bool                `json:"enabled,omitempty"`
-	GlobalMetrics  *storagev1.Metrics   `json:"globalMetrics,omitempty"`
-	ClusterMetrics *storagev1.Metrics   `json:"clusterMetrics,omitempty"`
-	Settings       *CostControlSettings `json:"settings,omitempty"`
+	Enabled  *bool                    `json:"enabled,omitempty"`
+	Global   CostControlGlobalConfig  `json:"global,omitempty"`
+	Cluster  CostControlClusterConfig `json:"cluster,omitempty"`
+	Settings *CostControlSettings     `json:"settings,omitempty"`
+}
+
+type CostControlClusterConfig struct {
+	Metrics  *storagev1.Metrics  `json:"metrics,omitempty"`
+	OpenCost *storagev1.OpenCost `json:"opencost,omitempty"`
+}
+
+type CostControlGlobalConfig struct {
+	Metrics *storagev1.Metrics `json:"metrics,omitempty"`
 }
 
 type CostControlResourcePrice struct {
@@ -2016,7 +2025,7 @@ type DevPodWorkspaceInstanceTroubleshoot struct {
 }
 
 // +genclient
-// +genclient
+// +genclient:nonNamespaced
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
 
 type DevPodWorkspacePreset struct {

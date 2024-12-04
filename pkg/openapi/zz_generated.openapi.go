@@ -157,6 +157,8 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 		"github.com/loft-sh/api/v4/pkg/apis/management/v1.ConvertVirtualClusterConfigSpec":            schema_pkg_apis_management_v1_ConvertVirtualClusterConfigSpec(ref),
 		"github.com/loft-sh/api/v4/pkg/apis/management/v1.ConvertVirtualClusterConfigStatus":          schema_pkg_apis_management_v1_ConvertVirtualClusterConfigStatus(ref),
 		"github.com/loft-sh/api/v4/pkg/apis/management/v1.CostControl":                                schema_pkg_apis_management_v1_CostControl(ref),
+		"github.com/loft-sh/api/v4/pkg/apis/management/v1.CostControlClusterConfig":                   schema_pkg_apis_management_v1_CostControlClusterConfig(ref),
+		"github.com/loft-sh/api/v4/pkg/apis/management/v1.CostControlGlobalConfig":                    schema_pkg_apis_management_v1_CostControlGlobalConfig(ref),
 		"github.com/loft-sh/api/v4/pkg/apis/management/v1.CostControlResourcePrice":                   schema_pkg_apis_management_v1_CostControlResourcePrice(ref),
 		"github.com/loft-sh/api/v4/pkg/apis/management/v1.CostControlSettings":                        schema_pkg_apis_management_v1_CostControlSettings(ref),
 		"github.com/loft-sh/api/v4/pkg/apis/management/v1.DevPodDeleteOptions":                        schema_pkg_apis_management_v1_DevPodDeleteOptions(ref),
@@ -486,6 +488,7 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 		"github.com/loft-sh/api/v4/pkg/apis/storage/v1.NetworkPeerSpec":                               schema_pkg_apis_storage_v1_NetworkPeerSpec(ref),
 		"github.com/loft-sh/api/v4/pkg/apis/storage/v1.NetworkPeerStatus":                             schema_pkg_apis_storage_v1_NetworkPeerStatus(ref),
 		"github.com/loft-sh/api/v4/pkg/apis/storage/v1.ObjectsStatus":                                 schema_pkg_apis_storage_v1_ObjectsStatus(ref),
+		"github.com/loft-sh/api/v4/pkg/apis/storage/v1.OpenCost":                                      schema_pkg_apis_storage_v1_OpenCost(ref),
 		"github.com/loft-sh/api/v4/pkg/apis/storage/v1.PodSelector":                                   schema_pkg_apis_storage_v1_PodSelector(ref),
 		"github.com/loft-sh/api/v4/pkg/apis/storage/v1.PresetRef":                                     schema_pkg_apis_storage_v1_PresetRef(ref),
 		"github.com/loft-sh/api/v4/pkg/apis/storage/v1.Project":                                       schema_pkg_apis_storage_v1_Project(ref),
@@ -8132,11 +8135,17 @@ func schema_pkg_apis_management_v1_ClusterSpec(ref common.ReferenceCallback) com
 							Ref:         ref("github.com/loft-sh/api/v4/pkg/apis/storage/v1.Metrics"),
 						},
 					},
+					"opencost": {
+						SchemaProps: spec.SchemaProps{
+							Description: "OpenCost holds the cluster's OpenCost backend configuration",
+							Ref:         ref("github.com/loft-sh/api/v4/pkg/apis/storage/v1.OpenCost"),
+						},
+					},
 				},
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/v4/pkg/apis/storage/v1.Access", "github.com/loft-sh/api/v4/pkg/apis/storage/v1.Metrics", "github.com/loft-sh/api/v4/pkg/apis/storage/v1.SecretRef", "github.com/loft-sh/api/v4/pkg/apis/storage/v1.UserOrTeam"},
+			"github.com/loft-sh/api/v4/pkg/apis/storage/v1.Access", "github.com/loft-sh/api/v4/pkg/apis/storage/v1.Metrics", "github.com/loft-sh/api/v4/pkg/apis/storage/v1.OpenCost", "github.com/loft-sh/api/v4/pkg/apis/storage/v1.SecretRef", "github.com/loft-sh/api/v4/pkg/apis/storage/v1.UserOrTeam"},
 	}
 }
 
@@ -8804,16 +8813,18 @@ func schema_pkg_apis_management_v1_CostControl(ref common.ReferenceCallback) com
 							Format:      "",
 						},
 					},
-					"globalMetrics": {
+					"global": {
 						SchemaProps: spec.SchemaProps{
-							Description: "GlobalMetrics are settings for the global metrics backend. This aggregates metrics for the Cost Control Dashboard across all connected clusters",
-							Ref:         ref("github.com/loft-sh/api/v4/pkg/apis/storage/v1.Metrics"),
+							Description: "Global are settings for globally managed components",
+							Default:     map[string]interface{}{},
+							Ref:         ref("github.com/loft-sh/api/v4/pkg/apis/management/v1.CostControlGlobalConfig"),
 						},
 					},
-					"clusterMetrics": {
+					"cluster": {
 						SchemaProps: spec.SchemaProps{
-							Description: "ClusterMetrics are settings for each cluster's metrics backend. These settings apply all connected clusters unless overridden by modifying the Cluster's spec.",
-							Ref:         ref("github.com/loft-sh/api/v4/pkg/apis/storage/v1.Metrics"),
+							Description: "Cluster are settings for each cluster's managed components. These settings apply to all connected clusters unless overridden by modifying the Cluster's spec",
+							Default:     map[string]interface{}{},
+							Ref:         ref("github.com/loft-sh/api/v4/pkg/apis/management/v1.CostControlClusterConfig"),
 						},
 					},
 					"settings": {
@@ -8826,7 +8837,53 @@ func schema_pkg_apis_management_v1_CostControl(ref common.ReferenceCallback) com
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/v4/pkg/apis/management/v1.CostControlSettings", "github.com/loft-sh/api/v4/pkg/apis/storage/v1.Metrics"},
+			"github.com/loft-sh/api/v4/pkg/apis/management/v1.CostControlClusterConfig", "github.com/loft-sh/api/v4/pkg/apis/management/v1.CostControlGlobalConfig", "github.com/loft-sh/api/v4/pkg/apis/management/v1.CostControlSettings"},
+	}
+}
+
+func schema_pkg_apis_management_v1_CostControlClusterConfig(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"metrics": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Metrics are settings applied to metric infrastructure in each connected cluster. These can be overridden in individual clusters by modifying the Cluster's spec",
+							Ref:         ref("github.com/loft-sh/api/v4/pkg/apis/storage/v1.Metrics"),
+						},
+					},
+					"opencost": {
+						SchemaProps: spec.SchemaProps{
+							Description: "OpenCost are settings applied to OpenCost deployments in each connected cluster. These can be overridden in individual clusters by modifying the Cluster's spec",
+							Ref:         ref("github.com/loft-sh/api/v4/pkg/apis/storage/v1.OpenCost"),
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			"github.com/loft-sh/api/v4/pkg/apis/storage/v1.Metrics", "github.com/loft-sh/api/v4/pkg/apis/storage/v1.OpenCost"},
+	}
+}
+
+func schema_pkg_apis_management_v1_CostControlGlobalConfig(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"metrics": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Metrics these settings apply to metric infrastructure used to aggregate metrics across all connected clusters",
+							Ref:         ref("github.com/loft-sh/api/v4/pkg/apis/storage/v1.Metrics"),
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			"github.com/loft-sh/api/v4/pkg/apis/storage/v1.Metrics"},
 	}
 }
 
@@ -21852,11 +21909,17 @@ func schema_pkg_apis_storage_v1_ClusterSpec(ref common.ReferenceCallback) common
 							Ref:         ref("github.com/loft-sh/api/v4/pkg/apis/storage/v1.Metrics"),
 						},
 					},
+					"opencost": {
+						SchemaProps: spec.SchemaProps{
+							Description: "OpenCost holds the cluster's OpenCost backend configuration",
+							Ref:         ref("github.com/loft-sh/api/v4/pkg/apis/storage/v1.OpenCost"),
+						},
+					},
 				},
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/v4/pkg/apis/storage/v1.Access", "github.com/loft-sh/api/v4/pkg/apis/storage/v1.Metrics", "github.com/loft-sh/api/v4/pkg/apis/storage/v1.SecretRef", "github.com/loft-sh/api/v4/pkg/apis/storage/v1.UserOrTeam"},
+			"github.com/loft-sh/api/v4/pkg/apis/storage/v1.Access", "github.com/loft-sh/api/v4/pkg/apis/storage/v1.Metrics", "github.com/loft-sh/api/v4/pkg/apis/storage/v1.OpenCost", "github.com/loft-sh/api/v4/pkg/apis/storage/v1.SecretRef", "github.com/loft-sh/api/v4/pkg/apis/storage/v1.UserOrTeam"},
 	}
 }
 
@@ -24345,6 +24408,26 @@ func schema_pkg_apis_storage_v1_Metrics(ref common.ReferenceCallback) common.Ope
 			SchemaProps: spec.SchemaProps{
 				Type: []string{"object"},
 				Properties: map[string]spec.Schema{
+					"replicas": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Replicas is the number of desired replicas.",
+							Type:        []string{"integer"},
+							Format:      "int32",
+						},
+					},
+					"resources": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Resources are compute resource required by the metrics backend",
+							Ref:         ref("k8s.io/api/core/v1.ResourceRequirements"),
+						},
+					},
+					"retention": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Retention is the metrics data retention period. Default is 1y",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
 					"storage": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Storage contains settings related to the metrics backend's persistent volume configuration",
@@ -24356,7 +24439,7 @@ func schema_pkg_apis_storage_v1_Metrics(ref common.ReferenceCallback) common.Ope
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/v4/pkg/apis/storage/v1.Storage"},
+			"github.com/loft-sh/api/v4/pkg/apis/storage/v1.Storage", "k8s.io/api/core/v1.ResourceRequirements"},
 	}
 }
 
@@ -24797,6 +24880,33 @@ func schema_pkg_apis_storage_v1_ObjectsStatus(ref common.ReferenceCallback) comm
 		},
 		Dependencies: []string{
 			"github.com/loft-sh/api/v4/pkg/apis/storage/v1.AppReference", "github.com/loft-sh/api/v4/pkg/apis/storage/v1.ChartStatus"},
+	}
+}
+
+func schema_pkg_apis_storage_v1_OpenCost(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"replicas": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Replicas is the number of desired replicas.",
+							Type:        []string{"integer"},
+							Format:      "int32",
+						},
+					},
+					"resources": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Resources are compute resource required by the OpenCost backend",
+							Ref:         ref("k8s.io/api/core/v1.ResourceRequirements"),
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			"k8s.io/api/core/v1.ResourceRequirements"},
 	}
 }
 
