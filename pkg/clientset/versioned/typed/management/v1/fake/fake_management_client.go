@@ -56,10 +56,6 @@ func (c *FakeManagementV1) DevPodWorkspaceInstances(namespace string) v1.DevPodW
 	return &FakeDevPodWorkspaceInstances{c, namespace}
 }
 
-func (c *FakeManagementV1) DevPodWorkspacePresets() v1.DevPodWorkspacePresetInterface {
-	return &FakeDevPodWorkspacePresets{c}
-}
-
 func (c *FakeManagementV1) DevPodWorkspaceTemplates() v1.DevPodWorkspaceTemplateInterface {
 	return &FakeDevPodWorkspaceTemplates{c}
 }

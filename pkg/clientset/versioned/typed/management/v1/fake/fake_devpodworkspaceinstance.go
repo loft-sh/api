@@ -140,15 +140,3 @@ func (c *FakeDevPodWorkspaceInstances) SetState(ctx context.Context, devPodWorks
 	}
 	return obj.(*v1.DevPodWorkspaceInstanceState), err
 }
-
-// Troubleshoot takes name of the devPodWorkspaceInstance, and returns the corresponding devPodWorkspaceInstanceTroubleshoot object, and an error if there is any.
-func (c *FakeDevPodWorkspaceInstances) Troubleshoot(ctx context.Context, devPodWorkspaceInstanceName string, options metav1.GetOptions) (result *v1.DevPodWorkspaceInstanceTroubleshoot, err error) {
-	emptyResult := &v1.DevPodWorkspaceInstanceTroubleshoot{}
-	obj, err := c.Fake.
-		Invokes(testing.NewGetSubresourceActionWithOptions(devpodworkspaceinstancesResource, c.ns, "troubleshoot", devPodWorkspaceInstanceName, options), emptyResult)
-
-	if obj == nil {
-		return emptyResult, err
-	}
-	return obj.(*v1.DevPodWorkspaceInstanceTroubleshoot), err
-}

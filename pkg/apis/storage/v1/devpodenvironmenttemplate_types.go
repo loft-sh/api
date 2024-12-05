@@ -15,26 +15,7 @@ type DevPodEnvironmentTemplate struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
 
-	Spec   DevPodEnvironmentTemplateSpec   `json:"spec,omitempty"`
-	Status DevPodEnvironmentTemplateStatus `json:"status,omitempty"`
-}
-
-// DevPodEnvironmentTemplateStatus holds the status
-type DevPodEnvironmentTemplateStatus struct {
-}
-
-func (a *DevPodEnvironmentTemplate) GetVersions() []VersionAccessor {
-	var retVersions []VersionAccessor
-	for _, v := range a.Spec.Versions {
-		b := v
-		retVersions = append(retVersions, &b)
-	}
-
-	return retVersions
-}
-
-func (a *DevPodEnvironmentTemplateVersion) GetVersion() string {
-	return a.Version
+	Spec DevPodEnvironmentTemplateSpec `json:"spec,omitempty"`
 }
 
 func (a *DevPodEnvironmentTemplate) GetOwner() *UserOrTeam {
@@ -58,9 +39,9 @@ type DevPodEnvironmentTemplateSpec struct {
 	// +optional
 	DisplayName string `json:"displayName,omitempty"`
 
-	// Description describes the environment template
+	// Git holds configuration for git environment spec source
 	// +optional
-	Description string `json:"description,omitempty"`
+	Git GitEnvironmentTemplate `json:"git,omitempty"`
 
 	// Owner holds the owner of this object
 	// +optional
@@ -70,23 +51,9 @@ type DevPodEnvironmentTemplateSpec struct {
 	// +optional
 	Access []Access `json:"access,omitempty"`
 
-	// Template is the inline template to use for DevPod environments
-	// +optional
-	Template *DevPodEnvironmentTemplateDefinition `json:"template,omitempty"`
-
 	// Versions are different versions of the template that can be referenced as well
 	// +optional
 	Versions []DevPodEnvironmentTemplateVersion `json:"versions,omitempty"`
-}
-
-type DevPodEnvironmentTemplateDefinition struct {
-	// Git holds configuration for git environment spec source
-	// +optional
-	Git *GitEnvironmentTemplate `json:"git,omitempty"`
-
-	// Inline holds an inline devcontainer.json definition
-	// +optional
-	Inline string `json:"inline,omitempty"`
 }
 
 // GitEnvironmentTemplate stores configuration of Git environment template source
@@ -108,9 +75,9 @@ type GitEnvironmentTemplate struct {
 }
 
 type DevPodEnvironmentTemplateVersion struct {
-	// Template holds the environment template definition
+	// Git holds the GitEnvironmentTemplate
 	// +optional
-	Template DevPodEnvironmentTemplateDefinition `json:"template,omitempty"`
+	Git GitEnvironmentTemplate `json:"git,omitempty"`
 
 	// Version is the version. Needs to be in X.X.X format.
 	// +optional

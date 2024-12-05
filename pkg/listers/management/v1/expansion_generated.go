@@ -50,10 +50,6 @@ type DevPodWorkspaceInstanceListerExpansion interface{}
 // DevPodWorkspaceInstanceNamespaceLister.
 type DevPodWorkspaceInstanceNamespaceListerExpansion interface{}
 
-// DevPodWorkspacePresetListerExpansion allows custom methods to be added to
-// DevPodWorkspacePresetLister.
-type DevPodWorkspacePresetListerExpansion interface{}
-
 // DevPodWorkspaceTemplateListerExpansion allows custom methods to be added to
 // DevPodWorkspaceTemplateLister.
 type DevPodWorkspaceTemplateListerExpansion interface{}
