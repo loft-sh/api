@@ -140,3 +140,15 @@ func (c *FakeVirtualClusterInstances) GetAccessKey(ctx context.Context, virtualC
 	}
 	return obj.(*v1.VirtualClusterAccessKey), err
 }
+
+// GetExternalDatabase takes the representation of a virtualClusterExternalDatabase and creates it.  Returns the server's representation of the virtualClusterExternalDatabase, and an error, if there is any.
+func (c *FakeVirtualClusterInstances) GetExternalDatabase(ctx context.Context, virtualClusterInstanceName string, virtualClusterExternalDatabase *v1.VirtualClusterExternalDatabase, opts metav1.CreateOptions) (result *v1.VirtualClusterExternalDatabase, err error) {
+	emptyResult := &v1.VirtualClusterExternalDatabase{}
+	obj, err := c.Fake.
+		Invokes(testing.NewCreateSubresourceActionWithOptions(virtualclusterinstancesResource, virtualClusterInstanceName, "externaldatabase", c.ns, virtualClusterExternalDatabase, opts), emptyResult)
+
+	if obj == nil {
+		return emptyResult, err
+	}
+	return obj.(*v1.VirtualClusterExternalDatabase), err
+}

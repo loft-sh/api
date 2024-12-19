@@ -4,8 +4,8 @@ go 1.22.5
 
 require (
 	github.com/ghodss/yaml v1.0.0
-	github.com/loft-sh/admin-apis v0.0.0-20240814093917-dc663916b354
-	github.com/loft-sh/agentapi/v4 v4.1.0-alpha.17
+	github.com/loft-sh/admin-apis v0.0.0-20241127134028-9cfb6b23ec44
+	github.com/loft-sh/agentapi/v4 v4.1.2-beta.2
 	github.com/loft-sh/apiserver v0.0.0-20241008120650-f17d504a4d0d
 	k8s.io/api v0.31.1
 	k8s.io/apimachinery v0.31.1
@@ -61,7 +61,7 @@ require (
 	github.com/modern-go/reflect2 v1.0.2 // indirect
 	github.com/munnerz/goautoneg v0.0.0-20191010083416-a7dc8b61c822 // indirect
 	github.com/pkg/errors v0.9.1 // indirect
-	github.com/prometheus/client_golang v1.20.4 // indirect
+	github.com/prometheus/client_golang v1.20.5 // indirect
 	github.com/prometheus/client_model v0.6.1 // indirect
 	github.com/prometheus/common v0.60.0 // indirect
 	github.com/prometheus/procfs v0.15.1 // indirect
