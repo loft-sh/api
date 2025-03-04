@@ -142,6 +142,8 @@ func addKnownTypes(scheme *runtime.Scheme) error {
 		&management.VirtualClusterExternalDatabase{},
 		&management.VirtualClusterInstanceKubeConfig{},
 		&management.VirtualClusterInstanceLog{},
+		&management.VirtualClusterSchema{},
+		&management.VirtualClusterSchemaList{},
 		&management.VirtualClusterTemplate{},
 		&management.VirtualClusterTemplateList{},
 	)

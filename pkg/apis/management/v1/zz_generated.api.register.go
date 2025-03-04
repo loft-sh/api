@@ -133,6 +133,8 @@ func addKnownTypes(scheme *runtime.Scheme) error {
 		&VirtualClusterExternalDatabase{},
 		&VirtualClusterInstanceKubeConfig{},
 		&VirtualClusterInstanceLog{},
+		&VirtualClusterSchema{},
+		&VirtualClusterSchemaList{},
 		&VirtualClusterTemplate{},
 		&VirtualClusterTemplateList{},
 	)
@@ -441,6 +443,7 @@ var (
 			nil,
 			management.NewVirtualClusterInstanceLogREST,
 		),
+		management.ManagementVirtualClusterSchemaStorage,
 		management.ManagementVirtualClusterTemplateStorage,
 	)
 
@@ -1111,6 +1114,14 @@ type VirtualClusterInstanceLogList struct {
 	metav1.TypeMeta `json:",inline"`
 	metav1.ListMeta `json:"metadata,omitempty"`
 	Items           []VirtualClusterInstanceLog `json:"items"`
+}
+
+// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+
+type VirtualClusterSchemaList struct {
+	metav1.TypeMeta `json:",inline"`
+	metav1.ListMeta `json:"metadata,omitempty"`
+	Items           []VirtualClusterSchema `json:"items"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object

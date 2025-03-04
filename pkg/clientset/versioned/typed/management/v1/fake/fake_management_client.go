@@ -168,6 +168,10 @@ func (c *FakeManagementV1) VirtualClusterInstances(namespace string) v1.VirtualC
 	return newFakeVirtualClusterInstances(c, namespace)
 }
 
+func (c *FakeManagementV1) VirtualClusterSchemas() v1.VirtualClusterSchemaInterface {
+	return newFakeVirtualClusterSchemas(c)
+}
+
 func (c *FakeManagementV1) VirtualClusterTemplates() v1.VirtualClusterTemplateInterface {
 	return newFakeVirtualClusterTemplates(c)
 }

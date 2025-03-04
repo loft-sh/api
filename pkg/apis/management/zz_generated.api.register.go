@@ -443,7 +443,17 @@ var (
 	NewVirtualClusterInstanceREST = func(getter generic.RESTOptionsGetter) rest.Storage {
 		return NewVirtualClusterInstanceRESTFunc(Factory)
 	}
-	NewVirtualClusterInstanceRESTFunc       NewRESTFunc
+	NewVirtualClusterInstanceRESTFunc     NewRESTFunc
+	ManagementVirtualClusterSchemaStorage = builders.NewApiResourceWithStorage( // Resource status endpoint
+		InternalVirtualClusterSchema,
+		func() runtime.Object { return &VirtualClusterSchema{} },     // Register versioned resource
+		func() runtime.Object { return &VirtualClusterSchemaList{} }, // Register versioned resource list
+		NewVirtualClusterSchemaREST,
+	)
+	NewVirtualClusterSchemaREST = func(getter generic.RESTOptionsGetter) rest.Storage {
+		return NewVirtualClusterSchemaRESTFunc(Factory)
+	}
+	NewVirtualClusterSchemaRESTFunc         NewRESTFunc
 	ManagementVirtualClusterTemplateStorage = builders.NewApiResourceWithStorage( // Resource status endpoint
 		InternalVirtualClusterTemplate,
 		func() runtime.Object { return &VirtualClusterTemplate{} },     // Register versioned resource
@@ -1254,7 +1264,19 @@ var (
 		return NewVirtualClusterInstanceLogRESTFunc(Factory)
 	}
 	NewVirtualClusterInstanceLogRESTFunc NewRESTFunc
-	InternalVirtualClusterTemplate       = builders.NewInternalResource(
+	InternalVirtualClusterSchema         = builders.NewInternalResource(
+		"virtualclusterschemas",
+		"VirtualClusterSchema",
+		func() runtime.Object { return &VirtualClusterSchema{} },
+		func() runtime.Object { return &VirtualClusterSchemaList{} },
+	)
+	InternalVirtualClusterSchemaStatus = builders.NewInternalResourceStatus(
+		"virtualclusterschemas",
+		"VirtualClusterSchemaStatus",
+		func() runtime.Object { return &VirtualClusterSchema{} },
+		func() runtime.Object { return &VirtualClusterSchemaList{} },
+	)
+	InternalVirtualClusterTemplate = builders.NewInternalResource(
 		"virtualclustertemplates",
 		"VirtualClusterTemplate",
 		func() runtime.Object { return &VirtualClusterTemplate{} },
@@ -1388,6 +1410,8 @@ var (
 		InternalVirtualClusterExternalDatabaseREST,
 		InternalVirtualClusterInstanceKubeConfigREST,
 		InternalVirtualClusterInstanceLogREST,
+		InternalVirtualClusterSchema,
+		InternalVirtualClusterSchemaStatus,
 		InternalVirtualClusterTemplate,
 		InternalVirtualClusterTemplateStatus,
 	)
@@ -1451,6 +1475,11 @@ type AgentAuditEventSpec struct {
 }
 
 type AgentAuditEventStatus struct {
+}
+
+type AgentCostControlConfig struct {
+	Enabled                  *bool `json:"enabled,omitempty"`
+	CostControlClusterConfig `json:",inline"`
 }
 
 // +genclient
@@ -1733,14 +1762,15 @@ type ClusterAgentConfig struct {
 }
 
 type ClusterAgentConfigCommon struct {
-	Cluster                string             `json:"cluster,omitempty"`
-	Audit                  *AgentAuditConfig  `json:"audit,omitempty"`
-	DefaultImageRegistry   string             `json:"defaultImageRegistry,omitempty"`
-	TokenCaCert            []byte             `json:"tokenCaCert,omitempty"`
-	LoftHost               string             `json:"loftHost,omitempty"`
-	ProjectNamespacePrefix string             `json:"projectNamespacePrefix,omitempty"`
-	LoftInstanceID         string             `json:"loftInstanceID,omitempty"`
-	AnalyticsSpec          AgentAnalyticsSpec `json:"analyticsSpec"`
+	Cluster                string                  `json:"cluster,omitempty"`
+	Audit                  *AgentAuditConfig       `json:"audit,omitempty"`
+	DefaultImageRegistry   string                  `json:"defaultImageRegistry,omitempty"`
+	TokenCaCert            []byte                  `json:"tokenCaCert,omitempty"`
+	LoftHost               string                  `json:"loftHost,omitempty"`
+	ProjectNamespacePrefix string                  `json:"projectNamespacePrefix,omitempty"`
+	LoftInstanceID         string                  `json:"loftInstanceID,omitempty"`
+	AnalyticsSpec          AgentAnalyticsSpec      `json:"analyticsSpec"`
+	CostControl            *AgentCostControlConfig `json:"costControl,omitempty"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -2169,7 +2199,7 @@ type KioskStatus struct {
 }
 
 // +genclient
-// +genclient
+// +genclient:nonNamespaced
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
 
 type License struct {
@@ -2823,13 +2853,19 @@ type UserPermissionsRole struct {
 type UserProfile struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	DisplayName       string  `json:"displayName,omitempty"`
-	Username          string  `json:"username,omitempty"`
-	Password          string  `json:"password,omitempty"`
-	CurrentPassword   string  `json:"currentPassword,omitempty"`
-	Email             string  `json:"email,omitempty"`
-	Icon              *string `json:"icon,omitempty"`
-	Custom            string  `json:"custom,omitempty"`
+	DisplayName       string                         `json:"displayName,omitempty"`
+	Username          string                         `json:"username,omitempty"`
+	Password          string                         `json:"password,omitempty"`
+	CurrentPassword   string                         `json:"currentPassword,omitempty"`
+	Email             string                         `json:"email,omitempty"`
+	Icon              *string                        `json:"icon,omitempty"`
+	Custom            string                         `json:"custom,omitempty"`
+	Secrets           *map[string]*UserProfileSecret `json:"secrets,omitempty"`
+}
+
+type UserProfileSecret struct {
+	Type string `json:"type,omitempty"`
+	Data string `json:"data,omitempty"`
 }
 
 type UserSpec struct {
@@ -2913,7 +2949,27 @@ type VirtualClusterInstanceStatus struct {
 }
 
 // +genclient
+// +genclient:nonNamespaced
+// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+
+type VirtualClusterSchema struct {
+	metav1.TypeMeta   `json:",inline"`
+	metav1.ObjectMeta `json:"metadata,omitempty"`
+	Spec              VirtualClusterSchemaSpec   `json:"spec,omitempty"`
+	Status            VirtualClusterSchemaStatus `json:"status,omitempty"`
+}
+
+type VirtualClusterSchemaSpec struct {
+	Version string `json:"version,omitempty"`
+}
+
+type VirtualClusterSchemaStatus struct {
+	Schema        string `json:"schema,omitempty"`
+	DefaultValues string `json:"defaultValues,omitempty"`
+}
+
 // +genclient
+// +genclient:nonNamespaced
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
 
 type VirtualClusterTemplate struct {
@@ -8007,6 +8063,125 @@ func (s *storageVirtualClusterInstance) UpdateVirtualClusterInstance(ctx context
 }
 
 func (s *storageVirtualClusterInstance) DeleteVirtualClusterInstance(ctx context.Context, id string) (bool, error) {
+	st := s.GetStandardStorage()
+	_, sync, err := st.Delete(ctx, id, nil, &metav1.DeleteOptions{})
+	return sync, err
+}
+
+// VirtualClusterSchema Functions and Structs
+//
+// +k8s:deepcopy-gen=false
+type VirtualClusterSchemaStrategy struct {
+	builders.DefaultStorageStrategy
+}
+
+// +k8s:deepcopy-gen=false
+type VirtualClusterSchemaStatusStrategy struct {
+	builders.DefaultStatusStorageStrategy
+}
+
+// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+
+type VirtualClusterSchemaList struct {
+	metav1.TypeMeta `json:",inline"`
+	metav1.ListMeta `json:"metadata,omitempty"`
+	Items           []VirtualClusterSchema `json:"items"`
+}
+
+func (VirtualClusterSchema) NewStatus() interface{} {
+	return VirtualClusterSchemaStatus{}
+}
+
+func (pc *VirtualClusterSchema) GetStatus() interface{} {
+	return pc.Status
+}
+
+func (pc *VirtualClusterSchema) SetStatus(s interface{}) {
+	pc.Status = s.(VirtualClusterSchemaStatus)
+}
+
+func (pc *VirtualClusterSchema) GetSpec() interface{} {
+	return pc.Spec
+}
+
+func (pc *VirtualClusterSchema) SetSpec(s interface{}) {
+	pc.Spec = s.(VirtualClusterSchemaSpec)
+}
+
+func (pc *VirtualClusterSchema) GetObjectMeta() *metav1.ObjectMeta {
+	return &pc.ObjectMeta
+}
+
+func (pc *VirtualClusterSchema) SetGeneration(generation int64) {
+	pc.ObjectMeta.Generation = generation
+}
+
+func (pc VirtualClusterSchema) GetGeneration() int64 {
+	return pc.ObjectMeta.Generation
+}
+
+// Registry is an interface for things that know how to store VirtualClusterSchema.
+// +k8s:deepcopy-gen=false
+type VirtualClusterSchemaRegistry interface {
+	ListVirtualClusterSchemas(ctx context.Context, options *internalversion.ListOptions) (*VirtualClusterSchemaList, error)
+	GetVirtualClusterSchema(ctx context.Context, id string, options *metav1.GetOptions) (*VirtualClusterSchema, error)
+	CreateVirtualClusterSchema(ctx context.Context, id *VirtualClusterSchema) (*VirtualClusterSchema, error)
+	UpdateVirtualClusterSchema(ctx context.Context, id *VirtualClusterSchema) (*VirtualClusterSchema, error)
+	DeleteVirtualClusterSchema(ctx context.Context, id string) (bool, error)
+}
+
+// NewRegistry returns a new Registry interface for the given Storage. Any mismatched types will panic.
+func NewVirtualClusterSchemaRegistry(sp builders.StandardStorageProvider) VirtualClusterSchemaRegistry {
+	return &storageVirtualClusterSchema{sp}
+}
+
+// Implement Registry
+// storage puts strong typing around storage calls
+// +k8s:deepcopy-gen=false
+type storageVirtualClusterSchema struct {
+	builders.StandardStorageProvider
+}
+
+func (s *storageVirtualClusterSchema) ListVirtualClusterSchemas(ctx context.Context, options *internalversion.ListOptions) (*VirtualClusterSchemaList, error) {
+	if options != nil && options.FieldSelector != nil && !options.FieldSelector.Empty() {
+		return nil, fmt.Errorf("field selector not supported yet")
+	}
+	st := s.GetStandardStorage()
+	obj, err := st.List(ctx, options)
+	if err != nil {
+		return nil, err
+	}
+	return obj.(*VirtualClusterSchemaList), err
+}
+
+func (s *storageVirtualClusterSchema) GetVirtualClusterSchema(ctx context.Context, id string, options *metav1.GetOptions) (*VirtualClusterSchema, error) {
+	st := s.GetStandardStorage()
+	obj, err := st.Get(ctx, id, options)
+	if err != nil {
+		return nil, err
+	}
+	return obj.(*VirtualClusterSchema), nil
+}
+
+func (s *storageVirtualClusterSchema) CreateVirtualClusterSchema(ctx context.Context, object *VirtualClusterSchema) (*VirtualClusterSchema, error) {
+	st := s.GetStandardStorage()
+	obj, err := st.Create(ctx, object, nil, &metav1.CreateOptions{})
+	if err != nil {
+		return nil, err
+	}
+	return obj.(*VirtualClusterSchema), nil
+}
+
+func (s *storageVirtualClusterSchema) UpdateVirtualClusterSchema(ctx context.Context, object *VirtualClusterSchema) (*VirtualClusterSchema, error) {
+	st := s.GetStandardStorage()
+	obj, _, err := st.Update(ctx, object.Name, rest.DefaultUpdatedObjectInfo(object), nil, nil, false, &metav1.UpdateOptions{})
+	if err != nil {
+		return nil, err
+	}
+	return obj.(*VirtualClusterSchema), nil
+}
+
+func (s *storageVirtualClusterSchema) DeleteVirtualClusterSchema(ctx context.Context, id string) (bool, error) {
 	st := s.GetStandardStorage()
 	_, sync, err := st.Delete(ctx, id, nil, &metav1.DeleteOptions{})
 	return sync, err

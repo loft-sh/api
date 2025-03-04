@@ -117,6 +117,8 @@ func (f *sharedInformerFactory) ForResource(resource schema.GroupVersionResource
 		return &genericInformer{resource: resource.GroupResource(), informer: f.Management().V1().Users().Informer()}, nil
 	case v1.SchemeGroupVersion.WithResource("virtualclusterinstances"):
 		return &genericInformer{resource: resource.GroupResource(), informer: f.Management().V1().VirtualClusterInstances().Informer()}, nil
+	case v1.SchemeGroupVersion.WithResource("virtualclusterschemas"):
+		return &genericInformer{resource: resource.GroupResource(), informer: f.Management().V1().VirtualClusterSchemas().Informer()}, nil
 	case v1.SchemeGroupVersion.WithResource("virtualclustertemplates"):
 		return &genericInformer{resource: resource.GroupResource(), informer: f.Management().V1().VirtualClusterTemplates().Informer()}, nil
 
