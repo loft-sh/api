@@ -94,6 +94,7 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 		"github.com/loft-sh/api/v4/pkg/apis/management/v1.AppSpec":                                    schema_pkg_apis_management_v1_AppSpec(ref),
 		"github.com/loft-sh/api/v4/pkg/apis/management/v1.AppStatus":                                  schema_pkg_apis_management_v1_AppStatus(ref),
 		"github.com/loft-sh/api/v4/pkg/apis/management/v1.Apps":                                       schema_pkg_apis_management_v1_Apps(ref),
+		"github.com/loft-sh/api/v4/pkg/apis/management/v1.AssignedVia":                                schema_pkg_apis_management_v1_AssignedVia(ref),
 		"github.com/loft-sh/api/v4/pkg/apis/management/v1.Audit":                                      schema_pkg_apis_management_v1_Audit(ref),
 		"github.com/loft-sh/api/v4/pkg/apis/management/v1.AuditPolicy":                                schema_pkg_apis_management_v1_AuditPolicy(ref),
 		"github.com/loft-sh/api/v4/pkg/apis/management/v1.AuditPolicyRule":                            schema_pkg_apis_management_v1_AuditPolicyRule(ref),
@@ -162,6 +163,7 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 		"github.com/loft-sh/api/v4/pkg/apis/management/v1.CostControlGlobalConfig":                    schema_pkg_apis_management_v1_CostControlGlobalConfig(ref),
 		"github.com/loft-sh/api/v4/pkg/apis/management/v1.CostControlResourcePrice":                   schema_pkg_apis_management_v1_CostControlResourcePrice(ref),
 		"github.com/loft-sh/api/v4/pkg/apis/management/v1.CostControlSettings":                        schema_pkg_apis_management_v1_CostControlSettings(ref),
+		"github.com/loft-sh/api/v4/pkg/apis/management/v1.CurrentUserAccess":                          schema_pkg_apis_management_v1_CurrentUserAccess(ref),
 		"github.com/loft-sh/api/v4/pkg/apis/management/v1.DevPodDeleteOptions":                        schema_pkg_apis_management_v1_DevPodDeleteOptions(ref),
 		"github.com/loft-sh/api/v4/pkg/apis/management/v1.DevPodDeleteOptionsList":                    schema_pkg_apis_management_v1_DevPodDeleteOptionsList(ref),
 		"github.com/loft-sh/api/v4/pkg/apis/management/v1.DevPodEnvironmentTemplate":                  schema_pkg_apis_management_v1_DevPodEnvironmentTemplate(ref),
@@ -236,6 +238,7 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 		"github.com/loft-sh/api/v4/pkg/apis/management/v1.OIDCClientList":                             schema_pkg_apis_management_v1_OIDCClientList(ref),
 		"github.com/loft-sh/api/v4/pkg/apis/management/v1.OIDCClientSpec":                             schema_pkg_apis_management_v1_OIDCClientSpec(ref),
 		"github.com/loft-sh/api/v4/pkg/apis/management/v1.OIDCClientStatus":                           schema_pkg_apis_management_v1_OIDCClientStatus(ref),
+		"github.com/loft-sh/api/v4/pkg/apis/management/v1.ObjectNames":                                schema_pkg_apis_management_v1_ObjectNames(ref),
 		"github.com/loft-sh/api/v4/pkg/apis/management/v1.OwnedAccessKey":                             schema_pkg_apis_management_v1_OwnedAccessKey(ref),
 		"github.com/loft-sh/api/v4/pkg/apis/management/v1.OwnedAccessKeyList":                         schema_pkg_apis_management_v1_OwnedAccessKeyList(ref),
 		"github.com/loft-sh/api/v4/pkg/apis/management/v1.OwnedAccessKeySpec":                         schema_pkg_apis_management_v1_OwnedAccessKeySpec(ref),
@@ -342,6 +345,12 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 		"github.com/loft-sh/api/v4/pkg/apis/management/v1.UserAccessKeysList":                         schema_pkg_apis_management_v1_UserAccessKeysList(ref),
 		"github.com/loft-sh/api/v4/pkg/apis/management/v1.UserClusters":                               schema_pkg_apis_management_v1_UserClusters(ref),
 		"github.com/loft-sh/api/v4/pkg/apis/management/v1.UserClustersList":                           schema_pkg_apis_management_v1_UserClustersList(ref),
+		"github.com/loft-sh/api/v4/pkg/apis/management/v1.UserDetailedPermissions":                    schema_pkg_apis_management_v1_UserDetailedPermissions(ref),
+		"github.com/loft-sh/api/v4/pkg/apis/management/v1.UserDetailedPermissionsList":                schema_pkg_apis_management_v1_UserDetailedPermissionsList(ref),
+		"github.com/loft-sh/api/v4/pkg/apis/management/v1.UserDrilldownManagementRoles":               schema_pkg_apis_management_v1_UserDrilldownManagementRoles(ref),
+		"github.com/loft-sh/api/v4/pkg/apis/management/v1.UserDrilldownPermissionsTeam":               schema_pkg_apis_management_v1_UserDrilldownPermissionsTeam(ref),
+		"github.com/loft-sh/api/v4/pkg/apis/management/v1.UserDrilldownProjectMemberships":            schema_pkg_apis_management_v1_UserDrilldownProjectMemberships(ref),
+		"github.com/loft-sh/api/v4/pkg/apis/management/v1.UserDrilldownVClusterRoles":                 schema_pkg_apis_management_v1_UserDrilldownVClusterRoles(ref),
 		"github.com/loft-sh/api/v4/pkg/apis/management/v1.UserInfo":                                   schema_pkg_apis_management_v1_UserInfo(ref),
 		"github.com/loft-sh/api/v4/pkg/apis/management/v1.UserList":                                   schema_pkg_apis_management_v1_UserList(ref),
 		"github.com/loft-sh/api/v4/pkg/apis/management/v1.UserPermissions":                            schema_pkg_apis_management_v1_UserPermissions(ref),
@@ -1574,10 +1583,11 @@ func schema_loft_sh_admin_apis_pkg_licenseapi_Feature(ref common.ReferenceCallba
 							Format: "",
 						},
 					},
-					"description": {
+					"preview": {
 						SchemaProps: spec.SchemaProps{
-							Type:   []string{"string"},
-							Format: "",
+							Description: "Preview represents whether the feature can be previewed if a user's license does not allow the feature",
+							Type:        []string{"boolean"},
+							Format:      "",
 						},
 					},
 					"status": {
@@ -1585,28 +1595,6 @@ func schema_loft_sh_admin_apis_pkg_licenseapi_Feature(ref common.ReferenceCallba
 							Description: "Status shows the status of the feature (see type FeatureStatus)",
 							Type:        []string{"string"},
 							Format:      "",
-						},
-					},
-					"compatibility": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Compatibility contains a series of semver compatibility constraints",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"labels": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Labels contains a list of labels to be displayed for this feature (e.g. alpha, beta)",
-							Type:        []string{"array"},
-							Items: &spec.SchemaOrArray{
-								Schema: &spec.Schema{
-									SchemaProps: spec.SchemaProps{
-										Default: "",
-										Type:    []string{"string"},
-										Format:  "",
-									},
-								},
-							},
 						},
 					},
 				},
@@ -3003,10 +2991,11 @@ func schema_apis_loft_cluster_v1_FeatureStatus(ref common.ReferenceCallback) com
 							Format: "",
 						},
 					},
-					"description": {
+					"preview": {
 						SchemaProps: spec.SchemaProps{
-							Type:   []string{"string"},
-							Format: "",
+							Description: "Preview represents whether the feature can be previewed if a user's license does not allow the feature",
+							Type:        []string{"boolean"},
+							Format:      "",
 						},
 					},
 					"status": {
@@ -3014,28 +3003,6 @@ func schema_apis_loft_cluster_v1_FeatureStatus(ref common.ReferenceCallback) com
 							Description: "Status shows the status of the feature (see type FeatureStatus)",
 							Type:        []string{"string"},
 							Format:      "",
-						},
-					},
-					"compatibility": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Compatibility contains a series of semver compatibility constraints",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"labels": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Labels contains a list of labels to be displayed for this feature (e.g. alpha, beta)",
-							Type:        []string{"array"},
-							Items: &spec.SchemaOrArray{
-								Schema: &spec.Schema{
-									SchemaProps: spec.SchemaProps{
-										Default: "",
-										Type:    []string{"string"},
-										Format:  "",
-									},
-								},
-							},
 						},
 					},
 					"internal": {
@@ -5311,6 +5278,24 @@ func schema_pkg_apis_management_v1_Apps(ref common.ReferenceCallback) common.Ope
 		},
 		Dependencies: []string{
 			"github.com/loft-sh/api/v4/pkg/apis/management/v1.PredefinedApp", "github.com/loft-sh/api/v4/pkg/apis/storage/v1.HelmChartRepository"},
+	}
+}
+
+func schema_pkg_apis_management_v1_AssignedVia(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"team": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"string"},
+							Format: "",
+						},
+					},
+				},
+			},
+		},
 	}
 }
 
@@ -9003,6 +8988,32 @@ func schema_pkg_apis_management_v1_CostControlSettings(ref common.ReferenceCallb
 	}
 }
 
+func schema_pkg_apis_management_v1_CurrentUserAccess(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"verbs": {
+						SchemaProps: spec.SchemaProps{
+							Type: []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: "",
+										Type:    []string{"string"},
+										Format:  "",
+									},
+								},
+							},
+						},
+					},
+				},
+			},
+		},
+	}
+}
+
 func schema_pkg_apis_management_v1_DevPodDeleteOptions(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
@@ -11045,10 +11056,11 @@ func schema_pkg_apis_management_v1_FeatureStatus(ref common.ReferenceCallback) c
 							Format: "",
 						},
 					},
-					"description": {
+					"preview": {
 						SchemaProps: spec.SchemaProps{
-							Type:   []string{"string"},
-							Format: "",
+							Description: "Preview represents whether the feature can be previewed if a user's license does not allow the feature",
+							Type:        []string{"boolean"},
+							Format:      "",
 						},
 					},
 					"status": {
@@ -11056,28 +11068,6 @@ func schema_pkg_apis_management_v1_FeatureStatus(ref common.ReferenceCallback) c
 							Description: "Status shows the status of the feature (see type FeatureStatus)",
 							Type:        []string{"string"},
 							Format:      "",
-						},
-					},
-					"compatibility": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Compatibility contains a series of semver compatibility constraints",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"labels": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Labels contains a list of labels to be displayed for this feature (e.g. alpha, beta)",
-							Type:        []string{"array"},
-							Items: &spec.SchemaOrArray{
-								Schema: &spec.Schema{
-									SchemaProps: spec.SchemaProps{
-										Default: "",
-										Type:    []string{"string"},
-										Format:  "",
-									},
-								},
-							},
 						},
 					},
 					"internal": {
@@ -12230,6 +12220,31 @@ func schema_pkg_apis_management_v1_OIDCClientStatus(ref common.ReferenceCallback
 			SchemaProps: spec.SchemaProps{
 				Description: "OIDCClientStatus holds the status",
 				Type:        []string{"object"},
+			},
+		},
+	}
+}
+
+func schema_pkg_apis_management_v1_ObjectNames(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"name": {
+						SchemaProps: spec.SchemaProps{
+							Default: "",
+							Type:    []string{"string"},
+							Format:  "",
+						},
+					},
+					"displayName": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"string"},
+							Format: "",
+						},
+					},
+				},
 			},
 		},
 	}
@@ -17588,6 +17603,228 @@ func schema_pkg_apis_management_v1_UserClustersList(ref common.ReferenceCallback
 	}
 }
 
+func schema_pkg_apis_management_v1_UserDetailedPermissions(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"kind": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"apiVersion": {
+						SchemaProps: spec.SchemaProps{
+							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"metadata": {
+						SchemaProps: spec.SchemaProps{
+							Default: map[string]interface{}{},
+							Ref:     ref("k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"),
+						},
+					},
+					"teamMemberships": {
+						SchemaProps: spec.SchemaProps{
+							Type: []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref("github.com/loft-sh/api/v4/pkg/apis/management/v1.UserDrilldownPermissionsTeam"),
+									},
+								},
+							},
+						},
+					},
+					"rolesAssigned": {
+						SchemaProps: spec.SchemaProps{
+							Type: []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref("github.com/loft-sh/api/v4/pkg/apis/management/v1.UserDrilldownManagementRoles"),
+									},
+								},
+							},
+						},
+					},
+					"projectMemberships": {
+						SchemaProps: spec.SchemaProps{
+							Type: []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref("github.com/loft-sh/api/v4/pkg/apis/management/v1.UserDrilldownProjectMemberships"),
+									},
+								},
+							},
+						},
+					},
+					"virtualClusterRoles": {
+						SchemaProps: spec.SchemaProps{
+							Type: []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref("github.com/loft-sh/api/v4/pkg/apis/management/v1.UserDrilldownVClusterRoles"),
+									},
+								},
+							},
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			"github.com/loft-sh/api/v4/pkg/apis/management/v1.UserDrilldownManagementRoles", "github.com/loft-sh/api/v4/pkg/apis/management/v1.UserDrilldownPermissionsTeam", "github.com/loft-sh/api/v4/pkg/apis/management/v1.UserDrilldownProjectMemberships", "github.com/loft-sh/api/v4/pkg/apis/management/v1.UserDrilldownVClusterRoles", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
+	}
+}
+
+func schema_pkg_apis_management_v1_UserDetailedPermissionsList(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"kind": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"apiVersion": {
+						SchemaProps: spec.SchemaProps{
+							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"metadata": {
+						SchemaProps: spec.SchemaProps{
+							Default: map[string]interface{}{},
+							Ref:     ref("k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"),
+						},
+					},
+					"items": {
+						SchemaProps: spec.SchemaProps{
+							Type: []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref("github.com/loft-sh/api/v4/pkg/apis/management/v1.UserDetailedPermissions"),
+									},
+								},
+							},
+						},
+					},
+				},
+				Required: []string{"items"},
+			},
+		},
+		Dependencies: []string{
+			"github.com/loft-sh/api/v4/pkg/apis/management/v1.UserDetailedPermissions", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
+	}
+}
+
+func schema_pkg_apis_management_v1_UserDrilldownManagementRoles(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"management": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"boolean"},
+							Format: "",
+						},
+					},
+					"assignedVia": {
+						SchemaProps: spec.SchemaProps{
+							Default: map[string]interface{}{},
+							Ref:     ref("github.com/loft-sh/api/v4/pkg/apis/management/v1.AssignedVia"),
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			"github.com/loft-sh/api/v4/pkg/apis/management/v1.AssignedVia"},
+	}
+}
+
+func schema_pkg_apis_management_v1_UserDrilldownPermissionsTeam(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+			},
+		},
+	}
+}
+
+func schema_pkg_apis_management_v1_UserDrilldownProjectMemberships(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"role": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"string"},
+							Format: "",
+						},
+					},
+					"assignedVia": {
+						SchemaProps: spec.SchemaProps{
+							Default: map[string]interface{}{},
+							Ref:     ref("github.com/loft-sh/api/v4/pkg/apis/management/v1.AssignedVia"),
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			"github.com/loft-sh/api/v4/pkg/apis/management/v1.AssignedVia"},
+	}
+}
+
+func schema_pkg_apis_management_v1_UserDrilldownVClusterRoles(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"role": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"string"},
+							Format: "",
+						},
+					},
+					"assignedVia": {
+						SchemaProps: spec.SchemaProps{
+							Default: map[string]interface{}{},
+							Ref:     ref("github.com/loft-sh/api/v4/pkg/apis/management/v1.AssignedVia"),
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			"github.com/loft-sh/api/v4/pkg/apis/management/v1.AssignedVia"},
+	}
+}
+
 func schema_pkg_apis_management_v1_UserInfo(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
@@ -19179,11 +19416,18 @@ func schema_pkg_apis_management_v1_VirtualClusterInstanceStatus(ref common.Refer
 							Format:      "",
 						},
 					},
+					"currentUserAccess": {
+						SchemaProps: spec.SchemaProps{
+							Description: "CurrentUserAccess returns which actions (get / update / delete) user can perform on the object.",
+							Default:     map[string]interface{}{},
+							Ref:         ref("github.com/loft-sh/api/v4/pkg/apis/management/v1.CurrentUserAccess"),
+						},
+					},
 				},
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/agentapi/v4/pkg/apis/loft/cluster/v1.SleepModeConfig", "github.com/loft-sh/agentapi/v4/pkg/apis/loft/storage/v1.Condition", "github.com/loft-sh/api/v4/pkg/apis/storage/v1.ObjectsStatus", "github.com/loft-sh/api/v4/pkg/apis/storage/v1.VirtualClusterTemplateDefinition"},
+			"github.com/loft-sh/agentapi/v4/pkg/apis/loft/cluster/v1.SleepModeConfig", "github.com/loft-sh/agentapi/v4/pkg/apis/loft/storage/v1.Condition", "github.com/loft-sh/api/v4/pkg/apis/management/v1.CurrentUserAccess", "github.com/loft-sh/api/v4/pkg/apis/storage/v1.ObjectsStatus", "github.com/loft-sh/api/v4/pkg/apis/storage/v1.VirtualClusterTemplateDefinition"},
 	}
 }
 
@@ -19533,11 +19777,18 @@ func schema_pkg_apis_management_v1_VirtualClusterTemplateStatus(ref common.Refer
 							},
 						},
 					},
+					"currentUserAccess": {
+						SchemaProps: spec.SchemaProps{
+							Description: "CurrentUserAccess returns which actions (get / update / delete) user can perform on the object.",
+							Default:     map[string]interface{}{},
+							Ref:         ref("github.com/loft-sh/api/v4/pkg/apis/management/v1.CurrentUserAccess"),
+						},
+					},
 				},
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/v4/pkg/apis/storage/v1.EntityInfo"},
+			"github.com/loft-sh/api/v4/pkg/apis/management/v1.CurrentUserAccess", "github.com/loft-sh/api/v4/pkg/apis/storage/v1.EntityInfo"},
 	}
 }
 

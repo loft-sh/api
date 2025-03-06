@@ -134,6 +134,7 @@ func addKnownTypes(scheme *runtime.Scheme) error {
 		&management.UserList{},
 		&management.UserAccessKeys{},
 		&management.UserClusters{},
+		&management.UserDetailedPermissions{},
 		&management.UserPermissions{},
 		&management.UserProfile{},
 		&management.VirtualClusterInstance{},
