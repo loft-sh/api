@@ -73,6 +73,7 @@ func GetManagementAPIBuilder() *builders.APIGroupBuilder {
 			"Team",
 			"TranslateVClusterResourceName",
 			"User",
+			"VirtualClusterSchema",
 			"VirtualClusterTemplate",
 		)
 }
