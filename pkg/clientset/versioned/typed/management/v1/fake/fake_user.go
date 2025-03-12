@@ -46,6 +46,17 @@ func (c *fakeUsers) GetProfile(ctx context.Context, userName string, options met
 	return obj.(*v1.UserProfile), err
 }
 
+// UpdateProfile takes the representation of a userProfile and creates it.  Returns the server's representation of the userProfile, and an error, if there is any.
+func (c *fakeUsers) UpdateProfile(ctx context.Context, userName string, userProfile *v1.UserProfile, opts metav1.CreateOptions) (result *v1.UserProfile, err error) {
+	emptyResult := &v1.UserProfile{}
+	obj, err := c.Fake.
+		Invokes(testing.NewRootCreateSubresourceActionWithOptions(c.Resource(), userName, "profile", userProfile, opts), emptyResult)
+	if obj == nil {
+		return emptyResult, err
+	}
+	return obj.(*v1.UserProfile), err
+}
+
 // ListClusters takes name of the user, and returns the corresponding userClusters object, and an error if there is any.
 func (c *fakeUsers) ListClusters(ctx context.Context, userName string, options metav1.GetOptions) (result *v1.UserClusters, err error) {
 	emptyResult := &v1.UserClusters{}

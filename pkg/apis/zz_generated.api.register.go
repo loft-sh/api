@@ -64,7 +64,6 @@ func GetManagementAPIBuilder() *builders.APIGroupBuilder {
 			"RedirectToken",
 			"RegisterVirtualCluster",
 			"ResetAccessKey",
-			"Runner",
 			"Self",
 			"SelfSubjectAccessReview",
 			"SpaceTemplate",

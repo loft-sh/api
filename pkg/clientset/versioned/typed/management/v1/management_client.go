@@ -39,7 +39,6 @@ type ManagementV1Interface interface {
 	RedirectTokensGetter
 	RegisterVirtualClustersGetter
 	ResetAccessKeysGetter
-	RunnersGetter
 	SelvesGetter
 	SelfSubjectAccessReviewsGetter
 	SharedSecretsGetter
@@ -166,10 +165,6 @@ func (c *ManagementV1Client) RegisterVirtualClusters() RegisterVirtualClusterInt
 
 func (c *ManagementV1Client) ResetAccessKeys() ResetAccessKeyInterface {
 	return newResetAccessKeys(c)
-}
-
-func (c *ManagementV1Client) Runners() RunnerInterface {
-	return newRunners(c)
 }
 
 func (c *ManagementV1Client) Selves() SelfInterface {

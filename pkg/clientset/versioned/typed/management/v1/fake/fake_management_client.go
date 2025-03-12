@@ -120,10 +120,6 @@ func (c *FakeManagementV1) ResetAccessKeys() v1.ResetAccessKeyInterface {
 	return newFakeResetAccessKeys(c)
 }
 
-func (c *FakeManagementV1) Runners() v1.RunnerInterface {
-	return newFakeRunners(c)
-}
-
 func (c *FakeManagementV1) Selves() v1.SelfInterface {
 	return newFakeSelves(c)
 }

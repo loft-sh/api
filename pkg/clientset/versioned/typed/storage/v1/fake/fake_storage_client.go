@@ -56,10 +56,6 @@ func (c *FakeStorageV1) Projects() v1.ProjectInterface {
 	return newFakeProjects(c)
 }
 
-func (c *FakeStorageV1) Runners() v1.RunnerInterface {
-	return newFakeRunners(c)
-}
-
 func (c *FakeStorageV1) SharedSecrets(namespace string) v1.SharedSecretInterface {
 	return newFakeSharedSecrets(c, namespace)
 }

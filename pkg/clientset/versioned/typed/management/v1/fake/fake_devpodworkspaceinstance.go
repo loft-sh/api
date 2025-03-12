@@ -39,28 +39,28 @@ func newFakeDevPodWorkspaceInstances(fake *FakeManagementV1, namespace string) m
 	}
 }
 
-// GetState takes name of the devPodWorkspaceInstance, and returns the corresponding devPodWorkspaceInstanceState object, and an error if there is any.
-func (c *fakeDevPodWorkspaceInstances) GetState(ctx context.Context, devPodWorkspaceInstanceName string, options metav1.GetOptions) (result *v1.DevPodWorkspaceInstanceState, err error) {
-	emptyResult := &v1.DevPodWorkspaceInstanceState{}
+// Up takes the representation of a devPodWorkspaceInstanceUp and creates it.  Returns the server's representation of the devPodWorkspaceInstanceUp, and an error, if there is any.
+func (c *fakeDevPodWorkspaceInstances) Up(ctx context.Context, devPodWorkspaceInstanceName string, devPodWorkspaceInstanceUp *v1.DevPodWorkspaceInstanceUp, opts metav1.CreateOptions) (result *v1.DevPodWorkspaceInstanceUp, err error) {
+	emptyResult := &v1.DevPodWorkspaceInstanceUp{}
 	obj, err := c.Fake.
-		Invokes(testing.NewGetSubresourceActionWithOptions(c.Resource(), c.Namespace(), "state", devPodWorkspaceInstanceName, options), emptyResult)
+		Invokes(testing.NewCreateSubresourceActionWithOptions(c.Resource(), devPodWorkspaceInstanceName, "up", c.Namespace(), devPodWorkspaceInstanceUp, opts), emptyResult)
 
 	if obj == nil {
 		return emptyResult, err
 	}
-	return obj.(*v1.DevPodWorkspaceInstanceState), err
+	return obj.(*v1.DevPodWorkspaceInstanceUp), err
 }
 
-// SetState takes the representation of a devPodWorkspaceInstanceState and creates it.  Returns the server's representation of the devPodWorkspaceInstanceState, and an error, if there is any.
-func (c *fakeDevPodWorkspaceInstances) SetState(ctx context.Context, devPodWorkspaceInstanceName string, devPodWorkspaceInstanceState *v1.DevPodWorkspaceInstanceState, opts metav1.CreateOptions) (result *v1.DevPodWorkspaceInstanceState, err error) {
-	emptyResult := &v1.DevPodWorkspaceInstanceState{}
+// Stop takes the representation of a devPodWorkspaceInstanceStop and creates it.  Returns the server's representation of the devPodWorkspaceInstanceStop, and an error, if there is any.
+func (c *fakeDevPodWorkspaceInstances) Stop(ctx context.Context, devPodWorkspaceInstanceName string, devPodWorkspaceInstanceStop *v1.DevPodWorkspaceInstanceStop, opts metav1.CreateOptions) (result *v1.DevPodWorkspaceInstanceStop, err error) {
+	emptyResult := &v1.DevPodWorkspaceInstanceStop{}
 	obj, err := c.Fake.
-		Invokes(testing.NewCreateSubresourceActionWithOptions(c.Resource(), devPodWorkspaceInstanceName, "state", c.Namespace(), devPodWorkspaceInstanceState, opts), emptyResult)
+		Invokes(testing.NewCreateSubresourceActionWithOptions(c.Resource(), devPodWorkspaceInstanceName, "stop", c.Namespace(), devPodWorkspaceInstanceStop, opts), emptyResult)
 
 	if obj == nil {
 		return emptyResult, err
 	}
-	return obj.(*v1.DevPodWorkspaceInstanceState), err
+	return obj.(*v1.DevPodWorkspaceInstanceStop), err
 }
 
 // Troubleshoot takes name of the devPodWorkspaceInstance, and returns the corresponding devPodWorkspaceInstanceTroubleshoot object, and an error if there is any.
@@ -73,4 +73,16 @@ func (c *fakeDevPodWorkspaceInstances) Troubleshoot(ctx context.Context, devPodW
 		return emptyResult, err
 	}
 	return obj.(*v1.DevPodWorkspaceInstanceTroubleshoot), err
+}
+
+// Cancel takes the representation of a devPodWorkspaceInstanceCancel and creates it.  Returns the server's representation of the devPodWorkspaceInstanceCancel, and an error, if there is any.
+func (c *fakeDevPodWorkspaceInstances) Cancel(ctx context.Context, devPodWorkspaceInstanceName string, devPodWorkspaceInstanceCancel *v1.DevPodWorkspaceInstanceCancel, opts metav1.CreateOptions) (result *v1.DevPodWorkspaceInstanceCancel, err error) {
+	emptyResult := &v1.DevPodWorkspaceInstanceCancel{}
+	obj, err := c.Fake.
+		Invokes(testing.NewCreateSubresourceActionWithOptions(c.Resource(), devPodWorkspaceInstanceName, "cancel", c.Namespace(), devPodWorkspaceInstanceCancel, opts), emptyResult)
+
+	if obj == nil {
+		return emptyResult, err
+	}
+	return obj.(*v1.DevPodWorkspaceInstanceCancel), err
 }

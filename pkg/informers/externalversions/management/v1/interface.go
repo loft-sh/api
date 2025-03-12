@@ -62,8 +62,6 @@ type Interface interface {
 	RegisterVirtualClusters() RegisterVirtualClusterInformer
 	// ResetAccessKeys returns a ResetAccessKeyInformer.
 	ResetAccessKeys() ResetAccessKeyInformer
-	// Runners returns a RunnerInformer.
-	Runners() RunnerInformer
 	// Selves returns a SelfInformer.
 	Selves() SelfInformer
 	// SelfSubjectAccessReviews returns a SelfSubjectAccessReviewInformer.
@@ -236,11 +234,6 @@ func (v *version) RegisterVirtualClusters() RegisterVirtualClusterInformer {
 // ResetAccessKeys returns a ResetAccessKeyInformer.
 func (v *version) ResetAccessKeys() ResetAccessKeyInformer {
 	return &resetAccessKeyInformer{factory: v.factory, tweakListOptions: v.tweakListOptions}
-}
-
-// Runners returns a RunnerInformer.
-func (v *version) Runners() RunnerInformer {
-	return &runnerInformer{factory: v.factory, tweakListOptions: v.tweakListOptions}
 }
 
 // Selves returns a SelfInformer.

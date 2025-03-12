@@ -57,17 +57,6 @@ func (c *fakeProjects) ListTemplates(ctx context.Context, projectName string, op
 	return obj.(*v1.ProjectTemplates), err
 }
 
-// ListRunners takes name of the project, and returns the corresponding projectRunners object, and an error if there is any.
-func (c *fakeProjects) ListRunners(ctx context.Context, projectName string, options metav1.GetOptions) (result *v1.ProjectRunners, err error) {
-	emptyResult := &v1.ProjectRunners{}
-	obj, err := c.Fake.
-		Invokes(testing.NewRootGetSubresourceActionWithOptions(c.Resource(), "runners", projectName, options), emptyResult)
-	if obj == nil {
-		return emptyResult, err
-	}
-	return obj.(*v1.ProjectRunners), err
-}
-
 // ListClusters takes name of the project, and returns the corresponding projectClusters object, and an error if there is any.
 func (c *fakeProjects) ListClusters(ctx context.Context, projectName string, options metav1.GetOptions) (result *v1.ProjectClusters, err error) {
 	emptyResult := &v1.ProjectClusters{}
