@@ -7,10 +7,11 @@ import (
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
 
 // +subresource-request
-type ProjectRunners struct {
+type DevPodWorkspaceInstanceCancel struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
 
-	// Runners holds all the allowed runners
-	Runners []Runner `json:"runners,omitempty"`
+	// TaskID is the id of the task that should get cancelled
+	// +optional
+	TaskID string `json:"taskId,omitempty"`
 }
