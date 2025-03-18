@@ -3,120 +3,30 @@
 package fake
 
 import (
-	"context"
-
 	v1 "github.com/loft-sh/api/v4/pkg/apis/storage/v1"
-	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
-	labels "k8s.io/apimachinery/pkg/labels"
-	types "k8s.io/apimachinery/pkg/types"
-	watch "k8s.io/apimachinery/pkg/watch"
-	testing "k8s.io/client-go/testing"
+	storagev1 "github.com/loft-sh/api/v4/pkg/clientset/versioned/typed/storage/v1"
+	gentype "k8s.io/client-go/gentype"
 )
 
-// FakeRunners implements RunnerInterface
-type FakeRunners struct {
+// fakeRunners implements RunnerInterface
+type fakeRunners struct {
+	*gentype.FakeClientWithList[*v1.Runner, *v1.RunnerList]
 	Fake *FakeStorageV1
 }
 
-var runnersResource = v1.SchemeGroupVersion.WithResource("runners")
-
-var runnersKind = v1.SchemeGroupVersion.WithKind("Runner")
-
-// Get takes name of the runner, and returns the corresponding runner object, and an error if there is any.
-func (c *FakeRunners) Get(ctx context.Context, name string, options metav1.GetOptions) (result *v1.Runner, err error) {
-	emptyResult := &v1.Runner{}
-	obj, err := c.Fake.
-		Invokes(testing.NewRootGetActionWithOptions(runnersResource, name, options), emptyResult)
-	if obj == nil {
-		return emptyResult, err
+func newFakeRunners(fake *FakeStorageV1) storagev1.RunnerInterface {
+	return &fakeRunners{
+		gentype.NewFakeClientWithList[*v1.Runner, *v1.RunnerList](
+			fake.Fake,
+			"",
+			v1.SchemeGroupVersion.WithResource("runners"),
+			v1.SchemeGroupVersion.WithKind("Runner"),
+			func() *v1.Runner { return &v1.Runner{} },
+			func() *v1.RunnerList { return &v1.RunnerList{} },
+			func(dst, src *v1.RunnerList) { dst.ListMeta = src.ListMeta },
+			func(list *v1.RunnerList) []*v1.Runner { return gentype.ToPointerSlice(list.Items) },
+			func(list *v1.RunnerList, items []*v1.Runner) { list.Items = gentype.FromPointerSlice(items) },
+		),
+		fake,
 	}
-	return obj.(*v1.Runner), err
-}
-
-// List takes label and field selectors, and returns the list of Runners that match those selectors.
-func (c *FakeRunners) List(ctx context.Context, opts metav1.ListOptions) (result *v1.RunnerList, err error) {
-	emptyResult := &v1.RunnerList{}
-	obj, err := c.Fake.
-		Invokes(testing.NewRootListActionWithOptions(runnersResource, runnersKind, opts), emptyResult)
-	if obj == nil {
-		return emptyResult, err
-	}
-
-	label, _, _ := testing.ExtractFromListOptions(opts)
-	if label == nil {
-		label = labels.Everything()
-	}
-	list := &v1.RunnerList{ListMeta: obj.(*v1.RunnerList).ListMeta}
-	for _, item := range obj.(*v1.RunnerList).Items {
-		if label.Matches(labels.Set(item.Labels)) {
-			list.Items = append(list.Items, item)
-		}
-	}
-	return list, err
-}
-
-// Watch returns a watch.Interface that watches the requested runners.
-func (c *FakeRunners) Watch(ctx context.Context, opts metav1.ListOptions) (watch.Interface, error) {
-	return c.Fake.
-		InvokesWatch(testing.NewRootWatchActionWithOptions(runnersResource, opts))
-}
-
-// Create takes the representation of a runner and creates it.  Returns the server's representation of the runner, and an error, if there is any.
-func (c *FakeRunners) Create(ctx context.Context, runner *v1.Runner, opts metav1.CreateOptions) (result *v1.Runner, err error) {
-	emptyResult := &v1.Runner{}
-	obj, err := c.Fake.
-		Invokes(testing.NewRootCreateActionWithOptions(runnersResource, runner, opts), emptyResult)
-	if obj == nil {
-		return emptyResult, err
-	}
-	return obj.(*v1.Runner), err
-}
-
-// Update takes the representation of a runner and updates it. Returns the server's representation of the runner, and an error, if there is any.
-func (c *FakeRunners) Update(ctx context.Context, runner *v1.Runner, opts metav1.UpdateOptions) (result *v1.Runner, err error) {
-	emptyResult := &v1.Runner{}
-	obj, err := c.Fake.
-		Invokes(testing.NewRootUpdateActionWithOptions(runnersResource, runner, opts), emptyResult)
-	if obj == nil {
-		return emptyResult, err
-	}
-	return obj.(*v1.Runner), err
-}
-
-// UpdateStatus was generated because the type contains a Status member.
-// Add a +genclient:noStatus comment above the type to avoid generating UpdateStatus().
-func (c *FakeRunners) UpdateStatus(ctx context.Context, runner *v1.Runner, opts metav1.UpdateOptions) (result *v1.Runner, err error) {
-	emptyResult := &v1.Runner{}
-	obj, err := c.Fake.
-		Invokes(testing.NewRootUpdateSubresourceActionWithOptions(runnersResource, "status", runner, opts), emptyResult)
-	if obj == nil {
-		return emptyResult, err
-	}
-	return obj.(*v1.Runner), err
-}
-
-// Delete takes name of the runner and deletes it. Returns an error if one occurs.
-func (c *FakeRunners) Delete(ctx context.Context, name string, opts metav1.DeleteOptions) error {
-	_, err := c.Fake.
-		Invokes(testing.NewRootDeleteActionWithOptions(runnersResource, name, opts), &v1.Runner{})
-	return err
-}
-
-// DeleteCollection deletes a collection of objects.
-func (c *FakeRunners) DeleteCollection(ctx context.Context, opts metav1.DeleteOptions, listOpts metav1.ListOptions) error {
-	action := testing.NewRootDeleteCollectionActionWithOptions(runnersResource, opts, listOpts)
-
-	_, err := c.Fake.Invokes(action, &v1.RunnerList{})
-	return err
-}
-
-// Patch applies the patch and returns the patched runner.
-func (c *FakeRunners) Patch(ctx context.Context, name string, pt types.PatchType, data []byte, opts metav1.PatchOptions, subresources ...string) (result *v1.Runner, err error) {
-	emptyResult := &v1.Runner{}
-	obj, err := c.Fake.
-		Invokes(testing.NewRootPatchSubresourceActionWithOptions(runnersResource, name, pt, data, opts, subresources...), emptyResult)
-	if obj == nil {
-		return emptyResult, err
-	}
-	return obj.(*v1.Runner), err
 }
