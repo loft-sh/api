@@ -178,6 +178,10 @@ type VirtualClusterInstanceListerExpansion interface{}
 // VirtualClusterInstanceNamespaceLister.
 type VirtualClusterInstanceNamespaceListerExpansion interface{}
 
+// VirtualClusterSchemaListerExpansion allows custom methods to be added to
+// VirtualClusterSchemaLister.
+type VirtualClusterSchemaListerExpansion interface{}
+
 // VirtualClusterTemplateListerExpansion allows custom methods to be added to
 // VirtualClusterTemplateLister.
 type VirtualClusterTemplateListerExpansion interface{}
