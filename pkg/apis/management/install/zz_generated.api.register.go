@@ -4,7 +4,7 @@ package install
 
 import (
 	"github.com/loft-sh/api/v4/pkg/apis/management"
-	v1 "github.com/loft-sh/api/v4/pkg/apis/management/v1"
+	"github.com/loft-sh/api/v4/pkg/apis/management/v1"
 	"github.com/loft-sh/apiserver/pkg/builders"
 	"k8s.io/apimachinery/pkg/runtime"
 	utilruntime "k8s.io/apimachinery/pkg/util/runtime"
@@ -54,13 +54,12 @@ func addKnownTypes(scheme *runtime.Scheme) error {
 		&management.DevPodEnvironmentTemplateList{},
 		&management.DevPodWorkspaceInstance{},
 		&management.DevPodWorkspaceInstanceList{},
-		&management.DevPodDeleteOptions{},
-		&management.DevPodStatusOptions{},
-		&management.DevPodSshOptions{},
-		&management.DevPodWorkspaceInstanceState{},
-		&management.DevPodStopOptions{},
+		&management.DevPodWorkspaceInstanceCancel{},
+		&management.DevPodWorkspaceInstanceLog{},
+		&management.DevPodWorkspaceInstanceStop{},
+		&management.DevPodWorkspaceInstanceTasks{},
 		&management.DevPodWorkspaceInstanceTroubleshoot{},
-		&management.DevPodUpOptions{},
+		&management.DevPodWorkspaceInstanceUp{},
 		&management.DevPodWorkspacePreset{},
 		&management.DevPodWorkspacePresetList{},
 		&management.DevPodWorkspaceTemplate{},
@@ -95,7 +94,6 @@ func addKnownTypes(scheme *runtime.Scheme) error {
 		&management.ProjectMembers{},
 		&management.ProjectMigrateSpaceInstance{},
 		&management.ProjectMigrateVirtualClusterInstance{},
-		&management.ProjectRunners{},
 		&management.ProjectTemplates{},
 		&management.ProjectSecret{},
 		&management.ProjectSecretList{},
@@ -105,10 +103,6 @@ func addKnownTypes(scheme *runtime.Scheme) error {
 		&management.RegisterVirtualClusterList{},
 		&management.ResetAccessKey{},
 		&management.ResetAccessKeyList{},
-		&management.Runner{},
-		&management.RunnerList{},
-		&management.RunnerAccessKey{},
-		&management.RunnerConfig{},
 		&management.Self{},
 		&management.SelfList{},
 		&management.SelfSubjectAccessReview{},
@@ -134,6 +128,7 @@ func addKnownTypes(scheme *runtime.Scheme) error {
 		&management.UserList{},
 		&management.UserAccessKeys{},
 		&management.UserClusters{},
+		&management.UserDetailedPermissions{},
 		&management.UserPermissions{},
 		&management.UserProfile{},
 		&management.VirtualClusterInstance{},
@@ -142,6 +137,8 @@ func addKnownTypes(scheme *runtime.Scheme) error {
 		&management.VirtualClusterExternalDatabase{},
 		&management.VirtualClusterInstanceKubeConfig{},
 		&management.VirtualClusterInstanceLog{},
+		&management.VirtualClusterSchema{},
+		&management.VirtualClusterSchemaList{},
 		&management.VirtualClusterTemplate{},
 		&management.VirtualClusterTemplateList{},
 	)
