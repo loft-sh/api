@@ -64,7 +64,6 @@ func GetManagementAPIBuilder() *builders.APIGroupBuilder {
 			"RedirectToken",
 			"RegisterVirtualCluster",
 			"ResetAccessKey",
-			"Runner",
 			"Self",
 			"SelfSubjectAccessReview",
 			"SpaceTemplate",
@@ -73,6 +72,7 @@ func GetManagementAPIBuilder() *builders.APIGroupBuilder {
 			"Team",
 			"TranslateVClusterResourceName",
 			"User",
+			"VirtualClusterSchema",
 			"VirtualClusterTemplate",
 		)
 }
