@@ -86,6 +86,8 @@ type Interface interface {
 	Users() UserInformer
 	// VirtualClusterInstances returns a VirtualClusterInstanceInformer.
 	VirtualClusterInstances() VirtualClusterInstanceInformer
+	// VirtualClusterSchemas returns a VirtualClusterSchemaInformer.
+	VirtualClusterSchemas() VirtualClusterSchemaInformer
 	// VirtualClusterTemplates returns a VirtualClusterTemplateInformer.
 	VirtualClusterTemplates() VirtualClusterTemplateInformer
 }
@@ -294,6 +296,11 @@ func (v *version) Users() UserInformer {
 // VirtualClusterInstances returns a VirtualClusterInstanceInformer.
 func (v *version) VirtualClusterInstances() VirtualClusterInstanceInformer {
 	return &virtualClusterInstanceInformer{factory: v.factory, namespace: v.namespace, tweakListOptions: v.tweakListOptions}
+}
+
+// VirtualClusterSchemas returns a VirtualClusterSchemaInformer.
+func (v *version) VirtualClusterSchemas() VirtualClusterSchemaInformer {
+	return &virtualClusterSchemaInformer{factory: v.factory, tweakListOptions: v.tweakListOptions}
 }
 
 // VirtualClusterTemplates returns a VirtualClusterTemplateInformer.
