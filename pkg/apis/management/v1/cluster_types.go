@@ -1,23 +1,22 @@
 package v1
 
 import (
-	agentstoragev1 "github.com/loft-sh/agentapi/v4/pkg/apis/loft/storage/v1"
-	storagev1 "github.com/loft-sh/api/v4/pkg/apis/storage/v1"
+	storagev1 "github.com/loft-sh/api/v3/pkg/apis/storage/v1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 )
 
 // +genclient
 // +genclient:nonNamespaced
-// +genclient:method=ListAccess,verb=get,subresource=memberaccess,result=github.com/loft-sh/api/v4/pkg/apis/management/v1.ClusterMemberAccess
-// +genclient:method=ListMembers,verb=get,subresource=members,result=github.com/loft-sh/api/v4/pkg/apis/management/v1.ClusterMembers
-// +genclient:method=ListVirtualClusterDefaults,verb=get,subresource=virtualclusterdefaults,result=github.com/loft-sh/api/v4/pkg/apis/management/v1.ClusterVirtualClusterDefaults
-// +genclient:method=GetAgentConfig,verb=get,subresource=agentconfig,result=github.com/loft-sh/api/v4/pkg/apis/management/v1.ClusterAgentConfig
-// +genclient:method=GetAccessKey,verb=get,subresource=accesskey,result=github.com/loft-sh/api/v4/pkg/apis/management/v1.ClusterAccessKey
+// +genclient:method=ListAccess,verb=get,subresource=memberaccess,result=github.com/loft-sh/api/v3/pkg/apis/management/v1.ClusterMemberAccess
+// +genclient:method=ListMembers,verb=get,subresource=members,result=github.com/loft-sh/api/v3/pkg/apis/management/v1.ClusterMembers
+// +genclient:method=ListVirtualClusterDefaults,verb=get,subresource=virtualclusterdefaults,result=github.com/loft-sh/api/v3/pkg/apis/management/v1.ClusterVirtualClusterDefaults
+// +genclient:method=GetAgentConfig,verb=get,subresource=agentconfig,result=github.com/loft-sh/api/v3/pkg/apis/management/v1.ClusterAgentConfig
+// +genclient:method=GetAccessKey,verb=get,subresource=accesskey,result=github.com/loft-sh/api/v3/pkg/apis/management/v1.ClusterAccessKey
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
 
 // Cluster holds the cluster information
 // +k8s:openapi-gen=true
-// +resource:path=clusters,rest=ClusterREST,statusRest=ClusterStatusREST
+// +resource:path=clusters,rest=ClusterREST
 // +subresource:request=ClusterMemberAccess,path=memberaccess,kind=ClusterMemberAccess,rest=ClusterMemberAccessREST
 // +subresource:request=ClusterReset,path=reset,kind=ClusterReset,rest=ClusterResetREST
 // +subresource:request=ClusterDomain,path=domain,kind=ClusterDomain,rest=ClusterDomainREST
@@ -63,12 +62,4 @@ func (a *Cluster) GetAccess() []storagev1.Access {
 
 func (a *Cluster) SetAccess(access []storagev1.Access) {
 	a.Spec.Access = access
-}
-
-func (a *Cluster) GetConditions() agentstoragev1.Conditions {
-	return a.Status.Conditions
-}
-
-func (a *Cluster) SetConditions(conditions agentstoragev1.Conditions) {
-	a.Status.Conditions = conditions
 }

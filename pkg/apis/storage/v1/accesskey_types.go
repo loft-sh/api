@@ -105,9 +105,10 @@ type AccessKeySpec struct {
 }
 
 type AccessKeyScope struct {
-	// Roles is a set of managed permissions to apply to the access key.
+	// AllowLoftCLI allows certain read-only management requests to
+	// make sure loft cli works correctly with this specific access key.
 	// +optional
-	Roles []AccessKeyScopeRole `json:"roles,omitempty"`
+	AllowLoftCLI bool `json:"allowLoftCli,omitempty"`
 
 	// Projects specifies the projects the access key should have access to.
 	// +optional
@@ -129,88 +130,7 @@ type AccessKeyScope struct {
 	// Rules specifies the rules that should apply to the access key.
 	// +optional
 	Rules []AccessKeyScopeRule `json:"rules,omitempty"`
-
-	// AllowLoftCLI allows certain read-only management requests to
-	// make sure loft cli works correctly with this specific access key.
-	//
-	// Deprecated: Use the `roles` field instead
-	//  ```yaml
-	//  # Example:
-	//  roles:
-	//    - role: loftCLI
-	//  ```
-	// +optional
-	AllowLoftCLI bool `json:"allowLoftCli,omitempty"`
 }
-
-func (a AccessKeyScope) ContainsRole(val AccessKeyScopeRoleName) bool {
-	if a.AllowLoftCLI && val == AccessKeyScopeRoleLoftCLI {
-		return true
-	}
-
-	for _, entry := range a.Roles {
-		if entry.Role == val {
-			return true
-		}
-
-		// (ThomasK33): Add implicit network peer permissions
-		if val == AccessKeyScopeRoleNetworkPeer {
-			switch entry.Role {
-			case AccessKeyScopeRoleVCluster, AccessKeyScopeRoleAgent, AccessKeyScopeRoleRunner:
-				return true
-			// (ThomasK33): Adding this so that the exhaustive linter is happy
-			case AccessKeyScopeRoleNetworkPeer:
-				return true
-			case AccessKeyScopeRoleLoftCLI:
-				return false
-			}
-		}
-	}
-
-	return false
-}
-
-func (a AccessKeyScope) GetRole(name AccessKeyScopeRoleName) AccessKeyScopeRole {
-	for _, entry := range a.Roles {
-		if entry.Role == name {
-			return entry
-		}
-	}
-
-	if a.ContainsRole(name) {
-		return AccessKeyScopeRole{
-			Role: name,
-		}
-	}
-
-	return AccessKeyScopeRole{}
-}
-
-type AccessKeyScopeRole struct {
-	// Role is the name of the role to apply to the access key scope.
-	// +optional
-	Role AccessKeyScopeRoleName `json:"role,omitempty"`
-
-	// Projects specifies the projects the access key should have access to.
-	// +optional
-	Projects []string `json:"projects,omitempty"`
-
-	// VirtualClusters specifies the virtual clusters the access key is allowed to access.
-	// +optional
-	VirtualClusters []string `json:"virtualClusters,omitempty"`
-}
-
-// AccessKeyScopeRoleName is the role name for a given scope
-// +enum
-type AccessKeyScopeRoleName string
-
-const (
-	AccessKeyScopeRoleAgent       AccessKeyScopeRoleName = "agent"
-	AccessKeyScopeRoleVCluster    AccessKeyScopeRoleName = "vcluster"
-	AccessKeyScopeRoleNetworkPeer AccessKeyScopeRoleName = "network-peer"
-	AccessKeyScopeRoleLoftCLI     AccessKeyScopeRoleName = "loft-cli"
-	AccessKeyScopeRoleRunner      AccessKeyScopeRoleName = "runner"
-)
 
 type AccessKeyScopeCluster struct {
 	// Cluster is the name of the cluster to access. You can specify * to select all clusters.
@@ -309,6 +229,8 @@ const (
 	RequestTargetManagement RequestTarget = "Management"
 	// RequestTargetCluster specifies a connected kubernetes cluster request
 	RequestTargetCluster RequestTarget = "Cluster"
+	// RequestTargetVirtualCluster specifies a virtual kubernetes cluster request
+	RequestTargetVirtualCluster RequestTarget = "VirtualCluster"
 	// RequestTargetProjectSpace specifies a project space cluster request
 	RequestTargetProjectSpace RequestTarget = "ProjectSpace"
 	// RequestTargetProjectVirtualCluster specifies a project virtual kubernetes cluster request

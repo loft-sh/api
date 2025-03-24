@@ -1,7 +1,8 @@
 package v1
 
 import (
-	storagev1 "github.com/loft-sh/api/v4/pkg/apis/storage/v1"
+	clusterv1 "github.com/loft-sh/agentapi/v3/pkg/apis/loft/cluster/v1"
+	storagev1 "github.com/loft-sh/api/v3/pkg/apis/storage/v1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 )
 
@@ -30,13 +31,16 @@ type ClusterAccessStatus struct {
 	storagev1.ClusterAccessStatus `json:",inline"`
 
 	// +optional
-	Clusters []*storagev1.EntityInfo `json:"clusters,omitempty"`
+	Clusters []*clusterv1.EntityInfo `json:"clusters,omitempty"`
 
 	// +optional
-	Users []*storagev1.UserOrTeamEntity `json:"users,omitempty"`
+	Users []*clusterv1.UserOrTeam `json:"users,omitempty"`
 
 	// +optional
-	Teams []*storagev1.EntityInfo `json:"teams,omitempty"`
+	Teams []*clusterv1.EntityInfo `json:"teams,omitempty"`
+
+	// +optional
+	SpaceConstraint *clusterv1.EntityInfo `json:"spaceConstraint,omitempty"`
 }
 
 func (a *ClusterAccess) GetOwner() *storagev1.UserOrTeam {
