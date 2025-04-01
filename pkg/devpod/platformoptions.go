@@ -5,6 +5,11 @@ type PlatformOptions struct {
 	// when executed on the platform side and not if a platform workspace is used locally.
 	Enabled bool `json:"enabled,omitempty"`
 
+	// DevPodWorkspaceInstance information
+	InstanceName      string `json:"instanceName,omitempty"`
+	InstanceProject   string `json:"instanceProject,omitempty"`
+	InstanceNamespace string `json:"instanceNamespace,omitempty"`
+
 	// connection options
 	// AccessKey is used by the workspace daemon to authenticate itself
 	AccessKey string `json:"accessKey,omitempty"`
@@ -22,17 +27,19 @@ type PlatformOptions struct {
 	// the ones running in virtual clusters or spaces
 	Kubernetes *Kubernetes `json:"kubernetes,omitempty"`
 
-	// credentials for the workspace
-	Credentials PlatformWorkspaceCredentials `json:"credentials,omitempty"`
+	// user credentials are the credentials for the user
+	UserCredentials    PlatformWorkspaceCredentials `json:"userCredentials,omitempty"`
+	ProjectCredentials PlatformWorkspaceCredentials `json:"projectCredentials,omitempty"`
 
 	// Remote builds
 	Build *PlatformBuildOptions `json:"build,omitempty"`
 }
 
 type PlatformWorkspaceCredentials struct {
-	GitHttp []PlatformGitHttpCredentials `json:"gitHttp,omitempty"`
-	GitSsh  []PlatformGitSshCredentials  `json:"gitSsh,omitempty"`
-	Docker  []PlatformDockerCredentials  `json:"docker,omitempty"`
+	GitUser  string                       `json:"gitUser,omitempty"`
+	GitEmail string                       `json:"gitEmail,omitempty"`
+	GitHttp  []PlatformGitHttpCredentials `json:"gitHttp,omitempty"`
+	GitSsh   []PlatformGitSshCredentials  `json:"gitSsh,omitempty"`
 }
 
 type PlatformGitHttpCredentials struct {

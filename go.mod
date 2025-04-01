@@ -5,7 +5,7 @@ go 1.23.1
 require (
 	github.com/ghodss/yaml v1.0.0
 	github.com/loft-sh/admin-apis v0.0.0-20250221182517-7499d86167d2
-	github.com/loft-sh/agentapi/v4 v4.3.0-devpod.alpha.1
+	github.com/loft-sh/agentapi/v4 v4.3.0-devpod.alpha.25
 	github.com/loft-sh/apiserver v0.0.0-20250206205835-422f1d472459
 	google.golang.org/grpc v1.67.1
 	google.golang.org/protobuf v1.35.1

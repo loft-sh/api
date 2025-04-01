@@ -23,7 +23,6 @@ import (
 	"k8s.io/apimachinery/pkg/runtime/schema"
 	"k8s.io/apiserver/pkg/registry/generic"
 	"k8s.io/apiserver/pkg/registry/rest"
-	metricsv1beta1 "k8s.io/metrics/pkg/apis/metrics/v1beta1"
 )
 
 type NewRESTFunc func(factory managerfactory.SharedManagerFactory) rest.Storage
@@ -670,8 +669,16 @@ var (
 	NewDevPodWorkspaceInstanceCancelREST = func(getter generic.RESTOptionsGetter) rest.Storage {
 		return NewDevPodWorkspaceInstanceCancelRESTFunc(Factory)
 	}
-	NewDevPodWorkspaceInstanceCancelRESTFunc NewRESTFunc
-	InternalDevPodWorkspaceInstanceLogREST   = builders.NewInternalSubresource(
+	NewDevPodWorkspaceInstanceCancelRESTFunc    NewRESTFunc
+	InternalDevPodWorkspaceInstanceDownloadREST = builders.NewInternalSubresource(
+		"devpodworkspaceinstances", "DevPodWorkspaceInstanceDownload", "download",
+		func() runtime.Object { return &DevPodWorkspaceInstanceDownload{} },
+	)
+	NewDevPodWorkspaceInstanceDownloadREST = func(getter generic.RESTOptionsGetter) rest.Storage {
+		return NewDevPodWorkspaceInstanceDownloadRESTFunc(Factory)
+	}
+	NewDevPodWorkspaceInstanceDownloadRESTFunc NewRESTFunc
+	InternalDevPodWorkspaceInstanceLogREST     = builders.NewInternalSubresource(
 		"devpodworkspaceinstances", "DevPodWorkspaceInstanceLog", "log",
 		func() runtime.Object { return &DevPodWorkspaceInstanceLog{} },
 	)
@@ -1274,6 +1281,7 @@ var (
 		InternalDevPodWorkspaceInstance,
 		InternalDevPodWorkspaceInstanceStatus,
 		InternalDevPodWorkspaceInstanceCancelREST,
+		InternalDevPodWorkspaceInstanceDownloadREST,
 		InternalDevPodWorkspaceInstanceLogREST,
 		InternalDevPodWorkspaceInstanceStopREST,
 		InternalDevPodWorkspaceInstanceTasksREST,
@@ -1386,8 +1394,6 @@ func Resource(resource string) schema.GroupResource {
 
 type AccessKeyType string
 type Level string
-type PersistentVolumeClaimPhase string
-type PodPhase string
 type RequestTarget string
 type Stage string
 
@@ -1951,21 +1957,11 @@ type DevPodWorkspaceInstanceCancel struct {
 	TaskID            string `json:"taskId,omitempty"`
 }
 
-type DevPodWorkspaceInstanceContainerResource struct {
-	Name      string                      `json:"name,omitempty"`
-	Resources corev1.ResourceRequirements `json:"resources,omitempty"`
-}
+// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
 
-type DevPodWorkspaceInstanceEvent struct {
-	Reason        string      `json:"reason,omitempty" protobuf:"bytes,3,opt,name=reason"`
-	Message       string      `json:"message,omitempty" protobuf:"bytes,4,opt,name=message"`
-	LastTimestamp metav1.Time `json:"lastTimestamp,omitempty" protobuf:"bytes,7,opt,name=lastTimestamp"`
-	Type          string      `json:"type,omitempty" protobuf:"bytes,9,opt,name=type"`
-}
-
-type DevPodWorkspaceInstanceKubernetesStatus struct {
-	PodStatus                   *DevPodWorkspaceInstancePodStatus                   `json:"podStatus,omitempty"`
-	PersistentVolumeClaimStatus *DevPodWorkspaceInstancePersistentVolumeClaimStatus `json:"persistentVolumeClaimStatus,omitempty"`
+type DevPodWorkspaceInstanceDownload struct {
+	metav1.TypeMeta   `json:",inline"`
+	metav1.ObjectMeta `json:"metadata,omitempty"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -1975,34 +1971,13 @@ type DevPodWorkspaceInstanceLog struct {
 	metav1.ObjectMeta `json:"metadata,omitempty"`
 }
 
-type DevPodWorkspaceInstancePersistentVolumeClaimStatus struct {
-	Phase      corev1.PersistentVolumeClaimPhase       `json:"phase,omitempty" protobuf:"bytes,1,opt,name=phase,casttype=PersistentVolumeClaimPhase"`
-	Capacity   corev1.ResourceList                     `json:"capacity,omitempty" protobuf:"bytes,3,rep,name=capacity,casttype=ResourceList,castkey=ResourceName"`
-	Conditions []corev1.PersistentVolumeClaimCondition `json:"conditions,omitempty" patchStrategy:"merge" patchMergeKey:"type" protobuf:"bytes,4,rep,name=conditions"`
-	Events     []DevPodWorkspaceInstanceEvent          `json:"events,omitempty"`
-}
-
-type DevPodWorkspaceInstancePodStatus struct {
-	Phase                 corev1.PodPhase                            `json:"phase,omitempty" protobuf:"bytes,1,opt,name=phase,casttype=PodPhase"`
-	Conditions            []corev1.PodCondition                      `json:"conditions,omitempty" patchStrategy:"merge" patchMergeKey:"type" protobuf:"bytes,2,rep,name=conditions"`
-	Message               string                                     `json:"message,omitempty" protobuf:"bytes,3,opt,name=message"`
-	Reason                string                                     `json:"reason,omitempty" protobuf:"bytes,4,opt,name=reason"`
-	InitContainerStatuses []corev1.ContainerStatus                   `json:"initContainerStatuses,omitempty" protobuf:"bytes,10,rep,name=initContainerStatuses"`
-	ContainerStatuses     []corev1.ContainerStatus                   `json:"containerStatuses,omitempty" protobuf:"bytes,8,rep,name=containerStatuses"`
-	NodeName              string                                     `json:"nodeName,omitempty"`
-	Events                []DevPodWorkspaceInstanceEvent             `json:"events,omitempty"`
-	ContainerResources    []DevPodWorkspaceInstanceContainerResource `json:"containerResources,omitempty"`
-	ContainerMetrics      []metricsv1beta1.ContainerMetrics          `json:"containerMetrics,omitempty"`
-}
-
 type DevPodWorkspaceInstanceSpec struct {
 	storagev1.DevPodWorkspaceInstanceSpec `json:",inline"`
 }
 
 type DevPodWorkspaceInstanceStatus struct {
 	storagev1.DevPodWorkspaceInstanceStatus `json:",inline"`
-	SleepModeConfig                         *clusterv1.SleepModeConfig               `json:"sleepModeConfig,omitempty"`
-	Kubernetes                              *DevPodWorkspaceInstanceKubernetesStatus `json:"kubernetes,omitempty"`
+	SleepModeConfig                         *clusterv1.SleepModeConfig `json:"sleepModeConfig,omitempty"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -2049,6 +2024,7 @@ type DevPodWorkspaceInstanceTroubleshoot struct {
 	Template          *storagev1.DevPodWorkspaceTemplate `json:"template,omitempty"`
 	Pods              []corev1.Pod                       `json:"pods,omitempty"`
 	PVCs              []corev1.PersistentVolumeClaim     `json:"pvcs,omitempty"`
+	Netmaps           []string                           `json:"netmaps,omitempty"`
 	Errors            []string                           `json:"errors,omitempty"`
 }
 
@@ -2221,7 +2197,7 @@ type KioskStatus struct {
 }
 
 // +genclient
-// +genclient
+// +genclient:nonNamespaced
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
 
 type License struct {
@@ -2335,7 +2311,7 @@ type ObjectNames struct {
 }
 
 // +genclient
-// +genclient
+// +genclient:nonNamespaced
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
 
 type OwnedAccessKey struct {
@@ -4302,6 +4278,14 @@ type DevPodWorkspaceInstanceCancelList struct {
 	metav1.TypeMeta `json:",inline"`
 	metav1.ListMeta `json:"metadata,omitempty"`
 	Items           []DevPodWorkspaceInstanceCancel `json:"items"`
+}
+
+// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+
+type DevPodWorkspaceInstanceDownloadList struct {
+	metav1.TypeMeta `json:",inline"`
+	metav1.ListMeta `json:"metadata,omitempty"`
+	Items           []DevPodWorkspaceInstanceDownload `json:"items"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
