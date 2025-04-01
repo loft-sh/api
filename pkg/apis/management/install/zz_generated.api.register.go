@@ -4,7 +4,7 @@ package install
 
 import (
 	"github.com/loft-sh/api/v4/pkg/apis/management"
-	v1 "github.com/loft-sh/api/v4/pkg/apis/management/v1"
+	"github.com/loft-sh/api/v4/pkg/apis/management/v1"
 	"github.com/loft-sh/apiserver/pkg/builders"
 	"k8s.io/apimachinery/pkg/runtime"
 	utilruntime "k8s.io/apimachinery/pkg/util/runtime"
@@ -134,6 +134,7 @@ func addKnownTypes(scheme *runtime.Scheme) error {
 		&management.UserList{},
 		&management.UserAccessKeys{},
 		&management.UserClusters{},
+		&management.UserDetailedPermissions{},
 		&management.UserPermissions{},
 		&management.UserProfile{},
 		&management.VirtualClusterInstance{},
@@ -142,6 +143,8 @@ func addKnownTypes(scheme *runtime.Scheme) error {
 		&management.VirtualClusterExternalDatabase{},
 		&management.VirtualClusterInstanceKubeConfig{},
 		&management.VirtualClusterInstanceLog{},
+		&management.VirtualClusterSchema{},
+		&management.VirtualClusterSchemaList{},
 		&management.VirtualClusterTemplate{},
 		&management.VirtualClusterTemplateList{},
 	)
