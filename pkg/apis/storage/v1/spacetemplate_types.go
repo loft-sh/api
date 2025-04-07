@@ -1,6 +1,7 @@
 package v1
 
 import (
+	agentstoragev1 "github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 )
 
@@ -109,15 +110,15 @@ type SpaceTemplateDefinition struct {
 
 	// Charts are helm charts that should get deployed
 	// +optional
-	Charts []TemplateHelmChart `json:"charts,omitempty"`
+	Charts []agentstoragev1.TemplateHelmChart `json:"charts,omitempty"`
 
 	// Apps specifies the apps that should get deployed by this template
 	// +optional
-	Apps []AppReference `json:"apps,omitempty"`
+	Apps []agentstoragev1.AppReference `json:"apps,omitempty"`
 
 	// The space access
 	// +optional
-	Access *InstanceAccess `json:"access,omitempty"`
+	Access *agentstoragev1.InstanceAccess `json:"access,omitempty"`
 }
 
 // SpaceInstanceTemplateDefinition holds the space instance template

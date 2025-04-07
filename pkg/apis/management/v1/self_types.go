@@ -1,7 +1,8 @@
 package v1
 
 import (
-	storagev1 "github.com/loft-sh/api/v4/pkg/apis/storage/v1"
+	clusterv1 "github.com/loft-sh/agentapi/v3/pkg/apis/loft/cluster/v1"
+	storagev1 "github.com/loft-sh/api/v3/pkg/apis/storage/v1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 )
 
@@ -33,7 +34,7 @@ type SelfStatus struct {
 
 	// The name of the currently logged in team
 	// +optional
-	Team *storagev1.EntityInfo `json:"team,omitempty"`
+	Team *clusterv1.EntityInfo `json:"team,omitempty"`
 
 	// The name of the currently used access key
 	// +optional
@@ -61,21 +62,17 @@ type SelfStatus struct {
 
 	// ChatAuthToken is the token used to authenticate with the in-product chat widget in the UI
 	// +optional
-	ChatAuthToken string `json:"chatAuthToken,omitempty"`
+	ChatAuthToken string `json:"chatAuthToken"`
 
 	// InstanceID is the loft instance id
 	// +optional
-	InstanceID string `json:"instanceID,omitempty"`
-
-	// ProjectNamespacePrefix is the prefix used to name project namespaces after defaulting has been applied
-	// +optional
-	ProjectNamespacePrefix *string `json:"projectNamespacePrefix,omitempty"`
+	InstanceID string `json:"instanceID"`
 }
 
 type UserInfo struct {
-	storagev1.EntityInfo `json:",inline"`
+	clusterv1.EntityInfo `json:",inline"`
 
 	// Teams are the teams the user is part of
 	// +optional
-	Teams []*storagev1.EntityInfo `json:"teams,omitempty"`
+	Teams []*clusterv1.EntityInfo `json:"teams,omitempty"`
 }

@@ -39,7 +39,7 @@ func DisplayName() string {
 	case licenseapi.DevPodPro:
 		return "DevPod Pro"
 	case licenseapi.VClusterPro:
-		return "vCluster Platform"
+		return "vCluster.Pro"
 	case licenseapi.Loft:
 	}
 

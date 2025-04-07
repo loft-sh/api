@@ -1,8 +1,8 @@
 package v1
 
 import (
-	clusterv1 "github.com/loft-sh/agentapi/v4/pkg/apis/loft/cluster/v1"
-	agentstoragev1 "github.com/loft-sh/agentapi/v4/pkg/apis/loft/storage/v1"
+	clusterv1 "github.com/loft-sh/agentapi/v3/pkg/apis/loft/cluster/v1"
+	agentstoragev1 "github.com/loft-sh/agentapi/v3/pkg/apis/loft/storage/v1"
 	corev1 "k8s.io/api/core/v1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 )
@@ -80,6 +80,64 @@ type TaskDefinition struct {
 	// HelmTask executes a helm command
 	// +optional
 	HelmTask *HelmTask `json:"helm,omitempty"`
+
+	// SpaceCreationTask creates a new space
+	// +optional
+	SpaceCreationTask *SpaceCreationTask `json:"spaceCreation,omitempty"`
+
+	// VirtualClusterCreationTask creates a new virtual cluster
+	// +optional
+	VirtualClusterCreationTask *VirtualClusterCreationTask `json:"virtualClusterCreation,omitempty"`
+}
+
+type VirtualClusterCreationTask struct {
+	// The virtual cluster metadata
+	// +kubebuilder:pruning:PreserveUnknownFields
+	// +optional
+	Metadata metav1.ObjectMeta `json:"metadata,omitempty"`
+
+	// The virtual cluster access
+	// +optional
+	Access *agentstoragev1.InstanceAccess `json:"access,omitempty"`
+
+	// The helm release configuration for the virtual cluster.
+	// +optional
+	HelmRelease agentstoragev1.VirtualClusterHelmRelease `json:"helmRelease,omitempty"`
+
+	// Objects is the optional objects configuration for the virtual cluster
+	// +optional
+	Objects string `json:"objects,omitempty"`
+
+	// Wait defines if the task should wait until the virtual cluster is ready
+	// +optional
+	Wait bool `json:"wait,omitempty"`
+
+	// Apps specifies the apps that should get deployed by this template
+	// +optional
+	Apps []agentstoragev1.AppReference `json:"apps,omitempty"`
+
+	// SpaceCreationTask creates a new space if defined for the virtual cluster
+	// +optional
+	SpaceCreationTask *SpaceCreationTask `json:"spaceCreation,omitempty"`
+}
+
+type SpaceCreationTask struct {
+	// Metadata of the space
+	// +kubebuilder:pruning:PreserveUnknownFields
+	// +optional
+	Metadata metav1.ObjectMeta `json:"metadata,omitempty"`
+
+	// Objects are objects to put into the space
+	// +optional
+	Objects string `json:"objects,omitempty"`
+
+	// Owner defines the space owner
+	// +optional
+	Owner *UserOrTeam `json:"owner,omitempty"`
+
+	// Apps specifies the apps that should get deployed by this template
+	// +optional
+	Apps []agentstoragev1.AppReference `json:"apps,omitempty"`
 }
 
 type AppTask struct {
@@ -93,7 +151,7 @@ type AppTask struct {
 
 	// AppReference is the reference to the app to deploy
 	// +optional
-	AppReference AppReference `json:"appReference,omitempty"`
+	AppReference agentstoragev1.AppReference `json:"appReference,omitempty"`
 }
 
 type HelmTask struct {
@@ -193,6 +251,10 @@ type Target struct {
 	// Cluster defines a connected cluster as target
 	// +optional
 	Cluster *TargetCluster `json:"cluster,omitempty"`
+
+	// VirtualCluster defines a virtual cluster as target
+	// +optional
+	VirtualCluster *TargetVirtualCluster `json:"virtualCluster,omitempty"`
 }
 
 type TargetInstance struct {
@@ -227,41 +289,6 @@ type TargetVirtualCluster struct {
 	// Name of the virtual cluster
 	// +optional
 	Name string `json:"name,omitempty"`
-}
-
-type UserOrTeamEntity struct {
-	// User describes an user
-	// +optional
-	User *EntityInfo `json:"user,omitempty"`
-
-	// Team describes a team
-	// +optional
-	Team *EntityInfo `json:"team,omitempty"`
-}
-
-type EntityInfo struct {
-	// Name is the kubernetes name of the object
-	Name string `json:"name,omitempty"`
-
-	// The display name shown in the UI
-	// +optional
-	DisplayName string `json:"displayName,omitempty"`
-
-	// Icon is the icon of the user / team
-	// +optional
-	Icon string `json:"icon,omitempty"`
-
-	// The username that is used to login
-	// +optional
-	Username string `json:"username,omitempty"`
-
-	// The users email address
-	// +optional
-	Email string `json:"email,omitempty"`
-
-	// The user subject
-	// +optional
-	Subject string `json:"subject,omitempty"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object

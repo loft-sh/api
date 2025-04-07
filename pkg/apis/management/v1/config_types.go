@@ -1,9 +1,9 @@
 package v1
 
 import (
-	auditv1 "github.com/loft-sh/api/v4/pkg/apis/audit/v1"
-	storagev1 "github.com/loft-sh/api/v4/pkg/apis/storage/v1"
-	uiv1 "github.com/loft-sh/api/v4/pkg/apis/ui/v1"
+	auditv1 "github.com/loft-sh/api/v3/pkg/apis/audit/v1"
+	storagev1 "github.com/loft-sh/api/v3/pkg/apis/storage/v1"
+	uiv1 "github.com/loft-sh/api/v3/pkg/apis/ui/v1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 )
 
@@ -35,7 +35,7 @@ type ConfigStatus struct {
 	// +optional
 	Authentication Authentication `json:"auth,omitempty"`
 
-	// DEPRECATED: Configure the OIDC clients using either the OIDC Client UI or a secret. By default, vCluster Platform as an OIDC Provider is enabled but does not function without OIDC clients.
+	// OIDC holds oidc provider relevant information
 	// +optional
 	OIDC *OIDC `json:"oidc,omitempty"`
 
@@ -51,10 +51,6 @@ type ConfigStatus struct {
 	// +optional
 	LoftHost string `json:"loftHost,omitempty"`
 
-	// ProjectNamespacePrefix holds the prefix for loft project namespaces. Omitted defaults to "p-"
-	// +optional
-	ProjectNamespacePrefix *string `json:"projectNamespacePrefix,omitempty"`
-
 	// DevPodSubDomain holds a subdomain in the following form *.workspace.my-domain.com
 	// +optional
 	DevPodSubDomain string `json:"devPodSubDomain,omitempty"`
@@ -66,16 +62,6 @@ type ConfigStatus struct {
 	// VaultIntegration holds the vault integration configuration
 	// +optional
 	VaultIntegration *storagev1.VaultIntegrationSpec `json:"vault,omitempty"`
-
-	// DisableLoftConfigEndpoint will disable setting config via the UI and config.management.loft.sh endpoint
-	DisableConfigEndpoint bool `json:"disableConfigEndpoint,omitempty"`
-
-	// Cloud holds the settings to be used exclusively in vCluster Cloud based
-	// environments and deployments.
-	Cloud *Cloud `json:"cloud,omitempty"`
-
-	// CostControl holds the settings related to the Cost Control ROI dashboard and its metrics gathering infrastructure
-	CostControl *CostControl `json:"costControl,omitempty"`
 }
 
 // Audit holds the audit configuration options for loft. Changing any options will require a loft restart
@@ -298,7 +284,23 @@ type OIDC struct {
 	WildcardRedirect bool `json:"wildcardRedirect,omitempty"`
 
 	// The clients that are allowed to request loft tokens
-	Clients []OIDCClientSpec `json:"clients,omitempty"`
+	Clients []OIDCClient `json:"clients,omitempty"`
+}
+
+// OIDCClient holds information about a client
+type OIDCClient struct {
+	// The client name
+	Name string `json:"name,omitempty"`
+
+	// The client id of the client
+	ClientID string `json:"clientId,omitempty"`
+
+	// The client secret of the client
+	ClientSecret string `json:"clientSecret,omitempty"`
+
+	// A registered set of redirect URIs. When redirecting from dex to the client, the URI
+	// requested to redirect to MUST match one of these values, unless the client is "public".
+	RedirectURIs []string `json:"redirectURIs"`
 }
 
 // Authentication holds authentication relevant information
@@ -322,12 +324,6 @@ type Authentication struct {
 	// +optional
 	DisableTeamCreation bool `json:"disableTeamCreation,omitempty"`
 
-	// DisableUserCreation prevents the SSO connectors from creating a new user on a users initial signin through sso.
-	// Default behaviour is false, this means that a new user object will be created once a user without
-	// a Kubernetes user object logs in.
-	// +optional
-	DisableUserCreation bool `json:"disableUserCreation,omitempty"`
-
 	// AccessKeyMaxTTLSeconds is the global maximum lifespan of an accesskey in seconds.
 	// Leaving it 0 or unspecified will disable it.
 	// Specifying 2592000 will mean all keys have a Time-To-Live of 30 days.
@@ -345,9 +341,6 @@ type Authentication struct {
 	// CustomHttpHeaders are additional headers that should be set for the authentication endpoints
 	// +optional
 	CustomHttpHeaders map[string]string `json:"customHttpHeaders,omitempty"`
-
-	// GroupsFilters is a regex expression to only save matching sso groups into the user resource
-	GroupsFilters []string `json:"groupsFilters,omitempty"`
 }
 
 type AuthenticationRancher struct {
@@ -504,6 +497,8 @@ type AuthenticationMicrosoft struct {
 	// Restrict the groups claims to include only the user’s groups that are in the configured groups
 	// +optional
 	UseGroupsAsWhitelist bool `json:"useGroupsAsWhitelist,omitempty"`
+
+	AuthenticationClusterAccountTemplates `json:",inline"`
 }
 
 type AuthenticationGoogle struct {
@@ -541,6 +536,8 @@ type AuthenticationGoogle struct {
 	// when listing groups
 	// +optional
 	AdminEmail string `json:"adminEmail,omitempty"`
+
+	AuthenticationClusterAccountTemplates `json:",inline"`
 }
 
 type AuthenticationGitlab struct {
@@ -562,6 +559,8 @@ type AuthenticationGitlab struct {
 	// If `groups` is provided, this acts as a whitelist - only the user's GitLab groups that are in the configured `groups` below will go into the groups claim. Conversely, if the user is not in any of the configured `groups`, the user will not be authenticated.
 	// +optional
 	Groups []string `json:"groups,omitempty"`
+
+	AuthenticationClusterAccountTemplates `json:",inline"`
 }
 
 type AuthenticationGithub struct {
@@ -594,6 +593,8 @@ type AuthenticationGithub struct {
 	// Used to support self-signed or untrusted CA root certificates.
 	// +optional
 	RootCA string `json:"rootCA,omitempty"`
+
+	AuthenticationClusterAccountTemplates `json:",inline"`
 }
 
 // AuthenticationGithubOrg holds org-team filters, in which teams are optional.
@@ -698,77 +699,26 @@ type AuthenticationOIDC struct {
 	// Type of the OIDC to show in the UI. Only for displaying purposes
 	// +optional
 	Type string `json:"type,omitempty"`
+
+	AuthenticationClusterAccountTemplates `json:",inline"`
 }
 
-type Cloud struct {
-	// ReleaseChannel specifies the release channel for the cloud configuration.
-	// This can be used to determine which updates or versions are applied.
-	ReleaseChannel string `json:"releaseChannel,omitempty"`
+type AuthenticationClusterAccountTemplates struct {
+	// Cluster Account Templates that will be applied for users logging in through this authentication
+	// +optional
+	ClusterAccountTemplates []storagev1.UserClusterAccountTemplate `json:"clusterAccountTemplates,omitempty"`
 
-	// MaintenanceWindow specifies the maintenance window for the cloud configuration.
-	// This is a structured representation of the time window during which maintenance can occur.
-	MaintenanceWindow MaintenanceWindow `json:"maintenanceWindow,omitempty"`
+	// A mapping between groups and cluster account templates. If the user has a certain group, the cluster
+	// account template will be added during creation
+	// +optional
+	GroupClusterAccountTemplates []AuthenticationGroupClusterAccountTemplate `json:"groupClusterAccountTemplates,omitempty"`
 }
 
-type MaintenanceWindow struct {
-	// DayOfWeek specifies the day of the week for the maintenance window.
-	// It should be a string representing the day, e.g., "Monday", "Tuesday", etc.
-	DayOfWeek string `json:"dayOfWeek,omitempty"`
+type AuthenticationGroupClusterAccountTemplate struct {
+	// Group is the name of the group that should be matched
+	Group string `json:"group"`
 
-	// TimeWindow specifies the time window for the maintenance.
-	// It should be a string representing the time range in 24-hour format, in UTC, e.g., "02:00-03:00".
-	TimeWindow string `json:"timeWindow,omitempty"`
-}
-
-type CostControl struct {
-	// Enabled specifies whether the ROI dashboard should be available in the UI, and if the metrics infrastructure
-	// that provides dashboard data is deployed
-	Enabled *bool `json:"enabled,omitempty"`
-
-	// Global are settings for globally managed components
-	Global CostControlGlobalConfig `json:"global,omitempty"`
-
-	// Cluster are settings for each cluster's managed components. These settings apply to all connected clusters
-	// unless overridden by modifying the Cluster's spec
-	Cluster CostControlClusterConfig `json:"cluster,omitempty"`
-
-	// Settings specify price-related settings that are taken into account for the ROI dashboard calculations.
-	Settings *CostControlSettings `json:"settings,omitempty"`
-}
-
-type CostControlGlobalConfig struct {
-	// Metrics these settings apply to metric infrastructure used to aggregate metrics across all connected clusters
-	Metrics *storagev1.Metrics `json:"metrics,omitempty"`
-}
-
-type CostControlClusterConfig struct {
-	// Metrics are settings applied to metric infrastructure in each connected cluster. These can be overridden in
-	// individual clusters by modifying the Cluster's spec
-	Metrics *storagev1.Metrics `json:"metrics,omitempty"`
-
-	// OpenCost are settings applied to OpenCost deployments in each connected cluster. These can be overridden in
-	// individual clusters by modifying the Cluster's spec
-	OpenCost *storagev1.OpenCost `json:"opencost,omitempty"`
-}
-
-type CostControlSettings struct {
-	// PriceCurrency specifies the currency.
-	PriceCurrency string `json:"priceCurrency,omitempty"`
-
-	// AvgCPUPricePerNode specifies the average CPU price per node.
-	AvgCPUPricePerNode *CostControlResourcePrice `json:"averageCPUPricePerNode,omitempty"`
-
-	// AvgRAMPricePerNode specifies the average RAM price per node.
-	AvgRAMPricePerNode *CostControlResourcePrice `json:"averageRAMPricePerNode,omitempty"`
-
-	// ControlPlanePricePerCluster specifies the price of one physical cluster.
-	ControlPlanePricePerCluster *CostControlResourcePrice `json:"controlPlanePricePerCluster,omitempty"`
-}
-
-type CostControlResourcePrice struct {
-	// Price specifies the price.
-	Price float64 `json:"price,omitempty"`
-
-	// TimePeriod specifies the time period for the price.
-	TimePeriod string `json:"timePeriod,omitempty"`
+	// Cluster Account Templates that will be applied for users logging in through this authentication
+	// +optional
+	ClusterAccountTemplates []storagev1.UserClusterAccountTemplate `json:"clusterAccountTemplates,omitempty"`
 }
