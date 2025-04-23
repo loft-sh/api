@@ -80,4 +80,6 @@ type UserExpansion interface{}
 
 type VirtualClusterInstanceExpansion interface{}
 
+type VirtualClusterSchemaExpansion interface{}
+
 type VirtualClusterTemplateExpansion interface{}
