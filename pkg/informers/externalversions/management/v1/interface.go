@@ -26,6 +26,8 @@ type Interface interface {
 	Configs() ConfigInformer
 	// ConvertVirtualClusterConfigs returns a ConvertVirtualClusterConfigInformer.
 	ConvertVirtualClusterConfigs() ConvertVirtualClusterConfigInformer
+	// DatabaseConnectors returns a DatabaseConnectorInformer.
+	DatabaseConnectors() DatabaseConnectorInformer
 	// DevPodEnvironmentTemplates returns a DevPodEnvironmentTemplateInformer.
 	DevPodEnvironmentTemplates() DevPodEnvironmentTemplateInformer
 	// DevPodWorkspaceInstances returns a DevPodWorkspaceInstanceInformer.
@@ -86,6 +88,8 @@ type Interface interface {
 	Users() UserInformer
 	// VirtualClusterInstances returns a VirtualClusterInstanceInformer.
 	VirtualClusterInstances() VirtualClusterInstanceInformer
+	// VirtualClusterSchemas returns a VirtualClusterSchemaInformer.
+	VirtualClusterSchemas() VirtualClusterSchemaInformer
 	// VirtualClusterTemplates returns a VirtualClusterTemplateInformer.
 	VirtualClusterTemplates() VirtualClusterTemplateInformer
 }
@@ -144,6 +148,11 @@ func (v *version) Configs() ConfigInformer {
 // ConvertVirtualClusterConfigs returns a ConvertVirtualClusterConfigInformer.
 func (v *version) ConvertVirtualClusterConfigs() ConvertVirtualClusterConfigInformer {
 	return &convertVirtualClusterConfigInformer{factory: v.factory, tweakListOptions: v.tweakListOptions}
+}
+
+// DatabaseConnectors returns a DatabaseConnectorInformer.
+func (v *version) DatabaseConnectors() DatabaseConnectorInformer {
+	return &databaseConnectorInformer{factory: v.factory, tweakListOptions: v.tweakListOptions}
 }
 
 // DevPodEnvironmentTemplates returns a DevPodEnvironmentTemplateInformer.
@@ -294,6 +303,11 @@ func (v *version) Users() UserInformer {
 // VirtualClusterInstances returns a VirtualClusterInstanceInformer.
 func (v *version) VirtualClusterInstances() VirtualClusterInstanceInformer {
 	return &virtualClusterInstanceInformer{factory: v.factory, namespace: v.namespace, tweakListOptions: v.tweakListOptions}
+}
+
+// VirtualClusterSchemas returns a VirtualClusterSchemaInformer.
+func (v *version) VirtualClusterSchemas() VirtualClusterSchemaInformer {
+	return &virtualClusterSchemaInformer{factory: v.factory, tweakListOptions: v.tweakListOptions}
 }
 
 // VirtualClusterTemplates returns a VirtualClusterTemplateInformer.
