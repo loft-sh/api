@@ -3,7 +3,7 @@
 package externalversions
 
 import (
-	"fmt"
+	fmt "fmt"
 
 	v1 "github.com/loft-sh/api/v4/pkg/apis/management/v1"
 	storagev1 "github.com/loft-sh/api/v4/pkg/apis/storage/v1"
@@ -57,6 +57,8 @@ func (f *sharedInformerFactory) ForResource(resource schema.GroupVersionResource
 		return &genericInformer{resource: resource.GroupResource(), informer: f.Management().V1().Configs().Informer()}, nil
 	case v1.SchemeGroupVersion.WithResource("convertvirtualclusterconfigs"):
 		return &genericInformer{resource: resource.GroupResource(), informer: f.Management().V1().ConvertVirtualClusterConfigs().Informer()}, nil
+	case v1.SchemeGroupVersion.WithResource("databaseconnectors"):
+		return &genericInformer{resource: resource.GroupResource(), informer: f.Management().V1().DatabaseConnectors().Informer()}, nil
 	case v1.SchemeGroupVersion.WithResource("devpodenvironmenttemplates"):
 		return &genericInformer{resource: resource.GroupResource(), informer: f.Management().V1().DevPodEnvironmentTemplates().Informer()}, nil
 	case v1.SchemeGroupVersion.WithResource("devpodworkspaceinstances"):
@@ -117,6 +119,8 @@ func (f *sharedInformerFactory) ForResource(resource schema.GroupVersionResource
 		return &genericInformer{resource: resource.GroupResource(), informer: f.Management().V1().Users().Informer()}, nil
 	case v1.SchemeGroupVersion.WithResource("virtualclusterinstances"):
 		return &genericInformer{resource: resource.GroupResource(), informer: f.Management().V1().VirtualClusterInstances().Informer()}, nil
+	case v1.SchemeGroupVersion.WithResource("virtualclusterschemas"):
+		return &genericInformer{resource: resource.GroupResource(), informer: f.Management().V1().VirtualClusterSchemas().Informer()}, nil
 	case v1.SchemeGroupVersion.WithResource("virtualclustertemplates"):
 		return &genericInformer{resource: resource.GroupResource(), informer: f.Management().V1().VirtualClusterTemplates().Informer()}, nil
 
