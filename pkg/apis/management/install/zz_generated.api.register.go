@@ -4,7 +4,7 @@ package install
 
 import (
 	"github.com/loft-sh/api/v4/pkg/apis/management"
-	v1 "github.com/loft-sh/api/v4/pkg/apis/management/v1"
+	"github.com/loft-sh/api/v4/pkg/apis/management/v1"
 	"github.com/loft-sh/apiserver/pkg/builders"
 	"k8s.io/apimachinery/pkg/runtime"
 	utilruntime "k8s.io/apimachinery/pkg/util/runtime"
@@ -50,6 +50,8 @@ func addKnownTypes(scheme *runtime.Scheme) error {
 		&management.ConfigList{},
 		&management.ConvertVirtualClusterConfig{},
 		&management.ConvertVirtualClusterConfigList{},
+		&management.DatabaseConnector{},
+		&management.DatabaseConnectorList{},
 		&management.DevPodEnvironmentTemplate{},
 		&management.DevPodEnvironmentTemplateList{},
 		&management.DevPodWorkspaceInstance{},
@@ -128,12 +130,15 @@ func addKnownTypes(scheme *runtime.Scheme) error {
 		&management.TeamList{},
 		&management.TeamAccessKeys{},
 		&management.TeamClusters{},
+		&management.TeamObjectPermissions{},
+		&management.TeamPermissions{},
 		&management.TranslateVClusterResourceName{},
 		&management.TranslateVClusterResourceNameList{},
 		&management.User{},
 		&management.UserList{},
 		&management.UserAccessKeys{},
 		&management.UserClusters{},
+		&management.UserObjectPermissions{},
 		&management.UserPermissions{},
 		&management.UserProfile{},
 		&management.VirtualClusterInstance{},
@@ -142,6 +147,8 @@ func addKnownTypes(scheme *runtime.Scheme) error {
 		&management.VirtualClusterExternalDatabase{},
 		&management.VirtualClusterInstanceKubeConfig{},
 		&management.VirtualClusterInstanceLog{},
+		&management.VirtualClusterSchema{},
+		&management.VirtualClusterSchemaList{},
 		&management.VirtualClusterTemplate{},
 		&management.VirtualClusterTemplateList{},
 	)
