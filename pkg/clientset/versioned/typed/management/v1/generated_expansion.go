@@ -20,6 +20,8 @@ type ConfigExpansion interface{}
 
 type ConvertVirtualClusterConfigExpansion interface{}
 
+type DatabaseConnectorExpansion interface{}
+
 type DevPodEnvironmentTemplateExpansion interface{}
 
 type DevPodWorkspaceInstanceExpansion interface{}
@@ -79,5 +81,7 @@ type TranslateVClusterResourceNameExpansion interface{}
 type UserExpansion interface{}
 
 type VirtualClusterInstanceExpansion interface{}
+
+type VirtualClusterSchemaExpansion interface{}
 
 type VirtualClusterTemplateExpansion interface{}

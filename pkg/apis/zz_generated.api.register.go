@@ -48,6 +48,7 @@ func GetManagementAPIBuilder() *builders.APIGroupBuilder {
 			"ClusterRoleTemplate",
 			"Config",
 			"ConvertVirtualClusterConfig",
+			"DatabaseConnector",
 			"DevPodEnvironmentTemplate",
 			"DevPodWorkspacePreset",
 			"DevPodWorkspaceTemplate",
@@ -73,6 +74,7 @@ func GetManagementAPIBuilder() *builders.APIGroupBuilder {
 			"Team",
 			"TranslateVClusterResourceName",
 			"User",
+			"VirtualClusterSchema",
 			"VirtualClusterTemplate",
 		)
 }
