@@ -19,6 +19,7 @@ const (
 	InstanceProjectsSecretsSynced  agentstoragev1.ConditionType = "ProjectSecretsSynced"
 
 	InstanceVirtualClusterAppsAndObjectsSynced agentstoragev1.ConditionType = "VirtualClusterAppsAndObjectsSynced"
+	InstanceVirtualClusterDBConnectorSynced    agentstoragev1.ConditionType = "DBConnectorSynced"
 )
 
 // +genclient
@@ -317,6 +318,10 @@ type VirtualClusterHelmChart struct {
 	// the version of the helm chart to use
 	// +optional
 	Version string `json:"version,omitempty"`
+
+	// InsecureSkipTlsVerify skips the TLS verification for the helm chart
+	// +optional
+	InsecureSkipTlsVerify bool `json:"insecureSkipTlsVerify,omitempty"`
 }
 
 type PodSelector struct {
