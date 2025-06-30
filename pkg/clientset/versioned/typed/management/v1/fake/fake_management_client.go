@@ -48,6 +48,10 @@ func (c *FakeManagementV1) ConvertVirtualClusterConfigs() v1.ConvertVirtualClust
 	return newFakeConvertVirtualClusterConfigs(c)
 }
 
+func (c *FakeManagementV1) DatabaseConnectors() v1.DatabaseConnectorInterface {
+	return newFakeDatabaseConnectors(c)
+}
+
 func (c *FakeManagementV1) DevPodEnvironmentTemplates() v1.DevPodEnvironmentTemplateInterface {
 	return newFakeDevPodEnvironmentTemplates(c)
 }

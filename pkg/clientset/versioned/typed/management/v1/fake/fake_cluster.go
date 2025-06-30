@@ -57,17 +57,6 @@ func (c *fakeClusters) ListMembers(ctx context.Context, clusterName string, opti
 	return obj.(*v1.ClusterMembers), err
 }
 
-// ListVirtualClusterDefaults takes name of the cluster, and returns the corresponding clusterVirtualClusterDefaults object, and an error if there is any.
-func (c *fakeClusters) ListVirtualClusterDefaults(ctx context.Context, clusterName string, options metav1.GetOptions) (result *v1.ClusterVirtualClusterDefaults, err error) {
-	emptyResult := &v1.ClusterVirtualClusterDefaults{}
-	obj, err := c.Fake.
-		Invokes(testing.NewRootGetSubresourceActionWithOptions(c.Resource(), "virtualclusterdefaults", clusterName, options), emptyResult)
-	if obj == nil {
-		return emptyResult, err
-	}
-	return obj.(*v1.ClusterVirtualClusterDefaults), err
-}
-
 // GetAgentConfig takes name of the cluster, and returns the corresponding clusterAgentConfig object, and an error if there is any.
 func (c *fakeClusters) GetAgentConfig(ctx context.Context, clusterName string, options metav1.GetOptions) (result *v1.ClusterAgentConfig, err error) {
 	emptyResult := &v1.ClusterAgentConfig{}

@@ -97,7 +97,6 @@ type DevPodWorkspaceTemplateDefinition struct {
 
 	// Provider holds the legacy VM provider configuration
 	//
-	// Deprecated: use fields on template instead
 	// +optional
 	Provider *DevPodWorkspaceProvider `json:"provider,omitempty"`
 }

@@ -113,7 +113,6 @@ type DevPodWorkspaceInstanceSpec struct {
 	// +optional
 	Target WorkspaceTarget `json:"target,omitempty"`
 
-	// Deprecated: Use TargetRef instead
 	// RunnerRef is the reference to the runner holding this workspace
 	// +optional
 	RunnerRef RunnerRef `json:"runnerRef,omitempty"`

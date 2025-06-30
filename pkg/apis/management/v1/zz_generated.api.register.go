@@ -32,7 +32,6 @@ func addKnownTypes(scheme *runtime.Scheme) error {
 		&ClusterMemberAccess{},
 		&ClusterMembers{},
 		&ClusterReset{},
-		&ClusterVirtualClusterDefaults{},
 		&ClusterAccess{},
 		&ClusterAccessList{},
 		&ClusterRoleTemplate{},
@@ -41,6 +40,8 @@ func addKnownTypes(scheme *runtime.Scheme) error {
 		&ConfigList{},
 		&ConvertVirtualClusterConfig{},
 		&ConvertVirtualClusterConfigList{},
+		&DatabaseConnector{},
+		&DatabaseConnectorList{},
 		&DevPodEnvironmentTemplate{},
 		&DevPodEnvironmentTemplateList{},
 		&DevPodWorkspaceInstance{},
@@ -205,16 +206,11 @@ var (
 			nil,
 			management.NewClusterResetREST,
 		),
-		builders.NewApiResourceWithStorage(
-			management.InternalClusterVirtualClusterDefaultsREST,
-			func() runtime.Object { return &ClusterVirtualClusterDefaults{} }, // Register versioned resource
-			nil,
-			management.NewClusterVirtualClusterDefaultsREST,
-		),
 		management.ManagementClusterAccessStorage,
 		management.ManagementClusterRoleTemplateStorage,
 		management.ManagementConfigStorage,
 		management.ManagementConvertVirtualClusterConfigStorage,
+		management.ManagementDatabaseConnectorStorage,
 		management.ManagementDevPodEnvironmentTemplateStorage,
 		management.ManagementDevPodWorkspaceInstanceStorage,
 		builders.NewApiResourceWithStorage(
@@ -582,14 +578,6 @@ type ClusterResetList struct {
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
 
-type ClusterVirtualClusterDefaultsList struct {
-	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
-	Items           []ClusterVirtualClusterDefaults `json:"items"`
-}
-
-// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
-
 type ClusterAccessList struct {
 	metav1.TypeMeta `json:",inline"`
 	metav1.ListMeta `json:"metadata,omitempty"`
@@ -618,6 +606,14 @@ type ConvertVirtualClusterConfigList struct {
 	metav1.TypeMeta `json:",inline"`
 	metav1.ListMeta `json:"metadata,omitempty"`
 	Items           []ConvertVirtualClusterConfig `json:"items"`
+}
+
+// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+
+type DatabaseConnectorList struct {
+	metav1.TypeMeta `json:",inline"`
+	metav1.ListMeta `json:"metadata,omitempty"`
+	Items           []DatabaseConnector `json:"items"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object

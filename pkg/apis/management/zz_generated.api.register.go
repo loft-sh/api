@@ -121,7 +121,17 @@ var (
 	NewConvertVirtualClusterConfigREST = func(getter generic.RESTOptionsGetter) rest.Storage {
 		return NewConvertVirtualClusterConfigRESTFunc(Factory)
 	}
-	NewConvertVirtualClusterConfigRESTFunc     NewRESTFunc
+	NewConvertVirtualClusterConfigRESTFunc NewRESTFunc
+	ManagementDatabaseConnectorStorage     = builders.NewApiResourceWithStorage( // Resource status endpoint
+		InternalDatabaseConnector,
+		func() runtime.Object { return &DatabaseConnector{} },     // Register versioned resource
+		func() runtime.Object { return &DatabaseConnectorList{} }, // Register versioned resource list
+		NewDatabaseConnectorREST,
+	)
+	NewDatabaseConnectorREST = func(getter generic.RESTOptionsGetter) rest.Storage {
+		return NewDatabaseConnectorRESTFunc(Factory)
+	}
+	NewDatabaseConnectorRESTFunc               NewRESTFunc
 	ManagementDevPodEnvironmentTemplateStorage = builders.NewApiResourceWithStorage( // Resource status endpoint
 		InternalDevPodEnvironmentTemplate,
 		func() runtime.Object { return &DevPodEnvironmentTemplate{} },     // Register versioned resource
@@ -581,16 +591,8 @@ var (
 	NewClusterResetREST = func(getter generic.RESTOptionsGetter) rest.Storage {
 		return NewClusterResetRESTFunc(Factory)
 	}
-	NewClusterResetRESTFunc                   NewRESTFunc
-	InternalClusterVirtualClusterDefaultsREST = builders.NewInternalSubresource(
-		"clusters", "ClusterVirtualClusterDefaults", "virtualclusterdefaults",
-		func() runtime.Object { return &ClusterVirtualClusterDefaults{} },
-	)
-	NewClusterVirtualClusterDefaultsREST = func(getter generic.RESTOptionsGetter) rest.Storage {
-		return NewClusterVirtualClusterDefaultsRESTFunc(Factory)
-	}
-	NewClusterVirtualClusterDefaultsRESTFunc NewRESTFunc
-	InternalClusterAccess                    = builders.NewInternalResource(
+	NewClusterResetRESTFunc NewRESTFunc
+	InternalClusterAccess   = builders.NewInternalResource(
 		"clusteraccesses",
 		"ClusterAccess",
 		func() runtime.Object { return &ClusterAccess{} },
@@ -637,6 +639,18 @@ var (
 		"ConvertVirtualClusterConfigStatus",
 		func() runtime.Object { return &ConvertVirtualClusterConfig{} },
 		func() runtime.Object { return &ConvertVirtualClusterConfigList{} },
+	)
+	InternalDatabaseConnector = builders.NewInternalResource(
+		"databaseconnectors",
+		"DatabaseConnector",
+		func() runtime.Object { return &DatabaseConnector{} },
+		func() runtime.Object { return &DatabaseConnectorList{} },
+	)
+	InternalDatabaseConnectorStatus = builders.NewInternalResourceStatus(
+		"databaseconnectors",
+		"DatabaseConnectorStatus",
+		func() runtime.Object { return &DatabaseConnector{} },
+		func() runtime.Object { return &DatabaseConnectorList{} },
 	)
 	InternalDevPodEnvironmentTemplate = builders.NewInternalResource(
 		"devpodenvironmenttemplates",
@@ -1283,7 +1297,6 @@ var (
 		InternalClusterMemberAccessREST,
 		InternalClusterMembersREST,
 		InternalClusterResetREST,
-		InternalClusterVirtualClusterDefaultsREST,
 		InternalClusterAccess,
 		InternalClusterAccessStatus,
 		InternalClusterRoleTemplate,
@@ -1292,6 +1305,8 @@ var (
 		InternalConfigStatus,
 		InternalConvertVirtualClusterConfig,
 		InternalConvertVirtualClusterConfigStatus,
+		InternalDatabaseConnector,
+		InternalDatabaseConnectorStatus,
 		InternalDevPodEnvironmentTemplate,
 		InternalDevPodEnvironmentTemplateStatus,
 		InternalDevPodWorkspaceInstance,
@@ -1611,6 +1626,7 @@ type AuthenticationOIDC struct {
 	LoftUsernameClaim      string   `json:"loftUsernameClaim,omitempty"`
 	UsernameClaim          string   `json:"usernameClaim,omitempty"`
 	EmailClaim             string   `json:"emailClaim,omitempty"`
+	AllowedExtraClaims     []string `json:"allowedExtraClaims,omitempty"`
 	UsernamePrefix         string   `json:"usernamePrefix,omitempty"`
 	GroupsClaim            string   `json:"groupsClaim,omitempty"`
 	Groups                 []string `json:"groups,omitempty"`
@@ -1835,17 +1851,6 @@ type ClusterStatus struct {
 	Online                  bool `json:"online,omitempty"`
 }
 
-// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
-
-type ClusterVirtualClusterDefaults struct {
-	metav1.TypeMeta   `json:",inline"`
-	metav1.ObjectMeta `json:"metadata,omitempty"`
-	DefaultTemplate   *storagev1.VirtualClusterTemplate `json:"defaultTemplate,omitempty"`
-	LatestVersion     string                            `json:"latestVersion,omitempty"`
-	Values            string                            `json:"values,omitempty"`
-	Warning           string                            `json:"warning,omitempty"`
-}
-
 // +genclient
 // +genclient:nonNamespaced
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -1946,6 +1951,25 @@ type CostControlSettings struct {
 	AvgRAMPricePerNode          *CostControlResourcePrice `json:"averageRAMPricePerNode,omitempty"`
 	GPUSettings                 *CostControlGPUSettings   `json:"gpuSettings,omitempty"`
 	ControlPlanePricePerCluster *CostControlResourcePrice `json:"controlPlanePricePerCluster,omitempty"`
+}
+
+// +genclient
+// +genclient:nonNamespaced
+// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+
+type DatabaseConnector struct {
+	metav1.TypeMeta   `json:",inline"`
+	metav1.ObjectMeta `json:"metadata,omitempty"`
+	Spec              DatabaseConnectorSpec   `json:"spec,omitempty"`
+	Status            DatabaseConnectorStatus `json:"status,omitempty"`
+}
+
+type DatabaseConnectorSpec struct {
+	Type        string `json:"type,omitempty"`
+	DisplayName string `json:"displayName,omitempty"`
+}
+
+type DatabaseConnectorStatus struct {
 }
 
 // +genclient
@@ -2225,7 +2249,7 @@ type KioskStatus struct {
 }
 
 // +genclient
-// +genclient
+// +genclient:nonNamespaced
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
 
 type License struct {
@@ -3604,14 +3628,6 @@ type ClusterResetList struct {
 	Items           []ClusterReset `json:"items"`
 }
 
-// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
-
-type ClusterVirtualClusterDefaultsList struct {
-	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
-	Items           []ClusterVirtualClusterDefaults `json:"items"`
-}
-
 func (Cluster) NewStatus() interface{} {
 	return ClusterStatus{}
 }
@@ -4182,6 +4198,125 @@ func (s *storageConvertVirtualClusterConfig) UpdateConvertVirtualClusterConfig(c
 }
 
 func (s *storageConvertVirtualClusterConfig) DeleteConvertVirtualClusterConfig(ctx context.Context, id string) (bool, error) {
+	st := s.GetStandardStorage()
+	_, sync, err := st.Delete(ctx, id, nil, &metav1.DeleteOptions{})
+	return sync, err
+}
+
+// DatabaseConnector Functions and Structs
+//
+// +k8s:deepcopy-gen=false
+type DatabaseConnectorStrategy struct {
+	builders.DefaultStorageStrategy
+}
+
+// +k8s:deepcopy-gen=false
+type DatabaseConnectorStatusStrategy struct {
+	builders.DefaultStatusStorageStrategy
+}
+
+// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+
+type DatabaseConnectorList struct {
+	metav1.TypeMeta `json:",inline"`
+	metav1.ListMeta `json:"metadata,omitempty"`
+	Items           []DatabaseConnector `json:"items"`
+}
+
+func (DatabaseConnector) NewStatus() interface{} {
+	return DatabaseConnectorStatus{}
+}
+
+func (pc *DatabaseConnector) GetStatus() interface{} {
+	return pc.Status
+}
+
+func (pc *DatabaseConnector) SetStatus(s interface{}) {
+	pc.Status = s.(DatabaseConnectorStatus)
+}
+
+func (pc *DatabaseConnector) GetSpec() interface{} {
+	return pc.Spec
+}
+
+func (pc *DatabaseConnector) SetSpec(s interface{}) {
+	pc.Spec = s.(DatabaseConnectorSpec)
+}
+
+func (pc *DatabaseConnector) GetObjectMeta() *metav1.ObjectMeta {
+	return &pc.ObjectMeta
+}
+
+func (pc *DatabaseConnector) SetGeneration(generation int64) {
+	pc.ObjectMeta.Generation = generation
+}
+
+func (pc DatabaseConnector) GetGeneration() int64 {
+	return pc.ObjectMeta.Generation
+}
+
+// Registry is an interface for things that know how to store DatabaseConnector.
+// +k8s:deepcopy-gen=false
+type DatabaseConnectorRegistry interface {
+	ListDatabaseConnectors(ctx context.Context, options *internalversion.ListOptions) (*DatabaseConnectorList, error)
+	GetDatabaseConnector(ctx context.Context, id string, options *metav1.GetOptions) (*DatabaseConnector, error)
+	CreateDatabaseConnector(ctx context.Context, id *DatabaseConnector) (*DatabaseConnector, error)
+	UpdateDatabaseConnector(ctx context.Context, id *DatabaseConnector) (*DatabaseConnector, error)
+	DeleteDatabaseConnector(ctx context.Context, id string) (bool, error)
+}
+
+// NewRegistry returns a new Registry interface for the given Storage. Any mismatched types will panic.
+func NewDatabaseConnectorRegistry(sp builders.StandardStorageProvider) DatabaseConnectorRegistry {
+	return &storageDatabaseConnector{sp}
+}
+
+// Implement Registry
+// storage puts strong typing around storage calls
+// +k8s:deepcopy-gen=false
+type storageDatabaseConnector struct {
+	builders.StandardStorageProvider
+}
+
+func (s *storageDatabaseConnector) ListDatabaseConnectors(ctx context.Context, options *internalversion.ListOptions) (*DatabaseConnectorList, error) {
+	if options != nil && options.FieldSelector != nil && !options.FieldSelector.Empty() {
+		return nil, fmt.Errorf("field selector not supported yet")
+	}
+	st := s.GetStandardStorage()
+	obj, err := st.List(ctx, options)
+	if err != nil {
+		return nil, err
+	}
+	return obj.(*DatabaseConnectorList), err
+}
+
+func (s *storageDatabaseConnector) GetDatabaseConnector(ctx context.Context, id string, options *metav1.GetOptions) (*DatabaseConnector, error) {
+	st := s.GetStandardStorage()
+	obj, err := st.Get(ctx, id, options)
+	if err != nil {
+		return nil, err
+	}
+	return obj.(*DatabaseConnector), nil
+}
+
+func (s *storageDatabaseConnector) CreateDatabaseConnector(ctx context.Context, object *DatabaseConnector) (*DatabaseConnector, error) {
+	st := s.GetStandardStorage()
+	obj, err := st.Create(ctx, object, nil, &metav1.CreateOptions{})
+	if err != nil {
+		return nil, err
+	}
+	return obj.(*DatabaseConnector), nil
+}
+
+func (s *storageDatabaseConnector) UpdateDatabaseConnector(ctx context.Context, object *DatabaseConnector) (*DatabaseConnector, error) {
+	st := s.GetStandardStorage()
+	obj, _, err := st.Update(ctx, object.Name, rest.DefaultUpdatedObjectInfo(object), nil, nil, false, &metav1.UpdateOptions{})
+	if err != nil {
+		return nil, err
+	}
+	return obj.(*DatabaseConnector), nil
+}
+
+func (s *storageDatabaseConnector) DeleteDatabaseConnector(ctx context.Context, id string) (bool, error) {
 	st := s.GetStandardStorage()
 	_, sync, err := st.Delete(ctx, id, nil, &metav1.DeleteOptions{})
 	return sync, err

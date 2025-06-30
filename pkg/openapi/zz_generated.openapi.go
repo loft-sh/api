@@ -147,8 +147,6 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 		"github.com/loft-sh/api/v4/pkg/apis/management/v1.ClusterRoleTemplateStatus":                       schema_pkg_apis_management_v1_ClusterRoleTemplateStatus(ref),
 		"github.com/loft-sh/api/v4/pkg/apis/management/v1.ClusterSpec":                                     schema_pkg_apis_management_v1_ClusterSpec(ref),
 		"github.com/loft-sh/api/v4/pkg/apis/management/v1.ClusterStatus":                                   schema_pkg_apis_management_v1_ClusterStatus(ref),
-		"github.com/loft-sh/api/v4/pkg/apis/management/v1.ClusterVirtualClusterDefaults":                   schema_pkg_apis_management_v1_ClusterVirtualClusterDefaults(ref),
-		"github.com/loft-sh/api/v4/pkg/apis/management/v1.ClusterVirtualClusterDefaultsList":               schema_pkg_apis_management_v1_ClusterVirtualClusterDefaultsList(ref),
 		"github.com/loft-sh/api/v4/pkg/apis/management/v1.Config":                                          schema_pkg_apis_management_v1_Config(ref),
 		"github.com/loft-sh/api/v4/pkg/apis/management/v1.ConfigList":                                      schema_pkg_apis_management_v1_ConfigList(ref),
 		"github.com/loft-sh/api/v4/pkg/apis/management/v1.ConfigSpec":                                      schema_pkg_apis_management_v1_ConfigSpec(ref),
@@ -165,6 +163,10 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 		"github.com/loft-sh/api/v4/pkg/apis/management/v1.CostControlGlobalConfig":                         schema_pkg_apis_management_v1_CostControlGlobalConfig(ref),
 		"github.com/loft-sh/api/v4/pkg/apis/management/v1.CostControlResourcePrice":                        schema_pkg_apis_management_v1_CostControlResourcePrice(ref),
 		"github.com/loft-sh/api/v4/pkg/apis/management/v1.CostControlSettings":                             schema_pkg_apis_management_v1_CostControlSettings(ref),
+		"github.com/loft-sh/api/v4/pkg/apis/management/v1.DatabaseConnector":                               schema_pkg_apis_management_v1_DatabaseConnector(ref),
+		"github.com/loft-sh/api/v4/pkg/apis/management/v1.DatabaseConnectorList":                           schema_pkg_apis_management_v1_DatabaseConnectorList(ref),
+		"github.com/loft-sh/api/v4/pkg/apis/management/v1.DatabaseConnectorSpec":                           schema_pkg_apis_management_v1_DatabaseConnectorSpec(ref),
+		"github.com/loft-sh/api/v4/pkg/apis/management/v1.DatabaseConnectorStatus":                         schema_pkg_apis_management_v1_DatabaseConnectorStatus(ref),
 		"github.com/loft-sh/api/v4/pkg/apis/management/v1.DevPodEnvironmentTemplate":                       schema_pkg_apis_management_v1_DevPodEnvironmentTemplate(ref),
 		"github.com/loft-sh/api/v4/pkg/apis/management/v1.DevPodEnvironmentTemplateList":                   schema_pkg_apis_management_v1_DevPodEnvironmentTemplateList(ref),
 		"github.com/loft-sh/api/v4/pkg/apis/management/v1.DevPodEnvironmentTemplateSpec":                   schema_pkg_apis_management_v1_DevPodEnvironmentTemplateSpec(ref),
@@ -396,7 +398,6 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 		"github.com/loft-sh/api/v4/pkg/apis/management/v1.VirtualClusterTemplateStatus":                    schema_pkg_apis_management_v1_VirtualClusterTemplateStatus(ref),
 		"github.com/loft-sh/api/v4/pkg/apis/storage/v1.Access":                                             schema_pkg_apis_storage_v1_Access(ref),
 		"github.com/loft-sh/api/v4/pkg/apis/storage/v1.AccessKey":                                          schema_pkg_apis_storage_v1_AccessKey(ref),
-		"github.com/loft-sh/api/v4/pkg/apis/storage/v1.AccessKeyIdentity":                                  schema_pkg_apis_storage_v1_AccessKeyIdentity(ref),
 		"github.com/loft-sh/api/v4/pkg/apis/storage/v1.AccessKeyList":                                      schema_pkg_apis_storage_v1_AccessKeyList(ref),
 		"github.com/loft-sh/api/v4/pkg/apis/storage/v1.AccessKeyOIDC":                                      schema_pkg_apis_storage_v1_AccessKeyOIDC(ref),
 		"github.com/loft-sh/api/v4/pkg/apis/storage/v1.AccessKeyOIDCProvider":                              schema_pkg_apis_storage_v1_AccessKeyOIDCProvider(ref),
@@ -539,6 +540,7 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 		"github.com/loft-sh/api/v4/pkg/apis/storage/v1.RequirePreset":                                      schema_pkg_apis_storage_v1_RequirePreset(ref),
 		"github.com/loft-sh/api/v4/pkg/apis/storage/v1.RequireTemplate":                                    schema_pkg_apis_storage_v1_RequireTemplate(ref),
 		"github.com/loft-sh/api/v4/pkg/apis/storage/v1.RunnerRef":                                          schema_pkg_apis_storage_v1_RunnerRef(ref),
+		"github.com/loft-sh/api/v4/pkg/apis/storage/v1.SSOIdentity":                                        schema_pkg_apis_storage_v1_SSOIdentity(ref),
 		"github.com/loft-sh/api/v4/pkg/apis/storage/v1.SecretRef":                                          schema_pkg_apis_storage_v1_SecretRef(ref),
 		"github.com/loft-sh/api/v4/pkg/apis/storage/v1.SharedSecret":                                       schema_pkg_apis_storage_v1_SharedSecret(ref),
 		"github.com/loft-sh/api/v4/pkg/apis/storage/v1.SharedSecretList":                                   schema_pkg_apis_storage_v1_SharedSecretList(ref),
@@ -1605,9 +1607,23 @@ func schema_loft_sh_admin_apis_pkg_licenseapi_Feature(ref common.ReferenceCallba
 							Format:      "",
 						},
 					},
+					"allowBefore": {
+						SchemaProps: spec.SchemaProps{
+							Description: "AllowBefore is an optional timestamp. If set, licenses issued before this time are allowed to use the feature even if it's not included in the license.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
 					"status": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Status shows the status of the feature (see type FeatureStatus)",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"module": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Name of the module that this feature belongs to",
 							Type:        []string{"string"},
 							Format:      "",
 						},
@@ -2024,6 +2040,13 @@ func schema_loft_sh_admin_apis_pkg_licenseapi_Limit(ref common.ReferenceCallback
 						SchemaProps: spec.SchemaProps{
 							Description: "Limit specifies the limit for this resource.",
 							Ref:         ref("github.com/loft-sh/admin-apis/pkg/licenseapi.ResourceCount"),
+						},
+					},
+					"module": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Name of the module that this limit belongs to",
+							Type:        []string{"string"},
+							Format:      "",
 						},
 					},
 				},
@@ -3013,9 +3036,23 @@ func schema_apis_loft_cluster_v1_FeatureStatus(ref common.ReferenceCallback) com
 							Format:      "",
 						},
 					},
+					"allowBefore": {
+						SchemaProps: spec.SchemaProps{
+							Description: "AllowBefore is an optional timestamp. If set, licenses issued before this time are allowed to use the feature even if it's not included in the license.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
 					"status": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Status shows the status of the feature (see type FeatureStatus)",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"module": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Name of the module that this feature belongs to",
 							Type:        []string{"string"},
 							Format:      "",
 						},
@@ -6186,6 +6223,21 @@ func schema_pkg_apis_management_v1_AuthenticationOIDC(ref common.ReferenceCallba
 							Format:      "",
 						},
 					},
+					"allowedExtraClaims": {
+						SchemaProps: spec.SchemaProps{
+							Description: "AllowedExtraClaims are claims of interest that are not part of User by default but may be provided by the OIDC provider.",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: "",
+										Type:    []string{"string"},
+										Format:  "",
+									},
+								},
+							},
+						},
+					},
 					"usernamePrefix": {
 						SchemaProps: spec.SchemaProps{
 							Description: "UsernamePrefix, if specified, causes claims mapping to username to be prefix with the provided value. A value \"oidc:\" would result in usernames like \"oidc:john\".",
@@ -8339,115 +8391,6 @@ func schema_pkg_apis_management_v1_ClusterStatus(ref common.ReferenceCallback) c
 	}
 }
 
-func schema_pkg_apis_management_v1_ClusterVirtualClusterDefaults(ref common.ReferenceCallback) common.OpenAPIDefinition {
-	return common.OpenAPIDefinition{
-		Schema: spec.Schema{
-			SchemaProps: spec.SchemaProps{
-				Type: []string{"object"},
-				Properties: map[string]spec.Schema{
-					"kind": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"apiVersion": {
-						SchemaProps: spec.SchemaProps{
-							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"metadata": {
-						SchemaProps: spec.SchemaProps{
-							Default: map[string]interface{}{},
-							Ref:     ref("k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"),
-						},
-					},
-					"defaultTemplate": {
-						SchemaProps: spec.SchemaProps{
-							Description: "DefaultTemplate is the default virtual cluster template",
-							Ref:         ref("github.com/loft-sh/api/v4/pkg/apis/storage/v1.VirtualClusterTemplate"),
-						},
-					},
-					"latestVersion": {
-						SchemaProps: spec.SchemaProps{
-							Description: "LatestVersion is the latest virtual cluster version",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"values": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Default values for the virtual cluster chart",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"warning": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Warning should be somehow shown to the user when there is a problem retrieving the defaults",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-				},
-			},
-		},
-		Dependencies: []string{
-			"github.com/loft-sh/api/v4/pkg/apis/storage/v1.VirtualClusterTemplate", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
-	}
-}
-
-func schema_pkg_apis_management_v1_ClusterVirtualClusterDefaultsList(ref common.ReferenceCallback) common.OpenAPIDefinition {
-	return common.OpenAPIDefinition{
-		Schema: spec.Schema{
-			SchemaProps: spec.SchemaProps{
-				Type: []string{"object"},
-				Properties: map[string]spec.Schema{
-					"kind": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"apiVersion": {
-						SchemaProps: spec.SchemaProps{
-							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"metadata": {
-						SchemaProps: spec.SchemaProps{
-							Default: map[string]interface{}{},
-							Ref:     ref("k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"),
-						},
-					},
-					"items": {
-						SchemaProps: spec.SchemaProps{
-							Type: []string{"array"},
-							Items: &spec.SchemaOrArray{
-								Schema: &spec.Schema{
-									SchemaProps: spec.SchemaProps{
-										Default: map[string]interface{}{},
-										Ref:     ref("github.com/loft-sh/api/v4/pkg/apis/management/v1.ClusterVirtualClusterDefaults"),
-									},
-								},
-							},
-						},
-					},
-				},
-				Required: []string{"items"},
-			},
-		},
-		Dependencies: []string{
-			"github.com/loft-sh/api/v4/pkg/apis/management/v1.ClusterVirtualClusterDefaults", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
-	}
-}
-
 func schema_pkg_apis_management_v1_Config(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
@@ -9127,6 +9070,138 @@ func schema_pkg_apis_management_v1_CostControlSettings(ref common.ReferenceCallb
 	}
 }
 
+func schema_pkg_apis_management_v1_DatabaseConnector(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "DatabaseConnector represents a connector that can be used to provision and manage a backingstore for a vCluster",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"kind": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"apiVersion": {
+						SchemaProps: spec.SchemaProps{
+							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"metadata": {
+						SchemaProps: spec.SchemaProps{
+							Default: map[string]interface{}{},
+							Ref:     ref("k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"),
+						},
+					},
+					"spec": {
+						SchemaProps: spec.SchemaProps{
+							Default: map[string]interface{}{},
+							Ref:     ref("github.com/loft-sh/api/v4/pkg/apis/management/v1.DatabaseConnectorSpec"),
+						},
+					},
+					"status": {
+						SchemaProps: spec.SchemaProps{
+							Default: map[string]interface{}{},
+							Ref:     ref("github.com/loft-sh/api/v4/pkg/apis/management/v1.DatabaseConnectorStatus"),
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			"github.com/loft-sh/api/v4/pkg/apis/management/v1.DatabaseConnectorSpec", "github.com/loft-sh/api/v4/pkg/apis/management/v1.DatabaseConnectorStatus", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
+	}
+}
+
+func schema_pkg_apis_management_v1_DatabaseConnectorList(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"kind": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"apiVersion": {
+						SchemaProps: spec.SchemaProps{
+							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"metadata": {
+						SchemaProps: spec.SchemaProps{
+							Default: map[string]interface{}{},
+							Ref:     ref("k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"),
+						},
+					},
+					"items": {
+						SchemaProps: spec.SchemaProps{
+							Type: []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref("github.com/loft-sh/api/v4/pkg/apis/management/v1.DatabaseConnector"),
+									},
+								},
+							},
+						},
+					},
+				},
+				Required: []string{"items"},
+			},
+		},
+		Dependencies: []string{
+			"github.com/loft-sh/api/v4/pkg/apis/management/v1.DatabaseConnector", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
+	}
+}
+
+func schema_pkg_apis_management_v1_DatabaseConnectorSpec(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "DatabaseConnectorSpec holds the specification",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"type": {
+						SchemaProps: spec.SchemaProps{
+							Description: "The client id of the client",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"displayName": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"string"},
+							Format: "",
+						},
+					},
+				},
+			},
+		},
+	}
+}
+
+func schema_pkg_apis_management_v1_DatabaseConnectorStatus(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "DatabaseConnectorStatus holds the status",
+				Type:        []string{"object"},
+			},
+		},
+	}
+}
+
 func schema_pkg_apis_management_v1_DevPodEnvironmentTemplate(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
@@ -9783,7 +9858,7 @@ func schema_pkg_apis_management_v1_DevPodWorkspaceInstanceSpec(ref common.Refere
 					},
 					"runnerRef": {
 						SchemaProps: spec.SchemaProps{
-							Description: "Deprecated: Use TargetRef instead RunnerRef is the reference to the runner holding this workspace",
+							Description: "RunnerRef is the reference to the runner holding this workspace",
 							Default:     map[string]interface{}{},
 							Ref:         ref("github.com/loft-sh/api/v4/pkg/apis/storage/v1.RunnerRef"),
 						},
@@ -11470,9 +11545,23 @@ func schema_pkg_apis_management_v1_FeatureStatus(ref common.ReferenceCallback) c
 							Format:      "",
 						},
 					},
+					"allowBefore": {
+						SchemaProps: spec.SchemaProps{
+							Description: "AllowBefore is an optional timestamp. If set, licenses issued before this time are allowed to use the feature even if it's not included in the license.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
 					"status": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Status shows the status of the feature (see type FeatureStatus)",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"module": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Name of the module that this feature belongs to",
 							Type:        []string{"string"},
 							Format:      "",
 						},
@@ -12985,7 +13074,7 @@ func schema_pkg_apis_management_v1_OwnedAccessKeySpec(ref common.ReferenceCallba
 					"identity": {
 						SchemaProps: spec.SchemaProps{
 							Description: "If available, contains information about the sso login data for this access key",
-							Ref:         ref("github.com/loft-sh/api/v4/pkg/apis/storage/v1.AccessKeyIdentity"),
+							Ref:         ref("github.com/loft-sh/api/v4/pkg/apis/storage/v1.SSOIdentity"),
 						},
 					},
 					"identityRefresh": {
@@ -13017,7 +13106,7 @@ func schema_pkg_apis_management_v1_OwnedAccessKeySpec(ref common.ReferenceCallba
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/v4/pkg/apis/storage/v1.AccessKeyIdentity", "github.com/loft-sh/api/v4/pkg/apis/storage/v1.AccessKeyOIDC", "github.com/loft-sh/api/v4/pkg/apis/storage/v1.AccessKeyOIDCProvider", "github.com/loft-sh/api/v4/pkg/apis/storage/v1.AccessKeyScope", "k8s.io/apimachinery/pkg/apis/meta/v1.Time"},
+			"github.com/loft-sh/api/v4/pkg/apis/storage/v1.AccessKeyOIDC", "github.com/loft-sh/api/v4/pkg/apis/storage/v1.AccessKeyOIDCProvider", "github.com/loft-sh/api/v4/pkg/apis/storage/v1.AccessKeyScope", "github.com/loft-sh/api/v4/pkg/apis/storage/v1.SSOIdentity", "k8s.io/apimachinery/pkg/apis/meta/v1.Time"},
 	}
 }
 
@@ -15219,7 +15308,7 @@ func schema_pkg_apis_management_v1_ResetAccessKeySpec(ref common.ReferenceCallba
 					"identity": {
 						SchemaProps: spec.SchemaProps{
 							Description: "If available, contains information about the sso login data for this access key",
-							Ref:         ref("github.com/loft-sh/api/v4/pkg/apis/storage/v1.AccessKeyIdentity"),
+							Ref:         ref("github.com/loft-sh/api/v4/pkg/apis/storage/v1.SSOIdentity"),
 						},
 					},
 					"identityRefresh": {
@@ -15251,7 +15340,7 @@ func schema_pkg_apis_management_v1_ResetAccessKeySpec(ref common.ReferenceCallba
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/v4/pkg/apis/storage/v1.AccessKeyIdentity", "github.com/loft-sh/api/v4/pkg/apis/storage/v1.AccessKeyOIDC", "github.com/loft-sh/api/v4/pkg/apis/storage/v1.AccessKeyOIDCProvider", "github.com/loft-sh/api/v4/pkg/apis/storage/v1.AccessKeyScope", "k8s.io/apimachinery/pkg/apis/meta/v1.Time"},
+			"github.com/loft-sh/api/v4/pkg/apis/storage/v1.AccessKeyOIDC", "github.com/loft-sh/api/v4/pkg/apis/storage/v1.AccessKeyOIDCProvider", "github.com/loft-sh/api/v4/pkg/apis/storage/v1.AccessKeyScope", "github.com/loft-sh/api/v4/pkg/apis/storage/v1.SSOIdentity", "k8s.io/apimachinery/pkg/apis/meta/v1.Time"},
 	}
 }
 
@@ -18813,6 +18902,22 @@ func schema_pkg_apis_management_v1_UserSpec(ref common.ReferenceCallback) common
 							},
 						},
 					},
+					"extraClaims": {
+						SchemaProps: spec.SchemaProps{
+							Description: "ExtraClaims are additional claims that have been added to the user by an admin.",
+							Type:        []string{"object"},
+							AdditionalProperties: &spec.SchemaOrBool{
+								Allows: true,
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: "",
+										Type:    []string{"string"},
+										Format:  "",
+									},
+								},
+							},
+						},
+					},
 				},
 			},
 		},
@@ -20263,82 +20368,6 @@ func schema_pkg_apis_storage_v1_AccessKey(ref common.ReferenceCallback) common.O
 	}
 }
 
-func schema_pkg_apis_storage_v1_AccessKeyIdentity(ref common.ReferenceCallback) common.OpenAPIDefinition {
-	return common.OpenAPIDefinition{
-		Schema: spec.Schema{
-			SchemaProps: spec.SchemaProps{
-				Type: []string{"object"},
-				Properties: map[string]spec.Schema{
-					"userId": {
-						SchemaProps: spec.SchemaProps{
-							Description: "The subject of the user",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"username": {
-						SchemaProps: spec.SchemaProps{
-							Description: "The username",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"preferredUsername": {
-						SchemaProps: spec.SchemaProps{
-							Description: "The preferred username / display name",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"email": {
-						SchemaProps: spec.SchemaProps{
-							Description: "The user email",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"emailVerified": {
-						SchemaProps: spec.SchemaProps{
-							Description: "If the user email was verified",
-							Type:        []string{"boolean"},
-							Format:      "",
-						},
-					},
-					"groups": {
-						SchemaProps: spec.SchemaProps{
-							Description: "The groups from the identity provider",
-							Type:        []string{"array"},
-							Items: &spec.SchemaOrArray{
-								Schema: &spec.Schema{
-									SchemaProps: spec.SchemaProps{
-										Default: "",
-										Type:    []string{"string"},
-										Format:  "",
-									},
-								},
-							},
-						},
-					},
-					"connector": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Connector is the name of the connector this access key was created from",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"connectorData": {
-						SchemaProps: spec.SchemaProps{
-							Description: "ConnectorData holds data used by the connector for subsequent requests after initial authentication, such as access tokens for upstream providers.\n\nThis data is never shared with end users, OAuth clients, or through the API.",
-							Type:        []string{"string"},
-							Format:      "byte",
-						},
-					},
-				},
-			},
-		},
-	}
-}
-
 func schema_pkg_apis_storage_v1_AccessKeyList(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
@@ -20924,7 +20953,7 @@ func schema_pkg_apis_storage_v1_AccessKeySpec(ref common.ReferenceCallback) comm
 					"identity": {
 						SchemaProps: spec.SchemaProps{
 							Description: "If available, contains information about the sso login data for this access key",
-							Ref:         ref("github.com/loft-sh/api/v4/pkg/apis/storage/v1.AccessKeyIdentity"),
+							Ref:         ref("github.com/loft-sh/api/v4/pkg/apis/storage/v1.SSOIdentity"),
 						},
 					},
 					"identityRefresh": {
@@ -20956,7 +20985,7 @@ func schema_pkg_apis_storage_v1_AccessKeySpec(ref common.ReferenceCallback) comm
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/v4/pkg/apis/storage/v1.AccessKeyIdentity", "github.com/loft-sh/api/v4/pkg/apis/storage/v1.AccessKeyOIDC", "github.com/loft-sh/api/v4/pkg/apis/storage/v1.AccessKeyOIDCProvider", "github.com/loft-sh/api/v4/pkg/apis/storage/v1.AccessKeyScope", "k8s.io/apimachinery/pkg/apis/meta/v1.Time"},
+			"github.com/loft-sh/api/v4/pkg/apis/storage/v1.AccessKeyOIDC", "github.com/loft-sh/api/v4/pkg/apis/storage/v1.AccessKeyOIDCProvider", "github.com/loft-sh/api/v4/pkg/apis/storage/v1.AccessKeyScope", "github.com/loft-sh/api/v4/pkg/apis/storage/v1.SSOIdentity", "k8s.io/apimachinery/pkg/apis/meta/v1.Time"},
 	}
 }
 
@@ -24126,7 +24155,7 @@ func schema_pkg_apis_storage_v1_DevPodWorkspaceInstanceSpec(ref common.Reference
 					},
 					"runnerRef": {
 						SchemaProps: spec.SchemaProps{
-							Description: "Deprecated: Use TargetRef instead RunnerRef is the reference to the runner holding this workspace",
+							Description: "RunnerRef is the reference to the runner holding this workspace",
 							Default:     map[string]interface{}{},
 							Ref:         ref("github.com/loft-sh/api/v4/pkg/apis/storage/v1.RunnerRef"),
 						},
@@ -25180,7 +25209,7 @@ func schema_pkg_apis_storage_v1_DevPodWorkspaceTemplateDefinition(ref common.Ref
 					},
 					"provider": {
 						SchemaProps: spec.SchemaProps{
-							Description: "Provider holds the legacy VM provider configuration\n\nDeprecated: use fields on template instead",
+							Description: "Provider holds the legacy VM provider configuration",
 							Ref:         ref("github.com/loft-sh/api/v4/pkg/apis/storage/v1.DevPodWorkspaceProvider"),
 						},
 					},
@@ -26417,11 +26446,13 @@ func schema_pkg_apis_storage_v1_Member(ref common.ReferenceCallback) common.Open
 					"clusterRole": {
 						SchemaProps: spec.SchemaProps{
 							Description: "ClusterRole is the assigned role for the above member",
+							Default:     "",
 							Type:        []string{"string"},
 							Format:      "",
 						},
 					},
 				},
+				Required: []string{"clusterRole"},
 			},
 		},
 	}
@@ -27671,6 +27702,98 @@ func schema_pkg_apis_storage_v1_RunnerRef(ref common.ReferenceCallback) common.O
 							Description: "Runner is the connected runner the workspace will be created in",
 							Type:        []string{"string"},
 							Format:      "",
+						},
+					},
+				},
+			},
+		},
+	}
+}
+
+func schema_pkg_apis_storage_v1_SSOIdentity(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"userId": {
+						SchemaProps: spec.SchemaProps{
+							Description: "The subject of the user",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"username": {
+						SchemaProps: spec.SchemaProps{
+							Description: "The username",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"preferredUsername": {
+						SchemaProps: spec.SchemaProps{
+							Description: "The preferred username / display name",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"email": {
+						SchemaProps: spec.SchemaProps{
+							Description: "The user email",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"emailVerified": {
+						SchemaProps: spec.SchemaProps{
+							Description: "If the user email was verified",
+							Type:        []string{"boolean"},
+							Format:      "",
+						},
+					},
+					"extraClaims": {
+						SchemaProps: spec.SchemaProps{
+							Description: "ExtraClaims are claims that are not otherwise contained in this struct but may be provided by the OIDC provider. Only extra claims that are allowed by the auth config are included.",
+							Type:        []string{"object"},
+							AdditionalProperties: &spec.SchemaOrBool{
+								Allows: true,
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: "",
+										Type:    []string{"string"},
+										Format:  "",
+									},
+								},
+							},
+						},
+					},
+					"groups": {
+						SchemaProps: spec.SchemaProps{
+							Description: "The groups from the identity provider",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: "",
+										Type:    []string{"string"},
+										Format:  "",
+									},
+								},
+							},
+						},
+					},
+					"connector": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Connector is the name of the connector this access key was created from",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"connectorData": {
+						SchemaProps: spec.SchemaProps{
+							Description: "ConnectorData holds data used by the connector for subsequent requests after initial authentication, such as access tokens for upstream providers.\n\nThis data is never shared with end users, OAuth clients, or through the API.",
+							Type:        []string{"string"},
+							Format:      "byte",
 						},
 					},
 				},
@@ -29616,6 +29739,22 @@ func schema_pkg_apis_storage_v1_UserSpec(ref common.ReferenceCallback) common.Op
 							},
 						},
 					},
+					"extraClaims": {
+						SchemaProps: spec.SchemaProps{
+							Description: "ExtraClaims are additional claims that have been added to the user by an admin.",
+							Type:        []string{"object"},
+							AdditionalProperties: &spec.SchemaOrBool{
+								Allows: true,
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: "",
+										Type:    []string{"string"},
+										Format:  "",
+									},
+								},
+							},
+						},
+					},
 				},
 			},
 		},
@@ -29929,6 +30068,13 @@ func schema_pkg_apis_storage_v1_VirtualClusterHelmChart(ref common.ReferenceCall
 						SchemaProps: spec.SchemaProps{
 							Description: "the version of the helm chart to use",
 							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"insecureSkipTlsVerify": {
+						SchemaProps: spec.SchemaProps{
+							Description: "InsecureSkipTlsVerify skips the TLS verification for the helm chart",
+							Type:        []string{"boolean"},
 							Format:      "",
 						},
 					},
@@ -31116,6 +31262,13 @@ func schema_pkg_apis_ui_v1_UISettingsConfig(ref common.ReferenceCallback) common
 							Format:      "",
 						},
 					},
+					"smallLogoURL": {
+						SchemaProps: spec.SchemaProps{
+							Description: "SmallLogoURL is url pointing to the small logo to use in the Loft UI. This path must be accessible for clients accessing the Loft UI!",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
 					"logoBackgroundColor": {
 						SchemaProps: spec.SchemaProps{
 							Description: "LogoBackgroundColor is the color value (ex: \"#12345\") to use as the background color for the logo",
@@ -31220,6 +31373,13 @@ func schema_pkg_apis_ui_v1_UISettingsSpec(ref common.ReferenceCallback) common.O
 					"logoURL": {
 						SchemaProps: spec.SchemaProps{
 							Description: "LogoURL is url pointing to the logo to use in the Loft UI. This path must be accessible for clients accessing the Loft UI!",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"smallLogoURL": {
+						SchemaProps: spec.SchemaProps{
+							Description: "SmallLogoURL is url pointing to the small logo to use in the Loft UI. This path must be accessible for clients accessing the Loft UI!",
 							Type:        []string{"string"},
 							Format:      "",
 						},

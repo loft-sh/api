@@ -669,6 +669,10 @@ type AuthenticationOIDC struct {
 	// +optional
 	EmailClaim string `json:"emailClaim,omitempty"`
 
+	// AllowedExtraClaims are claims of interest that are not part of User by default but may be provided by the OIDC provider.
+	// +optional
+	AllowedExtraClaims []string `json:"allowedExtraClaims,omitempty"`
+
 	// UsernamePrefix, if specified, causes claims mapping to username to be prefix with
 	// the provided value. A value "oidc:" would result in usernames like "oidc:john".
 	// +optional

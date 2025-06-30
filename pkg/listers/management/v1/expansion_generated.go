@@ -38,6 +38,10 @@ type ConfigListerExpansion interface{}
 // ConvertVirtualClusterConfigLister.
 type ConvertVirtualClusterConfigListerExpansion interface{}
 
+// DatabaseConnectorListerExpansion allows custom methods to be added to
+// DatabaseConnectorLister.
+type DatabaseConnectorListerExpansion interface{}
+
 // DevPodEnvironmentTemplateListerExpansion allows custom methods to be added to
 // DevPodEnvironmentTemplateLister.
 type DevPodEnvironmentTemplateListerExpansion interface{}

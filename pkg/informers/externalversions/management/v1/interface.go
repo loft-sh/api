@@ -26,6 +26,8 @@ type Interface interface {
 	Configs() ConfigInformer
 	// ConvertVirtualClusterConfigs returns a ConvertVirtualClusterConfigInformer.
 	ConvertVirtualClusterConfigs() ConvertVirtualClusterConfigInformer
+	// DatabaseConnectors returns a DatabaseConnectorInformer.
+	DatabaseConnectors() DatabaseConnectorInformer
 	// DevPodEnvironmentTemplates returns a DevPodEnvironmentTemplateInformer.
 	DevPodEnvironmentTemplates() DevPodEnvironmentTemplateInformer
 	// DevPodWorkspaceInstances returns a DevPodWorkspaceInstanceInformer.
@@ -144,6 +146,11 @@ func (v *version) Configs() ConfigInformer {
 // ConvertVirtualClusterConfigs returns a ConvertVirtualClusterConfigInformer.
 func (v *version) ConvertVirtualClusterConfigs() ConvertVirtualClusterConfigInformer {
 	return &convertVirtualClusterConfigInformer{factory: v.factory, tweakListOptions: v.tweakListOptions}
+}
+
+// DatabaseConnectors returns a DatabaseConnectorInformer.
+func (v *version) DatabaseConnectors() DatabaseConnectorInformer {
+	return &databaseConnectorInformer{factory: v.factory, tweakListOptions: v.tweakListOptions}
 }
 
 // DevPodEnvironmentTemplates returns a DevPodEnvironmentTemplateInformer.
