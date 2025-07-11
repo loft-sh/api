@@ -45,13 +45,25 @@ func NewFilteredSelfSubjectAccessReviewInformer(client versioned.Interface, resy
 				if tweakListOptions != nil {
 					tweakListOptions(&options)
 				}
-				return client.ManagementV1().SelfSubjectAccessReviews().List(context.TODO(), options)
+				return client.ManagementV1().SelfSubjectAccessReviews().List(context.Background(), options)
 			},
 			WatchFunc: func(options metav1.ListOptions) (watch.Interface, error) {
 				if tweakListOptions != nil {
 					tweakListOptions(&options)
 				}
-				return client.ManagementV1().SelfSubjectAccessReviews().Watch(context.TODO(), options)
+				return client.ManagementV1().SelfSubjectAccessReviews().Watch(context.Background(), options)
+			},
+			ListWithContextFunc: func(ctx context.Context, options metav1.ListOptions) (runtime.Object, error) {
+				if tweakListOptions != nil {
+					tweakListOptions(&options)
+				}
+				return client.ManagementV1().SelfSubjectAccessReviews().List(ctx, options)
+			},
+			WatchFuncWithContext: func(ctx context.Context, options metav1.ListOptions) (watch.Interface, error) {
+				if tweakListOptions != nil {
+					tweakListOptions(&options)
+				}
+				return client.ManagementV1().SelfSubjectAccessReviews().Watch(ctx, options)
 			},
 		},
 		&apismanagementv1.SelfSubjectAccessReview{},

@@ -45,13 +45,25 @@ func NewFilteredDevPodEnvironmentTemplateInformer(client versioned.Interface, re
 				if tweakListOptions != nil {
 					tweakListOptions(&options)
 				}
-				return client.StorageV1().DevPodEnvironmentTemplates().List(context.TODO(), options)
+				return client.StorageV1().DevPodEnvironmentTemplates().List(context.Background(), options)
 			},
 			WatchFunc: func(options metav1.ListOptions) (watch.Interface, error) {
 				if tweakListOptions != nil {
 					tweakListOptions(&options)
 				}
-				return client.StorageV1().DevPodEnvironmentTemplates().Watch(context.TODO(), options)
+				return client.StorageV1().DevPodEnvironmentTemplates().Watch(context.Background(), options)
+			},
+			ListWithContextFunc: func(ctx context.Context, options metav1.ListOptions) (runtime.Object, error) {
+				if tweakListOptions != nil {
+					tweakListOptions(&options)
+				}
+				return client.StorageV1().DevPodEnvironmentTemplates().List(ctx, options)
+			},
+			WatchFuncWithContext: func(ctx context.Context, options metav1.ListOptions) (watch.Interface, error) {
+				if tweakListOptions != nil {
+					tweakListOptions(&options)
+				}
+				return client.StorageV1().DevPodEnvironmentTemplates().Watch(ctx, options)
 			},
 		},
 		&apisstoragev1.DevPodEnvironmentTemplate{},

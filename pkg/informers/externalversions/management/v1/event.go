@@ -45,13 +45,25 @@ func NewFilteredEventInformer(client versioned.Interface, resyncPeriod time.Dura
 				if tweakListOptions != nil {
 					tweakListOptions(&options)
 				}
-				return client.ManagementV1().Events().List(context.TODO(), options)
+				return client.ManagementV1().Events().List(context.Background(), options)
 			},
 			WatchFunc: func(options metav1.ListOptions) (watch.Interface, error) {
 				if tweakListOptions != nil {
 					tweakListOptions(&options)
 				}
-				return client.ManagementV1().Events().Watch(context.TODO(), options)
+				return client.ManagementV1().Events().Watch(context.Background(), options)
+			},
+			ListWithContextFunc: func(ctx context.Context, options metav1.ListOptions) (runtime.Object, error) {
+				if tweakListOptions != nil {
+					tweakListOptions(&options)
+				}
+				return client.ManagementV1().Events().List(ctx, options)
+			},
+			WatchFuncWithContext: func(ctx context.Context, options metav1.ListOptions) (watch.Interface, error) {
+				if tweakListOptions != nil {
+					tweakListOptions(&options)
+				}
+				return client.ManagementV1().Events().Watch(ctx, options)
 			},
 		},
 		&apismanagementv1.Event{},

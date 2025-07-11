@@ -45,13 +45,25 @@ func NewFilteredLicenseTokenInformer(client versioned.Interface, resyncPeriod ti
 				if tweakListOptions != nil {
 					tweakListOptions(&options)
 				}
-				return client.ManagementV1().LicenseTokens().List(context.TODO(), options)
+				return client.ManagementV1().LicenseTokens().List(context.Background(), options)
 			},
 			WatchFunc: func(options metav1.ListOptions) (watch.Interface, error) {
 				if tweakListOptions != nil {
 					tweakListOptions(&options)
 				}
-				return client.ManagementV1().LicenseTokens().Watch(context.TODO(), options)
+				return client.ManagementV1().LicenseTokens().Watch(context.Background(), options)
+			},
+			ListWithContextFunc: func(ctx context.Context, options metav1.ListOptions) (runtime.Object, error) {
+				if tweakListOptions != nil {
+					tweakListOptions(&options)
+				}
+				return client.ManagementV1().LicenseTokens().List(ctx, options)
+			},
+			WatchFuncWithContext: func(ctx context.Context, options metav1.ListOptions) (watch.Interface, error) {
+				if tweakListOptions != nil {
+					tweakListOptions(&options)
+				}
+				return client.ManagementV1().LicenseTokens().Watch(ctx, options)
 			},
 		},
 		&apismanagementv1.LicenseToken{},

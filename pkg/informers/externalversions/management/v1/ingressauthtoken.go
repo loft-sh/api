@@ -45,13 +45,25 @@ func NewFilteredIngressAuthTokenInformer(client versioned.Interface, resyncPerio
 				if tweakListOptions != nil {
 					tweakListOptions(&options)
 				}
-				return client.ManagementV1().IngressAuthTokens().List(context.TODO(), options)
+				return client.ManagementV1().IngressAuthTokens().List(context.Background(), options)
 			},
 			WatchFunc: func(options metav1.ListOptions) (watch.Interface, error) {
 				if tweakListOptions != nil {
 					tweakListOptions(&options)
 				}
-				return client.ManagementV1().IngressAuthTokens().Watch(context.TODO(), options)
+				return client.ManagementV1().IngressAuthTokens().Watch(context.Background(), options)
+			},
+			ListWithContextFunc: func(ctx context.Context, options metav1.ListOptions) (runtime.Object, error) {
+				if tweakListOptions != nil {
+					tweakListOptions(&options)
+				}
+				return client.ManagementV1().IngressAuthTokens().List(ctx, options)
+			},
+			WatchFuncWithContext: func(ctx context.Context, options metav1.ListOptions) (watch.Interface, error) {
+				if tweakListOptions != nil {
+					tweakListOptions(&options)
+				}
+				return client.ManagementV1().IngressAuthTokens().Watch(ctx, options)
 			},
 		},
 		&apismanagementv1.IngressAuthToken{},

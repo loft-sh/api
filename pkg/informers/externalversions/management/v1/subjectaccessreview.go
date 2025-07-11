@@ -45,13 +45,25 @@ func NewFilteredSubjectAccessReviewInformer(client versioned.Interface, resyncPe
 				if tweakListOptions != nil {
 					tweakListOptions(&options)
 				}
-				return client.ManagementV1().SubjectAccessReviews().List(context.TODO(), options)
+				return client.ManagementV1().SubjectAccessReviews().List(context.Background(), options)
 			},
 			WatchFunc: func(options metav1.ListOptions) (watch.Interface, error) {
 				if tweakListOptions != nil {
 					tweakListOptions(&options)
 				}
-				return client.ManagementV1().SubjectAccessReviews().Watch(context.TODO(), options)
+				return client.ManagementV1().SubjectAccessReviews().Watch(context.Background(), options)
+			},
+			ListWithContextFunc: func(ctx context.Context, options metav1.ListOptions) (runtime.Object, error) {
+				if tweakListOptions != nil {
+					tweakListOptions(&options)
+				}
+				return client.ManagementV1().SubjectAccessReviews().List(ctx, options)
+			},
+			WatchFuncWithContext: func(ctx context.Context, options metav1.ListOptions) (watch.Interface, error) {
+				if tweakListOptions != nil {
+					tweakListOptions(&options)
+				}
+				return client.ManagementV1().SubjectAccessReviews().Watch(ctx, options)
 			},
 		},
 		&apismanagementv1.SubjectAccessReview{},

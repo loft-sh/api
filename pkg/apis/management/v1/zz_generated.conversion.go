@@ -10837,6 +10837,8 @@ func Convert_management_VirtualClusterInstanceKubeConfigList_To_v1_VirtualCluste
 
 func autoConvert_v1_VirtualClusterInstanceKubeConfigSpec_To_management_VirtualClusterInstanceKubeConfigSpec(in *VirtualClusterInstanceKubeConfigSpec, out *management.VirtualClusterInstanceKubeConfigSpec, s conversion.Scope) error {
 	out.CertificateTTL = (*int32)(unsafe.Pointer(in.CertificateTTL))
+	out.Server = in.Server
+	out.ClientCert = in.ClientCert
 	return nil
 }
 
@@ -10847,6 +10849,8 @@ func Convert_v1_VirtualClusterInstanceKubeConfigSpec_To_management_VirtualCluste
 
 func autoConvert_management_VirtualClusterInstanceKubeConfigSpec_To_v1_VirtualClusterInstanceKubeConfigSpec(in *management.VirtualClusterInstanceKubeConfigSpec, out *VirtualClusterInstanceKubeConfigSpec, s conversion.Scope) error {
 	out.CertificateTTL = (*int32)(unsafe.Pointer(in.CertificateTTL))
+	out.Server = in.Server
+	out.ClientCert = in.ClientCert
 	return nil
 }
 

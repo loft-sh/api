@@ -45,13 +45,25 @@ func NewFilteredResetAccessKeyInformer(client versioned.Interface, resyncPeriod 
 				if tweakListOptions != nil {
 					tweakListOptions(&options)
 				}
-				return client.ManagementV1().ResetAccessKeys().List(context.TODO(), options)
+				return client.ManagementV1().ResetAccessKeys().List(context.Background(), options)
 			},
 			WatchFunc: func(options metav1.ListOptions) (watch.Interface, error) {
 				if tweakListOptions != nil {
 					tweakListOptions(&options)
 				}
-				return client.ManagementV1().ResetAccessKeys().Watch(context.TODO(), options)
+				return client.ManagementV1().ResetAccessKeys().Watch(context.Background(), options)
+			},
+			ListWithContextFunc: func(ctx context.Context, options metav1.ListOptions) (runtime.Object, error) {
+				if tweakListOptions != nil {
+					tweakListOptions(&options)
+				}
+				return client.ManagementV1().ResetAccessKeys().List(ctx, options)
+			},
+			WatchFuncWithContext: func(ctx context.Context, options metav1.ListOptions) (watch.Interface, error) {
+				if tweakListOptions != nil {
+					tweakListOptions(&options)
+				}
+				return client.ManagementV1().ResetAccessKeys().Watch(ctx, options)
 			},
 		},
 		&apismanagementv1.ResetAccessKey{},

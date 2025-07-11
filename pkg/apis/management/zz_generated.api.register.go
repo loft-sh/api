@@ -2989,6 +2989,8 @@ type VirtualClusterInstanceKubeConfig struct {
 
 type VirtualClusterInstanceKubeConfigSpec struct {
 	CertificateTTL *int32 `json:"certificateTTL,omitempty"`
+	Server         string `json:"server,omitempty"`
+	ClientCert     bool   `json:"clientCert,omitempty"`
 }
 
 type VirtualClusterInstanceKubeConfigStatus struct {

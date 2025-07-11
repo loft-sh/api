@@ -45,13 +45,25 @@ func NewFilteredOwnedAccessKeyInformer(client versioned.Interface, resyncPeriod 
 				if tweakListOptions != nil {
 					tweakListOptions(&options)
 				}
-				return client.ManagementV1().OwnedAccessKeys().List(context.TODO(), options)
+				return client.ManagementV1().OwnedAccessKeys().List(context.Background(), options)
 			},
 			WatchFunc: func(options metav1.ListOptions) (watch.Interface, error) {
 				if tweakListOptions != nil {
 					tweakListOptions(&options)
 				}
-				return client.ManagementV1().OwnedAccessKeys().Watch(context.TODO(), options)
+				return client.ManagementV1().OwnedAccessKeys().Watch(context.Background(), options)
+			},
+			ListWithContextFunc: func(ctx context.Context, options metav1.ListOptions) (runtime.Object, error) {
+				if tweakListOptions != nil {
+					tweakListOptions(&options)
+				}
+				return client.ManagementV1().OwnedAccessKeys().List(ctx, options)
+			},
+			WatchFuncWithContext: func(ctx context.Context, options metav1.ListOptions) (watch.Interface, error) {
+				if tweakListOptions != nil {
+					tweakListOptions(&options)
+				}
+				return client.ManagementV1().OwnedAccessKeys().Watch(ctx, options)
 			},
 		},
 		&apismanagementv1.OwnedAccessKey{},

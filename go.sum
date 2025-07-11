@@ -105,10 +105,10 @@ github.com/kylelemons/godebug v1.1.0 h1:RPNrshWIDI6G2gRW9EHilWtl7Z6Sb1BR0xunSBf0
 github.com/kylelemons/godebug v1.1.0/go.mod h1:9/0rRGxNHcop5bhtWyNeEfOS8JIWk580+fNqagV/RAw=
 github.com/loft-sh/admin-apis v0.0.0-20250521064618-068d5f25cdae h1:nyrRyiEi1mssYel6z3NaUiHBaFG2bBA6HCsADWxSMo0=
 github.com/loft-sh/admin-apis v0.0.0-20250521064618-068d5f25cdae/go.mod h1:WHCqWfljfD1hkwk41hLeqBhW2yeLvWipB1sH6vfnR7U=
-github.com/loft-sh/agentapi/v4 v4.4.0-alpha.5 h1:CRlDSqGMjUISFtwC+Xfw50iMD4/w1QS0P6iRDZI9eyc=
-github.com/loft-sh/agentapi/v4 v4.4.0-alpha.5/go.mod h1:N6gGurI16TFYeD9eBZ2nK7D8LX1iaH2IHm8Hzt61Kbc=
-github.com/loft-sh/apiserver v0.0.0-20250508152823-e8b51d3b592b h1:v/yQiR772ioVe5RfEVFjewN7iEtgUlgpiMfv+Q/8CZw=
-github.com/loft-sh/apiserver v0.0.0-20250508152823-e8b51d3b592b/go.mod h1:O8dvTzapPh7Fvg7tYReb/wtOIwPSTYTYfXZFKF/peTo=
+github.com/loft-sh/agentapi/v4 v4.4.0-alpha.7 h1:u3SatYgsAW/4BM3GSmN8hwaNDl/QM8VkfyJqiiqJmKs=
+github.com/loft-sh/agentapi/v4 v4.4.0-alpha.7/go.mod h1:PiGvXqHI8SmsbJ6lMUgmybTkD+Q2Pn/1IoWuYTg+lCI=
+github.com/loft-sh/apiserver v0.0.0-20250704091321-0966a6ee77b2 h1:CucC57Nm4cfTsktoj6UaSSh29q/adSLrDcALh377SP4=
+github.com/loft-sh/apiserver v0.0.0-20250704091321-0966a6ee77b2/go.mod h1:ROoLzugsusno4FKi+Lju6VN62u9mROLi3MvLrqC3cA4=
 github.com/mailru/easyjson v0.7.7 h1:UGYAvKxe3sBsEDzO8ZeWOSlIQfWFlxbzLZe7hwFURr0=
 github.com/mailru/easyjson v0.7.7/go.mod h1:xzfreul335JAWq5oZzymOObrkdz5UnU4kGfJJLY9Nlc=
 github.com/modern-go/concurrent v0.0.0-20180228061459-e0a39a4cb421/go.mod h1:6dJC0mAP4ikYIbvyc7fijjWJddQyLn8Ig3JB5CqoB9Q=

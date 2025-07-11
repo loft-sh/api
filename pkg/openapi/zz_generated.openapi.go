@@ -893,10 +893,16 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 		"k8s.io/api/certificates/v1beta1.CertificateSigningRequestList":                                    schema_k8sio_api_certificates_v1beta1_CertificateSigningRequestList(ref),
 		"k8s.io/api/certificates/v1beta1.CertificateSigningRequestSpec":                                    schema_k8sio_api_certificates_v1beta1_CertificateSigningRequestSpec(ref),
 		"k8s.io/api/certificates/v1beta1.CertificateSigningRequestStatus":                                  schema_k8sio_api_certificates_v1beta1_CertificateSigningRequestStatus(ref),
+		"k8s.io/api/certificates/v1beta1.ClusterTrustBundle":                                               schema_k8sio_api_certificates_v1beta1_ClusterTrustBundle(ref),
+		"k8s.io/api/certificates/v1beta1.ClusterTrustBundleList":                                           schema_k8sio_api_certificates_v1beta1_ClusterTrustBundleList(ref),
+		"k8s.io/api/certificates/v1beta1.ClusterTrustBundleSpec":                                           schema_k8sio_api_certificates_v1beta1_ClusterTrustBundleSpec(ref),
 		"k8s.io/api/coordination/v1.Lease":                                                                 schema_k8sio_api_coordination_v1_Lease(ref),
 		"k8s.io/api/coordination/v1.LeaseList":                                                             schema_k8sio_api_coordination_v1_LeaseList(ref),
 		"k8s.io/api/coordination/v1.LeaseSpec":                                                             schema_k8sio_api_coordination_v1_LeaseSpec(ref),
 		"k8s.io/api/coordination/v1beta1.Lease":                                                            schema_k8sio_api_coordination_v1beta1_Lease(ref),
+		"k8s.io/api/coordination/v1beta1.LeaseCandidate":                                                   schema_k8sio_api_coordination_v1beta1_LeaseCandidate(ref),
+		"k8s.io/api/coordination/v1beta1.LeaseCandidateList":                                               schema_k8sio_api_coordination_v1beta1_LeaseCandidateList(ref),
+		"k8s.io/api/coordination/v1beta1.LeaseCandidateSpec":                                               schema_k8sio_api_coordination_v1beta1_LeaseCandidateSpec(ref),
 		"k8s.io/api/coordination/v1beta1.LeaseList":                                                        schema_k8sio_api_coordination_v1beta1_LeaseList(ref),
 		"k8s.io/api/coordination/v1beta1.LeaseSpec":                                                        schema_k8sio_api_coordination_v1beta1_LeaseSpec(ref),
 		"k8s.io/api/core/v1.AWSElasticBlockStoreVolumeSource":                                              schema_k8sio_api_core_v1_AWSElasticBlockStoreVolumeSource(ref),
@@ -1012,6 +1018,7 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 		"k8s.io/api/core/v1.NodeSelectorTerm":                                                              schema_k8sio_api_core_v1_NodeSelectorTerm(ref),
 		"k8s.io/api/core/v1.NodeSpec":                                                                      schema_k8sio_api_core_v1_NodeSpec(ref),
 		"k8s.io/api/core/v1.NodeStatus":                                                                    schema_k8sio_api_core_v1_NodeStatus(ref),
+		"k8s.io/api/core/v1.NodeSwapStatus":                                                                schema_k8sio_api_core_v1_NodeSwapStatus(ref),
 		"k8s.io/api/core/v1.NodeSystemInfo":                                                                schema_k8sio_api_core_v1_NodeSystemInfo(ref),
 		"k8s.io/api/core/v1.ObjectFieldSelector":                                                           schema_k8sio_api_core_v1_ObjectFieldSelector(ref),
 		"k8s.io/api/core/v1.ObjectReference":                                                               schema_k8sio_api_core_v1_ObjectReference(ref),
@@ -1178,6 +1185,9 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 		"k8s.io/api/extensions/v1beta1.ScaleStatus":                                                        schema_k8sio_api_extensions_v1beta1_ScaleStatus(ref),
 		"k8s.io/api/networking/v1.HTTPIngressPath":                                                         schema_k8sio_api_networking_v1_HTTPIngressPath(ref),
 		"k8s.io/api/networking/v1.HTTPIngressRuleValue":                                                    schema_k8sio_api_networking_v1_HTTPIngressRuleValue(ref),
+		"k8s.io/api/networking/v1.IPAddress":                                                               schema_k8sio_api_networking_v1_IPAddress(ref),
+		"k8s.io/api/networking/v1.IPAddressList":                                                           schema_k8sio_api_networking_v1_IPAddressList(ref),
+		"k8s.io/api/networking/v1.IPAddressSpec":                                                           schema_k8sio_api_networking_v1_IPAddressSpec(ref),
 		"k8s.io/api/networking/v1.IPBlock":                                                                 schema_k8sio_api_networking_v1_IPBlock(ref),
 		"k8s.io/api/networking/v1.Ingress":                                                                 schema_k8sio_api_networking_v1_Ingress(ref),
 		"k8s.io/api/networking/v1.IngressBackend":                                                          schema_k8sio_api_networking_v1_IngressBackend(ref),
@@ -1202,7 +1212,12 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 		"k8s.io/api/networking/v1.NetworkPolicyPeer":                                                       schema_k8sio_api_networking_v1_NetworkPolicyPeer(ref),
 		"k8s.io/api/networking/v1.NetworkPolicyPort":                                                       schema_k8sio_api_networking_v1_NetworkPolicyPort(ref),
 		"k8s.io/api/networking/v1.NetworkPolicySpec":                                                       schema_k8sio_api_networking_v1_NetworkPolicySpec(ref),
+		"k8s.io/api/networking/v1.ParentReference":                                                         schema_k8sio_api_networking_v1_ParentReference(ref),
 		"k8s.io/api/networking/v1.ServiceBackendPort":                                                      schema_k8sio_api_networking_v1_ServiceBackendPort(ref),
+		"k8s.io/api/networking/v1.ServiceCIDR":                                                             schema_k8sio_api_networking_v1_ServiceCIDR(ref),
+		"k8s.io/api/networking/v1.ServiceCIDRList":                                                         schema_k8sio_api_networking_v1_ServiceCIDRList(ref),
+		"k8s.io/api/networking/v1.ServiceCIDRSpec":                                                         schema_k8sio_api_networking_v1_ServiceCIDRSpec(ref),
+		"k8s.io/api/networking/v1.ServiceCIDRStatus":                                                       schema_k8sio_api_networking_v1_ServiceCIDRStatus(ref),
 		"k8s.io/api/networking/v1beta1.HTTPIngressPath":                                                    schema_k8sio_api_networking_v1beta1_HTTPIngressPath(ref),
 		"k8s.io/api/networking/v1beta1.HTTPIngressRuleValue":                                               schema_k8sio_api_networking_v1beta1_HTTPIngressRuleValue(ref),
 		"k8s.io/api/networking/v1beta1.IPAddress":                                                          schema_k8sio_api_networking_v1beta1_IPAddress(ref),
@@ -19373,6 +19388,20 @@ func schema_pkg_apis_management_v1_VirtualClusterInstanceKubeConfigSpec(ref comm
 							Format:      "int32",
 						},
 					},
+					"server": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Server allows user to override server in the kubeconfig.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"clientCert": {
+						SchemaProps: spec.SchemaProps{
+							Description: "ClientCert, if set to true, will return kube config with generated client certs instead of platform token",
+							Type:        []string{"boolean"},
+							Format:      "",
+						},
+					},
 				},
 			},
 		},
@@ -32242,9 +32271,10 @@ func schema_k8sio_api_admissionregistration_v1_NamedRuleWithOperations(ref commo
 					},
 					"scope": {
 						SchemaProps: spec.SchemaProps{
-							Description: "scope specifies the scope of this rule. Valid values are \"Cluster\", \"Namespaced\", and \"*\" \"Cluster\" means that only cluster-scoped resources will match this rule. Namespace API objects are cluster-scoped. \"Namespaced\" means that only namespaced resources will match this rule. \"*\" means that there are no scope restrictions. Subresources match the scope of their parent resource. Default is \"*\".",
+							Description: "scope specifies the scope of this rule. Valid values are \"Cluster\", \"Namespaced\", and \"*\" \"Cluster\" means that only cluster-scoped resources will match this rule. Namespace API objects are cluster-scoped. \"Namespaced\" means that only namespaced resources will match this rule. \"*\" means that there are no scope restrictions. Subresources match the scope of their parent resource. Default is \"*\".\n\n\nPossible enum values:\n - `\"*\"` means that all scopes are included.\n - `\"Cluster\"` means that scope is limited to cluster-scoped objects. Namespace objects are cluster-scoped.\n - `\"Namespaced\"` means that scope is limited to namespaced objects.",
 							Type:        []string{"string"},
 							Format:      "",
+							Enum:        []interface{}{"*", "Cluster", "Namespaced"},
 						},
 					},
 				},
@@ -32406,9 +32436,10 @@ func schema_k8sio_api_admissionregistration_v1_Rule(ref common.ReferenceCallback
 					},
 					"scope": {
 						SchemaProps: spec.SchemaProps{
-							Description: "scope specifies the scope of this rule. Valid values are \"Cluster\", \"Namespaced\", and \"*\" \"Cluster\" means that only cluster-scoped resources will match this rule. Namespace API objects are cluster-scoped. \"Namespaced\" means that only namespaced resources will match this rule. \"*\" means that there are no scope restrictions. Subresources match the scope of their parent resource. Default is \"*\".",
+							Description: "scope specifies the scope of this rule. Valid values are \"Cluster\", \"Namespaced\", and \"*\" \"Cluster\" means that only cluster-scoped resources will match this rule. Namespace API objects are cluster-scoped. \"Namespaced\" means that only namespaced resources will match this rule. \"*\" means that there are no scope restrictions. Subresources match the scope of their parent resource. Default is \"*\".\n\n\nPossible enum values:\n - `\"*\"` means that all scopes are included.\n - `\"Cluster\"` means that scope is limited to cluster-scoped objects. Namespace objects are cluster-scoped.\n - `\"Namespaced\"` means that scope is limited to namespaced objects.",
 							Type:        []string{"string"},
 							Format:      "",
+							Enum:        []interface{}{"*", "Cluster", "Namespaced"},
 						},
 					},
 				},
@@ -32507,9 +32538,10 @@ func schema_k8sio_api_admissionregistration_v1_RuleWithOperations(ref common.Ref
 					},
 					"scope": {
 						SchemaProps: spec.SchemaProps{
-							Description: "scope specifies the scope of this rule. Valid values are \"Cluster\", \"Namespaced\", and \"*\" \"Cluster\" means that only cluster-scoped resources will match this rule. Namespace API objects are cluster-scoped. \"Namespaced\" means that only namespaced resources will match this rule. \"*\" means that there are no scope restrictions. Subresources match the scope of their parent resource. Default is \"*\".",
+							Description: "scope specifies the scope of this rule. Valid values are \"Cluster\", \"Namespaced\", and \"*\" \"Cluster\" means that only cluster-scoped resources will match this rule. Namespace API objects are cluster-scoped. \"Namespaced\" means that only namespaced resources will match this rule. \"*\" means that there are no scope restrictions. Subresources match the scope of their parent resource. Default is \"*\".\n\n\nPossible enum values:\n - `\"*\"` means that all scopes are included.\n - `\"Cluster\"` means that scope is limited to cluster-scoped objects. Namespace objects are cluster-scoped.\n - `\"Namespaced\"` means that scope is limited to namespaced objects.",
 							Type:        []string{"string"},
 							Format:      "",
+							Enum:        []interface{}{"*", "Cluster", "Namespaced"},
 						},
 					},
 				},
@@ -33907,9 +33939,10 @@ func schema_k8sio_api_admissionregistration_v1beta1_NamedRuleWithOperations(ref 
 					},
 					"scope": {
 						SchemaProps: spec.SchemaProps{
-							Description: "scope specifies the scope of this rule. Valid values are \"Cluster\", \"Namespaced\", and \"*\" \"Cluster\" means that only cluster-scoped resources will match this rule. Namespace API objects are cluster-scoped. \"Namespaced\" means that only namespaced resources will match this rule. \"*\" means that there are no scope restrictions. Subresources match the scope of their parent resource. Default is \"*\".",
+							Description: "scope specifies the scope of this rule. Valid values are \"Cluster\", \"Namespaced\", and \"*\" \"Cluster\" means that only cluster-scoped resources will match this rule. Namespace API objects are cluster-scoped. \"Namespaced\" means that only namespaced resources will match this rule. \"*\" means that there are no scope restrictions. Subresources match the scope of their parent resource. Default is \"*\".\n\n\nPossible enum values:\n - `\"*\"` means that all scopes are included.\n - `\"Cluster\"` means that scope is limited to cluster-scoped objects. Namespace objects are cluster-scoped.\n - `\"Namespaced\"` means that scope is limited to namespaced objects.",
 							Type:        []string{"string"},
 							Format:      "",
+							Enum:        []interface{}{"*", "Cluster", "Namespaced"},
 						},
 					},
 				},
@@ -35555,28 +35588,28 @@ func schema_k8sio_api_apps_v1_DeploymentStatus(ref common.ReferenceCallback) com
 					},
 					"replicas": {
 						SchemaProps: spec.SchemaProps{
-							Description: "Total number of non-terminated pods targeted by this deployment (their labels match the selector).",
+							Description: "Total number of non-terminating pods targeted by this deployment (their labels match the selector).",
 							Type:        []string{"integer"},
 							Format:      "int32",
 						},
 					},
 					"updatedReplicas": {
 						SchemaProps: spec.SchemaProps{
-							Description: "Total number of non-terminated pods targeted by this deployment that have the desired template spec.",
+							Description: "Total number of non-terminating pods targeted by this deployment that have the desired template spec.",
 							Type:        []string{"integer"},
 							Format:      "int32",
 						},
 					},
 					"readyReplicas": {
 						SchemaProps: spec.SchemaProps{
-							Description: "readyReplicas is the number of pods targeted by this Deployment with a Ready Condition.",
+							Description: "Total number of non-terminating pods targeted by this Deployment with a Ready Condition.",
 							Type:        []string{"integer"},
 							Format:      "int32",
 						},
 					},
 					"availableReplicas": {
 						SchemaProps: spec.SchemaProps{
-							Description: "Total number of available pods (ready for at least minReadySeconds) targeted by this deployment.",
+							Description: "Total number of available non-terminating pods (ready for at least minReadySeconds) targeted by this deployment.",
 							Type:        []string{"integer"},
 							Format:      "int32",
 						},
@@ -35584,6 +35617,13 @@ func schema_k8sio_api_apps_v1_DeploymentStatus(ref common.ReferenceCallback) com
 					"unavailableReplicas": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Total number of unavailable pods targeted by this deployment. This is the total number of pods that are still required for the deployment to have 100% available capacity. They may either be pods that are running but not yet available or pods that still have not been created.",
+							Type:        []string{"integer"},
+							Format:      "int32",
+						},
+					},
+					"terminatingReplicas": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Total number of terminating pods targeted by this deployment. Terminating pods have a non-null .metadata.deletionTimestamp and have not yet reached the Failed or Succeeded .status.phase.\n\nThis is an alpha field. Enable DeploymentReplicaSetTerminatingReplicas to be able to use this field.",
 							Type:        []string{"integer"},
 							Format:      "int32",
 						},
@@ -35788,7 +35828,7 @@ func schema_k8sio_api_apps_v1_ReplicaSetList(ref common.ReferenceCallback) commo
 					},
 					"items": {
 						SchemaProps: spec.SchemaProps{
-							Description: "List of ReplicaSets. More info: https://kubernetes.io/docs/concepts/workloads/controllers/replicationcontroller",
+							Description: "List of ReplicaSets. More info: https://kubernetes.io/docs/concepts/workloads/controllers/replicaset",
 							Type:        []string{"array"},
 							Items: &spec.SchemaOrArray{
 								Schema: &spec.Schema{
@@ -35818,7 +35858,7 @@ func schema_k8sio_api_apps_v1_ReplicaSetSpec(ref common.ReferenceCallback) commo
 				Properties: map[string]spec.Schema{
 					"replicas": {
 						SchemaProps: spec.SchemaProps{
-							Description: "Replicas is the number of desired replicas. This is a pointer to distinguish between explicit zero and unspecified. Defaults to 1. More info: https://kubernetes.io/docs/concepts/workloads/controllers/replicationcontroller/#what-is-a-replicationcontroller",
+							Description: "Replicas is the number of desired pods. This is a pointer to distinguish between explicit zero and unspecified. Defaults to 1. More info: https://kubernetes.io/docs/concepts/workloads/controllers/replicaset",
 							Type:        []string{"integer"},
 							Format:      "int32",
 						},
@@ -35838,7 +35878,7 @@ func schema_k8sio_api_apps_v1_ReplicaSetSpec(ref common.ReferenceCallback) commo
 					},
 					"template": {
 						SchemaProps: spec.SchemaProps{
-							Description: "Template is the object that describes the pod that will be created if insufficient replicas are detected. More info: https://kubernetes.io/docs/concepts/workloads/controllers/replicationcontroller#pod-template",
+							Description: "Template is the object that describes the pod that will be created if insufficient replicas are detected. More info: https://kubernetes.io/docs/concepts/workloads/controllers/replicaset/#pod-template",
 							Default:     map[string]interface{}{},
 							Ref:         ref("k8s.io/api/core/v1.PodTemplateSpec"),
 						},
@@ -35861,7 +35901,7 @@ func schema_k8sio_api_apps_v1_ReplicaSetStatus(ref common.ReferenceCallback) com
 				Properties: map[string]spec.Schema{
 					"replicas": {
 						SchemaProps: spec.SchemaProps{
-							Description: "Replicas is the most recently observed number of replicas. More info: https://kubernetes.io/docs/concepts/workloads/controllers/replicationcontroller/#what-is-a-replicationcontroller",
+							Description: "Replicas is the most recently observed number of non-terminating pods. More info: https://kubernetes.io/docs/concepts/workloads/controllers/replicaset",
 							Default:     0,
 							Type:        []string{"integer"},
 							Format:      "int32",
@@ -35869,21 +35909,28 @@ func schema_k8sio_api_apps_v1_ReplicaSetStatus(ref common.ReferenceCallback) com
 					},
 					"fullyLabeledReplicas": {
 						SchemaProps: spec.SchemaProps{
-							Description: "The number of pods that have labels matching the labels of the pod template of the replicaset.",
+							Description: "The number of non-terminating pods that have labels matching the labels of the pod template of the replicaset.",
 							Type:        []string{"integer"},
 							Format:      "int32",
 						},
 					},
 					"readyReplicas": {
 						SchemaProps: spec.SchemaProps{
-							Description: "readyReplicas is the number of pods targeted by this ReplicaSet with a Ready Condition.",
+							Description: "The number of non-terminating pods targeted by this ReplicaSet with a Ready Condition.",
 							Type:        []string{"integer"},
 							Format:      "int32",
 						},
 					},
 					"availableReplicas": {
 						SchemaProps: spec.SchemaProps{
-							Description: "The number of available replicas (ready for at least minReadySeconds) for this replica set.",
+							Description: "The number of available non-terminating pods (ready for at least minReadySeconds) for this replica set.",
+							Type:        []string{"integer"},
+							Format:      "int32",
+						},
+					},
+					"terminatingReplicas": {
+						SchemaProps: spec.SchemaProps{
+							Description: "The number of terminating pods for this replica set. Terminating pods have a non-null .metadata.deletionTimestamp and have not yet reached the Failed or Succeeded .status.phase.\n\nThis is an alpha field. Enable DeploymentReplicaSetTerminatingReplicas to be able to use this field.",
 							Type:        []string{"integer"},
 							Format:      "int32",
 						},
@@ -36307,7 +36354,7 @@ func schema_k8sio_api_apps_v1_StatefulSetSpec(ref common.ReferenceCallback) comm
 						},
 					},
 				},
-				Required: []string{"selector", "template", "serviceName"},
+				Required: []string{"selector", "template"},
 			},
 		},
 		Dependencies: []string{
@@ -36862,42 +36909,49 @@ func schema_k8sio_api_apps_v1beta1_DeploymentStatus(ref common.ReferenceCallback
 				Properties: map[string]spec.Schema{
 					"observedGeneration": {
 						SchemaProps: spec.SchemaProps{
-							Description: "observedGeneration is the generation observed by the deployment controller.",
+							Description: "The generation observed by the deployment controller.",
 							Type:        []string{"integer"},
 							Format:      "int64",
 						},
 					},
 					"replicas": {
 						SchemaProps: spec.SchemaProps{
-							Description: "replicas is the total number of non-terminated pods targeted by this deployment (their labels match the selector).",
+							Description: "Total number of non-terminating pods targeted by this deployment (their labels match the selector).",
 							Type:        []string{"integer"},
 							Format:      "int32",
 						},
 					},
 					"updatedReplicas": {
 						SchemaProps: spec.SchemaProps{
-							Description: "updatedReplicas is the total number of non-terminated pods targeted by this deployment that have the desired template spec.",
+							Description: "Total number of non-terminating pods targeted by this deployment that have the desired template spec.",
 							Type:        []string{"integer"},
 							Format:      "int32",
 						},
 					},
 					"readyReplicas": {
 						SchemaProps: spec.SchemaProps{
-							Description: "readyReplicas is the number of pods targeted by this Deployment controller with a Ready Condition.",
+							Description: "Total number of non-terminating pods targeted by this Deployment with a Ready Condition.",
 							Type:        []string{"integer"},
 							Format:      "int32",
 						},
 					},
 					"availableReplicas": {
 						SchemaProps: spec.SchemaProps{
-							Description: "Total number of available pods (ready for at least minReadySeconds) targeted by this deployment.",
+							Description: "Total number of available non-terminating pods (ready for at least minReadySeconds) targeted by this deployment.",
 							Type:        []string{"integer"},
 							Format:      "int32",
 						},
 					},
 					"unavailableReplicas": {
 						SchemaProps: spec.SchemaProps{
-							Description: "unavailableReplicas is the total number of unavailable pods targeted by this deployment. This is the total number of pods that are still required for the deployment to have 100% available capacity. They may either be pods that are running but not yet available or pods that still have not been created.",
+							Description: "Total number of unavailable pods targeted by this deployment. This is the total number of pods that are still required for the deployment to have 100% available capacity. They may either be pods that are running but not yet available or pods that still have not been created.",
+							Type:        []string{"integer"},
+							Format:      "int32",
+						},
+					},
+					"terminatingReplicas": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Total number of terminating pods targeted by this deployment. Terminating pods have a non-null .metadata.deletionTimestamp and have not yet reached the Failed or Succeeded .status.phase.\n\nThis is an alpha field. Enable DeploymentReplicaSetTerminatingReplicas to be able to use this field.",
 							Type:        []string{"integer"},
 							Format:      "int32",
 						},
@@ -36914,7 +36968,7 @@ func schema_k8sio_api_apps_v1beta1_DeploymentStatus(ref common.ReferenceCallback
 							},
 						},
 						SchemaProps: spec.SchemaProps{
-							Description: "Conditions represent the latest available observations of a deployment's current state.",
+							Description: "Represents the latest available observations of a deployment's current state.",
 							Type:        []string{"array"},
 							Items: &spec.SchemaOrArray{
 								Schema: &spec.Schema{
@@ -37452,7 +37506,7 @@ func schema_k8sio_api_apps_v1beta1_StatefulSetSpec(ref common.ReferenceCallback)
 						},
 					},
 				},
-				Required: []string{"template", "serviceName"},
+				Required: []string{"template"},
 			},
 		},
 		Dependencies: []string{
@@ -38284,28 +38338,28 @@ func schema_k8sio_api_apps_v1beta2_DeploymentStatus(ref common.ReferenceCallback
 					},
 					"replicas": {
 						SchemaProps: spec.SchemaProps{
-							Description: "Total number of non-terminated pods targeted by this deployment (their labels match the selector).",
+							Description: "Total number of non-terminating pods targeted by this deployment (their labels match the selector).",
 							Type:        []string{"integer"},
 							Format:      "int32",
 						},
 					},
 					"updatedReplicas": {
 						SchemaProps: spec.SchemaProps{
-							Description: "Total number of non-terminated pods targeted by this deployment that have the desired template spec.",
+							Description: "Total number of non-terminating pods targeted by this deployment that have the desired template spec.",
 							Type:        []string{"integer"},
 							Format:      "int32",
 						},
 					},
 					"readyReplicas": {
 						SchemaProps: spec.SchemaProps{
-							Description: "readyReplicas is the number of pods targeted by this Deployment controller with a Ready Condition.",
+							Description: "Total number of non-terminating pods targeted by this Deployment with a Ready Condition.",
 							Type:        []string{"integer"},
 							Format:      "int32",
 						},
 					},
 					"availableReplicas": {
 						SchemaProps: spec.SchemaProps{
-							Description: "Total number of available pods (ready for at least minReadySeconds) targeted by this deployment.",
+							Description: "Total number of available non-terminating pods (ready for at least minReadySeconds) targeted by this deployment.",
 							Type:        []string{"integer"},
 							Format:      "int32",
 						},
@@ -38313,6 +38367,13 @@ func schema_k8sio_api_apps_v1beta2_DeploymentStatus(ref common.ReferenceCallback
 					"unavailableReplicas": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Total number of unavailable pods targeted by this deployment. This is the total number of pods that are still required for the deployment to have 100% available capacity. They may either be pods that are running but not yet available or pods that still have not been created.",
+							Type:        []string{"integer"},
+							Format:      "int32",
+						},
+					},
+					"terminatingReplicas": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Total number of terminating pods targeted by this deployment. Terminating pods have a non-null .metadata.deletionTimestamp and have not yet reached the Failed or Succeeded .status.phase.\n\nThis is an alpha field. Enable DeploymentReplicaSetTerminatingReplicas to be able to use this field.",
 							Type:        []string{"integer"},
 							Format:      "int32",
 						},
@@ -38516,7 +38577,7 @@ func schema_k8sio_api_apps_v1beta2_ReplicaSetList(ref common.ReferenceCallback) 
 					},
 					"items": {
 						SchemaProps: spec.SchemaProps{
-							Description: "List of ReplicaSets. More info: https://kubernetes.io/docs/concepts/workloads/controllers/replicationcontroller",
+							Description: "List of ReplicaSets. More info: https://kubernetes.io/docs/concepts/workloads/controllers/replicaset",
 							Type:        []string{"array"},
 							Items: &spec.SchemaOrArray{
 								Schema: &spec.Schema{
@@ -38546,7 +38607,7 @@ func schema_k8sio_api_apps_v1beta2_ReplicaSetSpec(ref common.ReferenceCallback) 
 				Properties: map[string]spec.Schema{
 					"replicas": {
 						SchemaProps: spec.SchemaProps{
-							Description: "Replicas is the number of desired replicas. This is a pointer to distinguish between explicit zero and unspecified. Defaults to 1. More info: https://kubernetes.io/docs/concepts/workloads/controllers/replicationcontroller/#what-is-a-replicationcontroller",
+							Description: "Replicas is the number of desired pods. This is a pointer to distinguish between explicit zero and unspecified. Defaults to 1. More info: https://kubernetes.io/docs/concepts/workloads/controllers/replicaset",
 							Type:        []string{"integer"},
 							Format:      "int32",
 						},
@@ -38566,7 +38627,7 @@ func schema_k8sio_api_apps_v1beta2_ReplicaSetSpec(ref common.ReferenceCallback) 
 					},
 					"template": {
 						SchemaProps: spec.SchemaProps{
-							Description: "Template is the object that describes the pod that will be created if insufficient replicas are detected. More info: https://kubernetes.io/docs/concepts/workloads/controllers/replicationcontroller#pod-template",
+							Description: "Template is the object that describes the pod that will be created if insufficient replicas are detected. More info: https://kubernetes.io/docs/concepts/workloads/controllers/replicaset/#pod-template",
 							Default:     map[string]interface{}{},
 							Ref:         ref("k8s.io/api/core/v1.PodTemplateSpec"),
 						},
@@ -38589,7 +38650,7 @@ func schema_k8sio_api_apps_v1beta2_ReplicaSetStatus(ref common.ReferenceCallback
 				Properties: map[string]spec.Schema{
 					"replicas": {
 						SchemaProps: spec.SchemaProps{
-							Description: "Replicas is the most recently observed number of replicas. More info: https://kubernetes.io/docs/concepts/workloads/controllers/replicationcontroller/#what-is-a-replicationcontroller",
+							Description: "Replicas is the most recently observed number of non-terminating pods. More info: https://kubernetes.io/docs/concepts/workloads/controllers/replicaset",
 							Default:     0,
 							Type:        []string{"integer"},
 							Format:      "int32",
@@ -38597,21 +38658,28 @@ func schema_k8sio_api_apps_v1beta2_ReplicaSetStatus(ref common.ReferenceCallback
 					},
 					"fullyLabeledReplicas": {
 						SchemaProps: spec.SchemaProps{
-							Description: "The number of pods that have labels matching the labels of the pod template of the replicaset.",
+							Description: "The number of non-terminating pods that have labels matching the labels of the pod template of the replicaset.",
 							Type:        []string{"integer"},
 							Format:      "int32",
 						},
 					},
 					"readyReplicas": {
 						SchemaProps: spec.SchemaProps{
-							Description: "readyReplicas is the number of pods targeted by this ReplicaSet controller with a Ready Condition.",
+							Description: "The number of non-terminating pods targeted by this ReplicaSet with a Ready Condition.",
 							Type:        []string{"integer"},
 							Format:      "int32",
 						},
 					},
 					"availableReplicas": {
 						SchemaProps: spec.SchemaProps{
-							Description: "The number of available replicas (ready for at least minReadySeconds) for this replica set.",
+							Description: "The number of available non-terminating pods (ready for at least minReadySeconds) for this replica set.",
+							Type:        []string{"integer"},
+							Format:      "int32",
+						},
+					},
+					"terminatingReplicas": {
+						SchemaProps: spec.SchemaProps{
+							Description: "The number of terminating pods for this replica set. Terminating pods have a non-null .metadata.deletionTimestamp and have not yet reached the Failed or Succeeded .status.phase.\n\nThis is an alpha field. Enable DeploymentReplicaSetTerminatingReplicas to be able to use this field.",
 							Type:        []string{"integer"},
 							Format:      "int32",
 						},
@@ -39151,7 +39219,7 @@ func schema_k8sio_api_apps_v1beta2_StatefulSetSpec(ref common.ReferenceCallback)
 						},
 					},
 				},
-				Required: []string{"selector", "template", "serviceName"},
+				Required: []string{"selector", "template"},
 			},
 		},
 		Dependencies: []string{
@@ -44692,7 +44760,7 @@ func schema_k8sio_api_batch_v1_JobSpec(ref common.ReferenceCallback) common.Open
 					},
 					"successPolicy": {
 						SchemaProps: spec.SchemaProps{
-							Description: "successPolicy specifies the policy when the Job can be declared as succeeded. If empty, the default behavior applies - the Job is declared as succeeded only when the number of succeeded pods equals to the completions. When the field is specified, it must be immutable and works only for the Indexed Jobs. Once the Job meets the SuccessPolicy, the lingering pods are terminated.\n\nThis field is beta-level. To use this field, you must enable the `JobSuccessPolicy` feature gate (enabled by default).",
+							Description: "successPolicy specifies the policy when the Job can be declared as succeeded. If empty, the default behavior applies - the Job is declared as succeeded only when the number of succeeded pods equals to the completions. When the field is specified, it must be immutable and works only for the Indexed Jobs. Once the Job meets the SuccessPolicy, the lingering pods are terminated.",
 							Ref:         ref("k8s.io/api/batch/v1.SuccessPolicy"),
 						},
 					},
@@ -44705,14 +44773,14 @@ func schema_k8sio_api_batch_v1_JobSpec(ref common.ReferenceCallback) common.Open
 					},
 					"backoffLimitPerIndex": {
 						SchemaProps: spec.SchemaProps{
-							Description: "Specifies the limit for the number of retries within an index before marking this index as failed. When enabled the number of failures per index is kept in the pod's batch.kubernetes.io/job-index-failure-count annotation. It can only be set when Job's completionMode=Indexed, and the Pod's restart policy is Never. The field is immutable. This field is beta-level. It can be used when the `JobBackoffLimitPerIndex` feature gate is enabled (enabled by default).",
+							Description: "Specifies the limit for the number of retries within an index before marking this index as failed. When enabled the number of failures per index is kept in the pod's batch.kubernetes.io/job-index-failure-count annotation. It can only be set when Job's completionMode=Indexed, and the Pod's restart policy is Never. The field is immutable.",
 							Type:        []string{"integer"},
 							Format:      "int32",
 						},
 					},
 					"maxFailedIndexes": {
 						SchemaProps: spec.SchemaProps{
-							Description: "Specifies the maximal number of failed indexes before marking the Job as failed, when backoffLimitPerIndex is set. Once the number of failed indexes exceeds this number the entire Job is marked as Failed and its execution is terminated. When left as null the job continues execution of all of its indexes and is marked with the `Complete` Job condition. It can only be specified when backoffLimitPerIndex is set. It can be null or up to completions. It is required and must be less than or equal to 10^4 when is completions greater than 10^5. This field is beta-level. It can be used when the `JobBackoffLimitPerIndex` feature gate is enabled (enabled by default).",
+							Description: "Specifies the maximal number of failed indexes before marking the Job as failed, when backoffLimitPerIndex is set. Once the number of failed indexes exceeds this number the entire Job is marked as Failed and its execution is terminated. When left as null the job continues execution of all of its indexes and is marked with the `Complete` Job condition. It can only be specified when backoffLimitPerIndex is set. It can be null or up to completions. It is required and must be less than or equal to 10^4 when is completions greater than 10^5.",
 							Type:        []string{"integer"},
 							Format:      "int32",
 						},
@@ -44860,7 +44928,7 @@ func schema_k8sio_api_batch_v1_JobStatus(ref common.ReferenceCallback) common.Op
 					},
 					"failedIndexes": {
 						SchemaProps: spec.SchemaProps{
-							Description: "FailedIndexes holds the failed indexes when spec.backoffLimitPerIndex is set. The indexes are represented in the text format analogous as for the `completedIndexes` field, ie. they are kept as decimal integers separated by commas. The numbers are listed in increasing order. Three or more consecutive numbers are compressed and represented by the first and last element of the series, separated by a hyphen. For example, if the failed indexes are 1, 3, 4, 5 and 7, they are represented as \"1,3-5,7\". The set of failed indexes cannot overlap with the set of completed indexes.\n\nThis field is beta-level. It can be used when the `JobBackoffLimitPerIndex` feature gate is enabled (enabled by default).",
+							Description: "FailedIndexes holds the failed indexes when spec.backoffLimitPerIndex is set. The indexes are represented in the text format analogous as for the `completedIndexes` field, ie. they are kept as decimal integers separated by commas. The numbers are listed in increasing order. Three or more consecutive numbers are compressed and represented by the first and last element of the series, separated by a hyphen. For example, if the failed indexes are 1, 3, 4, 5 and 7, they are represented as \"1,3-5,7\". The set of failed indexes cannot overlap with the set of completed indexes.",
 							Type:        []string{"string"},
 							Format:      "",
 						},
@@ -45039,7 +45107,7 @@ func schema_k8sio_api_batch_v1_PodFailurePolicyRule(ref common.ReferenceCallback
 				Properties: map[string]spec.Schema{
 					"action": {
 						SchemaProps: spec.SchemaProps{
-							Description: "Specifies the action taken on a pod failure when the requirements are satisfied. Possible values are:\n\n- FailJob: indicates that the pod's job is marked as Failed and all\n  running pods are terminated.\n- FailIndex: indicates that the pod's index is marked as Failed and will\n  not be restarted.\n  This value is beta-level. It can be used when the\n  `JobBackoffLimitPerIndex` feature gate is enabled (enabled by default).\n- Ignore: indicates that the counter towards the .backoffLimit is not\n  incremented and a replacement pod is created.\n- Count: indicates that the pod is handled in the default way - the\n  counter towards the .backoffLimit is incremented.\nAdditional values are considered to be added in the future. Clients should react to an unknown action by skipping the rule.\n\nPossible enum values:\n - `\"Count\"` This is an action which might be taken on a pod failure - the pod failure is handled in the default way - the counter towards .backoffLimit, represented by the job's .status.failed field, is incremented.\n - `\"FailIndex\"` This is an action which might be taken on a pod failure - mark the Job's index as failed to avoid restarts within this index. This action can only be used when backoffLimitPerIndex is set. This value is beta-level.\n - `\"FailJob\"` This is an action which might be taken on a pod failure - mark the pod's job as Failed and terminate all running pods.\n - `\"Ignore\"` This is an action which might be taken on a pod failure - the counter towards .backoffLimit, represented by the job's .status.failed field, is not incremented and a replacement pod is created.",
+							Description: "Specifies the action taken on a pod failure when the requirements are satisfied. Possible values are:\n\n- FailJob: indicates that the pod's job is marked as Failed and all\n  running pods are terminated.\n- FailIndex: indicates that the pod's index is marked as Failed and will\n  not be restarted.\n- Ignore: indicates that the counter towards the .backoffLimit is not\n  incremented and a replacement pod is created.\n- Count: indicates that the pod is handled in the default way - the\n  counter towards the .backoffLimit is incremented.\nAdditional values are considered to be added in the future. Clients should react to an unknown action by skipping the rule.\n\nPossible enum values:\n - `\"Count\"` This is an action which might be taken on a pod failure - the pod failure is handled in the default way - the counter towards .backoffLimit, represented by the job's .status.failed field, is incremented.\n - `\"FailIndex\"` This is an action which might be taken on a pod failure - mark the Job's index as failed to avoid restarts within this index. This action can only be used when backoffLimitPerIndex is set.\n - `\"FailJob\"` This is an action which might be taken on a pod failure - mark the pod's job as Failed and terminate all running pods.\n - `\"Ignore\"` This is an action which might be taken on a pod failure - the counter towards .backoffLimit, represented by the job's .status.failed field, is not incremented and a replacement pod is created.",
 							Default:     "",
 							Type:        []string{"string"},
 							Format:      "",
@@ -45764,6 +45832,130 @@ func schema_k8sio_api_certificates_v1beta1_CertificateSigningRequestStatus(ref c
 	}
 }
 
+func schema_k8sio_api_certificates_v1beta1_ClusterTrustBundle(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "ClusterTrustBundle is a cluster-scoped container for X.509 trust anchors (root certificates).\n\nClusterTrustBundle objects are considered to be readable by any authenticated user in the cluster, because they can be mounted by pods using the `clusterTrustBundle` projection.  All service accounts have read access to ClusterTrustBundles by default.  Users who only have namespace-level access to a cluster can read ClusterTrustBundles by impersonating a serviceaccount that they have access to.\n\nIt can be optionally associated with a particular assigner, in which case it contains one valid set of trust anchors for that signer. Signers may have multiple associated ClusterTrustBundles; each is an independent set of trust anchors for that signer. Admission control is used to enforce that only users with permissions on the signer can create or modify the corresponding bundle.",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"kind": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"apiVersion": {
+						SchemaProps: spec.SchemaProps{
+							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"metadata": {
+						SchemaProps: spec.SchemaProps{
+							Description: "metadata contains the object metadata.",
+							Default:     map[string]interface{}{},
+							Ref:         ref("k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"),
+						},
+					},
+					"spec": {
+						SchemaProps: spec.SchemaProps{
+							Description: "spec contains the signer (if any) and trust anchors.",
+							Default:     map[string]interface{}{},
+							Ref:         ref("k8s.io/api/certificates/v1beta1.ClusterTrustBundleSpec"),
+						},
+					},
+				},
+				Required: []string{"spec"},
+			},
+		},
+		Dependencies: []string{
+			"k8s.io/api/certificates/v1beta1.ClusterTrustBundleSpec", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
+	}
+}
+
+func schema_k8sio_api_certificates_v1beta1_ClusterTrustBundleList(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "ClusterTrustBundleList is a collection of ClusterTrustBundle objects",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"kind": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"apiVersion": {
+						SchemaProps: spec.SchemaProps{
+							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"metadata": {
+						SchemaProps: spec.SchemaProps{
+							Description: "metadata contains the list metadata.",
+							Default:     map[string]interface{}{},
+							Ref:         ref("k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"),
+						},
+					},
+					"items": {
+						SchemaProps: spec.SchemaProps{
+							Description: "items is a collection of ClusterTrustBundle objects",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref("k8s.io/api/certificates/v1beta1.ClusterTrustBundle"),
+									},
+								},
+							},
+						},
+					},
+				},
+				Required: []string{"items"},
+			},
+		},
+		Dependencies: []string{
+			"k8s.io/api/certificates/v1beta1.ClusterTrustBundle", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
+	}
+}
+
+func schema_k8sio_api_certificates_v1beta1_ClusterTrustBundleSpec(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "ClusterTrustBundleSpec contains the signer and trust anchors.",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"signerName": {
+						SchemaProps: spec.SchemaProps{
+							Description: "signerName indicates the associated signer, if any.\n\nIn order to create or update a ClusterTrustBundle that sets signerName, you must have the following cluster-scoped permission: group=certificates.k8s.io resource=signers resourceName=<the signer name> verb=attest.\n\nIf signerName is not empty, then the ClusterTrustBundle object must be named with the signer name as a prefix (translating slashes to colons). For example, for the signer name `example.com/foo`, valid ClusterTrustBundle object names include `example.com:foo:abc` and `example.com:foo:v1`.\n\nIf signerName is empty, then the ClusterTrustBundle object's name must not have such a prefix.\n\nList/watch requests for ClusterTrustBundles can filter on this field using a `spec.signerName=NAME` field selector.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"trustBundle": {
+						SchemaProps: spec.SchemaProps{
+							Description: "trustBundle contains the individual X.509 trust anchors for this bundle, as PEM bundle of PEM-wrapped, DER-formatted X.509 certificates.\n\nThe data must consist only of PEM certificate blocks that parse as valid X.509 certificates.  Each certificate must include a basic constraints extension with the CA bit set.  The API server will reject objects that contain duplicate certificates, or that use PEM block headers.\n\nUsers of ClusterTrustBundles, including Kubelet, are free to reorder and deduplicate certificate blocks in this file according to their own logic, as well as to drop PEM block headers and inter-block data.",
+							Default:     "",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+				},
+				Required: []string{"trustBundle"},
+			},
+		},
+	}
+}
+
 func schema_k8sio_api_coordination_v1_Lease(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
@@ -45960,6 +46152,158 @@ func schema_k8sio_api_coordination_v1beta1_Lease(ref common.ReferenceCallback) c
 		},
 		Dependencies: []string{
 			"k8s.io/api/coordination/v1beta1.LeaseSpec", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
+	}
+}
+
+func schema_k8sio_api_coordination_v1beta1_LeaseCandidate(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "LeaseCandidate defines a candidate for a Lease object. Candidates are created such that coordinated leader election will pick the best leader from the list of candidates.",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"kind": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"apiVersion": {
+						SchemaProps: spec.SchemaProps{
+							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"metadata": {
+						SchemaProps: spec.SchemaProps{
+							Description: "More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata",
+							Default:     map[string]interface{}{},
+							Ref:         ref("k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"),
+						},
+					},
+					"spec": {
+						SchemaProps: spec.SchemaProps{
+							Description: "spec contains the specification of the Lease. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status",
+							Default:     map[string]interface{}{},
+							Ref:         ref("k8s.io/api/coordination/v1beta1.LeaseCandidateSpec"),
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			"k8s.io/api/coordination/v1beta1.LeaseCandidateSpec", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
+	}
+}
+
+func schema_k8sio_api_coordination_v1beta1_LeaseCandidateList(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "LeaseCandidateList is a list of Lease objects.",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"kind": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"apiVersion": {
+						SchemaProps: spec.SchemaProps{
+							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"metadata": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Standard list metadata. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata",
+							Default:     map[string]interface{}{},
+							Ref:         ref("k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"),
+						},
+					},
+					"items": {
+						SchemaProps: spec.SchemaProps{
+							Description: "items is a list of schema objects.",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref("k8s.io/api/coordination/v1beta1.LeaseCandidate"),
+									},
+								},
+							},
+						},
+					},
+				},
+				Required: []string{"items"},
+			},
+		},
+		Dependencies: []string{
+			"k8s.io/api/coordination/v1beta1.LeaseCandidate", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
+	}
+}
+
+func schema_k8sio_api_coordination_v1beta1_LeaseCandidateSpec(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "LeaseCandidateSpec is a specification of a Lease.",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"leaseName": {
+						SchemaProps: spec.SchemaProps{
+							Description: "LeaseName is the name of the lease for which this candidate is contending. The limits on this field are the same as on Lease.name. Multiple lease candidates may reference the same Lease.name. This field is immutable.",
+							Default:     "",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"pingTime": {
+						SchemaProps: spec.SchemaProps{
+							Description: "PingTime is the last time that the server has requested the LeaseCandidate to renew. It is only done during leader election to check if any LeaseCandidates have become ineligible. When PingTime is updated, the LeaseCandidate will respond by updating RenewTime.",
+							Ref:         ref("k8s.io/apimachinery/pkg/apis/meta/v1.MicroTime"),
+						},
+					},
+					"renewTime": {
+						SchemaProps: spec.SchemaProps{
+							Description: "RenewTime is the time that the LeaseCandidate was last updated. Any time a Lease needs to do leader election, the PingTime field is updated to signal to the LeaseCandidate that they should update the RenewTime. Old LeaseCandidate objects are also garbage collected if it has been hours since the last renew. The PingTime field is updated regularly to prevent garbage collection for still active LeaseCandidates.",
+							Ref:         ref("k8s.io/apimachinery/pkg/apis/meta/v1.MicroTime"),
+						},
+					},
+					"binaryVersion": {
+						SchemaProps: spec.SchemaProps{
+							Description: "BinaryVersion is the binary version. It must be in a semver format without leading `v`. This field is required.",
+							Default:     "",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"emulationVersion": {
+						SchemaProps: spec.SchemaProps{
+							Description: "EmulationVersion is the emulation version. It must be in a semver format without leading `v`. EmulationVersion must be less than or equal to BinaryVersion. This field is required when strategy is \"OldestEmulationVersion\"",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"strategy": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Strategy is the strategy that coordinated leader election will use for picking the leader. If multiple candidates for the same Lease return different strategies, the strategy provided by the candidate with the latest BinaryVersion will be used. If there is still conflict, this is a user error and coordinated leader election will not operate the Lease until resolved.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+				},
+				Required: []string{"leaseName", "binaryVersion", "strategy"},
+			},
+		},
+		Dependencies: []string{
+			"k8s.io/apimachinery/pkg/apis/meta/v1.MicroTime"},
 	}
 }
 
@@ -48175,6 +48519,14 @@ func schema_k8sio_api_core_v1_ContainerStatus(ref common.ReferenceCallback) comm
 							},
 						},
 					},
+					"stopSignal": {
+						SchemaProps: spec.SchemaProps{
+							Description: "StopSignal reports the effective stop signal for this container\n\nPossible enum values:\n - `\"SIGABRT\"`\n - `\"SIGALRM\"`\n - `\"SIGBUS\"`\n - `\"SIGCHLD\"`\n - `\"SIGCLD\"`\n - `\"SIGCONT\"`\n - `\"SIGFPE\"`\n - `\"SIGHUP\"`\n - `\"SIGILL\"`\n - `\"SIGINT\"`\n - `\"SIGIO\"`\n - `\"SIGIOT\"`\n - `\"SIGKILL\"`\n - `\"SIGPIPE\"`\n - `\"SIGPOLL\"`\n - `\"SIGPROF\"`\n - `\"SIGPWR\"`\n - `\"SIGQUIT\"`\n - `\"SIGRTMAX\"`\n - `\"SIGRTMAX-1\"`\n - `\"SIGRTMAX-10\"`\n - `\"SIGRTMAX-11\"`\n - `\"SIGRTMAX-12\"`\n - `\"SIGRTMAX-13\"`\n - `\"SIGRTMAX-14\"`\n - `\"SIGRTMAX-2\"`\n - `\"SIGRTMAX-3\"`\n - `\"SIGRTMAX-4\"`\n - `\"SIGRTMAX-5\"`\n - `\"SIGRTMAX-6\"`\n - `\"SIGRTMAX-7\"`\n - `\"SIGRTMAX-8\"`\n - `\"SIGRTMAX-9\"`\n - `\"SIGRTMIN\"`\n - `\"SIGRTMIN+1\"`\n - `\"SIGRTMIN+10\"`\n - `\"SIGRTMIN+11\"`\n - `\"SIGRTMIN+12\"`\n - `\"SIGRTMIN+13\"`\n - `\"SIGRTMIN+14\"`\n - `\"SIGRTMIN+15\"`\n - `\"SIGRTMIN+2\"`\n - `\"SIGRTMIN+3\"`\n - `\"SIGRTMIN+4\"`\n - `\"SIGRTMIN+5\"`\n - `\"SIGRTMIN+6\"`\n - `\"SIGRTMIN+7\"`\n - `\"SIGRTMIN+8\"`\n - `\"SIGRTMIN+9\"`\n - `\"SIGSEGV\"`\n - `\"SIGSTKFLT\"`\n - `\"SIGSTOP\"`\n - `\"SIGSYS\"`\n - `\"SIGTERM\"`\n - `\"SIGTRAP\"`\n - `\"SIGTSTP\"`\n - `\"SIGTTIN\"`\n - `\"SIGTTOU\"`\n - `\"SIGURG\"`\n - `\"SIGUSR1\"`\n - `\"SIGUSR2\"`\n - `\"SIGVTALRM\"`\n - `\"SIGWINCH\"`\n - `\"SIGXCPU\"`\n - `\"SIGXFSZ\"`",
+							Type:        []string{"string"},
+							Format:      "",
+							Enum:        []interface{}{"SIGABRT", "SIGALRM", "SIGBUS", "SIGCHLD", "SIGCLD", "SIGCONT", "SIGFPE", "SIGHUP", "SIGILL", "SIGINT", "SIGIO", "SIGIOT", "SIGKILL", "SIGPIPE", "SIGPOLL", "SIGPROF", "SIGPWR", "SIGQUIT", "SIGRTMAX", "SIGRTMAX-1", "SIGRTMAX-10", "SIGRTMAX-11", "SIGRTMAX-12", "SIGRTMAX-13", "SIGRTMAX-14", "SIGRTMAX-2", "SIGRTMAX-3", "SIGRTMAX-4", "SIGRTMAX-5", "SIGRTMAX-6", "SIGRTMAX-7", "SIGRTMAX-8", "SIGRTMAX-9", "SIGRTMIN", "SIGRTMIN+1", "SIGRTMIN+10", "SIGRTMIN+11", "SIGRTMIN+12", "SIGRTMIN+13", "SIGRTMIN+14", "SIGRTMIN+15", "SIGRTMIN+2", "SIGRTMIN+3", "SIGRTMIN+4", "SIGRTMIN+5", "SIGRTMIN+6", "SIGRTMIN+7", "SIGRTMIN+8", "SIGRTMIN+9", "SIGSEGV", "SIGSTKFLT", "SIGSTOP", "SIGSYS", "SIGTERM", "SIGTRAP", "SIGTSTP", "SIGTTIN", "SIGTTOU", "SIGURG", "SIGUSR1", "SIGUSR2", "SIGVTALRM", "SIGWINCH", "SIGXCPU", "SIGXFSZ"},
+						},
+					},
 				},
 				Required: []string{"name", "ready", "restartCount", "image", "imageID"},
 			},
@@ -48377,7 +48729,7 @@ func schema_k8sio_api_core_v1_EndpointAddress(ref common.ReferenceCallback) comm
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
-				Description: "EndpointAddress is a tuple that describes single IP address.",
+				Description: "EndpointAddress is a tuple that describes single IP address. Deprecated: This API is deprecated in v1.33+.",
 				Type:        []string{"object"},
 				Properties: map[string]spec.Schema{
 					"ip": {
@@ -48426,7 +48778,7 @@ func schema_k8sio_api_core_v1_EndpointPort(ref common.ReferenceCallback) common.
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
-				Description: "EndpointPort is a tuple that describes a single port.",
+				Description: "EndpointPort is a tuple that describes a single port. Deprecated: This API is deprecated in v1.33+.",
 				Type:        []string{"object"},
 				Properties: map[string]spec.Schema{
 					"name": {
@@ -48475,7 +48827,7 @@ func schema_k8sio_api_core_v1_EndpointSubset(ref common.ReferenceCallback) commo
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
-				Description: "EndpointSubset is a group of addresses with a common set of ports. The expanded set of endpoints is the Cartesian product of Addresses x Ports. For example, given:\n\n\t{\n\t  Addresses: [{\"ip\": \"10.10.1.1\"}, {\"ip\": \"10.10.2.2\"}],\n\t  Ports:     [{\"name\": \"a\", \"port\": 8675}, {\"name\": \"b\", \"port\": 309}]\n\t}\n\nThe resulting set of endpoints can be viewed as:\n\n\ta: [ 10.10.1.1:8675, 10.10.2.2:8675 ],\n\tb: [ 10.10.1.1:309, 10.10.2.2:309 ]",
+				Description: "EndpointSubset is a group of addresses with a common set of ports. The expanded set of endpoints is the Cartesian product of Addresses x Ports. For example, given:\n\n\t{\n\t  Addresses: [{\"ip\": \"10.10.1.1\"}, {\"ip\": \"10.10.2.2\"}],\n\t  Ports:     [{\"name\": \"a\", \"port\": 8675}, {\"name\": \"b\", \"port\": 309}]\n\t}\n\nThe resulting set of endpoints can be viewed as:\n\n\ta: [ 10.10.1.1:8675, 10.10.2.2:8675 ],\n\tb: [ 10.10.1.1:309, 10.10.2.2:309 ]\n\nDeprecated: This API is deprecated in v1.33+.",
 				Type:        []string{"object"},
 				Properties: map[string]spec.Schema{
 					"addresses": {
@@ -48547,7 +48899,7 @@ func schema_k8sio_api_core_v1_Endpoints(ref common.ReferenceCallback) common.Ope
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
-				Description: "Endpoints is a collection of endpoints that implement the actual service. Example:\n\n\t Name: \"mysvc\",\n\t Subsets: [\n\t   {\n\t     Addresses: [{\"ip\": \"10.10.1.1\"}, {\"ip\": \"10.10.2.2\"}],\n\t     Ports: [{\"name\": \"a\", \"port\": 8675}, {\"name\": \"b\", \"port\": 309}]\n\t   },\n\t   {\n\t     Addresses: [{\"ip\": \"10.10.3.3\"}],\n\t     Ports: [{\"name\": \"a\", \"port\": 93}, {\"name\": \"b\", \"port\": 76}]\n\t   },\n\t]",
+				Description: "Endpoints is a collection of endpoints that implement the actual service. Example:\n\n\t Name: \"mysvc\",\n\t Subsets: [\n\t   {\n\t     Addresses: [{\"ip\": \"10.10.1.1\"}, {\"ip\": \"10.10.2.2\"}],\n\t     Ports: [{\"name\": \"a\", \"port\": 8675}, {\"name\": \"b\", \"port\": 309}]\n\t   },\n\t   {\n\t     Addresses: [{\"ip\": \"10.10.3.3\"}],\n\t     Ports: [{\"name\": \"a\", \"port\": 93}, {\"name\": \"b\", \"port\": 76}]\n\t   },\n\t]\n\nEndpoints is a legacy API and does not contain information about all Service features. Use discoveryv1.EndpointSlice for complete information about Service endpoints.\n\nDeprecated: This API is deprecated in v1.33+. Use discoveryv1.EndpointSlice.",
 				Type:        []string{"object"},
 				Properties: map[string]spec.Schema{
 					"kind": {
@@ -48602,7 +48954,7 @@ func schema_k8sio_api_core_v1_EndpointsList(ref common.ReferenceCallback) common
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
-				Description: "EndpointsList is a list of endpoints.",
+				Description: "EndpointsList is a list of endpoints. Deprecated: This API is deprecated in v1.33+.",
 				Type:        []string{"object"},
 				Properties: map[string]spec.Schema{
 					"kind": {
@@ -48653,12 +49005,12 @@ func schema_k8sio_api_core_v1_EnvFromSource(ref common.ReferenceCallback) common
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
-				Description: "EnvFromSource represents the source of a set of ConfigMaps",
+				Description: "EnvFromSource represents the source of a set of ConfigMaps or Secrets",
 				Type:        []string{"object"},
 				Properties: map[string]spec.Schema{
 					"prefix": {
 						SchemaProps: spec.SchemaProps{
-							Description: "An optional identifier to prepend to each key in the ConfigMap. Must be a C_IDENTIFIER.",
+							Description: "Optional text to prepend to the name of each environment variable. Must be a C_IDENTIFIER.",
 							Type:        []string{"string"},
 							Format:      "",
 						},
@@ -50560,6 +50912,14 @@ func schema_k8sio_api_core_v1_Lifecycle(ref common.ReferenceCallback) common.Ope
 							Ref:         ref("k8s.io/api/core/v1.LifecycleHandler"),
 						},
 					},
+					"stopSignal": {
+						SchemaProps: spec.SchemaProps{
+							Description: "StopSignal defines which signal will be sent to a container when it is being stopped. If not specified, the default is defined by the container runtime in use. StopSignal can only be set for Pods with a non-empty .spec.os.name\n\nPossible enum values:\n - `\"SIGABRT\"`\n - `\"SIGALRM\"`\n - `\"SIGBUS\"`\n - `\"SIGCHLD\"`\n - `\"SIGCLD\"`\n - `\"SIGCONT\"`\n - `\"SIGFPE\"`\n - `\"SIGHUP\"`\n - `\"SIGILL\"`\n - `\"SIGINT\"`\n - `\"SIGIO\"`\n - `\"SIGIOT\"`\n - `\"SIGKILL\"`\n - `\"SIGPIPE\"`\n - `\"SIGPOLL\"`\n - `\"SIGPROF\"`\n - `\"SIGPWR\"`\n - `\"SIGQUIT\"`\n - `\"SIGRTMAX\"`\n - `\"SIGRTMAX-1\"`\n - `\"SIGRTMAX-10\"`\n - `\"SIGRTMAX-11\"`\n - `\"SIGRTMAX-12\"`\n - `\"SIGRTMAX-13\"`\n - `\"SIGRTMAX-14\"`\n - `\"SIGRTMAX-2\"`\n - `\"SIGRTMAX-3\"`\n - `\"SIGRTMAX-4\"`\n - `\"SIGRTMAX-5\"`\n - `\"SIGRTMAX-6\"`\n - `\"SIGRTMAX-7\"`\n - `\"SIGRTMAX-8\"`\n - `\"SIGRTMAX-9\"`\n - `\"SIGRTMIN\"`\n - `\"SIGRTMIN+1\"`\n - `\"SIGRTMIN+10\"`\n - `\"SIGRTMIN+11\"`\n - `\"SIGRTMIN+12\"`\n - `\"SIGRTMIN+13\"`\n - `\"SIGRTMIN+14\"`\n - `\"SIGRTMIN+15\"`\n - `\"SIGRTMIN+2\"`\n - `\"SIGRTMIN+3\"`\n - `\"SIGRTMIN+4\"`\n - `\"SIGRTMIN+5\"`\n - `\"SIGRTMIN+6\"`\n - `\"SIGRTMIN+7\"`\n - `\"SIGRTMIN+8\"`\n - `\"SIGRTMIN+9\"`\n - `\"SIGSEGV\"`\n - `\"SIGSTKFLT\"`\n - `\"SIGSTOP\"`\n - `\"SIGSYS\"`\n - `\"SIGTERM\"`\n - `\"SIGTRAP\"`\n - `\"SIGTSTP\"`\n - `\"SIGTTIN\"`\n - `\"SIGTTOU\"`\n - `\"SIGURG\"`\n - `\"SIGUSR1\"`\n - `\"SIGUSR2\"`\n - `\"SIGVTALRM\"`\n - `\"SIGWINCH\"`\n - `\"SIGXCPU\"`\n - `\"SIGXFSZ\"`",
+							Type:        []string{"string"},
+							Format:      "",
+							Enum:        []interface{}{"SIGABRT", "SIGALRM", "SIGBUS", "SIGCHLD", "SIGCLD", "SIGCONT", "SIGFPE", "SIGHUP", "SIGILL", "SIGINT", "SIGIO", "SIGIOT", "SIGKILL", "SIGPIPE", "SIGPOLL", "SIGPROF", "SIGPWR", "SIGQUIT", "SIGRTMAX", "SIGRTMAX-1", "SIGRTMAX-10", "SIGRTMAX-11", "SIGRTMAX-12", "SIGRTMAX-13", "SIGRTMAX-14", "SIGRTMAX-2", "SIGRTMAX-3", "SIGRTMAX-4", "SIGRTMAX-5", "SIGRTMAX-6", "SIGRTMAX-7", "SIGRTMAX-8", "SIGRTMAX-9", "SIGRTMIN", "SIGRTMIN+1", "SIGRTMIN+10", "SIGRTMIN+11", "SIGRTMIN+12", "SIGRTMIN+13", "SIGRTMIN+14", "SIGRTMIN+15", "SIGRTMIN+2", "SIGRTMIN+3", "SIGRTMIN+4", "SIGRTMIN+5", "SIGRTMIN+6", "SIGRTMIN+7", "SIGRTMIN+8", "SIGRTMIN+9", "SIGSEGV", "SIGSTKFLT", "SIGSTOP", "SIGSYS", "SIGTERM", "SIGTRAP", "SIGTSTP", "SIGTTIN", "SIGTTOU", "SIGURG", "SIGUSR1", "SIGUSR2", "SIGVTALRM", "SIGWINCH", "SIGXCPU", "SIGXFSZ"},
+						},
+					},
 				},
 			},
 		},
@@ -52236,6 +52596,26 @@ func schema_k8sio_api_core_v1_NodeStatus(ref common.ReferenceCallback) common.Op
 	}
 }
 
+func schema_k8sio_api_core_v1_NodeSwapStatus(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "NodeSwapStatus represents swap memory information.",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"capacity": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Total amount of swap memory in bytes.",
+							Type:        []string{"integer"},
+							Format:      "int64",
+						},
+					},
+				},
+			},
+		},
+	}
+}
+
 func schema_k8sio_api_core_v1_NodeSystemInfo(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
@@ -52323,10 +52703,18 @@ func schema_k8sio_api_core_v1_NodeSystemInfo(ref common.ReferenceCallback) commo
 							Format:      "",
 						},
 					},
+					"swap": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Swap Info reported by the node.",
+							Ref:         ref("k8s.io/api/core/v1.NodeSwapStatus"),
+						},
+					},
 				},
 				Required: []string{"machineID", "systemUUID", "bootID", "kernelVersion", "osImage", "containerRuntimeVersion", "kubeletVersion", "kubeProxyVersion", "operatingSystem", "architecture"},
 			},
 		},
+		Dependencies: []string{
+			"k8s.io/api/core/v1.NodeSwapStatus"},
 	}
 }
 
@@ -53596,7 +53984,7 @@ func schema_k8sio_api_core_v1_PodAffinityTerm(ref common.ReferenceCallback) comm
 							},
 						},
 						SchemaProps: spec.SchemaProps{
-							Description: "MatchLabelKeys is a set of pod label keys to select which pods will be taken into consideration. The keys are used to lookup values from the incoming pod labels, those key-value labels are merged with `labelSelector` as `key in (value)` to select the group of existing pods which pods will be taken into consideration for the incoming pod's pod (anti) affinity. Keys that don't exist in the incoming pod labels will be ignored. The default value is empty. The same key is forbidden to exist in both matchLabelKeys and labelSelector. Also, matchLabelKeys cannot be set when labelSelector isn't set. This is a beta field and requires enabling MatchLabelKeysInPodAffinity feature gate (enabled by default).",
+							Description: "MatchLabelKeys is a set of pod label keys to select which pods will be taken into consideration. The keys are used to lookup values from the incoming pod labels, those key-value labels are merged with `labelSelector` as `key in (value)` to select the group of existing pods which pods will be taken into consideration for the incoming pod's pod (anti) affinity. Keys that don't exist in the incoming pod labels will be ignored. The default value is empty. The same key is forbidden to exist in both matchLabelKeys and labelSelector. Also, matchLabelKeys cannot be set when labelSelector isn't set.",
 							Type:        []string{"array"},
 							Items: &spec.SchemaOrArray{
 								Schema: &spec.Schema{
@@ -53616,7 +54004,7 @@ func schema_k8sio_api_core_v1_PodAffinityTerm(ref common.ReferenceCallback) comm
 							},
 						},
 						SchemaProps: spec.SchemaProps{
-							Description: "MismatchLabelKeys is a set of pod label keys to select which pods will be taken into consideration. The keys are used to lookup values from the incoming pod labels, those key-value labels are merged with `labelSelector` as `key notin (value)` to select the group of existing pods which pods will be taken into consideration for the incoming pod's pod (anti) affinity. Keys that don't exist in the incoming pod labels will be ignored. The default value is empty. The same key is forbidden to exist in both mismatchLabelKeys and labelSelector. Also, mismatchLabelKeys cannot be set when labelSelector isn't set. This is a beta field and requires enabling MatchLabelKeysInPodAffinity feature gate (enabled by default).",
+							Description: "MismatchLabelKeys is a set of pod label keys to select which pods will be taken into consideration. The keys are used to lookup values from the incoming pod labels, those key-value labels are merged with `labelSelector` as `key notin (value)` to select the group of existing pods which pods will be taken into consideration for the incoming pod's pod (anti) affinity. Keys that don't exist in the incoming pod labels will be ignored. The default value is empty. The same key is forbidden to exist in both mismatchLabelKeys and labelSelector. Also, mismatchLabelKeys cannot be set when labelSelector isn't set.",
 							Type:        []string{"array"},
 							Items: &spec.SchemaOrArray{
 								Schema: &spec.Schema{
@@ -53766,6 +54154,13 @@ func schema_k8sio_api_core_v1_PodCondition(ref common.ReferenceCallback) common.
 							Default:     "",
 							Type:        []string{"string"},
 							Format:      "",
+						},
+					},
+					"observedGeneration": {
+						SchemaProps: spec.SchemaProps{
+							Description: "If set, this represents the .metadata.generation that the pod condition was set based upon. This is an alpha field. Enable PodObservedGenerationTracking to be able to use this field.",
+							Type:        []string{"integer"},
+							Format:      "int64",
 						},
 					},
 					"status": {
@@ -54571,7 +54966,7 @@ func schema_k8sio_api_core_v1_PodSpec(ref common.ReferenceCallback) common.OpenA
 							},
 						},
 						SchemaProps: spec.SchemaProps{
-							Description: "List of initialization containers belonging to the pod. Init containers are executed in order prior to containers being started. If any init container fails, the pod is considered to have failed and is handled according to its restartPolicy. The name for an init container or normal container must be unique among all containers. Init containers may not have Lifecycle actions, Readiness probes, Liveness probes, or Startup probes. The resourceRequirements of an init container are taken into account during scheduling by finding the highest request/limit for each resource type, and then using the max of of that value or the sum of the normal containers. Limits are applied to init containers in a similar fashion. Init containers cannot currently be added or removed. Cannot be updated. More info: https://kubernetes.io/docs/concepts/workloads/pods/init-containers/",
+							Description: "List of initialization containers belonging to the pod. Init containers are executed in order prior to containers being started. If any init container fails, the pod is considered to have failed and is handled according to its restartPolicy. The name for an init container or normal container must be unique among all containers. Init containers may not have Lifecycle actions, Readiness probes, Liveness probes, or Startup probes. The resourceRequirements of an init container are taken into account during scheduling by finding the highest request/limit for each resource type, and then using the max of that value or the sum of the normal containers. Limits are applied to init containers in a similar fashion. Init containers cannot currently be added or removed. Cannot be updated. More info: https://kubernetes.io/docs/concepts/workloads/pods/init-containers/",
 							Type:        []string{"array"},
 							Items: &spec.SchemaOrArray{
 								Schema: &spec.Schema{
@@ -55028,6 +55423,13 @@ func schema_k8sio_api_core_v1_PodStatus(ref common.ReferenceCallback) common.Ope
 				Description: "PodStatus represents information about the status of a pod. Status may trail the actual state of a system, especially if the node that hosts the pod cannot contact the control plane.",
 				Type:        []string{"object"},
 				Properties: map[string]spec.Schema{
+					"observedGeneration": {
+						SchemaProps: spec.SchemaProps{
+							Description: "If set, this represents the .metadata.generation that the pod status was set based upon. This is an alpha field. Enable PodObservedGenerationTracking to be able to use this field.",
+							Type:        []string{"integer"},
+							Format:      "int64",
+						},
+					},
 					"phase": {
 						SchemaProps: spec.SchemaProps{
 							Description: "The phase of a Pod is a simple, high-level summary of where the Pod is in its lifecycle. The conditions array, the reason and message fields, and the individual container status arrays contain more detail about the pod's status. There are five possible phase values:\n\nPending: The pod has been accepted by the Kubernetes system, but one or more of the container images has not been created. This includes time before being scheduled as well as time spent downloading images over the network, which could take a while. Running: The pod has been bound to a node, and all of the containers have been created. At least one container is still running, or is in the process of starting or restarting. Succeeded: All containers in the pod have terminated in success, and will not be restarted. Failed: All containers in the pod have terminated, and at least one container has terminated in failure. The container either exited with non-zero status or was terminated by the system. Unknown: For some reason the state of the pod could not be obtained, typically due to an error in communicating with the host of the pod.\n\nMore info: https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle#pod-phase\n\nPossible enum values:\n - `\"Failed\"` means that all containers in the pod have terminated, and at least one container has terminated in a failure (exited with a non-zero exit code or was stopped by the system).\n - `\"Pending\"` means the pod has been accepted by the system, but one or more of the containers has not been started. This includes time before being bound to a node, as well as time spent pulling images onto the host.\n - `\"Running\"` means the pod has been bound to a node and all of the containers have been started. At least one container is still running or is in the process of being restarted.\n - `\"Succeeded\"` means that all containers in the pod have voluntarily terminated with a container exit code of 0, and the system is not going to restart any of these containers.\n - `\"Unknown\"` means that for some reason the state of the pod could not be obtained, typically due to an error in communicating with the host of the pod. Deprecated: It isn't being set since 2015 (74da3b14b0c0f658b3bb8d2def5094686d0e9095)",
@@ -55213,7 +55615,7 @@ func schema_k8sio_api_core_v1_PodStatus(ref common.ReferenceCallback) common.Ope
 					},
 					"resize": {
 						SchemaProps: spec.SchemaProps{
-							Description: "Status of resources resize desired for pod's containers. It is empty if no resources resize is pending. Any changes to container resources will automatically set this to \"Proposed\"",
+							Description: "Status of resources resize desired for pod's containers. It is empty if no resources resize is pending. Any changes to container resources will automatically set this to \"Proposed\" Deprecated: Resize status is moved to two pod conditions PodResizePending and PodResizeInProgress. PodResizePending will track states where the spec has been resized, but the Kubelet has not yet allocated the resources. PodResizeInProgress will track in-progress resizes, and should be present whenever allocated resources != acknowledged resources.",
 							Type:        []string{"string"},
 							Format:      "",
 						},
@@ -56174,6 +56576,7 @@ func schema_k8sio_api_core_v1_ReplicationControllerSpec(ref common.ReferenceCall
 					"replicas": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Replicas is the number of desired replicas. This is a pointer to distinguish between explicit zero and unspecified. Defaults to 1. More info: https://kubernetes.io/docs/concepts/workloads/controllers/replicationcontroller#what-is-a-replicationcontroller",
+							Default:     1,
 							Type:        []string{"integer"},
 							Format:      "int32",
 						},
@@ -56181,6 +56584,7 @@ func schema_k8sio_api_core_v1_ReplicationControllerSpec(ref common.ReferenceCall
 					"minReadySeconds": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Minimum number of seconds for which a newly created pod should be ready without any of its container crashing, for it to be considered available. Defaults to 0 (pod will be considered available as soon as it is ready)",
+							Default:     0,
 							Type:        []string{"integer"},
 							Format:      "int32",
 						},
@@ -56533,7 +56937,7 @@ func schema_k8sio_api_core_v1_ResourceQuotaSpec(ref common.ReferenceCallback) co
 										Default: "",
 										Type:    []string{"string"},
 										Format:  "",
-										Enum:    []interface{}{"BestEffort", "CrossNamespacePodAffinity", "NotBestEffort", "NotTerminating", "PriorityClass", "Terminating"},
+										Enum:    []interface{}{"BestEffort", "CrossNamespacePodAffinity", "NotBestEffort", "NotTerminating", "PriorityClass", "Terminating", "VolumeAttributesClass"},
 									},
 								},
 							},
@@ -56974,11 +57378,11 @@ func schema_k8sio_api_core_v1_ScopedResourceSelectorRequirement(ref common.Refer
 				Properties: map[string]spec.Schema{
 					"scopeName": {
 						SchemaProps: spec.SchemaProps{
-							Description: "The name of the scope that the selector applies to.\n\nPossible enum values:\n - `\"BestEffort\"` Match all pod objects that have best effort quality of service\n - `\"CrossNamespacePodAffinity\"` Match all pod objects that have cross-namespace pod (anti)affinity mentioned.\n - `\"NotBestEffort\"` Match all pod objects that do not have best effort quality of service\n - `\"NotTerminating\"` Match all pod objects where spec.activeDeadlineSeconds is nil\n - `\"PriorityClass\"` Match all pod objects that have priority class mentioned\n - `\"Terminating\"` Match all pod objects where spec.activeDeadlineSeconds >=0",
+							Description: "The name of the scope that the selector applies to.\n\nPossible enum values:\n - `\"BestEffort\"` Match all pod objects that have best effort quality of service\n - `\"CrossNamespacePodAffinity\"` Match all pod objects that have cross-namespace pod (anti)affinity mentioned.\n - `\"NotBestEffort\"` Match all pod objects that do not have best effort quality of service\n - `\"NotTerminating\"` Match all pod objects where spec.activeDeadlineSeconds is nil\n - `\"PriorityClass\"` Match all pod objects that have priority class mentioned\n - `\"Terminating\"` Match all pod objects where spec.activeDeadlineSeconds >=0\n - `\"VolumeAttributesClass\"` Match all pvc objects that have volume attributes class mentioned.",
 							Default:     "",
 							Type:        []string{"string"},
 							Format:      "",
-							Enum:        []interface{}{"BestEffort", "CrossNamespacePodAffinity", "NotBestEffort", "NotTerminating", "PriorityClass", "Terminating"},
+							Enum:        []interface{}{"BestEffort", "CrossNamespacePodAffinity", "NotBestEffort", "NotTerminating", "PriorityClass", "Terminating", "VolumeAttributesClass"},
 						},
 					},
 					"operator": {
@@ -58127,7 +58531,7 @@ func schema_k8sio_api_core_v1_ServiceSpec(ref common.ReferenceCallback) common.O
 					},
 					"trafficDistribution": {
 						SchemaProps: spec.SchemaProps{
-							Description: "TrafficDistribution offers a way to express preferences for how traffic is distributed to Service endpoints. Implementations can use this field as a hint, but are not required to guarantee strict adherence. If the field is not set, the implementation will apply its default routing strategy. If set to \"PreferClose\", implementations should prioritize endpoints that are topologically close (e.g., same zone). This is a beta field and requires enabling ServiceTrafficDistribution feature.",
+							Description: "TrafficDistribution offers a way to express preferences for how traffic is distributed to Service endpoints. Implementations can use this field as a hint, but are not required to guarantee strict adherence. If the field is not set, the implementation will apply its default routing strategy. If set to \"PreferClose\", implementations should prioritize endpoints that are in the same zone.",
 							Type:        []string{"string"},
 							Format:      "",
 						},
@@ -58610,7 +59014,7 @@ func schema_k8sio_api_core_v1_TopologySpreadConstraint(ref common.ReferenceCallb
 					},
 					"nodeAffinityPolicy": {
 						SchemaProps: spec.SchemaProps{
-							Description: "NodeAffinityPolicy indicates how we will treat Pod's nodeAffinity/nodeSelector when calculating pod topology spread skew. Options are: - Honor: only nodes matching nodeAffinity/nodeSelector are included in the calculations. - Ignore: nodeAffinity/nodeSelector are ignored. All nodes are included in the calculations.\n\nIf this value is nil, the behavior is equivalent to the Honor policy. This is a beta-level feature default enabled by the NodeInclusionPolicyInPodTopologySpread feature flag.\n\nPossible enum values:\n - `\"Honor\"` means use this scheduling directive when calculating pod topology spread skew.\n - `\"Ignore\"` means ignore this scheduling directive when calculating pod topology spread skew.",
+							Description: "NodeAffinityPolicy indicates how we will treat Pod's nodeAffinity/nodeSelector when calculating pod topology spread skew. Options are: - Honor: only nodes matching nodeAffinity/nodeSelector are included in the calculations. - Ignore: nodeAffinity/nodeSelector are ignored. All nodes are included in the calculations.\n\nIf this value is nil, the behavior is equivalent to the Honor policy.\n\nPossible enum values:\n - `\"Honor\"` means use this scheduling directive when calculating pod topology spread skew.\n - `\"Ignore\"` means ignore this scheduling directive when calculating pod topology spread skew.",
 							Type:        []string{"string"},
 							Format:      "",
 							Enum:        []interface{}{"Honor", "Ignore"},
@@ -58618,7 +59022,7 @@ func schema_k8sio_api_core_v1_TopologySpreadConstraint(ref common.ReferenceCallb
 					},
 					"nodeTaintsPolicy": {
 						SchemaProps: spec.SchemaProps{
-							Description: "NodeTaintsPolicy indicates how we will treat node taints when calculating pod topology spread skew. Options are: - Honor: nodes without taints, along with tainted nodes for which the incoming pod has a toleration, are included. - Ignore: node taints are ignored. All nodes are included.\n\nIf this value is nil, the behavior is equivalent to the Ignore policy. This is a beta-level feature default enabled by the NodeInclusionPolicyInPodTopologySpread feature flag.\n\nPossible enum values:\n - `\"Honor\"` means use this scheduling directive when calculating pod topology spread skew.\n - `\"Ignore\"` means ignore this scheduling directive when calculating pod topology spread skew.",
+							Description: "NodeTaintsPolicy indicates how we will treat node taints when calculating pod topology spread skew. Options are: - Honor: nodes without taints, along with tainted nodes for which the incoming pod has a toleration, are included. - Ignore: node taints are ignored. All nodes are included.\n\nIf this value is nil, the behavior is equivalent to the Ignore policy.\n\nPossible enum values:\n - `\"Honor\"` means use this scheduling directive when calculating pod topology spread skew.\n - `\"Ignore\"` means ignore this scheduling directive when calculating pod topology spread skew.",
 							Type:        []string{"string"},
 							Format:      "",
 							Enum:        []interface{}{"Honor", "Ignore"},
@@ -58930,7 +59334,7 @@ func schema_k8sio_api_core_v1_Volume(ref common.ReferenceCallback) common.OpenAP
 					},
 					"image": {
 						SchemaProps: spec.SchemaProps{
-							Description: "image represents an OCI object (a container image or artifact) pulled and mounted on the kubelet's host machine. The volume is resolved at pod startup depending on which PullPolicy value is provided:\n\n- Always: the kubelet always attempts to pull the reference. Container creation will fail If the pull fails. - Never: the kubelet never pulls the reference and only uses a local image or artifact. Container creation will fail if the reference isn't present. - IfNotPresent: the kubelet pulls if the reference isn't already present on disk. Container creation will fail if the reference isn't present and the pull fails.\n\nThe volume gets re-resolved if the pod gets deleted and recreated, which means that new remote content will become available on pod recreation. A failure to resolve or pull the image during pod startup will block containers from starting and may add significant latency. Failures will be retried using normal volume backoff and will be reported on the pod reason and message. The types of objects that may be mounted by this volume are defined by the container runtime implementation on a host machine and at minimum must include all valid types supported by the container image field. The OCI object gets mounted in a single directory (spec.containers[*].volumeMounts.mountPath) by merging the manifest layers in the same way as for container images. The volume will be mounted read-only (ro) and non-executable files (noexec). Sub path mounts for containers are not supported (spec.containers[*].volumeMounts.subpath). The field spec.securityContext.fsGroupChangePolicy has no effect on this volume type.",
+							Description: "image represents an OCI object (a container image or artifact) pulled and mounted on the kubelet's host machine. The volume is resolved at pod startup depending on which PullPolicy value is provided:\n\n- Always: the kubelet always attempts to pull the reference. Container creation will fail If the pull fails. - Never: the kubelet never pulls the reference and only uses a local image or artifact. Container creation will fail if the reference isn't present. - IfNotPresent: the kubelet pulls if the reference isn't already present on disk. Container creation will fail if the reference isn't present and the pull fails.\n\nThe volume gets re-resolved if the pod gets deleted and recreated, which means that new remote content will become available on pod recreation. A failure to resolve or pull the image during pod startup will block containers from starting and may add significant latency. Failures will be retried using normal volume backoff and will be reported on the pod reason and message. The types of objects that may be mounted by this volume are defined by the container runtime implementation on a host machine and at minimum must include all valid types supported by the container image field. The OCI object gets mounted in a single directory (spec.containers[*].volumeMounts.mountPath) by merging the manifest layers in the same way as for container images. The volume will be mounted read-only (ro) and non-executable files (noexec). Sub path mounts for containers are not supported (spec.containers[*].volumeMounts.subpath) before 1.33. The field spec.securityContext.fsGroupChangePolicy has no effect on this volume type.",
 							Ref:         ref("k8s.io/api/core/v1.ImageVolumeSource"),
 						},
 					},
@@ -59375,7 +59779,7 @@ func schema_k8sio_api_core_v1_VolumeSource(ref common.ReferenceCallback) common.
 					},
 					"image": {
 						SchemaProps: spec.SchemaProps{
-							Description: "image represents an OCI object (a container image or artifact) pulled and mounted on the kubelet's host machine. The volume is resolved at pod startup depending on which PullPolicy value is provided:\n\n- Always: the kubelet always attempts to pull the reference. Container creation will fail If the pull fails. - Never: the kubelet never pulls the reference and only uses a local image or artifact. Container creation will fail if the reference isn't present. - IfNotPresent: the kubelet pulls if the reference isn't already present on disk. Container creation will fail if the reference isn't present and the pull fails.\n\nThe volume gets re-resolved if the pod gets deleted and recreated, which means that new remote content will become available on pod recreation. A failure to resolve or pull the image during pod startup will block containers from starting and may add significant latency. Failures will be retried using normal volume backoff and will be reported on the pod reason and message. The types of objects that may be mounted by this volume are defined by the container runtime implementation on a host machine and at minimum must include all valid types supported by the container image field. The OCI object gets mounted in a single directory (spec.containers[*].volumeMounts.mountPath) by merging the manifest layers in the same way as for container images. The volume will be mounted read-only (ro) and non-executable files (noexec). Sub path mounts for containers are not supported (spec.containers[*].volumeMounts.subpath). The field spec.securityContext.fsGroupChangePolicy has no effect on this volume type.",
+							Description: "image represents an OCI object (a container image or artifact) pulled and mounted on the kubelet's host machine. The volume is resolved at pod startup depending on which PullPolicy value is provided:\n\n- Always: the kubelet always attempts to pull the reference. Container creation will fail If the pull fails. - Never: the kubelet never pulls the reference and only uses a local image or artifact. Container creation will fail if the reference isn't present. - IfNotPresent: the kubelet pulls if the reference isn't already present on disk. Container creation will fail if the reference isn't present and the pull fails.\n\nThe volume gets re-resolved if the pod gets deleted and recreated, which means that new remote content will become available on pod recreation. A failure to resolve or pull the image during pod startup will block containers from starting and may add significant latency. Failures will be retried using normal volume backoff and will be reported on the pod reason and message. The types of objects that may be mounted by this volume are defined by the container runtime implementation on a host machine and at minimum must include all valid types supported by the container image field. The OCI object gets mounted in a single directory (spec.containers[*].volumeMounts.mountPath) by merging the manifest layers in the same way as for container images. The volume will be mounted read-only (ro) and non-executable files (noexec). Sub path mounts for containers are not supported (spec.containers[*].volumeMounts.subpath) before 1.33. The field spec.securityContext.fsGroupChangePolicy has no effect on this volume type.",
 							Ref:         ref("k8s.io/api/core/v1.ImageVolumeSource"),
 						},
 					},
@@ -60376,28 +60780,28 @@ func schema_k8sio_api_extensions_v1beta1_DeploymentStatus(ref common.ReferenceCa
 					},
 					"replicas": {
 						SchemaProps: spec.SchemaProps{
-							Description: "Total number of non-terminated pods targeted by this deployment (their labels match the selector).",
+							Description: "Total number of non-terminating pods targeted by this deployment (their labels match the selector).",
 							Type:        []string{"integer"},
 							Format:      "int32",
 						},
 					},
 					"updatedReplicas": {
 						SchemaProps: spec.SchemaProps{
-							Description: "Total number of non-terminated pods targeted by this deployment that have the desired template spec.",
+							Description: "Total number of non-terminating pods targeted by this deployment that have the desired template spec.",
 							Type:        []string{"integer"},
 							Format:      "int32",
 						},
 					},
 					"readyReplicas": {
 						SchemaProps: spec.SchemaProps{
-							Description: "Total number of ready pods targeted by this deployment.",
+							Description: "Total number of non-terminating pods targeted by this Deployment with a Ready Condition.",
 							Type:        []string{"integer"},
 							Format:      "int32",
 						},
 					},
 					"availableReplicas": {
 						SchemaProps: spec.SchemaProps{
-							Description: "Total number of available pods (ready for at least minReadySeconds) targeted by this deployment.",
+							Description: "Total number of available non-terminating pods (ready for at least minReadySeconds) targeted by this deployment.",
 							Type:        []string{"integer"},
 							Format:      "int32",
 						},
@@ -60405,6 +60809,13 @@ func schema_k8sio_api_extensions_v1beta1_DeploymentStatus(ref common.ReferenceCa
 					"unavailableReplicas": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Total number of unavailable pods targeted by this deployment. This is the total number of pods that are still required for the deployment to have 100% available capacity. They may either be pods that are running but not yet available or pods that still have not been created.",
+							Type:        []string{"integer"},
+							Format:      "int32",
+						},
+					},
+					"terminatingReplicas": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Total number of terminating pods targeted by this deployment. Terminating pods have a non-null .metadata.deletionTimestamp and have not yet reached the Failed or Succeeded .status.phase.\n\nThis is an alpha field. Enable DeploymentReplicaSetTerminatingReplicas to be able to use this field.",
 							Type:        []string{"integer"},
 							Format:      "int32",
 						},
@@ -61504,7 +61915,7 @@ func schema_k8sio_api_extensions_v1beta1_ReplicaSetList(ref common.ReferenceCall
 					},
 					"items": {
 						SchemaProps: spec.SchemaProps{
-							Description: "List of ReplicaSets. More info: https://kubernetes.io/docs/concepts/workloads/controllers/replicationcontroller",
+							Description: "List of ReplicaSets. More info: https://kubernetes.io/docs/concepts/workloads/controllers/replicaset",
 							Type:        []string{"array"},
 							Items: &spec.SchemaOrArray{
 								Schema: &spec.Schema{
@@ -61534,7 +61945,7 @@ func schema_k8sio_api_extensions_v1beta1_ReplicaSetSpec(ref common.ReferenceCall
 				Properties: map[string]spec.Schema{
 					"replicas": {
 						SchemaProps: spec.SchemaProps{
-							Description: "Replicas is the number of desired replicas. This is a pointer to distinguish between explicit zero and unspecified. Defaults to 1. More info: https://kubernetes.io/docs/concepts/workloads/controllers/replicationcontroller/#what-is-a-replicationcontroller",
+							Description: "Replicas is the number of desired pods. This is a pointer to distinguish between explicit zero and unspecified. Defaults to 1. More info: https://kubernetes.io/docs/concepts/workloads/controllers/replicaset",
 							Type:        []string{"integer"},
 							Format:      "int32",
 						},
@@ -61554,7 +61965,7 @@ func schema_k8sio_api_extensions_v1beta1_ReplicaSetSpec(ref common.ReferenceCall
 					},
 					"template": {
 						SchemaProps: spec.SchemaProps{
-							Description: "Template is the object that describes the pod that will be created if insufficient replicas are detected. More info: https://kubernetes.io/docs/concepts/workloads/controllers/replicationcontroller#pod-template",
+							Description: "Template is the object that describes the pod that will be created if insufficient replicas are detected. More info: https://kubernetes.io/docs/concepts/workloads/controllers/replicaset/#pod-template",
 							Default:     map[string]interface{}{},
 							Ref:         ref("k8s.io/api/core/v1.PodTemplateSpec"),
 						},
@@ -61576,7 +61987,7 @@ func schema_k8sio_api_extensions_v1beta1_ReplicaSetStatus(ref common.ReferenceCa
 				Properties: map[string]spec.Schema{
 					"replicas": {
 						SchemaProps: spec.SchemaProps{
-							Description: "Replicas is the most recently observed number of replicas. More info: https://kubernetes.io/docs/concepts/workloads/controllers/replicationcontroller/#what-is-a-replicationcontroller",
+							Description: "Replicas is the most recently observed number of non-terminating pods. More info: https://kubernetes.io/docs/concepts/workloads/controllers/replicaset",
 							Default:     0,
 							Type:        []string{"integer"},
 							Format:      "int32",
@@ -61584,21 +61995,28 @@ func schema_k8sio_api_extensions_v1beta1_ReplicaSetStatus(ref common.ReferenceCa
 					},
 					"fullyLabeledReplicas": {
 						SchemaProps: spec.SchemaProps{
-							Description: "The number of pods that have labels matching the labels of the pod template of the replicaset.",
+							Description: "The number of non-terminating pods that have labels matching the labels of the pod template of the replicaset.",
 							Type:        []string{"integer"},
 							Format:      "int32",
 						},
 					},
 					"readyReplicas": {
 						SchemaProps: spec.SchemaProps{
-							Description: "The number of ready replicas for this replica set.",
+							Description: "The number of non-terminating pods targeted by this ReplicaSet with a Ready Condition.",
 							Type:        []string{"integer"},
 							Format:      "int32",
 						},
 					},
 					"availableReplicas": {
 						SchemaProps: spec.SchemaProps{
-							Description: "The number of available replicas (ready for at least minReadySeconds) for this replica set.",
+							Description: "The number of available non-terminating pods (ready for at least minReadySeconds) for this replica set.",
+							Type:        []string{"integer"},
+							Format:      "int32",
+						},
+					},
+					"terminatingReplicas": {
+						SchemaProps: spec.SchemaProps{
+							Description: "The number of terminating pods for this replica set. Terminating pods have a non-null .metadata.deletionTimestamp and have not yet reached the Failed or Succeeded .status.phase.\n\nThis is an alpha field. Enable DeploymentReplicaSetTerminatingReplicas to be able to use this field.",
 							Type:        []string{"integer"},
 							Format:      "int32",
 						},
@@ -61907,6 +62325,122 @@ func schema_k8sio_api_networking_v1_HTTPIngressRuleValue(ref common.ReferenceCal
 		},
 		Dependencies: []string{
 			"k8s.io/api/networking/v1.HTTPIngressPath"},
+	}
+}
+
+func schema_k8sio_api_networking_v1_IPAddress(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "IPAddress represents a single IP of a single IP Family. The object is designed to be used by APIs that operate on IP addresses. The object is used by the Service core API for allocation of IP addresses. An IP address can be represented in different formats, to guarantee the uniqueness of the IP, the name of the object is the IP address in canonical format, four decimal digits separated by dots suppressing leading zeros for IPv4 and the representation defined by RFC 5952 for IPv6. Valid: 192.168.1.5 or 2001:db8::1 or 2001:db8:aaaa:bbbb:cccc:dddd:eeee:1 Invalid: 10.01.2.3 or 2001:db8:0:0:0::1",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"kind": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"apiVersion": {
+						SchemaProps: spec.SchemaProps{
+							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"metadata": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Standard object's metadata. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata",
+							Default:     map[string]interface{}{},
+							Ref:         ref("k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"),
+						},
+					},
+					"spec": {
+						SchemaProps: spec.SchemaProps{
+							Description: "spec is the desired state of the IPAddress. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status",
+							Default:     map[string]interface{}{},
+							Ref:         ref("k8s.io/api/networking/v1.IPAddressSpec"),
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			"k8s.io/api/networking/v1.IPAddressSpec", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
+	}
+}
+
+func schema_k8sio_api_networking_v1_IPAddressList(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "IPAddressList contains a list of IPAddress.",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"kind": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"apiVersion": {
+						SchemaProps: spec.SchemaProps{
+							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"metadata": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Standard object's metadata. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata",
+							Default:     map[string]interface{}{},
+							Ref:         ref("k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"),
+						},
+					},
+					"items": {
+						SchemaProps: spec.SchemaProps{
+							Description: "items is the list of IPAddresses.",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref("k8s.io/api/networking/v1.IPAddress"),
+									},
+								},
+							},
+						},
+					},
+				},
+				Required: []string{"items"},
+			},
+		},
+		Dependencies: []string{
+			"k8s.io/api/networking/v1.IPAddress", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
+	}
+}
+
+func schema_k8sio_api_networking_v1_IPAddressSpec(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "IPAddressSpec describe the attributes in an IP Address.",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"parentRef": {
+						SchemaProps: spec.SchemaProps{
+							Description: "ParentRef references the resource that an IPAddress is attached to. An IPAddress must reference a parent object.",
+							Ref:         ref("k8s.io/api/networking/v1.ParentReference"),
+						},
+					},
+				},
+				Required: []string{"parentRef"},
+			},
+		},
+		Dependencies: []string{
+			"k8s.io/api/networking/v1.ParentReference"},
 	}
 }
 
@@ -62930,6 +63464,48 @@ func schema_k8sio_api_networking_v1_NetworkPolicySpec(ref common.ReferenceCallba
 	}
 }
 
+func schema_k8sio_api_networking_v1_ParentReference(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "ParentReference describes a reference to a parent object.",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"group": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Group is the group of the object being referenced.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"resource": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Resource is the resource of the object being referenced.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"namespace": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Namespace is the namespace of the object being referenced.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"name": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Name is the name of the object being referenced.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+				},
+				Required: []string{"resource", "name"},
+			},
+		},
+	}
+}
+
 func schema_k8sio_api_networking_v1_ServiceBackendPort(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
@@ -62959,6 +63535,179 @@ func schema_k8sio_api_networking_v1_ServiceBackendPort(ref common.ReferenceCallb
 				},
 			},
 		},
+	}
+}
+
+func schema_k8sio_api_networking_v1_ServiceCIDR(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "ServiceCIDR defines a range of IP addresses using CIDR format (e.g. 192.168.0.0/24 or 2001:db2::/64). This range is used to allocate ClusterIPs to Service objects.",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"kind": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"apiVersion": {
+						SchemaProps: spec.SchemaProps{
+							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"metadata": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Standard object's metadata. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata",
+							Default:     map[string]interface{}{},
+							Ref:         ref("k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"),
+						},
+					},
+					"spec": {
+						SchemaProps: spec.SchemaProps{
+							Description: "spec is the desired state of the ServiceCIDR. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status",
+							Default:     map[string]interface{}{},
+							Ref:         ref("k8s.io/api/networking/v1.ServiceCIDRSpec"),
+						},
+					},
+					"status": {
+						SchemaProps: spec.SchemaProps{
+							Description: "status represents the current state of the ServiceCIDR. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status",
+							Default:     map[string]interface{}{},
+							Ref:         ref("k8s.io/api/networking/v1.ServiceCIDRStatus"),
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			"k8s.io/api/networking/v1.ServiceCIDRSpec", "k8s.io/api/networking/v1.ServiceCIDRStatus", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
+	}
+}
+
+func schema_k8sio_api_networking_v1_ServiceCIDRList(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "ServiceCIDRList contains a list of ServiceCIDR objects.",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"kind": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"apiVersion": {
+						SchemaProps: spec.SchemaProps{
+							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"metadata": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Standard object's metadata. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata",
+							Default:     map[string]interface{}{},
+							Ref:         ref("k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"),
+						},
+					},
+					"items": {
+						SchemaProps: spec.SchemaProps{
+							Description: "items is the list of ServiceCIDRs.",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref("k8s.io/api/networking/v1.ServiceCIDR"),
+									},
+								},
+							},
+						},
+					},
+				},
+				Required: []string{"items"},
+			},
+		},
+		Dependencies: []string{
+			"k8s.io/api/networking/v1.ServiceCIDR", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
+	}
+}
+
+func schema_k8sio_api_networking_v1_ServiceCIDRSpec(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "ServiceCIDRSpec define the CIDRs the user wants to use for allocating ClusterIPs for Services.",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"cidrs": {
+						VendorExtensible: spec.VendorExtensible{
+							Extensions: spec.Extensions{
+								"x-kubernetes-list-type": "atomic",
+							},
+						},
+						SchemaProps: spec.SchemaProps{
+							Description: "CIDRs defines the IP blocks in CIDR notation (e.g. \"192.168.0.0/24\" or \"2001:db8::/64\") from which to assign service cluster IPs. Max of two CIDRs is allowed, one of each IP family. This field is immutable.",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: "",
+										Type:    []string{"string"},
+										Format:  "",
+									},
+								},
+							},
+						},
+					},
+				},
+			},
+		},
+	}
+}
+
+func schema_k8sio_api_networking_v1_ServiceCIDRStatus(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "ServiceCIDRStatus describes the current state of the ServiceCIDR.",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"conditions": {
+						VendorExtensible: spec.VendorExtensible{
+							Extensions: spec.Extensions{
+								"x-kubernetes-list-map-keys": []interface{}{
+									"type",
+								},
+								"x-kubernetes-list-type":       "map",
+								"x-kubernetes-patch-merge-key": "type",
+								"x-kubernetes-patch-strategy":  "merge",
+							},
+						},
+						SchemaProps: spec.SchemaProps{
+							Description: "conditions holds an array of metav1.Condition that describe the state of the ServiceCIDR. Current service state",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref("k8s.io/apimachinery/pkg/apis/meta/v1.Condition"),
+									},
+								},
+							},
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			"k8s.io/apimachinery/pkg/apis/meta/v1.Condition"},
 	}
 }
 
@@ -64545,7 +65294,7 @@ func schema_k8sio_api_policy_v1beta1_PodDisruptionBudgetSpec(ref common.Referenc
 					},
 					"unhealthyPodEvictionPolicy": {
 						SchemaProps: spec.SchemaProps{
-							Description: "UnhealthyPodEvictionPolicy defines the criteria for when unhealthy pods should be considered for eviction. Current implementation considers healthy pods, as pods that have status.conditions item with type=\"Ready\",status=\"True\".\n\nValid policies are IfHealthyBudget and AlwaysAllow. If no policy is specified, the default behavior will be used, which corresponds to the IfHealthyBudget policy.\n\nIfHealthyBudget policy means that running pods (status.phase=\"Running\"), but not yet healthy can be evicted only if the guarded application is not disrupted (status.currentHealthy is at least equal to status.desiredHealthy). Healthy pods will be subject to the PDB for eviction.\n\nAlwaysAllow policy means that all running pods (status.phase=\"Running\"), but not yet healthy are considered disrupted and can be evicted regardless of whether the criteria in a PDB is met. This means perspective running pods of a disrupted application might not get a chance to become healthy. Healthy pods will be subject to the PDB for eviction.\n\nAdditional policies may be added in the future. Clients making eviction decisions should disallow eviction of unhealthy pods if they encounter an unrecognized policy in this field.\n\nThis field is beta-level. The eviction API uses this field when the feature gate PDBUnhealthyPodEvictionPolicy is enabled (enabled by default).\n\nPossible enum values:\n - `\"AlwaysAllow\"` policy means that all running pods (status.phase=\"Running\"), but not yet healthy are considered disrupted and can be evicted regardless of whether the criteria in a PDB is met. This means perspective running pods of a disrupted application might not get a chance to become healthy. Healthy pods will be subject to the PDB for eviction.\n - `\"IfHealthyBudget\"` policy means that running pods (status.phase=\"Running\"), but not yet healthy can be evicted only if the guarded application is not disrupted (status.currentHealthy is at least equal to status.desiredHealthy). Healthy pods will be subject to the PDB for eviction.",
+							Description: "UnhealthyPodEvictionPolicy defines the criteria for when unhealthy pods should be considered for eviction. Current implementation considers healthy pods, as pods that have status.conditions item with type=\"Ready\",status=\"True\".\n\nValid policies are IfHealthyBudget and AlwaysAllow. If no policy is specified, the default behavior will be used, which corresponds to the IfHealthyBudget policy.\n\nIfHealthyBudget policy means that running pods (status.phase=\"Running\"), but not yet healthy can be evicted only if the guarded application is not disrupted (status.currentHealthy is at least equal to status.desiredHealthy). Healthy pods will be subject to the PDB for eviction.\n\nAlwaysAllow policy means that all running pods (status.phase=\"Running\"), but not yet healthy are considered disrupted and can be evicted regardless of whether the criteria in a PDB is met. This means perspective running pods of a disrupted application might not get a chance to become healthy. Healthy pods will be subject to the PDB for eviction.\n\nAdditional policies may be added in the future. Clients making eviction decisions should disallow eviction of unhealthy pods if they encounter an unrecognized policy in this field.\n\nPossible enum values:\n - `\"AlwaysAllow\"` policy means that all running pods (status.phase=\"Running\"), but not yet healthy are considered disrupted and can be evicted regardless of whether the criteria in a PDB is met. This means perspective running pods of a disrupted application might not get a chance to become healthy. Healthy pods will be subject to the PDB for eviction.\n - `\"IfHealthyBudget\"` policy means that running pods (status.phase=\"Running\"), but not yet healthy can be evicted only if the guarded application is not disrupted (status.currentHealthy is at least equal to status.desiredHealthy). Healthy pods will be subject to the PDB for eviction.",
 							Type:        []string{"string"},
 							Format:      "",
 							Enum:        []interface{}{"AlwaysAllow", "IfHealthyBudget"},
@@ -67227,6 +67976,13 @@ func schema_k8sio_api_storage_v1_CSIDriverSpec(ref common.ReferenceCallback) com
 							Format:      "",
 						},
 					},
+					"nodeAllocatableUpdatePeriodSeconds": {
+						SchemaProps: spec.SchemaProps{
+							Description: "nodeAllocatableUpdatePeriodSeconds specifies the interval between periodic updates of the CSINode allocatable capacity for this driver. When set, both periodic updates and updates triggered by capacity-related failures are enabled. If not set, no updates occur (neither periodic nor upon detecting capacity-related failures), and the allocatable.count remains static. The minimum allowed value for this field is 10 seconds.\n\nThis is an alpha feature and requires the MutableCSINodeAllocatableCount feature gate to be enabled.\n\nThis field is mutable.",
+							Type:        []string{"integer"},
+							Format:      "int64",
+						},
+					},
 				},
 			},
 		},
@@ -67986,6 +68742,13 @@ func schema_k8sio_api_storage_v1_VolumeError(ref common.ReferenceCallback) commo
 							Format:      "",
 						},
 					},
+					"errorCode": {
+						SchemaProps: spec.SchemaProps{
+							Description: "errorCode is a numeric gRPC code representing the error encountered during Attach or Detach operations.\n\nThis is an optional, alpha field that requires the MutableCSINodeAllocatableCount feature gate being enabled to be set.",
+							Type:        []string{"integer"},
+							Format:      "int32",
+						},
+					},
 				},
 			},
 		},
@@ -68481,6 +69244,13 @@ func schema_k8sio_api_storage_v1alpha1_VolumeError(ref common.ReferenceCallback)
 							Format:      "",
 						},
 					},
+					"errorCode": {
+						SchemaProps: spec.SchemaProps{
+							Description: "errorCode is a numeric gRPC code representing the error encountered during Attach or Detach operations.\n\nThis is an optional, alpha field that requires the MutableCSINodeAllocatableCount feature gate being enabled to be set.",
+							Type:        []string{"integer"},
+							Format:      "int32",
+						},
+					},
 				},
 			},
 		},
@@ -68670,6 +69440,13 @@ func schema_k8sio_api_storage_v1beta1_CSIDriverSpec(ref common.ReferenceCallback
 							Description: "seLinuxMount specifies if the CSI driver supports \"-o context\" mount option.\n\nWhen \"true\", the CSI driver must ensure that all volumes provided by this CSI driver can be mounted separately with different `-o context` options. This is typical for storage backends that provide volumes as filesystems on block devices or as independent shared volumes. Kubernetes will call NodeStage / NodePublish with \"-o context=xyz\" mount option when mounting a ReadWriteOncePod volume used in Pod that has explicitly set SELinux context. In the future, it may be expanded to other volume AccessModes. In any case, Kubernetes will ensure that the volume is mounted only with a single SELinux context.\n\nWhen \"false\", Kubernetes won't pass any special SELinux mount options to the driver. This is typical for volumes that represent subdirectories of a bigger shared filesystem.\n\nDefault is \"false\".",
 							Type:        []string{"boolean"},
 							Format:      "",
+						},
+					},
+					"nodeAllocatableUpdatePeriodSeconds": {
+						SchemaProps: spec.SchemaProps{
+							Description: "nodeAllocatableUpdatePeriodSeconds specifies the interval between periodic updates of the CSINode allocatable capacity for this driver. When set, both periodic updates and updates triggered by capacity-related failures are enabled. If not set, no updates occur (neither periodic nor upon detecting capacity-related failures), and the allocatable.count remains static. The minimum allowed value for this field is 10 seconds.\n\nThis is an alpha feature and requires the MutableCSINodeAllocatableCount feature gate to be enabled.\n\nThis field is mutable.",
+							Type:        []string{"integer"},
+							Format:      "int64",
 						},
 					},
 				},
@@ -69540,6 +70317,13 @@ func schema_k8sio_api_storage_v1beta1_VolumeError(ref common.ReferenceCallback) 
 							Description: "message represents the error encountered during Attach or Detach operation. This string may be logged, so it should not contain sensitive information.",
 							Type:        []string{"string"},
 							Format:      "",
+						},
+					},
+					"errorCode": {
+						SchemaProps: spec.SchemaProps{
+							Description: "errorCode is a numeric gRPC code representing the error encountered during Attach or Detach operations.\n\nThis is an optional, alpha field that requires the MutableCSINodeAllocatableCount feature gate being enabled to be set.",
+							Type:        []string{"integer"},
+							Format:      "int32",
 						},
 					},
 				},
@@ -72166,16 +72950,46 @@ func schema_k8sio_apimachinery_pkg_version_Info(ref common.ReferenceCallback) co
 				Properties: map[string]spec.Schema{
 					"major": {
 						SchemaProps: spec.SchemaProps{
-							Default: "",
-							Type:    []string{"string"},
-							Format:  "",
+							Description: "Major is the major version of the binary version",
+							Default:     "",
+							Type:        []string{"string"},
+							Format:      "",
 						},
 					},
 					"minor": {
 						SchemaProps: spec.SchemaProps{
-							Default: "",
-							Type:    []string{"string"},
-							Format:  "",
+							Description: "Minor is the minor version of the binary version",
+							Default:     "",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"emulationMajor": {
+						SchemaProps: spec.SchemaProps{
+							Description: "EmulationMajor is the major version of the emulation version",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"emulationMinor": {
+						SchemaProps: spec.SchemaProps{
+							Description: "EmulationMinor is the minor version of the emulation version",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"minCompatibilityMajor": {
+						SchemaProps: spec.SchemaProps{
+							Description: "MinCompatibilityMajor is the major version of the minimum compatibility version",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"minCompatibilityMinor": {
+						SchemaProps: spec.SchemaProps{
+							Description: "MinCompatibilityMinor is the minor version of the minimum compatibility version",
+							Type:        []string{"string"},
+							Format:      "",
 						},
 					},
 					"gitVersion": {

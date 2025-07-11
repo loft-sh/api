@@ -45,13 +45,25 @@ func NewFilteredSelfInformer(client versioned.Interface, resyncPeriod time.Durat
 				if tweakListOptions != nil {
 					tweakListOptions(&options)
 				}
-				return client.ManagementV1().Selves().List(context.TODO(), options)
+				return client.ManagementV1().Selves().List(context.Background(), options)
 			},
 			WatchFunc: func(options metav1.ListOptions) (watch.Interface, error) {
 				if tweakListOptions != nil {
 					tweakListOptions(&options)
 				}
-				return client.ManagementV1().Selves().Watch(context.TODO(), options)
+				return client.ManagementV1().Selves().Watch(context.Background(), options)
+			},
+			ListWithContextFunc: func(ctx context.Context, options metav1.ListOptions) (runtime.Object, error) {
+				if tweakListOptions != nil {
+					tweakListOptions(&options)
+				}
+				return client.ManagementV1().Selves().List(ctx, options)
+			},
+			WatchFuncWithContext: func(ctx context.Context, options metav1.ListOptions) (watch.Interface, error) {
+				if tweakListOptions != nil {
+					tweakListOptions(&options)
+				}
+				return client.ManagementV1().Selves().Watch(ctx, options)
 			},
 		},
 		&apismanagementv1.Self{},
