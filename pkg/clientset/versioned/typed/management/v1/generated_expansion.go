@@ -44,6 +44,12 @@ type LicenseTokenExpansion interface{}
 
 type LoftUpgradeExpansion interface{}
 
+type NodeClaimExpansion interface{}
+
+type NodeProviderExpansion interface{}
+
+type NodeTypeExpansion interface{}
+
 type OIDCClientExpansion interface{}
 
 type OwnedAccessKeyExpansion interface{}

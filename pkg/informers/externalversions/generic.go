@@ -81,6 +81,12 @@ func (f *sharedInformerFactory) ForResource(resource schema.GroupVersionResource
 		return &genericInformer{resource: resource.GroupResource(), informer: f.Management().V1().LicenseTokens().Informer()}, nil
 	case v1.SchemeGroupVersion.WithResource("loftupgrades"):
 		return &genericInformer{resource: resource.GroupResource(), informer: f.Management().V1().LoftUpgrades().Informer()}, nil
+	case v1.SchemeGroupVersion.WithResource("nodeclaims"):
+		return &genericInformer{resource: resource.GroupResource(), informer: f.Management().V1().NodeClaims().Informer()}, nil
+	case v1.SchemeGroupVersion.WithResource("nodeproviders"):
+		return &genericInformer{resource: resource.GroupResource(), informer: f.Management().V1().NodeProviders().Informer()}, nil
+	case v1.SchemeGroupVersion.WithResource("nodetypes"):
+		return &genericInformer{resource: resource.GroupResource(), informer: f.Management().V1().NodeTypes().Informer()}, nil
 	case v1.SchemeGroupVersion.WithResource("oidcclients"):
 		return &genericInformer{resource: resource.GroupResource(), informer: f.Management().V1().OIDCClients().Informer()}, nil
 	case v1.SchemeGroupVersion.WithResource("ownedaccesskeys"):
@@ -143,6 +149,12 @@ func (f *sharedInformerFactory) ForResource(resource schema.GroupVersionResource
 		return &genericInformer{resource: resource.GroupResource(), informer: f.Storage().V1().DevPodWorkspaceTemplates().Informer()}, nil
 	case storagev1.SchemeGroupVersion.WithResource("networkpeers"):
 		return &genericInformer{resource: resource.GroupResource(), informer: f.Storage().V1().NetworkPeers().Informer()}, nil
+	case storagev1.SchemeGroupVersion.WithResource("nodeclaims"):
+		return &genericInformer{resource: resource.GroupResource(), informer: f.Storage().V1().NodeClaims().Informer()}, nil
+	case storagev1.SchemeGroupVersion.WithResource("nodeproviders"):
+		return &genericInformer{resource: resource.GroupResource(), informer: f.Storage().V1().NodeProviders().Informer()}, nil
+	case storagev1.SchemeGroupVersion.WithResource("nodetypes"):
+		return &genericInformer{resource: resource.GroupResource(), informer: f.Storage().V1().NodeTypes().Informer()}, nil
 	case storagev1.SchemeGroupVersion.WithResource("projects"):
 		return &genericInformer{resource: resource.GroupResource(), informer: f.Storage().V1().Projects().Informer()}, nil
 	case storagev1.SchemeGroupVersion.WithResource("sharedsecrets"):

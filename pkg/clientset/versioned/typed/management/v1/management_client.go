@@ -33,6 +33,9 @@ type ManagementV1Interface interface {
 	LicensesGetter
 	LicenseTokensGetter
 	LoftUpgradesGetter
+	NodeClaimsGetter
+	NodeProvidersGetter
+	NodeTypesGetter
 	OIDCClientsGetter
 	OwnedAccessKeysGetter
 	ProjectsGetter
@@ -142,6 +145,18 @@ func (c *ManagementV1Client) LicenseTokens() LicenseTokenInterface {
 
 func (c *ManagementV1Client) LoftUpgrades() LoftUpgradeInterface {
 	return newLoftUpgrades(c)
+}
+
+func (c *ManagementV1Client) NodeClaims(namespace string) NodeClaimInterface {
+	return newNodeClaims(c, namespace)
+}
+
+func (c *ManagementV1Client) NodeProviders() NodeProviderInterface {
+	return newNodeProviders(c)
+}
+
+func (c *ManagementV1Client) NodeTypes() NodeTypeInterface {
+	return newNodeTypes(c)
 }
 
 func (c *ManagementV1Client) OIDCClients() OIDCClientInterface {

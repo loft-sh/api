@@ -22,6 +22,9 @@ type StorageV1Interface interface {
 	DevPodWorkspacePresetsGetter
 	DevPodWorkspaceTemplatesGetter
 	NetworkPeersGetter
+	NodeClaimsGetter
+	NodeProvidersGetter
+	NodeTypesGetter
 	ProjectsGetter
 	SharedSecretsGetter
 	SpaceInstancesGetter
@@ -76,6 +79,18 @@ func (c *StorageV1Client) DevPodWorkspaceTemplates() DevPodWorkspaceTemplateInte
 
 func (c *StorageV1Client) NetworkPeers() NetworkPeerInterface {
 	return newNetworkPeers(c)
+}
+
+func (c *StorageV1Client) NodeClaims(namespace string) NodeClaimInterface {
+	return newNodeClaims(c, namespace)
+}
+
+func (c *StorageV1Client) NodeProviders() NodeProviderInterface {
+	return newNodeProviders(c)
+}
+
+func (c *StorageV1Client) NodeTypes() NodeTypeInterface {
+	return newNodeTypes(c)
 }
 
 func (c *StorageV1Client) Projects() ProjectInterface {

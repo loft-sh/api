@@ -52,6 +52,18 @@ func (c *FakeStorageV1) NetworkPeers() v1.NetworkPeerInterface {
 	return newFakeNetworkPeers(c)
 }
 
+func (c *FakeStorageV1) NodeClaims(namespace string) v1.NodeClaimInterface {
+	return newFakeNodeClaims(c, namespace)
+}
+
+func (c *FakeStorageV1) NodeProviders() v1.NodeProviderInterface {
+	return newFakeNodeProviders(c)
+}
+
+func (c *FakeStorageV1) NodeTypes() v1.NodeTypeInterface {
+	return newFakeNodeTypes(c)
+}
+
 func (c *FakeStorageV1) Projects() v1.ProjectInterface {
 	return newFakeProjects(c)
 }

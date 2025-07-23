@@ -96,6 +96,18 @@ func (c *FakeManagementV1) LoftUpgrades() v1.LoftUpgradeInterface {
 	return newFakeLoftUpgrades(c)
 }
 
+func (c *FakeManagementV1) NodeClaims(namespace string) v1.NodeClaimInterface {
+	return newFakeNodeClaims(c, namespace)
+}
+
+func (c *FakeManagementV1) NodeProviders() v1.NodeProviderInterface {
+	return newFakeNodeProviders(c)
+}
+
+func (c *FakeManagementV1) NodeTypes() v1.NodeTypeInterface {
+	return newFakeNodeTypes(c)
+}
+
 func (c *FakeManagementV1) OIDCClients() v1.OIDCClientInterface {
 	return newFakeOIDCClients(c)
 }
