@@ -54,6 +54,10 @@ type UISettingsConfig struct {
 	// the Loft UI!
 	// +optional
 	LogoURL string `json:"logoURL,omitempty"`
+	// SmallLogoURL is url pointing to the small logo to use in the Loft UI. This path must be accessible for clients accessing
+	// the Loft UI!
+	// +optional
+	SmallLogoURL string `json:"smallLogoURL,omitempty"`
 	// LogoBackgroundColor is the color value (ex: "#12345") to use as the background color for the logo
 	// +optional
 	LogoBackgroundColor string `json:"logoBackgroundColor,omitempty"`
@@ -78,6 +82,23 @@ type UISettingsConfig struct {
 	// NavBarButtons holds extra nav bar buttons
 	// +optional
 	NavBarButtons []NavBarButton `json:"navBarButtons,omitempty"`
+	// External URLs that can be called from the UI
+	// +optional
+	ExternalURLs ExternalURLs `json:"externalURLs,omitempty"`
+}
+
+type ExternalURLs struct {
+	// Enabled determines if requests to external URLs from the UI should be allowed at all
+	// +optional
+	Enabled bool `json:"enabled,omitempty"`
+
+	// Allow specifies which external URLs can be called. In addition to the predefined modules,
+	// - "vcluster" (license page, feature descriptions, ...)
+	// - "gtm" (google tag manager)
+	// - "featurebase"
+	// any URL can be added to this list. This will allow the UI to make any request to this URL.
+	// +optional
+	Allow []string `json:"allow,omitempty"`
 }
 
 type NavBarButton struct {
@@ -97,4 +118,23 @@ type NavBarButton struct {
 }
 
 // UISettingsStatus holds the status
-type UISettingsStatus struct{}
+type UISettingsStatus struct {
+	// Csps holds Content Security Policies
+	// +optional
+	Csps Csps `json:"csps,omitempty"`
+
+	// CspConfig holds the raw csp config from the user
+	// +optional
+	CspConfig string `json:"cspConfig,omitempty"`
+}
+
+
+type Csps map[string]CspPolicy
+
+type CspPolicy struct {
+	Script  string
+	Image   string
+	Connect string
+	Frame   string
+	Font    string
+}
