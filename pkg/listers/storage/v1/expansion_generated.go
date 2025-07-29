@@ -46,13 +46,25 @@ type DevPodWorkspaceTemplateListerExpansion interface{}
 // NetworkPeerLister.
 type NetworkPeerListerExpansion interface{}
 
+// NodeClaimListerExpansion allows custom methods to be added to
+// NodeClaimLister.
+type NodeClaimListerExpansion interface{}
+
+// NodeClaimNamespaceListerExpansion allows custom methods to be added to
+// NodeClaimNamespaceLister.
+type NodeClaimNamespaceListerExpansion interface{}
+
+// NodeProviderListerExpansion allows custom methods to be added to
+// NodeProviderLister.
+type NodeProviderListerExpansion interface{}
+
+// NodeTypeListerExpansion allows custom methods to be added to
+// NodeTypeLister.
+type NodeTypeListerExpansion interface{}
+
 // ProjectListerExpansion allows custom methods to be added to
 // ProjectLister.
 type ProjectListerExpansion interface{}
-
-// RunnerListerExpansion allows custom methods to be added to
-// RunnerLister.
-type RunnerListerExpansion interface{}
 
 // SharedSecretListerExpansion allows custom methods to be added to
 // SharedSecretLister.
