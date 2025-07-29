@@ -12,13 +12,13 @@ const (
 	NodeProviderPropertyKey = "vcluster.com/node-provider"
 	NodeTypePropertyKey     = "vcluster.com/node-type"
 
-	// NodeTypeConditionTypeInitialized is the condition that indicates if the node type is initialized.
-	NodeTypeConditionTypeInitialized = "Initialized"
+	// NodeTypeConditionTypeSynced is the condition that indicates if the node type is synced with provider.
+	NodeTypeConditionTypeSynced = "Synced"
 )
 
 var (
 	NodeTypeConditions = []agentstoragev1.ConditionType{
-		NodeTypeConditionTypeInitialized,
+		NodeTypeConditionTypeSynced,
 	}
 )
 

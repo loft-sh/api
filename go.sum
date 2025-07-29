@@ -105,8 +105,8 @@ github.com/kylelemons/godebug v1.1.0 h1:RPNrshWIDI6G2gRW9EHilWtl7Z6Sb1BR0xunSBf0
 github.com/kylelemons/godebug v1.1.0/go.mod h1:9/0rRGxNHcop5bhtWyNeEfOS8JIWk580+fNqagV/RAw=
 github.com/loft-sh/admin-apis v0.0.0-20250521064618-068d5f25cdae h1:nyrRyiEi1mssYel6z3NaUiHBaFG2bBA6HCsADWxSMo0=
 github.com/loft-sh/admin-apis v0.0.0-20250521064618-068d5f25cdae/go.mod h1:WHCqWfljfD1hkwk41hLeqBhW2yeLvWipB1sH6vfnR7U=
-github.com/loft-sh/agentapi/v4 v4.5.0-next.1 h1:cTKk4CIjvuY+p63hCL+SqoRuFnINyHzlsIe+I5snyjQ=
-github.com/loft-sh/agentapi/v4 v4.5.0-next.1/go.mod h1:wERN3GDmvqTcKC2NvsYMPwvfXzEd3pXxRyvDSLTxU48=
+github.com/loft-sh/agentapi/v4 v4.5.0-next.2 h1:VaDNvsht/uOqXDC0ymiDqdw1llGZuzgAvy/SVcWsvCo=
+github.com/loft-sh/agentapi/v4 v4.5.0-next.2/go.mod h1:wERN3GDmvqTcKC2NvsYMPwvfXzEd3pXxRyvDSLTxU48=
 github.com/loft-sh/apiserver v0.0.0-20250704091321-0966a6ee77b2 h1:CucC57Nm4cfTsktoj6UaSSh29q/adSLrDcALh377SP4=
 github.com/loft-sh/apiserver v0.0.0-20250704091321-0966a6ee77b2/go.mod h1:ROoLzugsusno4FKi+Lju6VN62u9mROLi3MvLrqC3cA4=
 github.com/mailru/easyjson v0.7.7 h1:UGYAvKxe3sBsEDzO8ZeWOSlIQfWFlxbzLZe7hwFURr0=
