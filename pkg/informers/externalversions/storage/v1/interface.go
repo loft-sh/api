@@ -28,10 +28,14 @@ type Interface interface {
 	DevPodWorkspaceTemplates() DevPodWorkspaceTemplateInformer
 	// NetworkPeers returns a NetworkPeerInformer.
 	NetworkPeers() NetworkPeerInformer
+	// NodeClaims returns a NodeClaimInformer.
+	NodeClaims() NodeClaimInformer
+	// NodeProviders returns a NodeProviderInformer.
+	NodeProviders() NodeProviderInformer
+	// NodeTypes returns a NodeTypeInformer.
+	NodeTypes() NodeTypeInformer
 	// Projects returns a ProjectInformer.
 	Projects() ProjectInformer
-	// Runners returns a RunnerInformer.
-	Runners() RunnerInformer
 	// SharedSecrets returns a SharedSecretInformer.
 	SharedSecrets() SharedSecretInformer
 	// SpaceInstances returns a SpaceInstanceInformer.
@@ -111,14 +115,24 @@ func (v *version) NetworkPeers() NetworkPeerInformer {
 	return &networkPeerInformer{factory: v.factory, tweakListOptions: v.tweakListOptions}
 }
 
+// NodeClaims returns a NodeClaimInformer.
+func (v *version) NodeClaims() NodeClaimInformer {
+	return &nodeClaimInformer{factory: v.factory, namespace: v.namespace, tweakListOptions: v.tweakListOptions}
+}
+
+// NodeProviders returns a NodeProviderInformer.
+func (v *version) NodeProviders() NodeProviderInformer {
+	return &nodeProviderInformer{factory: v.factory, tweakListOptions: v.tweakListOptions}
+}
+
+// NodeTypes returns a NodeTypeInformer.
+func (v *version) NodeTypes() NodeTypeInformer {
+	return &nodeTypeInformer{factory: v.factory, tweakListOptions: v.tweakListOptions}
+}
+
 // Projects returns a ProjectInformer.
 func (v *version) Projects() ProjectInformer {
 	return &projectInformer{factory: v.factory, tweakListOptions: v.tweakListOptions}
-}
-
-// Runners returns a RunnerInformer.
-func (v *version) Runners() RunnerInformer {
-	return &runnerInformer{factory: v.factory, tweakListOptions: v.tweakListOptions}
 }
 
 // SharedSecrets returns a SharedSecretInformer.
