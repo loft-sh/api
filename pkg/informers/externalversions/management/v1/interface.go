@@ -26,6 +26,8 @@ type Interface interface {
 	Configs() ConfigInformer
 	// ConvertVirtualClusterConfigs returns a ConvertVirtualClusterConfigInformer.
 	ConvertVirtualClusterConfigs() ConvertVirtualClusterConfigInformer
+	// DatabaseConnectors returns a DatabaseConnectorInformer.
+	DatabaseConnectors() DatabaseConnectorInformer
 	// DevPodEnvironmentTemplates returns a DevPodEnvironmentTemplateInformer.
 	DevPodEnvironmentTemplates() DevPodEnvironmentTemplateInformer
 	// DevPodWorkspaceInstances returns a DevPodWorkspaceInstanceInformer.
@@ -48,6 +50,12 @@ type Interface interface {
 	LicenseTokens() LicenseTokenInformer
 	// LoftUpgrades returns a LoftUpgradeInformer.
 	LoftUpgrades() LoftUpgradeInformer
+	// NodeClaims returns a NodeClaimInformer.
+	NodeClaims() NodeClaimInformer
+	// NodeProviders returns a NodeProviderInformer.
+	NodeProviders() NodeProviderInformer
+	// NodeTypes returns a NodeTypeInformer.
+	NodeTypes() NodeTypeInformer
 	// OIDCClients returns a OIDCClientInformer.
 	OIDCClients() OIDCClientInformer
 	// OwnedAccessKeys returns a OwnedAccessKeyInformer.
@@ -62,8 +70,6 @@ type Interface interface {
 	RegisterVirtualClusters() RegisterVirtualClusterInformer
 	// ResetAccessKeys returns a ResetAccessKeyInformer.
 	ResetAccessKeys() ResetAccessKeyInformer
-	// Runners returns a RunnerInformer.
-	Runners() RunnerInformer
 	// Selves returns a SelfInformer.
 	Selves() SelfInformer
 	// SelfSubjectAccessReviews returns a SelfSubjectAccessReviewInformer.
@@ -86,6 +92,8 @@ type Interface interface {
 	Users() UserInformer
 	// VirtualClusterInstances returns a VirtualClusterInstanceInformer.
 	VirtualClusterInstances() VirtualClusterInstanceInformer
+	// VirtualClusterSchemas returns a VirtualClusterSchemaInformer.
+	VirtualClusterSchemas() VirtualClusterSchemaInformer
 	// VirtualClusterTemplates returns a VirtualClusterTemplateInformer.
 	VirtualClusterTemplates() VirtualClusterTemplateInformer
 }
@@ -146,6 +154,11 @@ func (v *version) ConvertVirtualClusterConfigs() ConvertVirtualClusterConfigInfo
 	return &convertVirtualClusterConfigInformer{factory: v.factory, tweakListOptions: v.tweakListOptions}
 }
 
+// DatabaseConnectors returns a DatabaseConnectorInformer.
+func (v *version) DatabaseConnectors() DatabaseConnectorInformer {
+	return &databaseConnectorInformer{factory: v.factory, tweakListOptions: v.tweakListOptions}
+}
+
 // DevPodEnvironmentTemplates returns a DevPodEnvironmentTemplateInformer.
 func (v *version) DevPodEnvironmentTemplates() DevPodEnvironmentTemplateInformer {
 	return &devPodEnvironmentTemplateInformer{factory: v.factory, tweakListOptions: v.tweakListOptions}
@@ -201,6 +214,21 @@ func (v *version) LoftUpgrades() LoftUpgradeInformer {
 	return &loftUpgradeInformer{factory: v.factory, tweakListOptions: v.tweakListOptions}
 }
 
+// NodeClaims returns a NodeClaimInformer.
+func (v *version) NodeClaims() NodeClaimInformer {
+	return &nodeClaimInformer{factory: v.factory, namespace: v.namespace, tweakListOptions: v.tweakListOptions}
+}
+
+// NodeProviders returns a NodeProviderInformer.
+func (v *version) NodeProviders() NodeProviderInformer {
+	return &nodeProviderInformer{factory: v.factory, tweakListOptions: v.tweakListOptions}
+}
+
+// NodeTypes returns a NodeTypeInformer.
+func (v *version) NodeTypes() NodeTypeInformer {
+	return &nodeTypeInformer{factory: v.factory, tweakListOptions: v.tweakListOptions}
+}
+
 // OIDCClients returns a OIDCClientInformer.
 func (v *version) OIDCClients() OIDCClientInformer {
 	return &oIDCClientInformer{factory: v.factory, tweakListOptions: v.tweakListOptions}
@@ -234,11 +262,6 @@ func (v *version) RegisterVirtualClusters() RegisterVirtualClusterInformer {
 // ResetAccessKeys returns a ResetAccessKeyInformer.
 func (v *version) ResetAccessKeys() ResetAccessKeyInformer {
 	return &resetAccessKeyInformer{factory: v.factory, tweakListOptions: v.tweakListOptions}
-}
-
-// Runners returns a RunnerInformer.
-func (v *version) Runners() RunnerInformer {
-	return &runnerInformer{factory: v.factory, tweakListOptions: v.tweakListOptions}
 }
 
 // Selves returns a SelfInformer.
@@ -294,6 +317,11 @@ func (v *version) Users() UserInformer {
 // VirtualClusterInstances returns a VirtualClusterInstanceInformer.
 func (v *version) VirtualClusterInstances() VirtualClusterInstanceInformer {
 	return &virtualClusterInstanceInformer{factory: v.factory, namespace: v.namespace, tweakListOptions: v.tweakListOptions}
+}
+
+// VirtualClusterSchemas returns a VirtualClusterSchemaInformer.
+func (v *version) VirtualClusterSchemas() VirtualClusterSchemaInformer {
+	return &virtualClusterSchemaInformer{factory: v.factory, tweakListOptions: v.tweakListOptions}
 }
 
 // VirtualClusterTemplates returns a VirtualClusterTemplateInformer.
