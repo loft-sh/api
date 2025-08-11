@@ -7,18 +7,21 @@ import (
 )
 
 const (
-	InstanceScheduled              agentstoragev1.ConditionType = "Scheduled"
-	InstanceTemplateSynced         agentstoragev1.ConditionType = "TemplateSynced"
-	InstanceTemplateResolved       agentstoragev1.ConditionType = "TemplateResolved"
-	InstanceSpaceSynced            agentstoragev1.ConditionType = "SpaceSynced"
-	InstanceSpaceReady             agentstoragev1.ConditionType = "SpaceReady"
-	InstanceVirtualClusterDeployed agentstoragev1.ConditionType = "VirtualClusterDeployed"
-	InstanceVirtualClusterSynced   agentstoragev1.ConditionType = "VirtualClusterSynced"
-	InstanceVirtualClusterReady    agentstoragev1.ConditionType = "VirtualClusterReady"
-	InstanceVirtualClusterOnline   agentstoragev1.ConditionType = "VirtualClusterOnline"
-	InstanceProjectsSecretsSynced  agentstoragev1.ConditionType = "ProjectSecretsSynced"
+	InstanceScheduled                  agentstoragev1.ConditionType = "Scheduled"
+	InstanceTemplateSynced             agentstoragev1.ConditionType = "TemplateSynced"
+	InstanceTemplateResolved           agentstoragev1.ConditionType = "TemplateResolved"
+	InstanceSpaceSynced                agentstoragev1.ConditionType = "SpaceSynced"
+	InstanceSpaceReady                 agentstoragev1.ConditionType = "SpaceReady"
+	InstanceVirtualClusterDeployed     agentstoragev1.ConditionType = "VirtualClusterDeployed"
+	InstanceVirtualClusterSynced       agentstoragev1.ConditionType = "VirtualClusterSynced"
+	InstanceVirtualClusterReady        agentstoragev1.ConditionType = "VirtualClusterReady"
+	InstanceVirtualClusterOnline       agentstoragev1.ConditionType = "VirtualClusterOnline"
+	InstanceProjectsSecretsSynced      agentstoragev1.ConditionType = "ProjectSecretsSynced"
+	InstanceNodesProvisioned           agentstoragev1.ConditionType = "NodesProvisioned"
+	InstanceNodeEnvironmentProvisioned agentstoragev1.ConditionType = "NodeEnvironmentProvisioned"
 
 	InstanceVirtualClusterAppsAndObjectsSynced agentstoragev1.ConditionType = "VirtualClusterAppsAndObjectsSynced"
+	InstanceVirtualClusterDBConnectorSynced    agentstoragev1.ConditionType = "DBConnectorSynced"
 )
 
 // +genclient
@@ -317,6 +320,10 @@ type VirtualClusterHelmChart struct {
 	// the version of the helm chart to use
 	// +optional
 	Version string `json:"version,omitempty"`
+
+	// InsecureSkipTlsVerify skips the TLS verification for the helm chart
+	// +optional
+	InsecureSkipTlsVerify bool `json:"insecureSkipTlsVerify,omitempty"`
 }
 
 type PodSelector struct {
