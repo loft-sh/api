@@ -3,13 +3,13 @@
 package v1
 
 import (
-	"context"
+	context "context"
 	time "time"
 
-	managementv1 "github.com/loft-sh/api/v4/pkg/apis/management/v1"
+	apismanagementv1 "github.com/loft-sh/api/v4/pkg/apis/management/v1"
 	versioned "github.com/loft-sh/api/v4/pkg/clientset/versioned"
 	internalinterfaces "github.com/loft-sh/api/v4/pkg/informers/externalversions/internalinterfaces"
-	v1 "github.com/loft-sh/api/v4/pkg/listers/management/v1"
+	managementv1 "github.com/loft-sh/api/v4/pkg/listers/management/v1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	runtime "k8s.io/apimachinery/pkg/runtime"
 	watch "k8s.io/apimachinery/pkg/watch"
@@ -20,7 +20,7 @@ import (
 // RedirectTokens.
 type RedirectTokenInformer interface {
 	Informer() cache.SharedIndexInformer
-	Lister() v1.RedirectTokenLister
+	Lister() managementv1.RedirectTokenLister
 }
 
 type redirectTokenInformer struct {
@@ -45,16 +45,28 @@ func NewFilteredRedirectTokenInformer(client versioned.Interface, resyncPeriod t
 				if tweakListOptions != nil {
 					tweakListOptions(&options)
 				}
-				return client.ManagementV1().RedirectTokens().List(context.TODO(), options)
+				return client.ManagementV1().RedirectTokens().List(context.Background(), options)
 			},
 			WatchFunc: func(options metav1.ListOptions) (watch.Interface, error) {
 				if tweakListOptions != nil {
 					tweakListOptions(&options)
 				}
-				return client.ManagementV1().RedirectTokens().Watch(context.TODO(), options)
+				return client.ManagementV1().RedirectTokens().Watch(context.Background(), options)
+			},
+			ListWithContextFunc: func(ctx context.Context, options metav1.ListOptions) (runtime.Object, error) {
+				if tweakListOptions != nil {
+					tweakListOptions(&options)
+				}
+				return client.ManagementV1().RedirectTokens().List(ctx, options)
+			},
+			WatchFuncWithContext: func(ctx context.Context, options metav1.ListOptions) (watch.Interface, error) {
+				if tweakListOptions != nil {
+					tweakListOptions(&options)
+				}
+				return client.ManagementV1().RedirectTokens().Watch(ctx, options)
 			},
 		},
-		&managementv1.RedirectToken{},
+		&apismanagementv1.RedirectToken{},
 		resyncPeriod,
 		indexers,
 	)
@@ -65,9 +77,9 @@ func (f *redirectTokenInformer) defaultInformer(client versioned.Interface, resy
 }
 
 func (f *redirectTokenInformer) Informer() cache.SharedIndexInformer {
-	return f.factory.InformerFor(&managementv1.RedirectToken{}, f.defaultInformer)
+	return f.factory.InformerFor(&apismanagementv1.RedirectToken{}, f.defaultInformer)
 }
 
-func (f *redirectTokenInformer) Lister() v1.RedirectTokenLister {
-	return v1.NewRedirectTokenLister(f.Informer().GetIndexer())
+func (f *redirectTokenInformer) Lister() managementv1.RedirectTokenLister {
+	return managementv1.NewRedirectTokenLister(f.Informer().GetIndexer())
 }
