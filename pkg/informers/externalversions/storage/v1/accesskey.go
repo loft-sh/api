@@ -3,13 +3,13 @@
 package v1
 
 import (
-	"context"
+	context "context"
 	time "time"
 
-	storagev1 "github.com/loft-sh/api/v4/pkg/apis/storage/v1"
+	apisstoragev1 "github.com/loft-sh/api/v4/pkg/apis/storage/v1"
 	versioned "github.com/loft-sh/api/v4/pkg/clientset/versioned"
 	internalinterfaces "github.com/loft-sh/api/v4/pkg/informers/externalversions/internalinterfaces"
-	v1 "github.com/loft-sh/api/v4/pkg/listers/storage/v1"
+	storagev1 "github.com/loft-sh/api/v4/pkg/listers/storage/v1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	runtime "k8s.io/apimachinery/pkg/runtime"
 	watch "k8s.io/apimachinery/pkg/watch"
@@ -20,7 +20,7 @@ import (
 // AccessKeys.
 type AccessKeyInformer interface {
 	Informer() cache.SharedIndexInformer
-	Lister() v1.AccessKeyLister
+	Lister() storagev1.AccessKeyLister
 }
 
 type accessKeyInformer struct {
@@ -45,16 +45,28 @@ func NewFilteredAccessKeyInformer(client versioned.Interface, resyncPeriod time.
 				if tweakListOptions != nil {
 					tweakListOptions(&options)
 				}
-				return client.StorageV1().AccessKeys().List(context.TODO(), options)
+				return client.StorageV1().AccessKeys().List(context.Background(), options)
 			},
 			WatchFunc: func(options metav1.ListOptions) (watch.Interface, error) {
 				if tweakListOptions != nil {
 					tweakListOptions(&options)
 				}
-				return client.StorageV1().AccessKeys().Watch(context.TODO(), options)
+				return client.StorageV1().AccessKeys().Watch(context.Background(), options)
+			},
+			ListWithContextFunc: func(ctx context.Context, options metav1.ListOptions) (runtime.Object, error) {
+				if tweakListOptions != nil {
+					tweakListOptions(&options)
+				}
+				return client.StorageV1().AccessKeys().List(ctx, options)
+			},
+			WatchFuncWithContext: func(ctx context.Context, options metav1.ListOptions) (watch.Interface, error) {
+				if tweakListOptions != nil {
+					tweakListOptions(&options)
+				}
+				return client.StorageV1().AccessKeys().Watch(ctx, options)
 			},
 		},
-		&storagev1.AccessKey{},
+		&apisstoragev1.AccessKey{},
 		resyncPeriod,
 		indexers,
 	)
@@ -65,9 +77,9 @@ func (f *accessKeyInformer) defaultInformer(client versioned.Interface, resyncPe
 }
 
 func (f *accessKeyInformer) Informer() cache.SharedIndexInformer {
-	return f.factory.InformerFor(&storagev1.AccessKey{}, f.defaultInformer)
+	return f.factory.InformerFor(&apisstoragev1.AccessKey{}, f.defaultInformer)
 }
 
-func (f *accessKeyInformer) Lister() v1.AccessKeyLister {
-	return v1.NewAccessKeyLister(f.Informer().GetIndexer())
+func (f *accessKeyInformer) Lister() storagev1.AccessKeyLister {
+	return storagev1.NewAccessKeyLister(f.Informer().GetIndexer())
 }
