@@ -6,7 +6,7 @@ toolchain go1.24.4
 
 require (
 	github.com/ghodss/yaml v1.0.0
-	github.com/loft-sh/admin-apis v0.0.0-20250521064618-068d5f25cdae
+	github.com/loft-sh/admin-apis v0.0.0-20250825172409-daa49fc5396e
 	github.com/loft-sh/agentapi/v4 v4.5.0-next.2
 	github.com/loft-sh/apiserver v0.0.0-20250704091321-0966a6ee77b2
 	google.golang.org/grpc v1.68.1
