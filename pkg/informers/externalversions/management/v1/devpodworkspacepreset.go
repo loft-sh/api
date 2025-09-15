@@ -3,13 +3,13 @@
 package v1
 
 import (
-	"context"
+	context "context"
 	time "time"
 
-	managementv1 "github.com/loft-sh/api/v4/pkg/apis/management/v1"
+	apismanagementv1 "github.com/loft-sh/api/v4/pkg/apis/management/v1"
 	versioned "github.com/loft-sh/api/v4/pkg/clientset/versioned"
 	internalinterfaces "github.com/loft-sh/api/v4/pkg/informers/externalversions/internalinterfaces"
-	v1 "github.com/loft-sh/api/v4/pkg/listers/management/v1"
+	managementv1 "github.com/loft-sh/api/v4/pkg/listers/management/v1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	runtime "k8s.io/apimachinery/pkg/runtime"
 	watch "k8s.io/apimachinery/pkg/watch"
@@ -20,7 +20,7 @@ import (
 // DevPodWorkspacePresets.
 type DevPodWorkspacePresetInformer interface {
 	Informer() cache.SharedIndexInformer
-	Lister() v1.DevPodWorkspacePresetLister
+	Lister() managementv1.DevPodWorkspacePresetLister
 }
 
 type devPodWorkspacePresetInformer struct {
@@ -45,16 +45,28 @@ func NewFilteredDevPodWorkspacePresetInformer(client versioned.Interface, resync
 				if tweakListOptions != nil {
 					tweakListOptions(&options)
 				}
-				return client.ManagementV1().DevPodWorkspacePresets().List(context.TODO(), options)
+				return client.ManagementV1().DevPodWorkspacePresets().List(context.Background(), options)
 			},
 			WatchFunc: func(options metav1.ListOptions) (watch.Interface, error) {
 				if tweakListOptions != nil {
 					tweakListOptions(&options)
 				}
-				return client.ManagementV1().DevPodWorkspacePresets().Watch(context.TODO(), options)
+				return client.ManagementV1().DevPodWorkspacePresets().Watch(context.Background(), options)
+			},
+			ListWithContextFunc: func(ctx context.Context, options metav1.ListOptions) (runtime.Object, error) {
+				if tweakListOptions != nil {
+					tweakListOptions(&options)
+				}
+				return client.ManagementV1().DevPodWorkspacePresets().List(ctx, options)
+			},
+			WatchFuncWithContext: func(ctx context.Context, options metav1.ListOptions) (watch.Interface, error) {
+				if tweakListOptions != nil {
+					tweakListOptions(&options)
+				}
+				return client.ManagementV1().DevPodWorkspacePresets().Watch(ctx, options)
 			},
 		},
-		&managementv1.DevPodWorkspacePreset{},
+		&apismanagementv1.DevPodWorkspacePreset{},
 		resyncPeriod,
 		indexers,
 	)
@@ -65,9 +77,9 @@ func (f *devPodWorkspacePresetInformer) defaultInformer(client versioned.Interfa
 }
 
 func (f *devPodWorkspacePresetInformer) Informer() cache.SharedIndexInformer {
-	return f.factory.InformerFor(&managementv1.DevPodWorkspacePreset{}, f.defaultInformer)
+	return f.factory.InformerFor(&apismanagementv1.DevPodWorkspacePreset{}, f.defaultInformer)
 }
 
-func (f *devPodWorkspacePresetInformer) Lister() v1.DevPodWorkspacePresetLister {
-	return v1.NewDevPodWorkspacePresetLister(f.Informer().GetIndexer())
+func (f *devPodWorkspacePresetInformer) Lister() managementv1.DevPodWorkspacePresetLister {
+	return managementv1.NewDevPodWorkspacePresetLister(f.Informer().GetIndexer())
 }
