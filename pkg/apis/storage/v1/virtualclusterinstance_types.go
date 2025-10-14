@@ -17,8 +17,10 @@ const (
 	InstanceVirtualClusterReady    agentstoragev1.ConditionType = "VirtualClusterReady"
 	InstanceVirtualClusterOnline   agentstoragev1.ConditionType = "VirtualClusterOnline"
 	InstanceProjectsSecretsSynced  agentstoragev1.ConditionType = "ProjectSecretsSynced"
+	InstanceNodesProvisioned       agentstoragev1.ConditionType = "NodesProvisioned"
 
 	InstanceVirtualClusterAppsAndObjectsSynced agentstoragev1.ConditionType = "VirtualClusterAppsAndObjectsSynced"
+	InstanceVirtualClusterDBConnectorSynced    agentstoragev1.ConditionType = "DBConnectorSynced"
 )
 
 // +genclient
@@ -107,6 +109,10 @@ type VirtualClusterInstanceSpec struct {
 	// External specifies if the virtual cluster is managed by the platform agent or externally.
 	// +optional
 	External bool `json:"external,omitempty"`
+
+	// Standalone specifies if the virtual cluster is standalone and not hosted in another Kubernetes cluster.
+	// +optional
+	Standalone bool `json:"standalone,omitempty"`
 }
 
 type VirtualClusterInstanceStatus struct {
@@ -127,6 +133,10 @@ type VirtualClusterInstanceStatus struct {
 	// ServiceUID is the service uid of the virtual cluster to uniquely identify it.
 	// +optional
 	ServiceUID string `json:"serviceUID,omitempty"`
+
+	// KubernetesVersion is the Kubernetes version of the virtual cluster.
+	// +optional
+	KubernetesVersion string `json:"kubernetesVersion,omitempty"`
 
 	// DeployHash is the hash of the last deployed values.
 	// +optional
@@ -282,6 +292,10 @@ type AppReference struct {
 	// +optional
 	Version string `json:"version,omitempty"`
 
+	// Hash is the hash of the app configuration
+	// +optional
+	Hash string `json:"hash,omitempty"`
+
 	// Parameters to use for the app
 	// +optional
 	Parameters string `json:"parameters,omitempty"`
@@ -317,6 +331,10 @@ type VirtualClusterHelmChart struct {
 	// the version of the helm chart to use
 	// +optional
 	Version string `json:"version,omitempty"`
+
+	// InsecureSkipTlsVerify skips the TLS verification for the helm chart
+	// +optional
+	InsecureSkipTlsVerify bool `json:"insecureSkipTlsVerify,omitempty"`
 }
 
 type PodSelector struct {
