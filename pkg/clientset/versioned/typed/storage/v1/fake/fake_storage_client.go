@@ -32,28 +32,16 @@ func (c *FakeStorageV1) ClusterRoleTemplates() v1.ClusterRoleTemplateInterface {
 	return newFakeClusterRoleTemplates(c)
 }
 
-func (c *FakeStorageV1) DevPodEnvironmentTemplates() v1.DevPodEnvironmentTemplateInterface {
-	return newFakeDevPodEnvironmentTemplates(c)
-}
-
-func (c *FakeStorageV1) DevPodWorkspaceInstances(namespace string) v1.DevPodWorkspaceInstanceInterface {
-	return newFakeDevPodWorkspaceInstances(c, namespace)
-}
-
-func (c *FakeStorageV1) DevPodWorkspacePresets() v1.DevPodWorkspacePresetInterface {
-	return newFakeDevPodWorkspacePresets(c)
-}
-
-func (c *FakeStorageV1) DevPodWorkspaceTemplates() v1.DevPodWorkspaceTemplateInterface {
-	return newFakeDevPodWorkspaceTemplates(c)
-}
-
 func (c *FakeStorageV1) NetworkPeers() v1.NetworkPeerInterface {
 	return newFakeNetworkPeers(c)
 }
 
 func (c *FakeStorageV1) NodeClaims(namespace string) v1.NodeClaimInterface {
 	return newFakeNodeClaims(c, namespace)
+}
+
+func (c *FakeStorageV1) NodeEnvironments(namespace string) v1.NodeEnvironmentInterface {
+	return newFakeNodeEnvironments(c, namespace)
 }
 
 func (c *FakeStorageV1) NodeProviders() v1.NodeProviderInterface {

@@ -22,10 +22,6 @@ type ManagementV1Interface interface {
 	ConfigsGetter
 	ConvertVirtualClusterConfigsGetter
 	DatabaseConnectorsGetter
-	DevPodEnvironmentTemplatesGetter
-	DevPodWorkspaceInstancesGetter
-	DevPodWorkspacePresetsGetter
-	DevPodWorkspaceTemplatesGetter
 	DirectClusterEndpointTokensGetter
 	EventsGetter
 	FeaturesGetter
@@ -34,6 +30,7 @@ type ManagementV1Interface interface {
 	LicenseTokensGetter
 	LoftUpgradesGetter
 	NodeClaimsGetter
+	NodeEnvironmentsGetter
 	NodeProvidersGetter
 	NodeTypesGetter
 	OIDCClientsGetter
@@ -52,6 +49,7 @@ type ManagementV1Interface interface {
 	TasksGetter
 	TeamsGetter
 	TranslateVClusterResourceNamesGetter
+	UsageDownloadsGetter
 	UsersGetter
 	VirtualClusterInstancesGetter
 	VirtualClusterSchemasGetter
@@ -103,22 +101,6 @@ func (c *ManagementV1Client) DatabaseConnectors() DatabaseConnectorInterface {
 	return newDatabaseConnectors(c)
 }
 
-func (c *ManagementV1Client) DevPodEnvironmentTemplates() DevPodEnvironmentTemplateInterface {
-	return newDevPodEnvironmentTemplates(c)
-}
-
-func (c *ManagementV1Client) DevPodWorkspaceInstances(namespace string) DevPodWorkspaceInstanceInterface {
-	return newDevPodWorkspaceInstances(c, namespace)
-}
-
-func (c *ManagementV1Client) DevPodWorkspacePresets() DevPodWorkspacePresetInterface {
-	return newDevPodWorkspacePresets(c)
-}
-
-func (c *ManagementV1Client) DevPodWorkspaceTemplates() DevPodWorkspaceTemplateInterface {
-	return newDevPodWorkspaceTemplates(c)
-}
-
 func (c *ManagementV1Client) DirectClusterEndpointTokens() DirectClusterEndpointTokenInterface {
 	return newDirectClusterEndpointTokens(c)
 }
@@ -149,6 +131,10 @@ func (c *ManagementV1Client) LoftUpgrades() LoftUpgradeInterface {
 
 func (c *ManagementV1Client) NodeClaims(namespace string) NodeClaimInterface {
 	return newNodeClaims(c, namespace)
+}
+
+func (c *ManagementV1Client) NodeEnvironments(namespace string) NodeEnvironmentInterface {
+	return newNodeEnvironments(c, namespace)
 }
 
 func (c *ManagementV1Client) NodeProviders() NodeProviderInterface {
@@ -221,6 +207,10 @@ func (c *ManagementV1Client) Teams() TeamInterface {
 
 func (c *ManagementV1Client) TranslateVClusterResourceNames() TranslateVClusterResourceNameInterface {
 	return newTranslateVClusterResourceNames(c)
+}
+
+func (c *ManagementV1Client) UsageDownloads() UsageDownloadInterface {
+	return newUsageDownloads(c)
 }
 
 func (c *ManagementV1Client) Users() UserInterface {

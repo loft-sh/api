@@ -74,3 +74,27 @@ func (c *fakeVirtualClusterInstances) GetExternalDatabase(ctx context.Context, v
 	}
 	return obj.(*v1.VirtualClusterExternalDatabase), err
 }
+
+// GetNodeAccessKey takes the representation of a virtualClusterNodeAccessKey and creates it.  Returns the server's representation of the virtualClusterNodeAccessKey, and an error, if there is any.
+func (c *fakeVirtualClusterInstances) GetNodeAccessKey(ctx context.Context, virtualClusterInstanceName string, virtualClusterNodeAccessKey *v1.VirtualClusterNodeAccessKey, opts metav1.CreateOptions) (result *v1.VirtualClusterNodeAccessKey, err error) {
+	emptyResult := &v1.VirtualClusterNodeAccessKey{}
+	obj, err := c.Fake.
+		Invokes(testing.NewCreateSubresourceActionWithOptions(c.Resource(), virtualClusterInstanceName, "nodeaccesskey", c.Namespace(), virtualClusterNodeAccessKey, opts), emptyResult)
+
+	if obj == nil {
+		return emptyResult, err
+	}
+	return obj.(*v1.VirtualClusterNodeAccessKey), err
+}
+
+// GetStandaloneETCDPeers takes the representation of a virtualClusterStandalone and creates it.  Returns the server's representation of the virtualClusterStandalone, and an error, if there is any.
+func (c *fakeVirtualClusterInstances) GetStandaloneETCDPeers(ctx context.Context, virtualClusterInstanceName string, virtualClusterStandalone *v1.VirtualClusterStandalone, opts metav1.CreateOptions) (result *v1.VirtualClusterStandalone, err error) {
+	emptyResult := &v1.VirtualClusterStandalone{}
+	obj, err := c.Fake.
+		Invokes(testing.NewCreateSubresourceActionWithOptions(c.Resource(), virtualClusterInstanceName, "standalone", c.Namespace(), virtualClusterStandalone, opts), emptyResult)
+
+	if obj == nil {
+		return emptyResult, err
+	}
+	return obj.(*v1.VirtualClusterStandalone), err
+}

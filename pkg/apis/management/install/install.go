@@ -27,9 +27,6 @@ func addKnownOptionsTypes(scheme *runtime.Scheme) error {
 		&management.UserSpacesOptions{},
 		&management.UserVirtualClustersOptions{},
 		&management.UserQuotasOptions{},
-		&management.DevPodWorkspaceInstanceLogOptions{},
-		&management.DevPodWorkspaceInstanceTasksOptions{},
-		&management.DevPodWorkspaceInstanceDownloadOptions{},
 	)
 	return nil
 }

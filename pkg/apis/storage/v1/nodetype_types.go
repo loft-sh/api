@@ -1,24 +1,23 @@
 package v1
 
 import (
-	"strings"
-
 	agentstoragev1 "github.com/loft-sh/agentapi/v4/pkg/apis/loft/storage/v1"
 	corev1 "k8s.io/api/core/v1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 )
 
 const (
-	NodeProviderPropertyKey = "vcluster.com/node-provider"
-	NodeTypePropertyKey     = "vcluster.com/node-type"
+	NodeTypePropertyKey = "vcluster.com/node-type"
 
 	// NodeTypeConditionTypeSynced is the condition that indicates if the node type is synced with provider.
-	NodeTypeConditionTypeSynced = "Synced"
+	NodeTypeConditionTypeSynced  = "Synced"
+	NodeTypeConditionHasCapacity = "HasCapacity"
 )
 
 var (
 	NodeTypeConditions = []agentstoragev1.ConditionType{
 		NodeTypeConditionTypeSynced,
+		NodeTypeConditionHasCapacity,
 	}
 )
 
@@ -53,14 +52,6 @@ type NodeTypeSpec struct {
 	// +optional
 	ProviderRef string `json:"providerRef,omitempty"`
 
-	// Zone is the zone of the node type. If empty, will default to "global".
-	// +optional
-	Zone string `json:"zone,omitempty"`
-
-	// Region is the region of the node type.
-	// +optional
-	Region string `json:"region,omitempty"`
-
 	// Properties returns a flexible set of properties that may be selected for scheduling.
 	Properties map[string]string `json:"properties,omitempty"`
 
@@ -79,66 +70,6 @@ type NodeTypeSpec struct {
 	// DisplayName is the name that should be displayed in the UI
 	// +optional
 	DisplayName string `json:"displayName,omitempty"`
-}
-
-func (a *NodeType) GetAllProperties() []corev1.NodeSelectorRequirement {
-	// default properties
-	zone := "global"
-	if a.Spec.Zone != "" {
-		zone = a.Spec.Zone
-	}
-
-	// build all properties
-	allProperties := []corev1.NodeSelectorRequirement{
-		{
-			Key:      corev1.LabelInstanceTypeStable,
-			Operator: corev1.NodeSelectorOpIn,
-			Values:   []string{a.Name},
-		},
-		{
-			Key:      corev1.LabelOSStable,
-			Operator: corev1.NodeSelectorOpIn,
-			Values:   []string{string(corev1.Linux)},
-		},
-		{
-			Key:      corev1.LabelTopologyZone,
-			Operator: corev1.NodeSelectorOpIn,
-			Values:   []string{zone},
-		},
-		{
-			Key:      "karpenter.sh/capacity-type",
-			Operator: corev1.NodeSelectorOpIn,
-			Values:   []string{"on-demand"},
-		},
-		{
-			Key:      NodeProviderPropertyKey,
-			Operator: corev1.NodeSelectorOpIn,
-			Values:   []string{a.Spec.ProviderRef},
-		},
-		{
-			Key:      NodeTypePropertyKey,
-			Operator: corev1.NodeSelectorOpIn,
-			Values:   []string{a.Name},
-		},
-	}
-	if a.Spec.Region != "" {
-		allProperties = append(allProperties, corev1.NodeSelectorRequirement{
-			Key:      corev1.LabelTopologyRegion,
-			Operator: corev1.NodeSelectorOpIn,
-			Values:   []string{a.Spec.Region},
-		})
-	}
-
-	// add custom properties
-	for key, value := range a.Spec.Properties {
-		allProperties = append(allProperties, corev1.NodeSelectorRequirement{
-			Key:      key,
-			Operator: corev1.NodeSelectorOpIn,
-			Values:   strings.Split(value, ","),
-		})
-	}
-
-	return allProperties
 }
 
 // NodeTypeOverhead defines the resource overhead for a node type.
@@ -174,27 +105,31 @@ type NodeTypeStatus struct {
 	// +optional
 	Message string `json:"message,omitempty"`
 
+	// Cost is the calculated instance cost from the resources specified or the price specified from spec. The higher the cost, the less likely it is to be selected.
+	// +optional
+	Cost int64 `json:"cost,omitempty"`
+
 	// Capacity is the capacity of the node type.
 	// +optional
-	Capacity *NodeTypeCapacity `json:"capacity,omitempty"`
+	Capacity NodeTypeCapacity `json:"capacity,omitempty"`
+
+	// Requirements is the calculated requirements based of the properties for the node type.
+	// +optional
+	Requirements []corev1.NodeSelectorRequirement `json:"requirements,omitempty"`
 
 	// Conditions holds several conditions the node type might be in
 	// +optional
 	Conditions agentstoragev1.Conditions `json:"conditions,omitempty"`
 }
 
+// IMPORTANT: DO NOT use omitempty for values in NodeTypeCapacity.
+// The values are used in NodePool calculations and for UI.
 type NodeTypeCapacity struct {
 	// Total is the total number of nodes of this type
-	// +optional
-	Total int `json:"total,omitempty"`
+	Total int `json:"total"`
 
-	// Available is the number of available nodes of this type
-	// +optional
-	Available int `json:"available,omitempty"`
-
-	// Provisioned is the number of already provisioned nodes of this type
-	// +optional
-	Provisioned int `json:"provisioned,omitempty"`
+	// Claimed is the number of already claimed nodes of this type
+	Claimed int `json:"claimed"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object

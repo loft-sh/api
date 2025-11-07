@@ -22,26 +22,6 @@ type ClusterAccessListerExpansion interface{}
 // ClusterRoleTemplateLister.
 type ClusterRoleTemplateListerExpansion interface{}
 
-// DevPodEnvironmentTemplateListerExpansion allows custom methods to be added to
-// DevPodEnvironmentTemplateLister.
-type DevPodEnvironmentTemplateListerExpansion interface{}
-
-// DevPodWorkspaceInstanceListerExpansion allows custom methods to be added to
-// DevPodWorkspaceInstanceLister.
-type DevPodWorkspaceInstanceListerExpansion interface{}
-
-// DevPodWorkspaceInstanceNamespaceListerExpansion allows custom methods to be added to
-// DevPodWorkspaceInstanceNamespaceLister.
-type DevPodWorkspaceInstanceNamespaceListerExpansion interface{}
-
-// DevPodWorkspacePresetListerExpansion allows custom methods to be added to
-// DevPodWorkspacePresetLister.
-type DevPodWorkspacePresetListerExpansion interface{}
-
-// DevPodWorkspaceTemplateListerExpansion allows custom methods to be added to
-// DevPodWorkspaceTemplateLister.
-type DevPodWorkspaceTemplateListerExpansion interface{}
-
 // NetworkPeerListerExpansion allows custom methods to be added to
 // NetworkPeerLister.
 type NetworkPeerListerExpansion interface{}
@@ -53,6 +33,14 @@ type NodeClaimListerExpansion interface{}
 // NodeClaimNamespaceListerExpansion allows custom methods to be added to
 // NodeClaimNamespaceLister.
 type NodeClaimNamespaceListerExpansion interface{}
+
+// NodeEnvironmentListerExpansion allows custom methods to be added to
+// NodeEnvironmentLister.
+type NodeEnvironmentListerExpansion interface{}
+
+// NodeEnvironmentNamespaceListerExpansion allows custom methods to be added to
+// NodeEnvironmentNamespaceLister.
+type NodeEnvironmentNamespaceListerExpansion interface{}
 
 // NodeProviderListerExpansion allows custom methods to be added to
 // NodeProviderLister.

@@ -52,22 +52,6 @@ func (c *FakeManagementV1) DatabaseConnectors() v1.DatabaseConnectorInterface {
 	return newFakeDatabaseConnectors(c)
 }
 
-func (c *FakeManagementV1) DevPodEnvironmentTemplates() v1.DevPodEnvironmentTemplateInterface {
-	return newFakeDevPodEnvironmentTemplates(c)
-}
-
-func (c *FakeManagementV1) DevPodWorkspaceInstances(namespace string) v1.DevPodWorkspaceInstanceInterface {
-	return newFakeDevPodWorkspaceInstances(c, namespace)
-}
-
-func (c *FakeManagementV1) DevPodWorkspacePresets() v1.DevPodWorkspacePresetInterface {
-	return newFakeDevPodWorkspacePresets(c)
-}
-
-func (c *FakeManagementV1) DevPodWorkspaceTemplates() v1.DevPodWorkspaceTemplateInterface {
-	return newFakeDevPodWorkspaceTemplates(c)
-}
-
 func (c *FakeManagementV1) DirectClusterEndpointTokens() v1.DirectClusterEndpointTokenInterface {
 	return newFakeDirectClusterEndpointTokens(c)
 }
@@ -98,6 +82,10 @@ func (c *FakeManagementV1) LoftUpgrades() v1.LoftUpgradeInterface {
 
 func (c *FakeManagementV1) NodeClaims(namespace string) v1.NodeClaimInterface {
 	return newFakeNodeClaims(c, namespace)
+}
+
+func (c *FakeManagementV1) NodeEnvironments(namespace string) v1.NodeEnvironmentInterface {
+	return newFakeNodeEnvironments(c, namespace)
 }
 
 func (c *FakeManagementV1) NodeProviders() v1.NodeProviderInterface {
@@ -170,6 +158,10 @@ func (c *FakeManagementV1) Teams() v1.TeamInterface {
 
 func (c *FakeManagementV1) TranslateVClusterResourceNames() v1.TranslateVClusterResourceNameInterface {
 	return newFakeTranslateVClusterResourceNames(c)
+}
+
+func (c *FakeManagementV1) UsageDownloads() v1.UsageDownloadInterface {
+	return newFakeUsageDownloads(c)
 }
 
 func (c *FakeManagementV1) Users() v1.UserInterface {

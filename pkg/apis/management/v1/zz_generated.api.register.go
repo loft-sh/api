@@ -42,21 +42,6 @@ func addKnownTypes(scheme *runtime.Scheme) error {
 		&ConvertVirtualClusterConfigList{},
 		&DatabaseConnector{},
 		&DatabaseConnectorList{},
-		&DevPodEnvironmentTemplate{},
-		&DevPodEnvironmentTemplateList{},
-		&DevPodWorkspaceInstance{},
-		&DevPodWorkspaceInstanceList{},
-		&DevPodWorkspaceInstanceCancel{},
-		&DevPodWorkspaceInstanceDownload{},
-		&DevPodWorkspaceInstanceLog{},
-		&DevPodWorkspaceInstanceStop{},
-		&DevPodWorkspaceInstanceTasks{},
-		&DevPodWorkspaceInstanceTroubleshoot{},
-		&DevPodWorkspaceInstanceUp{},
-		&DevPodWorkspacePreset{},
-		&DevPodWorkspacePresetList{},
-		&DevPodWorkspaceTemplate{},
-		&DevPodWorkspaceTemplateList{},
 		&DirectClusterEndpointToken{},
 		&DirectClusterEndpointTokenList{},
 		&Event{},
@@ -76,8 +61,11 @@ func addKnownTypes(scheme *runtime.Scheme) error {
 		&LoftUpgradeList{},
 		&NodeClaim{},
 		&NodeClaimList{},
+		&NodeEnvironment{},
+		&NodeEnvironmentList{},
 		&NodeProvider{},
 		&NodeProviderList{},
+		&NodeProviderExec{},
 		&NodeType{},
 		&NodeTypeList{},
 		&OIDCClient{},
@@ -93,6 +81,7 @@ func addKnownTypes(scheme *runtime.Scheme) error {
 		&ProjectMembers{},
 		&ProjectMigrateSpaceInstance{},
 		&ProjectMigrateVirtualClusterInstance{},
+		&ProjectNodeTypes{},
 		&ProjectTemplates{},
 		&ProjectSecret{},
 		&ProjectSecretList{},
@@ -125,6 +114,8 @@ func addKnownTypes(scheme *runtime.Scheme) error {
 		&TeamPermissions{},
 		&TranslateVClusterResourceName{},
 		&TranslateVClusterResourceNameList{},
+		&UsageDownload{},
+		&UsageDownloadList{},
 		&User{},
 		&UserList{},
 		&UserAccessKeys{},
@@ -138,6 +129,10 @@ func addKnownTypes(scheme *runtime.Scheme) error {
 		&VirtualClusterExternalDatabase{},
 		&VirtualClusterInstanceKubeConfig{},
 		&VirtualClusterInstanceLog{},
+		&VirtualClusterNodeAccessKey{},
+		&VirtualClusterInstanceShell{},
+		&VirtualClusterInstanceSnapshot{},
+		&VirtualClusterStandalone{},
 		&VirtualClusterSchema{},
 		&VirtualClusterSchemaList{},
 		&VirtualClusterTemplate{},
@@ -217,52 +212,6 @@ var (
 		management.ManagementConfigStorage,
 		management.ManagementConvertVirtualClusterConfigStorage,
 		management.ManagementDatabaseConnectorStorage,
-		management.ManagementDevPodEnvironmentTemplateStorage,
-		management.ManagementDevPodWorkspaceInstanceStorage,
-		builders.NewApiResourceWithStorage(
-			management.InternalDevPodWorkspaceInstanceCancelREST,
-			func() runtime.Object { return &DevPodWorkspaceInstanceCancel{} }, // Register versioned resource
-			nil,
-			management.NewDevPodWorkspaceInstanceCancelREST,
-		),
-		builders.NewApiResourceWithStorage(
-			management.InternalDevPodWorkspaceInstanceDownloadREST,
-			func() runtime.Object { return &DevPodWorkspaceInstanceDownload{} }, // Register versioned resource
-			nil,
-			management.NewDevPodWorkspaceInstanceDownloadREST,
-		),
-		builders.NewApiResourceWithStorage(
-			management.InternalDevPodWorkspaceInstanceLogREST,
-			func() runtime.Object { return &DevPodWorkspaceInstanceLog{} }, // Register versioned resource
-			nil,
-			management.NewDevPodWorkspaceInstanceLogREST,
-		),
-		builders.NewApiResourceWithStorage(
-			management.InternalDevPodWorkspaceInstanceStopREST,
-			func() runtime.Object { return &DevPodWorkspaceInstanceStop{} }, // Register versioned resource
-			nil,
-			management.NewDevPodWorkspaceInstanceStopREST,
-		),
-		builders.NewApiResourceWithStorage(
-			management.InternalDevPodWorkspaceInstanceTasksREST,
-			func() runtime.Object { return &DevPodWorkspaceInstanceTasks{} }, // Register versioned resource
-			nil,
-			management.NewDevPodWorkspaceInstanceTasksREST,
-		),
-		builders.NewApiResourceWithStorage(
-			management.InternalDevPodWorkspaceInstanceTroubleshootREST,
-			func() runtime.Object { return &DevPodWorkspaceInstanceTroubleshoot{} }, // Register versioned resource
-			nil,
-			management.NewDevPodWorkspaceInstanceTroubleshootREST,
-		),
-		builders.NewApiResourceWithStorage(
-			management.InternalDevPodWorkspaceInstanceUpREST,
-			func() runtime.Object { return &DevPodWorkspaceInstanceUp{} }, // Register versioned resource
-			nil,
-			management.NewDevPodWorkspaceInstanceUpREST,
-		),
-		management.ManagementDevPodWorkspacePresetStorage,
-		management.ManagementDevPodWorkspaceTemplateStorage,
 		management.ManagementDirectClusterEndpointTokenStorage,
 		management.ManagementEventStorage,
 		management.ManagementFeatureStorage,
@@ -288,12 +237,24 @@ var (
 			func() runtime.Object { return &NodeClaim{} },     // Register versioned resource
 			func() runtime.Object { return &NodeClaimList{} }, // Register versioned resource list
 			management.NewNodeClaimStatusREST),
+		management.ManagementNodeEnvironmentStorage,
+		builders.NewApiResourceWithStorage(
+			management.InternalNodeEnvironmentStatus,
+			func() runtime.Object { return &NodeEnvironment{} },     // Register versioned resource
+			func() runtime.Object { return &NodeEnvironmentList{} }, // Register versioned resource list
+			management.NewNodeEnvironmentStatusREST),
 		management.ManagementNodeProviderStorage,
 		builders.NewApiResourceWithStorage(
 			management.InternalNodeProviderStatus,
 			func() runtime.Object { return &NodeProvider{} },     // Register versioned resource
 			func() runtime.Object { return &NodeProviderList{} }, // Register versioned resource list
 			management.NewNodeProviderStatusREST),
+		builders.NewApiResourceWithStorage(
+			management.InternalNodeProviderExecREST,
+			func() runtime.Object { return &NodeProviderExec{} }, // Register versioned resource
+			nil,
+			management.NewNodeProviderExecREST,
+		),
 		management.ManagementNodeTypeStorage,
 		builders.NewApiResourceWithStorage(
 			management.InternalNodeTypeStatus,
@@ -351,6 +312,12 @@ var (
 			management.NewProjectMigrateVirtualClusterInstanceREST,
 		),
 		builders.NewApiResourceWithStorage(
+			management.InternalProjectNodeTypesREST,
+			func() runtime.Object { return &ProjectNodeTypes{} }, // Register versioned resource
+			nil,
+			management.NewProjectNodeTypesREST,
+		),
+		builders.NewApiResourceWithStorage(
 			management.InternalProjectTemplatesREST,
 			func() runtime.Object { return &ProjectTemplates{} }, // Register versioned resource
 			nil,
@@ -399,6 +366,7 @@ var (
 			management.NewTeamPermissionsREST,
 		),
 		management.ManagementTranslateVClusterResourceNameStorage,
+		management.ManagementUsageDownloadStorage,
 		management.ManagementUserStorage,
 		builders.NewApiResourceWithStorage(
 			management.InternalUserAccessKeysREST,
@@ -454,6 +422,30 @@ var (
 			func() runtime.Object { return &VirtualClusterInstanceLog{} }, // Register versioned resource
 			nil,
 			management.NewVirtualClusterInstanceLogREST,
+		),
+		builders.NewApiResourceWithStorage(
+			management.InternalVirtualClusterNodeAccessKeyREST,
+			func() runtime.Object { return &VirtualClusterNodeAccessKey{} }, // Register versioned resource
+			nil,
+			management.NewVirtualClusterNodeAccessKeyREST,
+		),
+		builders.NewApiResourceWithStorage(
+			management.InternalVirtualClusterInstanceShellREST,
+			func() runtime.Object { return &VirtualClusterInstanceShell{} }, // Register versioned resource
+			nil,
+			management.NewVirtualClusterInstanceShellREST,
+		),
+		builders.NewApiResourceWithStorage(
+			management.InternalVirtualClusterInstanceSnapshotREST,
+			func() runtime.Object { return &VirtualClusterInstanceSnapshot{} }, // Register versioned resource
+			nil,
+			management.NewVirtualClusterInstanceSnapshotREST,
+		),
+		builders.NewApiResourceWithStorage(
+			management.InternalVirtualClusterStandaloneREST,
+			func() runtime.Object { return &VirtualClusterStandalone{} }, // Register versioned resource
+			nil,
+			management.NewVirtualClusterStandaloneREST,
 		),
 		management.ManagementVirtualClusterSchemaStorage,
 		management.ManagementVirtualClusterTemplateStorage,
@@ -642,94 +634,6 @@ type DatabaseConnectorList struct {
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
 
-type DevPodEnvironmentTemplateList struct {
-	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
-	Items           []DevPodEnvironmentTemplate `json:"items"`
-}
-
-// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
-
-type DevPodWorkspaceInstanceList struct {
-	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
-	Items           []DevPodWorkspaceInstance `json:"items"`
-}
-
-// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
-
-type DevPodWorkspaceInstanceCancelList struct {
-	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
-	Items           []DevPodWorkspaceInstanceCancel `json:"items"`
-}
-
-// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
-
-type DevPodWorkspaceInstanceDownloadList struct {
-	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
-	Items           []DevPodWorkspaceInstanceDownload `json:"items"`
-}
-
-// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
-
-type DevPodWorkspaceInstanceLogList struct {
-	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
-	Items           []DevPodWorkspaceInstanceLog `json:"items"`
-}
-
-// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
-
-type DevPodWorkspaceInstanceStopList struct {
-	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
-	Items           []DevPodWorkspaceInstanceStop `json:"items"`
-}
-
-// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
-
-type DevPodWorkspaceInstanceTasksList struct {
-	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
-	Items           []DevPodWorkspaceInstanceTasks `json:"items"`
-}
-
-// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
-
-type DevPodWorkspaceInstanceTroubleshootList struct {
-	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
-	Items           []DevPodWorkspaceInstanceTroubleshoot `json:"items"`
-}
-
-// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
-
-type DevPodWorkspaceInstanceUpList struct {
-	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
-	Items           []DevPodWorkspaceInstanceUp `json:"items"`
-}
-
-// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
-
-type DevPodWorkspacePresetList struct {
-	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
-	Items           []DevPodWorkspacePreset `json:"items"`
-}
-
-// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
-
-type DevPodWorkspaceTemplateList struct {
-	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
-	Items           []DevPodWorkspaceTemplate `json:"items"`
-}
-
-// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
-
 type DirectClusterEndpointTokenList struct {
 	metav1.TypeMeta `json:",inline"`
 	metav1.ListMeta `json:"metadata,omitempty"`
@@ -810,10 +714,26 @@ type NodeClaimList struct {
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
 
+type NodeEnvironmentList struct {
+	metav1.TypeMeta `json:",inline"`
+	metav1.ListMeta `json:"metadata,omitempty"`
+	Items           []NodeEnvironment `json:"items"`
+}
+
+// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+
 type NodeProviderList struct {
 	metav1.TypeMeta `json:",inline"`
 	metav1.ListMeta `json:"metadata,omitempty"`
 	Items           []NodeProvider `json:"items"`
+}
+
+// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+
+type NodeProviderExecList struct {
+	metav1.TypeMeta `json:",inline"`
+	metav1.ListMeta `json:"metadata,omitempty"`
+	Items           []NodeProviderExec `json:"items"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -902,6 +822,14 @@ type ProjectMigrateVirtualClusterInstanceList struct {
 	metav1.TypeMeta `json:",inline"`
 	metav1.ListMeta `json:"metadata,omitempty"`
 	Items           []ProjectMigrateVirtualClusterInstance `json:"items"`
+}
+
+// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+
+type ProjectNodeTypesList struct {
+	metav1.TypeMeta `json:",inline"`
+	metav1.ListMeta `json:"metadata,omitempty"`
+	Items           []ProjectNodeTypes `json:"items"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -1058,6 +986,14 @@ type TranslateVClusterResourceNameList struct {
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
 
+type UsageDownloadList struct {
+	metav1.TypeMeta `json:",inline"`
+	metav1.ListMeta `json:"metadata,omitempty"`
+	Items           []UsageDownload `json:"items"`
+}
+
+// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+
 type UserList struct {
 	metav1.TypeMeta `json:",inline"`
 	metav1.ListMeta `json:"metadata,omitempty"`
@@ -1142,6 +1078,38 @@ type VirtualClusterInstanceLogList struct {
 	metav1.TypeMeta `json:",inline"`
 	metav1.ListMeta `json:"metadata,omitempty"`
 	Items           []VirtualClusterInstanceLog `json:"items"`
+}
+
+// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+
+type VirtualClusterNodeAccessKeyList struct {
+	metav1.TypeMeta `json:",inline"`
+	metav1.ListMeta `json:"metadata,omitempty"`
+	Items           []VirtualClusterNodeAccessKey `json:"items"`
+}
+
+// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+
+type VirtualClusterInstanceShellList struct {
+	metav1.TypeMeta `json:",inline"`
+	metav1.ListMeta `json:"metadata,omitempty"`
+	Items           []VirtualClusterInstanceShell `json:"items"`
+}
+
+// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+
+type VirtualClusterInstanceSnapshotList struct {
+	metav1.TypeMeta `json:",inline"`
+	metav1.ListMeta `json:"metadata,omitempty"`
+	Items           []VirtualClusterInstanceSnapshot `json:"items"`
+}
+
+// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+
+type VirtualClusterStandaloneList struct {
+	metav1.TypeMeta `json:",inline"`
+	metav1.ListMeta `json:"metadata,omitempty"`
+	Items           []VirtualClusterStandalone `json:"items"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
