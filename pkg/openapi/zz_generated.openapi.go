@@ -31004,14 +31004,21 @@ func schema_pkg_apis_ui_v1_UISettingsConfig(ref common.ReferenceCallback) common
 					},
 					"logoURL": {
 						SchemaProps: spec.SchemaProps{
-							Description: "LogoURL is url pointing to the logo to use in the Loft UI. This path must be accessible for clients accessing the Loft UI!",
+							Description: "LogoURL is url pointing to the logo to use in the vCluster Platform UI. This path must be accessible for clients accessing the vCluster Platform UI!",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"faviconURL": {
+						SchemaProps: spec.SchemaProps{
+							Description: "FaviconURL is url pointing to the favicon to use in the vCluster Platform UI. This path must be accessible for clients accessing the vCluster Platform UI!",
 							Type:        []string{"string"},
 							Format:      "",
 						},
 					},
 					"smallLogoURL": {
 						SchemaProps: spec.SchemaProps{
-							Description: "SmallLogoURL is url pointing to the small logo to use in the Loft UI. This path must be accessible for clients accessing the Loft UI!",
+							Description: "SmallLogoURL is url pointing to the small logo to use in the vCluster Platform UI. This path must be accessible for clients accessing the vCluster Platform UI!",
 							Type:        []string{"string"},
 							Format:      "",
 						},
@@ -31126,14 +31133,21 @@ func schema_pkg_apis_ui_v1_UISettingsSpec(ref common.ReferenceCallback) common.O
 					},
 					"logoURL": {
 						SchemaProps: spec.SchemaProps{
-							Description: "LogoURL is url pointing to the logo to use in the Loft UI. This path must be accessible for clients accessing the Loft UI!",
+							Description: "LogoURL is url pointing to the logo to use in the vCluster Platform UI. This path must be accessible for clients accessing the vCluster Platform UI!",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"faviconURL": {
+						SchemaProps: spec.SchemaProps{
+							Description: "FaviconURL is url pointing to the favicon to use in the vCluster Platform UI. This path must be accessible for clients accessing the vCluster Platform UI!",
 							Type:        []string{"string"},
 							Format:      "",
 						},
 					},
 					"smallLogoURL": {
 						SchemaProps: spec.SchemaProps{
-							Description: "SmallLogoURL is url pointing to the small logo to use in the Loft UI. This path must be accessible for clients accessing the Loft UI!",
+							Description: "SmallLogoURL is url pointing to the small logo to use in the vCluster Platform UI. This path must be accessible for clients accessing the vCluster Platform UI!",
 							Type:        []string{"string"},
 							Format:      "",
 						},
