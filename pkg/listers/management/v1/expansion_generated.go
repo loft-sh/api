@@ -62,10 +62,6 @@ type IngressAuthTokenListerExpansion interface{}
 // LicenseLister.
 type LicenseListerExpansion interface{}
 
-// LicenseTokenListerExpansion allows custom methods to be added to
-// LicenseTokenLister.
-type LicenseTokenListerExpansion interface{}
-
 // LoftUpgradeListerExpansion allows custom methods to be added to
 // LoftUpgradeLister.
 type LoftUpgradeListerExpansion interface{}

@@ -198,10 +198,6 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 		"github.com/loft-sh/api/v4/pkg/apis/management/v1.LicenseRequestStatus":                       schema_pkg_apis_management_v1_LicenseRequestStatus(ref),
 		"github.com/loft-sh/api/v4/pkg/apis/management/v1.LicenseSpec":                                schema_pkg_apis_management_v1_LicenseSpec(ref),
 		"github.com/loft-sh/api/v4/pkg/apis/management/v1.LicenseStatus":                              schema_pkg_apis_management_v1_LicenseStatus(ref),
-		"github.com/loft-sh/api/v4/pkg/apis/management/v1.LicenseToken":                               schema_pkg_apis_management_v1_LicenseToken(ref),
-		"github.com/loft-sh/api/v4/pkg/apis/management/v1.LicenseTokenList":                           schema_pkg_apis_management_v1_LicenseTokenList(ref),
-		"github.com/loft-sh/api/v4/pkg/apis/management/v1.LicenseTokenSpec":                           schema_pkg_apis_management_v1_LicenseTokenSpec(ref),
-		"github.com/loft-sh/api/v4/pkg/apis/management/v1.LicenseTokenStatus":                         schema_pkg_apis_management_v1_LicenseTokenStatus(ref),
 		"github.com/loft-sh/api/v4/pkg/apis/management/v1.LoftUpgrade":                                schema_pkg_apis_management_v1_LoftUpgrade(ref),
 		"github.com/loft-sh/api/v4/pkg/apis/management/v1.LoftUpgradeList":                            schema_pkg_apis_management_v1_LoftUpgradeList(ref),
 		"github.com/loft-sh/api/v4/pkg/apis/management/v1.LoftUpgradeSpec":                            schema_pkg_apis_management_v1_LoftUpgradeSpec(ref),
@@ -404,6 +400,10 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 		"github.com/loft-sh/api/v4/pkg/apis/management/v1.VirtualClusterNodeAccessKeyList":            schema_pkg_apis_management_v1_VirtualClusterNodeAccessKeyList(ref),
 		"github.com/loft-sh/api/v4/pkg/apis/management/v1.VirtualClusterNodeAccessKeySpec":            schema_pkg_apis_management_v1_VirtualClusterNodeAccessKeySpec(ref),
 		"github.com/loft-sh/api/v4/pkg/apis/management/v1.VirtualClusterNodeAccessKeyStatus":          schema_pkg_apis_management_v1_VirtualClusterNodeAccessKeyStatus(ref),
+		"github.com/loft-sh/api/v4/pkg/apis/management/v1.VirtualClusterResourceUsage":                schema_pkg_apis_management_v1_VirtualClusterResourceUsage(ref),
+		"github.com/loft-sh/api/v4/pkg/apis/management/v1.VirtualClusterResourceUsageList":            schema_pkg_apis_management_v1_VirtualClusterResourceUsageList(ref),
+		"github.com/loft-sh/api/v4/pkg/apis/management/v1.VirtualClusterResourceUsageMap":             schema_pkg_apis_management_v1_VirtualClusterResourceUsageMap(ref),
+		"github.com/loft-sh/api/v4/pkg/apis/management/v1.VirtualClusterResourceUsageStatus":          schema_pkg_apis_management_v1_VirtualClusterResourceUsageStatus(ref),
 		"github.com/loft-sh/api/v4/pkg/apis/management/v1.VirtualClusterRole":                         schema_pkg_apis_management_v1_VirtualClusterRole(ref),
 		"github.com/loft-sh/api/v4/pkg/apis/management/v1.VirtualClusterSchema":                       schema_pkg_apis_management_v1_VirtualClusterSchema(ref),
 		"github.com/loft-sh/api/v4/pkg/apis/management/v1.VirtualClusterSchemaList":                   schema_pkg_apis_management_v1_VirtualClusterSchemaList(ref),
@@ -1851,6 +1851,22 @@ func schema_loft_sh_admin_apis_pkg_licenseapi_License(ref common.ReferenceCallba
 							Description: "Entity holds a name for an organization, person or entity this product is licensed for. This will be displayed to the user.",
 							Type:        []string{"string"},
 							Format:      "",
+						},
+					},
+					"annotations": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Annotations contains additional metadata about the license.",
+							Type:        []string{"object"},
+							AdditionalProperties: &spec.SchemaOrBool{
+								Allows: true,
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: "",
+										Type:    []string{"string"},
+										Format:  "",
+									},
+								},
+							},
 						},
 					},
 					"analytics": {
@@ -10534,15 +10550,13 @@ func schema_pkg_apis_management_v1_LicenseRequestSpec(ref common.ReferenceCallba
 					"input": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Input is the input payload to send to the url.",
-							Default:     map[string]interface{}{},
-							Ref:         ref("github.com/loft-sh/admin-apis/pkg/licenseapi.GenericRequestInput"),
+							Type:        []string{"string"},
+							Format:      "",
 						},
 					},
 				},
 			},
 		},
-		Dependencies: []string{
-			"github.com/loft-sh/admin-apis/pkg/licenseapi.GenericRequestInput"},
 	}
 }
 
@@ -10555,14 +10569,13 @@ func schema_pkg_apis_management_v1_LicenseRequestStatus(ref common.ReferenceCall
 					"output": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Output is where the request output is stored.",
-							Ref:         ref("github.com/loft-sh/admin-apis/pkg/licenseapi.GenericRequestOutput"),
+							Type:        []string{"string"},
+							Format:      "",
 						},
 					},
 				},
 			},
 		},
-		Dependencies: []string{
-			"github.com/loft-sh/admin-apis/pkg/licenseapi.GenericRequestOutput"},
 	}
 }
 
@@ -10614,144 +10627,6 @@ func schema_pkg_apis_management_v1_LicenseStatus(ref common.ReferenceCallback) c
 		},
 		Dependencies: []string{
 			"github.com/loft-sh/admin-apis/pkg/licenseapi.License", "github.com/loft-sh/admin-apis/pkg/licenseapi.PlatformDatabase", "github.com/loft-sh/admin-apis/pkg/licenseapi.ResourceCount"},
-	}
-}
-
-func schema_pkg_apis_management_v1_LicenseToken(ref common.ReferenceCallback) common.OpenAPIDefinition {
-	return common.OpenAPIDefinition{
-		Schema: spec.Schema{
-			SchemaProps: spec.SchemaProps{
-				Description: "License Token holds the license token information",
-				Type:        []string{"object"},
-				Properties: map[string]spec.Schema{
-					"kind": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"apiVersion": {
-						SchemaProps: spec.SchemaProps{
-							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"metadata": {
-						SchemaProps: spec.SchemaProps{
-							Default: map[string]interface{}{},
-							Ref:     ref("k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"),
-						},
-					},
-					"spec": {
-						SchemaProps: spec.SchemaProps{
-							Default: map[string]interface{}{},
-							Ref:     ref("github.com/loft-sh/api/v4/pkg/apis/management/v1.LicenseTokenSpec"),
-						},
-					},
-					"status": {
-						SchemaProps: spec.SchemaProps{
-							Default: map[string]interface{}{},
-							Ref:     ref("github.com/loft-sh/api/v4/pkg/apis/management/v1.LicenseTokenStatus"),
-						},
-					},
-				},
-			},
-		},
-		Dependencies: []string{
-			"github.com/loft-sh/api/v4/pkg/apis/management/v1.LicenseTokenSpec", "github.com/loft-sh/api/v4/pkg/apis/management/v1.LicenseTokenStatus", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
-	}
-}
-
-func schema_pkg_apis_management_v1_LicenseTokenList(ref common.ReferenceCallback) common.OpenAPIDefinition {
-	return common.OpenAPIDefinition{
-		Schema: spec.Schema{
-			SchemaProps: spec.SchemaProps{
-				Type: []string{"object"},
-				Properties: map[string]spec.Schema{
-					"kind": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"apiVersion": {
-						SchemaProps: spec.SchemaProps{
-							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"metadata": {
-						SchemaProps: spec.SchemaProps{
-							Default: map[string]interface{}{},
-							Ref:     ref("k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"),
-						},
-					},
-					"items": {
-						SchemaProps: spec.SchemaProps{
-							Type: []string{"array"},
-							Items: &spec.SchemaOrArray{
-								Schema: &spec.Schema{
-									SchemaProps: spec.SchemaProps{
-										Default: map[string]interface{}{},
-										Ref:     ref("github.com/loft-sh/api/v4/pkg/apis/management/v1.LicenseToken"),
-									},
-								},
-							},
-						},
-					},
-				},
-				Required: []string{"items"},
-			},
-		},
-		Dependencies: []string{
-			"github.com/loft-sh/api/v4/pkg/apis/management/v1.LicenseToken", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
-	}
-}
-
-func schema_pkg_apis_management_v1_LicenseTokenSpec(ref common.ReferenceCallback) common.OpenAPIDefinition {
-	return common.OpenAPIDefinition{
-		Schema: spec.Schema{
-			SchemaProps: spec.SchemaProps{
-				Type: []string{"object"},
-				Properties: map[string]spec.Schema{
-					"url": {
-						SchemaProps: spec.SchemaProps{
-							Type:   []string{"string"},
-							Format: "",
-						},
-					},
-					"payload": {
-						SchemaProps: spec.SchemaProps{
-							Type:   []string{"string"},
-							Format: "",
-						},
-					},
-				},
-			},
-		},
-	}
-}
-
-func schema_pkg_apis_management_v1_LicenseTokenStatus(ref common.ReferenceCallback) common.OpenAPIDefinition {
-	return common.OpenAPIDefinition{
-		Schema: spec.Schema{
-			SchemaProps: spec.SchemaProps{
-				Type: []string{"object"},
-				Properties: map[string]spec.Schema{
-					"token": {
-						SchemaProps: spec.SchemaProps{
-							Ref: ref("github.com/loft-sh/admin-apis/pkg/licenseapi.InstanceTokenAuth"),
-						},
-					},
-				},
-			},
-		},
-		Dependencies: []string{
-			"github.com/loft-sh/admin-apis/pkg/licenseapi.InstanceTokenAuth"},
 	}
 }
 
@@ -20483,6 +20358,153 @@ func schema_pkg_apis_management_v1_VirtualClusterNodeAccessKeyStatus(ref common.
 				},
 			},
 		},
+	}
+}
+
+func schema_pkg_apis_management_v1_VirtualClusterResourceUsage(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "VirtualClusterResourceUsage holds information about a virtual cluster's usage of node resources.",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"kind": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"apiVersion": {
+						SchemaProps: spec.SchemaProps{
+							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"metadata": {
+						SchemaProps: spec.SchemaProps{
+							Default: map[string]interface{}{},
+							Ref:     ref("k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"),
+						},
+					},
+					"status": {
+						SchemaProps: spec.SchemaProps{
+							Default: map[string]interface{}{},
+							Ref:     ref("github.com/loft-sh/api/v4/pkg/apis/management/v1.VirtualClusterResourceUsageStatus"),
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			"github.com/loft-sh/api/v4/pkg/apis/management/v1.VirtualClusterResourceUsageStatus", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
+	}
+}
+
+func schema_pkg_apis_management_v1_VirtualClusterResourceUsageList(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"kind": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"apiVersion": {
+						SchemaProps: spec.SchemaProps{
+							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"metadata": {
+						SchemaProps: spec.SchemaProps{
+							Default: map[string]interface{}{},
+							Ref:     ref("k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"),
+						},
+					},
+					"items": {
+						SchemaProps: spec.SchemaProps{
+							Type: []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref("github.com/loft-sh/api/v4/pkg/apis/management/v1.VirtualClusterResourceUsage"),
+									},
+								},
+							},
+						},
+					},
+				},
+				Required: []string{"items"},
+			},
+		},
+		Dependencies: []string{
+			"github.com/loft-sh/api/v4/pkg/apis/management/v1.VirtualClusterResourceUsage", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
+	}
+}
+
+func schema_pkg_apis_management_v1_VirtualClusterResourceUsageMap(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"nodes": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Nodes is the total count of nodes attached to the virtual cluster.",
+							Default:     0,
+							Type:        []string{"integer"},
+							Format:      "int32",
+						},
+					},
+					"capacity": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Capacity is a map of resources to their total amounts across all attached nodes.",
+							Type:        []string{"object"},
+							AdditionalProperties: &spec.SchemaOrBool{
+								Allows: true,
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: 0,
+										Type:    []string{"integer"},
+										Format:  "int32",
+									},
+								},
+							},
+						},
+					},
+				},
+				Required: []string{"nodes"},
+			},
+		},
+	}
+}
+
+func schema_pkg_apis_management_v1_VirtualClusterResourceUsageStatus(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"resourceUsage": {
+						SchemaProps: spec.SchemaProps{
+							Description: "ResourceUsage contains the aggregated result of the queries to the virtual cluster's nodes.",
+							Default:     map[string]interface{}{},
+							Ref:         ref("github.com/loft-sh/api/v4/pkg/apis/management/v1.VirtualClusterResourceUsageMap"),
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			"github.com/loft-sh/api/v4/pkg/apis/management/v1.VirtualClusterResourceUsageMap"},
 	}
 }
 
@@ -31823,9 +31845,10 @@ func schema_k8sio_api_admissionregistration_v1_MutatingWebhook(ref common.Refere
 					},
 					"reinvocationPolicy": {
 						SchemaProps: spec.SchemaProps{
-							Description: "reinvocationPolicy indicates whether this webhook should be called multiple times as part of a single admission evaluation. Allowed values are \"Never\" and \"IfNeeded\".\n\nNever: the webhook will not be called more than once in a single admission evaluation.\n\nIfNeeded: the webhook will be called at least one additional time as part of the admission evaluation if the object being admitted is modified by other admission plugins after the initial webhook call. Webhooks that specify this option *must* be idempotent, able to process objects they previously admitted. Note: * the number of additional invocations is not guaranteed to be exactly one. * if additional invocations result in further modifications to the object, webhooks are not guaranteed to be invoked again. * webhooks that use this option may be reordered to minimize the number of additional invocations. * to validate an object after all mutations are guaranteed complete, use a validating admission webhook instead.\n\nDefaults to \"Never\".",
+							Description: "reinvocationPolicy indicates whether this webhook should be called multiple times as part of a single admission evaluation. Allowed values are \"Never\" and \"IfNeeded\".\n\nNever: the webhook will not be called more than once in a single admission evaluation.\n\nIfNeeded: the webhook will be called at least one additional time as part of the admission evaluation if the object being admitted is modified by other admission plugins after the initial webhook call. Webhooks that specify this option *must* be idempotent, able to process objects they previously admitted. Note: * the number of additional invocations is not guaranteed to be exactly one. * if additional invocations result in further modifications to the object, webhooks are not guaranteed to be invoked again. * webhooks that use this option may be reordered to minimize the number of additional invocations. * to validate an object after all mutations are guaranteed complete, use a validating admission webhook instead.\n\nDefaults to \"Never\".\n\nPossible enum values:\n - `\"IfNeeded\"` indicates that the webhook may be called at least one additional time as part of the admission evaluation if the object being admitted is modified by other admission plugins after the initial webhook call.\n - `\"Never\"` indicates that the webhook must not be called more than once in a single admission evaluation.",
 							Type:        []string{"string"},
 							Format:      "",
+							Enum:        []interface{}{"IfNeeded", "Never"},
 						},
 					},
 					"matchConditions": {
@@ -32082,9 +32105,10 @@ func schema_k8sio_api_admissionregistration_v1_NamedRuleWithOperations(ref commo
 					},
 					"scope": {
 						SchemaProps: spec.SchemaProps{
-							Description: "scope specifies the scope of this rule. Valid values are \"Cluster\", \"Namespaced\", and \"*\" \"Cluster\" means that only cluster-scoped resources will match this rule. Namespace API objects are cluster-scoped. \"Namespaced\" means that only namespaced resources will match this rule. \"*\" means that there are no scope restrictions. Subresources match the scope of their parent resource. Default is \"*\".",
+							Description: "scope specifies the scope of this rule. Valid values are \"Cluster\", \"Namespaced\", and \"*\" \"Cluster\" means that only cluster-scoped resources will match this rule. Namespace API objects are cluster-scoped. \"Namespaced\" means that only namespaced resources will match this rule. \"*\" means that there are no scope restrictions. Subresources match the scope of their parent resource. Default is \"*\".\n\n\nPossible enum values:\n - `\"*\"` means that all scopes are included.\n - `\"Cluster\"` means that scope is limited to cluster-scoped objects. Namespace objects are cluster-scoped.\n - `\"Namespaced\"` means that scope is limited to namespaced objects.",
 							Type:        []string{"string"},
 							Format:      "",
+							Enum:        []interface{}{"*", "Cluster", "Namespaced"},
 						},
 					},
 				},
@@ -32246,9 +32270,10 @@ func schema_k8sio_api_admissionregistration_v1_Rule(ref common.ReferenceCallback
 					},
 					"scope": {
 						SchemaProps: spec.SchemaProps{
-							Description: "scope specifies the scope of this rule. Valid values are \"Cluster\", \"Namespaced\", and \"*\" \"Cluster\" means that only cluster-scoped resources will match this rule. Namespace API objects are cluster-scoped. \"Namespaced\" means that only namespaced resources will match this rule. \"*\" means that there are no scope restrictions. Subresources match the scope of their parent resource. Default is \"*\".",
+							Description: "scope specifies the scope of this rule. Valid values are \"Cluster\", \"Namespaced\", and \"*\" \"Cluster\" means that only cluster-scoped resources will match this rule. Namespace API objects are cluster-scoped. \"Namespaced\" means that only namespaced resources will match this rule. \"*\" means that there are no scope restrictions. Subresources match the scope of their parent resource. Default is \"*\".\n\n\nPossible enum values:\n - `\"*\"` means that all scopes are included.\n - `\"Cluster\"` means that scope is limited to cluster-scoped objects. Namespace objects are cluster-scoped.\n - `\"Namespaced\"` means that scope is limited to namespaced objects.",
 							Type:        []string{"string"},
 							Format:      "",
+							Enum:        []interface{}{"*", "Cluster", "Namespaced"},
 						},
 					},
 				},
@@ -32347,9 +32372,10 @@ func schema_k8sio_api_admissionregistration_v1_RuleWithOperations(ref common.Ref
 					},
 					"scope": {
 						SchemaProps: spec.SchemaProps{
-							Description: "scope specifies the scope of this rule. Valid values are \"Cluster\", \"Namespaced\", and \"*\" \"Cluster\" means that only cluster-scoped resources will match this rule. Namespace API objects are cluster-scoped. \"Namespaced\" means that only namespaced resources will match this rule. \"*\" means that there are no scope restrictions. Subresources match the scope of their parent resource. Default is \"*\".",
+							Description: "scope specifies the scope of this rule. Valid values are \"Cluster\", \"Namespaced\", and \"*\" \"Cluster\" means that only cluster-scoped resources will match this rule. Namespace API objects are cluster-scoped. \"Namespaced\" means that only namespaced resources will match this rule. \"*\" means that there are no scope restrictions. Subresources match the scope of their parent resource. Default is \"*\".\n\n\nPossible enum values:\n - `\"*\"` means that all scopes are included.\n - `\"Cluster\"` means that scope is limited to cluster-scoped objects. Namespace objects are cluster-scoped.\n - `\"Namespaced\"` means that scope is limited to namespaced objects.",
 							Type:        []string{"string"},
 							Format:      "",
+							Enum:        []interface{}{"*", "Cluster", "Namespaced"},
 						},
 					},
 				},
@@ -33737,9 +33763,10 @@ func schema_k8sio_api_admissionregistration_v1beta1_MutatingAdmissionPolicySpec(
 					},
 					"reinvocationPolicy": {
 						SchemaProps: spec.SchemaProps{
-							Description: "reinvocationPolicy indicates whether mutations may be called multiple times per MutatingAdmissionPolicyBinding as part of a single admission evaluation. Allowed values are \"Never\" and \"IfNeeded\".\n\nNever: These mutations will not be called more than once per binding in a single admission evaluation.\n\nIfNeeded: These mutations may be invoked more than once per binding for a single admission request and there is no guarantee of order with respect to other admission plugins, admission webhooks, bindings of this policy and admission policies.  Mutations are only reinvoked when mutations change the object after this mutation is invoked. Required.",
+							Description: "reinvocationPolicy indicates whether mutations may be called multiple times per MutatingAdmissionPolicyBinding as part of a single admission evaluation. Allowed values are \"Never\" and \"IfNeeded\".\n\nNever: These mutations will not be called more than once per binding in a single admission evaluation.\n\nIfNeeded: These mutations may be invoked more than once per binding for a single admission request and there is no guarantee of order with respect to other admission plugins, admission webhooks, bindings of this policy and admission policies.  Mutations are only reinvoked when mutations change the object after this mutation is invoked. Required.\n\nPossible enum values:\n - `\"IfNeeded\"` indicates that the webhook may be called at least one additional time as part of the admission evaluation if the object being admitted is modified by other admission plugins after the initial webhook call.\n - `\"Never\"` indicates that the webhook must not be called more than once in a single admission evaluation.",
 							Type:        []string{"string"},
 							Format:      "",
+							Enum:        []interface{}{"IfNeeded", "Never"},
 						},
 					},
 				},
@@ -33853,9 +33880,10 @@ func schema_k8sio_api_admissionregistration_v1beta1_MutatingWebhook(ref common.R
 					},
 					"reinvocationPolicy": {
 						SchemaProps: spec.SchemaProps{
-							Description: "reinvocationPolicy indicates whether this webhook should be called multiple times as part of a single admission evaluation. Allowed values are \"Never\" and \"IfNeeded\".\n\nNever: the webhook will not be called more than once in a single admission evaluation.\n\nIfNeeded: the webhook will be called at least one additional time as part of the admission evaluation if the object being admitted is modified by other admission plugins after the initial webhook call. Webhooks that specify this option *must* be idempotent, able to process objects they previously admitted. Note: * the number of additional invocations is not guaranteed to be exactly one. * if additional invocations result in further modifications to the object, webhooks are not guaranteed to be invoked again. * webhooks that use this option may be reordered to minimize the number of additional invocations. * to validate an object after all mutations are guaranteed complete, use a validating admission webhook instead.\n\nDefaults to \"Never\".",
+							Description: "reinvocationPolicy indicates whether this webhook should be called multiple times as part of a single admission evaluation. Allowed values are \"Never\" and \"IfNeeded\".\n\nNever: the webhook will not be called more than once in a single admission evaluation.\n\nIfNeeded: the webhook will be called at least one additional time as part of the admission evaluation if the object being admitted is modified by other admission plugins after the initial webhook call. Webhooks that specify this option *must* be idempotent, able to process objects they previously admitted. Note: * the number of additional invocations is not guaranteed to be exactly one. * if additional invocations result in further modifications to the object, webhooks are not guaranteed to be invoked again. * webhooks that use this option may be reordered to minimize the number of additional invocations. * to validate an object after all mutations are guaranteed complete, use a validating admission webhook instead.\n\nDefaults to \"Never\".\n\nPossible enum values:\n - `\"IfNeeded\"` indicates that the webhook may be called at least one additional time as part of the admission evaluation if the object being admitted is modified by other admission plugins after the initial webhook call.\n - `\"Never\"` indicates that the webhook must not be called more than once in a single admission evaluation.",
 							Type:        []string{"string"},
 							Format:      "",
+							Enum:        []interface{}{"IfNeeded", "Never"},
 						},
 					},
 					"matchConditions": {
@@ -34149,9 +34177,10 @@ func schema_k8sio_api_admissionregistration_v1beta1_NamedRuleWithOperations(ref 
 					},
 					"scope": {
 						SchemaProps: spec.SchemaProps{
-							Description: "scope specifies the scope of this rule. Valid values are \"Cluster\", \"Namespaced\", and \"*\" \"Cluster\" means that only cluster-scoped resources will match this rule. Namespace API objects are cluster-scoped. \"Namespaced\" means that only namespaced resources will match this rule. \"*\" means that there are no scope restrictions. Subresources match the scope of their parent resource. Default is \"*\".",
+							Description: "scope specifies the scope of this rule. Valid values are \"Cluster\", \"Namespaced\", and \"*\" \"Cluster\" means that only cluster-scoped resources will match this rule. Namespace API objects are cluster-scoped. \"Namespaced\" means that only namespaced resources will match this rule. \"*\" means that there are no scope restrictions. Subresources match the scope of their parent resource. Default is \"*\".\n\n\nPossible enum values:\n - `\"*\"` means that all scopes are included.\n - `\"Cluster\"` means that scope is limited to cluster-scoped objects. Namespace objects are cluster-scoped.\n - `\"Namespaced\"` means that scope is limited to namespaced objects.",
 							Type:        []string{"string"},
 							Format:      "",
+							Enum:        []interface{}{"*", "Cluster", "Namespaced"},
 						},
 					},
 				},

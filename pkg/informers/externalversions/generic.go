@@ -69,8 +69,6 @@ func (f *sharedInformerFactory) ForResource(resource schema.GroupVersionResource
 		return &genericInformer{resource: resource.GroupResource(), informer: f.Management().V1().IngressAuthTokens().Informer()}, nil
 	case v1.SchemeGroupVersion.WithResource("licenses"):
 		return &genericInformer{resource: resource.GroupResource(), informer: f.Management().V1().Licenses().Informer()}, nil
-	case v1.SchemeGroupVersion.WithResource("licensetokens"):
-		return &genericInformer{resource: resource.GroupResource(), informer: f.Management().V1().LicenseTokens().Informer()}, nil
 	case v1.SchemeGroupVersion.WithResource("loftupgrades"):
 		return &genericInformer{resource: resource.GroupResource(), informer: f.Management().V1().LoftUpgrades().Informer()}, nil
 	case v1.SchemeGroupVersion.WithResource("nodeclaims"):

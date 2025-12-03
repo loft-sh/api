@@ -72,10 +72,6 @@ func (c *FakeManagementV1) Licenses() v1.LicenseInterface {
 	return newFakeLicenses(c)
 }
 
-func (c *FakeManagementV1) LicenseTokens() v1.LicenseTokenInterface {
-	return newFakeLicenseTokens(c)
-}
-
 func (c *FakeManagementV1) LoftUpgrades() v1.LoftUpgradeInterface {
 	return newFakeLoftUpgrades(c)
 }

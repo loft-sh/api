@@ -38,8 +38,6 @@ type Interface interface {
 	IngressAuthTokens() IngressAuthTokenInformer
 	// Licenses returns a LicenseInformer.
 	Licenses() LicenseInformer
-	// LicenseTokens returns a LicenseTokenInformer.
-	LicenseTokens() LicenseTokenInformer
 	// LoftUpgrades returns a LoftUpgradeInformer.
 	LoftUpgrades() LoftUpgradeInformer
 	// NodeClaims returns a NodeClaimInformer.
@@ -178,11 +176,6 @@ func (v *version) IngressAuthTokens() IngressAuthTokenInformer {
 // Licenses returns a LicenseInformer.
 func (v *version) Licenses() LicenseInformer {
 	return &licenseInformer{factory: v.factory, tweakListOptions: v.tweakListOptions}
-}
-
-// LicenseTokens returns a LicenseTokenInformer.
-func (v *version) LicenseTokens() LicenseTokenInformer {
-	return &licenseTokenInformer{factory: v.factory, tweakListOptions: v.tweakListOptions}
 }
 
 // LoftUpgrades returns a LoftUpgradeInformer.

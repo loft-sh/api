@@ -98,3 +98,15 @@ func (c *fakeVirtualClusterInstances) GetStandaloneETCDPeers(ctx context.Context
 	}
 	return obj.(*v1.VirtualClusterStandalone), err
 }
+
+// GetShellPod takes the representation of a virtualClusterInstanceShell and creates it.  Returns the server's representation of the virtualClusterInstanceShell, and an error, if there is any.
+func (c *fakeVirtualClusterInstances) GetShellPod(ctx context.Context, virtualClusterInstanceName string, virtualClusterInstanceShell *v1.VirtualClusterInstanceShell, opts metav1.CreateOptions) (result *v1.VirtualClusterInstanceShell, err error) {
+	emptyResult := &v1.VirtualClusterInstanceShell{}
+	obj, err := c.Fake.
+		Invokes(testing.NewCreateSubresourceActionWithOptions(c.Resource(), virtualClusterInstanceName, "shell", c.Namespace(), virtualClusterInstanceShell, opts), emptyResult)
+
+	if obj == nil {
+		return emptyResult, err
+	}
+	return obj.(*v1.VirtualClusterInstanceShell), err
+}
