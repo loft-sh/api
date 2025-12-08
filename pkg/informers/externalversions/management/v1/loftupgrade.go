@@ -3,13 +3,13 @@
 package v1
 
 import (
-	"context"
+	context "context"
 	time "time"
 
-	managementv1 "github.com/loft-sh/api/v4/pkg/apis/management/v1"
+	apismanagementv1 "github.com/loft-sh/api/v4/pkg/apis/management/v1"
 	versioned "github.com/loft-sh/api/v4/pkg/clientset/versioned"
 	internalinterfaces "github.com/loft-sh/api/v4/pkg/informers/externalversions/internalinterfaces"
-	v1 "github.com/loft-sh/api/v4/pkg/listers/management/v1"
+	managementv1 "github.com/loft-sh/api/v4/pkg/listers/management/v1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	runtime "k8s.io/apimachinery/pkg/runtime"
 	watch "k8s.io/apimachinery/pkg/watch"
@@ -20,7 +20,7 @@ import (
 // LoftUpgrades.
 type LoftUpgradeInformer interface {
 	Informer() cache.SharedIndexInformer
-	Lister() v1.LoftUpgradeLister
+	Lister() managementv1.LoftUpgradeLister
 }
 
 type loftUpgradeInformer struct {
@@ -45,16 +45,28 @@ func NewFilteredLoftUpgradeInformer(client versioned.Interface, resyncPeriod tim
 				if tweakListOptions != nil {
 					tweakListOptions(&options)
 				}
-				return client.ManagementV1().LoftUpgrades().List(context.TODO(), options)
+				return client.ManagementV1().LoftUpgrades().List(context.Background(), options)
 			},
 			WatchFunc: func(options metav1.ListOptions) (watch.Interface, error) {
 				if tweakListOptions != nil {
 					tweakListOptions(&options)
 				}
-				return client.ManagementV1().LoftUpgrades().Watch(context.TODO(), options)
+				return client.ManagementV1().LoftUpgrades().Watch(context.Background(), options)
+			},
+			ListWithContextFunc: func(ctx context.Context, options metav1.ListOptions) (runtime.Object, error) {
+				if tweakListOptions != nil {
+					tweakListOptions(&options)
+				}
+				return client.ManagementV1().LoftUpgrades().List(ctx, options)
+			},
+			WatchFuncWithContext: func(ctx context.Context, options metav1.ListOptions) (watch.Interface, error) {
+				if tweakListOptions != nil {
+					tweakListOptions(&options)
+				}
+				return client.ManagementV1().LoftUpgrades().Watch(ctx, options)
 			},
 		},
-		&managementv1.LoftUpgrade{},
+		&apismanagementv1.LoftUpgrade{},
 		resyncPeriod,
 		indexers,
 	)
@@ -65,9 +77,9 @@ func (f *loftUpgradeInformer) defaultInformer(client versioned.Interface, resync
 }
 
 func (f *loftUpgradeInformer) Informer() cache.SharedIndexInformer {
-	return f.factory.InformerFor(&managementv1.LoftUpgrade{}, f.defaultInformer)
+	return f.factory.InformerFor(&apismanagementv1.LoftUpgrade{}, f.defaultInformer)
 }
 
-func (f *loftUpgradeInformer) Lister() v1.LoftUpgradeLister {
-	return v1.NewLoftUpgradeLister(f.Informer().GetIndexer())
+func (f *loftUpgradeInformer) Lister() managementv1.LoftUpgradeLister {
+	return managementv1.NewLoftUpgradeLister(f.Informer().GetIndexer())
 }
