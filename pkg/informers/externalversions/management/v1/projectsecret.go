@@ -3,13 +3,13 @@
 package v1
 
 import (
-	"context"
+	context "context"
 	time "time"
 
-	managementv1 "github.com/loft-sh/api/v4/pkg/apis/management/v1"
+	apismanagementv1 "github.com/loft-sh/api/v4/pkg/apis/management/v1"
 	versioned "github.com/loft-sh/api/v4/pkg/clientset/versioned"
 	internalinterfaces "github.com/loft-sh/api/v4/pkg/informers/externalversions/internalinterfaces"
-	v1 "github.com/loft-sh/api/v4/pkg/listers/management/v1"
+	managementv1 "github.com/loft-sh/api/v4/pkg/listers/management/v1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	runtime "k8s.io/apimachinery/pkg/runtime"
 	watch "k8s.io/apimachinery/pkg/watch"
@@ -20,7 +20,7 @@ import (
 // ProjectSecrets.
 type ProjectSecretInformer interface {
 	Informer() cache.SharedIndexInformer
-	Lister() v1.ProjectSecretLister
+	Lister() managementv1.ProjectSecretLister
 }
 
 type projectSecretInformer struct {
@@ -46,16 +46,28 @@ func NewFilteredProjectSecretInformer(client versioned.Interface, namespace stri
 				if tweakListOptions != nil {
 					tweakListOptions(&options)
 				}
-				return client.ManagementV1().ProjectSecrets(namespace).List(context.TODO(), options)
+				return client.ManagementV1().ProjectSecrets(namespace).List(context.Background(), options)
 			},
 			WatchFunc: func(options metav1.ListOptions) (watch.Interface, error) {
 				if tweakListOptions != nil {
 					tweakListOptions(&options)
 				}
-				return client.ManagementV1().ProjectSecrets(namespace).Watch(context.TODO(), options)
+				return client.ManagementV1().ProjectSecrets(namespace).Watch(context.Background(), options)
+			},
+			ListWithContextFunc: func(ctx context.Context, options metav1.ListOptions) (runtime.Object, error) {
+				if tweakListOptions != nil {
+					tweakListOptions(&options)
+				}
+				return client.ManagementV1().ProjectSecrets(namespace).List(ctx, options)
+			},
+			WatchFuncWithContext: func(ctx context.Context, options metav1.ListOptions) (watch.Interface, error) {
+				if tweakListOptions != nil {
+					tweakListOptions(&options)
+				}
+				return client.ManagementV1().ProjectSecrets(namespace).Watch(ctx, options)
 			},
 		},
-		&managementv1.ProjectSecret{},
+		&apismanagementv1.ProjectSecret{},
 		resyncPeriod,
 		indexers,
 	)
@@ -66,9 +78,9 @@ func (f *projectSecretInformer) defaultInformer(client versioned.Interface, resy
 }
 
 func (f *projectSecretInformer) Informer() cache.SharedIndexInformer {
-	return f.factory.InformerFor(&managementv1.ProjectSecret{}, f.defaultInformer)
+	return f.factory.InformerFor(&apismanagementv1.ProjectSecret{}, f.defaultInformer)
 }
 
-func (f *projectSecretInformer) Lister() v1.ProjectSecretLister {
-	return v1.NewProjectSecretLister(f.Informer().GetIndexer())
+func (f *projectSecretInformer) Lister() managementv1.ProjectSecretLister {
+	return managementv1.NewProjectSecretLister(f.Informer().GetIndexer())
 }
