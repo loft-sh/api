@@ -18,20 +18,18 @@ type Interface interface {
 	ClusterAccesses() ClusterAccessInformer
 	// ClusterRoleTemplates returns a ClusterRoleTemplateInformer.
 	ClusterRoleTemplates() ClusterRoleTemplateInformer
-	// DevPodEnvironmentTemplates returns a DevPodEnvironmentTemplateInformer.
-	DevPodEnvironmentTemplates() DevPodEnvironmentTemplateInformer
-	// DevPodWorkspaceInstances returns a DevPodWorkspaceInstanceInformer.
-	DevPodWorkspaceInstances() DevPodWorkspaceInstanceInformer
-	// DevPodWorkspacePresets returns a DevPodWorkspacePresetInformer.
-	DevPodWorkspacePresets() DevPodWorkspacePresetInformer
-	// DevPodWorkspaceTemplates returns a DevPodWorkspaceTemplateInformer.
-	DevPodWorkspaceTemplates() DevPodWorkspaceTemplateInformer
 	// NetworkPeers returns a NetworkPeerInformer.
 	NetworkPeers() NetworkPeerInformer
+	// NodeClaims returns a NodeClaimInformer.
+	NodeClaims() NodeClaimInformer
+	// NodeEnvironments returns a NodeEnvironmentInformer.
+	NodeEnvironments() NodeEnvironmentInformer
+	// NodeProviders returns a NodeProviderInformer.
+	NodeProviders() NodeProviderInformer
+	// NodeTypes returns a NodeTypeInformer.
+	NodeTypes() NodeTypeInformer
 	// Projects returns a ProjectInformer.
 	Projects() ProjectInformer
-	// Runners returns a RunnerInformer.
-	Runners() RunnerInformer
 	// SharedSecrets returns a SharedSecretInformer.
 	SharedSecrets() SharedSecretInformer
 	// SpaceInstances returns a SpaceInstanceInformer.
@@ -86,39 +84,34 @@ func (v *version) ClusterRoleTemplates() ClusterRoleTemplateInformer {
 	return &clusterRoleTemplateInformer{factory: v.factory, tweakListOptions: v.tweakListOptions}
 }
 
-// DevPodEnvironmentTemplates returns a DevPodEnvironmentTemplateInformer.
-func (v *version) DevPodEnvironmentTemplates() DevPodEnvironmentTemplateInformer {
-	return &devPodEnvironmentTemplateInformer{factory: v.factory, tweakListOptions: v.tweakListOptions}
-}
-
-// DevPodWorkspaceInstances returns a DevPodWorkspaceInstanceInformer.
-func (v *version) DevPodWorkspaceInstances() DevPodWorkspaceInstanceInformer {
-	return &devPodWorkspaceInstanceInformer{factory: v.factory, namespace: v.namespace, tweakListOptions: v.tweakListOptions}
-}
-
-// DevPodWorkspacePresets returns a DevPodWorkspacePresetInformer.
-func (v *version) DevPodWorkspacePresets() DevPodWorkspacePresetInformer {
-	return &devPodWorkspacePresetInformer{factory: v.factory, tweakListOptions: v.tweakListOptions}
-}
-
-// DevPodWorkspaceTemplates returns a DevPodWorkspaceTemplateInformer.
-func (v *version) DevPodWorkspaceTemplates() DevPodWorkspaceTemplateInformer {
-	return &devPodWorkspaceTemplateInformer{factory: v.factory, tweakListOptions: v.tweakListOptions}
-}
-
 // NetworkPeers returns a NetworkPeerInformer.
 func (v *version) NetworkPeers() NetworkPeerInformer {
 	return &networkPeerInformer{factory: v.factory, tweakListOptions: v.tweakListOptions}
 }
 
+// NodeClaims returns a NodeClaimInformer.
+func (v *version) NodeClaims() NodeClaimInformer {
+	return &nodeClaimInformer{factory: v.factory, namespace: v.namespace, tweakListOptions: v.tweakListOptions}
+}
+
+// NodeEnvironments returns a NodeEnvironmentInformer.
+func (v *version) NodeEnvironments() NodeEnvironmentInformer {
+	return &nodeEnvironmentInformer{factory: v.factory, namespace: v.namespace, tweakListOptions: v.tweakListOptions}
+}
+
+// NodeProviders returns a NodeProviderInformer.
+func (v *version) NodeProviders() NodeProviderInformer {
+	return &nodeProviderInformer{factory: v.factory, tweakListOptions: v.tweakListOptions}
+}
+
+// NodeTypes returns a NodeTypeInformer.
+func (v *version) NodeTypes() NodeTypeInformer {
+	return &nodeTypeInformer{factory: v.factory, tweakListOptions: v.tweakListOptions}
+}
+
 // Projects returns a ProjectInformer.
 func (v *version) Projects() ProjectInformer {
 	return &projectInformer{factory: v.factory, tweakListOptions: v.tweakListOptions}
-}
-
-// Runners returns a RunnerInformer.
-func (v *version) Runners() RunnerInformer {
-	return &runnerInformer{factory: v.factory, tweakListOptions: v.tweakListOptions}
 }
 
 // SharedSecrets returns a SharedSecretInformer.
