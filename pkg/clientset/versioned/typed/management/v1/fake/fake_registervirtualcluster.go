@@ -3,120 +3,34 @@
 package fake
 
 import (
-	"context"
-
 	v1 "github.com/loft-sh/api/v4/pkg/apis/management/v1"
-	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
-	labels "k8s.io/apimachinery/pkg/labels"
-	types "k8s.io/apimachinery/pkg/types"
-	watch "k8s.io/apimachinery/pkg/watch"
-	testing "k8s.io/client-go/testing"
+	managementv1 "github.com/loft-sh/api/v4/pkg/clientset/versioned/typed/management/v1"
+	gentype "k8s.io/client-go/gentype"
 )
 
-// FakeRegisterVirtualClusters implements RegisterVirtualClusterInterface
-type FakeRegisterVirtualClusters struct {
+// fakeRegisterVirtualClusters implements RegisterVirtualClusterInterface
+type fakeRegisterVirtualClusters struct {
+	*gentype.FakeClientWithList[*v1.RegisterVirtualCluster, *v1.RegisterVirtualClusterList]
 	Fake *FakeManagementV1
 }
 
-var registervirtualclustersResource = v1.SchemeGroupVersion.WithResource("registervirtualclusters")
-
-var registervirtualclustersKind = v1.SchemeGroupVersion.WithKind("RegisterVirtualCluster")
-
-// Get takes name of the registerVirtualCluster, and returns the corresponding registerVirtualCluster object, and an error if there is any.
-func (c *FakeRegisterVirtualClusters) Get(ctx context.Context, name string, options metav1.GetOptions) (result *v1.RegisterVirtualCluster, err error) {
-	emptyResult := &v1.RegisterVirtualCluster{}
-	obj, err := c.Fake.
-		Invokes(testing.NewRootGetActionWithOptions(registervirtualclustersResource, name, options), emptyResult)
-	if obj == nil {
-		return emptyResult, err
+func newFakeRegisterVirtualClusters(fake *FakeManagementV1) managementv1.RegisterVirtualClusterInterface {
+	return &fakeRegisterVirtualClusters{
+		gentype.NewFakeClientWithList[*v1.RegisterVirtualCluster, *v1.RegisterVirtualClusterList](
+			fake.Fake,
+			"",
+			v1.SchemeGroupVersion.WithResource("registervirtualclusters"),
+			v1.SchemeGroupVersion.WithKind("RegisterVirtualCluster"),
+			func() *v1.RegisterVirtualCluster { return &v1.RegisterVirtualCluster{} },
+			func() *v1.RegisterVirtualClusterList { return &v1.RegisterVirtualClusterList{} },
+			func(dst, src *v1.RegisterVirtualClusterList) { dst.ListMeta = src.ListMeta },
+			func(list *v1.RegisterVirtualClusterList) []*v1.RegisterVirtualCluster {
+				return gentype.ToPointerSlice(list.Items)
+			},
+			func(list *v1.RegisterVirtualClusterList, items []*v1.RegisterVirtualCluster) {
+				list.Items = gentype.FromPointerSlice(items)
+			},
+		),
+		fake,
 	}
-	return obj.(*v1.RegisterVirtualCluster), err
-}
-
-// List takes label and field selectors, and returns the list of RegisterVirtualClusters that match those selectors.
-func (c *FakeRegisterVirtualClusters) List(ctx context.Context, opts metav1.ListOptions) (result *v1.RegisterVirtualClusterList, err error) {
-	emptyResult := &v1.RegisterVirtualClusterList{}
-	obj, err := c.Fake.
-		Invokes(testing.NewRootListActionWithOptions(registervirtualclustersResource, registervirtualclustersKind, opts), emptyResult)
-	if obj == nil {
-		return emptyResult, err
-	}
-
-	label, _, _ := testing.ExtractFromListOptions(opts)
-	if label == nil {
-		label = labels.Everything()
-	}
-	list := &v1.RegisterVirtualClusterList{ListMeta: obj.(*v1.RegisterVirtualClusterList).ListMeta}
-	for _, item := range obj.(*v1.RegisterVirtualClusterList).Items {
-		if label.Matches(labels.Set(item.Labels)) {
-			list.Items = append(list.Items, item)
-		}
-	}
-	return list, err
-}
-
-// Watch returns a watch.Interface that watches the requested registerVirtualClusters.
-func (c *FakeRegisterVirtualClusters) Watch(ctx context.Context, opts metav1.ListOptions) (watch.Interface, error) {
-	return c.Fake.
-		InvokesWatch(testing.NewRootWatchActionWithOptions(registervirtualclustersResource, opts))
-}
-
-// Create takes the representation of a registerVirtualCluster and creates it.  Returns the server's representation of the registerVirtualCluster, and an error, if there is any.
-func (c *FakeRegisterVirtualClusters) Create(ctx context.Context, registerVirtualCluster *v1.RegisterVirtualCluster, opts metav1.CreateOptions) (result *v1.RegisterVirtualCluster, err error) {
-	emptyResult := &v1.RegisterVirtualCluster{}
-	obj, err := c.Fake.
-		Invokes(testing.NewRootCreateActionWithOptions(registervirtualclustersResource, registerVirtualCluster, opts), emptyResult)
-	if obj == nil {
-		return emptyResult, err
-	}
-	return obj.(*v1.RegisterVirtualCluster), err
-}
-
-// Update takes the representation of a registerVirtualCluster and updates it. Returns the server's representation of the registerVirtualCluster, and an error, if there is any.
-func (c *FakeRegisterVirtualClusters) Update(ctx context.Context, registerVirtualCluster *v1.RegisterVirtualCluster, opts metav1.UpdateOptions) (result *v1.RegisterVirtualCluster, err error) {
-	emptyResult := &v1.RegisterVirtualCluster{}
-	obj, err := c.Fake.
-		Invokes(testing.NewRootUpdateActionWithOptions(registervirtualclustersResource, registerVirtualCluster, opts), emptyResult)
-	if obj == nil {
-		return emptyResult, err
-	}
-	return obj.(*v1.RegisterVirtualCluster), err
-}
-
-// UpdateStatus was generated because the type contains a Status member.
-// Add a +genclient:noStatus comment above the type to avoid generating UpdateStatus().
-func (c *FakeRegisterVirtualClusters) UpdateStatus(ctx context.Context, registerVirtualCluster *v1.RegisterVirtualCluster, opts metav1.UpdateOptions) (result *v1.RegisterVirtualCluster, err error) {
-	emptyResult := &v1.RegisterVirtualCluster{}
-	obj, err := c.Fake.
-		Invokes(testing.NewRootUpdateSubresourceActionWithOptions(registervirtualclustersResource, "status", registerVirtualCluster, opts), emptyResult)
-	if obj == nil {
-		return emptyResult, err
-	}
-	return obj.(*v1.RegisterVirtualCluster), err
-}
-
-// Delete takes name of the registerVirtualCluster and deletes it. Returns an error if one occurs.
-func (c *FakeRegisterVirtualClusters) Delete(ctx context.Context, name string, opts metav1.DeleteOptions) error {
-	_, err := c.Fake.
-		Invokes(testing.NewRootDeleteActionWithOptions(registervirtualclustersResource, name, opts), &v1.RegisterVirtualCluster{})
-	return err
-}
-
-// DeleteCollection deletes a collection of objects.
-func (c *FakeRegisterVirtualClusters) DeleteCollection(ctx context.Context, opts metav1.DeleteOptions, listOpts metav1.ListOptions) error {
-	action := testing.NewRootDeleteCollectionActionWithOptions(registervirtualclustersResource, opts, listOpts)
-
-	_, err := c.Fake.Invokes(action, &v1.RegisterVirtualClusterList{})
-	return err
-}
-
-// Patch applies the patch and returns the patched registerVirtualCluster.
-func (c *FakeRegisterVirtualClusters) Patch(ctx context.Context, name string, pt types.PatchType, data []byte, opts metav1.PatchOptions, subresources ...string) (result *v1.RegisterVirtualCluster, err error) {
-	emptyResult := &v1.RegisterVirtualCluster{}
-	obj, err := c.Fake.
-		Invokes(testing.NewRootPatchSubresourceActionWithOptions(registervirtualclustersResource, name, pt, data, opts, subresources...), emptyResult)
-	if obj == nil {
-		return emptyResult, err
-	}
-	return obj.(*v1.RegisterVirtualCluster), err
 }
