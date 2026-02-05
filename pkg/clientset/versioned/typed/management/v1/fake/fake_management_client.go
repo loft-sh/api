@@ -13,163 +13,171 @@ type FakeManagementV1 struct {
 }
 
 func (c *FakeManagementV1) AgentAuditEvents() v1.AgentAuditEventInterface {
-	return &FakeAgentAuditEvents{c}
+	return newFakeAgentAuditEvents(c)
 }
 
 func (c *FakeManagementV1) Announcements() v1.AnnouncementInterface {
-	return &FakeAnnouncements{c}
+	return newFakeAnnouncements(c)
 }
 
 func (c *FakeManagementV1) Apps() v1.AppInterface {
-	return &FakeApps{c}
+	return newFakeApps(c)
 }
 
 func (c *FakeManagementV1) Backups() v1.BackupInterface {
-	return &FakeBackups{c}
+	return newFakeBackups(c)
+}
+
+func (c *FakeManagementV1) BareMetalInstances() v1.BareMetalInstanceInterface {
+	return newFakeBareMetalInstances(c)
 }
 
 func (c *FakeManagementV1) Clusters() v1.ClusterInterface {
-	return &FakeClusters{c}
+	return newFakeClusters(c)
 }
 
 func (c *FakeManagementV1) ClusterAccesses() v1.ClusterAccessInterface {
-	return &FakeClusterAccesses{c}
+	return newFakeClusterAccesses(c)
 }
 
 func (c *FakeManagementV1) ClusterRoleTemplates() v1.ClusterRoleTemplateInterface {
-	return &FakeClusterRoleTemplates{c}
+	return newFakeClusterRoleTemplates(c)
 }
 
 func (c *FakeManagementV1) Configs() v1.ConfigInterface {
-	return &FakeConfigs{c}
+	return newFakeConfigs(c)
 }
 
 func (c *FakeManagementV1) ConvertVirtualClusterConfigs() v1.ConvertVirtualClusterConfigInterface {
-	return &FakeConvertVirtualClusterConfigs{c}
+	return newFakeConvertVirtualClusterConfigs(c)
 }
 
-func (c *FakeManagementV1) DevPodEnvironmentTemplates() v1.DevPodEnvironmentTemplateInterface {
-	return &FakeDevPodEnvironmentTemplates{c}
-}
-
-func (c *FakeManagementV1) DevPodWorkspaceInstances(namespace string) v1.DevPodWorkspaceInstanceInterface {
-	return &FakeDevPodWorkspaceInstances{c, namespace}
-}
-
-func (c *FakeManagementV1) DevPodWorkspacePresets() v1.DevPodWorkspacePresetInterface {
-	return &FakeDevPodWorkspacePresets{c}
-}
-
-func (c *FakeManagementV1) DevPodWorkspaceTemplates() v1.DevPodWorkspaceTemplateInterface {
-	return &FakeDevPodWorkspaceTemplates{c}
+func (c *FakeManagementV1) DatabaseConnectors() v1.DatabaseConnectorInterface {
+	return newFakeDatabaseConnectors(c)
 }
 
 func (c *FakeManagementV1) DirectClusterEndpointTokens() v1.DirectClusterEndpointTokenInterface {
-	return &FakeDirectClusterEndpointTokens{c}
+	return newFakeDirectClusterEndpointTokens(c)
 }
 
 func (c *FakeManagementV1) Events() v1.EventInterface {
-	return &FakeEvents{c}
+	return newFakeEvents(c)
 }
 
 func (c *FakeManagementV1) Features() v1.FeatureInterface {
-	return &FakeFeatures{c}
+	return newFakeFeatures(c)
 }
 
 func (c *FakeManagementV1) IngressAuthTokens() v1.IngressAuthTokenInterface {
-	return &FakeIngressAuthTokens{c}
+	return newFakeIngressAuthTokens(c)
 }
 
 func (c *FakeManagementV1) Licenses() v1.LicenseInterface {
-	return &FakeLicenses{c}
-}
-
-func (c *FakeManagementV1) LicenseTokens() v1.LicenseTokenInterface {
-	return &FakeLicenseTokens{c}
+	return newFakeLicenses(c)
 }
 
 func (c *FakeManagementV1) LoftUpgrades() v1.LoftUpgradeInterface {
-	return &FakeLoftUpgrades{c}
+	return newFakeLoftUpgrades(c)
+}
+
+func (c *FakeManagementV1) NodeClaims(namespace string) v1.NodeClaimInterface {
+	return newFakeNodeClaims(c, namespace)
+}
+
+func (c *FakeManagementV1) NodeEnvironments(namespace string) v1.NodeEnvironmentInterface {
+	return newFakeNodeEnvironments(c, namespace)
+}
+
+func (c *FakeManagementV1) NodeProviders() v1.NodeProviderInterface {
+	return newFakeNodeProviders(c)
+}
+
+func (c *FakeManagementV1) NodeTypes() v1.NodeTypeInterface {
+	return newFakeNodeTypes(c)
 }
 
 func (c *FakeManagementV1) OIDCClients() v1.OIDCClientInterface {
-	return &FakeOIDCClients{c}
+	return newFakeOIDCClients(c)
 }
 
 func (c *FakeManagementV1) OwnedAccessKeys() v1.OwnedAccessKeyInterface {
-	return &FakeOwnedAccessKeys{c}
+	return newFakeOwnedAccessKeys(c)
 }
 
 func (c *FakeManagementV1) Projects() v1.ProjectInterface {
-	return &FakeProjects{c}
+	return newFakeProjects(c)
 }
 
 func (c *FakeManagementV1) ProjectSecrets(namespace string) v1.ProjectSecretInterface {
-	return &FakeProjectSecrets{c, namespace}
+	return newFakeProjectSecrets(c, namespace)
 }
 
 func (c *FakeManagementV1) RedirectTokens() v1.RedirectTokenInterface {
-	return &FakeRedirectTokens{c}
+	return newFakeRedirectTokens(c)
 }
 
 func (c *FakeManagementV1) RegisterVirtualClusters() v1.RegisterVirtualClusterInterface {
-	return &FakeRegisterVirtualClusters{c}
+	return newFakeRegisterVirtualClusters(c)
 }
 
 func (c *FakeManagementV1) ResetAccessKeys() v1.ResetAccessKeyInterface {
-	return &FakeResetAccessKeys{c}
-}
-
-func (c *FakeManagementV1) Runners() v1.RunnerInterface {
-	return &FakeRunners{c}
+	return newFakeResetAccessKeys(c)
 }
 
 func (c *FakeManagementV1) Selves() v1.SelfInterface {
-	return &FakeSelves{c}
+	return newFakeSelves(c)
 }
 
 func (c *FakeManagementV1) SelfSubjectAccessReviews() v1.SelfSubjectAccessReviewInterface {
-	return &FakeSelfSubjectAccessReviews{c}
+	return newFakeSelfSubjectAccessReviews(c)
 }
 
 func (c *FakeManagementV1) SharedSecrets(namespace string) v1.SharedSecretInterface {
-	return &FakeSharedSecrets{c, namespace}
+	return newFakeSharedSecrets(c, namespace)
 }
 
 func (c *FakeManagementV1) SpaceInstances(namespace string) v1.SpaceInstanceInterface {
-	return &FakeSpaceInstances{c, namespace}
+	return newFakeSpaceInstances(c, namespace)
 }
 
 func (c *FakeManagementV1) SpaceTemplates() v1.SpaceTemplateInterface {
-	return &FakeSpaceTemplates{c}
+	return newFakeSpaceTemplates(c)
 }
 
 func (c *FakeManagementV1) SubjectAccessReviews() v1.SubjectAccessReviewInterface {
-	return &FakeSubjectAccessReviews{c}
+	return newFakeSubjectAccessReviews(c)
 }
 
 func (c *FakeManagementV1) Tasks() v1.TaskInterface {
-	return &FakeTasks{c}
+	return newFakeTasks(c)
 }
 
 func (c *FakeManagementV1) Teams() v1.TeamInterface {
-	return &FakeTeams{c}
+	return newFakeTeams(c)
 }
 
 func (c *FakeManagementV1) TranslateVClusterResourceNames() v1.TranslateVClusterResourceNameInterface {
-	return &FakeTranslateVClusterResourceNames{c}
+	return newFakeTranslateVClusterResourceNames(c)
+}
+
+func (c *FakeManagementV1) UsageDownloads() v1.UsageDownloadInterface {
+	return newFakeUsageDownloads(c)
 }
 
 func (c *FakeManagementV1) Users() v1.UserInterface {
-	return &FakeUsers{c}
+	return newFakeUsers(c)
 }
 
 func (c *FakeManagementV1) VirtualClusterInstances(namespace string) v1.VirtualClusterInstanceInterface {
-	return &FakeVirtualClusterInstances{c, namespace}
+	return newFakeVirtualClusterInstances(c, namespace)
+}
+
+func (c *FakeManagementV1) VirtualClusterSchemas() v1.VirtualClusterSchemaInterface {
+	return newFakeVirtualClusterSchemas(c)
 }
 
 func (c *FakeManagementV1) VirtualClusterTemplates() v1.VirtualClusterTemplateInterface {
-	return &FakeVirtualClusterTemplates{c}
+	return newFakeVirtualClusterTemplates(c)
 }
 
 // RESTClient returns a RESTClient that is used to communicate
