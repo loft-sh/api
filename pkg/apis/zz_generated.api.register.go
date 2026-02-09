@@ -43,6 +43,7 @@ func GetManagementAPIBuilder() *builders.APIGroupBuilder {
 			"Announcement",
 			"App",
 			"Backup",
+			"BareMetalInstance",
 			"Cluster",
 			"ClusterAccess",
 			"ClusterRoleTemplate",

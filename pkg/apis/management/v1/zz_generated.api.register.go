@@ -23,6 +23,10 @@ func addKnownTypes(scheme *runtime.Scheme) error {
 		&Backup{},
 		&BackupList{},
 		&BackupApply{},
+		&BareMetalInstance{},
+		&BareMetalInstanceList{},
+		&BareMetalInstanceDiscover{},
+		&BareMetalInstanceProvision{},
 		&Cluster{},
 		&ClusterList{},
 		&ClusterAccessKey{},
@@ -157,6 +161,19 @@ var (
 			func() runtime.Object { return &BackupApply{} }, // Register versioned resource
 			nil,
 			management.NewBackupApplyREST,
+		),
+		management.ManagementBareMetalInstanceStorage,
+		builders.NewApiResourceWithStorage(
+			management.InternalBareMetalInstanceDiscoverREST,
+			func() runtime.Object { return &BareMetalInstanceDiscover{} }, // Register versioned resource
+			nil,
+			management.NewBareMetalInstanceDiscoverREST,
+		),
+		builders.NewApiResourceWithStorage(
+			management.InternalBareMetalInstanceProvisionREST,
+			func() runtime.Object { return &BareMetalInstanceProvision{} }, // Register versioned resource
+			nil,
+			management.NewBareMetalInstanceProvisionREST,
 		),
 		management.ManagementClusterStorage,
 		builders.NewApiResourceWithStorage(
@@ -530,6 +547,30 @@ type BackupApplyList struct {
 	metav1.TypeMeta `json:",inline"`
 	metav1.ListMeta `json:"metadata,omitempty"`
 	Items           []BackupApply `json:"items"`
+}
+
+// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+
+type BareMetalInstanceList struct {
+	metav1.TypeMeta `json:",inline"`
+	metav1.ListMeta `json:"metadata,omitempty"`
+	Items           []BareMetalInstance `json:"items"`
+}
+
+// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+
+type BareMetalInstanceDiscoverList struct {
+	metav1.TypeMeta `json:",inline"`
+	metav1.ListMeta `json:"metadata,omitempty"`
+	Items           []BareMetalInstanceDiscover `json:"items"`
+}
+
+// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+
+type BareMetalInstanceProvisionList struct {
+	metav1.TypeMeta `json:",inline"`
+	metav1.ListMeta `json:"metadata,omitempty"`
+	Items           []BareMetalInstanceProvision `json:"items"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object

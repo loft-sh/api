@@ -7,7 +7,7 @@ toolchain go1.24.4
 require (
 	github.com/ghodss/yaml v1.0.0
 	github.com/loft-sh/admin-apis v0.0.0-20260107140926-51c6ca9ce68d
-	github.com/loft-sh/agentapi/v4 v4.7.0-next.internal.5
+	github.com/loft-sh/agentapi/v4 v4.7.0-next.internal.8
 	github.com/loft-sh/apiserver v0.0.0-20250910060242-4b9f3ffe0646
 	github.com/robfig/cron/v3 v3.0.1
 	golang.org/x/mod v0.27.0

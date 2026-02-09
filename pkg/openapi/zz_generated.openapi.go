@@ -21,6 +21,7 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 		"github.com/loft-sh/admin-apis/pkg/licenseapi.BlockRequest":                                   schema_loft_sh_admin_apis_pkg_licenseapi_BlockRequest(ref),
 		"github.com/loft-sh/admin-apis/pkg/licenseapi.Button":                                         schema_loft_sh_admin_apis_pkg_licenseapi_Button(ref),
 		"github.com/loft-sh/admin-apis/pkg/licenseapi.Feature":                                        schema_loft_sh_admin_apis_pkg_licenseapi_Feature(ref),
+		"github.com/loft-sh/admin-apis/pkg/licenseapi.FeatureUsage":                                   schema_loft_sh_admin_apis_pkg_licenseapi_FeatureUsage(ref),
 		"github.com/loft-sh/admin-apis/pkg/licenseapi.GenericRequestInput":                            schema_loft_sh_admin_apis_pkg_licenseapi_GenericRequestInput(ref),
 		"github.com/loft-sh/admin-apis/pkg/licenseapi.GenericRequestOutput":                           schema_loft_sh_admin_apis_pkg_licenseapi_GenericRequestOutput(ref),
 		"github.com/loft-sh/admin-apis/pkg/licenseapi.InstanceTokenAuth":                              schema_loft_sh_admin_apis_pkg_licenseapi_InstanceTokenAuth(ref),
@@ -31,6 +32,7 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 		"github.com/loft-sh/admin-apis/pkg/licenseapi.LicenseAPIRoutes":                               schema_loft_sh_admin_apis_pkg_licenseapi_LicenseAPIRoutes(ref),
 		"github.com/loft-sh/admin-apis/pkg/licenseapi.Limit":                                          schema_loft_sh_admin_apis_pkg_licenseapi_Limit(ref),
 		"github.com/loft-sh/admin-apis/pkg/licenseapi.Module":                                         schema_loft_sh_admin_apis_pkg_licenseapi_Module(ref),
+		"github.com/loft-sh/admin-apis/pkg/licenseapi.NodeInfo":                                       schema_loft_sh_admin_apis_pkg_licenseapi_NodeInfo(ref),
 		"github.com/loft-sh/admin-apis/pkg/licenseapi.OfflineLicenseKeyClaims":                        schema_loft_sh_admin_apis_pkg_licenseapi_OfflineLicenseKeyClaims(ref),
 		"github.com/loft-sh/admin-apis/pkg/licenseapi.Plan":                                           schema_loft_sh_admin_apis_pkg_licenseapi_Plan(ref),
 		"github.com/loft-sh/admin-apis/pkg/licenseapi.PlanExpiration":                                 schema_loft_sh_admin_apis_pkg_licenseapi_PlanExpiration(ref),
@@ -42,6 +44,9 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 		"github.com/loft-sh/admin-apis/pkg/licenseapi.ResourceCount":                                  schema_loft_sh_admin_apis_pkg_licenseapi_ResourceCount(ref),
 		"github.com/loft-sh/admin-apis/pkg/licenseapi.TierResource":                                   schema_loft_sh_admin_apis_pkg_licenseapi_TierResource(ref),
 		"github.com/loft-sh/admin-apis/pkg/licenseapi.Trial":                                          schema_loft_sh_admin_apis_pkg_licenseapi_Trial(ref),
+		"github.com/loft-sh/admin-apis/pkg/licenseapi.UsageData":                                      schema_loft_sh_admin_apis_pkg_licenseapi_UsageData(ref),
+		"github.com/loft-sh/admin-apis/pkg/licenseapi.UsageDataDetails":                               schema_loft_sh_admin_apis_pkg_licenseapi_UsageDataDetails(ref),
+		"github.com/loft-sh/admin-apis/pkg/licenseapi.VirtualClusterInfo":                             schema_loft_sh_admin_apis_pkg_licenseapi_VirtualClusterInfo(ref),
 		"github.com/loft-sh/agentapi/v4/pkg/apis/loft/cluster/v1.Bash":                                schema_apis_loft_cluster_v1_Bash(ref),
 		"github.com/loft-sh/agentapi/v4/pkg/apis/loft/cluster/v1.Chart":                               schema_apis_loft_cluster_v1_Chart(ref),
 		"github.com/loft-sh/agentapi/v4/pkg/apis/loft/cluster/v1.ChartInfo":                           schema_apis_loft_cluster_v1_ChartInfo(ref),
@@ -109,6 +114,7 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 		"github.com/loft-sh/api/v4/pkg/apis/management/v1.AuthenticationPassword":                     schema_pkg_apis_management_v1_AuthenticationPassword(ref),
 		"github.com/loft-sh/api/v4/pkg/apis/management/v1.AuthenticationRancher":                      schema_pkg_apis_management_v1_AuthenticationRancher(ref),
 		"github.com/loft-sh/api/v4/pkg/apis/management/v1.AuthenticationSAML":                         schema_pkg_apis_management_v1_AuthenticationSAML(ref),
+		"github.com/loft-sh/api/v4/pkg/apis/management/v1.BMCDetails":                                 schema_pkg_apis_management_v1_BMCDetails(ref),
 		"github.com/loft-sh/api/v4/pkg/apis/management/v1.Backup":                                     schema_pkg_apis_management_v1_Backup(ref),
 		"github.com/loft-sh/api/v4/pkg/apis/management/v1.BackupApply":                                schema_pkg_apis_management_v1_BackupApply(ref),
 		"github.com/loft-sh/api/v4/pkg/apis/management/v1.BackupApplyList":                            schema_pkg_apis_management_v1_BackupApplyList(ref),
@@ -117,6 +123,18 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 		"github.com/loft-sh/api/v4/pkg/apis/management/v1.BackupList":                                 schema_pkg_apis_management_v1_BackupList(ref),
 		"github.com/loft-sh/api/v4/pkg/apis/management/v1.BackupSpec":                                 schema_pkg_apis_management_v1_BackupSpec(ref),
 		"github.com/loft-sh/api/v4/pkg/apis/management/v1.BackupStatus":                               schema_pkg_apis_management_v1_BackupStatus(ref),
+		"github.com/loft-sh/api/v4/pkg/apis/management/v1.BareMetalImage":                             schema_pkg_apis_management_v1_BareMetalImage(ref),
+		"github.com/loft-sh/api/v4/pkg/apis/management/v1.BareMetalInstance":                          schema_pkg_apis_management_v1_BareMetalInstance(ref),
+		"github.com/loft-sh/api/v4/pkg/apis/management/v1.BareMetalInstanceDiscover":                  schema_pkg_apis_management_v1_BareMetalInstanceDiscover(ref),
+		"github.com/loft-sh/api/v4/pkg/apis/management/v1.BareMetalInstanceDiscoverList":              schema_pkg_apis_management_v1_BareMetalInstanceDiscoverList(ref),
+		"github.com/loft-sh/api/v4/pkg/apis/management/v1.BareMetalInstanceDiscoverSpec":              schema_pkg_apis_management_v1_BareMetalInstanceDiscoverSpec(ref),
+		"github.com/loft-sh/api/v4/pkg/apis/management/v1.BareMetalInstanceDiscoverStatus":            schema_pkg_apis_management_v1_BareMetalInstanceDiscoverStatus(ref),
+		"github.com/loft-sh/api/v4/pkg/apis/management/v1.BareMetalInstanceList":                      schema_pkg_apis_management_v1_BareMetalInstanceList(ref),
+		"github.com/loft-sh/api/v4/pkg/apis/management/v1.BareMetalInstanceProvision":                 schema_pkg_apis_management_v1_BareMetalInstanceProvision(ref),
+		"github.com/loft-sh/api/v4/pkg/apis/management/v1.BareMetalInstanceProvisionList":             schema_pkg_apis_management_v1_BareMetalInstanceProvisionList(ref),
+		"github.com/loft-sh/api/v4/pkg/apis/management/v1.BareMetalInstanceSpec":                      schema_pkg_apis_management_v1_BareMetalInstanceSpec(ref),
+		"github.com/loft-sh/api/v4/pkg/apis/management/v1.BareMetalInstanceStatus":                    schema_pkg_apis_management_v1_BareMetalInstanceStatus(ref),
+		"github.com/loft-sh/api/v4/pkg/apis/management/v1.BareMetalOperation":                         schema_pkg_apis_management_v1_BareMetalOperation(ref),
 		"github.com/loft-sh/api/v4/pkg/apis/management/v1.Cloud":                                      schema_pkg_apis_management_v1_Cloud(ref),
 		"github.com/loft-sh/api/v4/pkg/apis/management/v1.Cluster":                                    schema_pkg_apis_management_v1_Cluster(ref),
 		"github.com/loft-sh/api/v4/pkg/apis/management/v1.ClusterAccess":                              schema_pkg_apis_management_v1_ClusterAccess(ref),
@@ -172,6 +190,8 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 		"github.com/loft-sh/api/v4/pkg/apis/management/v1.DirectClusterEndpointTokenList":             schema_pkg_apis_management_v1_DirectClusterEndpointTokenList(ref),
 		"github.com/loft-sh/api/v4/pkg/apis/management/v1.DirectClusterEndpointTokenSpec":             schema_pkg_apis_management_v1_DirectClusterEndpointTokenSpec(ref),
 		"github.com/loft-sh/api/v4/pkg/apis/management/v1.DirectClusterEndpointTokenStatus":           schema_pkg_apis_management_v1_DirectClusterEndpointTokenStatus(ref),
+		"github.com/loft-sh/api/v4/pkg/apis/management/v1.DiscoveredNetworkInterface":                 schema_pkg_apis_management_v1_DiscoveredNetworkInterface(ref),
+		"github.com/loft-sh/api/v4/pkg/apis/management/v1.DiscoveredSystem":                           schema_pkg_apis_management_v1_DiscoveredSystem(ref),
 		"github.com/loft-sh/api/v4/pkg/apis/management/v1.Event":                                      schema_pkg_apis_management_v1_Event(ref),
 		"github.com/loft-sh/api/v4/pkg/apis/management/v1.EventList":                                  schema_pkg_apis_management_v1_EventList(ref),
 		"github.com/loft-sh/api/v4/pkg/apis/management/v1.EventSpec":                                  schema_pkg_apis_management_v1_EventSpec(ref),
@@ -205,6 +225,7 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 		"github.com/loft-sh/api/v4/pkg/apis/management/v1.MaintenanceWindow":                          schema_pkg_apis_management_v1_MaintenanceWindow(ref),
 		"github.com/loft-sh/api/v4/pkg/apis/management/v1.ManagementRole":                             schema_pkg_apis_management_v1_ManagementRole(ref),
 		"github.com/loft-sh/api/v4/pkg/apis/management/v1.NamespacedNameArgs":                         schema_pkg_apis_management_v1_NamespacedNameArgs(ref),
+		"github.com/loft-sh/api/v4/pkg/apis/management/v1.NetworkConfig":                              schema_pkg_apis_management_v1_NetworkConfig(ref),
 		"github.com/loft-sh/api/v4/pkg/apis/management/v1.NodeClaim":                                  schema_pkg_apis_management_v1_NodeClaim(ref),
 		"github.com/loft-sh/api/v4/pkg/apis/management/v1.NodeClaimData":                              schema_pkg_apis_management_v1_NodeClaimData(ref),
 		"github.com/loft-sh/api/v4/pkg/apis/management/v1.NodeClaimList":                              schema_pkg_apis_management_v1_NodeClaimList(ref),
@@ -242,6 +263,7 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 		"github.com/loft-sh/api/v4/pkg/apis/management/v1.ObjectName":                                 schema_pkg_apis_management_v1_ObjectName(ref),
 		"github.com/loft-sh/api/v4/pkg/apis/management/v1.ObjectPermission":                           schema_pkg_apis_management_v1_ObjectPermission(ref),
 		"github.com/loft-sh/api/v4/pkg/apis/management/v1.Operation":                                  schema_pkg_apis_management_v1_Operation(ref),
+		"github.com/loft-sh/api/v4/pkg/apis/management/v1.OperationHistory":                           schema_pkg_apis_management_v1_OperationHistory(ref),
 		"github.com/loft-sh/api/v4/pkg/apis/management/v1.OwnedAccessKey":                             schema_pkg_apis_management_v1_OwnedAccessKey(ref),
 		"github.com/loft-sh/api/v4/pkg/apis/management/v1.OwnedAccessKeyList":                         schema_pkg_apis_management_v1_OwnedAccessKeyList(ref),
 		"github.com/loft-sh/api/v4/pkg/apis/management/v1.OwnedAccessKeySpec":                         schema_pkg_apis_management_v1_OwnedAccessKeySpec(ref),
@@ -295,6 +317,7 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 		"github.com/loft-sh/api/v4/pkg/apis/management/v1.ResetAccessKeyList":                         schema_pkg_apis_management_v1_ResetAccessKeyList(ref),
 		"github.com/loft-sh/api/v4/pkg/apis/management/v1.ResetAccessKeySpec":                         schema_pkg_apis_management_v1_ResetAccessKeySpec(ref),
 		"github.com/loft-sh/api/v4/pkg/apis/management/v1.ResetAccessKeyStatus":                       schema_pkg_apis_management_v1_ResetAccessKeyStatus(ref),
+		"github.com/loft-sh/api/v4/pkg/apis/management/v1.RootDeviceHints":                            schema_pkg_apis_management_v1_RootDeviceHints(ref),
 		"github.com/loft-sh/api/v4/pkg/apis/management/v1.Self":                                       schema_pkg_apis_management_v1_Self(ref),
 		"github.com/loft-sh/api/v4/pkg/apis/management/v1.SelfList":                                   schema_pkg_apis_management_v1_SelfList(ref),
 		"github.com/loft-sh/api/v4/pkg/apis/management/v1.SelfSpec":                                   schema_pkg_apis_management_v1_SelfSpec(ref),
@@ -494,6 +517,7 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 		"github.com/loft-sh/api/v4/pkg/apis/storage/v1.LocalClusterRoleTemplateSpec":                  schema_pkg_apis_storage_v1_LocalClusterRoleTemplateSpec(ref),
 		"github.com/loft-sh/api/v4/pkg/apis/storage/v1.ManagedNodeTypeObjectMeta":                     schema_pkg_apis_storage_v1_ManagedNodeTypeObjectMeta(ref),
 		"github.com/loft-sh/api/v4/pkg/apis/storage/v1.Member":                                        schema_pkg_apis_storage_v1_Member(ref),
+		"github.com/loft-sh/api/v4/pkg/apis/storage/v1.Metal3NodeTypeSpec":                            schema_pkg_apis_storage_v1_Metal3NodeTypeSpec(ref),
 		"github.com/loft-sh/api/v4/pkg/apis/storage/v1.Metrics":                                       schema_pkg_apis_storage_v1_Metrics(ref),
 		"github.com/loft-sh/api/v4/pkg/apis/storage/v1.NamedNodeTypeSpec":                             schema_pkg_apis_storage_v1_NamedNodeTypeSpec(ref),
 		"github.com/loft-sh/api/v4/pkg/apis/storage/v1.NamespacePattern":                              schema_pkg_apis_storage_v1_NamespacePattern(ref),
@@ -516,6 +540,7 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 		"github.com/loft-sh/api/v4/pkg/apis/storage/v1.NodeProviderClusterRef":                        schema_pkg_apis_storage_v1_NodeProviderClusterRef(ref),
 		"github.com/loft-sh/api/v4/pkg/apis/storage/v1.NodeProviderKubeVirt":                          schema_pkg_apis_storage_v1_NodeProviderKubeVirt(ref),
 		"github.com/loft-sh/api/v4/pkg/apis/storage/v1.NodeProviderList":                              schema_pkg_apis_storage_v1_NodeProviderList(ref),
+		"github.com/loft-sh/api/v4/pkg/apis/storage/v1.NodeProviderMetal3":                            schema_pkg_apis_storage_v1_NodeProviderMetal3(ref),
 		"github.com/loft-sh/api/v4/pkg/apis/storage/v1.NodeProviderSpec":                              schema_pkg_apis_storage_v1_NodeProviderSpec(ref),
 		"github.com/loft-sh/api/v4/pkg/apis/storage/v1.NodeProviderStatus":                            schema_pkg_apis_storage_v1_NodeProviderStatus(ref),
 		"github.com/loft-sh/api/v4/pkg/apis/storage/v1.NodeProviderTerraform":                         schema_pkg_apis_storage_v1_NodeProviderTerraform(ref),
@@ -1670,6 +1695,34 @@ func schema_loft_sh_admin_apis_pkg_licenseapi_Feature(ref common.ReferenceCallba
 	}
 }
 
+func schema_loft_sh_admin_apis_pkg_licenseapi_FeatureUsage(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "FeatureUsage holds information about whether a feature is used and its status",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"used": {
+						SchemaProps: spec.SchemaProps{
+							Default: false,
+							Type:    []string{"boolean"},
+							Format:  "",
+						},
+					},
+					"status": {
+						SchemaProps: spec.SchemaProps{
+							Default: "",
+							Type:    []string{"string"},
+							Format:  "",
+						},
+					},
+				},
+				Required: []string{"used", "status"},
+			},
+		},
+	}
+}
+
 func schema_loft_sh_admin_apis_pkg_licenseapi_GenericRequestInput(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
@@ -1963,11 +2016,18 @@ func schema_loft_sh_admin_apis_pkg_licenseapi_License(ref common.ReferenceCallba
 							},
 						},
 					},
+					"usageData": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Usage data contains  resource usage information for a platform deployment",
+							Default:     map[string]interface{}{},
+							Ref:         ref("github.com/loft-sh/admin-apis/pkg/licenseapi.UsageData"),
+						},
+					},
 				},
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/admin-apis/pkg/licenseapi.Analytics", "github.com/loft-sh/admin-apis/pkg/licenseapi.Announcement", "github.com/loft-sh/admin-apis/pkg/licenseapi.BlockRequest", "github.com/loft-sh/admin-apis/pkg/licenseapi.Button", "github.com/loft-sh/admin-apis/pkg/licenseapi.LicenseAPIRoutes", "github.com/loft-sh/admin-apis/pkg/licenseapi.Module", "github.com/loft-sh/admin-apis/pkg/licenseapi.Plan"},
+			"github.com/loft-sh/admin-apis/pkg/licenseapi.Analytics", "github.com/loft-sh/admin-apis/pkg/licenseapi.Announcement", "github.com/loft-sh/admin-apis/pkg/licenseapi.BlockRequest", "github.com/loft-sh/admin-apis/pkg/licenseapi.Button", "github.com/loft-sh/admin-apis/pkg/licenseapi.LicenseAPIRoutes", "github.com/loft-sh/admin-apis/pkg/licenseapi.Module", "github.com/loft-sh/admin-apis/pkg/licenseapi.Plan", "github.com/loft-sh/admin-apis/pkg/licenseapi.UsageData"},
 	}
 }
 
@@ -2165,6 +2225,49 @@ func schema_loft_sh_admin_apis_pkg_licenseapi_Module(ref common.ReferenceCallbac
 		},
 		Dependencies: []string{
 			"github.com/loft-sh/admin-apis/pkg/licenseapi.Feature", "github.com/loft-sh/admin-apis/pkg/licenseapi.Limit"},
+	}
+}
+
+func schema_loft_sh_admin_apis_pkg_licenseapi_NodeInfo(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "NodeInfo holds information about a single node",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"machine_id": {
+						SchemaProps: spec.SchemaProps{
+							Default: "",
+							Type:    []string{"string"},
+							Format:  "",
+						},
+					},
+					"creation_timestamp": {
+						SchemaProps: spec.SchemaProps{
+							Default: "",
+							Type:    []string{"string"},
+							Format:  "",
+						},
+					},
+					"capacity": {
+						SchemaProps: spec.SchemaProps{
+							Type: []string{"object"},
+							AdditionalProperties: &spec.SchemaOrBool{
+								Allows: true,
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: "",
+										Type:    []string{"string"},
+										Format:  "",
+									},
+								},
+							},
+						},
+					},
+				},
+				Required: []string{"machine_id", "creation_timestamp", "capacity"},
+			},
+		},
 	}
 }
 
@@ -2678,6 +2781,166 @@ func schema_loft_sh_admin_apis_pkg_licenseapi_Trial(ref common.ReferenceCallback
 						},
 					},
 				},
+			},
+		},
+	}
+}
+
+func schema_loft_sh_admin_apis_pkg_licenseapi_UsageData(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "UsageData holds information for an instance deployment of vCluster Platform",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"featureUsage": {
+						SchemaProps: spec.SchemaProps{
+							Description: "FeatureUsage contains the usage of features",
+							Type:        []string{"object"},
+							AdditionalProperties: &spec.SchemaOrBool{
+								Allows: true,
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref("github.com/loft-sh/admin-apis/pkg/licenseapi.FeatureUsage"),
+									},
+								},
+							},
+						},
+					},
+					"resourceUsage": {
+						SchemaProps: spec.SchemaProps{
+							Description: "ResourceUsage contains the usage of resources",
+							Type:        []string{"object"},
+							AdditionalProperties: &spec.SchemaOrBool{
+								Allows: true,
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref("github.com/loft-sh/admin-apis/pkg/licenseapi.ResourceCount"),
+									},
+								},
+							},
+						},
+					},
+					"details": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Details contains the details of the usage data",
+							Default:     map[string]interface{}{},
+							Ref:         ref("github.com/loft-sh/admin-apis/pkg/licenseapi.UsageDataDetails"),
+						},
+					},
+				},
+				Required: []string{"featureUsage", "resourceUsage", "details"},
+			},
+		},
+		Dependencies: []string{
+			"github.com/loft-sh/admin-apis/pkg/licenseapi.FeatureUsage", "github.com/loft-sh/admin-apis/pkg/licenseapi.ResourceCount", "github.com/loft-sh/admin-apis/pkg/licenseapi.UsageDataDetails"},
+	}
+}
+
+func schema_loft_sh_admin_apis_pkg_licenseapi_UsageDataDetails(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "UsageDataDetails holds detailed information about the nodes and virtual cluster for an instance deployment of vCluster Platform",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"nodes": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Nodes contains the details of the nodes",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref("github.com/loft-sh/admin-apis/pkg/licenseapi.NodeInfo"),
+									},
+								},
+							},
+						},
+					},
+					"vClusters": {
+						SchemaProps: spec.SchemaProps{
+							Description: "VClusters contains the details of the virtual clusters",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref("github.com/loft-sh/admin-apis/pkg/licenseapi.VirtualClusterInfo"),
+									},
+								},
+							},
+						},
+					},
+				},
+				Required: []string{"nodes", "vClusters"},
+			},
+		},
+		Dependencies: []string{
+			"github.com/loft-sh/admin-apis/pkg/licenseapi.NodeInfo", "github.com/loft-sh/admin-apis/pkg/licenseapi.VirtualClusterInfo"},
+	}
+}
+
+func schema_loft_sh_admin_apis_pkg_licenseapi_VirtualClusterInfo(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "VirtualClusterInfo holds information about a single virtual cluster",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"uid": {
+						SchemaProps: spec.SchemaProps{
+							Default: "",
+							Type:    []string{"string"},
+							Format:  "",
+						},
+					},
+					"name": {
+						SchemaProps: spec.SchemaProps{
+							Default: "",
+							Type:    []string{"string"},
+							Format:  "",
+						},
+					},
+					"namespace": {
+						SchemaProps: spec.SchemaProps{
+							Default: "",
+							Type:    []string{"string"},
+							Format:  "",
+						},
+					},
+					"creation_timestamp": {
+						SchemaProps: spec.SchemaProps{
+							Default: "",
+							Type:    []string{"string"},
+							Format:  "",
+						},
+					},
+					"is_available": {
+						SchemaProps: spec.SchemaProps{
+							Default: false,
+							Type:    []string{"boolean"},
+							Format:  "",
+						},
+					},
+					"node_machine_ids": {
+						SchemaProps: spec.SchemaProps{
+							Type: []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: "",
+										Type:    []string{"string"},
+										Format:  "",
+									},
+								},
+							},
+						},
+					},
+				},
+				Required: []string{"uid", "name", "namespace", "creation_timestamp", "is_available", "node_machine_ids"},
 			},
 		},
 	}
@@ -6579,6 +6842,51 @@ func schema_pkg_apis_management_v1_AuthenticationSAML(ref common.ReferenceCallba
 	}
 }
 
+func schema_pkg_apis_management_v1_BMCDetails(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "BMCDetails defines BMC connection information",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"address": {
+						SchemaProps: spec.SchemaProps{
+							Default: "",
+							Type:    []string{"string"},
+							Format:  "",
+						},
+					},
+					"username": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"string"},
+							Format: "",
+						},
+					},
+					"password": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"string"},
+							Format: "",
+						},
+					},
+					"credentialsName": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"string"},
+							Format: "",
+						},
+					},
+					"disableCertificateVerification": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"boolean"},
+							Format: "",
+						},
+					},
+				},
+				Required: []string{"address"},
+			},
+		},
+	}
+}
+
 func schema_pkg_apis_management_v1_Backup(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
@@ -6827,6 +7135,524 @@ func schema_pkg_apis_management_v1_BackupStatus(ref common.ReferenceCallback) co
 				Type:        []string{"object"},
 				Properties: map[string]spec.Schema{
 					"rawBackup": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"string"},
+							Format: "",
+						},
+					},
+				},
+			},
+		},
+	}
+}
+
+func schema_pkg_apis_management_v1_BareMetalImage(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "BareMetalImage defines the image to be provisioned",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"url": {
+						SchemaProps: spec.SchemaProps{
+							Default: "",
+							Type:    []string{"string"},
+							Format:  "",
+						},
+					},
+					"checksum": {
+						SchemaProps: spec.SchemaProps{
+							Default: "",
+							Type:    []string{"string"},
+							Format:  "",
+						},
+					},
+					"checksumType": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"string"},
+							Format: "",
+						},
+					},
+				},
+				Required: []string{"url", "checksum"},
+			},
+		},
+	}
+}
+
+func schema_pkg_apis_management_v1_BareMetalInstance(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "BareMetalInstance provides a management interface for metal3 BareMetalHost resources",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"kind": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"apiVersion": {
+						SchemaProps: spec.SchemaProps{
+							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"metadata": {
+						SchemaProps: spec.SchemaProps{
+							Default: map[string]interface{}{},
+							Ref:     ref("k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"),
+						},
+					},
+					"spec": {
+						SchemaProps: spec.SchemaProps{
+							Default: map[string]interface{}{},
+							Ref:     ref("github.com/loft-sh/api/v4/pkg/apis/management/v1.BareMetalInstanceSpec"),
+						},
+					},
+					"status": {
+						SchemaProps: spec.SchemaProps{
+							Default: map[string]interface{}{},
+							Ref:     ref("github.com/loft-sh/api/v4/pkg/apis/management/v1.BareMetalInstanceStatus"),
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			"github.com/loft-sh/api/v4/pkg/apis/management/v1.BareMetalInstanceSpec", "github.com/loft-sh/api/v4/pkg/apis/management/v1.BareMetalInstanceStatus", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
+	}
+}
+
+func schema_pkg_apis_management_v1_BareMetalInstanceDiscover(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "BareMetalInstanceDiscover is used to discover systems via Redfish",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"kind": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"apiVersion": {
+						SchemaProps: spec.SchemaProps{
+							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"metadata": {
+						SchemaProps: spec.SchemaProps{
+							Default: map[string]interface{}{},
+							Ref:     ref("k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"),
+						},
+					},
+					"spec": {
+						SchemaProps: spec.SchemaProps{
+							Default: map[string]interface{}{},
+							Ref:     ref("github.com/loft-sh/api/v4/pkg/apis/management/v1.BareMetalInstanceDiscoverSpec"),
+						},
+					},
+					"status": {
+						SchemaProps: spec.SchemaProps{
+							Default: map[string]interface{}{},
+							Ref:     ref("github.com/loft-sh/api/v4/pkg/apis/management/v1.BareMetalInstanceDiscoverStatus"),
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			"github.com/loft-sh/api/v4/pkg/apis/management/v1.BareMetalInstanceDiscoverSpec", "github.com/loft-sh/api/v4/pkg/apis/management/v1.BareMetalInstanceDiscoverStatus", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
+	}
+}
+
+func schema_pkg_apis_management_v1_BareMetalInstanceDiscoverList(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"kind": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"apiVersion": {
+						SchemaProps: spec.SchemaProps{
+							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"metadata": {
+						SchemaProps: spec.SchemaProps{
+							Default: map[string]interface{}{},
+							Ref:     ref("k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"),
+						},
+					},
+					"items": {
+						SchemaProps: spec.SchemaProps{
+							Type: []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref("github.com/loft-sh/api/v4/pkg/apis/management/v1.BareMetalInstanceDiscover"),
+									},
+								},
+							},
+						},
+					},
+				},
+				Required: []string{"items"},
+			},
+		},
+		Dependencies: []string{
+			"github.com/loft-sh/api/v4/pkg/apis/management/v1.BareMetalInstanceDiscover", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
+	}
+}
+
+func schema_pkg_apis_management_v1_BareMetalInstanceDiscoverSpec(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"endpoint": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Endpoint is the Redfish API base URL (e.g., https://192.168.1.100:8443)",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"username": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Username for Redfish authentication",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"password": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Password for Redfish authentication",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"insecureSkipVerify": {
+						SchemaProps: spec.SchemaProps{
+							Description: "InsecureSkipVerify skips TLS certificate verification",
+							Type:        []string{"boolean"},
+							Format:      "",
+						},
+					},
+				},
+			},
+		},
+	}
+}
+
+func schema_pkg_apis_management_v1_BareMetalInstanceDiscoverStatus(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"systems": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Systems contains the list of discovered systems",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref("github.com/loft-sh/api/v4/pkg/apis/management/v1.DiscoveredSystem"),
+									},
+								},
+							},
+						},
+					},
+					"error": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Error contains any error message from the discovery process",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			"github.com/loft-sh/api/v4/pkg/apis/management/v1.DiscoveredSystem"},
+	}
+}
+
+func schema_pkg_apis_management_v1_BareMetalInstanceList(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"kind": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"apiVersion": {
+						SchemaProps: spec.SchemaProps{
+							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"metadata": {
+						SchemaProps: spec.SchemaProps{
+							Default: map[string]interface{}{},
+							Ref:     ref("k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"),
+						},
+					},
+					"items": {
+						SchemaProps: spec.SchemaProps{
+							Type: []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref("github.com/loft-sh/api/v4/pkg/apis/management/v1.BareMetalInstance"),
+									},
+								},
+							},
+						},
+					},
+				},
+				Required: []string{"items"},
+			},
+		},
+		Dependencies: []string{
+			"github.com/loft-sh/api/v4/pkg/apis/management/v1.BareMetalInstance", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
+	}
+}
+
+func schema_pkg_apis_management_v1_BareMetalInstanceProvision(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"kind": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"apiVersion": {
+						SchemaProps: spec.SchemaProps{
+							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"metadata": {
+						SchemaProps: spec.SchemaProps{
+							Default: map[string]interface{}{},
+							Ref:     ref("k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"),
+						},
+					},
+					"image": {
+						SchemaProps: spec.SchemaProps{
+							Default: map[string]interface{}{},
+							Ref:     ref("github.com/loft-sh/api/v4/pkg/apis/management/v1.BareMetalImage"),
+						},
+					},
+				},
+				Required: []string{"image"},
+			},
+		},
+		Dependencies: []string{
+			"github.com/loft-sh/api/v4/pkg/apis/management/v1.BareMetalImage", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
+	}
+}
+
+func schema_pkg_apis_management_v1_BareMetalInstanceProvisionList(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"kind": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"apiVersion": {
+						SchemaProps: spec.SchemaProps{
+							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"metadata": {
+						SchemaProps: spec.SchemaProps{
+							Default: map[string]interface{}{},
+							Ref:     ref("k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"),
+						},
+					},
+					"items": {
+						SchemaProps: spec.SchemaProps{
+							Type: []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref("github.com/loft-sh/api/v4/pkg/apis/management/v1.BareMetalInstanceProvision"),
+									},
+								},
+							},
+						},
+					},
+				},
+				Required: []string{"items"},
+			},
+		},
+		Dependencies: []string{
+			"github.com/loft-sh/api/v4/pkg/apis/management/v1.BareMetalInstanceProvision", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
+	}
+}
+
+func schema_pkg_apis_management_v1_BareMetalInstanceSpec(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "BareMetalInstanceSpec defines the desired state of a bare metal instance",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"macAddress": {
+						SchemaProps: spec.SchemaProps{
+							Description: "MAC address for boot identification",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"bmc": {
+						SchemaProps: spec.SchemaProps{
+							Description: "BMC connection details",
+							Ref:         ref("github.com/loft-sh/api/v4/pkg/apis/management/v1.BMCDetails"),
+						},
+					},
+					"image": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Image configuration",
+							Ref:         ref("github.com/loft-sh/api/v4/pkg/apis/management/v1.BareMetalImage"),
+						},
+					},
+					"userData": {
+						SchemaProps: spec.SchemaProps{
+							Description: "UserData is literal cloud-init user data (secret managed internally)",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"networkData": {
+						SchemaProps: spec.SchemaProps{
+							Description: "NetworkData is literal cloud-init network config (secret managed internally)",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"rootDeviceHints": {
+						SchemaProps: spec.SchemaProps{
+							Description: "RootDeviceHints for target disk selection",
+							Ref:         ref("github.com/loft-sh/api/v4/pkg/apis/management/v1.RootDeviceHints"),
+						},
+					},
+					"network": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Network configuration (translated to BMH annotations)",
+							Ref:         ref("github.com/loft-sh/api/v4/pkg/apis/management/v1.NetworkConfig"),
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			"github.com/loft-sh/api/v4/pkg/apis/management/v1.BMCDetails", "github.com/loft-sh/api/v4/pkg/apis/management/v1.BareMetalImage", "github.com/loft-sh/api/v4/pkg/apis/management/v1.NetworkConfig", "github.com/loft-sh/api/v4/pkg/apis/management/v1.RootDeviceHints"},
+	}
+}
+
+func schema_pkg_apis_management_v1_BareMetalInstanceStatus(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "BareMetalInstanceStatus defines the observed state of a bare metal instance",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"provisioningState": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"string"},
+							Format: "",
+						},
+					},
+					"errorMessage": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"string"},
+							Format: "",
+						},
+					},
+					"hardware": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Hardware contains the hardware details as inline JSON (cpu, firmware, nics, storage, etc.) This field is dynamically populated from the BMH status.hardware Clients should unmarshal this to access the hardware information",
+							Type:        []string{"string"},
+							Format:      "byte",
+						},
+					},
+					"poweredOn": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"boolean"},
+							Format: "",
+						},
+					},
+					"operationHistory": {
+						SchemaProps: spec.SchemaProps{
+							Ref: ref("github.com/loft-sh/api/v4/pkg/apis/management/v1.OperationHistory"),
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			"github.com/loft-sh/api/v4/pkg/apis/management/v1.OperationHistory"},
+	}
+}
+
+func schema_pkg_apis_management_v1_BareMetalOperation(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "BareMetalOperation tracks the timing of an operation",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"start": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"string"},
+							Format: "",
+						},
+					},
+					"end": {
 						SchemaProps: spec.SchemaProps{
 							Type:   []string{"string"},
 							Format: "",
@@ -9471,6 +10297,139 @@ func schema_pkg_apis_management_v1_DirectClusterEndpointTokenStatus(ref common.R
 	}
 }
 
+func schema_pkg_apis_management_v1_DiscoveredNetworkInterface(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"id": {
+						SchemaProps: spec.SchemaProps{
+							Description: "ID is the interface identifier",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"name": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Name is the human-readable interface name",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"macAddress": {
+						SchemaProps: spec.SchemaProps{
+							Description: "MACAddress is the MAC address",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"speedMbps": {
+						SchemaProps: spec.SchemaProps{
+							Description: "SpeedMbps is the link speed in Mbps",
+							Type:        []string{"integer"},
+							Format:      "int32",
+						},
+					},
+					"linkStatus": {
+						SchemaProps: spec.SchemaProps{
+							Description: "LinkStatus indicates link status (e.g., \"LinkUp\", \"LinkDown\")",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"ipv4Addresses": {
+						SchemaProps: spec.SchemaProps{
+							Description: "IPv4Addresses contains assigned IPv4 addresses",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: "",
+										Type:    []string{"string"},
+										Format:  "",
+									},
+								},
+							},
+						},
+					},
+					"ipv6Addresses": {
+						SchemaProps: spec.SchemaProps{
+							Description: "IPv6Addresses contains assigned IPv6 addresses",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: "",
+										Type:    []string{"string"},
+										Format:  "",
+									},
+								},
+							},
+						},
+					},
+				},
+			},
+		},
+	}
+}
+
+func schema_pkg_apis_management_v1_DiscoveredSystem(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"id": {
+						SchemaProps: spec.SchemaProps{
+							Description: "ID is the system identifier",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"name": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Name is the human-readable system name",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"uri": {
+						SchemaProps: spec.SchemaProps{
+							Description: "URI is the Redfish URI for this system",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"networkInterfaces": {
+						SchemaProps: spec.SchemaProps{
+							Description: "NetworkInterfaces contains discovered network interfaces",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref("github.com/loft-sh/api/v4/pkg/apis/management/v1.DiscoveredNetworkInterface"),
+									},
+								},
+							},
+						},
+					},
+					"error": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Error contains any error encountered while discovering this system",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			"github.com/loft-sh/api/v4/pkg/apis/management/v1.DiscoveredNetworkInterface"},
+	}
+}
+
 func schema_pkg_apis_management_v1_Event(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
@@ -10862,6 +11821,50 @@ func schema_pkg_apis_management_v1_NamespacedNameArgs(ref common.ReferenceCallba
 	}
 }
 
+func schema_pkg_apis_management_v1_NetworkConfig(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "NetworkConfig defines network configuration for the instance",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"ip": {
+						SchemaProps: spec.SchemaProps{
+							Description: "IP address in CIDR notation (e.g., \"192.168.100.14/24\")",
+							Default:     "",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"gateway": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Gateway IP address (e.g., \"192.168.100.1\")",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"dnsServers": {
+						SchemaProps: spec.SchemaProps{
+							Description: "DNS servers (e.g., [\"10.0.0.2\"])",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: "",
+										Type:    []string{"string"},
+										Format:  "",
+									},
+								},
+							},
+						},
+					},
+				},
+				Required: []string{"ip"},
+			},
+		},
+	}
+}
+
 func schema_pkg_apis_management_v1_NodeClaim(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
@@ -11892,6 +12895,12 @@ func schema_pkg_apis_management_v1_NodeProviderSpec(ref common.ReferenceCallback
 							Ref:         ref("github.com/loft-sh/api/v4/pkg/apis/storage/v1.NodeProviderClusterAPI"),
 						},
 					},
+					"metal3": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Metal3 configures a node provider using metal3.io BareMetalHost resources.",
+							Ref:         ref("github.com/loft-sh/api/v4/pkg/apis/storage/v1.NodeProviderMetal3"),
+						},
+					},
 					"displayName": {
 						SchemaProps: spec.SchemaProps{
 							Description: "DisplayName is the name that should be displayed in the UI",
@@ -11903,7 +12912,7 @@ func schema_pkg_apis_management_v1_NodeProviderSpec(ref common.ReferenceCallback
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/v4/pkg/apis/storage/v1.NodeProviderBCM", "github.com/loft-sh/api/v4/pkg/apis/storage/v1.NodeProviderClusterAPI", "github.com/loft-sh/api/v4/pkg/apis/storage/v1.NodeProviderKubeVirt", "github.com/loft-sh/api/v4/pkg/apis/storage/v1.NodeProviderTerraform"},
+			"github.com/loft-sh/api/v4/pkg/apis/storage/v1.NodeProviderBCM", "github.com/loft-sh/api/v4/pkg/apis/storage/v1.NodeProviderClusterAPI", "github.com/loft-sh/api/v4/pkg/apis/storage/v1.NodeProviderKubeVirt", "github.com/loft-sh/api/v4/pkg/apis/storage/v1.NodeProviderMetal3", "github.com/loft-sh/api/v4/pkg/apis/storage/v1.NodeProviderTerraform"},
 	}
 }
 
@@ -12552,6 +13561,41 @@ func schema_pkg_apis_management_v1_Operation(ref common.ReferenceCallback) commo
 		},
 		Dependencies: []string{
 			"k8s.io/apimachinery/pkg/apis/meta/v1.Time"},
+	}
+}
+
+func schema_pkg_apis_management_v1_OperationHistory(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "OperationHistory tracks the history of operations on the instance",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"register": {
+						SchemaProps: spec.SchemaProps{
+							Ref: ref("github.com/loft-sh/api/v4/pkg/apis/management/v1.BareMetalOperation"),
+						},
+					},
+					"inspect": {
+						SchemaProps: spec.SchemaProps{
+							Ref: ref("github.com/loft-sh/api/v4/pkg/apis/management/v1.BareMetalOperation"),
+						},
+					},
+					"provision": {
+						SchemaProps: spec.SchemaProps{
+							Ref: ref("github.com/loft-sh/api/v4/pkg/apis/management/v1.BareMetalOperation"),
+						},
+					},
+					"deprovision": {
+						SchemaProps: spec.SchemaProps{
+							Ref: ref("github.com/loft-sh/api/v4/pkg/apis/management/v1.BareMetalOperation"),
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			"github.com/loft-sh/api/v4/pkg/apis/management/v1.BareMetalOperation"},
 	}
 }
 
@@ -15118,6 +16162,27 @@ func schema_pkg_apis_management_v1_ResetAccessKeyStatus(ref common.ReferenceCall
 		},
 		Dependencies: []string{
 			"k8s.io/apimachinery/pkg/apis/meta/v1.Time"},
+	}
+}
+
+func schema_pkg_apis_management_v1_RootDeviceHints(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "RootDeviceHints defines hints for selecting the target disk",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"deviceName": {
+						SchemaProps: spec.SchemaProps{
+							Default: "",
+							Type:    []string{"string"},
+							Format:  "",
+						},
+					},
+				},
+				Required: []string{"deviceName"},
+			},
+		},
 	}
 }
 
@@ -24955,6 +26020,100 @@ func schema_pkg_apis_storage_v1_Member(ref common.ReferenceCallback) common.Open
 	}
 }
 
+func schema_pkg_apis_storage_v1_Metal3NodeTypeSpec(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"providerRef": {
+						SchemaProps: spec.SchemaProps{
+							Description: "ProviderRef is the node provider to use for this node type.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"properties": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Properties returns a flexible set of properties that may be selected for scheduling.",
+							Type:        []string{"object"},
+							AdditionalProperties: &spec.SchemaOrBool{
+								Allows: true,
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: "",
+										Type:    []string{"string"},
+										Format:  "",
+									},
+								},
+							},
+						},
+					},
+					"resources": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Resources lists the full resources for a single node.",
+							Type:        []string{"object"},
+							AdditionalProperties: &spec.SchemaOrBool{
+								Allows: true,
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Ref: ref("k8s.io/apimachinery/pkg/api/resource.Quantity"),
+									},
+								},
+							},
+						},
+					},
+					"overhead": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Overhead defines the resource overhead for this node type.",
+							Ref:         ref("github.com/loft-sh/api/v4/pkg/apis/storage/v1.NodeTypeOverhead"),
+						},
+					},
+					"cost": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Cost is the instance cost. The higher the cost, the less likely it is to be selected. If empty, cost is automatically calculated from the resources specified.",
+							Type:        []string{"integer"},
+							Format:      "int64",
+						},
+					},
+					"displayName": {
+						SchemaProps: spec.SchemaProps{
+							Description: "DisplayName is the name that should be displayed in the UI",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"name": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Name is the name of this node type.",
+							Default:     "",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"metadata": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Metadata holds metadata to add to this managed NodeType.",
+							Default:     map[string]interface{}{},
+							Ref:         ref("github.com/loft-sh/api/v4/pkg/apis/storage/v1.ManagedNodeTypeObjectMeta"),
+						},
+					},
+					"maxCapacity": {
+						SchemaProps: spec.SchemaProps{
+							Description: "MaxCapacity is the maximum number of nodes that can be created for this NodeType.",
+							Type:        []string{"integer"},
+							Format:      "int32",
+						},
+					},
+				},
+				Required: []string{"name"},
+			},
+		},
+		Dependencies: []string{
+			"github.com/loft-sh/api/v4/pkg/apis/storage/v1.ManagedNodeTypeObjectMeta", "github.com/loft-sh/api/v4/pkg/apis/storage/v1.NodeTypeOverhead", "k8s.io/apimachinery/pkg/api/resource.Quantity"},
+	}
+}
+
 func schema_pkg_apis_storage_v1_Metrics(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
@@ -26080,6 +27239,34 @@ func schema_pkg_apis_storage_v1_NodeProviderList(ref common.ReferenceCallback) c
 	}
 }
 
+func schema_pkg_apis_storage_v1_NodeProviderMetal3(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"nodeTypes": {
+						SchemaProps: spec.SchemaProps{
+							Description: "NodeTypes define NodeTypes that should be automatically created for this provider.",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref("github.com/loft-sh/api/v4/pkg/apis/storage/v1.Metal3NodeTypeSpec"),
+									},
+								},
+							},
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			"github.com/loft-sh/api/v4/pkg/apis/storage/v1.Metal3NodeTypeSpec"},
+	}
+}
+
 func schema_pkg_apis_storage_v1_NodeProviderSpec(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
@@ -26127,6 +27314,12 @@ func schema_pkg_apis_storage_v1_NodeProviderSpec(ref common.ReferenceCallback) c
 							Ref:         ref("github.com/loft-sh/api/v4/pkg/apis/storage/v1.NodeProviderClusterAPI"),
 						},
 					},
+					"metal3": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Metal3 configures a node provider using metal3.io BareMetalHost resources.",
+							Ref:         ref("github.com/loft-sh/api/v4/pkg/apis/storage/v1.NodeProviderMetal3"),
+						},
+					},
 					"displayName": {
 						SchemaProps: spec.SchemaProps{
 							Description: "DisplayName is the name that should be displayed in the UI",
@@ -26138,7 +27331,7 @@ func schema_pkg_apis_storage_v1_NodeProviderSpec(ref common.ReferenceCallback) c
 			},
 		},
 		Dependencies: []string{
-			"github.com/loft-sh/api/v4/pkg/apis/storage/v1.NodeProviderBCM", "github.com/loft-sh/api/v4/pkg/apis/storage/v1.NodeProviderClusterAPI", "github.com/loft-sh/api/v4/pkg/apis/storage/v1.NodeProviderKubeVirt", "github.com/loft-sh/api/v4/pkg/apis/storage/v1.NodeProviderTerraform"},
+			"github.com/loft-sh/api/v4/pkg/apis/storage/v1.NodeProviderBCM", "github.com/loft-sh/api/v4/pkg/apis/storage/v1.NodeProviderClusterAPI", "github.com/loft-sh/api/v4/pkg/apis/storage/v1.NodeProviderKubeVirt", "github.com/loft-sh/api/v4/pkg/apis/storage/v1.NodeProviderMetal3", "github.com/loft-sh/api/v4/pkg/apis/storage/v1.NodeProviderTerraform"},
 	}
 }
 
@@ -31845,10 +33038,9 @@ func schema_k8sio_api_admissionregistration_v1_MutatingWebhook(ref common.Refere
 					},
 					"reinvocationPolicy": {
 						SchemaProps: spec.SchemaProps{
-							Description: "reinvocationPolicy indicates whether this webhook should be called multiple times as part of a single admission evaluation. Allowed values are \"Never\" and \"IfNeeded\".\n\nNever: the webhook will not be called more than once in a single admission evaluation.\n\nIfNeeded: the webhook will be called at least one additional time as part of the admission evaluation if the object being admitted is modified by other admission plugins after the initial webhook call. Webhooks that specify this option *must* be idempotent, able to process objects they previously admitted. Note: * the number of additional invocations is not guaranteed to be exactly one. * if additional invocations result in further modifications to the object, webhooks are not guaranteed to be invoked again. * webhooks that use this option may be reordered to minimize the number of additional invocations. * to validate an object after all mutations are guaranteed complete, use a validating admission webhook instead.\n\nDefaults to \"Never\".\n\nPossible enum values:\n - `\"IfNeeded\"` indicates that the webhook may be called at least one additional time as part of the admission evaluation if the object being admitted is modified by other admission plugins after the initial webhook call.\n - `\"Never\"` indicates that the webhook must not be called more than once in a single admission evaluation.",
+							Description: "reinvocationPolicy indicates whether this webhook should be called multiple times as part of a single admission evaluation. Allowed values are \"Never\" and \"IfNeeded\".\n\nNever: the webhook will not be called more than once in a single admission evaluation.\n\nIfNeeded: the webhook will be called at least one additional time as part of the admission evaluation if the object being admitted is modified by other admission plugins after the initial webhook call. Webhooks that specify this option *must* be idempotent, able to process objects they previously admitted. Note: * the number of additional invocations is not guaranteed to be exactly one. * if additional invocations result in further modifications to the object, webhooks are not guaranteed to be invoked again. * webhooks that use this option may be reordered to minimize the number of additional invocations. * to validate an object after all mutations are guaranteed complete, use a validating admission webhook instead.\n\nDefaults to \"Never\".",
 							Type:        []string{"string"},
 							Format:      "",
-							Enum:        []interface{}{"IfNeeded", "Never"},
 						},
 					},
 					"matchConditions": {
@@ -32105,10 +33297,9 @@ func schema_k8sio_api_admissionregistration_v1_NamedRuleWithOperations(ref commo
 					},
 					"scope": {
 						SchemaProps: spec.SchemaProps{
-							Description: "scope specifies the scope of this rule. Valid values are \"Cluster\", \"Namespaced\", and \"*\" \"Cluster\" means that only cluster-scoped resources will match this rule. Namespace API objects are cluster-scoped. \"Namespaced\" means that only namespaced resources will match this rule. \"*\" means that there are no scope restrictions. Subresources match the scope of their parent resource. Default is \"*\".\n\n\nPossible enum values:\n - `\"*\"` means that all scopes are included.\n - `\"Cluster\"` means that scope is limited to cluster-scoped objects. Namespace objects are cluster-scoped.\n - `\"Namespaced\"` means that scope is limited to namespaced objects.",
+							Description: "scope specifies the scope of this rule. Valid values are \"Cluster\", \"Namespaced\", and \"*\" \"Cluster\" means that only cluster-scoped resources will match this rule. Namespace API objects are cluster-scoped. \"Namespaced\" means that only namespaced resources will match this rule. \"*\" means that there are no scope restrictions. Subresources match the scope of their parent resource. Default is \"*\".",
 							Type:        []string{"string"},
 							Format:      "",
-							Enum:        []interface{}{"*", "Cluster", "Namespaced"},
 						},
 					},
 				},
@@ -32270,10 +33461,9 @@ func schema_k8sio_api_admissionregistration_v1_Rule(ref common.ReferenceCallback
 					},
 					"scope": {
 						SchemaProps: spec.SchemaProps{
-							Description: "scope specifies the scope of this rule. Valid values are \"Cluster\", \"Namespaced\", and \"*\" \"Cluster\" means that only cluster-scoped resources will match this rule. Namespace API objects are cluster-scoped. \"Namespaced\" means that only namespaced resources will match this rule. \"*\" means that there are no scope restrictions. Subresources match the scope of their parent resource. Default is \"*\".\n\n\nPossible enum values:\n - `\"*\"` means that all scopes are included.\n - `\"Cluster\"` means that scope is limited to cluster-scoped objects. Namespace objects are cluster-scoped.\n - `\"Namespaced\"` means that scope is limited to namespaced objects.",
+							Description: "scope specifies the scope of this rule. Valid values are \"Cluster\", \"Namespaced\", and \"*\" \"Cluster\" means that only cluster-scoped resources will match this rule. Namespace API objects are cluster-scoped. \"Namespaced\" means that only namespaced resources will match this rule. \"*\" means that there are no scope restrictions. Subresources match the scope of their parent resource. Default is \"*\".",
 							Type:        []string{"string"},
 							Format:      "",
-							Enum:        []interface{}{"*", "Cluster", "Namespaced"},
 						},
 					},
 				},
@@ -32372,10 +33562,9 @@ func schema_k8sio_api_admissionregistration_v1_RuleWithOperations(ref common.Ref
 					},
 					"scope": {
 						SchemaProps: spec.SchemaProps{
-							Description: "scope specifies the scope of this rule. Valid values are \"Cluster\", \"Namespaced\", and \"*\" \"Cluster\" means that only cluster-scoped resources will match this rule. Namespace API objects are cluster-scoped. \"Namespaced\" means that only namespaced resources will match this rule. \"*\" means that there are no scope restrictions. Subresources match the scope of their parent resource. Default is \"*\".\n\n\nPossible enum values:\n - `\"*\"` means that all scopes are included.\n - `\"Cluster\"` means that scope is limited to cluster-scoped objects. Namespace objects are cluster-scoped.\n - `\"Namespaced\"` means that scope is limited to namespaced objects.",
+							Description: "scope specifies the scope of this rule. Valid values are \"Cluster\", \"Namespaced\", and \"*\" \"Cluster\" means that only cluster-scoped resources will match this rule. Namespace API objects are cluster-scoped. \"Namespaced\" means that only namespaced resources will match this rule. \"*\" means that there are no scope restrictions. Subresources match the scope of their parent resource. Default is \"*\".",
 							Type:        []string{"string"},
 							Format:      "",
-							Enum:        []interface{}{"*", "Cluster", "Namespaced"},
 						},
 					},
 				},
@@ -33763,10 +34952,9 @@ func schema_k8sio_api_admissionregistration_v1beta1_MutatingAdmissionPolicySpec(
 					},
 					"reinvocationPolicy": {
 						SchemaProps: spec.SchemaProps{
-							Description: "reinvocationPolicy indicates whether mutations may be called multiple times per MutatingAdmissionPolicyBinding as part of a single admission evaluation. Allowed values are \"Never\" and \"IfNeeded\".\n\nNever: These mutations will not be called more than once per binding in a single admission evaluation.\n\nIfNeeded: These mutations may be invoked more than once per binding for a single admission request and there is no guarantee of order with respect to other admission plugins, admission webhooks, bindings of this policy and admission policies.  Mutations are only reinvoked when mutations change the object after this mutation is invoked. Required.\n\nPossible enum values:\n - `\"IfNeeded\"` indicates that the webhook may be called at least one additional time as part of the admission evaluation if the object being admitted is modified by other admission plugins after the initial webhook call.\n - `\"Never\"` indicates that the webhook must not be called more than once in a single admission evaluation.",
+							Description: "reinvocationPolicy indicates whether mutations may be called multiple times per MutatingAdmissionPolicyBinding as part of a single admission evaluation. Allowed values are \"Never\" and \"IfNeeded\".\n\nNever: These mutations will not be called more than once per binding in a single admission evaluation.\n\nIfNeeded: These mutations may be invoked more than once per binding for a single admission request and there is no guarantee of order with respect to other admission plugins, admission webhooks, bindings of this policy and admission policies.  Mutations are only reinvoked when mutations change the object after this mutation is invoked. Required.",
 							Type:        []string{"string"},
 							Format:      "",
-							Enum:        []interface{}{"IfNeeded", "Never"},
 						},
 					},
 				},
@@ -33880,10 +35068,9 @@ func schema_k8sio_api_admissionregistration_v1beta1_MutatingWebhook(ref common.R
 					},
 					"reinvocationPolicy": {
 						SchemaProps: spec.SchemaProps{
-							Description: "reinvocationPolicy indicates whether this webhook should be called multiple times as part of a single admission evaluation. Allowed values are \"Never\" and \"IfNeeded\".\n\nNever: the webhook will not be called more than once in a single admission evaluation.\n\nIfNeeded: the webhook will be called at least one additional time as part of the admission evaluation if the object being admitted is modified by other admission plugins after the initial webhook call. Webhooks that specify this option *must* be idempotent, able to process objects they previously admitted. Note: * the number of additional invocations is not guaranteed to be exactly one. * if additional invocations result in further modifications to the object, webhooks are not guaranteed to be invoked again. * webhooks that use this option may be reordered to minimize the number of additional invocations. * to validate an object after all mutations are guaranteed complete, use a validating admission webhook instead.\n\nDefaults to \"Never\".\n\nPossible enum values:\n - `\"IfNeeded\"` indicates that the webhook may be called at least one additional time as part of the admission evaluation if the object being admitted is modified by other admission plugins after the initial webhook call.\n - `\"Never\"` indicates that the webhook must not be called more than once in a single admission evaluation.",
+							Description: "reinvocationPolicy indicates whether this webhook should be called multiple times as part of a single admission evaluation. Allowed values are \"Never\" and \"IfNeeded\".\n\nNever: the webhook will not be called more than once in a single admission evaluation.\n\nIfNeeded: the webhook will be called at least one additional time as part of the admission evaluation if the object being admitted is modified by other admission plugins after the initial webhook call. Webhooks that specify this option *must* be idempotent, able to process objects they previously admitted. Note: * the number of additional invocations is not guaranteed to be exactly one. * if additional invocations result in further modifications to the object, webhooks are not guaranteed to be invoked again. * webhooks that use this option may be reordered to minimize the number of additional invocations. * to validate an object after all mutations are guaranteed complete, use a validating admission webhook instead.\n\nDefaults to \"Never\".",
 							Type:        []string{"string"},
 							Format:      "",
-							Enum:        []interface{}{"IfNeeded", "Never"},
 						},
 					},
 					"matchConditions": {
@@ -34177,10 +35364,9 @@ func schema_k8sio_api_admissionregistration_v1beta1_NamedRuleWithOperations(ref 
 					},
 					"scope": {
 						SchemaProps: spec.SchemaProps{
-							Description: "scope specifies the scope of this rule. Valid values are \"Cluster\", \"Namespaced\", and \"*\" \"Cluster\" means that only cluster-scoped resources will match this rule. Namespace API objects are cluster-scoped. \"Namespaced\" means that only namespaced resources will match this rule. \"*\" means that there are no scope restrictions. Subresources match the scope of their parent resource. Default is \"*\".\n\n\nPossible enum values:\n - `\"*\"` means that all scopes are included.\n - `\"Cluster\"` means that scope is limited to cluster-scoped objects. Namespace objects are cluster-scoped.\n - `\"Namespaced\"` means that scope is limited to namespaced objects.",
+							Description: "scope specifies the scope of this rule. Valid values are \"Cluster\", \"Namespaced\", and \"*\" \"Cluster\" means that only cluster-scoped resources will match this rule. Namespace API objects are cluster-scoped. \"Namespaced\" means that only namespaced resources will match this rule. \"*\" means that there are no scope restrictions. Subresources match the scope of their parent resource. Default is \"*\".",
 							Type:        []string{"string"},
 							Format:      "",
-							Enum:        []interface{}{"*", "Cluster", "Namespaced"},
 						},
 					},
 				},

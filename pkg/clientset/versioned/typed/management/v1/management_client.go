@@ -16,6 +16,7 @@ type ManagementV1Interface interface {
 	AnnouncementsGetter
 	AppsGetter
 	BackupsGetter
+	BareMetalInstancesGetter
 	ClustersGetter
 	ClusterAccessesGetter
 	ClusterRoleTemplatesGetter
@@ -74,6 +75,10 @@ func (c *ManagementV1Client) Apps() AppInterface {
 
 func (c *ManagementV1Client) Backups() BackupInterface {
 	return newBackups(c)
+}
+
+func (c *ManagementV1Client) BareMetalInstances() BareMetalInstanceInterface {
+	return newBareMetalInstances(c)
 }
 
 func (c *ManagementV1Client) Clusters() ClusterInterface {

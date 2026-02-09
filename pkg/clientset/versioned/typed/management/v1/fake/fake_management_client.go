@@ -28,6 +28,10 @@ func (c *FakeManagementV1) Backups() v1.BackupInterface {
 	return newFakeBackups(c)
 }
 
+func (c *FakeManagementV1) BareMetalInstances() v1.BareMetalInstanceInterface {
+	return newFakeBareMetalInstances(c)
+}
+
 func (c *FakeManagementV1) Clusters() v1.ClusterInterface {
 	return newFakeClusters(c)
 }

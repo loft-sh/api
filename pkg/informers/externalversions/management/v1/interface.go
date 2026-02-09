@@ -16,6 +16,8 @@ type Interface interface {
 	Apps() AppInformer
 	// Backups returns a BackupInformer.
 	Backups() BackupInformer
+	// BareMetalInstances returns a BareMetalInstanceInformer.
+	BareMetalInstances() BareMetalInstanceInformer
 	// Clusters returns a ClusterInformer.
 	Clusters() ClusterInformer
 	// ClusterAccesses returns a ClusterAccessInformer.
@@ -121,6 +123,11 @@ func (v *version) Apps() AppInformer {
 // Backups returns a BackupInformer.
 func (v *version) Backups() BackupInformer {
 	return &backupInformer{factory: v.factory, tweakListOptions: v.tweakListOptions}
+}
+
+// BareMetalInstances returns a BareMetalInstanceInformer.
+func (v *version) BareMetalInstances() BareMetalInstanceInformer {
+	return &bareMetalInstanceInformer{factory: v.factory, tweakListOptions: v.tweakListOptions}
 }
 
 // Clusters returns a ClusterInformer.
