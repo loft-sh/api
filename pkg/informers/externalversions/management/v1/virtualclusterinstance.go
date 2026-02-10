@@ -3,13 +3,13 @@
 package v1
 
 import (
-	"context"
+	context "context"
 	time "time"
 
-	managementv1 "github.com/loft-sh/api/v4/pkg/apis/management/v1"
+	apismanagementv1 "github.com/loft-sh/api/v4/pkg/apis/management/v1"
 	versioned "github.com/loft-sh/api/v4/pkg/clientset/versioned"
 	internalinterfaces "github.com/loft-sh/api/v4/pkg/informers/externalversions/internalinterfaces"
-	v1 "github.com/loft-sh/api/v4/pkg/listers/management/v1"
+	managementv1 "github.com/loft-sh/api/v4/pkg/listers/management/v1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	runtime "k8s.io/apimachinery/pkg/runtime"
 	watch "k8s.io/apimachinery/pkg/watch"
@@ -20,7 +20,7 @@ import (
 // VirtualClusterInstances.
 type VirtualClusterInstanceInformer interface {
 	Informer() cache.SharedIndexInformer
-	Lister() v1.VirtualClusterInstanceLister
+	Lister() managementv1.VirtualClusterInstanceLister
 }
 
 type virtualClusterInstanceInformer struct {
@@ -46,16 +46,28 @@ func NewFilteredVirtualClusterInstanceInformer(client versioned.Interface, names
 				if tweakListOptions != nil {
 					tweakListOptions(&options)
 				}
-				return client.ManagementV1().VirtualClusterInstances(namespace).List(context.TODO(), options)
+				return client.ManagementV1().VirtualClusterInstances(namespace).List(context.Background(), options)
 			},
 			WatchFunc: func(options metav1.ListOptions) (watch.Interface, error) {
 				if tweakListOptions != nil {
 					tweakListOptions(&options)
 				}
-				return client.ManagementV1().VirtualClusterInstances(namespace).Watch(context.TODO(), options)
+				return client.ManagementV1().VirtualClusterInstances(namespace).Watch(context.Background(), options)
+			},
+			ListWithContextFunc: func(ctx context.Context, options metav1.ListOptions) (runtime.Object, error) {
+				if tweakListOptions != nil {
+					tweakListOptions(&options)
+				}
+				return client.ManagementV1().VirtualClusterInstances(namespace).List(ctx, options)
+			},
+			WatchFuncWithContext: func(ctx context.Context, options metav1.ListOptions) (watch.Interface, error) {
+				if tweakListOptions != nil {
+					tweakListOptions(&options)
+				}
+				return client.ManagementV1().VirtualClusterInstances(namespace).Watch(ctx, options)
 			},
 		},
-		&managementv1.VirtualClusterInstance{},
+		&apismanagementv1.VirtualClusterInstance{},
 		resyncPeriod,
 		indexers,
 	)
@@ -66,9 +78,9 @@ func (f *virtualClusterInstanceInformer) defaultInformer(client versioned.Interf
 }
 
 func (f *virtualClusterInstanceInformer) Informer() cache.SharedIndexInformer {
-	return f.factory.InformerFor(&managementv1.VirtualClusterInstance{}, f.defaultInformer)
+	return f.factory.InformerFor(&apismanagementv1.VirtualClusterInstance{}, f.defaultInformer)
 }
 
-func (f *virtualClusterInstanceInformer) Lister() v1.VirtualClusterInstanceLister {
-	return v1.NewVirtualClusterInstanceLister(f.Informer().GetIndexer())
+func (f *virtualClusterInstanceInformer) Lister() managementv1.VirtualClusterInstanceLister {
+	return managementv1.NewVirtualClusterInstanceLister(f.Informer().GetIndexer())
 }
