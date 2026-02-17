@@ -3,13 +3,13 @@
 package v1
 
 import (
-	"context"
+	context "context"
 	time "time"
 
-	managementv1 "github.com/loft-sh/api/v4/pkg/apis/management/v1"
+	apismanagementv1 "github.com/loft-sh/api/v4/pkg/apis/management/v1"
 	versioned "github.com/loft-sh/api/v4/pkg/clientset/versioned"
 	internalinterfaces "github.com/loft-sh/api/v4/pkg/informers/externalversions/internalinterfaces"
-	v1 "github.com/loft-sh/api/v4/pkg/listers/management/v1"
+	managementv1 "github.com/loft-sh/api/v4/pkg/listers/management/v1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	runtime "k8s.io/apimachinery/pkg/runtime"
 	watch "k8s.io/apimachinery/pkg/watch"
@@ -20,7 +20,7 @@ import (
 // RegisterVirtualClusters.
 type RegisterVirtualClusterInformer interface {
 	Informer() cache.SharedIndexInformer
-	Lister() v1.RegisterVirtualClusterLister
+	Lister() managementv1.RegisterVirtualClusterLister
 }
 
 type registerVirtualClusterInformer struct {
@@ -40,21 +40,33 @@ func NewRegisterVirtualClusterInformer(client versioned.Interface, resyncPeriod 
 // one. This reduces memory footprint and number of connections to the server.
 func NewFilteredRegisterVirtualClusterInformer(client versioned.Interface, resyncPeriod time.Duration, indexers cache.Indexers, tweakListOptions internalinterfaces.TweakListOptionsFunc) cache.SharedIndexInformer {
 	return cache.NewSharedIndexInformer(
-		&cache.ListWatch{
+		cache.ToListWatcherWithWatchListSemantics(&cache.ListWatch{
 			ListFunc: func(options metav1.ListOptions) (runtime.Object, error) {
 				if tweakListOptions != nil {
 					tweakListOptions(&options)
 				}
-				return client.ManagementV1().RegisterVirtualClusters().List(context.TODO(), options)
+				return client.ManagementV1().RegisterVirtualClusters().List(context.Background(), options)
 			},
 			WatchFunc: func(options metav1.ListOptions) (watch.Interface, error) {
 				if tweakListOptions != nil {
 					tweakListOptions(&options)
 				}
-				return client.ManagementV1().RegisterVirtualClusters().Watch(context.TODO(), options)
+				return client.ManagementV1().RegisterVirtualClusters().Watch(context.Background(), options)
 			},
-		},
-		&managementv1.RegisterVirtualCluster{},
+			ListWithContextFunc: func(ctx context.Context, options metav1.ListOptions) (runtime.Object, error) {
+				if tweakListOptions != nil {
+					tweakListOptions(&options)
+				}
+				return client.ManagementV1().RegisterVirtualClusters().List(ctx, options)
+			},
+			WatchFuncWithContext: func(ctx context.Context, options metav1.ListOptions) (watch.Interface, error) {
+				if tweakListOptions != nil {
+					tweakListOptions(&options)
+				}
+				return client.ManagementV1().RegisterVirtualClusters().Watch(ctx, options)
+			},
+		}, client),
+		&apismanagementv1.RegisterVirtualCluster{},
 		resyncPeriod,
 		indexers,
 	)
@@ -65,9 +77,9 @@ func (f *registerVirtualClusterInformer) defaultInformer(client versioned.Interf
 }
 
 func (f *registerVirtualClusterInformer) Informer() cache.SharedIndexInformer {
-	return f.factory.InformerFor(&managementv1.RegisterVirtualCluster{}, f.defaultInformer)
+	return f.factory.InformerFor(&apismanagementv1.RegisterVirtualCluster{}, f.defaultInformer)
 }
 
-func (f *registerVirtualClusterInformer) Lister() v1.RegisterVirtualClusterLister {
-	return v1.NewRegisterVirtualClusterLister(f.Informer().GetIndexer())
+func (f *registerVirtualClusterInformer) Lister() managementv1.RegisterVirtualClusterLister {
+	return managementv1.NewRegisterVirtualClusterLister(f.Informer().GetIndexer())
 }
