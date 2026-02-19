@@ -3,13 +3,13 @@
 package v1
 
 import (
-	"context"
+	context "context"
 	time "time"
 
-	storagev1 "github.com/loft-sh/api/v4/pkg/apis/storage/v1"
+	apisstoragev1 "github.com/loft-sh/api/v4/pkg/apis/storage/v1"
 	versioned "github.com/loft-sh/api/v4/pkg/clientset/versioned"
 	internalinterfaces "github.com/loft-sh/api/v4/pkg/informers/externalversions/internalinterfaces"
-	v1 "github.com/loft-sh/api/v4/pkg/listers/storage/v1"
+	storagev1 "github.com/loft-sh/api/v4/pkg/listers/storage/v1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	runtime "k8s.io/apimachinery/pkg/runtime"
 	watch "k8s.io/apimachinery/pkg/watch"
@@ -20,7 +20,7 @@ import (
 // VirtualClusterInstances.
 type VirtualClusterInstanceInformer interface {
 	Informer() cache.SharedIndexInformer
-	Lister() v1.VirtualClusterInstanceLister
+	Lister() storagev1.VirtualClusterInstanceLister
 }
 
 type virtualClusterInstanceInformer struct {
@@ -41,21 +41,33 @@ func NewVirtualClusterInstanceInformer(client versioned.Interface, namespace str
 // one. This reduces memory footprint and number of connections to the server.
 func NewFilteredVirtualClusterInstanceInformer(client versioned.Interface, namespace string, resyncPeriod time.Duration, indexers cache.Indexers, tweakListOptions internalinterfaces.TweakListOptionsFunc) cache.SharedIndexInformer {
 	return cache.NewSharedIndexInformer(
-		&cache.ListWatch{
+		cache.ToListWatcherWithWatchListSemantics(&cache.ListWatch{
 			ListFunc: func(options metav1.ListOptions) (runtime.Object, error) {
 				if tweakListOptions != nil {
 					tweakListOptions(&options)
 				}
-				return client.StorageV1().VirtualClusterInstances(namespace).List(context.TODO(), options)
+				return client.StorageV1().VirtualClusterInstances(namespace).List(context.Background(), options)
 			},
 			WatchFunc: func(options metav1.ListOptions) (watch.Interface, error) {
 				if tweakListOptions != nil {
 					tweakListOptions(&options)
 				}
-				return client.StorageV1().VirtualClusterInstances(namespace).Watch(context.TODO(), options)
+				return client.StorageV1().VirtualClusterInstances(namespace).Watch(context.Background(), options)
 			},
-		},
-		&storagev1.VirtualClusterInstance{},
+			ListWithContextFunc: func(ctx context.Context, options metav1.ListOptions) (runtime.Object, error) {
+				if tweakListOptions != nil {
+					tweakListOptions(&options)
+				}
+				return client.StorageV1().VirtualClusterInstances(namespace).List(ctx, options)
+			},
+			WatchFuncWithContext: func(ctx context.Context, options metav1.ListOptions) (watch.Interface, error) {
+				if tweakListOptions != nil {
+					tweakListOptions(&options)
+				}
+				return client.StorageV1().VirtualClusterInstances(namespace).Watch(ctx, options)
+			},
+		}, client),
+		&apisstoragev1.VirtualClusterInstance{},
 		resyncPeriod,
 		indexers,
 	)
@@ -66,9 +78,9 @@ func (f *virtualClusterInstanceInformer) defaultInformer(client versioned.Interf
 }
 
 func (f *virtualClusterInstanceInformer) Informer() cache.SharedIndexInformer {
-	return f.factory.InformerFor(&storagev1.VirtualClusterInstance{}, f.defaultInformer)
+	return f.factory.InformerFor(&apisstoragev1.VirtualClusterInstance{}, f.defaultInformer)
 }
 
-func (f *virtualClusterInstanceInformer) Lister() v1.VirtualClusterInstanceLister {
-	return v1.NewVirtualClusterInstanceLister(f.Informer().GetIndexer())
+func (f *virtualClusterInstanceInformer) Lister() storagev1.VirtualClusterInstanceLister {
+	return storagev1.NewVirtualClusterInstanceLister(f.Informer().GetIndexer())
 }
