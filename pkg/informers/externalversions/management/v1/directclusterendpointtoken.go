@@ -3,13 +3,13 @@
 package v1
 
 import (
-	"context"
+	context "context"
 	time "time"
 
-	managementv1 "github.com/loft-sh/api/v4/pkg/apis/management/v1"
+	apismanagementv1 "github.com/loft-sh/api/v4/pkg/apis/management/v1"
 	versioned "github.com/loft-sh/api/v4/pkg/clientset/versioned"
 	internalinterfaces "github.com/loft-sh/api/v4/pkg/informers/externalversions/internalinterfaces"
-	v1 "github.com/loft-sh/api/v4/pkg/listers/management/v1"
+	managementv1 "github.com/loft-sh/api/v4/pkg/listers/management/v1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	runtime "k8s.io/apimachinery/pkg/runtime"
 	watch "k8s.io/apimachinery/pkg/watch"
@@ -20,7 +20,7 @@ import (
 // DirectClusterEndpointTokens.
 type DirectClusterEndpointTokenInformer interface {
 	Informer() cache.SharedIndexInformer
-	Lister() v1.DirectClusterEndpointTokenLister
+	Lister() managementv1.DirectClusterEndpointTokenLister
 }
 
 type directClusterEndpointTokenInformer struct {
@@ -40,21 +40,33 @@ func NewDirectClusterEndpointTokenInformer(client versioned.Interface, resyncPer
 // one. This reduces memory footprint and number of connections to the server.
 func NewFilteredDirectClusterEndpointTokenInformer(client versioned.Interface, resyncPeriod time.Duration, indexers cache.Indexers, tweakListOptions internalinterfaces.TweakListOptionsFunc) cache.SharedIndexInformer {
 	return cache.NewSharedIndexInformer(
-		&cache.ListWatch{
+		cache.ToListWatcherWithWatchListSemantics(&cache.ListWatch{
 			ListFunc: func(options metav1.ListOptions) (runtime.Object, error) {
 				if tweakListOptions != nil {
 					tweakListOptions(&options)
 				}
-				return client.ManagementV1().DirectClusterEndpointTokens().List(context.TODO(), options)
+				return client.ManagementV1().DirectClusterEndpointTokens().List(context.Background(), options)
 			},
 			WatchFunc: func(options metav1.ListOptions) (watch.Interface, error) {
 				if tweakListOptions != nil {
 					tweakListOptions(&options)
 				}
-				return client.ManagementV1().DirectClusterEndpointTokens().Watch(context.TODO(), options)
+				return client.ManagementV1().DirectClusterEndpointTokens().Watch(context.Background(), options)
 			},
-		},
-		&managementv1.DirectClusterEndpointToken{},
+			ListWithContextFunc: func(ctx context.Context, options metav1.ListOptions) (runtime.Object, error) {
+				if tweakListOptions != nil {
+					tweakListOptions(&options)
+				}
+				return client.ManagementV1().DirectClusterEndpointTokens().List(ctx, options)
+			},
+			WatchFuncWithContext: func(ctx context.Context, options metav1.ListOptions) (watch.Interface, error) {
+				if tweakListOptions != nil {
+					tweakListOptions(&options)
+				}
+				return client.ManagementV1().DirectClusterEndpointTokens().Watch(ctx, options)
+			},
+		}, client),
+		&apismanagementv1.DirectClusterEndpointToken{},
 		resyncPeriod,
 		indexers,
 	)
@@ -65,9 +77,9 @@ func (f *directClusterEndpointTokenInformer) defaultInformer(client versioned.In
 }
 
 func (f *directClusterEndpointTokenInformer) Informer() cache.SharedIndexInformer {
-	return f.factory.InformerFor(&managementv1.DirectClusterEndpointToken{}, f.defaultInformer)
+	return f.factory.InformerFor(&apismanagementv1.DirectClusterEndpointToken{}, f.defaultInformer)
 }
 
-func (f *directClusterEndpointTokenInformer) Lister() v1.DirectClusterEndpointTokenLister {
-	return v1.NewDirectClusterEndpointTokenLister(f.Informer().GetIndexer())
+func (f *directClusterEndpointTokenInformer) Lister() managementv1.DirectClusterEndpointTokenLister {
+	return managementv1.NewDirectClusterEndpointTokenLister(f.Informer().GetIndexer())
 }
