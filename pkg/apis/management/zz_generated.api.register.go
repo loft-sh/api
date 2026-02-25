@@ -4,7 +4,6 @@ package management
 
 import (
 	"context"
-	encodingjson "encoding/json"
 	"fmt"
 
 	pkglicenseapi "github.com/loft-sh/admin-apis/pkg/licenseapi"
@@ -69,18 +68,8 @@ var (
 	NewBackupREST = func(getter generic.RESTOptionsGetter) rest.Storage {
 		return NewBackupRESTFunc(Factory)
 	}
-	NewBackupRESTFunc                  NewRESTFunc
-	ManagementBareMetalInstanceStorage = builders.NewApiResourceWithStorage( // Resource status endpoint
-		InternalBareMetalInstance,
-		func() runtime.Object { return &BareMetalInstance{} },     // Register versioned resource
-		func() runtime.Object { return &BareMetalInstanceList{} }, // Register versioned resource list
-		NewBareMetalInstanceREST,
-	)
-	NewBareMetalInstanceREST = func(getter generic.RESTOptionsGetter) rest.Storage {
-		return NewBareMetalInstanceRESTFunc(Factory)
-	}
-	NewBareMetalInstanceRESTFunc NewRESTFunc
-	ManagementClusterStorage     = builders.NewApiResourceWithStorage( // Resource status endpoint
+	NewBackupRESTFunc        NewRESTFunc
+	ManagementClusterStorage = builders.NewApiResourceWithStorage( // Resource status endpoint
 		InternalCluster,
 		func() runtime.Object { return &Cluster{} },     // Register versioned resource
 		func() runtime.Object { return &ClusterList{} }, // Register versioned resource list
@@ -551,36 +540,8 @@ var (
 	NewBackupApplyREST = func(getter generic.RESTOptionsGetter) rest.Storage {
 		return NewBackupApplyRESTFunc(Factory)
 	}
-	NewBackupApplyRESTFunc    NewRESTFunc
-	InternalBareMetalInstance = builders.NewInternalResource(
-		"baremetalinstances",
-		"BareMetalInstance",
-		func() runtime.Object { return &BareMetalInstance{} },
-		func() runtime.Object { return &BareMetalInstanceList{} },
-	)
-	InternalBareMetalInstanceStatus = builders.NewInternalResourceStatus(
-		"baremetalinstances",
-		"BareMetalInstanceStatus",
-		func() runtime.Object { return &BareMetalInstance{} },
-		func() runtime.Object { return &BareMetalInstanceList{} },
-	)
-	InternalBareMetalInstanceDiscoverREST = builders.NewInternalSubresource(
-		"baremetalinstances", "BareMetalInstanceDiscover", "discover",
-		func() runtime.Object { return &BareMetalInstanceDiscover{} },
-	)
-	NewBareMetalInstanceDiscoverREST = func(getter generic.RESTOptionsGetter) rest.Storage {
-		return NewBareMetalInstanceDiscoverRESTFunc(Factory)
-	}
-	NewBareMetalInstanceDiscoverRESTFunc   NewRESTFunc
-	InternalBareMetalInstanceProvisionREST = builders.NewInternalSubresource(
-		"baremetalinstances", "BareMetalInstanceProvision", "provision",
-		func() runtime.Object { return &BareMetalInstanceProvision{} },
-	)
-	NewBareMetalInstanceProvisionREST = func(getter generic.RESTOptionsGetter) rest.Storage {
-		return NewBareMetalInstanceProvisionRESTFunc(Factory)
-	}
-	NewBareMetalInstanceProvisionRESTFunc NewRESTFunc
-	InternalCluster                       = builders.NewInternalResource(
+	NewBackupApplyRESTFunc NewRESTFunc
+	InternalCluster        = builders.NewInternalResource(
 		"clusters",
 		"Cluster",
 		func() runtime.Object { return &Cluster{} },
@@ -1243,8 +1204,24 @@ var (
 	NewVirtualClusterAccessKeyREST = func(getter generic.RESTOptionsGetter) rest.Storage {
 		return NewVirtualClusterAccessKeyRESTFunc(Factory)
 	}
-	NewVirtualClusterAccessKeyRESTFunc         NewRESTFunc
-	InternalVirtualClusterExternalDatabaseREST = builders.NewInternalSubresource(
+	NewVirtualClusterAccessKeyRESTFunc           NewRESTFunc
+	InternalVirtualClusterInstanceDebugShellREST = builders.NewInternalSubresource(
+		"virtualclusterinstances", "VirtualClusterInstanceDebugShell", "debug-shell",
+		func() runtime.Object { return &VirtualClusterInstanceDebugShell{} },
+	)
+	NewVirtualClusterInstanceDebugShellREST = func(getter generic.RESTOptionsGetter) rest.Storage {
+		return NewVirtualClusterInstanceDebugShellRESTFunc(Factory)
+	}
+	NewVirtualClusterInstanceDebugShellRESTFunc      NewRESTFunc
+	InternalVirtualClusterInstanceDebugShellPodsREST = builders.NewInternalSubresource(
+		"virtualclusterinstances", "VirtualClusterInstanceDebugShellPods", "debug-shell-pods",
+		func() runtime.Object { return &VirtualClusterInstanceDebugShellPods{} },
+	)
+	NewVirtualClusterInstanceDebugShellPodsREST = func(getter generic.RESTOptionsGetter) rest.Storage {
+		return NewVirtualClusterInstanceDebugShellPodsRESTFunc(Factory)
+	}
+	NewVirtualClusterInstanceDebugShellPodsRESTFunc NewRESTFunc
+	InternalVirtualClusterExternalDatabaseREST      = builders.NewInternalSubresource(
 		"virtualclusterinstances", "VirtualClusterExternalDatabase", "externaldatabase",
 		func() runtime.Object { return &VirtualClusterExternalDatabase{} },
 	)
@@ -1344,10 +1321,6 @@ var (
 		InternalBackup,
 		InternalBackupStatus,
 		InternalBackupApplyREST,
-		InternalBareMetalInstance,
-		InternalBareMetalInstanceStatus,
-		InternalBareMetalInstanceDiscoverREST,
-		InternalBareMetalInstanceProvisionREST,
 		InternalCluster,
 		InternalClusterStatus,
 		InternalClusterAccessKeyREST,
@@ -1449,6 +1422,8 @@ var (
 		InternalVirtualClusterInstance,
 		InternalVirtualClusterInstanceStatus,
 		InternalVirtualClusterAccessKeyREST,
+		InternalVirtualClusterInstanceDebugShellREST,
+		InternalVirtualClusterInstanceDebugShellPodsREST,
 		InternalVirtualClusterExternalDatabaseREST,
 		InternalVirtualClusterInstanceKubeConfigREST,
 		InternalVirtualClusterInstanceLogREST,
@@ -1727,14 +1702,6 @@ type AuthenticationSAML struct {
 	NameIDPolicyFormat              string   `json:"nameIDPolicyFormat,omitempty"`
 }
 
-type BMCDetails struct {
-	Address                        string `json:"address"`
-	Username                       string `json:"username,omitempty"`
-	Password                       string `json:"password,omitempty"`
-	CredentialsName                string `json:"credentialsName,omitempty"`
-	DisableCertificateVerification bool   `json:"disableCertificateVerification,omitempty"`
-}
-
 // +genclient
 // +genclient:nonNamespaced
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -1763,75 +1730,6 @@ type BackupSpec struct {
 
 type BackupStatus struct {
 	RawBackup string `json:"rawBackup,omitempty"`
-}
-
-type BareMetalImage struct {
-	URL          string `json:"url"`
-	Checksum     string `json:"checksum"`
-	ChecksumType string `json:"checksumType,omitempty"`
-}
-
-// +genclient
-// +genclient:nonNamespaced
-// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
-
-type BareMetalInstance struct {
-	metav1.TypeMeta   `json:",inline"`
-	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              BareMetalInstanceSpec   `json:"spec,omitempty"`
-	Status            BareMetalInstanceStatus `json:"status,omitempty"`
-}
-
-// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
-
-type BareMetalInstanceDiscover struct {
-	metav1.TypeMeta   `json:",inline"`
-	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              BareMetalInstanceDiscoverSpec   `json:"spec,omitempty"`
-	Status            BareMetalInstanceDiscoverStatus `json:"status,omitempty"`
-}
-
-type BareMetalInstanceDiscoverSpec struct {
-	Endpoint           string `json:"endpoint,omitempty"`
-	Username           string `json:"username,omitempty"`
-	Password           string `json:"password,omitempty"`
-	InsecureSkipVerify bool   `json:"insecureSkipVerify,omitempty"`
-}
-
-type BareMetalInstanceDiscoverStatus struct {
-	Systems []DiscoveredSystem `json:"systems,omitempty"`
-	Error   string             `json:"error,omitempty"`
-}
-
-// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
-
-type BareMetalInstanceProvision struct {
-	metav1.TypeMeta   `json:",inline"`
-	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Image             BareMetalImage `json:"image"`
-}
-
-type BareMetalInstanceSpec struct {
-	MACAddress      string           `json:"macAddress,omitempty"`
-	BMC             *BMCDetails      `json:"bmc,omitempty"`
-	Image           *BareMetalImage  `json:"image,omitempty"`
-	UserData        string           `json:"userData,omitempty"`
-	NetworkData     string           `json:"networkData,omitempty"`
-	RootDeviceHints *RootDeviceHints `json:"rootDeviceHints,omitempty"`
-	Network         *NetworkConfig   `json:"network,omitempty"`
-}
-
-type BareMetalInstanceStatus struct {
-	ProvisioningState string                  `json:"provisioningState,omitempty"`
-	ErrorMessage      string                  `json:"errorMessage,omitempty"`
-	Hardware          encodingjson.RawMessage `json:"hardware,omitempty"`
-	PoweredOn         bool                    `json:"poweredOn,omitempty"`
-	OperationHistory  *OperationHistory       `json:"operationHistory,omitempty"`
-}
-
-type BareMetalOperation struct {
-	Start string `json:"start,omitempty"`
-	End   string `json:"end,omitempty"`
 }
 
 type Cloud struct {
@@ -2136,24 +2034,6 @@ type DirectClusterEndpointTokenStatus struct {
 	Token string `json:"token,omitempty"`
 }
 
-type DiscoveredNetworkInterface struct {
-	ID            string   `json:"id,omitempty"`
-	Name          string   `json:"name,omitempty"`
-	MACAddress    string   `json:"macAddress,omitempty"`
-	SpeedMbps     int      `json:"speedMbps,omitempty"`
-	LinkStatus    string   `json:"linkStatus,omitempty"`
-	IPv4Addresses []string `json:"ipv4Addresses,omitempty"`
-	IPv6Addresses []string `json:"ipv6Addresses,omitempty"`
-}
-
-type DiscoveredSystem struct {
-	ID                string                       `json:"id,omitempty"`
-	Name              string                       `json:"name,omitempty"`
-	URI               string                       `json:"uri,omitempty"`
-	NetworkInterfaces []DiscoveredNetworkInterface `json:"networkInterfaces,omitempty"`
-	Error             string                       `json:"error,omitempty"`
-}
-
 // +genclient
 // +genclient:nonNamespaced
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -2256,7 +2136,7 @@ type KioskStatus struct {
 }
 
 // +genclient
-// +genclient:nonNamespaced
+// +genclient
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
 
 type License struct {
@@ -2321,12 +2201,6 @@ type MaintenanceWindow struct {
 type ManagementRole struct {
 	ObjectName  `json:",inline"`
 	AssignedVia AssignedVia `json:"assignedVia,omitempty"`
-}
-
-type NetworkConfig struct {
-	IP         string   `json:"ip"`
-	Gateway    string   `json:"gateway,omitempty"`
-	DNSServers []string `json:"dnsServers,omitempty"`
 }
 
 // +genclient
@@ -2513,13 +2387,6 @@ type Operation struct {
 	Phase          OperationPhase `json:"phase,omitempty"`
 	Logs           []byte         `json:"logs,omitempty"`
 	Error          string         `json:"error,omitempty"`
-}
-
-type OperationHistory struct {
-	Register    *BareMetalOperation `json:"register,omitempty"`
-	Inspect     *BareMetalOperation `json:"inspect,omitempty"`
-	Provision   *BareMetalOperation `json:"provision,omitempty"`
-	Deprovision *BareMetalOperation `json:"deprovision,omitempty"`
 }
 
 // +genclient
@@ -2778,10 +2645,6 @@ type ResetAccessKeySpec struct {
 
 type ResetAccessKeyStatus struct {
 	storagev1.AccessKeyStatus `json:",inline"`
-}
-
-type RootDeviceHints struct {
-	DeviceName string `json:"deviceName"`
 }
 
 // +genclient
@@ -3176,6 +3039,28 @@ type VirtualClusterAccessKey struct {
 	AccessKey         string `json:"accessKey,omitempty"`
 }
 
+type VirtualClusterDebugShellPodStatus struct {
+	Name      string `json:"name,omitempty"`
+	Namespace string `json:"namespace,omitempty"`
+	Phase     string `json:"phase,omitempty"`
+	Ready     bool   `json:"ready,omitempty"`
+}
+
+type VirtualClusterDebugShellPodsStatus struct {
+	Pods []VirtualClusterDebugShellPodStatus `json:"pods,omitempty"`
+}
+
+type VirtualClusterDebugShellSpec struct {
+	PodName string `json:"podName,omitempty"`
+}
+
+type VirtualClusterDebugShellStatus struct {
+	ContainerName string `json:"containerName,omitempty"`
+	TargetName    string `json:"target,omitempty"`
+	PodName       string `json:"podName,omitempty"`
+	PodNamespace  string `json:"podNamespace,omitempty"`
+}
+
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
 
 type VirtualClusterExternalDatabase struct {
@@ -3203,6 +3088,23 @@ type VirtualClusterInstance struct {
 	metav1.ObjectMeta `json:"metadata,omitempty"`
 	Spec              VirtualClusterInstanceSpec   `json:"spec,omitempty"`
 	Status            VirtualClusterInstanceStatus `json:"status,omitempty"`
+}
+
+// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+
+type VirtualClusterInstanceDebugShell struct {
+	metav1.TypeMeta   `json:",inline"`
+	metav1.ObjectMeta `json:"metadata,omitempty"`
+	Spec              VirtualClusterDebugShellSpec   `json:"spec,omitempty"`
+	Status            VirtualClusterDebugShellStatus `json:"status,omitempty"`
+}
+
+// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+
+type VirtualClusterInstanceDebugShellPods struct {
+	metav1.TypeMeta   `json:",inline"`
+	metav1.ObjectMeta `json:"metadata,omitempty"`
+	Status            VirtualClusterDebugShellPodsStatus `json:"status,omitempty"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -3868,141 +3770,6 @@ func (s *storageBackup) UpdateBackup(ctx context.Context, object *Backup) (*Back
 }
 
 func (s *storageBackup) DeleteBackup(ctx context.Context, id string) (bool, error) {
-	st := s.GetStandardStorage()
-	_, sync, err := st.Delete(ctx, id, nil, &metav1.DeleteOptions{})
-	return sync, err
-}
-
-// BareMetalInstance Functions and Structs
-//
-// +k8s:deepcopy-gen=false
-type BareMetalInstanceStrategy struct {
-	builders.DefaultStorageStrategy
-}
-
-// +k8s:deepcopy-gen=false
-type BareMetalInstanceStatusStrategy struct {
-	builders.DefaultStatusStorageStrategy
-}
-
-// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
-
-type BareMetalInstanceList struct {
-	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
-	Items           []BareMetalInstance `json:"items"`
-}
-
-// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
-
-type BareMetalInstanceDiscoverList struct {
-	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
-	Items           []BareMetalInstanceDiscover `json:"items"`
-}
-
-// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
-
-type BareMetalInstanceProvisionList struct {
-	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
-	Items           []BareMetalInstanceProvision `json:"items"`
-}
-
-func (BareMetalInstance) NewStatus() interface{} {
-	return BareMetalInstanceStatus{}
-}
-
-func (pc *BareMetalInstance) GetStatus() interface{} {
-	return pc.Status
-}
-
-func (pc *BareMetalInstance) SetStatus(s interface{}) {
-	pc.Status = s.(BareMetalInstanceStatus)
-}
-
-func (pc *BareMetalInstance) GetSpec() interface{} {
-	return pc.Spec
-}
-
-func (pc *BareMetalInstance) SetSpec(s interface{}) {
-	pc.Spec = s.(BareMetalInstanceSpec)
-}
-
-func (pc *BareMetalInstance) GetObjectMeta() *metav1.ObjectMeta {
-	return &pc.ObjectMeta
-}
-
-func (pc *BareMetalInstance) SetGeneration(generation int64) {
-	pc.ObjectMeta.Generation = generation
-}
-
-func (pc BareMetalInstance) GetGeneration() int64 {
-	return pc.ObjectMeta.Generation
-}
-
-// Registry is an interface for things that know how to store BareMetalInstance.
-// +k8s:deepcopy-gen=false
-type BareMetalInstanceRegistry interface {
-	ListBareMetalInstances(ctx context.Context, options *internalversion.ListOptions) (*BareMetalInstanceList, error)
-	GetBareMetalInstance(ctx context.Context, id string, options *metav1.GetOptions) (*BareMetalInstance, error)
-	CreateBareMetalInstance(ctx context.Context, id *BareMetalInstance) (*BareMetalInstance, error)
-	UpdateBareMetalInstance(ctx context.Context, id *BareMetalInstance) (*BareMetalInstance, error)
-	DeleteBareMetalInstance(ctx context.Context, id string) (bool, error)
-}
-
-// NewRegistry returns a new Registry interface for the given Storage. Any mismatched types will panic.
-func NewBareMetalInstanceRegistry(sp builders.StandardStorageProvider) BareMetalInstanceRegistry {
-	return &storageBareMetalInstance{sp}
-}
-
-// Implement Registry
-// storage puts strong typing around storage calls
-// +k8s:deepcopy-gen=false
-type storageBareMetalInstance struct {
-	builders.StandardStorageProvider
-}
-
-func (s *storageBareMetalInstance) ListBareMetalInstances(ctx context.Context, options *internalversion.ListOptions) (*BareMetalInstanceList, error) {
-	if options != nil && options.FieldSelector != nil && !options.FieldSelector.Empty() {
-		return nil, fmt.Errorf("field selector not supported yet")
-	}
-	st := s.GetStandardStorage()
-	obj, err := st.List(ctx, options)
-	if err != nil {
-		return nil, err
-	}
-	return obj.(*BareMetalInstanceList), err
-}
-
-func (s *storageBareMetalInstance) GetBareMetalInstance(ctx context.Context, id string, options *metav1.GetOptions) (*BareMetalInstance, error) {
-	st := s.GetStandardStorage()
-	obj, err := st.Get(ctx, id, options)
-	if err != nil {
-		return nil, err
-	}
-	return obj.(*BareMetalInstance), nil
-}
-
-func (s *storageBareMetalInstance) CreateBareMetalInstance(ctx context.Context, object *BareMetalInstance) (*BareMetalInstance, error) {
-	st := s.GetStandardStorage()
-	obj, err := st.Create(ctx, object, nil, &metav1.CreateOptions{})
-	if err != nil {
-		return nil, err
-	}
-	return obj.(*BareMetalInstance), nil
-}
-
-func (s *storageBareMetalInstance) UpdateBareMetalInstance(ctx context.Context, object *BareMetalInstance) (*BareMetalInstance, error) {
-	st := s.GetStandardStorage()
-	obj, _, err := st.Update(ctx, object.Name, rest.DefaultUpdatedObjectInfo(object), nil, nil, false, &metav1.UpdateOptions{})
-	if err != nil {
-		return nil, err
-	}
-	return obj.(*BareMetalInstance), nil
-}
-
-func (s *storageBareMetalInstance) DeleteBareMetalInstance(ctx context.Context, id string) (bool, error) {
 	st := s.GetStandardStorage()
 	_, sync, err := st.Delete(ctx, id, nil, &metav1.DeleteOptions{})
 	return sync, err
@@ -8423,6 +8190,22 @@ type VirtualClusterAccessKeyList struct {
 	metav1.TypeMeta `json:",inline"`
 	metav1.ListMeta `json:"metadata,omitempty"`
 	Items           []VirtualClusterAccessKey `json:"items"`
+}
+
+// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+
+type VirtualClusterInstanceDebugShellList struct {
+	metav1.TypeMeta `json:",inline"`
+	metav1.ListMeta `json:"metadata,omitempty"`
+	Items           []VirtualClusterInstanceDebugShell `json:"items"`
+}
+
+// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+
+type VirtualClusterInstanceDebugShellPodsList struct {
+	metav1.TypeMeta `json:",inline"`
+	metav1.ListMeta `json:"metadata,omitempty"`
+	Items           []VirtualClusterInstanceDebugShellPods `json:"items"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object

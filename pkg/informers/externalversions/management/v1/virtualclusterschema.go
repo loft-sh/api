@@ -40,7 +40,7 @@ func NewVirtualClusterSchemaInformer(client versioned.Interface, resyncPeriod ti
 // one. This reduces memory footprint and number of connections to the server.
 func NewFilteredVirtualClusterSchemaInformer(client versioned.Interface, resyncPeriod time.Duration, indexers cache.Indexers, tweakListOptions internalinterfaces.TweakListOptionsFunc) cache.SharedIndexInformer {
 	return cache.NewSharedIndexInformer(
-		&cache.ListWatch{
+		cache.ToListWatcherWithWatchListSemantics(&cache.ListWatch{
 			ListFunc: func(options metav1.ListOptions) (runtime.Object, error) {
 				if tweakListOptions != nil {
 					tweakListOptions(&options)
@@ -65,7 +65,7 @@ func NewFilteredVirtualClusterSchemaInformer(client versioned.Interface, resyncP
 				}
 				return client.ManagementV1().VirtualClusterSchemas().Watch(ctx, options)
 			},
-		},
+		}, client),
 		&apismanagementv1.VirtualClusterSchema{},
 		resyncPeriod,
 		indexers,

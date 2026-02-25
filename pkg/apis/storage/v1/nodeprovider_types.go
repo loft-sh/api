@@ -11,7 +11,6 @@ const (
 	NodeProviderTypeKubeVirt   string = "kubeVirt"
 	NodeProviderTypeTerraform  string = "terraform"
 	NodeProviderTypeClusterAPI string = "clusterAPI"
-	NodeProviderTypeMetal3     string = "metal3"
 
 	// NodeProviderConditionTypeInitialized is the condition that indicates if the node provider is initialized.
 	NodeProviderConditionTypeInitialized = "Initialized"
@@ -102,10 +101,6 @@ type NodeProviderSpec struct {
 	// This requires the vCluster to be deployed with Cluster API as well.
 	// +optional
 	ClusterAPI *NodeProviderClusterAPI `json:"clusterAPI,omitempty"`
-
-	// Metal3 configures a node provider using metal3.io BareMetalHost resources.
-	// +optional
-	Metal3 *NodeProviderMetal3 `json:"metal3,omitempty"`
 
 	// DisplayName is the name that should be displayed in the UI
 	// +optional
@@ -299,18 +294,6 @@ type NodeProviderClusterRef struct {
 
 	// Namespace is the namespace inside the connected cluster holding VMs
 	Namespace string `json:"namespace,omitempty"`
-}
-
-type NodeProviderMetal3 struct {
-	// NodeTypes define NodeTypes that should be automatically created for this provider.
-	NodeTypes []Metal3NodeTypeSpec `json:"nodeTypes,omitempty"`
-}
-
-type Metal3NodeTypeSpec struct {
-	NamedNodeTypeSpec `json:",inline"`
-
-	// MaxCapacity is the maximum number of nodes that can be created for this NodeType.
-	MaxCapacity int `json:"maxCapacity,omitempty"`
 }
 
 // NodeProviderStatus defines the observed state of NodeProvider.

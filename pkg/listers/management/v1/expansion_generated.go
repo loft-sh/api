@@ -18,10 +18,6 @@ type AppListerExpansion interface{}
 // BackupLister.
 type BackupListerExpansion interface{}
 
-// BareMetalInstanceListerExpansion allows custom methods to be added to
-// BareMetalInstanceLister.
-type BareMetalInstanceListerExpansion interface{}
-
 // ClusterListerExpansion allows custom methods to be added to
 // ClusterLister.
 type ClusterListerExpansion interface{}

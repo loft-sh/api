@@ -110,3 +110,15 @@ func (c *fakeVirtualClusterInstances) GetShellPod(ctx context.Context, virtualCl
 	}
 	return obj.(*v1.VirtualClusterInstanceShell), err
 }
+
+// GetDebugShell takes the representation of a virtualClusterInstanceDebugShell and creates it.  Returns the server's representation of the virtualClusterInstanceDebugShell, and an error, if there is any.
+func (c *fakeVirtualClusterInstances) GetDebugShell(ctx context.Context, virtualClusterInstanceName string, virtualClusterInstanceDebugShell *v1.VirtualClusterInstanceDebugShell, opts metav1.CreateOptions) (result *v1.VirtualClusterInstanceDebugShell, err error) {
+	emptyResult := &v1.VirtualClusterInstanceDebugShell{}
+	obj, err := c.Fake.
+		Invokes(testing.NewCreateSubresourceActionWithOptions(c.Resource(), virtualClusterInstanceName, "debug-shell", c.Namespace(), virtualClusterInstanceDebugShell, opts), emptyResult)
+
+	if obj == nil {
+		return emptyResult, err
+	}
+	return obj.(*v1.VirtualClusterInstanceDebugShell), err
+}

@@ -10,8 +10,6 @@ type AppExpansion interface{}
 
 type BackupExpansion interface{}
 
-type BareMetalInstanceExpansion interface{}
-
 type ClusterExpansion interface{}
 
 type ClusterAccessExpansion interface{}

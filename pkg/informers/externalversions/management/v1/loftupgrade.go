@@ -40,7 +40,7 @@ func NewLoftUpgradeInformer(client versioned.Interface, resyncPeriod time.Durati
 // one. This reduces memory footprint and number of connections to the server.
 func NewFilteredLoftUpgradeInformer(client versioned.Interface, resyncPeriod time.Duration, indexers cache.Indexers, tweakListOptions internalinterfaces.TweakListOptionsFunc) cache.SharedIndexInformer {
 	return cache.NewSharedIndexInformer(
-		&cache.ListWatch{
+		cache.ToListWatcherWithWatchListSemantics(&cache.ListWatch{
 			ListFunc: func(options metav1.ListOptions) (runtime.Object, error) {
 				if tweakListOptions != nil {
 					tweakListOptions(&options)
@@ -65,7 +65,7 @@ func NewFilteredLoftUpgradeInformer(client versioned.Interface, resyncPeriod tim
 				}
 				return client.ManagementV1().LoftUpgrades().Watch(ctx, options)
 			},
-		},
+		}, client),
 		&apismanagementv1.LoftUpgrade{},
 		resyncPeriod,
 		indexers,

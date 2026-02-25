@@ -40,7 +40,7 @@ func NewDirectClusterEndpointTokenInformer(client versioned.Interface, resyncPer
 // one. This reduces memory footprint and number of connections to the server.
 func NewFilteredDirectClusterEndpointTokenInformer(client versioned.Interface, resyncPeriod time.Duration, indexers cache.Indexers, tweakListOptions internalinterfaces.TweakListOptionsFunc) cache.SharedIndexInformer {
 	return cache.NewSharedIndexInformer(
-		&cache.ListWatch{
+		cache.ToListWatcherWithWatchListSemantics(&cache.ListWatch{
 			ListFunc: func(options metav1.ListOptions) (runtime.Object, error) {
 				if tweakListOptions != nil {
 					tweakListOptions(&options)
@@ -65,7 +65,7 @@ func NewFilteredDirectClusterEndpointTokenInformer(client versioned.Interface, r
 				}
 				return client.ManagementV1().DirectClusterEndpointTokens().Watch(ctx, options)
 			},
-		},
+		}, client),
 		&apismanagementv1.DirectClusterEndpointToken{},
 		resyncPeriod,
 		indexers,

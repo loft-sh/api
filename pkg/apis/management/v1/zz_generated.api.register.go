@@ -23,10 +23,6 @@ func addKnownTypes(scheme *runtime.Scheme) error {
 		&Backup{},
 		&BackupList{},
 		&BackupApply{},
-		&BareMetalInstance{},
-		&BareMetalInstanceList{},
-		&BareMetalInstanceDiscover{},
-		&BareMetalInstanceProvision{},
 		&Cluster{},
 		&ClusterList{},
 		&ClusterAccessKey{},
@@ -128,6 +124,8 @@ func addKnownTypes(scheme *runtime.Scheme) error {
 		&VirtualClusterInstance{},
 		&VirtualClusterInstanceList{},
 		&VirtualClusterAccessKey{},
+		&VirtualClusterInstanceDebugShell{},
+		&VirtualClusterInstanceDebugShellPods{},
 		&VirtualClusterExternalDatabase{},
 		&VirtualClusterInstanceKubeConfig{},
 		&VirtualClusterInstanceLog{},
@@ -161,19 +159,6 @@ var (
 			func() runtime.Object { return &BackupApply{} }, // Register versioned resource
 			nil,
 			management.NewBackupApplyREST,
-		),
-		management.ManagementBareMetalInstanceStorage,
-		builders.NewApiResourceWithStorage(
-			management.InternalBareMetalInstanceDiscoverREST,
-			func() runtime.Object { return &BareMetalInstanceDiscover{} }, // Register versioned resource
-			nil,
-			management.NewBareMetalInstanceDiscoverREST,
-		),
-		builders.NewApiResourceWithStorage(
-			management.InternalBareMetalInstanceProvisionREST,
-			func() runtime.Object { return &BareMetalInstanceProvision{} }, // Register versioned resource
-			nil,
-			management.NewBareMetalInstanceProvisionREST,
 		),
 		management.ManagementClusterStorage,
 		builders.NewApiResourceWithStorage(
@@ -421,6 +406,18 @@ var (
 			management.NewVirtualClusterAccessKeyREST,
 		),
 		builders.NewApiResourceWithStorage(
+			management.InternalVirtualClusterInstanceDebugShellREST,
+			func() runtime.Object { return &VirtualClusterInstanceDebugShell{} }, // Register versioned resource
+			nil,
+			management.NewVirtualClusterInstanceDebugShellREST,
+		),
+		builders.NewApiResourceWithStorage(
+			management.InternalVirtualClusterInstanceDebugShellPodsREST,
+			func() runtime.Object { return &VirtualClusterInstanceDebugShellPods{} }, // Register versioned resource
+			nil,
+			management.NewVirtualClusterInstanceDebugShellPodsREST,
+		),
+		builders.NewApiResourceWithStorage(
 			management.InternalVirtualClusterExternalDatabaseREST,
 			func() runtime.Object { return &VirtualClusterExternalDatabase{} }, // Register versioned resource
 			nil,
@@ -547,30 +544,6 @@ type BackupApplyList struct {
 	metav1.TypeMeta `json:",inline"`
 	metav1.ListMeta `json:"metadata,omitempty"`
 	Items           []BackupApply `json:"items"`
-}
-
-// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
-
-type BareMetalInstanceList struct {
-	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
-	Items           []BareMetalInstance `json:"items"`
-}
-
-// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
-
-type BareMetalInstanceDiscoverList struct {
-	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
-	Items           []BareMetalInstanceDiscover `json:"items"`
-}
-
-// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
-
-type BareMetalInstanceProvisionList struct {
-	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
-	Items           []BareMetalInstanceProvision `json:"items"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -1091,6 +1064,22 @@ type VirtualClusterAccessKeyList struct {
 	metav1.TypeMeta `json:",inline"`
 	metav1.ListMeta `json:"metadata,omitempty"`
 	Items           []VirtualClusterAccessKey `json:"items"`
+}
+
+// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+
+type VirtualClusterInstanceDebugShellList struct {
+	metav1.TypeMeta `json:",inline"`
+	metav1.ListMeta `json:"metadata,omitempty"`
+	Items           []VirtualClusterInstanceDebugShell `json:"items"`
+}
+
+// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+
+type VirtualClusterInstanceDebugShellPodsList struct {
+	metav1.TypeMeta `json:",inline"`
+	metav1.ListMeta `json:"metadata,omitempty"`
+	Items           []VirtualClusterInstanceDebugShellPods `json:"items"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object

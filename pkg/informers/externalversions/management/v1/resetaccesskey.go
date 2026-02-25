@@ -40,7 +40,7 @@ func NewResetAccessKeyInformer(client versioned.Interface, resyncPeriod time.Dur
 // one. This reduces memory footprint and number of connections to the server.
 func NewFilteredResetAccessKeyInformer(client versioned.Interface, resyncPeriod time.Duration, indexers cache.Indexers, tweakListOptions internalinterfaces.TweakListOptionsFunc) cache.SharedIndexInformer {
 	return cache.NewSharedIndexInformer(
-		&cache.ListWatch{
+		cache.ToListWatcherWithWatchListSemantics(&cache.ListWatch{
 			ListFunc: func(options metav1.ListOptions) (runtime.Object, error) {
 				if tweakListOptions != nil {
 					tweakListOptions(&options)
@@ -65,7 +65,7 @@ func NewFilteredResetAccessKeyInformer(client versioned.Interface, resyncPeriod 
 				}
 				return client.ManagementV1().ResetAccessKeys().Watch(ctx, options)
 			},
-		},
+		}, client),
 		&apismanagementv1.ResetAccessKey{},
 		resyncPeriod,
 		indexers,
