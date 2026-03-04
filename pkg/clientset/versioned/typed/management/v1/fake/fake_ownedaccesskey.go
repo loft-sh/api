@@ -3,120 +3,32 @@
 package fake
 
 import (
-	"context"
-
 	v1 "github.com/loft-sh/api/v4/pkg/apis/management/v1"
-	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
-	labels "k8s.io/apimachinery/pkg/labels"
-	types "k8s.io/apimachinery/pkg/types"
-	watch "k8s.io/apimachinery/pkg/watch"
-	testing "k8s.io/client-go/testing"
+	managementv1 "github.com/loft-sh/api/v4/pkg/clientset/versioned/typed/management/v1"
+	gentype "k8s.io/client-go/gentype"
 )
 
-// FakeOwnedAccessKeys implements OwnedAccessKeyInterface
-type FakeOwnedAccessKeys struct {
+// fakeOwnedAccessKeys implements OwnedAccessKeyInterface
+type fakeOwnedAccessKeys struct {
+	*gentype.FakeClientWithList[*v1.OwnedAccessKey, *v1.OwnedAccessKeyList]
 	Fake *FakeManagementV1
 }
 
-var ownedaccesskeysResource = v1.SchemeGroupVersion.WithResource("ownedaccesskeys")
-
-var ownedaccesskeysKind = v1.SchemeGroupVersion.WithKind("OwnedAccessKey")
-
-// Get takes name of the ownedAccessKey, and returns the corresponding ownedAccessKey object, and an error if there is any.
-func (c *FakeOwnedAccessKeys) Get(ctx context.Context, name string, options metav1.GetOptions) (result *v1.OwnedAccessKey, err error) {
-	emptyResult := &v1.OwnedAccessKey{}
-	obj, err := c.Fake.
-		Invokes(testing.NewRootGetActionWithOptions(ownedaccesskeysResource, name, options), emptyResult)
-	if obj == nil {
-		return emptyResult, err
+func newFakeOwnedAccessKeys(fake *FakeManagementV1) managementv1.OwnedAccessKeyInterface {
+	return &fakeOwnedAccessKeys{
+		gentype.NewFakeClientWithList[*v1.OwnedAccessKey, *v1.OwnedAccessKeyList](
+			fake.Fake,
+			"",
+			v1.SchemeGroupVersion.WithResource("ownedaccesskeys"),
+			v1.SchemeGroupVersion.WithKind("OwnedAccessKey"),
+			func() *v1.OwnedAccessKey { return &v1.OwnedAccessKey{} },
+			func() *v1.OwnedAccessKeyList { return &v1.OwnedAccessKeyList{} },
+			func(dst, src *v1.OwnedAccessKeyList) { dst.ListMeta = src.ListMeta },
+			func(list *v1.OwnedAccessKeyList) []*v1.OwnedAccessKey { return gentype.ToPointerSlice(list.Items) },
+			func(list *v1.OwnedAccessKeyList, items []*v1.OwnedAccessKey) {
+				list.Items = gentype.FromPointerSlice(items)
+			},
+		),
+		fake,
 	}
-	return obj.(*v1.OwnedAccessKey), err
-}
-
-// List takes label and field selectors, and returns the list of OwnedAccessKeys that match those selectors.
-func (c *FakeOwnedAccessKeys) List(ctx context.Context, opts metav1.ListOptions) (result *v1.OwnedAccessKeyList, err error) {
-	emptyResult := &v1.OwnedAccessKeyList{}
-	obj, err := c.Fake.
-		Invokes(testing.NewRootListActionWithOptions(ownedaccesskeysResource, ownedaccesskeysKind, opts), emptyResult)
-	if obj == nil {
-		return emptyResult, err
-	}
-
-	label, _, _ := testing.ExtractFromListOptions(opts)
-	if label == nil {
-		label = labels.Everything()
-	}
-	list := &v1.OwnedAccessKeyList{ListMeta: obj.(*v1.OwnedAccessKeyList).ListMeta}
-	for _, item := range obj.(*v1.OwnedAccessKeyList).Items {
-		if label.Matches(labels.Set(item.Labels)) {
-			list.Items = append(list.Items, item)
-		}
-	}
-	return list, err
-}
-
-// Watch returns a watch.Interface that watches the requested ownedAccessKeys.
-func (c *FakeOwnedAccessKeys) Watch(ctx context.Context, opts metav1.ListOptions) (watch.Interface, error) {
-	return c.Fake.
-		InvokesWatch(testing.NewRootWatchActionWithOptions(ownedaccesskeysResource, opts))
-}
-
-// Create takes the representation of a ownedAccessKey and creates it.  Returns the server's representation of the ownedAccessKey, and an error, if there is any.
-func (c *FakeOwnedAccessKeys) Create(ctx context.Context, ownedAccessKey *v1.OwnedAccessKey, opts metav1.CreateOptions) (result *v1.OwnedAccessKey, err error) {
-	emptyResult := &v1.OwnedAccessKey{}
-	obj, err := c.Fake.
-		Invokes(testing.NewRootCreateActionWithOptions(ownedaccesskeysResource, ownedAccessKey, opts), emptyResult)
-	if obj == nil {
-		return emptyResult, err
-	}
-	return obj.(*v1.OwnedAccessKey), err
-}
-
-// Update takes the representation of a ownedAccessKey and updates it. Returns the server's representation of the ownedAccessKey, and an error, if there is any.
-func (c *FakeOwnedAccessKeys) Update(ctx context.Context, ownedAccessKey *v1.OwnedAccessKey, opts metav1.UpdateOptions) (result *v1.OwnedAccessKey, err error) {
-	emptyResult := &v1.OwnedAccessKey{}
-	obj, err := c.Fake.
-		Invokes(testing.NewRootUpdateActionWithOptions(ownedaccesskeysResource, ownedAccessKey, opts), emptyResult)
-	if obj == nil {
-		return emptyResult, err
-	}
-	return obj.(*v1.OwnedAccessKey), err
-}
-
-// UpdateStatus was generated because the type contains a Status member.
-// Add a +genclient:noStatus comment above the type to avoid generating UpdateStatus().
-func (c *FakeOwnedAccessKeys) UpdateStatus(ctx context.Context, ownedAccessKey *v1.OwnedAccessKey, opts metav1.UpdateOptions) (result *v1.OwnedAccessKey, err error) {
-	emptyResult := &v1.OwnedAccessKey{}
-	obj, err := c.Fake.
-		Invokes(testing.NewRootUpdateSubresourceActionWithOptions(ownedaccesskeysResource, "status", ownedAccessKey, opts), emptyResult)
-	if obj == nil {
-		return emptyResult, err
-	}
-	return obj.(*v1.OwnedAccessKey), err
-}
-
-// Delete takes name of the ownedAccessKey and deletes it. Returns an error if one occurs.
-func (c *FakeOwnedAccessKeys) Delete(ctx context.Context, name string, opts metav1.DeleteOptions) error {
-	_, err := c.Fake.
-		Invokes(testing.NewRootDeleteActionWithOptions(ownedaccesskeysResource, name, opts), &v1.OwnedAccessKey{})
-	return err
-}
-
-// DeleteCollection deletes a collection of objects.
-func (c *FakeOwnedAccessKeys) DeleteCollection(ctx context.Context, opts metav1.DeleteOptions, listOpts metav1.ListOptions) error {
-	action := testing.NewRootDeleteCollectionActionWithOptions(ownedaccesskeysResource, opts, listOpts)
-
-	_, err := c.Fake.Invokes(action, &v1.OwnedAccessKeyList{})
-	return err
-}
-
-// Patch applies the patch and returns the patched ownedAccessKey.
-func (c *FakeOwnedAccessKeys) Patch(ctx context.Context, name string, pt types.PatchType, data []byte, opts metav1.PatchOptions, subresources ...string) (result *v1.OwnedAccessKey, err error) {
-	emptyResult := &v1.OwnedAccessKey{}
-	obj, err := c.Fake.
-		Invokes(testing.NewRootPatchSubresourceActionWithOptions(ownedaccesskeysResource, name, pt, data, opts, subresources...), emptyResult)
-	if obj == nil {
-		return emptyResult, err
-	}
-	return obj.(*v1.OwnedAccessKey), err
 }
