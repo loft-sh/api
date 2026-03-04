@@ -3,13 +3,13 @@
 package v1
 
 import (
-	"context"
+	context "context"
 	time "time"
 
-	managementv1 "github.com/loft-sh/api/v4/pkg/apis/management/v1"
+	apismanagementv1 "github.com/loft-sh/api/v4/pkg/apis/management/v1"
 	versioned "github.com/loft-sh/api/v4/pkg/clientset/versioned"
 	internalinterfaces "github.com/loft-sh/api/v4/pkg/informers/externalversions/internalinterfaces"
-	v1 "github.com/loft-sh/api/v4/pkg/listers/management/v1"
+	managementv1 "github.com/loft-sh/api/v4/pkg/listers/management/v1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	runtime "k8s.io/apimachinery/pkg/runtime"
 	watch "k8s.io/apimachinery/pkg/watch"
@@ -20,7 +20,7 @@ import (
 // Apps.
 type AppInformer interface {
 	Informer() cache.SharedIndexInformer
-	Lister() v1.AppLister
+	Lister() managementv1.AppLister
 }
 
 type appInformer struct {
@@ -40,21 +40,33 @@ func NewAppInformer(client versioned.Interface, resyncPeriod time.Duration, inde
 // one. This reduces memory footprint and number of connections to the server.
 func NewFilteredAppInformer(client versioned.Interface, resyncPeriod time.Duration, indexers cache.Indexers, tweakListOptions internalinterfaces.TweakListOptionsFunc) cache.SharedIndexInformer {
 	return cache.NewSharedIndexInformer(
-		&cache.ListWatch{
+		cache.ToListWatcherWithWatchListSemantics(&cache.ListWatch{
 			ListFunc: func(options metav1.ListOptions) (runtime.Object, error) {
 				if tweakListOptions != nil {
 					tweakListOptions(&options)
 				}
-				return client.ManagementV1().Apps().List(context.TODO(), options)
+				return client.ManagementV1().Apps().List(context.Background(), options)
 			},
 			WatchFunc: func(options metav1.ListOptions) (watch.Interface, error) {
 				if tweakListOptions != nil {
 					tweakListOptions(&options)
 				}
-				return client.ManagementV1().Apps().Watch(context.TODO(), options)
+				return client.ManagementV1().Apps().Watch(context.Background(), options)
 			},
-		},
-		&managementv1.App{},
+			ListWithContextFunc: func(ctx context.Context, options metav1.ListOptions) (runtime.Object, error) {
+				if tweakListOptions != nil {
+					tweakListOptions(&options)
+				}
+				return client.ManagementV1().Apps().List(ctx, options)
+			},
+			WatchFuncWithContext: func(ctx context.Context, options metav1.ListOptions) (watch.Interface, error) {
+				if tweakListOptions != nil {
+					tweakListOptions(&options)
+				}
+				return client.ManagementV1().Apps().Watch(ctx, options)
+			},
+		}, client),
+		&apismanagementv1.App{},
 		resyncPeriod,
 		indexers,
 	)
@@ -65,9 +77,9 @@ func (f *appInformer) defaultInformer(client versioned.Interface, resyncPeriod t
 }
 
 func (f *appInformer) Informer() cache.SharedIndexInformer {
-	return f.factory.InformerFor(&managementv1.App{}, f.defaultInformer)
+	return f.factory.InformerFor(&apismanagementv1.App{}, f.defaultInformer)
 }
 
-func (f *appInformer) Lister() v1.AppLister {
-	return v1.NewAppLister(f.Informer().GetIndexer())
+func (f *appInformer) Lister() managementv1.AppLister {
+	return managementv1.NewAppLister(f.Informer().GetIndexer())
 }
