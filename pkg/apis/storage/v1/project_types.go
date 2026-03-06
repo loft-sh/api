@@ -93,7 +93,6 @@ type ProjectSpec struct {
 	AllowedClusters []AllowedCluster `json:"allowedClusters,omitempty"`
 
 	// AllowedRunners are target runners that are allowed to target with
-	// DevPod environments.
 	// +optional
 	AllowedRunners []AllowedRunner `json:"allowedRunners,omitempty"`
 
@@ -133,10 +132,6 @@ type ProjectSpec struct {
 	// RancherIntegration holds information about Rancher Integration
 	// +optional
 	RancherIntegration *RancherIntegrationSpec `json:"rancher,omitempty"`
-
-	// DevPod holds DevPod specific configuration for project
-	// +optional
-	DevPod *DevPodProjectSpec `json:"devPod,omitempty"`
 }
 
 type RequireTemplate struct {
@@ -173,10 +168,8 @@ type Quotas struct {
 }
 
 var (
-	SpaceTemplateKind           = "SpaceTemplate"
-	VirtualClusterTemplateKind  = "VirtualClusterTemplate"
-	DevPodWorkspaceTemplateKind = "DevPodWorkspaceTemplate"
-	DevPodWorkspacePresetKind   = "DevPodWorkspacePreset"
+	SpaceTemplateKind          = "SpaceTemplate"
+	VirtualClusterTemplateKind = "VirtualClusterTemplate"
 )
 
 type AllowedTemplate struct {
@@ -211,7 +204,7 @@ type Member struct {
 	Name string `json:"name,omitempty"`
 
 	// ClusterRole is the assigned role for the above member
-	ClusterRole string `json:"clusterRole,omitempty"`
+	ClusterRole string `json:"clusterRole"`
 }
 
 type AllowedRunner struct {
@@ -509,44 +502,6 @@ type SyncMembersSpec struct {
 	// being synced.
 	// +optional
 	RoleMapping map[string]string `json:"roleMapping,omitempty"`
-}
-
-type DevPodProjectSpec struct {
-	// Git defines additional git related settings like credentials
-	// +optional
-	Git *GitProjectSpec `json:"git,omitempty"`
-
-	// SSH defines additional ssh related settings like private keys, to be
-	// specified as base64 encoded strings.
-	// +optional
-	SSH *SSHProjectSpec `json:"ssh,omitempty"`
-
-	// FallbackImage defines an image all workspace will fall back to if no devcontainer.json could be detected
-	// +optional
-	FallbackImage string `json:"fallbackImage,omitempty"`
-}
-
-type GitProjectSpec struct {
-	// Token defines the token to use for authentication.
-	// +optional
-	Token string `json:"token,omitempty"`
-
-	// TokenSecretRef defines the project secret to use for token authentication.
-	// Will be used if `Token` is not provided.
-	// +optional
-	TokenProjectSecretRef *corev1.SecretKeySelector `json:"tokenSecretRef,omitempty"`
-}
-
-type SSHProjectSpec struct {
-	// Token defines the private ssh key to use for authentication,
-	// this is a base64 encoded string.
-	// +optional
-	Token string `json:"token,omitempty"`
-
-	// TokenSecretRef defines the project secret to use as private ssh key for authentication.
-	// Will be used if `Token` is not provided.
-	// +optional
-	TokenProjectSecretRef *corev1.SecretKeySelector `json:"tokenSecretRef,omitempty"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
