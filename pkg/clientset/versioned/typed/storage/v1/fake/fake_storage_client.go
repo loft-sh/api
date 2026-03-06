@@ -13,83 +13,95 @@ type FakeStorageV1 struct {
 }
 
 func (c *FakeStorageV1) AccessKeys() v1.AccessKeyInterface {
-	return &FakeAccessKeys{c}
+	return newFakeAccessKeys(c)
 }
 
 func (c *FakeStorageV1) Apps() v1.AppInterface {
-	return &FakeApps{c}
+	return newFakeApps(c)
 }
 
 func (c *FakeStorageV1) Clusters() v1.ClusterInterface {
-	return &FakeClusters{c}
+	return newFakeClusters(c)
 }
 
 func (c *FakeStorageV1) ClusterAccesses() v1.ClusterAccessInterface {
-	return &FakeClusterAccesses{c}
+	return newFakeClusterAccesses(c)
 }
 
 func (c *FakeStorageV1) ClusterRoleTemplates() v1.ClusterRoleTemplateInterface {
-	return &FakeClusterRoleTemplates{c}
+	return newFakeClusterRoleTemplates(c)
 }
 
 func (c *FakeStorageV1) DevPodEnvironmentTemplates() v1.DevPodEnvironmentTemplateInterface {
-	return &FakeDevPodEnvironmentTemplates{c}
+	return newFakeDevPodEnvironmentTemplates(c)
 }
 
 func (c *FakeStorageV1) DevPodWorkspaceInstances(namespace string) v1.DevPodWorkspaceInstanceInterface {
-	return &FakeDevPodWorkspaceInstances{c, namespace}
+	return newFakeDevPodWorkspaceInstances(c, namespace)
 }
 
 func (c *FakeStorageV1) DevPodWorkspacePresets() v1.DevPodWorkspacePresetInterface {
-	return &FakeDevPodWorkspacePresets{c}
+	return newFakeDevPodWorkspacePresets(c)
 }
 
 func (c *FakeStorageV1) DevPodWorkspaceTemplates() v1.DevPodWorkspaceTemplateInterface {
-	return &FakeDevPodWorkspaceTemplates{c}
+	return newFakeDevPodWorkspaceTemplates(c)
 }
 
 func (c *FakeStorageV1) NetworkPeers() v1.NetworkPeerInterface {
-	return &FakeNetworkPeers{c}
+	return newFakeNetworkPeers(c)
+}
+
+func (c *FakeStorageV1) NodeClaims(namespace string) v1.NodeClaimInterface {
+	return newFakeNodeClaims(c, namespace)
+}
+
+func (c *FakeStorageV1) NodeEnvironments(namespace string) v1.NodeEnvironmentInterface {
+	return newFakeNodeEnvironments(c, namespace)
+}
+
+func (c *FakeStorageV1) NodeProviders() v1.NodeProviderInterface {
+	return newFakeNodeProviders(c)
+}
+
+func (c *FakeStorageV1) NodeTypes() v1.NodeTypeInterface {
+	return newFakeNodeTypes(c)
 }
 
 func (c *FakeStorageV1) Projects() v1.ProjectInterface {
-	return &FakeProjects{c}
-}
-
-func (c *FakeStorageV1) Runners() v1.RunnerInterface {
-	return &FakeRunners{c}
+	return newFakeProjects(c)
 }
 
 func (c *FakeStorageV1) SharedSecrets(namespace string) v1.SharedSecretInterface {
-	return &FakeSharedSecrets{c, namespace}
+	return newFakeSharedSecrets(c, namespace)
 }
 
 func (c *FakeStorageV1) SpaceInstances(namespace string) v1.SpaceInstanceInterface {
-	return &FakeSpaceInstances{c, namespace}
+	return newFakeSpaceInstances(c, namespace)
 }
 
 func (c *FakeStorageV1) SpaceTemplates() v1.SpaceTemplateInterface {
-	return &FakeSpaceTemplates{c}
+	return newFakeSpaceTemplates(c)
 }
 
 func (c *FakeStorageV1) Tasks() v1.TaskInterface {
-	return &FakeTasks{c}
+	return newFakeTasks(c)
 }
 
 func (c *FakeStorageV1) Teams() v1.TeamInterface {
-	return &FakeTeams{c}
+	return newFakeTeams(c)
 }
 
 func (c *FakeStorageV1) Users() v1.UserInterface {
-	return &FakeUsers{c}
+	return newFakeUsers(c)
 }
 
 func (c *FakeStorageV1) VirtualClusterInstances(namespace string) v1.VirtualClusterInstanceInterface {
-	return &FakeVirtualClusterInstances{c, namespace}
+	return newFakeVirtualClusterInstances(c, namespace)
 }
 
 func (c *FakeStorageV1) VirtualClusterTemplates() v1.VirtualClusterTemplateInterface {
-	return &FakeVirtualClusterTemplates{c}
+	return newFakeVirtualClusterTemplates(c)
 }
 
 // RESTClient returns a RESTClient that is used to communicate
