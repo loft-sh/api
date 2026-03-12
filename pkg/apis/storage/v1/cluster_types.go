@@ -8,6 +8,8 @@ import (
 )
 
 const (
+	LoftCluster = "loft-cluster"
+
 	MetricsFederationServiceNamespaceAnnotation = "loft.sh/metrics-federation-service-namespace"
 	MetricsFederationServiceNameAnnotation      = "loft.sh/metrics-federation-service-name"
 	MetricsFederationServicePortAnnotation      = "loft.sh/metrics-federation-service-port"
@@ -16,13 +18,23 @@ const (
 	PrometheusDeployed                  agentstoragev1.ConditionType = "PrometheusDeployed"
 	PrometheusAvailable                 agentstoragev1.ConditionType = "PrometheusAvailable"
 
+	GlobalPrometheusServiceAddress                                         = "loft.sh/global-prometheus-service-address"
 	GlobalPrometheusLastAppliedHashAnnotation                              = "loft.sh/global-prometheus-last-applied-hash"
 	GlobalPrometheusDeployed                  agentstoragev1.ConditionType = "GlobalPrometheusDeployed"
 	GlobalPrometheusAvailable                 agentstoragev1.ConditionType = "GlobalPrometheusAvailable"
 
+	EmbeddedPostgresAppliedHashAnnotation                              = "loft.sh/platform-db-applied-hash"
+	EmbeddedPostgresDeployed              agentstoragev1.ConditionType = "EmbeddedPostgresDeployed"
+	EmbeddedPostgresAvailable             agentstoragev1.ConditionType = "EmbeddedPostgresAvailable"
+
 	OpenCostLastAppliedHashAnnotation                              = "loft.sh/opencost-last-applied-hash"
 	OpenCostDeployed                  agentstoragev1.ConditionType = "OpenCostDeployed"
 	OpenCostAvailable                 agentstoragev1.ConditionType = "OpenCostAvailable"
+
+	BuildKitServiceAddress                                         = "loft.sh/buildkit-service-address"
+	BuildKitLastAppliedHashAnnotation                              = "loft.sh/buildkit-last-applied-hash"
+	BuildKitDeployed                  agentstoragev1.ConditionType = "BuildKitDeployed"
+	BuildKitAvailable                 agentstoragev1.ConditionType = "BuildKitAvailable"
 )
 
 // +genclient
