@@ -94,6 +94,10 @@ type NodeTypeListerExpansion interface{}
 // OIDCClientLister.
 type OIDCClientListerExpansion interface{}
 
+// OSImageListerExpansion allows custom methods to be added to
+// OSImageLister.
+type OSImageListerExpansion interface{}
+
 // OwnedAccessKeyListerExpansion allows custom methods to be added to
 // OwnedAccessKeyLister.
 type OwnedAccessKeyListerExpansion interface{}
@@ -121,6 +125,10 @@ type RegisterVirtualClusterListerExpansion interface{}
 // ResetAccessKeyListerExpansion allows custom methods to be added to
 // ResetAccessKeyLister.
 type ResetAccessKeyListerExpansion interface{}
+
+// SSHKeyListerExpansion allows custom methods to be added to
+// SSHKeyLister.
+type SSHKeyListerExpansion interface{}
 
 // SelfListerExpansion allows custom methods to be added to
 // SelfLister.

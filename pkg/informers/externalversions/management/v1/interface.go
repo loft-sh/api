@@ -50,6 +50,8 @@ type Interface interface {
 	NodeTypes() NodeTypeInformer
 	// OIDCClients returns a OIDCClientInformer.
 	OIDCClients() OIDCClientInformer
+	// OSImages returns a OSImageInformer.
+	OSImages() OSImageInformer
 	// OwnedAccessKeys returns a OwnedAccessKeyInformer.
 	OwnedAccessKeys() OwnedAccessKeyInformer
 	// Projects returns a ProjectInformer.
@@ -62,6 +64,8 @@ type Interface interface {
 	RegisterVirtualClusters() RegisterVirtualClusterInformer
 	// ResetAccessKeys returns a ResetAccessKeyInformer.
 	ResetAccessKeys() ResetAccessKeyInformer
+	// SSHKeys returns a SSHKeyInformer.
+	SSHKeys() SSHKeyInformer
 	// Selves returns a SelfInformer.
 	Selves() SelfInformer
 	// SelfSubjectAccessReviews returns a SelfSubjectAccessReviewInformer.
@@ -208,6 +212,11 @@ func (v *version) OIDCClients() OIDCClientInformer {
 	return &oIDCClientInformer{factory: v.factory, tweakListOptions: v.tweakListOptions}
 }
 
+// OSImages returns a OSImageInformer.
+func (v *version) OSImages() OSImageInformer {
+	return &oSImageInformer{factory: v.factory, tweakListOptions: v.tweakListOptions}
+}
+
 // OwnedAccessKeys returns a OwnedAccessKeyInformer.
 func (v *version) OwnedAccessKeys() OwnedAccessKeyInformer {
 	return &ownedAccessKeyInformer{factory: v.factory, tweakListOptions: v.tweakListOptions}
@@ -236,6 +245,11 @@ func (v *version) RegisterVirtualClusters() RegisterVirtualClusterInformer {
 // ResetAccessKeys returns a ResetAccessKeyInformer.
 func (v *version) ResetAccessKeys() ResetAccessKeyInformer {
 	return &resetAccessKeyInformer{factory: v.factory, tweakListOptions: v.tweakListOptions}
+}
+
+// SSHKeys returns a SSHKeyInformer.
+func (v *version) SSHKeys() SSHKeyInformer {
+	return &sSHKeyInformer{factory: v.factory, tweakListOptions: v.tweakListOptions}
 }
 
 // Selves returns a SelfInformer.

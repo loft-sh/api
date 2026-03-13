@@ -96,6 +96,10 @@ func (c *FakeManagementV1) OIDCClients() v1.OIDCClientInterface {
 	return newFakeOIDCClients(c)
 }
 
+func (c *FakeManagementV1) OSImages() v1.OSImageInterface {
+	return newFakeOSImages(c)
+}
+
 func (c *FakeManagementV1) OwnedAccessKeys() v1.OwnedAccessKeyInterface {
 	return newFakeOwnedAccessKeys(c)
 }
@@ -118,6 +122,10 @@ func (c *FakeManagementV1) RegisterVirtualClusters() v1.RegisterVirtualClusterIn
 
 func (c *FakeManagementV1) ResetAccessKeys() v1.ResetAccessKeyInterface {
 	return newFakeResetAccessKeys(c)
+}
+
+func (c *FakeManagementV1) SSHKeys() v1.SSHKeyInterface {
+	return newFakeSSHKeys(c)
 }
 
 func (c *FakeManagementV1) Selves() v1.SelfInterface {

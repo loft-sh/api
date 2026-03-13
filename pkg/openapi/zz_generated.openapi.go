@@ -226,6 +226,7 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 		managementv1.DatabaseConnectorList{}.OpenAPIModelName():                           schema_pkg_apis_management_v1_DatabaseConnectorList(ref),
 		managementv1.DatabaseConnectorSpec{}.OpenAPIModelName():                           schema_pkg_apis_management_v1_DatabaseConnectorSpec(ref),
 		managementv1.DatabaseConnectorStatus{}.OpenAPIModelName():                         schema_pkg_apis_management_v1_DatabaseConnectorStatus(ref),
+		managementv1.DatabaseKine{}.OpenAPIModelName():                                    schema_pkg_apis_management_v1_DatabaseKine(ref),
 		managementv1.DirectClusterEndpointToken{}.OpenAPIModelName():                      schema_pkg_apis_management_v1_DirectClusterEndpointToken(ref),
 		managementv1.DirectClusterEndpointTokenList{}.OpenAPIModelName():                  schema_pkg_apis_management_v1_DirectClusterEndpointTokenList(ref),
 		managementv1.DirectClusterEndpointTokenSpec{}.OpenAPIModelName():                  schema_pkg_apis_management_v1_DirectClusterEndpointTokenSpec(ref),
@@ -297,6 +298,10 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 		managementv1.OIDCClientList{}.OpenAPIModelName():                                  schema_pkg_apis_management_v1_OIDCClientList(ref),
 		managementv1.OIDCClientSpec{}.OpenAPIModelName():                                  schema_pkg_apis_management_v1_OIDCClientSpec(ref),
 		managementv1.OIDCClientStatus{}.OpenAPIModelName():                                schema_pkg_apis_management_v1_OIDCClientStatus(ref),
+		managementv1.OSImage{}.OpenAPIModelName():                                         schema_pkg_apis_management_v1_OSImage(ref),
+		managementv1.OSImageList{}.OpenAPIModelName():                                     schema_pkg_apis_management_v1_OSImageList(ref),
+		managementv1.OSImageSpec{}.OpenAPIModelName():                                     schema_pkg_apis_management_v1_OSImageSpec(ref),
+		managementv1.OSImageStatus{}.OpenAPIModelName():                                   schema_pkg_apis_management_v1_OSImageStatus(ref),
 		managementv1.ObjectName{}.OpenAPIModelName():                                      schema_pkg_apis_management_v1_ObjectName(ref),
 		managementv1.ObjectPermission{}.OpenAPIModelName():                                schema_pkg_apis_management_v1_ObjectPermission(ref),
 		managementv1.Operation{}.OpenAPIModelName():                                       schema_pkg_apis_management_v1_Operation(ref),
@@ -354,6 +359,10 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 		managementv1.ResetAccessKeyList{}.OpenAPIModelName():                              schema_pkg_apis_management_v1_ResetAccessKeyList(ref),
 		managementv1.ResetAccessKeySpec{}.OpenAPIModelName():                              schema_pkg_apis_management_v1_ResetAccessKeySpec(ref),
 		managementv1.ResetAccessKeyStatus{}.OpenAPIModelName():                            schema_pkg_apis_management_v1_ResetAccessKeyStatus(ref),
+		managementv1.SSHKey{}.OpenAPIModelName():                                          schema_pkg_apis_management_v1_SSHKey(ref),
+		managementv1.SSHKeyList{}.OpenAPIModelName():                                      schema_pkg_apis_management_v1_SSHKeyList(ref),
+		managementv1.SSHKeySpec{}.OpenAPIModelName():                                      schema_pkg_apis_management_v1_SSHKeySpec(ref),
+		managementv1.SSHKeyStatus{}.OpenAPIModelName():                                    schema_pkg_apis_management_v1_SSHKeyStatus(ref),
 		managementv1.Self{}.OpenAPIModelName():                                            schema_pkg_apis_management_v1_Self(ref),
 		managementv1.SelfList{}.OpenAPIModelName():                                        schema_pkg_apis_management_v1_SelfList(ref),
 		managementv1.SelfSpec{}.OpenAPIModelName():                                        schema_pkg_apis_management_v1_SelfSpec(ref),
@@ -542,6 +551,7 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 		apisstoragev1.ClusterRoleTemplateTemplate{}.OpenAPIModelName():                    schema_pkg_apis_storage_v1_ClusterRoleTemplateTemplate(ref),
 		apisstoragev1.ClusterSpec{}.OpenAPIModelName():                                    schema_pkg_apis_storage_v1_ClusterSpec(ref),
 		apisstoragev1.ClusterStatus{}.OpenAPIModelName():                                  schema_pkg_apis_storage_v1_ClusterStatus(ref),
+		apisstoragev1.DHCPDeployment{}.OpenAPIModelName():                                 schema_pkg_apis_storage_v1_DHCPDeployment(ref),
 		apisstoragev1.EntityInfo{}.OpenAPIModelName():                                     schema_pkg_apis_storage_v1_EntityInfo(ref),
 		apisstoragev1.GroupResources{}.OpenAPIModelName():                                 schema_pkg_apis_storage_v1_GroupResources(ref),
 		apisstoragev1.HelmChart{}.OpenAPIModelName():                                      schema_pkg_apis_storage_v1_HelmChart(ref),
@@ -561,7 +571,12 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 		apisstoragev1.LocalClusterRoleTemplateSpec{}.OpenAPIModelName():                   schema_pkg_apis_storage_v1_LocalClusterRoleTemplateSpec(ref),
 		apisstoragev1.ManagedNodeTypeObjectMeta{}.OpenAPIModelName():                      schema_pkg_apis_storage_v1_ManagedNodeTypeObjectMeta(ref),
 		apisstoragev1.Member{}.OpenAPIModelName():                                         schema_pkg_apis_storage_v1_Member(ref),
+		apisstoragev1.Metal3BareMetalHosts{}.OpenAPIModelName():                           schema_pkg_apis_storage_v1_Metal3BareMetalHosts(ref),
+		apisstoragev1.Metal3Deployment{}.OpenAPIModelName():                               schema_pkg_apis_storage_v1_Metal3Deployment(ref),
+		apisstoragev1.Metal3NodeTypeSpec{}.OpenAPIModelName():                             schema_pkg_apis_storage_v1_Metal3NodeTypeSpec(ref),
+		apisstoragev1.Metal3ProviderDeployment{}.OpenAPIModelName():                       schema_pkg_apis_storage_v1_Metal3ProviderDeployment(ref),
 		apisstoragev1.Metrics{}.OpenAPIModelName():                                        schema_pkg_apis_storage_v1_Metrics(ref),
+		apisstoragev1.MultusDeployment{}.OpenAPIModelName():                               schema_pkg_apis_storage_v1_MultusDeployment(ref),
 		apisstoragev1.NamedNodeTypeSpec{}.OpenAPIModelName():                              schema_pkg_apis_storage_v1_NamedNodeTypeSpec(ref),
 		apisstoragev1.NamespacePattern{}.OpenAPIModelName():                               schema_pkg_apis_storage_v1_NamespacePattern(ref),
 		apisstoragev1.NamespacedRef{}.OpenAPIModelName():                                  schema_pkg_apis_storage_v1_NamespacedRef(ref),
@@ -583,6 +598,7 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 		apisstoragev1.NodeProviderClusterRef{}.OpenAPIModelName():                         schema_pkg_apis_storage_v1_NodeProviderClusterRef(ref),
 		apisstoragev1.NodeProviderKubeVirt{}.OpenAPIModelName():                           schema_pkg_apis_storage_v1_NodeProviderKubeVirt(ref),
 		apisstoragev1.NodeProviderList{}.OpenAPIModelName():                               schema_pkg_apis_storage_v1_NodeProviderList(ref),
+		apisstoragev1.NodeProviderMetal3{}.OpenAPIModelName():                             schema_pkg_apis_storage_v1_NodeProviderMetal3(ref),
 		apisstoragev1.NodeProviderSpec{}.OpenAPIModelName():                               schema_pkg_apis_storage_v1_NodeProviderSpec(ref),
 		apisstoragev1.NodeProviderStatus{}.OpenAPIModelName():                             schema_pkg_apis_storage_v1_NodeProviderStatus(ref),
 		apisstoragev1.NodeProviderTerraform{}.OpenAPIModelName():                          schema_pkg_apis_storage_v1_NodeProviderTerraform(ref),
@@ -592,11 +608,16 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 		apisstoragev1.NodeTypeOverhead{}.OpenAPIModelName():                               schema_pkg_apis_storage_v1_NodeTypeOverhead(ref),
 		apisstoragev1.NodeTypeSpec{}.OpenAPIModelName():                                   schema_pkg_apis_storage_v1_NodeTypeSpec(ref),
 		apisstoragev1.NodeTypeStatus{}.OpenAPIModelName():                                 schema_pkg_apis_storage_v1_NodeTypeStatus(ref),
+		apisstoragev1.OSImage{}.OpenAPIModelName():                                        schema_pkg_apis_storage_v1_OSImage(ref),
+		apisstoragev1.OSImageList{}.OpenAPIModelName():                                    schema_pkg_apis_storage_v1_OSImageList(ref),
+		apisstoragev1.OSImageSpec{}.OpenAPIModelName():                                    schema_pkg_apis_storage_v1_OSImageSpec(ref),
+		apisstoragev1.OSImageStatus{}.OpenAPIModelName():                                  schema_pkg_apis_storage_v1_OSImageStatus(ref),
 		apisstoragev1.ObjectsStatus{}.OpenAPIModelName():                                  schema_pkg_apis_storage_v1_ObjectsStatus(ref),
 		apisstoragev1.OpenCost{}.OpenAPIModelName():                                       schema_pkg_apis_storage_v1_OpenCost(ref),
 		apisstoragev1.PodSelector{}.OpenAPIModelName():                                    schema_pkg_apis_storage_v1_PodSelector(ref),
 		apisstoragev1.Project{}.OpenAPIModelName():                                        schema_pkg_apis_storage_v1_Project(ref),
 		apisstoragev1.ProjectList{}.OpenAPIModelName():                                    schema_pkg_apis_storage_v1_ProjectList(ref),
+		apisstoragev1.ProjectNamespaceTemplate{}.OpenAPIModelName():                       schema_pkg_apis_storage_v1_ProjectNamespaceTemplate(ref),
 		apisstoragev1.ProjectSpec{}.OpenAPIModelName():                                    schema_pkg_apis_storage_v1_ProjectSpec(ref),
 		apisstoragev1.ProjectStatus{}.OpenAPIModelName():                                  schema_pkg_apis_storage_v1_ProjectStatus(ref),
 		apisstoragev1.QuotaStatus{}.OpenAPIModelName():                                    schema_pkg_apis_storage_v1_QuotaStatus(ref),
@@ -609,6 +630,10 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 		apisstoragev1.RancherProjectRef{}.OpenAPIModelName():                              schema_pkg_apis_storage_v1_RancherProjectRef(ref),
 		apisstoragev1.RequirePreset{}.OpenAPIModelName():                                  schema_pkg_apis_storage_v1_RequirePreset(ref),
 		apisstoragev1.RequireTemplate{}.OpenAPIModelName():                                schema_pkg_apis_storage_v1_RequireTemplate(ref),
+		apisstoragev1.SSHKey{}.OpenAPIModelName():                                         schema_pkg_apis_storage_v1_SSHKey(ref),
+		apisstoragev1.SSHKeyList{}.OpenAPIModelName():                                     schema_pkg_apis_storage_v1_SSHKeyList(ref),
+		apisstoragev1.SSHKeySpec{}.OpenAPIModelName():                                     schema_pkg_apis_storage_v1_SSHKeySpec(ref),
+		apisstoragev1.SSHKeyStatus{}.OpenAPIModelName():                                   schema_pkg_apis_storage_v1_SSHKeyStatus(ref),
 		apisstoragev1.SSOIdentity{}.OpenAPIModelName():                                    schema_pkg_apis_storage_v1_SSOIdentity(ref),
 		apisstoragev1.SecretRef{}.OpenAPIModelName():                                      schema_pkg_apis_storage_v1_SecretRef(ref),
 		apisstoragev1.SharedSecret{}.OpenAPIModelName():                                   schema_pkg_apis_storage_v1_SharedSecret(ref),
@@ -681,6 +706,7 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 		apisstoragev1.VirtualClusterTemplateVersion{}.OpenAPIModelName():                  schema_pkg_apis_storage_v1_VirtualClusterTemplateVersion(ref),
 		uiv1.CspPolicy{}.OpenAPIModelName():                                               schema_pkg_apis_ui_v1_CspPolicy(ref),
 		uiv1.ExternalURLs{}.OpenAPIModelName():                                            schema_pkg_apis_ui_v1_ExternalURLs(ref),
+		uiv1.MultiRegion{}.OpenAPIModelName():                                             schema_pkg_apis_ui_v1_MultiRegion(ref),
 		uiv1.NavBarButton{}.OpenAPIModelName():                                            schema_pkg_apis_ui_v1_NavBarButton(ref),
 		uiv1.UISettings{}.OpenAPIModelName():                                              schema_pkg_apis_ui_v1_UISettings(ref),
 		uiv1.UISettingsConfig{}.OpenAPIModelName():                                        schema_pkg_apis_ui_v1_UISettingsConfig(ref),
@@ -9373,11 +9399,17 @@ func schema_pkg_apis_management_v1_ConfigStatus(ref common.ReferenceCallback) co
 							Ref:         ref(managementv1.ImageBuilder{}.OpenAPIModelName()),
 						},
 					},
+					"database": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Database represents the database connection settings when deploying the platform with an embedded Kubernetes backed by kine",
+							Ref:         ref(managementv1.DatabaseKine{}.OpenAPIModelName()),
+						},
+					},
 				},
 			},
 		},
 		Dependencies: []string{
-			managementv1.Apps{}.OpenAPIModelName(), managementv1.Audit{}.OpenAPIModelName(), managementv1.Authentication{}.OpenAPIModelName(), managementv1.Cloud{}.OpenAPIModelName(), managementv1.CostControl{}.OpenAPIModelName(), managementv1.ImageBuilder{}.OpenAPIModelName(), managementv1.OIDC{}.OpenAPIModelName(), managementv1.PlatformDB{}.OpenAPIModelName(), apisstoragev1.VaultIntegrationSpec{}.OpenAPIModelName(), uiv1.UISettingsConfig{}.OpenAPIModelName()},
+			managementv1.Apps{}.OpenAPIModelName(), managementv1.Audit{}.OpenAPIModelName(), managementv1.Authentication{}.OpenAPIModelName(), managementv1.Cloud{}.OpenAPIModelName(), managementv1.CostControl{}.OpenAPIModelName(), managementv1.DatabaseKine{}.OpenAPIModelName(), managementv1.ImageBuilder{}.OpenAPIModelName(), managementv1.OIDC{}.OpenAPIModelName(), managementv1.PlatformDB{}.OpenAPIModelName(), apisstoragev1.VaultIntegrationSpec{}.OpenAPIModelName(), uiv1.UISettingsConfig{}.OpenAPIModelName()},
 	}
 }
 
@@ -9974,6 +10006,75 @@ func schema_pkg_apis_management_v1_DatabaseConnectorStatus(ref common.ReferenceC
 			SchemaProps: spec.SchemaProps{
 				Description: "DatabaseConnectorStatus holds the status",
 				Type:        []string{"object"},
+			},
+		},
+	}
+}
+
+func schema_pkg_apis_management_v1_DatabaseKine(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"enabled": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Enabled defines if the database should be used.",
+							Type:        []string{"boolean"},
+							Format:      "",
+						},
+					},
+					"dataSource": {
+						SchemaProps: spec.SchemaProps{
+							Description: "DataSource is the kine dataSource to use for the database. This depends on the database format. This is optional for the external database. Examples: * mysql: mysql://username:password@tcp(hostname:3306)/k3s * postgres: postgres://username:password@hostname:5432/k3s",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"identityProvider": {
+						SchemaProps: spec.SchemaProps{
+							Description: "IdentityProvider is the kine identity provider to use when generating temporary authentication tokens for enhanced security. This is optional for the external database. Examples: * aws: RDS IAM Authentication",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"keyFile": {
+						SchemaProps: spec.SchemaProps{
+							Description: "KeyFile is the key file to use for the database. This is optional.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"certFile": {
+						SchemaProps: spec.SchemaProps{
+							Description: "CertFile is the cert file to use for the database. This is optional.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"caFile": {
+						SchemaProps: spec.SchemaProps{
+							Description: "CaFile is the ca file to use for the database. This is optional.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"extraArgs": {
+						SchemaProps: spec.SchemaProps{
+							Description: "ExtraArgs are additional arguments to pass to Kine.",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: "",
+										Type:    []string{"string"},
+										Format:  "",
+									},
+								},
+							},
+						},
+					},
+				},
 			},
 		},
 	}
@@ -11572,6 +11673,13 @@ func schema_pkg_apis_management_v1_NodeClaimData(ref common.ReferenceCallback) c
 							Format:      "",
 						},
 					},
+					"outputs": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Outputs of the node environment.",
+							Type:        []string{"string"},
+							Format:      "byte",
+						},
+					},
 					"state": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Terraform state of the node claim.",
@@ -11656,6 +11764,86 @@ func schema_pkg_apis_management_v1_NodeClaimSpec(ref common.ReferenceCallback) c
 				Description: "NodeClaimSpec defines spec of node claim.",
 				Type:        []string{"object"},
 				Properties: map[string]spec.Schema{
+					"displayName": {
+						SchemaProps: spec.SchemaProps{
+							Description: "DisplayName is the name of the NodeClaim that is displayed in the UI.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"owner": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Owner holds the owner of this object",
+							Ref:         ref(apisstoragev1.UserOrTeam{}.OpenAPIModelName()),
+						},
+					},
+					"access": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Access holds the access rights for users and teams",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref(apisstoragev1.Access{}.OpenAPIModelName()),
+									},
+								},
+							},
+						},
+					},
+					"providerRef": {
+						SchemaProps: spec.SchemaProps{
+							Description: "ProviderRef is the name of the NodeProvider that this NodeClaim is based on.",
+							Default:     "",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"typeRef": {
+						SchemaProps: spec.SchemaProps{
+							Description: "TypeRef is the full name of the NodeType that this NodeClaim is based on.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"environmentRef": {
+						SchemaProps: spec.SchemaProps{
+							Description: "EnvironmentRef is the name of the NodeEnvironment that this NodeClaim is based on.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"properties": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Properties are extra properties for the NodeClaim.",
+							Type:        []string{"object"},
+							AdditionalProperties: &spec.SchemaOrBool{
+								Allows: true,
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: "",
+										Type:    []string{"string"},
+										Format:  "",
+									},
+								},
+							},
+						},
+					},
+					"vClusterRef": {
+						SchemaProps: spec.SchemaProps{
+							Description: "VClusterRef references source vCluster.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"controlPlane": {
+						SchemaProps: spec.SchemaProps{
+							Description: "ControlPlane indicates if the node claim is for a control plane node. This is intentionally not omitempty as we want to ensure that the control plane is always set for easier checking in for example terraform templates.",
+							Default:     false,
+							Type:        []string{"boolean"},
+							Format:      "",
+						},
+					},
 					"taints": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Taints will be applied to the NodeClaim's node.",
@@ -11728,59 +11916,12 @@ func schema_pkg_apis_management_v1_NodeClaimSpec(ref common.ReferenceCallback) c
 							},
 						},
 					},
-					"properties": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Properties are extra properties for the NodeClaim.",
-							Type:        []string{"object"},
-							AdditionalProperties: &spec.SchemaOrBool{
-								Allows: true,
-								Schema: &spec.Schema{
-									SchemaProps: spec.SchemaProps{
-										Default: "",
-										Type:    []string{"string"},
-										Format:  "",
-									},
-								},
-							},
-						},
-					},
-					"providerRef": {
-						SchemaProps: spec.SchemaProps{
-							Description: "ProviderRef is the name of the NodeProvider that this NodeClaim is based on.",
-							Default:     "",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"typeRef": {
-						SchemaProps: spec.SchemaProps{
-							Description: "TypeRef is the full name of the NodeType that this NodeClaim is based on.",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"vClusterRef": {
-						SchemaProps: spec.SchemaProps{
-							Description: "VClusterRef references source vCluster. This is required.",
-							Default:     "",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"controlPlane": {
-						SchemaProps: spec.SchemaProps{
-							Description: "ControlPlane indicates if the node claim is for a control plane node. This is intentionally not omitempty as we want to ensure that the control plane is always set for easier checking in for example terraform templates.",
-							Default:     false,
-							Type:        []string{"boolean"},
-							Format:      "",
-						},
-					},
 				},
-				Required: []string{"providerRef", "vClusterRef"},
+				Required: []string{"providerRef"},
 			},
 		},
 		Dependencies: []string{
-			corev1.NodeSelectorRequirement{}.OpenAPIModelName(), corev1.Taint{}.OpenAPIModelName(), resource.Quantity{}.OpenAPIModelName()},
+			apisstoragev1.Access{}.OpenAPIModelName(), apisstoragev1.UserOrTeam{}.OpenAPIModelName(), corev1.NodeSelectorRequirement{}.OpenAPIModelName(), corev1.Taint{}.OpenAPIModelName(), resource.Quantity{}.OpenAPIModelName()},
 	}
 }
 
@@ -11977,6 +12118,33 @@ func schema_pkg_apis_management_v1_NodeEnvironmentSpec(ref common.ReferenceCallb
 				Description: "NodeEnvironmentSpec defines spec of node environment.",
 				Type:        []string{"object"},
 				Properties: map[string]spec.Schema{
+					"displayName": {
+						SchemaProps: spec.SchemaProps{
+							Description: "DisplayName is the name of the NodeClaim that is displayed in the UI.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"owner": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Owner holds the owner of this object",
+							Ref:         ref(apisstoragev1.UserOrTeam{}.OpenAPIModelName()),
+						},
+					},
+					"access": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Access holds the access rights for users and teams",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref(apisstoragev1.Access{}.OpenAPIModelName()),
+									},
+								},
+							},
+						},
+					},
 					"properties": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Properties are the properties for the NodeEnvironment.",
@@ -11996,15 +12164,13 @@ func schema_pkg_apis_management_v1_NodeEnvironmentSpec(ref common.ReferenceCallb
 					"providerRef": {
 						SchemaProps: spec.SchemaProps{
 							Description: "ProviderRef is the name of the NodeProvider that this NodeEnvironment is based on.",
-							Default:     "",
 							Type:        []string{"string"},
 							Format:      "",
 						},
 					},
 					"vClusterRef": {
 						SchemaProps: spec.SchemaProps{
-							Description: "VClusterRef references source vCluster. This is required.",
-							Default:     "",
+							Description: "VClusterRef references source vCluster.",
 							Type:        []string{"string"},
 							Format:      "",
 						},
@@ -12018,9 +12184,10 @@ func schema_pkg_apis_management_v1_NodeEnvironmentSpec(ref common.ReferenceCallb
 						},
 					},
 				},
-				Required: []string{"providerRef", "vClusterRef"},
 			},
 		},
+		Dependencies: []string{
+			apisstoragev1.Access{}.OpenAPIModelName(), apisstoragev1.UserOrTeam{}.OpenAPIModelName()},
 	}
 }
 
@@ -12542,6 +12709,12 @@ func schema_pkg_apis_management_v1_NodeProviderSpec(ref common.ReferenceCallback
 							Ref:         ref(apisstoragev1.NodeProviderClusterAPI{}.OpenAPIModelName()),
 						},
 					},
+					"metal3": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Metal3 configures a node provider using metal3.io BareMetalHost resources.",
+							Ref:         ref(apisstoragev1.NodeProviderMetal3{}.OpenAPIModelName()),
+						},
+					},
 					"displayName": {
 						SchemaProps: spec.SchemaProps{
 							Description: "DisplayName is the name that should be displayed in the UI",
@@ -12553,7 +12726,7 @@ func schema_pkg_apis_management_v1_NodeProviderSpec(ref common.ReferenceCallback
 			},
 		},
 		Dependencies: []string{
-			apisstoragev1.NodeProviderBCM{}.OpenAPIModelName(), apisstoragev1.NodeProviderClusterAPI{}.OpenAPIModelName(), apisstoragev1.NodeProviderKubeVirt{}.OpenAPIModelName(), apisstoragev1.NodeProviderTerraform{}.OpenAPIModelName()},
+			apisstoragev1.NodeProviderBCM{}.OpenAPIModelName(), apisstoragev1.NodeProviderClusterAPI{}.OpenAPIModelName(), apisstoragev1.NodeProviderKubeVirt{}.OpenAPIModelName(), apisstoragev1.NodeProviderMetal3{}.OpenAPIModelName(), apisstoragev1.NodeProviderTerraform{}.OpenAPIModelName()},
 	}
 }
 
@@ -13071,6 +13244,175 @@ func schema_pkg_apis_management_v1_OIDCClientStatus(ref common.ReferenceCallback
 			SchemaProps: spec.SchemaProps{
 				Description: "OIDCClientStatus holds the status",
 				Type:        []string{"object"},
+			},
+		},
+	}
+}
+
+func schema_pkg_apis_management_v1_OSImage(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "OSImage holds the OS image.",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"kind": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"apiVersion": {
+						SchemaProps: spec.SchemaProps{
+							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"metadata": {
+						SchemaProps: spec.SchemaProps{
+							Default: map[string]interface{}{},
+							Ref:     ref(metav1.ObjectMeta{}.OpenAPIModelName()),
+						},
+					},
+					"spec": {
+						SchemaProps: spec.SchemaProps{
+							Default: map[string]interface{}{},
+							Ref:     ref(managementv1.OSImageSpec{}.OpenAPIModelName()),
+						},
+					},
+					"status": {
+						SchemaProps: spec.SchemaProps{
+							Default: map[string]interface{}{},
+							Ref:     ref(managementv1.OSImageStatus{}.OpenAPIModelName()),
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			managementv1.OSImageSpec{}.OpenAPIModelName(), managementv1.OSImageStatus{}.OpenAPIModelName(), metav1.ObjectMeta{}.OpenAPIModelName()},
+	}
+}
+
+func schema_pkg_apis_management_v1_OSImageList(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"kind": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"apiVersion": {
+						SchemaProps: spec.SchemaProps{
+							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"metadata": {
+						SchemaProps: spec.SchemaProps{
+							Default: map[string]interface{}{},
+							Ref:     ref(metav1.ListMeta{}.OpenAPIModelName()),
+						},
+					},
+					"items": {
+						SchemaProps: spec.SchemaProps{
+							Type: []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref(managementv1.OSImage{}.OpenAPIModelName()),
+									},
+								},
+							},
+						},
+					},
+				},
+				Required: []string{"items"},
+			},
+		},
+		Dependencies: []string{
+			managementv1.OSImage{}.OpenAPIModelName(), metav1.ListMeta{}.OpenAPIModelName()},
+	}
+}
+
+func schema_pkg_apis_management_v1_OSImageSpec(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"displayName": {
+						SchemaProps: spec.SchemaProps{
+							Description: "DisplayName is the name that should be displayed in the UI",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"description": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Description describes an OS image",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"owner": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Owner holds the owner of this object",
+							Ref:         ref(apisstoragev1.UserOrTeam{}.OpenAPIModelName()),
+						},
+					},
+					"access": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Access holds the access rights for users and teams",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref(apisstoragev1.Access{}.OpenAPIModelName()),
+									},
+								},
+							},
+						},
+					},
+					"properties": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Properties is the configuration for the OS image",
+							Type:        []string{"object"},
+							AdditionalProperties: &spec.SchemaOrBool{
+								Allows: true,
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: "",
+										Type:    []string{"string"},
+										Format:  "",
+									},
+								},
+							},
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			apisstoragev1.Access{}.OpenAPIModelName(), apisstoragev1.UserOrTeam{}.OpenAPIModelName()},
+	}
+}
+
+func schema_pkg_apis_management_v1_OSImageStatus(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
 			},
 		},
 	}
@@ -14664,11 +15006,25 @@ func schema_pkg_apis_management_v1_ProjectNodeTypes(ref common.ReferenceCallback
 							},
 						},
 					},
+					"osImages": {
+						SchemaProps: spec.SchemaProps{
+							Description: "OSImages holds all the allowed OS images for the project",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref(apisstoragev1.OSImage{}.OpenAPIModelName()),
+									},
+								},
+							},
+						},
+					},
 				},
 			},
 		},
 		Dependencies: []string{
-			apisstoragev1.NodeProvider{}.OpenAPIModelName(), apisstoragev1.NodeType{}.OpenAPIModelName(), metav1.ObjectMeta{}.OpenAPIModelName()},
+			apisstoragev1.NodeProvider{}.OpenAPIModelName(), apisstoragev1.NodeType{}.OpenAPIModelName(), apisstoragev1.OSImage{}.OpenAPIModelName(), metav1.ObjectMeta{}.OpenAPIModelName()},
 	}
 }
 
@@ -15066,6 +15422,12 @@ func schema_pkg_apis_management_v1_ProjectSpec(ref common.ReferenceCallback) com
 							},
 						},
 					},
+					"namespaceTemplate": {
+						SchemaProps: spec.SchemaProps{
+							Description: "NamespaceTemplate defines metadata that should be applied to the project's namespace on creation. This is useful for environments where admission controllers (e.g., Kyverno) require specific labels or annotations on namespaces.",
+							Ref:         ref(apisstoragev1.ProjectNamespaceTemplate{}.OpenAPIModelName()),
+						},
+					},
 					"namespacePattern": {
 						SchemaProps: spec.SchemaProps{
 							Description: "NamespacePattern specifies template patterns to use for creating each space or virtual cluster's namespace",
@@ -15094,7 +15456,7 @@ func schema_pkg_apis_management_v1_ProjectSpec(ref common.ReferenceCallback) com
 			},
 		},
 		Dependencies: []string{
-			apisstoragev1.Access{}.OpenAPIModelName(), apisstoragev1.AllowedCluster{}.OpenAPIModelName(), apisstoragev1.AllowedRunner{}.OpenAPIModelName(), apisstoragev1.AllowedTemplate{}.OpenAPIModelName(), apisstoragev1.ArgoIntegrationSpec{}.OpenAPIModelName(), apisstoragev1.Member{}.OpenAPIModelName(), apisstoragev1.NamespacePattern{}.OpenAPIModelName(), apisstoragev1.Quotas{}.OpenAPIModelName(), apisstoragev1.RancherIntegrationSpec{}.OpenAPIModelName(), apisstoragev1.RequirePreset{}.OpenAPIModelName(), apisstoragev1.RequireTemplate{}.OpenAPIModelName(), apisstoragev1.UserOrTeam{}.OpenAPIModelName(), apisstoragev1.VaultIntegrationSpec{}.OpenAPIModelName()},
+			apisstoragev1.Access{}.OpenAPIModelName(), apisstoragev1.AllowedCluster{}.OpenAPIModelName(), apisstoragev1.AllowedRunner{}.OpenAPIModelName(), apisstoragev1.AllowedTemplate{}.OpenAPIModelName(), apisstoragev1.ArgoIntegrationSpec{}.OpenAPIModelName(), apisstoragev1.Member{}.OpenAPIModelName(), apisstoragev1.NamespacePattern{}.OpenAPIModelName(), apisstoragev1.ProjectNamespaceTemplate{}.OpenAPIModelName(), apisstoragev1.Quotas{}.OpenAPIModelName(), apisstoragev1.RancherIntegrationSpec{}.OpenAPIModelName(), apisstoragev1.RequirePreset{}.OpenAPIModelName(), apisstoragev1.RequireTemplate{}.OpenAPIModelName(), apisstoragev1.UserOrTeam{}.OpenAPIModelName(), apisstoragev1.VaultIntegrationSpec{}.OpenAPIModelName()},
 	}
 }
 
@@ -15569,6 +15931,13 @@ func schema_pkg_apis_management_v1_RegisterVirtualClusterSpec(ref common.Referen
 							Format:      "",
 						},
 					},
+					"standalone": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Standalone specifies if the vCluster is standalone",
+							Type:        []string{"boolean"},
+							Format:      "",
+						},
+					},
 				},
 			},
 		},
@@ -15850,6 +16219,166 @@ func schema_pkg_apis_management_v1_ResetAccessKeyStatus(ref common.ReferenceCall
 		},
 		Dependencies: []string{
 			metav1.Time{}.OpenAPIModelName()},
+	}
+}
+
+func schema_pkg_apis_management_v1_SSHKey(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "SSHKey holds the OS image.",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"kind": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"apiVersion": {
+						SchemaProps: spec.SchemaProps{
+							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"metadata": {
+						SchemaProps: spec.SchemaProps{
+							Default: map[string]interface{}{},
+							Ref:     ref(metav1.ObjectMeta{}.OpenAPIModelName()),
+						},
+					},
+					"spec": {
+						SchemaProps: spec.SchemaProps{
+							Default: map[string]interface{}{},
+							Ref:     ref(managementv1.SSHKeySpec{}.OpenAPIModelName()),
+						},
+					},
+					"status": {
+						SchemaProps: spec.SchemaProps{
+							Default: map[string]interface{}{},
+							Ref:     ref(managementv1.SSHKeyStatus{}.OpenAPIModelName()),
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			managementv1.SSHKeySpec{}.OpenAPIModelName(), managementv1.SSHKeyStatus{}.OpenAPIModelName(), metav1.ObjectMeta{}.OpenAPIModelName()},
+	}
+}
+
+func schema_pkg_apis_management_v1_SSHKeyList(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"kind": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"apiVersion": {
+						SchemaProps: spec.SchemaProps{
+							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"metadata": {
+						SchemaProps: spec.SchemaProps{
+							Default: map[string]interface{}{},
+							Ref:     ref(metav1.ListMeta{}.OpenAPIModelName()),
+						},
+					},
+					"items": {
+						SchemaProps: spec.SchemaProps{
+							Type: []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref(managementv1.SSHKey{}.OpenAPIModelName()),
+									},
+								},
+							},
+						},
+					},
+				},
+				Required: []string{"items"},
+			},
+		},
+		Dependencies: []string{
+			managementv1.SSHKey{}.OpenAPIModelName(), metav1.ListMeta{}.OpenAPIModelName()},
+	}
+}
+
+func schema_pkg_apis_management_v1_SSHKeySpec(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"displayName": {
+						SchemaProps: spec.SchemaProps{
+							Description: "DisplayName is the name that should be displayed in the UI",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"description": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Description describes an SSH key",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"owner": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Owner holds the owner of this object",
+							Ref:         ref(apisstoragev1.UserOrTeam{}.OpenAPIModelName()),
+						},
+					},
+					"access": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Access holds the access rights for users and teams",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref(apisstoragev1.Access{}.OpenAPIModelName()),
+									},
+								},
+							},
+						},
+					},
+					"publicKey": {
+						SchemaProps: spec.SchemaProps{
+							Description: "PublicKey is the public SSH key",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			apisstoragev1.Access{}.OpenAPIModelName(), apisstoragev1.UserOrTeam{}.OpenAPIModelName()},
+	}
+}
+
+func schema_pkg_apis_management_v1_SSHKeyStatus(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+			},
+		},
 	}
 }
 
@@ -25072,6 +25601,34 @@ func schema_pkg_apis_storage_v1_ClusterStatus(ref common.ReferenceCallback) comm
 	}
 }
 
+func schema_pkg_apis_storage_v1_DHCPDeployment(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"enabled": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Enabled controls whether the DHCP server is deployed into the cluster.",
+							Default:     false,
+							Type:        []string{"boolean"},
+							Format:      "",
+						},
+					},
+					"helmValues": {
+						SchemaProps: spec.SchemaProps{
+							Description: "HelmValues is raw YAML that will be passed as values to the DHCP Helm chart.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+				},
+				Required: []string{"enabled"},
+			},
+		},
+	}
+}
+
 func schema_pkg_apis_storage_v1_EntityInfo(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
@@ -25996,6 +26553,183 @@ func schema_pkg_apis_storage_v1_Member(ref common.ReferenceCallback) common.Open
 	}
 }
 
+func schema_pkg_apis_storage_v1_Metal3BareMetalHosts(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"selector": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Selector is a label selector to select the BareMetalHosts to use for this NodeType.",
+							Ref:         ref(metav1.LabelSelector{}.OpenAPIModelName()),
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			metav1.LabelSelector{}.OpenAPIModelName()},
+	}
+}
+
+func schema_pkg_apis_storage_v1_Metal3Deployment(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"enabled": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Enabled controls whether Metal3 and Ironic are deployed into the cluster.",
+							Default:     false,
+							Type:        []string{"boolean"},
+							Format:      "",
+						},
+					},
+					"helmValues": {
+						SchemaProps: spec.SchemaProps{
+							Description: "HelmValues is raw YAML that will be passed as values to the Metal3 Helm chart.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+				},
+				Required: []string{"enabled"},
+			},
+		},
+	}
+}
+
+func schema_pkg_apis_storage_v1_Metal3NodeTypeSpec(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"providerRef": {
+						SchemaProps: spec.SchemaProps{
+							Description: "ProviderRef is the node provider to use for this node type.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"properties": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Properties returns a flexible set of properties that may be selected for scheduling.",
+							Type:        []string{"object"},
+							AdditionalProperties: &spec.SchemaOrBool{
+								Allows: true,
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: "",
+										Type:    []string{"string"},
+										Format:  "",
+									},
+								},
+							},
+						},
+					},
+					"resources": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Resources lists the full resources for a single node.",
+							Type:        []string{"object"},
+							AdditionalProperties: &spec.SchemaOrBool{
+								Allows: true,
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Ref: ref(resource.Quantity{}.OpenAPIModelName()),
+									},
+								},
+							},
+						},
+					},
+					"overhead": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Overhead defines the resource overhead for this node type.",
+							Ref:         ref(apisstoragev1.NodeTypeOverhead{}.OpenAPIModelName()),
+						},
+					},
+					"cost": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Cost is the instance cost. The higher the cost, the less likely it is to be selected. If empty, cost is automatically calculated from the resources specified.",
+							Type:        []string{"integer"},
+							Format:      "int64",
+						},
+					},
+					"displayName": {
+						SchemaProps: spec.SchemaProps{
+							Description: "DisplayName is the name that should be displayed in the UI",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"name": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Name is the name of this node type.",
+							Default:     "",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"metadata": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Metadata holds metadata to add to this managed NodeType.",
+							Default:     map[string]interface{}{},
+							Ref:         ref(apisstoragev1.ManagedNodeTypeObjectMeta{}.OpenAPIModelName()),
+						},
+					},
+					"bareMetalHosts": {
+						SchemaProps: spec.SchemaProps{
+							Description: "BareMetalHosts is a list of BareMetalHosts to use for this NodeType.",
+							Default:     map[string]interface{}{},
+							Ref:         ref(apisstoragev1.Metal3BareMetalHosts{}.OpenAPIModelName()),
+						},
+					},
+				},
+				Required: []string{"name"},
+			},
+		},
+		Dependencies: []string{
+			apisstoragev1.ManagedNodeTypeObjectMeta{}.OpenAPIModelName(), apisstoragev1.Metal3BareMetalHosts{}.OpenAPIModelName(), apisstoragev1.NodeTypeOverhead{}.OpenAPIModelName(), resource.Quantity{}.OpenAPIModelName()},
+	}
+}
+
+func schema_pkg_apis_storage_v1_Metal3ProviderDeployment(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"multus": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Multus configures the Multus CNI deployment.",
+							Default:     map[string]interface{}{},
+							Ref:         ref(apisstoragev1.MultusDeployment{}.OpenAPIModelName()),
+						},
+					},
+					"dhcp": {
+						SchemaProps: spec.SchemaProps{
+							Description: "DHCP configures the DHCP server deployment.",
+							Default:     map[string]interface{}{},
+							Ref:         ref(apisstoragev1.DHCPDeployment{}.OpenAPIModelName()),
+						},
+					},
+					"metal3": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Metal3 configures the Metal3/Ironic deployment.",
+							Default:     map[string]interface{}{},
+							Ref:         ref(apisstoragev1.Metal3Deployment{}.OpenAPIModelName()),
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			apisstoragev1.DHCPDeployment{}.OpenAPIModelName(), apisstoragev1.Metal3Deployment{}.OpenAPIModelName(), apisstoragev1.MultusDeployment{}.OpenAPIModelName()},
+	}
+}
+
 func schema_pkg_apis_storage_v1_Metrics(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
@@ -26034,6 +26768,34 @@ func schema_pkg_apis_storage_v1_Metrics(ref common.ReferenceCallback) common.Ope
 		},
 		Dependencies: []string{
 			apisstoragev1.Storage{}.OpenAPIModelName(), corev1.ResourceRequirements{}.OpenAPIModelName()},
+	}
+}
+
+func schema_pkg_apis_storage_v1_MultusDeployment(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"enabled": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Enabled controls whether Multus CNI is deployed into the cluster.",
+							Default:     false,
+							Type:        []string{"boolean"},
+							Format:      "",
+						},
+					},
+					"helmValues": {
+						SchemaProps: spec.SchemaProps{
+							Description: "HelmValues is raw YAML that will be passed as values to the Multus Helm chart.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+				},
+				Required: []string{"enabled"},
+			},
+		},
 	}
 }
 
@@ -26489,6 +27251,86 @@ func schema_pkg_apis_storage_v1_NodeClaimSpec(ref common.ReferenceCallback) comm
 				Description: "NodeClaimSpec defines spec of node claim.",
 				Type:        []string{"object"},
 				Properties: map[string]spec.Schema{
+					"displayName": {
+						SchemaProps: spec.SchemaProps{
+							Description: "DisplayName is the name of the NodeClaim that is displayed in the UI.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"owner": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Owner holds the owner of this object",
+							Ref:         ref(apisstoragev1.UserOrTeam{}.OpenAPIModelName()),
+						},
+					},
+					"access": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Access holds the access rights for users and teams",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref(apisstoragev1.Access{}.OpenAPIModelName()),
+									},
+								},
+							},
+						},
+					},
+					"providerRef": {
+						SchemaProps: spec.SchemaProps{
+							Description: "ProviderRef is the name of the NodeProvider that this NodeClaim is based on.",
+							Default:     "",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"typeRef": {
+						SchemaProps: spec.SchemaProps{
+							Description: "TypeRef is the full name of the NodeType that this NodeClaim is based on.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"environmentRef": {
+						SchemaProps: spec.SchemaProps{
+							Description: "EnvironmentRef is the name of the NodeEnvironment that this NodeClaim is based on.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"properties": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Properties are extra properties for the NodeClaim.",
+							Type:        []string{"object"},
+							AdditionalProperties: &spec.SchemaOrBool{
+								Allows: true,
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: "",
+										Type:    []string{"string"},
+										Format:  "",
+									},
+								},
+							},
+						},
+					},
+					"vClusterRef": {
+						SchemaProps: spec.SchemaProps{
+							Description: "VClusterRef references source vCluster.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"controlPlane": {
+						SchemaProps: spec.SchemaProps{
+							Description: "ControlPlane indicates if the node claim is for a control plane node. This is intentionally not omitempty as we want to ensure that the control plane is always set for easier checking in for example terraform templates.",
+							Default:     false,
+							Type:        []string{"boolean"},
+							Format:      "",
+						},
+					},
 					"taints": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Taints will be applied to the NodeClaim's node.",
@@ -26561,59 +27403,12 @@ func schema_pkg_apis_storage_v1_NodeClaimSpec(ref common.ReferenceCallback) comm
 							},
 						},
 					},
-					"properties": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Properties are extra properties for the NodeClaim.",
-							Type:        []string{"object"},
-							AdditionalProperties: &spec.SchemaOrBool{
-								Allows: true,
-								Schema: &spec.Schema{
-									SchemaProps: spec.SchemaProps{
-										Default: "",
-										Type:    []string{"string"},
-										Format:  "",
-									},
-								},
-							},
-						},
-					},
-					"providerRef": {
-						SchemaProps: spec.SchemaProps{
-							Description: "ProviderRef is the name of the NodeProvider that this NodeClaim is based on.",
-							Default:     "",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"typeRef": {
-						SchemaProps: spec.SchemaProps{
-							Description: "TypeRef is the full name of the NodeType that this NodeClaim is based on.",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"vClusterRef": {
-						SchemaProps: spec.SchemaProps{
-							Description: "VClusterRef references source vCluster. This is required.",
-							Default:     "",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"controlPlane": {
-						SchemaProps: spec.SchemaProps{
-							Description: "ControlPlane indicates if the node claim is for a control plane node. This is intentionally not omitempty as we want to ensure that the control plane is always set for easier checking in for example terraform templates.",
-							Default:     false,
-							Type:        []string{"boolean"},
-							Format:      "",
-						},
-					},
 				},
-				Required: []string{"providerRef", "vClusterRef"},
+				Required: []string{"providerRef"},
 			},
 		},
 		Dependencies: []string{
-			corev1.NodeSelectorRequirement{}.OpenAPIModelName(), corev1.Taint{}.OpenAPIModelName(), resource.Quantity{}.OpenAPIModelName()},
+			apisstoragev1.Access{}.OpenAPIModelName(), apisstoragev1.UserOrTeam{}.OpenAPIModelName(), corev1.NodeSelectorRequirement{}.OpenAPIModelName(), corev1.Taint{}.OpenAPIModelName(), resource.Quantity{}.OpenAPIModelName()},
 	}
 }
 
@@ -26769,6 +27564,33 @@ func schema_pkg_apis_storage_v1_NodeEnvironmentSpec(ref common.ReferenceCallback
 				Description: "NodeEnvironmentSpec defines spec of node environment.",
 				Type:        []string{"object"},
 				Properties: map[string]spec.Schema{
+					"displayName": {
+						SchemaProps: spec.SchemaProps{
+							Description: "DisplayName is the name of the NodeClaim that is displayed in the UI.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"owner": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Owner holds the owner of this object",
+							Ref:         ref(apisstoragev1.UserOrTeam{}.OpenAPIModelName()),
+						},
+					},
+					"access": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Access holds the access rights for users and teams",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref(apisstoragev1.Access{}.OpenAPIModelName()),
+									},
+								},
+							},
+						},
+					},
 					"properties": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Properties are the properties for the NodeEnvironment.",
@@ -26788,15 +27610,13 @@ func schema_pkg_apis_storage_v1_NodeEnvironmentSpec(ref common.ReferenceCallback
 					"providerRef": {
 						SchemaProps: spec.SchemaProps{
 							Description: "ProviderRef is the name of the NodeProvider that this NodeEnvironment is based on.",
-							Default:     "",
 							Type:        []string{"string"},
 							Format:      "",
 						},
 					},
 					"vClusterRef": {
 						SchemaProps: spec.SchemaProps{
-							Description: "VClusterRef references source vCluster. This is required.",
-							Default:     "",
+							Description: "VClusterRef references source vCluster.",
 							Type:        []string{"string"},
 							Format:      "",
 						},
@@ -26810,9 +27630,10 @@ func schema_pkg_apis_storage_v1_NodeEnvironmentSpec(ref common.ReferenceCallback
 						},
 					},
 				},
-				Required: []string{"providerRef", "vClusterRef"},
 			},
 		},
+		Dependencies: []string{
+			apisstoragev1.Access{}.OpenAPIModelName(), apisstoragev1.UserOrTeam{}.OpenAPIModelName()},
 	}
 }
 
@@ -26977,6 +27798,7 @@ func schema_pkg_apis_storage_v1_NodeProviderClusterAPI(ref common.ReferenceCallb
 					"clusterRef": {
 						SchemaProps: spec.SchemaProps{
 							Description: "ClusterRef is a reference to connected host cluster in which KubeVirt operator is running",
+							Default:     map[string]interface{}{},
 							Ref:         ref(apisstoragev1.NodeProviderClusterRef{}.OpenAPIModelName()),
 						},
 					},
@@ -27040,6 +27862,7 @@ func schema_pkg_apis_storage_v1_NodeProviderKubeVirt(ref common.ReferenceCallbac
 					"clusterRef": {
 						SchemaProps: spec.SchemaProps{
 							Description: "ClusterRef is a reference to connected host cluster in which KubeVirt operator is running",
+							Default:     map[string]interface{}{},
 							Ref:         ref(apisstoragev1.NodeProviderClusterRef{}.OpenAPIModelName()),
 						},
 					},
@@ -27121,6 +27944,47 @@ func schema_pkg_apis_storage_v1_NodeProviderList(ref common.ReferenceCallback) c
 	}
 }
 
+func schema_pkg_apis_storage_v1_NodeProviderMetal3(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"clusterRef": {
+						SchemaProps: spec.SchemaProps{
+							Description: "ClusterRef is a reference to connected host cluster in which KubeVirt operator is running",
+							Default:     map[string]interface{}{},
+							Ref:         ref(apisstoragev1.NodeProviderClusterRef{}.OpenAPIModelName()),
+						},
+					},
+					"deploy": {
+						SchemaProps: spec.SchemaProps{
+							Default: map[string]interface{}{},
+							Ref:     ref(apisstoragev1.Metal3ProviderDeployment{}.OpenAPIModelName()),
+						},
+					},
+					"nodeTypes": {
+						SchemaProps: spec.SchemaProps{
+							Description: "NodeTypes define NodeTypes that should be automatically created for this provider.",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref(apisstoragev1.Metal3NodeTypeSpec{}.OpenAPIModelName()),
+									},
+								},
+							},
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			apisstoragev1.Metal3NodeTypeSpec{}.OpenAPIModelName(), apisstoragev1.Metal3ProviderDeployment{}.OpenAPIModelName(), apisstoragev1.NodeProviderClusterRef{}.OpenAPIModelName()},
+	}
+}
+
 func schema_pkg_apis_storage_v1_NodeProviderSpec(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
@@ -27168,6 +28032,12 @@ func schema_pkg_apis_storage_v1_NodeProviderSpec(ref common.ReferenceCallback) c
 							Ref:         ref(apisstoragev1.NodeProviderClusterAPI{}.OpenAPIModelName()),
 						},
 					},
+					"metal3": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Metal3 configures a node provider using metal3.io BareMetalHost resources.",
+							Ref:         ref(apisstoragev1.NodeProviderMetal3{}.OpenAPIModelName()),
+						},
+					},
 					"displayName": {
 						SchemaProps: spec.SchemaProps{
 							Description: "DisplayName is the name that should be displayed in the UI",
@@ -27179,7 +28049,7 @@ func schema_pkg_apis_storage_v1_NodeProviderSpec(ref common.ReferenceCallback) c
 			},
 		},
 		Dependencies: []string{
-			apisstoragev1.NodeProviderBCM{}.OpenAPIModelName(), apisstoragev1.NodeProviderClusterAPI{}.OpenAPIModelName(), apisstoragev1.NodeProviderKubeVirt{}.OpenAPIModelName(), apisstoragev1.NodeProviderTerraform{}.OpenAPIModelName()},
+			apisstoragev1.NodeProviderBCM{}.OpenAPIModelName(), apisstoragev1.NodeProviderClusterAPI{}.OpenAPIModelName(), apisstoragev1.NodeProviderKubeVirt{}.OpenAPIModelName(), apisstoragev1.NodeProviderMetal3{}.OpenAPIModelName(), apisstoragev1.NodeProviderTerraform{}.OpenAPIModelName()},
 	}
 }
 
@@ -27578,6 +28448,176 @@ func schema_pkg_apis_storage_v1_NodeTypeStatus(ref common.ReferenceCallback) com
 	}
 }
 
+func schema_pkg_apis_storage_v1_OSImage(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "OSImage holds the information of machine networks",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"kind": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"apiVersion": {
+						SchemaProps: spec.SchemaProps{
+							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"metadata": {
+						SchemaProps: spec.SchemaProps{
+							Default: map[string]interface{}{},
+							Ref:     ref(metav1.ObjectMeta{}.OpenAPIModelName()),
+						},
+					},
+					"spec": {
+						SchemaProps: spec.SchemaProps{
+							Default: map[string]interface{}{},
+							Ref:     ref(apisstoragev1.OSImageSpec{}.OpenAPIModelName()),
+						},
+					},
+					"status": {
+						SchemaProps: spec.SchemaProps{
+							Default: map[string]interface{}{},
+							Ref:     ref(apisstoragev1.OSImageStatus{}.OpenAPIModelName()),
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			apisstoragev1.OSImageSpec{}.OpenAPIModelName(), apisstoragev1.OSImageStatus{}.OpenAPIModelName(), metav1.ObjectMeta{}.OpenAPIModelName()},
+	}
+}
+
+func schema_pkg_apis_storage_v1_OSImageList(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "OSImageList contains a list of OSImages",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"kind": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"apiVersion": {
+						SchemaProps: spec.SchemaProps{
+							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"metadata": {
+						SchemaProps: spec.SchemaProps{
+							Default: map[string]interface{}{},
+							Ref:     ref(metav1.ListMeta{}.OpenAPIModelName()),
+						},
+					},
+					"items": {
+						SchemaProps: spec.SchemaProps{
+							Type: []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref(apisstoragev1.OSImage{}.OpenAPIModelName()),
+									},
+								},
+							},
+						},
+					},
+				},
+				Required: []string{"items"},
+			},
+		},
+		Dependencies: []string{
+			apisstoragev1.OSImage{}.OpenAPIModelName(), metav1.ListMeta{}.OpenAPIModelName()},
+	}
+}
+
+func schema_pkg_apis_storage_v1_OSImageSpec(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"displayName": {
+						SchemaProps: spec.SchemaProps{
+							Description: "DisplayName is the name that should be displayed in the UI",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"description": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Description describes an OS image",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"owner": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Owner holds the owner of this object",
+							Ref:         ref(apisstoragev1.UserOrTeam{}.OpenAPIModelName()),
+						},
+					},
+					"access": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Access holds the access rights for users and teams",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref(apisstoragev1.Access{}.OpenAPIModelName()),
+									},
+								},
+							},
+						},
+					},
+					"properties": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Properties is the configuration for the OS image",
+							Type:        []string{"object"},
+							AdditionalProperties: &spec.SchemaOrBool{
+								Allows: true,
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: "",
+										Type:    []string{"string"},
+										Format:  "",
+									},
+								},
+							},
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			apisstoragev1.Access{}.OpenAPIModelName(), apisstoragev1.UserOrTeam{}.OpenAPIModelName()},
+	}
+}
+
+func schema_pkg_apis_storage_v1_OSImageStatus(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+			},
+		},
+	}
+}
+
 func schema_pkg_apis_storage_v1_ObjectsStatus(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
@@ -27778,6 +28818,28 @@ func schema_pkg_apis_storage_v1_ProjectList(ref common.ReferenceCallback) common
 	}
 }
 
+func schema_pkg_apis_storage_v1_ProjectNamespaceTemplate(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "ProjectNamespaceTemplate defines metadata to apply to the auto-created project namespace.",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"metadata": {
+						SchemaProps: spec.SchemaProps{
+							Description: "The namespace metadata",
+							Default:     map[string]interface{}{},
+							Ref:         ref(apisstoragev1.TemplateMetadata{}.OpenAPIModelName()),
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			apisstoragev1.TemplateMetadata{}.OpenAPIModelName()},
+	}
+}
+
 func schema_pkg_apis_storage_v1_ProjectSpec(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
@@ -27895,6 +28957,12 @@ func schema_pkg_apis_storage_v1_ProjectSpec(ref common.ReferenceCallback) common
 							},
 						},
 					},
+					"namespaceTemplate": {
+						SchemaProps: spec.SchemaProps{
+							Description: "NamespaceTemplate defines metadata that should be applied to the project's namespace on creation. This is useful for environments where admission controllers (e.g., Kyverno) require specific labels or annotations on namespaces.",
+							Ref:         ref(apisstoragev1.ProjectNamespaceTemplate{}.OpenAPIModelName()),
+						},
+					},
 					"namespacePattern": {
 						SchemaProps: spec.SchemaProps{
 							Description: "NamespacePattern specifies template patterns to use for creating each space or virtual cluster's namespace",
@@ -27923,7 +28991,7 @@ func schema_pkg_apis_storage_v1_ProjectSpec(ref common.ReferenceCallback) common
 			},
 		},
 		Dependencies: []string{
-			apisstoragev1.Access{}.OpenAPIModelName(), apisstoragev1.AllowedCluster{}.OpenAPIModelName(), apisstoragev1.AllowedRunner{}.OpenAPIModelName(), apisstoragev1.AllowedTemplate{}.OpenAPIModelName(), apisstoragev1.ArgoIntegrationSpec{}.OpenAPIModelName(), apisstoragev1.Member{}.OpenAPIModelName(), apisstoragev1.NamespacePattern{}.OpenAPIModelName(), apisstoragev1.Quotas{}.OpenAPIModelName(), apisstoragev1.RancherIntegrationSpec{}.OpenAPIModelName(), apisstoragev1.RequirePreset{}.OpenAPIModelName(), apisstoragev1.RequireTemplate{}.OpenAPIModelName(), apisstoragev1.UserOrTeam{}.OpenAPIModelName(), apisstoragev1.VaultIntegrationSpec{}.OpenAPIModelName()},
+			apisstoragev1.Access{}.OpenAPIModelName(), apisstoragev1.AllowedCluster{}.OpenAPIModelName(), apisstoragev1.AllowedRunner{}.OpenAPIModelName(), apisstoragev1.AllowedTemplate{}.OpenAPIModelName(), apisstoragev1.ArgoIntegrationSpec{}.OpenAPIModelName(), apisstoragev1.Member{}.OpenAPIModelName(), apisstoragev1.NamespacePattern{}.OpenAPIModelName(), apisstoragev1.ProjectNamespaceTemplate{}.OpenAPIModelName(), apisstoragev1.Quotas{}.OpenAPIModelName(), apisstoragev1.RancherIntegrationSpec{}.OpenAPIModelName(), apisstoragev1.RequirePreset{}.OpenAPIModelName(), apisstoragev1.RequireTemplate{}.OpenAPIModelName(), apisstoragev1.UserOrTeam{}.OpenAPIModelName(), apisstoragev1.VaultIntegrationSpec{}.OpenAPIModelName()},
 	}
 }
 
@@ -28333,6 +29401,167 @@ func schema_pkg_apis_storage_v1_RequireTemplate(ref common.ReferenceCallback) co
 						},
 					},
 				},
+			},
+		},
+	}
+}
+
+func schema_pkg_apis_storage_v1_SSHKey(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "SSHKey holds the information of SSH keys",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"kind": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"apiVersion": {
+						SchemaProps: spec.SchemaProps{
+							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"metadata": {
+						SchemaProps: spec.SchemaProps{
+							Default: map[string]interface{}{},
+							Ref:     ref(metav1.ObjectMeta{}.OpenAPIModelName()),
+						},
+					},
+					"spec": {
+						SchemaProps: spec.SchemaProps{
+							Default: map[string]interface{}{},
+							Ref:     ref(apisstoragev1.SSHKeySpec{}.OpenAPIModelName()),
+						},
+					},
+					"status": {
+						SchemaProps: spec.SchemaProps{
+							Default: map[string]interface{}{},
+							Ref:     ref(apisstoragev1.SSHKeyStatus{}.OpenAPIModelName()),
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			apisstoragev1.SSHKeySpec{}.OpenAPIModelName(), apisstoragev1.SSHKeyStatus{}.OpenAPIModelName(), metav1.ObjectMeta{}.OpenAPIModelName()},
+	}
+}
+
+func schema_pkg_apis_storage_v1_SSHKeyList(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "SSHKeyList contains a list of SSHKeys",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"kind": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"apiVersion": {
+						SchemaProps: spec.SchemaProps{
+							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"metadata": {
+						SchemaProps: spec.SchemaProps{
+							Default: map[string]interface{}{},
+							Ref:     ref(metav1.ListMeta{}.OpenAPIModelName()),
+						},
+					},
+					"items": {
+						SchemaProps: spec.SchemaProps{
+							Type: []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref(apisstoragev1.SSHKey{}.OpenAPIModelName()),
+									},
+								},
+							},
+						},
+					},
+				},
+				Required: []string{"items"},
+			},
+		},
+		Dependencies: []string{
+			apisstoragev1.SSHKey{}.OpenAPIModelName(), metav1.ListMeta{}.OpenAPIModelName()},
+	}
+}
+
+func schema_pkg_apis_storage_v1_SSHKeySpec(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"displayName": {
+						SchemaProps: spec.SchemaProps{
+							Description: "DisplayName is the name that should be displayed in the UI",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"description": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Description describes an SSH key",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"owner": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Owner holds the owner of this object",
+							Ref:         ref(apisstoragev1.UserOrTeam{}.OpenAPIModelName()),
+						},
+					},
+					"access": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Access holds the access rights for users and teams",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref(apisstoragev1.Access{}.OpenAPIModelName()),
+									},
+								},
+							},
+						},
+					},
+					"publicKey": {
+						SchemaProps: spec.SchemaProps{
+							Description: "PublicKey is the public SSH key",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			apisstoragev1.Access{}.OpenAPIModelName(), apisstoragev1.UserOrTeam{}.OpenAPIModelName()},
+	}
+}
+
+func schema_pkg_apis_storage_v1_SSHKeyStatus(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
 			},
 		},
 	}
@@ -31965,6 +33194,32 @@ func schema_pkg_apis_ui_v1_ExternalURLs(ref common.ReferenceCallback) common.Ope
 	}
 }
 
+func schema_pkg_apis_ui_v1_MultiRegion(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"enabled": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Enabled indicates whether multi-region is enabled",
+							Type:        []string{"boolean"},
+							Format:      "",
+						},
+					},
+					"region": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Region is the region where this vCluster Platform instance is running",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+				},
+			},
+		},
+	}
+}
+
 func schema_pkg_apis_ui_v1_NavBarButton(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
@@ -32350,11 +33605,25 @@ func schema_pkg_apis_ui_v1_UISettingsSpec(ref common.ReferenceCallback) common.O
 							Format:      "",
 						},
 					},
+					"multiRegion": {
+						SchemaProps: spec.SchemaProps{
+							Description: "MultiRegion holds the multi-region configuration",
+							Default:     map[string]interface{}{},
+							Ref:         ref(uiv1.MultiRegion{}.OpenAPIModelName()),
+						},
+					},
+					"agentNamespace": {
+						SchemaProps: spec.SchemaProps{
+							Description: "AgentNamespace is the namespace where the connected cluster agents are deployed by default",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
 				},
 			},
 		},
 		Dependencies: []string{
-			uiv1.ExternalURLs{}.OpenAPIModelName(), uiv1.NavBarButton{}.OpenAPIModelName(), uiv1.VClusterVersion{}.OpenAPIModelName()},
+			uiv1.ExternalURLs{}.OpenAPIModelName(), uiv1.MultiRegion{}.OpenAPIModelName(), uiv1.NavBarButton{}.OpenAPIModelName(), uiv1.VClusterVersion{}.OpenAPIModelName()},
 	}
 }
 

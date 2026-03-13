@@ -52,8 +52,16 @@ func (c *FakeStorageV1) NodeTypes() v1.NodeTypeInterface {
 	return newFakeNodeTypes(c)
 }
 
+func (c *FakeStorageV1) OSImages() v1.OSImageInterface {
+	return newFakeOSImages(c)
+}
+
 func (c *FakeStorageV1) Projects() v1.ProjectInterface {
 	return newFakeProjects(c)
+}
+
+func (c *FakeStorageV1) SSHKeys() v1.SSHKeyInterface {
+	return newFakeSSHKeys(c)
 }
 
 func (c *FakeStorageV1) SharedSecrets(namespace string) v1.SharedSecretInterface {

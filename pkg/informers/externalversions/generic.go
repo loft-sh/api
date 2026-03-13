@@ -81,6 +81,8 @@ func (f *sharedInformerFactory) ForResource(resource schema.GroupVersionResource
 		return &genericInformer{resource: resource.GroupResource(), informer: f.Management().V1().NodeTypes().Informer()}, nil
 	case v1.SchemeGroupVersion.WithResource("oidcclients"):
 		return &genericInformer{resource: resource.GroupResource(), informer: f.Management().V1().OIDCClients().Informer()}, nil
+	case v1.SchemeGroupVersion.WithResource("osimages"):
+		return &genericInformer{resource: resource.GroupResource(), informer: f.Management().V1().OSImages().Informer()}, nil
 	case v1.SchemeGroupVersion.WithResource("ownedaccesskeys"):
 		return &genericInformer{resource: resource.GroupResource(), informer: f.Management().V1().OwnedAccessKeys().Informer()}, nil
 	case v1.SchemeGroupVersion.WithResource("projects"):
@@ -93,6 +95,8 @@ func (f *sharedInformerFactory) ForResource(resource schema.GroupVersionResource
 		return &genericInformer{resource: resource.GroupResource(), informer: f.Management().V1().RegisterVirtualClusters().Informer()}, nil
 	case v1.SchemeGroupVersion.WithResource("resetaccesskeys"):
 		return &genericInformer{resource: resource.GroupResource(), informer: f.Management().V1().ResetAccessKeys().Informer()}, nil
+	case v1.SchemeGroupVersion.WithResource("sshkeys"):
+		return &genericInformer{resource: resource.GroupResource(), informer: f.Management().V1().SSHKeys().Informer()}, nil
 	case v1.SchemeGroupVersion.WithResource("selves"):
 		return &genericInformer{resource: resource.GroupResource(), informer: f.Management().V1().Selves().Informer()}, nil
 	case v1.SchemeGroupVersion.WithResource("selfsubjectaccessreviews"):
@@ -143,8 +147,12 @@ func (f *sharedInformerFactory) ForResource(resource schema.GroupVersionResource
 		return &genericInformer{resource: resource.GroupResource(), informer: f.Storage().V1().NodeProviders().Informer()}, nil
 	case storagev1.SchemeGroupVersion.WithResource("nodetypes"):
 		return &genericInformer{resource: resource.GroupResource(), informer: f.Storage().V1().NodeTypes().Informer()}, nil
+	case storagev1.SchemeGroupVersion.WithResource("osimages"):
+		return &genericInformer{resource: resource.GroupResource(), informer: f.Storage().V1().OSImages().Informer()}, nil
 	case storagev1.SchemeGroupVersion.WithResource("projects"):
 		return &genericInformer{resource: resource.GroupResource(), informer: f.Storage().V1().Projects().Informer()}, nil
+	case storagev1.SchemeGroupVersion.WithResource("sshkeys"):
+		return &genericInformer{resource: resource.GroupResource(), informer: f.Storage().V1().SSHKeys().Informer()}, nil
 	case storagev1.SchemeGroupVersion.WithResource("sharedsecrets"):
 		return &genericInformer{resource: resource.GroupResource(), informer: f.Storage().V1().SharedSecrets().Informer()}, nil
 	case storagev1.SchemeGroupVersion.WithResource("spaceinstances"):

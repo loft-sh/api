@@ -28,8 +28,12 @@ type Interface interface {
 	NodeProviders() NodeProviderInformer
 	// NodeTypes returns a NodeTypeInformer.
 	NodeTypes() NodeTypeInformer
+	// OSImages returns a OSImageInformer.
+	OSImages() OSImageInformer
 	// Projects returns a ProjectInformer.
 	Projects() ProjectInformer
+	// SSHKeys returns a SSHKeyInformer.
+	SSHKeys() SSHKeyInformer
 	// SharedSecrets returns a SharedSecretInformer.
 	SharedSecrets() SharedSecretInformer
 	// SpaceInstances returns a SpaceInstanceInformer.
@@ -109,9 +113,19 @@ func (v *version) NodeTypes() NodeTypeInformer {
 	return &nodeTypeInformer{factory: v.factory, tweakListOptions: v.tweakListOptions}
 }
 
+// OSImages returns a OSImageInformer.
+func (v *version) OSImages() OSImageInformer {
+	return &oSImageInformer{factory: v.factory, tweakListOptions: v.tweakListOptions}
+}
+
 // Projects returns a ProjectInformer.
 func (v *version) Projects() ProjectInformer {
 	return &projectInformer{factory: v.factory, tweakListOptions: v.tweakListOptions}
+}
+
+// SSHKeys returns a SSHKeyInformer.
+func (v *version) SSHKeys() SSHKeyInformer {
+	return &sSHKeyInformer{factory: v.factory, tweakListOptions: v.tweakListOptions}
 }
 
 // SharedSecrets returns a SharedSecretInformer.

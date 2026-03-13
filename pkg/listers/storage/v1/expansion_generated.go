@@ -50,9 +50,17 @@ type NodeProviderListerExpansion interface{}
 // NodeTypeLister.
 type NodeTypeListerExpansion interface{}
 
+// OSImageListerExpansion allows custom methods to be added to
+// OSImageLister.
+type OSImageListerExpansion interface{}
+
 // ProjectListerExpansion allows custom methods to be added to
 // ProjectLister.
 type ProjectListerExpansion interface{}
+
+// SSHKeyListerExpansion allows custom methods to be added to
+// SSHKeyLister.
+type SSHKeyListerExpansion interface{}
 
 // SharedSecretListerExpansion allows custom methods to be added to
 // SharedSecretLister.
