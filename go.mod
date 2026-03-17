@@ -5,7 +5,7 @@ go 1.25.0
 require (
 	github.com/ghodss/yaml v1.0.0
 	github.com/loft-sh/admin-apis v0.0.0-20260311181619-506013b79ba0
-	github.com/loft-sh/agentapi/v4 v4.8.0-rc.3
+	github.com/loft-sh/agentapi/v4 v4.8.0
 	github.com/loft-sh/apiserver v0.0.0-20260113122925-594495a02e96
 	github.com/robfig/cron/v3 v3.0.1
 	golang.org/x/mod v0.31.0
@@ -75,12 +75,12 @@ require (
 	go.opentelemetry.io/auto/sdk v1.2.1 // indirect
 	go.opentelemetry.io/contrib/instrumentation/google.golang.org/grpc/otelgrpc v0.61.0 // indirect
 	go.opentelemetry.io/contrib/instrumentation/net/http/otelhttp v0.61.0 // indirect
-	go.opentelemetry.io/otel v1.39.0 // indirect
+	go.opentelemetry.io/otel v1.40.0 // indirect
 	go.opentelemetry.io/otel/exporters/otlp/otlptrace v1.34.0 // indirect
 	go.opentelemetry.io/otel/exporters/otlp/otlptrace/otlptracegrpc v1.34.0 // indirect
-	go.opentelemetry.io/otel/metric v1.39.0 // indirect
-	go.opentelemetry.io/otel/sdk v1.39.0 // indirect
-	go.opentelemetry.io/otel/trace v1.39.0 // indirect
+	go.opentelemetry.io/otel/metric v1.40.0 // indirect
+	go.opentelemetry.io/otel/sdk v1.40.0 // indirect
+	go.opentelemetry.io/otel/trace v1.40.0 // indirect
 	go.opentelemetry.io/proto/otlp v1.7.0 // indirect
 	go.uber.org/multierr v1.11.0 // indirect
 	go.uber.org/zap v1.27.0 // indirect
