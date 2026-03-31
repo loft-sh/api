@@ -394,6 +394,23 @@ type ArgoProjectSpec struct {
 	// configure sane default values.
 	// +optional
 	Roles []ArgoProjectRole `json:"roles,omitempty"`
+	// ClusterResourceWhitelist contains a list of whitelisted cluster level resources
+	// If not specified or empty, deny all cluster-scope resources.
+	// +optional
+	ClusterResourceWhitelist []metav1.GroupKind `json:"clusterResourceWhitelist,omitempty"`
+	// NamespaceResourceWhitelist contains a list of whitelisted namespace level resources
+	// If not specified or empty, allow all namespace-scope resources.
+	// +optional
+	NamespaceResourceWhitelist []metav1.GroupKind `json:"namespaceResourceWhitelist,omitempty"`
+	// ClusterResourceBlacklist contains a list of blacklisted cluster level resources
+	// +optional
+	ClusterResourceBlacklist []metav1.GroupKind `json:"clusterResourceBlacklist,omitempty"`
+	// NamespaceResourceBlacklist contains a list of blacklisted namespace level resources
+	// +optional
+	NamespaceResourceBlacklist []metav1.GroupKind `json:"namespaceResourceBlacklist,omitempty"`
+	// SourceNamespaces defines the namespaces application resources are allowed to be created in
+	// +optional
+	SourceNamespaces []string `json:"sourceNamespaces,omitempty"`
 }
 
 type ArgoProjectSpecMetadata struct {

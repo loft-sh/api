@@ -816,6 +816,31 @@ func (in *ArgoProjectSpec) DeepCopyInto(out *ArgoProjectSpec) {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
+	if in.ClusterResourceWhitelist != nil {
+		in, out := &in.ClusterResourceWhitelist, &out.ClusterResourceWhitelist
+		*out = make([]metav1.GroupKind, len(*in))
+		copy(*out, *in)
+	}
+	if in.NamespaceResourceWhitelist != nil {
+		in, out := &in.NamespaceResourceWhitelist, &out.NamespaceResourceWhitelist
+		*out = make([]metav1.GroupKind, len(*in))
+		copy(*out, *in)
+	}
+	if in.ClusterResourceBlacklist != nil {
+		in, out := &in.ClusterResourceBlacklist, &out.ClusterResourceBlacklist
+		*out = make([]metav1.GroupKind, len(*in))
+		copy(*out, *in)
+	}
+	if in.NamespaceResourceBlacklist != nil {
+		in, out := &in.NamespaceResourceBlacklist, &out.NamespaceResourceBlacklist
+		*out = make([]metav1.GroupKind, len(*in))
+		copy(*out, *in)
+	}
+	if in.SourceNamespaces != nil {
+		in, out := &in.SourceNamespaces, &out.SourceNamespaces
+		*out = make([]string, len(*in))
+		copy(*out, *in)
+	}
 	return
 }
 

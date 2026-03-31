@@ -24467,11 +24467,82 @@ func schema_pkg_apis_storage_v1_ArgoProjectSpec(ref common.ReferenceCallback) co
 							},
 						},
 					},
+					"clusterResourceWhitelist": {
+						SchemaProps: spec.SchemaProps{
+							Description: "ClusterResourceWhitelist contains a list of whitelisted cluster level resources If not specified or empty, deny all cluster-scope resources.",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref(metav1.GroupKind{}.OpenAPIModelName()),
+									},
+								},
+							},
+						},
+					},
+					"namespaceResourceWhitelist": {
+						SchemaProps: spec.SchemaProps{
+							Description: "NamespaceResourceWhitelist contains a list of whitelisted namespace level resources If not specified or empty, allow all namespace-scope resources.",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref(metav1.GroupKind{}.OpenAPIModelName()),
+									},
+								},
+							},
+						},
+					},
+					"clusterResourceBlacklist": {
+						SchemaProps: spec.SchemaProps{
+							Description: "ClusterResourceBlacklist contains a list of blacklisted cluster level resources",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref(metav1.GroupKind{}.OpenAPIModelName()),
+									},
+								},
+							},
+						},
+					},
+					"namespaceResourceBlacklist": {
+						SchemaProps: spec.SchemaProps{
+							Description: "NamespaceResourceBlacklist contains a list of blacklisted namespace level resources",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref(metav1.GroupKind{}.OpenAPIModelName()),
+									},
+								},
+							},
+						},
+					},
+					"sourceNamespaces": {
+						SchemaProps: spec.SchemaProps{
+							Description: "SourceNamespaces defines the namespaces application resources are allowed to be created in",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: "",
+										Type:    []string{"string"},
+										Format:  "",
+									},
+								},
+							},
+						},
+					},
 				},
 			},
 		},
 		Dependencies: []string{
-			apisstoragev1.ArgoProjectRole{}.OpenAPIModelName(), apisstoragev1.ArgoProjectSpecMetadata{}.OpenAPIModelName()},
+			apisstoragev1.ArgoProjectRole{}.OpenAPIModelName(), apisstoragev1.ArgoProjectSpecMetadata{}.OpenAPIModelName(), metav1.GroupKind{}.OpenAPIModelName()},
 	}
 }
 
