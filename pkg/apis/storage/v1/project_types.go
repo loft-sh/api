@@ -2,6 +2,7 @@ package v1
 
 import (
 	agentstoragev1 "github.com/loft-sh/agentapi/v4/pkg/apis/loft/storage/v1"
+	argoapplicationsv1alpha1 "github.com/loft-sh/external-types/argoproj/argo-cd/v2/pkg/apis/application/v1alpha1"
 	corev1 "k8s.io/api/core/v1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 )
@@ -30,6 +31,10 @@ const (
 	RancherIntegrationSynced agentstoragev1.ConditionType = "RancherIntegrationSynced"
 
 	RancherLastAppliedHashAnnotation = "loft.sh/rancher-integration-last-applied-hash"
+)
+
+const (
+	ConditionTypeNamespaceTemplateSynced agentstoragev1.ConditionType = "NamespaceTemplateSynced"
 )
 
 // +genclient
@@ -93,7 +98,6 @@ type ProjectSpec struct {
 	AllowedClusters []AllowedCluster `json:"allowedClusters,omitempty"`
 
 	// AllowedRunners are target runners that are allowed to target with
-	// DevPod environments.
 	// +optional
 	AllowedRunners []AllowedRunner `json:"allowedRunners,omitempty"`
 
@@ -118,6 +122,12 @@ type ProjectSpec struct {
 	// +optional
 	Access []Access `json:"access,omitempty"`
 
+	// NamespaceTemplate defines metadata that should be applied to the project's namespace on creation.
+	// This is useful for environments where admission controllers (e.g., Kyverno)
+	// require specific labels or annotations on namespaces.
+	// +optional
+	NamespaceTemplate *ProjectNamespaceTemplate `json:"namespaceTemplate,omitempty"`
+
 	// NamespacePattern specifies template patterns to use for creating each space or virtual cluster's namespace
 	// +optional
 	NamespacePattern *NamespacePattern `json:"namespacePattern,omitempty"`
@@ -133,10 +143,6 @@ type ProjectSpec struct {
 	// RancherIntegration holds information about Rancher Integration
 	// +optional
 	RancherIntegration *RancherIntegrationSpec `json:"rancher,omitempty"`
-
-	// DevPod holds DevPod specific configuration for project
-	// +optional
-	DevPod *DevPodProjectSpec `json:"devPod,omitempty"`
 }
 
 type RequireTemplate struct {
@@ -151,6 +157,13 @@ type RequirePreset struct {
 	// By default, all users are allowed to create a new instance without a preset.
 	// +optional
 	Enabled bool `json:"disabled,omitempty"`
+}
+
+// ProjectNamespaceTemplate defines metadata to apply to the auto-created project namespace.
+type ProjectNamespaceTemplate struct {
+	// The namespace metadata
+	// +optional
+	TemplateMetadata `json:"metadata,omitempty"`
 }
 
 type NamespacePattern struct {
@@ -173,10 +186,8 @@ type Quotas struct {
 }
 
 var (
-	SpaceTemplateKind           = "SpaceTemplate"
-	VirtualClusterTemplateKind  = "VirtualClusterTemplate"
-	DevPodWorkspaceTemplateKind = "DevPodWorkspaceTemplate"
-	DevPodWorkspacePresetKind   = "DevPodWorkspacePreset"
+	SpaceTemplateKind          = "SpaceTemplate"
+	VirtualClusterTemplateKind = "VirtualClusterTemplate"
 )
 
 type AllowedTemplate struct {
@@ -211,7 +222,7 @@ type Member struct {
 	Name string `json:"name,omitempty"`
 
 	// ClusterRole is the assigned role for the above member
-	ClusterRole string `json:"clusterRole,omitempty"`
+	ClusterRole string `json:"clusterRole"`
 }
 
 type AllowedRunner struct {
@@ -379,11 +390,30 @@ type ArgoProjectSpec struct {
 	// will be "*" indicating all source repositories.
 	// +optional
 	SourceRepos []string `json:"sourceRepos,omitempty"`
+	// Destinations contains list of destinations available for deployment
+	Destinations []argoapplicationsv1alpha1.ApplicationDestination `json:"destinations,omitempty"`
 	// Roles is a list of roles that should be attached to the ArgoCD project. If roles are provided
 	// no loft default roles will be set. If no roles are provided *and* SSO is enabled, loft will
 	// configure sane default values.
 	// +optional
 	Roles []ArgoProjectRole `json:"roles,omitempty"`
+	// ClusterResourceWhitelist contains a list of whitelisted cluster level resources
+	// If not specified or empty, deny all cluster-scope resources.
+	// +optional
+	ClusterResourceWhitelist []argoapplicationsv1alpha1.ClusterResourceRestrictionItem `json:"clusterResourceWhitelist,omitempty"`
+	// NamespaceResourceWhitelist contains a list of whitelisted namespace level resources
+	// If not specified or empty, allow all namespace-scope resources.
+	// +optional
+	NamespaceResourceWhitelist []metav1.GroupKind `json:"namespaceResourceWhitelist,omitempty"`
+	// ClusterResourceBlacklist contains a list of blacklisted cluster level resources
+	// +optional
+	ClusterResourceBlacklist []argoapplicationsv1alpha1.ClusterResourceRestrictionItem `json:"clusterResourceBlacklist,omitempty"`
+	// NamespaceResourceBlacklist contains a list of blacklisted namespace level resources
+	// +optional
+	NamespaceResourceBlacklist []metav1.GroupKind `json:"namespaceResourceBlacklist,omitempty"`
+	// SourceNamespaces defines the namespaces application resources are allowed to be created in
+	// +optional
+	SourceNamespaces []string `json:"sourceNamespaces,omitempty"`
 }
 
 type ArgoProjectSpecMetadata struct {
@@ -415,8 +445,12 @@ type ArgoProjectPolicyRule struct {
 	// +optional
 	Action string `json:"action,omitempty"`
 	// Application is the ArgoCD project/repository to apply the rule to.
+	// DEPRECATED: Wasn't used. Kind provides a more flexible way to specify the resource type.
 	// +optional
 	Application string `json:"application,omitempty"`
+	// Kind is the kind to apply the rule to
+	// +optional
+	Kind string `json:"kind,omitempty"`
 	// Allow applies the "allow" permission to the rule, if allow is not set, the permission will
 	// always be set to "deny".
 	// +optional
@@ -509,44 +543,6 @@ type SyncMembersSpec struct {
 	// being synced.
 	// +optional
 	RoleMapping map[string]string `json:"roleMapping,omitempty"`
-}
-
-type DevPodProjectSpec struct {
-	// Git defines additional git related settings like credentials
-	// +optional
-	Git *GitProjectSpec `json:"git,omitempty"`
-
-	// SSH defines additional ssh related settings like private keys, to be
-	// specified as base64 encoded strings.
-	// +optional
-	SSH *SSHProjectSpec `json:"ssh,omitempty"`
-
-	// FallbackImage defines an image all workspace will fall back to if no devcontainer.json could be detected
-	// +optional
-	FallbackImage string `json:"fallbackImage,omitempty"`
-}
-
-type GitProjectSpec struct {
-	// Token defines the token to use for authentication.
-	// +optional
-	Token string `json:"token,omitempty"`
-
-	// TokenSecretRef defines the project secret to use for token authentication.
-	// Will be used if `Token` is not provided.
-	// +optional
-	TokenProjectSecretRef *corev1.SecretKeySelector `json:"tokenSecretRef,omitempty"`
-}
-
-type SSHProjectSpec struct {
-	// Token defines the private ssh key to use for authentication,
-	// this is a base64 encoded string.
-	// +optional
-	Token string `json:"token,omitempty"`
-
-	// TokenSecretRef defines the project secret to use as private ssh key for authentication.
-	// Will be used if `Token` is not provided.
-	// +optional
-	TokenProjectSecretRef *corev1.SecretKeySelector `json:"tokenSecretRef,omitempty"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
