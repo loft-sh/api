@@ -76,6 +76,10 @@ func (c *FakeManagementV1) LoftUpgrades() v1.LoftUpgradeInterface {
 	return newFakeLoftUpgrades(c)
 }
 
+func (c *FakeManagementV1) NetworkPeers() v1.NetworkPeerInterface {
+	return newFakeNetworkPeers(c)
+}
+
 func (c *FakeManagementV1) NodeClaims(namespace string) v1.NodeClaimInterface {
 	return newFakeNodeClaims(c, namespace)
 }

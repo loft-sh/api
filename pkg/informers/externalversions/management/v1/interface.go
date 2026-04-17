@@ -40,6 +40,8 @@ type Interface interface {
 	Licenses() LicenseInformer
 	// LoftUpgrades returns a LoftUpgradeInformer.
 	LoftUpgrades() LoftUpgradeInformer
+	// NetworkPeers returns a NetworkPeerInformer.
+	NetworkPeers() NetworkPeerInformer
 	// NodeClaims returns a NodeClaimInformer.
 	NodeClaims() NodeClaimInformer
 	// NodeEnvironments returns a NodeEnvironmentInformer.
@@ -185,6 +187,11 @@ func (v *version) Licenses() LicenseInformer {
 // LoftUpgrades returns a LoftUpgradeInformer.
 func (v *version) LoftUpgrades() LoftUpgradeInformer {
 	return &loftUpgradeInformer{factory: v.factory, tweakListOptions: v.tweakListOptions}
+}
+
+// NetworkPeers returns a NetworkPeerInformer.
+func (v *version) NetworkPeers() NetworkPeerInformer {
+	return &networkPeerInformer{factory: v.factory, tweakListOptions: v.tweakListOptions}
 }
 
 // NodeClaims returns a NodeClaimInformer.

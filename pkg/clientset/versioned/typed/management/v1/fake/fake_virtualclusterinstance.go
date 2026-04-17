@@ -122,3 +122,15 @@ func (c *fakeVirtualClusterInstances) GetDebugShell(ctx context.Context, virtual
 	}
 	return obj.(*v1.VirtualClusterInstanceDebugShell), err
 }
+
+// GetJoinScript takes the representation of a virtualClusterInstanceJoinScript and creates it.  Returns the server's representation of the virtualClusterInstanceJoinScript, and an error, if there is any.
+func (c *fakeVirtualClusterInstances) GetJoinScript(ctx context.Context, virtualClusterInstanceName string, virtualClusterInstanceJoinScript *v1.VirtualClusterInstanceJoinScript, opts metav1.CreateOptions) (result *v1.VirtualClusterInstanceJoinScript, err error) {
+	emptyResult := &v1.VirtualClusterInstanceJoinScript{}
+	obj, err := c.Fake.
+		Invokes(testing.NewCreateSubresourceActionWithOptions(c.Resource(), virtualClusterInstanceName, "joinscript", c.Namespace(), virtualClusterInstanceJoinScript, opts), emptyResult)
+
+	if obj == nil {
+		return emptyResult, err
+	}
+	return obj.(*v1.VirtualClusterInstanceJoinScript), err
+}

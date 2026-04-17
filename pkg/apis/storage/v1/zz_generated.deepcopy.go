@@ -7,6 +7,7 @@ package v1
 
 import (
 	storagev1 "github.com/loft-sh/agentapi/v4/pkg/apis/loft/storage/v1"
+	v1alpha1 "github.com/loft-sh/external-types/argoproj/argo-cd/v2/pkg/apis/application/v1alpha1"
 	corev1 "k8s.io/api/core/v1"
 	rbacv1 "k8s.io/api/rbac/v1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
@@ -809,6 +810,11 @@ func (in *ArgoProjectSpec) DeepCopyInto(out *ArgoProjectSpec) {
 		*out = make([]string, len(*in))
 		copy(*out, *in)
 	}
+	if in.Destinations != nil {
+		in, out := &in.Destinations, &out.Destinations
+		*out = make([]v1alpha1.ApplicationDestination, len(*in))
+		copy(*out, *in)
+	}
 	if in.Roles != nil {
 		in, out := &in.Roles, &out.Roles
 		*out = make([]ArgoProjectRole, len(*in))
@@ -818,7 +824,7 @@ func (in *ArgoProjectSpec) DeepCopyInto(out *ArgoProjectSpec) {
 	}
 	if in.ClusterResourceWhitelist != nil {
 		in, out := &in.ClusterResourceWhitelist, &out.ClusterResourceWhitelist
-		*out = make([]metav1.GroupKind, len(*in))
+		*out = make([]v1alpha1.ClusterResourceRestrictionItem, len(*in))
 		copy(*out, *in)
 	}
 	if in.NamespaceResourceWhitelist != nil {
@@ -828,7 +834,7 @@ func (in *ArgoProjectSpec) DeepCopyInto(out *ArgoProjectSpec) {
 	}
 	if in.ClusterResourceBlacklist != nil {
 		in, out := &in.ClusterResourceBlacklist, &out.ClusterResourceBlacklist
-		*out = make([]metav1.GroupKind, len(*in))
+		*out = make([]v1alpha1.ClusterResourceRestrictionItem, len(*in))
 		copy(*out, *in)
 	}
 	if in.NamespaceResourceBlacklist != nil {

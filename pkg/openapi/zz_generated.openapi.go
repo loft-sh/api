@@ -14,6 +14,7 @@ import (
 	apisstoragev1 "github.com/loft-sh/api/v4/pkg/apis/storage/v1"
 	uiv1 "github.com/loft-sh/api/v4/pkg/apis/ui/v1"
 	virtualclusterv1 "github.com/loft-sh/api/v4/pkg/apis/virtualcluster/v1"
+	v1alpha1 "github.com/loft-sh/external-types/argoproj/argo-cd/v2/pkg/apis/application/v1alpha1"
 	admissionregistrationv1 "k8s.io/api/admissionregistration/v1"
 	v1beta1 "k8s.io/api/admissionregistration/v1beta1"
 	appsv1 "k8s.io/api/apps/v1"
@@ -36,7 +37,7 @@ import (
 	extensionsv1beta1 "k8s.io/api/extensions/v1beta1"
 	networkingv1 "k8s.io/api/networking/v1"
 	networkingv1beta1 "k8s.io/api/networking/v1beta1"
-	v1alpha1 "k8s.io/api/node/v1alpha1"
+	nodev1alpha1 "k8s.io/api/node/v1alpha1"
 	nodev1beta1 "k8s.io/api/node/v1beta1"
 	policyv1beta1 "k8s.io/api/policy/v1beta1"
 	rbacv1 "k8s.io/api/rbac/v1"
@@ -264,6 +265,13 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 		managementv1.MaintenanceWindow{}.OpenAPIModelName():                               schema_pkg_apis_management_v1_MaintenanceWindow(ref),
 		managementv1.ManagementRole{}.OpenAPIModelName():                                  schema_pkg_apis_management_v1_ManagementRole(ref),
 		managementv1.NamespacedNameArgs{}.OpenAPIModelName():                              schema_pkg_apis_management_v1_NamespacedNameArgs(ref),
+		managementv1.NetworkPeer{}.OpenAPIModelName():                                     schema_pkg_apis_management_v1_NetworkPeer(ref),
+		managementv1.NetworkPeerDebug{}.OpenAPIModelName():                                schema_pkg_apis_management_v1_NetworkPeerDebug(ref),
+		managementv1.NetworkPeerDebugList{}.OpenAPIModelName():                            schema_pkg_apis_management_v1_NetworkPeerDebugList(ref),
+		managementv1.NetworkPeerDebugOptions{}.OpenAPIModelName():                         schema_pkg_apis_management_v1_NetworkPeerDebugOptions(ref),
+		managementv1.NetworkPeerList{}.OpenAPIModelName():                                 schema_pkg_apis_management_v1_NetworkPeerList(ref),
+		managementv1.NetworkPeerSpec{}.OpenAPIModelName():                                 schema_pkg_apis_management_v1_NetworkPeerSpec(ref),
+		managementv1.NetworkPeerStatus{}.OpenAPIModelName():                               schema_pkg_apis_management_v1_NetworkPeerStatus(ref),
 		managementv1.NodeClaim{}.OpenAPIModelName():                                       schema_pkg_apis_management_v1_NodeClaim(ref),
 		managementv1.NodeClaimData{}.OpenAPIModelName():                                   schema_pkg_apis_management_v1_NodeClaimData(ref),
 		managementv1.NodeClaimList{}.OpenAPIModelName():                                   schema_pkg_apis_management_v1_NodeClaimList(ref),
@@ -457,6 +465,9 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 		managementv1.VirtualClusterInstanceDebugShellList{}.OpenAPIModelName():            schema_pkg_apis_management_v1_VirtualClusterInstanceDebugShellList(ref),
 		managementv1.VirtualClusterInstanceDebugShellPods{}.OpenAPIModelName():            schema_pkg_apis_management_v1_VirtualClusterInstanceDebugShellPods(ref),
 		managementv1.VirtualClusterInstanceDebugShellPodsList{}.OpenAPIModelName():        schema_pkg_apis_management_v1_VirtualClusterInstanceDebugShellPodsList(ref),
+		managementv1.VirtualClusterInstanceJoinScript{}.OpenAPIModelName():                schema_pkg_apis_management_v1_VirtualClusterInstanceJoinScript(ref),
+		managementv1.VirtualClusterInstanceJoinScriptList{}.OpenAPIModelName():            schema_pkg_apis_management_v1_VirtualClusterInstanceJoinScriptList(ref),
+		managementv1.VirtualClusterInstanceJoinScriptStatus{}.OpenAPIModelName():          schema_pkg_apis_management_v1_VirtualClusterInstanceJoinScriptStatus(ref),
 		managementv1.VirtualClusterInstanceKubeConfig{}.OpenAPIModelName():                schema_pkg_apis_management_v1_VirtualClusterInstanceKubeConfig(ref),
 		managementv1.VirtualClusterInstanceKubeConfigList{}.OpenAPIModelName():            schema_pkg_apis_management_v1_VirtualClusterInstanceKubeConfigList(ref),
 		managementv1.VirtualClusterInstanceKubeConfigSpec{}.OpenAPIModelName():            schema_pkg_apis_management_v1_VirtualClusterInstanceKubeConfigSpec(ref),
@@ -717,6 +728,74 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 		virtualclusterv1.HelmReleaseList{}.OpenAPIModelName():                             schema_pkg_apis_virtualcluster_v1_HelmReleaseList(ref),
 		virtualclusterv1.HelmReleaseSpec{}.OpenAPIModelName():                             schema_pkg_apis_virtualcluster_v1_HelmReleaseSpec(ref),
 		virtualclusterv1.HelmReleaseStatus{}.OpenAPIModelName():                           schema_pkg_apis_virtualcluster_v1_HelmReleaseStatus(ref),
+		v1alpha1.AppHealthStatus{}.OpenAPIModelName():                                     schema_pkg_apis_application_v1alpha1_AppHealthStatus(ref),
+		v1alpha1.AppProject{}.OpenAPIModelName():                                          schema_pkg_apis_application_v1alpha1_AppProject(ref),
+		v1alpha1.AppProjectList{}.OpenAPIModelName():                                      schema_pkg_apis_application_v1alpha1_AppProjectList(ref),
+		v1alpha1.AppProjectSpec{}.OpenAPIModelName():                                      schema_pkg_apis_application_v1alpha1_AppProjectSpec(ref),
+		v1alpha1.AppProjectStatus{}.OpenAPIModelName():                                    schema_pkg_apis_application_v1alpha1_AppProjectStatus(ref),
+		v1alpha1.Application{}.OpenAPIModelName():                                         schema_pkg_apis_application_v1alpha1_Application(ref),
+		v1alpha1.ApplicationCondition{}.OpenAPIModelName():                                schema_pkg_apis_application_v1alpha1_ApplicationCondition(ref),
+		v1alpha1.ApplicationDestination{}.OpenAPIModelName():                              schema_pkg_apis_application_v1alpha1_ApplicationDestination(ref),
+		v1alpha1.ApplicationDestinationServiceAccount{}.OpenAPIModelName():                schema_pkg_apis_application_v1alpha1_ApplicationDestinationServiceAccount(ref),
+		v1alpha1.ApplicationList{}.OpenAPIModelName():                                     schema_pkg_apis_application_v1alpha1_ApplicationList(ref),
+		v1alpha1.ApplicationSource{}.OpenAPIModelName():                                   schema_pkg_apis_application_v1alpha1_ApplicationSource(ref),
+		v1alpha1.ApplicationSourceDirectory{}.OpenAPIModelName():                          schema_pkg_apis_application_v1alpha1_ApplicationSourceDirectory(ref),
+		v1alpha1.ApplicationSourceHelm{}.OpenAPIModelName():                               schema_pkg_apis_application_v1alpha1_ApplicationSourceHelm(ref),
+		v1alpha1.ApplicationSourceJsonnet{}.OpenAPIModelName():                            schema_pkg_apis_application_v1alpha1_ApplicationSourceJsonnet(ref),
+		v1alpha1.ApplicationSourceKustomize{}.OpenAPIModelName():                          schema_pkg_apis_application_v1alpha1_ApplicationSourceKustomize(ref),
+		v1alpha1.ApplicationSourcePlugin{}.OpenAPIModelName():                             schema_pkg_apis_application_v1alpha1_ApplicationSourcePlugin(ref),
+		v1alpha1.ApplicationSourcePluginParameter{}.OpenAPIModelName():                    schema_pkg_apis_application_v1alpha1_ApplicationSourcePluginParameter(ref),
+		v1alpha1.ApplicationSpec{}.OpenAPIModelName():                                     schema_pkg_apis_application_v1alpha1_ApplicationSpec(ref),
+		v1alpha1.ApplicationStatus{}.OpenAPIModelName():                                   schema_pkg_apis_application_v1alpha1_ApplicationStatus(ref),
+		v1alpha1.ApplicationSummary{}.OpenAPIModelName():                                  schema_pkg_apis_application_v1alpha1_ApplicationSummary(ref),
+		v1alpha1.Backoff{}.OpenAPIModelName():                                             schema_pkg_apis_application_v1alpha1_Backoff(ref),
+		v1alpha1.ClusterResourceRestrictionItem{}.OpenAPIModelName():                      schema_pkg_apis_application_v1alpha1_ClusterResourceRestrictionItem(ref),
+		v1alpha1.ComparedTo{}.OpenAPIModelName():                                          schema_pkg_apis_application_v1alpha1_ComparedTo(ref),
+		v1alpha1.DrySource{}.OpenAPIModelName():                                           schema_pkg_apis_application_v1alpha1_DrySource(ref),
+		v1alpha1.EnvEntry{}.OpenAPIModelName():                                            schema_pkg_apis_application_v1alpha1_EnvEntry(ref),
+		v1alpha1.HealthStatus{}.OpenAPIModelName():                                        schema_pkg_apis_application_v1alpha1_HealthStatus(ref),
+		v1alpha1.HelmFileParameter{}.OpenAPIModelName():                                   schema_pkg_apis_application_v1alpha1_HelmFileParameter(ref),
+		v1alpha1.HelmParameter{}.OpenAPIModelName():                                       schema_pkg_apis_application_v1alpha1_HelmParameter(ref),
+		v1alpha1.HydrateOperation{}.OpenAPIModelName():                                    schema_pkg_apis_application_v1alpha1_HydrateOperation(ref),
+		v1alpha1.HydrateTo{}.OpenAPIModelName():                                           schema_pkg_apis_application_v1alpha1_HydrateTo(ref),
+		v1alpha1.Info{}.OpenAPIModelName():                                                schema_pkg_apis_application_v1alpha1_Info(ref),
+		v1alpha1.JWTToken{}.OpenAPIModelName():                                            schema_pkg_apis_application_v1alpha1_JWTToken(ref),
+		v1alpha1.JWTTokens{}.OpenAPIModelName():                                           schema_pkg_apis_application_v1alpha1_JWTTokens(ref),
+		v1alpha1.JsonnetVar{}.OpenAPIModelName():                                          schema_pkg_apis_application_v1alpha1_JsonnetVar(ref),
+		v1alpha1.KustomizeGvk{}.OpenAPIModelName():                                        schema_pkg_apis_application_v1alpha1_KustomizeGvk(ref),
+		v1alpha1.KustomizePatch{}.OpenAPIModelName():                                      schema_pkg_apis_application_v1alpha1_KustomizePatch(ref),
+		v1alpha1.KustomizeReplica{}.OpenAPIModelName():                                    schema_pkg_apis_application_v1alpha1_KustomizeReplica(ref),
+		v1alpha1.KustomizeResId{}.OpenAPIModelName():                                      schema_pkg_apis_application_v1alpha1_KustomizeResId(ref),
+		v1alpha1.KustomizeSelector{}.OpenAPIModelName():                                   schema_pkg_apis_application_v1alpha1_KustomizeSelector(ref),
+		v1alpha1.ManagedNamespaceMetadata{}.OpenAPIModelName():                            schema_pkg_apis_application_v1alpha1_ManagedNamespaceMetadata(ref),
+		v1alpha1.Operation{}.OpenAPIModelName():                                           schema_pkg_apis_application_v1alpha1_Operation(ref),
+		v1alpha1.OperationInitiator{}.OpenAPIModelName():                                  schema_pkg_apis_application_v1alpha1_OperationInitiator(ref),
+		v1alpha1.OperationState{}.OpenAPIModelName():                                      schema_pkg_apis_application_v1alpha1_OperationState(ref),
+		v1alpha1.OptionalArray{}.OpenAPIModelName():                                       schema_pkg_apis_application_v1alpha1_OptionalArray(ref),
+		v1alpha1.OptionalMap{}.OpenAPIModelName():                                         schema_pkg_apis_application_v1alpha1_OptionalMap(ref),
+		v1alpha1.OrphanedResourceKey{}.OpenAPIModelName():                                 schema_pkg_apis_application_v1alpha1_OrphanedResourceKey(ref),
+		v1alpha1.OrphanedResourcesMonitorSettings{}.OpenAPIModelName():                    schema_pkg_apis_application_v1alpha1_OrphanedResourcesMonitorSettings(ref),
+		v1alpha1.ProjectRole{}.OpenAPIModelName():                                         schema_pkg_apis_application_v1alpha1_ProjectRole(ref),
+		v1alpha1.ResourceIgnoreDifferences{}.OpenAPIModelName():                           schema_pkg_apis_application_v1alpha1_ResourceIgnoreDifferences(ref),
+		v1alpha1.ResourceResult{}.OpenAPIModelName():                                      schema_pkg_apis_application_v1alpha1_ResourceResult(ref),
+		v1alpha1.ResourceStatus{}.OpenAPIModelName():                                      schema_pkg_apis_application_v1alpha1_ResourceStatus(ref),
+		v1alpha1.RetryStrategy{}.OpenAPIModelName():                                       schema_pkg_apis_application_v1alpha1_RetryStrategy(ref),
+		v1alpha1.RevisionHistory{}.OpenAPIModelName():                                     schema_pkg_apis_application_v1alpha1_RevisionHistory(ref),
+		v1alpha1.SignatureKey{}.OpenAPIModelName():                                        schema_pkg_apis_application_v1alpha1_SignatureKey(ref),
+		v1alpha1.SourceHydrator{}.OpenAPIModelName():                                      schema_pkg_apis_application_v1alpha1_SourceHydrator(ref),
+		v1alpha1.SourceHydratorStatus{}.OpenAPIModelName():                                schema_pkg_apis_application_v1alpha1_SourceHydratorStatus(ref),
+		v1alpha1.SuccessfulHydrateOperation{}.OpenAPIModelName():                          schema_pkg_apis_application_v1alpha1_SuccessfulHydrateOperation(ref),
+		v1alpha1.SyncOperation{}.OpenAPIModelName():                                       schema_pkg_apis_application_v1alpha1_SyncOperation(ref),
+		v1alpha1.SyncOperationResource{}.OpenAPIModelName():                               schema_pkg_apis_application_v1alpha1_SyncOperationResource(ref),
+		v1alpha1.SyncOperationResult{}.OpenAPIModelName():                                 schema_pkg_apis_application_v1alpha1_SyncOperationResult(ref),
+		v1alpha1.SyncPolicy{}.OpenAPIModelName():                                          schema_pkg_apis_application_v1alpha1_SyncPolicy(ref),
+		v1alpha1.SyncPolicyAutomated{}.OpenAPIModelName():                                 schema_pkg_apis_application_v1alpha1_SyncPolicyAutomated(ref),
+		v1alpha1.SyncSource{}.OpenAPIModelName():                                          schema_pkg_apis_application_v1alpha1_SyncSource(ref),
+		v1alpha1.SyncStatus{}.OpenAPIModelName():                                          schema_pkg_apis_application_v1alpha1_SyncStatus(ref),
+		v1alpha1.SyncStrategy{}.OpenAPIModelName():                                        schema_pkg_apis_application_v1alpha1_SyncStrategy(ref),
+		v1alpha1.SyncStrategyApply{}.OpenAPIModelName():                                   schema_pkg_apis_application_v1alpha1_SyncStrategyApply(ref),
+		v1alpha1.SyncStrategyHook{}.OpenAPIModelName():                                    schema_pkg_apis_application_v1alpha1_SyncStrategyHook(ref),
+		v1alpha1.SyncWindow{}.OpenAPIModelName():                                          schema_pkg_apis_application_v1alpha1_SyncWindow(ref),
 		admissionregistrationv1.AuditAnnotation{}.OpenAPIModelName():                      schema_k8sio_api_admissionregistration_v1_AuditAnnotation(ref),
 		admissionregistrationv1.ExpressionWarning{}.OpenAPIModelName():                    schema_k8sio_api_admissionregistration_v1_ExpressionWarning(ref),
 		admissionregistrationv1.MatchCondition{}.OpenAPIModelName():                       schema_k8sio_api_admissionregistration_v1_MatchCondition(ref),
@@ -1359,11 +1438,11 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 		networkingv1beta1.ServiceCIDRList{}.OpenAPIModelName():                            schema_k8sio_api_networking_v1beta1_ServiceCIDRList(ref),
 		networkingv1beta1.ServiceCIDRSpec{}.OpenAPIModelName():                            schema_k8sio_api_networking_v1beta1_ServiceCIDRSpec(ref),
 		networkingv1beta1.ServiceCIDRStatus{}.OpenAPIModelName():                          schema_k8sio_api_networking_v1beta1_ServiceCIDRStatus(ref),
-		v1alpha1.Overhead{}.OpenAPIModelName():                                            schema_k8sio_api_node_v1alpha1_Overhead(ref),
-		v1alpha1.RuntimeClass{}.OpenAPIModelName():                                        schema_k8sio_api_node_v1alpha1_RuntimeClass(ref),
-		v1alpha1.RuntimeClassList{}.OpenAPIModelName():                                    schema_k8sio_api_node_v1alpha1_RuntimeClassList(ref),
-		v1alpha1.RuntimeClassSpec{}.OpenAPIModelName():                                    schema_k8sio_api_node_v1alpha1_RuntimeClassSpec(ref),
-		v1alpha1.Scheduling{}.OpenAPIModelName():                                          schema_k8sio_api_node_v1alpha1_Scheduling(ref),
+		nodev1alpha1.Overhead{}.OpenAPIModelName():                                        schema_k8sio_api_node_v1alpha1_Overhead(ref),
+		nodev1alpha1.RuntimeClass{}.OpenAPIModelName():                                    schema_k8sio_api_node_v1alpha1_RuntimeClass(ref),
+		nodev1alpha1.RuntimeClassList{}.OpenAPIModelName():                                schema_k8sio_api_node_v1alpha1_RuntimeClassList(ref),
+		nodev1alpha1.RuntimeClassSpec{}.OpenAPIModelName():                                schema_k8sio_api_node_v1alpha1_RuntimeClassSpec(ref),
+		nodev1alpha1.Scheduling{}.OpenAPIModelName():                                      schema_k8sio_api_node_v1alpha1_Scheduling(ref),
 		nodev1beta1.Overhead{}.OpenAPIModelName():                                         schema_k8sio_api_node_v1beta1_Overhead(ref),
 		nodev1beta1.RuntimeClass{}.OpenAPIModelName():                                     schema_k8sio_api_node_v1beta1_RuntimeClass(ref),
 		nodev1beta1.RuntimeClassList{}.OpenAPIModelName():                                 schema_k8sio_api_node_v1beta1_RuntimeClassList(ref),
@@ -11613,6 +11692,328 @@ func schema_pkg_apis_management_v1_NamespacedNameArgs(ref common.ReferenceCallba
 	}
 }
 
+func schema_pkg_apis_management_v1_NetworkPeer(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "NetworkPeer holds the network peer for vCluster.",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"kind": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"apiVersion": {
+						SchemaProps: spec.SchemaProps{
+							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"metadata": {
+						SchemaProps: spec.SchemaProps{
+							Default: map[string]interface{}{},
+							Ref:     ref(metav1.ObjectMeta{}.OpenAPIModelName()),
+						},
+					},
+					"spec": {
+						SchemaProps: spec.SchemaProps{
+							Default: map[string]interface{}{},
+							Ref:     ref(managementv1.NetworkPeerSpec{}.OpenAPIModelName()),
+						},
+					},
+					"status": {
+						SchemaProps: spec.SchemaProps{
+							Default: map[string]interface{}{},
+							Ref:     ref(managementv1.NetworkPeerStatus{}.OpenAPIModelName()),
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			managementv1.NetworkPeerSpec{}.OpenAPIModelName(), managementv1.NetworkPeerStatus{}.OpenAPIModelName(), metav1.ObjectMeta{}.OpenAPIModelName()},
+	}
+}
+
+func schema_pkg_apis_management_v1_NetworkPeerDebug(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"kind": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"apiVersion": {
+						SchemaProps: spec.SchemaProps{
+							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"metadata": {
+						SchemaProps: spec.SchemaProps{
+							Default: map[string]interface{}{},
+							Ref:     ref(metav1.ObjectMeta{}.OpenAPIModelName()),
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			metav1.ObjectMeta{}.OpenAPIModelName()},
+	}
+}
+
+func schema_pkg_apis_management_v1_NetworkPeerDebugList(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"kind": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"apiVersion": {
+						SchemaProps: spec.SchemaProps{
+							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"metadata": {
+						SchemaProps: spec.SchemaProps{
+							Default: map[string]interface{}{},
+							Ref:     ref(metav1.ListMeta{}.OpenAPIModelName()),
+						},
+					},
+					"items": {
+						SchemaProps: spec.SchemaProps{
+							Type: []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref(managementv1.NetworkPeerDebug{}.OpenAPIModelName()),
+									},
+								},
+							},
+						},
+					},
+				},
+				Required: []string{"items"},
+			},
+		},
+		Dependencies: []string{
+			managementv1.NetworkPeerDebug{}.OpenAPIModelName(), metav1.ListMeta{}.OpenAPIModelName()},
+	}
+}
+
+func schema_pkg_apis_management_v1_NetworkPeerDebugOptions(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"kind": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"apiVersion": {
+						SchemaProps: spec.SchemaProps{
+							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"action": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Action is the action to perform on the network peer.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+				},
+			},
+		},
+	}
+}
+
+func schema_pkg_apis_management_v1_NetworkPeerList(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"kind": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"apiVersion": {
+						SchemaProps: spec.SchemaProps{
+							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"metadata": {
+						SchemaProps: spec.SchemaProps{
+							Default: map[string]interface{}{},
+							Ref:     ref(metav1.ListMeta{}.OpenAPIModelName()),
+						},
+					},
+					"items": {
+						SchemaProps: spec.SchemaProps{
+							Type: []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref(managementv1.NetworkPeer{}.OpenAPIModelName()),
+									},
+								},
+							},
+						},
+					},
+				},
+				Required: []string{"items"},
+			},
+		},
+		Dependencies: []string{
+			managementv1.NetworkPeer{}.OpenAPIModelName(), metav1.ListMeta{}.OpenAPIModelName()},
+	}
+}
+
+func schema_pkg_apis_management_v1_NetworkPeerSpec(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "NetworkPeerSpec defines spec of network peer.",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"discoKey": {
+						SchemaProps: spec.SchemaProps{
+							Description: "DiscoKey is a key used for DERP discovery",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"machineKey": {
+						SchemaProps: spec.SchemaProps{
+							Description: "MachineKey is used to identify a network peer",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"nodeKey": {
+						SchemaProps: spec.SchemaProps{
+							Description: "NodeKey is used to identify a session",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"addresses": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Addresses is a list of IP addresses of this Node directly.",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: "",
+										Type:    []string{"string"},
+										Format:  "",
+									},
+								},
+							},
+						},
+					},
+					"allowedIPs": {
+						SchemaProps: spec.SchemaProps{
+							Description: "AllowedIPs is a range of IP addresses to route to this node.",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: "",
+										Type:    []string{"string"},
+										Format:  "",
+									},
+								},
+							},
+						},
+					},
+					"endpoints": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Endpoints is a list of IP+port (public via STUN, and local LANs) where this node can be reached.",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: "",
+										Type:    []string{"string"},
+										Format:  "",
+									},
+								},
+							},
+						},
+					},
+				},
+			},
+		},
+	}
+}
+
+func schema_pkg_apis_management_v1_NetworkPeerStatus(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"lastSeen": {
+						SchemaProps: spec.SchemaProps{
+							Description: "LastSeen is when the network peer was last online. It is not updated when Online is true.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"homeDerpRegion": {
+						SchemaProps: spec.SchemaProps{
+							Description: "HomeDerpRegion is the currently preferred DERP region by the network peer",
+							Type:        []string{"integer"},
+							Format:      "int32",
+						},
+					},
+					"online": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Online is whether the node is currently connected to the coordination server.",
+							Type:        []string{"boolean"},
+							Format:      "",
+						},
+					},
+				},
+			},
+		},
+	}
+}
+
 func schema_pkg_apis_management_v1_NodeClaim(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
@@ -20997,6 +21398,114 @@ func schema_pkg_apis_management_v1_VirtualClusterInstanceDebugShellPodsList(ref 
 	}
 }
 
+func schema_pkg_apis_management_v1_VirtualClusterInstanceJoinScript(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "VirtualClusterInstanceJoinScript holds join script request and response data for virtual cluster instances",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"kind": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"apiVersion": {
+						SchemaProps: spec.SchemaProps{
+							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"metadata": {
+						SchemaProps: spec.SchemaProps{
+							Default: map[string]interface{}{},
+							Ref:     ref(metav1.ObjectMeta{}.OpenAPIModelName()),
+						},
+					},
+					"status": {
+						SchemaProps: spec.SchemaProps{
+							Default: map[string]interface{}{},
+							Ref:     ref(managementv1.VirtualClusterInstanceJoinScriptStatus{}.OpenAPIModelName()),
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			managementv1.VirtualClusterInstanceJoinScriptStatus{}.OpenAPIModelName(), metav1.ObjectMeta{}.OpenAPIModelName()},
+	}
+}
+
+func schema_pkg_apis_management_v1_VirtualClusterInstanceJoinScriptList(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"kind": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"apiVersion": {
+						SchemaProps: spec.SchemaProps{
+							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"metadata": {
+						SchemaProps: spec.SchemaProps{
+							Default: map[string]interface{}{},
+							Ref:     ref(metav1.ListMeta{}.OpenAPIModelName()),
+						},
+					},
+					"items": {
+						SchemaProps: spec.SchemaProps{
+							Type: []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref(managementv1.VirtualClusterInstanceJoinScript{}.OpenAPIModelName()),
+									},
+								},
+							},
+						},
+					},
+				},
+				Required: []string{"items"},
+			},
+		},
+		Dependencies: []string{
+			managementv1.VirtualClusterInstanceJoinScript{}.OpenAPIModelName(), metav1.ListMeta{}.OpenAPIModelName()},
+	}
+}
+
+func schema_pkg_apis_management_v1_VirtualClusterInstanceJoinScriptStatus(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"joinCommand": {
+						SchemaProps: spec.SchemaProps{
+							Description: "JoinCommand holds the curl command that can be run on a node to join the vCluster",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+				},
+			},
+		},
+	}
+}
+
 func schema_pkg_apis_management_v1_VirtualClusterInstanceKubeConfig(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
@@ -24343,7 +24852,14 @@ func schema_pkg_apis_storage_v1_ArgoProjectPolicyRule(ref common.ReferenceCallba
 					},
 					"application": {
 						SchemaProps: spec.SchemaProps{
-							Description: "Application is the ArgoCD project/repository to apply the rule to.",
+							Description: "Application is the ArgoCD project/repository to apply the rule to. DEPRECATED: Wasn't used. Kind provides a more flexible way to specify the resource type.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"kind": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Kind is the kind to apply the rule to",
 							Type:        []string{"string"},
 							Format:      "",
 						},
@@ -24453,6 +24969,20 @@ func schema_pkg_apis_storage_v1_ArgoProjectSpec(ref common.ReferenceCallback) co
 							},
 						},
 					},
+					"destinations": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Destinations contains list of destinations available for deployment",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref(v1alpha1.ApplicationDestination{}.OpenAPIModelName()),
+									},
+								},
+							},
+						},
+					},
 					"roles": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Roles is a list of roles that should be attached to the ArgoCD project. If roles are provided no loft default roles will be set. If no roles are provided *and* SSO is enabled, loft will configure sane default values.",
@@ -24475,7 +25005,7 @@ func schema_pkg_apis_storage_v1_ArgoProjectSpec(ref common.ReferenceCallback) co
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref(metav1.GroupKind{}.OpenAPIModelName()),
+										Ref:     ref(v1alpha1.ClusterResourceRestrictionItem{}.OpenAPIModelName()),
 									},
 								},
 							},
@@ -24503,7 +25033,7 @@ func schema_pkg_apis_storage_v1_ArgoProjectSpec(ref common.ReferenceCallback) co
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref(metav1.GroupKind{}.OpenAPIModelName()),
+										Ref:     ref(v1alpha1.ClusterResourceRestrictionItem{}.OpenAPIModelName()),
 									},
 								},
 							},
@@ -24542,7 +25072,7 @@ func schema_pkg_apis_storage_v1_ArgoProjectSpec(ref common.ReferenceCallback) co
 			},
 		},
 		Dependencies: []string{
-			apisstoragev1.ArgoProjectRole{}.OpenAPIModelName(), apisstoragev1.ArgoProjectSpecMetadata{}.OpenAPIModelName(), metav1.GroupKind{}.OpenAPIModelName()},
+			apisstoragev1.ArgoProjectRole{}.OpenAPIModelName(), apisstoragev1.ArgoProjectSpecMetadata{}.OpenAPIModelName(), v1alpha1.ApplicationDestination{}.OpenAPIModelName(), v1alpha1.ClusterResourceRestrictionItem{}.OpenAPIModelName(), metav1.GroupKind{}.OpenAPIModelName()},
 	}
 }
 
@@ -33949,6 +34479,3684 @@ func schema_pkg_apis_virtualcluster_v1_HelmReleaseStatus(ref common.ReferenceCal
 		},
 		Dependencies: []string{
 			v1.Info{}.OpenAPIModelName(), v1.Metadata{}.OpenAPIModelName()},
+	}
+}
+
+func schema_pkg_apis_application_v1alpha1_AppHealthStatus(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "AppHealthStatus contains information about the currently observed health state of an application",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"status": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Status holds the status code of the application",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"message": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Message is a human-readable informational message describing the health status\n\nDeprecated: this field is not used and will be removed in a future release.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"lastTransitionTime": {
+						SchemaProps: spec.SchemaProps{
+							Description: "LastTransitionTime is the time the HealthStatus was set or updated",
+							Ref:         ref(metav1.Time{}.OpenAPIModelName()),
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			metav1.Time{}.OpenAPIModelName()},
+	}
+}
+
+func schema_pkg_apis_application_v1alpha1_AppProject(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "AppProject provides a logical grouping of applications, providing controls for: * where the apps may deploy to (cluster whitelist) * what may be deployed (repository whitelist, resource whitelist/blacklist) * who can access these applications (roles, OIDC group claims bindings) * and what they can do (RBAC policies) * automation access to these roles (JWT tokens)",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"kind": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"apiVersion": {
+						SchemaProps: spec.SchemaProps{
+							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"metadata": {
+						SchemaProps: spec.SchemaProps{
+							Default: map[string]interface{}{},
+							Ref:     ref(metav1.ObjectMeta{}.OpenAPIModelName()),
+						},
+					},
+					"spec": {
+						SchemaProps: spec.SchemaProps{
+							Default: map[string]interface{}{},
+							Ref:     ref(v1alpha1.AppProjectSpec{}.OpenAPIModelName()),
+						},
+					},
+					"status": {
+						SchemaProps: spec.SchemaProps{
+							Default: map[string]interface{}{},
+							Ref:     ref(v1alpha1.AppProjectStatus{}.OpenAPIModelName()),
+						},
+					},
+				},
+				Required: []string{"metadata", "spec"},
+			},
+		},
+		Dependencies: []string{
+			v1alpha1.AppProjectSpec{}.OpenAPIModelName(), v1alpha1.AppProjectStatus{}.OpenAPIModelName(), metav1.ObjectMeta{}.OpenAPIModelName()},
+	}
+}
+
+func schema_pkg_apis_application_v1alpha1_AppProjectList(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "AppProjectList is list of AppProject resources",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"kind": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"apiVersion": {
+						SchemaProps: spec.SchemaProps{
+							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"metadata": {
+						SchemaProps: spec.SchemaProps{
+							Default: map[string]interface{}{},
+							Ref:     ref(metav1.ListMeta{}.OpenAPIModelName()),
+						},
+					},
+					"items": {
+						SchemaProps: spec.SchemaProps{
+							Type: []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref(v1alpha1.AppProject{}.OpenAPIModelName()),
+									},
+								},
+							},
+						},
+					},
+				},
+				Required: []string{"metadata", "items"},
+			},
+		},
+		Dependencies: []string{
+			v1alpha1.AppProject{}.OpenAPIModelName(), metav1.ListMeta{}.OpenAPIModelName()},
+	}
+}
+
+func schema_pkg_apis_application_v1alpha1_AppProjectSpec(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "AppProjectSpec is the specification of an AppProject",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"sourceRepos": {
+						SchemaProps: spec.SchemaProps{
+							Description: "SourceRepos contains list of repository URLs which can be used for deployment",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: "",
+										Type:    []string{"string"},
+										Format:  "",
+									},
+								},
+							},
+						},
+					},
+					"destinations": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Destinations contains list of destinations available for deployment",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref(v1alpha1.ApplicationDestination{}.OpenAPIModelName()),
+									},
+								},
+							},
+						},
+					},
+					"description": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Description contains optional project description",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"roles": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Roles are user defined RBAC roles associated with this project",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref(v1alpha1.ProjectRole{}.OpenAPIModelName()),
+									},
+								},
+							},
+						},
+					},
+					"clusterResourceWhitelist": {
+						SchemaProps: spec.SchemaProps{
+							Description: "ClusterResourceWhitelist contains list of whitelisted cluster level resources",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref(v1alpha1.ClusterResourceRestrictionItem{}.OpenAPIModelName()),
+									},
+								},
+							},
+						},
+					},
+					"namespaceResourceBlacklist": {
+						SchemaProps: spec.SchemaProps{
+							Description: "NamespaceResourceBlacklist contains list of blacklisted namespace level resources",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref(metav1.GroupKind{}.OpenAPIModelName()),
+									},
+								},
+							},
+						},
+					},
+					"orphanedResources": {
+						SchemaProps: spec.SchemaProps{
+							Description: "OrphanedResources specifies if controller should monitor orphaned resources of apps in this project",
+							Ref:         ref(v1alpha1.OrphanedResourcesMonitorSettings{}.OpenAPIModelName()),
+						},
+					},
+					"syncWindows": {
+						SchemaProps: spec.SchemaProps{
+							Description: "SyncWindows controls when syncs can be run for apps in this project",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Ref: ref(v1alpha1.SyncWindow{}.OpenAPIModelName()),
+									},
+								},
+							},
+						},
+					},
+					"namespaceResourceWhitelist": {
+						SchemaProps: spec.SchemaProps{
+							Description: "NamespaceResourceWhitelist contains list of whitelisted namespace level resources",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref(metav1.GroupKind{}.OpenAPIModelName()),
+									},
+								},
+							},
+						},
+					},
+					"signatureKeys": {
+						SchemaProps: spec.SchemaProps{
+							Description: "SignatureKeys contains a list of PGP key IDs that commits in Git must be signed with in order to be allowed for sync",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref(v1alpha1.SignatureKey{}.OpenAPIModelName()),
+									},
+								},
+							},
+						},
+					},
+					"clusterResourceBlacklist": {
+						SchemaProps: spec.SchemaProps{
+							Description: "ClusterResourceBlacklist contains list of blacklisted cluster level resources",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref(v1alpha1.ClusterResourceRestrictionItem{}.OpenAPIModelName()),
+									},
+								},
+							},
+						},
+					},
+					"sourceNamespaces": {
+						SchemaProps: spec.SchemaProps{
+							Description: "SourceNamespaces defines the namespaces application resources are allowed to be created in",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: "",
+										Type:    []string{"string"},
+										Format:  "",
+									},
+								},
+							},
+						},
+					},
+					"permitOnlyProjectScopedClusters": {
+						SchemaProps: spec.SchemaProps{
+							Description: "PermitOnlyProjectScopedClusters determines whether destinations can only reference clusters which are project-scoped",
+							Type:        []string{"boolean"},
+							Format:      "",
+						},
+					},
+					"destinationServiceAccounts": {
+						SchemaProps: spec.SchemaProps{
+							Description: "DestinationServiceAccounts holds information about the service accounts to be impersonated for the application sync operation for each destination.",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref(v1alpha1.ApplicationDestinationServiceAccount{}.OpenAPIModelName()),
+									},
+								},
+							},
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			v1alpha1.ApplicationDestination{}.OpenAPIModelName(), v1alpha1.ApplicationDestinationServiceAccount{}.OpenAPIModelName(), v1alpha1.ClusterResourceRestrictionItem{}.OpenAPIModelName(), v1alpha1.OrphanedResourcesMonitorSettings{}.OpenAPIModelName(), v1alpha1.ProjectRole{}.OpenAPIModelName(), v1alpha1.SignatureKey{}.OpenAPIModelName(), v1alpha1.SyncWindow{}.OpenAPIModelName(), metav1.GroupKind{}.OpenAPIModelName()},
+	}
+}
+
+func schema_pkg_apis_application_v1alpha1_AppProjectStatus(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "AppProjectStatus contains status information for AppProject CRs",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"jwtTokensByRole": {
+						SchemaProps: spec.SchemaProps{
+							Description: "JWTTokensByRole contains a list of JWT tokens issued for a given role",
+							Type:        []string{"object"},
+							AdditionalProperties: &spec.SchemaOrBool{
+								Allows: true,
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref(v1alpha1.JWTTokens{}.OpenAPIModelName()),
+									},
+								},
+							},
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			v1alpha1.JWTTokens{}.OpenAPIModelName()},
+	}
+}
+
+func schema_pkg_apis_application_v1alpha1_Application(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "Application is a definition of Application resource.",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"kind": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"apiVersion": {
+						SchemaProps: spec.SchemaProps{
+							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"metadata": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Common: shared with ApplicationSet",
+							Default:     map[string]interface{}{},
+							Ref:         ref(metav1.ObjectMeta{}.OpenAPIModelName()),
+						},
+					},
+					"spec": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Common: shared with ApplicationSet",
+							Default:     map[string]interface{}{},
+							Ref:         ref(v1alpha1.ApplicationSpec{}.OpenAPIModelName()),
+						},
+					},
+					"status": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Common: shared with ApplicationSet (different type)",
+							Default:     map[string]interface{}{},
+							Ref:         ref(v1alpha1.ApplicationStatus{}.OpenAPIModelName()),
+						},
+					},
+					"operation": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Common: shared with ApplicationSet (different type)",
+							Ref:         ref(v1alpha1.Operation{}.OpenAPIModelName()),
+						},
+					},
+				},
+				Required: []string{"metadata", "spec"},
+			},
+		},
+		Dependencies: []string{
+			v1alpha1.ApplicationSpec{}.OpenAPIModelName(), v1alpha1.ApplicationStatus{}.OpenAPIModelName(), v1alpha1.Operation{}.OpenAPIModelName(), metav1.ObjectMeta{}.OpenAPIModelName()},
+	}
+}
+
+func schema_pkg_apis_application_v1alpha1_ApplicationCondition(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "ApplicationCondition contains details about an application condition, which is usually an error or warning",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"type": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Type is an application condition type",
+							Default:     "",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"message": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Message contains human-readable message indicating details about condition",
+							Default:     "",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"lastTransitionTime": {
+						SchemaProps: spec.SchemaProps{
+							Description: "LastTransitionTime is the time the condition was last observed",
+							Ref:         ref(metav1.Time{}.OpenAPIModelName()),
+						},
+					},
+				},
+				Required: []string{"type", "message"},
+			},
+		},
+		Dependencies: []string{
+			metav1.Time{}.OpenAPIModelName()},
+	}
+}
+
+func schema_pkg_apis_application_v1alpha1_ApplicationDestination(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "ApplicationDestination holds information about the application's destination",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"server": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Server specifies the URL of the target cluster and must be set to the Kubernetes control plane API",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"namespace": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Namespace specifies the target namespace for the application's resources. The namespace will only be set for namespace-scoped resources that have not set a value for .metadata.namespace",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"name": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Name is an alternate way of specifying the target cluster by its symbolic name",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+				},
+			},
+		},
+	}
+}
+
+func schema_pkg_apis_application_v1alpha1_ApplicationDestinationServiceAccount(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "ApplicationDestinationServiceAccount holds information about the service account to be impersonated for the application sync operation",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"server": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Server specifies the URL of the target cluster's Kubernetes control plane API.",
+							Default:     "",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"namespace": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Namespace specifies the target namespace for the application's resources.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"defaultServiceAccount": {
+						SchemaProps: spec.SchemaProps{
+							Description: "DefaultServiceAccount to be used for impersonation during the sync operation",
+							Default:     "",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+				},
+				Required: []string{"server", "defaultServiceAccount"},
+			},
+		},
+	}
+}
+
+func schema_pkg_apis_application_v1alpha1_ApplicationList(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "ApplicationList is list of Application resources",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"kind": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"apiVersion": {
+						SchemaProps: spec.SchemaProps{
+							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"metadata": {
+						SchemaProps: spec.SchemaProps{
+							Default: map[string]interface{}{},
+							Ref:     ref(metav1.ListMeta{}.OpenAPIModelName()),
+						},
+					},
+					"items": {
+						SchemaProps: spec.SchemaProps{
+							Type: []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref(v1alpha1.Application{}.OpenAPIModelName()),
+									},
+								},
+							},
+						},
+					},
+				},
+				Required: []string{"metadata", "items"},
+			},
+		},
+		Dependencies: []string{
+			v1alpha1.Application{}.OpenAPIModelName(), metav1.ListMeta{}.OpenAPIModelName()},
+	}
+}
+
+func schema_pkg_apis_application_v1alpha1_ApplicationSource(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "ApplicationSource contains all required information about the source of an application",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"repoURL": {
+						SchemaProps: spec.SchemaProps{
+							Description: "RepoURL is the URL to the repository (Git or Helm) that contains the application manifests",
+							Default:     "",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"path": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Path is a directory path within the Git repository, and is only valid for applications sourced from Git.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"targetRevision": {
+						SchemaProps: spec.SchemaProps{
+							Description: "TargetRevision defines the revision of the source to sync the application to. In case of Git, this can be commit, tag, or branch. If omitted, will equal to HEAD. In case of Helm, this is a semver tag for the Chart's version.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"helm": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Helm holds helm specific options",
+							Ref:         ref(v1alpha1.ApplicationSourceHelm{}.OpenAPIModelName()),
+						},
+					},
+					"kustomize": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Kustomize holds kustomize specific options",
+							Ref:         ref(v1alpha1.ApplicationSourceKustomize{}.OpenAPIModelName()),
+						},
+					},
+					"directory": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Directory holds path/directory specific options",
+							Ref:         ref(v1alpha1.ApplicationSourceDirectory{}.OpenAPIModelName()),
+						},
+					},
+					"plugin": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Plugin holds config management plugin specific options",
+							Ref:         ref(v1alpha1.ApplicationSourcePlugin{}.OpenAPIModelName()),
+						},
+					},
+					"chart": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Chart is a Helm chart name, and must be specified for applications sourced from a Helm repo.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"ref": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Ref is reference to another source within sources field. This field will not be used if used with a `source` tag.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"name": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Name is used to refer to a source and is displayed in the UI. It is used in multi-source Applications.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+				},
+				Required: []string{"repoURL"},
+			},
+		},
+		Dependencies: []string{
+			v1alpha1.ApplicationSourceDirectory{}.OpenAPIModelName(), v1alpha1.ApplicationSourceHelm{}.OpenAPIModelName(), v1alpha1.ApplicationSourceKustomize{}.OpenAPIModelName(), v1alpha1.ApplicationSourcePlugin{}.OpenAPIModelName()},
+	}
+}
+
+func schema_pkg_apis_application_v1alpha1_ApplicationSourceDirectory(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "ApplicationSourceDirectory holds options for applications of type plain YAML or Jsonnet",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"recurse": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Recurse specifies whether to scan a directory recursively for manifests",
+							Type:        []string{"boolean"},
+							Format:      "",
+						},
+					},
+					"jsonnet": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Jsonnet holds options specific to Jsonnet",
+							Default:     map[string]interface{}{},
+							Ref:         ref(v1alpha1.ApplicationSourceJsonnet{}.OpenAPIModelName()),
+						},
+					},
+					"exclude": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Exclude contains a glob pattern to match paths against that should be explicitly excluded from being used during manifest generation",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"include": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Include contains a glob pattern to match paths against that should be explicitly included during manifest generation",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			v1alpha1.ApplicationSourceJsonnet{}.OpenAPIModelName()},
+	}
+}
+
+func schema_pkg_apis_application_v1alpha1_ApplicationSourceHelm(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "ApplicationSourceHelm holds helm specific options",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"valueFiles": {
+						SchemaProps: spec.SchemaProps{
+							Description: "ValuesFiles is a list of Helm value files to use when generating a template",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: "",
+										Type:    []string{"string"},
+										Format:  "",
+									},
+								},
+							},
+						},
+					},
+					"parameters": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Parameters is a list of Helm parameters which are passed to the helm template command upon manifest generation",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref(v1alpha1.HelmParameter{}.OpenAPIModelName()),
+									},
+								},
+							},
+						},
+					},
+					"releaseName": {
+						SchemaProps: spec.SchemaProps{
+							Description: "ReleaseName is the Helm release name to use. If omitted it will use the application name",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"values": {
+						VendorExtensible: spec.VendorExtensible{
+							Extensions: spec.Extensions{
+								"x-kubernetes-patch-strategy": "replace",
+							},
+						},
+						SchemaProps: spec.SchemaProps{
+							Description: "Values specifies Helm values to be passed to helm template, typically defined as a block. ValuesObject takes precedence over Values, so use one or the other.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"fileParameters": {
+						SchemaProps: spec.SchemaProps{
+							Description: "FileParameters are file parameters to the helm template",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref(v1alpha1.HelmFileParameter{}.OpenAPIModelName()),
+									},
+								},
+							},
+						},
+					},
+					"version": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Version is the Helm version to use for templating (\"3\")",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"passCredentials": {
+						SchemaProps: spec.SchemaProps{
+							Description: "PassCredentials pass credentials to all domains (Helm's --pass-credentials)",
+							Type:        []string{"boolean"},
+							Format:      "",
+						},
+					},
+					"ignoreMissingValueFiles": {
+						SchemaProps: spec.SchemaProps{
+							Description: "IgnoreMissingValueFiles prevents helm template from failing when valueFiles do not exist locally by not appending them to helm template --values",
+							Type:        []string{"boolean"},
+							Format:      "",
+						},
+					},
+					"skipCrds": {
+						SchemaProps: spec.SchemaProps{
+							Description: "SkipCrds skips custom resource definition installation step (Helm's --skip-crds)",
+							Type:        []string{"boolean"},
+							Format:      "",
+						},
+					},
+					"valuesObject": {
+						SchemaProps: spec.SchemaProps{
+							Description: "ValuesObject specifies Helm values to be passed to helm template, defined as a map. This takes precedence over Values.",
+							Ref:         ref(runtime.RawExtension{}.OpenAPIModelName()),
+						},
+					},
+					"namespace": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Namespace is an optional namespace to template with. If left empty, defaults to the app's destination namespace.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"kubeVersion": {
+						SchemaProps: spec.SchemaProps{
+							Description: "KubeVersion specifies the Kubernetes API version to pass to Helm when templating manifests. By default, Argo CD uses the Kubernetes version of the target cluster.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"apiVersions": {
+						SchemaProps: spec.SchemaProps{
+							Description: "APIVersions specifies the Kubernetes resource API versions to pass to Helm when templating manifests. By default, Argo CD uses the API versions of the target cluster. The format is [group/]version/kind.",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: "",
+										Type:    []string{"string"},
+										Format:  "",
+									},
+								},
+							},
+						},
+					},
+					"skipTests": {
+						SchemaProps: spec.SchemaProps{
+							Description: "SkipTests skips test manifest installation step (Helm's --skip-tests).",
+							Type:        []string{"boolean"},
+							Format:      "",
+						},
+					},
+					"skipSchemaValidation": {
+						SchemaProps: spec.SchemaProps{
+							Description: "SkipSchemaValidation skips JSON schema validation (Helm's --skip-schema-validation)",
+							Type:        []string{"boolean"},
+							Format:      "",
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			v1alpha1.HelmFileParameter{}.OpenAPIModelName(), v1alpha1.HelmParameter{}.OpenAPIModelName(), runtime.RawExtension{}.OpenAPIModelName()},
+	}
+}
+
+func schema_pkg_apis_application_v1alpha1_ApplicationSourceJsonnet(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "ApplicationSourceJsonnet holds options specific to applications of type Jsonnet",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"extVars": {
+						SchemaProps: spec.SchemaProps{
+							Description: "ExtVars is a list of Jsonnet External Variables",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref(v1alpha1.JsonnetVar{}.OpenAPIModelName()),
+									},
+								},
+							},
+						},
+					},
+					"tlas": {
+						SchemaProps: spec.SchemaProps{
+							Description: "TLAS is a list of Jsonnet Top-level Arguments",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref(v1alpha1.JsonnetVar{}.OpenAPIModelName()),
+									},
+								},
+							},
+						},
+					},
+					"libs": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Additional library search dirs",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: "",
+										Type:    []string{"string"},
+										Format:  "",
+									},
+								},
+							},
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			v1alpha1.JsonnetVar{}.OpenAPIModelName()},
+	}
+}
+
+func schema_pkg_apis_application_v1alpha1_ApplicationSourceKustomize(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "ApplicationSourceKustomize holds options specific to an Application source specific to Kustomize",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"namePrefix": {
+						SchemaProps: spec.SchemaProps{
+							Description: "NamePrefix overrides the namePrefix in the kustomization.yaml for Kustomize apps",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"nameSuffix": {
+						SchemaProps: spec.SchemaProps{
+							Description: "NameSuffix overrides the nameSuffix in the kustomization.yaml for Kustomize apps",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"images": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Images is a list of Kustomize image override specifications",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: "",
+										Type:    []string{"string"},
+										Format:  "",
+									},
+								},
+							},
+						},
+					},
+					"commonLabels": {
+						SchemaProps: spec.SchemaProps{
+							Description: "CommonLabels is a list of additional labels to add to rendered manifests",
+							Type:        []string{"object"},
+							AdditionalProperties: &spec.SchemaOrBool{
+								Allows: true,
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: "",
+										Type:    []string{"string"},
+										Format:  "",
+									},
+								},
+							},
+						},
+					},
+					"version": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Version controls which version of Kustomize to use for rendering manifests",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"commonAnnotations": {
+						SchemaProps: spec.SchemaProps{
+							Description: "CommonAnnotations is a list of additional annotations to add to rendered manifests",
+							Type:        []string{"object"},
+							AdditionalProperties: &spec.SchemaOrBool{
+								Allows: true,
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: "",
+										Type:    []string{"string"},
+										Format:  "",
+									},
+								},
+							},
+						},
+					},
+					"forceCommonLabels": {
+						SchemaProps: spec.SchemaProps{
+							Description: "ForceCommonLabels specifies whether to force applying common labels to resources for Kustomize apps",
+							Type:        []string{"boolean"},
+							Format:      "",
+						},
+					},
+					"forceCommonAnnotations": {
+						SchemaProps: spec.SchemaProps{
+							Description: "ForceCommonAnnotations specifies whether to force applying common annotations to resources for Kustomize apps",
+							Type:        []string{"boolean"},
+							Format:      "",
+						},
+					},
+					"namespace": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Namespace sets the namespace that Kustomize adds to all resources",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"commonAnnotationsEnvsubst": {
+						SchemaProps: spec.SchemaProps{
+							Description: "CommonAnnotationsEnvsubst specifies whether to apply env variables substitution for annotation values",
+							Type:        []string{"boolean"},
+							Format:      "",
+						},
+					},
+					"replicas": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Replicas is a list of Kustomize Replicas override specifications",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref(v1alpha1.KustomizeReplica{}.OpenAPIModelName()),
+									},
+								},
+							},
+						},
+					},
+					"patches": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Patches is a list of Kustomize patches",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref(v1alpha1.KustomizePatch{}.OpenAPIModelName()),
+									},
+								},
+							},
+						},
+					},
+					"components": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Components specifies a list of kustomize components to add to the kustomization before building",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: "",
+										Type:    []string{"string"},
+										Format:  "",
+									},
+								},
+							},
+						},
+					},
+					"ignoreMissingComponents": {
+						SchemaProps: spec.SchemaProps{
+							Description: "IgnoreMissingComponents prevents kustomize from failing when components do not exist locally",
+							Type:        []string{"boolean"},
+							Format:      "",
+						},
+					},
+					"labelWithoutSelector": {
+						SchemaProps: spec.SchemaProps{
+							Description: "LabelWithoutSelector specifies whether to apply common labels to resource selectors or not",
+							Type:        []string{"boolean"},
+							Format:      "",
+						},
+					},
+					"kubeVersion": {
+						SchemaProps: spec.SchemaProps{
+							Description: "KubeVersion specifies the Kubernetes API version to pass to Helm when templating manifests.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"apiVersions": {
+						SchemaProps: spec.SchemaProps{
+							Description: "APIVersions specifies the Kubernetes resource API versions to pass to Helm when templating manifests.",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: "",
+										Type:    []string{"string"},
+										Format:  "",
+									},
+								},
+							},
+						},
+					},
+					"labelIncludeTemplates": {
+						SchemaProps: spec.SchemaProps{
+							Description: "LabelIncludeTemplates specifies whether to apply common labels to resource templates or not",
+							Type:        []string{"boolean"},
+							Format:      "",
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			v1alpha1.KustomizePatch{}.OpenAPIModelName(), v1alpha1.KustomizeReplica{}.OpenAPIModelName()},
+	}
+}
+
+func schema_pkg_apis_application_v1alpha1_ApplicationSourcePlugin(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "ApplicationSourcePlugin holds options specific to config management plugins",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"name": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"string"},
+							Format: "",
+						},
+					},
+					"env": {
+						SchemaProps: spec.SchemaProps{
+							Type: []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Ref: ref(v1alpha1.EnvEntry{}.OpenAPIModelName()),
+									},
+								},
+							},
+						},
+					},
+					"parameters": {
+						SchemaProps: spec.SchemaProps{
+							Type: []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref(v1alpha1.ApplicationSourcePluginParameter{}.OpenAPIModelName()),
+									},
+								},
+							},
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			v1alpha1.ApplicationSourcePluginParameter{}.OpenAPIModelName(), v1alpha1.EnvEntry{}.OpenAPIModelName()},
+	}
+}
+
+func schema_pkg_apis_application_v1alpha1_ApplicationSourcePluginParameter(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "ApplicationSourcePluginParameter is a parameter for a config management plugin",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"name": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Name is the name identifying a parameter.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"string": {
+						SchemaProps: spec.SchemaProps{
+							Description: "String_ is the value of a string type parameter.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+				},
+			},
+		},
+	}
+}
+
+func schema_pkg_apis_application_v1alpha1_ApplicationSpec(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "ApplicationSpec represents desired application state. Contains link to repository with application definition and additional parameters link definition revision.",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"source": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Source is a reference to the location of the application's manifests or chart",
+							Ref:         ref(v1alpha1.ApplicationSource{}.OpenAPIModelName()),
+						},
+					},
+					"destination": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Destination is a reference to the target Kubernetes server and namespace",
+							Default:     map[string]interface{}{},
+							Ref:         ref(v1alpha1.ApplicationDestination{}.OpenAPIModelName()),
+						},
+					},
+					"project": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Project is a reference to the project this application belongs to. The empty string means that application belongs to the 'default' project.",
+							Default:     "",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"syncPolicy": {
+						SchemaProps: spec.SchemaProps{
+							Description: "SyncPolicy controls when and how a sync will be performed",
+							Ref:         ref(v1alpha1.SyncPolicy{}.OpenAPIModelName()),
+						},
+					},
+					"ignoreDifferences": {
+						SchemaProps: spec.SchemaProps{
+							Description: "IgnoreDifferences is a list of resources and their fields which should be ignored during comparison",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref(v1alpha1.ResourceIgnoreDifferences{}.OpenAPIModelName()),
+									},
+								},
+							},
+						},
+					},
+					"info": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Info contains a list of information (URLs, email addresses, and plain text) that relates to the application",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref(v1alpha1.Info{}.OpenAPIModelName()),
+									},
+								},
+							},
+						},
+					},
+					"revisionHistoryLimit": {
+						SchemaProps: spec.SchemaProps{
+							Description: "RevisionHistoryLimit limits the number of items kept in the application's revision history, which is used for informational purposes as well as for rollbacks to previous versions. This should only be changed in exceptional circumstances. Setting to zero will store no history. This will reduce storage used. Increasing will increase the space used to store the history, so we do not recommend increasing it. Default is 10.",
+							Type:        []string{"integer"},
+							Format:      "int64",
+						},
+					},
+					"sources": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Sources is a reference to the location of the application's manifests or chart",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref(v1alpha1.ApplicationSource{}.OpenAPIModelName()),
+									},
+								},
+							},
+						},
+					},
+					"sourceHydrator": {
+						SchemaProps: spec.SchemaProps{
+							Description: "SourceHydrator provides a way to push hydrated manifests back to git before syncing them to the cluster.",
+							Ref:         ref(v1alpha1.SourceHydrator{}.OpenAPIModelName()),
+						},
+					},
+				},
+				Required: []string{"destination", "project"},
+			},
+		},
+		Dependencies: []string{
+			v1alpha1.ApplicationDestination{}.OpenAPIModelName(), v1alpha1.ApplicationSource{}.OpenAPIModelName(), v1alpha1.Info{}.OpenAPIModelName(), v1alpha1.ResourceIgnoreDifferences{}.OpenAPIModelName(), v1alpha1.SourceHydrator{}.OpenAPIModelName(), v1alpha1.SyncPolicy{}.OpenAPIModelName()},
+	}
+}
+
+func schema_pkg_apis_application_v1alpha1_ApplicationStatus(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "ApplicationStatus contains status information for the application",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"resources": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Resources is a list of Kubernetes resources managed by this application",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref(v1alpha1.ResourceStatus{}.OpenAPIModelName()),
+									},
+								},
+							},
+						},
+					},
+					"sync": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Sync contains information about the application's current sync status",
+							Default:     map[string]interface{}{},
+							Ref:         ref(v1alpha1.SyncStatus{}.OpenAPIModelName()),
+						},
+					},
+					"health": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Health contains information about the application's current health status",
+							Default:     map[string]interface{}{},
+							Ref:         ref(v1alpha1.AppHealthStatus{}.OpenAPIModelName()),
+						},
+					},
+					"history": {
+						SchemaProps: spec.SchemaProps{
+							Description: "History contains information about the application's sync history",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref(v1alpha1.RevisionHistory{}.OpenAPIModelName()),
+									},
+								},
+							},
+						},
+					},
+					"conditions": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Conditions is a list of currently observed application conditions",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref(v1alpha1.ApplicationCondition{}.OpenAPIModelName()),
+									},
+								},
+							},
+						},
+					},
+					"reconciledAt": {
+						SchemaProps: spec.SchemaProps{
+							Description: "ReconciledAt indicates when the application state was reconciled using the latest git version",
+							Ref:         ref(metav1.Time{}.OpenAPIModelName()),
+						},
+					},
+					"operationState": {
+						SchemaProps: spec.SchemaProps{
+							Description: "OperationState contains information about any ongoing operations, such as a sync",
+							Ref:         ref(v1alpha1.OperationState{}.OpenAPIModelName()),
+						},
+					},
+					"observedAt": {
+						SchemaProps: spec.SchemaProps{
+							Description: "ObservedAt indicates when the application state was updated without querying latest git state\n\nDeprecated: controller no longer updates ObservedAt field",
+							Ref:         ref(metav1.Time{}.OpenAPIModelName()),
+						},
+					},
+					"sourceType": {
+						SchemaProps: spec.SchemaProps{
+							Description: "SourceType specifies the type of this application",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"summary": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Summary contains a list of URLs and container images used by this application",
+							Default:     map[string]interface{}{},
+							Ref:         ref(v1alpha1.ApplicationSummary{}.OpenAPIModelName()),
+						},
+					},
+					"resourceHealthSource": {
+						SchemaProps: spec.SchemaProps{
+							Description: "ResourceHealthSource indicates where the resource health status is stored: inline if not set or appTree",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"sourceTypes": {
+						SchemaProps: spec.SchemaProps{
+							Description: "SourceTypes specifies the type of the sources included in the application",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: "",
+										Type:    []string{"string"},
+										Format:  "",
+									},
+								},
+							},
+						},
+					},
+					"controllerNamespace": {
+						SchemaProps: spec.SchemaProps{
+							Description: "ControllerNamespace indicates the namespace in which the application controller is located",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"sourceHydrator": {
+						SchemaProps: spec.SchemaProps{
+							Description: "SourceHydrator stores information about the current state of source hydration",
+							Default:     map[string]interface{}{},
+							Ref:         ref(v1alpha1.SourceHydratorStatus{}.OpenAPIModelName()),
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			v1alpha1.AppHealthStatus{}.OpenAPIModelName(), v1alpha1.ApplicationCondition{}.OpenAPIModelName(), v1alpha1.ApplicationSummary{}.OpenAPIModelName(), v1alpha1.OperationState{}.OpenAPIModelName(), v1alpha1.ResourceStatus{}.OpenAPIModelName(), v1alpha1.RevisionHistory{}.OpenAPIModelName(), v1alpha1.SourceHydratorStatus{}.OpenAPIModelName(), v1alpha1.SyncStatus{}.OpenAPIModelName(), metav1.Time{}.OpenAPIModelName()},
+	}
+}
+
+func schema_pkg_apis_application_v1alpha1_ApplicationSummary(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "ApplicationSummary contains information about URLs and container images used by an application",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"externalURLs": {
+						SchemaProps: spec.SchemaProps{
+							Description: "ExternalURLs holds all external URLs of application child resources.",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: "",
+										Type:    []string{"string"},
+										Format:  "",
+									},
+								},
+							},
+						},
+					},
+					"images": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Images holds all images of application child resources.",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: "",
+										Type:    []string{"string"},
+										Format:  "",
+									},
+								},
+							},
+						},
+					},
+				},
+			},
+		},
+	}
+}
+
+func schema_pkg_apis_application_v1alpha1_Backoff(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "Backoff is the backoff strategy to use on subsequent retries for failing syncs",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"duration": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Duration is the amount to back off. Default unit is seconds, but could also be a duration (e.g. \"2m\", \"1h\")",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"factor": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Factor is a factor to multiply the base duration after each failed retry",
+							Type:        []string{"integer"},
+							Format:      "int64",
+						},
+					},
+					"maxDuration": {
+						SchemaProps: spec.SchemaProps{
+							Description: "MaxDuration is the maximum amount of time allowed for the backoff strategy",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+				},
+			},
+		},
+	}
+}
+
+func schema_pkg_apis_application_v1alpha1_ClusterResourceRestrictionItem(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "ClusterResourceRestrictionItem is a cluster resource that is restricted by the project's whitelist or blacklist",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"group": {
+						SchemaProps: spec.SchemaProps{
+							Default: "",
+							Type:    []string{"string"},
+							Format:  "",
+						},
+					},
+					"kind": {
+						SchemaProps: spec.SchemaProps{
+							Default: "",
+							Type:    []string{"string"},
+							Format:  "",
+						},
+					},
+					"name": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Name is the name of the restricted resource. Glob patterns using Go's filepath.Match syntax are supported. Unlike the group and kind fields, if no name is specified, all resources of the specified group/kind are matched.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+				},
+				Required: []string{"group", "kind"},
+			},
+		},
+	}
+}
+
+func schema_pkg_apis_application_v1alpha1_ComparedTo(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "ComparedTo contains application source and target which was used for resources comparison",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"source": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Source is a reference to the application's source used for comparison",
+							Default:     map[string]interface{}{},
+							Ref:         ref(v1alpha1.ApplicationSource{}.OpenAPIModelName()),
+						},
+					},
+					"destination": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Destination is a reference to the application's destination used for comparison",
+							Default:     map[string]interface{}{},
+							Ref:         ref(v1alpha1.ApplicationDestination{}.OpenAPIModelName()),
+						},
+					},
+					"sources": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Sources is a reference to the application's multiple sources used for comparison",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref(v1alpha1.ApplicationSource{}.OpenAPIModelName()),
+									},
+								},
+							},
+						},
+					},
+					"ignoreDifferences": {
+						SchemaProps: spec.SchemaProps{
+							Description: "IgnoreDifferences is a reference to the application's ignored differences used for comparison",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref(v1alpha1.ResourceIgnoreDifferences{}.OpenAPIModelName()),
+									},
+								},
+							},
+						},
+					},
+				},
+				Required: []string{"destination"},
+			},
+		},
+		Dependencies: []string{
+			v1alpha1.ApplicationDestination{}.OpenAPIModelName(), v1alpha1.ApplicationSource{}.OpenAPIModelName(), v1alpha1.ResourceIgnoreDifferences{}.OpenAPIModelName()},
+	}
+}
+
+func schema_pkg_apis_application_v1alpha1_DrySource(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "DrySource specifies a location for dry \"don't repeat yourself\" manifest source information.",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"repoURL": {
+						SchemaProps: spec.SchemaProps{
+							Description: "RepoURL is the URL to the git repository that contains the application manifests",
+							Default:     "",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"targetRevision": {
+						SchemaProps: spec.SchemaProps{
+							Description: "TargetRevision defines the revision of the source to hydrate",
+							Default:     "",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"path": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Path is a directory path within the Git repository where the manifests are located",
+							Default:     "",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"helm": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Helm specifies helm specific options",
+							Ref:         ref(v1alpha1.ApplicationSourceHelm{}.OpenAPIModelName()),
+						},
+					},
+					"kustomize": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Kustomize specifies kustomize specific options",
+							Ref:         ref(v1alpha1.ApplicationSourceKustomize{}.OpenAPIModelName()),
+						},
+					},
+					"directory": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Directory specifies path/directory specific options",
+							Ref:         ref(v1alpha1.ApplicationSourceDirectory{}.OpenAPIModelName()),
+						},
+					},
+					"plugin": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Plugin specifies config management plugin specific options",
+							Ref:         ref(v1alpha1.ApplicationSourcePlugin{}.OpenAPIModelName()),
+						},
+					},
+				},
+				Required: []string{"repoURL", "targetRevision", "path"},
+			},
+		},
+		Dependencies: []string{
+			v1alpha1.ApplicationSourceDirectory{}.OpenAPIModelName(), v1alpha1.ApplicationSourceHelm{}.OpenAPIModelName(), v1alpha1.ApplicationSourceKustomize{}.OpenAPIModelName(), v1alpha1.ApplicationSourcePlugin{}.OpenAPIModelName()},
+	}
+}
+
+func schema_pkg_apis_application_v1alpha1_EnvEntry(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "EnvEntry represents an entry in the application's environment",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"name": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Name is the name of the variable, usually expressed in uppercase",
+							Default:     "",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"value": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Value is the value of the variable",
+							Default:     "",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+				},
+				Required: []string{"name", "value"},
+			},
+		},
+	}
+}
+
+func schema_pkg_apis_application_v1alpha1_HealthStatus(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "HealthStatus contains information about the currently observed health state of a resource",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"status": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Status holds the status code of the resource",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"message": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Message is a human-readable informational message describing the health status",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"lastTransitionTime": {
+						SchemaProps: spec.SchemaProps{
+							Description: "LastTransitionTime is the time the HealthStatus was set or updated\n\nDeprecated: this field is not used and will be removed in a future release.",
+							Ref:         ref(metav1.Time{}.OpenAPIModelName()),
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			metav1.Time{}.OpenAPIModelName()},
+	}
+}
+
+func schema_pkg_apis_application_v1alpha1_HelmFileParameter(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "HelmFileParameter is a file parameter that's passed to helm template during manifest generation",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"name": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Name is the name of the Helm parameter",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"path": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Path is the path to the file containing the values for the Helm parameter",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+				},
+			},
+		},
+	}
+}
+
+func schema_pkg_apis_application_v1alpha1_HelmParameter(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "HelmParameter is a parameter that's passed to helm template during manifest generation",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"name": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Name is the name of the Helm parameter",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"value": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Value is the value for the Helm parameter",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"forceString": {
+						SchemaProps: spec.SchemaProps{
+							Description: "ForceString determines whether to tell Helm to interpret booleans and numbers as strings",
+							Type:        []string{"boolean"},
+							Format:      "",
+						},
+					},
+				},
+			},
+		},
+	}
+}
+
+func schema_pkg_apis_application_v1alpha1_HydrateOperation(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "HydrateOperation contains information about the most recent hydrate operation",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"startedAt": {
+						SchemaProps: spec.SchemaProps{
+							Description: "StartedAt indicates when the hydrate operation started",
+							Ref:         ref(metav1.Time{}.OpenAPIModelName()),
+						},
+					},
+					"finishedAt": {
+						SchemaProps: spec.SchemaProps{
+							Description: "FinishedAt indicates when the hydrate operation finished",
+							Ref:         ref(metav1.Time{}.OpenAPIModelName()),
+						},
+					},
+					"phase": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Phase indicates the status of the hydrate operation",
+							Default:     "",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"message": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Message contains a message describing the current status of the hydrate operation",
+							Default:     "",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"drySHA": {
+						SchemaProps: spec.SchemaProps{
+							Description: "DrySHA holds the resolved revision (sha) of the dry source as of the most recent reconciliation",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"hydratedSHA": {
+						SchemaProps: spec.SchemaProps{
+							Description: "HydratedSHA holds the resolved revision (sha) of the hydrated source as of the most recent reconciliation",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"sourceHydrator": {
+						SchemaProps: spec.SchemaProps{
+							Description: "SourceHydrator holds the hydrator config used for the hydrate operation",
+							Default:     map[string]interface{}{},
+							Ref:         ref(v1alpha1.SourceHydrator{}.OpenAPIModelName()),
+						},
+					},
+				},
+				Required: []string{"phase", "message"},
+			},
+		},
+		Dependencies: []string{
+			v1alpha1.SourceHydrator{}.OpenAPIModelName(), metav1.Time{}.OpenAPIModelName()},
+	}
+}
+
+func schema_pkg_apis_application_v1alpha1_HydrateTo(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "HydrateTo specifies a location to which hydrated manifests should be pushed as a \"staging area\".",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"targetBranch": {
+						SchemaProps: spec.SchemaProps{
+							Description: "TargetBranch is the branch to which hydrated manifests should be committed",
+							Default:     "",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+				},
+				Required: []string{"targetBranch"},
+			},
+		},
+	}
+}
+
+func schema_pkg_apis_application_v1alpha1_Info(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"name": {
+						SchemaProps: spec.SchemaProps{
+							Default: "",
+							Type:    []string{"string"},
+							Format:  "",
+						},
+					},
+					"value": {
+						SchemaProps: spec.SchemaProps{
+							Default: "",
+							Type:    []string{"string"},
+							Format:  "",
+						},
+					},
+				},
+				Required: []string{"name", "value"},
+			},
+		},
+	}
+}
+
+func schema_pkg_apis_application_v1alpha1_JWTToken(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "JWTToken holds the issuedAt and expiresAt values of a token",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"iat": {
+						SchemaProps: spec.SchemaProps{
+							Default: 0,
+							Type:    []string{"integer"},
+							Format:  "int64",
+						},
+					},
+					"exp": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"integer"},
+							Format: "int64",
+						},
+					},
+					"id": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"string"},
+							Format: "",
+						},
+					},
+				},
+				Required: []string{"iat"},
+			},
+		},
+	}
+}
+
+func schema_pkg_apis_application_v1alpha1_JWTTokens(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "JWTTokens represents a list of JWT tokens",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"items": {
+						SchemaProps: spec.SchemaProps{
+							Type: []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref(v1alpha1.JWTToken{}.OpenAPIModelName()),
+									},
+								},
+							},
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			v1alpha1.JWTToken{}.OpenAPIModelName()},
+	}
+}
+
+func schema_pkg_apis_application_v1alpha1_JsonnetVar(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "JsonnetVar represents a variable to be passed to jsonnet during manifest generation",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"name": {
+						SchemaProps: spec.SchemaProps{
+							Default: "",
+							Type:    []string{"string"},
+							Format:  "",
+						},
+					},
+					"value": {
+						SchemaProps: spec.SchemaProps{
+							Default: "",
+							Type:    []string{"string"},
+							Format:  "",
+						},
+					},
+					"code": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"boolean"},
+							Format: "",
+						},
+					},
+				},
+				Required: []string{"name", "value"},
+			},
+		},
+	}
+}
+
+func schema_pkg_apis_application_v1alpha1_KustomizeGvk(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "KustomizeGvk is a group/version/kind for Kustomize",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"group": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"string"},
+							Format: "",
+						},
+					},
+					"version": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"string"},
+							Format: "",
+						},
+					},
+					"kind": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"string"},
+							Format: "",
+						},
+					},
+				},
+			},
+		},
+	}
+}
+
+func schema_pkg_apis_application_v1alpha1_KustomizePatch(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "KustomizePatch represents a Kustomize patch",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"path": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"string"},
+							Format: "",
+						},
+					},
+					"patch": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"string"},
+							Format: "",
+						},
+					},
+					"target": {
+						SchemaProps: spec.SchemaProps{
+							Ref: ref(v1alpha1.KustomizeSelector{}.OpenAPIModelName()),
+						},
+					},
+					"options": {
+						SchemaProps: spec.SchemaProps{
+							Type: []string{"object"},
+							AdditionalProperties: &spec.SchemaOrBool{
+								Allows: true,
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: false,
+										Type:    []string{"boolean"},
+										Format:  "",
+									},
+								},
+							},
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			v1alpha1.KustomizeSelector{}.OpenAPIModelName()},
+	}
+}
+
+func schema_pkg_apis_application_v1alpha1_KustomizeReplica(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "KustomizeReplica defines a Kustomize replica override",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"name": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Name of Deployment or StatefulSet",
+							Default:     "",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"count": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Number of replicas",
+							Ref:         ref(intstr.IntOrString{}.OpenAPIModelName()),
+						},
+					},
+				},
+				Required: []string{"name", "count"},
+			},
+		},
+		Dependencies: []string{
+			intstr.IntOrString{}.OpenAPIModelName()},
+	}
+}
+
+func schema_pkg_apis_application_v1alpha1_KustomizeResId(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "KustomizeResId is a resource identifier for Kustomize",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"group": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"string"},
+							Format: "",
+						},
+					},
+					"version": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"string"},
+							Format: "",
+						},
+					},
+					"kind": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"string"},
+							Format: "",
+						},
+					},
+					"name": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"string"},
+							Format: "",
+						},
+					},
+					"namespace": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"string"},
+							Format: "",
+						},
+					},
+				},
+			},
+		},
+	}
+}
+
+func schema_pkg_apis_application_v1alpha1_KustomizeSelector(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "KustomizeSelector is a selector for Kustomize patches",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"group": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"string"},
+							Format: "",
+						},
+					},
+					"version": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"string"},
+							Format: "",
+						},
+					},
+					"kind": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"string"},
+							Format: "",
+						},
+					},
+					"name": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"string"},
+							Format: "",
+						},
+					},
+					"namespace": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"string"},
+							Format: "",
+						},
+					},
+					"annotationSelector": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"string"},
+							Format: "",
+						},
+					},
+					"labelSelector": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"string"},
+							Format: "",
+						},
+					},
+				},
+			},
+		},
+	}
+}
+
+func schema_pkg_apis_application_v1alpha1_ManagedNamespaceMetadata(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"labels": {
+						SchemaProps: spec.SchemaProps{
+							Type: []string{"object"},
+							AdditionalProperties: &spec.SchemaOrBool{
+								Allows: true,
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: "",
+										Type:    []string{"string"},
+										Format:  "",
+									},
+								},
+							},
+						},
+					},
+					"annotations": {
+						SchemaProps: spec.SchemaProps{
+							Type: []string{"object"},
+							AdditionalProperties: &spec.SchemaOrBool{
+								Allows: true,
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: "",
+										Type:    []string{"string"},
+										Format:  "",
+									},
+								},
+							},
+						},
+					},
+				},
+			},
+		},
+	}
+}
+
+func schema_pkg_apis_application_v1alpha1_Operation(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "Operation contains information about a requested or running operation",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"sync": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Sync contains parameters for the operation",
+							Ref:         ref(v1alpha1.SyncOperation{}.OpenAPIModelName()),
+						},
+					},
+					"initiatedBy": {
+						SchemaProps: spec.SchemaProps{
+							Description: "InitiatedBy contains information about who initiated the operations",
+							Default:     map[string]interface{}{},
+							Ref:         ref(v1alpha1.OperationInitiator{}.OpenAPIModelName()),
+						},
+					},
+					"info": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Info is a list of informational items for this operation",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Ref: ref(v1alpha1.Info{}.OpenAPIModelName()),
+									},
+								},
+							},
+						},
+					},
+					"retry": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Retry controls the strategy to apply if a sync fails",
+							Default:     map[string]interface{}{},
+							Ref:         ref(v1alpha1.RetryStrategy{}.OpenAPIModelName()),
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			v1alpha1.Info{}.OpenAPIModelName(), v1alpha1.OperationInitiator{}.OpenAPIModelName(), v1alpha1.RetryStrategy{}.OpenAPIModelName(), v1alpha1.SyncOperation{}.OpenAPIModelName()},
+	}
+}
+
+func schema_pkg_apis_application_v1alpha1_OperationInitiator(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "OperationInitiator contains information about the initiator of an operation",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"username": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Username contains the name of a user who started operation",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"automated": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Automated is set to true if operation was initiated automatically by the application controller.",
+							Type:        []string{"boolean"},
+							Format:      "",
+						},
+					},
+				},
+			},
+		},
+	}
+}
+
+func schema_pkg_apis_application_v1alpha1_OperationState(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "OperationState contains information about state of a running operation",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"operation": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Operation is the original requested operation",
+							Default:     map[string]interface{}{},
+							Ref:         ref(v1alpha1.Operation{}.OpenAPIModelName()),
+						},
+					},
+					"phase": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Phase is the current phase of the operation",
+							Default:     "",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"message": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Message holds any pertinent messages when attempting to perform operation (typically errors).",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"syncResult": {
+						SchemaProps: spec.SchemaProps{
+							Description: "SyncResult is the result of a Sync operation",
+							Ref:         ref(v1alpha1.SyncOperationResult{}.OpenAPIModelName()),
+						},
+					},
+					"startedAt": {
+						SchemaProps: spec.SchemaProps{
+							Description: "StartedAt contains time of operation start",
+							Ref:         ref(metav1.Time{}.OpenAPIModelName()),
+						},
+					},
+					"finishedAt": {
+						SchemaProps: spec.SchemaProps{
+							Description: "FinishedAt contains time of operation completion",
+							Ref:         ref(metav1.Time{}.OpenAPIModelName()),
+						},
+					},
+					"retryCount": {
+						SchemaProps: spec.SchemaProps{
+							Description: "RetryCount contains time of operation retries",
+							Type:        []string{"integer"},
+							Format:      "int64",
+						},
+					},
+				},
+				Required: []string{"operation", "phase", "startedAt"},
+			},
+		},
+		Dependencies: []string{
+			v1alpha1.Operation{}.OpenAPIModelName(), v1alpha1.SyncOperationResult{}.OpenAPIModelName(), metav1.Time{}.OpenAPIModelName()},
+	}
+}
+
+func schema_pkg_apis_application_v1alpha1_OptionalArray(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "OptionalArray is an optional array parameter for plugins",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"array": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Array is the value of an array type parameter.",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: "",
+										Type:    []string{"string"},
+										Format:  "",
+									},
+								},
+							},
+						},
+					},
+				},
+			},
+		},
+	}
+}
+
+func schema_pkg_apis_application_v1alpha1_OptionalMap(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "OptionalMap is an optional map parameter for plugins",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"map": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Map is the value of a map type parameter.",
+							Type:        []string{"object"},
+							AdditionalProperties: &spec.SchemaOrBool{
+								Allows: true,
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: "",
+										Type:    []string{"string"},
+										Format:  "",
+									},
+								},
+							},
+						},
+					},
+				},
+			},
+		},
+	}
+}
+
+func schema_pkg_apis_application_v1alpha1_OrphanedResourceKey(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "OrphanedResourceKey is a reference to a resource to be ignored from",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"group": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"string"},
+							Format: "",
+						},
+					},
+					"kind": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"string"},
+							Format: "",
+						},
+					},
+					"name": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"string"},
+							Format: "",
+						},
+					},
+				},
+			},
+		},
+	}
+}
+
+func schema_pkg_apis_application_v1alpha1_OrphanedResourcesMonitorSettings(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "OrphanedResourcesMonitorSettings holds settings of orphaned resources monitoring",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"warn": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Warn indicates if warning condition should be created for apps which have orphaned resources",
+							Type:        []string{"boolean"},
+							Format:      "",
+						},
+					},
+					"ignore": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Ignore contains a list of resources that are to be excluded from orphaned resources monitoring",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref(v1alpha1.OrphanedResourceKey{}.OpenAPIModelName()),
+									},
+								},
+							},
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			v1alpha1.OrphanedResourceKey{}.OpenAPIModelName()},
+	}
+}
+
+func schema_pkg_apis_application_v1alpha1_ProjectRole(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "ProjectRole represents a role that has access to a project",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"name": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Name is a name for this role",
+							Default:     "",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"description": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Description is a description of the role",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"policies": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Policies Stores a list of casbin formatted strings that define access policies for the role in the project",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: "",
+										Type:    []string{"string"},
+										Format:  "",
+									},
+								},
+							},
+						},
+					},
+					"jwtTokens": {
+						SchemaProps: spec.SchemaProps{
+							Description: "JWTTokens are a list of generated JWT tokens bound to this role",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref(v1alpha1.JWTToken{}.OpenAPIModelName()),
+									},
+								},
+							},
+						},
+					},
+					"groups": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Groups are a list of OIDC group claims bound to this role",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: "",
+										Type:    []string{"string"},
+										Format:  "",
+									},
+								},
+							},
+						},
+					},
+				},
+				Required: []string{"name"},
+			},
+		},
+		Dependencies: []string{
+			v1alpha1.JWTToken{}.OpenAPIModelName()},
+	}
+}
+
+func schema_pkg_apis_application_v1alpha1_ResourceIgnoreDifferences(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "ResourceIgnoreDifferences contains resource filter and list of json paths which should be ignored during comparison with live state.",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"group": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"string"},
+							Format: "",
+						},
+					},
+					"kind": {
+						SchemaProps: spec.SchemaProps{
+							Default: "",
+							Type:    []string{"string"},
+							Format:  "",
+						},
+					},
+					"name": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"string"},
+							Format: "",
+						},
+					},
+					"namespace": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"string"},
+							Format: "",
+						},
+					},
+					"jsonPointers": {
+						SchemaProps: spec.SchemaProps{
+							Type: []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: "",
+										Type:    []string{"string"},
+										Format:  "",
+									},
+								},
+							},
+						},
+					},
+					"jqPathExpressions": {
+						SchemaProps: spec.SchemaProps{
+							Type: []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: "",
+										Type:    []string{"string"},
+										Format:  "",
+									},
+								},
+							},
+						},
+					},
+					"managedFieldsManagers": {
+						SchemaProps: spec.SchemaProps{
+							Description: "ManagedFieldsManagers is a list of trusted managers. Fields mutated by those managers will take precedence over the desired state defined in the SCM and won't be displayed in diffs",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: "",
+										Type:    []string{"string"},
+										Format:  "",
+									},
+								},
+							},
+						},
+					},
+				},
+				Required: []string{"kind"},
+			},
+		},
+	}
+}
+
+func schema_pkg_apis_application_v1alpha1_ResourceResult(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "ResourceResult holds the operation result details of a specific resource",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"group": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Group specifies the API group of the resource",
+							Default:     "",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"version": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Version specifies the API version of the resource",
+							Default:     "",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"kind": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Kind specifies the API kind of the resource",
+							Default:     "",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"namespace": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Namespace specifies the target namespace of the resource",
+							Default:     "",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"name": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Name specifies the name of the resource",
+							Default:     "",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"status": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Status holds the final result of the sync. Will be empty if the resources is yet to be applied/pruned and is always zero-value for hooks",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"message": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Message contains an informational or error message for the last sync OR operation",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"hookType": {
+						SchemaProps: spec.SchemaProps{
+							Description: "HookType specifies the type of the hook. Empty for non-hook resources",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"hookPhase": {
+						SchemaProps: spec.SchemaProps{
+							Description: "HookPhase contains the state of any operation associated with this resource OR hook",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"syncPhase": {
+						SchemaProps: spec.SchemaProps{
+							Description: "SyncPhase indicates the particular phase of the sync that this result was acquired in",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"images": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Images contains the images related to the ResourceResult",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: "",
+										Type:    []string{"string"},
+										Format:  "",
+									},
+								},
+							},
+						},
+					},
+				},
+				Required: []string{"group", "version", "kind", "namespace", "name"},
+			},
+		},
+	}
+}
+
+func schema_pkg_apis_application_v1alpha1_ResourceStatus(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "ResourceStatus holds the current synchronization and health status of a Kubernetes resource.",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"group": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Group represents the API group of the resource (e.g., \"apps\" for Deployments).",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"version": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Version indicates the API version of the resource (e.g., \"v1\", \"v1beta1\").",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"kind": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Kind specifies the type of the resource (e.g., \"Deployment\", \"Service\").",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"namespace": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Namespace defines the Kubernetes namespace where the resource is located.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"name": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Name is the unique name of the resource within the namespace.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"status": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Status represents the synchronization state of the resource (e.g., Synced, OutOfSync).",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"health": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Health indicates the health status of the resource (e.g., Healthy, Degraded, Progressing).",
+							Ref:         ref(v1alpha1.HealthStatus{}.OpenAPIModelName()),
+						},
+					},
+					"hook": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Hook is true if the resource is used as a lifecycle hook in an Argo CD application.",
+							Type:        []string{"boolean"},
+							Format:      "",
+						},
+					},
+					"requiresPruning": {
+						SchemaProps: spec.SchemaProps{
+							Description: "RequiresPruning is true if the resource needs to be pruned (deleted) as part of synchronization.",
+							Type:        []string{"boolean"},
+							Format:      "",
+						},
+					},
+					"syncWave": {
+						SchemaProps: spec.SchemaProps{
+							Description: "SyncWave determines the order in which resources are applied during a sync operation.",
+							Type:        []string{"integer"},
+							Format:      "int64",
+						},
+					},
+					"requiresDeletionConfirmation": {
+						SchemaProps: spec.SchemaProps{
+							Description: "RequiresDeletionConfirmation is true if the resource requires explicit user confirmation before deletion.",
+							Type:        []string{"boolean"},
+							Format:      "",
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			v1alpha1.HealthStatus{}.OpenAPIModelName()},
+	}
+}
+
+func schema_pkg_apis_application_v1alpha1_RetryStrategy(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "RetryStrategy contains information about the strategy to apply when a sync failed",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"limit": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Limit is the maximum number of attempts for retrying a failed sync. If set to 0, no retries will be performed.",
+							Type:        []string{"integer"},
+							Format:      "int64",
+						},
+					},
+					"backoff": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Backoff controls how to backoff on subsequent retries of failed syncs",
+							Ref:         ref(v1alpha1.Backoff{}.OpenAPIModelName()),
+						},
+					},
+					"refresh": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Refresh indicates if the latest revision should be used on retry instead of the initial one (default: false)",
+							Type:        []string{"boolean"},
+							Format:      "",
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			v1alpha1.Backoff{}.OpenAPIModelName()},
+	}
+}
+
+func schema_pkg_apis_application_v1alpha1_RevisionHistory(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "RevisionHistory contains history information about a previous sync",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"revision": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Revision holds the revision the sync was performed against",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"deployedAt": {
+						SchemaProps: spec.SchemaProps{
+							Description: "DeployedAt holds the time the sync operation completed",
+							Ref:         ref(metav1.Time{}.OpenAPIModelName()),
+						},
+					},
+					"id": {
+						SchemaProps: spec.SchemaProps{
+							Description: "ID is an auto incrementing identifier of the RevisionHistory",
+							Default:     0,
+							Type:        []string{"integer"},
+							Format:      "int64",
+						},
+					},
+					"source": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Source is a reference to the application source used for the sync operation",
+							Default:     map[string]interface{}{},
+							Ref:         ref(v1alpha1.ApplicationSource{}.OpenAPIModelName()),
+						},
+					},
+					"deployStartedAt": {
+						SchemaProps: spec.SchemaProps{
+							Description: "DeployStartedAt holds the time the sync operation started",
+							Ref:         ref(metav1.Time{}.OpenAPIModelName()),
+						},
+					},
+					"sources": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Sources is a reference to the application sources used for the sync operation",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref(v1alpha1.ApplicationSource{}.OpenAPIModelName()),
+									},
+								},
+							},
+						},
+					},
+					"revisions": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Revisions holds the revision of each source in sources field the sync was performed against",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: "",
+										Type:    []string{"string"},
+										Format:  "",
+									},
+								},
+							},
+						},
+					},
+					"initiatedBy": {
+						SchemaProps: spec.SchemaProps{
+							Description: "InitiatedBy contains information about who initiated the operations",
+							Default:     map[string]interface{}{},
+							Ref:         ref(v1alpha1.OperationInitiator{}.OpenAPIModelName()),
+						},
+					},
+				},
+				Required: []string{"deployedAt", "id"},
+			},
+		},
+		Dependencies: []string{
+			v1alpha1.ApplicationSource{}.OpenAPIModelName(), v1alpha1.OperationInitiator{}.OpenAPIModelName(), metav1.Time{}.OpenAPIModelName()},
+	}
+}
+
+func schema_pkg_apis_application_v1alpha1_SignatureKey(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "SignatureKey is the specification of a key required to verify commit signatures with",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"keyID": {
+						SchemaProps: spec.SchemaProps{
+							Description: "The ID of the key in hexadecimal notation",
+							Default:     "",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+				},
+				Required: []string{"keyID"},
+			},
+		},
+	}
+}
+
+func schema_pkg_apis_application_v1alpha1_SourceHydrator(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "SourceHydrator specifies a dry \"don't repeat yourself\" source for manifests, a sync source from which to sync hydrated manifests, and an optional hydrateTo location to act as a \"staging\" area for hydrated manifests.",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"drySource": {
+						SchemaProps: spec.SchemaProps{
+							Description: "DrySource specifies where the dry \"don't repeat yourself\" manifest source lives.",
+							Default:     map[string]interface{}{},
+							Ref:         ref(v1alpha1.DrySource{}.OpenAPIModelName()),
+						},
+					},
+					"syncSource": {
+						SchemaProps: spec.SchemaProps{
+							Description: "SyncSource specifies where to sync hydrated manifests from.",
+							Default:     map[string]interface{}{},
+							Ref:         ref(v1alpha1.SyncSource{}.OpenAPIModelName()),
+						},
+					},
+					"hydrateTo": {
+						SchemaProps: spec.SchemaProps{
+							Description: "HydrateTo specifies an optional \"staging\" location to push hydrated manifests to. An external system would then have to move manifests to the SyncSource, e.g. by pull request.",
+							Ref:         ref(v1alpha1.HydrateTo{}.OpenAPIModelName()),
+						},
+					},
+				},
+				Required: []string{"drySource", "syncSource"},
+			},
+		},
+		Dependencies: []string{
+			v1alpha1.DrySource{}.OpenAPIModelName(), v1alpha1.HydrateTo{}.OpenAPIModelName(), v1alpha1.SyncSource{}.OpenAPIModelName()},
+	}
+}
+
+func schema_pkg_apis_application_v1alpha1_SourceHydratorStatus(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "SourceHydratorStatus contains information about the current state of source hydration",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"lastSuccessfulOperation": {
+						SchemaProps: spec.SchemaProps{
+							Description: "LastSuccessfulOperation holds info about the most recent successful hydration",
+							Ref:         ref(v1alpha1.SuccessfulHydrateOperation{}.OpenAPIModelName()),
+						},
+					},
+					"currentOperation": {
+						SchemaProps: spec.SchemaProps{
+							Description: "CurrentOperation holds the status of the hydrate operation",
+							Ref:         ref(v1alpha1.HydrateOperation{}.OpenAPIModelName()),
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			v1alpha1.HydrateOperation{}.OpenAPIModelName(), v1alpha1.SuccessfulHydrateOperation{}.OpenAPIModelName()},
+	}
+}
+
+func schema_pkg_apis_application_v1alpha1_SuccessfulHydrateOperation(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "SuccessfulHydrateOperation contains information about the most recent successful hydrate operation",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"drySHA": {
+						SchemaProps: spec.SchemaProps{
+							Description: "DrySHA holds the resolved revision (sha) of the dry source as of the most recent reconciliation",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"hydratedSHA": {
+						SchemaProps: spec.SchemaProps{
+							Description: "HydratedSHA holds the resolved revision (sha) of the hydrated source as of the most recent reconciliation",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"sourceHydrator": {
+						SchemaProps: spec.SchemaProps{
+							Description: "SourceHydrator holds the hydrator config used for the hydrate operation",
+							Default:     map[string]interface{}{},
+							Ref:         ref(v1alpha1.SourceHydrator{}.OpenAPIModelName()),
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			v1alpha1.SourceHydrator{}.OpenAPIModelName()},
+	}
+}
+
+func schema_pkg_apis_application_v1alpha1_SyncOperation(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "SyncOperation contains details about a sync operation.",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"revision": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Revision is the revision (Git) or chart version (Helm) which to sync the application to. If omitted, will use the revision specified in app spec.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"prune": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Prune specifies to delete resources from the cluster that are no longer tracked in git",
+							Type:        []string{"boolean"},
+							Format:      "",
+						},
+					},
+					"dryRun": {
+						SchemaProps: spec.SchemaProps{
+							Description: "DryRun specifies to perform a `kubectl apply --dry-run` without actually performing the sync",
+							Type:        []string{"boolean"},
+							Format:      "",
+						},
+					},
+					"syncStrategy": {
+						SchemaProps: spec.SchemaProps{
+							Description: "SyncStrategy describes how to perform the sync",
+							Ref:         ref(v1alpha1.SyncStrategy{}.OpenAPIModelName()),
+						},
+					},
+					"resources": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Resources describes which resources shall be part of the sync",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref(v1alpha1.SyncOperationResource{}.OpenAPIModelName()),
+									},
+								},
+							},
+						},
+					},
+					"source": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Source overrides the source definition set in the application. This is typically set in a Rollback operation and is nil during a Sync operation",
+							Ref:         ref(v1alpha1.ApplicationSource{}.OpenAPIModelName()),
+						},
+					},
+					"manifests": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Manifests is an optional field that overrides sync source with a local directory for development",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: "",
+										Type:    []string{"string"},
+										Format:  "",
+									},
+								},
+							},
+						},
+					},
+					"syncOptions": {
+						SchemaProps: spec.SchemaProps{
+							Description: "SyncOptions provide per-sync sync-options, e.g. Validate=false",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: "",
+										Type:    []string{"string"},
+										Format:  "",
+									},
+								},
+							},
+						},
+					},
+					"sources": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Sources overrides the source definition set in the application. This is typically set in a Rollback operation and is nil during a Sync operation",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref(v1alpha1.ApplicationSource{}.OpenAPIModelName()),
+									},
+								},
+							},
+						},
+					},
+					"revisions": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Revisions is the list of revision (Git) or chart version (Helm) which to sync each source in sources field for the application to. If omitted, will use the revision specified in app spec.",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: "",
+										Type:    []string{"string"},
+										Format:  "",
+									},
+								},
+							},
+						},
+					},
+					"autoHealAttemptsCount": {
+						SchemaProps: spec.SchemaProps{
+							Description: "SelfHealAttemptsCount contains the number of auto-heal attempts",
+							Type:        []string{"integer"},
+							Format:      "int64",
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			v1alpha1.ApplicationSource{}.OpenAPIModelName(), v1alpha1.SyncOperationResource{}.OpenAPIModelName(), v1alpha1.SyncStrategy{}.OpenAPIModelName()},
+	}
+}
+
+func schema_pkg_apis_application_v1alpha1_SyncOperationResource(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "SyncOperationResource contains resources to sync.",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"group": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"string"},
+							Format: "",
+						},
+					},
+					"kind": {
+						SchemaProps: spec.SchemaProps{
+							Default: "",
+							Type:    []string{"string"},
+							Format:  "",
+						},
+					},
+					"name": {
+						SchemaProps: spec.SchemaProps{
+							Default: "",
+							Type:    []string{"string"},
+							Format:  "",
+						},
+					},
+					"namespace": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"string"},
+							Format: "",
+						},
+					},
+				},
+				Required: []string{"kind", "name"},
+			},
+		},
+	}
+}
+
+func schema_pkg_apis_application_v1alpha1_SyncOperationResult(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "SyncOperationResult represent result of sync operation",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"resources": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Resources contains a list of sync result items for each individual resource in a sync operation",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Ref: ref(v1alpha1.ResourceResult{}.OpenAPIModelName()),
+									},
+								},
+							},
+						},
+					},
+					"revision": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Revision holds the revision this sync operation was performed to",
+							Default:     "",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"source": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Source records the application source information of the sync, used for comparing auto-sync",
+							Default:     map[string]interface{}{},
+							Ref:         ref(v1alpha1.ApplicationSource{}.OpenAPIModelName()),
+						},
+					},
+					"sources": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Sources records the application source information of the sync, used for comparing auto-sync",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref(v1alpha1.ApplicationSource{}.OpenAPIModelName()),
+									},
+								},
+							},
+						},
+					},
+					"revisions": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Revisions holds the revision this sync operation was performed for respective indexed source in sources field",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: "",
+										Type:    []string{"string"},
+										Format:  "",
+									},
+								},
+							},
+						},
+					},
+					"managedNamespaceMetadata": {
+						SchemaProps: spec.SchemaProps{
+							Description: "ManagedNamespaceMetadata contains the current sync state of managed namespace metadata",
+							Ref:         ref(v1alpha1.ManagedNamespaceMetadata{}.OpenAPIModelName()),
+						},
+					},
+				},
+				Required: []string{"revision"},
+			},
+		},
+		Dependencies: []string{
+			v1alpha1.ApplicationSource{}.OpenAPIModelName(), v1alpha1.ManagedNamespaceMetadata{}.OpenAPIModelName(), v1alpha1.ResourceResult{}.OpenAPIModelName()},
+	}
+}
+
+func schema_pkg_apis_application_v1alpha1_SyncPolicy(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "SyncPolicy controls when a sync will be performed in response to updates in git",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"automated": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Automated will keep an application synced to the target revision",
+							Ref:         ref(v1alpha1.SyncPolicyAutomated{}.OpenAPIModelName()),
+						},
+					},
+					"syncOptions": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Options allow you to specify whole app sync-options",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: "",
+										Type:    []string{"string"},
+										Format:  "",
+									},
+								},
+							},
+						},
+					},
+					"retry": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Retry controls failed sync retry behavior",
+							Ref:         ref(v1alpha1.RetryStrategy{}.OpenAPIModelName()),
+						},
+					},
+					"managedNamespaceMetadata": {
+						SchemaProps: spec.SchemaProps{
+							Description: "ManagedNamespaceMetadata controls metadata in the given namespace (if CreateNamespace=true)",
+							Ref:         ref(v1alpha1.ManagedNamespaceMetadata{}.OpenAPIModelName()),
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			v1alpha1.ManagedNamespaceMetadata{}.OpenAPIModelName(), v1alpha1.RetryStrategy{}.OpenAPIModelName(), v1alpha1.SyncPolicyAutomated{}.OpenAPIModelName()},
+	}
+}
+
+func schema_pkg_apis_application_v1alpha1_SyncPolicyAutomated(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "SyncPolicyAutomated controls the behavior of an automated sync",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"prune": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Prune specifies whether to delete resources from the cluster that are not found in the sources anymore as part of automated sync (default: false)",
+							Type:        []string{"boolean"},
+							Format:      "",
+						},
+					},
+					"selfHeal": {
+						SchemaProps: spec.SchemaProps{
+							Description: "SelfHeal specifies whether to revert resources back to their desired state upon modification in the cluster (default: false)",
+							Type:        []string{"boolean"},
+							Format:      "",
+						},
+					},
+					"allowEmpty": {
+						SchemaProps: spec.SchemaProps{
+							Description: "AllowEmpty allows apps have zero live resources (default: false)",
+							Type:        []string{"boolean"},
+							Format:      "",
+						},
+					},
+					"enabled": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Enable allows apps to explicitly control automated sync",
+							Type:        []string{"boolean"},
+							Format:      "",
+						},
+					},
+				},
+			},
+		},
+	}
+}
+
+func schema_pkg_apis_application_v1alpha1_SyncSource(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "SyncSource specifies a location from which hydrated manifests may be synced.",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"targetBranch": {
+						SchemaProps: spec.SchemaProps{
+							Description: "TargetBranch is the branch from which hydrated manifests will be synced. If HydrateTo is not set, this is also the branch to which hydrated manifests are committed.",
+							Default:     "",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"path": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Path is a directory path within the git repository where hydrated manifests should be committed to and synced from.",
+							Default:     "",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+				},
+				Required: []string{"targetBranch", "path"},
+			},
+		},
+	}
+}
+
+func schema_pkg_apis_application_v1alpha1_SyncStatus(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "SyncStatus contains information about the currently observed live and desired states of an application",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"status": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Status is the sync state of the comparison",
+							Default:     "",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"comparedTo": {
+						SchemaProps: spec.SchemaProps{
+							Description: "ComparedTo contains information about what has been compared",
+							Default:     map[string]interface{}{},
+							Ref:         ref(v1alpha1.ComparedTo{}.OpenAPIModelName()),
+						},
+					},
+					"revision": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Revision contains information about the revision the comparison has been performed to",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"revisions": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Revisions contains information about the revisions of multiple sources the comparison has been performed to",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: "",
+										Type:    []string{"string"},
+										Format:  "",
+									},
+								},
+							},
+						},
+					},
+				},
+				Required: []string{"status"},
+			},
+		},
+		Dependencies: []string{
+			v1alpha1.ComparedTo{}.OpenAPIModelName()},
+	}
+}
+
+func schema_pkg_apis_application_v1alpha1_SyncStrategy(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "SyncStrategy contains sync strategy options",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"apply": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Apply will perform a `kubectl apply` to perform the sync.",
+							Ref:         ref(v1alpha1.SyncStrategyApply{}.OpenAPIModelName()),
+						},
+					},
+					"hook": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Hook will submit any referenced resources to perform the sync. This is the default strategy",
+							Ref:         ref(v1alpha1.SyncStrategyHook{}.OpenAPIModelName()),
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			v1alpha1.SyncStrategyApply{}.OpenAPIModelName(), v1alpha1.SyncStrategyHook{}.OpenAPIModelName()},
+	}
+}
+
+func schema_pkg_apis_application_v1alpha1_SyncStrategyApply(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "SyncStrategyApply uses `kubectl apply` to perform the apply",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"force": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Force indicates whether or not to supply the --force flag to `kubectl apply`. The --force flag deletes and re-create the resource, when PATCH encounters conflict and has retried for 5 times.",
+							Type:        []string{"boolean"},
+							Format:      "",
+						},
+					},
+				},
+			},
+		},
+	}
+}
+
+func schema_pkg_apis_application_v1alpha1_SyncStrategyHook(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "SyncStrategyHook will perform a sync using hooks annotations. If no hook annotation is specified falls back to `kubectl apply`.",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"force": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Force indicates whether or not to supply the --force flag to `kubectl apply`. The --force flag deletes and re-create the resource, when PATCH encounters conflict and has retried for 5 times.",
+							Type:        []string{"boolean"},
+							Format:      "",
+						},
+					},
+				},
+			},
+		},
+	}
+}
+
+func schema_pkg_apis_application_v1alpha1_SyncWindow(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "SyncWindow contains the kind, time, duration and attributes that are used to assign the syncWindows to apps",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"kind": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Kind defines if the window allows or blocks syncs",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"schedule": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Schedule is the time the window will begin, specified in cron format",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"duration": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Duration is the amount of time the sync window will be open",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"applications": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Applications contains a list of applications that the window will apply to",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: "",
+										Type:    []string{"string"},
+										Format:  "",
+									},
+								},
+							},
+						},
+					},
+					"namespaces": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Namespaces contains a list of namespaces that the window will apply to",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: "",
+										Type:    []string{"string"},
+										Format:  "",
+									},
+								},
+							},
+						},
+					},
+					"clusters": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Clusters contains a list of clusters that the window will apply to",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: "",
+										Type:    []string{"string"},
+										Format:  "",
+									},
+								},
+							},
+						},
+					},
+					"manualSync": {
+						SchemaProps: spec.SchemaProps{
+							Description: "ManualSync enables manual syncs when they would otherwise be blocked",
+							Type:        []string{"boolean"},
+							Format:      "",
+						},
+					},
+					"timeZone": {
+						SchemaProps: spec.SchemaProps{
+							Description: "TimeZone of the sync that will be applied to the schedule",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"andOperator": {
+						SchemaProps: spec.SchemaProps{
+							Description: "UseAndOperator use AND operator for matching applications, namespaces and clusters instead of the default OR operator",
+							Type:        []string{"boolean"},
+							Format:      "",
+						},
+					},
+					"description": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Description of the sync that will be applied to the schedule, can be used to add any information such as a ticket number for example",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+				},
+			},
+		},
 	}
 }
 
@@ -68103,7 +72311,7 @@ func schema_k8sio_api_node_v1alpha1_RuntimeClass(ref common.ReferenceCallback) c
 						SchemaProps: spec.SchemaProps{
 							Description: "spec represents specification of the RuntimeClass More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status",
 							Default:     map[string]interface{}{},
-							Ref:         ref(v1alpha1.RuntimeClassSpec{}.OpenAPIModelName()),
+							Ref:         ref(nodev1alpha1.RuntimeClassSpec{}.OpenAPIModelName()),
 						},
 					},
 				},
@@ -68111,7 +72319,7 @@ func schema_k8sio_api_node_v1alpha1_RuntimeClass(ref common.ReferenceCallback) c
 			},
 		},
 		Dependencies: []string{
-			v1alpha1.RuntimeClassSpec{}.OpenAPIModelName(), metav1.ObjectMeta{}.OpenAPIModelName()},
+			nodev1alpha1.RuntimeClassSpec{}.OpenAPIModelName(), metav1.ObjectMeta{}.OpenAPIModelName()},
 	}
 }
 
@@ -68151,7 +72359,7 @@ func schema_k8sio_api_node_v1alpha1_RuntimeClassList(ref common.ReferenceCallbac
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref(v1alpha1.RuntimeClass{}.OpenAPIModelName()),
+										Ref:     ref(nodev1alpha1.RuntimeClass{}.OpenAPIModelName()),
 									},
 								},
 							},
@@ -68162,7 +72370,7 @@ func schema_k8sio_api_node_v1alpha1_RuntimeClassList(ref common.ReferenceCallbac
 			},
 		},
 		Dependencies: []string{
-			v1alpha1.RuntimeClass{}.OpenAPIModelName(), metav1.ListMeta{}.OpenAPIModelName()},
+			nodev1alpha1.RuntimeClass{}.OpenAPIModelName(), metav1.ListMeta{}.OpenAPIModelName()},
 	}
 }
 
@@ -68184,13 +72392,13 @@ func schema_k8sio_api_node_v1alpha1_RuntimeClassSpec(ref common.ReferenceCallbac
 					"overhead": {
 						SchemaProps: spec.SchemaProps{
 							Description: "overhead represents the resource overhead associated with running a pod for a given RuntimeClass. For more details, see https://git.k8s.io/enhancements/keps/sig-node/688-pod-overhead/README.md",
-							Ref:         ref(v1alpha1.Overhead{}.OpenAPIModelName()),
+							Ref:         ref(nodev1alpha1.Overhead{}.OpenAPIModelName()),
 						},
 					},
 					"scheduling": {
 						SchemaProps: spec.SchemaProps{
 							Description: "scheduling holds the scheduling constraints to ensure that pods running with this RuntimeClass are scheduled to nodes that support it. If scheduling is nil, this RuntimeClass is assumed to be supported by all nodes.",
-							Ref:         ref(v1alpha1.Scheduling{}.OpenAPIModelName()),
+							Ref:         ref(nodev1alpha1.Scheduling{}.OpenAPIModelName()),
 						},
 					},
 				},
@@ -68198,7 +72406,7 @@ func schema_k8sio_api_node_v1alpha1_RuntimeClassSpec(ref common.ReferenceCallbac
 			},
 		},
 		Dependencies: []string{
-			v1alpha1.Overhead{}.OpenAPIModelName(), v1alpha1.Scheduling{}.OpenAPIModelName()},
+			nodev1alpha1.Overhead{}.OpenAPIModelName(), nodev1alpha1.Scheduling{}.OpenAPIModelName()},
 	}
 }
 

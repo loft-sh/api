@@ -66,6 +66,10 @@ type LicenseListerExpansion interface{}
 // LoftUpgradeLister.
 type LoftUpgradeListerExpansion interface{}
 
+// NetworkPeerListerExpansion allows custom methods to be added to
+// NetworkPeerLister.
+type NetworkPeerListerExpansion interface{}
+
 // NodeClaimListerExpansion allows custom methods to be added to
 // NodeClaimLister.
 type NodeClaimListerExpansion interface{}

@@ -2,6 +2,7 @@ package v1
 
 import (
 	agentstoragev1 "github.com/loft-sh/agentapi/v4/pkg/apis/loft/storage/v1"
+	argoapplicationsv1alpha1 "github.com/loft-sh/external-types/argoproj/argo-cd/v2/pkg/apis/application/v1alpha1"
 	corev1 "k8s.io/api/core/v1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 )
@@ -389,6 +390,8 @@ type ArgoProjectSpec struct {
 	// will be "*" indicating all source repositories.
 	// +optional
 	SourceRepos []string `json:"sourceRepos,omitempty"`
+	// Destinations contains list of destinations available for deployment
+	Destinations []argoapplicationsv1alpha1.ApplicationDestination `json:"destinations,omitempty"`
 	// Roles is a list of roles that should be attached to the ArgoCD project. If roles are provided
 	// no loft default roles will be set. If no roles are provided *and* SSO is enabled, loft will
 	// configure sane default values.
@@ -397,14 +400,14 @@ type ArgoProjectSpec struct {
 	// ClusterResourceWhitelist contains a list of whitelisted cluster level resources
 	// If not specified or empty, deny all cluster-scope resources.
 	// +optional
-	ClusterResourceWhitelist []metav1.GroupKind `json:"clusterResourceWhitelist,omitempty"`
+	ClusterResourceWhitelist []argoapplicationsv1alpha1.ClusterResourceRestrictionItem `json:"clusterResourceWhitelist,omitempty"`
 	// NamespaceResourceWhitelist contains a list of whitelisted namespace level resources
 	// If not specified or empty, allow all namespace-scope resources.
 	// +optional
 	NamespaceResourceWhitelist []metav1.GroupKind `json:"namespaceResourceWhitelist,omitempty"`
 	// ClusterResourceBlacklist contains a list of blacklisted cluster level resources
 	// +optional
-	ClusterResourceBlacklist []metav1.GroupKind `json:"clusterResourceBlacklist,omitempty"`
+	ClusterResourceBlacklist []argoapplicationsv1alpha1.ClusterResourceRestrictionItem `json:"clusterResourceBlacklist,omitempty"`
 	// NamespaceResourceBlacklist contains a list of blacklisted namespace level resources
 	// +optional
 	NamespaceResourceBlacklist []metav1.GroupKind `json:"namespaceResourceBlacklist,omitempty"`
@@ -442,8 +445,12 @@ type ArgoProjectPolicyRule struct {
 	// +optional
 	Action string `json:"action,omitempty"`
 	// Application is the ArgoCD project/repository to apply the rule to.
+	// DEPRECATED: Wasn't used. Kind provides a more flexible way to specify the resource type.
 	// +optional
 	Application string `json:"application,omitempty"`
+	// Kind is the kind to apply the rule to
+	// +optional
+	Kind string `json:"kind,omitempty"`
 	// Allow applies the "allow" permission to the rule, if allow is not set, the permission will
 	// always be set to "deny".
 	// +optional

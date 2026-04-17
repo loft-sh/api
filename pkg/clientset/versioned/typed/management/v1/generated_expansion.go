@@ -34,6 +34,8 @@ type LicenseExpansion interface{}
 
 type LoftUpgradeExpansion interface{}
 
+type NetworkPeerExpansion interface{}
+
 type NodeClaimExpansion interface{}
 
 type NodeEnvironmentExpansion interface{}

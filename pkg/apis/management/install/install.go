@@ -28,6 +28,7 @@ func addKnownOptionsTypes(scheme *runtime.Scheme) error {
 		&management.UserVirtualClustersOptions{},
 		&management.UserQuotasOptions{},
 		&management.PodExecOptions{},
+		&management.NetworkPeerDebugOptions{},
 	)
 	return nil
 }

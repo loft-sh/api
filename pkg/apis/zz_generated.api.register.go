@@ -55,6 +55,7 @@ func GetManagementAPIBuilder() *builders.APIGroupBuilder {
 			"IngressAuthToken",
 			"License",
 			"LoftUpgrade",
+			"NetworkPeer",
 			"NodeProvider",
 			"NodeType",
 			"OIDCClient",
