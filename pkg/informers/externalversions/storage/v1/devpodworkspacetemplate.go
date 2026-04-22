@@ -3,13 +3,13 @@
 package v1
 
 import (
-	"context"
+	context "context"
 	time "time"
 
-	storagev1 "github.com/loft-sh/api/v4/pkg/apis/storage/v1"
+	apisstoragev1 "github.com/loft-sh/api/v4/pkg/apis/storage/v1"
 	versioned "github.com/loft-sh/api/v4/pkg/clientset/versioned"
 	internalinterfaces "github.com/loft-sh/api/v4/pkg/informers/externalversions/internalinterfaces"
-	v1 "github.com/loft-sh/api/v4/pkg/listers/storage/v1"
+	storagev1 "github.com/loft-sh/api/v4/pkg/listers/storage/v1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	runtime "k8s.io/apimachinery/pkg/runtime"
 	watch "k8s.io/apimachinery/pkg/watch"
@@ -20,7 +20,7 @@ import (
 // DevPodWorkspaceTemplates.
 type DevPodWorkspaceTemplateInformer interface {
 	Informer() cache.SharedIndexInformer
-	Lister() v1.DevPodWorkspaceTemplateLister
+	Lister() storagev1.DevPodWorkspaceTemplateLister
 }
 
 type devPodWorkspaceTemplateInformer struct {
@@ -45,16 +45,28 @@ func NewFilteredDevPodWorkspaceTemplateInformer(client versioned.Interface, resy
 				if tweakListOptions != nil {
 					tweakListOptions(&options)
 				}
-				return client.StorageV1().DevPodWorkspaceTemplates().List(context.TODO(), options)
+				return client.StorageV1().DevPodWorkspaceTemplates().List(context.Background(), options)
 			},
 			WatchFunc: func(options metav1.ListOptions) (watch.Interface, error) {
 				if tweakListOptions != nil {
 					tweakListOptions(&options)
 				}
-				return client.StorageV1().DevPodWorkspaceTemplates().Watch(context.TODO(), options)
+				return client.StorageV1().DevPodWorkspaceTemplates().Watch(context.Background(), options)
+			},
+			ListWithContextFunc: func(ctx context.Context, options metav1.ListOptions) (runtime.Object, error) {
+				if tweakListOptions != nil {
+					tweakListOptions(&options)
+				}
+				return client.StorageV1().DevPodWorkspaceTemplates().List(ctx, options)
+			},
+			WatchFuncWithContext: func(ctx context.Context, options metav1.ListOptions) (watch.Interface, error) {
+				if tweakListOptions != nil {
+					tweakListOptions(&options)
+				}
+				return client.StorageV1().DevPodWorkspaceTemplates().Watch(ctx, options)
 			},
 		},
-		&storagev1.DevPodWorkspaceTemplate{},
+		&apisstoragev1.DevPodWorkspaceTemplate{},
 		resyncPeriod,
 		indexers,
 	)
@@ -65,9 +77,9 @@ func (f *devPodWorkspaceTemplateInformer) defaultInformer(client versioned.Inter
 }
 
 func (f *devPodWorkspaceTemplateInformer) Informer() cache.SharedIndexInformer {
-	return f.factory.InformerFor(&storagev1.DevPodWorkspaceTemplate{}, f.defaultInformer)
+	return f.factory.InformerFor(&apisstoragev1.DevPodWorkspaceTemplate{}, f.defaultInformer)
 }
 
-func (f *devPodWorkspaceTemplateInformer) Lister() v1.DevPodWorkspaceTemplateLister {
-	return v1.NewDevPodWorkspaceTemplateLister(f.Informer().GetIndexer())
+func (f *devPodWorkspaceTemplateInformer) Lister() storagev1.DevPodWorkspaceTemplateLister {
+	return storagev1.NewDevPodWorkspaceTemplateLister(f.Informer().GetIndexer())
 }
