@@ -156,11 +156,6 @@ func (in AuthenticationPassword) OpenAPIModelName() string {
 }
 
 // OpenAPIModelName returns the OpenAPI model name for this type.
-func (in AuthenticationRancher) OpenAPIModelName() string {
-	return "com.github.loft-sh.api.v4.pkg.apis.management.v1.AuthenticationRancher"
-}
-
-// OpenAPIModelName returns the OpenAPI model name for this type.
 func (in AuthenticationSAML) OpenAPIModelName() string {
 	return "com.github.loft-sh.api.v4.pkg.apis.management.v1.AuthenticationSAML"
 }

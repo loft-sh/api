@@ -5,7 +5,7 @@ go 1.25.0
 require (
 	github.com/ghodss/yaml v1.0.0
 	github.com/loft-sh/admin-apis v0.0.0-20260311181619-506013b79ba0
-	github.com/loft-sh/agentapi/v4 v4.9.0-next.4
+	github.com/loft-sh/agentapi/v4 v4.9.0-rc.1
 	github.com/loft-sh/apiserver v0.0.0-20260113122925-594495a02e96
 	github.com/loft-sh/external-types v0.0.3
 	github.com/robfig/cron/v3 v3.0.1

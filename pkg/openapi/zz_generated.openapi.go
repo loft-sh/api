@@ -166,7 +166,6 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 		managementv1.AuthenticationMicrosoft{}.OpenAPIModelName():                         schema_pkg_apis_management_v1_AuthenticationMicrosoft(ref),
 		managementv1.AuthenticationOIDC{}.OpenAPIModelName():                              schema_pkg_apis_management_v1_AuthenticationOIDC(ref),
 		managementv1.AuthenticationPassword{}.OpenAPIModelName():                          schema_pkg_apis_management_v1_AuthenticationPassword(ref),
-		managementv1.AuthenticationRancher{}.OpenAPIModelName():                           schema_pkg_apis_management_v1_AuthenticationRancher(ref),
 		managementv1.AuthenticationSAML{}.OpenAPIModelName():                              schema_pkg_apis_management_v1_AuthenticationSAML(ref),
 		managementv1.Backup{}.OpenAPIModelName():                                          schema_pkg_apis_management_v1_Backup(ref),
 		managementv1.BackupApply{}.OpenAPIModelName():                                     schema_pkg_apis_management_v1_BackupApply(ref),
@@ -570,7 +569,6 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 		apisstoragev1.HelmConfiguration{}.OpenAPIModelName():                              schema_pkg_apis_storage_v1_HelmConfiguration(ref),
 		apisstoragev1.HelmTask{}.OpenAPIModelName():                                       schema_pkg_apis_storage_v1_HelmTask(ref),
 		apisstoragev1.HelmTaskRelease{}.OpenAPIModelName():                                schema_pkg_apis_storage_v1_HelmTaskRelease(ref),
-		apisstoragev1.ImportVirtualClustersSpec{}.OpenAPIModelName():                      schema_pkg_apis_storage_v1_ImportVirtualClustersSpec(ref),
 		apisstoragev1.InstanceAccess{}.OpenAPIModelName():                                 schema_pkg_apis_storage_v1_InstanceAccess(ref),
 		apisstoragev1.InstanceAccessRule{}.OpenAPIModelName():                             schema_pkg_apis_storage_v1_InstanceAccessRule(ref),
 		apisstoragev1.InstanceDeployedAppStatus{}.OpenAPIModelName():                      schema_pkg_apis_storage_v1_InstanceDeployedAppStatus(ref),
@@ -637,8 +635,6 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 		apisstoragev1.QuotaStatusUser{}.OpenAPIModelName():                                schema_pkg_apis_storage_v1_QuotaStatusUser(ref),
 		apisstoragev1.QuotaStatusUserUsed{}.OpenAPIModelName():                            schema_pkg_apis_storage_v1_QuotaStatusUserUsed(ref),
 		apisstoragev1.Quotas{}.OpenAPIModelName():                                         schema_pkg_apis_storage_v1_Quotas(ref),
-		apisstoragev1.RancherIntegrationSpec{}.OpenAPIModelName():                         schema_pkg_apis_storage_v1_RancherIntegrationSpec(ref),
-		apisstoragev1.RancherProjectRef{}.OpenAPIModelName():                              schema_pkg_apis_storage_v1_RancherProjectRef(ref),
 		apisstoragev1.RequirePreset{}.OpenAPIModelName():                                  schema_pkg_apis_storage_v1_RequirePreset(ref),
 		apisstoragev1.RequireTemplate{}.OpenAPIModelName():                                schema_pkg_apis_storage_v1_RequireTemplate(ref),
 		apisstoragev1.SSHKey{}.OpenAPIModelName():                                         schema_pkg_apis_storage_v1_SSHKey(ref),
@@ -664,7 +660,6 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 		apisstoragev1.SpaceTemplateVersion{}.OpenAPIModelName():                           schema_pkg_apis_storage_v1_SpaceTemplateVersion(ref),
 		apisstoragev1.Storage{}.OpenAPIModelName():                                        schema_pkg_apis_storage_v1_Storage(ref),
 		apisstoragev1.StreamContainer{}.OpenAPIModelName():                                schema_pkg_apis_storage_v1_StreamContainer(ref),
-		apisstoragev1.SyncMembersSpec{}.OpenAPIModelName():                                schema_pkg_apis_storage_v1_SyncMembersSpec(ref),
 		apisstoragev1.Target{}.OpenAPIModelName():                                         schema_pkg_apis_storage_v1_Target(ref),
 		apisstoragev1.TargetCluster{}.OpenAPIModelName():                                  schema_pkg_apis_storage_v1_TargetCluster(ref),
 		apisstoragev1.TargetInstance{}.OpenAPIModelName():                                 schema_pkg_apis_storage_v1_TargetInstance(ref),
@@ -6565,12 +6560,6 @@ func schema_pkg_apis_management_v1_Authentication(ref common.ReferenceCallback) 
 							Ref:         ref(managementv1.AuthenticationSAML{}.OpenAPIModelName()),
 						},
 					},
-					"rancher": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Rancher holds the rancher authentication options",
-							Ref:         ref(managementv1.AuthenticationRancher{}.OpenAPIModelName()),
-						},
-					},
 					"password": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Password holds password authentication relevant information",
@@ -6654,7 +6643,7 @@ func schema_pkg_apis_management_v1_Authentication(ref common.ReferenceCallback) 
 			},
 		},
 		Dependencies: []string{
-			managementv1.AuthenticationGithub{}.OpenAPIModelName(), managementv1.AuthenticationGitlab{}.OpenAPIModelName(), managementv1.AuthenticationGoogle{}.OpenAPIModelName(), managementv1.AuthenticationMicrosoft{}.OpenAPIModelName(), managementv1.AuthenticationOIDC{}.OpenAPIModelName(), managementv1.AuthenticationPassword{}.OpenAPIModelName(), managementv1.AuthenticationRancher{}.OpenAPIModelName(), managementv1.AuthenticationSAML{}.OpenAPIModelName(), managementv1.ConnectorWithName{}.OpenAPIModelName()},
+			managementv1.AuthenticationGithub{}.OpenAPIModelName(), managementv1.AuthenticationGitlab{}.OpenAPIModelName(), managementv1.AuthenticationGoogle{}.OpenAPIModelName(), managementv1.AuthenticationMicrosoft{}.OpenAPIModelName(), managementv1.AuthenticationOIDC{}.OpenAPIModelName(), managementv1.AuthenticationPassword{}.OpenAPIModelName(), managementv1.AuthenticationSAML{}.OpenAPIModelName(), managementv1.ConnectorWithName{}.OpenAPIModelName()},
 	}
 }
 
@@ -7173,39 +7162,6 @@ func schema_pkg_apis_management_v1_AuthenticationPassword(ref common.ReferenceCa
 					"disabled": {
 						SchemaProps: spec.SchemaProps{
 							Description: "If true login via password is disabled",
-							Type:        []string{"boolean"},
-							Format:      "",
-						},
-					},
-				},
-			},
-		},
-	}
-}
-
-func schema_pkg_apis_management_v1_AuthenticationRancher(ref common.ReferenceCallback) common.OpenAPIDefinition {
-	return common.OpenAPIDefinition{
-		Schema: spec.Schema{
-			SchemaProps: spec.SchemaProps{
-				Type: []string{"object"},
-				Properties: map[string]spec.Schema{
-					"host": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Host holds the rancher host, e.g. my-domain.com",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"bearerToken": {
-						SchemaProps: spec.SchemaProps{
-							Description: "BearerToken holds the rancher API key in token username and password form. E.g. my-token:my-secret",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"insecure": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Insecure tells Loft if the Rancher endpoint is insecure.",
 							Type:        []string{"boolean"},
 							Format:      "",
 						},
@@ -15847,17 +15803,11 @@ func schema_pkg_apis_management_v1_ProjectSpec(ref common.ReferenceCallback) com
 							Ref:         ref(apisstoragev1.VaultIntegrationSpec{}.OpenAPIModelName()),
 						},
 					},
-					"rancher": {
-						SchemaProps: spec.SchemaProps{
-							Description: "RancherIntegration holds information about Rancher Integration",
-							Ref:         ref(apisstoragev1.RancherIntegrationSpec{}.OpenAPIModelName()),
-						},
-					},
 				},
 			},
 		},
 		Dependencies: []string{
-			apisstoragev1.Access{}.OpenAPIModelName(), apisstoragev1.AllowedCluster{}.OpenAPIModelName(), apisstoragev1.AllowedRunner{}.OpenAPIModelName(), apisstoragev1.AllowedTemplate{}.OpenAPIModelName(), apisstoragev1.ArgoIntegrationSpec{}.OpenAPIModelName(), apisstoragev1.Member{}.OpenAPIModelName(), apisstoragev1.NamespacePattern{}.OpenAPIModelName(), apisstoragev1.ProjectNamespaceTemplate{}.OpenAPIModelName(), apisstoragev1.Quotas{}.OpenAPIModelName(), apisstoragev1.RancherIntegrationSpec{}.OpenAPIModelName(), apisstoragev1.RequirePreset{}.OpenAPIModelName(), apisstoragev1.RequireTemplate{}.OpenAPIModelName(), apisstoragev1.UserOrTeam{}.OpenAPIModelName(), apisstoragev1.VaultIntegrationSpec{}.OpenAPIModelName()},
+			apisstoragev1.Access{}.OpenAPIModelName(), apisstoragev1.AllowedCluster{}.OpenAPIModelName(), apisstoragev1.AllowedRunner{}.OpenAPIModelName(), apisstoragev1.AllowedTemplate{}.OpenAPIModelName(), apisstoragev1.ArgoIntegrationSpec{}.OpenAPIModelName(), apisstoragev1.Member{}.OpenAPIModelName(), apisstoragev1.NamespacePattern{}.OpenAPIModelName(), apisstoragev1.ProjectNamespaceTemplate{}.OpenAPIModelName(), apisstoragev1.Quotas{}.OpenAPIModelName(), apisstoragev1.RequirePreset{}.OpenAPIModelName(), apisstoragev1.RequireTemplate{}.OpenAPIModelName(), apisstoragev1.UserOrTeam{}.OpenAPIModelName(), apisstoragev1.VaultIntegrationSpec{}.OpenAPIModelName()},
 	}
 }
 
@@ -26574,34 +26524,6 @@ func schema_pkg_apis_storage_v1_HelmTaskRelease(ref common.ReferenceCallback) co
 	}
 }
 
-func schema_pkg_apis_storage_v1_ImportVirtualClustersSpec(ref common.ReferenceCallback) common.OpenAPIDefinition {
-	return common.OpenAPIDefinition{
-		Schema: spec.Schema{
-			SchemaProps: spec.SchemaProps{
-				Type: []string{"object"},
-				Properties: map[string]spec.Schema{
-					"roleMapping": {
-						SchemaProps: spec.SchemaProps{
-							Description: "RoleMapping indicates an optional role mapping from a rancher project role to a rancher cluster role. Map to an empty role to exclude users and groups with that role from being synced.",
-							Type:        []string{"object"},
-							AdditionalProperties: &spec.SchemaOrBool{
-								Allows: true,
-								Schema: &spec.Schema{
-									SchemaProps: spec.SchemaProps{
-										Default: "",
-										Type:    []string{"string"},
-										Format:  "",
-									},
-								},
-							},
-						},
-					},
-				},
-			},
-		},
-	}
-}
-
 func schema_pkg_apis_storage_v1_InstanceAccess(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
@@ -29582,17 +29504,11 @@ func schema_pkg_apis_storage_v1_ProjectSpec(ref common.ReferenceCallback) common
 							Ref:         ref(apisstoragev1.VaultIntegrationSpec{}.OpenAPIModelName()),
 						},
 					},
-					"rancher": {
-						SchemaProps: spec.SchemaProps{
-							Description: "RancherIntegration holds information about Rancher Integration",
-							Ref:         ref(apisstoragev1.RancherIntegrationSpec{}.OpenAPIModelName()),
-						},
-					},
 				},
 			},
 		},
 		Dependencies: []string{
-			apisstoragev1.Access{}.OpenAPIModelName(), apisstoragev1.AllowedCluster{}.OpenAPIModelName(), apisstoragev1.AllowedRunner{}.OpenAPIModelName(), apisstoragev1.AllowedTemplate{}.OpenAPIModelName(), apisstoragev1.ArgoIntegrationSpec{}.OpenAPIModelName(), apisstoragev1.Member{}.OpenAPIModelName(), apisstoragev1.NamespacePattern{}.OpenAPIModelName(), apisstoragev1.ProjectNamespaceTemplate{}.OpenAPIModelName(), apisstoragev1.Quotas{}.OpenAPIModelName(), apisstoragev1.RancherIntegrationSpec{}.OpenAPIModelName(), apisstoragev1.RequirePreset{}.OpenAPIModelName(), apisstoragev1.RequireTemplate{}.OpenAPIModelName(), apisstoragev1.UserOrTeam{}.OpenAPIModelName(), apisstoragev1.VaultIntegrationSpec{}.OpenAPIModelName()},
+			apisstoragev1.Access{}.OpenAPIModelName(), apisstoragev1.AllowedCluster{}.OpenAPIModelName(), apisstoragev1.AllowedRunner{}.OpenAPIModelName(), apisstoragev1.AllowedTemplate{}.OpenAPIModelName(), apisstoragev1.ArgoIntegrationSpec{}.OpenAPIModelName(), apisstoragev1.Member{}.OpenAPIModelName(), apisstoragev1.NamespacePattern{}.OpenAPIModelName(), apisstoragev1.ProjectNamespaceTemplate{}.OpenAPIModelName(), apisstoragev1.Quotas{}.OpenAPIModelName(), apisstoragev1.RequirePreset{}.OpenAPIModelName(), apisstoragev1.RequireTemplate{}.OpenAPIModelName(), apisstoragev1.UserOrTeam{}.OpenAPIModelName(), apisstoragev1.VaultIntegrationSpec{}.OpenAPIModelName()},
 	}
 }
 
@@ -29893,74 +29809,6 @@ func schema_pkg_apis_storage_v1_Quotas(ref common.ReferenceCallback) common.Open
 									},
 								},
 							},
-						},
-					},
-				},
-			},
-		},
-	}
-}
-
-func schema_pkg_apis_storage_v1_RancherIntegrationSpec(ref common.ReferenceCallback) common.OpenAPIDefinition {
-	return common.OpenAPIDefinition{
-		Schema: spec.Schema{
-			SchemaProps: spec.SchemaProps{
-				Type: []string{"object"},
-				Properties: map[string]spec.Schema{
-					"enabled": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Enabled indicates if the Rancher Project Integration is enabled for this project.",
-							Type:        []string{"boolean"},
-							Format:      "",
-						},
-					},
-					"projectRef": {
-						SchemaProps: spec.SchemaProps{
-							Description: "ProjectRef defines references to rancher project, required for syncMembers and syncVirtualClusters.syncMembers",
-							Default:     map[string]interface{}{},
-							Ref:         ref(apisstoragev1.RancherProjectRef{}.OpenAPIModelName()),
-						},
-					},
-					"importVirtualClusters": {
-						SchemaProps: spec.SchemaProps{
-							Description: "ImportVirtualClusters defines settings to import virtual clusters to Rancher on creation",
-							Default:     map[string]interface{}{},
-							Ref:         ref(apisstoragev1.ImportVirtualClustersSpec{}.OpenAPIModelName()),
-						},
-					},
-					"syncMembers": {
-						SchemaProps: spec.SchemaProps{
-							Description: "SyncMembers defines settings to sync Rancher project members to the loft project",
-							Default:     map[string]interface{}{},
-							Ref:         ref(apisstoragev1.SyncMembersSpec{}.OpenAPIModelName()),
-						},
-					},
-				},
-			},
-		},
-		Dependencies: []string{
-			apisstoragev1.ImportVirtualClustersSpec{}.OpenAPIModelName(), apisstoragev1.RancherProjectRef{}.OpenAPIModelName(), apisstoragev1.SyncMembersSpec{}.OpenAPIModelName()},
-	}
-}
-
-func schema_pkg_apis_storage_v1_RancherProjectRef(ref common.ReferenceCallback) common.OpenAPIDefinition {
-	return common.OpenAPIDefinition{
-		Schema: spec.Schema{
-			SchemaProps: spec.SchemaProps{
-				Type: []string{"object"},
-				Properties: map[string]spec.Schema{
-					"cluster": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Cluster defines the Rancher cluster ID Needs to be the same id within Loft",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"project": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Project defines the Rancher project ID",
-							Type:        []string{"string"},
-							Format:      "",
 						},
 					},
 				},
@@ -31107,41 +30955,6 @@ func schema_pkg_apis_storage_v1_StreamContainer(ref common.ReferenceCallback) co
 		},
 		Dependencies: []string{
 			metav1.LabelSelector{}.OpenAPIModelName()},
-	}
-}
-
-func schema_pkg_apis_storage_v1_SyncMembersSpec(ref common.ReferenceCallback) common.OpenAPIDefinition {
-	return common.OpenAPIDefinition{
-		Schema: spec.Schema{
-			SchemaProps: spec.SchemaProps{
-				Type: []string{"object"},
-				Properties: map[string]spec.Schema{
-					"enabled": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Enabled indicates whether to sync rancher project members to the loft project.",
-							Type:        []string{"boolean"},
-							Format:      "",
-						},
-					},
-					"roleMapping": {
-						SchemaProps: spec.SchemaProps{
-							Description: "RoleMapping indicates an optional role mapping from a rancher role to a loft role. Map to an empty role to exclude users and groups with that role from being synced.",
-							Type:        []string{"object"},
-							AdditionalProperties: &spec.SchemaOrBool{
-								Allows: true,
-								Schema: &spec.Schema{
-									SchemaProps: spec.SchemaProps{
-										Default: "",
-										Type:    []string{"string"},
-										Format:  "",
-									},
-								},
-							},
-						},
-					},
-				},
-			},
-		},
 	}
 }
 

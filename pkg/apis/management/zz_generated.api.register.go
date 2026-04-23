@@ -1688,7 +1688,6 @@ type AuditPolicyRule struct {
 
 type Authentication struct {
 	Connector                `json:",inline"`
-	Rancher                  *AuthenticationRancher  `json:"rancher,omitempty"`
 	Password                 *AuthenticationPassword `json:"password,omitempty"`
 	Connectors               []ConnectorWithName     `json:"connectors,omitempty"`
 	DisableTeamCreation      bool                    `json:"disableTeamCreation,omitempty"`
@@ -1767,12 +1766,6 @@ type AuthenticationOIDC struct {
 
 type AuthenticationPassword struct {
 	Disabled bool `json:"disabled,omitempty"`
-}
-
-type AuthenticationRancher struct {
-	Host        string `json:"host,omitempty"`
-	BearerToken string `json:"bearerToken,omitempty"`
-	Insecure    bool   `json:"insecure,omitempty"`
 }
 
 type AuthenticationSAML struct {
