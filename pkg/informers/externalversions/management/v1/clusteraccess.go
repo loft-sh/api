@@ -3,13 +3,13 @@
 package v1
 
 import (
-	"context"
+	context "context"
 	time "time"
 
-	managementv1 "github.com/loft-sh/api/v4/pkg/apis/management/v1"
+	apismanagementv1 "github.com/loft-sh/api/v4/pkg/apis/management/v1"
 	versioned "github.com/loft-sh/api/v4/pkg/clientset/versioned"
 	internalinterfaces "github.com/loft-sh/api/v4/pkg/informers/externalversions/internalinterfaces"
-	v1 "github.com/loft-sh/api/v4/pkg/listers/management/v1"
+	managementv1 "github.com/loft-sh/api/v4/pkg/listers/management/v1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	runtime "k8s.io/apimachinery/pkg/runtime"
 	watch "k8s.io/apimachinery/pkg/watch"
@@ -20,7 +20,7 @@ import (
 // ClusterAccesses.
 type ClusterAccessInformer interface {
 	Informer() cache.SharedIndexInformer
-	Lister() v1.ClusterAccessLister
+	Lister() managementv1.ClusterAccessLister
 }
 
 type clusterAccessInformer struct {
@@ -45,16 +45,28 @@ func NewFilteredClusterAccessInformer(client versioned.Interface, resyncPeriod t
 				if tweakListOptions != nil {
 					tweakListOptions(&options)
 				}
-				return client.ManagementV1().ClusterAccesses().List(context.TODO(), options)
+				return client.ManagementV1().ClusterAccesses().List(context.Background(), options)
 			},
 			WatchFunc: func(options metav1.ListOptions) (watch.Interface, error) {
 				if tweakListOptions != nil {
 					tweakListOptions(&options)
 				}
-				return client.ManagementV1().ClusterAccesses().Watch(context.TODO(), options)
+				return client.ManagementV1().ClusterAccesses().Watch(context.Background(), options)
+			},
+			ListWithContextFunc: func(ctx context.Context, options metav1.ListOptions) (runtime.Object, error) {
+				if tweakListOptions != nil {
+					tweakListOptions(&options)
+				}
+				return client.ManagementV1().ClusterAccesses().List(ctx, options)
+			},
+			WatchFuncWithContext: func(ctx context.Context, options metav1.ListOptions) (watch.Interface, error) {
+				if tweakListOptions != nil {
+					tweakListOptions(&options)
+				}
+				return client.ManagementV1().ClusterAccesses().Watch(ctx, options)
 			},
 		},
-		&managementv1.ClusterAccess{},
+		&apismanagementv1.ClusterAccess{},
 		resyncPeriod,
 		indexers,
 	)
@@ -65,9 +77,9 @@ func (f *clusterAccessInformer) defaultInformer(client versioned.Interface, resy
 }
 
 func (f *clusterAccessInformer) Informer() cache.SharedIndexInformer {
-	return f.factory.InformerFor(&managementv1.ClusterAccess{}, f.defaultInformer)
+	return f.factory.InformerFor(&apismanagementv1.ClusterAccess{}, f.defaultInformer)
 }
 
-func (f *clusterAccessInformer) Lister() v1.ClusterAccessLister {
-	return v1.NewClusterAccessLister(f.Informer().GetIndexer())
+func (f *clusterAccessInformer) Lister() managementv1.ClusterAccessLister {
+	return managementv1.NewClusterAccessLister(f.Informer().GetIndexer())
 }
