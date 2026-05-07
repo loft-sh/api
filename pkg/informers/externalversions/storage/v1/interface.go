@@ -12,6 +12,10 @@ type Interface interface {
 	AccessKeys() AccessKeyInformer
 	// Apps returns a AppInformer.
 	Apps() AppInformer
+	// ArgoCDApplications returns a ArgoCDApplicationInformer.
+	ArgoCDApplications() ArgoCDApplicationInformer
+	// ArgoCDApplicationTemplates returns a ArgoCDApplicationTemplateInformer.
+	ArgoCDApplicationTemplates() ArgoCDApplicationTemplateInformer
 	// Clusters returns a ClusterInformer.
 	Clusters() ClusterInformer
 	// ClusterAccesses returns a ClusterAccessInformer.
@@ -71,6 +75,16 @@ func (v *version) AccessKeys() AccessKeyInformer {
 // Apps returns a AppInformer.
 func (v *version) Apps() AppInformer {
 	return &appInformer{factory: v.factory, tweakListOptions: v.tweakListOptions}
+}
+
+// ArgoCDApplications returns a ArgoCDApplicationInformer.
+func (v *version) ArgoCDApplications() ArgoCDApplicationInformer {
+	return &argoCDApplicationInformer{factory: v.factory, namespace: v.namespace, tweakListOptions: v.tweakListOptions}
+}
+
+// ArgoCDApplicationTemplates returns a ArgoCDApplicationTemplateInformer.
+func (v *version) ArgoCDApplicationTemplates() ArgoCDApplicationTemplateInformer {
+	return &argoCDApplicationTemplateInformer{factory: v.factory, tweakListOptions: v.tweakListOptions}
 }
 
 // Clusters returns a ClusterInformer.

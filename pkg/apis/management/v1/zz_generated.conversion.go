@@ -210,6 +210,86 @@ func RegisterConversions(s *runtime.Scheme) error {
 	}); err != nil {
 		return err
 	}
+	if err := s.AddGeneratedConversionFunc((*ArgoCDApplication)(nil), (*management.ArgoCDApplication)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_v1_ArgoCDApplication_To_management_ArgoCDApplication(a.(*ArgoCDApplication), b.(*management.ArgoCDApplication), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*management.ArgoCDApplication)(nil), (*ArgoCDApplication)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_management_ArgoCDApplication_To_v1_ArgoCDApplication(a.(*management.ArgoCDApplication), b.(*ArgoCDApplication), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*ArgoCDApplicationList)(nil), (*management.ArgoCDApplicationList)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_v1_ArgoCDApplicationList_To_management_ArgoCDApplicationList(a.(*ArgoCDApplicationList), b.(*management.ArgoCDApplicationList), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*management.ArgoCDApplicationList)(nil), (*ArgoCDApplicationList)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_management_ArgoCDApplicationList_To_v1_ArgoCDApplicationList(a.(*management.ArgoCDApplicationList), b.(*ArgoCDApplicationList), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*ArgoCDApplicationSpec)(nil), (*management.ArgoCDApplicationSpec)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_v1_ArgoCDApplicationSpec_To_management_ArgoCDApplicationSpec(a.(*ArgoCDApplicationSpec), b.(*management.ArgoCDApplicationSpec), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*management.ArgoCDApplicationSpec)(nil), (*ArgoCDApplicationSpec)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_management_ArgoCDApplicationSpec_To_v1_ArgoCDApplicationSpec(a.(*management.ArgoCDApplicationSpec), b.(*ArgoCDApplicationSpec), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*ArgoCDApplicationStatus)(nil), (*management.ArgoCDApplicationStatus)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_v1_ArgoCDApplicationStatus_To_management_ArgoCDApplicationStatus(a.(*ArgoCDApplicationStatus), b.(*management.ArgoCDApplicationStatus), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*management.ArgoCDApplicationStatus)(nil), (*ArgoCDApplicationStatus)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_management_ArgoCDApplicationStatus_To_v1_ArgoCDApplicationStatus(a.(*management.ArgoCDApplicationStatus), b.(*ArgoCDApplicationStatus), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*ArgoCDApplicationTemplate)(nil), (*management.ArgoCDApplicationTemplate)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_v1_ArgoCDApplicationTemplate_To_management_ArgoCDApplicationTemplate(a.(*ArgoCDApplicationTemplate), b.(*management.ArgoCDApplicationTemplate), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*management.ArgoCDApplicationTemplate)(nil), (*ArgoCDApplicationTemplate)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_management_ArgoCDApplicationTemplate_To_v1_ArgoCDApplicationTemplate(a.(*management.ArgoCDApplicationTemplate), b.(*ArgoCDApplicationTemplate), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*ArgoCDApplicationTemplateList)(nil), (*management.ArgoCDApplicationTemplateList)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_v1_ArgoCDApplicationTemplateList_To_management_ArgoCDApplicationTemplateList(a.(*ArgoCDApplicationTemplateList), b.(*management.ArgoCDApplicationTemplateList), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*management.ArgoCDApplicationTemplateList)(nil), (*ArgoCDApplicationTemplateList)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_management_ArgoCDApplicationTemplateList_To_v1_ArgoCDApplicationTemplateList(a.(*management.ArgoCDApplicationTemplateList), b.(*ArgoCDApplicationTemplateList), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*ArgoCDApplicationTemplateSpec)(nil), (*management.ArgoCDApplicationTemplateSpec)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_v1_ArgoCDApplicationTemplateSpec_To_management_ArgoCDApplicationTemplateSpec(a.(*ArgoCDApplicationTemplateSpec), b.(*management.ArgoCDApplicationTemplateSpec), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*management.ArgoCDApplicationTemplateSpec)(nil), (*ArgoCDApplicationTemplateSpec)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_management_ArgoCDApplicationTemplateSpec_To_v1_ArgoCDApplicationTemplateSpec(a.(*management.ArgoCDApplicationTemplateSpec), b.(*ArgoCDApplicationTemplateSpec), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*ArgoCDApplicationTemplateStatus)(nil), (*management.ArgoCDApplicationTemplateStatus)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_v1_ArgoCDApplicationTemplateStatus_To_management_ArgoCDApplicationTemplateStatus(a.(*ArgoCDApplicationTemplateStatus), b.(*management.ArgoCDApplicationTemplateStatus), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*management.ArgoCDApplicationTemplateStatus)(nil), (*ArgoCDApplicationTemplateStatus)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_management_ArgoCDApplicationTemplateStatus_To_v1_ArgoCDApplicationTemplateStatus(a.(*management.ArgoCDApplicationTemplateStatus), b.(*ArgoCDApplicationTemplateStatus), scope)
+	}); err != nil {
+		return err
+	}
 	if err := s.AddGeneratedConversionFunc((*AssignedVia)(nil), (*management.AssignedVia)(nil), func(a, b interface{}, scope conversion.Scope) error {
 		return Convert_v1_AssignedVia_To_management_AssignedVia(a.(*AssignedVia), b.(*management.AssignedVia), scope)
 	}); err != nil {
@@ -4185,6 +4265,194 @@ func Convert_management_Apps_To_v1_Apps(in *management.Apps, out *Apps, s conver
 	return autoConvert_management_Apps_To_v1_Apps(in, out, s)
 }
 
+func autoConvert_v1_ArgoCDApplication_To_management_ArgoCDApplication(in *ArgoCDApplication, out *management.ArgoCDApplication, s conversion.Scope) error {
+	out.ObjectMeta = in.ObjectMeta
+	if err := Convert_v1_ArgoCDApplicationSpec_To_management_ArgoCDApplicationSpec(&in.Spec, &out.Spec, s); err != nil {
+		return err
+	}
+	if err := Convert_v1_ArgoCDApplicationStatus_To_management_ArgoCDApplicationStatus(&in.Status, &out.Status, s); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Convert_v1_ArgoCDApplication_To_management_ArgoCDApplication is an autogenerated conversion function.
+func Convert_v1_ArgoCDApplication_To_management_ArgoCDApplication(in *ArgoCDApplication, out *management.ArgoCDApplication, s conversion.Scope) error {
+	return autoConvert_v1_ArgoCDApplication_To_management_ArgoCDApplication(in, out, s)
+}
+
+func autoConvert_management_ArgoCDApplication_To_v1_ArgoCDApplication(in *management.ArgoCDApplication, out *ArgoCDApplication, s conversion.Scope) error {
+	out.ObjectMeta = in.ObjectMeta
+	if err := Convert_management_ArgoCDApplicationSpec_To_v1_ArgoCDApplicationSpec(&in.Spec, &out.Spec, s); err != nil {
+		return err
+	}
+	if err := Convert_management_ArgoCDApplicationStatus_To_v1_ArgoCDApplicationStatus(&in.Status, &out.Status, s); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Convert_management_ArgoCDApplication_To_v1_ArgoCDApplication is an autogenerated conversion function.
+func Convert_management_ArgoCDApplication_To_v1_ArgoCDApplication(in *management.ArgoCDApplication, out *ArgoCDApplication, s conversion.Scope) error {
+	return autoConvert_management_ArgoCDApplication_To_v1_ArgoCDApplication(in, out, s)
+}
+
+func autoConvert_v1_ArgoCDApplicationList_To_management_ArgoCDApplicationList(in *ArgoCDApplicationList, out *management.ArgoCDApplicationList, s conversion.Scope) error {
+	out.ListMeta = in.ListMeta
+	out.Items = *(*[]management.ArgoCDApplication)(unsafe.Pointer(&in.Items))
+	return nil
+}
+
+// Convert_v1_ArgoCDApplicationList_To_management_ArgoCDApplicationList is an autogenerated conversion function.
+func Convert_v1_ArgoCDApplicationList_To_management_ArgoCDApplicationList(in *ArgoCDApplicationList, out *management.ArgoCDApplicationList, s conversion.Scope) error {
+	return autoConvert_v1_ArgoCDApplicationList_To_management_ArgoCDApplicationList(in, out, s)
+}
+
+func autoConvert_management_ArgoCDApplicationList_To_v1_ArgoCDApplicationList(in *management.ArgoCDApplicationList, out *ArgoCDApplicationList, s conversion.Scope) error {
+	out.ListMeta = in.ListMeta
+	out.Items = *(*[]ArgoCDApplication)(unsafe.Pointer(&in.Items))
+	return nil
+}
+
+// Convert_management_ArgoCDApplicationList_To_v1_ArgoCDApplicationList is an autogenerated conversion function.
+func Convert_management_ArgoCDApplicationList_To_v1_ArgoCDApplicationList(in *management.ArgoCDApplicationList, out *ArgoCDApplicationList, s conversion.Scope) error {
+	return autoConvert_management_ArgoCDApplicationList_To_v1_ArgoCDApplicationList(in, out, s)
+}
+
+func autoConvert_v1_ArgoCDApplicationSpec_To_management_ArgoCDApplicationSpec(in *ArgoCDApplicationSpec, out *management.ArgoCDApplicationSpec, s conversion.Scope) error {
+	out.ArgoCDApplicationSpec = in.ArgoCDApplicationSpec
+	return nil
+}
+
+// Convert_v1_ArgoCDApplicationSpec_To_management_ArgoCDApplicationSpec is an autogenerated conversion function.
+func Convert_v1_ArgoCDApplicationSpec_To_management_ArgoCDApplicationSpec(in *ArgoCDApplicationSpec, out *management.ArgoCDApplicationSpec, s conversion.Scope) error {
+	return autoConvert_v1_ArgoCDApplicationSpec_To_management_ArgoCDApplicationSpec(in, out, s)
+}
+
+func autoConvert_management_ArgoCDApplicationSpec_To_v1_ArgoCDApplicationSpec(in *management.ArgoCDApplicationSpec, out *ArgoCDApplicationSpec, s conversion.Scope) error {
+	out.ArgoCDApplicationSpec = in.ArgoCDApplicationSpec
+	return nil
+}
+
+// Convert_management_ArgoCDApplicationSpec_To_v1_ArgoCDApplicationSpec is an autogenerated conversion function.
+func Convert_management_ArgoCDApplicationSpec_To_v1_ArgoCDApplicationSpec(in *management.ArgoCDApplicationSpec, out *ArgoCDApplicationSpec, s conversion.Scope) error {
+	return autoConvert_management_ArgoCDApplicationSpec_To_v1_ArgoCDApplicationSpec(in, out, s)
+}
+
+func autoConvert_v1_ArgoCDApplicationStatus_To_management_ArgoCDApplicationStatus(in *ArgoCDApplicationStatus, out *management.ArgoCDApplicationStatus, s conversion.Scope) error {
+	out.ArgoCDApplicationStatus = in.ArgoCDApplicationStatus
+	return nil
+}
+
+// Convert_v1_ArgoCDApplicationStatus_To_management_ArgoCDApplicationStatus is an autogenerated conversion function.
+func Convert_v1_ArgoCDApplicationStatus_To_management_ArgoCDApplicationStatus(in *ArgoCDApplicationStatus, out *management.ArgoCDApplicationStatus, s conversion.Scope) error {
+	return autoConvert_v1_ArgoCDApplicationStatus_To_management_ArgoCDApplicationStatus(in, out, s)
+}
+
+func autoConvert_management_ArgoCDApplicationStatus_To_v1_ArgoCDApplicationStatus(in *management.ArgoCDApplicationStatus, out *ArgoCDApplicationStatus, s conversion.Scope) error {
+	out.ArgoCDApplicationStatus = in.ArgoCDApplicationStatus
+	return nil
+}
+
+// Convert_management_ArgoCDApplicationStatus_To_v1_ArgoCDApplicationStatus is an autogenerated conversion function.
+func Convert_management_ArgoCDApplicationStatus_To_v1_ArgoCDApplicationStatus(in *management.ArgoCDApplicationStatus, out *ArgoCDApplicationStatus, s conversion.Scope) error {
+	return autoConvert_management_ArgoCDApplicationStatus_To_v1_ArgoCDApplicationStatus(in, out, s)
+}
+
+func autoConvert_v1_ArgoCDApplicationTemplate_To_management_ArgoCDApplicationTemplate(in *ArgoCDApplicationTemplate, out *management.ArgoCDApplicationTemplate, s conversion.Scope) error {
+	out.ObjectMeta = in.ObjectMeta
+	if err := Convert_v1_ArgoCDApplicationTemplateSpec_To_management_ArgoCDApplicationTemplateSpec(&in.Spec, &out.Spec, s); err != nil {
+		return err
+	}
+	if err := Convert_v1_ArgoCDApplicationTemplateStatus_To_management_ArgoCDApplicationTemplateStatus(&in.Status, &out.Status, s); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Convert_v1_ArgoCDApplicationTemplate_To_management_ArgoCDApplicationTemplate is an autogenerated conversion function.
+func Convert_v1_ArgoCDApplicationTemplate_To_management_ArgoCDApplicationTemplate(in *ArgoCDApplicationTemplate, out *management.ArgoCDApplicationTemplate, s conversion.Scope) error {
+	return autoConvert_v1_ArgoCDApplicationTemplate_To_management_ArgoCDApplicationTemplate(in, out, s)
+}
+
+func autoConvert_management_ArgoCDApplicationTemplate_To_v1_ArgoCDApplicationTemplate(in *management.ArgoCDApplicationTemplate, out *ArgoCDApplicationTemplate, s conversion.Scope) error {
+	out.ObjectMeta = in.ObjectMeta
+	if err := Convert_management_ArgoCDApplicationTemplateSpec_To_v1_ArgoCDApplicationTemplateSpec(&in.Spec, &out.Spec, s); err != nil {
+		return err
+	}
+	if err := Convert_management_ArgoCDApplicationTemplateStatus_To_v1_ArgoCDApplicationTemplateStatus(&in.Status, &out.Status, s); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Convert_management_ArgoCDApplicationTemplate_To_v1_ArgoCDApplicationTemplate is an autogenerated conversion function.
+func Convert_management_ArgoCDApplicationTemplate_To_v1_ArgoCDApplicationTemplate(in *management.ArgoCDApplicationTemplate, out *ArgoCDApplicationTemplate, s conversion.Scope) error {
+	return autoConvert_management_ArgoCDApplicationTemplate_To_v1_ArgoCDApplicationTemplate(in, out, s)
+}
+
+func autoConvert_v1_ArgoCDApplicationTemplateList_To_management_ArgoCDApplicationTemplateList(in *ArgoCDApplicationTemplateList, out *management.ArgoCDApplicationTemplateList, s conversion.Scope) error {
+	out.ListMeta = in.ListMeta
+	out.Items = *(*[]management.ArgoCDApplicationTemplate)(unsafe.Pointer(&in.Items))
+	return nil
+}
+
+// Convert_v1_ArgoCDApplicationTemplateList_To_management_ArgoCDApplicationTemplateList is an autogenerated conversion function.
+func Convert_v1_ArgoCDApplicationTemplateList_To_management_ArgoCDApplicationTemplateList(in *ArgoCDApplicationTemplateList, out *management.ArgoCDApplicationTemplateList, s conversion.Scope) error {
+	return autoConvert_v1_ArgoCDApplicationTemplateList_To_management_ArgoCDApplicationTemplateList(in, out, s)
+}
+
+func autoConvert_management_ArgoCDApplicationTemplateList_To_v1_ArgoCDApplicationTemplateList(in *management.ArgoCDApplicationTemplateList, out *ArgoCDApplicationTemplateList, s conversion.Scope) error {
+	out.ListMeta = in.ListMeta
+	out.Items = *(*[]ArgoCDApplicationTemplate)(unsafe.Pointer(&in.Items))
+	return nil
+}
+
+// Convert_management_ArgoCDApplicationTemplateList_To_v1_ArgoCDApplicationTemplateList is an autogenerated conversion function.
+func Convert_management_ArgoCDApplicationTemplateList_To_v1_ArgoCDApplicationTemplateList(in *management.ArgoCDApplicationTemplateList, out *ArgoCDApplicationTemplateList, s conversion.Scope) error {
+	return autoConvert_management_ArgoCDApplicationTemplateList_To_v1_ArgoCDApplicationTemplateList(in, out, s)
+}
+
+func autoConvert_v1_ArgoCDApplicationTemplateSpec_To_management_ArgoCDApplicationTemplateSpec(in *ArgoCDApplicationTemplateSpec, out *management.ArgoCDApplicationTemplateSpec, s conversion.Scope) error {
+	out.ArgoCDApplicationTemplateSpec = in.ArgoCDApplicationTemplateSpec
+	return nil
+}
+
+// Convert_v1_ArgoCDApplicationTemplateSpec_To_management_ArgoCDApplicationTemplateSpec is an autogenerated conversion function.
+func Convert_v1_ArgoCDApplicationTemplateSpec_To_management_ArgoCDApplicationTemplateSpec(in *ArgoCDApplicationTemplateSpec, out *management.ArgoCDApplicationTemplateSpec, s conversion.Scope) error {
+	return autoConvert_v1_ArgoCDApplicationTemplateSpec_To_management_ArgoCDApplicationTemplateSpec(in, out, s)
+}
+
+func autoConvert_management_ArgoCDApplicationTemplateSpec_To_v1_ArgoCDApplicationTemplateSpec(in *management.ArgoCDApplicationTemplateSpec, out *ArgoCDApplicationTemplateSpec, s conversion.Scope) error {
+	out.ArgoCDApplicationTemplateSpec = in.ArgoCDApplicationTemplateSpec
+	return nil
+}
+
+// Convert_management_ArgoCDApplicationTemplateSpec_To_v1_ArgoCDApplicationTemplateSpec is an autogenerated conversion function.
+func Convert_management_ArgoCDApplicationTemplateSpec_To_v1_ArgoCDApplicationTemplateSpec(in *management.ArgoCDApplicationTemplateSpec, out *ArgoCDApplicationTemplateSpec, s conversion.Scope) error {
+	return autoConvert_management_ArgoCDApplicationTemplateSpec_To_v1_ArgoCDApplicationTemplateSpec(in, out, s)
+}
+
+func autoConvert_v1_ArgoCDApplicationTemplateStatus_To_management_ArgoCDApplicationTemplateStatus(in *ArgoCDApplicationTemplateStatus, out *management.ArgoCDApplicationTemplateStatus, s conversion.Scope) error {
+	out.ArgoCDApplicationTemplateStatus = in.ArgoCDApplicationTemplateStatus
+	return nil
+}
+
+// Convert_v1_ArgoCDApplicationTemplateStatus_To_management_ArgoCDApplicationTemplateStatus is an autogenerated conversion function.
+func Convert_v1_ArgoCDApplicationTemplateStatus_To_management_ArgoCDApplicationTemplateStatus(in *ArgoCDApplicationTemplateStatus, out *management.ArgoCDApplicationTemplateStatus, s conversion.Scope) error {
+	return autoConvert_v1_ArgoCDApplicationTemplateStatus_To_management_ArgoCDApplicationTemplateStatus(in, out, s)
+}
+
+func autoConvert_management_ArgoCDApplicationTemplateStatus_To_v1_ArgoCDApplicationTemplateStatus(in *management.ArgoCDApplicationTemplateStatus, out *ArgoCDApplicationTemplateStatus, s conversion.Scope) error {
+	out.ArgoCDApplicationTemplateStatus = in.ArgoCDApplicationTemplateStatus
+	return nil
+}
+
+// Convert_management_ArgoCDApplicationTemplateStatus_To_v1_ArgoCDApplicationTemplateStatus is an autogenerated conversion function.
+func Convert_management_ArgoCDApplicationTemplateStatus_To_v1_ArgoCDApplicationTemplateStatus(in *management.ArgoCDApplicationTemplateStatus, out *ArgoCDApplicationTemplateStatus, s conversion.Scope) error {
+	return autoConvert_management_ArgoCDApplicationTemplateStatus_To_v1_ArgoCDApplicationTemplateStatus(in, out, s)
+}
+
 func autoConvert_v1_AssignedVia_To_management_AssignedVia(in *AssignedVia, out *management.AssignedVia, s conversion.Scope) error {
 	if err := Convert_v1_ObjectName_To_management_ObjectName(&in.ObjectName, &out.ObjectName, s); err != nil {
 		return err
@@ -6607,6 +6875,7 @@ func autoConvert_v1_KioskSpec_To_management_KioskSpec(in *KioskSpec, out *manage
 	out.SleepModeConfig = in.SleepModeConfig
 	out.ChartInfo = in.ChartInfo
 	out.StorageClusterQuota = in.StorageClusterQuota
+	out.AccessKey = in.AccessKey
 	out.UISettings = in.UISettings
 	if err := Convert_v1_License_To_management_License(&in.License, &out.License, s); err != nil {
 		return err
@@ -6648,6 +6917,7 @@ func autoConvert_management_KioskSpec_To_v1_KioskSpec(in *management.KioskSpec, 
 	out.SleepModeConfig = in.SleepModeConfig
 	out.ChartInfo = in.ChartInfo
 	out.StorageClusterQuota = in.StorageClusterQuota
+	out.AccessKey = in.AccessKey
 	out.UISettings = in.UISettings
 	if err := Convert_management_License_To_v1_License(&in.License, &out.License, s); err != nil {
 		return err

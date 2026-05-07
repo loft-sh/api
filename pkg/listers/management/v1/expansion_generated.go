@@ -14,6 +14,18 @@ type AnnouncementListerExpansion interface{}
 // AppLister.
 type AppListerExpansion interface{}
 
+// ArgoCDApplicationListerExpansion allows custom methods to be added to
+// ArgoCDApplicationLister.
+type ArgoCDApplicationListerExpansion interface{}
+
+// ArgoCDApplicationNamespaceListerExpansion allows custom methods to be added to
+// ArgoCDApplicationNamespaceLister.
+type ArgoCDApplicationNamespaceListerExpansion interface{}
+
+// ArgoCDApplicationTemplateListerExpansion allows custom methods to be added to
+// ArgoCDApplicationTemplateLister.
+type ArgoCDApplicationTemplateListerExpansion interface{}
+
 // BackupListerExpansion allows custom methods to be added to
 // BackupLister.
 type BackupListerExpansion interface{}

@@ -14,6 +14,10 @@ type Interface interface {
 	Announcements() AnnouncementInformer
 	// Apps returns a AppInformer.
 	Apps() AppInformer
+	// ArgoCDApplications returns a ArgoCDApplicationInformer.
+	ArgoCDApplications() ArgoCDApplicationInformer
+	// ArgoCDApplicationTemplates returns a ArgoCDApplicationTemplateInformer.
+	ArgoCDApplicationTemplates() ArgoCDApplicationTemplateInformer
 	// Backups returns a BackupInformer.
 	Backups() BackupInformer
 	// Clusters returns a ClusterInformer.
@@ -122,6 +126,16 @@ func (v *version) Announcements() AnnouncementInformer {
 // Apps returns a AppInformer.
 func (v *version) Apps() AppInformer {
 	return &appInformer{factory: v.factory, tweakListOptions: v.tweakListOptions}
+}
+
+// ArgoCDApplications returns a ArgoCDApplicationInformer.
+func (v *version) ArgoCDApplications() ArgoCDApplicationInformer {
+	return &argoCDApplicationInformer{factory: v.factory, namespace: v.namespace, tweakListOptions: v.tweakListOptions}
+}
+
+// ArgoCDApplicationTemplates returns a ArgoCDApplicationTemplateInformer.
+func (v *version) ArgoCDApplicationTemplates() ArgoCDApplicationTemplateInformer {
+	return &argoCDApplicationTemplateInformer{factory: v.factory, tweakListOptions: v.tweakListOptions}
 }
 
 // Backups returns a BackupInformer.

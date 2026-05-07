@@ -24,6 +24,14 @@ func (c *FakeManagementV1) Apps() v1.AppInterface {
 	return newFakeApps(c)
 }
 
+func (c *FakeManagementV1) ArgoCDApplications(namespace string) v1.ArgoCDApplicationInterface {
+	return newFakeArgoCDApplications(c, namespace)
+}
+
+func (c *FakeManagementV1) ArgoCDApplicationTemplates() v1.ArgoCDApplicationTemplateInterface {
+	return newFakeArgoCDApplicationTemplates(c)
+}
+
 func (c *FakeManagementV1) Backups() v1.BackupInterface {
 	return newFakeBackups(c)
 }

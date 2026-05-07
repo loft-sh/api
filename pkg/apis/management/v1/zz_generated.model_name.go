@@ -96,6 +96,46 @@ func (in Apps) OpenAPIModelName() string {
 }
 
 // OpenAPIModelName returns the OpenAPI model name for this type.
+func (in ArgoCDApplication) OpenAPIModelName() string {
+	return "com.github.loft-sh.api.v4.pkg.apis.management.v1.ArgoCDApplication"
+}
+
+// OpenAPIModelName returns the OpenAPI model name for this type.
+func (in ArgoCDApplicationList) OpenAPIModelName() string {
+	return "com.github.loft-sh.api.v4.pkg.apis.management.v1.ArgoCDApplicationList"
+}
+
+// OpenAPIModelName returns the OpenAPI model name for this type.
+func (in ArgoCDApplicationSpec) OpenAPIModelName() string {
+	return "com.github.loft-sh.api.v4.pkg.apis.management.v1.ArgoCDApplicationSpec"
+}
+
+// OpenAPIModelName returns the OpenAPI model name for this type.
+func (in ArgoCDApplicationStatus) OpenAPIModelName() string {
+	return "com.github.loft-sh.api.v4.pkg.apis.management.v1.ArgoCDApplicationStatus"
+}
+
+// OpenAPIModelName returns the OpenAPI model name for this type.
+func (in ArgoCDApplicationTemplate) OpenAPIModelName() string {
+	return "com.github.loft-sh.api.v4.pkg.apis.management.v1.ArgoCDApplicationTemplate"
+}
+
+// OpenAPIModelName returns the OpenAPI model name for this type.
+func (in ArgoCDApplicationTemplateList) OpenAPIModelName() string {
+	return "com.github.loft-sh.api.v4.pkg.apis.management.v1.ArgoCDApplicationTemplateList"
+}
+
+// OpenAPIModelName returns the OpenAPI model name for this type.
+func (in ArgoCDApplicationTemplateSpec) OpenAPIModelName() string {
+	return "com.github.loft-sh.api.v4.pkg.apis.management.v1.ArgoCDApplicationTemplateSpec"
+}
+
+// OpenAPIModelName returns the OpenAPI model name for this type.
+func (in ArgoCDApplicationTemplateStatus) OpenAPIModelName() string {
+	return "com.github.loft-sh.api.v4.pkg.apis.management.v1.ArgoCDApplicationTemplateStatus"
+}
+
+// OpenAPIModelName returns the OpenAPI model name for this type.
 func (in AssignedVia) OpenAPIModelName() string {
 	return "com.github.loft-sh.api.v4.pkg.apis.management.v1.AssignedVia"
 }

@@ -42,6 +42,7 @@ func GetManagementAPIBuilder() *builders.APIGroupBuilder {
 			"AgentAuditEvent",
 			"Announcement",
 			"App",
+			"ArgoCDApplicationTemplate",
 			"Backup",
 			"Cluster",
 			"ClusterAccess",

@@ -20,6 +20,14 @@ func (c *FakeStorageV1) Apps() v1.AppInterface {
 	return newFakeApps(c)
 }
 
+func (c *FakeStorageV1) ArgoCDApplications(namespace string) v1.ArgoCDApplicationInterface {
+	return newFakeArgoCDApplications(c, namespace)
+}
+
+func (c *FakeStorageV1) ArgoCDApplicationTemplates() v1.ArgoCDApplicationTemplateInterface {
+	return newFakeArgoCDApplicationTemplates(c)
+}
+
 func (c *FakeStorageV1) Clusters() v1.ClusterInterface {
 	return newFakeClusters(c)
 }

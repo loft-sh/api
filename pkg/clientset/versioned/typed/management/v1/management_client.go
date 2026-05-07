@@ -15,6 +15,8 @@ type ManagementV1Interface interface {
 	AgentAuditEventsGetter
 	AnnouncementsGetter
 	AppsGetter
+	ArgoCDApplicationsGetter
+	ArgoCDApplicationTemplatesGetter
 	BackupsGetter
 	ClustersGetter
 	ClusterAccessesGetter
@@ -73,6 +75,14 @@ func (c *ManagementV1Client) Announcements() AnnouncementInterface {
 
 func (c *ManagementV1Client) Apps() AppInterface {
 	return newApps(c)
+}
+
+func (c *ManagementV1Client) ArgoCDApplications(namespace string) ArgoCDApplicationInterface {
+	return newArgoCDApplications(c, namespace)
+}
+
+func (c *ManagementV1Client) ArgoCDApplicationTemplates() ArgoCDApplicationTemplateInterface {
+	return newArgoCDApplicationTemplates(c)
 }
 
 func (c *ManagementV1Client) Backups() BackupInterface {

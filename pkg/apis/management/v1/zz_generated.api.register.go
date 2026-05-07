@@ -20,6 +20,10 @@ func addKnownTypes(scheme *runtime.Scheme) error {
 		&App{},
 		&AppList{},
 		&AppCredentials{},
+		&ArgoCDApplication{},
+		&ArgoCDApplicationList{},
+		&ArgoCDApplicationTemplate{},
+		&ArgoCDApplicationTemplateList{},
 		&Backup{},
 		&BackupList{},
 		&BackupApply{},
@@ -161,6 +165,8 @@ var (
 			nil,
 			management.NewAppCredentialsREST,
 		),
+		management.ManagementArgoCDApplicationStorage,
+		management.ManagementArgoCDApplicationTemplateStorage,
 		management.ManagementBackupStorage,
 		builders.NewApiResourceWithStorage(
 			management.InternalBackupApplyREST,
@@ -551,6 +557,22 @@ type AppCredentialsList struct {
 	metav1.TypeMeta `json:",inline"`
 	metav1.ListMeta `json:"metadata,omitempty"`
 	Items           []AppCredentials `json:"items"`
+}
+
+// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+
+type ArgoCDApplicationList struct {
+	metav1.TypeMeta `json:",inline"`
+	metav1.ListMeta `json:"metadata,omitempty"`
+	Items           []ArgoCDApplication `json:"items"`
+}
+
+// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+
+type ArgoCDApplicationTemplateList struct {
+	metav1.TypeMeta `json:",inline"`
+	metav1.ListMeta `json:"metadata,omitempty"`
+	Items           []ArgoCDApplicationTemplate `json:"items"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object

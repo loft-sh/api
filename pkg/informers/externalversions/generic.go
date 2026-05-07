@@ -45,6 +45,10 @@ func (f *sharedInformerFactory) ForResource(resource schema.GroupVersionResource
 		return &genericInformer{resource: resource.GroupResource(), informer: f.Management().V1().Announcements().Informer()}, nil
 	case v1.SchemeGroupVersion.WithResource("apps"):
 		return &genericInformer{resource: resource.GroupResource(), informer: f.Management().V1().Apps().Informer()}, nil
+	case v1.SchemeGroupVersion.WithResource("argocdapplications"):
+		return &genericInformer{resource: resource.GroupResource(), informer: f.Management().V1().ArgoCDApplications().Informer()}, nil
+	case v1.SchemeGroupVersion.WithResource("argocdapplicationtemplates"):
+		return &genericInformer{resource: resource.GroupResource(), informer: f.Management().V1().ArgoCDApplicationTemplates().Informer()}, nil
 	case v1.SchemeGroupVersion.WithResource("backups"):
 		return &genericInformer{resource: resource.GroupResource(), informer: f.Management().V1().Backups().Informer()}, nil
 	case v1.SchemeGroupVersion.WithResource("clusters"):
@@ -133,6 +137,10 @@ func (f *sharedInformerFactory) ForResource(resource schema.GroupVersionResource
 		return &genericInformer{resource: resource.GroupResource(), informer: f.Storage().V1().AccessKeys().Informer()}, nil
 	case storagev1.SchemeGroupVersion.WithResource("apps"):
 		return &genericInformer{resource: resource.GroupResource(), informer: f.Storage().V1().Apps().Informer()}, nil
+	case storagev1.SchemeGroupVersion.WithResource("argocdapplications"):
+		return &genericInformer{resource: resource.GroupResource(), informer: f.Storage().V1().ArgoCDApplications().Informer()}, nil
+	case storagev1.SchemeGroupVersion.WithResource("argocdapplicationtemplates"):
+		return &genericInformer{resource: resource.GroupResource(), informer: f.Storage().V1().ArgoCDApplicationTemplates().Informer()}, nil
 	case storagev1.SchemeGroupVersion.WithResource("clusters"):
 		return &genericInformer{resource: resource.GroupResource(), informer: f.Storage().V1().Clusters().Informer()}, nil
 	case storagev1.SchemeGroupVersion.WithResource("clusteraccesses"):

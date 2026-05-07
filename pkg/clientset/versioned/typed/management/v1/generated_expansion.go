@@ -8,6 +8,10 @@ type AnnouncementExpansion interface{}
 
 type AppExpansion interface{}
 
+type ArgoCDApplicationExpansion interface{}
+
+type ArgoCDApplicationTemplateExpansion interface{}
+
 type BackupExpansion interface{}
 
 type ClusterExpansion interface{}

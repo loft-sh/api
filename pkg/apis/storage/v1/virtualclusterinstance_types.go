@@ -32,6 +32,8 @@ const (
 	InstanceEtcdMemberHealthy   agentstoragev1.ConditionType = "EtcdMemberHealthy"
 	InstanceEtcdNoAlarms        agentstoragev1.ConditionType = "EtcdNoAlarms"
 	InstanceEtcdDbSizeOk        agentstoragev1.ConditionType = "EtcdDbSizeOk"
+
+	ArgoCDIntegrationSynced agentstoragev1.ConditionType = "ArgoCDIntegrationSynced"
 )
 
 // +genclient
