@@ -318,6 +318,18 @@ type DHCPDeployment struct {
 	// Enabled controls whether the DHCP server is deployed into the cluster.
 	Enabled bool `json:"enabled"`
 
+	// ChartRepo overrides the Helm chart repository used to install the DHCP server.
+	// +optional
+	ChartRepo string `json:"chartRepo,omitempty"`
+
+	// Chart overrides the Helm chart name used to install the DHCP server.
+	// +optional
+	Chart string `json:"chart,omitempty"`
+
+	// Version overrides the Helm chart version used to install the DHCP server.
+	// +optional
+	Version string `json:"version,omitempty"`
+
 	// HelmValues is raw YAML that will be passed as values to the DHCP Helm chart.
 	// +optional
 	HelmValues string `json:"helmValues,omitempty"`

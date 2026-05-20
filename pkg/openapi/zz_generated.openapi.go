@@ -529,6 +529,7 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 		apisstoragev1.AccessKeyVirtualCluster{}.OpenAPIModelName():                        schema_pkg_apis_storage_v1_AccessKeyVirtualCluster(ref),
 		apisstoragev1.AllowedCluster{}.OpenAPIModelName():                                 schema_pkg_apis_storage_v1_AllowedCluster(ref),
 		apisstoragev1.AllowedClusterAccountTemplate{}.OpenAPIModelName():                  schema_pkg_apis_storage_v1_AllowedClusterAccountTemplate(ref),
+		apisstoragev1.AllowedNodeType{}.OpenAPIModelName():                                schema_pkg_apis_storage_v1_AllowedNodeType(ref),
 		apisstoragev1.AllowedRunner{}.OpenAPIModelName():                                  schema_pkg_apis_storage_v1_AllowedRunner(ref),
 		apisstoragev1.AllowedTemplate{}.OpenAPIModelName():                                schema_pkg_apis_storage_v1_AllowedTemplate(ref),
 		apisstoragev1.App{}.OpenAPIModelName():                                            schema_pkg_apis_storage_v1_App(ref),
@@ -614,6 +615,7 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 		apisstoragev1.NetworkPeerStatus{}.OpenAPIModelName():                              schema_pkg_apis_storage_v1_NetworkPeerStatus(ref),
 		apisstoragev1.NodeClaim{}.OpenAPIModelName():                                      schema_pkg_apis_storage_v1_NodeClaim(ref),
 		apisstoragev1.NodeClaimList{}.OpenAPIModelName():                                  schema_pkg_apis_storage_v1_NodeClaimList(ref),
+		apisstoragev1.NodeClaimPower{}.OpenAPIModelName():                                 schema_pkg_apis_storage_v1_NodeClaimPower(ref),
 		apisstoragev1.NodeClaimSpec{}.OpenAPIModelName():                                  schema_pkg_apis_storage_v1_NodeClaimSpec(ref),
 		apisstoragev1.NodeClaimStatus{}.OpenAPIModelName():                                schema_pkg_apis_storage_v1_NodeClaimStatus(ref),
 		apisstoragev1.NodeEnvironment{}.OpenAPIModelName():                                schema_pkg_apis_storage_v1_NodeEnvironment(ref),
@@ -12652,12 +12654,18 @@ func schema_pkg_apis_management_v1_NodeClaimSpec(ref common.ReferenceCallback) c
 							},
 						},
 					},
+					"power": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Power describes the desired power state of the machine.",
+							Ref:         ref(apisstoragev1.NodeClaimPower{}.OpenAPIModelName()),
+						},
+					},
 				},
 				Required: []string{"providerRef"},
 			},
 		},
 		Dependencies: []string{
-			apisstoragev1.Access{}.OpenAPIModelName(), apisstoragev1.UserOrTeam{}.OpenAPIModelName(), corev1.NodeSelectorRequirement{}.OpenAPIModelName(), corev1.Taint{}.OpenAPIModelName(), resource.Quantity{}.OpenAPIModelName()},
+			apisstoragev1.Access{}.OpenAPIModelName(), apisstoragev1.NodeClaimPower{}.OpenAPIModelName(), apisstoragev1.UserOrTeam{}.OpenAPIModelName(), corev1.NodeSelectorRequirement{}.OpenAPIModelName(), corev1.Taint{}.OpenAPIModelName(), resource.Quantity{}.OpenAPIModelName()},
 	}
 }
 
@@ -12702,11 +12710,17 @@ func schema_pkg_apis_management_v1_NodeClaimStatus(ref common.ReferenceCallback)
 							},
 						},
 					},
+					"power": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Power describes the observed power state of the machine.",
+							Ref:         ref(apisstoragev1.NodeClaimPower{}.OpenAPIModelName()),
+						},
+					},
 				},
 			},
 		},
 		Dependencies: []string{
-			storagev1.Condition{}.OpenAPIModelName()},
+			storagev1.Condition{}.OpenAPIModelName(), apisstoragev1.NodeClaimPower{}.OpenAPIModelName()},
 	}
 }
 
@@ -16116,6 +16130,20 @@ func schema_pkg_apis_management_v1_ProjectSpec(ref common.ReferenceCallback) com
 							},
 						},
 					},
+					"allowedNodeTypes": {
+						SchemaProps: spec.SchemaProps{
+							Description: "AllowedNodeTypes restricts which NodeTypes can be referenced by NodeClaims in this project. An entry can be an exact name (\"aws.large\") or a provider wildcard (\"aws.*\"). If unset (nil), all NodeTypes are allowed; an empty list disallows all NodeTypes.",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref(apisstoragev1.AllowedNodeType{}.OpenAPIModelName()),
+									},
+								},
+							},
+						},
+					},
 					"requireTemplate": {
 						SchemaProps: spec.SchemaProps{
 							Description: "RequireTemplate configures if a template is required for instance creation.",
@@ -16186,7 +16214,7 @@ func schema_pkg_apis_management_v1_ProjectSpec(ref common.ReferenceCallback) com
 			},
 		},
 		Dependencies: []string{
-			apisstoragev1.Access{}.OpenAPIModelName(), apisstoragev1.AllowedCluster{}.OpenAPIModelName(), apisstoragev1.AllowedRunner{}.OpenAPIModelName(), apisstoragev1.AllowedTemplate{}.OpenAPIModelName(), apisstoragev1.ArgoIntegrationSpec{}.OpenAPIModelName(), apisstoragev1.Member{}.OpenAPIModelName(), apisstoragev1.NamespacePattern{}.OpenAPIModelName(), apisstoragev1.ProjectNamespaceTemplate{}.OpenAPIModelName(), apisstoragev1.Quotas{}.OpenAPIModelName(), apisstoragev1.RequirePreset{}.OpenAPIModelName(), apisstoragev1.RequireTemplate{}.OpenAPIModelName(), apisstoragev1.UserOrTeam{}.OpenAPIModelName(), apisstoragev1.VaultIntegrationSpec{}.OpenAPIModelName()},
+			apisstoragev1.Access{}.OpenAPIModelName(), apisstoragev1.AllowedCluster{}.OpenAPIModelName(), apisstoragev1.AllowedNodeType{}.OpenAPIModelName(), apisstoragev1.AllowedRunner{}.OpenAPIModelName(), apisstoragev1.AllowedTemplate{}.OpenAPIModelName(), apisstoragev1.ArgoIntegrationSpec{}.OpenAPIModelName(), apisstoragev1.Member{}.OpenAPIModelName(), apisstoragev1.NamespacePattern{}.OpenAPIModelName(), apisstoragev1.ProjectNamespaceTemplate{}.OpenAPIModelName(), apisstoragev1.Quotas{}.OpenAPIModelName(), apisstoragev1.RequirePreset{}.OpenAPIModelName(), apisstoragev1.RequireTemplate{}.OpenAPIModelName(), apisstoragev1.UserOrTeam{}.OpenAPIModelName(), apisstoragev1.VaultIntegrationSpec{}.OpenAPIModelName()},
 	}
 }
 
@@ -24419,6 +24447,25 @@ func schema_pkg_apis_storage_v1_AllowedClusterAccountTemplate(ref common.Referen
 	}
 }
 
+func schema_pkg_apis_storage_v1_AllowedNodeType(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"name": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Name of the NodeType, or \"<provider>.*\" to allow all NodeTypes of the given provider.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+				},
+			},
+		},
+	}
+}
+
 func schema_pkg_apis_storage_v1_AllowedRunner(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
@@ -27094,6 +27141,27 @@ func schema_pkg_apis_storage_v1_DHCPDeployment(ref common.ReferenceCallback) com
 							Format:      "",
 						},
 					},
+					"chartRepo": {
+						SchemaProps: spec.SchemaProps{
+							Description: "ChartRepo overrides the Helm chart repository used to install the DHCP server.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"chart": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Chart overrides the Helm chart name used to install the DHCP server.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"version": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Version overrides the Helm chart version used to install the DHCP server.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
 					"helmValues": {
 						SchemaProps: spec.SchemaProps{
 							Description: "HelmValues is raw YAML that will be passed as values to the DHCP Helm chart.",
@@ -28695,6 +28763,25 @@ func schema_pkg_apis_storage_v1_NodeClaimList(ref common.ReferenceCallback) comm
 	}
 }
 
+func schema_pkg_apis_storage_v1_NodeClaimPower(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"state": {
+						SchemaProps: spec.SchemaProps{
+							Description: "State is the power state.\n\nIn spec, only \"On\" and \"Off\" are meaningful; an empty value is treated as \"On\".\n\nIn status, \"On\" and \"Off\" indicate the observed state is stable. Providers may also surface their native intermediate state (e.g. \"Starting\", \"Stopping\", \"Migrating\", ...) as a passthrough. An empty value means the state could not be determined.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+				},
+			},
+		},
+	}
+}
+
 func schema_pkg_apis_storage_v1_NodeClaimSpec(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
@@ -28854,12 +28941,18 @@ func schema_pkg_apis_storage_v1_NodeClaimSpec(ref common.ReferenceCallback) comm
 							},
 						},
 					},
+					"power": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Power describes the desired power state of the machine.",
+							Ref:         ref(apisstoragev1.NodeClaimPower{}.OpenAPIModelName()),
+						},
+					},
 				},
 				Required: []string{"providerRef"},
 			},
 		},
 		Dependencies: []string{
-			apisstoragev1.Access{}.OpenAPIModelName(), apisstoragev1.UserOrTeam{}.OpenAPIModelName(), corev1.NodeSelectorRequirement{}.OpenAPIModelName(), corev1.Taint{}.OpenAPIModelName(), resource.Quantity{}.OpenAPIModelName()},
+			apisstoragev1.Access{}.OpenAPIModelName(), apisstoragev1.NodeClaimPower{}.OpenAPIModelName(), apisstoragev1.UserOrTeam{}.OpenAPIModelName(), corev1.NodeSelectorRequirement{}.OpenAPIModelName(), corev1.Taint{}.OpenAPIModelName(), resource.Quantity{}.OpenAPIModelName()},
 	}
 }
 
@@ -28904,11 +28997,17 @@ func schema_pkg_apis_storage_v1_NodeClaimStatus(ref common.ReferenceCallback) co
 							},
 						},
 					},
+					"power": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Power describes the observed power state of the machine.",
+							Ref:         ref(apisstoragev1.NodeClaimPower{}.OpenAPIModelName()),
+						},
+					},
 				},
 			},
 		},
 		Dependencies: []string{
-			storagev1.Condition{}.OpenAPIModelName()},
+			storagev1.Condition{}.OpenAPIModelName(), apisstoragev1.NodeClaimPower{}.OpenAPIModelName()},
 	}
 }
 
@@ -30366,6 +30465,20 @@ func schema_pkg_apis_storage_v1_ProjectSpec(ref common.ReferenceCallback) common
 							},
 						},
 					},
+					"allowedNodeTypes": {
+						SchemaProps: spec.SchemaProps{
+							Description: "AllowedNodeTypes restricts which NodeTypes can be referenced by NodeClaims in this project. An entry can be an exact name (\"aws.large\") or a provider wildcard (\"aws.*\"). If unset (nil), all NodeTypes are allowed; an empty list disallows all NodeTypes.",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref(apisstoragev1.AllowedNodeType{}.OpenAPIModelName()),
+									},
+								},
+							},
+						},
+					},
 					"requireTemplate": {
 						SchemaProps: spec.SchemaProps{
 							Description: "RequireTemplate configures if a template is required for instance creation.",
@@ -30436,7 +30549,7 @@ func schema_pkg_apis_storage_v1_ProjectSpec(ref common.ReferenceCallback) common
 			},
 		},
 		Dependencies: []string{
-			apisstoragev1.Access{}.OpenAPIModelName(), apisstoragev1.AllowedCluster{}.OpenAPIModelName(), apisstoragev1.AllowedRunner{}.OpenAPIModelName(), apisstoragev1.AllowedTemplate{}.OpenAPIModelName(), apisstoragev1.ArgoIntegrationSpec{}.OpenAPIModelName(), apisstoragev1.Member{}.OpenAPIModelName(), apisstoragev1.NamespacePattern{}.OpenAPIModelName(), apisstoragev1.ProjectNamespaceTemplate{}.OpenAPIModelName(), apisstoragev1.Quotas{}.OpenAPIModelName(), apisstoragev1.RequirePreset{}.OpenAPIModelName(), apisstoragev1.RequireTemplate{}.OpenAPIModelName(), apisstoragev1.UserOrTeam{}.OpenAPIModelName(), apisstoragev1.VaultIntegrationSpec{}.OpenAPIModelName()},
+			apisstoragev1.Access{}.OpenAPIModelName(), apisstoragev1.AllowedCluster{}.OpenAPIModelName(), apisstoragev1.AllowedNodeType{}.OpenAPIModelName(), apisstoragev1.AllowedRunner{}.OpenAPIModelName(), apisstoragev1.AllowedTemplate{}.OpenAPIModelName(), apisstoragev1.ArgoIntegrationSpec{}.OpenAPIModelName(), apisstoragev1.Member{}.OpenAPIModelName(), apisstoragev1.NamespacePattern{}.OpenAPIModelName(), apisstoragev1.ProjectNamespaceTemplate{}.OpenAPIModelName(), apisstoragev1.Quotas{}.OpenAPIModelName(), apisstoragev1.RequirePreset{}.OpenAPIModelName(), apisstoragev1.RequireTemplate{}.OpenAPIModelName(), apisstoragev1.UserOrTeam{}.OpenAPIModelName(), apisstoragev1.VaultIntegrationSpec{}.OpenAPIModelName()},
 	}
 }
 

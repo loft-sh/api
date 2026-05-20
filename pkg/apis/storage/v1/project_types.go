@@ -100,6 +100,13 @@ type ProjectSpec struct {
 	// +optional
 	AllowedTemplates []AllowedTemplate `json:"allowedTemplates,omitempty"`
 
+	// AllowedNodeTypes restricts which NodeTypes can be referenced by
+	// NodeClaims in this project. An entry can be an exact name
+	// ("aws.large") or a provider wildcard ("aws.*"). If unset (nil),
+	// all NodeTypes are allowed; an empty list disallows all NodeTypes.
+	// +optional
+	AllowedNodeTypes []AllowedNodeType `json:"allowedNodeTypes"`
+
 	// RequireTemplate configures if a template is required for instance creation.
 	// +optional
 	RequireTemplate RequireTemplate `json:"requireTemplate,omitempty"`
@@ -224,6 +231,13 @@ type AllowedRunner struct {
 
 type AllowedCluster struct {
 	// Name is the name of the cluster that is allowed to create an environment in.
+	// +optional
+	Name string `json:"name,omitempty"`
+}
+
+type AllowedNodeType struct {
+	// Name of the NodeType, or "<provider>.*" to allow all NodeTypes
+	// of the given provider.
 	// +optional
 	Name string `json:"name,omitempty"`
 }

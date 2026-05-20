@@ -5,7 +5,7 @@ go 1.26.0
 require (
 	github.com/ghodss/yaml v1.0.0
 	github.com/loft-sh/admin-apis v0.0.0-20260311181619-506013b79ba0
-	github.com/loft-sh/agentapi/v4 v4.10.0-next.3
+	github.com/loft-sh/agentapi/v4 v4.10.0-next.7
 	github.com/loft-sh/apiserver v0.0.0-20260424174643-365191901530
 	github.com/loft-sh/external-types v0.1.0-alpha.2.0.20260409132559-a38365a8cbf2
 	github.com/robfig/cron/v3 v3.0.1
@@ -18,7 +18,7 @@ require (
 	k8s.io/kube-openapi v0.0.0-20260330154417-16be699c7b31
 	k8s.io/metrics v0.36.0
 	sigs.k8s.io/controller-runtime v0.23.1-0.20260424122448-c8b4b9d61fbd
-	sigs.k8s.io/controller-tools v0.16.4
+	sigs.k8s.io/controller-tools v0.17.0
 	sigs.k8s.io/yaml v1.6.0
 )
 

@@ -91,6 +91,11 @@ func (in AllowedClusterAccountTemplate) OpenAPIModelName() string {
 }
 
 // OpenAPIModelName returns the OpenAPI model name for this type.
+func (in AllowedNodeType) OpenAPIModelName() string {
+	return "com.github.loft-sh.api.v4.pkg.apis.storage.v1.AllowedNodeType"
+}
+
+// OpenAPIModelName returns the OpenAPI model name for this type.
 func (in AllowedRunner) OpenAPIModelName() string {
 	return "com.github.loft-sh.api.v4.pkg.apis.storage.v1.AllowedRunner"
 }
@@ -513,6 +518,11 @@ func (in NodeClaim) OpenAPIModelName() string {
 // OpenAPIModelName returns the OpenAPI model name for this type.
 func (in NodeClaimList) OpenAPIModelName() string {
 	return "com.github.loft-sh.api.v4.pkg.apis.storage.v1.NodeClaimList"
+}
+
+// OpenAPIModelName returns the OpenAPI model name for this type.
+func (in NodeClaimPower) OpenAPIModelName() string {
+	return "com.github.loft-sh.api.v4.pkg.apis.storage.v1.NodeClaimPower"
 }
 
 // OpenAPIModelName returns the OpenAPI model name for this type.
