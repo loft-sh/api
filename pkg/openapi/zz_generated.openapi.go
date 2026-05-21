@@ -10594,7 +10594,7 @@ func schema_pkg_apis_management_v1_DirectClusterEndpointTokenSpec(ref common.Ref
 				Properties: map[string]spec.Schema{
 					"ttl": {
 						SchemaProps: spec.SchemaProps{
-							Description: "The time to life for this access token in seconds",
+							Description: "The time to live for this access token in seconds",
 							Type:        []string{"integer"},
 							Format:      "int64",
 						},
@@ -14464,14 +14464,14 @@ func schema_pkg_apis_management_v1_OwnedAccessKeySpec(ref common.ReferenceCallba
 					},
 					"ttl": {
 						SchemaProps: spec.SchemaProps{
-							Description: "The time to life for this access key",
+							Description: "The time to live for this access key",
 							Type:        []string{"integer"},
 							Format:      "int64",
 						},
 					},
 					"ttlAfterLastActivity": {
 						SchemaProps: spec.SchemaProps{
-							Description: "If this is specified, the time to life for this access key will start after the lastActivity instead of creation timestamp",
+							Description: "If this is specified, the time to live for this access key will start after the lastActivity instead of creation timestamp",
 							Type:        []string{"boolean"},
 							Format:      "",
 						},
@@ -16896,14 +16896,14 @@ func schema_pkg_apis_management_v1_ResetAccessKeySpec(ref common.ReferenceCallba
 					},
 					"ttl": {
 						SchemaProps: spec.SchemaProps{
-							Description: "The time to life for this access key",
+							Description: "The time to live for this access key",
 							Type:        []string{"integer"},
 							Format:      "int64",
 						},
 					},
 					"ttlAfterLastActivity": {
 						SchemaProps: spec.SchemaProps{
-							Description: "If this is specified, the time to life for this access key will start after the lastActivity instead of creation timestamp",
+							Description: "If this is specified, the time to live for this access key will start after the lastActivity instead of creation timestamp",
 							Type:        []string{"boolean"},
 							Format:      "",
 						},
@@ -21043,7 +21043,7 @@ func schema_pkg_apis_management_v1_UserSpec(ref common.ReferenceCallback) common
 					},
 					"disabled": {
 						SchemaProps: spec.SchemaProps{
-							Description: "If disabled is true, an user will not be able to login anymore. All other user resources are unaffected and other users can still interact with this user",
+							Description: "If disabled is true, a user will not be able to login anymore. All other user resources are unaffected and other users can still interact with this user",
 							Type:        []string{"boolean"},
 							Format:      "",
 						},
@@ -24298,14 +24298,14 @@ func schema_pkg_apis_storage_v1_AccessKeySpec(ref common.ReferenceCallback) comm
 					},
 					"ttl": {
 						SchemaProps: spec.SchemaProps{
-							Description: "The time to life for this access key",
+							Description: "The time to live for this access key",
 							Type:        []string{"integer"},
 							Format:      "int64",
 						},
 					},
 					"ttlAfterLastActivity": {
 						SchemaProps: spec.SchemaProps{
-							Description: "If this is specified, the time to life for this access key will start after the lastActivity instead of creation timestamp",
+							Description: "If this is specified, the time to live for this access key will start after the lastActivity instead of creation timestamp",
 							Type:        []string{"boolean"},
 							Format:      "",
 						},
@@ -28106,6 +28106,27 @@ func schema_pkg_apis_storage_v1_Metal3Deployment(ref common.ReferenceCallback) c
 							Format:      "",
 						},
 					},
+					"chartRepo": {
+						SchemaProps: spec.SchemaProps{
+							Description: "ChartRepo overrides the Helm chart repository used to install Metal3.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"chart": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Chart overrides the Helm chart name used to install Metal3.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"version": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Version overrides the Helm chart version used to install Metal3.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
 					"helmValues": {
 						SchemaProps: spec.SchemaProps{
 							Description: "HelmValues is raw YAML that will be passed as values to the Metal3 Helm chart.",
@@ -29298,7 +29319,7 @@ func schema_pkg_apis_storage_v1_NodeProviderBCM(ref common.ReferenceCallback) co
 					},
 					"endpoint": {
 						SchemaProps: spec.SchemaProps{
-							Description: "Endpoint is a address for head node.",
+							Description: "Endpoint is an address for head node.",
 							Default:     "",
 							Type:        []string{"string"},
 							Format:      "",
@@ -31712,7 +31733,7 @@ func schema_pkg_apis_storage_v1_SpaceTemplateDefinition(ref common.ReferenceCall
 					},
 					"objects": {
 						SchemaProps: spec.SchemaProps{
-							Description: "Objects are Kubernetes style yamls that should get deployed into the virtual cluster",
+							Description: "Objects are Kubernetes style YAMLs that should get deployed into the virtual cluster",
 							Type:        []string{"string"},
 							Format:      "",
 						},
@@ -33275,7 +33296,7 @@ func schema_pkg_apis_storage_v1_UserSpec(ref common.ReferenceCallback) common.Op
 					},
 					"disabled": {
 						SchemaProps: spec.SchemaProps{
-							Description: "If disabled is true, an user will not be able to login anymore. All other user resources are unaffected and other users can still interact with this user",
+							Description: "If disabled is true, a user will not be able to login anymore. All other user resources are unaffected and other users can still interact with this user",
 							Type:        []string{"boolean"},
 							Format:      "",
 						},
@@ -33336,7 +33357,7 @@ func schema_pkg_apis_storage_v1_UserStatus(ref common.ReferenceCallback) common.
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
-				Description: "UserStatus holds the status of an user",
+				Description: "UserStatus holds the status of a user",
 				Type:        []string{"object"},
 				Properties: map[string]spec.Schema{
 					"teams": {
@@ -33552,7 +33573,7 @@ func schema_pkg_apis_storage_v1_VirtualClusterCommonSpec(ref common.ReferenceCal
 					},
 					"objects": {
 						SchemaProps: spec.SchemaProps{
-							Description: "Objects are Kubernetes style yamls that should get deployed into the virtual cluster",
+							Description: "Objects are Kubernetes style YAMLs that should get deployed into the virtual cluster",
 							Type:        []string{"string"},
 							Format:      "",
 						},
@@ -34309,7 +34330,7 @@ func schema_pkg_apis_storage_v1_VirtualClusterTemplateDefinition(ref common.Refe
 					},
 					"objects": {
 						SchemaProps: spec.SchemaProps{
-							Description: "Objects are Kubernetes style yamls that should get deployed into the virtual cluster",
+							Description: "Objects are Kubernetes style YAMLs that should get deployed into the virtual cluster",
 							Type:        []string{"string"},
 							Format:      "",
 						},
