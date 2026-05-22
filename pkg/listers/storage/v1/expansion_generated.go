@@ -10,6 +10,18 @@ type AccessKeyListerExpansion interface{}
 // AppLister.
 type AppListerExpansion interface{}
 
+// ArgoCDApplicationListerExpansion allows custom methods to be added to
+// ArgoCDApplicationLister.
+type ArgoCDApplicationListerExpansion interface{}
+
+// ArgoCDApplicationNamespaceListerExpansion allows custom methods to be added to
+// ArgoCDApplicationNamespaceLister.
+type ArgoCDApplicationNamespaceListerExpansion interface{}
+
+// ArgoCDApplicationTemplateListerExpansion allows custom methods to be added to
+// ArgoCDApplicationTemplateLister.
+type ArgoCDApplicationTemplateListerExpansion interface{}
+
 // ClusterListerExpansion allows custom methods to be added to
 // ClusterLister.
 type ClusterListerExpansion interface{}
@@ -22,37 +34,45 @@ type ClusterAccessListerExpansion interface{}
 // ClusterRoleTemplateLister.
 type ClusterRoleTemplateListerExpansion interface{}
 
-// DevPodEnvironmentTemplateListerExpansion allows custom methods to be added to
-// DevPodEnvironmentTemplateLister.
-type DevPodEnvironmentTemplateListerExpansion interface{}
-
-// DevPodWorkspaceInstanceListerExpansion allows custom methods to be added to
-// DevPodWorkspaceInstanceLister.
-type DevPodWorkspaceInstanceListerExpansion interface{}
-
-// DevPodWorkspaceInstanceNamespaceListerExpansion allows custom methods to be added to
-// DevPodWorkspaceInstanceNamespaceLister.
-type DevPodWorkspaceInstanceNamespaceListerExpansion interface{}
-
-// DevPodWorkspacePresetListerExpansion allows custom methods to be added to
-// DevPodWorkspacePresetLister.
-type DevPodWorkspacePresetListerExpansion interface{}
-
-// DevPodWorkspaceTemplateListerExpansion allows custom methods to be added to
-// DevPodWorkspaceTemplateLister.
-type DevPodWorkspaceTemplateListerExpansion interface{}
-
 // NetworkPeerListerExpansion allows custom methods to be added to
 // NetworkPeerLister.
 type NetworkPeerListerExpansion interface{}
+
+// NodeClaimListerExpansion allows custom methods to be added to
+// NodeClaimLister.
+type NodeClaimListerExpansion interface{}
+
+// NodeClaimNamespaceListerExpansion allows custom methods to be added to
+// NodeClaimNamespaceLister.
+type NodeClaimNamespaceListerExpansion interface{}
+
+// NodeEnvironmentListerExpansion allows custom methods to be added to
+// NodeEnvironmentLister.
+type NodeEnvironmentListerExpansion interface{}
+
+// NodeEnvironmentNamespaceListerExpansion allows custom methods to be added to
+// NodeEnvironmentNamespaceLister.
+type NodeEnvironmentNamespaceListerExpansion interface{}
+
+// NodeProviderListerExpansion allows custom methods to be added to
+// NodeProviderLister.
+type NodeProviderListerExpansion interface{}
+
+// NodeTypeListerExpansion allows custom methods to be added to
+// NodeTypeLister.
+type NodeTypeListerExpansion interface{}
+
+// OSImageListerExpansion allows custom methods to be added to
+// OSImageLister.
+type OSImageListerExpansion interface{}
 
 // ProjectListerExpansion allows custom methods to be added to
 // ProjectLister.
 type ProjectListerExpansion interface{}
 
-// RunnerListerExpansion allows custom methods to be added to
-// RunnerLister.
-type RunnerListerExpansion interface{}
+// SSHKeyListerExpansion allows custom methods to be added to
+// SSHKeyLister.
+type SSHKeyListerExpansion interface{}
 
 // SharedSecretListerExpansion allows custom methods to be added to
 // SharedSecretLister.
