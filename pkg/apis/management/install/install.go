@@ -27,11 +27,7 @@ func addKnownOptionsTypes(scheme *runtime.Scheme) error {
 		&management.UserSpacesOptions{},
 		&management.UserVirtualClustersOptions{},
 		&management.UserQuotasOptions{},
-		&management.DevPodUpOptions{},
-		&management.DevPodDeleteOptions{},
-		&management.DevPodStopOptions{},
-		&management.DevPodStatusOptions{},
-		&management.DevPodSshOptions{},
+		&management.PodExecOptions{},
 	)
 	return nil
 }
