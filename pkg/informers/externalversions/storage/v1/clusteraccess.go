@@ -3,13 +3,13 @@
 package v1
 
 import (
-	"context"
+	context "context"
 	time "time"
 
-	storagev1 "github.com/loft-sh/api/v4/pkg/apis/storage/v1"
+	apisstoragev1 "github.com/loft-sh/api/v4/pkg/apis/storage/v1"
 	versioned "github.com/loft-sh/api/v4/pkg/clientset/versioned"
 	internalinterfaces "github.com/loft-sh/api/v4/pkg/informers/externalversions/internalinterfaces"
-	v1 "github.com/loft-sh/api/v4/pkg/listers/storage/v1"
+	storagev1 "github.com/loft-sh/api/v4/pkg/listers/storage/v1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	runtime "k8s.io/apimachinery/pkg/runtime"
 	watch "k8s.io/apimachinery/pkg/watch"
@@ -20,7 +20,7 @@ import (
 // ClusterAccesses.
 type ClusterAccessInformer interface {
 	Informer() cache.SharedIndexInformer
-	Lister() v1.ClusterAccessLister
+	Lister() storagev1.ClusterAccessLister
 }
 
 type clusterAccessInformer struct {
@@ -45,16 +45,28 @@ func NewFilteredClusterAccessInformer(client versioned.Interface, resyncPeriod t
 				if tweakListOptions != nil {
 					tweakListOptions(&options)
 				}
-				return client.StorageV1().ClusterAccesses().List(context.TODO(), options)
+				return client.StorageV1().ClusterAccesses().List(context.Background(), options)
 			},
 			WatchFunc: func(options metav1.ListOptions) (watch.Interface, error) {
 				if tweakListOptions != nil {
 					tweakListOptions(&options)
 				}
-				return client.StorageV1().ClusterAccesses().Watch(context.TODO(), options)
+				return client.StorageV1().ClusterAccesses().Watch(context.Background(), options)
+			},
+			ListWithContextFunc: func(ctx context.Context, options metav1.ListOptions) (runtime.Object, error) {
+				if tweakListOptions != nil {
+					tweakListOptions(&options)
+				}
+				return client.StorageV1().ClusterAccesses().List(ctx, options)
+			},
+			WatchFuncWithContext: func(ctx context.Context, options metav1.ListOptions) (watch.Interface, error) {
+				if tweakListOptions != nil {
+					tweakListOptions(&options)
+				}
+				return client.StorageV1().ClusterAccesses().Watch(ctx, options)
 			},
 		},
-		&storagev1.ClusterAccess{},
+		&apisstoragev1.ClusterAccess{},
 		resyncPeriod,
 		indexers,
 	)
@@ -65,9 +77,9 @@ func (f *clusterAccessInformer) defaultInformer(client versioned.Interface, resy
 }
 
 func (f *clusterAccessInformer) Informer() cache.SharedIndexInformer {
-	return f.factory.InformerFor(&storagev1.ClusterAccess{}, f.defaultInformer)
+	return f.factory.InformerFor(&apisstoragev1.ClusterAccess{}, f.defaultInformer)
 }
 
-func (f *clusterAccessInformer) Lister() v1.ClusterAccessLister {
-	return v1.NewClusterAccessLister(f.Informer().GetIndexer())
+func (f *clusterAccessInformer) Lister() storagev1.ClusterAccessLister {
+	return storagev1.NewClusterAccessLister(f.Informer().GetIndexer())
 }
