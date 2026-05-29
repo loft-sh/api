@@ -3,129 +3,43 @@
 package fake
 
 import (
-	"context"
+	context "context"
 
 	v1 "github.com/loft-sh/api/v4/pkg/apis/management/v1"
+	managementv1 "github.com/loft-sh/api/v4/pkg/clientset/versioned/typed/management/v1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
-	labels "k8s.io/apimachinery/pkg/labels"
-	types "k8s.io/apimachinery/pkg/types"
-	watch "k8s.io/apimachinery/pkg/watch"
+	gentype "k8s.io/client-go/gentype"
 	testing "k8s.io/client-go/testing"
 )
 
-// FakeProjects implements ProjectInterface
-type FakeProjects struct {
+// fakeProjects implements ProjectInterface
+type fakeProjects struct {
+	*gentype.FakeClientWithList[*v1.Project, *v1.ProjectList]
 	Fake *FakeManagementV1
 }
 
-var projectsResource = v1.SchemeGroupVersion.WithResource("projects")
-
-var projectsKind = v1.SchemeGroupVersion.WithKind("Project")
-
-// Get takes name of the project, and returns the corresponding project object, and an error if there is any.
-func (c *FakeProjects) Get(ctx context.Context, name string, options metav1.GetOptions) (result *v1.Project, err error) {
-	emptyResult := &v1.Project{}
-	obj, err := c.Fake.
-		Invokes(testing.NewRootGetActionWithOptions(projectsResource, name, options), emptyResult)
-	if obj == nil {
-		return emptyResult, err
+func newFakeProjects(fake *FakeManagementV1) managementv1.ProjectInterface {
+	return &fakeProjects{
+		gentype.NewFakeClientWithList[*v1.Project, *v1.ProjectList](
+			fake.Fake,
+			"",
+			v1.SchemeGroupVersion.WithResource("projects"),
+			v1.SchemeGroupVersion.WithKind("Project"),
+			func() *v1.Project { return &v1.Project{} },
+			func() *v1.ProjectList { return &v1.ProjectList{} },
+			func(dst, src *v1.ProjectList) { dst.ListMeta = src.ListMeta },
+			func(list *v1.ProjectList) []*v1.Project { return gentype.ToPointerSlice(list.Items) },
+			func(list *v1.ProjectList, items []*v1.Project) { list.Items = gentype.FromPointerSlice(items) },
+		),
+		fake,
 	}
-	return obj.(*v1.Project), err
-}
-
-// List takes label and field selectors, and returns the list of Projects that match those selectors.
-func (c *FakeProjects) List(ctx context.Context, opts metav1.ListOptions) (result *v1.ProjectList, err error) {
-	emptyResult := &v1.ProjectList{}
-	obj, err := c.Fake.
-		Invokes(testing.NewRootListActionWithOptions(projectsResource, projectsKind, opts), emptyResult)
-	if obj == nil {
-		return emptyResult, err
-	}
-
-	label, _, _ := testing.ExtractFromListOptions(opts)
-	if label == nil {
-		label = labels.Everything()
-	}
-	list := &v1.ProjectList{ListMeta: obj.(*v1.ProjectList).ListMeta}
-	for _, item := range obj.(*v1.ProjectList).Items {
-		if label.Matches(labels.Set(item.Labels)) {
-			list.Items = append(list.Items, item)
-		}
-	}
-	return list, err
-}
-
-// Watch returns a watch.Interface that watches the requested projects.
-func (c *FakeProjects) Watch(ctx context.Context, opts metav1.ListOptions) (watch.Interface, error) {
-	return c.Fake.
-		InvokesWatch(testing.NewRootWatchActionWithOptions(projectsResource, opts))
-}
-
-// Create takes the representation of a project and creates it.  Returns the server's representation of the project, and an error, if there is any.
-func (c *FakeProjects) Create(ctx context.Context, project *v1.Project, opts metav1.CreateOptions) (result *v1.Project, err error) {
-	emptyResult := &v1.Project{}
-	obj, err := c.Fake.
-		Invokes(testing.NewRootCreateActionWithOptions(projectsResource, project, opts), emptyResult)
-	if obj == nil {
-		return emptyResult, err
-	}
-	return obj.(*v1.Project), err
-}
-
-// Update takes the representation of a project and updates it. Returns the server's representation of the project, and an error, if there is any.
-func (c *FakeProjects) Update(ctx context.Context, project *v1.Project, opts metav1.UpdateOptions) (result *v1.Project, err error) {
-	emptyResult := &v1.Project{}
-	obj, err := c.Fake.
-		Invokes(testing.NewRootUpdateActionWithOptions(projectsResource, project, opts), emptyResult)
-	if obj == nil {
-		return emptyResult, err
-	}
-	return obj.(*v1.Project), err
-}
-
-// UpdateStatus was generated because the type contains a Status member.
-// Add a +genclient:noStatus comment above the type to avoid generating UpdateStatus().
-func (c *FakeProjects) UpdateStatus(ctx context.Context, project *v1.Project, opts metav1.UpdateOptions) (result *v1.Project, err error) {
-	emptyResult := &v1.Project{}
-	obj, err := c.Fake.
-		Invokes(testing.NewRootUpdateSubresourceActionWithOptions(projectsResource, "status", project, opts), emptyResult)
-	if obj == nil {
-		return emptyResult, err
-	}
-	return obj.(*v1.Project), err
-}
-
-// Delete takes name of the project and deletes it. Returns an error if one occurs.
-func (c *FakeProjects) Delete(ctx context.Context, name string, opts metav1.DeleteOptions) error {
-	_, err := c.Fake.
-		Invokes(testing.NewRootDeleteActionWithOptions(projectsResource, name, opts), &v1.Project{})
-	return err
-}
-
-// DeleteCollection deletes a collection of objects.
-func (c *FakeProjects) DeleteCollection(ctx context.Context, opts metav1.DeleteOptions, listOpts metav1.ListOptions) error {
-	action := testing.NewRootDeleteCollectionActionWithOptions(projectsResource, opts, listOpts)
-
-	_, err := c.Fake.Invokes(action, &v1.ProjectList{})
-	return err
-}
-
-// Patch applies the patch and returns the patched project.
-func (c *FakeProjects) Patch(ctx context.Context, name string, pt types.PatchType, data []byte, opts metav1.PatchOptions, subresources ...string) (result *v1.Project, err error) {
-	emptyResult := &v1.Project{}
-	obj, err := c.Fake.
-		Invokes(testing.NewRootPatchSubresourceActionWithOptions(projectsResource, name, pt, data, opts, subresources...), emptyResult)
-	if obj == nil {
-		return emptyResult, err
-	}
-	return obj.(*v1.Project), err
 }
 
 // ListMembers takes name of the project, and returns the corresponding projectMembers object, and an error if there is any.
-func (c *FakeProjects) ListMembers(ctx context.Context, projectName string, options metav1.GetOptions) (result *v1.ProjectMembers, err error) {
+func (c *fakeProjects) ListMembers(ctx context.Context, projectName string, options metav1.GetOptions) (result *v1.ProjectMembers, err error) {
 	emptyResult := &v1.ProjectMembers{}
 	obj, err := c.Fake.
-		Invokes(testing.NewRootGetSubresourceActionWithOptions(projectsResource, "members", projectName, options), emptyResult)
+		Invokes(testing.NewRootGetSubresourceActionWithOptions(c.Resource(), "members", projectName, options), emptyResult)
 	if obj == nil {
 		return emptyResult, err
 	}
@@ -133,32 +47,21 @@ func (c *FakeProjects) ListMembers(ctx context.Context, projectName string, opti
 }
 
 // ListTemplates takes name of the project, and returns the corresponding projectTemplates object, and an error if there is any.
-func (c *FakeProjects) ListTemplates(ctx context.Context, projectName string, options metav1.GetOptions) (result *v1.ProjectTemplates, err error) {
+func (c *fakeProjects) ListTemplates(ctx context.Context, projectName string, options metav1.GetOptions) (result *v1.ProjectTemplates, err error) {
 	emptyResult := &v1.ProjectTemplates{}
 	obj, err := c.Fake.
-		Invokes(testing.NewRootGetSubresourceActionWithOptions(projectsResource, "templates", projectName, options), emptyResult)
+		Invokes(testing.NewRootGetSubresourceActionWithOptions(c.Resource(), "templates", projectName, options), emptyResult)
 	if obj == nil {
 		return emptyResult, err
 	}
 	return obj.(*v1.ProjectTemplates), err
 }
 
-// ListRunners takes name of the project, and returns the corresponding projectRunners object, and an error if there is any.
-func (c *FakeProjects) ListRunners(ctx context.Context, projectName string, options metav1.GetOptions) (result *v1.ProjectRunners, err error) {
-	emptyResult := &v1.ProjectRunners{}
-	obj, err := c.Fake.
-		Invokes(testing.NewRootGetSubresourceActionWithOptions(projectsResource, "runners", projectName, options), emptyResult)
-	if obj == nil {
-		return emptyResult, err
-	}
-	return obj.(*v1.ProjectRunners), err
-}
-
 // ListClusters takes name of the project, and returns the corresponding projectClusters object, and an error if there is any.
-func (c *FakeProjects) ListClusters(ctx context.Context, projectName string, options metav1.GetOptions) (result *v1.ProjectClusters, err error) {
+func (c *fakeProjects) ListClusters(ctx context.Context, projectName string, options metav1.GetOptions) (result *v1.ProjectClusters, err error) {
 	emptyResult := &v1.ProjectClusters{}
 	obj, err := c.Fake.
-		Invokes(testing.NewRootGetSubresourceActionWithOptions(projectsResource, "clusters", projectName, options), emptyResult)
+		Invokes(testing.NewRootGetSubresourceActionWithOptions(c.Resource(), "clusters", projectName, options), emptyResult)
 	if obj == nil {
 		return emptyResult, err
 	}
@@ -166,10 +69,10 @@ func (c *FakeProjects) ListClusters(ctx context.Context, projectName string, opt
 }
 
 // MigrateVirtualClusterInstance takes the representation of a projectMigrateVirtualClusterInstance and creates it.  Returns the server's representation of the projectMigrateVirtualClusterInstance, and an error, if there is any.
-func (c *FakeProjects) MigrateVirtualClusterInstance(ctx context.Context, projectName string, projectMigrateVirtualClusterInstance *v1.ProjectMigrateVirtualClusterInstance, opts metav1.CreateOptions) (result *v1.ProjectMigrateVirtualClusterInstance, err error) {
+func (c *fakeProjects) MigrateVirtualClusterInstance(ctx context.Context, projectName string, projectMigrateVirtualClusterInstance *v1.ProjectMigrateVirtualClusterInstance, opts metav1.CreateOptions) (result *v1.ProjectMigrateVirtualClusterInstance, err error) {
 	emptyResult := &v1.ProjectMigrateVirtualClusterInstance{}
 	obj, err := c.Fake.
-		Invokes(testing.NewRootCreateSubresourceActionWithOptions(projectsResource, projectName, "migratevirtualclusterinstance", projectMigrateVirtualClusterInstance, opts), emptyResult)
+		Invokes(testing.NewRootCreateSubresourceActionWithOptions(c.Resource(), projectName, "migratevirtualclusterinstance", projectMigrateVirtualClusterInstance, opts), emptyResult)
 	if obj == nil {
 		return emptyResult, err
 	}
@@ -177,10 +80,10 @@ func (c *FakeProjects) MigrateVirtualClusterInstance(ctx context.Context, projec
 }
 
 // ImportSpace takes the representation of a projectImportSpace and creates it.  Returns the server's representation of the projectImportSpace, and an error, if there is any.
-func (c *FakeProjects) ImportSpace(ctx context.Context, projectName string, projectImportSpace *v1.ProjectImportSpace, opts metav1.CreateOptions) (result *v1.ProjectImportSpace, err error) {
+func (c *fakeProjects) ImportSpace(ctx context.Context, projectName string, projectImportSpace *v1.ProjectImportSpace, opts metav1.CreateOptions) (result *v1.ProjectImportSpace, err error) {
 	emptyResult := &v1.ProjectImportSpace{}
 	obj, err := c.Fake.
-		Invokes(testing.NewRootCreateSubresourceActionWithOptions(projectsResource, projectName, "importspace", projectImportSpace, opts), emptyResult)
+		Invokes(testing.NewRootCreateSubresourceActionWithOptions(c.Resource(), projectName, "importspace", projectImportSpace, opts), emptyResult)
 	if obj == nil {
 		return emptyResult, err
 	}
@@ -188,10 +91,10 @@ func (c *FakeProjects) ImportSpace(ctx context.Context, projectName string, proj
 }
 
 // MigrateSpaceInstance takes the representation of a projectMigrateSpaceInstance and creates it.  Returns the server's representation of the projectMigrateSpaceInstance, and an error, if there is any.
-func (c *FakeProjects) MigrateSpaceInstance(ctx context.Context, projectName string, projectMigrateSpaceInstance *v1.ProjectMigrateSpaceInstance, opts metav1.CreateOptions) (result *v1.ProjectMigrateSpaceInstance, err error) {
+func (c *fakeProjects) MigrateSpaceInstance(ctx context.Context, projectName string, projectMigrateSpaceInstance *v1.ProjectMigrateSpaceInstance, opts metav1.CreateOptions) (result *v1.ProjectMigrateSpaceInstance, err error) {
 	emptyResult := &v1.ProjectMigrateSpaceInstance{}
 	obj, err := c.Fake.
-		Invokes(testing.NewRootCreateSubresourceActionWithOptions(projectsResource, projectName, "migratespaceinstance", projectMigrateSpaceInstance, opts), emptyResult)
+		Invokes(testing.NewRootCreateSubresourceActionWithOptions(c.Resource(), projectName, "migratespaceinstance", projectMigrateSpaceInstance, opts), emptyResult)
 	if obj == nil {
 		return emptyResult, err
 	}

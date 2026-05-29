@@ -73,7 +73,6 @@ type Info struct {
 
 type InfoMethods struct {
 	SSO      []*MethodSSO    `json:"sso,omitempty"`
-	Rancher  *MethodRancher  `json:"rancher,omitempty"`
 	Password *MethodPassword `json:"password,omitempty"`
 }
 
@@ -96,14 +95,6 @@ type MethodPassword struct {
 	Enabled bool `json:"enabled,omitempty"`
 }
 
-type MethodRancher struct {
-	// Indicates if the authentication method is enabled
-	Enabled bool `json:"enabled,omitempty"`
-
-	// Host is the rancher host to use for redirects
-	Host string `json:"host,omitempty"`
-}
-
 type Version struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
@@ -112,8 +103,7 @@ type Version struct {
 	Major   string `json:"major,omitempty"`
 	Minor   string `json:"minor,omitempty"`
 
-	KubeVersion   string `json:"kubeVersion,omitempty"`
-	DevPodVersion string `json:"devPodVersion,omitempty"`
+	KubeVersion string `json:"kubeVersion,omitempty"`
 
 	NewerVersion  string `json:"newerVersion,omitempty"`
 	ShouldUpgrade bool   `json:"shouldUpgrade,omitempty"`
