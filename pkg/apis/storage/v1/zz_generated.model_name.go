@@ -411,8 +411,18 @@ func (in KindSecretRef) OpenAPIModelName() string {
 }
 
 // OpenAPIModelName returns the OpenAPI model name for this type.
+func (in KubeVirtDeployment) OpenAPIModelName() string {
+	return "com.github.loft-sh.api.v4.pkg.apis.storage.v1.KubeVirtDeployment"
+}
+
+// OpenAPIModelName returns the OpenAPI model name for this type.
 func (in KubeVirtNodeTypeSpec) OpenAPIModelName() string {
 	return "com.github.loft-sh.api.v4.pkg.apis.storage.v1.KubeVirtNodeTypeSpec"
+}
+
+// OpenAPIModelName returns the OpenAPI model name for this type.
+func (in KubeVirtProviderDeployment) OpenAPIModelName() string {
+	return "com.github.loft-sh.api.v4.pkg.apis.storage.v1.KubeVirtProviderDeployment"
 }
 
 // OpenAPIModelName returns the OpenAPI model name for this type.
@@ -473,6 +483,11 @@ func (in Metrics) OpenAPIModelName() string {
 // OpenAPIModelName returns the OpenAPI model name for this type.
 func (in MultusDeployment) OpenAPIModelName() string {
 	return "com.github.loft-sh.api.v4.pkg.apis.storage.v1.MultusDeployment"
+}
+
+// OpenAPIModelName returns the OpenAPI model name for this type.
+func (in NICoNodeTypeSpec) OpenAPIModelName() string {
+	return "com.github.loft-sh.api.v4.pkg.apis.storage.v1.NICoNodeTypeSpec"
 }
 
 // OpenAPIModelName returns the OpenAPI model name for this type.
@@ -588,6 +603,11 @@ func (in NodeProviderList) OpenAPIModelName() string {
 // OpenAPIModelName returns the OpenAPI model name for this type.
 func (in NodeProviderMetal3) OpenAPIModelName() string {
 	return "com.github.loft-sh.api.v4.pkg.apis.storage.v1.NodeProviderMetal3"
+}
+
+// OpenAPIModelName returns the OpenAPI model name for this type.
+func (in NodeProviderNICo) OpenAPIModelName() string {
+	return "com.github.loft-sh.api.v4.pkg.apis.storage.v1.NodeProviderNICo"
 }
 
 // OpenAPIModelName returns the OpenAPI model name for this type.
