@@ -13,7 +13,7 @@ type FakeVirtualclusterV1 struct {
 }
 
 func (c *FakeVirtualclusterV1) HelmReleases(namespace string) v1.HelmReleaseInterface {
-	return &FakeHelmReleases{c, namespace}
+	return newFakeHelmReleases(c, namespace)
 }
 
 // RESTClient returns a RESTClient that is used to communicate
