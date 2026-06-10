@@ -3,120 +3,32 @@
 package fake
 
 import (
-	"context"
-
 	v1 "github.com/loft-sh/api/v4/pkg/apis/management/v1"
-	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
-	labels "k8s.io/apimachinery/pkg/labels"
-	types "k8s.io/apimachinery/pkg/types"
-	watch "k8s.io/apimachinery/pkg/watch"
-	testing "k8s.io/client-go/testing"
+	managementv1 "github.com/loft-sh/api/v4/pkg/clientset/versioned/typed/management/v1"
+	gentype "k8s.io/client-go/gentype"
 )
 
-// FakeRedirectTokens implements RedirectTokenInterface
-type FakeRedirectTokens struct {
+// fakeRedirectTokens implements RedirectTokenInterface
+type fakeRedirectTokens struct {
+	*gentype.FakeClientWithList[*v1.RedirectToken, *v1.RedirectTokenList]
 	Fake *FakeManagementV1
 }
 
-var redirecttokensResource = v1.SchemeGroupVersion.WithResource("redirecttokens")
-
-var redirecttokensKind = v1.SchemeGroupVersion.WithKind("RedirectToken")
-
-// Get takes name of the redirectToken, and returns the corresponding redirectToken object, and an error if there is any.
-func (c *FakeRedirectTokens) Get(ctx context.Context, name string, options metav1.GetOptions) (result *v1.RedirectToken, err error) {
-	emptyResult := &v1.RedirectToken{}
-	obj, err := c.Fake.
-		Invokes(testing.NewRootGetActionWithOptions(redirecttokensResource, name, options), emptyResult)
-	if obj == nil {
-		return emptyResult, err
+func newFakeRedirectTokens(fake *FakeManagementV1) managementv1.RedirectTokenInterface {
+	return &fakeRedirectTokens{
+		gentype.NewFakeClientWithList[*v1.RedirectToken, *v1.RedirectTokenList](
+			fake.Fake,
+			"",
+			v1.SchemeGroupVersion.WithResource("redirecttokens"),
+			v1.SchemeGroupVersion.WithKind("RedirectToken"),
+			func() *v1.RedirectToken { return &v1.RedirectToken{} },
+			func() *v1.RedirectTokenList { return &v1.RedirectTokenList{} },
+			func(dst, src *v1.RedirectTokenList) { dst.ListMeta = src.ListMeta },
+			func(list *v1.RedirectTokenList) []*v1.RedirectToken { return gentype.ToPointerSlice(list.Items) },
+			func(list *v1.RedirectTokenList, items []*v1.RedirectToken) {
+				list.Items = gentype.FromPointerSlice(items)
+			},
+		),
+		fake,
 	}
-	return obj.(*v1.RedirectToken), err
-}
-
-// List takes label and field selectors, and returns the list of RedirectTokens that match those selectors.
-func (c *FakeRedirectTokens) List(ctx context.Context, opts metav1.ListOptions) (result *v1.RedirectTokenList, err error) {
-	emptyResult := &v1.RedirectTokenList{}
-	obj, err := c.Fake.
-		Invokes(testing.NewRootListActionWithOptions(redirecttokensResource, redirecttokensKind, opts), emptyResult)
-	if obj == nil {
-		return emptyResult, err
-	}
-
-	label, _, _ := testing.ExtractFromListOptions(opts)
-	if label == nil {
-		label = labels.Everything()
-	}
-	list := &v1.RedirectTokenList{ListMeta: obj.(*v1.RedirectTokenList).ListMeta}
-	for _, item := range obj.(*v1.RedirectTokenList).Items {
-		if label.Matches(labels.Set(item.Labels)) {
-			list.Items = append(list.Items, item)
-		}
-	}
-	return list, err
-}
-
-// Watch returns a watch.Interface that watches the requested redirectTokens.
-func (c *FakeRedirectTokens) Watch(ctx context.Context, opts metav1.ListOptions) (watch.Interface, error) {
-	return c.Fake.
-		InvokesWatch(testing.NewRootWatchActionWithOptions(redirecttokensResource, opts))
-}
-
-// Create takes the representation of a redirectToken and creates it.  Returns the server's representation of the redirectToken, and an error, if there is any.
-func (c *FakeRedirectTokens) Create(ctx context.Context, redirectToken *v1.RedirectToken, opts metav1.CreateOptions) (result *v1.RedirectToken, err error) {
-	emptyResult := &v1.RedirectToken{}
-	obj, err := c.Fake.
-		Invokes(testing.NewRootCreateActionWithOptions(redirecttokensResource, redirectToken, opts), emptyResult)
-	if obj == nil {
-		return emptyResult, err
-	}
-	return obj.(*v1.RedirectToken), err
-}
-
-// Update takes the representation of a redirectToken and updates it. Returns the server's representation of the redirectToken, and an error, if there is any.
-func (c *FakeRedirectTokens) Update(ctx context.Context, redirectToken *v1.RedirectToken, opts metav1.UpdateOptions) (result *v1.RedirectToken, err error) {
-	emptyResult := &v1.RedirectToken{}
-	obj, err := c.Fake.
-		Invokes(testing.NewRootUpdateActionWithOptions(redirecttokensResource, redirectToken, opts), emptyResult)
-	if obj == nil {
-		return emptyResult, err
-	}
-	return obj.(*v1.RedirectToken), err
-}
-
-// UpdateStatus was generated because the type contains a Status member.
-// Add a +genclient:noStatus comment above the type to avoid generating UpdateStatus().
-func (c *FakeRedirectTokens) UpdateStatus(ctx context.Context, redirectToken *v1.RedirectToken, opts metav1.UpdateOptions) (result *v1.RedirectToken, err error) {
-	emptyResult := &v1.RedirectToken{}
-	obj, err := c.Fake.
-		Invokes(testing.NewRootUpdateSubresourceActionWithOptions(redirecttokensResource, "status", redirectToken, opts), emptyResult)
-	if obj == nil {
-		return emptyResult, err
-	}
-	return obj.(*v1.RedirectToken), err
-}
-
-// Delete takes name of the redirectToken and deletes it. Returns an error if one occurs.
-func (c *FakeRedirectTokens) Delete(ctx context.Context, name string, opts metav1.DeleteOptions) error {
-	_, err := c.Fake.
-		Invokes(testing.NewRootDeleteActionWithOptions(redirecttokensResource, name, opts), &v1.RedirectToken{})
-	return err
-}
-
-// DeleteCollection deletes a collection of objects.
-func (c *FakeRedirectTokens) DeleteCollection(ctx context.Context, opts metav1.DeleteOptions, listOpts metav1.ListOptions) error {
-	action := testing.NewRootDeleteCollectionActionWithOptions(redirecttokensResource, opts, listOpts)
-
-	_, err := c.Fake.Invokes(action, &v1.RedirectTokenList{})
-	return err
-}
-
-// Patch applies the patch and returns the patched redirectToken.
-func (c *FakeRedirectTokens) Patch(ctx context.Context, name string, pt types.PatchType, data []byte, opts metav1.PatchOptions, subresources ...string) (result *v1.RedirectToken, err error) {
-	emptyResult := &v1.RedirectToken{}
-	obj, err := c.Fake.
-		Invokes(testing.NewRootPatchSubresourceActionWithOptions(redirecttokensResource, name, pt, data, opts, subresources...), emptyResult)
-	if obj == nil {
-		return emptyResult, err
-	}
-	return obj.(*v1.RedirectToken), err
 }
