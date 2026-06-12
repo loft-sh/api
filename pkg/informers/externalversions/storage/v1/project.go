@@ -3,13 +3,13 @@
 package v1
 
 import (
-	"context"
+	context "context"
 	time "time"
 
-	storagev1 "github.com/loft-sh/api/v4/pkg/apis/storage/v1"
+	apisstoragev1 "github.com/loft-sh/api/v4/pkg/apis/storage/v1"
 	versioned "github.com/loft-sh/api/v4/pkg/clientset/versioned"
 	internalinterfaces "github.com/loft-sh/api/v4/pkg/informers/externalversions/internalinterfaces"
-	v1 "github.com/loft-sh/api/v4/pkg/listers/storage/v1"
+	storagev1 "github.com/loft-sh/api/v4/pkg/listers/storage/v1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	runtime "k8s.io/apimachinery/pkg/runtime"
 	watch "k8s.io/apimachinery/pkg/watch"
@@ -20,7 +20,7 @@ import (
 // Projects.
 type ProjectInformer interface {
 	Informer() cache.SharedIndexInformer
-	Lister() v1.ProjectLister
+	Lister() storagev1.ProjectLister
 }
 
 type projectInformer struct {
@@ -45,16 +45,28 @@ func NewFilteredProjectInformer(client versioned.Interface, resyncPeriod time.Du
 				if tweakListOptions != nil {
 					tweakListOptions(&options)
 				}
-				return client.StorageV1().Projects().List(context.TODO(), options)
+				return client.StorageV1().Projects().List(context.Background(), options)
 			},
 			WatchFunc: func(options metav1.ListOptions) (watch.Interface, error) {
 				if tweakListOptions != nil {
 					tweakListOptions(&options)
 				}
-				return client.StorageV1().Projects().Watch(context.TODO(), options)
+				return client.StorageV1().Projects().Watch(context.Background(), options)
+			},
+			ListWithContextFunc: func(ctx context.Context, options metav1.ListOptions) (runtime.Object, error) {
+				if tweakListOptions != nil {
+					tweakListOptions(&options)
+				}
+				return client.StorageV1().Projects().List(ctx, options)
+			},
+			WatchFuncWithContext: func(ctx context.Context, options metav1.ListOptions) (watch.Interface, error) {
+				if tweakListOptions != nil {
+					tweakListOptions(&options)
+				}
+				return client.StorageV1().Projects().Watch(ctx, options)
 			},
 		},
-		&storagev1.Project{},
+		&apisstoragev1.Project{},
 		resyncPeriod,
 		indexers,
 	)
@@ -65,9 +77,9 @@ func (f *projectInformer) defaultInformer(client versioned.Interface, resyncPeri
 }
 
 func (f *projectInformer) Informer() cache.SharedIndexInformer {
-	return f.factory.InformerFor(&storagev1.Project{}, f.defaultInformer)
+	return f.factory.InformerFor(&apisstoragev1.Project{}, f.defaultInformer)
 }
 
-func (f *projectInformer) Lister() v1.ProjectLister {
-	return v1.NewProjectLister(f.Informer().GetIndexer())
+func (f *projectInformer) Lister() storagev1.ProjectLister {
+	return storagev1.NewProjectLister(f.Informer().GetIndexer())
 }

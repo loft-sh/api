@@ -3,13 +3,13 @@
 package v1
 
 import (
-	"context"
+	context "context"
 	time "time"
 
-	managementv1 "github.com/loft-sh/api/v4/pkg/apis/management/v1"
+	apismanagementv1 "github.com/loft-sh/api/v4/pkg/apis/management/v1"
 	versioned "github.com/loft-sh/api/v4/pkg/clientset/versioned"
 	internalinterfaces "github.com/loft-sh/api/v4/pkg/informers/externalversions/internalinterfaces"
-	v1 "github.com/loft-sh/api/v4/pkg/listers/management/v1"
+	managementv1 "github.com/loft-sh/api/v4/pkg/listers/management/v1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	runtime "k8s.io/apimachinery/pkg/runtime"
 	watch "k8s.io/apimachinery/pkg/watch"
@@ -20,7 +20,7 @@ import (
 // SubjectAccessReviews.
 type SubjectAccessReviewInformer interface {
 	Informer() cache.SharedIndexInformer
-	Lister() v1.SubjectAccessReviewLister
+	Lister() managementv1.SubjectAccessReviewLister
 }
 
 type subjectAccessReviewInformer struct {
@@ -45,16 +45,28 @@ func NewFilteredSubjectAccessReviewInformer(client versioned.Interface, resyncPe
 				if tweakListOptions != nil {
 					tweakListOptions(&options)
 				}
-				return client.ManagementV1().SubjectAccessReviews().List(context.TODO(), options)
+				return client.ManagementV1().SubjectAccessReviews().List(context.Background(), options)
 			},
 			WatchFunc: func(options metav1.ListOptions) (watch.Interface, error) {
 				if tweakListOptions != nil {
 					tweakListOptions(&options)
 				}
-				return client.ManagementV1().SubjectAccessReviews().Watch(context.TODO(), options)
+				return client.ManagementV1().SubjectAccessReviews().Watch(context.Background(), options)
+			},
+			ListWithContextFunc: func(ctx context.Context, options metav1.ListOptions) (runtime.Object, error) {
+				if tweakListOptions != nil {
+					tweakListOptions(&options)
+				}
+				return client.ManagementV1().SubjectAccessReviews().List(ctx, options)
+			},
+			WatchFuncWithContext: func(ctx context.Context, options metav1.ListOptions) (watch.Interface, error) {
+				if tweakListOptions != nil {
+					tweakListOptions(&options)
+				}
+				return client.ManagementV1().SubjectAccessReviews().Watch(ctx, options)
 			},
 		},
-		&managementv1.SubjectAccessReview{},
+		&apismanagementv1.SubjectAccessReview{},
 		resyncPeriod,
 		indexers,
 	)
@@ -65,9 +77,9 @@ func (f *subjectAccessReviewInformer) defaultInformer(client versioned.Interface
 }
 
 func (f *subjectAccessReviewInformer) Informer() cache.SharedIndexInformer {
-	return f.factory.InformerFor(&managementv1.SubjectAccessReview{}, f.defaultInformer)
+	return f.factory.InformerFor(&apismanagementv1.SubjectAccessReview{}, f.defaultInformer)
 }
 
-func (f *subjectAccessReviewInformer) Lister() v1.SubjectAccessReviewLister {
-	return v1.NewSubjectAccessReviewLister(f.Informer().GetIndexer())
+func (f *subjectAccessReviewInformer) Lister() managementv1.SubjectAccessReviewLister {
+	return managementv1.NewSubjectAccessReviewLister(f.Informer().GetIndexer())
 }

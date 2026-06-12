@@ -3,13 +3,13 @@
 package v1
 
 import (
-	"context"
+	context "context"
 	time "time"
 
-	storagev1 "github.com/loft-sh/api/v4/pkg/apis/storage/v1"
+	apisstoragev1 "github.com/loft-sh/api/v4/pkg/apis/storage/v1"
 	versioned "github.com/loft-sh/api/v4/pkg/clientset/versioned"
 	internalinterfaces "github.com/loft-sh/api/v4/pkg/informers/externalversions/internalinterfaces"
-	v1 "github.com/loft-sh/api/v4/pkg/listers/storage/v1"
+	storagev1 "github.com/loft-sh/api/v4/pkg/listers/storage/v1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	runtime "k8s.io/apimachinery/pkg/runtime"
 	watch "k8s.io/apimachinery/pkg/watch"
@@ -20,7 +20,7 @@ import (
 // SpaceInstances.
 type SpaceInstanceInformer interface {
 	Informer() cache.SharedIndexInformer
-	Lister() v1.SpaceInstanceLister
+	Lister() storagev1.SpaceInstanceLister
 }
 
 type spaceInstanceInformer struct {
@@ -46,16 +46,28 @@ func NewFilteredSpaceInstanceInformer(client versioned.Interface, namespace stri
 				if tweakListOptions != nil {
 					tweakListOptions(&options)
 				}
-				return client.StorageV1().SpaceInstances(namespace).List(context.TODO(), options)
+				return client.StorageV1().SpaceInstances(namespace).List(context.Background(), options)
 			},
 			WatchFunc: func(options metav1.ListOptions) (watch.Interface, error) {
 				if tweakListOptions != nil {
 					tweakListOptions(&options)
 				}
-				return client.StorageV1().SpaceInstances(namespace).Watch(context.TODO(), options)
+				return client.StorageV1().SpaceInstances(namespace).Watch(context.Background(), options)
+			},
+			ListWithContextFunc: func(ctx context.Context, options metav1.ListOptions) (runtime.Object, error) {
+				if tweakListOptions != nil {
+					tweakListOptions(&options)
+				}
+				return client.StorageV1().SpaceInstances(namespace).List(ctx, options)
+			},
+			WatchFuncWithContext: func(ctx context.Context, options metav1.ListOptions) (watch.Interface, error) {
+				if tweakListOptions != nil {
+					tweakListOptions(&options)
+				}
+				return client.StorageV1().SpaceInstances(namespace).Watch(ctx, options)
 			},
 		},
-		&storagev1.SpaceInstance{},
+		&apisstoragev1.SpaceInstance{},
 		resyncPeriod,
 		indexers,
 	)
@@ -66,9 +78,9 @@ func (f *spaceInstanceInformer) defaultInformer(client versioned.Interface, resy
 }
 
 func (f *spaceInstanceInformer) Informer() cache.SharedIndexInformer {
-	return f.factory.InformerFor(&storagev1.SpaceInstance{}, f.defaultInformer)
+	return f.factory.InformerFor(&apisstoragev1.SpaceInstance{}, f.defaultInformer)
 }
 
-func (f *spaceInstanceInformer) Lister() v1.SpaceInstanceLister {
-	return v1.NewSpaceInstanceLister(f.Informer().GetIndexer())
+func (f *spaceInstanceInformer) Lister() storagev1.SpaceInstanceLister {
+	return storagev1.NewSpaceInstanceLister(f.Informer().GetIndexer())
 }
