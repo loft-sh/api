@@ -54,11 +54,11 @@ type AccessKeySpec struct {
 	// +optional
 	Disabled bool `json:"disabled,omitempty"`
 
-	// The time to life for this access key
+	// The time to live for this access key
 	// +optional
 	TTL int64 `json:"ttl,omitempty"`
 
-	// If this is specified, the time to life for this access key will
+	// If this is specified, the time to live for this access key will
 	// start after the lastActivity instead of creation timestamp
 	// +optional
 	TTLAfterLastActivity bool `json:"ttlAfterLastActivity,omitempty"`
@@ -75,7 +75,7 @@ type AccessKeySpec struct {
 	// If available, contains information about the sso login data for this
 	// access key
 	// +optional
-	Identity *AccessKeyIdentity `json:"identity,omitempty"`
+	Identity *SSOIdentity `json:"identity,omitempty"`
 
 	// The last time the identity was refreshed
 	// +optional
@@ -117,7 +117,7 @@ type AccessKeyScope struct {
 	// +optional
 	Spaces []AccessKeyScopeSpace `json:"spaces,omitempty"`
 
-	// VirtualClusters specifies the virtual clusters the access key is allowed to access.
+	// VirtualClusters specifies the tenant clusters the access key is allowed to access.
 	// +optional
 	VirtualClusters []AccessKeyScopeVirtualCluster `json:"virtualClusters,omitempty"`
 
@@ -195,7 +195,7 @@ type AccessKeyScopeRole struct {
 	// +optional
 	Projects []string `json:"projects,omitempty"`
 
-	// VirtualClusters specifies the virtual clusters the access key is allowed to access.
+	// VirtualClusters specifies the tenant clusters the access key is allowed to access.
 	// +optional
 	VirtualClusters []string `json:"virtualClusters,omitempty"`
 }
@@ -205,11 +205,14 @@ type AccessKeyScopeRole struct {
 type AccessKeyScopeRoleName string
 
 const (
-	AccessKeyScopeRoleAgent       AccessKeyScopeRoleName = "agent"
-	AccessKeyScopeRoleVCluster    AccessKeyScopeRoleName = "vcluster"
-	AccessKeyScopeRoleNetworkPeer AccessKeyScopeRoleName = "network-peer"
-	AccessKeyScopeRoleLoftCLI     AccessKeyScopeRoleName = "loft-cli"
-	AccessKeyScopeRoleRunner      AccessKeyScopeRoleName = "runner"
+	AccessKeyScopeRoleAgent         AccessKeyScopeRoleName = "agent"
+	AccessKeyScopeRoleVCluster      AccessKeyScopeRoleName = "vcluster"
+	AccessKeyScopeRoleNetworkPeer   AccessKeyScopeRoleName = "network-peer"
+	AccessKeyScopeRoleLoftCLI       AccessKeyScopeRoleName = "loft-cli"
+	AccessKeyScopeRoleRunner        AccessKeyScopeRoleName = "runner"
+	AccessKeyScopeRoleWorkspace     AccessKeyScopeRoleName = "workspace"
+	AccessKeyScopeRoleMetricsWriter AccessKeyScopeRoleName = "metrics-writer"
+	AccessKeyScopeRoleMetricsReader AccessKeyScopeRoleName = "metrics-reader"
 )
 
 type AccessKeyScopeCluster struct {
@@ -223,7 +226,7 @@ type AccessKeyScopeVirtualCluster struct {
 	// +optional
 	Project string `json:"project,omitempty"`
 
-	// VirtualCluster is the name of the virtual cluster to access. You can specify * to select all virtual clusters.
+	// VirtualCluster is the name of the tenant cluster to access. You can specify * to select all tenant clusters.
 	// +optional
 	VirtualCluster string `json:"virtualCluster,omitempty"`
 }
@@ -284,18 +287,18 @@ type AccessKeyScopeRule struct {
 	// +optional
 	Cluster string `json:"cluster,omitempty"`
 
-	// VirtualClusters that this rule matches. Only applies to virtual cluster requests.
+	// VirtualClusters that this rule matches. Only applies to tenant cluster requests.
 	// An empty list means no restrictions will apply.
 	// +optional
 	VirtualClusters []AccessKeyVirtualCluster `json:"virtualClusters,omitempty"`
 }
 
 type AccessKeyVirtualCluster struct {
-	// Name of the virtual cluster. Empty means all virtual clusters.
+	// Name of the tenant cluster. Empty means all tenant clusters.
 	// +optional
 	Name string `json:"name,omitempty"`
 
-	// Namespace of the virtual cluster. Empty means all namespaces.
+	// Namespace of the tenant cluster. Empty means all namespaces.
 	// +optional
 	Namespace string `json:"namespace,omitempty"`
 }
@@ -343,7 +346,7 @@ type GroupResources struct {
 	ResourceNames []string `json:"resourceNames,omitempty" protobuf:"bytes,3,rep,name=resourceNames"`
 }
 
-type AccessKeyIdentity struct {
+type SSOIdentity struct {
 	// The subject of the user
 	// +optional
 	UserID string `json:"userId,omitempty"`
@@ -363,6 +366,11 @@ type AccessKeyIdentity struct {
 	// If the user email was verified
 	// +optional
 	EmailVerified bool `json:"emailVerified,omitempty"`
+
+	// ExtraClaims are claims that are not otherwise contained in this struct but may be provided by the OIDC
+	// provider. Only extra claims that are allowed by the auth config are included.
+	// +optional
+	ExtraClaims map[string]string `json:"extraClaims,omitempty"`
 
 	// The groups from the identity provider
 	// +optional
@@ -428,6 +436,7 @@ const (
 	AccessKeyTypeReset            AccessKeyType = "Reset"
 	AccessKeyTypeOIDCRefreshToken AccessKeyType = "OIDCRefreshToken"
 	AccessKeyTypeNetworkPeer      AccessKeyType = "NetworkPeer"
+	AccessKeyTypeWorkspace        AccessKeyType = "Workspace"
 )
 
 // AccessKeyStatus holds the status of an access key
