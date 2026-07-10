@@ -84,6 +84,10 @@ func (c *FakeManagementV1) LoftUpgrades() v1.LoftUpgradeInterface {
 	return newFakeLoftUpgrades(c)
 }
 
+func (c *FakeManagementV1) MachineConfigTemplates(namespace string) v1.MachineConfigTemplateInterface {
+	return newFakeMachineConfigTemplates(c, namespace)
+}
+
 func (c *FakeManagementV1) NetworkPeers() v1.NetworkPeerInterface {
 	return newFakeNetworkPeers(c)
 }
@@ -132,6 +136,10 @@ func (c *FakeManagementV1) RegisterVirtualClusters() v1.RegisterVirtualClusterIn
 	return newFakeRegisterVirtualClusters(c)
 }
 
+func (c *FakeManagementV1) RenderVirtualClusterTemplates() v1.RenderVirtualClusterTemplateInterface {
+	return newFakeRenderVirtualClusterTemplates(c)
+}
+
 func (c *FakeManagementV1) ResetAccessKeys() v1.ResetAccessKeyInterface {
 	return newFakeResetAccessKeys(c)
 }
@@ -150,6 +158,10 @@ func (c *FakeManagementV1) SelfSubjectAccessReviews() v1.SelfSubjectAccessReview
 
 func (c *FakeManagementV1) SharedSecrets(namespace string) v1.SharedSecretInterface {
 	return newFakeSharedSecrets(c, namespace)
+}
+
+func (c *FakeManagementV1) SlurmInstances(namespace string) v1.SlurmInstanceInterface {
+	return newFakeSlurmInstances(c, namespace)
 }
 
 func (c *FakeManagementV1) SpaceInstances(namespace string) v1.SpaceInstanceInterface {

@@ -114,7 +114,7 @@ type UserSpacesOptions struct {
 type UserVirtualClustersOptions struct {
 	metav1.TypeMeta `json:",inline"`
 
-	// Cluster where to retrieve virtual clusters from
+	// Cluster where to retrieve tenant clusters from
 	// +optional
 	Cluster []string `json:"cluster,omitempty"`
 }
@@ -170,4 +170,20 @@ type NetworkPeerDebugOptions struct {
 	// Action is the action to perform on the network peer.
 	// +optional
 	Action string `json:"action,omitempty"`
+}
+
+// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+
+type SlurmInstanceAccountingOptions struct {
+	metav1.TypeMeta `json:",inline"`
+
+	// Since restricts the returned jobs to those that ran at or after this time.
+	// Defaults to 24 hours before now when unset.
+	// +optional
+	Since *metav1.Time `json:"since,omitempty"`
+
+	// Until restricts the returned jobs to those that ran at or before this time.
+	// Defaults to now when unset.
+	// +optional
+	Until *metav1.Time `json:"until,omitempty"`
 }

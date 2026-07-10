@@ -14,7 +14,6 @@ func TestNewSnapshotRequestResources(t *testing.T) {
 			Bucket: "bucket",
 			Key:    "snapshots/test.tar.gz",
 		},
-		IncludeVolumes: true,
 	}
 
 	secret, err := NewSnapshotOptionsSecret("vcluster-ns", "my-vcluster", options)
@@ -73,9 +72,6 @@ func TestNewSnapshotRequestResources(t *testing.T) {
 	}
 	if storedRequest.Spec.URL != "s3://bucket/snapshots/test.tar.gz" {
 		t.Fatalf("expected request URL, got %q", storedRequest.Spec.URL)
-	}
-	if !storedRequest.Spec.IncludeVolumes {
-		t.Fatalf("expected include volumes")
 	}
 }
 

@@ -61,6 +61,8 @@ func addKnownTypes(scheme *runtime.Scheme) error {
 		&LicenseRequest{},
 		&LoftUpgrade{},
 		&LoftUpgradeList{},
+		&MachineConfigTemplate{},
+		&MachineConfigTemplateList{},
 		&NetworkPeer{},
 		&NetworkPeerList{},
 		&NetworkPeerDebug{},
@@ -96,6 +98,8 @@ func addKnownTypes(scheme *runtime.Scheme) error {
 		&RedirectTokenList{},
 		&RegisterVirtualCluster{},
 		&RegisterVirtualClusterList{},
+		&RenderVirtualClusterTemplate{},
+		&RenderVirtualClusterTemplateList{},
 		&ResetAccessKey{},
 		&ResetAccessKeyList{},
 		&SSHKey{},
@@ -106,6 +110,9 @@ func addKnownTypes(scheme *runtime.Scheme) error {
 		&SelfSubjectAccessReviewList{},
 		&SharedSecret{},
 		&SharedSecretList{},
+		&SlurmInstance{},
+		&SlurmInstanceList{},
+		&SlurmInstanceAccounting{},
 		&SpaceInstance{},
 		&SpaceInstanceList{},
 		&SpaceTemplate{},
@@ -245,6 +252,7 @@ var (
 			management.NewLicenseRequestREST,
 		),
 		management.ManagementLoftUpgradeStorage,
+		management.ManagementMachineConfigTemplateStorage,
 		management.ManagementNetworkPeerStorage,
 		builders.NewApiResourceWithStorage(
 			management.InternalNetworkPeerDebugREST,
@@ -348,11 +356,24 @@ var (
 		management.ManagementProjectSecretStorage,
 		management.ManagementRedirectTokenStorage,
 		management.ManagementRegisterVirtualClusterStorage,
+		management.ManagementRenderVirtualClusterTemplateStorage,
 		management.ManagementResetAccessKeyStorage,
 		management.ManagementSSHKeyStorage,
 		management.ManagementSelfStorage,
 		management.ManagementSelfSubjectAccessReviewStorage,
 		management.ManagementSharedSecretStorage,
+		management.ManagementSlurmInstanceStorage,
+		builders.NewApiResourceWithStorage(
+			management.InternalSlurmInstanceStatus,
+			func() runtime.Object { return &SlurmInstance{} },     // Register versioned resource
+			func() runtime.Object { return &SlurmInstanceList{} }, // Register versioned resource list
+			management.NewSlurmInstanceStatusREST),
+		builders.NewApiResourceWithStorage(
+			management.InternalSlurmInstanceAccountingREST,
+			func() runtime.Object { return &SlurmInstanceAccounting{} }, // Register versioned resource
+			nil,
+			management.NewSlurmInstanceAccountingREST,
+		),
 		management.ManagementSpaceInstanceStorage,
 		management.ManagementSpaceTemplateStorage,
 		management.ManagementSubjectAccessReviewStorage,
@@ -761,6 +782,14 @@ type LoftUpgradeList struct {
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
 
+type MachineConfigTemplateList struct {
+	metav1.TypeMeta `json:",inline"`
+	metav1.ListMeta `json:"metadata,omitempty"`
+	Items           []MachineConfigTemplate `json:"items"`
+}
+
+// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+
 type NetworkPeerList struct {
 	metav1.TypeMeta `json:",inline"`
 	metav1.ListMeta `json:"metadata,omitempty"`
@@ -945,6 +974,14 @@ type RegisterVirtualClusterList struct {
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
 
+type RenderVirtualClusterTemplateList struct {
+	metav1.TypeMeta `json:",inline"`
+	metav1.ListMeta `json:"metadata,omitempty"`
+	Items           []RenderVirtualClusterTemplate `json:"items"`
+}
+
+// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+
 type ResetAccessKeyList struct {
 	metav1.TypeMeta `json:",inline"`
 	metav1.ListMeta `json:"metadata,omitempty"`
@@ -981,6 +1018,22 @@ type SharedSecretList struct {
 	metav1.TypeMeta `json:",inline"`
 	metav1.ListMeta `json:"metadata,omitempty"`
 	Items           []SharedSecret `json:"items"`
+}
+
+// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+
+type SlurmInstanceList struct {
+	metav1.TypeMeta `json:",inline"`
+	metav1.ListMeta `json:"metadata,omitempty"`
+	Items           []SlurmInstance `json:"items"`
+}
+
+// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+
+type SlurmInstanceAccountingList struct {
+	metav1.TypeMeta `json:",inline"`
+	metav1.ListMeta `json:"metadata,omitempty"`
+	Items           []SlurmInstanceAccounting `json:"items"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object

@@ -65,6 +65,7 @@ func GetManagementAPIBuilder() *builders.APIGroupBuilder {
 			"Project",
 			"RedirectToken",
 			"RegisterVirtualCluster",
+			"RenderVirtualClusterTemplate",
 			"ResetAccessKey",
 			"SSHKey",
 			"Self",

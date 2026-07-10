@@ -78,6 +78,14 @@ type LicenseListerExpansion interface{}
 // LoftUpgradeLister.
 type LoftUpgradeListerExpansion interface{}
 
+// MachineConfigTemplateListerExpansion allows custom methods to be added to
+// MachineConfigTemplateLister.
+type MachineConfigTemplateListerExpansion interface{}
+
+// MachineConfigTemplateNamespaceListerExpansion allows custom methods to be added to
+// MachineConfigTemplateNamespaceLister.
+type MachineConfigTemplateNamespaceListerExpansion interface{}
+
 // NetworkPeerListerExpansion allows custom methods to be added to
 // NetworkPeerLister.
 type NetworkPeerListerExpansion interface{}
@@ -138,6 +146,10 @@ type RedirectTokenListerExpansion interface{}
 // RegisterVirtualClusterLister.
 type RegisterVirtualClusterListerExpansion interface{}
 
+// RenderVirtualClusterTemplateListerExpansion allows custom methods to be added to
+// RenderVirtualClusterTemplateLister.
+type RenderVirtualClusterTemplateListerExpansion interface{}
+
 // ResetAccessKeyListerExpansion allows custom methods to be added to
 // ResetAccessKeyLister.
 type ResetAccessKeyListerExpansion interface{}
@@ -161,6 +173,14 @@ type SharedSecretListerExpansion interface{}
 // SharedSecretNamespaceListerExpansion allows custom methods to be added to
 // SharedSecretNamespaceLister.
 type SharedSecretNamespaceListerExpansion interface{}
+
+// SlurmInstanceListerExpansion allows custom methods to be added to
+// SlurmInstanceLister.
+type SlurmInstanceListerExpansion interface{}
+
+// SlurmInstanceNamespaceListerExpansion allows custom methods to be added to
+// SlurmInstanceNamespaceLister.
+type SlurmInstanceNamespaceListerExpansion interface{}
 
 // SpaceInstanceListerExpansion allows custom methods to be added to
 // SpaceInstanceLister.

@@ -12,7 +12,6 @@ const (
 	NodeProviderTypeTerraform  string = "terraform"
 	NodeProviderTypeClusterAPI string = "clusterAPI"
 	NodeProviderTypeMetal3     string = "metal3"
-	NodeProviderTypeNICo       string = "nico"
 
 	// NodeProviderConditionTypeInitialized is the condition that indicates if the node provider is initialized.
 	NodeProviderConditionTypeInitialized = "Initialized"
@@ -112,10 +111,6 @@ type NodeProviderSpec struct {
 	// +optional
 	Metal3 *NodeProviderMetal3 `json:"metal3,omitempty"`
 
-	// NICo configures a node provider backed by the NVIDIA Infra Controller.
-	// +optional
-	NICo *NodeProviderNICo `json:"nico,omitempty"`
-
 	// DisplayName is the name that should be displayed in the UI
 	// +optional
 	DisplayName string `json:"displayName,omitempty"`
@@ -124,7 +119,7 @@ type NodeProviderSpec struct {
 type NodeProviderClusterAPI struct {
 	ClusterAPIObjects `json:",inline"`
 
-	// ClusterRef is a reference to connected host cluster in which KubeVirt operator is running
+	// ClusterRef is a reference to connected control plane cluster in which KubeVirt operator is running
 	ClusterRef NodeProviderClusterRef `json:"clusterRef,omitempty"`
 
 	// NodeTypes define NodeTypes that should be automatically created for this provider.
@@ -292,10 +287,10 @@ type KubeVirtNodeTypeSpec struct {
 
 // NodeProviderKubeVirt defines the configuration for a KubeVirt node provider.
 type NodeProviderKubeVirt struct {
-	// ClusterRef is a reference to connected host cluster in which KubeVirt operator is running
+	// ClusterRef is a reference to connected control plane cluster in which KubeVirt operator is running
 	ClusterRef NodeProviderClusterRef `json:"clusterRef,omitempty"`
 
-	// Deploy configures components deployed into the connected host cluster.
+	// Deploy configures components deployed into the connected control plane cluster.
 	// +optional
 	Deploy KubeVirtProviderDeployment `json:"deploy,omitempty"`
 
@@ -315,6 +310,18 @@ type KubeVirtProviderDeployment struct {
 type KubeVirtDeployment struct {
 	// Enabled controls whether the KubeVirt operator is deployed into the cluster.
 	Enabled bool `json:"enabled"`
+
+	// ChartRepo overrides the Helm chart repository used to install the KubeVirt operator.
+	// +optional
+	ChartRepo string `json:"chartRepo,omitempty"`
+
+	// Chart overrides the Helm chart name used to install the KubeVirt operator.
+	// +optional
+	Chart string `json:"chart,omitempty"`
+
+	// Version overrides the Helm chart version used to install the KubeVirt operator.
+	// +optional
+	Version string `json:"version,omitempty"`
 
 	// HelmValues is raw YAML that will be passed as values to the KubeVirt Helm chart.
 	// +optional
@@ -395,13 +402,28 @@ type Metal3ProviderDeployment struct {
 }
 
 type NodeProviderMetal3 struct {
-	// ClusterRef is a reference to connected host cluster in which KubeVirt operator is running
+	// ClusterRef is a reference to connected control plane cluster in which KubeVirt operator is running
 	ClusterRef NodeProviderClusterRef `json:"clusterRef,omitempty"`
 
 	Deploy Metal3ProviderDeployment `json:"deploy,omitempty"`
 
 	// NodeTypes define NodeTypes that should be automatically created for this provider.
 	NodeTypes []Metal3NodeTypeSpec `json:"nodeTypes,omitempty"`
+
+	// NeutronEnabled turns on the neutron network shim for this provider: BareMetalHost network
+	// attachments are allocated by the platform and reconciled through ConfigMaps instead of
+	// being written directly as DHCP annotations.
+	// +optional
+	NeutronEnabled bool `json:"neutronEnabled,omitempty"`
+
+	// Netris attaches BareMetalHosts to a Netris server cluster on provisioning.
+	// +optional
+	Netris *NodeProviderMetal3Netris `json:"netris,omitempty"`
+}
+
+type NodeProviderMetal3Netris struct {
+	// SecretRef references a Secret with keys url, username and password for the Netris API.
+	SecretRef *NamespacedRef `json:"secretRef"`
 }
 
 type Metal3NodeTypeSpec struct {
@@ -410,58 +432,6 @@ type Metal3NodeTypeSpec struct {
 	// BareMetalHosts is a list of BareMetalHosts to use for this NodeType.
 	// +optional
 	BareMetalHosts Metal3BareMetalHosts `json:"bareMetalHosts,omitempty"`
-}
-
-// NodeProviderNICo defines the configuration for an NVIDIA Infra Controller node provider.
-type NodeProviderNICo struct {
-	// Endpoint is the base URL of the NICo REST API (e.g. https://nico.example.com:8388).
-	// The REST path prefix /v2/org/{org}/nico is appended by the client.
-	Endpoint string `json:"endpoint"`
-
-	// Org is the NICo organization identifier used in the REST URL path.
-	Org string `json:"org"`
-
-	// SiteID is the NICo site UUID this provider operates against.
-	SiteID string `json:"siteId"`
-
-	// CredentialsRef references a Secret containing NICo credentials. The Secret
-	// must carry either a static "token" key (long-lived JWT) or the trio
-	// "clientId" + "clientSecret" + "issuerUrl" for OIDC client-credentials exchange.
-	CredentialsRef *NamespacedRef `json:"credentialsRef"`
-
-	// InstanceTypeIDs is an allow-list of NICo InstanceType IDs that this provider
-	// surfaces as NodeTypes. When empty the provider exposes every InstanceType
-	// visible to the org.
-	// +optional
-	InstanceTypeIDs []string `json:"instanceTypeIds,omitempty"`
-
-	// NodeTypes declares per-InstanceType overrides applied on top of values
-	// discovered from NICo (cost, resources, properties, metadata).
-	// +optional
-	NodeTypes []NICoNodeTypeSpec `json:"nodeTypes,omitempty"`
-
-	// InsecureSkipTLSVerify disables TLS verification on the NICo endpoint.
-	// Intended for development against the mocked NICo Kind setup only.
-	// +optional
-	InsecureSkipTLSVerify bool `json:"insecureSkipTLSVerify,omitempty"`
-}
-
-// NICoNodeTypeSpec attaches per-InstanceType overrides to NodeTypes minted by the NICo provider.
-type NICoNodeTypeSpec struct {
-	NamedNodeTypeSpec `json:",inline"`
-
-	// InstanceTypeID identifies the NICo InstanceType this NodeType maps to.
-	InstanceTypeID string `json:"instanceTypeId"`
-
-	// OSImageID is the NICo OS image to boot allocated Instances with. Either
-	// this or InstanceTypeID-level default must be set before allocation.
-	// +optional
-	OSImageID string `json:"osImageId,omitempty"`
-
-	// MaxCapacity is the upper bound on Instances of this type that the provider
-	// will keep alive. 0 means unbounded (limited only by NICo inventory).
-	// +optional
-	MaxCapacity int `json:"maxCapacity,omitempty"`
 }
 
 type Metal3BareMetalHosts struct {

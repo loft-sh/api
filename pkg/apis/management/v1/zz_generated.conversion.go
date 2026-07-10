@@ -331,96 +331,6 @@ func RegisterConversions(s *runtime.Scheme) error {
 	}); err != nil {
 		return err
 	}
-	if err := s.AddGeneratedConversionFunc((*Authentication)(nil), (*management.Authentication)(nil), func(a, b interface{}, scope conversion.Scope) error {
-		return Convert_v1_Authentication_To_management_Authentication(a.(*Authentication), b.(*management.Authentication), scope)
-	}); err != nil {
-		return err
-	}
-	if err := s.AddGeneratedConversionFunc((*management.Authentication)(nil), (*Authentication)(nil), func(a, b interface{}, scope conversion.Scope) error {
-		return Convert_management_Authentication_To_v1_Authentication(a.(*management.Authentication), b.(*Authentication), scope)
-	}); err != nil {
-		return err
-	}
-	if err := s.AddGeneratedConversionFunc((*AuthenticationGithub)(nil), (*management.AuthenticationGithub)(nil), func(a, b interface{}, scope conversion.Scope) error {
-		return Convert_v1_AuthenticationGithub_To_management_AuthenticationGithub(a.(*AuthenticationGithub), b.(*management.AuthenticationGithub), scope)
-	}); err != nil {
-		return err
-	}
-	if err := s.AddGeneratedConversionFunc((*management.AuthenticationGithub)(nil), (*AuthenticationGithub)(nil), func(a, b interface{}, scope conversion.Scope) error {
-		return Convert_management_AuthenticationGithub_To_v1_AuthenticationGithub(a.(*management.AuthenticationGithub), b.(*AuthenticationGithub), scope)
-	}); err != nil {
-		return err
-	}
-	if err := s.AddGeneratedConversionFunc((*AuthenticationGithubOrg)(nil), (*management.AuthenticationGithubOrg)(nil), func(a, b interface{}, scope conversion.Scope) error {
-		return Convert_v1_AuthenticationGithubOrg_To_management_AuthenticationGithubOrg(a.(*AuthenticationGithubOrg), b.(*management.AuthenticationGithubOrg), scope)
-	}); err != nil {
-		return err
-	}
-	if err := s.AddGeneratedConversionFunc((*management.AuthenticationGithubOrg)(nil), (*AuthenticationGithubOrg)(nil), func(a, b interface{}, scope conversion.Scope) error {
-		return Convert_management_AuthenticationGithubOrg_To_v1_AuthenticationGithubOrg(a.(*management.AuthenticationGithubOrg), b.(*AuthenticationGithubOrg), scope)
-	}); err != nil {
-		return err
-	}
-	if err := s.AddGeneratedConversionFunc((*AuthenticationGitlab)(nil), (*management.AuthenticationGitlab)(nil), func(a, b interface{}, scope conversion.Scope) error {
-		return Convert_v1_AuthenticationGitlab_To_management_AuthenticationGitlab(a.(*AuthenticationGitlab), b.(*management.AuthenticationGitlab), scope)
-	}); err != nil {
-		return err
-	}
-	if err := s.AddGeneratedConversionFunc((*management.AuthenticationGitlab)(nil), (*AuthenticationGitlab)(nil), func(a, b interface{}, scope conversion.Scope) error {
-		return Convert_management_AuthenticationGitlab_To_v1_AuthenticationGitlab(a.(*management.AuthenticationGitlab), b.(*AuthenticationGitlab), scope)
-	}); err != nil {
-		return err
-	}
-	if err := s.AddGeneratedConversionFunc((*AuthenticationGoogle)(nil), (*management.AuthenticationGoogle)(nil), func(a, b interface{}, scope conversion.Scope) error {
-		return Convert_v1_AuthenticationGoogle_To_management_AuthenticationGoogle(a.(*AuthenticationGoogle), b.(*management.AuthenticationGoogle), scope)
-	}); err != nil {
-		return err
-	}
-	if err := s.AddGeneratedConversionFunc((*management.AuthenticationGoogle)(nil), (*AuthenticationGoogle)(nil), func(a, b interface{}, scope conversion.Scope) error {
-		return Convert_management_AuthenticationGoogle_To_v1_AuthenticationGoogle(a.(*management.AuthenticationGoogle), b.(*AuthenticationGoogle), scope)
-	}); err != nil {
-		return err
-	}
-	if err := s.AddGeneratedConversionFunc((*AuthenticationMicrosoft)(nil), (*management.AuthenticationMicrosoft)(nil), func(a, b interface{}, scope conversion.Scope) error {
-		return Convert_v1_AuthenticationMicrosoft_To_management_AuthenticationMicrosoft(a.(*AuthenticationMicrosoft), b.(*management.AuthenticationMicrosoft), scope)
-	}); err != nil {
-		return err
-	}
-	if err := s.AddGeneratedConversionFunc((*management.AuthenticationMicrosoft)(nil), (*AuthenticationMicrosoft)(nil), func(a, b interface{}, scope conversion.Scope) error {
-		return Convert_management_AuthenticationMicrosoft_To_v1_AuthenticationMicrosoft(a.(*management.AuthenticationMicrosoft), b.(*AuthenticationMicrosoft), scope)
-	}); err != nil {
-		return err
-	}
-	if err := s.AddGeneratedConversionFunc((*AuthenticationOIDC)(nil), (*management.AuthenticationOIDC)(nil), func(a, b interface{}, scope conversion.Scope) error {
-		return Convert_v1_AuthenticationOIDC_To_management_AuthenticationOIDC(a.(*AuthenticationOIDC), b.(*management.AuthenticationOIDC), scope)
-	}); err != nil {
-		return err
-	}
-	if err := s.AddGeneratedConversionFunc((*management.AuthenticationOIDC)(nil), (*AuthenticationOIDC)(nil), func(a, b interface{}, scope conversion.Scope) error {
-		return Convert_management_AuthenticationOIDC_To_v1_AuthenticationOIDC(a.(*management.AuthenticationOIDC), b.(*AuthenticationOIDC), scope)
-	}); err != nil {
-		return err
-	}
-	if err := s.AddGeneratedConversionFunc((*AuthenticationPassword)(nil), (*management.AuthenticationPassword)(nil), func(a, b interface{}, scope conversion.Scope) error {
-		return Convert_v1_AuthenticationPassword_To_management_AuthenticationPassword(a.(*AuthenticationPassword), b.(*management.AuthenticationPassword), scope)
-	}); err != nil {
-		return err
-	}
-	if err := s.AddGeneratedConversionFunc((*management.AuthenticationPassword)(nil), (*AuthenticationPassword)(nil), func(a, b interface{}, scope conversion.Scope) error {
-		return Convert_management_AuthenticationPassword_To_v1_AuthenticationPassword(a.(*management.AuthenticationPassword), b.(*AuthenticationPassword), scope)
-	}); err != nil {
-		return err
-	}
-	if err := s.AddGeneratedConversionFunc((*AuthenticationSAML)(nil), (*management.AuthenticationSAML)(nil), func(a, b interface{}, scope conversion.Scope) error {
-		return Convert_v1_AuthenticationSAML_To_management_AuthenticationSAML(a.(*AuthenticationSAML), b.(*management.AuthenticationSAML), scope)
-	}); err != nil {
-		return err
-	}
-	if err := s.AddGeneratedConversionFunc((*management.AuthenticationSAML)(nil), (*AuthenticationSAML)(nil), func(a, b interface{}, scope conversion.Scope) error {
-		return Convert_management_AuthenticationSAML_To_v1_AuthenticationSAML(a.(*management.AuthenticationSAML), b.(*AuthenticationSAML), scope)
-	}); err != nil {
-		return err
-	}
 	if err := s.AddGeneratedConversionFunc((*Backup)(nil), (*management.Backup)(nil), func(a, b interface{}, scope conversion.Scope) error {
 		return Convert_v1_Backup_To_management_Backup(a.(*Backup), b.(*management.Backup), scope)
 	}); err != nil {
@@ -838,26 +748,6 @@ func RegisterConversions(s *runtime.Scheme) error {
 	}
 	if err := s.AddGeneratedConversionFunc((*management.ConfigStatus)(nil), (*ConfigStatus)(nil), func(a, b interface{}, scope conversion.Scope) error {
 		return Convert_management_ConfigStatus_To_v1_ConfigStatus(a.(*management.ConfigStatus), b.(*ConfigStatus), scope)
-	}); err != nil {
-		return err
-	}
-	if err := s.AddGeneratedConversionFunc((*Connector)(nil), (*management.Connector)(nil), func(a, b interface{}, scope conversion.Scope) error {
-		return Convert_v1_Connector_To_management_Connector(a.(*Connector), b.(*management.Connector), scope)
-	}); err != nil {
-		return err
-	}
-	if err := s.AddGeneratedConversionFunc((*management.Connector)(nil), (*Connector)(nil), func(a, b interface{}, scope conversion.Scope) error {
-		return Convert_management_Connector_To_v1_Connector(a.(*management.Connector), b.(*Connector), scope)
-	}); err != nil {
-		return err
-	}
-	if err := s.AddGeneratedConversionFunc((*ConnectorWithName)(nil), (*management.ConnectorWithName)(nil), func(a, b interface{}, scope conversion.Scope) error {
-		return Convert_v1_ConnectorWithName_To_management_ConnectorWithName(a.(*ConnectorWithName), b.(*management.ConnectorWithName), scope)
-	}); err != nil {
-		return err
-	}
-	if err := s.AddGeneratedConversionFunc((*management.ConnectorWithName)(nil), (*ConnectorWithName)(nil), func(a, b interface{}, scope conversion.Scope) error {
-		return Convert_management_ConnectorWithName_To_v1_ConnectorWithName(a.(*management.ConnectorWithName), b.(*ConnectorWithName), scope)
 	}); err != nil {
 		return err
 	}
@@ -1348,6 +1238,46 @@ func RegisterConversions(s *runtime.Scheme) error {
 	}
 	if err := s.AddGeneratedConversionFunc((*management.LoftUpgradeStatus)(nil), (*LoftUpgradeStatus)(nil), func(a, b interface{}, scope conversion.Scope) error {
 		return Convert_management_LoftUpgradeStatus_To_v1_LoftUpgradeStatus(a.(*management.LoftUpgradeStatus), b.(*LoftUpgradeStatus), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*MachineConfigTemplate)(nil), (*management.MachineConfigTemplate)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_v1_MachineConfigTemplate_To_management_MachineConfigTemplate(a.(*MachineConfigTemplate), b.(*management.MachineConfigTemplate), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*management.MachineConfigTemplate)(nil), (*MachineConfigTemplate)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_management_MachineConfigTemplate_To_v1_MachineConfigTemplate(a.(*management.MachineConfigTemplate), b.(*MachineConfigTemplate), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*MachineConfigTemplateList)(nil), (*management.MachineConfigTemplateList)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_v1_MachineConfigTemplateList_To_management_MachineConfigTemplateList(a.(*MachineConfigTemplateList), b.(*management.MachineConfigTemplateList), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*management.MachineConfigTemplateList)(nil), (*MachineConfigTemplateList)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_management_MachineConfigTemplateList_To_v1_MachineConfigTemplateList(a.(*management.MachineConfigTemplateList), b.(*MachineConfigTemplateList), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*MachineConfigTemplateSpec)(nil), (*management.MachineConfigTemplateSpec)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_v1_MachineConfigTemplateSpec_To_management_MachineConfigTemplateSpec(a.(*MachineConfigTemplateSpec), b.(*management.MachineConfigTemplateSpec), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*management.MachineConfigTemplateSpec)(nil), (*MachineConfigTemplateSpec)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_management_MachineConfigTemplateSpec_To_v1_MachineConfigTemplateSpec(a.(*management.MachineConfigTemplateSpec), b.(*MachineConfigTemplateSpec), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*MachineConfigTemplateStatus)(nil), (*management.MachineConfigTemplateStatus)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_v1_MachineConfigTemplateStatus_To_management_MachineConfigTemplateStatus(a.(*MachineConfigTemplateStatus), b.(*management.MachineConfigTemplateStatus), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*management.MachineConfigTemplateStatus)(nil), (*MachineConfigTemplateStatus)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_management_MachineConfigTemplateStatus_To_v1_MachineConfigTemplateStatus(a.(*management.MachineConfigTemplateStatus), b.(*MachineConfigTemplateStatus), scope)
 	}); err != nil {
 		return err
 	}
@@ -2341,6 +2271,56 @@ func RegisterConversions(s *runtime.Scheme) error {
 	}); err != nil {
 		return err
 	}
+	if err := s.AddGeneratedConversionFunc((*RenderVirtualClusterTemplate)(nil), (*management.RenderVirtualClusterTemplate)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_v1_RenderVirtualClusterTemplate_To_management_RenderVirtualClusterTemplate(a.(*RenderVirtualClusterTemplate), b.(*management.RenderVirtualClusterTemplate), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*management.RenderVirtualClusterTemplate)(nil), (*RenderVirtualClusterTemplate)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_management_RenderVirtualClusterTemplate_To_v1_RenderVirtualClusterTemplate(a.(*management.RenderVirtualClusterTemplate), b.(*RenderVirtualClusterTemplate), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*RenderVirtualClusterTemplateList)(nil), (*management.RenderVirtualClusterTemplateList)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_v1_RenderVirtualClusterTemplateList_To_management_RenderVirtualClusterTemplateList(a.(*RenderVirtualClusterTemplateList), b.(*management.RenderVirtualClusterTemplateList), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*management.RenderVirtualClusterTemplateList)(nil), (*RenderVirtualClusterTemplateList)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_management_RenderVirtualClusterTemplateList_To_v1_RenderVirtualClusterTemplateList(a.(*management.RenderVirtualClusterTemplateList), b.(*RenderVirtualClusterTemplateList), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*RenderVirtualClusterTemplateLoft)(nil), (*management.RenderVirtualClusterTemplateLoft)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_v1_RenderVirtualClusterTemplateLoft_To_management_RenderVirtualClusterTemplateLoft(a.(*RenderVirtualClusterTemplateLoft), b.(*management.RenderVirtualClusterTemplateLoft), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*management.RenderVirtualClusterTemplateLoft)(nil), (*RenderVirtualClusterTemplateLoft)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_management_RenderVirtualClusterTemplateLoft_To_v1_RenderVirtualClusterTemplateLoft(a.(*management.RenderVirtualClusterTemplateLoft), b.(*RenderVirtualClusterTemplateLoft), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*RenderVirtualClusterTemplateSpec)(nil), (*management.RenderVirtualClusterTemplateSpec)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_v1_RenderVirtualClusterTemplateSpec_To_management_RenderVirtualClusterTemplateSpec(a.(*RenderVirtualClusterTemplateSpec), b.(*management.RenderVirtualClusterTemplateSpec), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*management.RenderVirtualClusterTemplateSpec)(nil), (*RenderVirtualClusterTemplateSpec)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_management_RenderVirtualClusterTemplateSpec_To_v1_RenderVirtualClusterTemplateSpec(a.(*management.RenderVirtualClusterTemplateSpec), b.(*RenderVirtualClusterTemplateSpec), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*RenderVirtualClusterTemplateStatus)(nil), (*management.RenderVirtualClusterTemplateStatus)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_v1_RenderVirtualClusterTemplateStatus_To_management_RenderVirtualClusterTemplateStatus(a.(*RenderVirtualClusterTemplateStatus), b.(*management.RenderVirtualClusterTemplateStatus), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*management.RenderVirtualClusterTemplateStatus)(nil), (*RenderVirtualClusterTemplateStatus)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_management_RenderVirtualClusterTemplateStatus_To_v1_RenderVirtualClusterTemplateStatus(a.(*management.RenderVirtualClusterTemplateStatus), b.(*RenderVirtualClusterTemplateStatus), scope)
+	}); err != nil {
+		return err
+	}
 	if err := s.AddGeneratedConversionFunc((*ResetAccessKey)(nil), (*management.ResetAccessKey)(nil), func(a, b interface{}, scope conversion.Scope) error {
 		return Convert_v1_ResetAccessKey_To_management_ResetAccessKey(a.(*ResetAccessKey), b.(*management.ResetAccessKey), scope)
 	}); err != nil {
@@ -2538,6 +2518,106 @@ func RegisterConversions(s *runtime.Scheme) error {
 	}
 	if err := s.AddGeneratedConversionFunc((*management.SharedSecretStatus)(nil), (*SharedSecretStatus)(nil), func(a, b interface{}, scope conversion.Scope) error {
 		return Convert_management_SharedSecretStatus_To_v1_SharedSecretStatus(a.(*management.SharedSecretStatus), b.(*SharedSecretStatus), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*SlurmInstance)(nil), (*management.SlurmInstance)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_v1_SlurmInstance_To_management_SlurmInstance(a.(*SlurmInstance), b.(*management.SlurmInstance), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*management.SlurmInstance)(nil), (*SlurmInstance)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_management_SlurmInstance_To_v1_SlurmInstance(a.(*management.SlurmInstance), b.(*SlurmInstance), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*SlurmInstanceAccounting)(nil), (*management.SlurmInstanceAccounting)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_v1_SlurmInstanceAccounting_To_management_SlurmInstanceAccounting(a.(*SlurmInstanceAccounting), b.(*management.SlurmInstanceAccounting), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*management.SlurmInstanceAccounting)(nil), (*SlurmInstanceAccounting)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_management_SlurmInstanceAccounting_To_v1_SlurmInstanceAccounting(a.(*management.SlurmInstanceAccounting), b.(*SlurmInstanceAccounting), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*SlurmInstanceAccountingList)(nil), (*management.SlurmInstanceAccountingList)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_v1_SlurmInstanceAccountingList_To_management_SlurmInstanceAccountingList(a.(*SlurmInstanceAccountingList), b.(*management.SlurmInstanceAccountingList), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*management.SlurmInstanceAccountingList)(nil), (*SlurmInstanceAccountingList)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_management_SlurmInstanceAccountingList_To_v1_SlurmInstanceAccountingList(a.(*management.SlurmInstanceAccountingList), b.(*SlurmInstanceAccountingList), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*SlurmInstanceAccountingOptions)(nil), (*management.SlurmInstanceAccountingOptions)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_v1_SlurmInstanceAccountingOptions_To_management_SlurmInstanceAccountingOptions(a.(*SlurmInstanceAccountingOptions), b.(*management.SlurmInstanceAccountingOptions), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*management.SlurmInstanceAccountingOptions)(nil), (*SlurmInstanceAccountingOptions)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_management_SlurmInstanceAccountingOptions_To_v1_SlurmInstanceAccountingOptions(a.(*management.SlurmInstanceAccountingOptions), b.(*SlurmInstanceAccountingOptions), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*SlurmInstanceAccountingStatus)(nil), (*management.SlurmInstanceAccountingStatus)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_v1_SlurmInstanceAccountingStatus_To_management_SlurmInstanceAccountingStatus(a.(*SlurmInstanceAccountingStatus), b.(*management.SlurmInstanceAccountingStatus), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*management.SlurmInstanceAccountingStatus)(nil), (*SlurmInstanceAccountingStatus)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_management_SlurmInstanceAccountingStatus_To_v1_SlurmInstanceAccountingStatus(a.(*management.SlurmInstanceAccountingStatus), b.(*SlurmInstanceAccountingStatus), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*SlurmInstanceList)(nil), (*management.SlurmInstanceList)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_v1_SlurmInstanceList_To_management_SlurmInstanceList(a.(*SlurmInstanceList), b.(*management.SlurmInstanceList), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*management.SlurmInstanceList)(nil), (*SlurmInstanceList)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_management_SlurmInstanceList_To_v1_SlurmInstanceList(a.(*management.SlurmInstanceList), b.(*SlurmInstanceList), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*SlurmInstanceSpec)(nil), (*management.SlurmInstanceSpec)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_v1_SlurmInstanceSpec_To_management_SlurmInstanceSpec(a.(*SlurmInstanceSpec), b.(*management.SlurmInstanceSpec), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*management.SlurmInstanceSpec)(nil), (*SlurmInstanceSpec)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_management_SlurmInstanceSpec_To_v1_SlurmInstanceSpec(a.(*management.SlurmInstanceSpec), b.(*SlurmInstanceSpec), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*SlurmInstanceStatus)(nil), (*management.SlurmInstanceStatus)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_v1_SlurmInstanceStatus_To_management_SlurmInstanceStatus(a.(*SlurmInstanceStatus), b.(*management.SlurmInstanceStatus), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*management.SlurmInstanceStatus)(nil), (*SlurmInstanceStatus)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_management_SlurmInstanceStatus_To_v1_SlurmInstanceStatus(a.(*management.SlurmInstanceStatus), b.(*SlurmInstanceStatus), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*SlurmJob)(nil), (*management.SlurmJob)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_v1_SlurmJob_To_management_SlurmJob(a.(*SlurmJob), b.(*management.SlurmJob), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*management.SlurmJob)(nil), (*SlurmJob)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_management_SlurmJob_To_v1_SlurmJob(a.(*management.SlurmJob), b.(*SlurmJob), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*SlurmTRES)(nil), (*management.SlurmTRES)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_v1_SlurmTRES_To_management_SlurmTRES(a.(*SlurmTRES), b.(*management.SlurmTRES), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*management.SlurmTRES)(nil), (*SlurmTRES)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_management_SlurmTRES_To_v1_SlurmTRES(a.(*management.SlurmTRES), b.(*SlurmTRES), scope)
 	}); err != nil {
 		return err
 	}
@@ -3831,26 +3911,6 @@ func RegisterConversions(s *runtime.Scheme) error {
 	}); err != nil {
 		return err
 	}
-	if err := s.AddGeneratedConversionFunc((*VolumeSnapshotRequestStatus)(nil), (*management.VolumeSnapshotRequestStatus)(nil), func(a, b interface{}, scope conversion.Scope) error {
-		return Convert_v1_VolumeSnapshotRequestStatus_To_management_VolumeSnapshotRequestStatus(a.(*VolumeSnapshotRequestStatus), b.(*management.VolumeSnapshotRequestStatus), scope)
-	}); err != nil {
-		return err
-	}
-	if err := s.AddGeneratedConversionFunc((*management.VolumeSnapshotRequestStatus)(nil), (*VolumeSnapshotRequestStatus)(nil), func(a, b interface{}, scope conversion.Scope) error {
-		return Convert_management_VolumeSnapshotRequestStatus_To_v1_VolumeSnapshotRequestStatus(a.(*management.VolumeSnapshotRequestStatus), b.(*VolumeSnapshotRequestStatus), scope)
-	}); err != nil {
-		return err
-	}
-	if err := s.AddGeneratedConversionFunc((*VolumeSnapshotsRequestStatus)(nil), (*management.VolumeSnapshotsRequestStatus)(nil), func(a, b interface{}, scope conversion.Scope) error {
-		return Convert_v1_VolumeSnapshotsRequestStatus_To_management_VolumeSnapshotsRequestStatus(a.(*VolumeSnapshotsRequestStatus), b.(*management.VolumeSnapshotsRequestStatus), scope)
-	}); err != nil {
-		return err
-	}
-	if err := s.AddGeneratedConversionFunc((*management.VolumeSnapshotsRequestStatus)(nil), (*VolumeSnapshotsRequestStatus)(nil), func(a, b interface{}, scope conversion.Scope) error {
-		return Convert_management_VolumeSnapshotsRequestStatus_To_v1_VolumeSnapshotsRequestStatus(a.(*management.VolumeSnapshotsRequestStatus), b.(*VolumeSnapshotsRequestStatus), scope)
-	}); err != nil {
-		return err
-	}
 	if err := s.AddGeneratedConversionFunc((*url.Values)(nil), (*BackupApplyOptions)(nil), func(a, b interface{}, scope conversion.Scope) error {
 		return Convert_url_Values_To_v1_BackupApplyOptions(a.(*url.Values), b.(*BackupApplyOptions), scope)
 	}); err != nil {
@@ -3863,6 +3923,11 @@ func RegisterConversions(s *runtime.Scheme) error {
 	}
 	if err := s.AddGeneratedConversionFunc((*url.Values)(nil), (*PodExecOptions)(nil), func(a, b interface{}, scope conversion.Scope) error {
 		return Convert_url_Values_To_v1_PodExecOptions(a.(*url.Values), b.(*PodExecOptions), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*url.Values)(nil), (*SlurmInstanceAccountingOptions)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_url_Values_To_v1_SlurmInstanceAccountingOptions(a.(*url.Values), b.(*SlurmInstanceAccountingOptions), scope)
 	}); err != nil {
 		return err
 	}
@@ -4644,316 +4709,6 @@ func autoConvert_management_AuditPolicyRule_To_v1_AuditPolicyRule(in *management
 // Convert_management_AuditPolicyRule_To_v1_AuditPolicyRule is an autogenerated conversion function.
 func Convert_management_AuditPolicyRule_To_v1_AuditPolicyRule(in *management.AuditPolicyRule, out *AuditPolicyRule, s conversion.Scope) error {
 	return autoConvert_management_AuditPolicyRule_To_v1_AuditPolicyRule(in, out, s)
-}
-
-func autoConvert_v1_Authentication_To_management_Authentication(in *Authentication, out *management.Authentication, s conversion.Scope) error {
-	if err := Convert_v1_Connector_To_management_Connector(&in.Connector, &out.Connector, s); err != nil {
-		return err
-	}
-	out.Password = (*management.AuthenticationPassword)(unsafe.Pointer(in.Password))
-	out.Connectors = *(*[]management.ConnectorWithName)(unsafe.Pointer(&in.Connectors))
-	out.DisableTeamCreation = in.DisableTeamCreation
-	out.DisableUserCreation = in.DisableUserCreation
-	out.AccessKeyMaxTTLSeconds = in.AccessKeyMaxTTLSeconds
-	out.LoginAccessKeyTTLSeconds = (*int64)(unsafe.Pointer(in.LoginAccessKeyTTLSeconds))
-	out.CustomHttpHeaders = *(*map[string]string)(unsafe.Pointer(&in.CustomHttpHeaders))
-	out.GroupsFilters = *(*[]string)(unsafe.Pointer(&in.GroupsFilters))
-	return nil
-}
-
-// Convert_v1_Authentication_To_management_Authentication is an autogenerated conversion function.
-func Convert_v1_Authentication_To_management_Authentication(in *Authentication, out *management.Authentication, s conversion.Scope) error {
-	return autoConvert_v1_Authentication_To_management_Authentication(in, out, s)
-}
-
-func autoConvert_management_Authentication_To_v1_Authentication(in *management.Authentication, out *Authentication, s conversion.Scope) error {
-	if err := Convert_management_Connector_To_v1_Connector(&in.Connector, &out.Connector, s); err != nil {
-		return err
-	}
-	out.Password = (*AuthenticationPassword)(unsafe.Pointer(in.Password))
-	out.Connectors = *(*[]ConnectorWithName)(unsafe.Pointer(&in.Connectors))
-	out.DisableTeamCreation = in.DisableTeamCreation
-	out.DisableUserCreation = in.DisableUserCreation
-	out.AccessKeyMaxTTLSeconds = in.AccessKeyMaxTTLSeconds
-	out.LoginAccessKeyTTLSeconds = (*int64)(unsafe.Pointer(in.LoginAccessKeyTTLSeconds))
-	out.CustomHttpHeaders = *(*map[string]string)(unsafe.Pointer(&in.CustomHttpHeaders))
-	out.GroupsFilters = *(*[]string)(unsafe.Pointer(&in.GroupsFilters))
-	return nil
-}
-
-// Convert_management_Authentication_To_v1_Authentication is an autogenerated conversion function.
-func Convert_management_Authentication_To_v1_Authentication(in *management.Authentication, out *Authentication, s conversion.Scope) error {
-	return autoConvert_management_Authentication_To_v1_Authentication(in, out, s)
-}
-
-func autoConvert_v1_AuthenticationGithub_To_management_AuthenticationGithub(in *AuthenticationGithub, out *management.AuthenticationGithub, s conversion.Scope) error {
-	out.ClientID = in.ClientID
-	out.ClientSecret = in.ClientSecret
-	out.RedirectURI = in.RedirectURI
-	out.Orgs = *(*[]management.AuthenticationGithubOrg)(unsafe.Pointer(&in.Orgs))
-	out.HostName = in.HostName
-	out.RootCA = in.RootCA
-	return nil
-}
-
-// Convert_v1_AuthenticationGithub_To_management_AuthenticationGithub is an autogenerated conversion function.
-func Convert_v1_AuthenticationGithub_To_management_AuthenticationGithub(in *AuthenticationGithub, out *management.AuthenticationGithub, s conversion.Scope) error {
-	return autoConvert_v1_AuthenticationGithub_To_management_AuthenticationGithub(in, out, s)
-}
-
-func autoConvert_management_AuthenticationGithub_To_v1_AuthenticationGithub(in *management.AuthenticationGithub, out *AuthenticationGithub, s conversion.Scope) error {
-	out.ClientID = in.ClientID
-	out.ClientSecret = in.ClientSecret
-	out.RedirectURI = in.RedirectURI
-	out.Orgs = *(*[]AuthenticationGithubOrg)(unsafe.Pointer(&in.Orgs))
-	out.HostName = in.HostName
-	out.RootCA = in.RootCA
-	return nil
-}
-
-// Convert_management_AuthenticationGithub_To_v1_AuthenticationGithub is an autogenerated conversion function.
-func Convert_management_AuthenticationGithub_To_v1_AuthenticationGithub(in *management.AuthenticationGithub, out *AuthenticationGithub, s conversion.Scope) error {
-	return autoConvert_management_AuthenticationGithub_To_v1_AuthenticationGithub(in, out, s)
-}
-
-func autoConvert_v1_AuthenticationGithubOrg_To_management_AuthenticationGithubOrg(in *AuthenticationGithubOrg, out *management.AuthenticationGithubOrg, s conversion.Scope) error {
-	out.Name = in.Name
-	out.Teams = *(*[]string)(unsafe.Pointer(&in.Teams))
-	return nil
-}
-
-// Convert_v1_AuthenticationGithubOrg_To_management_AuthenticationGithubOrg is an autogenerated conversion function.
-func Convert_v1_AuthenticationGithubOrg_To_management_AuthenticationGithubOrg(in *AuthenticationGithubOrg, out *management.AuthenticationGithubOrg, s conversion.Scope) error {
-	return autoConvert_v1_AuthenticationGithubOrg_To_management_AuthenticationGithubOrg(in, out, s)
-}
-
-func autoConvert_management_AuthenticationGithubOrg_To_v1_AuthenticationGithubOrg(in *management.AuthenticationGithubOrg, out *AuthenticationGithubOrg, s conversion.Scope) error {
-	out.Name = in.Name
-	out.Teams = *(*[]string)(unsafe.Pointer(&in.Teams))
-	return nil
-}
-
-// Convert_management_AuthenticationGithubOrg_To_v1_AuthenticationGithubOrg is an autogenerated conversion function.
-func Convert_management_AuthenticationGithubOrg_To_v1_AuthenticationGithubOrg(in *management.AuthenticationGithubOrg, out *AuthenticationGithubOrg, s conversion.Scope) error {
-	return autoConvert_management_AuthenticationGithubOrg_To_v1_AuthenticationGithubOrg(in, out, s)
-}
-
-func autoConvert_v1_AuthenticationGitlab_To_management_AuthenticationGitlab(in *AuthenticationGitlab, out *management.AuthenticationGitlab, s conversion.Scope) error {
-	out.ClientID = in.ClientID
-	out.ClientSecret = in.ClientSecret
-	out.RedirectURI = in.RedirectURI
-	out.BaseURL = in.BaseURL
-	out.Groups = *(*[]string)(unsafe.Pointer(&in.Groups))
-	return nil
-}
-
-// Convert_v1_AuthenticationGitlab_To_management_AuthenticationGitlab is an autogenerated conversion function.
-func Convert_v1_AuthenticationGitlab_To_management_AuthenticationGitlab(in *AuthenticationGitlab, out *management.AuthenticationGitlab, s conversion.Scope) error {
-	return autoConvert_v1_AuthenticationGitlab_To_management_AuthenticationGitlab(in, out, s)
-}
-
-func autoConvert_management_AuthenticationGitlab_To_v1_AuthenticationGitlab(in *management.AuthenticationGitlab, out *AuthenticationGitlab, s conversion.Scope) error {
-	out.ClientID = in.ClientID
-	out.ClientSecret = in.ClientSecret
-	out.RedirectURI = in.RedirectURI
-	out.BaseURL = in.BaseURL
-	out.Groups = *(*[]string)(unsafe.Pointer(&in.Groups))
-	return nil
-}
-
-// Convert_management_AuthenticationGitlab_To_v1_AuthenticationGitlab is an autogenerated conversion function.
-func Convert_management_AuthenticationGitlab_To_v1_AuthenticationGitlab(in *management.AuthenticationGitlab, out *AuthenticationGitlab, s conversion.Scope) error {
-	return autoConvert_management_AuthenticationGitlab_To_v1_AuthenticationGitlab(in, out, s)
-}
-
-func autoConvert_v1_AuthenticationGoogle_To_management_AuthenticationGoogle(in *AuthenticationGoogle, out *management.AuthenticationGoogle, s conversion.Scope) error {
-	out.ClientID = in.ClientID
-	out.ClientSecret = in.ClientSecret
-	out.RedirectURI = in.RedirectURI
-	out.Scopes = *(*[]string)(unsafe.Pointer(&in.Scopes))
-	out.HostedDomains = *(*[]string)(unsafe.Pointer(&in.HostedDomains))
-	out.Groups = *(*[]string)(unsafe.Pointer(&in.Groups))
-	out.ServiceAccountFilePath = in.ServiceAccountFilePath
-	out.AdminEmail = in.AdminEmail
-	return nil
-}
-
-// Convert_v1_AuthenticationGoogle_To_management_AuthenticationGoogle is an autogenerated conversion function.
-func Convert_v1_AuthenticationGoogle_To_management_AuthenticationGoogle(in *AuthenticationGoogle, out *management.AuthenticationGoogle, s conversion.Scope) error {
-	return autoConvert_v1_AuthenticationGoogle_To_management_AuthenticationGoogle(in, out, s)
-}
-
-func autoConvert_management_AuthenticationGoogle_To_v1_AuthenticationGoogle(in *management.AuthenticationGoogle, out *AuthenticationGoogle, s conversion.Scope) error {
-	out.ClientID = in.ClientID
-	out.ClientSecret = in.ClientSecret
-	out.RedirectURI = in.RedirectURI
-	out.Scopes = *(*[]string)(unsafe.Pointer(&in.Scopes))
-	out.HostedDomains = *(*[]string)(unsafe.Pointer(&in.HostedDomains))
-	out.Groups = *(*[]string)(unsafe.Pointer(&in.Groups))
-	out.ServiceAccountFilePath = in.ServiceAccountFilePath
-	out.AdminEmail = in.AdminEmail
-	return nil
-}
-
-// Convert_management_AuthenticationGoogle_To_v1_AuthenticationGoogle is an autogenerated conversion function.
-func Convert_management_AuthenticationGoogle_To_v1_AuthenticationGoogle(in *management.AuthenticationGoogle, out *AuthenticationGoogle, s conversion.Scope) error {
-	return autoConvert_management_AuthenticationGoogle_To_v1_AuthenticationGoogle(in, out, s)
-}
-
-func autoConvert_v1_AuthenticationMicrosoft_To_management_AuthenticationMicrosoft(in *AuthenticationMicrosoft, out *management.AuthenticationMicrosoft, s conversion.Scope) error {
-	out.ClientID = in.ClientID
-	out.ClientSecret = in.ClientSecret
-	out.RedirectURI = in.RedirectURI
-	out.Tenant = in.Tenant
-	out.Groups = *(*[]string)(unsafe.Pointer(&in.Groups))
-	out.OnlySecurityGroups = in.OnlySecurityGroups
-	out.UseGroupsAsWhitelist = in.UseGroupsAsWhitelist
-	return nil
-}
-
-// Convert_v1_AuthenticationMicrosoft_To_management_AuthenticationMicrosoft is an autogenerated conversion function.
-func Convert_v1_AuthenticationMicrosoft_To_management_AuthenticationMicrosoft(in *AuthenticationMicrosoft, out *management.AuthenticationMicrosoft, s conversion.Scope) error {
-	return autoConvert_v1_AuthenticationMicrosoft_To_management_AuthenticationMicrosoft(in, out, s)
-}
-
-func autoConvert_management_AuthenticationMicrosoft_To_v1_AuthenticationMicrosoft(in *management.AuthenticationMicrosoft, out *AuthenticationMicrosoft, s conversion.Scope) error {
-	out.ClientID = in.ClientID
-	out.ClientSecret = in.ClientSecret
-	out.RedirectURI = in.RedirectURI
-	out.Tenant = in.Tenant
-	out.Groups = *(*[]string)(unsafe.Pointer(&in.Groups))
-	out.OnlySecurityGroups = in.OnlySecurityGroups
-	out.UseGroupsAsWhitelist = in.UseGroupsAsWhitelist
-	return nil
-}
-
-// Convert_management_AuthenticationMicrosoft_To_v1_AuthenticationMicrosoft is an autogenerated conversion function.
-func Convert_management_AuthenticationMicrosoft_To_v1_AuthenticationMicrosoft(in *management.AuthenticationMicrosoft, out *AuthenticationMicrosoft, s conversion.Scope) error {
-	return autoConvert_management_AuthenticationMicrosoft_To_v1_AuthenticationMicrosoft(in, out, s)
-}
-
-func autoConvert_v1_AuthenticationOIDC_To_management_AuthenticationOIDC(in *AuthenticationOIDC, out *management.AuthenticationOIDC, s conversion.Scope) error {
-	out.IssuerURL = in.IssuerURL
-	out.ClientID = in.ClientID
-	out.ClientSecret = in.ClientSecret
-	out.RedirectURI = in.RedirectURI
-	out.PostLogoutRedirectURI = in.PostLogoutRedirectURI
-	out.CAFile = in.CAFile
-	out.InsecureCA = in.InsecureCA
-	out.PreferredUsernameClaim = in.PreferredUsernameClaim
-	out.LoftUsernameClaim = in.LoftUsernameClaim
-	out.UsernameClaim = in.UsernameClaim
-	out.EmailClaim = in.EmailClaim
-	out.AllowedExtraClaims = *(*[]string)(unsafe.Pointer(&in.AllowedExtraClaims))
-	out.UsernamePrefix = in.UsernamePrefix
-	out.GroupsClaim = in.GroupsClaim
-	out.Groups = *(*[]string)(unsafe.Pointer(&in.Groups))
-	out.Scopes = *(*[]string)(unsafe.Pointer(&in.Scopes))
-	out.GetUserInfo = in.GetUserInfo
-	out.GroupsPrefix = in.GroupsPrefix
-	out.Type = in.Type
-	out.Resource = in.Resource
-	return nil
-}
-
-// Convert_v1_AuthenticationOIDC_To_management_AuthenticationOIDC is an autogenerated conversion function.
-func Convert_v1_AuthenticationOIDC_To_management_AuthenticationOIDC(in *AuthenticationOIDC, out *management.AuthenticationOIDC, s conversion.Scope) error {
-	return autoConvert_v1_AuthenticationOIDC_To_management_AuthenticationOIDC(in, out, s)
-}
-
-func autoConvert_management_AuthenticationOIDC_To_v1_AuthenticationOIDC(in *management.AuthenticationOIDC, out *AuthenticationOIDC, s conversion.Scope) error {
-	out.IssuerURL = in.IssuerURL
-	out.ClientID = in.ClientID
-	out.ClientSecret = in.ClientSecret
-	out.RedirectURI = in.RedirectURI
-	out.PostLogoutRedirectURI = in.PostLogoutRedirectURI
-	out.CAFile = in.CAFile
-	out.InsecureCA = in.InsecureCA
-	out.PreferredUsernameClaim = in.PreferredUsernameClaim
-	out.LoftUsernameClaim = in.LoftUsernameClaim
-	out.UsernameClaim = in.UsernameClaim
-	out.EmailClaim = in.EmailClaim
-	out.AllowedExtraClaims = *(*[]string)(unsafe.Pointer(&in.AllowedExtraClaims))
-	out.UsernamePrefix = in.UsernamePrefix
-	out.GroupsClaim = in.GroupsClaim
-	out.Groups = *(*[]string)(unsafe.Pointer(&in.Groups))
-	out.Scopes = *(*[]string)(unsafe.Pointer(&in.Scopes))
-	out.GetUserInfo = in.GetUserInfo
-	out.GroupsPrefix = in.GroupsPrefix
-	out.Type = in.Type
-	out.Resource = in.Resource
-	return nil
-}
-
-// Convert_management_AuthenticationOIDC_To_v1_AuthenticationOIDC is an autogenerated conversion function.
-func Convert_management_AuthenticationOIDC_To_v1_AuthenticationOIDC(in *management.AuthenticationOIDC, out *AuthenticationOIDC, s conversion.Scope) error {
-	return autoConvert_management_AuthenticationOIDC_To_v1_AuthenticationOIDC(in, out, s)
-}
-
-func autoConvert_v1_AuthenticationPassword_To_management_AuthenticationPassword(in *AuthenticationPassword, out *management.AuthenticationPassword, s conversion.Scope) error {
-	out.Disabled = in.Disabled
-	return nil
-}
-
-// Convert_v1_AuthenticationPassword_To_management_AuthenticationPassword is an autogenerated conversion function.
-func Convert_v1_AuthenticationPassword_To_management_AuthenticationPassword(in *AuthenticationPassword, out *management.AuthenticationPassword, s conversion.Scope) error {
-	return autoConvert_v1_AuthenticationPassword_To_management_AuthenticationPassword(in, out, s)
-}
-
-func autoConvert_management_AuthenticationPassword_To_v1_AuthenticationPassword(in *management.AuthenticationPassword, out *AuthenticationPassword, s conversion.Scope) error {
-	out.Disabled = in.Disabled
-	return nil
-}
-
-// Convert_management_AuthenticationPassword_To_v1_AuthenticationPassword is an autogenerated conversion function.
-func Convert_management_AuthenticationPassword_To_v1_AuthenticationPassword(in *management.AuthenticationPassword, out *AuthenticationPassword, s conversion.Scope) error {
-	return autoConvert_management_AuthenticationPassword_To_v1_AuthenticationPassword(in, out, s)
-}
-
-func autoConvert_v1_AuthenticationSAML_To_management_AuthenticationSAML(in *AuthenticationSAML, out *management.AuthenticationSAML, s conversion.Scope) error {
-	out.RedirectURI = in.RedirectURI
-	out.SSOURL = in.SSOURL
-	out.CAData = *(*[]byte)(unsafe.Pointer(&in.CAData))
-	out.UsernameAttr = in.UsernameAttr
-	out.EmailAttr = in.EmailAttr
-	out.GroupsAttr = in.GroupsAttr
-	out.CA = in.CA
-	out.InsecureSkipSignatureValidation = in.InsecureSkipSignatureValidation
-	out.EntityIssuer = in.EntityIssuer
-	out.SSOIssuer = in.SSOIssuer
-	out.GroupsDelim = in.GroupsDelim
-	out.AllowedGroups = *(*[]string)(unsafe.Pointer(&in.AllowedGroups))
-	out.FilterGroups = in.FilterGroups
-	out.NameIDPolicyFormat = in.NameIDPolicyFormat
-	return nil
-}
-
-// Convert_v1_AuthenticationSAML_To_management_AuthenticationSAML is an autogenerated conversion function.
-func Convert_v1_AuthenticationSAML_To_management_AuthenticationSAML(in *AuthenticationSAML, out *management.AuthenticationSAML, s conversion.Scope) error {
-	return autoConvert_v1_AuthenticationSAML_To_management_AuthenticationSAML(in, out, s)
-}
-
-func autoConvert_management_AuthenticationSAML_To_v1_AuthenticationSAML(in *management.AuthenticationSAML, out *AuthenticationSAML, s conversion.Scope) error {
-	out.RedirectURI = in.RedirectURI
-	out.SSOURL = in.SSOURL
-	out.CAData = *(*[]byte)(unsafe.Pointer(&in.CAData))
-	out.UsernameAttr = in.UsernameAttr
-	out.EmailAttr = in.EmailAttr
-	out.GroupsAttr = in.GroupsAttr
-	out.CA = in.CA
-	out.InsecureSkipSignatureValidation = in.InsecureSkipSignatureValidation
-	out.EntityIssuer = in.EntityIssuer
-	out.SSOIssuer = in.SSOIssuer
-	out.GroupsDelim = in.GroupsDelim
-	out.AllowedGroups = *(*[]string)(unsafe.Pointer(&in.AllowedGroups))
-	out.FilterGroups = in.FilterGroups
-	out.NameIDPolicyFormat = in.NameIDPolicyFormat
-	return nil
-}
-
-// Convert_management_AuthenticationSAML_To_v1_AuthenticationSAML is an autogenerated conversion function.
-func Convert_management_AuthenticationSAML_To_v1_AuthenticationSAML(in *management.AuthenticationSAML, out *AuthenticationSAML, s conversion.Scope) error {
-	return autoConvert_management_AuthenticationSAML_To_v1_AuthenticationSAML(in, out, s)
 }
 
 func autoConvert_v1_Backup_To_management_Backup(in *Backup, out *management.Backup, s conversion.Scope) error {
@@ -5964,9 +5719,7 @@ func Convert_management_ConfigSpec_To_v1_ConfigSpec(in *management.ConfigSpec, o
 }
 
 func autoConvert_v1_ConfigStatus_To_management_ConfigStatus(in *ConfigStatus, out *management.ConfigStatus, s conversion.Scope) error {
-	if err := Convert_v1_Authentication_To_management_Authentication(&in.Authentication, &out.Authentication, s); err != nil {
-		return err
-	}
+	out.Authentication = in.Authentication
 	out.OIDC = (*management.OIDC)(unsafe.Pointer(in.OIDC))
 	out.Apps = (*management.Apps)(unsafe.Pointer(in.Apps))
 	out.Audit = (*management.Audit)(unsafe.Pointer(in.Audit))
@@ -5991,9 +5744,7 @@ func Convert_v1_ConfigStatus_To_management_ConfigStatus(in *ConfigStatus, out *m
 }
 
 func autoConvert_management_ConfigStatus_To_v1_ConfigStatus(in *management.ConfigStatus, out *ConfigStatus, s conversion.Scope) error {
-	if err := Convert_management_Authentication_To_v1_Authentication(&in.Authentication, &out.Authentication, s); err != nil {
-		return err
-	}
+	out.Authentication = in.Authentication
 	out.OIDC = (*OIDC)(unsafe.Pointer(in.OIDC))
 	out.Apps = (*Apps)(unsafe.Pointer(in.Apps))
 	out.Audit = (*Audit)(unsafe.Pointer(in.Audit))
@@ -6015,64 +5766,6 @@ func autoConvert_management_ConfigStatus_To_v1_ConfigStatus(in *management.Confi
 // Convert_management_ConfigStatus_To_v1_ConfigStatus is an autogenerated conversion function.
 func Convert_management_ConfigStatus_To_v1_ConfigStatus(in *management.ConfigStatus, out *ConfigStatus, s conversion.Scope) error {
 	return autoConvert_management_ConfigStatus_To_v1_ConfigStatus(in, out, s)
-}
-
-func autoConvert_v1_Connector_To_management_Connector(in *Connector, out *management.Connector, s conversion.Scope) error {
-	out.OIDC = (*management.AuthenticationOIDC)(unsafe.Pointer(in.OIDC))
-	out.Github = (*management.AuthenticationGithub)(unsafe.Pointer(in.Github))
-	out.Gitlab = (*management.AuthenticationGitlab)(unsafe.Pointer(in.Gitlab))
-	out.Google = (*management.AuthenticationGoogle)(unsafe.Pointer(in.Google))
-	out.Microsoft = (*management.AuthenticationMicrosoft)(unsafe.Pointer(in.Microsoft))
-	out.SAML = (*management.AuthenticationSAML)(unsafe.Pointer(in.SAML))
-	return nil
-}
-
-// Convert_v1_Connector_To_management_Connector is an autogenerated conversion function.
-func Convert_v1_Connector_To_management_Connector(in *Connector, out *management.Connector, s conversion.Scope) error {
-	return autoConvert_v1_Connector_To_management_Connector(in, out, s)
-}
-
-func autoConvert_management_Connector_To_v1_Connector(in *management.Connector, out *Connector, s conversion.Scope) error {
-	out.OIDC = (*AuthenticationOIDC)(unsafe.Pointer(in.OIDC))
-	out.Github = (*AuthenticationGithub)(unsafe.Pointer(in.Github))
-	out.Gitlab = (*AuthenticationGitlab)(unsafe.Pointer(in.Gitlab))
-	out.Google = (*AuthenticationGoogle)(unsafe.Pointer(in.Google))
-	out.Microsoft = (*AuthenticationMicrosoft)(unsafe.Pointer(in.Microsoft))
-	out.SAML = (*AuthenticationSAML)(unsafe.Pointer(in.SAML))
-	return nil
-}
-
-// Convert_management_Connector_To_v1_Connector is an autogenerated conversion function.
-func Convert_management_Connector_To_v1_Connector(in *management.Connector, out *Connector, s conversion.Scope) error {
-	return autoConvert_management_Connector_To_v1_Connector(in, out, s)
-}
-
-func autoConvert_v1_ConnectorWithName_To_management_ConnectorWithName(in *ConnectorWithName, out *management.ConnectorWithName, s conversion.Scope) error {
-	out.ID = in.ID
-	out.DisplayName = in.DisplayName
-	if err := Convert_v1_Connector_To_management_Connector(&in.Connector, &out.Connector, s); err != nil {
-		return err
-	}
-	return nil
-}
-
-// Convert_v1_ConnectorWithName_To_management_ConnectorWithName is an autogenerated conversion function.
-func Convert_v1_ConnectorWithName_To_management_ConnectorWithName(in *ConnectorWithName, out *management.ConnectorWithName, s conversion.Scope) error {
-	return autoConvert_v1_ConnectorWithName_To_management_ConnectorWithName(in, out, s)
-}
-
-func autoConvert_management_ConnectorWithName_To_v1_ConnectorWithName(in *management.ConnectorWithName, out *ConnectorWithName, s conversion.Scope) error {
-	out.ID = in.ID
-	out.DisplayName = in.DisplayName
-	if err := Convert_management_Connector_To_v1_Connector(&in.Connector, &out.Connector, s); err != nil {
-		return err
-	}
-	return nil
-}
-
-// Convert_management_ConnectorWithName_To_v1_ConnectorWithName is an autogenerated conversion function.
-func Convert_management_ConnectorWithName_To_v1_ConnectorWithName(in *management.ConnectorWithName, out *ConnectorWithName, s conversion.Scope) error {
-	return autoConvert_management_ConnectorWithName_To_v1_ConnectorWithName(in, out, s)
 }
 
 func autoConvert_v1_ConvertVirtualClusterConfig_To_management_ConvertVirtualClusterConfig(in *ConvertVirtualClusterConfig, out *management.ConvertVirtualClusterConfig, s conversion.Scope) error {
@@ -7319,6 +7012,100 @@ func autoConvert_management_LoftUpgradeStatus_To_v1_LoftUpgradeStatus(in *manage
 // Convert_management_LoftUpgradeStatus_To_v1_LoftUpgradeStatus is an autogenerated conversion function.
 func Convert_management_LoftUpgradeStatus_To_v1_LoftUpgradeStatus(in *management.LoftUpgradeStatus, out *LoftUpgradeStatus, s conversion.Scope) error {
 	return autoConvert_management_LoftUpgradeStatus_To_v1_LoftUpgradeStatus(in, out, s)
+}
+
+func autoConvert_v1_MachineConfigTemplate_To_management_MachineConfigTemplate(in *MachineConfigTemplate, out *management.MachineConfigTemplate, s conversion.Scope) error {
+	out.ObjectMeta = in.ObjectMeta
+	if err := Convert_v1_MachineConfigTemplateSpec_To_management_MachineConfigTemplateSpec(&in.Spec, &out.Spec, s); err != nil {
+		return err
+	}
+	if err := Convert_v1_MachineConfigTemplateStatus_To_management_MachineConfigTemplateStatus(&in.Status, &out.Status, s); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Convert_v1_MachineConfigTemplate_To_management_MachineConfigTemplate is an autogenerated conversion function.
+func Convert_v1_MachineConfigTemplate_To_management_MachineConfigTemplate(in *MachineConfigTemplate, out *management.MachineConfigTemplate, s conversion.Scope) error {
+	return autoConvert_v1_MachineConfigTemplate_To_management_MachineConfigTemplate(in, out, s)
+}
+
+func autoConvert_management_MachineConfigTemplate_To_v1_MachineConfigTemplate(in *management.MachineConfigTemplate, out *MachineConfigTemplate, s conversion.Scope) error {
+	out.ObjectMeta = in.ObjectMeta
+	if err := Convert_management_MachineConfigTemplateSpec_To_v1_MachineConfigTemplateSpec(&in.Spec, &out.Spec, s); err != nil {
+		return err
+	}
+	if err := Convert_management_MachineConfigTemplateStatus_To_v1_MachineConfigTemplateStatus(&in.Status, &out.Status, s); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Convert_management_MachineConfigTemplate_To_v1_MachineConfigTemplate is an autogenerated conversion function.
+func Convert_management_MachineConfigTemplate_To_v1_MachineConfigTemplate(in *management.MachineConfigTemplate, out *MachineConfigTemplate, s conversion.Scope) error {
+	return autoConvert_management_MachineConfigTemplate_To_v1_MachineConfigTemplate(in, out, s)
+}
+
+func autoConvert_v1_MachineConfigTemplateList_To_management_MachineConfigTemplateList(in *MachineConfigTemplateList, out *management.MachineConfigTemplateList, s conversion.Scope) error {
+	out.ListMeta = in.ListMeta
+	out.Items = *(*[]management.MachineConfigTemplate)(unsafe.Pointer(&in.Items))
+	return nil
+}
+
+// Convert_v1_MachineConfigTemplateList_To_management_MachineConfigTemplateList is an autogenerated conversion function.
+func Convert_v1_MachineConfigTemplateList_To_management_MachineConfigTemplateList(in *MachineConfigTemplateList, out *management.MachineConfigTemplateList, s conversion.Scope) error {
+	return autoConvert_v1_MachineConfigTemplateList_To_management_MachineConfigTemplateList(in, out, s)
+}
+
+func autoConvert_management_MachineConfigTemplateList_To_v1_MachineConfigTemplateList(in *management.MachineConfigTemplateList, out *MachineConfigTemplateList, s conversion.Scope) error {
+	out.ListMeta = in.ListMeta
+	out.Items = *(*[]MachineConfigTemplate)(unsafe.Pointer(&in.Items))
+	return nil
+}
+
+// Convert_management_MachineConfigTemplateList_To_v1_MachineConfigTemplateList is an autogenerated conversion function.
+func Convert_management_MachineConfigTemplateList_To_v1_MachineConfigTemplateList(in *management.MachineConfigTemplateList, out *MachineConfigTemplateList, s conversion.Scope) error {
+	return autoConvert_management_MachineConfigTemplateList_To_v1_MachineConfigTemplateList(in, out, s)
+}
+
+func autoConvert_v1_MachineConfigTemplateSpec_To_management_MachineConfigTemplateSpec(in *MachineConfigTemplateSpec, out *management.MachineConfigTemplateSpec, s conversion.Scope) error {
+	out.MachineConfigTemplateSpec = in.MachineConfigTemplateSpec
+	return nil
+}
+
+// Convert_v1_MachineConfigTemplateSpec_To_management_MachineConfigTemplateSpec is an autogenerated conversion function.
+func Convert_v1_MachineConfigTemplateSpec_To_management_MachineConfigTemplateSpec(in *MachineConfigTemplateSpec, out *management.MachineConfigTemplateSpec, s conversion.Scope) error {
+	return autoConvert_v1_MachineConfigTemplateSpec_To_management_MachineConfigTemplateSpec(in, out, s)
+}
+
+func autoConvert_management_MachineConfigTemplateSpec_To_v1_MachineConfigTemplateSpec(in *management.MachineConfigTemplateSpec, out *MachineConfigTemplateSpec, s conversion.Scope) error {
+	out.MachineConfigTemplateSpec = in.MachineConfigTemplateSpec
+	return nil
+}
+
+// Convert_management_MachineConfigTemplateSpec_To_v1_MachineConfigTemplateSpec is an autogenerated conversion function.
+func Convert_management_MachineConfigTemplateSpec_To_v1_MachineConfigTemplateSpec(in *management.MachineConfigTemplateSpec, out *MachineConfigTemplateSpec, s conversion.Scope) error {
+	return autoConvert_management_MachineConfigTemplateSpec_To_v1_MachineConfigTemplateSpec(in, out, s)
+}
+
+func autoConvert_v1_MachineConfigTemplateStatus_To_management_MachineConfigTemplateStatus(in *MachineConfigTemplateStatus, out *management.MachineConfigTemplateStatus, s conversion.Scope) error {
+	out.MachineConfigTemplateStatus = in.MachineConfigTemplateStatus
+	return nil
+}
+
+// Convert_v1_MachineConfigTemplateStatus_To_management_MachineConfigTemplateStatus is an autogenerated conversion function.
+func Convert_v1_MachineConfigTemplateStatus_To_management_MachineConfigTemplateStatus(in *MachineConfigTemplateStatus, out *management.MachineConfigTemplateStatus, s conversion.Scope) error {
+	return autoConvert_v1_MachineConfigTemplateStatus_To_management_MachineConfigTemplateStatus(in, out, s)
+}
+
+func autoConvert_management_MachineConfigTemplateStatus_To_v1_MachineConfigTemplateStatus(in *management.MachineConfigTemplateStatus, out *MachineConfigTemplateStatus, s conversion.Scope) error {
+	out.MachineConfigTemplateStatus = in.MachineConfigTemplateStatus
+	return nil
+}
+
+// Convert_management_MachineConfigTemplateStatus_To_v1_MachineConfigTemplateStatus is an autogenerated conversion function.
+func Convert_management_MachineConfigTemplateStatus_To_v1_MachineConfigTemplateStatus(in *management.MachineConfigTemplateStatus, out *MachineConfigTemplateStatus, s conversion.Scope) error {
+	return autoConvert_management_MachineConfigTemplateStatus_To_v1_MachineConfigTemplateStatus(in, out, s)
 }
 
 func autoConvert_v1_MaintenanceWindow_To_management_MaintenanceWindow(in *MaintenanceWindow, out *management.MaintenanceWindow, s conversion.Scope) error {
@@ -9766,6 +9553,138 @@ func Convert_management_RegisterVirtualClusterStatus_To_v1_RegisterVirtualCluste
 	return autoConvert_management_RegisterVirtualClusterStatus_To_v1_RegisterVirtualClusterStatus(in, out, s)
 }
 
+func autoConvert_v1_RenderVirtualClusterTemplate_To_management_RenderVirtualClusterTemplate(in *RenderVirtualClusterTemplate, out *management.RenderVirtualClusterTemplate, s conversion.Scope) error {
+	out.ObjectMeta = in.ObjectMeta
+	if err := Convert_v1_RenderVirtualClusterTemplateSpec_To_management_RenderVirtualClusterTemplateSpec(&in.Spec, &out.Spec, s); err != nil {
+		return err
+	}
+	if err := Convert_v1_RenderVirtualClusterTemplateStatus_To_management_RenderVirtualClusterTemplateStatus(&in.Status, &out.Status, s); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Convert_v1_RenderVirtualClusterTemplate_To_management_RenderVirtualClusterTemplate is an autogenerated conversion function.
+func Convert_v1_RenderVirtualClusterTemplate_To_management_RenderVirtualClusterTemplate(in *RenderVirtualClusterTemplate, out *management.RenderVirtualClusterTemplate, s conversion.Scope) error {
+	return autoConvert_v1_RenderVirtualClusterTemplate_To_management_RenderVirtualClusterTemplate(in, out, s)
+}
+
+func autoConvert_management_RenderVirtualClusterTemplate_To_v1_RenderVirtualClusterTemplate(in *management.RenderVirtualClusterTemplate, out *RenderVirtualClusterTemplate, s conversion.Scope) error {
+	out.ObjectMeta = in.ObjectMeta
+	if err := Convert_management_RenderVirtualClusterTemplateSpec_To_v1_RenderVirtualClusterTemplateSpec(&in.Spec, &out.Spec, s); err != nil {
+		return err
+	}
+	if err := Convert_management_RenderVirtualClusterTemplateStatus_To_v1_RenderVirtualClusterTemplateStatus(&in.Status, &out.Status, s); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Convert_management_RenderVirtualClusterTemplate_To_v1_RenderVirtualClusterTemplate is an autogenerated conversion function.
+func Convert_management_RenderVirtualClusterTemplate_To_v1_RenderVirtualClusterTemplate(in *management.RenderVirtualClusterTemplate, out *RenderVirtualClusterTemplate, s conversion.Scope) error {
+	return autoConvert_management_RenderVirtualClusterTemplate_To_v1_RenderVirtualClusterTemplate(in, out, s)
+}
+
+func autoConvert_v1_RenderVirtualClusterTemplateList_To_management_RenderVirtualClusterTemplateList(in *RenderVirtualClusterTemplateList, out *management.RenderVirtualClusterTemplateList, s conversion.Scope) error {
+	out.ListMeta = in.ListMeta
+	out.Items = *(*[]management.RenderVirtualClusterTemplate)(unsafe.Pointer(&in.Items))
+	return nil
+}
+
+// Convert_v1_RenderVirtualClusterTemplateList_To_management_RenderVirtualClusterTemplateList is an autogenerated conversion function.
+func Convert_v1_RenderVirtualClusterTemplateList_To_management_RenderVirtualClusterTemplateList(in *RenderVirtualClusterTemplateList, out *management.RenderVirtualClusterTemplateList, s conversion.Scope) error {
+	return autoConvert_v1_RenderVirtualClusterTemplateList_To_management_RenderVirtualClusterTemplateList(in, out, s)
+}
+
+func autoConvert_management_RenderVirtualClusterTemplateList_To_v1_RenderVirtualClusterTemplateList(in *management.RenderVirtualClusterTemplateList, out *RenderVirtualClusterTemplateList, s conversion.Scope) error {
+	out.ListMeta = in.ListMeta
+	out.Items = *(*[]RenderVirtualClusterTemplate)(unsafe.Pointer(&in.Items))
+	return nil
+}
+
+// Convert_management_RenderVirtualClusterTemplateList_To_v1_RenderVirtualClusterTemplateList is an autogenerated conversion function.
+func Convert_management_RenderVirtualClusterTemplateList_To_v1_RenderVirtualClusterTemplateList(in *management.RenderVirtualClusterTemplateList, out *RenderVirtualClusterTemplateList, s conversion.Scope) error {
+	return autoConvert_management_RenderVirtualClusterTemplateList_To_v1_RenderVirtualClusterTemplateList(in, out, s)
+}
+
+func autoConvert_v1_RenderVirtualClusterTemplateLoft_To_management_RenderVirtualClusterTemplateLoft(in *RenderVirtualClusterTemplateLoft, out *management.RenderVirtualClusterTemplateLoft, s conversion.Scope) error {
+	out.Name = in.Name
+	out.Project = in.Project
+	out.Cluster = in.Cluster
+	out.Namespace = in.Namespace
+	out.User = in.User
+	out.Team = in.Team
+	return nil
+}
+
+// Convert_v1_RenderVirtualClusterTemplateLoft_To_management_RenderVirtualClusterTemplateLoft is an autogenerated conversion function.
+func Convert_v1_RenderVirtualClusterTemplateLoft_To_management_RenderVirtualClusterTemplateLoft(in *RenderVirtualClusterTemplateLoft, out *management.RenderVirtualClusterTemplateLoft, s conversion.Scope) error {
+	return autoConvert_v1_RenderVirtualClusterTemplateLoft_To_management_RenderVirtualClusterTemplateLoft(in, out, s)
+}
+
+func autoConvert_management_RenderVirtualClusterTemplateLoft_To_v1_RenderVirtualClusterTemplateLoft(in *management.RenderVirtualClusterTemplateLoft, out *RenderVirtualClusterTemplateLoft, s conversion.Scope) error {
+	out.Name = in.Name
+	out.Project = in.Project
+	out.Cluster = in.Cluster
+	out.Namespace = in.Namespace
+	out.User = in.User
+	out.Team = in.Team
+	return nil
+}
+
+// Convert_management_RenderVirtualClusterTemplateLoft_To_v1_RenderVirtualClusterTemplateLoft is an autogenerated conversion function.
+func Convert_management_RenderVirtualClusterTemplateLoft_To_v1_RenderVirtualClusterTemplateLoft(in *management.RenderVirtualClusterTemplateLoft, out *RenderVirtualClusterTemplateLoft, s conversion.Scope) error {
+	return autoConvert_management_RenderVirtualClusterTemplateLoft_To_v1_RenderVirtualClusterTemplateLoft(in, out, s)
+}
+
+func autoConvert_v1_RenderVirtualClusterTemplateSpec_To_management_RenderVirtualClusterTemplateSpec(in *RenderVirtualClusterTemplateSpec, out *management.RenderVirtualClusterTemplateSpec, s conversion.Scope) error {
+	out.Values = in.Values
+	out.Parameters = in.Parameters
+	if err := Convert_v1_RenderVirtualClusterTemplateLoft_To_management_RenderVirtualClusterTemplateLoft(&in.Loft, &out.Loft, s); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Convert_v1_RenderVirtualClusterTemplateSpec_To_management_RenderVirtualClusterTemplateSpec is an autogenerated conversion function.
+func Convert_v1_RenderVirtualClusterTemplateSpec_To_management_RenderVirtualClusterTemplateSpec(in *RenderVirtualClusterTemplateSpec, out *management.RenderVirtualClusterTemplateSpec, s conversion.Scope) error {
+	return autoConvert_v1_RenderVirtualClusterTemplateSpec_To_management_RenderVirtualClusterTemplateSpec(in, out, s)
+}
+
+func autoConvert_management_RenderVirtualClusterTemplateSpec_To_v1_RenderVirtualClusterTemplateSpec(in *management.RenderVirtualClusterTemplateSpec, out *RenderVirtualClusterTemplateSpec, s conversion.Scope) error {
+	out.Values = in.Values
+	out.Parameters = in.Parameters
+	if err := Convert_management_RenderVirtualClusterTemplateLoft_To_v1_RenderVirtualClusterTemplateLoft(&in.Loft, &out.Loft, s); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Convert_management_RenderVirtualClusterTemplateSpec_To_v1_RenderVirtualClusterTemplateSpec is an autogenerated conversion function.
+func Convert_management_RenderVirtualClusterTemplateSpec_To_v1_RenderVirtualClusterTemplateSpec(in *management.RenderVirtualClusterTemplateSpec, out *RenderVirtualClusterTemplateSpec, s conversion.Scope) error {
+	return autoConvert_management_RenderVirtualClusterTemplateSpec_To_v1_RenderVirtualClusterTemplateSpec(in, out, s)
+}
+
+func autoConvert_v1_RenderVirtualClusterTemplateStatus_To_management_RenderVirtualClusterTemplateStatus(in *RenderVirtualClusterTemplateStatus, out *management.RenderVirtualClusterTemplateStatus, s conversion.Scope) error {
+	out.Values = in.Values
+	return nil
+}
+
+// Convert_v1_RenderVirtualClusterTemplateStatus_To_management_RenderVirtualClusterTemplateStatus is an autogenerated conversion function.
+func Convert_v1_RenderVirtualClusterTemplateStatus_To_management_RenderVirtualClusterTemplateStatus(in *RenderVirtualClusterTemplateStatus, out *management.RenderVirtualClusterTemplateStatus, s conversion.Scope) error {
+	return autoConvert_v1_RenderVirtualClusterTemplateStatus_To_management_RenderVirtualClusterTemplateStatus(in, out, s)
+}
+
+func autoConvert_management_RenderVirtualClusterTemplateStatus_To_v1_RenderVirtualClusterTemplateStatus(in *management.RenderVirtualClusterTemplateStatus, out *RenderVirtualClusterTemplateStatus, s conversion.Scope) error {
+	out.Values = in.Values
+	return nil
+}
+
+// Convert_management_RenderVirtualClusterTemplateStatus_To_v1_RenderVirtualClusterTemplateStatus is an autogenerated conversion function.
+func Convert_management_RenderVirtualClusterTemplateStatus_To_v1_RenderVirtualClusterTemplateStatus(in *management.RenderVirtualClusterTemplateStatus, out *RenderVirtualClusterTemplateStatus, s conversion.Scope) error {
+	return autoConvert_management_RenderVirtualClusterTemplateStatus_To_v1_RenderVirtualClusterTemplateStatus(in, out, s)
+}
+
 func autoConvert_v1_ResetAccessKey_To_management_ResetAccessKey(in *ResetAccessKey, out *management.ResetAccessKey, s conversion.Scope) error {
 	out.ObjectMeta = in.ObjectMeta
 	if err := Convert_v1_ResetAccessKeySpec_To_management_ResetAccessKeySpec(&in.Spec, &out.Spec, s); err != nil {
@@ -10258,6 +10177,289 @@ func Convert_management_SharedSecretStatus_To_v1_SharedSecretStatus(in *manageme
 	return autoConvert_management_SharedSecretStatus_To_v1_SharedSecretStatus(in, out, s)
 }
 
+func autoConvert_v1_SlurmInstance_To_management_SlurmInstance(in *SlurmInstance, out *management.SlurmInstance, s conversion.Scope) error {
+	out.ObjectMeta = in.ObjectMeta
+	if err := Convert_v1_SlurmInstanceSpec_To_management_SlurmInstanceSpec(&in.Spec, &out.Spec, s); err != nil {
+		return err
+	}
+	if err := Convert_v1_SlurmInstanceStatus_To_management_SlurmInstanceStatus(&in.Status, &out.Status, s); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Convert_v1_SlurmInstance_To_management_SlurmInstance is an autogenerated conversion function.
+func Convert_v1_SlurmInstance_To_management_SlurmInstance(in *SlurmInstance, out *management.SlurmInstance, s conversion.Scope) error {
+	return autoConvert_v1_SlurmInstance_To_management_SlurmInstance(in, out, s)
+}
+
+func autoConvert_management_SlurmInstance_To_v1_SlurmInstance(in *management.SlurmInstance, out *SlurmInstance, s conversion.Scope) error {
+	out.ObjectMeta = in.ObjectMeta
+	if err := Convert_management_SlurmInstanceSpec_To_v1_SlurmInstanceSpec(&in.Spec, &out.Spec, s); err != nil {
+		return err
+	}
+	if err := Convert_management_SlurmInstanceStatus_To_v1_SlurmInstanceStatus(&in.Status, &out.Status, s); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Convert_management_SlurmInstance_To_v1_SlurmInstance is an autogenerated conversion function.
+func Convert_management_SlurmInstance_To_v1_SlurmInstance(in *management.SlurmInstance, out *SlurmInstance, s conversion.Scope) error {
+	return autoConvert_management_SlurmInstance_To_v1_SlurmInstance(in, out, s)
+}
+
+func autoConvert_v1_SlurmInstanceAccounting_To_management_SlurmInstanceAccounting(in *SlurmInstanceAccounting, out *management.SlurmInstanceAccounting, s conversion.Scope) error {
+	out.ObjectMeta = in.ObjectMeta
+	if err := Convert_v1_SlurmInstanceAccountingStatus_To_management_SlurmInstanceAccountingStatus(&in.Status, &out.Status, s); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Convert_v1_SlurmInstanceAccounting_To_management_SlurmInstanceAccounting is an autogenerated conversion function.
+func Convert_v1_SlurmInstanceAccounting_To_management_SlurmInstanceAccounting(in *SlurmInstanceAccounting, out *management.SlurmInstanceAccounting, s conversion.Scope) error {
+	return autoConvert_v1_SlurmInstanceAccounting_To_management_SlurmInstanceAccounting(in, out, s)
+}
+
+func autoConvert_management_SlurmInstanceAccounting_To_v1_SlurmInstanceAccounting(in *management.SlurmInstanceAccounting, out *SlurmInstanceAccounting, s conversion.Scope) error {
+	out.ObjectMeta = in.ObjectMeta
+	if err := Convert_management_SlurmInstanceAccountingStatus_To_v1_SlurmInstanceAccountingStatus(&in.Status, &out.Status, s); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Convert_management_SlurmInstanceAccounting_To_v1_SlurmInstanceAccounting is an autogenerated conversion function.
+func Convert_management_SlurmInstanceAccounting_To_v1_SlurmInstanceAccounting(in *management.SlurmInstanceAccounting, out *SlurmInstanceAccounting, s conversion.Scope) error {
+	return autoConvert_management_SlurmInstanceAccounting_To_v1_SlurmInstanceAccounting(in, out, s)
+}
+
+func autoConvert_v1_SlurmInstanceAccountingList_To_management_SlurmInstanceAccountingList(in *SlurmInstanceAccountingList, out *management.SlurmInstanceAccountingList, s conversion.Scope) error {
+	out.ListMeta = in.ListMeta
+	out.Items = *(*[]management.SlurmInstanceAccounting)(unsafe.Pointer(&in.Items))
+	return nil
+}
+
+// Convert_v1_SlurmInstanceAccountingList_To_management_SlurmInstanceAccountingList is an autogenerated conversion function.
+func Convert_v1_SlurmInstanceAccountingList_To_management_SlurmInstanceAccountingList(in *SlurmInstanceAccountingList, out *management.SlurmInstanceAccountingList, s conversion.Scope) error {
+	return autoConvert_v1_SlurmInstanceAccountingList_To_management_SlurmInstanceAccountingList(in, out, s)
+}
+
+func autoConvert_management_SlurmInstanceAccountingList_To_v1_SlurmInstanceAccountingList(in *management.SlurmInstanceAccountingList, out *SlurmInstanceAccountingList, s conversion.Scope) error {
+	out.ListMeta = in.ListMeta
+	out.Items = *(*[]SlurmInstanceAccounting)(unsafe.Pointer(&in.Items))
+	return nil
+}
+
+// Convert_management_SlurmInstanceAccountingList_To_v1_SlurmInstanceAccountingList is an autogenerated conversion function.
+func Convert_management_SlurmInstanceAccountingList_To_v1_SlurmInstanceAccountingList(in *management.SlurmInstanceAccountingList, out *SlurmInstanceAccountingList, s conversion.Scope) error {
+	return autoConvert_management_SlurmInstanceAccountingList_To_v1_SlurmInstanceAccountingList(in, out, s)
+}
+
+func autoConvert_v1_SlurmInstanceAccountingOptions_To_management_SlurmInstanceAccountingOptions(in *SlurmInstanceAccountingOptions, out *management.SlurmInstanceAccountingOptions, s conversion.Scope) error {
+	out.Since = (*metav1.Time)(unsafe.Pointer(in.Since))
+	out.Until = (*metav1.Time)(unsafe.Pointer(in.Until))
+	return nil
+}
+
+// Convert_v1_SlurmInstanceAccountingOptions_To_management_SlurmInstanceAccountingOptions is an autogenerated conversion function.
+func Convert_v1_SlurmInstanceAccountingOptions_To_management_SlurmInstanceAccountingOptions(in *SlurmInstanceAccountingOptions, out *management.SlurmInstanceAccountingOptions, s conversion.Scope) error {
+	return autoConvert_v1_SlurmInstanceAccountingOptions_To_management_SlurmInstanceAccountingOptions(in, out, s)
+}
+
+func autoConvert_management_SlurmInstanceAccountingOptions_To_v1_SlurmInstanceAccountingOptions(in *management.SlurmInstanceAccountingOptions, out *SlurmInstanceAccountingOptions, s conversion.Scope) error {
+	out.Since = (*metav1.Time)(unsafe.Pointer(in.Since))
+	out.Until = (*metav1.Time)(unsafe.Pointer(in.Until))
+	return nil
+}
+
+// Convert_management_SlurmInstanceAccountingOptions_To_v1_SlurmInstanceAccountingOptions is an autogenerated conversion function.
+func Convert_management_SlurmInstanceAccountingOptions_To_v1_SlurmInstanceAccountingOptions(in *management.SlurmInstanceAccountingOptions, out *SlurmInstanceAccountingOptions, s conversion.Scope) error {
+	return autoConvert_management_SlurmInstanceAccountingOptions_To_v1_SlurmInstanceAccountingOptions(in, out, s)
+}
+
+func autoConvert_url_Values_To_v1_SlurmInstanceAccountingOptions(in *url.Values, out *SlurmInstanceAccountingOptions, s conversion.Scope) error {
+	// WARNING: Field TypeMeta does not have json tag, skipping.
+
+	if values, ok := map[string][]string(*in)["since"]; ok && len(values) > 0 {
+		if err := metav1.Convert_Slice_string_To_Pointer_v1_Time(&values, &out.Since, s); err != nil {
+			return err
+		}
+	} else {
+		out.Since = nil
+	}
+	if values, ok := map[string][]string(*in)["until"]; ok && len(values) > 0 {
+		if err := metav1.Convert_Slice_string_To_Pointer_v1_Time(&values, &out.Until, s); err != nil {
+			return err
+		}
+	} else {
+		out.Until = nil
+	}
+	return nil
+}
+
+// Convert_url_Values_To_v1_SlurmInstanceAccountingOptions is an autogenerated conversion function.
+func Convert_url_Values_To_v1_SlurmInstanceAccountingOptions(in *url.Values, out *SlurmInstanceAccountingOptions, s conversion.Scope) error {
+	return autoConvert_url_Values_To_v1_SlurmInstanceAccountingOptions(in, out, s)
+}
+
+func autoConvert_v1_SlurmInstanceAccountingStatus_To_management_SlurmInstanceAccountingStatus(in *SlurmInstanceAccountingStatus, out *management.SlurmInstanceAccountingStatus, s conversion.Scope) error {
+	out.Enabled = in.Enabled
+	out.Message = in.Message
+	out.Jobs = *(*[]management.SlurmJob)(unsafe.Pointer(&in.Jobs))
+	return nil
+}
+
+// Convert_v1_SlurmInstanceAccountingStatus_To_management_SlurmInstanceAccountingStatus is an autogenerated conversion function.
+func Convert_v1_SlurmInstanceAccountingStatus_To_management_SlurmInstanceAccountingStatus(in *SlurmInstanceAccountingStatus, out *management.SlurmInstanceAccountingStatus, s conversion.Scope) error {
+	return autoConvert_v1_SlurmInstanceAccountingStatus_To_management_SlurmInstanceAccountingStatus(in, out, s)
+}
+
+func autoConvert_management_SlurmInstanceAccountingStatus_To_v1_SlurmInstanceAccountingStatus(in *management.SlurmInstanceAccountingStatus, out *SlurmInstanceAccountingStatus, s conversion.Scope) error {
+	out.Enabled = in.Enabled
+	out.Message = in.Message
+	out.Jobs = *(*[]SlurmJob)(unsafe.Pointer(&in.Jobs))
+	return nil
+}
+
+// Convert_management_SlurmInstanceAccountingStatus_To_v1_SlurmInstanceAccountingStatus is an autogenerated conversion function.
+func Convert_management_SlurmInstanceAccountingStatus_To_v1_SlurmInstanceAccountingStatus(in *management.SlurmInstanceAccountingStatus, out *SlurmInstanceAccountingStatus, s conversion.Scope) error {
+	return autoConvert_management_SlurmInstanceAccountingStatus_To_v1_SlurmInstanceAccountingStatus(in, out, s)
+}
+
+func autoConvert_v1_SlurmInstanceList_To_management_SlurmInstanceList(in *SlurmInstanceList, out *management.SlurmInstanceList, s conversion.Scope) error {
+	out.ListMeta = in.ListMeta
+	out.Items = *(*[]management.SlurmInstance)(unsafe.Pointer(&in.Items))
+	return nil
+}
+
+// Convert_v1_SlurmInstanceList_To_management_SlurmInstanceList is an autogenerated conversion function.
+func Convert_v1_SlurmInstanceList_To_management_SlurmInstanceList(in *SlurmInstanceList, out *management.SlurmInstanceList, s conversion.Scope) error {
+	return autoConvert_v1_SlurmInstanceList_To_management_SlurmInstanceList(in, out, s)
+}
+
+func autoConvert_management_SlurmInstanceList_To_v1_SlurmInstanceList(in *management.SlurmInstanceList, out *SlurmInstanceList, s conversion.Scope) error {
+	out.ListMeta = in.ListMeta
+	out.Items = *(*[]SlurmInstance)(unsafe.Pointer(&in.Items))
+	return nil
+}
+
+// Convert_management_SlurmInstanceList_To_v1_SlurmInstanceList is an autogenerated conversion function.
+func Convert_management_SlurmInstanceList_To_v1_SlurmInstanceList(in *management.SlurmInstanceList, out *SlurmInstanceList, s conversion.Scope) error {
+	return autoConvert_management_SlurmInstanceList_To_v1_SlurmInstanceList(in, out, s)
+}
+
+func autoConvert_v1_SlurmInstanceSpec_To_management_SlurmInstanceSpec(in *SlurmInstanceSpec, out *management.SlurmInstanceSpec, s conversion.Scope) error {
+	out.SlurmInstanceSpec = in.SlurmInstanceSpec
+	return nil
+}
+
+// Convert_v1_SlurmInstanceSpec_To_management_SlurmInstanceSpec is an autogenerated conversion function.
+func Convert_v1_SlurmInstanceSpec_To_management_SlurmInstanceSpec(in *SlurmInstanceSpec, out *management.SlurmInstanceSpec, s conversion.Scope) error {
+	return autoConvert_v1_SlurmInstanceSpec_To_management_SlurmInstanceSpec(in, out, s)
+}
+
+func autoConvert_management_SlurmInstanceSpec_To_v1_SlurmInstanceSpec(in *management.SlurmInstanceSpec, out *SlurmInstanceSpec, s conversion.Scope) error {
+	out.SlurmInstanceSpec = in.SlurmInstanceSpec
+	return nil
+}
+
+// Convert_management_SlurmInstanceSpec_To_v1_SlurmInstanceSpec is an autogenerated conversion function.
+func Convert_management_SlurmInstanceSpec_To_v1_SlurmInstanceSpec(in *management.SlurmInstanceSpec, out *SlurmInstanceSpec, s conversion.Scope) error {
+	return autoConvert_management_SlurmInstanceSpec_To_v1_SlurmInstanceSpec(in, out, s)
+}
+
+func autoConvert_v1_SlurmInstanceStatus_To_management_SlurmInstanceStatus(in *SlurmInstanceStatus, out *management.SlurmInstanceStatus, s conversion.Scope) error {
+	out.SlurmInstanceStatus = in.SlurmInstanceStatus
+	out.CanUse = in.CanUse
+	out.CanUpdate = in.CanUpdate
+	return nil
+}
+
+// Convert_v1_SlurmInstanceStatus_To_management_SlurmInstanceStatus is an autogenerated conversion function.
+func Convert_v1_SlurmInstanceStatus_To_management_SlurmInstanceStatus(in *SlurmInstanceStatus, out *management.SlurmInstanceStatus, s conversion.Scope) error {
+	return autoConvert_v1_SlurmInstanceStatus_To_management_SlurmInstanceStatus(in, out, s)
+}
+
+func autoConvert_management_SlurmInstanceStatus_To_v1_SlurmInstanceStatus(in *management.SlurmInstanceStatus, out *SlurmInstanceStatus, s conversion.Scope) error {
+	out.SlurmInstanceStatus = in.SlurmInstanceStatus
+	out.CanUse = in.CanUse
+	out.CanUpdate = in.CanUpdate
+	return nil
+}
+
+// Convert_management_SlurmInstanceStatus_To_v1_SlurmInstanceStatus is an autogenerated conversion function.
+func Convert_management_SlurmInstanceStatus_To_v1_SlurmInstanceStatus(in *management.SlurmInstanceStatus, out *SlurmInstanceStatus, s conversion.Scope) error {
+	return autoConvert_management_SlurmInstanceStatus_To_v1_SlurmInstanceStatus(in, out, s)
+}
+
+func autoConvert_v1_SlurmJob_To_management_SlurmJob(in *SlurmJob, out *management.SlurmJob, s conversion.Scope) error {
+	out.ID = in.ID
+	out.Name = in.Name
+	out.User = in.User
+	out.Account = in.Account
+	out.Partition = in.Partition
+	out.State = in.State
+	out.SubmitTime = (*metav1.Time)(unsafe.Pointer(in.SubmitTime))
+	out.StartTime = (*metav1.Time)(unsafe.Pointer(in.StartTime))
+	out.EndTime = (*metav1.Time)(unsafe.Pointer(in.EndTime))
+	out.Elapsed = in.Elapsed
+	out.Nodes = in.Nodes
+	out.AllocatedResources = *(*[]management.SlurmTRES)(unsafe.Pointer(&in.AllocatedResources))
+	return nil
+}
+
+// Convert_v1_SlurmJob_To_management_SlurmJob is an autogenerated conversion function.
+func Convert_v1_SlurmJob_To_management_SlurmJob(in *SlurmJob, out *management.SlurmJob, s conversion.Scope) error {
+	return autoConvert_v1_SlurmJob_To_management_SlurmJob(in, out, s)
+}
+
+func autoConvert_management_SlurmJob_To_v1_SlurmJob(in *management.SlurmJob, out *SlurmJob, s conversion.Scope) error {
+	out.ID = in.ID
+	out.Name = in.Name
+	out.User = in.User
+	out.Account = in.Account
+	out.Partition = in.Partition
+	out.State = in.State
+	out.SubmitTime = (*metav1.Time)(unsafe.Pointer(in.SubmitTime))
+	out.StartTime = (*metav1.Time)(unsafe.Pointer(in.StartTime))
+	out.EndTime = (*metav1.Time)(unsafe.Pointer(in.EndTime))
+	out.Elapsed = in.Elapsed
+	out.Nodes = in.Nodes
+	out.AllocatedResources = *(*[]SlurmTRES)(unsafe.Pointer(&in.AllocatedResources))
+	return nil
+}
+
+// Convert_management_SlurmJob_To_v1_SlurmJob is an autogenerated conversion function.
+func Convert_management_SlurmJob_To_v1_SlurmJob(in *management.SlurmJob, out *SlurmJob, s conversion.Scope) error {
+	return autoConvert_management_SlurmJob_To_v1_SlurmJob(in, out, s)
+}
+
+func autoConvert_v1_SlurmTRES_To_management_SlurmTRES(in *SlurmTRES, out *management.SlurmTRES, s conversion.Scope) error {
+	out.Type = in.Type
+	out.Name = in.Name
+	out.Count = in.Count
+	return nil
+}
+
+// Convert_v1_SlurmTRES_To_management_SlurmTRES is an autogenerated conversion function.
+func Convert_v1_SlurmTRES_To_management_SlurmTRES(in *SlurmTRES, out *management.SlurmTRES, s conversion.Scope) error {
+	return autoConvert_v1_SlurmTRES_To_management_SlurmTRES(in, out, s)
+}
+
+func autoConvert_management_SlurmTRES_To_v1_SlurmTRES(in *management.SlurmTRES, out *SlurmTRES, s conversion.Scope) error {
+	out.Type = in.Type
+	out.Name = in.Name
+	out.Count = in.Count
+	return nil
+}
+
+// Convert_management_SlurmTRES_To_v1_SlurmTRES is an autogenerated conversion function.
+func Convert_management_SlurmTRES_To_v1_SlurmTRES(in *management.SlurmTRES, out *SlurmTRES, s conversion.Scope) error {
+	return autoConvert_management_SlurmTRES_To_v1_SlurmTRES(in, out, s)
+}
+
 func autoConvert_v1_SnapshotRequest_To_management_SnapshotRequest(in *SnapshotRequest, out *management.SnapshotRequest, s conversion.Scope) error {
 	if err := Convert_v1_SnapshotRequestMetadata_To_management_SnapshotRequestMetadata(&in.Metadata, &out.Metadata, s); err != nil {
 		return err
@@ -10332,9 +10534,6 @@ func Convert_management_SnapshotRequestMetadata_To_v1_SnapshotRequestMetadata(in
 
 func autoConvert_v1_SnapshotRequestStatus_To_management_SnapshotRequestStatus(in *SnapshotRequestStatus, out *management.SnapshotRequestStatus, s conversion.Scope) error {
 	out.Phase = management.SnapshotRequestPhase(in.Phase)
-	if err := Convert_v1_VolumeSnapshotsRequestStatus_To_management_VolumeSnapshotsRequestStatus(&in.VolumeSnapshots, &out.VolumeSnapshots, s); err != nil {
-		return err
-	}
 	if err := Convert_v1_SnapshotRequestError_To_management_SnapshotRequestError(&in.Error, &out.Error, s); err != nil {
 		return err
 	}
@@ -10348,9 +10547,6 @@ func Convert_v1_SnapshotRequestStatus_To_management_SnapshotRequestStatus(in *Sn
 
 func autoConvert_management_SnapshotRequestStatus_To_v1_SnapshotRequestStatus(in *management.SnapshotRequestStatus, out *SnapshotRequestStatus, s conversion.Scope) error {
 	out.Phase = SnapshotRequestPhase(in.Phase)
-	if err := Convert_management_VolumeSnapshotsRequestStatus_To_v1_VolumeSnapshotsRequestStatus(&in.VolumeSnapshots, &out.VolumeSnapshots, s); err != nil {
-		return err
-	}
 	if err := Convert_management_SnapshotRequestError_To_v1_SnapshotRequestError(&in.Error, &out.Error, s); err != nil {
 		return err
 	}
@@ -10370,7 +10566,6 @@ func autoConvert_v1_SnapshotTaken_To_management_SnapshotTaken(in *SnapshotTaken,
 	if err := Convert_v1_SnapshotRequest_To_management_SnapshotRequest(&in.Request, &out.Request, s); err != nil {
 		return err
 	}
-	out.TotalPV = in.TotalPV
 	out.Status = management.SnapshotTakenStatus(in.Status)
 	return nil
 }
@@ -10388,7 +10583,6 @@ func autoConvert_management_SnapshotTaken_To_v1_SnapshotTaken(in *management.Sna
 	if err := Convert_management_SnapshotRequest_To_v1_SnapshotRequest(&in.Request, &out.Request, s); err != nil {
 		return err
 	}
-	out.TotalPV = in.TotalPV
 	out.Status = SnapshotTakenStatus(in.Status)
 	return nil
 }
@@ -12398,6 +12592,8 @@ func Convert_management_VirtualClusterExternalDatabaseSpec_To_v1_VirtualClusterE
 func autoConvert_v1_VirtualClusterExternalDatabaseStatus_To_management_VirtualClusterExternalDatabaseStatus(in *VirtualClusterExternalDatabaseStatus, out *management.VirtualClusterExternalDatabaseStatus, s conversion.Scope) error {
 	out.DataSource = in.DataSource
 	out.IdentityProvider = in.IdentityProvider
+	out.CaCert = in.CaCert
+	out.SslMode = in.SslMode
 	return nil
 }
 
@@ -12409,6 +12605,8 @@ func Convert_v1_VirtualClusterExternalDatabaseStatus_To_management_VirtualCluste
 func autoConvert_management_VirtualClusterExternalDatabaseStatus_To_v1_VirtualClusterExternalDatabaseStatus(in *management.VirtualClusterExternalDatabaseStatus, out *VirtualClusterExternalDatabaseStatus, s conversion.Scope) error {
 	out.DataSource = in.DataSource
 	out.IdentityProvider = in.IdentityProvider
+	out.CaCert = in.CaCert
+	out.SslMode = in.SslMode
 	return nil
 }
 
@@ -13571,58 +13769,4 @@ func autoConvert_management_VirtualClusterTemplateStatus_To_v1_VirtualClusterTem
 // Convert_management_VirtualClusterTemplateStatus_To_v1_VirtualClusterTemplateStatus is an autogenerated conversion function.
 func Convert_management_VirtualClusterTemplateStatus_To_v1_VirtualClusterTemplateStatus(in *management.VirtualClusterTemplateStatus, out *VirtualClusterTemplateStatus, s conversion.Scope) error {
 	return autoConvert_management_VirtualClusterTemplateStatus_To_v1_VirtualClusterTemplateStatus(in, out, s)
-}
-
-func autoConvert_v1_VolumeSnapshotRequestStatus_To_management_VolumeSnapshotRequestStatus(in *VolumeSnapshotRequestStatus, out *management.VolumeSnapshotRequestStatus, s conversion.Scope) error {
-	out.Phase = in.Phase
-	if err := Convert_v1_SnapshotRequestError_To_management_SnapshotRequestError(&in.Error, &out.Error, s); err != nil {
-		return err
-	}
-	return nil
-}
-
-// Convert_v1_VolumeSnapshotRequestStatus_To_management_VolumeSnapshotRequestStatus is an autogenerated conversion function.
-func Convert_v1_VolumeSnapshotRequestStatus_To_management_VolumeSnapshotRequestStatus(in *VolumeSnapshotRequestStatus, out *management.VolumeSnapshotRequestStatus, s conversion.Scope) error {
-	return autoConvert_v1_VolumeSnapshotRequestStatus_To_management_VolumeSnapshotRequestStatus(in, out, s)
-}
-
-func autoConvert_management_VolumeSnapshotRequestStatus_To_v1_VolumeSnapshotRequestStatus(in *management.VolumeSnapshotRequestStatus, out *VolumeSnapshotRequestStatus, s conversion.Scope) error {
-	out.Phase = in.Phase
-	if err := Convert_management_SnapshotRequestError_To_v1_SnapshotRequestError(&in.Error, &out.Error, s); err != nil {
-		return err
-	}
-	return nil
-}
-
-// Convert_management_VolumeSnapshotRequestStatus_To_v1_VolumeSnapshotRequestStatus is an autogenerated conversion function.
-func Convert_management_VolumeSnapshotRequestStatus_To_v1_VolumeSnapshotRequestStatus(in *management.VolumeSnapshotRequestStatus, out *VolumeSnapshotRequestStatus, s conversion.Scope) error {
-	return autoConvert_management_VolumeSnapshotRequestStatus_To_v1_VolumeSnapshotRequestStatus(in, out, s)
-}
-
-func autoConvert_v1_VolumeSnapshotsRequestStatus_To_management_VolumeSnapshotsRequestStatus(in *VolumeSnapshotsRequestStatus, out *management.VolumeSnapshotsRequestStatus, s conversion.Scope) error {
-	out.Phase = in.Phase
-	out.Snapshots = *(*map[string]management.VolumeSnapshotRequestStatus)(unsafe.Pointer(&in.Snapshots))
-	if err := Convert_v1_SnapshotRequestError_To_management_SnapshotRequestError(&in.Error, &out.Error, s); err != nil {
-		return err
-	}
-	return nil
-}
-
-// Convert_v1_VolumeSnapshotsRequestStatus_To_management_VolumeSnapshotsRequestStatus is an autogenerated conversion function.
-func Convert_v1_VolumeSnapshotsRequestStatus_To_management_VolumeSnapshotsRequestStatus(in *VolumeSnapshotsRequestStatus, out *management.VolumeSnapshotsRequestStatus, s conversion.Scope) error {
-	return autoConvert_v1_VolumeSnapshotsRequestStatus_To_management_VolumeSnapshotsRequestStatus(in, out, s)
-}
-
-func autoConvert_management_VolumeSnapshotsRequestStatus_To_v1_VolumeSnapshotsRequestStatus(in *management.VolumeSnapshotsRequestStatus, out *VolumeSnapshotsRequestStatus, s conversion.Scope) error {
-	out.Phase = in.Phase
-	out.Snapshots = *(*map[string]VolumeSnapshotRequestStatus)(unsafe.Pointer(&in.Snapshots))
-	if err := Convert_management_SnapshotRequestError_To_v1_SnapshotRequestError(&in.Error, &out.Error, s); err != nil {
-		return err
-	}
-	return nil
-}
-
-// Convert_management_VolumeSnapshotsRequestStatus_To_v1_VolumeSnapshotsRequestStatus is an autogenerated conversion function.
-func Convert_management_VolumeSnapshotsRequestStatus_To_v1_VolumeSnapshotsRequestStatus(in *management.VolumeSnapshotsRequestStatus, out *VolumeSnapshotsRequestStatus, s conversion.Scope) error {
-	return autoConvert_management_VolumeSnapshotsRequestStatus_To_v1_VolumeSnapshotsRequestStatus(in, out, s)
 }

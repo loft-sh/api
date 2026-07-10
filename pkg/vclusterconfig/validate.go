@@ -42,14 +42,27 @@ func ValidateArgoCD(fldPath *field.Path, integration *ArgoCDIntegration, deploy 
 	}
 
 	seenNames := map[string]int{}
+	seenDisplayNames := map[string]int{}
 	for i, application := range deploy.Applications {
 		appPath := deployPath.Child("applications").Index(i)
-		if application.Name == "" {
-			errs = append(errs, field.Required(appPath.Child("name"), "name is required"))
-		} else if previousIndex, ok := seenNames[application.Name]; ok {
-			errs = append(errs, field.Duplicate(appPath.Child("name"), fmt.Sprintf("%s (already used at index %d)", application.Name, previousIndex)))
-		} else {
-			seenNames[application.Name] = i
+		name := strings.TrimSpace(application.Name)
+		displayName := strings.TrimSpace(application.DisplayName)
+		if name == "" && displayName == "" {
+			errs = append(errs, field.Required(appPath, "either name or displayName must be set"))
+		}
+		if name != "" {
+			if previousIndex, ok := seenNames[name]; ok {
+				errs = append(errs, field.Duplicate(appPath.Child("name"), fmt.Sprintf("%s (already used at index %d)", name, previousIndex)))
+			} else {
+				seenNames[name] = i
+			}
+		}
+		if displayName != "" {
+			if previousIndex, ok := seenDisplayNames[displayName]; ok {
+				errs = append(errs, field.Duplicate(appPath.Child("displayName"), fmt.Sprintf("%s (already used at index %d)", displayName, previousIndex)))
+			} else {
+				seenDisplayNames[displayName] = i
+			}
 		}
 
 		switch application.Target {
@@ -208,8 +221,8 @@ func ValidateDeletion(fldPath *field.Path, deletion *Deletion) field.ErrorList {
 	return errs
 }
 
-// check if vcluster chart version is compatible with PV snapshots
-func IsVolumeSnapshotCompatible(release storagev1.VirtualClusterHelmRelease) bool {
+// check if vcluster chart version is compatible with snapshots requests
+func SupportsSnapshotRequests(release storagev1.VirtualClusterHelmRelease) bool {
 	return semver.Compare("v"+release.Chart.Version, "v0.30.0-alpha.0") == 1
 }
 

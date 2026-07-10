@@ -40,6 +40,10 @@ func (c *FakeStorageV1) ClusterRoleTemplates() v1.ClusterRoleTemplateInterface {
 	return newFakeClusterRoleTemplates(c)
 }
 
+func (c *FakeStorageV1) MachineConfigTemplates(namespace string) v1.MachineConfigTemplateInterface {
+	return newFakeMachineConfigTemplates(c, namespace)
+}
+
 func (c *FakeStorageV1) NetworkPeers() v1.NetworkPeerInterface {
 	return newFakeNetworkPeers(c)
 }
@@ -74,6 +78,10 @@ func (c *FakeStorageV1) SSHKeys() v1.SSHKeyInterface {
 
 func (c *FakeStorageV1) SharedSecrets(namespace string) v1.SharedSecretInterface {
 	return newFakeSharedSecrets(c, namespace)
+}
+
+func (c *FakeStorageV1) SlurmInstances(namespace string) v1.SlurmInstanceInterface {
+	return newFakeSlurmInstances(c, namespace)
 }
 
 func (c *FakeStorageV1) SpaceInstances(namespace string) v1.SpaceInstanceInterface {

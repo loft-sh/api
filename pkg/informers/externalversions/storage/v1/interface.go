@@ -22,6 +22,8 @@ type Interface interface {
 	ClusterAccesses() ClusterAccessInformer
 	// ClusterRoleTemplates returns a ClusterRoleTemplateInformer.
 	ClusterRoleTemplates() ClusterRoleTemplateInformer
+	// MachineConfigTemplates returns a MachineConfigTemplateInformer.
+	MachineConfigTemplates() MachineConfigTemplateInformer
 	// NetworkPeers returns a NetworkPeerInformer.
 	NetworkPeers() NetworkPeerInformer
 	// NodeClaims returns a NodeClaimInformer.
@@ -40,6 +42,8 @@ type Interface interface {
 	SSHKeys() SSHKeyInformer
 	// SharedSecrets returns a SharedSecretInformer.
 	SharedSecrets() SharedSecretInformer
+	// SlurmInstances returns a SlurmInstanceInformer.
+	SlurmInstances() SlurmInstanceInformer
 	// SpaceInstances returns a SpaceInstanceInformer.
 	SpaceInstances() SpaceInstanceInformer
 	// SpaceTemplates returns a SpaceTemplateInformer.
@@ -102,6 +106,11 @@ func (v *version) ClusterRoleTemplates() ClusterRoleTemplateInformer {
 	return &clusterRoleTemplateInformer{factory: v.factory, tweakListOptions: v.tweakListOptions}
 }
 
+// MachineConfigTemplates returns a MachineConfigTemplateInformer.
+func (v *version) MachineConfigTemplates() MachineConfigTemplateInformer {
+	return &machineConfigTemplateInformer{factory: v.factory, namespace: v.namespace, tweakListOptions: v.tweakListOptions}
+}
+
 // NetworkPeers returns a NetworkPeerInformer.
 func (v *version) NetworkPeers() NetworkPeerInformer {
 	return &networkPeerInformer{factory: v.factory, tweakListOptions: v.tweakListOptions}
@@ -145,6 +154,11 @@ func (v *version) SSHKeys() SSHKeyInformer {
 // SharedSecrets returns a SharedSecretInformer.
 func (v *version) SharedSecrets() SharedSecretInformer {
 	return &sharedSecretInformer{factory: v.factory, namespace: v.namespace, tweakListOptions: v.tweakListOptions}
+}
+
+// SlurmInstances returns a SlurmInstanceInformer.
+func (v *version) SlurmInstances() SlurmInstanceInformer {
+	return &slurmInstanceInformer{factory: v.factory, namespace: v.namespace, tweakListOptions: v.tweakListOptions}
 }
 
 // SpaceInstances returns a SpaceInstanceInformer.

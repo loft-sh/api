@@ -38,6 +38,8 @@ type LicenseExpansion interface{}
 
 type LoftUpgradeExpansion interface{}
 
+type MachineConfigTemplateExpansion interface{}
+
 type NetworkPeerExpansion interface{}
 
 type NodeClaimExpansion interface{}
@@ -62,6 +64,8 @@ type RedirectTokenExpansion interface{}
 
 type RegisterVirtualClusterExpansion interface{}
 
+type RenderVirtualClusterTemplateExpansion interface{}
+
 type ResetAccessKeyExpansion interface{}
 
 type SSHKeyExpansion interface{}
@@ -71,6 +75,8 @@ type SelfExpansion interface{}
 type SelfSubjectAccessReviewExpansion interface{}
 
 type SharedSecretExpansion interface{}
+
+type SlurmInstanceExpansion interface{}
 
 type SpaceInstanceExpansion interface{}
 

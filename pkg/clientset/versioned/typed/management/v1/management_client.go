@@ -30,6 +30,7 @@ type ManagementV1Interface interface {
 	IngressAuthTokensGetter
 	LicensesGetter
 	LoftUpgradesGetter
+	MachineConfigTemplatesGetter
 	NetworkPeersGetter
 	NodeClaimsGetter
 	NodeEnvironmentsGetter
@@ -42,11 +43,13 @@ type ManagementV1Interface interface {
 	ProjectSecretsGetter
 	RedirectTokensGetter
 	RegisterVirtualClustersGetter
+	RenderVirtualClusterTemplatesGetter
 	ResetAccessKeysGetter
 	SSHKeysGetter
 	SelvesGetter
 	SelfSubjectAccessReviewsGetter
 	SharedSecretsGetter
+	SlurmInstancesGetter
 	SpaceInstancesGetter
 	SpaceTemplatesGetter
 	SubjectAccessReviewsGetter
@@ -137,6 +140,10 @@ func (c *ManagementV1Client) LoftUpgrades() LoftUpgradeInterface {
 	return newLoftUpgrades(c)
 }
 
+func (c *ManagementV1Client) MachineConfigTemplates(namespace string) MachineConfigTemplateInterface {
+	return newMachineConfigTemplates(c, namespace)
+}
+
 func (c *ManagementV1Client) NetworkPeers() NetworkPeerInterface {
 	return newNetworkPeers(c)
 }
@@ -185,6 +192,10 @@ func (c *ManagementV1Client) RegisterVirtualClusters() RegisterVirtualClusterInt
 	return newRegisterVirtualClusters(c)
 }
 
+func (c *ManagementV1Client) RenderVirtualClusterTemplates() RenderVirtualClusterTemplateInterface {
+	return newRenderVirtualClusterTemplates(c)
+}
+
 func (c *ManagementV1Client) ResetAccessKeys() ResetAccessKeyInterface {
 	return newResetAccessKeys(c)
 }
@@ -203,6 +214,10 @@ func (c *ManagementV1Client) SelfSubjectAccessReviews() SelfSubjectAccessReviewI
 
 func (c *ManagementV1Client) SharedSecrets(namespace string) SharedSecretInterface {
 	return newSharedSecrets(c, namespace)
+}
+
+func (c *ManagementV1Client) SlurmInstances(namespace string) SlurmInstanceInterface {
+	return newSlurmInstances(c, namespace)
 }
 
 func (c *ManagementV1Client) SpaceInstances(namespace string) SpaceInstanceInterface {

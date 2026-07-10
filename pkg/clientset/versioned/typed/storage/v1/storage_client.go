@@ -19,6 +19,7 @@ type StorageV1Interface interface {
 	ClustersGetter
 	ClusterAccessesGetter
 	ClusterRoleTemplatesGetter
+	MachineConfigTemplatesGetter
 	NetworkPeersGetter
 	NodeClaimsGetter
 	NodeEnvironmentsGetter
@@ -28,6 +29,7 @@ type StorageV1Interface interface {
 	ProjectsGetter
 	SSHKeysGetter
 	SharedSecretsGetter
+	SlurmInstancesGetter
 	SpaceInstancesGetter
 	SpaceTemplatesGetter
 	TasksGetter
@@ -70,6 +72,10 @@ func (c *StorageV1Client) ClusterRoleTemplates() ClusterRoleTemplateInterface {
 	return newClusterRoleTemplates(c)
 }
 
+func (c *StorageV1Client) MachineConfigTemplates(namespace string) MachineConfigTemplateInterface {
+	return newMachineConfigTemplates(c, namespace)
+}
+
 func (c *StorageV1Client) NetworkPeers() NetworkPeerInterface {
 	return newNetworkPeers(c)
 }
@@ -104,6 +110,10 @@ func (c *StorageV1Client) SSHKeys() SSHKeyInterface {
 
 func (c *StorageV1Client) SharedSecrets(namespace string) SharedSecretInterface {
 	return newSharedSecrets(c, namespace)
+}
+
+func (c *StorageV1Client) SlurmInstances(namespace string) SlurmInstanceInterface {
+	return newSlurmInstances(c, namespace)
 }
 
 func (c *StorageV1Client) SpaceInstances(namespace string) SpaceInstanceInterface {

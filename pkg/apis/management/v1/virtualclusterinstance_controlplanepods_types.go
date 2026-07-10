@@ -7,7 +7,7 @@ import (
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
 
-// VirtualClusterControlPlanePods holds control plane pod information for a virtual cluster instance.
+// VirtualClusterControlPlanePods holds control plane pod information for a tenant cluster instance.
 // +subresource-request
 type VirtualClusterControlPlanePods struct {
 	metav1.TypeMeta   `json:",inline"`

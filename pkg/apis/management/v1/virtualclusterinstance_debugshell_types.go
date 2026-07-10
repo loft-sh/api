@@ -7,7 +7,7 @@ import (
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
 
 // VirtualClusterDebugShell creates (or returns) an ephemeral debug-shell container
-// in a virtual cluster pod for the requesting user.
+// in a tenant cluster pod for the requesting user.
 // +subresource-request
 type VirtualClusterInstanceDebugShell struct {
 	metav1.TypeMeta   `json:",inline"`
@@ -19,8 +19,8 @@ type VirtualClusterInstanceDebugShell struct {
 
 // VirtualClusterDebugShellSpec defines the target pod for the debug shell.
 type VirtualClusterDebugShellSpec struct {
-	// PodName specifies which virtual cluster replica should get ephemeral container.
-	// This is needed to virtual cluster deployed with HA (3+ replicas)
+	// PodName specifies which tenant cluster replica should get ephemeral container.
+	// This is needed to tenant cluster deployed with HA (3+ replicas)
 	PodName string `json:"podName,omitempty"`
 }
 
@@ -32,9 +32,9 @@ type VirtualClusterDebugShellStatus struct {
 	// TargetName is the target name of ephemeral container
 	TargetName string `json:"target,omitempty"`
 
-	// PodName is the name of the virtual cluster pod
+	// PodName is the name of the tenant cluster pod
 	PodName string `json:"podName,omitempty"`
 
-	// PodNamespace is the namespace of the virtual cluster pod
+	// PodNamespace is the namespace of the tenant cluster pod
 	PodNamespace string `json:"podNamespace,omitempty"`
 }
