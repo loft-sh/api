@@ -3,10 +3,10 @@
 package v1
 
 import (
-	"net/http"
+	http "net/http"
 
-	v1 "github.com/loft-sh/api/v4/pkg/apis/management/v1"
-	"github.com/loft-sh/api/v4/pkg/clientset/versioned/scheme"
+	managementv1 "github.com/loft-sh/api/v4/pkg/apis/management/v1"
+	scheme "github.com/loft-sh/api/v4/pkg/clientset/versioned/scheme"
 	rest "k8s.io/client-go/rest"
 )
 
@@ -15,42 +15,52 @@ type ManagementV1Interface interface {
 	AgentAuditEventsGetter
 	AnnouncementsGetter
 	AppsGetter
+	ArgoCDApplicationsGetter
+	ArgoCDApplicationTemplatesGetter
 	BackupsGetter
 	ClustersGetter
 	ClusterAccessesGetter
 	ClusterRoleTemplatesGetter
 	ConfigsGetter
 	ConvertVirtualClusterConfigsGetter
-	DevPodEnvironmentTemplatesGetter
-	DevPodWorkspaceInstancesGetter
-	DevPodWorkspacePresetsGetter
-	DevPodWorkspaceTemplatesGetter
+	DatabaseConnectorsGetter
 	DirectClusterEndpointTokensGetter
 	EventsGetter
+	ExternalCredentialsGetter
 	FeaturesGetter
 	IngressAuthTokensGetter
 	LicensesGetter
-	LicenseTokensGetter
 	LoftUpgradesGetter
+	MachineConfigTemplatesGetter
+	NetworkPeersGetter
+	NodeClaimsGetter
+	NodeEnvironmentsGetter
+	NodeProvidersGetter
+	NodeTypesGetter
 	OIDCClientsGetter
+	OSImagesGetter
 	OwnedAccessKeysGetter
 	ProjectsGetter
 	ProjectSecretsGetter
 	RedirectTokensGetter
 	RegisterVirtualClustersGetter
+	RenderVirtualClusterTemplatesGetter
 	ResetAccessKeysGetter
-	RunnersGetter
+	SSHKeysGetter
 	SelvesGetter
 	SelfSubjectAccessReviewsGetter
 	SharedSecretsGetter
+	SlurmInstancesGetter
 	SpaceInstancesGetter
 	SpaceTemplatesGetter
 	SubjectAccessReviewsGetter
 	TasksGetter
 	TeamsGetter
 	TranslateVClusterResourceNamesGetter
+	UsageDownloadsGetter
 	UsersGetter
 	VirtualClusterInstancesGetter
+	VirtualClusterSchemasGetter
 	VirtualClusterTemplatesGetter
 }
 
@@ -69,6 +79,14 @@ func (c *ManagementV1Client) Announcements() AnnouncementInterface {
 
 func (c *ManagementV1Client) Apps() AppInterface {
 	return newApps(c)
+}
+
+func (c *ManagementV1Client) ArgoCDApplications(namespace string) ArgoCDApplicationInterface {
+	return newArgoCDApplications(c, namespace)
+}
+
+func (c *ManagementV1Client) ArgoCDApplicationTemplates() ArgoCDApplicationTemplateInterface {
+	return newArgoCDApplicationTemplates(c)
 }
 
 func (c *ManagementV1Client) Backups() BackupInterface {
@@ -95,20 +113,8 @@ func (c *ManagementV1Client) ConvertVirtualClusterConfigs() ConvertVirtualCluste
 	return newConvertVirtualClusterConfigs(c)
 }
 
-func (c *ManagementV1Client) DevPodEnvironmentTemplates() DevPodEnvironmentTemplateInterface {
-	return newDevPodEnvironmentTemplates(c)
-}
-
-func (c *ManagementV1Client) DevPodWorkspaceInstances(namespace string) DevPodWorkspaceInstanceInterface {
-	return newDevPodWorkspaceInstances(c, namespace)
-}
-
-func (c *ManagementV1Client) DevPodWorkspacePresets() DevPodWorkspacePresetInterface {
-	return newDevPodWorkspacePresets(c)
-}
-
-func (c *ManagementV1Client) DevPodWorkspaceTemplates() DevPodWorkspaceTemplateInterface {
-	return newDevPodWorkspaceTemplates(c)
+func (c *ManagementV1Client) DatabaseConnectors() DatabaseConnectorInterface {
+	return newDatabaseConnectors(c)
 }
 
 func (c *ManagementV1Client) DirectClusterEndpointTokens() DirectClusterEndpointTokenInterface {
@@ -117,6 +123,10 @@ func (c *ManagementV1Client) DirectClusterEndpointTokens() DirectClusterEndpoint
 
 func (c *ManagementV1Client) Events() EventInterface {
 	return newEvents(c)
+}
+
+func (c *ManagementV1Client) ExternalCredentials(namespace string) ExternalCredentialInterface {
+	return newExternalCredentials(c, namespace)
 }
 
 func (c *ManagementV1Client) Features() FeatureInterface {
@@ -131,16 +141,40 @@ func (c *ManagementV1Client) Licenses() LicenseInterface {
 	return newLicenses(c)
 }
 
-func (c *ManagementV1Client) LicenseTokens() LicenseTokenInterface {
-	return newLicenseTokens(c)
-}
-
 func (c *ManagementV1Client) LoftUpgrades() LoftUpgradeInterface {
 	return newLoftUpgrades(c)
 }
 
+func (c *ManagementV1Client) MachineConfigTemplates(namespace string) MachineConfigTemplateInterface {
+	return newMachineConfigTemplates(c, namespace)
+}
+
+func (c *ManagementV1Client) NetworkPeers() NetworkPeerInterface {
+	return newNetworkPeers(c)
+}
+
+func (c *ManagementV1Client) NodeClaims(namespace string) NodeClaimInterface {
+	return newNodeClaims(c, namespace)
+}
+
+func (c *ManagementV1Client) NodeEnvironments(namespace string) NodeEnvironmentInterface {
+	return newNodeEnvironments(c, namespace)
+}
+
+func (c *ManagementV1Client) NodeProviders() NodeProviderInterface {
+	return newNodeProviders(c)
+}
+
+func (c *ManagementV1Client) NodeTypes() NodeTypeInterface {
+	return newNodeTypes(c)
+}
+
 func (c *ManagementV1Client) OIDCClients() OIDCClientInterface {
 	return newOIDCClients(c)
+}
+
+func (c *ManagementV1Client) OSImages() OSImageInterface {
+	return newOSImages(c)
 }
 
 func (c *ManagementV1Client) OwnedAccessKeys() OwnedAccessKeyInterface {
@@ -163,12 +197,16 @@ func (c *ManagementV1Client) RegisterVirtualClusters() RegisterVirtualClusterInt
 	return newRegisterVirtualClusters(c)
 }
 
+func (c *ManagementV1Client) RenderVirtualClusterTemplates() RenderVirtualClusterTemplateInterface {
+	return newRenderVirtualClusterTemplates(c)
+}
+
 func (c *ManagementV1Client) ResetAccessKeys() ResetAccessKeyInterface {
 	return newResetAccessKeys(c)
 }
 
-func (c *ManagementV1Client) Runners() RunnerInterface {
-	return newRunners(c)
+func (c *ManagementV1Client) SSHKeys() SSHKeyInterface {
+	return newSSHKeys(c)
 }
 
 func (c *ManagementV1Client) Selves() SelfInterface {
@@ -181,6 +219,10 @@ func (c *ManagementV1Client) SelfSubjectAccessReviews() SelfSubjectAccessReviewI
 
 func (c *ManagementV1Client) SharedSecrets(namespace string) SharedSecretInterface {
 	return newSharedSecrets(c, namespace)
+}
+
+func (c *ManagementV1Client) SlurmInstances(namespace string) SlurmInstanceInterface {
+	return newSlurmInstances(c, namespace)
 }
 
 func (c *ManagementV1Client) SpaceInstances(namespace string) SpaceInstanceInterface {
@@ -207,12 +249,20 @@ func (c *ManagementV1Client) TranslateVClusterResourceNames() TranslateVClusterR
 	return newTranslateVClusterResourceNames(c)
 }
 
+func (c *ManagementV1Client) UsageDownloads() UsageDownloadInterface {
+	return newUsageDownloads(c)
+}
+
 func (c *ManagementV1Client) Users() UserInterface {
 	return newUsers(c)
 }
 
 func (c *ManagementV1Client) VirtualClusterInstances(namespace string) VirtualClusterInstanceInterface {
 	return newVirtualClusterInstances(c, namespace)
+}
+
+func (c *ManagementV1Client) VirtualClusterSchemas() VirtualClusterSchemaInterface {
+	return newVirtualClusterSchemas(c)
 }
 
 func (c *ManagementV1Client) VirtualClusterTemplates() VirtualClusterTemplateInterface {
@@ -224,9 +274,7 @@ func (c *ManagementV1Client) VirtualClusterTemplates() VirtualClusterTemplateInt
 // where httpClient was generated with rest.HTTPClientFor(c).
 func NewForConfig(c *rest.Config) (*ManagementV1Client, error) {
 	config := *c
-	if err := setConfigDefaults(&config); err != nil {
-		return nil, err
-	}
+	setConfigDefaults(&config)
 	httpClient, err := rest.HTTPClientFor(&config)
 	if err != nil {
 		return nil, err
@@ -238,9 +286,7 @@ func NewForConfig(c *rest.Config) (*ManagementV1Client, error) {
 // Note the http client provided takes precedence over the configured transport values.
 func NewForConfigAndClient(c *rest.Config, h *http.Client) (*ManagementV1Client, error) {
 	config := *c
-	if err := setConfigDefaults(&config); err != nil {
-		return nil, err
-	}
+	setConfigDefaults(&config)
 	client, err := rest.RESTClientForConfigAndClient(&config, h)
 	if err != nil {
 		return nil, err
@@ -263,17 +309,15 @@ func New(c rest.Interface) *ManagementV1Client {
 	return &ManagementV1Client{c}
 }
 
-func setConfigDefaults(config *rest.Config) error {
-	gv := v1.SchemeGroupVersion
+func setConfigDefaults(config *rest.Config) {
+	gv := managementv1.SchemeGroupVersion
 	config.GroupVersion = &gv
 	config.APIPath = "/apis"
-	config.NegotiatedSerializer = scheme.Codecs.WithoutConversion()
+	config.NegotiatedSerializer = rest.CodecFactoryForGeneratedClient(scheme.Scheme, scheme.Codecs).WithoutConversion()
 
 	if config.UserAgent == "" {
 		config.UserAgent = rest.DefaultKubernetesUserAgent()
 	}
-
-	return nil
 }
 
 // RESTClient returns a RESTClient that is used to communicate
