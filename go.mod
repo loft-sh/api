@@ -1,6 +1,6 @@
 module github.com/loft-sh/api/v4
 
-go 1.26.0
+go 1.26.3
 
 require (
 	github.com/Azure/azure-sdk-for-go/sdk/azcore v1.20.0
@@ -16,8 +16,8 @@ require (
 	github.com/ghodss/yaml v1.0.0
 	github.com/go-logr/logr v1.4.3
 	github.com/google/go-containerregistry v0.20.7
-	github.com/loft-sh/admin-apis v0.0.0-20260601071241-26d546886c99
-	github.com/loft-sh/agentapi/v4 v4.11.0-next.internal.4
+	github.com/loft-sh/admin-apis v0.0.0-20260707131545-11a67ade9341
+	github.com/loft-sh/agentapi/v4 v4.11.0-rc.3
 	github.com/loft-sh/apiserver v0.0.0-20260707184419-aef558a5ae8d
 	github.com/loft-sh/external-types v0.1.0-alpha.2.0.20260409132559-a38365a8cbf2
 	github.com/opencontainers/image-spec v1.1.1

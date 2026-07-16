@@ -100,6 +100,10 @@ func (c *FakeManagementV1) NodeEnvironments(namespace string) v1.NodeEnvironment
 	return newFakeNodeEnvironments(c, namespace)
 }
 
+func (c *FakeManagementV1) NodeProfiles() v1.NodeProfileInterface {
+	return newFakeNodeProfiles(c)
+}
+
 func (c *FakeManagementV1) NodeProviders() v1.NodeProviderInterface {
 	return newFakeNodeProviders(c)
 }
@@ -158,10 +162,6 @@ func (c *FakeManagementV1) SelfSubjectAccessReviews() v1.SelfSubjectAccessReview
 
 func (c *FakeManagementV1) SharedSecrets(namespace string) v1.SharedSecretInterface {
 	return newFakeSharedSecrets(c, namespace)
-}
-
-func (c *FakeManagementV1) SlurmInstances(namespace string) v1.SlurmInstanceInterface {
-	return newFakeSlurmInstances(c, namespace)
 }
 
 func (c *FakeManagementV1) SpaceInstances(namespace string) v1.SpaceInstanceInterface {

@@ -29,7 +29,6 @@ func addKnownOptionsTypes(scheme *runtime.Scheme) error {
 		&management.UserQuotasOptions{},
 		&management.PodExecOptions{},
 		&management.NetworkPeerDebugOptions{},
-		&management.SlurmInstanceAccountingOptions{},
 	)
 	return nil
 }

@@ -52,6 +52,8 @@ type Interface interface {
 	NodeClaims() NodeClaimInformer
 	// NodeEnvironments returns a NodeEnvironmentInformer.
 	NodeEnvironments() NodeEnvironmentInformer
+	// NodeProfiles returns a NodeProfileInformer.
+	NodeProfiles() NodeProfileInformer
 	// NodeProviders returns a NodeProviderInformer.
 	NodeProviders() NodeProviderInformer
 	// NodeTypes returns a NodeTypeInformer.
@@ -82,8 +84,6 @@ type Interface interface {
 	SelfSubjectAccessReviews() SelfSubjectAccessReviewInformer
 	// SharedSecrets returns a SharedSecretInformer.
 	SharedSecrets() SharedSecretInformer
-	// SlurmInstances returns a SlurmInstanceInformer.
-	SlurmInstances() SlurmInstanceInformer
 	// SpaceInstances returns a SpaceInstanceInformer.
 	SpaceInstances() SpaceInstanceInformer
 	// SpaceTemplates returns a SpaceTemplateInformer.
@@ -229,6 +229,11 @@ func (v *version) NodeEnvironments() NodeEnvironmentInformer {
 	return &nodeEnvironmentInformer{factory: v.factory, namespace: v.namespace, tweakListOptions: v.tweakListOptions}
 }
 
+// NodeProfiles returns a NodeProfileInformer.
+func (v *version) NodeProfiles() NodeProfileInformer {
+	return &nodeProfileInformer{factory: v.factory, tweakListOptions: v.tweakListOptions}
+}
+
 // NodeProviders returns a NodeProviderInformer.
 func (v *version) NodeProviders() NodeProviderInformer {
 	return &nodeProviderInformer{factory: v.factory, tweakListOptions: v.tweakListOptions}
@@ -302,11 +307,6 @@ func (v *version) SelfSubjectAccessReviews() SelfSubjectAccessReviewInformer {
 // SharedSecrets returns a SharedSecretInformer.
 func (v *version) SharedSecrets() SharedSecretInformer {
 	return &sharedSecretInformer{factory: v.factory, namespace: v.namespace, tweakListOptions: v.tweakListOptions}
-}
-
-// SlurmInstances returns a SlurmInstanceInformer.
-func (v *version) SlurmInstances() SlurmInstanceInformer {
-	return &slurmInstanceInformer{factory: v.factory, namespace: v.namespace, tweakListOptions: v.tweakListOptions}
 }
 
 // SpaceInstances returns a SpaceInstanceInformer.

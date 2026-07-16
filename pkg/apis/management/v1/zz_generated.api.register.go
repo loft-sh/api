@@ -70,6 +70,8 @@ func addKnownTypes(scheme *runtime.Scheme) error {
 		&NodeClaimList{},
 		&NodeEnvironment{},
 		&NodeEnvironmentList{},
+		&NodeProfile{},
+		&NodeProfileList{},
 		&NodeProvider{},
 		&NodeProviderList{},
 		&NodeProviderExec{},
@@ -110,9 +112,6 @@ func addKnownTypes(scheme *runtime.Scheme) error {
 		&SelfSubjectAccessReviewList{},
 		&SharedSecret{},
 		&SharedSecretList{},
-		&SlurmInstance{},
-		&SlurmInstanceList{},
-		&SlurmInstanceAccounting{},
 		&SpaceInstance{},
 		&SpaceInstanceList{},
 		&SpaceTemplate{},
@@ -272,6 +271,7 @@ var (
 			func() runtime.Object { return &NodeEnvironment{} },     // Register versioned resource
 			func() runtime.Object { return &NodeEnvironmentList{} }, // Register versioned resource list
 			management.NewNodeEnvironmentStatusREST),
+		management.ManagementNodeProfileStorage,
 		management.ManagementNodeProviderStorage,
 		builders.NewApiResourceWithStorage(
 			management.InternalNodeProviderStatus,
@@ -362,18 +362,6 @@ var (
 		management.ManagementSelfStorage,
 		management.ManagementSelfSubjectAccessReviewStorage,
 		management.ManagementSharedSecretStorage,
-		management.ManagementSlurmInstanceStorage,
-		builders.NewApiResourceWithStorage(
-			management.InternalSlurmInstanceStatus,
-			func() runtime.Object { return &SlurmInstance{} },     // Register versioned resource
-			func() runtime.Object { return &SlurmInstanceList{} }, // Register versioned resource list
-			management.NewSlurmInstanceStatusREST),
-		builders.NewApiResourceWithStorage(
-			management.InternalSlurmInstanceAccountingREST,
-			func() runtime.Object { return &SlurmInstanceAccounting{} }, // Register versioned resource
-			nil,
-			management.NewSlurmInstanceAccountingREST,
-		),
 		management.ManagementSpaceInstanceStorage,
 		management.ManagementSpaceTemplateStorage,
 		management.ManagementSubjectAccessReviewStorage,
@@ -822,6 +810,14 @@ type NodeEnvironmentList struct {
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
 
+type NodeProfileList struct {
+	metav1.TypeMeta `json:",inline"`
+	metav1.ListMeta `json:"metadata,omitempty"`
+	Items           []NodeProfile `json:"items"`
+}
+
+// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+
 type NodeProviderList struct {
 	metav1.TypeMeta `json:",inline"`
 	metav1.ListMeta `json:"metadata,omitempty"`
@@ -1018,22 +1014,6 @@ type SharedSecretList struct {
 	metav1.TypeMeta `json:",inline"`
 	metav1.ListMeta `json:"metadata,omitempty"`
 	Items           []SharedSecret `json:"items"`
-}
-
-// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
-
-type SlurmInstanceList struct {
-	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
-	Items           []SlurmInstance `json:"items"`
-}
-
-// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
-
-type SlurmInstanceAccountingList struct {
-	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
-	Items           []SlurmInstanceAccounting `json:"items"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object

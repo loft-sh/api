@@ -34,6 +34,7 @@ type ManagementV1Interface interface {
 	NetworkPeersGetter
 	NodeClaimsGetter
 	NodeEnvironmentsGetter
+	NodeProfilesGetter
 	NodeProvidersGetter
 	NodeTypesGetter
 	OIDCClientsGetter
@@ -49,7 +50,6 @@ type ManagementV1Interface interface {
 	SelvesGetter
 	SelfSubjectAccessReviewsGetter
 	SharedSecretsGetter
-	SlurmInstancesGetter
 	SpaceInstancesGetter
 	SpaceTemplatesGetter
 	SubjectAccessReviewsGetter
@@ -156,6 +156,10 @@ func (c *ManagementV1Client) NodeEnvironments(namespace string) NodeEnvironmentI
 	return newNodeEnvironments(c, namespace)
 }
 
+func (c *ManagementV1Client) NodeProfiles() NodeProfileInterface {
+	return newNodeProfiles(c)
+}
+
 func (c *ManagementV1Client) NodeProviders() NodeProviderInterface {
 	return newNodeProviders(c)
 }
@@ -214,10 +218,6 @@ func (c *ManagementV1Client) SelfSubjectAccessReviews() SelfSubjectAccessReviewI
 
 func (c *ManagementV1Client) SharedSecrets(namespace string) SharedSecretInterface {
 	return newSharedSecrets(c, namespace)
-}
-
-func (c *ManagementV1Client) SlurmInstances(namespace string) SlurmInstanceInterface {
-	return newSlurmInstances(c, namespace)
 }
 
 func (c *ManagementV1Client) SpaceInstances(namespace string) SpaceInstanceInterface {

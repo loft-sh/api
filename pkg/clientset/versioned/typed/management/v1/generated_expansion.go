@@ -46,6 +46,8 @@ type NodeClaimExpansion interface{}
 
 type NodeEnvironmentExpansion interface{}
 
+type NodeProfileExpansion interface{}
+
 type NodeProviderExpansion interface{}
 
 type NodeTypeExpansion interface{}
@@ -75,8 +77,6 @@ type SelfExpansion interface{}
 type SelfSubjectAccessReviewExpansion interface{}
 
 type SharedSecretExpansion interface{}
-
-type SlurmInstanceExpansion interface{}
 
 type SpaceInstanceExpansion interface{}
 

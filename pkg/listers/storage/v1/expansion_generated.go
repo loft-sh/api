@@ -62,6 +62,10 @@ type NodeEnvironmentListerExpansion interface{}
 // NodeEnvironmentNamespaceLister.
 type NodeEnvironmentNamespaceListerExpansion interface{}
 
+// NodeProfileListerExpansion allows custom methods to be added to
+// NodeProfileLister.
+type NodeProfileListerExpansion interface{}
+
 // NodeProviderListerExpansion allows custom methods to be added to
 // NodeProviderLister.
 type NodeProviderListerExpansion interface{}
@@ -89,14 +93,6 @@ type SharedSecretListerExpansion interface{}
 // SharedSecretNamespaceListerExpansion allows custom methods to be added to
 // SharedSecretNamespaceLister.
 type SharedSecretNamespaceListerExpansion interface{}
-
-// SlurmInstanceListerExpansion allows custom methods to be added to
-// SlurmInstanceLister.
-type SlurmInstanceListerExpansion interface{}
-
-// SlurmInstanceNamespaceListerExpansion allows custom methods to be added to
-// SlurmInstanceNamespaceLister.
-type SlurmInstanceNamespaceListerExpansion interface{}
 
 // SpaceInstanceListerExpansion allows custom methods to be added to
 // SpaceInstanceLister.

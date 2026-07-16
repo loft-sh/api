@@ -57,6 +57,7 @@ func GetManagementAPIBuilder() *builders.APIGroupBuilder {
 			"License",
 			"LoftUpgrade",
 			"NetworkPeer",
+			"NodeProfile",
 			"NodeProvider",
 			"NodeType",
 			"OIDCClient",

@@ -276,7 +276,17 @@ var (
 		return NewNodeEnvironmentStatusRESTFunc(Factory)
 	}
 	NewNodeEnvironmentStatusRESTFunc NewRESTFunc
-	ManagementNodeProviderStorage    = builders.NewApiResourceWithStorage( // Resource status endpoint
+	ManagementNodeProfileStorage     = builders.NewApiResourceWithStorage( // Resource status endpoint
+		InternalNodeProfile,
+		func() runtime.Object { return &NodeProfile{} },     // Register versioned resource
+		func() runtime.Object { return &NodeProfileList{} }, // Register versioned resource list
+		NewNodeProfileREST,
+	)
+	NewNodeProfileREST = func(getter generic.RESTOptionsGetter) rest.Storage {
+		return NewNodeProfileRESTFunc(Factory)
+	}
+	NewNodeProfileRESTFunc        NewRESTFunc
+	ManagementNodeProviderStorage = builders.NewApiResourceWithStorage( // Resource status endpoint
 		InternalNodeProvider,
 		func() runtime.Object { return &NodeProvider{} },     // Register versioned resource
 		func() runtime.Object { return &NodeProviderList{} }, // Register versioned resource list
@@ -438,20 +448,6 @@ var (
 		return NewSharedSecretRESTFunc(Factory)
 	}
 	NewSharedSecretRESTFunc        NewRESTFunc
-	ManagementSlurmInstanceStorage = builders.NewApiResourceWithStorage( // Resource status endpoint
-		InternalSlurmInstance,
-		func() runtime.Object { return &SlurmInstance{} },     // Register versioned resource
-		func() runtime.Object { return &SlurmInstanceList{} }, // Register versioned resource list
-		NewSlurmInstanceREST,
-	)
-	NewSlurmInstanceREST = func(getter generic.RESTOptionsGetter) rest.Storage {
-		return NewSlurmInstanceRESTFunc(Factory)
-	}
-	NewSlurmInstanceRESTFunc   NewRESTFunc
-	NewSlurmInstanceStatusREST = func(getter generic.RESTOptionsGetter) rest.Storage {
-		return NewSlurmInstanceStatusRESTFunc(Factory)
-	}
-	NewSlurmInstanceStatusRESTFunc NewRESTFunc
 	ManagementSpaceInstanceStorage = builders.NewApiResourceWithStorage( // Resource status endpoint
 		InternalSpaceInstance,
 		func() runtime.Object { return &SpaceInstance{} },     // Register versioned resource
@@ -926,6 +922,18 @@ var (
 		func() runtime.Object { return &NodeEnvironment{} },
 		func() runtime.Object { return &NodeEnvironmentList{} },
 	)
+	InternalNodeProfile = builders.NewInternalResource(
+		"nodeprofiles",
+		"NodeProfile",
+		func() runtime.Object { return &NodeProfile{} },
+		func() runtime.Object { return &NodeProfileList{} },
+	)
+	InternalNodeProfileStatus = builders.NewInternalResourceStatus(
+		"nodeprofiles",
+		"NodeProfileStatus",
+		func() runtime.Object { return &NodeProfile{} },
+		func() runtime.Object { return &NodeProfileList{} },
+	)
 	InternalNodeProvider = builders.NewInternalResource(
 		"nodeproviders",
 		"NodeProvider",
@@ -1186,27 +1194,7 @@ var (
 		func() runtime.Object { return &SharedSecret{} },
 		func() runtime.Object { return &SharedSecretList{} },
 	)
-	InternalSlurmInstance = builders.NewInternalResource(
-		"slurminstances",
-		"SlurmInstance",
-		func() runtime.Object { return &SlurmInstance{} },
-		func() runtime.Object { return &SlurmInstanceList{} },
-	)
-	InternalSlurmInstanceStatus = builders.NewInternalResourceStatus(
-		"slurminstances",
-		"SlurmInstanceStatus",
-		func() runtime.Object { return &SlurmInstance{} },
-		func() runtime.Object { return &SlurmInstanceList{} },
-	)
-	InternalSlurmInstanceAccountingREST = builders.NewInternalSubresource(
-		"slurminstances", "SlurmInstanceAccounting", "accounting",
-		func() runtime.Object { return &SlurmInstanceAccounting{} },
-	)
-	NewSlurmInstanceAccountingREST = func(getter generic.RESTOptionsGetter) rest.Storage {
-		return NewSlurmInstanceAccountingRESTFunc(Factory)
-	}
-	NewSlurmInstanceAccountingRESTFunc NewRESTFunc
-	InternalSpaceInstance              = builders.NewInternalResource(
+	InternalSpaceInstance = builders.NewInternalResource(
 		"spaceinstances",
 		"SpaceInstance",
 		func() runtime.Object { return &SpaceInstance{} },
@@ -1573,6 +1561,8 @@ var (
 		InternalNodeClaimStatus,
 		InternalNodeEnvironment,
 		InternalNodeEnvironmentStatus,
+		InternalNodeProfile,
+		InternalNodeProfileStatus,
 		InternalNodeProvider,
 		InternalNodeProviderStatus,
 		InternalNodeProviderExecREST,
@@ -1613,9 +1603,6 @@ var (
 		InternalSelfSubjectAccessReviewStatus,
 		InternalSharedSecret,
 		InternalSharedSecretStatus,
-		InternalSlurmInstance,
-		InternalSlurmInstanceStatus,
-		InternalSlurmInstanceAccountingREST,
 		InternalSpaceInstance,
 		InternalSpaceInstanceStatus,
 		InternalSpaceTemplate,
@@ -2457,6 +2444,25 @@ type NodeEnvironmentStatus struct {
 // +genclient:nonNamespaced
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
 
+type NodeProfile struct {
+	metav1.TypeMeta   `json:",inline"`
+	metav1.ObjectMeta `json:"metadata,omitempty"`
+	Spec              NodeProfileSpec   `json:"spec,omitempty"`
+	Status            NodeProfileStatus `json:"status,omitempty"`
+}
+
+type NodeProfileSpec struct {
+	storagev1.NodeProfileSpec `json:",inline"`
+}
+
+type NodeProfileStatus struct {
+	storagev1.NodeProfileStatus `json:",inline"`
+}
+
+// +genclient
+// +genclient:nonNamespaced
+// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+
 type NodeProvider struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
@@ -2609,7 +2615,7 @@ type Operation struct {
 }
 
 // +genclient
-// +genclient:nonNamespaced
+// +genclient
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
 
 type OwnedAccessKey struct {
@@ -2752,6 +2758,7 @@ type ProjectNodeTypes struct {
 	metav1.ObjectMeta `json:"metadata,omitempty"`
 	NodeProviders     []storagev1.NodeProvider `json:"nodeProviders,omitempty"`
 	NodeTypes         []storagev1.NodeType     `json:"nodeTypes,omitempty"`
+	NodeProfiles      []storagev1.NodeProfile  `json:"nodeProfiles,omitempty"`
 	OSImages          []storagev1.OSImage      `json:"osImages,omitempty"`
 }
 
@@ -2983,62 +2990,6 @@ type SharedSecretSpec struct {
 
 type SharedSecretStatus struct {
 	storagev1.SharedSecretStatus `json:",inline"`
-}
-
-// +genclient
-// +genclient
-// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
-
-type SlurmInstance struct {
-	metav1.TypeMeta   `json:",inline"`
-	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              SlurmInstanceSpec   `json:"spec,omitempty"`
-	Status            SlurmInstanceStatus `json:"status,omitempty"`
-}
-
-// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
-
-type SlurmInstanceAccounting struct {
-	metav1.TypeMeta   `json:",inline"`
-	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Status            SlurmInstanceAccountingStatus `json:"status,omitempty"`
-}
-
-type SlurmInstanceAccountingStatus struct {
-	Enabled bool       `json:"enabled"`
-	Message string     `json:"message,omitempty"`
-	Jobs    []SlurmJob `json:"jobs,omitempty"`
-}
-
-type SlurmInstanceSpec struct {
-	storagev1.SlurmInstanceSpec `json:",inline"`
-}
-
-type SlurmInstanceStatus struct {
-	storagev1.SlurmInstanceStatus `json:",inline"`
-	CanUse                        bool `json:"canUse,omitempty"`
-	CanUpdate                     bool `json:"canUpdate,omitempty"`
-}
-
-type SlurmJob struct {
-	ID                 int64        `json:"id"`
-	Name               string       `json:"name,omitempty"`
-	User               string       `json:"user,omitempty"`
-	Account            string       `json:"account,omitempty"`
-	Partition          string       `json:"partition,omitempty"`
-	State              string       `json:"state,omitempty"`
-	SubmitTime         *metav1.Time `json:"submitTime,omitempty"`
-	StartTime          *metav1.Time `json:"startTime,omitempty"`
-	EndTime            *metav1.Time `json:"endTime,omitempty"`
-	Elapsed            int64        `json:"elapsed,omitempty"`
-	Nodes              string       `json:"nodes,omitempty"`
-	AllocatedResources []SlurmTRES  `json:"allocatedResources,omitempty"`
-}
-
-type SlurmTRES struct {
-	Type  string `json:"type"`
-	Name  string `json:"name,omitempty"`
-	Count int64  `json:"count"`
 }
 
 type SnapshotRequest struct {
@@ -3473,7 +3424,12 @@ type VirtualClusterInstanceDebugShell struct {
 type VirtualClusterInstanceJoinScript struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
+	Spec              VirtualClusterInstanceJoinScriptSpec   `json:"spec,omitempty"`
 	Status            VirtualClusterInstanceJoinScriptStatus `json:"status,omitempty"`
+}
+
+type VirtualClusterInstanceJoinScriptSpec struct {
+	ProfileRef string `json:"profileRef,omitempty"`
 }
 
 type VirtualClusterInstanceJoinScriptStatus struct {
@@ -6470,6 +6426,125 @@ func (s *storageNodeEnvironment) DeleteNodeEnvironment(ctx context.Context, id s
 	return sync, err
 }
 
+// NodeProfile Functions and Structs
+//
+// +k8s:deepcopy-gen=false
+type NodeProfileStrategy struct {
+	builders.DefaultStorageStrategy
+}
+
+// +k8s:deepcopy-gen=false
+type NodeProfileStatusStrategy struct {
+	builders.DefaultStatusStorageStrategy
+}
+
+// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+
+type NodeProfileList struct {
+	metav1.TypeMeta `json:",inline"`
+	metav1.ListMeta `json:"metadata,omitempty"`
+	Items           []NodeProfile `json:"items"`
+}
+
+func (NodeProfile) NewStatus() interface{} {
+	return NodeProfileStatus{}
+}
+
+func (pc *NodeProfile) GetStatus() interface{} {
+	return pc.Status
+}
+
+func (pc *NodeProfile) SetStatus(s interface{}) {
+	pc.Status = s.(NodeProfileStatus)
+}
+
+func (pc *NodeProfile) GetSpec() interface{} {
+	return pc.Spec
+}
+
+func (pc *NodeProfile) SetSpec(s interface{}) {
+	pc.Spec = s.(NodeProfileSpec)
+}
+
+func (pc *NodeProfile) GetObjectMeta() *metav1.ObjectMeta {
+	return &pc.ObjectMeta
+}
+
+func (pc *NodeProfile) SetGeneration(generation int64) {
+	pc.ObjectMeta.Generation = generation
+}
+
+func (pc NodeProfile) GetGeneration() int64 {
+	return pc.ObjectMeta.Generation
+}
+
+// Registry is an interface for things that know how to store NodeProfile.
+// +k8s:deepcopy-gen=false
+type NodeProfileRegistry interface {
+	ListNodeProfiles(ctx context.Context, options *internalversion.ListOptions) (*NodeProfileList, error)
+	GetNodeProfile(ctx context.Context, id string, options *metav1.GetOptions) (*NodeProfile, error)
+	CreateNodeProfile(ctx context.Context, id *NodeProfile) (*NodeProfile, error)
+	UpdateNodeProfile(ctx context.Context, id *NodeProfile) (*NodeProfile, error)
+	DeleteNodeProfile(ctx context.Context, id string) (bool, error)
+}
+
+// NewRegistry returns a new Registry interface for the given Storage. Any mismatched types will panic.
+func NewNodeProfileRegistry(sp builders.StandardStorageProvider) NodeProfileRegistry {
+	return &storageNodeProfile{sp}
+}
+
+// Implement Registry
+// storage puts strong typing around storage calls
+// +k8s:deepcopy-gen=false
+type storageNodeProfile struct {
+	builders.StandardStorageProvider
+}
+
+func (s *storageNodeProfile) ListNodeProfiles(ctx context.Context, options *internalversion.ListOptions) (*NodeProfileList, error) {
+	if options != nil && options.FieldSelector != nil && !options.FieldSelector.Empty() {
+		return nil, fmt.Errorf("field selector not supported yet")
+	}
+	st := s.GetStandardStorage()
+	obj, err := st.List(ctx, options)
+	if err != nil {
+		return nil, err
+	}
+	return obj.(*NodeProfileList), err
+}
+
+func (s *storageNodeProfile) GetNodeProfile(ctx context.Context, id string, options *metav1.GetOptions) (*NodeProfile, error) {
+	st := s.GetStandardStorage()
+	obj, err := st.Get(ctx, id, options)
+	if err != nil {
+		return nil, err
+	}
+	return obj.(*NodeProfile), nil
+}
+
+func (s *storageNodeProfile) CreateNodeProfile(ctx context.Context, object *NodeProfile) (*NodeProfile, error) {
+	st := s.GetStandardStorage()
+	obj, err := st.Create(ctx, object, nil, &metav1.CreateOptions{})
+	if err != nil {
+		return nil, err
+	}
+	return obj.(*NodeProfile), nil
+}
+
+func (s *storageNodeProfile) UpdateNodeProfile(ctx context.Context, object *NodeProfile) (*NodeProfile, error) {
+	st := s.GetStandardStorage()
+	obj, _, err := st.Update(ctx, object.Name, rest.DefaultUpdatedObjectInfo(object), nil, nil, false, &metav1.UpdateOptions{})
+	if err != nil {
+		return nil, err
+	}
+	return obj.(*NodeProfile), nil
+}
+
+func (s *storageNodeProfile) DeleteNodeProfile(ctx context.Context, id string) (bool, error) {
+	st := s.GetStandardStorage()
+	_, sync, err := st.Delete(ctx, id, nil, &metav1.DeleteOptions{})
+	return sync, err
+}
+
 // NodeProvider Functions and Structs
 //
 // +k8s:deepcopy-gen=false
@@ -8330,133 +8405,6 @@ func (s *storageSharedSecret) UpdateSharedSecret(ctx context.Context, object *Sh
 }
 
 func (s *storageSharedSecret) DeleteSharedSecret(ctx context.Context, id string) (bool, error) {
-	st := s.GetStandardStorage()
-	_, sync, err := st.Delete(ctx, id, nil, &metav1.DeleteOptions{})
-	return sync, err
-}
-
-// SlurmInstance Functions and Structs
-//
-// +k8s:deepcopy-gen=false
-type SlurmInstanceStrategy struct {
-	builders.DefaultStorageStrategy
-}
-
-// +k8s:deepcopy-gen=false
-type SlurmInstanceStatusStrategy struct {
-	builders.DefaultStatusStorageStrategy
-}
-
-// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
-
-type SlurmInstanceList struct {
-	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
-	Items           []SlurmInstance `json:"items"`
-}
-
-// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
-
-type SlurmInstanceAccountingList struct {
-	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
-	Items           []SlurmInstanceAccounting `json:"items"`
-}
-
-func (SlurmInstance) NewStatus() interface{} {
-	return SlurmInstanceStatus{}
-}
-
-func (pc *SlurmInstance) GetStatus() interface{} {
-	return pc.Status
-}
-
-func (pc *SlurmInstance) SetStatus(s interface{}) {
-	pc.Status = s.(SlurmInstanceStatus)
-}
-
-func (pc *SlurmInstance) GetSpec() interface{} {
-	return pc.Spec
-}
-
-func (pc *SlurmInstance) SetSpec(s interface{}) {
-	pc.Spec = s.(SlurmInstanceSpec)
-}
-
-func (pc *SlurmInstance) GetObjectMeta() *metav1.ObjectMeta {
-	return &pc.ObjectMeta
-}
-
-func (pc *SlurmInstance) SetGeneration(generation int64) {
-	pc.ObjectMeta.Generation = generation
-}
-
-func (pc SlurmInstance) GetGeneration() int64 {
-	return pc.ObjectMeta.Generation
-}
-
-// Registry is an interface for things that know how to store SlurmInstance.
-// +k8s:deepcopy-gen=false
-type SlurmInstanceRegistry interface {
-	ListSlurmInstances(ctx context.Context, options *internalversion.ListOptions) (*SlurmInstanceList, error)
-	GetSlurmInstance(ctx context.Context, id string, options *metav1.GetOptions) (*SlurmInstance, error)
-	CreateSlurmInstance(ctx context.Context, id *SlurmInstance) (*SlurmInstance, error)
-	UpdateSlurmInstance(ctx context.Context, id *SlurmInstance) (*SlurmInstance, error)
-	DeleteSlurmInstance(ctx context.Context, id string) (bool, error)
-}
-
-// NewRegistry returns a new Registry interface for the given Storage. Any mismatched types will panic.
-func NewSlurmInstanceRegistry(sp builders.StandardStorageProvider) SlurmInstanceRegistry {
-	return &storageSlurmInstance{sp}
-}
-
-// Implement Registry
-// storage puts strong typing around storage calls
-// +k8s:deepcopy-gen=false
-type storageSlurmInstance struct {
-	builders.StandardStorageProvider
-}
-
-func (s *storageSlurmInstance) ListSlurmInstances(ctx context.Context, options *internalversion.ListOptions) (*SlurmInstanceList, error) {
-	if options != nil && options.FieldSelector != nil && !options.FieldSelector.Empty() {
-		return nil, fmt.Errorf("field selector not supported yet")
-	}
-	st := s.GetStandardStorage()
-	obj, err := st.List(ctx, options)
-	if err != nil {
-		return nil, err
-	}
-	return obj.(*SlurmInstanceList), err
-}
-
-func (s *storageSlurmInstance) GetSlurmInstance(ctx context.Context, id string, options *metav1.GetOptions) (*SlurmInstance, error) {
-	st := s.GetStandardStorage()
-	obj, err := st.Get(ctx, id, options)
-	if err != nil {
-		return nil, err
-	}
-	return obj.(*SlurmInstance), nil
-}
-
-func (s *storageSlurmInstance) CreateSlurmInstance(ctx context.Context, object *SlurmInstance) (*SlurmInstance, error) {
-	st := s.GetStandardStorage()
-	obj, err := st.Create(ctx, object, nil, &metav1.CreateOptions{})
-	if err != nil {
-		return nil, err
-	}
-	return obj.(*SlurmInstance), nil
-}
-
-func (s *storageSlurmInstance) UpdateSlurmInstance(ctx context.Context, object *SlurmInstance) (*SlurmInstance, error) {
-	st := s.GetStandardStorage()
-	obj, _, err := st.Update(ctx, object.Name, rest.DefaultUpdatedObjectInfo(object), nil, nil, false, &metav1.UpdateOptions{})
-	if err != nil {
-		return nil, err
-	}
-	return obj.(*SlurmInstance), nil
-}
-
-func (s *storageSlurmInstance) DeleteSlurmInstance(ctx context.Context, id string) (bool, error) {
 	st := s.GetStandardStorage()
 	_, sync, err := st.Delete(ctx, id, nil, &metav1.DeleteOptions{})
 	return sync, err

@@ -56,6 +56,10 @@ func (c *FakeStorageV1) NodeEnvironments(namespace string) v1.NodeEnvironmentInt
 	return newFakeNodeEnvironments(c, namespace)
 }
 
+func (c *FakeStorageV1) NodeProfiles() v1.NodeProfileInterface {
+	return newFakeNodeProfiles(c)
+}
+
 func (c *FakeStorageV1) NodeProviders() v1.NodeProviderInterface {
 	return newFakeNodeProviders(c)
 }
@@ -78,10 +82,6 @@ func (c *FakeStorageV1) SSHKeys() v1.SSHKeyInterface {
 
 func (c *FakeStorageV1) SharedSecrets(namespace string) v1.SharedSecretInterface {
 	return newFakeSharedSecrets(c, namespace)
-}
-
-func (c *FakeStorageV1) SlurmInstances(namespace string) v1.SlurmInstanceInterface {
-	return newFakeSlurmInstances(c, namespace)
 }
 
 func (c *FakeStorageV1) SpaceInstances(namespace string) v1.SpaceInstanceInterface {
