@@ -121,7 +121,7 @@ type UserSpacesOptions struct {
 type UserVirtualClustersOptions struct {
 	metav1.TypeMeta `json:",inline"`
 
-	// Cluster where to retrieve virtual clusters from
+	// Cluster where to retrieve tenant clusters from
 	// +optional
 	Cluster []string `json:"cluster,omitempty"`
 }
@@ -140,80 +140,70 @@ type UserQuotasOptions struct {
 // +k8s:conversion-gen:explicit-from=net/url.Values
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
 
-// +subresource-request
-type DevPodUpOptions struct {
-	metav1.TypeMeta `json:",inline"`
-
-	// WebMode executes the up command directly.
-	// +optional
-	WebMode bool `json:"webMode,omitempty"`
-
-	// CLIMode executes the up command directly.
-	// +optional
-	CLIMode bool `json:"cliMode,omitempty"`
-
-	// Debug includes debug logs.
-	// +optional
-	Debug bool `json:"debug,omitempty"`
-
-	// Options are the options to pass.
-	// +optional
-	Options string `json:"options,omitempty"`
-}
-
-// +k8s:conversion-gen:explicit-from=net/url.Values
-// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
-
-// +subresource-request
-type DevPodDeleteOptions struct {
-	metav1.TypeMeta `json:",inline"`
-
-	// Options are the options to pass.
-	// +optional
-	Options string `json:"options,omitempty"`
-}
-
-// +k8s:conversion-gen:explicit-from=net/url.Values
-// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
-
-// +subresource-request
-type DevPodStopOptions struct {
-	metav1.TypeMeta `json:",inline"`
-
-	// Options are the options to pass.
-	// +optional
-	Options string `json:"options,omitempty"`
-}
-
-// +k8s:conversion-gen:explicit-from=net/url.Values
-// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
-
-// +subresource-request
-type DevPodStatusOptions struct {
-	metav1.TypeMeta `json:",inline"`
-
-	// Options are the options to pass.
-	// +optional
-	Options string `json:"options,omitempty"`
-}
-
-// +k8s:conversion-gen:explicit-from=net/url.Values
-// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
-
-// +subresource-request
-type DevPodSshOptions struct {
-	metav1.TypeMeta `json:",inline"`
-
-	// Options are the options to pass.
-	// +optional
-	Options string `json:"options,omitempty"`
-}
-
-// +k8s:conversion-gen:explicit-from=net/url.Values
-// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
-
 type BackupApplyOptions struct {
 	metav1.TypeMeta `json:",inline"`
+}
+
+// +k8s:conversion-gen:explicit-from=net/url.Values
+// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+
+type PodExecOptions struct {
+	metav1.TypeMeta `json:",inline"`
+
+	// Redirect the standard input stream of the pod for this call.
+	// Defaults to false.
+	// +optional
+	Stdin bool `json:"stdin,omitempty" protobuf:"varint,1,opt,name=stdin"`
+
+	// Redirect the standard output stream of the pod for this call.
+	// +optional
+	Stdout bool `json:"stdout,omitempty" protobuf:"varint,2,opt,name=stdout"`
+
+	// Redirect the standard error stream of the pod for this call.
+	// +optional
+	Stderr bool `json:"stderr,omitempty" protobuf:"varint,3,opt,name=stderr"`
+
+	// TTY if true indicates that a tty will be allocated for the exec call.
+	// Defaults to false.
+	// +optional
+	TTY bool `json:"tty,omitempty" protobuf:"varint,4,opt,name=tty"`
+
+	// Container in which to execute the command.
+	// Defaults to only container if there is only one container in the pod.
+	// +optional
+	Container string `json:"container,omitempty" protobuf:"bytes,5,opt,name=container"`
+
+	// Command is the remote command to execute. argv array. Not executed within a shell.
+	// +listType=atomic
+	Command []string `json:"command" protobuf:"bytes,6,rep,name=command"`
+}
+
+// +k8s:conversion-gen:explicit-from=net/url.Values
+// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+
+type NetworkPeerDebugOptions struct {
+	metav1.TypeMeta `json:",inline"`
+
+	// Action is the action to perform on the network peer.
+	// +optional
+	Action string `json:"action,omitempty"`
+}
+
+// +k8s:conversion-gen:explicit-from=net/url.Values
+// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+
+type SlurmInstanceAccountingOptions struct {
+	metav1.TypeMeta `json:",inline"`
+
+	// Since restricts the returned jobs to those that ran at or after this time.
+	// Defaults to 24 hours before now when unset.
+	// +optional
+	Since *metav1.Time `json:"since,omitempty"`
+
+	// Until restricts the returned jobs to those that ran at or before this time.
+	// Defaults to now when unset.
+	// +optional
+	Until *metav1.Time `json:"until,omitempty"`
 }
 
 func InstallOptions(scheme *runtime.Scheme) error {
@@ -229,12 +219,10 @@ func addKnownOptionsTypes(scheme *runtime.Scheme) error {
 		&UserSpacesOptions{},
 		&UserVirtualClustersOptions{},
 		&UserQuotasOptions{},
-		&DevPodUpOptions{},
-		&DevPodDeleteOptions{},
-		&DevPodStopOptions{},
-		&DevPodStatusOptions{},
-		&DevPodSshOptions{},
 		&BackupApplyOptions{},
+		&PodExecOptions{},
+		&NetworkPeerDebugOptions{},
+		&SlurmInstanceAccountingOptions{},
 	)
 	return nil
 }
