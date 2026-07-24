@@ -55,7 +55,7 @@ type ArgoCDApplicationSpec struct {
 	// +optional
 	DisplayName string `json:"displayName,omitempty"`
 
-	// Description describes an OS image
+	// Description describes the Argo CD application
 	// +optional
 	Description string `json:"description,omitempty"`
 

@@ -8,8 +8,6 @@ import (
 	fakemanagementv1 "github.com/loft-sh/api/v4/pkg/clientset/versioned/typed/management/v1/fake"
 	storagev1 "github.com/loft-sh/api/v4/pkg/clientset/versioned/typed/storage/v1"
 	fakestoragev1 "github.com/loft-sh/api/v4/pkg/clientset/versioned/typed/storage/v1/fake"
-	virtualclusterv1 "github.com/loft-sh/api/v4/pkg/clientset/versioned/typed/virtualcluster/v1"
-	fakevirtualclusterv1 "github.com/loft-sh/api/v4/pkg/clientset/versioned/typed/virtualcluster/v1/fake"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime"
 	"k8s.io/apimachinery/pkg/watch"
@@ -91,9 +89,4 @@ func (c *Clientset) ManagementV1() managementv1.ManagementV1Interface {
 // StorageV1 retrieves the StorageV1Client
 func (c *Clientset) StorageV1() storagev1.StorageV1Interface {
 	return &fakestoragev1.FakeStorageV1{Fake: &c.Fake}
-}
-
-// VirtualclusterV1 retrieves the VirtualclusterV1Client
-func (c *Clientset) VirtualclusterV1() virtualclusterv1.VirtualclusterV1Interface {
-	return &fakevirtualclusterv1.FakeVirtualclusterV1{Fake: &c.Fake}
 }

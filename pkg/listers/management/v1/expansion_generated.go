@@ -14,6 +14,14 @@ type AnnouncementListerExpansion interface{}
 // AppLister.
 type AppListerExpansion interface{}
 
+// AppInstanceListerExpansion allows custom methods to be added to
+// AppInstanceLister.
+type AppInstanceListerExpansion interface{}
+
+// AppInstanceNamespaceListerExpansion allows custom methods to be added to
+// AppInstanceNamespaceLister.
+type AppInstanceNamespaceListerExpansion interface{}
+
 // ArgoCDApplicationListerExpansion allows custom methods to be added to
 // ArgoCDApplicationLister.
 type ArgoCDApplicationListerExpansion interface{}
@@ -193,10 +201,6 @@ type SpaceTemplateListerExpansion interface{}
 // SubjectAccessReviewListerExpansion allows custom methods to be added to
 // SubjectAccessReviewLister.
 type SubjectAccessReviewListerExpansion interface{}
-
-// TaskListerExpansion allows custom methods to be added to
-// TaskLister.
-type TaskListerExpansion interface{}
 
 // TeamListerExpansion allows custom methods to be added to
 // TeamLister.

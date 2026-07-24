@@ -12,7 +12,6 @@ import (
 	internalinterfaces "github.com/loft-sh/api/v4/pkg/informers/externalversions/internalinterfaces"
 	management "github.com/loft-sh/api/v4/pkg/informers/externalversions/management"
 	storage "github.com/loft-sh/api/v4/pkg/informers/externalversions/storage"
-	virtualcluster "github.com/loft-sh/api/v4/pkg/informers/externalversions/virtualcluster"
 	v1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	runtime "k8s.io/apimachinery/pkg/runtime"
 	schema "k8s.io/apimachinery/pkg/runtime/schema"
@@ -313,7 +312,6 @@ type SharedInformerFactory interface {
 
 	Management() management.Interface
 	Storage() storage.Interface
-	Virtualcluster() virtualcluster.Interface
 }
 
 func (f *sharedInformerFactory) Management() management.Interface {
@@ -322,8 +320,4 @@ func (f *sharedInformerFactory) Management() management.Interface {
 
 func (f *sharedInformerFactory) Storage() storage.Interface {
 	return storage.New(f, f.namespace, f.tweakListOptions)
-}
-
-func (f *sharedInformerFactory) Virtualcluster() virtualcluster.Interface {
-	return virtualcluster.New(f, f.namespace, f.tweakListOptions)
 }

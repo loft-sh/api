@@ -15,6 +15,7 @@ type ManagementV1Interface interface {
 	AgentAuditEventsGetter
 	AnnouncementsGetter
 	AppsGetter
+	AppInstancesGetter
 	ArgoCDApplicationsGetter
 	ArgoCDApplicationTemplatesGetter
 	BackupsGetter
@@ -53,7 +54,6 @@ type ManagementV1Interface interface {
 	SpaceInstancesGetter
 	SpaceTemplatesGetter
 	SubjectAccessReviewsGetter
-	TasksGetter
 	TeamsGetter
 	TranslateVClusterResourceNamesGetter
 	UsageDownloadsGetter
@@ -78,6 +78,10 @@ func (c *ManagementV1Client) Announcements() AnnouncementInterface {
 
 func (c *ManagementV1Client) Apps() AppInterface {
 	return newApps(c)
+}
+
+func (c *ManagementV1Client) AppInstances(namespace string) AppInstanceInterface {
+	return newAppInstances(c, namespace)
 }
 
 func (c *ManagementV1Client) ArgoCDApplications(namespace string) ArgoCDApplicationInterface {
@@ -230,10 +234,6 @@ func (c *ManagementV1Client) SpaceTemplates() SpaceTemplateInterface {
 
 func (c *ManagementV1Client) SubjectAccessReviews() SubjectAccessReviewInterface {
 	return newSubjectAccessReviews(c)
-}
-
-func (c *ManagementV1Client) Tasks() TaskInterface {
-	return newTasks(c)
 }
 
 func (c *ManagementV1Client) Teams() TeamInterface {

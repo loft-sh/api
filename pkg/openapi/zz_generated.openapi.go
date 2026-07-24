@@ -13,7 +13,6 @@ import (
 	managementv1 "github.com/loft-sh/api/v4/pkg/apis/management/v1"
 	apisstoragev1 "github.com/loft-sh/api/v4/pkg/apis/storage/v1"
 	uiv1 "github.com/loft-sh/api/v4/pkg/apis/ui/v1"
-	virtualclusterv1 "github.com/loft-sh/api/v4/pkg/apis/virtualcluster/v1"
 	v1alpha1 "github.com/loft-sh/external-types/argoproj/argo-cd/v2/pkg/apis/application/v1alpha1"
 	admissionregistrationv1 "k8s.io/api/admissionregistration/v1"
 	v1beta1 "k8s.io/api/admissionregistration/v1beta1"
@@ -103,29 +102,12 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 		licenseapi.UsageData{}.OpenAPIModelName():                                            schema_loft_sh_admin_apis_pkg_licenseapi_UsageData(ref),
 		licenseapi.UsageDataDetails{}.OpenAPIModelName():                                     schema_loft_sh_admin_apis_pkg_licenseapi_UsageDataDetails(ref),
 		licenseapi.VirtualClusterInfo{}.OpenAPIModelName():                                   schema_loft_sh_admin_apis_pkg_licenseapi_VirtualClusterInfo(ref),
-		v1.Bash{}.OpenAPIModelName():                                                         schema_apis_loft_cluster_v1_Bash(ref),
-		v1.Chart{}.OpenAPIModelName():                                                        schema_apis_loft_cluster_v1_Chart(ref),
-		v1.ChartInfo{}.OpenAPIModelName():                                                    schema_apis_loft_cluster_v1_ChartInfo(ref),
-		v1.ChartInfoList{}.OpenAPIModelName():                                                schema_apis_loft_cluster_v1_ChartInfoList(ref),
-		v1.ChartInfoSpec{}.OpenAPIModelName():                                                schema_apis_loft_cluster_v1_ChartInfoSpec(ref),
-		v1.ChartInfoStatus{}.OpenAPIModelName():                                              schema_apis_loft_cluster_v1_ChartInfoStatus(ref),
-		v1.ChartSecretRef{}.OpenAPIModelName():                                               schema_apis_loft_cluster_v1_ChartSecretRef(ref),
 		v1.EpochInfo{}.OpenAPIModelName():                                                    schema_apis_loft_cluster_v1_EpochInfo(ref),
 		v1.Feature{}.OpenAPIModelName():                                                      schema_apis_loft_cluster_v1_Feature(ref),
 		v1.FeatureList{}.OpenAPIModelName():                                                  schema_apis_loft_cluster_v1_FeatureList(ref),
 		v1.FeatureSpec{}.OpenAPIModelName():                                                  schema_apis_loft_cluster_v1_FeatureSpec(ref),
 		v1.FeatureStatus{}.OpenAPIModelName():                                                schema_apis_loft_cluster_v1_FeatureStatus(ref),
-		v1.HelmRelease{}.OpenAPIModelName():                                                  schema_apis_loft_cluster_v1_HelmRelease(ref),
-		v1.HelmReleaseApp{}.OpenAPIModelName():                                               schema_apis_loft_cluster_v1_HelmReleaseApp(ref),
-		v1.HelmReleaseConfig{}.OpenAPIModelName():                                            schema_apis_loft_cluster_v1_HelmReleaseConfig(ref),
-		v1.HelmReleaseList{}.OpenAPIModelName():                                              schema_apis_loft_cluster_v1_HelmReleaseList(ref),
-		v1.HelmReleaseSpec{}.OpenAPIModelName():                                              schema_apis_loft_cluster_v1_HelmReleaseSpec(ref),
-		v1.HelmReleaseStatus{}.OpenAPIModelName():                                            schema_apis_loft_cluster_v1_HelmReleaseStatus(ref),
-		v1.Info{}.OpenAPIModelName():                                                         schema_apis_loft_cluster_v1_Info(ref),
 		v1.LastActivityInfo{}.OpenAPIModelName():                                             schema_apis_loft_cluster_v1_LastActivityInfo(ref),
-		v1.Maintainer{}.OpenAPIModelName():                                                   schema_apis_loft_cluster_v1_Maintainer(ref),
-		v1.Metadata{}.OpenAPIModelName():                                                     schema_apis_loft_cluster_v1_Metadata(ref),
-		v1.ProjectSecretRef{}.OpenAPIModelName():                                             schema_apis_loft_cluster_v1_ProjectSecretRef(ref),
 		v1.SleepModeConfig{}.OpenAPIModelName():                                              schema_apis_loft_cluster_v1_SleepModeConfig(ref),
 		v1.SleepModeConfigSpec{}.OpenAPIModelName():                                          schema_apis_loft_cluster_v1_SleepModeConfigSpec(ref),
 		v1.SleepModeConfigStatus{}.OpenAPIModelName():                                        schema_apis_loft_cluster_v1_SleepModeConfigStatus(ref),
@@ -152,10 +134,16 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 		managementv1.App{}.OpenAPIModelName():                                                schema_pkg_apis_management_v1_App(ref),
 		managementv1.AppCredentials{}.OpenAPIModelName():                                     schema_pkg_apis_management_v1_AppCredentials(ref),
 		managementv1.AppCredentialsList{}.OpenAPIModelName():                                 schema_pkg_apis_management_v1_AppCredentialsList(ref),
+		managementv1.AppInstance{}.OpenAPIModelName():                                        schema_pkg_apis_management_v1_AppInstance(ref),
+		managementv1.AppInstanceList{}.OpenAPIModelName():                                    schema_pkg_apis_management_v1_AppInstanceList(ref),
+		managementv1.AppInstanceLog{}.OpenAPIModelName():                                     schema_pkg_apis_management_v1_AppInstanceLog(ref),
+		managementv1.AppInstanceLogList{}.OpenAPIModelName():                                 schema_pkg_apis_management_v1_AppInstanceLogList(ref),
+		managementv1.AppInstanceLogOptions{}.OpenAPIModelName():                              schema_pkg_apis_management_v1_AppInstanceLogOptions(ref),
+		managementv1.AppInstanceSpec{}.OpenAPIModelName():                                    schema_pkg_apis_management_v1_AppInstanceSpec(ref),
+		managementv1.AppInstanceStatus{}.OpenAPIModelName():                                  schema_pkg_apis_management_v1_AppInstanceStatus(ref),
 		managementv1.AppList{}.OpenAPIModelName():                                            schema_pkg_apis_management_v1_AppList(ref),
 		managementv1.AppSpec{}.OpenAPIModelName():                                            schema_pkg_apis_management_v1_AppSpec(ref),
 		managementv1.AppStatus{}.OpenAPIModelName():                                          schema_pkg_apis_management_v1_AppStatus(ref),
-		managementv1.Apps{}.OpenAPIModelName():                                               schema_pkg_apis_management_v1_Apps(ref),
 		managementv1.ArgoCDApplication{}.OpenAPIModelName():                                  schema_pkg_apis_management_v1_ArgoCDApplication(ref),
 		managementv1.ArgoCDApplicationList{}.OpenAPIModelName():                              schema_pkg_apis_management_v1_ArgoCDApplicationList(ref),
 		managementv1.ArgoCDApplicationSpec{}.OpenAPIModelName():                              schema_pkg_apis_management_v1_ArgoCDApplicationSpec(ref),
@@ -189,8 +177,6 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 		managementv1.ClusterAgentConfig{}.OpenAPIModelName():                                 schema_pkg_apis_management_v1_ClusterAgentConfig(ref),
 		managementv1.ClusterAgentConfigCommon{}.OpenAPIModelName():                           schema_pkg_apis_management_v1_ClusterAgentConfigCommon(ref),
 		managementv1.ClusterAgentConfigList{}.OpenAPIModelName():                             schema_pkg_apis_management_v1_ClusterAgentConfigList(ref),
-		managementv1.ClusterCharts{}.OpenAPIModelName():                                      schema_pkg_apis_management_v1_ClusterCharts(ref),
-		managementv1.ClusterChartsList{}.OpenAPIModelName():                                  schema_pkg_apis_management_v1_ClusterChartsList(ref),
 		managementv1.ClusterDomain{}.OpenAPIModelName():                                      schema_pkg_apis_management_v1_ClusterDomain(ref),
 		managementv1.ClusterDomainList{}.OpenAPIModelName():                                  schema_pkg_apis_management_v1_ClusterDomainList(ref),
 		managementv1.ClusterList{}.OpenAPIModelName():                                        schema_pkg_apis_management_v1_ClusterList(ref),
@@ -325,14 +311,11 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 		managementv1.OwnedAccessKeyStatus{}.OpenAPIModelName():                               schema_pkg_apis_management_v1_OwnedAccessKeyStatus(ref),
 		managementv1.PlatformDB{}.OpenAPIModelName():                                         schema_pkg_apis_management_v1_PlatformDB(ref),
 		managementv1.PodExecOptions{}.OpenAPIModelName():                                     schema_pkg_apis_management_v1_PodExecOptions(ref),
-		managementv1.PredefinedApp{}.OpenAPIModelName():                                      schema_pkg_apis_management_v1_PredefinedApp(ref),
 		managementv1.Project{}.OpenAPIModelName():                                            schema_pkg_apis_management_v1_Project(ref),
 		managementv1.ProjectChartInfo{}.OpenAPIModelName():                                   schema_pkg_apis_management_v1_ProjectChartInfo(ref),
 		managementv1.ProjectChartInfoList{}.OpenAPIModelName():                               schema_pkg_apis_management_v1_ProjectChartInfoList(ref),
 		managementv1.ProjectChartInfoSpec{}.OpenAPIModelName():                               schema_pkg_apis_management_v1_ProjectChartInfoSpec(ref),
 		managementv1.ProjectChartInfoStatus{}.OpenAPIModelName():                             schema_pkg_apis_management_v1_ProjectChartInfoStatus(ref),
-		managementv1.ProjectCharts{}.OpenAPIModelName():                                      schema_pkg_apis_management_v1_ProjectCharts(ref),
-		managementv1.ProjectChartsList{}.OpenAPIModelName():                                  schema_pkg_apis_management_v1_ProjectChartsList(ref),
 		managementv1.ProjectClusters{}.OpenAPIModelName():                                    schema_pkg_apis_management_v1_ProjectClusters(ref),
 		managementv1.ProjectClustersList{}.OpenAPIModelName():                                schema_pkg_apis_management_v1_ProjectClustersList(ref),
 		managementv1.ProjectImportSpace{}.OpenAPIModelName():                                 schema_pkg_apis_management_v1_ProjectImportSpace(ref),
@@ -414,13 +397,6 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 		managementv1.SubjectAccessReviewList{}.OpenAPIModelName():                            schema_pkg_apis_management_v1_SubjectAccessReviewList(ref),
 		managementv1.SubjectAccessReviewSpec{}.OpenAPIModelName():                            schema_pkg_apis_management_v1_SubjectAccessReviewSpec(ref),
 		managementv1.SubjectAccessReviewStatus{}.OpenAPIModelName():                          schema_pkg_apis_management_v1_SubjectAccessReviewStatus(ref),
-		managementv1.Task{}.OpenAPIModelName():                                               schema_pkg_apis_management_v1_Task(ref),
-		managementv1.TaskList{}.OpenAPIModelName():                                           schema_pkg_apis_management_v1_TaskList(ref),
-		managementv1.TaskLog{}.OpenAPIModelName():                                            schema_pkg_apis_management_v1_TaskLog(ref),
-		managementv1.TaskLogList{}.OpenAPIModelName():                                        schema_pkg_apis_management_v1_TaskLogList(ref),
-		managementv1.TaskLogOptions{}.OpenAPIModelName():                                     schema_pkg_apis_management_v1_TaskLogOptions(ref),
-		managementv1.TaskSpec{}.OpenAPIModelName():                                           schema_pkg_apis_management_v1_TaskSpec(ref),
-		managementv1.TaskStatus{}.OpenAPIModelName():                                         schema_pkg_apis_management_v1_TaskStatus(ref),
 		managementv1.Team{}.OpenAPIModelName():                                               schema_pkg_apis_management_v1_Team(ref),
 		managementv1.TeamAccessKeys{}.OpenAPIModelName():                                     schema_pkg_apis_management_v1_TeamAccessKeys(ref),
 		managementv1.TeamAccessKeysList{}.OpenAPIModelName():                                 schema_pkg_apis_management_v1_TeamAccessKeysList(ref),
@@ -547,12 +523,20 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 		apisstoragev1.AllowedTemplate{}.OpenAPIModelName():                                   schema_pkg_apis_storage_v1_AllowedTemplate(ref),
 		apisstoragev1.App{}.OpenAPIModelName():                                               schema_pkg_apis_storage_v1_App(ref),
 		apisstoragev1.AppConfig{}.OpenAPIModelName():                                         schema_pkg_apis_storage_v1_AppConfig(ref),
+		apisstoragev1.AppInstance{}.OpenAPIModelName():                                       schema_pkg_apis_storage_v1_AppInstance(ref),
+		apisstoragev1.AppInstanceDestination{}.OpenAPIModelName():                            schema_pkg_apis_storage_v1_AppInstanceDestination(ref),
+		apisstoragev1.AppInstanceDestinationCluster{}.OpenAPIModelName():                     schema_pkg_apis_storage_v1_AppInstanceDestinationCluster(ref),
+		apisstoragev1.AppInstanceDestinationSpace{}.OpenAPIModelName():                       schema_pkg_apis_storage_v1_AppInstanceDestinationSpace(ref),
+		apisstoragev1.AppInstanceDestinationVirtualCluster{}.OpenAPIModelName():              schema_pkg_apis_storage_v1_AppInstanceDestinationVirtualCluster(ref),
+		apisstoragev1.AppInstanceList{}.OpenAPIModelName():                                   schema_pkg_apis_storage_v1_AppInstanceList(ref),
+		apisstoragev1.AppInstanceSpec{}.OpenAPIModelName():                                   schema_pkg_apis_storage_v1_AppInstanceSpec(ref),
+		apisstoragev1.AppInstanceStatus{}.OpenAPIModelName():                                 schema_pkg_apis_storage_v1_AppInstanceStatus(ref),
+		apisstoragev1.AppInstanceTemplateRef{}.OpenAPIModelName():                            schema_pkg_apis_storage_v1_AppInstanceTemplateRef(ref),
 		apisstoragev1.AppList{}.OpenAPIModelName():                                           schema_pkg_apis_storage_v1_AppList(ref),
 		apisstoragev1.AppParameter{}.OpenAPIModelName():                                      schema_pkg_apis_storage_v1_AppParameter(ref),
 		apisstoragev1.AppReference{}.OpenAPIModelName():                                      schema_pkg_apis_storage_v1_AppReference(ref),
 		apisstoragev1.AppSpec{}.OpenAPIModelName():                                           schema_pkg_apis_storage_v1_AppSpec(ref),
 		apisstoragev1.AppStatus{}.OpenAPIModelName():                                         schema_pkg_apis_storage_v1_AppStatus(ref),
-		apisstoragev1.AppTask{}.OpenAPIModelName():                                           schema_pkg_apis_storage_v1_AppTask(ref),
 		apisstoragev1.AppVersion{}.OpenAPIModelName():                                        schema_pkg_apis_storage_v1_AppVersion(ref),
 		apisstoragev1.ArgoCD{}.OpenAPIModelName():                                            schema_pkg_apis_storage_v1_ArgoCD(ref),
 		apisstoragev1.ArgoCDApplication{}.OpenAPIModelName():                                 schema_pkg_apis_storage_v1_ArgoCDApplication(ref),
@@ -584,7 +568,9 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 		apisstoragev1.AuthenticationPassword{}.OpenAPIModelName():                            schema_pkg_apis_storage_v1_AuthenticationPassword(ref),
 		apisstoragev1.AuthenticationSAML{}.OpenAPIModelName():                                schema_pkg_apis_storage_v1_AuthenticationSAML(ref),
 		apisstoragev1.BCMNodeTypeSpec{}.OpenAPIModelName():                                   schema_pkg_apis_storage_v1_BCMNodeTypeSpec(ref),
+		apisstoragev1.Bash{}.OpenAPIModelName():                                              schema_pkg_apis_storage_v1_Bash(ref),
 		apisstoragev1.Chart{}.OpenAPIModelName():                                             schema_pkg_apis_storage_v1_Chart(ref),
+		apisstoragev1.ChartSecretRef{}.OpenAPIModelName():                                    schema_pkg_apis_storage_v1_ChartSecretRef(ref),
 		apisstoragev1.ChartStatus{}.OpenAPIModelName():                                       schema_pkg_apis_storage_v1_ChartStatus(ref),
 		apisstoragev1.Cluster{}.OpenAPIModelName():                                           schema_pkg_apis_storage_v1_Cluster(ref),
 		apisstoragev1.ClusterAPINodeTypeSpec{}.OpenAPIModelName():                            schema_pkg_apis_storage_v1_ClusterAPINodeTypeSpec(ref),
@@ -611,8 +597,7 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 		apisstoragev1.HelmChart{}.OpenAPIModelName():                                         schema_pkg_apis_storage_v1_HelmChart(ref),
 		apisstoragev1.HelmChartRepository{}.OpenAPIModelName():                               schema_pkg_apis_storage_v1_HelmChartRepository(ref),
 		apisstoragev1.HelmConfiguration{}.OpenAPIModelName():                                 schema_pkg_apis_storage_v1_HelmConfiguration(ref),
-		apisstoragev1.HelmTask{}.OpenAPIModelName():                                          schema_pkg_apis_storage_v1_HelmTask(ref),
-		apisstoragev1.HelmTaskRelease{}.OpenAPIModelName():                                   schema_pkg_apis_storage_v1_HelmTaskRelease(ref),
+		apisstoragev1.HelmReleaseConfig{}.OpenAPIModelName():                                 schema_pkg_apis_storage_v1_HelmReleaseConfig(ref),
 		apisstoragev1.InstanceAccess{}.OpenAPIModelName():                                    schema_pkg_apis_storage_v1_InstanceAccess(ref),
 		apisstoragev1.InstanceAccessRule{}.OpenAPIModelName():                                schema_pkg_apis_storage_v1_InstanceAccessRule(ref),
 		apisstoragev1.InstanceDeployedAppStatus{}.OpenAPIModelName():                         schema_pkg_apis_storage_v1_InstanceDeployedAppStatus(ref),
@@ -628,8 +613,10 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 		apisstoragev1.MachineConfigTemplateList{}.OpenAPIModelName():                         schema_pkg_apis_storage_v1_MachineConfigTemplateList(ref),
 		apisstoragev1.MachineConfigTemplateSpec{}.OpenAPIModelName():                         schema_pkg_apis_storage_v1_MachineConfigTemplateSpec(ref),
 		apisstoragev1.MachineConfigTemplateStatus{}.OpenAPIModelName():                       schema_pkg_apis_storage_v1_MachineConfigTemplateStatus(ref),
+		apisstoragev1.Maintainer{}.OpenAPIModelName():                                        schema_pkg_apis_storage_v1_Maintainer(ref),
 		apisstoragev1.ManagedNodeTypeObjectMeta{}.OpenAPIModelName():                         schema_pkg_apis_storage_v1_ManagedNodeTypeObjectMeta(ref),
 		apisstoragev1.Member{}.OpenAPIModelName():                                            schema_pkg_apis_storage_v1_Member(ref),
+		apisstoragev1.Metadata{}.OpenAPIModelName():                                          schema_pkg_apis_storage_v1_Metadata(ref),
 		apisstoragev1.Metal3BareMetalHosts{}.OpenAPIModelName():                              schema_pkg_apis_storage_v1_Metal3BareMetalHosts(ref),
 		apisstoragev1.Metal3Deployment{}.OpenAPIModelName():                                  schema_pkg_apis_storage_v1_Metal3Deployment(ref),
 		apisstoragev1.Metal3NodeTypeSpec{}.OpenAPIModelName():                                schema_pkg_apis_storage_v1_Metal3NodeTypeSpec(ref),
@@ -663,6 +650,7 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 		apisstoragev1.NodeProviderKubeVirt{}.OpenAPIModelName():                              schema_pkg_apis_storage_v1_NodeProviderKubeVirt(ref),
 		apisstoragev1.NodeProviderList{}.OpenAPIModelName():                                  schema_pkg_apis_storage_v1_NodeProviderList(ref),
 		apisstoragev1.NodeProviderMetal3{}.OpenAPIModelName():                                schema_pkg_apis_storage_v1_NodeProviderMetal3(ref),
+		apisstoragev1.NodeProviderMetal3Netris{}.OpenAPIModelName():                          schema_pkg_apis_storage_v1_NodeProviderMetal3Netris(ref),
 		apisstoragev1.NodeProviderSpec{}.OpenAPIModelName():                                  schema_pkg_apis_storage_v1_NodeProviderSpec(ref),
 		apisstoragev1.NodeProviderStatus{}.OpenAPIModelName():                                schema_pkg_apis_storage_v1_NodeProviderStatus(ref),
 		apisstoragev1.NodeProviderTerraform{}.OpenAPIModelName():                             schema_pkg_apis_storage_v1_NodeProviderTerraform(ref),
@@ -682,6 +670,7 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 		apisstoragev1.Project{}.OpenAPIModelName():                                           schema_pkg_apis_storage_v1_Project(ref),
 		apisstoragev1.ProjectList{}.OpenAPIModelName():                                       schema_pkg_apis_storage_v1_ProjectList(ref),
 		apisstoragev1.ProjectNamespaceTemplate{}.OpenAPIModelName():                          schema_pkg_apis_storage_v1_ProjectNamespaceTemplate(ref),
+		apisstoragev1.ProjectSecretRef{}.OpenAPIModelName():                                  schema_pkg_apis_storage_v1_ProjectSecretRef(ref),
 		apisstoragev1.ProjectSpec{}.OpenAPIModelName():                                       schema_pkg_apis_storage_v1_ProjectSpec(ref),
 		apisstoragev1.ProjectStatus{}.OpenAPIModelName():                                     schema_pkg_apis_storage_v1_ProjectStatus(ref),
 		apisstoragev1.QuotaStatus{}.OpenAPIModelName():                                       schema_pkg_apis_storage_v1_QuotaStatus(ref),
@@ -719,11 +708,6 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 		apisstoragev1.TargetCluster{}.OpenAPIModelName():                                     schema_pkg_apis_storage_v1_TargetCluster(ref),
 		apisstoragev1.TargetInstance{}.OpenAPIModelName():                                    schema_pkg_apis_storage_v1_TargetInstance(ref),
 		apisstoragev1.TargetVirtualCluster{}.OpenAPIModelName():                              schema_pkg_apis_storage_v1_TargetVirtualCluster(ref),
-		apisstoragev1.Task{}.OpenAPIModelName():                                              schema_pkg_apis_storage_v1_Task(ref),
-		apisstoragev1.TaskDefinition{}.OpenAPIModelName():                                    schema_pkg_apis_storage_v1_TaskDefinition(ref),
-		apisstoragev1.TaskList{}.OpenAPIModelName():                                          schema_pkg_apis_storage_v1_TaskList(ref),
-		apisstoragev1.TaskSpec{}.OpenAPIModelName():                                          schema_pkg_apis_storage_v1_TaskSpec(ref),
-		apisstoragev1.TaskStatus{}.OpenAPIModelName():                                        schema_pkg_apis_storage_v1_TaskStatus(ref),
 		apisstoragev1.Team{}.OpenAPIModelName():                                              schema_pkg_apis_storage_v1_Team(ref),
 		apisstoragev1.TeamList{}.OpenAPIModelName():                                          schema_pkg_apis_storage_v1_TeamList(ref),
 		apisstoragev1.TeamSpec{}.OpenAPIModelName():                                          schema_pkg_apis_storage_v1_TeamSpec(ref),
@@ -774,10 +758,6 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 		uiv1.UISettingsSpec{}.OpenAPIModelName():                                             schema_pkg_apis_ui_v1_UISettingsSpec(ref),
 		uiv1.UISettingsStatus{}.OpenAPIModelName():                                           schema_pkg_apis_ui_v1_UISettingsStatus(ref),
 		uiv1.VClusterVersion{}.OpenAPIModelName():                                            schema_pkg_apis_ui_v1_VClusterVersion(ref),
-		virtualclusterv1.HelmRelease{}.OpenAPIModelName():                                    schema_pkg_apis_virtualcluster_v1_HelmRelease(ref),
-		virtualclusterv1.HelmReleaseList{}.OpenAPIModelName():                                schema_pkg_apis_virtualcluster_v1_HelmReleaseList(ref),
-		virtualclusterv1.HelmReleaseSpec{}.OpenAPIModelName():                                schema_pkg_apis_virtualcluster_v1_HelmReleaseSpec(ref),
-		virtualclusterv1.HelmReleaseStatus{}.OpenAPIModelName():                              schema_pkg_apis_virtualcluster_v1_HelmReleaseStatus(ref),
 		v1alpha1.AppHealthStatus{}.OpenAPIModelName():                                        schema_pkg_apis_application_v1alpha1_AppHealthStatus(ref),
 		v1alpha1.AppProject{}.OpenAPIModelName():                                             schema_pkg_apis_application_v1alpha1_AppProject(ref),
 		v1alpha1.AppProjectList{}.OpenAPIModelName():                                         schema_pkg_apis_application_v1alpha1_AppProjectList(ref),
@@ -3687,291 +3667,6 @@ func schema_loft_sh_admin_apis_pkg_licenseapi_VirtualClusterInfo(ref common.Refe
 	}
 }
 
-func schema_apis_loft_cluster_v1_Bash(ref common.ReferenceCallback) common.OpenAPIDefinition {
-	return common.OpenAPIDefinition{
-		Schema: spec.Schema{
-			SchemaProps: spec.SchemaProps{
-				Type: []string{"object"},
-				Properties: map[string]spec.Schema{
-					"script": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Script is the script to execute.",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"image": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Image is the image to use for this app",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"clusterRole": {
-						SchemaProps: spec.SchemaProps{
-							Description: "ClusterRole is the cluster role to use for this job",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"podSecurityContext": {
-						SchemaProps: spec.SchemaProps{
-							Description: "PodSecurityContext for the bash pod.",
-							Ref:         ref(corev1.PodSecurityContext{}.OpenAPIModelName()),
-						},
-					},
-					"securityContext": {
-						SchemaProps: spec.SchemaProps{
-							Description: "SecurityContext for the bash container.",
-							Ref:         ref(corev1.SecurityContext{}.OpenAPIModelName()),
-						},
-					},
-				},
-			},
-		},
-		Dependencies: []string{
-			corev1.PodSecurityContext{}.OpenAPIModelName(), corev1.SecurityContext{}.OpenAPIModelName()},
-	}
-}
-
-func schema_apis_loft_cluster_v1_Chart(ref common.ReferenceCallback) common.OpenAPIDefinition {
-	return common.OpenAPIDefinition{
-		Schema: spec.Schema{
-			SchemaProps: spec.SchemaProps{
-				Description: "Chart describes a chart",
-				Type:        []string{"object"},
-				Properties: map[string]spec.Schema{
-					"name": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Name is the chart name in the repository",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"version": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Version is the chart version in the repository",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"repoURL": {
-						SchemaProps: spec.SchemaProps{
-							Description: "RepoURL is the repo url where the chart can be found",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"username": {
-						SchemaProps: spec.SchemaProps{
-							Description: "The username that is required for this repository",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"usernameRef": {
-						SchemaProps: spec.SchemaProps{
-							Description: "The username that is required for this repository",
-							Ref:         ref(v1.ChartSecretRef{}.OpenAPIModelName()),
-						},
-					},
-					"password": {
-						SchemaProps: spec.SchemaProps{
-							Description: "The password that is required for this repository",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"passwordRef": {
-						SchemaProps: spec.SchemaProps{
-							Description: "The password that is required for this repository",
-							Ref:         ref(v1.ChartSecretRef{}.OpenAPIModelName()),
-						},
-					},
-					"insecureSkipTlsVerify": {
-						SchemaProps: spec.SchemaProps{
-							Description: "If tls certificate checks for the chart download should be skipped",
-							Type:        []string{"boolean"},
-							Format:      "",
-						},
-					},
-				},
-			},
-		},
-		Dependencies: []string{
-			v1.ChartSecretRef{}.OpenAPIModelName()},
-	}
-}
-
-func schema_apis_loft_cluster_v1_ChartInfo(ref common.ReferenceCallback) common.OpenAPIDefinition {
-	return common.OpenAPIDefinition{
-		Schema: spec.Schema{
-			SchemaProps: spec.SchemaProps{
-				Type: []string{"object"},
-				Properties: map[string]spec.Schema{
-					"kind": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"apiVersion": {
-						SchemaProps: spec.SchemaProps{
-							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"metadata": {
-						SchemaProps: spec.SchemaProps{
-							Default: map[string]interface{}{},
-							Ref:     ref(metav1.ObjectMeta{}.OpenAPIModelName()),
-						},
-					},
-					"spec": {
-						SchemaProps: spec.SchemaProps{
-							Default: map[string]interface{}{},
-							Ref:     ref(v1.ChartInfoSpec{}.OpenAPIModelName()),
-						},
-					},
-					"status": {
-						SchemaProps: spec.SchemaProps{
-							Default: map[string]interface{}{},
-							Ref:     ref(v1.ChartInfoStatus{}.OpenAPIModelName()),
-						},
-					},
-				},
-			},
-		},
-		Dependencies: []string{
-			v1.ChartInfoSpec{}.OpenAPIModelName(), v1.ChartInfoStatus{}.OpenAPIModelName(), metav1.ObjectMeta{}.OpenAPIModelName()},
-	}
-}
-
-func schema_apis_loft_cluster_v1_ChartInfoList(ref common.ReferenceCallback) common.OpenAPIDefinition {
-	return common.OpenAPIDefinition{
-		Schema: spec.Schema{
-			SchemaProps: spec.SchemaProps{
-				Type: []string{"object"},
-				Properties: map[string]spec.Schema{
-					"kind": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"apiVersion": {
-						SchemaProps: spec.SchemaProps{
-							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"metadata": {
-						SchemaProps: spec.SchemaProps{
-							Default: map[string]interface{}{},
-							Ref:     ref(metav1.ListMeta{}.OpenAPIModelName()),
-						},
-					},
-					"items": {
-						SchemaProps: spec.SchemaProps{
-							Type: []string{"array"},
-							Items: &spec.SchemaOrArray{
-								Schema: &spec.Schema{
-									SchemaProps: spec.SchemaProps{
-										Default: map[string]interface{}{},
-										Ref:     ref(v1.ChartInfo{}.OpenAPIModelName()),
-									},
-								},
-							},
-						},
-					},
-				},
-				Required: []string{"items"},
-			},
-		},
-		Dependencies: []string{
-			v1.ChartInfo{}.OpenAPIModelName(), metav1.ListMeta{}.OpenAPIModelName()},
-	}
-}
-
-func schema_apis_loft_cluster_v1_ChartInfoSpec(ref common.ReferenceCallback) common.OpenAPIDefinition {
-	return common.OpenAPIDefinition{
-		Schema: spec.Schema{
-			SchemaProps: spec.SchemaProps{
-				Type: []string{"object"},
-				Properties: map[string]spec.Schema{
-					"chart": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Chart holds information about a chart that should get deployed",
-							Default:     map[string]interface{}{},
-							Ref:         ref(v1.Chart{}.OpenAPIModelName()),
-						},
-					},
-				},
-			},
-		},
-		Dependencies: []string{
-			v1.Chart{}.OpenAPIModelName()},
-	}
-}
-
-func schema_apis_loft_cluster_v1_ChartInfoStatus(ref common.ReferenceCallback) common.OpenAPIDefinition {
-	return common.OpenAPIDefinition{
-		Schema: spec.Schema{
-			SchemaProps: spec.SchemaProps{
-				Type: []string{"object"},
-				Properties: map[string]spec.Schema{
-					"metadata": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Metadata provides information about a chart",
-							Ref:         ref(v1.Metadata{}.OpenAPIModelName()),
-						},
-					},
-					"readme": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Readme is the readme of the chart",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"values": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Values are the default values of the chart",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-				},
-			},
-		},
-		Dependencies: []string{
-			v1.Metadata{}.OpenAPIModelName()},
-	}
-}
-
-func schema_apis_loft_cluster_v1_ChartSecretRef(ref common.ReferenceCallback) common.OpenAPIDefinition {
-	return common.OpenAPIDefinition{
-		Schema: spec.Schema{
-			SchemaProps: spec.SchemaProps{
-				Type: []string{"object"},
-				Properties: map[string]spec.Schema{
-					"projectSecretRef": {
-						SchemaProps: spec.SchemaProps{
-							Description: "ProjectSecretRef holds the reference to a project secret",
-							Ref:         ref(v1.ProjectSecretRef{}.OpenAPIModelName()),
-						},
-					},
-				},
-			},
-		},
-		Dependencies: []string{
-			v1.ProjectSecretRef{}.OpenAPIModelName()},
-	}
-}
-
 func schema_apis_loft_cluster_v1_EpochInfo(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
@@ -4175,341 +3870,6 @@ func schema_apis_loft_cluster_v1_FeatureStatus(ref common.ReferenceCallback) com
 	}
 }
 
-func schema_apis_loft_cluster_v1_HelmRelease(ref common.ReferenceCallback) common.OpenAPIDefinition {
-	return common.OpenAPIDefinition{
-		Schema: spec.Schema{
-			SchemaProps: spec.SchemaProps{
-				Type: []string{"object"},
-				Properties: map[string]spec.Schema{
-					"kind": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"apiVersion": {
-						SchemaProps: spec.SchemaProps{
-							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"metadata": {
-						SchemaProps: spec.SchemaProps{
-							Default: map[string]interface{}{},
-							Ref:     ref(metav1.ObjectMeta{}.OpenAPIModelName()),
-						},
-					},
-					"spec": {
-						SchemaProps: spec.SchemaProps{
-							Default: map[string]interface{}{},
-							Ref:     ref(v1.HelmReleaseSpec{}.OpenAPIModelName()),
-						},
-					},
-					"status": {
-						SchemaProps: spec.SchemaProps{
-							Default: map[string]interface{}{},
-							Ref:     ref(v1.HelmReleaseStatus{}.OpenAPIModelName()),
-						},
-					},
-				},
-			},
-		},
-		Dependencies: []string{
-			v1.HelmReleaseSpec{}.OpenAPIModelName(), v1.HelmReleaseStatus{}.OpenAPIModelName(), metav1.ObjectMeta{}.OpenAPIModelName()},
-	}
-}
-
-func schema_apis_loft_cluster_v1_HelmReleaseApp(ref common.ReferenceCallback) common.OpenAPIDefinition {
-	return common.OpenAPIDefinition{
-		Schema: spec.Schema{
-			SchemaProps: spec.SchemaProps{
-				Type: []string{"object"},
-				Properties: map[string]spec.Schema{
-					"name": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Name is the name of the app this release refers to",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"version": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Revision is the revision of the app this release refers to",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-				},
-			},
-		},
-	}
-}
-
-func schema_apis_loft_cluster_v1_HelmReleaseConfig(ref common.ReferenceCallback) common.OpenAPIDefinition {
-	return common.OpenAPIDefinition{
-		Schema: spec.Schema{
-			SchemaProps: spec.SchemaProps{
-				Type: []string{"object"},
-				Properties: map[string]spec.Schema{
-					"chart": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Chart holds information about a chart that should get deployed",
-							Default:     map[string]interface{}{},
-							Ref:         ref(v1.Chart{}.OpenAPIModelName()),
-						},
-					},
-					"manifests": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Manifests holds kube manifests that will be deployed as a chart",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"bash": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Bash holds the bash script to execute in a container in the target",
-							Ref:         ref(v1.Bash{}.OpenAPIModelName()),
-						},
-					},
-					"values": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Values is the set of extra Values added to the chart. These values merge with the default values inside of the chart. You can use golang templating in here with values from parameters.",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"parameters": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Parameters are additional helm chart values that will get merged with config and are then used to deploy the helm chart.",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"annotations": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Annotations are extra annotations for this helm release",
-							Type:        []string{"object"},
-							AdditionalProperties: &spec.SchemaOrBool{
-								Allows: true,
-								Schema: &spec.Schema{
-									SchemaProps: spec.SchemaProps{
-										Default: "",
-										Type:    []string{"string"},
-										Format:  "",
-									},
-								},
-							},
-						},
-					},
-				},
-			},
-		},
-		Dependencies: []string{
-			v1.Bash{}.OpenAPIModelName(), v1.Chart{}.OpenAPIModelName()},
-	}
-}
-
-func schema_apis_loft_cluster_v1_HelmReleaseList(ref common.ReferenceCallback) common.OpenAPIDefinition {
-	return common.OpenAPIDefinition{
-		Schema: spec.Schema{
-			SchemaProps: spec.SchemaProps{
-				Type: []string{"object"},
-				Properties: map[string]spec.Schema{
-					"kind": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"apiVersion": {
-						SchemaProps: spec.SchemaProps{
-							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"metadata": {
-						SchemaProps: spec.SchemaProps{
-							Default: map[string]interface{}{},
-							Ref:     ref(metav1.ListMeta{}.OpenAPIModelName()),
-						},
-					},
-					"items": {
-						SchemaProps: spec.SchemaProps{
-							Type: []string{"array"},
-							Items: &spec.SchemaOrArray{
-								Schema: &spec.Schema{
-									SchemaProps: spec.SchemaProps{
-										Default: map[string]interface{}{},
-										Ref:     ref(v1.HelmRelease{}.OpenAPIModelName()),
-									},
-								},
-							},
-						},
-					},
-				},
-				Required: []string{"items"},
-			},
-		},
-		Dependencies: []string{
-			v1.HelmRelease{}.OpenAPIModelName(), metav1.ListMeta{}.OpenAPIModelName()},
-	}
-}
-
-func schema_apis_loft_cluster_v1_HelmReleaseSpec(ref common.ReferenceCallback) common.OpenAPIDefinition {
-	return common.OpenAPIDefinition{
-		Schema: spec.Schema{
-			SchemaProps: spec.SchemaProps{
-				Type: []string{"object"},
-				Properties: map[string]spec.Schema{
-					"chart": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Chart holds information about a chart that should get deployed",
-							Default:     map[string]interface{}{},
-							Ref:         ref(v1.Chart{}.OpenAPIModelName()),
-						},
-					},
-					"manifests": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Manifests holds kube manifests that will be deployed as a chart",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"bash": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Bash holds the bash script to execute in a container in the target",
-							Ref:         ref(v1.Bash{}.OpenAPIModelName()),
-						},
-					},
-					"values": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Values is the set of extra Values added to the chart. These values merge with the default values inside of the chart. You can use golang templating in here with values from parameters.",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"parameters": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Parameters are additional helm chart values that will get merged with config and are then used to deploy the helm chart.",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"annotations": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Annotations are extra annotations for this helm release",
-							Type:        []string{"object"},
-							AdditionalProperties: &spec.SchemaOrBool{
-								Allows: true,
-								Schema: &spec.Schema{
-									SchemaProps: spec.SchemaProps{
-										Default: "",
-										Type:    []string{"string"},
-										Format:  "",
-									},
-								},
-							},
-						},
-					},
-				},
-			},
-		},
-		Dependencies: []string{
-			v1.Bash{}.OpenAPIModelName(), v1.Chart{}.OpenAPIModelName()},
-	}
-}
-
-func schema_apis_loft_cluster_v1_HelmReleaseStatus(ref common.ReferenceCallback) common.OpenAPIDefinition {
-	return common.OpenAPIDefinition{
-		Schema: spec.Schema{
-			SchemaProps: spec.SchemaProps{
-				Type: []string{"object"},
-				Properties: map[string]spec.Schema{
-					"version": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Revision is an int which represents the revision of the release.",
-							Type:        []string{"integer"},
-							Format:      "int32",
-						},
-					},
-					"info": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Info provides information about a release",
-							Ref:         ref(v1.Info{}.OpenAPIModelName()),
-						},
-					},
-					"metadata": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Metadata provides information about a chart",
-							Ref:         ref(v1.Metadata{}.OpenAPIModelName()),
-						},
-					},
-				},
-			},
-		},
-		Dependencies: []string{
-			v1.Info{}.OpenAPIModelName(), v1.Metadata{}.OpenAPIModelName()},
-	}
-}
-
-func schema_apis_loft_cluster_v1_Info(ref common.ReferenceCallback) common.OpenAPIDefinition {
-	return common.OpenAPIDefinition{
-		Schema: spec.Schema{
-			SchemaProps: spec.SchemaProps{
-				Description: "Info describes release information.",
-				Type:        []string{"object"},
-				Properties: map[string]spec.Schema{
-					"first_deployed": {
-						SchemaProps: spec.SchemaProps{
-							Description: "FirstDeployed is when the release was first deployed.",
-							Ref:         ref(metav1.Time{}.OpenAPIModelName()),
-						},
-					},
-					"last_deployed": {
-						SchemaProps: spec.SchemaProps{
-							Description: "LastDeployed is when the release was last deployed.",
-							Ref:         ref(metav1.Time{}.OpenAPIModelName()),
-						},
-					},
-					"deleted": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Deleted tracks when this object was deleted.",
-							Ref:         ref(metav1.Time{}.OpenAPIModelName()),
-						},
-					},
-					"description": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Description is human-friendly \"log entry\" about this release.",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"status": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Status is the current state of the release",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"notes": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Contains the rendered templates/NOTES.txt if available",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-				},
-			},
-		},
-		Dependencies: []string{
-			metav1.Time{}.OpenAPIModelName()},
-	}
-}
-
 func schema_apis_loft_cluster_v1_LastActivityInfo(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
@@ -4578,246 +3938,6 @@ func schema_apis_loft_cluster_v1_LastActivityInfo(ref common.ReferenceCallback) 
 							Description: "MetricsRefreshInterval is the activity refresh interval. This is used to prevent sleeping instances if the last activity metrics have not been refreshed within the interval. Useful for metrics based activty tracking.",
 							Type:        []string{"integer"},
 							Format:      "int64",
-						},
-					},
-				},
-			},
-		},
-	}
-}
-
-func schema_apis_loft_cluster_v1_Maintainer(ref common.ReferenceCallback) common.OpenAPIDefinition {
-	return common.OpenAPIDefinition{
-		Schema: spec.Schema{
-			SchemaProps: spec.SchemaProps{
-				Description: "Maintainer describes a Chart maintainer.",
-				Type:        []string{"object"},
-				Properties: map[string]spec.Schema{
-					"name": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Name is a user name or organization name",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"email": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Email is an optional email address to contact the named maintainer",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"url": {
-						SchemaProps: spec.SchemaProps{
-							Description: "URL is an optional URL to an address for the named maintainer",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-				},
-			},
-		},
-	}
-}
-
-func schema_apis_loft_cluster_v1_Metadata(ref common.ReferenceCallback) common.OpenAPIDefinition {
-	return common.OpenAPIDefinition{
-		Schema: spec.Schema{
-			SchemaProps: spec.SchemaProps{
-				Description: "Metadata for a Chart file. This models the structure of a Chart.yaml file.",
-				Type:        []string{"object"},
-				Properties: map[string]spec.Schema{
-					"name": {
-						SchemaProps: spec.SchemaProps{
-							Description: "The name of the chart",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"home": {
-						SchemaProps: spec.SchemaProps{
-							Description: "The URL to a relevant project page, git repo, or contact person",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"sources": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Source is the URL to the source code of this chart",
-							Type:        []string{"array"},
-							Items: &spec.SchemaOrArray{
-								Schema: &spec.Schema{
-									SchemaProps: spec.SchemaProps{
-										Default: "",
-										Type:    []string{"string"},
-										Format:  "",
-									},
-								},
-							},
-						},
-					},
-					"version": {
-						SchemaProps: spec.SchemaProps{
-							Description: "A SemVer 2 conformant version string of the chart",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"description": {
-						SchemaProps: spec.SchemaProps{
-							Description: "A one-sentence description of the chart",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"keywords": {
-						SchemaProps: spec.SchemaProps{
-							Description: "A list of string keywords",
-							Type:        []string{"array"},
-							Items: &spec.SchemaOrArray{
-								Schema: &spec.Schema{
-									SchemaProps: spec.SchemaProps{
-										Default: "",
-										Type:    []string{"string"},
-										Format:  "",
-									},
-								},
-							},
-						},
-					},
-					"maintainers": {
-						SchemaProps: spec.SchemaProps{
-							Description: "A list of name and URL/email address combinations for the maintainer(s)",
-							Type:        []string{"array"},
-							Items: &spec.SchemaOrArray{
-								Schema: &spec.Schema{
-									SchemaProps: spec.SchemaProps{
-										Ref: ref(v1.Maintainer{}.OpenAPIModelName()),
-									},
-								},
-							},
-						},
-					},
-					"icon": {
-						SchemaProps: spec.SchemaProps{
-							Description: "The URL to an icon file.",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"apiVersion": {
-						SchemaProps: spec.SchemaProps{
-							Description: "The API Version of this chart.",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"condition": {
-						SchemaProps: spec.SchemaProps{
-							Description: "The condition to check to enable chart",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"tags": {
-						SchemaProps: spec.SchemaProps{
-							Description: "The tags to check to enable chart",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"appVersion": {
-						SchemaProps: spec.SchemaProps{
-							Description: "The version of the application enclosed inside of this chart.",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"deprecated": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Whether or not this chart is deprecated",
-							Type:        []string{"boolean"},
-							Format:      "",
-						},
-					},
-					"annotations": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Annotations are additional mappings uninterpreted by Helm, made available for inspection by other applications.",
-							Type:        []string{"object"},
-							AdditionalProperties: &spec.SchemaOrBool{
-								Allows: true,
-								Schema: &spec.Schema{
-									SchemaProps: spec.SchemaProps{
-										Default: "",
-										Type:    []string{"string"},
-										Format:  "",
-									},
-								},
-							},
-						},
-					},
-					"kubeVersion": {
-						SchemaProps: spec.SchemaProps{
-							Description: "KubeVersion is a SemVer constraint specifying the version of Kubernetes required.",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"type": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Specifies the chart type: application or library",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"urls": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Urls where to find the chart contents",
-							Type:        []string{"array"},
-							Items: &spec.SchemaOrArray{
-								Schema: &spec.Schema{
-									SchemaProps: spec.SchemaProps{
-										Default: "",
-										Type:    []string{"string"},
-										Format:  "",
-									},
-								},
-							},
-						},
-					},
-				},
-			},
-		},
-		Dependencies: []string{
-			v1.Maintainer{}.OpenAPIModelName()},
-	}
-}
-
-func schema_apis_loft_cluster_v1_ProjectSecretRef(ref common.ReferenceCallback) common.OpenAPIDefinition {
-	return common.OpenAPIDefinition{
-		Schema: spec.Schema{
-			SchemaProps: spec.SchemaProps{
-				Type: []string{"object"},
-				Properties: map[string]spec.Schema{
-					"project": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Project is the project name where the secret is located in.",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"name": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Name of the project secret to use.",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"key": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Key of the project secret to use.",
-							Type:        []string{"string"},
-							Format:      "",
 						},
 					},
 				},
@@ -6153,6 +5273,438 @@ func schema_pkg_apis_management_v1_AppCredentialsList(ref common.ReferenceCallba
 	}
 }
 
+func schema_pkg_apis_management_v1_AppInstance(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "AppInstance holds the AppInstance information",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"kind": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"apiVersion": {
+						SchemaProps: spec.SchemaProps{
+							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"metadata": {
+						SchemaProps: spec.SchemaProps{
+							Default: map[string]interface{}{},
+							Ref:     ref(metav1.ObjectMeta{}.OpenAPIModelName()),
+						},
+					},
+					"spec": {
+						SchemaProps: spec.SchemaProps{
+							Default: map[string]interface{}{},
+							Ref:     ref(managementv1.AppInstanceSpec{}.OpenAPIModelName()),
+						},
+					},
+					"status": {
+						SchemaProps: spec.SchemaProps{
+							Default: map[string]interface{}{},
+							Ref:     ref(managementv1.AppInstanceStatus{}.OpenAPIModelName()),
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			managementv1.AppInstanceSpec{}.OpenAPIModelName(), managementv1.AppInstanceStatus{}.OpenAPIModelName(), metav1.ObjectMeta{}.OpenAPIModelName()},
+	}
+}
+
+func schema_pkg_apis_management_v1_AppInstanceList(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"kind": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"apiVersion": {
+						SchemaProps: spec.SchemaProps{
+							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"metadata": {
+						SchemaProps: spec.SchemaProps{
+							Default: map[string]interface{}{},
+							Ref:     ref(metav1.ListMeta{}.OpenAPIModelName()),
+						},
+					},
+					"items": {
+						SchemaProps: spec.SchemaProps{
+							Type: []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref(managementv1.AppInstance{}.OpenAPIModelName()),
+									},
+								},
+							},
+						},
+					},
+				},
+				Required: []string{"items"},
+			},
+		},
+		Dependencies: []string{
+			managementv1.AppInstance{}.OpenAPIModelName(), metav1.ListMeta{}.OpenAPIModelName()},
+	}
+}
+
+func schema_pkg_apis_management_v1_AppInstanceLog(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"kind": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"apiVersion": {
+						SchemaProps: spec.SchemaProps{
+							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"metadata": {
+						SchemaProps: spec.SchemaProps{
+							Default: map[string]interface{}{},
+							Ref:     ref(metav1.ObjectMeta{}.OpenAPIModelName()),
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			metav1.ObjectMeta{}.OpenAPIModelName()},
+	}
+}
+
+func schema_pkg_apis_management_v1_AppInstanceLogList(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"kind": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"apiVersion": {
+						SchemaProps: spec.SchemaProps{
+							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"metadata": {
+						SchemaProps: spec.SchemaProps{
+							Default: map[string]interface{}{},
+							Ref:     ref(metav1.ListMeta{}.OpenAPIModelName()),
+						},
+					},
+					"items": {
+						SchemaProps: spec.SchemaProps{
+							Type: []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref(managementv1.AppInstanceLog{}.OpenAPIModelName()),
+									},
+								},
+							},
+						},
+					},
+				},
+				Required: []string{"items"},
+			},
+		},
+		Dependencies: []string{
+			managementv1.AppInstanceLog{}.OpenAPIModelName(), metav1.ListMeta{}.OpenAPIModelName()},
+	}
+}
+
+func schema_pkg_apis_management_v1_AppInstanceLogOptions(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"kind": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"apiVersion": {
+						SchemaProps: spec.SchemaProps{
+							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"follow": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Follow the log stream of the pod. Defaults to false.",
+							Type:        []string{"boolean"},
+							Format:      "",
+						},
+					},
+					"previous": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Return previous terminated container logs. Defaults to false.",
+							Type:        []string{"boolean"},
+							Format:      "",
+						},
+					},
+					"sinceSeconds": {
+						SchemaProps: spec.SchemaProps{
+							Description: "A relative time in seconds before the current time from which to show logs. If this value precedes the time a pod was started, only logs since the pod start will be returned. If this value is in the future, no logs will be returned. Only one of sinceSeconds or sinceTime may be specified.",
+							Type:        []string{"integer"},
+							Format:      "int64",
+						},
+					},
+					"sinceTime": {
+						SchemaProps: spec.SchemaProps{
+							Description: "An RFC3339 timestamp from which to show logs. If this value precedes the time a pod was started, only logs since the pod start will be returned. If this value is in the future, no logs will be returned. Only one of sinceSeconds or sinceTime may be specified.",
+							Ref:         ref(metav1.Time{}.OpenAPIModelName()),
+						},
+					},
+					"timestamps": {
+						SchemaProps: spec.SchemaProps{
+							Description: "If true, add an RFC3339 or RFC3339Nano timestamp at the beginning of every line of log output. Defaults to false.",
+							Type:        []string{"boolean"},
+							Format:      "",
+						},
+					},
+					"tailLines": {
+						SchemaProps: spec.SchemaProps{
+							Description: "If set, the number of lines from the end of the logs to show. If not specified, logs are shown from the creation of the container or sinceSeconds or sinceTime",
+							Type:        []string{"integer"},
+							Format:      "int64",
+						},
+					},
+					"limitBytes": {
+						SchemaProps: spec.SchemaProps{
+							Description: "If set, the number of bytes to read from the server before terminating the log output. This may not display a complete final line of logging, and may return slightly more or slightly less than the specified limit.",
+							Type:        []string{"integer"},
+							Format:      "int64",
+						},
+					},
+					"insecureSkipTLSVerifyBackend": {
+						SchemaProps: spec.SchemaProps{
+							Description: "insecureSkipTLSVerifyBackend indicates that the apiserver should not confirm the validity of the serving certificate of the backend it is connecting to.  This will make the HTTPS connection between the apiserver and the backend insecure. This means the apiserver cannot verify the log data it is receiving came from the real kubelet.  If the kubelet is configured to verify the apiserver's TLS credentials, it does not mean the connection to the real kubelet is vulnerable to a man in the middle attack (e.g. an attacker could not intercept the actual log data coming from the real kubelet).",
+							Type:        []string{"boolean"},
+							Format:      "",
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			metav1.Time{}.OpenAPIModelName()},
+	}
+}
+
+func schema_pkg_apis_management_v1_AppInstanceSpec(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "AppInstanceSpec holds the specification",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"displayName": {
+						SchemaProps: spec.SchemaProps{
+							Description: "DisplayName is the name that should be displayed in the UI",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"description": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Description describes the app instance",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"templateRef": {
+						SchemaProps: spec.SchemaProps{
+							Description: "TemplateRef holds the reference to the app to deploy",
+							Ref:         ref(apisstoragev1.AppInstanceTemplateRef{}.OpenAPIModelName()),
+						},
+					},
+					"template": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Template is the inline app configuration to deploy. Mutually exclusive with TemplateRef.",
+							Ref:         ref(apisstoragev1.AppConfig{}.OpenAPIModelName()),
+						},
+					},
+					"parameters": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Parameters are values to pass to the app. The values should be encoded as YAML string where each parameter is represented as a top-level field key.",
+							Ref:         ref(runtime.RawExtension{}.OpenAPIModelName()),
+						},
+					},
+					"releaseName": {
+						SchemaProps: spec.SchemaProps{
+							Description: "ReleaseName is the name of the helm release that is created for this app instance. If empty, defaults to the name of the AppInstance.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"destination": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Destination defines where the app is deployed to",
+							Default:     map[string]interface{}{},
+							Ref:         ref(apisstoragev1.AppInstanceDestination{}.OpenAPIModelName()),
+						},
+					},
+					"owner": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Owner holds the owner of this object",
+							Ref:         ref(apisstoragev1.UserOrTeam{}.OpenAPIModelName()),
+						},
+					},
+					"access": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Access holds the access rights for users and teams",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref(apisstoragev1.Access{}.OpenAPIModelName()),
+									},
+								},
+							},
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			apisstoragev1.Access{}.OpenAPIModelName(), apisstoragev1.AppConfig{}.OpenAPIModelName(), apisstoragev1.AppInstanceDestination{}.OpenAPIModelName(), apisstoragev1.AppInstanceTemplateRef{}.OpenAPIModelName(), apisstoragev1.UserOrTeam{}.OpenAPIModelName(), runtime.RawExtension{}.OpenAPIModelName()},
+	}
+}
+
+func schema_pkg_apis_management_v1_AppInstanceStatus(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "AppInstanceStatus holds the status",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"phase": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Phase describes the current phase the app instance is in",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"reason": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Reason describes the reason in machine-readable form why the instance is in the current phase",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"message": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Message describes the reason in human-readable form why the instance is in the current phase",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"observedGeneration": {
+						SchemaProps: spec.SchemaProps{
+							Description: "ObservedGeneration is the last generation that was reconciled",
+							Type:        []string{"integer"},
+							Format:      "int64",
+						},
+					},
+					"conditions": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Conditions holds several conditions the app instance might be in",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref(storagev1.Condition{}.OpenAPIModelName()),
+									},
+								},
+							},
+						},
+					},
+					"app": {
+						SchemaProps: spec.SchemaProps{
+							Description: "App holds the resolved app configuration that was last deployed",
+							Ref:         ref(apisstoragev1.AppConfig{}.OpenAPIModelName()),
+						},
+					},
+					"version": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Version is the resolved app version that was last deployed",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"releaseName": {
+						SchemaProps: spec.SchemaProps{
+							Description: "ReleaseName is the effective name of the helm release created by the last deployment. It is recorded so the release can be uninstalled even if the referenced app or its default namespace can no longer be resolved.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"releaseNamespace": {
+						SchemaProps: spec.SchemaProps{
+							Description: "ReleaseNamespace is the effective namespace the helm release was deployed into by the last deployment.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"revision": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Revision is the revision of the helm release created by the last deployment",
+							Type:        []string{"integer"},
+							Format:      "int32",
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			storagev1.Condition{}.OpenAPIModelName(), apisstoragev1.AppConfig{}.OpenAPIModelName()},
+	}
+}
+
 func schema_pkg_apis_management_v1_AppList(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
@@ -6283,7 +5835,7 @@ func schema_pkg_apis_management_v1_AppSpec(ref common.ReferenceCallback) common.
 						SchemaProps: spec.SchemaProps{
 							Description: "Config is the helm config to use to deploy the helm release",
 							Default:     map[string]interface{}{},
-							Ref:         ref(v1.HelmReleaseConfig{}.OpenAPIModelName()),
+							Ref:         ref(apisstoragev1.HelmReleaseConfig{}.OpenAPIModelName()),
 						},
 					},
 					"wait": {
@@ -6365,7 +5917,7 @@ func schema_pkg_apis_management_v1_AppSpec(ref common.ReferenceCallback) common.
 			},
 		},
 		Dependencies: []string{
-			v1.HelmReleaseConfig{}.OpenAPIModelName(), apisstoragev1.Access{}.OpenAPIModelName(), apisstoragev1.AppParameter{}.OpenAPIModelName(), apisstoragev1.AppVersion{}.OpenAPIModelName(), apisstoragev1.HelmConfiguration{}.OpenAPIModelName(), apisstoragev1.StreamContainer{}.OpenAPIModelName(), apisstoragev1.UserOrTeam{}.OpenAPIModelName()},
+			apisstoragev1.Access{}.OpenAPIModelName(), apisstoragev1.AppParameter{}.OpenAPIModelName(), apisstoragev1.AppVersion{}.OpenAPIModelName(), apisstoragev1.HelmConfiguration{}.OpenAPIModelName(), apisstoragev1.HelmReleaseConfig{}.OpenAPIModelName(), apisstoragev1.StreamContainer{}.OpenAPIModelName(), apisstoragev1.UserOrTeam{}.OpenAPIModelName()},
 	}
 }
 
@@ -6377,56 +5929,6 @@ func schema_pkg_apis_management_v1_AppStatus(ref common.ReferenceCallback) commo
 				Type:        []string{"object"},
 			},
 		},
-	}
-}
-
-func schema_pkg_apis_management_v1_Apps(ref common.ReferenceCallback) common.OpenAPIDefinition {
-	return common.OpenAPIDefinition{
-		Schema: spec.Schema{
-			SchemaProps: spec.SchemaProps{
-				Description: "Apps holds configuration for apps that should be shown",
-				Type:        []string{"object"},
-				Properties: map[string]spec.Schema{
-					"noDefault": {
-						SchemaProps: spec.SchemaProps{
-							Description: "If this option is true, loft will not try to parse the default apps",
-							Type:        []string{"boolean"},
-							Format:      "",
-						},
-					},
-					"repositories": {
-						SchemaProps: spec.SchemaProps{
-							Description: "These are additional repositories that are parsed by loft",
-							Type:        []string{"array"},
-							Items: &spec.SchemaOrArray{
-								Schema: &spec.Schema{
-									SchemaProps: spec.SchemaProps{
-										Default: map[string]interface{}{},
-										Ref:     ref(apisstoragev1.HelmChartRepository{}.OpenAPIModelName()),
-									},
-								},
-							},
-						},
-					},
-					"predefinedApps": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Predefined apps that can be selected in the Spaces > Space menu",
-							Type:        []string{"array"},
-							Items: &spec.SchemaOrArray{
-								Schema: &spec.Schema{
-									SchemaProps: spec.SchemaProps{
-										Default: map[string]interface{}{},
-										Ref:     ref(managementv1.PredefinedApp{}.OpenAPIModelName()),
-									},
-								},
-							},
-						},
-					},
-				},
-			},
-		},
-		Dependencies: []string{
-			managementv1.PredefinedApp{}.OpenAPIModelName(), apisstoragev1.HelmChartRepository{}.OpenAPIModelName()},
 	}
 }
 
@@ -6541,7 +6043,7 @@ func schema_pkg_apis_management_v1_ArgoCDApplicationSpec(ref common.ReferenceCal
 					},
 					"description": {
 						SchemaProps: spec.SchemaProps{
-							Description: "Description describes an OS image",
+							Description: "Description describes the Argo CD application",
 							Type:        []string{"string"},
 							Format:      "",
 						},
@@ -8147,110 +7649,6 @@ func schema_pkg_apis_management_v1_ClusterAgentConfigList(ref common.ReferenceCa
 	}
 }
 
-func schema_pkg_apis_management_v1_ClusterCharts(ref common.ReferenceCallback) common.OpenAPIDefinition {
-	return common.OpenAPIDefinition{
-		Schema: spec.Schema{
-			SchemaProps: spec.SchemaProps{
-				Type: []string{"object"},
-				Properties: map[string]spec.Schema{
-					"kind": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"apiVersion": {
-						SchemaProps: spec.SchemaProps{
-							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"metadata": {
-						SchemaProps: spec.SchemaProps{
-							Default: map[string]interface{}{},
-							Ref:     ref(metav1.ObjectMeta{}.OpenAPIModelName()),
-						},
-					},
-					"charts": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Holds the available helm charts for this cluster",
-							Type:        []string{"array"},
-							Items: &spec.SchemaOrArray{
-								Schema: &spec.Schema{
-									SchemaProps: spec.SchemaProps{
-										Default: map[string]interface{}{},
-										Ref:     ref(apisstoragev1.HelmChart{}.OpenAPIModelName()),
-									},
-								},
-							},
-						},
-					},
-					"busy": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Busy will indicate if the chart parsing is still in progress.",
-							Type:        []string{"boolean"},
-							Format:      "",
-						},
-					},
-				},
-				Required: []string{"charts"},
-			},
-		},
-		Dependencies: []string{
-			apisstoragev1.HelmChart{}.OpenAPIModelName(), metav1.ObjectMeta{}.OpenAPIModelName()},
-	}
-}
-
-func schema_pkg_apis_management_v1_ClusterChartsList(ref common.ReferenceCallback) common.OpenAPIDefinition {
-	return common.OpenAPIDefinition{
-		Schema: spec.Schema{
-			SchemaProps: spec.SchemaProps{
-				Type: []string{"object"},
-				Properties: map[string]spec.Schema{
-					"kind": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"apiVersion": {
-						SchemaProps: spec.SchemaProps{
-							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"metadata": {
-						SchemaProps: spec.SchemaProps{
-							Default: map[string]interface{}{},
-							Ref:     ref(metav1.ListMeta{}.OpenAPIModelName()),
-						},
-					},
-					"items": {
-						SchemaProps: spec.SchemaProps{
-							Type: []string{"array"},
-							Items: &spec.SchemaOrArray{
-								Schema: &spec.Schema{
-									SchemaProps: spec.SchemaProps{
-										Default: map[string]interface{}{},
-										Ref:     ref(managementv1.ClusterCharts{}.OpenAPIModelName()),
-									},
-								},
-							},
-						},
-					},
-				},
-				Required: []string{"items"},
-			},
-		},
-		Dependencies: []string{
-			managementv1.ClusterCharts{}.OpenAPIModelName(), metav1.ListMeta{}.OpenAPIModelName()},
-	}
-}
-
 func schema_pkg_apis_management_v1_ClusterDomain(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
@@ -9225,12 +8623,6 @@ func schema_pkg_apis_management_v1_ConfigStatus(ref common.ReferenceCallback) co
 							Ref:         ref(managementv1.OIDC{}.OpenAPIModelName()),
 						},
 					},
-					"apps": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Apps holds configuration around apps",
-							Ref:         ref(managementv1.Apps{}.OpenAPIModelName()),
-						},
-					},
 					"audit": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Audit holds audit configuration",
@@ -9318,7 +8710,7 @@ func schema_pkg_apis_management_v1_ConfigStatus(ref common.ReferenceCallback) co
 			},
 		},
 		Dependencies: []string{
-			managementv1.Apps{}.OpenAPIModelName(), managementv1.Audit{}.OpenAPIModelName(), managementv1.Cloud{}.OpenAPIModelName(), managementv1.CostControl{}.OpenAPIModelName(), managementv1.DatabaseKine{}.OpenAPIModelName(), managementv1.ImageBuilder{}.OpenAPIModelName(), managementv1.OIDC{}.OpenAPIModelName(), managementv1.PlatformDB{}.OpenAPIModelName(), apisstoragev1.Authentication{}.OpenAPIModelName(), apisstoragev1.VaultIntegrationSpec{}.OpenAPIModelName(), uiv1.UISettingsConfig{}.OpenAPIModelName()},
+			managementv1.Audit{}.OpenAPIModelName(), managementv1.Cloud{}.OpenAPIModelName(), managementv1.CostControl{}.OpenAPIModelName(), managementv1.DatabaseKine{}.OpenAPIModelName(), managementv1.ImageBuilder{}.OpenAPIModelName(), managementv1.OIDC{}.OpenAPIModelName(), managementv1.PlatformDB{}.OpenAPIModelName(), apisstoragev1.Authentication{}.OpenAPIModelName(), apisstoragev1.VaultIntegrationSpec{}.OpenAPIModelName(), uiv1.UISettingsConfig{}.OpenAPIModelName()},
 	}
 }
 
@@ -10782,23 +10174,11 @@ func schema_pkg_apis_management_v1_KioskSpec(ref common.ReferenceCallback) commo
 			SchemaProps: spec.SchemaProps{
 				Type: []string{"object"},
 				Properties: map[string]spec.Schema{
-					"helmRelease": {
+					"sleepModeConfig": {
 						SchemaProps: spec.SchemaProps{
 							Description: "cluster.loft.sh",
 							Default:     map[string]interface{}{},
-							Ref:         ref(v1.HelmRelease{}.OpenAPIModelName()),
-						},
-					},
-					"sleepModeConfig": {
-						SchemaProps: spec.SchemaProps{
-							Default: map[string]interface{}{},
-							Ref:     ref(v1.SleepModeConfig{}.OpenAPIModelName()),
-						},
-					},
-					"chartInfo": {
-						SchemaProps: spec.SchemaProps{
-							Default: map[string]interface{}{},
-							Ref:     ref(v1.ChartInfo{}.OpenAPIModelName()),
+							Ref:         ref(v1.SleepModeConfig{}.OpenAPIModelName()),
 						},
 					},
 					"storageClusterQuota": {
@@ -10880,7 +10260,7 @@ func schema_pkg_apis_management_v1_KioskSpec(ref common.ReferenceCallback) commo
 			},
 		},
 		Dependencies: []string{
-			v1.ChartInfo{}.OpenAPIModelName(), v1.HelmRelease{}.OpenAPIModelName(), v1.SleepModeConfig{}.OpenAPIModelName(), storagev1.ClusterQuota{}.OpenAPIModelName(), managementv1.License{}.OpenAPIModelName(), managementv1.NodeClaimData{}.OpenAPIModelName(), managementv1.NodeEnvironmentData{}.OpenAPIModelName(), managementv1.NodeProviderBCMGetResourcesResult{}.OpenAPIModelName(), managementv1.NodeProviderBCMNodeWithResources{}.OpenAPIModelName(), managementv1.NodeProviderBCMTestConnectionResult{}.OpenAPIModelName(), managementv1.NodeProviderCalculateCostResult{}.OpenAPIModelName(), managementv1.NodeProviderExecResult{}.OpenAPIModelName(), managementv1.NodeProviderTerraformValidateResult{}.OpenAPIModelName(), apisstoragev1.AccessKey{}.OpenAPIModelName(), uiv1.UISettings{}.OpenAPIModelName()},
+			v1.SleepModeConfig{}.OpenAPIModelName(), storagev1.ClusterQuota{}.OpenAPIModelName(), managementv1.License{}.OpenAPIModelName(), managementv1.NodeClaimData{}.OpenAPIModelName(), managementv1.NodeEnvironmentData{}.OpenAPIModelName(), managementv1.NodeProviderBCMGetResourcesResult{}.OpenAPIModelName(), managementv1.NodeProviderBCMNodeWithResources{}.OpenAPIModelName(), managementv1.NodeProviderBCMTestConnectionResult{}.OpenAPIModelName(), managementv1.NodeProviderCalculateCostResult{}.OpenAPIModelName(), managementv1.NodeProviderExecResult{}.OpenAPIModelName(), managementv1.NodeProviderTerraformValidateResult{}.OpenAPIModelName(), apisstoragev1.AccessKey{}.OpenAPIModelName(), uiv1.UISettings{}.OpenAPIModelName()},
 	}
 }
 
@@ -14395,77 +13775,6 @@ func schema_pkg_apis_management_v1_PodExecOptions(ref common.ReferenceCallback) 
 	}
 }
 
-func schema_pkg_apis_management_v1_PredefinedApp(ref common.ReferenceCallback) common.OpenAPIDefinition {
-	return common.OpenAPIDefinition{
-		Schema: spec.Schema{
-			SchemaProps: spec.SchemaProps{
-				Description: "PredefinedApp holds information about a predefined app",
-				Type:        []string{"object"},
-				Properties: map[string]spec.Schema{
-					"chart": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Chart holds the repo/chart name of the predefined app",
-							Default:     "",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"initialVersion": {
-						SchemaProps: spec.SchemaProps{
-							Description: "InitialVersion holds the initial version of this app. This version will be selected automatically.",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"initialValues": {
-						SchemaProps: spec.SchemaProps{
-							Description: "InitialValues holds the initial values for this app. The values will be prefilled automatically. There are certain placeholders that can be used within the values that are replaced by the loft UI automatically.",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"clusters": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Holds the cluster names where to display this app",
-							Type:        []string{"array"},
-							Items: &spec.SchemaOrArray{
-								Schema: &spec.Schema{
-									SchemaProps: spec.SchemaProps{
-										Default: "",
-										Type:    []string{"string"},
-										Format:  "",
-									},
-								},
-							},
-						},
-					},
-					"title": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Title is the name that should be displayed for the predefined app. If empty the chart name is used.",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"iconUrl": {
-						SchemaProps: spec.SchemaProps{
-							Description: "IconURL specifies an url to the icon that should be displayed for this app. If none is specified the icon from the chart metadata is used.",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"readmeUrl": {
-						SchemaProps: spec.SchemaProps{
-							Description: "ReadmeURL specifies an url to the readme page of this predefined app. If empty an url will be constructed to artifact hub.",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-				},
-			},
-		},
-	}
-}
-
 func schema_pkg_apis_management_v1_Project(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
@@ -14615,16 +13924,16 @@ func schema_pkg_apis_management_v1_ProjectChartInfoSpec(ref common.ReferenceCall
 				Properties: map[string]spec.Schema{
 					"chart": {
 						SchemaProps: spec.SchemaProps{
-							Description: "Chart holds information about a chart that should get deployed",
+							Description: "Chart holds information about the chart to retrieve info for",
 							Default:     map[string]interface{}{},
-							Ref:         ref(v1.Chart{}.OpenAPIModelName()),
+							Ref:         ref(apisstoragev1.Chart{}.OpenAPIModelName()),
 						},
 					},
 				},
 			},
 		},
 		Dependencies: []string{
-			v1.Chart{}.OpenAPIModelName()},
+			apisstoragev1.Chart{}.OpenAPIModelName()},
 	}
 }
 
@@ -14637,7 +13946,7 @@ func schema_pkg_apis_management_v1_ProjectChartInfoStatus(ref common.ReferenceCa
 					"metadata": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Metadata provides information about a chart",
-							Ref:         ref(v1.Metadata{}.OpenAPIModelName()),
+							Ref:         ref(apisstoragev1.Metadata{}.OpenAPIModelName()),
 						},
 					},
 					"readme": {
@@ -14658,111 +13967,7 @@ func schema_pkg_apis_management_v1_ProjectChartInfoStatus(ref common.ReferenceCa
 			},
 		},
 		Dependencies: []string{
-			v1.Metadata{}.OpenAPIModelName()},
-	}
-}
-
-func schema_pkg_apis_management_v1_ProjectCharts(ref common.ReferenceCallback) common.OpenAPIDefinition {
-	return common.OpenAPIDefinition{
-		Schema: spec.Schema{
-			SchemaProps: spec.SchemaProps{
-				Type: []string{"object"},
-				Properties: map[string]spec.Schema{
-					"kind": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"apiVersion": {
-						SchemaProps: spec.SchemaProps{
-							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"metadata": {
-						SchemaProps: spec.SchemaProps{
-							Default: map[string]interface{}{},
-							Ref:     ref(metav1.ObjectMeta{}.OpenAPIModelName()),
-						},
-					},
-					"charts": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Holds the available helm charts for this cluster",
-							Type:        []string{"array"},
-							Items: &spec.SchemaOrArray{
-								Schema: &spec.Schema{
-									SchemaProps: spec.SchemaProps{
-										Default: map[string]interface{}{},
-										Ref:     ref(apisstoragev1.HelmChart{}.OpenAPIModelName()),
-									},
-								},
-							},
-						},
-					},
-					"busy": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Busy will indicate if the chart parsing is still in progress.",
-							Type:        []string{"boolean"},
-							Format:      "",
-						},
-					},
-				},
-				Required: []string{"charts"},
-			},
-		},
-		Dependencies: []string{
-			apisstoragev1.HelmChart{}.OpenAPIModelName(), metav1.ObjectMeta{}.OpenAPIModelName()},
-	}
-}
-
-func schema_pkg_apis_management_v1_ProjectChartsList(ref common.ReferenceCallback) common.OpenAPIDefinition {
-	return common.OpenAPIDefinition{
-		Schema: spec.Schema{
-			SchemaProps: spec.SchemaProps{
-				Type: []string{"object"},
-				Properties: map[string]spec.Schema{
-					"kind": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"apiVersion": {
-						SchemaProps: spec.SchemaProps{
-							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"metadata": {
-						SchemaProps: spec.SchemaProps{
-							Default: map[string]interface{}{},
-							Ref:     ref(metav1.ListMeta{}.OpenAPIModelName()),
-						},
-					},
-					"items": {
-						SchemaProps: spec.SchemaProps{
-							Type: []string{"array"},
-							Items: &spec.SchemaOrArray{
-								Schema: &spec.Schema{
-									SchemaProps: spec.SchemaProps{
-										Default: map[string]interface{}{},
-										Ref:     ref(managementv1.ProjectCharts{}.OpenAPIModelName()),
-									},
-								},
-							},
-						},
-					},
-				},
-				Required: []string{"items"},
-			},
-		},
-		Dependencies: []string{
-			managementv1.ProjectCharts{}.OpenAPIModelName(), metav1.ListMeta{}.OpenAPIModelName()},
+			apisstoragev1.Metadata{}.OpenAPIModelName()},
 	}
 }
 
@@ -18652,395 +17857,6 @@ func schema_pkg_apis_management_v1_SubjectAccessReviewStatus(ref common.Referenc
 				Required: []string{"allowed"},
 			},
 		},
-	}
-}
-
-func schema_pkg_apis_management_v1_Task(ref common.ReferenceCallback) common.OpenAPIDefinition {
-	return common.OpenAPIDefinition{
-		Schema: spec.Schema{
-			SchemaProps: spec.SchemaProps{
-				Description: "Task holds the Task information",
-				Type:        []string{"object"},
-				Properties: map[string]spec.Schema{
-					"kind": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"apiVersion": {
-						SchemaProps: spec.SchemaProps{
-							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"metadata": {
-						SchemaProps: spec.SchemaProps{
-							Default: map[string]interface{}{},
-							Ref:     ref(metav1.ObjectMeta{}.OpenAPIModelName()),
-						},
-					},
-					"spec": {
-						SchemaProps: spec.SchemaProps{
-							Default: map[string]interface{}{},
-							Ref:     ref(managementv1.TaskSpec{}.OpenAPIModelName()),
-						},
-					},
-					"status": {
-						SchemaProps: spec.SchemaProps{
-							Default: map[string]interface{}{},
-							Ref:     ref(managementv1.TaskStatus{}.OpenAPIModelName()),
-						},
-					},
-				},
-			},
-		},
-		Dependencies: []string{
-			managementv1.TaskSpec{}.OpenAPIModelName(), managementv1.TaskStatus{}.OpenAPIModelName(), metav1.ObjectMeta{}.OpenAPIModelName()},
-	}
-}
-
-func schema_pkg_apis_management_v1_TaskList(ref common.ReferenceCallback) common.OpenAPIDefinition {
-	return common.OpenAPIDefinition{
-		Schema: spec.Schema{
-			SchemaProps: spec.SchemaProps{
-				Type: []string{"object"},
-				Properties: map[string]spec.Schema{
-					"kind": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"apiVersion": {
-						SchemaProps: spec.SchemaProps{
-							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"metadata": {
-						SchemaProps: spec.SchemaProps{
-							Default: map[string]interface{}{},
-							Ref:     ref(metav1.ListMeta{}.OpenAPIModelName()),
-						},
-					},
-					"items": {
-						SchemaProps: spec.SchemaProps{
-							Type: []string{"array"},
-							Items: &spec.SchemaOrArray{
-								Schema: &spec.Schema{
-									SchemaProps: spec.SchemaProps{
-										Default: map[string]interface{}{},
-										Ref:     ref(managementv1.Task{}.OpenAPIModelName()),
-									},
-								},
-							},
-						},
-					},
-				},
-				Required: []string{"items"},
-			},
-		},
-		Dependencies: []string{
-			managementv1.Task{}.OpenAPIModelName(), metav1.ListMeta{}.OpenAPIModelName()},
-	}
-}
-
-func schema_pkg_apis_management_v1_TaskLog(ref common.ReferenceCallback) common.OpenAPIDefinition {
-	return common.OpenAPIDefinition{
-		Schema: spec.Schema{
-			SchemaProps: spec.SchemaProps{
-				Type: []string{"object"},
-				Properties: map[string]spec.Schema{
-					"kind": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"apiVersion": {
-						SchemaProps: spec.SchemaProps{
-							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"metadata": {
-						SchemaProps: spec.SchemaProps{
-							Default: map[string]interface{}{},
-							Ref:     ref(metav1.ObjectMeta{}.OpenAPIModelName()),
-						},
-					},
-				},
-			},
-		},
-		Dependencies: []string{
-			metav1.ObjectMeta{}.OpenAPIModelName()},
-	}
-}
-
-func schema_pkg_apis_management_v1_TaskLogList(ref common.ReferenceCallback) common.OpenAPIDefinition {
-	return common.OpenAPIDefinition{
-		Schema: spec.Schema{
-			SchemaProps: spec.SchemaProps{
-				Type: []string{"object"},
-				Properties: map[string]spec.Schema{
-					"kind": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"apiVersion": {
-						SchemaProps: spec.SchemaProps{
-							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"metadata": {
-						SchemaProps: spec.SchemaProps{
-							Default: map[string]interface{}{},
-							Ref:     ref(metav1.ListMeta{}.OpenAPIModelName()),
-						},
-					},
-					"items": {
-						SchemaProps: spec.SchemaProps{
-							Type: []string{"array"},
-							Items: &spec.SchemaOrArray{
-								Schema: &spec.Schema{
-									SchemaProps: spec.SchemaProps{
-										Default: map[string]interface{}{},
-										Ref:     ref(managementv1.TaskLog{}.OpenAPIModelName()),
-									},
-								},
-							},
-						},
-					},
-				},
-				Required: []string{"items"},
-			},
-		},
-		Dependencies: []string{
-			managementv1.TaskLog{}.OpenAPIModelName(), metav1.ListMeta{}.OpenAPIModelName()},
-	}
-}
-
-func schema_pkg_apis_management_v1_TaskLogOptions(ref common.ReferenceCallback) common.OpenAPIDefinition {
-	return common.OpenAPIDefinition{
-		Schema: spec.Schema{
-			SchemaProps: spec.SchemaProps{
-				Type: []string{"object"},
-				Properties: map[string]spec.Schema{
-					"kind": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"apiVersion": {
-						SchemaProps: spec.SchemaProps{
-							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"follow": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Follow the log stream of the pod. Defaults to false.",
-							Type:        []string{"boolean"},
-							Format:      "",
-						},
-					},
-					"previous": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Return previous terminated container logs. Defaults to false.",
-							Type:        []string{"boolean"},
-							Format:      "",
-						},
-					},
-					"sinceSeconds": {
-						SchemaProps: spec.SchemaProps{
-							Description: "A relative time in seconds before the current time from which to show logs. If this value precedes the time a pod was started, only logs since the pod start will be returned. If this value is in the future, no logs will be returned. Only one of sinceSeconds or sinceTime may be specified.",
-							Type:        []string{"integer"},
-							Format:      "int64",
-						},
-					},
-					"sinceTime": {
-						SchemaProps: spec.SchemaProps{
-							Description: "An RFC3339 timestamp from which to show logs. If this value precedes the time a pod was started, only logs since the pod start will be returned. If this value is in the future, no logs will be returned. Only one of sinceSeconds or sinceTime may be specified.",
-							Ref:         ref(metav1.Time{}.OpenAPIModelName()),
-						},
-					},
-					"timestamps": {
-						SchemaProps: spec.SchemaProps{
-							Description: "If true, add an RFC3339 or RFC3339Nano timestamp at the beginning of every line of log output. Defaults to false.",
-							Type:        []string{"boolean"},
-							Format:      "",
-						},
-					},
-					"tailLines": {
-						SchemaProps: spec.SchemaProps{
-							Description: "If set, the number of lines from the end of the logs to show. If not specified, logs are shown from the creation of the container or sinceSeconds or sinceTime",
-							Type:        []string{"integer"},
-							Format:      "int64",
-						},
-					},
-					"limitBytes": {
-						SchemaProps: spec.SchemaProps{
-							Description: "If set, the number of bytes to read from the server before terminating the log output. This may not display a complete final line of logging, and may return slightly more or slightly less than the specified limit.",
-							Type:        []string{"integer"},
-							Format:      "int64",
-						},
-					},
-					"insecureSkipTLSVerifyBackend": {
-						SchemaProps: spec.SchemaProps{
-							Description: "insecureSkipTLSVerifyBackend indicates that the apiserver should not confirm the validity of the serving certificate of the backend it is connecting to.  This will make the HTTPS connection between the apiserver and the backend insecure. This means the apiserver cannot verify the log data it is receiving came from the real kubelet.  If the kubelet is configured to verify the apiserver's TLS credentials, it does not mean the connection to the real kubelet is vulnerable to a man in the middle attack (e.g. an attacker could not intercept the actual log data coming from the real kubelet).",
-							Type:        []string{"boolean"},
-							Format:      "",
-						},
-					},
-				},
-			},
-		},
-		Dependencies: []string{
-			metav1.Time{}.OpenAPIModelName()},
-	}
-}
-
-func schema_pkg_apis_management_v1_TaskSpec(ref common.ReferenceCallback) common.OpenAPIDefinition {
-	return common.OpenAPIDefinition{
-		Schema: spec.Schema{
-			SchemaProps: spec.SchemaProps{
-				Description: "TaskSpec holds the specification",
-				Type:        []string{"object"},
-				Properties: map[string]spec.Schema{
-					"displayName": {
-						SchemaProps: spec.SchemaProps{
-							Description: "DisplayName is the name that should be displayed in the UI",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"access": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Access holds the access rights for users and teams",
-							Type:        []string{"array"},
-							Items: &spec.SchemaOrArray{
-								Schema: &spec.Schema{
-									SchemaProps: spec.SchemaProps{
-										Default: map[string]interface{}{},
-										Ref:     ref(apisstoragev1.Access{}.OpenAPIModelName()),
-									},
-								},
-							},
-						},
-					},
-					"scope": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Scope defines the scope of the access key.",
-							Ref:         ref(apisstoragev1.AccessKeyScope{}.OpenAPIModelName()),
-						},
-					},
-					"owner": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Owner holds the owner of this object",
-							Ref:         ref(apisstoragev1.UserOrTeam{}.OpenAPIModelName()),
-						},
-					},
-					"target": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Target where this task should get executed",
-							Default:     map[string]interface{}{},
-							Ref:         ref(apisstoragev1.Target{}.OpenAPIModelName()),
-						},
-					},
-					"task": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Task defines the task to execute",
-							Default:     map[string]interface{}{},
-							Ref:         ref(apisstoragev1.TaskDefinition{}.OpenAPIModelName()),
-						},
-					},
-				},
-			},
-		},
-		Dependencies: []string{
-			apisstoragev1.Access{}.OpenAPIModelName(), apisstoragev1.AccessKeyScope{}.OpenAPIModelName(), apisstoragev1.Target{}.OpenAPIModelName(), apisstoragev1.TaskDefinition{}.OpenAPIModelName(), apisstoragev1.UserOrTeam{}.OpenAPIModelName()},
-	}
-}
-
-func schema_pkg_apis_management_v1_TaskStatus(ref common.ReferenceCallback) common.OpenAPIDefinition {
-	return common.OpenAPIDefinition{
-		Schema: spec.Schema{
-			SchemaProps: spec.SchemaProps{
-				Description: "TaskStatus holds the status",
-				Type:        []string{"object"},
-				Properties: map[string]spec.Schema{
-					"started": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Started determines if the task was started",
-							Type:        []string{"boolean"},
-							Format:      "",
-						},
-					},
-					"conditions": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Conditions holds several conditions the tenant cluster might be in",
-							Type:        []string{"array"},
-							Items: &spec.SchemaOrArray{
-								Schema: &spec.Schema{
-									SchemaProps: spec.SchemaProps{
-										Default: map[string]interface{}{},
-										Ref:     ref(storagev1.Condition{}.OpenAPIModelName()),
-									},
-								},
-							},
-						},
-					},
-					"podPhase": {
-						SchemaProps: spec.SchemaProps{
-							Description: "PodPhase describes the phase this task is in\n\nPossible enum values:\n - `\"Failed\"` means that all containers in the pod have terminated, and at least one container has terminated in a failure (exited with a non-zero exit code or was stopped by the system).\n - `\"Pending\"` means the pod has been accepted by the system, but one or more of the containers has not been started. This includes time before being bound to a node, as well as time spent pulling images onto the host.\n - `\"Running\"` means the pod has been bound to a node and all of the containers have been started. At least one container is still running or is in the process of being restarted.\n - `\"Succeeded\"` means that all containers in the pod have voluntarily terminated with a container exit code of 0, and the system is not going to restart any of these containers.\n - `\"Unknown\"` means that for some reason the state of the pod could not be obtained, typically due to an error in communicating with the host of the pod. Deprecated: It isn't being set since 2015 (74da3b14b0c0f658b3bb8d2def5094686d0e9095)",
-							Type:        []string{"string"},
-							Format:      "",
-							Enum:        []interface{}{"Failed", "Pending", "Running", "Succeeded", "Unknown"},
-						},
-					},
-					"observedGeneration": {
-						SchemaProps: spec.SchemaProps{
-							Description: "ObservedGeneration is the latest generation observed by the controller.",
-							Type:        []string{"integer"},
-							Format:      "int64",
-						},
-					},
-					"containerState": {
-						SchemaProps: spec.SchemaProps{
-							Description: "DEPRECATED: This is not set anymore after migrating to runners ContainerState describes the container state of the task",
-							Ref:         ref(corev1.ContainerStatus{}.OpenAPIModelName()),
-						},
-					},
-					"owner": {
-						SchemaProps: spec.SchemaProps{
-							Ref: ref(apisstoragev1.UserOrTeamEntity{}.OpenAPIModelName()),
-						},
-					},
-					"cluster": {
-						SchemaProps: spec.SchemaProps{
-							Ref: ref(apisstoragev1.EntityInfo{}.OpenAPIModelName()),
-						},
-					},
-				},
-			},
-		},
-		Dependencies: []string{
-			storagev1.Condition{}.OpenAPIModelName(), apisstoragev1.EntityInfo{}.OpenAPIModelName(), apisstoragev1.UserOrTeamEntity{}.OpenAPIModelName(), corev1.ContainerStatus{}.OpenAPIModelName()},
 	}
 }
 
@@ -24767,7 +23583,7 @@ func schema_pkg_apis_storage_v1_AppConfig(ref common.ReferenceCallback) common.O
 						SchemaProps: spec.SchemaProps{
 							Description: "Config is the helm config to use to deploy the helm release",
 							Default:     map[string]interface{}{},
-							Ref:         ref(v1.HelmReleaseConfig{}.OpenAPIModelName()),
+							Ref:         ref(apisstoragev1.HelmReleaseConfig{}.OpenAPIModelName()),
 						},
 					},
 					"wait": {
@@ -24808,7 +23624,409 @@ func schema_pkg_apis_storage_v1_AppConfig(ref common.ReferenceCallback) common.O
 			},
 		},
 		Dependencies: []string{
-			v1.HelmReleaseConfig{}.OpenAPIModelName(), apisstoragev1.AppParameter{}.OpenAPIModelName(), apisstoragev1.StreamContainer{}.OpenAPIModelName()},
+			apisstoragev1.AppParameter{}.OpenAPIModelName(), apisstoragev1.HelmReleaseConfig{}.OpenAPIModelName(), apisstoragev1.StreamContainer{}.OpenAPIModelName()},
+	}
+}
+
+func schema_pkg_apis_storage_v1_AppInstance(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "AppInstance holds the information of app instances",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"kind": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"apiVersion": {
+						SchemaProps: spec.SchemaProps{
+							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"metadata": {
+						SchemaProps: spec.SchemaProps{
+							Default: map[string]interface{}{},
+							Ref:     ref(metav1.ObjectMeta{}.OpenAPIModelName()),
+						},
+					},
+					"spec": {
+						SchemaProps: spec.SchemaProps{
+							Default: map[string]interface{}{},
+							Ref:     ref(apisstoragev1.AppInstanceSpec{}.OpenAPIModelName()),
+						},
+					},
+					"status": {
+						SchemaProps: spec.SchemaProps{
+							Default: map[string]interface{}{},
+							Ref:     ref(apisstoragev1.AppInstanceStatus{}.OpenAPIModelName()),
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			apisstoragev1.AppInstanceSpec{}.OpenAPIModelName(), apisstoragev1.AppInstanceStatus{}.OpenAPIModelName(), metav1.ObjectMeta{}.OpenAPIModelName()},
+	}
+}
+
+func schema_pkg_apis_storage_v1_AppInstanceDestination(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"virtualCluster": {
+						SchemaProps: spec.SchemaProps{
+							Description: "VirtualCluster deploys the app into a virtual cluster instance. Mutually exclusive with Space and Cluster.",
+							Ref:         ref(apisstoragev1.AppInstanceDestinationVirtualCluster{}.OpenAPIModelName()),
+						},
+					},
+					"space": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Space deploys the app into the namespace of a space instance. Mutually exclusive with VirtualCluster and Cluster.",
+							Ref:         ref(apisstoragev1.AppInstanceDestinationSpace{}.OpenAPIModelName()),
+						},
+					},
+					"cluster": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Cluster deploys the app into a connected cluster. Mutually exclusive with VirtualCluster and Space.",
+							Ref:         ref(apisstoragev1.AppInstanceDestinationCluster{}.OpenAPIModelName()),
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			apisstoragev1.AppInstanceDestinationCluster{}.OpenAPIModelName(), apisstoragev1.AppInstanceDestinationSpace{}.OpenAPIModelName(), apisstoragev1.AppInstanceDestinationVirtualCluster{}.OpenAPIModelName()},
+	}
+}
+
+func schema_pkg_apis_storage_v1_AppInstanceDestinationCluster(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"name": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Name of the connected cluster",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"namespace": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Namespace in the cluster the helm release is deployed into. If empty, defaults to the app's default namespace.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+				},
+			},
+		},
+	}
+}
+
+func schema_pkg_apis_storage_v1_AppInstanceDestinationSpace(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"name": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Name of the space instance within the project. The helm release is deployed into the namespace of the space.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+				},
+			},
+		},
+	}
+}
+
+func schema_pkg_apis_storage_v1_AppInstanceDestinationVirtualCluster(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"name": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Name of the virtual cluster instance within the project",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"namespace": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Namespace the helm release is deployed into. Only used when target is vCluster; for the host target the release is always deployed into the virtual cluster's host namespace. If empty, defaults to the app's default namespace.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"target": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Target selects whether the app is deployed inside the virtual cluster or into its host namespace",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+				},
+			},
+		},
+	}
+}
+
+func schema_pkg_apis_storage_v1_AppInstanceList(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "AppInstanceList contains a list of AppInstances",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"kind": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"apiVersion": {
+						SchemaProps: spec.SchemaProps{
+							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"metadata": {
+						SchemaProps: spec.SchemaProps{
+							Default: map[string]interface{}{},
+							Ref:     ref(metav1.ListMeta{}.OpenAPIModelName()),
+						},
+					},
+					"items": {
+						SchemaProps: spec.SchemaProps{
+							Type: []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref(apisstoragev1.AppInstance{}.OpenAPIModelName()),
+									},
+								},
+							},
+						},
+					},
+				},
+				Required: []string{"items"},
+			},
+		},
+		Dependencies: []string{
+			apisstoragev1.AppInstance{}.OpenAPIModelName(), metav1.ListMeta{}.OpenAPIModelName()},
+	}
+}
+
+func schema_pkg_apis_storage_v1_AppInstanceSpec(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"displayName": {
+						SchemaProps: spec.SchemaProps{
+							Description: "DisplayName is the name that should be displayed in the UI",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"description": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Description describes the app instance",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"templateRef": {
+						SchemaProps: spec.SchemaProps{
+							Description: "TemplateRef holds the reference to the app to deploy",
+							Ref:         ref(apisstoragev1.AppInstanceTemplateRef{}.OpenAPIModelName()),
+						},
+					},
+					"template": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Template is the inline app configuration to deploy. Mutually exclusive with TemplateRef.",
+							Ref:         ref(apisstoragev1.AppConfig{}.OpenAPIModelName()),
+						},
+					},
+					"parameters": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Parameters are values to pass to the app. The values should be encoded as YAML string where each parameter is represented as a top-level field key.",
+							Ref:         ref(runtime.RawExtension{}.OpenAPIModelName()),
+						},
+					},
+					"releaseName": {
+						SchemaProps: spec.SchemaProps{
+							Description: "ReleaseName is the name of the helm release that is created for this app instance. If empty, defaults to the name of the AppInstance.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"destination": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Destination defines where the app is deployed to",
+							Default:     map[string]interface{}{},
+							Ref:         ref(apisstoragev1.AppInstanceDestination{}.OpenAPIModelName()),
+						},
+					},
+					"owner": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Owner holds the owner of this object",
+							Ref:         ref(apisstoragev1.UserOrTeam{}.OpenAPIModelName()),
+						},
+					},
+					"access": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Access holds the access rights for users and teams",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref(apisstoragev1.Access{}.OpenAPIModelName()),
+									},
+								},
+							},
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			apisstoragev1.Access{}.OpenAPIModelName(), apisstoragev1.AppConfig{}.OpenAPIModelName(), apisstoragev1.AppInstanceDestination{}.OpenAPIModelName(), apisstoragev1.AppInstanceTemplateRef{}.OpenAPIModelName(), apisstoragev1.UserOrTeam{}.OpenAPIModelName(), runtime.RawExtension{}.OpenAPIModelName()},
+	}
+}
+
+func schema_pkg_apis_storage_v1_AppInstanceStatus(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"phase": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Phase describes the current phase the app instance is in",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"reason": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Reason describes the reason in machine-readable form why the instance is in the current phase",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"message": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Message describes the reason in human-readable form why the instance is in the current phase",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"observedGeneration": {
+						SchemaProps: spec.SchemaProps{
+							Description: "ObservedGeneration is the last generation that was reconciled",
+							Type:        []string{"integer"},
+							Format:      "int64",
+						},
+					},
+					"conditions": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Conditions holds several conditions the app instance might be in",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref(storagev1.Condition{}.OpenAPIModelName()),
+									},
+								},
+							},
+						},
+					},
+					"app": {
+						SchemaProps: spec.SchemaProps{
+							Description: "App holds the resolved app configuration that was last deployed",
+							Ref:         ref(apisstoragev1.AppConfig{}.OpenAPIModelName()),
+						},
+					},
+					"version": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Version is the resolved app version that was last deployed",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"releaseName": {
+						SchemaProps: spec.SchemaProps{
+							Description: "ReleaseName is the effective name of the helm release created by the last deployment. It is recorded so the release can be uninstalled even if the referenced app or its default namespace can no longer be resolved.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"releaseNamespace": {
+						SchemaProps: spec.SchemaProps{
+							Description: "ReleaseNamespace is the effective namespace the helm release was deployed into by the last deployment.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"revision": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Revision is the revision of the helm release created by the last deployment",
+							Type:        []string{"integer"},
+							Format:      "int32",
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			storagev1.Condition{}.OpenAPIModelName(), apisstoragev1.AppConfig{}.OpenAPIModelName()},
+	}
+}
+
+func schema_pkg_apis_storage_v1_AppInstanceTemplateRef(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"name": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Name holds the name of the app to reference.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"version": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Version of the app to deploy. If empty, the latest version is deployed.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+				},
+			},
+		},
 	}
 }
 
@@ -25108,7 +24326,7 @@ func schema_pkg_apis_storage_v1_AppSpec(ref common.ReferenceCallback) common.Ope
 						SchemaProps: spec.SchemaProps{
 							Description: "Config is the helm config to use to deploy the helm release",
 							Default:     map[string]interface{}{},
-							Ref:         ref(v1.HelmReleaseConfig{}.OpenAPIModelName()),
+							Ref:         ref(apisstoragev1.HelmReleaseConfig{}.OpenAPIModelName()),
 						},
 					},
 					"wait": {
@@ -25190,7 +24408,7 @@ func schema_pkg_apis_storage_v1_AppSpec(ref common.ReferenceCallback) common.Ope
 			},
 		},
 		Dependencies: []string{
-			v1.HelmReleaseConfig{}.OpenAPIModelName(), apisstoragev1.Access{}.OpenAPIModelName(), apisstoragev1.AppParameter{}.OpenAPIModelName(), apisstoragev1.AppVersion{}.OpenAPIModelName(), apisstoragev1.HelmConfiguration{}.OpenAPIModelName(), apisstoragev1.StreamContainer{}.OpenAPIModelName(), apisstoragev1.UserOrTeam{}.OpenAPIModelName()},
+			apisstoragev1.Access{}.OpenAPIModelName(), apisstoragev1.AppParameter{}.OpenAPIModelName(), apisstoragev1.AppVersion{}.OpenAPIModelName(), apisstoragev1.HelmConfiguration{}.OpenAPIModelName(), apisstoragev1.HelmReleaseConfig{}.OpenAPIModelName(), apisstoragev1.StreamContainer{}.OpenAPIModelName(), apisstoragev1.UserOrTeam{}.OpenAPIModelName()},
 	}
 }
 
@@ -25202,41 +24420,6 @@ func schema_pkg_apis_storage_v1_AppStatus(ref common.ReferenceCallback) common.O
 				Type:        []string{"object"},
 			},
 		},
-	}
-}
-
-func schema_pkg_apis_storage_v1_AppTask(ref common.ReferenceCallback) common.OpenAPIDefinition {
-	return common.OpenAPIDefinition{
-		Schema: spec.Schema{
-			SchemaProps: spec.SchemaProps{
-				Type: []string{"object"},
-				Properties: map[string]spec.Schema{
-					"type": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Type is the task type. Defaults to Upgrade",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"rollbackRevision": {
-						SchemaProps: spec.SchemaProps{
-							Description: "RollbackRevision is the revision to rollback to",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"appReference": {
-						SchemaProps: spec.SchemaProps{
-							Description: "AppReference is the reference to the app to deploy",
-							Default:     map[string]interface{}{},
-							Ref:         ref(apisstoragev1.AppReference{}.OpenAPIModelName()),
-						},
-					},
-				},
-			},
-		},
-		Dependencies: []string{
-			apisstoragev1.AppReference{}.OpenAPIModelName()},
 	}
 }
 
@@ -25271,7 +24454,7 @@ func schema_pkg_apis_storage_v1_AppVersion(ref common.ReferenceCallback) common.
 						SchemaProps: spec.SchemaProps{
 							Description: "Config is the helm config to use to deploy the helm release",
 							Default:     map[string]interface{}{},
-							Ref:         ref(v1.HelmReleaseConfig{}.OpenAPIModelName()),
+							Ref:         ref(apisstoragev1.HelmReleaseConfig{}.OpenAPIModelName()),
 						},
 					},
 					"wait": {
@@ -25319,7 +24502,7 @@ func schema_pkg_apis_storage_v1_AppVersion(ref common.ReferenceCallback) common.
 			},
 		},
 		Dependencies: []string{
-			v1.HelmReleaseConfig{}.OpenAPIModelName(), apisstoragev1.AppParameter{}.OpenAPIModelName(), apisstoragev1.StreamContainer{}.OpenAPIModelName()},
+			apisstoragev1.AppParameter{}.OpenAPIModelName(), apisstoragev1.HelmReleaseConfig{}.OpenAPIModelName(), apisstoragev1.StreamContainer{}.OpenAPIModelName()},
 	}
 }
 
@@ -25460,7 +24643,7 @@ func schema_pkg_apis_storage_v1_ArgoCDApplicationSpec(ref common.ReferenceCallba
 					},
 					"description": {
 						SchemaProps: spec.SchemaProps{
-							Description: "Description describes an OS image",
+							Description: "Description describes the Argo CD application",
 							Type:        []string{"string"},
 							Format:      "",
 						},
@@ -27127,6 +26310,53 @@ func schema_pkg_apis_storage_v1_BCMNodeTypeSpec(ref common.ReferenceCallback) co
 	}
 }
 
+func schema_pkg_apis_storage_v1_Bash(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"script": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Script is the script to execute.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"image": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Image is the image to use for this app",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"clusterRole": {
+						SchemaProps: spec.SchemaProps{
+							Description: "ClusterRole is the cluster role to use for this job",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"podSecurityContext": {
+						SchemaProps: spec.SchemaProps{
+							Description: "PodSecurityContext for the bash pod.",
+							Ref:         ref(corev1.PodSecurityContext{}.OpenAPIModelName()),
+						},
+					},
+					"securityContext": {
+						SchemaProps: spec.SchemaProps{
+							Description: "SecurityContext for the bash container.",
+							Ref:         ref(corev1.SecurityContext{}.OpenAPIModelName()),
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			corev1.PodSecurityContext{}.OpenAPIModelName(), corev1.SecurityContext{}.OpenAPIModelName()},
+	}
+}
+
 func schema_pkg_apis_storage_v1_Chart(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
@@ -27162,6 +26392,12 @@ func schema_pkg_apis_storage_v1_Chart(ref common.ReferenceCallback) common.OpenA
 							Format:      "",
 						},
 					},
+					"usernameRef": {
+						SchemaProps: spec.SchemaProps{
+							Description: "The username that is required for this repository",
+							Ref:         ref(apisstoragev1.ChartSecretRef{}.OpenAPIModelName()),
+						},
+					},
 					"password": {
 						SchemaProps: spec.SchemaProps{
 							Description: "The password that is required for this repository",
@@ -27169,9 +26405,44 @@ func schema_pkg_apis_storage_v1_Chart(ref common.ReferenceCallback) common.OpenA
 							Format:      "",
 						},
 					},
+					"passwordRef": {
+						SchemaProps: spec.SchemaProps{
+							Description: "The password that is required for this repository",
+							Ref:         ref(apisstoragev1.ChartSecretRef{}.OpenAPIModelName()),
+						},
+					},
+					"insecureSkipTlsVerify": {
+						SchemaProps: spec.SchemaProps{
+							Description: "If tls certificate checks for the chart download should be skipped",
+							Type:        []string{"boolean"},
+							Format:      "",
+						},
+					},
 				},
 			},
 		},
+		Dependencies: []string{
+			apisstoragev1.ChartSecretRef{}.OpenAPIModelName()},
+	}
+}
+
+func schema_pkg_apis_storage_v1_ChartSecretRef(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"projectSecretRef": {
+						SchemaProps: spec.SchemaProps{
+							Description: "ProjectSecretRef holds the reference to a project secret",
+							Ref:         ref(apisstoragev1.ProjectSecretRef{}.OpenAPIModelName()),
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			apisstoragev1.ProjectSecretRef{}.OpenAPIModelName()},
 	}
 }
 
@@ -28327,7 +27598,7 @@ func schema_pkg_apis_storage_v1_HelmChart(ref common.ReferenceCallback) common.O
 						SchemaProps: spec.SchemaProps{
 							Description: "Metadata provides information about a chart",
 							Default:     map[string]interface{}{},
-							Ref:         ref(v1.Metadata{}.OpenAPIModelName()),
+							Ref:         ref(apisstoragev1.Metadata{}.OpenAPIModelName()),
 						},
 					},
 					"versions": {
@@ -28356,7 +27627,7 @@ func schema_pkg_apis_storage_v1_HelmChart(ref common.ReferenceCallback) common.O
 			},
 		},
 		Dependencies: []string{
-			v1.Metadata{}.OpenAPIModelName(), apisstoragev1.HelmChartRepository{}.OpenAPIModelName()},
+			apisstoragev1.HelmChartRepository{}.OpenAPIModelName(), apisstoragev1.Metadata{}.OpenAPIModelName()},
 	}
 }
 
@@ -28471,71 +27742,49 @@ func schema_pkg_apis_storage_v1_HelmConfiguration(ref common.ReferenceCallback) 
 	}
 }
 
-func schema_pkg_apis_storage_v1_HelmTask(ref common.ReferenceCallback) common.OpenAPIDefinition {
+func schema_pkg_apis_storage_v1_HelmReleaseConfig(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
 				Type: []string{"object"},
 				Properties: map[string]spec.Schema{
-					"release": {
+					"chart": {
 						SchemaProps: spec.SchemaProps{
-							Description: "Release holds the release information",
+							Description: "Chart holds information about a chart that should get deployed",
 							Default:     map[string]interface{}{},
-							Ref:         ref(apisstoragev1.HelmTaskRelease{}.OpenAPIModelName()),
+							Ref:         ref(apisstoragev1.Chart{}.OpenAPIModelName()),
 						},
 					},
-					"type": {
+					"manifests": {
 						SchemaProps: spec.SchemaProps{
-							Description: "Type is the task type. Defaults to Upgrade",
+							Description: "Manifests holds kube manifests that will be deployed as a chart",
 							Type:        []string{"string"},
 							Format:      "",
 						},
 					},
-					"rollbackRevision": {
+					"bash": {
 						SchemaProps: spec.SchemaProps{
-							Description: "RollbackRevision is the revision to rollback to",
+							Description: "Bash holds the bash script to execute in a container in the target",
+							Ref:         ref(apisstoragev1.Bash{}.OpenAPIModelName()),
+						},
+					},
+					"values": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Values is the set of extra Values added to the chart. These values merge with the default values inside of the chart. You can use golang templating in here with values from parameters.",
 							Type:        []string{"string"},
 							Format:      "",
 						},
 					},
-				},
-			},
-		},
-		Dependencies: []string{
-			apisstoragev1.HelmTaskRelease{}.OpenAPIModelName()},
-	}
-}
-
-func schema_pkg_apis_storage_v1_HelmTaskRelease(ref common.ReferenceCallback) common.OpenAPIDefinition {
-	return common.OpenAPIDefinition{
-		Schema: spec.Schema{
-			SchemaProps: spec.SchemaProps{
-				Type: []string{"object"},
-				Properties: map[string]spec.Schema{
-					"name": {
+					"parameters": {
 						SchemaProps: spec.SchemaProps{
-							Description: "Name is the name of the release",
+							Description: "Parameters are additional helm chart values that will get merged with config and are then used to deploy the helm chart.",
 							Type:        []string{"string"},
 							Format:      "",
 						},
 					},
-					"namespace": {
+					"annotations": {
 						SchemaProps: spec.SchemaProps{
-							Description: "Namespace of the release, if empty will use the target namespace",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"config": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Config is the helm config to use to deploy the release",
-							Default:     map[string]interface{}{},
-							Ref:         ref(v1.HelmReleaseConfig{}.OpenAPIModelName()),
-						},
-					},
-					"labels": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Labels are additional labels for the helm release.",
+							Description: "Annotations are extra annotations for this helm release",
 							Type:        []string{"object"},
 							AdditionalProperties: &spec.SchemaOrBool{
 								Allows: true,
@@ -28553,7 +27802,7 @@ func schema_pkg_apis_storage_v1_HelmTaskRelease(ref common.ReferenceCallback) co
 			},
 		},
 		Dependencies: []string{
-			v1.HelmReleaseConfig{}.OpenAPIModelName()},
+			apisstoragev1.Bash{}.OpenAPIModelName(), apisstoragev1.Chart{}.OpenAPIModelName()},
 	}
 }
 
@@ -29255,6 +28504,40 @@ func schema_pkg_apis_storage_v1_MachineConfigTemplateStatus(ref common.Reference
 	}
 }
 
+func schema_pkg_apis_storage_v1_Maintainer(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "Maintainer describes a Chart maintainer.",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"name": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Name is a user name or organization name",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"email": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Email is an optional email address to contact the named maintainer",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"url": {
+						SchemaProps: spec.SchemaProps{
+							Description: "URL is an optional URL to an address for the named maintainer",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+				},
+			},
+		},
+	}
+}
+
 func schema_pkg_apis_storage_v1_ManagedNodeTypeObjectMeta(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
@@ -29338,6 +28621,179 @@ func schema_pkg_apis_storage_v1_Member(ref common.ReferenceCallback) common.Open
 				Required: []string{"clusterRole"},
 			},
 		},
+	}
+}
+
+func schema_pkg_apis_storage_v1_Metadata(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "Metadata for a Chart file. This models the structure of a Chart.yaml file.",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"name": {
+						SchemaProps: spec.SchemaProps{
+							Description: "The name of the chart",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"home": {
+						SchemaProps: spec.SchemaProps{
+							Description: "The URL to a relevant project page, git repo, or contact person",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"sources": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Source is the URL to the source code of this chart",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: "",
+										Type:    []string{"string"},
+										Format:  "",
+									},
+								},
+							},
+						},
+					},
+					"version": {
+						SchemaProps: spec.SchemaProps{
+							Description: "A SemVer 2 conformant version string of the chart",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"description": {
+						SchemaProps: spec.SchemaProps{
+							Description: "A one-sentence description of the chart",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"keywords": {
+						SchemaProps: spec.SchemaProps{
+							Description: "A list of string keywords",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: "",
+										Type:    []string{"string"},
+										Format:  "",
+									},
+								},
+							},
+						},
+					},
+					"maintainers": {
+						SchemaProps: spec.SchemaProps{
+							Description: "A list of name and URL/email address combinations for the maintainer(s)",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Ref: ref(apisstoragev1.Maintainer{}.OpenAPIModelName()),
+									},
+								},
+							},
+						},
+					},
+					"icon": {
+						SchemaProps: spec.SchemaProps{
+							Description: "The URL to an icon file.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"apiVersion": {
+						SchemaProps: spec.SchemaProps{
+							Description: "The API Version of this chart.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"condition": {
+						SchemaProps: spec.SchemaProps{
+							Description: "The condition to check to enable chart",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"tags": {
+						SchemaProps: spec.SchemaProps{
+							Description: "The tags to check to enable chart",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"appVersion": {
+						SchemaProps: spec.SchemaProps{
+							Description: "The version of the application enclosed inside of this chart.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"deprecated": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Whether or not this chart is deprecated",
+							Type:        []string{"boolean"},
+							Format:      "",
+						},
+					},
+					"annotations": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Annotations are additional mappings uninterpreted by Helm, made available for inspection by other applications.",
+							Type:        []string{"object"},
+							AdditionalProperties: &spec.SchemaOrBool{
+								Allows: true,
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: "",
+										Type:    []string{"string"},
+										Format:  "",
+									},
+								},
+							},
+						},
+					},
+					"kubeVersion": {
+						SchemaProps: spec.SchemaProps{
+							Description: "KubeVersion is a SemVer constraint specifying the version of Kubernetes required.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"type": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Specifies the chart type: application or library",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"urls": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Urls where to find the chart contents",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: "",
+										Type:    []string{"string"},
+										Format:  "",
+									},
+								},
+							},
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			apisstoragev1.Maintainer{}.OpenAPIModelName()},
 	}
 }
 
@@ -31026,11 +30482,45 @@ func schema_pkg_apis_storage_v1_NodeProviderMetal3(ref common.ReferenceCallback)
 							},
 						},
 					},
+					"neutronEnabled": {
+						SchemaProps: spec.SchemaProps{
+							Description: "NeutronEnabled turns on the neutron network shim for this provider: BareMetalHost network attachments are allocated by the platform and reconciled through ConfigMaps instead of being written directly as DHCP annotations.",
+							Type:        []string{"boolean"},
+							Format:      "",
+						},
+					},
+					"netris": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Netris attaches BareMetalHosts to a Netris server cluster on provisioning.",
+							Ref:         ref(apisstoragev1.NodeProviderMetal3Netris{}.OpenAPIModelName()),
+						},
+					},
 				},
 			},
 		},
 		Dependencies: []string{
-			apisstoragev1.Metal3NodeTypeSpec{}.OpenAPIModelName(), apisstoragev1.Metal3ProviderDeployment{}.OpenAPIModelName(), apisstoragev1.NodeProviderClusterRef{}.OpenAPIModelName()},
+			apisstoragev1.Metal3NodeTypeSpec{}.OpenAPIModelName(), apisstoragev1.Metal3ProviderDeployment{}.OpenAPIModelName(), apisstoragev1.NodeProviderClusterRef{}.OpenAPIModelName(), apisstoragev1.NodeProviderMetal3Netris{}.OpenAPIModelName()},
+	}
+}
+
+func schema_pkg_apis_storage_v1_NodeProviderMetal3Netris(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"secretRef": {
+						SchemaProps: spec.SchemaProps{
+							Description: "SecretRef references a Secret with keys url, username and password for the Netris API.",
+							Ref:         ref(apisstoragev1.NamespacedRef{}.OpenAPIModelName()),
+						},
+					},
+				},
+				Required: []string{"secretRef"},
+			},
+		},
+		Dependencies: []string{
+			apisstoragev1.NamespacedRef{}.OpenAPIModelName()},
 	}
 }
 
@@ -31886,6 +31376,39 @@ func schema_pkg_apis_storage_v1_ProjectNamespaceTemplate(ref common.ReferenceCal
 		},
 		Dependencies: []string{
 			apisstoragev1.TemplateMetadata{}.OpenAPIModelName()},
+	}
+}
+
+func schema_pkg_apis_storage_v1_ProjectSecretRef(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"project": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Project is the project name where the secret is located in.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"name": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Name of the project secret to use.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"key": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Key of the project secret to use.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+				},
+			},
+		},
 	}
 }
 
@@ -33523,7 +33046,8 @@ func schema_pkg_apis_storage_v1_Target(ref common.ReferenceCallback) common.Open
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
-				Type: []string{"object"},
+				Description: "Target defines where an operation (e.g. an app deployment) should be executed.",
+				Type:        []string{"object"},
 				Properties: map[string]spec.Schema{
 					"spaceInstance": {
 						SchemaProps: spec.SchemaProps{
@@ -33559,14 +33083,14 @@ func schema_pkg_apis_storage_v1_TargetCluster(ref common.ReferenceCallback) comm
 				Properties: map[string]spec.Schema{
 					"cluster": {
 						SchemaProps: spec.SchemaProps{
-							Description: "Cluster is the cluster where the task should get executed",
+							Description: "Cluster is the cluster where the operation should get executed",
 							Type:        []string{"string"},
 							Format:      "",
 						},
 					},
 					"namespace": {
 						SchemaProps: spec.SchemaProps{
-							Description: "Namespace is the namespace where the task should get executed",
+							Description: "Namespace is the namespace where the operation should get executed",
 							Type:        []string{"string"},
 							Format:      "",
 						},
@@ -33633,244 +33157,6 @@ func schema_pkg_apis_storage_v1_TargetVirtualCluster(ref common.ReferenceCallbac
 				},
 			},
 		},
-	}
-}
-
-func schema_pkg_apis_storage_v1_Task(ref common.ReferenceCallback) common.OpenAPIDefinition {
-	return common.OpenAPIDefinition{
-		Schema: spec.Schema{
-			SchemaProps: spec.SchemaProps{
-				Type: []string{"object"},
-				Properties: map[string]spec.Schema{
-					"kind": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"apiVersion": {
-						SchemaProps: spec.SchemaProps{
-							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"metadata": {
-						SchemaProps: spec.SchemaProps{
-							Default: map[string]interface{}{},
-							Ref:     ref(metav1.ObjectMeta{}.OpenAPIModelName()),
-						},
-					},
-					"spec": {
-						SchemaProps: spec.SchemaProps{
-							Default: map[string]interface{}{},
-							Ref:     ref(apisstoragev1.TaskSpec{}.OpenAPIModelName()),
-						},
-					},
-					"status": {
-						SchemaProps: spec.SchemaProps{
-							Default: map[string]interface{}{},
-							Ref:     ref(apisstoragev1.TaskStatus{}.OpenAPIModelName()),
-						},
-					},
-				},
-			},
-		},
-		Dependencies: []string{
-			apisstoragev1.TaskSpec{}.OpenAPIModelName(), apisstoragev1.TaskStatus{}.OpenAPIModelName(), metav1.ObjectMeta{}.OpenAPIModelName()},
-	}
-}
-
-func schema_pkg_apis_storage_v1_TaskDefinition(ref common.ReferenceCallback) common.OpenAPIDefinition {
-	return common.OpenAPIDefinition{
-		Schema: spec.Schema{
-			SchemaProps: spec.SchemaProps{
-				Type: []string{"object"},
-				Properties: map[string]spec.Schema{
-					"appTask": {
-						SchemaProps: spec.SchemaProps{
-							Description: "AppTask is an app task",
-							Ref:         ref(apisstoragev1.AppTask{}.OpenAPIModelName()),
-						},
-					},
-					"helm": {
-						SchemaProps: spec.SchemaProps{
-							Description: "HelmTask executes a helm command",
-							Ref:         ref(apisstoragev1.HelmTask{}.OpenAPIModelName()),
-						},
-					},
-				},
-			},
-		},
-		Dependencies: []string{
-			apisstoragev1.AppTask{}.OpenAPIModelName(), apisstoragev1.HelmTask{}.OpenAPIModelName()},
-	}
-}
-
-func schema_pkg_apis_storage_v1_TaskList(ref common.ReferenceCallback) common.OpenAPIDefinition {
-	return common.OpenAPIDefinition{
-		Schema: spec.Schema{
-			SchemaProps: spec.SchemaProps{
-				Description: "TaskList contains a list of Task",
-				Type:        []string{"object"},
-				Properties: map[string]spec.Schema{
-					"kind": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"apiVersion": {
-						SchemaProps: spec.SchemaProps{
-							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"metadata": {
-						SchemaProps: spec.SchemaProps{
-							Default: map[string]interface{}{},
-							Ref:     ref(metav1.ListMeta{}.OpenAPIModelName()),
-						},
-					},
-					"items": {
-						SchemaProps: spec.SchemaProps{
-							Type: []string{"array"},
-							Items: &spec.SchemaOrArray{
-								Schema: &spec.Schema{
-									SchemaProps: spec.SchemaProps{
-										Default: map[string]interface{}{},
-										Ref:     ref(apisstoragev1.Task{}.OpenAPIModelName()),
-									},
-								},
-							},
-						},
-					},
-				},
-				Required: []string{"items"},
-			},
-		},
-		Dependencies: []string{
-			apisstoragev1.Task{}.OpenAPIModelName(), metav1.ListMeta{}.OpenAPIModelName()},
-	}
-}
-
-func schema_pkg_apis_storage_v1_TaskSpec(ref common.ReferenceCallback) common.OpenAPIDefinition {
-	return common.OpenAPIDefinition{
-		Schema: spec.Schema{
-			SchemaProps: spec.SchemaProps{
-				Type: []string{"object"},
-				Properties: map[string]spec.Schema{
-					"displayName": {
-						SchemaProps: spec.SchemaProps{
-							Description: "DisplayName is the name that should be displayed in the UI",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"access": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Access holds the access rights for users and teams",
-							Type:        []string{"array"},
-							Items: &spec.SchemaOrArray{
-								Schema: &spec.Schema{
-									SchemaProps: spec.SchemaProps{
-										Default: map[string]interface{}{},
-										Ref:     ref(apisstoragev1.Access{}.OpenAPIModelName()),
-									},
-								},
-							},
-						},
-					},
-					"scope": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Scope defines the scope of the access key.",
-							Ref:         ref(apisstoragev1.AccessKeyScope{}.OpenAPIModelName()),
-						},
-					},
-					"owner": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Owner holds the owner of this object",
-							Ref:         ref(apisstoragev1.UserOrTeam{}.OpenAPIModelName()),
-						},
-					},
-					"target": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Target where this task should get executed",
-							Default:     map[string]interface{}{},
-							Ref:         ref(apisstoragev1.Target{}.OpenAPIModelName()),
-						},
-					},
-					"task": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Task defines the task to execute",
-							Default:     map[string]interface{}{},
-							Ref:         ref(apisstoragev1.TaskDefinition{}.OpenAPIModelName()),
-						},
-					},
-				},
-			},
-		},
-		Dependencies: []string{
-			apisstoragev1.Access{}.OpenAPIModelName(), apisstoragev1.AccessKeyScope{}.OpenAPIModelName(), apisstoragev1.Target{}.OpenAPIModelName(), apisstoragev1.TaskDefinition{}.OpenAPIModelName(), apisstoragev1.UserOrTeam{}.OpenAPIModelName()},
-	}
-}
-
-func schema_pkg_apis_storage_v1_TaskStatus(ref common.ReferenceCallback) common.OpenAPIDefinition {
-	return common.OpenAPIDefinition{
-		Schema: spec.Schema{
-			SchemaProps: spec.SchemaProps{
-				Type: []string{"object"},
-				Properties: map[string]spec.Schema{
-					"started": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Started determines if the task was started",
-							Type:        []string{"boolean"},
-							Format:      "",
-						},
-					},
-					"conditions": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Conditions holds several conditions the tenant cluster might be in",
-							Type:        []string{"array"},
-							Items: &spec.SchemaOrArray{
-								Schema: &spec.Schema{
-									SchemaProps: spec.SchemaProps{
-										Default: map[string]interface{}{},
-										Ref:     ref(storagev1.Condition{}.OpenAPIModelName()),
-									},
-								},
-							},
-						},
-					},
-					"podPhase": {
-						SchemaProps: spec.SchemaProps{
-							Description: "PodPhase describes the phase this task is in\n\nPossible enum values:\n - `\"Failed\"` means that all containers in the pod have terminated, and at least one container has terminated in a failure (exited with a non-zero exit code or was stopped by the system).\n - `\"Pending\"` means the pod has been accepted by the system, but one or more of the containers has not been started. This includes time before being bound to a node, as well as time spent pulling images onto the host.\n - `\"Running\"` means the pod has been bound to a node and all of the containers have been started. At least one container is still running or is in the process of being restarted.\n - `\"Succeeded\"` means that all containers in the pod have voluntarily terminated with a container exit code of 0, and the system is not going to restart any of these containers.\n - `\"Unknown\"` means that for some reason the state of the pod could not be obtained, typically due to an error in communicating with the host of the pod. Deprecated: It isn't being set since 2015 (74da3b14b0c0f658b3bb8d2def5094686d0e9095)",
-							Type:        []string{"string"},
-							Format:      "",
-							Enum:        []interface{}{"Failed", "Pending", "Running", "Succeeded", "Unknown"},
-						},
-					},
-					"observedGeneration": {
-						SchemaProps: spec.SchemaProps{
-							Description: "ObservedGeneration is the latest generation observed by the controller.",
-							Type:        []string{"integer"},
-							Format:      "int64",
-						},
-					},
-					"containerState": {
-						SchemaProps: spec.SchemaProps{
-							Description: "DEPRECATED: This is not set anymore after migrating to runners ContainerState describes the container state of the task",
-							Ref:         ref(corev1.ContainerStatus{}.OpenAPIModelName()),
-						},
-					},
-				},
-			},
-		},
-		Dependencies: []string{
-			storagev1.Condition{}.OpenAPIModelName(), corev1.ContainerStatus{}.OpenAPIModelName()},
 	}
 }
 
@@ -34129,7 +33415,7 @@ func schema_pkg_apis_storage_v1_TemplateHelmChart(ref common.ReferenceCallback) 
 					"usernameRef": {
 						SchemaProps: spec.SchemaProps{
 							Description: "The username that is required for this repository",
-							Ref:         ref(v1.ChartSecretRef{}.OpenAPIModelName()),
+							Ref:         ref(apisstoragev1.ChartSecretRef{}.OpenAPIModelName()),
 						},
 					},
 					"password": {
@@ -34142,7 +33428,7 @@ func schema_pkg_apis_storage_v1_TemplateHelmChart(ref common.ReferenceCallback) 
 					"passwordRef": {
 						SchemaProps: spec.SchemaProps{
 							Description: "The password that is required for this repository",
-							Ref:         ref(v1.ChartSecretRef{}.OpenAPIModelName()),
+							Ref:         ref(apisstoragev1.ChartSecretRef{}.OpenAPIModelName()),
 						},
 					},
 					"insecureSkipTlsVerify": {
@@ -34191,7 +33477,7 @@ func schema_pkg_apis_storage_v1_TemplateHelmChart(ref common.ReferenceCallback) 
 			},
 		},
 		Dependencies: []string{
-			v1.ChartSecretRef{}.OpenAPIModelName()},
+			apisstoragev1.ChartSecretRef{}.OpenAPIModelName()},
 	}
 }
 
@@ -36676,197 +35962,6 @@ func schema_pkg_apis_ui_v1_VClusterVersion(ref common.ReferenceCallback) common.
 				},
 			},
 		},
-	}
-}
-
-func schema_pkg_apis_virtualcluster_v1_HelmRelease(ref common.ReferenceCallback) common.OpenAPIDefinition {
-	return common.OpenAPIDefinition{
-		Schema: spec.Schema{
-			SchemaProps: spec.SchemaProps{
-				Type: []string{"object"},
-				Properties: map[string]spec.Schema{
-					"kind": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"apiVersion": {
-						SchemaProps: spec.SchemaProps{
-							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"metadata": {
-						SchemaProps: spec.SchemaProps{
-							Default: map[string]interface{}{},
-							Ref:     ref(metav1.ObjectMeta{}.OpenAPIModelName()),
-						},
-					},
-					"spec": {
-						SchemaProps: spec.SchemaProps{
-							Default: map[string]interface{}{},
-							Ref:     ref(virtualclusterv1.HelmReleaseSpec{}.OpenAPIModelName()),
-						},
-					},
-					"status": {
-						SchemaProps: spec.SchemaProps{
-							Default: map[string]interface{}{},
-							Ref:     ref(virtualclusterv1.HelmReleaseStatus{}.OpenAPIModelName()),
-						},
-					},
-				},
-			},
-		},
-		Dependencies: []string{
-			virtualclusterv1.HelmReleaseSpec{}.OpenAPIModelName(), virtualclusterv1.HelmReleaseStatus{}.OpenAPIModelName(), metav1.ObjectMeta{}.OpenAPIModelName()},
-	}
-}
-
-func schema_pkg_apis_virtualcluster_v1_HelmReleaseList(ref common.ReferenceCallback) common.OpenAPIDefinition {
-	return common.OpenAPIDefinition{
-		Schema: spec.Schema{
-			SchemaProps: spec.SchemaProps{
-				Type: []string{"object"},
-				Properties: map[string]spec.Schema{
-					"kind": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"apiVersion": {
-						SchemaProps: spec.SchemaProps{
-							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"metadata": {
-						SchemaProps: spec.SchemaProps{
-							Default: map[string]interface{}{},
-							Ref:     ref(metav1.ListMeta{}.OpenAPIModelName()),
-						},
-					},
-					"items": {
-						SchemaProps: spec.SchemaProps{
-							Type: []string{"array"},
-							Items: &spec.SchemaOrArray{
-								Schema: &spec.Schema{
-									SchemaProps: spec.SchemaProps{
-										Default: map[string]interface{}{},
-										Ref:     ref(virtualclusterv1.HelmRelease{}.OpenAPIModelName()),
-									},
-								},
-							},
-						},
-					},
-				},
-				Required: []string{"items"},
-			},
-		},
-		Dependencies: []string{
-			virtualclusterv1.HelmRelease{}.OpenAPIModelName(), metav1.ListMeta{}.OpenAPIModelName()},
-	}
-}
-
-func schema_pkg_apis_virtualcluster_v1_HelmReleaseSpec(ref common.ReferenceCallback) common.OpenAPIDefinition {
-	return common.OpenAPIDefinition{
-		Schema: spec.Schema{
-			SchemaProps: spec.SchemaProps{
-				Type: []string{"object"},
-				Properties: map[string]spec.Schema{
-					"chart": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Chart holds information about a chart that should get deployed",
-							Default:     map[string]interface{}{},
-							Ref:         ref(v1.Chart{}.OpenAPIModelName()),
-						},
-					},
-					"manifests": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Manifests holds kube manifests that will be deployed as a chart",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"bash": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Bash holds the bash script to execute in a container in the target",
-							Ref:         ref(v1.Bash{}.OpenAPIModelName()),
-						},
-					},
-					"values": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Values is the set of extra Values added to the chart. These values merge with the default values inside of the chart. You can use golang templating in here with values from parameters.",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"parameters": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Parameters are additional helm chart values that will get merged with config and are then used to deploy the helm chart.",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"annotations": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Annotations are extra annotations for this helm release",
-							Type:        []string{"object"},
-							AdditionalProperties: &spec.SchemaOrBool{
-								Allows: true,
-								Schema: &spec.Schema{
-									SchemaProps: spec.SchemaProps{
-										Default: "",
-										Type:    []string{"string"},
-										Format:  "",
-									},
-								},
-							},
-						},
-					},
-				},
-			},
-		},
-		Dependencies: []string{
-			v1.Bash{}.OpenAPIModelName(), v1.Chart{}.OpenAPIModelName()},
-	}
-}
-
-func schema_pkg_apis_virtualcluster_v1_HelmReleaseStatus(ref common.ReferenceCallback) common.OpenAPIDefinition {
-	return common.OpenAPIDefinition{
-		Schema: spec.Schema{
-			SchemaProps: spec.SchemaProps{
-				Type: []string{"object"},
-				Properties: map[string]spec.Schema{
-					"version": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Revision is an int which represents the revision of the release.",
-							Type:        []string{"integer"},
-							Format:      "int32",
-						},
-					},
-					"info": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Info provides information about a release",
-							Ref:         ref(v1.Info{}.OpenAPIModelName()),
-						},
-					},
-					"metadata": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Metadata provides information about a chart",
-							Ref:         ref(v1.Metadata{}.OpenAPIModelName()),
-						},
-					},
-				},
-			},
-		},
-		Dependencies: []string{
-			v1.Info{}.OpenAPIModelName(), v1.Metadata{}.OpenAPIModelName()},
 	}
 }
 

@@ -24,6 +24,10 @@ func (c *FakeManagementV1) Apps() v1.AppInterface {
 	return newFakeApps(c)
 }
 
+func (c *FakeManagementV1) AppInstances(namespace string) v1.AppInstanceInterface {
+	return newFakeAppInstances(c, namespace)
+}
+
 func (c *FakeManagementV1) ArgoCDApplications(namespace string) v1.ArgoCDApplicationInterface {
 	return newFakeArgoCDApplications(c, namespace)
 }
@@ -174,10 +178,6 @@ func (c *FakeManagementV1) SpaceTemplates() v1.SpaceTemplateInterface {
 
 func (c *FakeManagementV1) SubjectAccessReviews() v1.SubjectAccessReviewInterface {
 	return newFakeSubjectAccessReviews(c)
-}
-
-func (c *FakeManagementV1) Tasks() v1.TaskInterface {
-	return newFakeTasks(c)
 }
 
 func (c *FakeManagementV1) Teams() v1.TeamInterface {

@@ -12,6 +12,8 @@ type Interface interface {
 	AccessKeys() AccessKeyInformer
 	// Apps returns a AppInformer.
 	Apps() AppInformer
+	// AppInstances returns a AppInstanceInformer.
+	AppInstances() AppInstanceInformer
 	// ArgoCDApplications returns a ArgoCDApplicationInformer.
 	ArgoCDApplications() ArgoCDApplicationInformer
 	// ArgoCDApplicationTemplates returns a ArgoCDApplicationTemplateInformer.
@@ -48,8 +50,6 @@ type Interface interface {
 	SpaceInstances() SpaceInstanceInformer
 	// SpaceTemplates returns a SpaceTemplateInformer.
 	SpaceTemplates() SpaceTemplateInformer
-	// Tasks returns a TaskInformer.
-	Tasks() TaskInformer
 	// Teams returns a TeamInformer.
 	Teams() TeamInformer
 	// Users returns a UserInformer.
@@ -79,6 +79,11 @@ func (v *version) AccessKeys() AccessKeyInformer {
 // Apps returns a AppInformer.
 func (v *version) Apps() AppInformer {
 	return &appInformer{factory: v.factory, tweakListOptions: v.tweakListOptions}
+}
+
+// AppInstances returns a AppInstanceInformer.
+func (v *version) AppInstances() AppInstanceInformer {
+	return &appInstanceInformer{factory: v.factory, namespace: v.namespace, tweakListOptions: v.tweakListOptions}
 }
 
 // ArgoCDApplications returns a ArgoCDApplicationInformer.
@@ -169,11 +174,6 @@ func (v *version) SpaceInstances() SpaceInstanceInformer {
 // SpaceTemplates returns a SpaceTemplateInformer.
 func (v *version) SpaceTemplates() SpaceTemplateInformer {
 	return &spaceTemplateInformer{factory: v.factory, tweakListOptions: v.tweakListOptions}
-}
-
-// Tasks returns a TaskInformer.
-func (v *version) Tasks() TaskInformer {
-	return &taskInformer{factory: v.factory, tweakListOptions: v.tweakListOptions}
 }
 
 // Teams returns a TeamInformer.

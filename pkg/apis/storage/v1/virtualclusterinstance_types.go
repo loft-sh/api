@@ -1,7 +1,6 @@
 package v1
 
 import (
-	clusterv1 "github.com/loft-sh/agentapi/v4/pkg/apis/loft/cluster/v1"
 	agentstoragev1 "github.com/loft-sh/agentapi/v4/pkg/apis/loft/storage/v1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 )
@@ -253,7 +252,6 @@ const (
 	ForwardTokenModePassthrough ForwardTokenMode = "Passthrough"
 )
 
-
 type VirtualClusterProSpec struct {
 	// Enabled defines if the tenant cluster is a pro cluster or not
 	// +optional
@@ -274,7 +272,7 @@ type VirtualClusterAccessPointIngressSpec struct {
 }
 
 type TemplateHelmChart struct {
-	clusterv1.Chart `json:",inline"`
+	Chart `json:",inline"`
 
 	// ReleaseName is the preferred release name of the app
 	// +optional

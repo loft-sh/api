@@ -10,6 +10,14 @@ type AccessKeyListerExpansion interface{}
 // AppLister.
 type AppListerExpansion interface{}
 
+// AppInstanceListerExpansion allows custom methods to be added to
+// AppInstanceLister.
+type AppInstanceListerExpansion interface{}
+
+// AppInstanceNamespaceListerExpansion allows custom methods to be added to
+// AppInstanceNamespaceLister.
+type AppInstanceNamespaceListerExpansion interface{}
+
 // ArgoCDApplicationListerExpansion allows custom methods to be added to
 // ArgoCDApplicationLister.
 type ArgoCDApplicationListerExpansion interface{}
@@ -105,10 +113,6 @@ type SpaceInstanceNamespaceListerExpansion interface{}
 // SpaceTemplateListerExpansion allows custom methods to be added to
 // SpaceTemplateLister.
 type SpaceTemplateListerExpansion interface{}
-
-// TaskListerExpansion allows custom methods to be added to
-// TaskLister.
-type TaskListerExpansion interface{}
 
 // TeamListerExpansion allows custom methods to be added to
 // TeamLister.

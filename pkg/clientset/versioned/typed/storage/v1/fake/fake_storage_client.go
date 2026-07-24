@@ -20,6 +20,10 @@ func (c *FakeStorageV1) Apps() v1.AppInterface {
 	return newFakeApps(c)
 }
 
+func (c *FakeStorageV1) AppInstances(namespace string) v1.AppInstanceInterface {
+	return newFakeAppInstances(c, namespace)
+}
+
 func (c *FakeStorageV1) ArgoCDApplications(namespace string) v1.ArgoCDApplicationInterface {
 	return newFakeArgoCDApplications(c, namespace)
 }
@@ -90,10 +94,6 @@ func (c *FakeStorageV1) SpaceInstances(namespace string) v1.SpaceInstanceInterfa
 
 func (c *FakeStorageV1) SpaceTemplates() v1.SpaceTemplateInterface {
 	return newFakeSpaceTemplates(c)
-}
-
-func (c *FakeStorageV1) Tasks() v1.TaskInterface {
-	return newFakeTasks(c)
 }
 
 func (c *FakeStorageV1) Teams() v1.TeamInterface {

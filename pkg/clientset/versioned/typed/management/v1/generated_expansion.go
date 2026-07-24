@@ -8,6 +8,8 @@ type AnnouncementExpansion interface{}
 
 type AppExpansion interface{}
 
+type AppInstanceExpansion interface{}
+
 type ArgoCDApplicationExpansion interface{}
 
 type ArgoCDApplicationTemplateExpansion interface{}
@@ -83,8 +85,6 @@ type SpaceInstanceExpansion interface{}
 type SpaceTemplateExpansion interface{}
 
 type SubjectAccessReviewExpansion interface{}
-
-type TaskExpansion interface{}
 
 type TeamExpansion interface{}
 

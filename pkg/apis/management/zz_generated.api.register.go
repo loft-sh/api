@@ -59,7 +59,17 @@ var (
 	NewAppREST = func(getter generic.RESTOptionsGetter) rest.Storage {
 		return NewAppRESTFunc(Factory)
 	}
-	NewAppRESTFunc                     NewRESTFunc
+	NewAppRESTFunc               NewRESTFunc
+	ManagementAppInstanceStorage = builders.NewApiResourceWithStorage( // Resource status endpoint
+		InternalAppInstance,
+		func() runtime.Object { return &AppInstance{} },     // Register versioned resource
+		func() runtime.Object { return &AppInstanceList{} }, // Register versioned resource list
+		NewAppInstanceREST,
+	)
+	NewAppInstanceREST = func(getter generic.RESTOptionsGetter) rest.Storage {
+		return NewAppInstanceRESTFunc(Factory)
+	}
+	NewAppInstanceRESTFunc             NewRESTFunc
 	ManagementArgoCDApplicationStorage = builders.NewApiResourceWithStorage( // Resource status endpoint
 		InternalArgoCDApplication,
 		func() runtime.Object { return &ArgoCDApplication{} },     // Register versioned resource
@@ -478,17 +488,7 @@ var (
 		return NewSubjectAccessReviewRESTFunc(Factory)
 	}
 	NewSubjectAccessReviewRESTFunc NewRESTFunc
-	ManagementTaskStorage          = builders.NewApiResourceWithStorage( // Resource status endpoint
-		InternalTask,
-		func() runtime.Object { return &Task{} },     // Register versioned resource
-		func() runtime.Object { return &TaskList{} }, // Register versioned resource list
-		NewTaskREST,
-	)
-	NewTaskREST = func(getter generic.RESTOptionsGetter) rest.Storage {
-		return NewTaskRESTFunc(Factory)
-	}
-	NewTaskRESTFunc       NewRESTFunc
-	ManagementTeamStorage = builders.NewApiResourceWithStorage( // Resource status endpoint
+	ManagementTeamStorage          = builders.NewApiResourceWithStorage( // Resource status endpoint
 		InternalTeam,
 		func() runtime.Object { return &Team{} },     // Register versioned resource
 		func() runtime.Object { return &TeamList{} }, // Register versioned resource list
@@ -602,6 +602,26 @@ var (
 		return NewAppCredentialsRESTFunc(Factory)
 	}
 	NewAppCredentialsRESTFunc NewRESTFunc
+	InternalAppInstance       = builders.NewInternalResource(
+		"appinstances",
+		"AppInstance",
+		func() runtime.Object { return &AppInstance{} },
+		func() runtime.Object { return &AppInstanceList{} },
+	)
+	InternalAppInstanceStatus = builders.NewInternalResourceStatus(
+		"appinstances",
+		"AppInstanceStatus",
+		func() runtime.Object { return &AppInstance{} },
+		func() runtime.Object { return &AppInstanceList{} },
+	)
+	InternalAppInstanceLogREST = builders.NewInternalSubresource(
+		"appinstances", "AppInstanceLog", "log",
+		func() runtime.Object { return &AppInstanceLog{} },
+	)
+	NewAppInstanceLogREST = func(getter generic.RESTOptionsGetter) rest.Storage {
+		return NewAppInstanceLogRESTFunc(Factory)
+	}
+	NewAppInstanceLogRESTFunc NewRESTFunc
 	InternalArgoCDApplication = builders.NewInternalResource(
 		"argocdapplications",
 		"ArgoCDApplication",
@@ -674,15 +694,7 @@ var (
 		return NewClusterAgentConfigRESTFunc(Factory)
 	}
 	NewClusterAgentConfigRESTFunc NewRESTFunc
-	InternalClusterChartsREST     = builders.NewInternalSubresource(
-		"clusters", "ClusterCharts", "charts",
-		func() runtime.Object { return &ClusterCharts{} },
-	)
-	NewClusterChartsREST = func(getter generic.RESTOptionsGetter) rest.Storage {
-		return NewClusterChartsRESTFunc(Factory)
-	}
-	NewClusterChartsRESTFunc  NewRESTFunc
-	InternalClusterDomainREST = builders.NewInternalSubresource(
+	InternalClusterDomainREST     = builders.NewInternalSubresource(
 		"clusters", "ClusterDomain", "domain",
 		func() runtime.Object { return &ClusterDomain{} },
 	)
@@ -1022,14 +1034,6 @@ var (
 		return NewProjectChartInfoRESTFunc(Factory)
 	}
 	NewProjectChartInfoRESTFunc NewRESTFunc
-	InternalProjectChartsREST   = builders.NewInternalSubresource(
-		"projects", "ProjectCharts", "charts",
-		func() runtime.Object { return &ProjectCharts{} },
-	)
-	NewProjectChartsREST = func(getter generic.RESTOptionsGetter) rest.Storage {
-		return NewProjectChartsRESTFunc(Factory)
-	}
-	NewProjectChartsRESTFunc    NewRESTFunc
 	InternalProjectClustersREST = builders.NewInternalSubresource(
 		"projects", "ProjectClusters", "clusters",
 		func() runtime.Object { return &ProjectClusters{} },
@@ -1230,27 +1234,7 @@ var (
 		func() runtime.Object { return &SubjectAccessReview{} },
 		func() runtime.Object { return &SubjectAccessReviewList{} },
 	)
-	InternalTask = builders.NewInternalResource(
-		"tasks",
-		"Task",
-		func() runtime.Object { return &Task{} },
-		func() runtime.Object { return &TaskList{} },
-	)
-	InternalTaskStatus = builders.NewInternalResourceStatus(
-		"tasks",
-		"TaskStatus",
-		func() runtime.Object { return &Task{} },
-		func() runtime.Object { return &TaskList{} },
-	)
-	InternalTaskLogREST = builders.NewInternalSubresource(
-		"tasks", "TaskLog", "log",
-		func() runtime.Object { return &TaskLog{} },
-	)
-	NewTaskLogREST = func(getter generic.RESTOptionsGetter) rest.Storage {
-		return NewTaskLogRESTFunc(Factory)
-	}
-	NewTaskLogRESTFunc NewRESTFunc
-	InternalTeam       = builders.NewInternalResource(
+	InternalTeam = builders.NewInternalResource(
 		"teams",
 		"Team",
 		func() runtime.Object { return &Team{} },
@@ -1511,6 +1495,9 @@ var (
 		InternalApp,
 		InternalAppStatus,
 		InternalAppCredentialsREST,
+		InternalAppInstance,
+		InternalAppInstanceStatus,
+		InternalAppInstanceLogREST,
 		InternalArgoCDApplication,
 		InternalArgoCDApplicationStatus,
 		InternalArgoCDApplicationTemplate,
@@ -1522,7 +1509,6 @@ var (
 		InternalClusterStatus,
 		InternalClusterAccessKeyREST,
 		InternalClusterAgentConfigREST,
-		InternalClusterChartsREST,
 		InternalClusterDomainREST,
 		InternalClusterMemberAccessREST,
 		InternalClusterMembersREST,
@@ -1577,7 +1563,6 @@ var (
 		InternalProject,
 		InternalProjectStatus,
 		InternalProjectChartInfoREST,
-		InternalProjectChartsREST,
 		InternalProjectClustersREST,
 		InternalProjectImportSpaceREST,
 		InternalProjectMembersREST,
@@ -1609,9 +1594,6 @@ var (
 		InternalSpaceTemplateStatus,
 		InternalSubjectAccessReview,
 		InternalSubjectAccessReviewStatus,
-		InternalTask,
-		InternalTaskStatus,
-		InternalTaskLogREST,
 		InternalTeam,
 		InternalTeamStatus,
 		InternalTeamAccessKeysREST,
@@ -1756,18 +1738,38 @@ type AppCredentials struct {
 	ProjectSecretRefs map[string]string `json:"projectSecretRefs,omitempty"`
 }
 
+// +genclient
+// +genclient
+// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+
+type AppInstance struct {
+	metav1.TypeMeta   `json:",inline"`
+	metav1.ObjectMeta `json:"metadata,omitempty"`
+	Spec              AppInstanceSpec   `json:"spec,omitempty"`
+	Status            AppInstanceStatus `json:"status,omitempty"`
+}
+
+// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+
+type AppInstanceLog struct {
+	metav1.TypeMeta   `json:",inline"`
+	metav1.ObjectMeta `json:"metadata,omitempty"`
+}
+
+type AppInstanceSpec struct {
+	storagev1.AppInstanceSpec `json:",inline"`
+}
+
+type AppInstanceStatus struct {
+	storagev1.AppInstanceStatus `json:",inline"`
+}
+
 type AppSpec struct {
 	storagev1.AppSpec `json:",inline"`
 }
 
 type AppStatus struct {
 	storagev1.AppStatus `json:",inline"`
-}
-
-type Apps struct {
-	NoDefault      bool                            `json:"noDefault,omitempty"`
-	Repositories   []storagev1.HelmChartRepository `json:"repositories,omitempty"`
-	PredefinedApps []PredefinedApp                 `json:"predefinedApps,omitempty"`
 }
 
 // +genclient
@@ -1959,15 +1961,6 @@ type ClusterAgentConfigCommon struct {
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
 
-type ClusterCharts struct {
-	metav1.TypeMeta   `json:",inline"`
-	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Charts            []storagev1.HelmChart `json:"charts"`
-	Busy              bool                  `json:"busy,omitempty"`
-}
-
-// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
-
 type ClusterDomain struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
@@ -2053,7 +2046,6 @@ type ConfigSpec struct {
 type ConfigStatus struct {
 	Authentication              storagev1.Authentication        `json:"auth,omitempty"`
 	OIDC                        *OIDC                           `json:"oidc,omitempty"`
-	Apps                        *Apps                           `json:"apps,omitempty"`
 	Audit                       *Audit                          `json:"audit,omitempty"`
 	LoftHost                    string                          `json:"loftHost,omitempty"`
 	ProjectNamespacePrefix      *string                         `json:"projectNamespacePrefix,omitempty"`
@@ -2256,9 +2248,7 @@ type Kiosk struct {
 }
 
 type KioskSpec struct {
-	HelmRelease                         clusterv1.HelmRelease               `json:"helmRelease,omitempty"`
 	SleepModeConfig                     clusterv1.SleepModeConfig           `json:"sleepModeConfig,omitempty"`
-	ChartInfo                           clusterv1.ChartInfo                 `json:"chartInfo,omitempty"`
 	StorageClusterQuota                 agentstoragev1.ClusterQuota         `json:"storageClusterQuota,omitempty"`
 	AccessKey                           storagev1.AccessKey                 `json:"accessKey,omitempty"`
 	UISettings                          uiv1.UISettings                     `json:"UISettings,omitempty"`
@@ -2615,7 +2605,7 @@ type Operation struct {
 }
 
 // +genclient
-// +genclient
+// +genclient:nonNamespaced
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
 
 type OwnedAccessKey struct {
@@ -2635,16 +2625,6 @@ type OwnedAccessKeyStatus struct {
 
 type PlatformDB struct {
 	StorageClass string `json:"storageClass,omitempty"`
-}
-
-type PredefinedApp struct {
-	Chart          string   `json:"chart"`
-	InitialVersion string   `json:"initialVersion,omitempty"`
-	InitialValues  string   `json:"initialValues,omitempty"`
-	Clusters       []string `json:"clusters,omitempty"`
-	Title          string   `json:"title,omitempty"`
-	IconURL        string   `json:"iconUrl,omitempty"`
-	ReadmeURL      string   `json:"readmeUrl,omitempty"`
 }
 
 // +genclient
@@ -2668,20 +2648,13 @@ type ProjectChartInfo struct {
 }
 
 type ProjectChartInfoSpec struct {
-	clusterv1.ChartInfoSpec `json:",inline"`
+	Chart storagev1.Chart `json:"chart,omitempty"`
 }
 
 type ProjectChartInfoStatus struct {
-	clusterv1.ChartInfoStatus `json:",inline"`
-}
-
-// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
-
-type ProjectCharts struct {
-	metav1.TypeMeta   `json:",inline"`
-	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Charts            []storagev1.HelmChart `json:"charts"`
-	Busy              bool                  `json:"busy,omitempty"`
+	Metadata *storagev1.Metadata `json:"metadata,omitempty"`
+	Readme   string              `json:"readme,omitempty"`
+	Values   string              `json:"values,omitempty"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -3094,34 +3067,6 @@ type SubjectAccessReviewSpec struct {
 
 type SubjectAccessReviewStatus struct {
 	authorizationv1.SubjectAccessReviewStatus `json:",inline"`
-}
-
-// +genclient
-// +genclient:nonNamespaced
-// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
-
-type Task struct {
-	metav1.TypeMeta   `json:",inline"`
-	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              TaskSpec   `json:"spec,omitempty"`
-	Status            TaskStatus `json:"status,omitempty"`
-}
-
-// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
-
-type TaskLog struct {
-	metav1.TypeMeta   `json:",inline"`
-	metav1.ObjectMeta `json:"metadata,omitempty"`
-}
-
-type TaskSpec struct {
-	storagev1.TaskSpec `json:",inline"`
-}
-
-type TaskStatus struct {
-	storagev1.TaskStatus `json:",inline"`
-	Owner                *storagev1.UserOrTeamEntity `json:"owner,omitempty"`
-	Cluster              *storagev1.EntityInfo       `json:"cluster,omitempty"`
 }
 
 // +genclient
@@ -3966,6 +3911,133 @@ func (s *storageApp) DeleteApp(ctx context.Context, id string) (bool, error) {
 	return sync, err
 }
 
+// AppInstance Functions and Structs
+//
+// +k8s:deepcopy-gen=false
+type AppInstanceStrategy struct {
+	builders.DefaultStorageStrategy
+}
+
+// +k8s:deepcopy-gen=false
+type AppInstanceStatusStrategy struct {
+	builders.DefaultStatusStorageStrategy
+}
+
+// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+
+type AppInstanceList struct {
+	metav1.TypeMeta `json:",inline"`
+	metav1.ListMeta `json:"metadata,omitempty"`
+	Items           []AppInstance `json:"items"`
+}
+
+// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+
+type AppInstanceLogList struct {
+	metav1.TypeMeta `json:",inline"`
+	metav1.ListMeta `json:"metadata,omitempty"`
+	Items           []AppInstanceLog `json:"items"`
+}
+
+func (AppInstance) NewStatus() interface{} {
+	return AppInstanceStatus{}
+}
+
+func (pc *AppInstance) GetStatus() interface{} {
+	return pc.Status
+}
+
+func (pc *AppInstance) SetStatus(s interface{}) {
+	pc.Status = s.(AppInstanceStatus)
+}
+
+func (pc *AppInstance) GetSpec() interface{} {
+	return pc.Spec
+}
+
+func (pc *AppInstance) SetSpec(s interface{}) {
+	pc.Spec = s.(AppInstanceSpec)
+}
+
+func (pc *AppInstance) GetObjectMeta() *metav1.ObjectMeta {
+	return &pc.ObjectMeta
+}
+
+func (pc *AppInstance) SetGeneration(generation int64) {
+	pc.ObjectMeta.Generation = generation
+}
+
+func (pc AppInstance) GetGeneration() int64 {
+	return pc.ObjectMeta.Generation
+}
+
+// Registry is an interface for things that know how to store AppInstance.
+// +k8s:deepcopy-gen=false
+type AppInstanceRegistry interface {
+	ListAppInstances(ctx context.Context, options *internalversion.ListOptions) (*AppInstanceList, error)
+	GetAppInstance(ctx context.Context, id string, options *metav1.GetOptions) (*AppInstance, error)
+	CreateAppInstance(ctx context.Context, id *AppInstance) (*AppInstance, error)
+	UpdateAppInstance(ctx context.Context, id *AppInstance) (*AppInstance, error)
+	DeleteAppInstance(ctx context.Context, id string) (bool, error)
+}
+
+// NewRegistry returns a new Registry interface for the given Storage. Any mismatched types will panic.
+func NewAppInstanceRegistry(sp builders.StandardStorageProvider) AppInstanceRegistry {
+	return &storageAppInstance{sp}
+}
+
+// Implement Registry
+// storage puts strong typing around storage calls
+// +k8s:deepcopy-gen=false
+type storageAppInstance struct {
+	builders.StandardStorageProvider
+}
+
+func (s *storageAppInstance) ListAppInstances(ctx context.Context, options *internalversion.ListOptions) (*AppInstanceList, error) {
+	if options != nil && options.FieldSelector != nil && !options.FieldSelector.Empty() {
+		return nil, fmt.Errorf("field selector not supported yet")
+	}
+	st := s.GetStandardStorage()
+	obj, err := st.List(ctx, options)
+	if err != nil {
+		return nil, err
+	}
+	return obj.(*AppInstanceList), err
+}
+
+func (s *storageAppInstance) GetAppInstance(ctx context.Context, id string, options *metav1.GetOptions) (*AppInstance, error) {
+	st := s.GetStandardStorage()
+	obj, err := st.Get(ctx, id, options)
+	if err != nil {
+		return nil, err
+	}
+	return obj.(*AppInstance), nil
+}
+
+func (s *storageAppInstance) CreateAppInstance(ctx context.Context, object *AppInstance) (*AppInstance, error) {
+	st := s.GetStandardStorage()
+	obj, err := st.Create(ctx, object, nil, &metav1.CreateOptions{})
+	if err != nil {
+		return nil, err
+	}
+	return obj.(*AppInstance), nil
+}
+
+func (s *storageAppInstance) UpdateAppInstance(ctx context.Context, object *AppInstance) (*AppInstance, error) {
+	st := s.GetStandardStorage()
+	obj, _, err := st.Update(ctx, object.Name, rest.DefaultUpdatedObjectInfo(object), nil, nil, false, &metav1.UpdateOptions{})
+	if err != nil {
+		return nil, err
+	}
+	return obj.(*AppInstance), nil
+}
+
+func (s *storageAppInstance) DeleteAppInstance(ctx context.Context, id string) (bool, error) {
+	st := s.GetStandardStorage()
+	_, sync, err := st.Delete(ctx, id, nil, &metav1.DeleteOptions{})
+	return sync, err
+}
+
 // ArgoCDApplication Functions and Structs
 //
 // +k8s:deepcopy-gen=false
@@ -4365,14 +4437,6 @@ type ClusterAgentConfigList struct {
 	metav1.TypeMeta `json:",inline"`
 	metav1.ListMeta `json:"metadata,omitempty"`
 	Items           []ClusterAgentConfig `json:"items"`
-}
-
-// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
-
-type ClusterChartsList struct {
-	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
-	Items           []ClusterCharts `json:"items"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -7178,14 +7242,6 @@ type ProjectChartInfoList struct {
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
 
-type ProjectChartsList struct {
-	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
-	Items           []ProjectCharts `json:"items"`
-}
-
-// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
-
 type ProjectClustersList struct {
 	metav1.TypeMeta `json:",inline"`
 	metav1.ListMeta `json:"metadata,omitempty"`
@@ -8762,133 +8818,6 @@ func (s *storageSubjectAccessReview) UpdateSubjectAccessReview(ctx context.Conte
 }
 
 func (s *storageSubjectAccessReview) DeleteSubjectAccessReview(ctx context.Context, id string) (bool, error) {
-	st := s.GetStandardStorage()
-	_, sync, err := st.Delete(ctx, id, nil, &metav1.DeleteOptions{})
-	return sync, err
-}
-
-// Task Functions and Structs
-//
-// +k8s:deepcopy-gen=false
-type TaskStrategy struct {
-	builders.DefaultStorageStrategy
-}
-
-// +k8s:deepcopy-gen=false
-type TaskStatusStrategy struct {
-	builders.DefaultStatusStorageStrategy
-}
-
-// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
-
-type TaskList struct {
-	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
-	Items           []Task `json:"items"`
-}
-
-// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
-
-type TaskLogList struct {
-	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
-	Items           []TaskLog `json:"items"`
-}
-
-func (Task) NewStatus() interface{} {
-	return TaskStatus{}
-}
-
-func (pc *Task) GetStatus() interface{} {
-	return pc.Status
-}
-
-func (pc *Task) SetStatus(s interface{}) {
-	pc.Status = s.(TaskStatus)
-}
-
-func (pc *Task) GetSpec() interface{} {
-	return pc.Spec
-}
-
-func (pc *Task) SetSpec(s interface{}) {
-	pc.Spec = s.(TaskSpec)
-}
-
-func (pc *Task) GetObjectMeta() *metav1.ObjectMeta {
-	return &pc.ObjectMeta
-}
-
-func (pc *Task) SetGeneration(generation int64) {
-	pc.ObjectMeta.Generation = generation
-}
-
-func (pc Task) GetGeneration() int64 {
-	return pc.ObjectMeta.Generation
-}
-
-// Registry is an interface for things that know how to store Task.
-// +k8s:deepcopy-gen=false
-type TaskRegistry interface {
-	ListTasks(ctx context.Context, options *internalversion.ListOptions) (*TaskList, error)
-	GetTask(ctx context.Context, id string, options *metav1.GetOptions) (*Task, error)
-	CreateTask(ctx context.Context, id *Task) (*Task, error)
-	UpdateTask(ctx context.Context, id *Task) (*Task, error)
-	DeleteTask(ctx context.Context, id string) (bool, error)
-}
-
-// NewRegistry returns a new Registry interface for the given Storage. Any mismatched types will panic.
-func NewTaskRegistry(sp builders.StandardStorageProvider) TaskRegistry {
-	return &storageTask{sp}
-}
-
-// Implement Registry
-// storage puts strong typing around storage calls
-// +k8s:deepcopy-gen=false
-type storageTask struct {
-	builders.StandardStorageProvider
-}
-
-func (s *storageTask) ListTasks(ctx context.Context, options *internalversion.ListOptions) (*TaskList, error) {
-	if options != nil && options.FieldSelector != nil && !options.FieldSelector.Empty() {
-		return nil, fmt.Errorf("field selector not supported yet")
-	}
-	st := s.GetStandardStorage()
-	obj, err := st.List(ctx, options)
-	if err != nil {
-		return nil, err
-	}
-	return obj.(*TaskList), err
-}
-
-func (s *storageTask) GetTask(ctx context.Context, id string, options *metav1.GetOptions) (*Task, error) {
-	st := s.GetStandardStorage()
-	obj, err := st.Get(ctx, id, options)
-	if err != nil {
-		return nil, err
-	}
-	return obj.(*Task), nil
-}
-
-func (s *storageTask) CreateTask(ctx context.Context, object *Task) (*Task, error) {
-	st := s.GetStandardStorage()
-	obj, err := st.Create(ctx, object, nil, &metav1.CreateOptions{})
-	if err != nil {
-		return nil, err
-	}
-	return obj.(*Task), nil
-}
-
-func (s *storageTask) UpdateTask(ctx context.Context, object *Task) (*Task, error) {
-	st := s.GetStandardStorage()
-	obj, _, err := st.Update(ctx, object.Name, rest.DefaultUpdatedObjectInfo(object), nil, nil, false, &metav1.UpdateOptions{})
-	if err != nil {
-		return nil, err
-	}
-	return obj.(*Task), nil
-}
-
-func (s *storageTask) DeleteTask(ctx context.Context, id string) (bool, error) {
 	st := s.GetStandardStorage()
 	_, sync, err := st.Delete(ctx, id, nil, &metav1.DeleteOptions{})
 	return sync, err
