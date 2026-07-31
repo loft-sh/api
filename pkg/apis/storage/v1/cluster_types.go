@@ -1,13 +1,14 @@
 package v1
 
 import (
-	clusterv1 "github.com/loft-sh/agentapi/v4/pkg/apis/loft/cluster/v1"
 	agentstoragev1 "github.com/loft-sh/agentapi/v4/pkg/apis/loft/storage/v1"
 	corev1 "k8s.io/api/core/v1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 )
 
 const (
+	LoftCluster = "loft-cluster"
+
 	MetricsFederationServiceNamespaceAnnotation = "loft.sh/metrics-federation-service-namespace"
 	MetricsFederationServiceNameAnnotation      = "loft.sh/metrics-federation-service-name"
 	MetricsFederationServicePortAnnotation      = "loft.sh/metrics-federation-service-port"
@@ -16,13 +17,29 @@ const (
 	PrometheusDeployed                  agentstoragev1.ConditionType = "PrometheusDeployed"
 	PrometheusAvailable                 agentstoragev1.ConditionType = "PrometheusAvailable"
 
+	GlobalPrometheusServiceAddress                                         = "loft.sh/global-prometheus-service-address"
 	GlobalPrometheusLastAppliedHashAnnotation                              = "loft.sh/global-prometheus-last-applied-hash"
 	GlobalPrometheusDeployed                  agentstoragev1.ConditionType = "GlobalPrometheusDeployed"
 	GlobalPrometheusAvailable                 agentstoragev1.ConditionType = "GlobalPrometheusAvailable"
 
+	EmbeddedPostgresAppliedHashAnnotation                              = "loft.sh/platform-db-applied-hash"
+	EmbeddedPostgresDeployed              agentstoragev1.ConditionType = "EmbeddedPostgresDeployed"
+	EmbeddedPostgresAvailable             agentstoragev1.ConditionType = "EmbeddedPostgresAvailable"
+
 	OpenCostLastAppliedHashAnnotation                              = "loft.sh/opencost-last-applied-hash"
 	OpenCostDeployed                  agentstoragev1.ConditionType = "OpenCostDeployed"
 	OpenCostAvailable                 agentstoragev1.ConditionType = "OpenCostAvailable"
+
+	BuildKitServiceAddress                                         = "loft.sh/buildkit-service-address"
+	BuildKitLastAppliedHashAnnotation                              = "loft.sh/buildkit-last-applied-hash"
+	BuildKitDeployed                  agentstoragev1.ConditionType = "BuildKitDeployed"
+	BuildKitAvailable                 agentstoragev1.ConditionType = "BuildKitAvailable"
+
+	// HTTPRouteRequestMirrorSupported is True when at least one GatewayClass in the
+	// managed cluster supports HTTPRoute request mirroring, either by advertising the
+	// HTTPRouteRequestMirror feature in status.supportedFeatures or by matching the
+	// agent's allowlisted spec.controllerName set.
+	HTTPRouteRequestMirrorSupported agentstoragev1.ConditionType = "HTTPRouteRequestMirrorSupported"
 )
 
 // +genclient
@@ -93,7 +110,7 @@ type ClusterSpec struct {
 	// +optional
 	ManagementNamespace string `json:"managementNamespace,omitempty"`
 
-	// If unusable is true, no spaces or virtual clusters can be scheduled on this cluster.
+	// If unusable is true, no spaces or tenant clusters can be scheduled on this cluster.
 	// +optional
 	Unusable bool `json:"unusable,omitempty"`
 
@@ -106,6 +123,20 @@ type ClusterSpec struct {
 
 	// OpenCost holds the cluster's OpenCost backend configuration
 	OpenCost *OpenCost `json:"opencost,omitempty"`
+
+	// ArgoCD holds the cluster's argo cd configuration
+	// +optional
+	ArgoCD *ArgoCD `json:"argoCD,omitempty"`
+}
+
+type ArgoCD struct {
+	// Enabled defines if argo cd is enabled
+	// +optional
+	Enabled bool `json:"enabled,omitempty"`
+
+	// Connector specifies the argo cd connector name
+	// +optional
+	Connector string `json:"connector,omitempty"`
 }
 
 type AllowedClusterAccountTemplate struct {
@@ -156,7 +187,7 @@ func init() {
 type HelmChart struct {
 	// Metadata provides information about a chart
 	// +optional
-	Metadata clusterv1.Metadata `json:"metadata,omitempty"`
+	Metadata Metadata `json:"metadata,omitempty"`
 
 	// Versions holds all chart versions
 	// +optional
@@ -190,27 +221,6 @@ type HelmChartRepository struct {
 	Insecure bool `json:"insecure,omitempty"`
 }
 
-// Chart describes a chart
-type Chart struct {
-	// Name is the chart name in the repository
-	Name string `json:"name,omitempty"`
-
-	// Version is the chart version in the repository
-	// +optional
-	Version string `json:"version,omitempty"`
-
-	// RepoURL is the repo url where the chart can be found
-	// +optional
-	RepoURL string `json:"repoURL,omitempty"`
-
-	// The username that is required for this repository
-	// +optional
-	Username string `json:"username,omitempty"`
-
-	// The password that is required for this repository
-	// +optional
-	Password string `json:"password,omitempty"`
-}
 type Metrics struct {
 	// Replicas is the number of desired replicas.
 	Replicas *int32 `json:"replicas,omitempty"`
