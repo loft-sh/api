@@ -1131,6 +1131,11 @@ func (in UserStatus) OpenAPIModelName() string {
 }
 
 // OpenAPIModelName returns the OpenAPI model name for this type.
+func (in VClusterDeviceOperatorDeployment) OpenAPIModelName() string {
+	return "com.github.loft-sh.api.v4.pkg.apis.storage.v1.VClusterDeviceOperatorDeployment"
+}
+
+// OpenAPIModelName returns the OpenAPI model name for this type.
 func (in VaultAuthSpec) OpenAPIModelName() string {
 	return "com.github.loft-sh.api.v4.pkg.apis.storage.v1.VaultAuthSpec"
 }

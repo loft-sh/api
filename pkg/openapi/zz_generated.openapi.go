@@ -725,6 +725,7 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 		apisstoragev1.UserOrTeamEntity{}.OpenAPIModelName():                                  schema_pkg_apis_storage_v1_UserOrTeamEntity(ref),
 		apisstoragev1.UserSpec{}.OpenAPIModelName():                                          schema_pkg_apis_storage_v1_UserSpec(ref),
 		apisstoragev1.UserStatus{}.OpenAPIModelName():                                        schema_pkg_apis_storage_v1_UserStatus(ref),
+		apisstoragev1.VClusterDeviceOperatorDeployment{}.OpenAPIModelName():                  schema_pkg_apis_storage_v1_VClusterDeviceOperatorDeployment(ref),
 		apisstoragev1.VaultAuthSpec{}.OpenAPIModelName():                                     schema_pkg_apis_storage_v1_VaultAuthSpec(ref),
 		apisstoragev1.VaultIntegrationSpec{}.OpenAPIModelName():                              schema_pkg_apis_storage_v1_VaultIntegrationSpec(ref),
 		apisstoragev1.VirtualClusterAccessPoint{}.OpenAPIModelName():                         schema_pkg_apis_storage_v1_VirtualClusterAccessPoint(ref),
@@ -5697,11 +5698,24 @@ func schema_pkg_apis_management_v1_AppInstanceStatus(ref common.ReferenceCallbac
 							Format:      "int32",
 						},
 					},
+					"deployAttempts": {
+						SchemaProps: spec.SchemaProps{
+							Description: "DeployAttempts counts the consecutive failed deploy attempts for the current spec generation and resolved app configuration. It backs the automatic retry of failed deploys and is reset whenever the deploy input changes or a deploy succeeds.",
+							Type:        []string{"integer"},
+							Format:      "int32",
+						},
+					},
+					"lastDeployTime": {
+						SchemaProps: spec.SchemaProps{
+							Description: "LastDeployTime is when the last deploy attempt finished, successful or not. Together with DeployAttempts it schedules the automatic retries of failed deploys.",
+							Ref:         ref(metav1.Time{}.OpenAPIModelName()),
+						},
+					},
 				},
 			},
 		},
 		Dependencies: []string{
-			storagev1.Condition{}.OpenAPIModelName(), apisstoragev1.AppConfig{}.OpenAPIModelName()},
+			storagev1.Condition{}.OpenAPIModelName(), apisstoragev1.AppConfig{}.OpenAPIModelName(), metav1.Time{}.OpenAPIModelName()},
 	}
 }
 
@@ -23996,11 +24010,24 @@ func schema_pkg_apis_storage_v1_AppInstanceStatus(ref common.ReferenceCallback) 
 							Format:      "int32",
 						},
 					},
+					"deployAttempts": {
+						SchemaProps: spec.SchemaProps{
+							Description: "DeployAttempts counts the consecutive failed deploy attempts for the current spec generation and resolved app configuration. It backs the automatic retry of failed deploys and is reset whenever the deploy input changes or a deploy succeeds.",
+							Type:        []string{"integer"},
+							Format:      "int32",
+						},
+					},
+					"lastDeployTime": {
+						SchemaProps: spec.SchemaProps{
+							Description: "LastDeployTime is when the last deploy attempt finished, successful or not. Together with DeployAttempts it schedules the automatic retries of failed deploys.",
+							Ref:         ref(metav1.Time{}.OpenAPIModelName()),
+						},
+					},
 				},
 			},
 		},
 		Dependencies: []string{
-			storagev1.Condition{}.OpenAPIModelName(), apisstoragev1.AppConfig{}.OpenAPIModelName()},
+			storagev1.Condition{}.OpenAPIModelName(), apisstoragev1.AppConfig{}.OpenAPIModelName(), metav1.Time{}.OpenAPIModelName()},
 	}
 }
 
@@ -28165,11 +28192,17 @@ func schema_pkg_apis_storage_v1_KubeVirtProviderDeployment(ref common.ReferenceC
 							Ref:         ref(apisstoragev1.KubeVirtDeployment{}.OpenAPIModelName()),
 						},
 					},
+					"vClusterDeviceOperator": {
+						SchemaProps: spec.SchemaProps{
+							Description: "VClusterDeviceOperator configures the vCluster device operator deployment.",
+							Ref:         ref(apisstoragev1.VClusterDeviceOperatorDeployment{}.OpenAPIModelName()),
+						},
+					},
 				},
 			},
 		},
 		Dependencies: []string{
-			apisstoragev1.KubeVirtDeployment{}.OpenAPIModelName()},
+			apisstoragev1.KubeVirtDeployment{}.OpenAPIModelName(), apisstoragev1.VClusterDeviceOperatorDeployment{}.OpenAPIModelName()},
 	}
 }
 
@@ -30362,6 +30395,13 @@ func schema_pkg_apis_storage_v1_NodeProviderKubeVirt(ref common.ReferenceCallbac
 							Description: "ClusterRef is a reference to connected control plane cluster in which KubeVirt operator is running",
 							Default:     map[string]interface{}{},
 							Ref:         ref(apisstoragev1.NodeProviderClusterRef{}.OpenAPIModelName()),
+						},
+					},
+					"namespaceStrategy": {
+						SchemaProps: spec.SchemaProps{
+							Description: "NamespaceStrategy determines in which namespace of the connected cluster the VirtualMachines are created. \"Provider\" (default) creates all VirtualMachines in clusterRef.namespace. \"VirtualCluster\" creates the VirtualMachines in the namespace of the tenant cluster the NodeClaim belongs to. If the NodeClaim cannot be traced back to a tenant cluster namespace within clusterRef.cluster, clusterRef.namespace is used instead.",
+							Type:        []string{"string"},
+							Format:      "",
 						},
 					},
 					"deploy": {
@@ -34161,6 +34201,55 @@ func schema_pkg_apis_storage_v1_UserStatus(ref common.ReferenceCallback) common.
 						},
 					},
 				},
+			},
+		},
+	}
+}
+
+func schema_pkg_apis_storage_v1_VClusterDeviceOperatorDeployment(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"enabled": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Enabled controls whether the vCluster device operator is deployed into the cluster.",
+							Default:     false,
+							Type:        []string{"boolean"},
+							Format:      "",
+						},
+					},
+					"chartRepo": {
+						SchemaProps: spec.SchemaProps{
+							Description: "ChartRepo overrides the Helm chart repository used to install the operator.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"chart": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Chart overrides the Helm chart name used to install the operator.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"version": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Version overrides the Helm chart version used to install the operator.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"helmValues": {
+						SchemaProps: spec.SchemaProps{
+							Description: "HelmValues is raw YAML that will be passed as values to the Helm chart.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+				},
+				Required: []string{"enabled"},
 			},
 		},
 	}

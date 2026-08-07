@@ -20,6 +20,33 @@ func ValidatePlatformConfig(fldPath *field.Path, platformConfig PlatformConfig) 
 	errs = append(errs, ValidateSnapshots(fldPath, platformConfig.Snapshots)...)
 	errs = append(errs, ValidateDeletion(fldPath, platformConfig.Deletion)...)
 	errs = append(errs, ValidateArgoCD(fldPath, platformConfig.ArgoCDIntegration, platformConfig.ArgoCDDeploy)...)
+	errs = append(errs, ValidateObservability(fldPath, platformConfig.ObservabilityIntegration)...)
+
+	return errs
+}
+
+// ValidateObservability validates the observability integration configuration.
+func ValidateObservability(fldPath *field.Path, integration *ObservabilityIntegration) field.ErrorList {
+	if integration == nil || !integration.Enabled {
+		return nil
+	}
+
+	var errs field.ErrorList
+	path := fldPath.Child("integrations", "observability")
+
+	if integration.Connector == "" {
+		errs = append(errs, field.Required(path.Child("connector"), "connector is required when observability is enabled"))
+	}
+
+	if integration.GatewaySecret != nil {
+		gsPath := path.Child("gatewaySecret")
+		if integration.GatewaySecret.Namespace == "" {
+			errs = append(errs, field.Required(gsPath.Child("namespace"), "namespace is required"))
+		}
+		if integration.GatewaySecret.Name == "" {
+			errs = append(errs, field.Required(gsPath.Child("name"), "name is required"))
+		}
+	}
 
 	return errs
 }

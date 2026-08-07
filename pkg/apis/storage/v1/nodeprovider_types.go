@@ -285,10 +285,35 @@ type KubeVirtNodeTypeSpec struct {
 	MaxCapacity int `json:"maxCapacity,omitempty"`
 }
 
+// KubeVirtNamespaceStrategy determines in which namespace of the connected cluster
+// the VirtualMachines for a NodeClaim are created.
+type KubeVirtNamespaceStrategy string
+
+const (
+	// KubeVirtNamespaceStrategyProvider creates all VirtualMachines in the namespace
+	// referenced by the node provider's clusterRef. This is the default.
+	KubeVirtNamespaceStrategyProvider KubeVirtNamespaceStrategy = "Provider"
+
+	// KubeVirtNamespaceStrategyVirtualCluster creates the VirtualMachines in the
+	// namespace of the tenant cluster the NodeClaim belongs to.
+	KubeVirtNamespaceStrategyVirtualCluster KubeVirtNamespaceStrategy = "VirtualCluster"
+)
+
 // NodeProviderKubeVirt defines the configuration for a KubeVirt node provider.
 type NodeProviderKubeVirt struct {
 	// ClusterRef is a reference to connected control plane cluster in which KubeVirt operator is running
 	ClusterRef NodeProviderClusterRef `json:"clusterRef,omitempty"`
+
+	// NamespaceStrategy determines in which namespace of the connected cluster the
+	// VirtualMachines are created.
+	// "Provider" (default) creates all VirtualMachines in clusterRef.namespace.
+	// "VirtualCluster" creates the VirtualMachines in the namespace of the tenant
+	// cluster the NodeClaim belongs to. If the NodeClaim cannot be traced back to a
+	// tenant cluster namespace within clusterRef.cluster, clusterRef.namespace is
+	// used instead.
+	// +kubebuilder:validation:Enum=Provider;VirtualCluster
+	// +optional
+	NamespaceStrategy KubeVirtNamespaceStrategy `json:"namespaceStrategy,omitempty"`
 
 	// Deploy configures components deployed into the connected control plane cluster.
 	// +optional
@@ -305,6 +330,31 @@ type KubeVirtProviderDeployment struct {
 	// KubeVirt configures the KubeVirt operator deployment.
 	// +optional
 	KubeVirt KubeVirtDeployment `json:"kubevirt,omitempty"`
+
+	// VClusterDeviceOperator configures the vCluster device operator deployment.
+	// +optional
+	VClusterDeviceOperator *VClusterDeviceOperatorDeployment `json:"vClusterDeviceOperator,omitempty"`
+}
+
+type VClusterDeviceOperatorDeployment struct {
+	// Enabled controls whether the vCluster device operator is deployed into the cluster.
+	Enabled bool `json:"enabled"`
+
+	// ChartRepo overrides the Helm chart repository used to install the operator.
+	// +optional
+	ChartRepo string `json:"chartRepo,omitempty"`
+
+	// Chart overrides the Helm chart name used to install the operator.
+	// +optional
+	Chart string `json:"chart,omitempty"`
+
+	// Version overrides the Helm chart version used to install the operator.
+	// +optional
+	Version string `json:"version,omitempty"`
+
+	// HelmValues is raw YAML that will be passed as values to the Helm chart.
+	// +optional
+	HelmValues string `json:"helmValues,omitempty"`
 }
 
 type KubeVirtDeployment struct {
