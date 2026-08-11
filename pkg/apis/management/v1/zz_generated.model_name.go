@@ -1451,6 +1451,41 @@ func (in TeamStatus) OpenAPIModelName() string {
 }
 
 // OpenAPIModelName returns the OpenAPI model name for this type.
+func (in Tenant) OpenAPIModelName() string {
+	return "com.github.loft-sh.api.v4.pkg.apis.management.v1.Tenant"
+}
+
+// OpenAPIModelName returns the OpenAPI model name for this type.
+func (in TenantList) OpenAPIModelName() string {
+	return "com.github.loft-sh.api.v4.pkg.apis.management.v1.TenantList"
+}
+
+// OpenAPIModelName returns the OpenAPI model name for this type.
+func (in TenantNICoToken) OpenAPIModelName() string {
+	return "com.github.loft-sh.api.v4.pkg.apis.management.v1.TenantNICoToken"
+}
+
+// OpenAPIModelName returns the OpenAPI model name for this type.
+func (in TenantNICoTokenList) OpenAPIModelName() string {
+	return "com.github.loft-sh.api.v4.pkg.apis.management.v1.TenantNICoTokenList"
+}
+
+// OpenAPIModelName returns the OpenAPI model name for this type.
+func (in TenantNICoTokenStatus) OpenAPIModelName() string {
+	return "com.github.loft-sh.api.v4.pkg.apis.management.v1.TenantNICoTokenStatus"
+}
+
+// OpenAPIModelName returns the OpenAPI model name for this type.
+func (in TenantSpec) OpenAPIModelName() string {
+	return "com.github.loft-sh.api.v4.pkg.apis.management.v1.TenantSpec"
+}
+
+// OpenAPIModelName returns the OpenAPI model name for this type.
+func (in TenantStatus) OpenAPIModelName() string {
+	return "com.github.loft-sh.api.v4.pkg.apis.management.v1.TenantStatus"
+}
+
+// OpenAPIModelName returns the OpenAPI model name for this type.
 func (in TranslateVClusterResourceName) OpenAPIModelName() string {
 	return "com.github.loft-sh.api.v4.pkg.apis.management.v1.TranslateVClusterResourceName"
 }

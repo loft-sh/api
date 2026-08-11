@@ -2891,6 +2891,76 @@ func RegisterConversions(s *runtime.Scheme) error {
 	}); err != nil {
 		return err
 	}
+	if err := s.AddGeneratedConversionFunc((*Tenant)(nil), (*management.Tenant)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_v1_Tenant_To_management_Tenant(a.(*Tenant), b.(*management.Tenant), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*management.Tenant)(nil), (*Tenant)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_management_Tenant_To_v1_Tenant(a.(*management.Tenant), b.(*Tenant), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*TenantList)(nil), (*management.TenantList)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_v1_TenantList_To_management_TenantList(a.(*TenantList), b.(*management.TenantList), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*management.TenantList)(nil), (*TenantList)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_management_TenantList_To_v1_TenantList(a.(*management.TenantList), b.(*TenantList), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*TenantNICoToken)(nil), (*management.TenantNICoToken)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_v1_TenantNICoToken_To_management_TenantNICoToken(a.(*TenantNICoToken), b.(*management.TenantNICoToken), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*management.TenantNICoToken)(nil), (*TenantNICoToken)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_management_TenantNICoToken_To_v1_TenantNICoToken(a.(*management.TenantNICoToken), b.(*TenantNICoToken), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*TenantNICoTokenList)(nil), (*management.TenantNICoTokenList)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_v1_TenantNICoTokenList_To_management_TenantNICoTokenList(a.(*TenantNICoTokenList), b.(*management.TenantNICoTokenList), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*management.TenantNICoTokenList)(nil), (*TenantNICoTokenList)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_management_TenantNICoTokenList_To_v1_TenantNICoTokenList(a.(*management.TenantNICoTokenList), b.(*TenantNICoTokenList), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*TenantNICoTokenStatus)(nil), (*management.TenantNICoTokenStatus)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_v1_TenantNICoTokenStatus_To_management_TenantNICoTokenStatus(a.(*TenantNICoTokenStatus), b.(*management.TenantNICoTokenStatus), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*management.TenantNICoTokenStatus)(nil), (*TenantNICoTokenStatus)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_management_TenantNICoTokenStatus_To_v1_TenantNICoTokenStatus(a.(*management.TenantNICoTokenStatus), b.(*TenantNICoTokenStatus), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*TenantSpec)(nil), (*management.TenantSpec)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_v1_TenantSpec_To_management_TenantSpec(a.(*TenantSpec), b.(*management.TenantSpec), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*management.TenantSpec)(nil), (*TenantSpec)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_management_TenantSpec_To_v1_TenantSpec(a.(*management.TenantSpec), b.(*TenantSpec), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*TenantStatus)(nil), (*management.TenantStatus)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_v1_TenantStatus_To_management_TenantStatus(a.(*TenantStatus), b.(*management.TenantStatus), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*management.TenantStatus)(nil), (*TenantStatus)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_management_TenantStatus_To_v1_TenantStatus(a.(*management.TenantStatus), b.(*TenantStatus), scope)
+	}); err != nil {
+		return err
+	}
 	if err := s.AddGeneratedConversionFunc((*TranslateVClusterResourceName)(nil), (*management.TranslateVClusterResourceName)(nil), func(a, b interface{}, scope conversion.Scope) error {
 		return Convert_v1_TranslateVClusterResourceName_To_management_TranslateVClusterResourceName(a.(*TranslateVClusterResourceName), b.(*management.TranslateVClusterResourceName), scope)
 	}); err != nil {
@@ -11013,6 +11083,172 @@ func autoConvert_management_TeamStatus_To_v1_TeamStatus(in *management.TeamStatu
 // Convert_management_TeamStatus_To_v1_TeamStatus is an autogenerated conversion function.
 func Convert_management_TeamStatus_To_v1_TeamStatus(in *management.TeamStatus, out *TeamStatus, s conversion.Scope) error {
 	return autoConvert_management_TeamStatus_To_v1_TeamStatus(in, out, s)
+}
+
+func autoConvert_v1_Tenant_To_management_Tenant(in *Tenant, out *management.Tenant, s conversion.Scope) error {
+	out.ObjectMeta = in.ObjectMeta
+	if err := Convert_v1_TenantSpec_To_management_TenantSpec(&in.Spec, &out.Spec, s); err != nil {
+		return err
+	}
+	if err := Convert_v1_TenantStatus_To_management_TenantStatus(&in.Status, &out.Status, s); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Convert_v1_Tenant_To_management_Tenant is an autogenerated conversion function.
+func Convert_v1_Tenant_To_management_Tenant(in *Tenant, out *management.Tenant, s conversion.Scope) error {
+	return autoConvert_v1_Tenant_To_management_Tenant(in, out, s)
+}
+
+func autoConvert_management_Tenant_To_v1_Tenant(in *management.Tenant, out *Tenant, s conversion.Scope) error {
+	out.ObjectMeta = in.ObjectMeta
+	if err := Convert_management_TenantSpec_To_v1_TenantSpec(&in.Spec, &out.Spec, s); err != nil {
+		return err
+	}
+	if err := Convert_management_TenantStatus_To_v1_TenantStatus(&in.Status, &out.Status, s); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Convert_management_Tenant_To_v1_Tenant is an autogenerated conversion function.
+func Convert_management_Tenant_To_v1_Tenant(in *management.Tenant, out *Tenant, s conversion.Scope) error {
+	return autoConvert_management_Tenant_To_v1_Tenant(in, out, s)
+}
+
+func autoConvert_v1_TenantList_To_management_TenantList(in *TenantList, out *management.TenantList, s conversion.Scope) error {
+	out.ListMeta = in.ListMeta
+	out.Items = *(*[]management.Tenant)(unsafe.Pointer(&in.Items))
+	return nil
+}
+
+// Convert_v1_TenantList_To_management_TenantList is an autogenerated conversion function.
+func Convert_v1_TenantList_To_management_TenantList(in *TenantList, out *management.TenantList, s conversion.Scope) error {
+	return autoConvert_v1_TenantList_To_management_TenantList(in, out, s)
+}
+
+func autoConvert_management_TenantList_To_v1_TenantList(in *management.TenantList, out *TenantList, s conversion.Scope) error {
+	out.ListMeta = in.ListMeta
+	out.Items = *(*[]Tenant)(unsafe.Pointer(&in.Items))
+	return nil
+}
+
+// Convert_management_TenantList_To_v1_TenantList is an autogenerated conversion function.
+func Convert_management_TenantList_To_v1_TenantList(in *management.TenantList, out *TenantList, s conversion.Scope) error {
+	return autoConvert_management_TenantList_To_v1_TenantList(in, out, s)
+}
+
+func autoConvert_v1_TenantNICoToken_To_management_TenantNICoToken(in *TenantNICoToken, out *management.TenantNICoToken, s conversion.Scope) error {
+	out.ObjectMeta = in.ObjectMeta
+	if err := Convert_v1_TenantNICoTokenStatus_To_management_TenantNICoTokenStatus(&in.Status, &out.Status, s); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Convert_v1_TenantNICoToken_To_management_TenantNICoToken is an autogenerated conversion function.
+func Convert_v1_TenantNICoToken_To_management_TenantNICoToken(in *TenantNICoToken, out *management.TenantNICoToken, s conversion.Scope) error {
+	return autoConvert_v1_TenantNICoToken_To_management_TenantNICoToken(in, out, s)
+}
+
+func autoConvert_management_TenantNICoToken_To_v1_TenantNICoToken(in *management.TenantNICoToken, out *TenantNICoToken, s conversion.Scope) error {
+	out.ObjectMeta = in.ObjectMeta
+	if err := Convert_management_TenantNICoTokenStatus_To_v1_TenantNICoTokenStatus(&in.Status, &out.Status, s); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Convert_management_TenantNICoToken_To_v1_TenantNICoToken is an autogenerated conversion function.
+func Convert_management_TenantNICoToken_To_v1_TenantNICoToken(in *management.TenantNICoToken, out *TenantNICoToken, s conversion.Scope) error {
+	return autoConvert_management_TenantNICoToken_To_v1_TenantNICoToken(in, out, s)
+}
+
+func autoConvert_v1_TenantNICoTokenList_To_management_TenantNICoTokenList(in *TenantNICoTokenList, out *management.TenantNICoTokenList, s conversion.Scope) error {
+	out.ListMeta = in.ListMeta
+	out.Items = *(*[]management.TenantNICoToken)(unsafe.Pointer(&in.Items))
+	return nil
+}
+
+// Convert_v1_TenantNICoTokenList_To_management_TenantNICoTokenList is an autogenerated conversion function.
+func Convert_v1_TenantNICoTokenList_To_management_TenantNICoTokenList(in *TenantNICoTokenList, out *management.TenantNICoTokenList, s conversion.Scope) error {
+	return autoConvert_v1_TenantNICoTokenList_To_management_TenantNICoTokenList(in, out, s)
+}
+
+func autoConvert_management_TenantNICoTokenList_To_v1_TenantNICoTokenList(in *management.TenantNICoTokenList, out *TenantNICoTokenList, s conversion.Scope) error {
+	out.ListMeta = in.ListMeta
+	out.Items = *(*[]TenantNICoToken)(unsafe.Pointer(&in.Items))
+	return nil
+}
+
+// Convert_management_TenantNICoTokenList_To_v1_TenantNICoTokenList is an autogenerated conversion function.
+func Convert_management_TenantNICoTokenList_To_v1_TenantNICoTokenList(in *management.TenantNICoTokenList, out *TenantNICoTokenList, s conversion.Scope) error {
+	return autoConvert_management_TenantNICoTokenList_To_v1_TenantNICoTokenList(in, out, s)
+}
+
+func autoConvert_v1_TenantNICoTokenStatus_To_management_TenantNICoTokenStatus(in *TenantNICoTokenStatus, out *management.TenantNICoTokenStatus, s conversion.Scope) error {
+	out.Token = in.Token
+	out.Org = in.Org
+	out.Endpoint = in.Endpoint
+	return nil
+}
+
+// Convert_v1_TenantNICoTokenStatus_To_management_TenantNICoTokenStatus is an autogenerated conversion function.
+func Convert_v1_TenantNICoTokenStatus_To_management_TenantNICoTokenStatus(in *TenantNICoTokenStatus, out *management.TenantNICoTokenStatus, s conversion.Scope) error {
+	return autoConvert_v1_TenantNICoTokenStatus_To_management_TenantNICoTokenStatus(in, out, s)
+}
+
+func autoConvert_management_TenantNICoTokenStatus_To_v1_TenantNICoTokenStatus(in *management.TenantNICoTokenStatus, out *TenantNICoTokenStatus, s conversion.Scope) error {
+	out.Token = in.Token
+	out.Org = in.Org
+	out.Endpoint = in.Endpoint
+	return nil
+}
+
+// Convert_management_TenantNICoTokenStatus_To_v1_TenantNICoTokenStatus is an autogenerated conversion function.
+func Convert_management_TenantNICoTokenStatus_To_v1_TenantNICoTokenStatus(in *management.TenantNICoTokenStatus, out *TenantNICoTokenStatus, s conversion.Scope) error {
+	return autoConvert_management_TenantNICoTokenStatus_To_v1_TenantNICoTokenStatus(in, out, s)
+}
+
+func autoConvert_v1_TenantSpec_To_management_TenantSpec(in *TenantSpec, out *management.TenantSpec, s conversion.Scope) error {
+	out.TenantSpec = in.TenantSpec
+	return nil
+}
+
+// Convert_v1_TenantSpec_To_management_TenantSpec is an autogenerated conversion function.
+func Convert_v1_TenantSpec_To_management_TenantSpec(in *TenantSpec, out *management.TenantSpec, s conversion.Scope) error {
+	return autoConvert_v1_TenantSpec_To_management_TenantSpec(in, out, s)
+}
+
+func autoConvert_management_TenantSpec_To_v1_TenantSpec(in *management.TenantSpec, out *TenantSpec, s conversion.Scope) error {
+	out.TenantSpec = in.TenantSpec
+	return nil
+}
+
+// Convert_management_TenantSpec_To_v1_TenantSpec is an autogenerated conversion function.
+func Convert_management_TenantSpec_To_v1_TenantSpec(in *management.TenantSpec, out *TenantSpec, s conversion.Scope) error {
+	return autoConvert_management_TenantSpec_To_v1_TenantSpec(in, out, s)
+}
+
+func autoConvert_v1_TenantStatus_To_management_TenantStatus(in *TenantStatus, out *management.TenantStatus, s conversion.Scope) error {
+	out.TenantStatus = in.TenantStatus
+	return nil
+}
+
+// Convert_v1_TenantStatus_To_management_TenantStatus is an autogenerated conversion function.
+func Convert_v1_TenantStatus_To_management_TenantStatus(in *TenantStatus, out *management.TenantStatus, s conversion.Scope) error {
+	return autoConvert_v1_TenantStatus_To_management_TenantStatus(in, out, s)
+}
+
+func autoConvert_management_TenantStatus_To_v1_TenantStatus(in *management.TenantStatus, out *TenantStatus, s conversion.Scope) error {
+	out.TenantStatus = in.TenantStatus
+	return nil
+}
+
+// Convert_management_TenantStatus_To_v1_TenantStatus is an autogenerated conversion function.
+func Convert_management_TenantStatus_To_v1_TenantStatus(in *management.TenantStatus, out *TenantStatus, s conversion.Scope) error {
+	return autoConvert_management_TenantStatus_To_v1_TenantStatus(in, out, s)
 }
 
 func autoConvert_v1_TranslateVClusterResourceName_To_management_TranslateVClusterResourceName(in *TranslateVClusterResourceName, out *management.TranslateVClusterResourceName, s conversion.Scope) error {

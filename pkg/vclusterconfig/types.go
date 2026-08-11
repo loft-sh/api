@@ -9,14 +9,13 @@ import (
 )
 
 type PlatformConfig struct {
-	Sleep                    *Sleep                    `json:"sleep,omitempty"     yaml:"sleep,omitempty"`
-	Snapshots                *Snapshots                `json:"snapshots,omitempty" yaml:"snapshots,omitempty"`
-	Deletion                 *Deletion                 `json:"deletion,omitempty"  yaml:"deletion,omitempty"`
-	Platform                 *Platform                 `json:"platform,omitempty"  yaml:"platform,omitempty"`
-	NetrisIntegration        *NetrisIntegration        `json:"netris,omitempty"    yaml:"netris,omitempty"`
-	ArgoCDIntegration        *ArgoCDIntegration        `json:"argoCD,omitempty"`
-	ArgoCDDeploy             *ArgoCDDeploy             `json:"deploy,omitempty"`
-	ObservabilityIntegration *ObservabilityIntegration `json:"observability,omitempty" yaml:"observability,omitempty"`
+	Sleep             *Sleep             `json:"sleep,omitempty"     yaml:"sleep,omitempty"`
+	Snapshots         *Snapshots         `json:"snapshots,omitempty" yaml:"snapshots,omitempty"`
+	Deletion          *Deletion          `json:"deletion,omitempty"  yaml:"deletion,omitempty"`
+	Platform          *Platform          `json:"platform,omitempty"  yaml:"platform,omitempty"`
+	NetrisIntegration *NetrisIntegration `json:"netris,omitempty"    yaml:"netris,omitempty"`
+	ArgoCDIntegration *ArgoCDIntegration `json:"argoCD,omitempty"`
+	ArgoCDDeploy      *ArgoCDDeploy      `json:"deploy,omitempty"`
 }
 
 // NewDefaultPlatformConfig returns an empty platform config.
@@ -394,56 +393,4 @@ type ArgoCDApplicationTemplate struct {
 	// Parameters specifies the parameters to pass to the argo cd application template.
 	// +optional
 	Parameters map[string]interface{} `json:"parameters,omitempty"`
-}
-
-// ObservabilityIntegration holds observability integration configuration.
-// The integration is considered configured when both Enabled is true and Connector is set.
-type ObservabilityIntegration struct {
-	// Enabled defines if the observability integration is enabled.
-	// Connector must also be set for the integration to be considered configured.
-	// +optional
-	Enabled bool `json:"enabled,omitempty"`
-
-	// Connector specifies the Platform observability connector to connect to.
-	// Required when Enabled is true for the integration to be considered configured.
-	// +optional
-	Connector string `json:"connector,omitempty"`
-
-	// GatewaySecret overrides where the metrics-writer Secret is delivered.
-	// When unset, the shared default target is used: namespace "observability", name "metrics-writer".
-	// +optional
-	GatewaySecret *GatewaySecret `json:"gatewaySecret,omitempty"`
-}
-
-// GatewaySecret identifies a Secret delivery target by namespace and name.
-type GatewaySecret struct {
-	// Namespace is the namespace the Secret is delivered to.
-	// Required once a gatewaySecrets entry is present.
-	// +optional
-	Namespace string `json:"namespace,omitempty"`
-	// Name is the name of the delivered Secret.
-	// Required once a gatewaySecrets entry is present.
-	// +optional
-	Name string `json:"name,omitempty"`
-}
-
-const (
-	// DefaultObservabilityNamespace is the default namespace the metrics-writer Secret is delivered to.
-	DefaultObservabilityNamespace = "observability"
-	// DefaultMetricsWriterSecretName is the default name of the delivered metrics-writer Secret.
-	DefaultMetricsWriterSecretName = "metrics-writer"
-)
-
-// DeliveryTarget returns where the metrics-writer Secret should be delivered.
-// It returns nil when the integration is nil or disabled, so "off" stays
-// distinguishable from "default target". For an enabled integration it returns the
-// configured GatewaySecret, or the default namespace/name when none is set.
-func (o *ObservabilityIntegration) DeliveryTarget() *GatewaySecret {
-	if o == nil || !o.Enabled {
-		return nil
-	}
-	if o.GatewaySecret != nil {
-		return o.GatewaySecret
-	}
-	return &GatewaySecret{Namespace: DefaultObservabilityNamespace, Name: DefaultMetricsWriterSecretName}
 }

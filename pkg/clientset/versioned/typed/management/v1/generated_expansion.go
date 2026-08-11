@@ -88,6 +88,8 @@ type SubjectAccessReviewExpansion interface{}
 
 type TeamExpansion interface{}
 
+type TenantExpansion interface{}
+
 type TranslateVClusterResourceNameExpansion interface{}
 
 type UsageDownloadExpansion interface{}

@@ -198,19 +198,6 @@ type AppInstanceStatus struct {
 	// Revision is the revision of the helm release created by the last deployment
 	// +optional
 	Revision int `json:"revision,omitempty"`
-
-	// DeployAttempts counts the consecutive failed deploy attempts for the current
-	// spec generation and resolved app configuration. It backs the automatic retry
-	// of failed deploys and is reset whenever the deploy input changes or a deploy
-	// succeeds.
-	// +optional
-	DeployAttempts int `json:"deployAttempts,omitempty"`
-
-	// LastDeployTime is when the last deploy attempt finished, successful or not.
-	// Together with DeployAttempts it schedules the automatic retries of failed
-	// deploys.
-	// +optional
-	LastDeployTime *metav1.Time `json:"lastDeployTime,omitempty"`
 }
 
 func (a *AppInstance) GetConditions() agentstoragev1.Conditions {

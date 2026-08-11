@@ -409,6 +409,13 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 		managementv1.TeamPermissionsList{}.OpenAPIModelName():                                schema_pkg_apis_management_v1_TeamPermissionsList(ref),
 		managementv1.TeamSpec{}.OpenAPIModelName():                                           schema_pkg_apis_management_v1_TeamSpec(ref),
 		managementv1.TeamStatus{}.OpenAPIModelName():                                         schema_pkg_apis_management_v1_TeamStatus(ref),
+		managementv1.Tenant{}.OpenAPIModelName():                                             schema_pkg_apis_management_v1_Tenant(ref),
+		managementv1.TenantList{}.OpenAPIModelName():                                         schema_pkg_apis_management_v1_TenantList(ref),
+		managementv1.TenantNICoToken{}.OpenAPIModelName():                                    schema_pkg_apis_management_v1_TenantNICoToken(ref),
+		managementv1.TenantNICoTokenList{}.OpenAPIModelName():                                schema_pkg_apis_management_v1_TenantNICoTokenList(ref),
+		managementv1.TenantNICoTokenStatus{}.OpenAPIModelName():                              schema_pkg_apis_management_v1_TenantNICoTokenStatus(ref),
+		managementv1.TenantSpec{}.OpenAPIModelName():                                         schema_pkg_apis_management_v1_TenantSpec(ref),
+		managementv1.TenantStatus{}.OpenAPIModelName():                                       schema_pkg_apis_management_v1_TenantStatus(ref),
 		managementv1.TranslateVClusterResourceName{}.OpenAPIModelName():                      schema_pkg_apis_management_v1_TranslateVClusterResourceName(ref),
 		managementv1.TranslateVClusterResourceNameList{}.OpenAPIModelName():                  schema_pkg_apis_management_v1_TranslateVClusterResourceNameList(ref),
 		managementv1.TranslateVClusterResourceNameSpec{}.OpenAPIModelName():                  schema_pkg_apis_management_v1_TranslateVClusterResourceNameSpec(ref),
@@ -598,6 +605,7 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 		apisstoragev1.HelmChartRepository{}.OpenAPIModelName():                               schema_pkg_apis_storage_v1_HelmChartRepository(ref),
 		apisstoragev1.HelmConfiguration{}.OpenAPIModelName():                                 schema_pkg_apis_storage_v1_HelmConfiguration(ref),
 		apisstoragev1.HelmReleaseConfig{}.OpenAPIModelName():                                 schema_pkg_apis_storage_v1_HelmReleaseConfig(ref),
+		apisstoragev1.HostBinding{}.OpenAPIModelName():                                       schema_pkg_apis_storage_v1_HostBinding(ref),
 		apisstoragev1.InstanceAccess{}.OpenAPIModelName():                                    schema_pkg_apis_storage_v1_InstanceAccess(ref),
 		apisstoragev1.InstanceAccessRule{}.OpenAPIModelName():                                schema_pkg_apis_storage_v1_InstanceAccessRule(ref),
 		apisstoragev1.InstanceDeployedAppStatus{}.OpenAPIModelName():                         schema_pkg_apis_storage_v1_InstanceDeployedAppStatus(ref),
@@ -623,6 +631,8 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 		apisstoragev1.Metal3ProviderDeployment{}.OpenAPIModelName():                          schema_pkg_apis_storage_v1_Metal3ProviderDeployment(ref),
 		apisstoragev1.Metrics{}.OpenAPIModelName():                                           schema_pkg_apis_storage_v1_Metrics(ref),
 		apisstoragev1.MultusDeployment{}.OpenAPIModelName():                                  schema_pkg_apis_storage_v1_MultusDeployment(ref),
+		apisstoragev1.NICoIdentity{}.OpenAPIModelName():                                      schema_pkg_apis_storage_v1_NICoIdentity(ref),
+		apisstoragev1.NICoPlatformIssued{}.OpenAPIModelName():                                schema_pkg_apis_storage_v1_NICoPlatformIssued(ref),
 		apisstoragev1.NamedNodeTypeSpec{}.OpenAPIModelName():                                 schema_pkg_apis_storage_v1_NamedNodeTypeSpec(ref),
 		apisstoragev1.NamespacePattern{}.OpenAPIModelName():                                  schema_pkg_apis_storage_v1_NamespacePattern(ref),
 		apisstoragev1.NamespacedRef{}.OpenAPIModelName():                                     schema_pkg_apis_storage_v1_NamespacedRef(ref),
@@ -650,7 +660,7 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 		apisstoragev1.NodeProviderKubeVirt{}.OpenAPIModelName():                              schema_pkg_apis_storage_v1_NodeProviderKubeVirt(ref),
 		apisstoragev1.NodeProviderList{}.OpenAPIModelName():                                  schema_pkg_apis_storage_v1_NodeProviderList(ref),
 		apisstoragev1.NodeProviderMetal3{}.OpenAPIModelName():                                schema_pkg_apis_storage_v1_NodeProviderMetal3(ref),
-		apisstoragev1.NodeProviderMetal3Netris{}.OpenAPIModelName():                          schema_pkg_apis_storage_v1_NodeProviderMetal3Netris(ref),
+		apisstoragev1.NodeProviderNICo{}.OpenAPIModelName():                                  schema_pkg_apis_storage_v1_NodeProviderNICo(ref),
 		apisstoragev1.NodeProviderSpec{}.OpenAPIModelName():                                  schema_pkg_apis_storage_v1_NodeProviderSpec(ref),
 		apisstoragev1.NodeProviderStatus{}.OpenAPIModelName():                                schema_pkg_apis_storage_v1_NodeProviderStatus(ref),
 		apisstoragev1.NodeProviderTerraform{}.OpenAPIModelName():                             schema_pkg_apis_storage_v1_NodeProviderTerraform(ref),
@@ -678,9 +688,13 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 		apisstoragev1.QuotaStatusProjectCluster{}.OpenAPIModelName():                         schema_pkg_apis_storage_v1_QuotaStatusProjectCluster(ref),
 		apisstoragev1.QuotaStatusUser{}.OpenAPIModelName():                                   schema_pkg_apis_storage_v1_QuotaStatusUser(ref),
 		apisstoragev1.QuotaStatusUserUsed{}.OpenAPIModelName():                               schema_pkg_apis_storage_v1_QuotaStatusUserUsed(ref),
+		apisstoragev1.QuotaUsage{}.OpenAPIModelName():                                        schema_pkg_apis_storage_v1_QuotaUsage(ref),
 		apisstoragev1.Quotas{}.OpenAPIModelName():                                            schema_pkg_apis_storage_v1_Quotas(ref),
 		apisstoragev1.RequirePreset{}.OpenAPIModelName():                                     schema_pkg_apis_storage_v1_RequirePreset(ref),
 		apisstoragev1.RequireTemplate{}.OpenAPIModelName():                                   schema_pkg_apis_storage_v1_RequireTemplate(ref),
+		apisstoragev1.ResourceAllowance{}.OpenAPIModelName():                                 schema_pkg_apis_storage_v1_ResourceAllowance(ref),
+		apisstoragev1.ResourceQuota{}.OpenAPIModelName():                                     schema_pkg_apis_storage_v1_ResourceQuota(ref),
+		apisstoragev1.ResourceQuotaStatus{}.OpenAPIModelName():                               schema_pkg_apis_storage_v1_ResourceQuotaStatus(ref),
 		apisstoragev1.SSHKey{}.OpenAPIModelName():                                            schema_pkg_apis_storage_v1_SSHKey(ref),
 		apisstoragev1.SSHKeyList{}.OpenAPIModelName():                                        schema_pkg_apis_storage_v1_SSHKeyList(ref),
 		apisstoragev1.SSHKeySpec{}.OpenAPIModelName():                                        schema_pkg_apis_storage_v1_SSHKeySpec(ref),
@@ -715,6 +729,11 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 		apisstoragev1.TemplateHelmChart{}.OpenAPIModelName():                                 schema_pkg_apis_storage_v1_TemplateHelmChart(ref),
 		apisstoragev1.TemplateMetadata{}.OpenAPIModelName():                                  schema_pkg_apis_storage_v1_TemplateMetadata(ref),
 		apisstoragev1.TemplateRef{}.OpenAPIModelName():                                       schema_pkg_apis_storage_v1_TemplateRef(ref),
+		apisstoragev1.Tenant{}.OpenAPIModelName():                                            schema_pkg_apis_storage_v1_Tenant(ref),
+		apisstoragev1.TenantList{}.OpenAPIModelName():                                        schema_pkg_apis_storage_v1_TenantList(ref),
+		apisstoragev1.TenantNICoStatus{}.OpenAPIModelName():                                  schema_pkg_apis_storage_v1_TenantNICoStatus(ref),
+		apisstoragev1.TenantSpec{}.OpenAPIModelName():                                        schema_pkg_apis_storage_v1_TenantSpec(ref),
+		apisstoragev1.TenantStatus{}.OpenAPIModelName():                                      schema_pkg_apis_storage_v1_TenantStatus(ref),
 		apisstoragev1.TerraformNodeEnvironmentTemplate{}.OpenAPIModelName():                  schema_pkg_apis_storage_v1_TerraformNodeEnvironmentTemplate(ref),
 		apisstoragev1.TerraformNodeTypeSpec{}.OpenAPIModelName():                             schema_pkg_apis_storage_v1_TerraformNodeTypeSpec(ref),
 		apisstoragev1.TerraformTemplate{}.OpenAPIModelName():                                 schema_pkg_apis_storage_v1_TerraformTemplate(ref),
@@ -725,7 +744,6 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 		apisstoragev1.UserOrTeamEntity{}.OpenAPIModelName():                                  schema_pkg_apis_storage_v1_UserOrTeamEntity(ref),
 		apisstoragev1.UserSpec{}.OpenAPIModelName():                                          schema_pkg_apis_storage_v1_UserSpec(ref),
 		apisstoragev1.UserStatus{}.OpenAPIModelName():                                        schema_pkg_apis_storage_v1_UserStatus(ref),
-		apisstoragev1.VClusterDeviceOperatorDeployment{}.OpenAPIModelName():                  schema_pkg_apis_storage_v1_VClusterDeviceOperatorDeployment(ref),
 		apisstoragev1.VaultAuthSpec{}.OpenAPIModelName():                                     schema_pkg_apis_storage_v1_VaultAuthSpec(ref),
 		apisstoragev1.VaultIntegrationSpec{}.OpenAPIModelName():                              schema_pkg_apis_storage_v1_VaultIntegrationSpec(ref),
 		apisstoragev1.VirtualClusterAccessPoint{}.OpenAPIModelName():                         schema_pkg_apis_storage_v1_VirtualClusterAccessPoint(ref),
@@ -5698,24 +5716,11 @@ func schema_pkg_apis_management_v1_AppInstanceStatus(ref common.ReferenceCallbac
 							Format:      "int32",
 						},
 					},
-					"deployAttempts": {
-						SchemaProps: spec.SchemaProps{
-							Description: "DeployAttempts counts the consecutive failed deploy attempts for the current spec generation and resolved app configuration. It backs the automatic retry of failed deploys and is reset whenever the deploy input changes or a deploy succeeds.",
-							Type:        []string{"integer"},
-							Format:      "int32",
-						},
-					},
-					"lastDeployTime": {
-						SchemaProps: spec.SchemaProps{
-							Description: "LastDeployTime is when the last deploy attempt finished, successful or not. Together with DeployAttempts it schedules the automatic retries of failed deploys.",
-							Ref:         ref(metav1.Time{}.OpenAPIModelName()),
-						},
-					},
 				},
 			},
 		},
 		Dependencies: []string{
-			storagev1.Condition{}.OpenAPIModelName(), apisstoragev1.AppConfig{}.OpenAPIModelName(), metav1.Time{}.OpenAPIModelName()},
+			storagev1.Condition{}.OpenAPIModelName(), apisstoragev1.AppConfig{}.OpenAPIModelName()},
 	}
 }
 
@@ -12605,6 +12610,12 @@ func schema_pkg_apis_management_v1_NodeProviderSpec(ref common.ReferenceCallback
 							Ref:         ref(apisstoragev1.NodeProviderMetal3{}.OpenAPIModelName()),
 						},
 					},
+					"nico": {
+						SchemaProps: spec.SchemaProps{
+							Description: "NICo configures a node provider backed by the NVIDIA Infra Controller (NICo) REST API.",
+							Ref:         ref(apisstoragev1.NodeProviderNICo{}.OpenAPIModelName()),
+						},
+					},
 					"displayName": {
 						SchemaProps: spec.SchemaProps{
 							Description: "DisplayName is the name that should be displayed in the UI",
@@ -12616,7 +12627,7 @@ func schema_pkg_apis_management_v1_NodeProviderSpec(ref common.ReferenceCallback
 			},
 		},
 		Dependencies: []string{
-			apisstoragev1.NodeProviderBCM{}.OpenAPIModelName(), apisstoragev1.NodeProviderClusterAPI{}.OpenAPIModelName(), apisstoragev1.NodeProviderKubeVirt{}.OpenAPIModelName(), apisstoragev1.NodeProviderMetal3{}.OpenAPIModelName(), apisstoragev1.NodeProviderTerraform{}.OpenAPIModelName()},
+			apisstoragev1.NodeProviderBCM{}.OpenAPIModelName(), apisstoragev1.NodeProviderClusterAPI{}.OpenAPIModelName(), apisstoragev1.NodeProviderKubeVirt{}.OpenAPIModelName(), apisstoragev1.NodeProviderMetal3{}.OpenAPIModelName(), apisstoragev1.NodeProviderNICo{}.OpenAPIModelName(), apisstoragev1.NodeProviderTerraform{}.OpenAPIModelName()},
 	}
 }
 
@@ -18528,6 +18539,390 @@ func schema_pkg_apis_management_v1_TeamStatus(ref common.ReferenceCallback) comm
 	}
 }
 
+func schema_pkg_apis_management_v1_Tenant(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "Tenant is the management API projection of the storage.loft.sh/v1 Tenant CRD. Identical Spec/Status shape; conversion is generated.",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"kind": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"apiVersion": {
+						SchemaProps: spec.SchemaProps{
+							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"metadata": {
+						SchemaProps: spec.SchemaProps{
+							Default: map[string]interface{}{},
+							Ref:     ref(metav1.ObjectMeta{}.OpenAPIModelName()),
+						},
+					},
+					"spec": {
+						SchemaProps: spec.SchemaProps{
+							Default: map[string]interface{}{},
+							Ref:     ref(managementv1.TenantSpec{}.OpenAPIModelName()),
+						},
+					},
+					"status": {
+						SchemaProps: spec.SchemaProps{
+							Default: map[string]interface{}{},
+							Ref:     ref(managementv1.TenantStatus{}.OpenAPIModelName()),
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			managementv1.TenantSpec{}.OpenAPIModelName(), managementv1.TenantStatus{}.OpenAPIModelName(), metav1.ObjectMeta{}.OpenAPIModelName()},
+	}
+}
+
+func schema_pkg_apis_management_v1_TenantList(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"kind": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"apiVersion": {
+						SchemaProps: spec.SchemaProps{
+							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"metadata": {
+						SchemaProps: spec.SchemaProps{
+							Default: map[string]interface{}{},
+							Ref:     ref(metav1.ListMeta{}.OpenAPIModelName()),
+						},
+					},
+					"items": {
+						SchemaProps: spec.SchemaProps{
+							Type: []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref(managementv1.Tenant{}.OpenAPIModelName()),
+									},
+								},
+							},
+						},
+					},
+				},
+				Required: []string{"items"},
+			},
+		},
+		Dependencies: []string{
+			managementv1.Tenant{}.OpenAPIModelName(), metav1.ListMeta{}.OpenAPIModelName()},
+	}
+}
+
+func schema_pkg_apis_management_v1_TenantNICoToken(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "TenantNICoToken holds the request and response for a short-lived, user-scoped NICo token for the tenant's onboarded org.",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"kind": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"apiVersion": {
+						SchemaProps: spec.SchemaProps{
+							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"metadata": {
+						SchemaProps: spec.SchemaProps{
+							Default: map[string]interface{}{},
+							Ref:     ref(metav1.ObjectMeta{}.OpenAPIModelName()),
+						},
+					},
+					"status": {
+						SchemaProps: spec.SchemaProps{
+							Default: map[string]interface{}{},
+							Ref:     ref(managementv1.TenantNICoTokenStatus{}.OpenAPIModelName()),
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			managementv1.TenantNICoTokenStatus{}.OpenAPIModelName(), metav1.ObjectMeta{}.OpenAPIModelName()},
+	}
+}
+
+func schema_pkg_apis_management_v1_TenantNICoTokenList(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"kind": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"apiVersion": {
+						SchemaProps: spec.SchemaProps{
+							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"metadata": {
+						SchemaProps: spec.SchemaProps{
+							Default: map[string]interface{}{},
+							Ref:     ref(metav1.ListMeta{}.OpenAPIModelName()),
+						},
+					},
+					"items": {
+						SchemaProps: spec.SchemaProps{
+							Type: []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref(managementv1.TenantNICoToken{}.OpenAPIModelName()),
+									},
+								},
+							},
+						},
+					},
+				},
+				Required: []string{"items"},
+			},
+		},
+		Dependencies: []string{
+			managementv1.TenantNICoToken{}.OpenAPIModelName(), metav1.ListMeta{}.OpenAPIModelName()},
+	}
+}
+
+func schema_pkg_apis_management_v1_TenantNICoTokenStatus(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"token": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Token is the platform-signed NICo bearer token.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"org": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Org is the NICo organization the token is scoped to.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"endpoint": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Endpoint is the NICo REST API endpoint the token is minted for.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+				},
+			},
+		},
+	}
+}
+
+func schema_pkg_apis_management_v1_TenantSpec(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "TenantSpec holds the specification.",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"displayName": {
+						SchemaProps: spec.SchemaProps{
+							Description: "DisplayName is the name that should be displayed in the UI.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"description": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Description describes this Tenant.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"owner": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Owner holds the owner of this Tenant. Access carries RBAC for the Tenant resource itself (transformed to Roles and RoleBindings), governing operator-side delegation — which Platform Operator users may read or edit this Tenant. Tenant membership for humans is carried as a loft:tenant:<name> group claim on User/Team, not by Access.",
+							Ref:         ref(apisstoragev1.UserOrTeam{}.OpenAPIModelName()),
+						},
+					},
+					"access": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Access holds the access rights for users and teams on the Tenant CR itself.",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref(apisstoragev1.Access{}.OpenAPIModelName()),
+									},
+								},
+							},
+						},
+					},
+					"hosts": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Hosts are the hostnames that map to this tenant. Used for SSO bootstrap, UI branding, and per-request tenant resolution.",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref(apisstoragev1.HostBinding{}.OpenAPIModelName()),
+									},
+								},
+							},
+						},
+					},
+					"auth": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Authentication holds per-tenant SSO connector configuration. Mirrors Config.Status.Authentication — same Go type — so the platform's existing connector machinery can dispatch from a Tenant's value.",
+							Ref:         ref(apisstoragev1.Authentication{}.OpenAPIModelName()),
+						},
+					},
+					"resourceAllowances": {
+						SchemaProps: spec.SchemaProps{
+							Description: "ResourceAllowances controls, per management.loft.sh kind, which admin-owned resources this tenant may see and use, and how (see ScopeMode). Each entry overrides the platform's shipped default for the matched instances. Multiple entries per resource are allowed (e.g. a co-held pool plus one leased instance); a name-matched entry wins over a kind-wide (no-resourceNames) entry. A resource with no entry falls to the shipped per-kind default, then to the catch-all. ScopeUnscoped is status-only and is rejected here.",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref(apisstoragev1.ResourceAllowance{}.OpenAPIModelName()),
+									},
+								},
+							},
+						},
+					},
+					"resourceQuotas": {
+						SchemaProps: spec.SchemaProps{
+							Description: "ResourceQuotas caps how many of a resource this tenant may hold or consume, aggregated across all the tenant's projects. Parity with Project quotas, not a replacement (Projects keep their per-project quotas; the tenant quota is an outer bound).",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref(apisstoragev1.ResourceQuota{}.OpenAPIModelName()),
+									},
+								},
+							},
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			apisstoragev1.Access{}.OpenAPIModelName(), apisstoragev1.Authentication{}.OpenAPIModelName(), apisstoragev1.HostBinding{}.OpenAPIModelName(), apisstoragev1.ResourceAllowance{}.OpenAPIModelName(), apisstoragev1.ResourceQuota{}.OpenAPIModelName(), apisstoragev1.UserOrTeam{}.OpenAPIModelName()},
+	}
+}
+
+func schema_pkg_apis_management_v1_TenantStatus(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "TenantStatus holds the status.",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"conditions": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Conditions describes the current observed conditions of the Tenant.",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref(storagev1.Condition{}.OpenAPIModelName()),
+									},
+								},
+							},
+						},
+					},
+					"observedGeneration": {
+						SchemaProps: spec.SchemaProps{
+							Description: "ObservedGeneration is the generation last observed by the reconciler.",
+							Type:        []string{"integer"},
+							Format:      "int64",
+						},
+					},
+					"resourceAllowances": {
+						SchemaProps: spec.SchemaProps{
+							Description: "ResourceAllowances is the resolved effective scope for every scopable management.loft.sh kind for this tenant: the shipped per-kind defaults merged with Spec.ResourceAllowances. Each entry's Scope is the effective scope and may be ScopeUnscoped. Recomputed each reconcile from discovery scope live at request time). The leased entries are the per-Tenant projection of the cross-Tenant exclusivity index.",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref(apisstoragev1.ResourceAllowance{}.OpenAPIModelName()),
+									},
+								},
+							},
+						},
+					},
+					"resourceQuotas": {
+						SchemaProps: spec.SchemaProps{
+							Description: "ResourceQuotas reports usage against the Spec.ResourceQuotas caps, aggregated across the tenant's projects.",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref(apisstoragev1.ResourceQuotaStatus{}.OpenAPIModelName()),
+									},
+								},
+							},
+						},
+					},
+					"nico": {
+						SchemaProps: spec.SchemaProps{
+							Description: "NICo reports the NICo tenant org materialized for this Tenant, set once the Tenant opts into NICo via the nico.vcluster.com/org annotation.",
+							Ref:         ref(apisstoragev1.TenantNICoStatus{}.OpenAPIModelName()),
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			storagev1.Condition{}.OpenAPIModelName(), apisstoragev1.ResourceAllowance{}.OpenAPIModelName(), apisstoragev1.ResourceQuotaStatus{}.OpenAPIModelName(), apisstoragev1.TenantNICoStatus{}.OpenAPIModelName()},
+	}
+}
+
 func schema_pkg_apis_management_v1_TranslateVClusterResourceName(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
@@ -24010,24 +24405,11 @@ func schema_pkg_apis_storage_v1_AppInstanceStatus(ref common.ReferenceCallback) 
 							Format:      "int32",
 						},
 					},
-					"deployAttempts": {
-						SchemaProps: spec.SchemaProps{
-							Description: "DeployAttempts counts the consecutive failed deploy attempts for the current spec generation and resolved app configuration. It backs the automatic retry of failed deploys and is reset whenever the deploy input changes or a deploy succeeds.",
-							Type:        []string{"integer"},
-							Format:      "int32",
-						},
-					},
-					"lastDeployTime": {
-						SchemaProps: spec.SchemaProps{
-							Description: "LastDeployTime is when the last deploy attempt finished, successful or not. Together with DeployAttempts it schedules the automatic retries of failed deploys.",
-							Ref:         ref(metav1.Time{}.OpenAPIModelName()),
-						},
-					},
 				},
 			},
 		},
 		Dependencies: []string{
-			storagev1.Condition{}.OpenAPIModelName(), apisstoragev1.AppConfig{}.OpenAPIModelName(), metav1.Time{}.OpenAPIModelName()},
+			storagev1.Condition{}.OpenAPIModelName(), apisstoragev1.AppConfig{}.OpenAPIModelName()},
 	}
 }
 
@@ -27833,6 +28215,28 @@ func schema_pkg_apis_storage_v1_HelmReleaseConfig(ref common.ReferenceCallback) 
 	}
 }
 
+func schema_pkg_apis_storage_v1_HostBinding(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "HostBinding binds a hostname to this Tenant for routing and SSO resolution.",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"hostname": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Hostname is the DNS name the platform will treat as belonging to this Tenant (e.g. acme.platform.example.com).",
+							Default:     "",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+				},
+				Required: []string{"hostname"},
+			},
+		},
+	}
+}
+
 func schema_pkg_apis_storage_v1_InstanceAccess(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
@@ -28192,17 +28596,11 @@ func schema_pkg_apis_storage_v1_KubeVirtProviderDeployment(ref common.ReferenceC
 							Ref:         ref(apisstoragev1.KubeVirtDeployment{}.OpenAPIModelName()),
 						},
 					},
-					"vClusterDeviceOperator": {
-						SchemaProps: spec.SchemaProps{
-							Description: "VClusterDeviceOperator configures the vCluster device operator deployment.",
-							Ref:         ref(apisstoragev1.VClusterDeviceOperatorDeployment{}.OpenAPIModelName()),
-						},
-					},
 				},
 			},
 		},
 		Dependencies: []string{
-			apisstoragev1.KubeVirtDeployment{}.OpenAPIModelName(), apisstoragev1.VClusterDeviceOperatorDeployment{}.OpenAPIModelName()},
+			apisstoragev1.KubeVirtDeployment{}.OpenAPIModelName()},
 	}
 }
 
@@ -29087,6 +29485,51 @@ func schema_pkg_apis_storage_v1_MultusDeployment(ref common.ReferenceCallback) c
 						SchemaProps: spec.SchemaProps{
 							Description: "HelmValues is raw YAML that will be passed as values to the Multus Helm chart.",
 							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+				},
+				Required: []string{"enabled"},
+			},
+		},
+	}
+}
+
+func schema_pkg_apis_storage_v1_NICoIdentity(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "NICoIdentity selects the source of the tokens the platform uses to authenticate to the NICo REST API. Exactly one source is configured; today only platform-issued tokens are supported.",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"platformIssued": {
+						SchemaProps: spec.SchemaProps{
+							Description: "PlatformIssued authenticates with short-TTL RS256 JWTs that the platform signs with its own OIDC key and issuer and NICo verifies against the platform's OIDC JWKS.",
+							Default:     map[string]interface{}{},
+							Ref:         ref(apisstoragev1.NICoPlatformIssued{}.OpenAPIModelName()),
+						},
+					},
+				},
+				Required: []string{"platformIssued"},
+			},
+		},
+		Dependencies: []string{
+			apisstoragev1.NICoPlatformIssued{}.OpenAPIModelName()},
+	}
+}
+
+func schema_pkg_apis_storage_v1_NICoPlatformIssued(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "NICoPlatformIssued configures platform-issued JWT authentication to NICo.",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"enabled": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Enabled turns on platform-issued JWT authentication. It must be true, since platform-issued tokens are currently the only supported identity source.",
+							Default:     false,
+							Type:        []string{"boolean"},
 							Format:      "",
 						},
 					},
@@ -30397,13 +30840,6 @@ func schema_pkg_apis_storage_v1_NodeProviderKubeVirt(ref common.ReferenceCallbac
 							Ref:         ref(apisstoragev1.NodeProviderClusterRef{}.OpenAPIModelName()),
 						},
 					},
-					"namespaceStrategy": {
-						SchemaProps: spec.SchemaProps{
-							Description: "NamespaceStrategy determines in which namespace of the connected cluster the VirtualMachines are created. \"Provider\" (default) creates all VirtualMachines in clusterRef.namespace. \"VirtualCluster\" creates the VirtualMachines in the namespace of the tenant cluster the NodeClaim belongs to. If the NodeClaim cannot be traced back to a tenant cluster namespace within clusterRef.cluster, clusterRef.namespace is used instead.",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
 					"deploy": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Deploy configures components deployed into the connected control plane cluster.",
@@ -30522,45 +30958,91 @@ func schema_pkg_apis_storage_v1_NodeProviderMetal3(ref common.ReferenceCallback)
 							},
 						},
 					},
-					"neutronEnabled": {
+				},
+			},
+		},
+		Dependencies: []string{
+			apisstoragev1.Metal3NodeTypeSpec{}.OpenAPIModelName(), apisstoragev1.Metal3ProviderDeployment{}.OpenAPIModelName(), apisstoragev1.NodeProviderClusterRef{}.OpenAPIModelName()},
+	}
+}
+
+func schema_pkg_apis_storage_v1_NodeProviderNICo(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "NodeProviderNICo configures a node provider backed by the NVIDIA Infra Controller (NICo) REST API. The NICo tenant org is taken from the platform Tenant's nico.vcluster.com/org annotation, not from this provider config.",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"endpoint": {
 						SchemaProps: spec.SchemaProps{
-							Description: "NeutronEnabled turns on the neutron network shim for this provider: BareMetalHost network attachments are allocated by the platform and reconciled through ConfigMaps instead of being written directly as DHCP annotations.",
+							Description: "Endpoint is the base URL (scheme + host + optional port) of the NICo REST API. The /v2/org/{org}/nico path is appended by the client.",
+							Default:     "",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"org": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Org is the NICo organization used for provider-scoped API calls (the /v2/org/{org}/nico path) and stamped as the provider token's organization claim. Optional; defaults to \"vcluster-autonodes\".",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"siteId": {
+						SchemaProps: spec.SchemaProps{
+							Description: "SiteID is the NICo site UUID this provider operates against.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"siteIPBlockID": {
+						SchemaProps: spec.SchemaProps{
+							Description: "SiteIPBlockID adopts an existing NICo site-level parent IPBlock. Mutually exclusive with SiteIPBlockCIDR.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"siteIPBlockCIDR": {
+						SchemaProps: spec.SchemaProps{
+							Description: "SiteIPBlockCIDR creates the NICo site-level parent IPBlock with this CIDR. Mutually exclusive with SiteIPBlockID.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"instanceTypeIds": {
+						SchemaProps: spec.SchemaProps{
+							Description: "InstanceTypeIDs is an allow-list of NICo InstanceType IDs to surface as NodeTypes. Empty surfaces all.",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: "",
+										Type:    []string{"string"},
+										Format:  "",
+									},
+								},
+							},
+						},
+					},
+					"identity": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Identity selects how the platform authenticates to the NICo REST API. Platform-issued JWTs are currently the only supported source, so identity.platformIssued.enabled must be true. The block is structured so additional identity sources can be added later.",
+							Ref:         ref(apisstoragev1.NICoIdentity{}.OpenAPIModelName()),
+						},
+					},
+					"insecureSkipTLSVerify": {
+						SchemaProps: spec.SchemaProps{
+							Description: "InsecureSkipTLSVerify disables TLS certificate verification against the NICo endpoint. Intended for development and test only.",
 							Type:        []string{"boolean"},
 							Format:      "",
 						},
 					},
-					"netris": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Netris attaches BareMetalHosts to a Netris server cluster on provisioning.",
-							Ref:         ref(apisstoragev1.NodeProviderMetal3Netris{}.OpenAPIModelName()),
-						},
-					},
 				},
+				Required: []string{"endpoint"},
 			},
 		},
 		Dependencies: []string{
-			apisstoragev1.Metal3NodeTypeSpec{}.OpenAPIModelName(), apisstoragev1.Metal3ProviderDeployment{}.OpenAPIModelName(), apisstoragev1.NodeProviderClusterRef{}.OpenAPIModelName(), apisstoragev1.NodeProviderMetal3Netris{}.OpenAPIModelName()},
-	}
-}
-
-func schema_pkg_apis_storage_v1_NodeProviderMetal3Netris(ref common.ReferenceCallback) common.OpenAPIDefinition {
-	return common.OpenAPIDefinition{
-		Schema: spec.Schema{
-			SchemaProps: spec.SchemaProps{
-				Type: []string{"object"},
-				Properties: map[string]spec.Schema{
-					"secretRef": {
-						SchemaProps: spec.SchemaProps{
-							Description: "SecretRef references a Secret with keys url, username and password for the Netris API.",
-							Ref:         ref(apisstoragev1.NamespacedRef{}.OpenAPIModelName()),
-						},
-					},
-				},
-				Required: []string{"secretRef"},
-			},
-		},
-		Dependencies: []string{
-			apisstoragev1.NamespacedRef{}.OpenAPIModelName()},
+			apisstoragev1.NICoIdentity{}.OpenAPIModelName()},
 	}
 }
 
@@ -30617,6 +31099,12 @@ func schema_pkg_apis_storage_v1_NodeProviderSpec(ref common.ReferenceCallback) c
 							Ref:         ref(apisstoragev1.NodeProviderMetal3{}.OpenAPIModelName()),
 						},
 					},
+					"nico": {
+						SchemaProps: spec.SchemaProps{
+							Description: "NICo configures a node provider backed by the NVIDIA Infra Controller (NICo) REST API.",
+							Ref:         ref(apisstoragev1.NodeProviderNICo{}.OpenAPIModelName()),
+						},
+					},
 					"displayName": {
 						SchemaProps: spec.SchemaProps{
 							Description: "DisplayName is the name that should be displayed in the UI",
@@ -30628,7 +31116,7 @@ func schema_pkg_apis_storage_v1_NodeProviderSpec(ref common.ReferenceCallback) c
 			},
 		},
 		Dependencies: []string{
-			apisstoragev1.NodeProviderBCM{}.OpenAPIModelName(), apisstoragev1.NodeProviderClusterAPI{}.OpenAPIModelName(), apisstoragev1.NodeProviderKubeVirt{}.OpenAPIModelName(), apisstoragev1.NodeProviderMetal3{}.OpenAPIModelName(), apisstoragev1.NodeProviderTerraform{}.OpenAPIModelName()},
+			apisstoragev1.NodeProviderBCM{}.OpenAPIModelName(), apisstoragev1.NodeProviderClusterAPI{}.OpenAPIModelName(), apisstoragev1.NodeProviderKubeVirt{}.OpenAPIModelName(), apisstoragev1.NodeProviderMetal3{}.OpenAPIModelName(), apisstoragev1.NodeProviderNICo{}.OpenAPIModelName(), apisstoragev1.NodeProviderTerraform{}.OpenAPIModelName()},
 	}
 }
 
@@ -31897,6 +32385,51 @@ func schema_pkg_apis_storage_v1_QuotaStatusUserUsed(ref common.ReferenceCallback
 	}
 }
 
+func schema_pkg_apis_storage_v1_QuotaUsage(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "QuotaUsage pairs configured limits with observed usage; both maps are keyed by the same condition keys as the corresponding ResourceQuota.",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"limit": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Limit echoes the configured caps (condition key -> count).",
+							Type:        []string{"object"},
+							AdditionalProperties: &spec.SchemaOrBool{
+								Allows: true,
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: "",
+										Type:    []string{"string"},
+										Format:  "",
+									},
+								},
+							},
+						},
+					},
+					"used": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Used is the observed usage (condition key -> count).",
+							Type:        []string{"object"},
+							AdditionalProperties: &spec.SchemaOrBool{
+								Allows: true,
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: "",
+										Type:    []string{"string"},
+										Format:  "",
+									},
+								},
+							},
+						},
+					},
+				},
+			},
+		},
+	}
+}
+
 func schema_pkg_apis_storage_v1_Quotas(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
@@ -31976,6 +32509,140 @@ func schema_pkg_apis_storage_v1_RequireTemplate(ref common.ReferenceCallback) co
 				},
 			},
 		},
+	}
+}
+
+func schema_pkg_apis_storage_v1_ResourceAllowance(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "ResourceAllowance scopes one management.loft.sh kind (optionally narrowed to specific instances) for a tenant. Used in Spec (operator intent) and in Status (resolved effective scope).",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"resource": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Resource is the lowercase plural name of a management.loft.sh resource (e.g. \"projects\", \"clusters\", \"virtualclustertemplates\"). The group is always management.loft.sh, so there is no apiGroup field.",
+							Default:     "",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"scope": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Scope is the treatment applied to this resource for the tenant.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"resourceNames": {
+						SchemaProps: spec.SchemaProps{
+							Description: "ResourceNames narrows the entry to specific admin-owned instances by name. Empty or [\"*\"] applies to the whole kind. Only meaningful for granted/leased.",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: "",
+										Type:    []string{"string"},
+										Format:  "",
+									},
+								},
+							},
+						},
+					},
+				},
+				Required: []string{"resource"},
+			},
+		},
+	}
+}
+
+func schema_pkg_apis_storage_v1_ResourceQuota(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "ResourceQuota caps consumption of one management.loft.sh resource for a tenant. Keys in the Tenant/User maps are conditions relative to the resource — \"total\", \"active\", \"!active\", \"template=<name>\", \"type=<name>\", \"provider=<name>\" — and values are integer counts.",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"resource": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Resource is the lowercase plural name of the counted management.loft.sh resource (e.g. \"virtualclusterinstances\", \"nodeclaims\").",
+							Default:     "",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"tenant": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Tenant caps usage aggregated across all the tenant's projects.",
+							Type:        []string{"object"},
+							AdditionalProperties: &spec.SchemaOrBool{
+								Allows: true,
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: "",
+										Type:    []string{"string"},
+										Format:  "",
+									},
+								},
+							},
+						},
+					},
+					"user": {
+						SchemaProps: spec.SchemaProps{
+							Description: "User caps usage per individual user or team.",
+							Type:        []string{"object"},
+							AdditionalProperties: &spec.SchemaOrBool{
+								Allows: true,
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: "",
+										Type:    []string{"string"},
+										Format:  "",
+									},
+								},
+							},
+						},
+					},
+				},
+				Required: []string{"resource"},
+			},
+		},
+	}
+}
+
+func schema_pkg_apis_storage_v1_ResourceQuotaStatus(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "ResourceQuotaStatus reports limit-vs-used for one resource's quota.",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"resource": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Resource is the counted management.loft.sh resource.",
+							Default:     "",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"tenant": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Tenant reports the tenant-aggregate limit and used counts.",
+							Ref:         ref(apisstoragev1.QuotaUsage{}.OpenAPIModelName()),
+						},
+					},
+					"user": {
+						SchemaProps: spec.SchemaProps{
+							Description: "User reports the per-user/team limit and used counts.",
+							Ref:         ref(apisstoragev1.QuotaUsage{}.OpenAPIModelName()),
+						},
+					},
+				},
+				Required: []string{"resource"},
+			},
+		},
+		Dependencies: []string{
+			apisstoragev1.QuotaUsage{}.OpenAPIModelName()},
 	}
 }
 
@@ -33598,6 +34265,344 @@ func schema_pkg_apis_storage_v1_TemplateRef(ref common.ReferenceCallback) common
 	}
 }
 
+func schema_pkg_apis_storage_v1_Tenant(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "Tenant is a customer-scoped envelope sitting between Global and Project. It is optional: installs with no Tenant objects behave exactly as today.",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"kind": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"apiVersion": {
+						SchemaProps: spec.SchemaProps{
+							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"metadata": {
+						SchemaProps: spec.SchemaProps{
+							Default: map[string]interface{}{},
+							Ref:     ref(metav1.ObjectMeta{}.OpenAPIModelName()),
+						},
+					},
+					"spec": {
+						SchemaProps: spec.SchemaProps{
+							Default: map[string]interface{}{},
+							Ref:     ref(apisstoragev1.TenantSpec{}.OpenAPIModelName()),
+						},
+					},
+					"status": {
+						SchemaProps: spec.SchemaProps{
+							Default: map[string]interface{}{},
+							Ref:     ref(apisstoragev1.TenantStatus{}.OpenAPIModelName()),
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			apisstoragev1.TenantSpec{}.OpenAPIModelName(), apisstoragev1.TenantStatus{}.OpenAPIModelName(), metav1.ObjectMeta{}.OpenAPIModelName()},
+	}
+}
+
+func schema_pkg_apis_storage_v1_TenantList(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "TenantList contains a list of Tenant objects.",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"kind": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"apiVersion": {
+						SchemaProps: spec.SchemaProps{
+							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"metadata": {
+						SchemaProps: spec.SchemaProps{
+							Default: map[string]interface{}{},
+							Ref:     ref(metav1.ListMeta{}.OpenAPIModelName()),
+						},
+					},
+					"items": {
+						SchemaProps: spec.SchemaProps{
+							Type: []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref(apisstoragev1.Tenant{}.OpenAPIModelName()),
+									},
+								},
+							},
+						},
+					},
+				},
+				Required: []string{"items"},
+			},
+		},
+		Dependencies: []string{
+			apisstoragev1.Tenant{}.OpenAPIModelName(), metav1.ListMeta{}.OpenAPIModelName()},
+	}
+}
+
+func schema_pkg_apis_storage_v1_TenantNICoStatus(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "TenantNICoStatus reports the NICo tenant org materialized for a Tenant and the NICo provider it is bound to, and is set by the platform. A Tenant is bound to a single NICo provider, and so to a single NICo site.",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"org": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Org is the NICo tenant org this Tenant maps to.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"tenantId": {
+						SchemaProps: spec.SchemaProps{
+							Description: "TenantID is the id of the materialized NICo tenant.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"nodeProvider": {
+						SchemaProps: spec.SchemaProps{
+							Description: "NodeProvider is the platform NodeProvider this Tenant uses.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"endpoint": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Endpoint is the NICo REST API endpoint taken from that NodeProvider.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"providerOrg": {
+						SchemaProps: spec.SchemaProps{
+							Description: "ProviderOrg is the NICo provider organization.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"insecureSkipTLSVerify": {
+						SchemaProps: spec.SchemaProps{
+							Description: "InsecureSkipTLSVerify reports whether TLS verification is skipped when reaching the NICo endpoint.",
+							Type:        []string{"boolean"},
+							Format:      "",
+						},
+					},
+					"tenantAccountId": {
+						SchemaProps: spec.SchemaProps{
+							Description: "TenantAccountID is the id of this Tenant's NICo TenantAccount.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"tenantAccountManaged": {
+						SchemaProps: spec.SchemaProps{
+							Description: "TenantAccountManaged reports whether the platform owns the NICo TenantAccount and removes it during cleanup.",
+							Type:        []string{"boolean"},
+							Format:      "",
+						},
+					},
+					"ipBlockId": {
+						SchemaProps: spec.SchemaProps{
+							Description: "IPBlockID is the id of the tenant-scoped NICo IPBlock from which VPC prefixes are carved. Set by the tenant onboarding flow (ENGNODE-604).",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+				},
+			},
+		},
+	}
+}
+
+func schema_pkg_apis_storage_v1_TenantSpec(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"displayName": {
+						SchemaProps: spec.SchemaProps{
+							Description: "DisplayName is the name that should be displayed in the UI.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"description": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Description describes this Tenant.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"owner": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Owner holds the owner of this Tenant. Access carries RBAC for the Tenant resource itself (transformed to Roles and RoleBindings), governing operator-side delegation — which Platform Operator users may read or edit this Tenant. Tenant membership for humans is carried as a loft:tenant:<name> group claim on User/Team, not by Access.",
+							Ref:         ref(apisstoragev1.UserOrTeam{}.OpenAPIModelName()),
+						},
+					},
+					"access": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Access holds the access rights for users and teams on the Tenant CR itself.",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref(apisstoragev1.Access{}.OpenAPIModelName()),
+									},
+								},
+							},
+						},
+					},
+					"hosts": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Hosts are the hostnames that map to this tenant. Used for SSO bootstrap, UI branding, and per-request tenant resolution.",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref(apisstoragev1.HostBinding{}.OpenAPIModelName()),
+									},
+								},
+							},
+						},
+					},
+					"auth": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Authentication holds per-tenant SSO connector configuration. Mirrors Config.Status.Authentication — same Go type — so the platform's existing connector machinery can dispatch from a Tenant's value.",
+							Ref:         ref(apisstoragev1.Authentication{}.OpenAPIModelName()),
+						},
+					},
+					"resourceAllowances": {
+						SchemaProps: spec.SchemaProps{
+							Description: "ResourceAllowances controls, per management.loft.sh kind, which admin-owned resources this tenant may see and use, and how (see ScopeMode). Each entry overrides the platform's shipped default for the matched instances. Multiple entries per resource are allowed (e.g. a co-held pool plus one leased instance); a name-matched entry wins over a kind-wide (no-resourceNames) entry. A resource with no entry falls to the shipped per-kind default, then to the catch-all. ScopeUnscoped is status-only and is rejected here.",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref(apisstoragev1.ResourceAllowance{}.OpenAPIModelName()),
+									},
+								},
+							},
+						},
+					},
+					"resourceQuotas": {
+						SchemaProps: spec.SchemaProps{
+							Description: "ResourceQuotas caps how many of a resource this tenant may hold or consume, aggregated across all the tenant's projects. Parity with Project quotas, not a replacement (Projects keep their per-project quotas; the tenant quota is an outer bound).",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref(apisstoragev1.ResourceQuota{}.OpenAPIModelName()),
+									},
+								},
+							},
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			apisstoragev1.Access{}.OpenAPIModelName(), apisstoragev1.Authentication{}.OpenAPIModelName(), apisstoragev1.HostBinding{}.OpenAPIModelName(), apisstoragev1.ResourceAllowance{}.OpenAPIModelName(), apisstoragev1.ResourceQuota{}.OpenAPIModelName(), apisstoragev1.UserOrTeam{}.OpenAPIModelName()},
+	}
+}
+
+func schema_pkg_apis_storage_v1_TenantStatus(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "TenantStatus surfaces reconciler-managed state.",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"conditions": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Conditions describes the current observed conditions of the Tenant.",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref(storagev1.Condition{}.OpenAPIModelName()),
+									},
+								},
+							},
+						},
+					},
+					"observedGeneration": {
+						SchemaProps: spec.SchemaProps{
+							Description: "ObservedGeneration is the generation last observed by the reconciler.",
+							Type:        []string{"integer"},
+							Format:      "int64",
+						},
+					},
+					"resourceAllowances": {
+						SchemaProps: spec.SchemaProps{
+							Description: "ResourceAllowances is the resolved effective scope for every scopable management.loft.sh kind for this tenant: the shipped per-kind defaults merged with Spec.ResourceAllowances. Each entry's Scope is the effective scope and may be ScopeUnscoped. Recomputed each reconcile from discovery scope live at request time). The leased entries are the per-Tenant projection of the cross-Tenant exclusivity index.",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref(apisstoragev1.ResourceAllowance{}.OpenAPIModelName()),
+									},
+								},
+							},
+						},
+					},
+					"resourceQuotas": {
+						SchemaProps: spec.SchemaProps{
+							Description: "ResourceQuotas reports usage against the Spec.ResourceQuotas caps, aggregated across the tenant's projects.",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref(apisstoragev1.ResourceQuotaStatus{}.OpenAPIModelName()),
+									},
+								},
+							},
+						},
+					},
+					"nico": {
+						SchemaProps: spec.SchemaProps{
+							Description: "NICo reports the NICo tenant org materialized for this Tenant, set once the Tenant opts into NICo via the nico.vcluster.com/org annotation.",
+							Ref:         ref(apisstoragev1.TenantNICoStatus{}.OpenAPIModelName()),
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			storagev1.Condition{}.OpenAPIModelName(), apisstoragev1.ResourceAllowance{}.OpenAPIModelName(), apisstoragev1.ResourceQuotaStatus{}.OpenAPIModelName(), apisstoragev1.TenantNICoStatus{}.OpenAPIModelName()},
+	}
+}
+
 func schema_pkg_apis_storage_v1_TerraformNodeEnvironmentTemplate(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
@@ -34201,55 +35206,6 @@ func schema_pkg_apis_storage_v1_UserStatus(ref common.ReferenceCallback) common.
 						},
 					},
 				},
-			},
-		},
-	}
-}
-
-func schema_pkg_apis_storage_v1_VClusterDeviceOperatorDeployment(ref common.ReferenceCallback) common.OpenAPIDefinition {
-	return common.OpenAPIDefinition{
-		Schema: spec.Schema{
-			SchemaProps: spec.SchemaProps{
-				Type: []string{"object"},
-				Properties: map[string]spec.Schema{
-					"enabled": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Enabled controls whether the vCluster device operator is deployed into the cluster.",
-							Default:     false,
-							Type:        []string{"boolean"},
-							Format:      "",
-						},
-					},
-					"chartRepo": {
-						SchemaProps: spec.SchemaProps{
-							Description: "ChartRepo overrides the Helm chart repository used to install the operator.",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"chart": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Chart overrides the Helm chart name used to install the operator.",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"version": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Version overrides the Helm chart version used to install the operator.",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"helmValues": {
-						SchemaProps: spec.SchemaProps{
-							Description: "HelmValues is raw YAML that will be passed as values to the Helm chart.",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-				},
-				Required: []string{"enabled"},
 			},
 		},
 	}

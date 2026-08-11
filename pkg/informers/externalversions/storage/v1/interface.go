@@ -52,6 +52,8 @@ type Interface interface {
 	SpaceTemplates() SpaceTemplateInformer
 	// Teams returns a TeamInformer.
 	Teams() TeamInformer
+	// Tenants returns a TenantInformer.
+	Tenants() TenantInformer
 	// Users returns a UserInformer.
 	Users() UserInformer
 	// VirtualClusterInstances returns a VirtualClusterInstanceInformer.
@@ -179,6 +181,11 @@ func (v *version) SpaceTemplates() SpaceTemplateInformer {
 // Teams returns a TeamInformer.
 func (v *version) Teams() TeamInformer {
 	return &teamInformer{factory: v.factory, tweakListOptions: v.tweakListOptions}
+}
+
+// Tenants returns a TenantInformer.
+func (v *version) Tenants() TenantInformer {
+	return &tenantInformer{factory: v.factory, tweakListOptions: v.tweakListOptions}
 }
 
 // Users returns a UserInformer.

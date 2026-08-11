@@ -34,6 +34,7 @@ type StorageV1Interface interface {
 	SpaceInstancesGetter
 	SpaceTemplatesGetter
 	TeamsGetter
+	TenantsGetter
 	UsersGetter
 	VirtualClusterInstancesGetter
 	VirtualClusterTemplatesGetter
@@ -130,6 +131,10 @@ func (c *StorageV1Client) SpaceTemplates() SpaceTemplateInterface {
 
 func (c *StorageV1Client) Teams() TeamInterface {
 	return newTeams(c)
+}
+
+func (c *StorageV1Client) Tenants() TenantInterface {
+	return newTenants(c)
 }
 
 func (c *StorageV1Client) Users() UserInterface {

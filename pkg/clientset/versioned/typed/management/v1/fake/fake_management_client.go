@@ -184,6 +184,10 @@ func (c *FakeManagementV1) Teams() v1.TeamInterface {
 	return newFakeTeams(c)
 }
 
+func (c *FakeManagementV1) Tenants() v1.TenantInterface {
+	return newFakeTenants(c)
+}
+
 func (c *FakeManagementV1) TranslateVClusterResourceNames() v1.TranslateVClusterResourceNameInterface {
 	return newFakeTranslateVClusterResourceNames(c)
 }

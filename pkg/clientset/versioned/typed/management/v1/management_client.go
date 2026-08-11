@@ -55,6 +55,7 @@ type ManagementV1Interface interface {
 	SpaceTemplatesGetter
 	SubjectAccessReviewsGetter
 	TeamsGetter
+	TenantsGetter
 	TranslateVClusterResourceNamesGetter
 	UsageDownloadsGetter
 	UsersGetter
@@ -238,6 +239,10 @@ func (c *ManagementV1Client) SubjectAccessReviews() SubjectAccessReviewInterface
 
 func (c *ManagementV1Client) Teams() TeamInterface {
 	return newTeams(c)
+}
+
+func (c *ManagementV1Client) Tenants() TenantInterface {
+	return newTenants(c)
 }
 
 func (c *ManagementV1Client) TranslateVClusterResourceNames() TranslateVClusterResourceNameInterface {

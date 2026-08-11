@@ -206,6 +206,10 @@ type SubjectAccessReviewListerExpansion interface{}
 // TeamLister.
 type TeamListerExpansion interface{}
 
+// TenantListerExpansion allows custom methods to be added to
+// TenantLister.
+type TenantListerExpansion interface{}
+
 // TranslateVClusterResourceNameListerExpansion allows custom methods to be added to
 // TranslateVClusterResourceNameLister.
 type TranslateVClusterResourceNameListerExpansion interface{}

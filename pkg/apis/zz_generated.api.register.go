@@ -69,6 +69,7 @@ func GetManagementAPIBuilder() *builders.APIGroupBuilder {
 			"SpaceTemplate",
 			"SubjectAccessReview",
 			"Team",
+			"Tenant",
 			"TranslateVClusterResourceName",
 			"UsageDownload",
 			"User",

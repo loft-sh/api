@@ -46,6 +46,8 @@ type SpaceTemplateExpansion interface{}
 
 type TeamExpansion interface{}
 
+type TenantExpansion interface{}
+
 type UserExpansion interface{}
 
 type VirtualClusterInstanceExpansion interface{}

@@ -100,6 +100,10 @@ func (c *FakeStorageV1) Teams() v1.TeamInterface {
 	return newFakeTeams(c)
 }
 
+func (c *FakeStorageV1) Tenants() v1.TenantInterface {
+	return newFakeTenants(c)
+}
+
 func (c *FakeStorageV1) Users() v1.UserInterface {
 	return newFakeUsers(c)
 }

@@ -125,6 +125,9 @@ func addKnownTypes(scheme *runtime.Scheme) error {
 		&TeamClusters{},
 		&TeamObjectPermissions{},
 		&TeamPermissions{},
+		&Tenant{},
+		&TenantList{},
+		&TenantNICoToken{},
 		&TranslateVClusterResourceName{},
 		&TranslateVClusterResourceNameList{},
 		&UsageDownload{},
@@ -382,6 +385,13 @@ var (
 			func() runtime.Object { return &TeamPermissions{} }, // Register versioned resource
 			nil,
 			management.NewTeamPermissionsREST,
+		),
+		management.ManagementTenantStorage,
+		builders.NewApiResourceWithStorage(
+			management.InternalTenantNICoTokenREST,
+			func() runtime.Object { return &TenantNICoToken{} }, // Register versioned resource
+			nil,
+			management.NewTenantNICoTokenREST,
 		),
 		management.ManagementTranslateVClusterResourceNameStorage,
 		management.ManagementUsageDownloadStorage,
@@ -1064,6 +1074,22 @@ type TeamPermissionsList struct {
 	metav1.TypeMeta `json:",inline"`
 	metav1.ListMeta `json:"metadata,omitempty"`
 	Items           []TeamPermissions `json:"items"`
+}
+
+// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+
+type TenantList struct {
+	metav1.TypeMeta `json:",inline"`
+	metav1.ListMeta `json:"metadata,omitempty"`
+	Items           []Tenant `json:"items"`
+}
+
+// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+
+type TenantNICoTokenList struct {
+	metav1.TypeMeta `json:",inline"`
+	metav1.ListMeta `json:"metadata,omitempty"`
+	Items           []TenantNICoToken `json:"items"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object

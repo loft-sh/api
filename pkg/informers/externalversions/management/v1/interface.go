@@ -94,6 +94,8 @@ type Interface interface {
 	SubjectAccessReviews() SubjectAccessReviewInformer
 	// Teams returns a TeamInformer.
 	Teams() TeamInformer
+	// Tenants returns a TenantInformer.
+	Tenants() TenantInformer
 	// TranslateVClusterResourceNames returns a TranslateVClusterResourceNameInformer.
 	TranslateVClusterResourceNames() TranslateVClusterResourceNameInformer
 	// UsageDownloads returns a UsageDownloadInformer.
@@ -332,6 +334,11 @@ func (v *version) SubjectAccessReviews() SubjectAccessReviewInformer {
 // Teams returns a TeamInformer.
 func (v *version) Teams() TeamInformer {
 	return &teamInformer{factory: v.factory, tweakListOptions: v.tweakListOptions}
+}
+
+// Tenants returns a TenantInformer.
+func (v *version) Tenants() TenantInformer {
+	return &tenantInformer{factory: v.factory, tweakListOptions: v.tweakListOptions}
 }
 
 // TranslateVClusterResourceNames returns a TranslateVClusterResourceNameInformer.
