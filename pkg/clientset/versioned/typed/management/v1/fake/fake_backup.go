@@ -3,120 +3,30 @@
 package fake
 
 import (
-	"context"
-
 	v1 "github.com/loft-sh/api/v4/pkg/apis/management/v1"
-	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
-	labels "k8s.io/apimachinery/pkg/labels"
-	types "k8s.io/apimachinery/pkg/types"
-	watch "k8s.io/apimachinery/pkg/watch"
-	testing "k8s.io/client-go/testing"
+	managementv1 "github.com/loft-sh/api/v4/pkg/clientset/versioned/typed/management/v1"
+	gentype "k8s.io/client-go/gentype"
 )
 
-// FakeBackups implements BackupInterface
-type FakeBackups struct {
+// fakeBackups implements BackupInterface
+type fakeBackups struct {
+	*gentype.FakeClientWithList[*v1.Backup, *v1.BackupList]
 	Fake *FakeManagementV1
 }
 
-var backupsResource = v1.SchemeGroupVersion.WithResource("backups")
-
-var backupsKind = v1.SchemeGroupVersion.WithKind("Backup")
-
-// Get takes name of the backup, and returns the corresponding backup object, and an error if there is any.
-func (c *FakeBackups) Get(ctx context.Context, name string, options metav1.GetOptions) (result *v1.Backup, err error) {
-	emptyResult := &v1.Backup{}
-	obj, err := c.Fake.
-		Invokes(testing.NewRootGetActionWithOptions(backupsResource, name, options), emptyResult)
-	if obj == nil {
-		return emptyResult, err
+func newFakeBackups(fake *FakeManagementV1) managementv1.BackupInterface {
+	return &fakeBackups{
+		gentype.NewFakeClientWithList[*v1.Backup, *v1.BackupList](
+			fake.Fake,
+			"",
+			v1.SchemeGroupVersion.WithResource("backups"),
+			v1.SchemeGroupVersion.WithKind("Backup"),
+			func() *v1.Backup { return &v1.Backup{} },
+			func() *v1.BackupList { return &v1.BackupList{} },
+			func(dst, src *v1.BackupList) { dst.ListMeta = src.ListMeta },
+			func(list *v1.BackupList) []*v1.Backup { return gentype.ToPointerSlice(list.Items) },
+			func(list *v1.BackupList, items []*v1.Backup) { list.Items = gentype.FromPointerSlice(items) },
+		),
+		fake,
 	}
-	return obj.(*v1.Backup), err
-}
-
-// List takes label and field selectors, and returns the list of Backups that match those selectors.
-func (c *FakeBackups) List(ctx context.Context, opts metav1.ListOptions) (result *v1.BackupList, err error) {
-	emptyResult := &v1.BackupList{}
-	obj, err := c.Fake.
-		Invokes(testing.NewRootListActionWithOptions(backupsResource, backupsKind, opts), emptyResult)
-	if obj == nil {
-		return emptyResult, err
-	}
-
-	label, _, _ := testing.ExtractFromListOptions(opts)
-	if label == nil {
-		label = labels.Everything()
-	}
-	list := &v1.BackupList{ListMeta: obj.(*v1.BackupList).ListMeta}
-	for _, item := range obj.(*v1.BackupList).Items {
-		if label.Matches(labels.Set(item.Labels)) {
-			list.Items = append(list.Items, item)
-		}
-	}
-	return list, err
-}
-
-// Watch returns a watch.Interface that watches the requested backups.
-func (c *FakeBackups) Watch(ctx context.Context, opts metav1.ListOptions) (watch.Interface, error) {
-	return c.Fake.
-		InvokesWatch(testing.NewRootWatchActionWithOptions(backupsResource, opts))
-}
-
-// Create takes the representation of a backup and creates it.  Returns the server's representation of the backup, and an error, if there is any.
-func (c *FakeBackups) Create(ctx context.Context, backup *v1.Backup, opts metav1.CreateOptions) (result *v1.Backup, err error) {
-	emptyResult := &v1.Backup{}
-	obj, err := c.Fake.
-		Invokes(testing.NewRootCreateActionWithOptions(backupsResource, backup, opts), emptyResult)
-	if obj == nil {
-		return emptyResult, err
-	}
-	return obj.(*v1.Backup), err
-}
-
-// Update takes the representation of a backup and updates it. Returns the server's representation of the backup, and an error, if there is any.
-func (c *FakeBackups) Update(ctx context.Context, backup *v1.Backup, opts metav1.UpdateOptions) (result *v1.Backup, err error) {
-	emptyResult := &v1.Backup{}
-	obj, err := c.Fake.
-		Invokes(testing.NewRootUpdateActionWithOptions(backupsResource, backup, opts), emptyResult)
-	if obj == nil {
-		return emptyResult, err
-	}
-	return obj.(*v1.Backup), err
-}
-
-// UpdateStatus was generated because the type contains a Status member.
-// Add a +genclient:noStatus comment above the type to avoid generating UpdateStatus().
-func (c *FakeBackups) UpdateStatus(ctx context.Context, backup *v1.Backup, opts metav1.UpdateOptions) (result *v1.Backup, err error) {
-	emptyResult := &v1.Backup{}
-	obj, err := c.Fake.
-		Invokes(testing.NewRootUpdateSubresourceActionWithOptions(backupsResource, "status", backup, opts), emptyResult)
-	if obj == nil {
-		return emptyResult, err
-	}
-	return obj.(*v1.Backup), err
-}
-
-// Delete takes name of the backup and deletes it. Returns an error if one occurs.
-func (c *FakeBackups) Delete(ctx context.Context, name string, opts metav1.DeleteOptions) error {
-	_, err := c.Fake.
-		Invokes(testing.NewRootDeleteActionWithOptions(backupsResource, name, opts), &v1.Backup{})
-	return err
-}
-
-// DeleteCollection deletes a collection of objects.
-func (c *FakeBackups) DeleteCollection(ctx context.Context, opts metav1.DeleteOptions, listOpts metav1.ListOptions) error {
-	action := testing.NewRootDeleteCollectionActionWithOptions(backupsResource, opts, listOpts)
-
-	_, err := c.Fake.Invokes(action, &v1.BackupList{})
-	return err
-}
-
-// Patch applies the patch and returns the patched backup.
-func (c *FakeBackups) Patch(ctx context.Context, name string, pt types.PatchType, data []byte, opts metav1.PatchOptions, subresources ...string) (result *v1.Backup, err error) {
-	emptyResult := &v1.Backup{}
-	obj, err := c.Fake.
-		Invokes(testing.NewRootPatchSubresourceActionWithOptions(backupsResource, name, pt, data, opts, subresources...), emptyResult)
-	if obj == nil {
-		return emptyResult, err
-	}
-	return obj.(*v1.Backup), err
 }
