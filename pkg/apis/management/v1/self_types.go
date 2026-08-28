@@ -67,6 +67,10 @@ type SelfStatus struct {
 	// +optional
 	InstanceID string `json:"instanceID,omitempty"`
 
+	// LoftHost is the host of the loft instance
+	// +optional
+	LoftHost string `json:"loftHost,omitempty"`
+
 	// ProjectNamespacePrefix is the prefix used to name project namespaces after defaulting has been applied
 	// +optional
 	ProjectNamespacePrefix *string `json:"projectNamespacePrefix,omitempty"`
@@ -78,4 +82,12 @@ type UserInfo struct {
 	// Teams are the teams the user is part of
 	// +optional
 	Teams []*storagev1.EntityInfo `json:"teams,omitempty"`
+
+	// Tenant is the name of the Tenant this user belongs to, derived from the
+	// tenant.vcluster.com/owner label on the User. Empty for an operator
+	// (unscoped) user, including a user that only inherits a label from a Team, since
+	// Team labels do not grant tenancy. The UI reads this to pre-fill the "<tenant>--"
+	// prefix required on cluster-scoped tenant-owned resources.
+	// +optional
+	Tenant string `json:"tenant,omitempty"`
 }
