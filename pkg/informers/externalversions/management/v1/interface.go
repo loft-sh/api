@@ -14,6 +14,12 @@ type Interface interface {
 	Announcements() AnnouncementInformer
 	// Apps returns a AppInformer.
 	Apps() AppInformer
+	// AppInstances returns a AppInstanceInformer.
+	AppInstances() AppInstanceInformer
+	// ArgoCDApplications returns a ArgoCDApplicationInformer.
+	ArgoCDApplications() ArgoCDApplicationInformer
+	// ArgoCDApplicationTemplates returns a ArgoCDApplicationTemplateInformer.
+	ArgoCDApplicationTemplates() ArgoCDApplicationTemplateInformer
 	// Backups returns a BackupInformer.
 	Backups() BackupInformer
 	// Clusters returns a ClusterInformer.
@@ -26,14 +32,8 @@ type Interface interface {
 	Configs() ConfigInformer
 	// ConvertVirtualClusterConfigs returns a ConvertVirtualClusterConfigInformer.
 	ConvertVirtualClusterConfigs() ConvertVirtualClusterConfigInformer
-	// DevPodEnvironmentTemplates returns a DevPodEnvironmentTemplateInformer.
-	DevPodEnvironmentTemplates() DevPodEnvironmentTemplateInformer
-	// DevPodWorkspaceInstances returns a DevPodWorkspaceInstanceInformer.
-	DevPodWorkspaceInstances() DevPodWorkspaceInstanceInformer
-	// DevPodWorkspacePresets returns a DevPodWorkspacePresetInformer.
-	DevPodWorkspacePresets() DevPodWorkspacePresetInformer
-	// DevPodWorkspaceTemplates returns a DevPodWorkspaceTemplateInformer.
-	DevPodWorkspaceTemplates() DevPodWorkspaceTemplateInformer
+	// DatabaseConnectors returns a DatabaseConnectorInformer.
+	DatabaseConnectors() DatabaseConnectorInformer
 	// DirectClusterEndpointTokens returns a DirectClusterEndpointTokenInformer.
 	DirectClusterEndpointTokens() DirectClusterEndpointTokenInformer
 	// Events returns a EventInformer.
@@ -44,12 +44,28 @@ type Interface interface {
 	IngressAuthTokens() IngressAuthTokenInformer
 	// Licenses returns a LicenseInformer.
 	Licenses() LicenseInformer
-	// LicenseTokens returns a LicenseTokenInformer.
-	LicenseTokens() LicenseTokenInformer
 	// LoftUpgrades returns a LoftUpgradeInformer.
 	LoftUpgrades() LoftUpgradeInformer
+	// Machines returns a MachineInformer.
+	Machines() MachineInformer
+	// MachineConfigTemplates returns a MachineConfigTemplateInformer.
+	MachineConfigTemplates() MachineConfigTemplateInformer
+	// NetworkEnvironments returns a NetworkEnvironmentInformer.
+	NetworkEnvironments() NetworkEnvironmentInformer
+	// NetworkPeers returns a NetworkPeerInformer.
+	NetworkPeers() NetworkPeerInformer
+	// NodeClaims returns a NodeClaimInformer.
+	NodeClaims() NodeClaimInformer
+	// NodeProfiles returns a NodeProfileInformer.
+	NodeProfiles() NodeProfileInformer
+	// NodeProviders returns a NodeProviderInformer.
+	NodeProviders() NodeProviderInformer
+	// NodeTypes returns a NodeTypeInformer.
+	NodeTypes() NodeTypeInformer
 	// OIDCClients returns a OIDCClientInformer.
 	OIDCClients() OIDCClientInformer
+	// OSImages returns a OSImageInformer.
+	OSImages() OSImageInformer
 	// OwnedAccessKeys returns a OwnedAccessKeyInformer.
 	OwnedAccessKeys() OwnedAccessKeyInformer
 	// Projects returns a ProjectInformer.
@@ -60,10 +76,12 @@ type Interface interface {
 	RedirectTokens() RedirectTokenInformer
 	// RegisterVirtualClusters returns a RegisterVirtualClusterInformer.
 	RegisterVirtualClusters() RegisterVirtualClusterInformer
+	// RenderVirtualClusterTemplates returns a RenderVirtualClusterTemplateInformer.
+	RenderVirtualClusterTemplates() RenderVirtualClusterTemplateInformer
 	// ResetAccessKeys returns a ResetAccessKeyInformer.
 	ResetAccessKeys() ResetAccessKeyInformer
-	// Runners returns a RunnerInformer.
-	Runners() RunnerInformer
+	// SSHKeys returns a SSHKeyInformer.
+	SSHKeys() SSHKeyInformer
 	// Selves returns a SelfInformer.
 	Selves() SelfInformer
 	// SelfSubjectAccessReviews returns a SelfSubjectAccessReviewInformer.
@@ -74,18 +92,26 @@ type Interface interface {
 	SpaceInstances() SpaceInstanceInformer
 	// SpaceTemplates returns a SpaceTemplateInformer.
 	SpaceTemplates() SpaceTemplateInformer
+	// StackInstances returns a StackInstanceInformer.
+	StackInstances() StackInstanceInformer
+	// StackTemplates returns a StackTemplateInformer.
+	StackTemplates() StackTemplateInformer
 	// SubjectAccessReviews returns a SubjectAccessReviewInformer.
 	SubjectAccessReviews() SubjectAccessReviewInformer
-	// Tasks returns a TaskInformer.
-	Tasks() TaskInformer
 	// Teams returns a TeamInformer.
 	Teams() TeamInformer
+	// Tenants returns a TenantInformer.
+	Tenants() TenantInformer
 	// TranslateVClusterResourceNames returns a TranslateVClusterResourceNameInformer.
 	TranslateVClusterResourceNames() TranslateVClusterResourceNameInformer
+	// UsageDownloads returns a UsageDownloadInformer.
+	UsageDownloads() UsageDownloadInformer
 	// Users returns a UserInformer.
 	Users() UserInformer
 	// VirtualClusterInstances returns a VirtualClusterInstanceInformer.
 	VirtualClusterInstances() VirtualClusterInstanceInformer
+	// VirtualClusterSchemas returns a VirtualClusterSchemaInformer.
+	VirtualClusterSchemas() VirtualClusterSchemaInformer
 	// VirtualClusterTemplates returns a VirtualClusterTemplateInformer.
 	VirtualClusterTemplates() VirtualClusterTemplateInformer
 }
@@ -114,6 +140,21 @@ func (v *version) Announcements() AnnouncementInformer {
 // Apps returns a AppInformer.
 func (v *version) Apps() AppInformer {
 	return &appInformer{factory: v.factory, tweakListOptions: v.tweakListOptions}
+}
+
+// AppInstances returns a AppInstanceInformer.
+func (v *version) AppInstances() AppInstanceInformer {
+	return &appInstanceInformer{factory: v.factory, namespace: v.namespace, tweakListOptions: v.tweakListOptions}
+}
+
+// ArgoCDApplications returns a ArgoCDApplicationInformer.
+func (v *version) ArgoCDApplications() ArgoCDApplicationInformer {
+	return &argoCDApplicationInformer{factory: v.factory, namespace: v.namespace, tweakListOptions: v.tweakListOptions}
+}
+
+// ArgoCDApplicationTemplates returns a ArgoCDApplicationTemplateInformer.
+func (v *version) ArgoCDApplicationTemplates() ArgoCDApplicationTemplateInformer {
+	return &argoCDApplicationTemplateInformer{factory: v.factory, tweakListOptions: v.tweakListOptions}
 }
 
 // Backups returns a BackupInformer.
@@ -146,24 +187,9 @@ func (v *version) ConvertVirtualClusterConfigs() ConvertVirtualClusterConfigInfo
 	return &convertVirtualClusterConfigInformer{factory: v.factory, tweakListOptions: v.tweakListOptions}
 }
 
-// DevPodEnvironmentTemplates returns a DevPodEnvironmentTemplateInformer.
-func (v *version) DevPodEnvironmentTemplates() DevPodEnvironmentTemplateInformer {
-	return &devPodEnvironmentTemplateInformer{factory: v.factory, tweakListOptions: v.tweakListOptions}
-}
-
-// DevPodWorkspaceInstances returns a DevPodWorkspaceInstanceInformer.
-func (v *version) DevPodWorkspaceInstances() DevPodWorkspaceInstanceInformer {
-	return &devPodWorkspaceInstanceInformer{factory: v.factory, namespace: v.namespace, tweakListOptions: v.tweakListOptions}
-}
-
-// DevPodWorkspacePresets returns a DevPodWorkspacePresetInformer.
-func (v *version) DevPodWorkspacePresets() DevPodWorkspacePresetInformer {
-	return &devPodWorkspacePresetInformer{factory: v.factory, tweakListOptions: v.tweakListOptions}
-}
-
-// DevPodWorkspaceTemplates returns a DevPodWorkspaceTemplateInformer.
-func (v *version) DevPodWorkspaceTemplates() DevPodWorkspaceTemplateInformer {
-	return &devPodWorkspaceTemplateInformer{factory: v.factory, tweakListOptions: v.tweakListOptions}
+// DatabaseConnectors returns a DatabaseConnectorInformer.
+func (v *version) DatabaseConnectors() DatabaseConnectorInformer {
+	return &databaseConnectorInformer{factory: v.factory, tweakListOptions: v.tweakListOptions}
 }
 
 // DirectClusterEndpointTokens returns a DirectClusterEndpointTokenInformer.
@@ -191,19 +217,59 @@ func (v *version) Licenses() LicenseInformer {
 	return &licenseInformer{factory: v.factory, tweakListOptions: v.tweakListOptions}
 }
 
-// LicenseTokens returns a LicenseTokenInformer.
-func (v *version) LicenseTokens() LicenseTokenInformer {
-	return &licenseTokenInformer{factory: v.factory, tweakListOptions: v.tweakListOptions}
-}
-
 // LoftUpgrades returns a LoftUpgradeInformer.
 func (v *version) LoftUpgrades() LoftUpgradeInformer {
 	return &loftUpgradeInformer{factory: v.factory, tweakListOptions: v.tweakListOptions}
 }
 
+// Machines returns a MachineInformer.
+func (v *version) Machines() MachineInformer {
+	return &machineInformer{factory: v.factory, tweakListOptions: v.tweakListOptions}
+}
+
+// MachineConfigTemplates returns a MachineConfigTemplateInformer.
+func (v *version) MachineConfigTemplates() MachineConfigTemplateInformer {
+	return &machineConfigTemplateInformer{factory: v.factory, namespace: v.namespace, tweakListOptions: v.tweakListOptions}
+}
+
+// NetworkEnvironments returns a NetworkEnvironmentInformer.
+func (v *version) NetworkEnvironments() NetworkEnvironmentInformer {
+	return &networkEnvironmentInformer{factory: v.factory, tweakListOptions: v.tweakListOptions}
+}
+
+// NetworkPeers returns a NetworkPeerInformer.
+func (v *version) NetworkPeers() NetworkPeerInformer {
+	return &networkPeerInformer{factory: v.factory, tweakListOptions: v.tweakListOptions}
+}
+
+// NodeClaims returns a NodeClaimInformer.
+func (v *version) NodeClaims() NodeClaimInformer {
+	return &nodeClaimInformer{factory: v.factory, namespace: v.namespace, tweakListOptions: v.tweakListOptions}
+}
+
+// NodeProfiles returns a NodeProfileInformer.
+func (v *version) NodeProfiles() NodeProfileInformer {
+	return &nodeProfileInformer{factory: v.factory, tweakListOptions: v.tweakListOptions}
+}
+
+// NodeProviders returns a NodeProviderInformer.
+func (v *version) NodeProviders() NodeProviderInformer {
+	return &nodeProviderInformer{factory: v.factory, tweakListOptions: v.tweakListOptions}
+}
+
+// NodeTypes returns a NodeTypeInformer.
+func (v *version) NodeTypes() NodeTypeInformer {
+	return &nodeTypeInformer{factory: v.factory, tweakListOptions: v.tweakListOptions}
+}
+
 // OIDCClients returns a OIDCClientInformer.
 func (v *version) OIDCClients() OIDCClientInformer {
 	return &oIDCClientInformer{factory: v.factory, tweakListOptions: v.tweakListOptions}
+}
+
+// OSImages returns a OSImageInformer.
+func (v *version) OSImages() OSImageInformer {
+	return &oSImageInformer{factory: v.factory, tweakListOptions: v.tweakListOptions}
 }
 
 // OwnedAccessKeys returns a OwnedAccessKeyInformer.
@@ -231,14 +297,19 @@ func (v *version) RegisterVirtualClusters() RegisterVirtualClusterInformer {
 	return &registerVirtualClusterInformer{factory: v.factory, tweakListOptions: v.tweakListOptions}
 }
 
+// RenderVirtualClusterTemplates returns a RenderVirtualClusterTemplateInformer.
+func (v *version) RenderVirtualClusterTemplates() RenderVirtualClusterTemplateInformer {
+	return &renderVirtualClusterTemplateInformer{factory: v.factory, tweakListOptions: v.tweakListOptions}
+}
+
 // ResetAccessKeys returns a ResetAccessKeyInformer.
 func (v *version) ResetAccessKeys() ResetAccessKeyInformer {
 	return &resetAccessKeyInformer{factory: v.factory, tweakListOptions: v.tweakListOptions}
 }
 
-// Runners returns a RunnerInformer.
-func (v *version) Runners() RunnerInformer {
-	return &runnerInformer{factory: v.factory, tweakListOptions: v.tweakListOptions}
+// SSHKeys returns a SSHKeyInformer.
+func (v *version) SSHKeys() SSHKeyInformer {
+	return &sSHKeyInformer{factory: v.factory, tweakListOptions: v.tweakListOptions}
 }
 
 // Selves returns a SelfInformer.
@@ -266,14 +337,19 @@ func (v *version) SpaceTemplates() SpaceTemplateInformer {
 	return &spaceTemplateInformer{factory: v.factory, tweakListOptions: v.tweakListOptions}
 }
 
+// StackInstances returns a StackInstanceInformer.
+func (v *version) StackInstances() StackInstanceInformer {
+	return &stackInstanceInformer{factory: v.factory, namespace: v.namespace, tweakListOptions: v.tweakListOptions}
+}
+
+// StackTemplates returns a StackTemplateInformer.
+func (v *version) StackTemplates() StackTemplateInformer {
+	return &stackTemplateInformer{factory: v.factory, tweakListOptions: v.tweakListOptions}
+}
+
 // SubjectAccessReviews returns a SubjectAccessReviewInformer.
 func (v *version) SubjectAccessReviews() SubjectAccessReviewInformer {
 	return &subjectAccessReviewInformer{factory: v.factory, tweakListOptions: v.tweakListOptions}
-}
-
-// Tasks returns a TaskInformer.
-func (v *version) Tasks() TaskInformer {
-	return &taskInformer{factory: v.factory, tweakListOptions: v.tweakListOptions}
 }
 
 // Teams returns a TeamInformer.
@@ -281,9 +357,19 @@ func (v *version) Teams() TeamInformer {
 	return &teamInformer{factory: v.factory, tweakListOptions: v.tweakListOptions}
 }
 
+// Tenants returns a TenantInformer.
+func (v *version) Tenants() TenantInformer {
+	return &tenantInformer{factory: v.factory, tweakListOptions: v.tweakListOptions}
+}
+
 // TranslateVClusterResourceNames returns a TranslateVClusterResourceNameInformer.
 func (v *version) TranslateVClusterResourceNames() TranslateVClusterResourceNameInformer {
 	return &translateVClusterResourceNameInformer{factory: v.factory, tweakListOptions: v.tweakListOptions}
+}
+
+// UsageDownloads returns a UsageDownloadInformer.
+func (v *version) UsageDownloads() UsageDownloadInformer {
+	return &usageDownloadInformer{factory: v.factory, tweakListOptions: v.tweakListOptions}
 }
 
 // Users returns a UserInformer.
@@ -294,6 +380,11 @@ func (v *version) Users() UserInformer {
 // VirtualClusterInstances returns a VirtualClusterInstanceInformer.
 func (v *version) VirtualClusterInstances() VirtualClusterInstanceInformer {
 	return &virtualClusterInstanceInformer{factory: v.factory, namespace: v.namespace, tweakListOptions: v.tweakListOptions}
+}
+
+// VirtualClusterSchemas returns a VirtualClusterSchemaInformer.
+func (v *version) VirtualClusterSchemas() VirtualClusterSchemaInformer {
+	return &virtualClusterSchemaInformer{factory: v.factory, tweakListOptions: v.tweakListOptions}
 }
 
 // VirtualClusterTemplates returns a VirtualClusterTemplateInformer.
