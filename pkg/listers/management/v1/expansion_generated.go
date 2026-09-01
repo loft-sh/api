@@ -70,6 +70,14 @@ type DirectClusterEndpointTokenListerExpansion interface{}
 // EventLister.
 type EventListerExpansion interface{}
 
+// ExternalCredentialListerExpansion allows custom methods to be added to
+// ExternalCredentialLister.
+type ExternalCredentialListerExpansion interface{}
+
+// ExternalCredentialNamespaceListerExpansion allows custom methods to be added to
+// ExternalCredentialNamespaceLister.
+type ExternalCredentialNamespaceListerExpansion interface{}
+
 // FeatureListerExpansion allows custom methods to be added to
 // FeatureLister.
 type FeatureListerExpansion interface{}
@@ -85,6 +93,10 @@ type LicenseListerExpansion interface{}
 // LoftUpgradeListerExpansion allows custom methods to be added to
 // LoftUpgradeLister.
 type LoftUpgradeListerExpansion interface{}
+
+// MachineListerExpansion allows custom methods to be added to
+// MachineLister.
+type MachineListerExpansion interface{}
 
 // MachineConfigTemplateListerExpansion allows custom methods to be added to
 // MachineConfigTemplateLister.
@@ -186,6 +198,14 @@ type SharedSecretListerExpansion interface{}
 // SharedSecretNamespaceLister.
 type SharedSecretNamespaceListerExpansion interface{}
 
+// SlurmInstanceListerExpansion allows custom methods to be added to
+// SlurmInstanceLister.
+type SlurmInstanceListerExpansion interface{}
+
+// SlurmInstanceNamespaceListerExpansion allows custom methods to be added to
+// SlurmInstanceNamespaceLister.
+type SlurmInstanceNamespaceListerExpansion interface{}
+
 // SpaceInstanceListerExpansion allows custom methods to be added to
 // SpaceInstanceLister.
 type SpaceInstanceListerExpansion interface{}
@@ -197,6 +217,18 @@ type SpaceInstanceNamespaceListerExpansion interface{}
 // SpaceTemplateListerExpansion allows custom methods to be added to
 // SpaceTemplateLister.
 type SpaceTemplateListerExpansion interface{}
+
+// StackInstanceListerExpansion allows custom methods to be added to
+// StackInstanceLister.
+type StackInstanceListerExpansion interface{}
+
+// StackInstanceNamespaceListerExpansion allows custom methods to be added to
+// StackInstanceNamespaceLister.
+type StackInstanceNamespaceListerExpansion interface{}
+
+// StackTemplateListerExpansion allows custom methods to be added to
+// StackTemplateLister.
+type StackTemplateListerExpansion interface{}
 
 // SubjectAccessReviewListerExpansion allows custom methods to be added to
 // SubjectAccessReviewLister.

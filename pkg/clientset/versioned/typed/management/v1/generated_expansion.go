@@ -32,6 +32,8 @@ type DirectClusterEndpointTokenExpansion interface{}
 
 type EventExpansion interface{}
 
+type ExternalCredentialExpansion interface{}
+
 type FeatureExpansion interface{}
 
 type IngressAuthTokenExpansion interface{}
@@ -39,6 +41,8 @@ type IngressAuthTokenExpansion interface{}
 type LicenseExpansion interface{}
 
 type LoftUpgradeExpansion interface{}
+
+type MachineExpansion interface{}
 
 type MachineConfigTemplateExpansion interface{}
 
@@ -80,9 +84,15 @@ type SelfSubjectAccessReviewExpansion interface{}
 
 type SharedSecretExpansion interface{}
 
+type SlurmInstanceExpansion interface{}
+
 type SpaceInstanceExpansion interface{}
 
 type SpaceTemplateExpansion interface{}
+
+type StackInstanceExpansion interface{}
+
+type StackTemplateExpansion interface{}
 
 type SubjectAccessReviewExpansion interface{}
 

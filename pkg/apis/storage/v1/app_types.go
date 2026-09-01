@@ -186,6 +186,11 @@ type AppParameter struct {
 	// Section where this app should be displayed. Apps with the same section name will be grouped together
 	// +optional
 	Section string `json:"section,omitempty"`
+
+	// Hidden specifies that this parameter should not be rendered in the UI
+	// because its value is filled in and wired up automatically
+	// +optional
+	Hidden bool `json:"hidden,omitempty"`
 }
 
 type UserOrTeam struct {

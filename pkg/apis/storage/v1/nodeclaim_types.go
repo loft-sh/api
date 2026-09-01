@@ -83,6 +83,7 @@ func (a *NodeClaim) SetAccess(access []Access) {
 }
 
 // NodeClaimSpec defines spec of node claim.
+// +kubebuilder:validation:XValidation:rule="!has(self.machineRef) || size(self.machineRef) == 0 || !has(self.typeRef) || size(self.typeRef) == 0",message="typeRef and machineRef are mutually exclusive"
 type NodeClaimSpec struct {
 	// DisplayName is the name of the NodeClaim that is displayed in the UI.
 	// +optional
@@ -102,6 +103,14 @@ type NodeClaimSpec struct {
 	// TypeRef is the full name of the NodeType that this NodeClaim is based on.
 	// +optional
 	TypeRef string `json:"typeRef,omitempty"`
+
+	// MachineRef is the name of a Machine from the provider's inventory to
+	// provision this claim on. Mutually exclusive with TypeRef: the machine is
+	// picked by identity, so there is no node type to schedule against and no
+	// node type capacity is consumed. Only providers that mirror an inventory
+	// support it.
+	// +optional
+	MachineRef string `json:"machineRef,omitempty"`
 
 	// EnvironmentRef is the name of the NodeEnvironment that this NodeClaim is based on.
 	// +optional

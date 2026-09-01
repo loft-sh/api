@@ -33,6 +33,11 @@ const (
 	InstanceEtcdDbSizeOk        agentstoragev1.ConditionType = "EtcdDbSizeOk"
 
 	ArgoCDIntegrationSynced agentstoragev1.ConditionType = "ArgoCDIntegrationSynced"
+
+	// StacksSynced reports whether deploy.stacks was converted into StackInstance resources. It is
+	// separate from ArgoCDIntegrationSynced so stack and application errors recover independently;
+	// per-stack runtime health lives on each StackInstance's own Ready condition.
+	StacksSynced agentstoragev1.ConditionType = "StacksSynced"
 )
 
 // +genclient

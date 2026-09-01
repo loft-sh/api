@@ -52,6 +52,9 @@ func addKnownTypes(scheme *runtime.Scheme) error {
 		&DirectClusterEndpointTokenList{},
 		&Event{},
 		&EventList{},
+		&ExternalCredential{},
+		&ExternalCredentialList{},
+		&ExternalCredentialCredentials{},
 		&Feature{},
 		&FeatureList{},
 		&IngressAuthToken{},
@@ -63,6 +66,8 @@ func addKnownTypes(scheme *runtime.Scheme) error {
 		&LicenseRequest{},
 		&LoftUpgrade{},
 		&LoftUpgradeList{},
+		&Machine{},
+		&MachineList{},
 		&MachineConfigTemplate{},
 		&MachineConfigTemplateList{},
 		&NetworkPeer{},
@@ -113,10 +118,18 @@ func addKnownTypes(scheme *runtime.Scheme) error {
 		&SelfSubjectAccessReviewList{},
 		&SharedSecret{},
 		&SharedSecretList{},
+		&SlurmInstance{},
+		&SlurmInstanceList{},
+		&SlurmInstanceAccounting{},
+		&SlurmInstanceTopology{},
 		&SpaceInstance{},
 		&SpaceInstanceList{},
 		&SpaceTemplate{},
 		&SpaceTemplateList{},
+		&StackInstance{},
+		&StackInstanceList{},
+		&StackTemplate{},
+		&StackTemplateList{},
 		&SubjectAccessReview{},
 		&SubjectAccessReviewList{},
 		&Team{},
@@ -127,6 +140,7 @@ func addKnownTypes(scheme *runtime.Scheme) error {
 		&TeamPermissions{},
 		&Tenant{},
 		&TenantList{},
+		&TenantConfig{},
 		&TenantNICoToken{},
 		&TranslateVClusterResourceName{},
 		&TranslateVClusterResourceNameList{},
@@ -152,6 +166,7 @@ func addKnownTypes(scheme *runtime.Scheme) error {
 		&VirtualClusterResourceUsage{},
 		&VirtualClusterInstanceShell{},
 		&VirtualClusterInstanceSnapshot{},
+		&VirtualClusterSnapshotCredentials{},
 		&VirtualClusterStandalone{},
 		&VirtualClusterSchema{},
 		&VirtualClusterSchemaList{},
@@ -237,6 +252,13 @@ var (
 		management.ManagementDatabaseConnectorStorage,
 		management.ManagementDirectClusterEndpointTokenStorage,
 		management.ManagementEventStorage,
+		management.ManagementExternalCredentialStorage,
+		builders.NewApiResourceWithStorage(
+			management.InternalExternalCredentialCredentialsREST,
+			func() runtime.Object { return &ExternalCredentialCredentials{} }, // Register versioned resource
+			nil,
+			management.NewExternalCredentialCredentialsREST,
+		),
 		management.ManagementFeatureStorage,
 		builders.NewApiResourceWithStorage(
 			management.InternalFeatureStatus,
@@ -253,6 +275,7 @@ var (
 			management.NewLicenseRequestREST,
 		),
 		management.ManagementLoftUpgradeStorage,
+		management.ManagementMachineStorage,
 		management.ManagementMachineConfigTemplateStorage,
 		management.ManagementNetworkPeerStorage,
 		builders.NewApiResourceWithStorage(
@@ -358,8 +381,28 @@ var (
 		management.ManagementSelfStorage,
 		management.ManagementSelfSubjectAccessReviewStorage,
 		management.ManagementSharedSecretStorage,
+		management.ManagementSlurmInstanceStorage,
+		builders.NewApiResourceWithStorage(
+			management.InternalSlurmInstanceStatus,
+			func() runtime.Object { return &SlurmInstance{} },     // Register versioned resource
+			func() runtime.Object { return &SlurmInstanceList{} }, // Register versioned resource list
+			management.NewSlurmInstanceStatusREST),
+		builders.NewApiResourceWithStorage(
+			management.InternalSlurmInstanceAccountingREST,
+			func() runtime.Object { return &SlurmInstanceAccounting{} }, // Register versioned resource
+			nil,
+			management.NewSlurmInstanceAccountingREST,
+		),
+		builders.NewApiResourceWithStorage(
+			management.InternalSlurmInstanceTopologyREST,
+			func() runtime.Object { return &SlurmInstanceTopology{} }, // Register versioned resource
+			nil,
+			management.NewSlurmInstanceTopologyREST,
+		),
 		management.ManagementSpaceInstanceStorage,
 		management.ManagementSpaceTemplateStorage,
+		management.ManagementStackInstanceStorage,
+		management.ManagementStackTemplateStorage,
 		management.ManagementSubjectAccessReviewStorage,
 		management.ManagementTeamStorage,
 		builders.NewApiResourceWithStorage(
@@ -387,6 +430,12 @@ var (
 			management.NewTeamPermissionsREST,
 		),
 		management.ManagementTenantStorage,
+		builders.NewApiResourceWithStorage(
+			management.InternalTenantConfigREST,
+			func() runtime.Object { return &TenantConfig{} }, // Register versioned resource
+			nil,
+			management.NewTenantConfigREST,
+		),
 		builders.NewApiResourceWithStorage(
 			management.InternalTenantNICoTokenREST,
 			func() runtime.Object { return &TenantNICoToken{} }, // Register versioned resource
@@ -492,6 +541,12 @@ var (
 			func() runtime.Object { return &VirtualClusterInstanceSnapshot{} }, // Register versioned resource
 			nil,
 			management.NewVirtualClusterInstanceSnapshotREST,
+		),
+		builders.NewApiResourceWithStorage(
+			management.InternalVirtualClusterSnapshotCredentialsREST,
+			func() runtime.Object { return &VirtualClusterSnapshotCredentials{} }, // Register versioned resource
+			nil,
+			management.NewVirtualClusterSnapshotCredentialsREST,
 		),
 		builders.NewApiResourceWithStorage(
 			management.InternalVirtualClusterStandaloneREST,
@@ -726,6 +781,22 @@ type EventList struct {
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
 
+type ExternalCredentialList struct {
+	metav1.TypeMeta `json:",inline"`
+	metav1.ListMeta `json:"metadata,omitempty"`
+	Items           []ExternalCredential `json:"items"`
+}
+
+// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+
+type ExternalCredentialCredentialsList struct {
+	metav1.TypeMeta `json:",inline"`
+	metav1.ListMeta `json:"metadata,omitempty"`
+	Items           []ExternalCredentialCredentials `json:"items"`
+}
+
+// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+
 type FeatureList struct {
 	metav1.TypeMeta `json:",inline"`
 	metav1.ListMeta `json:"metadata,omitempty"`
@@ -770,6 +841,14 @@ type LoftUpgradeList struct {
 	metav1.TypeMeta `json:",inline"`
 	metav1.ListMeta `json:"metadata,omitempty"`
 	Items           []LoftUpgrade `json:"items"`
+}
+
+// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+
+type MachineList struct {
+	metav1.TypeMeta `json:",inline"`
+	metav1.ListMeta `json:"metadata,omitempty"`
+	Items           []Machine `json:"items"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -1014,6 +1093,30 @@ type SharedSecretList struct {
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
 
+type SlurmInstanceList struct {
+	metav1.TypeMeta `json:",inline"`
+	metav1.ListMeta `json:"metadata,omitempty"`
+	Items           []SlurmInstance `json:"items"`
+}
+
+// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+
+type SlurmInstanceAccountingList struct {
+	metav1.TypeMeta `json:",inline"`
+	metav1.ListMeta `json:"metadata,omitempty"`
+	Items           []SlurmInstanceAccounting `json:"items"`
+}
+
+// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+
+type SlurmInstanceTopologyList struct {
+	metav1.TypeMeta `json:",inline"`
+	metav1.ListMeta `json:"metadata,omitempty"`
+	Items           []SlurmInstanceTopology `json:"items"`
+}
+
+// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+
 type SpaceInstanceList struct {
 	metav1.TypeMeta `json:",inline"`
 	metav1.ListMeta `json:"metadata,omitempty"`
@@ -1026,6 +1129,22 @@ type SpaceTemplateList struct {
 	metav1.TypeMeta `json:",inline"`
 	metav1.ListMeta `json:"metadata,omitempty"`
 	Items           []SpaceTemplate `json:"items"`
+}
+
+// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+
+type StackInstanceList struct {
+	metav1.TypeMeta `json:",inline"`
+	metav1.ListMeta `json:"metadata,omitempty"`
+	Items           []StackInstance `json:"items"`
+}
+
+// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+
+type StackTemplateList struct {
+	metav1.TypeMeta `json:",inline"`
+	metav1.ListMeta `json:"metadata,omitempty"`
+	Items           []StackTemplate `json:"items"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -1082,6 +1201,14 @@ type TenantList struct {
 	metav1.TypeMeta `json:",inline"`
 	metav1.ListMeta `json:"metadata,omitempty"`
 	Items           []Tenant `json:"items"`
+}
+
+// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+
+type TenantConfigList struct {
+	metav1.TypeMeta `json:",inline"`
+	metav1.ListMeta `json:"metadata,omitempty"`
+	Items           []TenantConfig `json:"items"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -1250,6 +1377,14 @@ type VirtualClusterInstanceSnapshotList struct {
 	metav1.TypeMeta `json:",inline"`
 	metav1.ListMeta `json:"metadata,omitempty"`
 	Items           []VirtualClusterInstanceSnapshot `json:"items"`
+}
+
+// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+
+type VirtualClusterSnapshotCredentialsList struct {
+	metav1.TypeMeta `json:",inline"`
+	metav1.ListMeta `json:"metadata,omitempty"`
+	Items           []VirtualClusterSnapshotCredentials `json:"items"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object

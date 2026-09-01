@@ -5,19 +5,12 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 )
 
-// TenantLabel is the canonical label key binding a resource to a Tenant.
-// Set on metadata.labels by the management apiserver REST handler on
-// Create; Admin users can modify, but invisible and immutable to tenants
-// after creation. Absent = operator-global.
-const TenantLabel = "tenant.platform.vcluster.com/name"
-
-// TenantImpersonationExtra is the user.Info.Extra key carrying the
-// impersonated tenant override. Travels on the wire as
-// Impersonate-Extra-tenant (case-insensitive per HTTP; the apiserver
-// impersonation filter lowercases on read). Kubernetes' built-in
-// impersonation filter authorizes the impersonate verb on
-// userextras/tenant before our handlers see the request.
-const TenantImpersonationExtra = "tenant"
+// TenantLabel is the canonical label key binding a resource to a Tenant. Today
+// it is only read — for owner provenance in Tenant admission
+// (validateOwnerOperatorDomain). The management apiserver writing it on create,
+// and the immutability/invisibility enforcement for tenants, land with the Tenant
+// activation work in a later Multi-Tenancy PR. Absent = operator-global.
+const TenantLabel = "tenant.vcluster.com/owner"
 
 // TenantConditionNICoOnboarded is set on a Tenant that opts into NICo (via the
 // nico.vcluster.com/org annotation) once its NICo tenant org has been
@@ -75,6 +68,58 @@ func (a *Tenant) SetAccess(access []Access) {
 	a.Spec.Access = access
 }
 
+// TenantSpec is the operator's intent for one tenant: who administers the Tenant
+// object, what platform capacity it may consume, and how much of its own platform
+// configuration it may set for itself.
+//
+// Every field here is operator intent. None of them holds tenant-authored data: the
+// capability fields say which platform resources the tenant may consume, PlatformConfig
+// says which parts of its configuration the tenant may write, and the configuration
+// values themselves live in the management tenants/config subresource.
+//
+// The capability fields (ControlPlaneClusters, SSHKeys, OSImages, NodeTypes,
+// Templates) each describe one class of platform resource, in up to three parts:
+//
+//   - Enabled gates the capability as a whole. It is off unless it is switched on:
+//     false denies the capability regardless of the rest of the entry, and only true
+//     makes it available. It is a plain bool rather than a pointer because there is
+//     nothing for "unset" to mean once the default is deny: absent and false are the
+//     same answer, so a pointer would only offer two spellings of it. A Tenant
+//     therefore grants nothing by existing (an operator has to say what the tenant may
+//     reach), and a capability added to this API in a later release cannot silently
+//     widen what an existing Tenant is allowed, because every stored object reads as
+//     false for it.
+//   - Allow narrows which admin-owned instances the tenant may use (ByName, ByLabels)
+//     and, where the capability supports it, whether the tenant may author its own
+//     (Custom). An omitted Allow leaves admin-owned instances to plain RBAC, which
+//     denies tenants by default. An Allow that is present but sets no selector is the
+//     opposite: nothing narrows the capability, so every admin-owned instance of the
+//     kind is allowed.
+//
+// That present-but-empty Allow is how "all of them" is written, and it is why Allow is a
+// pointer. The selectors themselves cannot carry it: ByLabels is a map, and an empty map
+// is indistinguishable from an absent one once the object is serialized, so an empty
+// ByLabels means "no label constraint", not "everything". Only the presence of Allow
+// survives a round trip, so the distinction lives there.
+//   - Quota caps how much of the capability the tenant may consume, aggregated across
+//     all of the tenant's projects. An omitted Quota is uncapped.
+//
+// A capability only exposes the parts that are meaningful for it, so no field is
+// silently ignored: Control Plane Clusters and templates cannot be authored by a
+// tenant and so carry no Custom, and SSH keys are never shared and so carry only
+// Custom. Templates is also the one capability that spans several kinds at once, which
+// is why it is addressed by label alone (see TenantTemplates), and Machines carries an
+// entitlement only, for the reason given on that type. Only NodeTypes carries a Quota today, because it is the only capability
+// with a consumer: the NICo allocation reconciler reserves provider capacity from
+// it. Quotas for the other capabilities are added when something enforces them.
+//
+// A capability Quota is the only consumption ceiling a Tenant carries. The former
+// top-level ResourceQuotas list, which keyed ceilings by management.loft.sh resource,
+// is replaced by these per-capability quotas.
+//
+// Capabilities are stored and validated for well-formedness now; the visibility and
+// usability treatment they describe is enforced by the tenant scope library in a later
+// Multi-Tenancy PR.
 type TenantSpec struct {
 	// DisplayName is the name that should be displayed in the UI.
 	// +optional
@@ -84,177 +129,373 @@ type TenantSpec struct {
 	// +optional
 	Description string `json:"description,omitempty"`
 
-	// Owner holds the owner of this Tenant. Access carries RBAC for the
-	// Tenant resource itself (transformed to Roles and RoleBindings),
-	// governing operator-side delegation — which Platform Operator users
-	// may read or edit this Tenant. Tenant membership for humans is
-	// carried as a loft:tenant:<name> group claim on User/Team, not by
-	// Access.
+	// Owner holds the owner of this Tenant. Access is intended to govern
+	// operator-side delegation, that is, which Platform Operator users may read
+	// or edit this Tenant, by transforming Owner/Access into effective RBAC for
+	// the Tenant resource itself. That wiring is not yet active: it lands with
+	// the Tenant authorizer in a later Multi-Tenancy PR. Until then Owner and
+	// Access are stored and validated for well-formedness only, and Tenant
+	// access is authorized by ClusterRole RBAC. Neither field expresses tenant
+	// membership: how a User or Team is bound to a Tenant is resolved
+	// separately and is deliberately not fixed by this API.
 	// +optional
 	Owner *UserOrTeam `json:"owner,omitempty"`
 
 	// Access holds the access rights for users and teams on the Tenant CR
-	// itself.
+	// itself. Stored and validated now; enforcement (operator-side delegation)
+	// activates with the Tenant authorizer in a later Multi-Tenancy PR — see
+	// the Owner field.
 	// +optional
 	Access []Access `json:"access,omitempty"`
 
-	// Hosts are the hostnames that map to this tenant. Used for SSO
-	// bootstrap, UI branding, and per-request tenant resolution.
+	// PlatformConfig controls which parts of its own platform configuration the
+	// tenant may set for itself. It holds no configuration values: the values live
+	// in the management tenants/config subresource.
 	// +optional
-	Hosts []HostBinding `json:"hosts,omitempty"`
+	PlatformConfig *TenantPlatformConfig `json:"platformConfig,omitempty"`
 
-	// Authentication holds per-tenant SSO connector configuration. Mirrors
-	// Config.Status.Authentication — same Go type — so the platform's
-	// existing connector machinery can dispatch from a Tenant's value.
+	// ControlPlaneClusters governs the Control Plane Clusters this tenant may
+	// target.
 	// +optional
-	Authentication *Authentication `json:"auth,omitempty"`
+	ControlPlaneClusters *TenantControlPlaneClusters `json:"controlPlaneClusters,omitempty"`
 
-	// ResourceAllowances controls, per management.loft.sh kind, which
-	// admin-owned resources this tenant may see and use, and how (see
-	// ScopeMode). Each entry overrides the platform's shipped default for the
-	// matched instances. Multiple entries per resource are allowed (e.g. a
-	// co-held pool plus one leased instance); a name-matched entry wins over a
-	// kind-wide (no-resourceNames) entry. A resource with no entry falls to
-	// the shipped per-kind default, then to the catch-all. ScopeUnscoped is
-	// status-only and is rejected here.
+	// SSHKeys governs the SSH keys this tenant may use for machine access.
 	// +optional
-	ResourceAllowances []ResourceAllowance `json:"resourceAllowances,omitempty"`
+	SSHKeys *TenantSSHKeys `json:"sshKeys,omitempty"`
 
-	// ResourceQuotas caps how many of a resource this tenant may hold or
-	// consume, aggregated across all the tenant's projects. Parity with
-	// Project quotas, not a replacement (Projects keep their per-project
-	// quotas; the tenant quota is an outer bound).
+	// OSImages governs the OS images this tenant may boot machines from.
 	// +optional
-	ResourceQuotas []ResourceQuota `json:"resourceQuotas,omitempty"`
+	OSImages *TenantOSImages `json:"osImages,omitempty"`
+
+	// Machines governs the individual machines this tenant may provision onto.
+	// +optional
+	Machines *TenantMachines `json:"machines,omitempty"`
+
+	// NodeTypes governs the node types this tenant may provision from.
+	// +optional
+	NodeTypes *TenantNodeTypes `json:"nodeTypes,omitempty"`
+
+	// Templates governs the templates this tenant may instantiate. It is the one
+	// capability that spans several kinds at once (VirtualClusterTemplates, Apps,
+	// StackTemplates), matched by a single label selector evaluated against every
+	// kind rather than one selector per kind.
+	// +optional
+	Templates *TenantTemplates `json:"templates,omitempty"`
 }
 
-// ScopeMode is the per-tenant treatment of a management.loft.sh kind's
-// admin-owned (unlabeled) instances. A tenant's own-labeled instances are
-// always read-write, and another tenant's instances are always hidden,
-// independent of scope.
-type ScopeMode string
-
-const (
-	// ScopeDisabled denies the kind to the tenant at the authorizer:
-	// `kubectl auth can-i` returns allowed:false and all verbs are Forbidden.
-	ScopeDisabled ScopeMode = "disabled"
-	// ScopeOwned shows only the tenant's own-labeled instances (read-write);
-	// admin-owned instances are hidden.
-	ScopeOwned ScopeMode = "owned"
-	// ScopeGranted additionally shows the matched admin-owned instances
-	// read-only and usable, co-held across tenants. The §3 Granted Resource
-	// pattern.
-	ScopeGranted ScopeMode = "granted"
-	// ScopeLeased is ScopeGranted with cross-Tenant exclusivity: at most one
-	// tenant may hold a given instance. The §3 Leased Resource pattern.
-	ScopeLeased ScopeMode = "leased"
-	// ScopeUnscoped means the kind is not tenant-scoped: admin-owned instances
-	// follow plain RBAC. It is the catch-all default and is reported in
-	// status; it is NOT valid in Spec.ResourceAllowances.
-	ScopeUnscoped ScopeMode = "unscoped"
-)
-
-// ResourceAllowance scopes one management.loft.sh kind (optionally narrowed to
-// specific instances) for a tenant. Used in Spec (operator intent) and in
-// Status (resolved effective scope).
-type ResourceAllowance struct {
-	// Resource is the lowercase plural name of a management.loft.sh resource
-	// (e.g. "projects", "clusters", "virtualclustertemplates"). The group is
-	// always management.loft.sh, so there is no apiGroup field.
-	Resource string `json:"resource"`
-
-	// Scope is the treatment applied to this resource for the tenant.
-	Scope ScopeMode `json:"scope,omitempty"`
-
-	// ResourceNames narrows the entry to specific admin-owned instances by
-	// name. Empty or ["*"] applies to the whole kind. Only meaningful for
-	// granted/leased.
+// TenantControlPlaneClusters governs the Control Plane Clusters a tenant may target.
+type TenantControlPlaneClusters struct {
+	// Enabled gates the capability. False denies the tenant every Control Plane
+	// Cluster; only true enables it. Default: disabled.
 	// +optional
-	ResourceNames []string `json:"resourceNames,omitempty"`
+	Enabled bool `json:"enabled,omitempty"`
+
+	// Allow narrows the admin-owned Control Plane Clusters the tenant may target.
+	// +optional
+	Allow *TenantControlPlaneClusterAllow `json:"allow,omitempty"`
 }
 
-// ResourceQuota caps consumption of one management.loft.sh resource for a
-// tenant. Keys in the Tenant/User maps are conditions relative to the resource
-// — "total", "active", "!active", "template=<name>", "type=<name>",
-// "provider=<name>" — and values are integer counts.
-type ResourceQuota struct {
-	// Resource is the lowercase plural name of the counted management.loft.sh
-	// resource (e.g. "virtualclusterinstances", "nodeclaims").
-	Resource string `json:"resource"`
-
-	// Tenant caps usage aggregated across all the tenant's projects.
+// TenantControlPlaneClusterAllow selects the admin-owned Control Plane Clusters a
+// tenant may target. A tenant cannot register a Control Plane Cluster of its own, so
+// there is no custom allowance.
+type TenantControlPlaneClusterAllow struct {
+	// ByLabels selects Control Plane Clusters carrying all of these labels.
 	// +optional
-	Tenant map[string]string `json:"tenant,omitempty"`
-
-	// User caps usage per individual user or team.
-	// +optional
-	User map[string]string `json:"user,omitempty"`
+	ByLabels map[string]string `json:"byLabels,omitempty"`
 }
 
-// HostBinding binds a hostname to this Tenant for routing and SSO
+// TenantSSHKeys governs the SSH keys a tenant may use for machine access.
+type TenantSSHKeys struct {
+	// Enabled gates the capability. False denies the tenant every SSH key; only true
+	// enables it. Default: disabled.
+	// +optional
+	Enabled bool `json:"enabled,omitempty"`
+
+	// Allow controls the tenant's SSH keys.
+	// +optional
+	Allow *TenantSSHKeyAllow `json:"allow,omitempty"`
+}
+
+// TenantSSHKeyAllow controls a tenant's SSH keys. Admin-owned keys are never shared
+// with a tenant, so the only allowance is whether the tenant may register its own.
+type TenantSSHKeyAllow struct {
+	// Custom controls whether the tenant may register its own SSH keys. Omitted
+	// denies it, the same as a Custom that is present but not enabled.
+	// +optional
+	Custom *TenantCustomAllow `json:"custom,omitempty"`
+}
+
+// TenantOSImages governs the OS images a tenant may boot machines from.
+type TenantOSImages struct {
+	// Enabled gates the capability. False denies the tenant every OS image; only true
+	// enables it. Default: disabled.
+	// +optional
+	Enabled bool `json:"enabled,omitempty"`
+
+	// Allow narrows the OS images the tenant may boot from.
+	// +optional
+	Allow *TenantOSImageAllow `json:"allow,omitempty"`
+}
+
+// TenantOSImageAllow selects the OS images a tenant may boot from: the admin-owned
+// images matching ByLabels, plus the tenant's own images when Custom allows them.
+type TenantOSImageAllow struct {
+	// ByLabels selects admin-owned OS images carrying all of these labels.
+	// +optional
+	ByLabels map[string]string `json:"byLabels,omitempty"`
+
+	// Custom controls whether the tenant may upload its own OS images. Omitted
+	// denies it, the same as a Custom that is present but not enabled.
+	// +optional
+	Custom *TenantCustomAllow `json:"custom,omitempty"`
+}
+
+// TenantMachines governs the individual machines a tenant may provision onto: the
+// reserved hardware assigned to it, as opposed to the NodeTypes it may draw capacity
+// from. It is the narrowest capability in the spec, carrying only an entitlement.
+//
+// It has no Quota. A machine is a discrete piece of hardware, so how many of them a
+// tenant may hold is already decided by which ones it is allowed; a count on top would
+// be a second, weaker way to say the same thing, and the two could disagree. Consumption
+// caps belong on what is drawn from a machine, which is NodeTypes.
+type TenantMachines struct {
+	// Enabled gates the capability. False denies the tenant every machine; only true
+	// enables it. Default: disabled.
+	// +optional
+	Enabled bool `json:"enabled,omitempty"`
+
+	// Allow narrows the machines the tenant may provision onto.
+	// +optional
+	Allow *TenantMachineAllow `json:"allow,omitempty"`
+}
+
+// TenantMachineAllow selects the machines a tenant may provision onto. A tenant cannot
+// register a machine of its own, so there is no custom allowance. ByName and ByLabels are
+// additive: a machine matched by either is allowed, and setting neither allows every
+// machine (see TenantSpec).
+type TenantMachineAllow struct {
+	// ByName selects machines by their exact names, for pinning a tenant to specific
+	// hardware. There is no wildcard, for the same reason as TenantNodeTypeAllow.ByName
+	// and more so: a machine is one piece of hardware named for itself, so a name prefix
+	// groups only machines that happen to share a naming habit. Selecting a set of
+	// machines is what labels are for, which is also how reserved hardware is assigned.
+	// +optional
+	ByName []string `json:"byName,omitempty"`
+
+	// ByLabels selects machines carrying all of these labels, and is the primary way
+	// to assign reserved hardware: an operator labels the machines it is setting
+	// aside for a tenant.
+	// +optional
+	ByLabels map[string]string `json:"byLabels,omitempty"`
+}
+
+// TenantNodeTypes governs the node types a tenant may provision from.
+type TenantNodeTypes struct {
+	// Enabled gates the capability. False denies the tenant every node type; only true
+	// enables it. Default: disabled.
+	// +optional
+	Enabled bool `json:"enabled,omitempty"`
+
+	// Allow narrows the node types the tenant may provision from.
+	// +optional
+	Allow *TenantNodeTypeAllow `json:"allow,omitempty"`
+
+	// Quota caps what the tenant may provision from those node types.
+	// +optional
+	Quota *TenantNodeTypeQuota `json:"quota,omitempty"`
+}
+
+// TenantNodeTypeAllow selects the NodeTypes a tenant may provision from. A tenant
+// cannot author a NodeType of its own, so there is no custom allowance. ByName and
+// ByLabels are additive: a NodeType matched by either is allowed, and setting neither
+// allows every NodeType (see TenantSpec).
+type TenantNodeTypeAllow struct {
+	// ByName selects NodeTypes by their exact names. There is no wildcard: to allow a
+	// whole provider, label its NodeTypes and select them with ByLabels.
+	//
+	// A "<provider>.*" prefix wildcard was considered, since a Project's
+	// allowedNodeTypes accepts one. It was rejected here because it encodes the provider
+	// in the name and so only works while the "<provider>.<type>" naming convention
+	// holds, while ByLabels expresses the same set with no such coupling. The Project list
+	// keeps its wildcard and keeps relying on that convention; this spec does not need a
+	// second way to say what a label already says.
+	// +optional
+	ByName []string `json:"byName,omitempty"`
+
+	// ByLabels selects NodeTypes carrying all of these labels, and is the way to
+	// allow a whole provider: label the NodeTypes it owns and match that label here.
+	// +optional
+	ByLabels map[string]string `json:"byLabels,omitempty"`
+}
+
+// TenantNodeTypeQuota caps what a tenant may provision from the node types it is
+// allowed, aggregated across all the tenant's projects.
+//
+// Each field is one matcher category, and its keys are the free-form specifics of
+// that category. Further categories (a capacity-property matcher, for instance) are
+// added as consumers for them appear; ByType is the only one with a consumer today.
+type TenantNodeTypeQuota struct {
+	// ByType caps how many nodes the tenant may run of each NodeType, keyed by
+	// NodeType name (e.g. "eu-west.medium": "5"). Values are non-negative integer
+	// counts, the same encoding a Project's Quotas use and the same one pkg/quota's
+	// admission path parses for management resources such as nodeclaims.
+	// +optional
+	ByType map[string]string `json:"byType,omitempty"`
+}
+
+// TenantTemplates governs the templates a tenant may instantiate. Unlike every other
+// capability, it spans several kinds at once: VirtualClusterTemplates, Apps, and
+// StackTemplates today, and the set is deliberately open, so a further template kind
+// joins it without an API change.
+//
+// One capability covers all of them because a single label selector is evaluated
+// against every kind and the tenant may use the union of what it matches. That is what
+// makes templates a single capability rather than one per kind, and it is why the
+// selector is the only way to address them: see TenantTemplateAllow.
+type TenantTemplates struct {
+	// Enabled gates the capability. False denies the tenant every template; only true
+	// enables it. Default: disabled.
+	// +optional
+	Enabled bool `json:"enabled,omitempty"`
+
+	// Allow narrows the templates the tenant may instantiate.
+	// +optional
+	Allow *TenantTemplateAllow `json:"allow,omitempty"`
+}
+
+// TenantTemplateAllow selects the templates a tenant may instantiate.
+//
+// ByLabels is the only selector, deliberately. A template name is unique only within
+// its kind, so a cross-kind name list of the sort TenantNodeTypeAllow.ByName provides
+// would be ambiguous: "starter" could name a VirtualClusterTemplate and an App at
+// once, with no way to say which. A label is the one identifier that means the same
+// thing in every kind, so granting a set of templates together is done by labelling
+// them alike, whatever kinds they are.
+//
+// A tenant cannot author templates of its own yet, so there is also no custom
+// allowance.
+type TenantTemplateAllow struct {
+	// ByLabels selects templates carrying all of these labels. They are matched
+	// against every template kind the capability spans, and the tenant may use the
+	// union of the matches; it is not per-kind and cannot be narrowed to one kind.
+	// +optional
+	ByLabels map[string]string `json:"byLabels,omitempty"`
+}
+
+// TenantCustomAllow controls whether a tenant may author its own value, as opposed to
+// only choosing from what an operator has already provided. Under a capability that
+// means authoring its own instances of the capability's resource rather than only using
+// the admin-owned instances the selectors match; under a TenantPlatformConfig control it
+// means setting a value of its own rather than only the operator-approved ones.
+type TenantCustomAllow struct {
+	// Enabled controls whether the tenant may author its own instances. False denies
+	// it; only true allows it. Default: disabled, which is also what omitting the whole
+	// Custom block means, so the two agree rather than a present-but-empty Custom
+	// quietly granting what an absent one withholds.
+	// +optional
+	Enabled bool `json:"enabled,omitempty"`
+}
+
+// TenantPlatformConfig gates tenant self-configuration. Each entry names one
+// configuration domain and says whether the tenant may configure it and within what
+// bounds. The entries deliberately carry no configuration values of their own: an
+// operator writes the gate here, the tenant writes the value through the management
+// tenants/config subresource, and managementv1.TenantConfigSpec is where that value's
+// schema lives.
+//
+// The shape mirrors a capability (Enabled plus Allow, see TenantSpec), because the
+// question is the same one: is this available, and how far does it reach. The
+// distinction is what it governs. A capability governs platform resources the tenant
+// consumes; a control here governs whether the tenant may write a piece of its own
+// configuration. The types are named Control rather than reusing the capability names
+// so the two cannot be confused at a call site.
+//
+// Only the domains an operator can currently delegate appear here.
+// managementv1.TenantConfigSpec carries other domains that remain operator-only until a
+// control for them is added, which is an additive change.
+//
+// Hostnames are deliberately not among them, and are not delegable. A hostname is not
+// tenant-local state like branding is: it is a routing claim on a platform-global
+// namespace, deciding which tenant an unauthenticated request resolves to before any
+// identity exists. A tenant also cannot complete the operation, since the name is only
+// reachable once DNS points at the platform and a certificate covers it, both of which
+// are operator actions. Delegating the write would hand a tenant half a workflow while
+// exposing it to a cross-tenant collision it cannot see or resolve: exclusivity is
+// best-effort, and a conflict is reported without naming the holder, because which
+// tenant owns a host is not a tenant's to know. Hostnames are set by an operator through
+// the tenants/config subresource.
+type TenantPlatformConfig struct {
+	// UISettings controls whether the tenant may set its own UI branding and
+	// customization.
+	// +optional
+	UISettings *TenantUISettingsControl `json:"uiSettings,omitempty"`
+}
+
+// TenantUISettingsControl gates the tenant's control over its own UI settings. The
+// settings themselves are managementv1.TenantConfigSpec.UISettings.
+type TenantUISettingsControl struct {
+	// Enabled gates the domain. False makes the tenant's UI settings operator-only;
+	// only true lets the tenant configure them. Default: disabled.
+	// +optional
+	Enabled bool `json:"enabled,omitempty"`
+
+	// Allow bounds what the tenant may set. UI settings are free-form branding
+	// rather than a set of named platform objects, so there is nothing for an
+	// operator to pre-approve by name; the only question is whether the tenant may
+	// author its own.
+	// +optional
+	Allow *TenantUISettingsAllow `json:"allow,omitempty"`
+}
+
+// TenantUISettingsAllow bounds the UI settings a tenant may set for itself.
+type TenantUISettingsAllow struct {
+	// Custom controls whether the tenant may author its own UI settings. Omitted
+	// denies it, the same as a Custom that is present but not enabled.
+	// +optional
+	Custom *TenantCustomAllow `json:"custom,omitempty"`
+}
+
+// TenantHostnameBinding binds a hostname to this Tenant for routing and SSO
 // resolution.
-type HostBinding struct {
+type TenantHostnameBinding struct {
 	// Hostname is the DNS name the platform will treat as belonging to
 	// this Tenant (e.g. acme.platform.example.com).
 	Hostname string `json:"hostname"`
 }
 
-// TenantStatus surfaces reconciler-managed state.
+// TenantStatus surfaces reconciler-managed state. It is written by the Tenant
+// controller, never by a caller: the resolved allowances and quota-usage fields join it
+// with the rest of the Multi-Tenancy work in a later PR.
 type TenantStatus struct {
+	// Hostnames are the DNS names that resolve to this tenant, projected here from the
+	// tenant's configuration by the Tenant controller.
+	//
+	// The configuration itself is written through the management tenants/config
+	// subresource and persisted in the tenant's backing Secret, which nothing on the
+	// request path can reach: a Secret is projected only to callers authorized on that
+	// subresource, and it cannot carry a field index. Hostnames need both. Per-request
+	// tenant resolution looks one up on every unauthenticated gateway request, and
+	// admission asks which tenant already claims one across every tenant at once, and
+	// neither caller is an authorized reader of the tenant's own configuration. So the
+	// controller copies them here, onto an object that can be watched, cached, and
+	// field-indexed (constants.IndexByHost).
+	//
+	// That makes this a projection and never a source of truth. A hostname written
+	// directly onto this status does not become a claim: the next reconcile overwrites
+	// it from the Secret, which is also why the exclusivity check reading this index is
+	// not fooled by one. Hostnames are set by an operator through the tenants/config
+	// subresource, for the reasons on TenantPlatformConfig.
+	// +optional
+	Hostnames []TenantHostnameBinding `json:"hostnames,omitempty"`
+
 	// Conditions describes the current observed conditions of the Tenant.
 	// +optional
 	Conditions agentstoragev1.Conditions `json:"conditions,omitempty"`
-
-	// ObservedGeneration is the generation last observed by the
-	// reconciler.
-	// +optional
-	ObservedGeneration int64 `json:"observedGeneration,omitempty"`
-
-	// ResourceAllowances is the resolved effective scope for every scopable
-	// management.loft.sh kind for this tenant: the shipped per-kind defaults
-	// merged with Spec.ResourceAllowances. Each entry's Scope is the effective
-	// scope and may be ScopeUnscoped. Recomputed each reconcile from discovery
-	// + defaults + spec; observability only (the apiserver computes effective
-	// scope live at request time). The leased entries are the per-Tenant
-	// projection of the cross-Tenant exclusivity index.
-	// +optional
-	ResourceAllowances []ResourceAllowance `json:"resourceAllowances,omitempty"`
-
-	// ResourceQuotas reports usage against the Spec.ResourceQuotas caps,
-	// aggregated across the tenant's projects.
-	// +optional
-	ResourceQuotas []ResourceQuotaStatus `json:"resourceQuotas,omitempty"`
 
 	// NICo reports the NICo tenant org materialized for this Tenant, set once
 	// the Tenant opts into NICo via the nico.vcluster.com/org annotation.
 	// +optional
 	NICo *TenantNICoStatus `json:"nico,omitempty"`
-}
-
-// ResourceQuotaStatus reports limit-vs-used for one resource's quota.
-type ResourceQuotaStatus struct {
-	// Resource is the counted management.loft.sh resource.
-	Resource string `json:"resource"`
-
-	// Tenant reports the tenant-aggregate limit and used counts.
-	// +optional
-	Tenant *QuotaUsage `json:"tenant,omitempty"`
-
-	// User reports the per-user/team limit and used counts.
-	// +optional
-	User *QuotaUsage `json:"user,omitempty"`
-}
-
-// QuotaUsage pairs configured limits with observed usage; both maps are keyed
-// by the same condition keys as the corresponding ResourceQuota.
-type QuotaUsage struct {
-	// Limit echoes the configured caps (condition key -> count).
-	// +optional
-	Limit map[string]string `json:"limit,omitempty"`
-
-	// Used is the observed usage (condition key -> count).
-	// +optional
-	Used map[string]string `json:"used,omitempty"`
 }
 
 // TenantNICoStatus reports the NICo tenant org materialized for a Tenant and the

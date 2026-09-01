@@ -27,10 +27,12 @@ type ManagementV1Interface interface {
 	DatabaseConnectorsGetter
 	DirectClusterEndpointTokensGetter
 	EventsGetter
+	ExternalCredentialsGetter
 	FeaturesGetter
 	IngressAuthTokensGetter
 	LicensesGetter
 	LoftUpgradesGetter
+	MachinesGetter
 	MachineConfigTemplatesGetter
 	NetworkPeersGetter
 	NodeClaimsGetter
@@ -51,8 +53,11 @@ type ManagementV1Interface interface {
 	SelvesGetter
 	SelfSubjectAccessReviewsGetter
 	SharedSecretsGetter
+	SlurmInstancesGetter
 	SpaceInstancesGetter
 	SpaceTemplatesGetter
+	StackInstancesGetter
+	StackTemplatesGetter
 	SubjectAccessReviewsGetter
 	TeamsGetter
 	TenantsGetter
@@ -129,6 +134,10 @@ func (c *ManagementV1Client) Events() EventInterface {
 	return newEvents(c)
 }
 
+func (c *ManagementV1Client) ExternalCredentials(namespace string) ExternalCredentialInterface {
+	return newExternalCredentials(c, namespace)
+}
+
 func (c *ManagementV1Client) Features() FeatureInterface {
 	return newFeatures(c)
 }
@@ -143,6 +152,10 @@ func (c *ManagementV1Client) Licenses() LicenseInterface {
 
 func (c *ManagementV1Client) LoftUpgrades() LoftUpgradeInterface {
 	return newLoftUpgrades(c)
+}
+
+func (c *ManagementV1Client) Machines() MachineInterface {
+	return newMachines(c)
 }
 
 func (c *ManagementV1Client) MachineConfigTemplates(namespace string) MachineConfigTemplateInterface {
@@ -225,12 +238,24 @@ func (c *ManagementV1Client) SharedSecrets(namespace string) SharedSecretInterfa
 	return newSharedSecrets(c, namespace)
 }
 
+func (c *ManagementV1Client) SlurmInstances(namespace string) SlurmInstanceInterface {
+	return newSlurmInstances(c, namespace)
+}
+
 func (c *ManagementV1Client) SpaceInstances(namespace string) SpaceInstanceInterface {
 	return newSpaceInstances(c, namespace)
 }
 
 func (c *ManagementV1Client) SpaceTemplates() SpaceTemplateInterface {
 	return newSpaceTemplates(c)
+}
+
+func (c *ManagementV1Client) StackInstances(namespace string) StackInstanceInterface {
+	return newStackInstances(c, namespace)
+}
+
+func (c *ManagementV1Client) StackTemplates() StackTemplateInterface {
+	return newStackTemplates(c)
 }
 
 func (c *ManagementV1Client) SubjectAccessReviews() SubjectAccessReviewInterface {

@@ -18,6 +18,8 @@ type ClusterAccessExpansion interface{}
 
 type ClusterRoleTemplateExpansion interface{}
 
+type MachineExpansion interface{}
+
 type MachineConfigTemplateExpansion interface{}
 
 type NetworkPeerExpansion interface{}
@@ -40,9 +42,15 @@ type SSHKeyExpansion interface{}
 
 type SharedSecretExpansion interface{}
 
+type SlurmInstanceExpansion interface{}
+
 type SpaceInstanceExpansion interface{}
 
 type SpaceTemplateExpansion interface{}
+
+type StackInstanceExpansion interface{}
+
+type StackTemplateExpansion interface{}
 
 type TeamExpansion interface{}
 

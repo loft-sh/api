@@ -24,6 +24,8 @@ type Interface interface {
 	ClusterAccesses() ClusterAccessInformer
 	// ClusterRoleTemplates returns a ClusterRoleTemplateInformer.
 	ClusterRoleTemplates() ClusterRoleTemplateInformer
+	// Machines returns a MachineInformer.
+	Machines() MachineInformer
 	// MachineConfigTemplates returns a MachineConfigTemplateInformer.
 	MachineConfigTemplates() MachineConfigTemplateInformer
 	// NetworkPeers returns a NetworkPeerInformer.
@@ -46,10 +48,16 @@ type Interface interface {
 	SSHKeys() SSHKeyInformer
 	// SharedSecrets returns a SharedSecretInformer.
 	SharedSecrets() SharedSecretInformer
+	// SlurmInstances returns a SlurmInstanceInformer.
+	SlurmInstances() SlurmInstanceInformer
 	// SpaceInstances returns a SpaceInstanceInformer.
 	SpaceInstances() SpaceInstanceInformer
 	// SpaceTemplates returns a SpaceTemplateInformer.
 	SpaceTemplates() SpaceTemplateInformer
+	// StackInstances returns a StackInstanceInformer.
+	StackInstances() StackInstanceInformer
+	// StackTemplates returns a StackTemplateInformer.
+	StackTemplates() StackTemplateInformer
 	// Teams returns a TeamInformer.
 	Teams() TeamInformer
 	// Tenants returns a TenantInformer.
@@ -113,6 +121,11 @@ func (v *version) ClusterRoleTemplates() ClusterRoleTemplateInformer {
 	return &clusterRoleTemplateInformer{factory: v.factory, tweakListOptions: v.tweakListOptions}
 }
 
+// Machines returns a MachineInformer.
+func (v *version) Machines() MachineInformer {
+	return &machineInformer{factory: v.factory, tweakListOptions: v.tweakListOptions}
+}
+
 // MachineConfigTemplates returns a MachineConfigTemplateInformer.
 func (v *version) MachineConfigTemplates() MachineConfigTemplateInformer {
 	return &machineConfigTemplateInformer{factory: v.factory, namespace: v.namespace, tweakListOptions: v.tweakListOptions}
@@ -168,6 +181,11 @@ func (v *version) SharedSecrets() SharedSecretInformer {
 	return &sharedSecretInformer{factory: v.factory, namespace: v.namespace, tweakListOptions: v.tweakListOptions}
 }
 
+// SlurmInstances returns a SlurmInstanceInformer.
+func (v *version) SlurmInstances() SlurmInstanceInformer {
+	return &slurmInstanceInformer{factory: v.factory, namespace: v.namespace, tweakListOptions: v.tweakListOptions}
+}
+
 // SpaceInstances returns a SpaceInstanceInformer.
 func (v *version) SpaceInstances() SpaceInstanceInformer {
 	return &spaceInstanceInformer{factory: v.factory, namespace: v.namespace, tweakListOptions: v.tweakListOptions}
@@ -176,6 +194,16 @@ func (v *version) SpaceInstances() SpaceInstanceInformer {
 // SpaceTemplates returns a SpaceTemplateInformer.
 func (v *version) SpaceTemplates() SpaceTemplateInformer {
 	return &spaceTemplateInformer{factory: v.factory, tweakListOptions: v.tweakListOptions}
+}
+
+// StackInstances returns a StackInstanceInformer.
+func (v *version) StackInstances() StackInstanceInformer {
+	return &stackInstanceInformer{factory: v.factory, namespace: v.namespace, tweakListOptions: v.tweakListOptions}
+}
+
+// StackTemplates returns a StackTemplateInformer.
+func (v *version) StackTemplates() StackTemplateInformer {
+	return &stackTemplateInformer{factory: v.factory, tweakListOptions: v.tweakListOptions}
 }
 
 // Teams returns a TeamInformer.

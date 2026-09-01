@@ -42,6 +42,10 @@ type ClusterAccessListerExpansion interface{}
 // ClusterRoleTemplateLister.
 type ClusterRoleTemplateListerExpansion interface{}
 
+// MachineListerExpansion allows custom methods to be added to
+// MachineLister.
+type MachineListerExpansion interface{}
+
 // MachineConfigTemplateListerExpansion allows custom methods to be added to
 // MachineConfigTemplateLister.
 type MachineConfigTemplateListerExpansion interface{}
@@ -102,6 +106,14 @@ type SharedSecretListerExpansion interface{}
 // SharedSecretNamespaceLister.
 type SharedSecretNamespaceListerExpansion interface{}
 
+// SlurmInstanceListerExpansion allows custom methods to be added to
+// SlurmInstanceLister.
+type SlurmInstanceListerExpansion interface{}
+
+// SlurmInstanceNamespaceListerExpansion allows custom methods to be added to
+// SlurmInstanceNamespaceLister.
+type SlurmInstanceNamespaceListerExpansion interface{}
+
 // SpaceInstanceListerExpansion allows custom methods to be added to
 // SpaceInstanceLister.
 type SpaceInstanceListerExpansion interface{}
@@ -113,6 +125,18 @@ type SpaceInstanceNamespaceListerExpansion interface{}
 // SpaceTemplateListerExpansion allows custom methods to be added to
 // SpaceTemplateLister.
 type SpaceTemplateListerExpansion interface{}
+
+// StackInstanceListerExpansion allows custom methods to be added to
+// StackInstanceLister.
+type StackInstanceListerExpansion interface{}
+
+// StackInstanceNamespaceListerExpansion allows custom methods to be added to
+// StackInstanceNamespaceLister.
+type StackInstanceNamespaceListerExpansion interface{}
+
+// StackTemplateListerExpansion allows custom methods to be added to
+// StackTemplateLister.
+type StackTemplateListerExpansion interface{}
 
 // TeamListerExpansion allows custom methods to be added to
 // TeamLister.

@@ -72,6 +72,10 @@ func (c *FakeManagementV1) Events() v1.EventInterface {
 	return newFakeEvents(c)
 }
 
+func (c *FakeManagementV1) ExternalCredentials(namespace string) v1.ExternalCredentialInterface {
+	return newFakeExternalCredentials(c, namespace)
+}
+
 func (c *FakeManagementV1) Features() v1.FeatureInterface {
 	return newFakeFeatures(c)
 }
@@ -86,6 +90,10 @@ func (c *FakeManagementV1) Licenses() v1.LicenseInterface {
 
 func (c *FakeManagementV1) LoftUpgrades() v1.LoftUpgradeInterface {
 	return newFakeLoftUpgrades(c)
+}
+
+func (c *FakeManagementV1) Machines() v1.MachineInterface {
+	return newFakeMachines(c)
 }
 
 func (c *FakeManagementV1) MachineConfigTemplates(namespace string) v1.MachineConfigTemplateInterface {
@@ -168,12 +176,24 @@ func (c *FakeManagementV1) SharedSecrets(namespace string) v1.SharedSecretInterf
 	return newFakeSharedSecrets(c, namespace)
 }
 
+func (c *FakeManagementV1) SlurmInstances(namespace string) v1.SlurmInstanceInterface {
+	return newFakeSlurmInstances(c, namespace)
+}
+
 func (c *FakeManagementV1) SpaceInstances(namespace string) v1.SpaceInstanceInterface {
 	return newFakeSpaceInstances(c, namespace)
 }
 
 func (c *FakeManagementV1) SpaceTemplates() v1.SpaceTemplateInterface {
 	return newFakeSpaceTemplates(c)
+}
+
+func (c *FakeManagementV1) StackInstances(namespace string) v1.StackInstanceInterface {
+	return newFakeStackInstances(c, namespace)
+}
+
+func (c *FakeManagementV1) StackTemplates() v1.StackTemplateInterface {
+	return newFakeStackTemplates(c)
 }
 
 func (c *FakeManagementV1) SubjectAccessReviews() v1.SubjectAccessReviewInterface {

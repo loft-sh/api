@@ -87,6 +87,18 @@ func (c *fakeVirtualClusterInstances) GetNodeAccessKey(ctx context.Context, virt
 	return obj.(*v1.VirtualClusterNodeAccessKey), err
 }
 
+// GetSnapshotCredentials takes the representation of a virtualClusterSnapshotCredentials and creates it.  Returns the server's representation of the virtualClusterSnapshotCredentials, and an error, if there is any.
+func (c *fakeVirtualClusterInstances) GetSnapshotCredentials(ctx context.Context, virtualClusterInstanceName string, virtualClusterSnapshotCredentials *v1.VirtualClusterSnapshotCredentials, opts metav1.CreateOptions) (result *v1.VirtualClusterSnapshotCredentials, err error) {
+	emptyResult := &v1.VirtualClusterSnapshotCredentials{}
+	obj, err := c.Fake.
+		Invokes(testing.NewCreateSubresourceActionWithOptions(c.Resource(), virtualClusterInstanceName, "snapshotcredentials", c.Namespace(), virtualClusterSnapshotCredentials, opts), emptyResult)
+
+	if obj == nil {
+		return emptyResult, err
+	}
+	return obj.(*v1.VirtualClusterSnapshotCredentials), err
+}
+
 // GetStandaloneETCDPeers takes the representation of a virtualClusterStandalone and creates it.  Returns the server's representation of the virtualClusterStandalone, and an error, if there is any.
 func (c *fakeVirtualClusterInstances) GetStandaloneETCDPeers(ctx context.Context, virtualClusterInstanceName string, virtualClusterStandalone *v1.VirtualClusterStandalone, opts metav1.CreateOptions) (result *v1.VirtualClusterStandalone, err error) {
 	emptyResult := &v1.VirtualClusterStandalone{}

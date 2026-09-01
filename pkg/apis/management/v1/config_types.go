@@ -111,6 +111,28 @@ type Audit struct {
 	// +optional
 	DataStoreEndpoint string `json:"dataStoreEndpoint,omitempty"`
 
+	// DataStoreIdentityProvider is the identity provider to use when generating temporary
+	// authentication tokens for the audit datastore, instead of a static password embedded in
+	// DataStoreEndpoint. Examples:
+	// * aws: RDS IAM Authentication
+	// +optional
+	DataStoreIdentityProvider string `json:"dataStoreIdentityProvider,omitempty"`
+
+	// DataStoreCAFile is the path to a PEM-encoded certificate authority bundle used to verify the
+	// audit datastore's server certificate, read directly by the platform pod at startup. Mount it
+	// in the platform pod via the chart's top-level volumes/volumeMounts (e.g. from a Secret or ConfigMap),
+	// the same way as config.database's caFile. When set, the connection is fully verified
+	// (postgres: sslmode=verify-full; mysql: a registered TLS config with the given CA as RootCAs)
+	// instead of the default encrypted-but-unverified connection. Optional; has no effect on the
+	// sqlite backend.
+	//
+	// An explicit ?sslmode=/?tls= already present on DataStoreEndpoint always overrides this and
+	// is not upgraded, even when DataStoreCAFile is set - e.g. an endpoint carried over from
+	// before CA support existed with ?tls=skip-verify stays unverified. The platform logs this
+	// case at startup so it isn't silent.
+	// +optional
+	DataStoreCAFile string `json:"dataStoreCAFile,omitempty"`
+
 	// DataStoreMaxAge is the maximum number of hours to retain old log events in the datastore
 	// +optional
 	DataStoreMaxAge *int `json:"dataStoreTTL,omitempty"`

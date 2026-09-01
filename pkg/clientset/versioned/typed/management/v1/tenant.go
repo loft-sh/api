@@ -31,6 +31,9 @@ type TenantInterface interface {
 	List(ctx context.Context, opts metav1.ListOptions) (*managementv1.TenantList, error)
 	Watch(ctx context.Context, opts metav1.ListOptions) (watch.Interface, error)
 	Patch(ctx context.Context, name string, pt types.PatchType, data []byte, opts metav1.PatchOptions, subresources ...string) (result *managementv1.Tenant, err error)
+	GetConfig(ctx context.Context, tenantName string, options metav1.GetOptions) (*managementv1.TenantConfig, error)
+	UpdateConfig(ctx context.Context, tenantName string, tenantConfig *managementv1.TenantConfig, opts metav1.CreateOptions) (*managementv1.TenantConfig, error)
+
 	TenantExpansion
 }
 
@@ -51,4 +54,31 @@ func newTenants(c *ManagementV1Client) *tenants {
 			func() *managementv1.TenantList { return &managementv1.TenantList{} },
 		),
 	}
+}
+
+// GetConfig takes name of the tenant, and returns the corresponding managementv1.TenantConfig object, and an error if there is any.
+func (c *tenants) GetConfig(ctx context.Context, tenantName string, options metav1.GetOptions) (result *managementv1.TenantConfig, err error) {
+	result = &managementv1.TenantConfig{}
+	err = c.GetClient().Get().
+		Resource("tenants").
+		Name(tenantName).
+		SubResource("config").
+		VersionedParams(&options, scheme.ParameterCodec).
+		Do(ctx).
+		Into(result)
+	return
+}
+
+// UpdateConfig takes the representation of a tenantConfig and creates it.  Returns the server's representation of the tenantConfig, and an error, if there is any.
+func (c *tenants) UpdateConfig(ctx context.Context, tenantName string, tenantConfig *managementv1.TenantConfig, opts metav1.CreateOptions) (result *managementv1.TenantConfig, err error) {
+	result = &managementv1.TenantConfig{}
+	err = c.GetClient().Post().
+		Resource("tenants").
+		Name(tenantName).
+		SubResource("config").
+		VersionedParams(&opts, scheme.ParameterCodec).
+		Body(tenantConfig).
+		Do(ctx).
+		Into(result)
+	return
 }
