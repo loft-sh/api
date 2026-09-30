@@ -13,7 +13,7 @@ import (
 // TestWithStaticCredentials pins that credentials stay on the config. The platform builds one store per
 // instance in a shared process, so credentials must never reach the process environment.
 func TestWithStaticCredentials(t *testing.T) {
-	cfg, err := newConfigBuilder(logr.Discard()).WithStaticCredentials("id", "secret", "token").Build()
+	cfg, err := NewConfigBuilder(logr.Discard()).WithStaticCredentials("id", "secret", "token").Build()
 	if err != nil {
 		t.Fatalf("build config: %v", err)
 	}
@@ -39,7 +39,7 @@ func TestWithStaticCredentialsNone(t *testing.T) {
 	t.Setenv("AWS_ACCESS_KEY_ID", "ambient-id")
 	t.Setenv("AWS_SECRET_ACCESS_KEY", "ambient-secret")
 
-	cfg, err := newConfigBuilder(logr.Discard()).WithStaticCredentials("", "", "").Build()
+	cfg, err := NewConfigBuilder(logr.Discard()).WithStaticCredentials("", "", "").Build()
 	if err != nil {
 		t.Fatalf("build config: %v", err)
 	}
@@ -68,7 +68,7 @@ func TestWithStaticCredentialsPartialFailsClosed(t *testing.T) {
 		{name: "only the secret access key", secretAccessKey: "secret"},
 	} {
 		t.Run(tt.name, func(t *testing.T) {
-			_, err := newConfigBuilder(logr.Discard()).WithStaticCredentials(tt.accessKeyID, tt.secretAccessKey, "").Build()
+			_, err := NewConfigBuilder(logr.Discard()).WithStaticCredentials(tt.accessKeyID, tt.secretAccessKey, "").Build()
 			if err == nil {
 				t.Fatal("expected a partial credential to fail rather than resolve the ambient identity")
 			}

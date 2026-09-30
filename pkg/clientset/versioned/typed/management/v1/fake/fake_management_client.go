@@ -56,6 +56,10 @@ func (c *FakeManagementV1) Configs() v1.ConfigInterface {
 	return newFakeConfigs(c)
 }
 
+func (c *FakeManagementV1) Connectors() v1.ConnectorInterface {
+	return newFakeConnectors(c)
+}
+
 func (c *FakeManagementV1) ConvertVirtualClusterConfigs() v1.ConvertVirtualClusterConfigInterface {
 	return newFakeConvertVirtualClusterConfigs(c)
 }
@@ -70,10 +74,6 @@ func (c *FakeManagementV1) DirectClusterEndpointTokens() v1.DirectClusterEndpoin
 
 func (c *FakeManagementV1) Events() v1.EventInterface {
 	return newFakeEvents(c)
-}
-
-func (c *FakeManagementV1) ExternalCredentials(namespace string) v1.ExternalCredentialInterface {
-	return newFakeExternalCredentials(c, namespace)
 }
 
 func (c *FakeManagementV1) Features() v1.FeatureInterface {
@@ -100,16 +100,16 @@ func (c *FakeManagementV1) MachineConfigTemplates(namespace string) v1.MachineCo
 	return newFakeMachineConfigTemplates(c, namespace)
 }
 
+func (c *FakeManagementV1) NetworkEnvironments() v1.NetworkEnvironmentInterface {
+	return newFakeNetworkEnvironments(c)
+}
+
 func (c *FakeManagementV1) NetworkPeers() v1.NetworkPeerInterface {
 	return newFakeNetworkPeers(c)
 }
 
 func (c *FakeManagementV1) NodeClaims(namespace string) v1.NodeClaimInterface {
 	return newFakeNodeClaims(c, namespace)
-}
-
-func (c *FakeManagementV1) NodeEnvironments(namespace string) v1.NodeEnvironmentInterface {
-	return newFakeNodeEnvironments(c, namespace)
 }
 
 func (c *FakeManagementV1) NodeProfiles() v1.NodeProfileInterface {
@@ -174,10 +174,6 @@ func (c *FakeManagementV1) SelfSubjectAccessReviews() v1.SelfSubjectAccessReview
 
 func (c *FakeManagementV1) SharedSecrets(namespace string) v1.SharedSecretInterface {
 	return newFakeSharedSecrets(c, namespace)
-}
-
-func (c *FakeManagementV1) SlurmInstances(namespace string) v1.SlurmInstanceInterface {
-	return newFakeSlurmInstances(c, namespace)
 }
 
 func (c *FakeManagementV1) SpaceInstances(namespace string) v1.SpaceInstanceInterface {

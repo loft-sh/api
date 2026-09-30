@@ -20,6 +20,14 @@ const (
 	// AppInstanceReasonAppNotFound is set on the Synced condition when the
 	// app referenced by spec.templateRef does not exist.
 	AppInstanceReasonAppNotFound = "AppNotFound"
+
+	// AppInstanceReasonDestinationNotFound is set when the space, tenant cluster or
+	// cluster the instance deploys into does not exist.
+	AppInstanceReasonDestinationNotFound = "DestinationNotFound"
+
+	// AppInstanceReasonDestinationNotReady is set when that destination exists but
+	// cannot take a deploy yet.
+	AppInstanceReasonDestinationNotReady = "DestinationNotReady"
 )
 
 // +genclient
@@ -111,7 +119,8 @@ type AppInstanceDestinationVirtualCluster struct {
 
 	// Namespace the helm release is deployed into. Only used when target is vCluster;
 	// for the host target the release is always deployed into the virtual cluster's host namespace.
-	// If empty, defaults to the app's default namespace.
+	// If empty, uses the app's default namespace only for initial release resolution.
+	// Existing instances retain their recorded release coordinates.
 	// +optional
 	Namespace string `json:"namespace,omitempty"`
 
@@ -140,7 +149,8 @@ type AppInstanceDestinationCluster struct {
 	Name string `json:"name,omitempty"`
 
 	// Namespace in the cluster the helm release is deployed into.
-	// If empty, defaults to the app's default namespace.
+	// If empty, uses the app's default namespace only for initial release resolution.
+	// Existing instances retain their recorded release coordinates.
 	// +optional
 	Namespace string `json:"namespace,omitempty"`
 }

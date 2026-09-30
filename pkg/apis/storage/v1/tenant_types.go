@@ -5,12 +5,57 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 )
 
-// TenantLabel is the canonical label key binding a resource to a Tenant. Today
-// it is only read — for owner provenance in Tenant admission
-// (validateOwnerOperatorDomain). The management apiserver writing it on create,
-// and the immutability/invisibility enforcement for tenants, land with the Tenant
-// activation work in a later Multi-Tenancy PR. Absent = operator-global.
+// TenantLabel is the canonical label key naming the Tenant that owns a resource:
+// the tenant created it, and it counts against that tenant rather than against the
+// operator. Absent = operator-global.
+//
+// It is one of a mutually exclusive pair. The other is TenantExclusiveHolderLabel, which an
+// operator applies by hand to assign a resource it owns to a single tenant. The two
+// answer different questions: who created this, versus who has exclusive use of
+// something the operator created.
+//
+// A resource carrying both is refused on write, and so is either key present with an empty
+// value: both name a tenant, and a key naming nobody says nothing while still acting, since
+// the read reads the value as no tenant but every admin leg selects on the key not
+// existing. Removing the label is how to say "no tenant".
+//
+// The read refuses the pair a second time, and this is deliberate rather than redundant: a
+// controller writing through the manager's client never passes the write-side check, so the
+// read is the only thing left. It resolves a resource carrying both to visible to no
+// tenant, which is the answer that does not depend on which of the two labels a reader
+// happens to look at first. No tenant, not nobody: an operator session is unscoped, so it
+// still sees the resource and both of its labels, which is what makes the state
+// discoverable and fixable rather than merely gone.
+//
+// Left to chance the result would differ by kind: a kind with no leg for the tenant's own
+// resources hides it, while one that has such a leg would still show it to the owner and
+// silently ignore the operator's assignment.
+//
+// The tenant-scoped client owns this key. It stamps ownership at create, preserves it on
+// update, refuses a patch that would reach it, and strips it from what a tenant reads
+// back, so a tenant can neither see nor set what binds a resource to it. Tenant admission
+// reads it separately for owner provenance (validateOwnerOperatorDomain).
 const TenantLabel = "tenant.vcluster.com/owner"
+
+// TenantExclusiveHolderLabel records which tenant holds an operator-owned resource exclusively.
+// An operator applies it by hand and nothing derives it, because no field in the Tenant
+// spec expresses exclusivity.
+//
+// It is deliberately tenant-independent, one key carrying the holder's name as its value,
+// because exclusivity is a fact about the resource rather than about whoever is looking at
+// it. Recording it per observer would mean writing a carve-out on every other tenant's
+// key, which makes one tenant's claim depend on how many tenants exist and couples their
+// reconciles together. Here a claim is one label on one object.
+//
+// It is mutually exclusive with TenantLabel; see the note there for what happens when a
+// resource carries both.
+//
+// An empty value reserves the resource for the platform, whose tenant is nameless. That is a
+// claim and not the absence of one, so the label's presence is the question to ask; see
+// tenancy.IsPlatformAssigned.
+//
+// The holder reads and references it; the operator keeps every write, including the delete.
+const TenantExclusiveHolderLabel = "tenant.vcluster.com/exclusive-to"
 
 // TenantConditionNICoOnboarded is set on a Tenant that opts into NICo (via the
 // nico.vcluster.com/org annotation) once its NICo tenant org has been
@@ -18,10 +63,10 @@ const TenantLabel = "tenant.vcluster.com/owner"
 // failing.
 const TenantConditionNICoOnboarded agentstoragev1.ConditionType = "NICoOnboarded"
 
-// TenantConditionNICoNodeProviderFound reports whether the Tenant's NICo
-// NodeProvider could be resolved. It is False when the referenced NodeProvider
-// is missing, is not a NICo provider, or when the Tenant resolves to more than
-// one NICo provider.
+// TenantConditionNICoNodeProviderFound reports whether exactly one NICo
+// NodeProvider could be resolved from the Tenant's granted NodeTypes or assigned
+// NetworkEnvironments. It is False when a referenced NodeProvider is missing,
+// is not a NICo provider, or when the Tenant resolves to more than one.
 const TenantConditionNICoNodeProviderFound agentstoragev1.ConditionType = "NICoNodeProviderFound"
 
 // TenantConditionNICoSiteCredentialsAvailable reports whether the Tenant's
@@ -92,34 +137,37 @@ func (a *Tenant) SetAccess(access []Access) {
 //   - Allow narrows which admin-owned instances the tenant may use (ByName, ByLabels)
 //     and, where the capability supports it, whether the tenant may author its own
 //     (Custom). An omitted Allow leaves admin-owned instances to plain RBAC, which
-//     denies tenants by default. An Allow that is present but sets no selector is the
-//     opposite: nothing narrows the capability, so every admin-owned instance of the
-//     kind is allowed.
-//
-// That present-but-empty Allow is how "all of them" is written, and it is why Allow is a
-// pointer. The selectors themselves cannot carry it: ByLabels is a map, and an empty map
-// is indistinguishable from an absent one once the object is serialized, so an empty
-// ByLabels means "no label constraint", not "everything". Only the presence of Allow
-// survives a round trip, so the distinction lives there.
+//     denies tenants by default. A present Allow is answered by its selectors, and a
+//     present Allow whose selectors are all absent therefore admits nothing.
 //   - Quota caps how much of the capability the tenant may consume, aggregated across
 //     all of the tenant's projects. An omitted Quota is uncapped.
+//
+// "All of them" is written as ByLabels: {}, not as an empty Allow. An empty conjunction
+// is vacuously true, so a label selector with no pairs matches every instance, while an
+// absent one matches none. That puts the two extremes at opposite ends of one field
+// instead of splitting them across two, and it means the most permissive answer has to
+// be typed rather than reached by omission. ByLabels carries no omitempty for exactly
+// this reason: with it, an empty map and an absent one both serialize to nothing and the
+// distinction dies on the first round trip.
+//
+// Allow is still a pointer, but for a narrower reason than it once was: it is what
+// separates "left to RBAC" from "answered, and the answer is nothing".
 //
 // A capability only exposes the parts that are meaningful for it, so no field is
 // silently ignored: Control Plane Clusters and templates cannot be authored by a
 // tenant and so carry no Custom, and SSH keys are never shared and so carry only
 // Custom. Templates is also the one capability that spans several kinds at once, which
-// is why it is addressed by label alone (see TenantTemplates), and Machines carries an
-// entitlement only, for the reason given on that type. Only NodeTypes carries a Quota today, because it is the only capability
-// with a consumer: the NICo allocation reconciler reserves provider capacity from
-// it. Quotas for the other capabilities are added when something enforces them.
+// is why it is addressed by label alone (see TenantTemplates). Only NodeTypes carries a
+// Quota today, because it is the only capability with a consumer: the NICo allocation
+// reconciler reserves provider capacity from it. Quotas for the other capabilities are
+// added when something enforces them.
 //
-// A capability Quota is the only consumption ceiling a Tenant carries. The former
-// top-level ResourceQuotas list, which keyed ceilings by management.loft.sh resource,
-// is replaced by these per-capability quotas.
+// A capability Quota is the only consumption ceiling a Tenant carries, and ceilings are
+// expressed per capability rather than keyed by management.loft.sh resource.
 //
-// Capabilities are stored and validated for well-formedness now; the visibility and
-// usability treatment they describe is enforced by the tenant scope library in a later
-// Multi-Tenancy PR.
+// Capabilities are stored and validated for well-formedness here; the visibility and
+// usability treatment they describe is enforced by the tenant scope library in
+// pkg/tenancy.
 type TenantSpec struct {
 	// DisplayName is the name that should be displayed in the UI.
 	// +optional
@@ -129,22 +177,19 @@ type TenantSpec struct {
 	// +optional
 	Description string `json:"description,omitempty"`
 
-	// Owner holds the owner of this Tenant. Access is intended to govern
-	// operator-side delegation, that is, which Platform Operator users may read
-	// or edit this Tenant, by transforming Owner/Access into effective RBAC for
-	// the Tenant resource itself. That wiring is not yet active: it lands with
-	// the Tenant authorizer in a later Multi-Tenancy PR. Until then Owner and
-	// Access are stored and validated for well-formedness only, and Tenant
-	// access is authorized by ClusterRole RBAC. Neither field expresses tenant
-	// membership: how a User or Team is bound to a Tenant is resolved
-	// separately and is deliberately not fixed by this API.
+	// Owner holds the owner of this Tenant. Owner and Access together are intended
+	// to govern operator-side delegation, that is, which Platform Operator users
+	// may read or edit this Tenant, by transforming them into effective RBAC for
+	// the Tenant resource itself. That wiring is not active yet: it lands with the
+	// Tenant authorizer, and until then both fields are stored and validated for
+	// well-formedness only while Tenant access is authorized by ClusterRole RBAC.
 	// +optional
 	Owner *UserOrTeam `json:"owner,omitempty"`
 
-	// Access holds the access rights for users and teams on the Tenant CR
-	// itself. Stored and validated now; enforcement (operator-side delegation)
-	// activates with the Tenant authorizer in a later Multi-Tenancy PR — see
-	// the Owner field.
+	// Access holds the access rights for users and teams on the Tenant object.
+	// Stored and validated on write, but it grants nothing at request time yet. It
+	// does not express tenant membership: a User's own tenant label is what binds
+	// it to a Tenant.
 	// +optional
 	Access []Access `json:"access,omitempty"`
 
@@ -166,10 +211,6 @@ type TenantSpec struct {
 	// OSImages governs the OS images this tenant may boot machines from.
 	// +optional
 	OSImages *TenantOSImages `json:"osImages,omitempty"`
-
-	// Machines governs the individual machines this tenant may provision onto.
-	// +optional
-	Machines *TenantMachines `json:"machines,omitempty"`
 
 	// NodeTypes governs the node types this tenant may provision from.
 	// +optional
@@ -200,8 +241,18 @@ type TenantControlPlaneClusters struct {
 // there is no custom allowance.
 type TenantControlPlaneClusterAllow struct {
 	// ByLabels selects Control Plane Clusters carrying all of these labels.
+	//
+	// An empty map and an absent one are deliberately different, which is why this
+	// field carries no omitempty. An empty conjunction is vacuously true, so
+	// byLabels: {} matches every admin-owned instance; absent or null matches none.
+	// With omitempty the two forms both serialize to nothing and the distinction dies
+	// on the first round trip, which is why it has to be stated here rather than
+	// inferred from emptiness on Allow. ByName gets no equivalent treatment: an empty
+	// enumeration reads as "nothing" to everyone, and only a conjunction has the
+	// vacuous-truth property that makes empty mean everything.
 	// +optional
-	ByLabels map[string]string `json:"byLabels,omitempty"`
+	// +nullable
+	ByLabels map[string]string `json:"byLabels"`
 }
 
 // TenantSSHKeys governs the SSH keys a tenant may use for machine access.
@@ -241,52 +292,23 @@ type TenantOSImages struct {
 // images matching ByLabels, plus the tenant's own images when Custom allows them.
 type TenantOSImageAllow struct {
 	// ByLabels selects admin-owned OS images carrying all of these labels.
+	//
+	// An empty map and an absent one are deliberately different, which is why this
+	// field carries no omitempty. An empty conjunction is vacuously true, so
+	// byLabels: {} matches every admin-owned instance; absent or null matches none.
+	// With omitempty the two forms both serialize to nothing and the distinction dies
+	// on the first round trip, which is why it has to be stated here rather than
+	// inferred from emptiness on Allow. ByName gets no equivalent treatment: an empty
+	// enumeration reads as "nothing" to everyone, and only a conjunction has the
+	// vacuous-truth property that makes empty mean everything.
 	// +optional
-	ByLabels map[string]string `json:"byLabels,omitempty"`
+	// +nullable
+	ByLabels map[string]string `json:"byLabels"`
 
 	// Custom controls whether the tenant may upload its own OS images. Omitted
 	// denies it, the same as a Custom that is present but not enabled.
 	// +optional
 	Custom *TenantCustomAllow `json:"custom,omitempty"`
-}
-
-// TenantMachines governs the individual machines a tenant may provision onto: the
-// reserved hardware assigned to it, as opposed to the NodeTypes it may draw capacity
-// from. It is the narrowest capability in the spec, carrying only an entitlement.
-//
-// It has no Quota. A machine is a discrete piece of hardware, so how many of them a
-// tenant may hold is already decided by which ones it is allowed; a count on top would
-// be a second, weaker way to say the same thing, and the two could disagree. Consumption
-// caps belong on what is drawn from a machine, which is NodeTypes.
-type TenantMachines struct {
-	// Enabled gates the capability. False denies the tenant every machine; only true
-	// enables it. Default: disabled.
-	// +optional
-	Enabled bool `json:"enabled,omitempty"`
-
-	// Allow narrows the machines the tenant may provision onto.
-	// +optional
-	Allow *TenantMachineAllow `json:"allow,omitempty"`
-}
-
-// TenantMachineAllow selects the machines a tenant may provision onto. A tenant cannot
-// register a machine of its own, so there is no custom allowance. ByName and ByLabels are
-// additive: a machine matched by either is allowed, and setting neither allows every
-// machine (see TenantSpec).
-type TenantMachineAllow struct {
-	// ByName selects machines by their exact names, for pinning a tenant to specific
-	// hardware. There is no wildcard, for the same reason as TenantNodeTypeAllow.ByName
-	// and more so: a machine is one piece of hardware named for itself, so a name prefix
-	// groups only machines that happen to share a naming habit. Selecting a set of
-	// machines is what labels are for, which is also how reserved hardware is assigned.
-	// +optional
-	ByName []string `json:"byName,omitempty"`
-
-	// ByLabels selects machines carrying all of these labels, and is the primary way
-	// to assign reserved hardware: an operator labels the machines it is setting
-	// aside for a tenant.
-	// +optional
-	ByLabels map[string]string `json:"byLabels,omitempty"`
 }
 
 // TenantNodeTypes governs the node types a tenant may provision from.
@@ -306,9 +328,22 @@ type TenantNodeTypes struct {
 }
 
 // TenantNodeTypeAllow selects the NodeTypes a tenant may provision from. A tenant
-// cannot author a NodeType of its own, so there is no custom allowance. ByName and
-// ByLabels are additive: a NodeType matched by either is allowed, and setting neither
-// allows every NodeType (see TenantSpec).
+// cannot author a NodeType of its own, so there is no custom allowance. Setting neither
+// selector allows every NodeType (see TenantSpec).
+//
+// A name grant and a label grant may not both be set. Each produces its own leg in the
+// read plan, and the plan's legs are concatenated on the assumption that they are
+// disjoint -- so a NodeType that is both named here and matched by these labels would be
+// served twice in one page, counted twice, and delivered twice to a watch.
+//
+// Only this capability can produce the collision, because it is the only one offering a
+// name selector at all. An empty byLabels is still allowed alongside byName: it resolves
+// to a shared baseline, which drops the name selector rather than adding a second leg.
+//
+// To grant a set plus an extra instance, label the extra one and widen byLabels. That is
+// what byLabels is for, and it keeps the grant expressed in one place.
+//
+// +kubebuilder:validation:XValidation:rule="!has(self.byName) || size(self.byName) == 0 || !has(self.byLabels) || size(self.byLabels) == 0",message="byName and byLabels cannot both be set: label the NodeTypes you want and select them with byLabels"
 type TenantNodeTypeAllow struct {
 	// ByName selects NodeTypes by their exact names. There is no wildcard: to allow a
 	// whole provider, label its NodeTypes and select them with ByLabels.
@@ -324,8 +359,18 @@ type TenantNodeTypeAllow struct {
 
 	// ByLabels selects NodeTypes carrying all of these labels, and is the way to
 	// allow a whole provider: label the NodeTypes it owns and match that label here.
+	//
+	// An empty map and an absent one are deliberately different, which is why this
+	// field carries no omitempty. An empty conjunction is vacuously true, so
+	// byLabels: {} matches every admin-owned instance; absent or null matches none.
+	// With omitempty the two forms both serialize to nothing and the distinction dies
+	// on the first round trip, which is why it has to be stated here rather than
+	// inferred from emptiness on Allow. ByName gets no equivalent treatment: an empty
+	// enumeration reads as "nothing" to everyone, and only a conjunction has the
+	// vacuous-truth property that makes empty mean everything.
 	// +optional
-	ByLabels map[string]string `json:"byLabels,omitempty"`
+	// +nullable
+	ByLabels map[string]string `json:"byLabels"`
 }
 
 // TenantNodeTypeQuota caps what a tenant may provision from the node types it is
@@ -378,8 +423,18 @@ type TenantTemplateAllow struct {
 	// ByLabels selects templates carrying all of these labels. They are matched
 	// against every template kind the capability spans, and the tenant may use the
 	// union of the matches; it is not per-kind and cannot be narrowed to one kind.
+	//
+	// An empty map and an absent one are deliberately different, which is why this
+	// field carries no omitempty. An empty conjunction is vacuously true, so
+	// byLabels: {} matches every admin-owned instance; absent or null matches none.
+	// With omitempty the two forms both serialize to nothing and the distinction dies
+	// on the first round trip, which is why it has to be stated here rather than
+	// inferred from emptiness on Allow. ByName gets no equivalent treatment: an empty
+	// enumeration reads as "nothing" to everyone, and only a conjunction has the
+	// vacuous-truth property that makes empty mean everything.
 	// +optional
-	ByLabels map[string]string `json:"byLabels,omitempty"`
+	// +nullable
+	ByLabels map[string]string `json:"byLabels"`
 }
 
 // TenantCustomAllow controls whether a tenant may author its own value, as opposed to
@@ -463,9 +518,55 @@ type TenantHostnameBinding struct {
 	Hostname string `json:"hostname"`
 }
 
+// TenantResourceBoundary is the resolved boundary for one resource kind.
+//
+// Mostly a report. The read path recomputes the spec-derived levers per request, which is what
+// lets an operator's change take effect on the next request rather than the next reconcile.
+// They are projected here because the reverse question -- which tenants can see this instance
+// -- has no efficient answer otherwise. Status.Hostnames is projected for the same reason.
+//
+// Derived is the exception and the only field read back; see its comment.
+//
+// The exclusive-assignment lever is absent by design: the read selects that label off the
+// instance, so projecting it would delay an operator's claim by a reconcile. A complete "who
+// can see this" answer is this boundary plus the instances carrying TenantExclusiveHolderLabel.
+type TenantResourceBoundary struct {
+	// Resource is the lowercase plural management.loft.sh resource name.
+	Resource string `json:"resource"`
+
+	// Own reports whether the tenant may author instances of this kind; reading what it already
+	// owns is not gated by it. Reported only.
+	// +optional
+	Own bool `json:"own,omitempty"`
+
+	// Baseline is the treatment for an admin-owned instance no selector matches, either
+	// "hidden" or "shared". Reported only.
+	// +optional
+	Baseline string `json:"baseline,omitempty"`
+
+	// ByLabels reports the capability's label selector. The read matches it where the operator's
+	// labels already are, so nothing is projected for it. Reported only.
+	// +optional
+	ByLabels map[string]string `json:"byLabels,omitempty"`
+
+	// ByName reports the instances the capability grants by exact name. Reported only.
+	// +optional
+	ByName []string `json:"byName,omitempty"`
+
+	// Derived are instances the tenant reaches by following a reference from one already inside
+	// its boundary. Today that is the NodeProvider a granted NodeType names in spec.providerRef.
+	//
+	// The one field here the read path consumes: it merges into the resource's by-name grants,
+	// which is what admits the instance and makes the projector stamp a scope label.
+	// Materialized because a reference is a join, and a selector evaluates one object at a time.
+	//
+	// A name written here grants nothing past the next reconcile, which recomputes it.
+	// +optional
+	Derived []string `json:"derived,omitempty"`
+}
+
 // TenantStatus surfaces reconciler-managed state. It is written by the Tenant
-// controller, never by a caller: the resolved allowances and quota-usage fields join it
-// with the rest of the Multi-Tenancy work in a later PR.
+// controller, never by a caller. The quota-usage fields are not part of it yet.
 type TenantStatus struct {
 	// Hostnames are the DNS names that resolve to this tenant, projected here from the
 	// tenant's configuration by the Tenant controller.
@@ -487,6 +588,12 @@ type TenantStatus struct {
 	// subresource, for the reasons on TenantPlatformConfig.
 	// +optional
 	Hostnames []TenantHostnameBinding `json:"hostnames,omitempty"`
+
+	// Boundary is the resolved tenant boundary, one entry per resource kind, projected here by
+	// the Tenant controller. Mostly a report: see TenantResourceBoundary for the single field
+	// the read path consumes.
+	// +optional
+	Boundary []TenantResourceBoundary `json:"boundary,omitempty"`
 
 	// Conditions describes the current observed conditions of the Tenant.
 	// +optional

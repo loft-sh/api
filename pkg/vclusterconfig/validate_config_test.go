@@ -1,7 +1,9 @@
 package vclusterconfig
 
 import (
+	"regexp"
 	"testing"
+	"time"
 
 	storagev1 "github.com/loft-sh/api/v4/pkg/apis/storage/v1"
 	"k8s.io/apimachinery/pkg/util/validation/field"
@@ -157,4 +159,39 @@ func TestValidateStandaloneSnapshots(t *testing.T) {
 
 func standaloneSnapshots(storage *SnapshotStorage) *Snapshots {
 	return &Snapshots{Auto: &SnapshotsAuto{Storage: storage}}
+}
+
+// TestValidateDuration covers what taskTimeout and afterInactivity accept, and checks that every
+// example in the error message parses. It used to recommend "30d", which does not.
+func TestValidateDuration(t *testing.T) {
+	tests := []struct {
+		value   string
+		wantErr bool
+	}{
+		{value: ""},
+		{value: "30m"},
+		{value: "720h"},
+		{value: "1h30m"},
+		{value: "30d", wantErr: true},
+		{value: "nope", wantErr: true},
+	}
+
+	for _, tt := range tests {
+		t.Run(tt.value, func(t *testing.T) {
+			errs := validateDuration(field.NewPath("spec", "taskTimeout"), tt.value)
+			if tt.wantErr != (len(errs) > 0) {
+				t.Fatalf("validateDuration(%q) = %v, wantErr=%v", tt.value, errs, tt.wantErr)
+			}
+			if len(errs) == 0 {
+				return
+			}
+
+			detail := errs[0].Detail
+			for _, example := range regexp.MustCompile(`'([^']+)'`).FindAllStringSubmatch(detail, -1) {
+				if _, err := time.ParseDuration(example[1]); err != nil {
+					t.Errorf("the message recommends %q, which does not parse: %v (%s)", example[1], err, detail)
+				}
+			}
+		})
+	}
 }

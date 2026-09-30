@@ -7,18 +7,24 @@ import (
 )
 
 const (
-	NodeProviderTypeBCM        string = "bcm"
-	NodeProviderTypeKubeVirt   string = "kubeVirt"
-	NodeProviderTypeTerraform  string = "terraform"
-	NodeProviderTypeClusterAPI string = "clusterAPI"
-	NodeProviderTypeMetal3     string = "metal3"
-	NodeProviderTypeNICo       string = "nico"
+	NodeProviderTypeBCM              string = "bcm"
+	NodeProviderTypeKubeVirt         string = "kubeVirt"
+	NodeProviderTypeTerraform        string = "terraform"
+	NodeProviderTypeClusterAPI       string = "clusterAPI"
+	NodeProviderTypeMetal3           string = "metal3"
+	NodeProviderTypeNICo             string = "nico"
+	NodeProviderTypeExternalPlatform string = "externalPlatform"
 
 	// NodeProviderConditionTypeInitialized is the condition that indicates if the node provider is initialized.
 	NodeProviderConditionTypeInitialized = "Initialized"
 
 	// NodeProviderConditionTypeDeployed is the condition that indicates if infrastructure components are deployed.
 	NodeProviderConditionTypeDeployed = "Deployed"
+
+	// NodeProviderReasonFeatureNotAllowed is set on the Initialized condition when the license
+	// does not cover the provider type this NodeProvider configures. The provider is left
+	// running as-is; nothing new is initialized until the license changes.
+	NodeProviderReasonFeatureNotAllowed = "FeatureNotAllowed"
 )
 
 var (
@@ -117,9 +123,20 @@ type NodeProviderSpec struct {
 	// +optional
 	NICo *NodeProviderNICo `json:"nico,omitempty"`
 
+	// ExternalPlatform configures a node provider that delegates to a NodeProvider on
+	// another vCluster Platform instance: machines are mirrored from there and NodeClaims
+	// are created there against the targeted provider.
+	// +optional
+	ExternalPlatform *NodeProviderExternalPlatform `json:"externalPlatform,omitempty"`
+
 	// DisplayName is the name that should be displayed in the UI
 	// +optional
 	DisplayName string `json:"displayName,omitempty"`
+
+	// MachinePool is the machine pool of this provider's node types that do not set their own.
+	// See NodeTypeSpec.MachinePool. Discovered node types (nico) can only be set here.
+	// +optional
+	MachinePool NodeTypeMachinePool `json:"machinePool,omitempty"`
 }
 
 type NodeProviderClusterAPI struct {
@@ -145,8 +162,8 @@ type NodeProviderBCM struct {
 }
 
 // NodeProviderNICo configures a node provider backed by the NVIDIA Infra
-// Controller (NICo) REST API. The NICo tenant org is taken from the platform
-// Tenant's nico.vcluster.com/org annotation, not from this provider config.
+// Controller (NICo) REST API. Platform workloads use the provider org.
+// Tenant workloads use the org from their Tenant's nico.vcluster.com/org annotation.
 type NodeProviderNICo struct {
 	// Endpoint is the base URL (scheme + host + optional port) of the NICo REST
 	// API. The /v2/org/{org}/nico path is appended by the client.
@@ -188,7 +205,25 @@ type NodeProviderNICo struct {
 	// NICo endpoint. Intended for development and test only.
 	// +optional
 	InsecureSkipTLSVerify bool `json:"insecureSkipTLSVerify,omitempty"`
+
+	// NetworkMode selects how tenant networking is provisioned at this site.
+	// Defaults to fnn.
+	// +optional
+	// +kubebuilder:validation:Enum=fnn;flat
+	NetworkMode NICoNetworkMode `json:"networkMode,omitempty"`
 }
+
+// NICoNetworkMode selects the NICo network virtualization a site provisions.
+// +enum
+type NICoNetworkMode string
+
+const (
+	// NICoNetworkModeFNN configures FNN VPCs with explicit interfaces and VPC prefixes.
+	NICoNetworkModeFNN NICoNetworkMode = "fnn"
+
+	// NICoNetworkModeFlat configures FLAT VPCs with automatic interface assignment.
+	NICoNetworkModeFlat NICoNetworkMode = "flat"
+)
 
 // NICoIdentity selects the source of the tokens the platform uses to
 // authenticate to the NICo REST API. Exactly one source is configured; today
@@ -207,12 +242,46 @@ type NICoPlatformIssued struct {
 	Enabled bool `json:"enabled"`
 }
 
+// NodeProviderExternalPlatform configures a node provider that delegates provisioning to
+// a NodeProvider on another vCluster Platform instance. The local platform authenticates
+// to the remote one with the access key in SecretRef, lists the remote provider's
+// machines and node types, and creates a NodeClaim in the remote project for every
+// local NodeClaim. Only remote Metal3 providers are supported.
+type NodeProviderExternalPlatform struct {
+	// Host is the URL of the remote vCluster Platform, e.g. https://platform.example.com.
+	Host string `json:"host"`
+
+	// SecretRef references a Secret with the key "accessKey" holding an access key for the
+	// remote vCluster Platform. The access key must be allowed to manage NodeClaims in
+	// Project and to read the remote NodeProvider, its NodeTypes and its Machines.
+	SecretRef *NamespacedRef `json:"secretRef"`
+
+	// InsecureSkipTLSVerify disables TLS certificate verification against the remote
+	// platform. Intended for development and test only.
+	// +optional
+	InsecureSkipTLSVerify bool `json:"insecureSkipTLSVerify,omitempty"`
+
+	// CAData is the PEM encoded CA bundle used to verify the remote platform's serving
+	// certificate, for a platform behind a private CA. Empty means the system roots are
+	// used. Cannot be combined with InsecureSkipTLSVerify.
+	// +optional
+	CAData []byte `json:"caData,omitempty"`
+
+	// NodeProvider is the name of the NodeProvider on the remote platform that provisions
+	// the machines.
+	NodeProvider string `json:"nodeProvider"`
+
+	// Project is the name of the project on the remote platform in which NodeClaims are
+	// created.
+	Project string `json:"project"`
+}
+
 type NodeProviderTerraform struct {
 	// NodeTemplate is the template to use for this node provider.
 	NodeTemplate *TerraformTemplate `json:"nodeTemplate,omitempty"`
 
-	// NodeEnvironmentTemplate is the template to use for this node environment.
-	NodeEnvironmentTemplate *TerraformNodeEnvironmentTemplate `json:"nodeEnvironmentTemplate,omitempty"`
+	// NetworkEnvironmentTemplate is the template to use for this network environment.
+	NetworkEnvironmentTemplate *TerraformNetworkEnvironmentTemplate `json:"networkEnvironmentTemplate,omitempty"`
 
 	// NodeTypes define NodeTypes that should be automatically created for this provider.
 	NodeTypes []TerraformNodeTypeSpec `json:"nodeTypes,omitempty"`
@@ -236,15 +305,12 @@ type ManagedNodeTypeObjectMeta struct {
 	Annotations map[string]string `json:"annotations,omitempty"`
 }
 
-type TerraformNodeEnvironmentTemplate struct {
-	// Deprecated: Use Infrastructure and Kubernetes instead.
+type TerraformNetworkEnvironmentTemplate struct {
+	// Deprecated: Use Infrastructure instead.
 	TerraformTemplate `json:",inline"`
 
-	// Infrastructure is the infrastructure template to use for this node environment.
+	// Infrastructure is the infrastructure template to use for this network environment.
 	Infrastructure *TerraformTemplate `json:"infrastructure,omitempty"`
-
-	// Kubernetes is the kubernetes template to use for this node environment.
-	Kubernetes *TerraformTemplate `json:"kubernetes,omitempty"`
 }
 
 type TerraformTemplate struct {
@@ -538,11 +604,95 @@ type NodeProviderMetal3 struct {
 	// Netris attaches BareMetalHosts to a Netris server cluster on provisioning.
 	// +optional
 	Netris *NodeProviderMetal3Netris `json:"netris,omitempty"`
+
+	// NetBox imports machines from a NetBox inventory: every device carrying the
+	// configured tag becomes a Machine of this provider and a BareMetalHost in
+	// the provider's cluster. Several providers may import from the same NetBox
+	// with different tags, or from different NetBox instances.
+	// +optional
+	NetBox *NodeProviderMetal3NetBox `json:"netBox,omitempty"`
 }
 
 type NodeProviderMetal3Netris struct {
 	// SecretRef references a Secret with keys url, username and password for the Netris API.
 	SecretRef *NamespacedRef `json:"secretRef"`
+}
+
+// NodeProviderMetal3NetBox configures the NetBox -> Machine -> BareMetalHost
+// import of a metal3 provider. The connector holds how to reach NetBox; this
+// holds what to take from it. Each machine's BMC address and login are read
+// from the device itself (its management IP and the bmc_username and
+// bmc_password custom fields); the protocol Ironic speaks to it is the
+// provider's to set, since NetBox has no field for it.
+type NodeProviderMetal3NetBox struct {
+	// SecretRef references the NetBox connector Secret (labelled
+	// loft.sh/connector-type=netbox) to read devices from.
+	SecretRef *NamespacedRef `json:"secretRef"`
+
+	// Tag is the slug of the NetBox tag that marks a device for import. A device
+	// carrying it is imported automatically and kept in sync; removing the tag
+	// stops the sync but never deprovisions a machine that is in use. Defaults
+	// to "vcluster-sync".
+	// +optional
+	Tag string `json:"tag,omitempty"`
+
+	// CustomFields names the device custom fields the BMC login is read from,
+	// for deployments that already keep it under other names. Unset names keep
+	// their defaults.
+	// +optional
+	CustomFields *NodeProviderMetal3NetBoxCustomFields `json:"customFields,omitempty"`
+
+	// AddressTemplate is a Go template rendering the BareMetalHost bmc.address
+	// from the device: the protocol and path Ironic dials, which NetBox records
+	// no field for. {{ .Address }} is the management IP as a URL host
+	// (IPv6 bracketed), {{ .IP }} the bare IP, {{ .Device }} the NetBox device
+	// name, {{ .Manufacturer }} and {{ .DeviceType }} their slugs, {{ .Serial }}
+	// the serial. Defaults to
+	// "redfish://{{ .Address }}/redfish/v1/Systems/1", which is
+	// what Lenovo, HPE and Supermicro BMCs answer; Dell iDRACs need
+	// "idrac-redfish://{{ .Address }}/redfish/v1/Systems/System.Embedded.1".
+	// +optional
+	AddressTemplate string `json:"addressTemplate,omitempty"`
+
+	// BareMetalHostTemplate is merged into every BareMetalHost the import
+	// creates. Its labels and annotations are kept current on existing hosts;
+	// its spec is applied when a host is created and wins over what the import
+	// generates, so it can set rootDeviceHints, disable BMC certificate
+	// verification, or point bmc.credentialsName at a Secret you manage. A
+	// template that sets bmc.credentialsName makes the BMC login custom fields
+	// optional, and one that sets bootMACAddress makes the NetBox boot MAC
+	// optional.
+	// +optional
+	BareMetalHostTemplate *NodeProviderMetal3NetBoxBareMetalHostTemplate `json:"bareMetalHostTemplate,omitempty"`
+}
+
+// NodeProviderMetal3NetBoxBareMetalHostTemplate is the part of an imported
+// BareMetalHost the provider dictates rather than NetBox.
+type NodeProviderMetal3NetBoxBareMetalHostTemplate struct {
+	// Metadata holds labels and annotations set on every imported host, on top
+	// of the ones the import derives from NetBox.
+	// +optional
+	Metadata TemplateMetadata `json:"metadata,omitempty"`
+
+	// Spec is merged into the generated BareMetalHost spec, with the
+	// template's values taking precedence field by field.
+	// +kubebuilder:pruning:PreserveUnknownFields
+	// +optional
+	Spec *runtime.RawExtension `json:"spec,omitempty"`
+}
+
+// NodeProviderMetal3NetBoxCustomFields names the NetBox device custom fields
+// holding the BMC login. NetBox has no schema for it, so deployments keep it in
+// custom fields; these are the names to read.
+type NodeProviderMetal3NetBoxCustomFields struct {
+	// BMCUsername holds the BMC login name. Defaults to "bmc_username".
+	// +optional
+	BMCUsername string `json:"bmcUsername,omitempty"`
+
+	// BMCPassword holds the BMC password. The platform never serves this
+	// field's value. Defaults to "bmc_password".
+	// +optional
+	BMCPassword string `json:"bmcPassword,omitempty"`
 }
 
 type Metal3NodeTypeSpec struct {

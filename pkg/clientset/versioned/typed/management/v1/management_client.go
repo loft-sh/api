@@ -23,20 +23,20 @@ type ManagementV1Interface interface {
 	ClusterAccessesGetter
 	ClusterRoleTemplatesGetter
 	ConfigsGetter
+	ConnectorsGetter
 	ConvertVirtualClusterConfigsGetter
 	DatabaseConnectorsGetter
 	DirectClusterEndpointTokensGetter
 	EventsGetter
-	ExternalCredentialsGetter
 	FeaturesGetter
 	IngressAuthTokensGetter
 	LicensesGetter
 	LoftUpgradesGetter
 	MachinesGetter
 	MachineConfigTemplatesGetter
+	NetworkEnvironmentsGetter
 	NetworkPeersGetter
 	NodeClaimsGetter
-	NodeEnvironmentsGetter
 	NodeProfilesGetter
 	NodeProvidersGetter
 	NodeTypesGetter
@@ -53,7 +53,6 @@ type ManagementV1Interface interface {
 	SelvesGetter
 	SelfSubjectAccessReviewsGetter
 	SharedSecretsGetter
-	SlurmInstancesGetter
 	SpaceInstancesGetter
 	SpaceTemplatesGetter
 	StackInstancesGetter
@@ -118,6 +117,10 @@ func (c *ManagementV1Client) Configs() ConfigInterface {
 	return newConfigs(c)
 }
 
+func (c *ManagementV1Client) Connectors() ConnectorInterface {
+	return newConnectors(c)
+}
+
 func (c *ManagementV1Client) ConvertVirtualClusterConfigs() ConvertVirtualClusterConfigInterface {
 	return newConvertVirtualClusterConfigs(c)
 }
@@ -132,10 +135,6 @@ func (c *ManagementV1Client) DirectClusterEndpointTokens() DirectClusterEndpoint
 
 func (c *ManagementV1Client) Events() EventInterface {
 	return newEvents(c)
-}
-
-func (c *ManagementV1Client) ExternalCredentials(namespace string) ExternalCredentialInterface {
-	return newExternalCredentials(c, namespace)
 }
 
 func (c *ManagementV1Client) Features() FeatureInterface {
@@ -162,16 +161,16 @@ func (c *ManagementV1Client) MachineConfigTemplates(namespace string) MachineCon
 	return newMachineConfigTemplates(c, namespace)
 }
 
+func (c *ManagementV1Client) NetworkEnvironments() NetworkEnvironmentInterface {
+	return newNetworkEnvironments(c)
+}
+
 func (c *ManagementV1Client) NetworkPeers() NetworkPeerInterface {
 	return newNetworkPeers(c)
 }
 
 func (c *ManagementV1Client) NodeClaims(namespace string) NodeClaimInterface {
 	return newNodeClaims(c, namespace)
-}
-
-func (c *ManagementV1Client) NodeEnvironments(namespace string) NodeEnvironmentInterface {
-	return newNodeEnvironments(c, namespace)
 }
 
 func (c *ManagementV1Client) NodeProfiles() NodeProfileInterface {
@@ -236,10 +235,6 @@ func (c *ManagementV1Client) SelfSubjectAccessReviews() SelfSubjectAccessReviewI
 
 func (c *ManagementV1Client) SharedSecrets(namespace string) SharedSecretInterface {
 	return newSharedSecrets(c, namespace)
-}
-
-func (c *ManagementV1Client) SlurmInstances(namespace string) SlurmInstanceInterface {
-	return newSlurmInstances(c, namespace)
 }
 
 func (c *ManagementV1Client) SpaceInstances(namespace string) SpaceInstanceInterface {

@@ -16,11 +16,35 @@ const (
 	// provider-side consumer matches a platform NodeClaim; absent when the
 	// machine is free or consumed outside the platform.
 	MachineNodeClaimAnnotation = "machines.vcluster.com/node-claim"
+
+	// MachineSourceLabel names the inventory a machine was recorded from before
+	// the provider knew about it. A machine without it is a plain mirror of the
+	// provider inventory and disappears with it; a machine carrying it is owned
+	// by that source's sync, which is the only thing allowed to delete it, and
+	// the provider sync only fills in its status once the provider lists it.
+	MachineSourceLabel = "machines.vcluster.com/source"
+
+	// MachineSourceNetBox is the MachineSourceLabel value for machines imported
+	// from a NetBox inventory through NodeProviderMetal3NetBox.
+	MachineSourceNetBox = "netbox"
+
+	// MachineConditionTypeRegistered is set on sourced machines: True once the
+	// provider holds a record for the machine (metal3: the BareMetalHost
+	// exists), False with the reason while it cannot be created.
+	MachineConditionTypeRegistered agentstoragev1.ConditionType = "Registered"
+
+	// MachineConditionTypeSourceAttached is set on sourced machines: True while
+	// the source still selects the machine, False with reason Orphaned once it
+	// no longer does (the NetBox device lost its tag or was deleted) but the
+	// machine was kept because it is provisioned or held by a NodeClaim.
+	// Releasing it is then an operator's decision, not the sync's.
+	MachineConditionTypeSourceAttached agentstoragev1.ConditionType = "SourceAttached"
 )
 
 // MachineConditions lists the conditions summarized into the Ready condition.
 var MachineConditions = []agentstoragev1.ConditionType{
 	MachineConditionTypeSynced,
+	MachineConditionTypeRegistered,
 }
 
 // MachinePhase is the machine's state as the provider sees it, normalized
@@ -29,6 +53,11 @@ var MachineConditions = []agentstoragev1.ConditionType{
 type MachinePhase string
 
 const (
+	// MachinePhasePending means the machine is recorded in the platform from an
+	// inventory source (see MachineSourceLabel) but the provider does not list
+	// it yet: the BareMetalHost is still to be created, or was rejected. Reason
+	// and Message say which.
+	MachinePhasePending MachinePhase = "Pending"
 	// MachinePhaseAvailable means the provider reports the machine as
 	// inventoried and free.
 	MachinePhaseAvailable MachinePhase = "Available"
@@ -147,6 +176,14 @@ type MachineStatus struct {
 	// Empty when the provider does not report power at all.
 	// +optional
 	PowerState MachinePowerState `json:"powerState,omitempty"`
+
+	// NodeTypes names the NodeTypes whose pool includes this machine: the ones a claim of the
+	// type may be placed on, whoever the machine is assigned to. It is filled from the provider
+	// inventory: for metal3, the node types whose host selector and resources the machine
+	// matches; for nico, the node type of its instance type; for externalPlatform, the mirrored
+	// node types the remote machine is in. Sorted.
+	// +optional
+	NodeTypes []string `json:"nodeTypes,omitempty"`
 
 	// LastSyncTime is when this state was last confirmed against the provider.
 	// +optional

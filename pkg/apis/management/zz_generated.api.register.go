@@ -143,7 +143,17 @@ var (
 	NewConfigREST = func(getter generic.RESTOptionsGetter) rest.Storage {
 		return NewConfigRESTFunc(Factory)
 	}
-	NewConfigRESTFunc                            NewRESTFunc
+	NewConfigRESTFunc          NewRESTFunc
+	ManagementConnectorStorage = builders.NewApiResourceWithStorage( // Resource status endpoint
+		InternalConnector,
+		func() runtime.Object { return &Connector{} },     // Register versioned resource
+		func() runtime.Object { return &ConnectorList{} }, // Register versioned resource list
+		NewConnectorREST,
+	)
+	NewConnectorREST = func(getter generic.RESTOptionsGetter) rest.Storage {
+		return NewConnectorRESTFunc(Factory)
+	}
+	NewConnectorRESTFunc                         NewRESTFunc
 	ManagementConvertVirtualClusterConfigStorage = builders.NewApiResourceWithStorage( // Resource status endpoint
 		InternalConvertVirtualClusterConfig,
 		func() runtime.Object { return &ConvertVirtualClusterConfig{} },     // Register versioned resource
@@ -183,18 +193,8 @@ var (
 	NewEventREST = func(getter generic.RESTOptionsGetter) rest.Storage {
 		return NewEventRESTFunc(Factory)
 	}
-	NewEventRESTFunc                    NewRESTFunc
-	ManagementExternalCredentialStorage = builders.NewApiResourceWithStorage( // Resource status endpoint
-		InternalExternalCredential,
-		func() runtime.Object { return &ExternalCredential{} },     // Register versioned resource
-		func() runtime.Object { return &ExternalCredentialList{} }, // Register versioned resource list
-		NewExternalCredentialREST,
-	)
-	NewExternalCredentialREST = func(getter generic.RESTOptionsGetter) rest.Storage {
-		return NewExternalCredentialRESTFunc(Factory)
-	}
-	NewExternalCredentialRESTFunc NewRESTFunc
-	ManagementFeatureStorage      = builders.NewApiResourceWithStorage( // Resource status endpoint
+	NewEventRESTFunc         NewRESTFunc
+	ManagementFeatureStorage = builders.NewApiResourceWithStorage( // Resource status endpoint
 		InternalFeature,
 		func() runtime.Object { return &Feature{} },     // Register versioned resource
 		func() runtime.Object { return &FeatureList{} }, // Register versioned resource list
@@ -267,8 +267,22 @@ var (
 	NewMachineConfigTemplateREST = func(getter generic.RESTOptionsGetter) rest.Storage {
 		return NewMachineConfigTemplateRESTFunc(Factory)
 	}
-	NewMachineConfigTemplateRESTFunc NewRESTFunc
-	ManagementNetworkPeerStorage     = builders.NewApiResourceWithStorage( // Resource status endpoint
+	NewMachineConfigTemplateRESTFunc    NewRESTFunc
+	ManagementNetworkEnvironmentStorage = builders.NewApiResourceWithStorage( // Resource status endpoint
+		InternalNetworkEnvironment,
+		func() runtime.Object { return &NetworkEnvironment{} },     // Register versioned resource
+		func() runtime.Object { return &NetworkEnvironmentList{} }, // Register versioned resource list
+		NewNetworkEnvironmentREST,
+	)
+	NewNetworkEnvironmentREST = func(getter generic.RESTOptionsGetter) rest.Storage {
+		return NewNetworkEnvironmentRESTFunc(Factory)
+	}
+	NewNetworkEnvironmentRESTFunc   NewRESTFunc
+	NewNetworkEnvironmentStatusREST = func(getter generic.RESTOptionsGetter) rest.Storage {
+		return NewNetworkEnvironmentStatusRESTFunc(Factory)
+	}
+	NewNetworkEnvironmentStatusRESTFunc NewRESTFunc
+	ManagementNetworkPeerStorage        = builders.NewApiResourceWithStorage( // Resource status endpoint
 		InternalNetworkPeer,
 		func() runtime.Object { return &NetworkPeer{} },     // Register versioned resource
 		func() runtime.Object { return &NetworkPeerList{} }, // Register versioned resource list
@@ -291,22 +305,8 @@ var (
 	NewNodeClaimStatusREST = func(getter generic.RESTOptionsGetter) rest.Storage {
 		return NewNodeClaimStatusRESTFunc(Factory)
 	}
-	NewNodeClaimStatusRESTFunc       NewRESTFunc
-	ManagementNodeEnvironmentStorage = builders.NewApiResourceWithStorage( // Resource status endpoint
-		InternalNodeEnvironment,
-		func() runtime.Object { return &NodeEnvironment{} },     // Register versioned resource
-		func() runtime.Object { return &NodeEnvironmentList{} }, // Register versioned resource list
-		NewNodeEnvironmentREST,
-	)
-	NewNodeEnvironmentREST = func(getter generic.RESTOptionsGetter) rest.Storage {
-		return NewNodeEnvironmentRESTFunc(Factory)
-	}
-	NewNodeEnvironmentRESTFunc   NewRESTFunc
-	NewNodeEnvironmentStatusREST = func(getter generic.RESTOptionsGetter) rest.Storage {
-		return NewNodeEnvironmentStatusRESTFunc(Factory)
-	}
-	NewNodeEnvironmentStatusRESTFunc NewRESTFunc
-	ManagementNodeProfileStorage     = builders.NewApiResourceWithStorage( // Resource status endpoint
+	NewNodeClaimStatusRESTFunc   NewRESTFunc
+	ManagementNodeProfileStorage = builders.NewApiResourceWithStorage( // Resource status endpoint
 		InternalNodeProfile,
 		func() runtime.Object { return &NodeProfile{} },     // Register versioned resource
 		func() runtime.Object { return &NodeProfileList{} }, // Register versioned resource list
@@ -478,20 +478,6 @@ var (
 		return NewSharedSecretRESTFunc(Factory)
 	}
 	NewSharedSecretRESTFunc        NewRESTFunc
-	ManagementSlurmInstanceStorage = builders.NewApiResourceWithStorage( // Resource status endpoint
-		InternalSlurmInstance,
-		func() runtime.Object { return &SlurmInstance{} },     // Register versioned resource
-		func() runtime.Object { return &SlurmInstanceList{} }, // Register versioned resource list
-		NewSlurmInstanceREST,
-	)
-	NewSlurmInstanceREST = func(getter generic.RESTOptionsGetter) rest.Storage {
-		return NewSlurmInstanceRESTFunc(Factory)
-	}
-	NewSlurmInstanceRESTFunc   NewRESTFunc
-	NewSlurmInstanceStatusREST = func(getter generic.RESTOptionsGetter) rest.Storage {
-		return NewSlurmInstanceStatusRESTFunc(Factory)
-	}
-	NewSlurmInstanceStatusRESTFunc NewRESTFunc
 	ManagementSpaceInstanceStorage = builders.NewApiResourceWithStorage( // Resource status endpoint
 		InternalSpaceInstance,
 		func() runtime.Object { return &SpaceInstance{} },     // Register versioned resource
@@ -826,6 +812,18 @@ var (
 		func() runtime.Object { return &Config{} },
 		func() runtime.Object { return &ConfigList{} },
 	)
+	InternalConnector = builders.NewInternalResource(
+		"connectors",
+		"Connector",
+		func() runtime.Object { return &Connector{} },
+		func() runtime.Object { return &ConnectorList{} },
+	)
+	InternalConnectorStatus = builders.NewInternalResourceStatus(
+		"connectors",
+		"ConnectorStatus",
+		func() runtime.Object { return &Connector{} },
+		func() runtime.Object { return &ConnectorList{} },
+	)
 	InternalConvertVirtualClusterConfig = builders.NewInternalResource(
 		"convertvirtualclusterconfig",
 		"ConvertVirtualClusterConfig",
@@ -874,27 +872,7 @@ var (
 		func() runtime.Object { return &Event{} },
 		func() runtime.Object { return &EventList{} },
 	)
-	InternalExternalCredential = builders.NewInternalResource(
-		"externalcredentials",
-		"ExternalCredential",
-		func() runtime.Object { return &ExternalCredential{} },
-		func() runtime.Object { return &ExternalCredentialList{} },
-	)
-	InternalExternalCredentialStatus = builders.NewInternalResourceStatus(
-		"externalcredentials",
-		"ExternalCredentialStatus",
-		func() runtime.Object { return &ExternalCredential{} },
-		func() runtime.Object { return &ExternalCredentialList{} },
-	)
-	InternalExternalCredentialCredentialsREST = builders.NewInternalSubresource(
-		"externalcredentials", "ExternalCredentialCredentials", "credentials",
-		func() runtime.Object { return &ExternalCredentialCredentials{} },
-	)
-	NewExternalCredentialCredentialsREST = func(getter generic.RESTOptionsGetter) rest.Storage {
-		return NewExternalCredentialCredentialsRESTFunc(Factory)
-	}
-	NewExternalCredentialCredentialsRESTFunc NewRESTFunc
-	InternalFeature                          = builders.NewInternalResource(
+	InternalFeature = builders.NewInternalResource(
 		"features",
 		"Feature",
 		func() runtime.Object { return &Feature{} },
@@ -986,6 +964,18 @@ var (
 		func() runtime.Object { return &MachineConfigTemplate{} },
 		func() runtime.Object { return &MachineConfigTemplateList{} },
 	)
+	InternalNetworkEnvironment = builders.NewInternalResource(
+		"networkenvironments",
+		"NetworkEnvironment",
+		func() runtime.Object { return &NetworkEnvironment{} },
+		func() runtime.Object { return &NetworkEnvironmentList{} },
+	)
+	InternalNetworkEnvironmentStatus = builders.NewInternalResourceStatus(
+		"networkenvironments",
+		"NetworkEnvironmentStatus",
+		func() runtime.Object { return &NetworkEnvironment{} },
+		func() runtime.Object { return &NetworkEnvironmentList{} },
+	)
 	InternalNetworkPeer = builders.NewInternalResource(
 		"networkpeers",
 		"NetworkPeer",
@@ -1017,18 +1007,6 @@ var (
 		"NodeClaimStatus",
 		func() runtime.Object { return &NodeClaim{} },
 		func() runtime.Object { return &NodeClaimList{} },
-	)
-	InternalNodeEnvironment = builders.NewInternalResource(
-		"nodeenvironments",
-		"NodeEnvironment",
-		func() runtime.Object { return &NodeEnvironment{} },
-		func() runtime.Object { return &NodeEnvironmentList{} },
-	)
-	InternalNodeEnvironmentStatus = builders.NewInternalResourceStatus(
-		"nodeenvironments",
-		"NodeEnvironmentStatus",
-		func() runtime.Object { return &NodeEnvironment{} },
-		func() runtime.Object { return &NodeEnvironmentList{} },
 	)
 	InternalNodeProfile = builders.NewInternalResource(
 		"nodeprofiles",
@@ -1098,7 +1076,23 @@ var (
 		func() runtime.Object { return &OSImage{} },
 		func() runtime.Object { return &OSImageList{} },
 	)
-	InternalOwnedAccessKey = builders.NewInternalResource(
+	InternalOSImageFinalizeREST = builders.NewInternalSubresource(
+		"osimages", "OSImageFinalize", "finalize",
+		func() runtime.Object { return &OSImageFinalize{} },
+	)
+	NewOSImageFinalizeREST = func(getter generic.RESTOptionsGetter) rest.Storage {
+		return NewOSImageFinalizeRESTFunc(Factory)
+	}
+	NewOSImageFinalizeRESTFunc NewRESTFunc
+	InternalOSImageUploadREST  = builders.NewInternalSubresource(
+		"osimages", "OSImageUpload", "upload",
+		func() runtime.Object { return &OSImageUpload{} },
+	)
+	NewOSImageUploadREST = func(getter generic.RESTOptionsGetter) rest.Storage {
+		return NewOSImageUploadRESTFunc(Factory)
+	}
+	NewOSImageUploadRESTFunc NewRESTFunc
+	InternalOwnedAccessKey   = builders.NewInternalResource(
 		"ownedaccesskeys",
 		"OwnedAccessKey",
 		func() runtime.Object { return &OwnedAccessKey{} },
@@ -1294,35 +1288,7 @@ var (
 		func() runtime.Object { return &SharedSecret{} },
 		func() runtime.Object { return &SharedSecretList{} },
 	)
-	InternalSlurmInstance = builders.NewInternalResource(
-		"slurminstances",
-		"SlurmInstance",
-		func() runtime.Object { return &SlurmInstance{} },
-		func() runtime.Object { return &SlurmInstanceList{} },
-	)
-	InternalSlurmInstanceStatus = builders.NewInternalResourceStatus(
-		"slurminstances",
-		"SlurmInstanceStatus",
-		func() runtime.Object { return &SlurmInstance{} },
-		func() runtime.Object { return &SlurmInstanceList{} },
-	)
-	InternalSlurmInstanceAccountingREST = builders.NewInternalSubresource(
-		"slurminstances", "SlurmInstanceAccounting", "accounting",
-		func() runtime.Object { return &SlurmInstanceAccounting{} },
-	)
-	NewSlurmInstanceAccountingREST = func(getter generic.RESTOptionsGetter) rest.Storage {
-		return NewSlurmInstanceAccountingRESTFunc(Factory)
-	}
-	NewSlurmInstanceAccountingRESTFunc NewRESTFunc
-	InternalSlurmInstanceTopologyREST  = builders.NewInternalSubresource(
-		"slurminstances", "SlurmInstanceTopology", "topology",
-		func() runtime.Object { return &SlurmInstanceTopology{} },
-	)
-	NewSlurmInstanceTopologyREST = func(getter generic.RESTOptionsGetter) rest.Storage {
-		return NewSlurmInstanceTopologyRESTFunc(Factory)
-	}
-	NewSlurmInstanceTopologyRESTFunc NewRESTFunc
-	InternalSpaceInstance            = builders.NewInternalResource(
+	InternalSpaceInstance = builders.NewInternalResource(
 		"spaceinstances",
 		"SpaceInstance",
 		func() runtime.Object { return &SpaceInstance{} },
@@ -1358,7 +1324,15 @@ var (
 		func() runtime.Object { return &StackInstance{} },
 		func() runtime.Object { return &StackInstanceList{} },
 	)
-	InternalStackTemplate = builders.NewInternalResource(
+	InternalStackInstanceOutputsREST = builders.NewInternalSubresource(
+		"stackinstances", "StackInstanceOutputs", "outputs",
+		func() runtime.Object { return &StackInstanceOutputs{} },
+	)
+	NewStackInstanceOutputsREST = func(getter generic.RESTOptionsGetter) rest.Storage {
+		return NewStackInstanceOutputsRESTFunc(Factory)
+	}
+	NewStackInstanceOutputsRESTFunc NewRESTFunc
+	InternalStackTemplate           = builders.NewInternalResource(
 		"stacktemplates",
 		"StackTemplate",
 		func() runtime.Object { return &StackTemplate{} },
@@ -1445,15 +1419,7 @@ var (
 	NewTenantConfigREST = func(getter generic.RESTOptionsGetter) rest.Storage {
 		return NewTenantConfigRESTFunc(Factory)
 	}
-	NewTenantConfigRESTFunc     NewRESTFunc
-	InternalTenantNICoTokenREST = builders.NewInternalSubresource(
-		"tenants", "TenantNICoToken", "nicotoken",
-		func() runtime.Object { return &TenantNICoToken{} },
-	)
-	NewTenantNICoTokenREST = func(getter generic.RESTOptionsGetter) rest.Storage {
-		return NewTenantNICoTokenRESTFunc(Factory)
-	}
-	NewTenantNICoTokenRESTFunc            NewRESTFunc
+	NewTenantConfigRESTFunc               NewRESTFunc
 	InternalTranslateVClusterResourceName = builders.NewInternalResource(
 		"translatevclusterresourcenames",
 		"TranslateVClusterResourceName",
@@ -1703,6 +1669,8 @@ var (
 		InternalClusterRoleTemplateStatus,
 		InternalConfig,
 		InternalConfigStatus,
+		InternalConnector,
+		InternalConnectorStatus,
 		InternalConvertVirtualClusterConfig,
 		InternalConvertVirtualClusterConfigStatus,
 		InternalDatabaseConnector,
@@ -1711,9 +1679,6 @@ var (
 		InternalDirectClusterEndpointTokenStatus,
 		InternalEvent,
 		InternalEventStatus,
-		InternalExternalCredential,
-		InternalExternalCredentialStatus,
-		InternalExternalCredentialCredentialsREST,
 		InternalFeature,
 		InternalFeatureStatus,
 		InternalIngressAuthToken,
@@ -1729,13 +1694,13 @@ var (
 		InternalMachineStatus,
 		InternalMachineConfigTemplate,
 		InternalMachineConfigTemplateStatus,
+		InternalNetworkEnvironment,
+		InternalNetworkEnvironmentStatus,
 		InternalNetworkPeer,
 		InternalNetworkPeerStatus,
 		InternalNetworkPeerDebugREST,
 		InternalNodeClaim,
 		InternalNodeClaimStatus,
-		InternalNodeEnvironment,
-		InternalNodeEnvironmentStatus,
 		InternalNodeProfile,
 		InternalNodeProfileStatus,
 		InternalNodeProvider,
@@ -1747,6 +1712,8 @@ var (
 		InternalOIDCClientStatus,
 		InternalOSImage,
 		InternalOSImageStatus,
+		InternalOSImageFinalizeREST,
+		InternalOSImageUploadREST,
 		InternalOwnedAccessKey,
 		InternalOwnedAccessKeyStatus,
 		InternalProject,
@@ -1777,16 +1744,13 @@ var (
 		InternalSelfSubjectAccessReviewStatus,
 		InternalSharedSecret,
 		InternalSharedSecretStatus,
-		InternalSlurmInstance,
-		InternalSlurmInstanceStatus,
-		InternalSlurmInstanceAccountingREST,
-		InternalSlurmInstanceTopologyREST,
 		InternalSpaceInstance,
 		InternalSpaceInstanceStatus,
 		InternalSpaceTemplate,
 		InternalSpaceTemplateStatus,
 		InternalStackInstance,
 		InternalStackInstanceStatus,
+		InternalStackInstanceOutputsREST,
 		InternalStackTemplate,
 		InternalStackTemplateStatus,
 		InternalSubjectAccessReview,
@@ -1800,7 +1764,6 @@ var (
 		InternalTenant,
 		InternalTenantStatus,
 		InternalTenantConfigREST,
-		InternalTenantNICoTokenREST,
 		InternalTranslateVClusterResourceName,
 		InternalTranslateVClusterResourceNameStatus,
 		InternalUsageDownload,
@@ -1856,11 +1819,15 @@ func Resource(resource string) schema.GroupResource {
 }
 
 type AccessKeyType string
+type ConnectorType string
 type Level string
 type OperationPhase string
 type RequestTarget string
+type SharedDatabaseDialect string
 type SnapshotRequestPhase string
 type SnapshotTakenStatus string
+type StackOutputReason string
+type StackOutputState string
 type Stage string
 type UID string
 
@@ -2269,6 +2236,39 @@ type ConfigStatus struct {
 // +genclient:nonNamespaced
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
 
+type Connector struct {
+	metav1.TypeMeta   `json:",inline"`
+	metav1.ObjectMeta `json:"metadata,omitempty"`
+	Spec              ConnectorSpec   `json:"spec,omitempty"`
+	Status            ConnectorStatus `json:"status,omitempty"`
+}
+
+type ConnectorSharedDatabaseSpec struct {
+	Dialect                        SharedDatabaseDialect `json:"dialect"`
+	Endpoint                       string                `json:"endpoint"`
+	Port                           string                `json:"port,omitempty"`
+	User                           string                `json:"user"`
+	Password                       string                `json:"password,omitempty"`
+	IdentityProvider               string                `json:"identityProvider,omitempty"`
+	AWSPermissionBoundaryPolicyARN string                `json:"awsPermissionBoundaryPolicyArn,omitempty"`
+	CACert                         string                `json:"caCert,omitempty"`
+	SSLMode                        string                `json:"sslMode,omitempty"`
+}
+
+type ConnectorSpec struct {
+	Type           ConnectorType                `json:"type"`
+	DisplayName    string                       `json:"displayName,omitempty"`
+	SharedDatabase *ConnectorSharedDatabaseSpec `json:"sharedDatabase,omitempty"`
+}
+
+type ConnectorStatus struct {
+	Conditions agentstoragev1.Conditions `json:"conditions,omitempty"`
+}
+
+// +genclient
+// +genclient:nonNamespaced
+// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+
 type ConvertVirtualClusterConfig struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
@@ -2389,43 +2389,6 @@ type EventStatus struct {
 }
 
 // +genclient
-// +genclient
-// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
-
-type ExternalCredential struct {
-	metav1.TypeMeta   `json:",inline"`
-	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              ExternalCredentialSpec   `json:"spec,omitempty"`
-	Status            ExternalCredentialStatus `json:"status,omitempty"`
-}
-
-// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
-
-type ExternalCredentialCredentials struct {
-	metav1.TypeMeta   `json:",inline"`
-	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Username          string `json:"username,omitempty"`
-	Password          string `json:"password"`
-}
-
-type ExternalCredentialSecretSelector struct {
-	SecretKeyRef corev1.SecretKeySelector `json:"secretKeyRef"`
-}
-
-type ExternalCredentialSpec struct {
-	DisplayName string                            `json:"displayName,omitempty"`
-	Description string                            `json:"description,omitempty"`
-	Username    *ExternalCredentialSecretSelector `json:"username,omitempty"`
-	Password    ExternalCredentialSecretSelector  `json:"password"`
-	Access      []storagev1.Access                `json:"access,omitempty"`
-}
-
-type ExternalCredentialStatus struct {
-	Available bool   `json:"available"`
-	Username  string `json:"username,omitempty"`
-}
-
-// +genclient
 // +genclient:nonNamespaced
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
 
@@ -2508,7 +2471,7 @@ type KioskSpec struct {
 	NodeProviderTerraformValidateResult NodeProviderTerraformValidateResult `json:"nodeProviderTerraformValidateResult,omitempty"`
 	NodeProviderExecResult              NodeProviderExecResult              `json:"nodeProviderExecResult,omitempty"`
 	NodeClaimData                       NodeClaimData                       `json:"nodeClaimData,omitempty"`
-	NodeEnvironmentData                 NodeEnvironmentData                 `json:"nodeEnvironmentData,omitempty"`
+	NetworkEnvironmentData              NetworkEnvironmentData              `json:"networkEnvironmentData,omitempty"`
 }
 
 type KioskStatus struct {
@@ -2624,6 +2587,31 @@ type ManagementRole struct {
 // +genclient:nonNamespaced
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
 
+type NetworkEnvironment struct {
+	metav1.TypeMeta   `json:",inline"`
+	metav1.ObjectMeta `json:"metadata,omitempty"`
+	Spec              NetworkEnvironmentSpec   `json:"spec,omitempty"`
+	Status            NetworkEnvironmentStatus `json:"status,omitempty"`
+}
+
+type NetworkEnvironmentData struct {
+	Outputs    []byte                `json:"outputs,omitempty"`
+	State      []byte                `json:"state,omitempty"`
+	Operations map[string]*Operation `json:"operations,omitempty"`
+}
+
+type NetworkEnvironmentSpec struct {
+	storagev1.NetworkEnvironmentSpec `json:",inline"`
+}
+
+type NetworkEnvironmentStatus struct {
+	storagev1.NetworkEnvironmentStatus `json:",inline"`
+}
+
+// +genclient
+// +genclient:nonNamespaced
+// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+
 type NetworkPeer struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
@@ -2670,31 +2658,6 @@ type NodeClaimSpec struct {
 
 type NodeClaimStatus struct {
 	storagev1.NodeClaimStatus `json:",inline"`
-}
-
-// +genclient
-// +genclient
-// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
-
-type NodeEnvironment struct {
-	metav1.TypeMeta   `json:",inline"`
-	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              NodeEnvironmentSpec   `json:"spec,omitempty"`
-	Status            NodeEnvironmentStatus `json:"status,omitempty"`
-}
-
-type NodeEnvironmentData struct {
-	Outputs    []byte                `json:"outputs,omitempty"`
-	State      []byte                `json:"state,omitempty"`
-	Operations map[string]*Operation `json:"operations,omitempty"`
-}
-
-type NodeEnvironmentSpec struct {
-	storagev1.NodeEnvironmentSpec `json:",inline"`
-}
-
-type NodeEnvironmentStatus struct {
-	storagev1.NodeEnvironmentStatus `json:",inline"`
 }
 
 // +genclient
@@ -2844,12 +2807,56 @@ type OSImage struct {
 	Status            OSImageStatus `json:"status,omitempty"`
 }
 
+// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+
+type OSImageFinalize struct {
+	metav1.TypeMeta   `json:",inline"`
+	metav1.ObjectMeta `json:"metadata,omitempty"`
+	Spec              OSImageFinalizeSpec   `json:"spec"`
+	Status            OSImageFinalizeStatus `json:"status,omitempty"`
+}
+
+type OSImageFinalizeSpec struct {
+	Checksum string `json:"checksum"`
+}
+
+type OSImageFinalizeStatus struct {
+	CompletedAt metav1.Time `json:"completedAt,omitempty"`
+}
+
 type OSImageSpec struct {
 	storagev1.OSImageSpec `json:",inline"`
 }
 
 type OSImageStatus struct {
 	storagev1.OSImageStatus `json:",inline"`
+}
+
+// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+
+type OSImageUpload struct {
+	metav1.TypeMeta   `json:",inline"`
+	metav1.ObjectMeta `json:"metadata,omitempty"`
+	Spec              OSImageUploadSpec   `json:"spec"`
+	Status            OSImageUploadStatus `json:"status,omitempty"`
+}
+
+type OSImageUploadSpec struct {
+	SizeBytes int64 `json:"sizeBytes"`
+	FromPart  int32 `json:"fromPart,omitempty"`
+}
+
+type OSImageUploadStatus struct {
+	PartSizeBytes int64                 `json:"partSizeBytes,omitempty"`
+	TotalParts    int32                 `json:"totalParts,omitempty"`
+	NextPart      *int32                `json:"nextPart,omitempty"`
+	Targets       []OSImageUploadTarget `json:"targets,omitempty"`
+	ExpiresAt     metav1.Time           `json:"expiresAt,omitempty"`
+}
+
+type OSImageUploadTarget struct {
+	PartNumber int32  `json:"partNumber"`
+	URL        string `json:"url"`
 }
 
 type ObjectName struct {
@@ -2994,12 +3001,13 @@ type ProjectMigrateVirtualClusterInstanceSource struct {
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
 
 type ProjectNodeTypes struct {
-	metav1.TypeMeta   `json:",inline"`
-	metav1.ObjectMeta `json:"metadata,omitempty"`
-	NodeProviders     []storagev1.NodeProvider `json:"nodeProviders,omitempty"`
-	NodeTypes         []storagev1.NodeType     `json:"nodeTypes,omitempty"`
-	NodeProfiles      []storagev1.NodeProfile  `json:"nodeProfiles,omitempty"`
-	OSImages          []storagev1.OSImage      `json:"osImages,omitempty"`
+	metav1.TypeMeta     `json:",inline"`
+	metav1.ObjectMeta   `json:"metadata,omitempty"`
+	NodeProviders       []storagev1.NodeProvider       `json:"nodeProviders,omitempty"`
+	NodeTypes           []storagev1.NodeType           `json:"nodeTypes,omitempty"`
+	NodeProfiles        []storagev1.NodeProfile        `json:"nodeProfiles,omitempty"`
+	NetworkEnvironments []storagev1.NetworkEnvironment `json:"networkEnvironments,omitempty"`
+	OSImages            []storagev1.OSImage            `json:"osImages,omitempty"`
 }
 
 type ProjectRole struct {
@@ -3232,104 +3240,6 @@ type SharedSecretStatus struct {
 	storagev1.SharedSecretStatus `json:",inline"`
 }
 
-// +genclient
-// +genclient
-// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
-
-type SlurmInstance struct {
-	metav1.TypeMeta   `json:",inline"`
-	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              SlurmInstanceSpec   `json:"spec,omitempty"`
-	Status            SlurmInstanceStatus `json:"status,omitempty"`
-}
-
-// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
-
-type SlurmInstanceAccounting struct {
-	metav1.TypeMeta   `json:",inline"`
-	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Status            SlurmInstanceAccountingStatus `json:"status,omitempty"`
-}
-
-type SlurmInstanceAccountingStatus struct {
-	Enabled bool       `json:"enabled"`
-	Message string     `json:"message,omitempty"`
-	Jobs    []SlurmJob `json:"jobs,omitempty"`
-}
-
-type SlurmInstanceSpec struct {
-	storagev1.SlurmInstanceSpec `json:",inline"`
-}
-
-type SlurmInstanceStatus struct {
-	storagev1.SlurmInstanceStatus `json:",inline"`
-	CanUse                        bool `json:"canUse,omitempty"`
-	CanUpdate                     bool `json:"canUpdate,omitempty"`
-}
-
-// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
-
-type SlurmInstanceTopology struct {
-	metav1.TypeMeta   `json:",inline"`
-	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Status            SlurmInstanceTopologyStatus `json:"status,omitempty"`
-}
-
-type SlurmInstanceTopologyStatus struct {
-	Supported bool                  `json:"supported"`
-	Message   string                `json:"message,omitempty"`
-	Configs   []SlurmTopologyConfig `json:"configs,omitempty"`
-}
-
-type SlurmJob struct {
-	ID                 int64        `json:"id"`
-	Name               string       `json:"name,omitempty"`
-	User               string       `json:"user,omitempty"`
-	Account            string       `json:"account,omitempty"`
-	Partition          string       `json:"partition,omitempty"`
-	State              string       `json:"state,omitempty"`
-	SubmitTime         *metav1.Time `json:"submitTime,omitempty"`
-	StartTime          *metav1.Time `json:"startTime,omitempty"`
-	EndTime            *metav1.Time `json:"endTime,omitempty"`
-	Elapsed            int64        `json:"elapsed,omitempty"`
-	Nodes              string       `json:"nodes,omitempty"`
-	AllocatedResources []SlurmTRES  `json:"allocatedResources,omitempty"`
-}
-
-type SlurmTRES struct {
-	Type  string `json:"type"`
-	Name  string `json:"name,omitempty"`
-	Count int64  `json:"count"`
-}
-
-type SlurmTopologyBlock struct {
-	BlockSizes []int32                   `json:"blockSizes,omitempty"`
-	Blocks     []SlurmTopologyBlockEntry `json:"blocks,omitempty"`
-}
-
-type SlurmTopologyBlockEntry struct {
-	Block string `json:"block"`
-	Nodes string `json:"nodes,omitempty"`
-}
-
-type SlurmTopologyConfig struct {
-	Name           string              `json:"name,omitempty"`
-	ClusterDefault bool                `json:"clusterDefault,omitempty"`
-	Tree           *SlurmTopologyTree  `json:"tree,omitempty"`
-	Block          *SlurmTopologyBlock `json:"block,omitempty"`
-	Flat           bool                `json:"flat,omitempty"`
-}
-
-type SlurmTopologySwitch struct {
-	Switch   string `json:"switch"`
-	Children string `json:"children,omitempty"`
-	Nodes    string `json:"nodes,omitempty"`
-}
-
-type SlurmTopologyTree struct {
-	Switches []SlurmTopologySwitch `json:"switches,omitempty"`
-}
-
 type SnapshotRequest struct {
 	Metadata SnapshotRequestMetadata `json:"metadata,omitempty"`
 	Status   SnapshotRequestStatus   `json:"status"`
@@ -3409,6 +3319,24 @@ type StackInstance struct {
 	metav1.ObjectMeta `json:"metadata,omitempty"`
 	Spec              StackInstanceSpec   `json:"spec,omitempty"`
 	Status            StackInstanceStatus `json:"status,omitempty"`
+}
+
+type StackInstanceOutput struct {
+	Name      string            `json:"name"`
+	Task      string            `json:"task"`
+	Sensitive bool              `json:"sensitive"`
+	State     StackOutputState  `json:"state"`
+	Reason    StackOutputReason `json:"reason,omitempty"`
+	Message   string            `json:"message,omitempty"`
+	Value     *string           `json:"value,omitempty"`
+}
+
+// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+
+type StackInstanceOutputs struct {
+	metav1.TypeMeta   `json:",inline"`
+	metav1.ObjectMeta `json:"metadata,omitempty"`
+	Outputs           []StackInstanceOutput `json:"outputs,omitempty"`
 }
 
 type StackInstanceSpec struct {
@@ -3550,20 +3478,6 @@ type TenantConfigSpec struct {
 	Hostnames      []storagev1.TenantHostnameBinding `json:"hostnames,omitempty"`
 	UISettings     *uiv1.UISettingsConfig            `json:"uiSettings,omitempty"`
 	Authentication *storagev1.Authentication         `json:"authentication,omitempty"`
-}
-
-// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
-
-type TenantNICoToken struct {
-	metav1.TypeMeta   `json:",inline"`
-	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Status            TenantNICoTokenStatus `json:"status,omitempty"`
-}
-
-type TenantNICoTokenStatus struct {
-	Token    string `json:"token,omitempty"`
-	Org      string `json:"org,omitempty"`
-	Endpoint string `json:"endpoint,omitempty"`
 }
 
 type TenantSpec struct {
@@ -5395,6 +5309,125 @@ func (s *storageConfig) DeleteConfig(ctx context.Context, id string) (bool, erro
 	return sync, err
 }
 
+// Connector Functions and Structs
+//
+// +k8s:deepcopy-gen=false
+type ConnectorStrategy struct {
+	builders.DefaultStorageStrategy
+}
+
+// +k8s:deepcopy-gen=false
+type ConnectorStatusStrategy struct {
+	builders.DefaultStatusStorageStrategy
+}
+
+// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+
+type ConnectorList struct {
+	metav1.TypeMeta `json:",inline"`
+	metav1.ListMeta `json:"metadata,omitempty"`
+	Items           []Connector `json:"items"`
+}
+
+func (Connector) NewStatus() interface{} {
+	return ConnectorStatus{}
+}
+
+func (pc *Connector) GetStatus() interface{} {
+	return pc.Status
+}
+
+func (pc *Connector) SetStatus(s interface{}) {
+	pc.Status = s.(ConnectorStatus)
+}
+
+func (pc *Connector) GetSpec() interface{} {
+	return pc.Spec
+}
+
+func (pc *Connector) SetSpec(s interface{}) {
+	pc.Spec = s.(ConnectorSpec)
+}
+
+func (pc *Connector) GetObjectMeta() *metav1.ObjectMeta {
+	return &pc.ObjectMeta
+}
+
+func (pc *Connector) SetGeneration(generation int64) {
+	pc.ObjectMeta.Generation = generation
+}
+
+func (pc Connector) GetGeneration() int64 {
+	return pc.ObjectMeta.Generation
+}
+
+// Registry is an interface for things that know how to store Connector.
+// +k8s:deepcopy-gen=false
+type ConnectorRegistry interface {
+	ListConnectors(ctx context.Context, options *internalversion.ListOptions) (*ConnectorList, error)
+	GetConnector(ctx context.Context, id string, options *metav1.GetOptions) (*Connector, error)
+	CreateConnector(ctx context.Context, id *Connector) (*Connector, error)
+	UpdateConnector(ctx context.Context, id *Connector) (*Connector, error)
+	DeleteConnector(ctx context.Context, id string) (bool, error)
+}
+
+// NewRegistry returns a new Registry interface for the given Storage. Any mismatched types will panic.
+func NewConnectorRegistry(sp builders.StandardStorageProvider) ConnectorRegistry {
+	return &storageConnector{sp}
+}
+
+// Implement Registry
+// storage puts strong typing around storage calls
+// +k8s:deepcopy-gen=false
+type storageConnector struct {
+	builders.StandardStorageProvider
+}
+
+func (s *storageConnector) ListConnectors(ctx context.Context, options *internalversion.ListOptions) (*ConnectorList, error) {
+	if options != nil && options.FieldSelector != nil && !options.FieldSelector.Empty() {
+		return nil, fmt.Errorf("field selector not supported yet")
+	}
+	st := s.GetStandardStorage()
+	obj, err := st.List(ctx, options)
+	if err != nil {
+		return nil, err
+	}
+	return obj.(*ConnectorList), err
+}
+
+func (s *storageConnector) GetConnector(ctx context.Context, id string, options *metav1.GetOptions) (*Connector, error) {
+	st := s.GetStandardStorage()
+	obj, err := st.Get(ctx, id, options)
+	if err != nil {
+		return nil, err
+	}
+	return obj.(*Connector), nil
+}
+
+func (s *storageConnector) CreateConnector(ctx context.Context, object *Connector) (*Connector, error) {
+	st := s.GetStandardStorage()
+	obj, err := st.Create(ctx, object, nil, &metav1.CreateOptions{})
+	if err != nil {
+		return nil, err
+	}
+	return obj.(*Connector), nil
+}
+
+func (s *storageConnector) UpdateConnector(ctx context.Context, object *Connector) (*Connector, error) {
+	st := s.GetStandardStorage()
+	obj, _, err := st.Update(ctx, object.Name, rest.DefaultUpdatedObjectInfo(object), nil, nil, false, &metav1.UpdateOptions{})
+	if err != nil {
+		return nil, err
+	}
+	return obj.(*Connector), nil
+}
+
+func (s *storageConnector) DeleteConnector(ctx context.Context, id string) (bool, error) {
+	st := s.GetStandardStorage()
+	_, sync, err := st.Delete(ctx, id, nil, &metav1.DeleteOptions{})
+	return sync, err
+}
+
 // ConvertVirtualClusterConfig Functions and Structs
 //
 // +k8s:deepcopy-gen=false
@@ -5866,133 +5899,6 @@ func (s *storageEvent) UpdateEvent(ctx context.Context, object *Event) (*Event, 
 }
 
 func (s *storageEvent) DeleteEvent(ctx context.Context, id string) (bool, error) {
-	st := s.GetStandardStorage()
-	_, sync, err := st.Delete(ctx, id, nil, &metav1.DeleteOptions{})
-	return sync, err
-}
-
-// ExternalCredential Functions and Structs
-//
-// +k8s:deepcopy-gen=false
-type ExternalCredentialStrategy struct {
-	builders.DefaultStorageStrategy
-}
-
-// +k8s:deepcopy-gen=false
-type ExternalCredentialStatusStrategy struct {
-	builders.DefaultStatusStorageStrategy
-}
-
-// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
-
-type ExternalCredentialList struct {
-	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
-	Items           []ExternalCredential `json:"items"`
-}
-
-// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
-
-type ExternalCredentialCredentialsList struct {
-	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
-	Items           []ExternalCredentialCredentials `json:"items"`
-}
-
-func (ExternalCredential) NewStatus() interface{} {
-	return ExternalCredentialStatus{}
-}
-
-func (pc *ExternalCredential) GetStatus() interface{} {
-	return pc.Status
-}
-
-func (pc *ExternalCredential) SetStatus(s interface{}) {
-	pc.Status = s.(ExternalCredentialStatus)
-}
-
-func (pc *ExternalCredential) GetSpec() interface{} {
-	return pc.Spec
-}
-
-func (pc *ExternalCredential) SetSpec(s interface{}) {
-	pc.Spec = s.(ExternalCredentialSpec)
-}
-
-func (pc *ExternalCredential) GetObjectMeta() *metav1.ObjectMeta {
-	return &pc.ObjectMeta
-}
-
-func (pc *ExternalCredential) SetGeneration(generation int64) {
-	pc.ObjectMeta.Generation = generation
-}
-
-func (pc ExternalCredential) GetGeneration() int64 {
-	return pc.ObjectMeta.Generation
-}
-
-// Registry is an interface for things that know how to store ExternalCredential.
-// +k8s:deepcopy-gen=false
-type ExternalCredentialRegistry interface {
-	ListExternalCredentials(ctx context.Context, options *internalversion.ListOptions) (*ExternalCredentialList, error)
-	GetExternalCredential(ctx context.Context, id string, options *metav1.GetOptions) (*ExternalCredential, error)
-	CreateExternalCredential(ctx context.Context, id *ExternalCredential) (*ExternalCredential, error)
-	UpdateExternalCredential(ctx context.Context, id *ExternalCredential) (*ExternalCredential, error)
-	DeleteExternalCredential(ctx context.Context, id string) (bool, error)
-}
-
-// NewRegistry returns a new Registry interface for the given Storage. Any mismatched types will panic.
-func NewExternalCredentialRegistry(sp builders.StandardStorageProvider) ExternalCredentialRegistry {
-	return &storageExternalCredential{sp}
-}
-
-// Implement Registry
-// storage puts strong typing around storage calls
-// +k8s:deepcopy-gen=false
-type storageExternalCredential struct {
-	builders.StandardStorageProvider
-}
-
-func (s *storageExternalCredential) ListExternalCredentials(ctx context.Context, options *internalversion.ListOptions) (*ExternalCredentialList, error) {
-	if options != nil && options.FieldSelector != nil && !options.FieldSelector.Empty() {
-		return nil, fmt.Errorf("field selector not supported yet")
-	}
-	st := s.GetStandardStorage()
-	obj, err := st.List(ctx, options)
-	if err != nil {
-		return nil, err
-	}
-	return obj.(*ExternalCredentialList), err
-}
-
-func (s *storageExternalCredential) GetExternalCredential(ctx context.Context, id string, options *metav1.GetOptions) (*ExternalCredential, error) {
-	st := s.GetStandardStorage()
-	obj, err := st.Get(ctx, id, options)
-	if err != nil {
-		return nil, err
-	}
-	return obj.(*ExternalCredential), nil
-}
-
-func (s *storageExternalCredential) CreateExternalCredential(ctx context.Context, object *ExternalCredential) (*ExternalCredential, error) {
-	st := s.GetStandardStorage()
-	obj, err := st.Create(ctx, object, nil, &metav1.CreateOptions{})
-	if err != nil {
-		return nil, err
-	}
-	return obj.(*ExternalCredential), nil
-}
-
-func (s *storageExternalCredential) UpdateExternalCredential(ctx context.Context, object *ExternalCredential) (*ExternalCredential, error) {
-	st := s.GetStandardStorage()
-	obj, _, err := st.Update(ctx, object.Name, rest.DefaultUpdatedObjectInfo(object), nil, nil, false, &metav1.UpdateOptions{})
-	if err != nil {
-		return nil, err
-	}
-	return obj.(*ExternalCredential), nil
-}
-
-func (s *storageExternalCredential) DeleteExternalCredential(ctx context.Context, id string) (bool, error) {
 	st := s.GetStandardStorage()
 	_, sync, err := st.Delete(ctx, id, nil, &metav1.DeleteOptions{})
 	return sync, err
@@ -6839,6 +6745,125 @@ func (s *storageMachineConfigTemplate) DeleteMachineConfigTemplate(ctx context.C
 	return sync, err
 }
 
+// NetworkEnvironment Functions and Structs
+//
+// +k8s:deepcopy-gen=false
+type NetworkEnvironmentStrategy struct {
+	builders.DefaultStorageStrategy
+}
+
+// +k8s:deepcopy-gen=false
+type NetworkEnvironmentStatusStrategy struct {
+	builders.DefaultStatusStorageStrategy
+}
+
+// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+
+type NetworkEnvironmentList struct {
+	metav1.TypeMeta `json:",inline"`
+	metav1.ListMeta `json:"metadata,omitempty"`
+	Items           []NetworkEnvironment `json:"items"`
+}
+
+func (NetworkEnvironment) NewStatus() interface{} {
+	return NetworkEnvironmentStatus{}
+}
+
+func (pc *NetworkEnvironment) GetStatus() interface{} {
+	return pc.Status
+}
+
+func (pc *NetworkEnvironment) SetStatus(s interface{}) {
+	pc.Status = s.(NetworkEnvironmentStatus)
+}
+
+func (pc *NetworkEnvironment) GetSpec() interface{} {
+	return pc.Spec
+}
+
+func (pc *NetworkEnvironment) SetSpec(s interface{}) {
+	pc.Spec = s.(NetworkEnvironmentSpec)
+}
+
+func (pc *NetworkEnvironment) GetObjectMeta() *metav1.ObjectMeta {
+	return &pc.ObjectMeta
+}
+
+func (pc *NetworkEnvironment) SetGeneration(generation int64) {
+	pc.ObjectMeta.Generation = generation
+}
+
+func (pc NetworkEnvironment) GetGeneration() int64 {
+	return pc.ObjectMeta.Generation
+}
+
+// Registry is an interface for things that know how to store NetworkEnvironment.
+// +k8s:deepcopy-gen=false
+type NetworkEnvironmentRegistry interface {
+	ListNetworkEnvironments(ctx context.Context, options *internalversion.ListOptions) (*NetworkEnvironmentList, error)
+	GetNetworkEnvironment(ctx context.Context, id string, options *metav1.GetOptions) (*NetworkEnvironment, error)
+	CreateNetworkEnvironment(ctx context.Context, id *NetworkEnvironment) (*NetworkEnvironment, error)
+	UpdateNetworkEnvironment(ctx context.Context, id *NetworkEnvironment) (*NetworkEnvironment, error)
+	DeleteNetworkEnvironment(ctx context.Context, id string) (bool, error)
+}
+
+// NewRegistry returns a new Registry interface for the given Storage. Any mismatched types will panic.
+func NewNetworkEnvironmentRegistry(sp builders.StandardStorageProvider) NetworkEnvironmentRegistry {
+	return &storageNetworkEnvironment{sp}
+}
+
+// Implement Registry
+// storage puts strong typing around storage calls
+// +k8s:deepcopy-gen=false
+type storageNetworkEnvironment struct {
+	builders.StandardStorageProvider
+}
+
+func (s *storageNetworkEnvironment) ListNetworkEnvironments(ctx context.Context, options *internalversion.ListOptions) (*NetworkEnvironmentList, error) {
+	if options != nil && options.FieldSelector != nil && !options.FieldSelector.Empty() {
+		return nil, fmt.Errorf("field selector not supported yet")
+	}
+	st := s.GetStandardStorage()
+	obj, err := st.List(ctx, options)
+	if err != nil {
+		return nil, err
+	}
+	return obj.(*NetworkEnvironmentList), err
+}
+
+func (s *storageNetworkEnvironment) GetNetworkEnvironment(ctx context.Context, id string, options *metav1.GetOptions) (*NetworkEnvironment, error) {
+	st := s.GetStandardStorage()
+	obj, err := st.Get(ctx, id, options)
+	if err != nil {
+		return nil, err
+	}
+	return obj.(*NetworkEnvironment), nil
+}
+
+func (s *storageNetworkEnvironment) CreateNetworkEnvironment(ctx context.Context, object *NetworkEnvironment) (*NetworkEnvironment, error) {
+	st := s.GetStandardStorage()
+	obj, err := st.Create(ctx, object, nil, &metav1.CreateOptions{})
+	if err != nil {
+		return nil, err
+	}
+	return obj.(*NetworkEnvironment), nil
+}
+
+func (s *storageNetworkEnvironment) UpdateNetworkEnvironment(ctx context.Context, object *NetworkEnvironment) (*NetworkEnvironment, error) {
+	st := s.GetStandardStorage()
+	obj, _, err := st.Update(ctx, object.Name, rest.DefaultUpdatedObjectInfo(object), nil, nil, false, &metav1.UpdateOptions{})
+	if err != nil {
+		return nil, err
+	}
+	return obj.(*NetworkEnvironment), nil
+}
+
+func (s *storageNetworkEnvironment) DeleteNetworkEnvironment(ctx context.Context, id string) (bool, error) {
+	st := s.GetStandardStorage()
+	_, sync, err := st.Delete(ctx, id, nil, &metav1.DeleteOptions{})
+	return sync, err
+}
+
 // NetworkPeer Functions and Structs
 //
 // +k8s:deepcopy-gen=false
@@ -7080,125 +7105,6 @@ func (s *storageNodeClaim) UpdateNodeClaim(ctx context.Context, object *NodeClai
 }
 
 func (s *storageNodeClaim) DeleteNodeClaim(ctx context.Context, id string) (bool, error) {
-	st := s.GetStandardStorage()
-	_, sync, err := st.Delete(ctx, id, nil, &metav1.DeleteOptions{})
-	return sync, err
-}
-
-// NodeEnvironment Functions and Structs
-//
-// +k8s:deepcopy-gen=false
-type NodeEnvironmentStrategy struct {
-	builders.DefaultStorageStrategy
-}
-
-// +k8s:deepcopy-gen=false
-type NodeEnvironmentStatusStrategy struct {
-	builders.DefaultStatusStorageStrategy
-}
-
-// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
-
-type NodeEnvironmentList struct {
-	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
-	Items           []NodeEnvironment `json:"items"`
-}
-
-func (NodeEnvironment) NewStatus() interface{} {
-	return NodeEnvironmentStatus{}
-}
-
-func (pc *NodeEnvironment) GetStatus() interface{} {
-	return pc.Status
-}
-
-func (pc *NodeEnvironment) SetStatus(s interface{}) {
-	pc.Status = s.(NodeEnvironmentStatus)
-}
-
-func (pc *NodeEnvironment) GetSpec() interface{} {
-	return pc.Spec
-}
-
-func (pc *NodeEnvironment) SetSpec(s interface{}) {
-	pc.Spec = s.(NodeEnvironmentSpec)
-}
-
-func (pc *NodeEnvironment) GetObjectMeta() *metav1.ObjectMeta {
-	return &pc.ObjectMeta
-}
-
-func (pc *NodeEnvironment) SetGeneration(generation int64) {
-	pc.ObjectMeta.Generation = generation
-}
-
-func (pc NodeEnvironment) GetGeneration() int64 {
-	return pc.ObjectMeta.Generation
-}
-
-// Registry is an interface for things that know how to store NodeEnvironment.
-// +k8s:deepcopy-gen=false
-type NodeEnvironmentRegistry interface {
-	ListNodeEnvironments(ctx context.Context, options *internalversion.ListOptions) (*NodeEnvironmentList, error)
-	GetNodeEnvironment(ctx context.Context, id string, options *metav1.GetOptions) (*NodeEnvironment, error)
-	CreateNodeEnvironment(ctx context.Context, id *NodeEnvironment) (*NodeEnvironment, error)
-	UpdateNodeEnvironment(ctx context.Context, id *NodeEnvironment) (*NodeEnvironment, error)
-	DeleteNodeEnvironment(ctx context.Context, id string) (bool, error)
-}
-
-// NewRegistry returns a new Registry interface for the given Storage. Any mismatched types will panic.
-func NewNodeEnvironmentRegistry(sp builders.StandardStorageProvider) NodeEnvironmentRegistry {
-	return &storageNodeEnvironment{sp}
-}
-
-// Implement Registry
-// storage puts strong typing around storage calls
-// +k8s:deepcopy-gen=false
-type storageNodeEnvironment struct {
-	builders.StandardStorageProvider
-}
-
-func (s *storageNodeEnvironment) ListNodeEnvironments(ctx context.Context, options *internalversion.ListOptions) (*NodeEnvironmentList, error) {
-	if options != nil && options.FieldSelector != nil && !options.FieldSelector.Empty() {
-		return nil, fmt.Errorf("field selector not supported yet")
-	}
-	st := s.GetStandardStorage()
-	obj, err := st.List(ctx, options)
-	if err != nil {
-		return nil, err
-	}
-	return obj.(*NodeEnvironmentList), err
-}
-
-func (s *storageNodeEnvironment) GetNodeEnvironment(ctx context.Context, id string, options *metav1.GetOptions) (*NodeEnvironment, error) {
-	st := s.GetStandardStorage()
-	obj, err := st.Get(ctx, id, options)
-	if err != nil {
-		return nil, err
-	}
-	return obj.(*NodeEnvironment), nil
-}
-
-func (s *storageNodeEnvironment) CreateNodeEnvironment(ctx context.Context, object *NodeEnvironment) (*NodeEnvironment, error) {
-	st := s.GetStandardStorage()
-	obj, err := st.Create(ctx, object, nil, &metav1.CreateOptions{})
-	if err != nil {
-		return nil, err
-	}
-	return obj.(*NodeEnvironment), nil
-}
-
-func (s *storageNodeEnvironment) UpdateNodeEnvironment(ctx context.Context, object *NodeEnvironment) (*NodeEnvironment, error) {
-	st := s.GetStandardStorage()
-	obj, _, err := st.Update(ctx, object.Name, rest.DefaultUpdatedObjectInfo(object), nil, nil, false, &metav1.UpdateOptions{})
-	if err != nil {
-		return nil, err
-	}
-	return obj.(*NodeEnvironment), nil
-}
-
-func (s *storageNodeEnvironment) DeleteNodeEnvironment(ctx context.Context, id string) (bool, error) {
 	st := s.GetStandardStorage()
 	_, sync, err := st.Delete(ctx, id, nil, &metav1.DeleteOptions{})
 	return sync, err
@@ -7706,6 +7612,22 @@ type OSImageList struct {
 	metav1.TypeMeta `json:",inline"`
 	metav1.ListMeta `json:"metadata,omitempty"`
 	Items           []OSImage `json:"items"`
+}
+
+// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+
+type OSImageFinalizeList struct {
+	metav1.TypeMeta `json:",inline"`
+	metav1.ListMeta `json:"metadata,omitempty"`
+	Items           []OSImageFinalize `json:"items"`
+}
+
+// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+
+type OSImageUploadList struct {
+	metav1.TypeMeta `json:",inline"`
+	metav1.ListMeta `json:"metadata,omitempty"`
+	Items           []OSImageUpload `json:"items"`
 }
 
 func (OSImage) NewStatus() interface{} {
@@ -9180,141 +9102,6 @@ func (s *storageSharedSecret) DeleteSharedSecret(ctx context.Context, id string)
 	return sync, err
 }
 
-// SlurmInstance Functions and Structs
-//
-// +k8s:deepcopy-gen=false
-type SlurmInstanceStrategy struct {
-	builders.DefaultStorageStrategy
-}
-
-// +k8s:deepcopy-gen=false
-type SlurmInstanceStatusStrategy struct {
-	builders.DefaultStatusStorageStrategy
-}
-
-// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
-
-type SlurmInstanceList struct {
-	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
-	Items           []SlurmInstance `json:"items"`
-}
-
-// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
-
-type SlurmInstanceAccountingList struct {
-	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
-	Items           []SlurmInstanceAccounting `json:"items"`
-}
-
-// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
-
-type SlurmInstanceTopologyList struct {
-	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
-	Items           []SlurmInstanceTopology `json:"items"`
-}
-
-func (SlurmInstance) NewStatus() interface{} {
-	return SlurmInstanceStatus{}
-}
-
-func (pc *SlurmInstance) GetStatus() interface{} {
-	return pc.Status
-}
-
-func (pc *SlurmInstance) SetStatus(s interface{}) {
-	pc.Status = s.(SlurmInstanceStatus)
-}
-
-func (pc *SlurmInstance) GetSpec() interface{} {
-	return pc.Spec
-}
-
-func (pc *SlurmInstance) SetSpec(s interface{}) {
-	pc.Spec = s.(SlurmInstanceSpec)
-}
-
-func (pc *SlurmInstance) GetObjectMeta() *metav1.ObjectMeta {
-	return &pc.ObjectMeta
-}
-
-func (pc *SlurmInstance) SetGeneration(generation int64) {
-	pc.ObjectMeta.Generation = generation
-}
-
-func (pc SlurmInstance) GetGeneration() int64 {
-	return pc.ObjectMeta.Generation
-}
-
-// Registry is an interface for things that know how to store SlurmInstance.
-// +k8s:deepcopy-gen=false
-type SlurmInstanceRegistry interface {
-	ListSlurmInstances(ctx context.Context, options *internalversion.ListOptions) (*SlurmInstanceList, error)
-	GetSlurmInstance(ctx context.Context, id string, options *metav1.GetOptions) (*SlurmInstance, error)
-	CreateSlurmInstance(ctx context.Context, id *SlurmInstance) (*SlurmInstance, error)
-	UpdateSlurmInstance(ctx context.Context, id *SlurmInstance) (*SlurmInstance, error)
-	DeleteSlurmInstance(ctx context.Context, id string) (bool, error)
-}
-
-// NewRegistry returns a new Registry interface for the given Storage. Any mismatched types will panic.
-func NewSlurmInstanceRegistry(sp builders.StandardStorageProvider) SlurmInstanceRegistry {
-	return &storageSlurmInstance{sp}
-}
-
-// Implement Registry
-// storage puts strong typing around storage calls
-// +k8s:deepcopy-gen=false
-type storageSlurmInstance struct {
-	builders.StandardStorageProvider
-}
-
-func (s *storageSlurmInstance) ListSlurmInstances(ctx context.Context, options *internalversion.ListOptions) (*SlurmInstanceList, error) {
-	if options != nil && options.FieldSelector != nil && !options.FieldSelector.Empty() {
-		return nil, fmt.Errorf("field selector not supported yet")
-	}
-	st := s.GetStandardStorage()
-	obj, err := st.List(ctx, options)
-	if err != nil {
-		return nil, err
-	}
-	return obj.(*SlurmInstanceList), err
-}
-
-func (s *storageSlurmInstance) GetSlurmInstance(ctx context.Context, id string, options *metav1.GetOptions) (*SlurmInstance, error) {
-	st := s.GetStandardStorage()
-	obj, err := st.Get(ctx, id, options)
-	if err != nil {
-		return nil, err
-	}
-	return obj.(*SlurmInstance), nil
-}
-
-func (s *storageSlurmInstance) CreateSlurmInstance(ctx context.Context, object *SlurmInstance) (*SlurmInstance, error) {
-	st := s.GetStandardStorage()
-	obj, err := st.Create(ctx, object, nil, &metav1.CreateOptions{})
-	if err != nil {
-		return nil, err
-	}
-	return obj.(*SlurmInstance), nil
-}
-
-func (s *storageSlurmInstance) UpdateSlurmInstance(ctx context.Context, object *SlurmInstance) (*SlurmInstance, error) {
-	st := s.GetStandardStorage()
-	obj, _, err := st.Update(ctx, object.Name, rest.DefaultUpdatedObjectInfo(object), nil, nil, false, &metav1.UpdateOptions{})
-	if err != nil {
-		return nil, err
-	}
-	return obj.(*SlurmInstance), nil
-}
-
-func (s *storageSlurmInstance) DeleteSlurmInstance(ctx context.Context, id string) (bool, error) {
-	st := s.GetStandardStorage()
-	_, sync, err := st.Delete(ctx, id, nil, &metav1.DeleteOptions{})
-	return sync, err
-}
-
 // SpaceInstance Functions and Structs
 //
 // +k8s:deepcopy-gen=false
@@ -9571,6 +9358,14 @@ type StackInstanceList struct {
 	metav1.TypeMeta `json:",inline"`
 	metav1.ListMeta `json:"metadata,omitempty"`
 	Items           []StackInstance `json:"items"`
+}
+
+// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+
+type StackInstanceOutputsList struct {
+	metav1.TypeMeta `json:",inline"`
+	metav1.ListMeta `json:"metadata,omitempty"`
+	Items           []StackInstanceOutputs `json:"items"`
 }
 
 func (StackInstance) NewStatus() interface{} {
@@ -10087,14 +9882,6 @@ type TenantConfigList struct {
 	metav1.TypeMeta `json:",inline"`
 	metav1.ListMeta `json:"metadata,omitempty"`
 	Items           []TenantConfig `json:"items"`
-}
-
-// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
-
-type TenantNICoTokenList struct {
-	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
-	Items           []TenantNICoToken `json:"items"`
 }
 
 func (Tenant) NewStatus() interface{} {

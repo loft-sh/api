@@ -28,12 +28,12 @@ type Interface interface {
 	Machines() MachineInformer
 	// MachineConfigTemplates returns a MachineConfigTemplateInformer.
 	MachineConfigTemplates() MachineConfigTemplateInformer
+	// NetworkEnvironments returns a NetworkEnvironmentInformer.
+	NetworkEnvironments() NetworkEnvironmentInformer
 	// NetworkPeers returns a NetworkPeerInformer.
 	NetworkPeers() NetworkPeerInformer
 	// NodeClaims returns a NodeClaimInformer.
 	NodeClaims() NodeClaimInformer
-	// NodeEnvironments returns a NodeEnvironmentInformer.
-	NodeEnvironments() NodeEnvironmentInformer
 	// NodeProfiles returns a NodeProfileInformer.
 	NodeProfiles() NodeProfileInformer
 	// NodeProviders returns a NodeProviderInformer.
@@ -48,8 +48,6 @@ type Interface interface {
 	SSHKeys() SSHKeyInformer
 	// SharedSecrets returns a SharedSecretInformer.
 	SharedSecrets() SharedSecretInformer
-	// SlurmInstances returns a SlurmInstanceInformer.
-	SlurmInstances() SlurmInstanceInformer
 	// SpaceInstances returns a SpaceInstanceInformer.
 	SpaceInstances() SpaceInstanceInformer
 	// SpaceTemplates returns a SpaceTemplateInformer.
@@ -131,6 +129,11 @@ func (v *version) MachineConfigTemplates() MachineConfigTemplateInformer {
 	return &machineConfigTemplateInformer{factory: v.factory, namespace: v.namespace, tweakListOptions: v.tweakListOptions}
 }
 
+// NetworkEnvironments returns a NetworkEnvironmentInformer.
+func (v *version) NetworkEnvironments() NetworkEnvironmentInformer {
+	return &networkEnvironmentInformer{factory: v.factory, tweakListOptions: v.tweakListOptions}
+}
+
 // NetworkPeers returns a NetworkPeerInformer.
 func (v *version) NetworkPeers() NetworkPeerInformer {
 	return &networkPeerInformer{factory: v.factory, tweakListOptions: v.tweakListOptions}
@@ -139,11 +142,6 @@ func (v *version) NetworkPeers() NetworkPeerInformer {
 // NodeClaims returns a NodeClaimInformer.
 func (v *version) NodeClaims() NodeClaimInformer {
 	return &nodeClaimInformer{factory: v.factory, namespace: v.namespace, tweakListOptions: v.tweakListOptions}
-}
-
-// NodeEnvironments returns a NodeEnvironmentInformer.
-func (v *version) NodeEnvironments() NodeEnvironmentInformer {
-	return &nodeEnvironmentInformer{factory: v.factory, namespace: v.namespace, tweakListOptions: v.tweakListOptions}
 }
 
 // NodeProfiles returns a NodeProfileInformer.
@@ -179,11 +177,6 @@ func (v *version) SSHKeys() SSHKeyInformer {
 // SharedSecrets returns a SharedSecretInformer.
 func (v *version) SharedSecrets() SharedSecretInformer {
 	return &sharedSecretInformer{factory: v.factory, namespace: v.namespace, tweakListOptions: v.tweakListOptions}
-}
-
-// SlurmInstances returns a SlurmInstanceInformer.
-func (v *version) SlurmInstances() SlurmInstanceInformer {
-	return &slurmInstanceInformer{factory: v.factory, namespace: v.namespace, tweakListOptions: v.tweakListOptions}
 }
 
 // SpaceInstances returns a SpaceInstanceInformer.

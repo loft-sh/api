@@ -54,13 +54,13 @@ type ClusterRoleTemplateListerExpansion interface{}
 // ConfigLister.
 type ConfigListerExpansion interface{}
 
+// ConnectorListerExpansion allows custom methods to be added to
+// ConnectorLister.
+type ConnectorListerExpansion interface{}
+
 // ConvertVirtualClusterConfigListerExpansion allows custom methods to be added to
 // ConvertVirtualClusterConfigLister.
 type ConvertVirtualClusterConfigListerExpansion interface{}
-
-// DatabaseConnectorListerExpansion allows custom methods to be added to
-// DatabaseConnectorLister.
-type DatabaseConnectorListerExpansion interface{}
 
 // DirectClusterEndpointTokenListerExpansion allows custom methods to be added to
 // DirectClusterEndpointTokenLister.
@@ -69,14 +69,6 @@ type DirectClusterEndpointTokenListerExpansion interface{}
 // EventListerExpansion allows custom methods to be added to
 // EventLister.
 type EventListerExpansion interface{}
-
-// ExternalCredentialListerExpansion allows custom methods to be added to
-// ExternalCredentialLister.
-type ExternalCredentialListerExpansion interface{}
-
-// ExternalCredentialNamespaceListerExpansion allows custom methods to be added to
-// ExternalCredentialNamespaceLister.
-type ExternalCredentialNamespaceListerExpansion interface{}
 
 // FeatureListerExpansion allows custom methods to be added to
 // FeatureLister.
@@ -106,6 +98,10 @@ type MachineConfigTemplateListerExpansion interface{}
 // MachineConfigTemplateNamespaceLister.
 type MachineConfigTemplateNamespaceListerExpansion interface{}
 
+// NetworkEnvironmentListerExpansion allows custom methods to be added to
+// NetworkEnvironmentLister.
+type NetworkEnvironmentListerExpansion interface{}
+
 // NetworkPeerListerExpansion allows custom methods to be added to
 // NetworkPeerLister.
 type NetworkPeerListerExpansion interface{}
@@ -117,14 +113,6 @@ type NodeClaimListerExpansion interface{}
 // NodeClaimNamespaceListerExpansion allows custom methods to be added to
 // NodeClaimNamespaceLister.
 type NodeClaimNamespaceListerExpansion interface{}
-
-// NodeEnvironmentListerExpansion allows custom methods to be added to
-// NodeEnvironmentLister.
-type NodeEnvironmentListerExpansion interface{}
-
-// NodeEnvironmentNamespaceListerExpansion allows custom methods to be added to
-// NodeEnvironmentNamespaceLister.
-type NodeEnvironmentNamespaceListerExpansion interface{}
 
 // NodeProfileListerExpansion allows custom methods to be added to
 // NodeProfileLister.
@@ -197,14 +185,6 @@ type SharedSecretListerExpansion interface{}
 // SharedSecretNamespaceListerExpansion allows custom methods to be added to
 // SharedSecretNamespaceLister.
 type SharedSecretNamespaceListerExpansion interface{}
-
-// SlurmInstanceListerExpansion allows custom methods to be added to
-// SlurmInstanceLister.
-type SlurmInstanceListerExpansion interface{}
-
-// SlurmInstanceNamespaceListerExpansion allows custom methods to be added to
-// SlurmInstanceNamespaceLister.
-type SlurmInstanceNamespaceListerExpansion interface{}
 
 // SpaceInstanceListerExpansion allows custom methods to be added to
 // SpaceInstanceLister.

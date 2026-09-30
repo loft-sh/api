@@ -112,7 +112,7 @@ type NodeClaimSpec struct {
 	// +optional
 	MachineRef string `json:"machineRef,omitempty"`
 
-	// EnvironmentRef is the name of the NodeEnvironment that this NodeClaim is based on.
+	// EnvironmentRef is the name of the NetworkEnvironment that this NodeClaim is based on.
 	// +optional
 	EnvironmentRef string `json:"environmentRef,omitempty"`
 

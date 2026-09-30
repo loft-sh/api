@@ -16,7 +16,6 @@ import (
 // +k8s:openapi-gen=true
 // +resource:path=tenants,rest=TenantREST
 // +subresource:request=TenantConfig,path=config,kind=TenantConfig,rest=TenantConfigREST
-// +subresource:request=TenantNICoToken,path=nicotoken,kind=TenantNICoToken,rest=TenantNICoTokenREST
 type Tenant struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`

@@ -29,6 +29,8 @@ type StackInstanceInterface interface {
 	List(ctx context.Context, opts metav1.ListOptions) (*managementv1.StackInstanceList, error)
 	Watch(ctx context.Context, opts metav1.ListOptions) (watch.Interface, error)
 	Patch(ctx context.Context, name string, pt types.PatchType, data []byte, opts metav1.PatchOptions, subresources ...string) (result *managementv1.StackInstance, err error)
+	GetOutputs(ctx context.Context, stackInstanceName string, options metav1.GetOptions) (*managementv1.StackInstanceOutputs, error)
+
 	StackInstanceExpansion
 }
 
@@ -49,4 +51,18 @@ func newStackInstances(c *ManagementV1Client, namespace string) *stackInstances 
 			func() *managementv1.StackInstanceList { return &managementv1.StackInstanceList{} },
 		),
 	}
+}
+
+// GetOutputs takes name of the stackInstance, and returns the corresponding managementv1.StackInstanceOutputs object, and an error if there is any.
+func (c *stackInstances) GetOutputs(ctx context.Context, stackInstanceName string, options metav1.GetOptions) (result *managementv1.StackInstanceOutputs, err error) {
+	result = &managementv1.StackInstanceOutputs{}
+	err = c.GetClient().Get().
+		Namespace(c.GetNamespace()).
+		Resource("stackinstances").
+		Name(stackInstanceName).
+		SubResource("outputs").
+		VersionedParams(&options, scheme.ParameterCodec).
+		Do(ctx).
+		Into(result)
+	return
 }

@@ -3,9 +3,13 @@
 package fake
 
 import (
+	context "context"
+
 	v1 "github.com/loft-sh/api/v4/pkg/apis/management/v1"
 	managementv1 "github.com/loft-sh/api/v4/pkg/clientset/versioned/typed/management/v1"
+	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	gentype "k8s.io/client-go/gentype"
+	testing "k8s.io/client-go/testing"
 )
 
 // fakeOSImages implements OSImageInterface
@@ -29,4 +33,26 @@ func newFakeOSImages(fake *FakeManagementV1) managementv1.OSImageInterface {
 		),
 		fake,
 	}
+}
+
+// Upload takes the representation of a oSImageUpload and creates it.  Returns the server's representation of the oSImageUpload, and an error, if there is any.
+func (c *fakeOSImages) Upload(ctx context.Context, oSImageName string, oSImageUpload *v1.OSImageUpload, opts metav1.CreateOptions) (result *v1.OSImageUpload, err error) {
+	emptyResult := &v1.OSImageUpload{}
+	obj, err := c.Fake.
+		Invokes(testing.NewRootCreateSubresourceActionWithOptions(c.Resource(), oSImageName, "upload", oSImageUpload, opts), emptyResult)
+	if obj == nil {
+		return emptyResult, err
+	}
+	return obj.(*v1.OSImageUpload), err
+}
+
+// Finalize takes the representation of a oSImageFinalize and creates it.  Returns the server's representation of the oSImageFinalize, and an error, if there is any.
+func (c *fakeOSImages) Finalize(ctx context.Context, oSImageName string, oSImageFinalize *v1.OSImageFinalize, opts metav1.CreateOptions) (result *v1.OSImageFinalize, err error) {
+	emptyResult := &v1.OSImageFinalize{}
+	obj, err := c.Fake.
+		Invokes(testing.NewRootCreateSubresourceActionWithOptions(c.Resource(), oSImageName, "finalize", oSImageFinalize, opts), emptyResult)
+	if obj == nil {
+		return emptyResult, err
+	}
+	return obj.(*v1.OSImageFinalize), err
 }

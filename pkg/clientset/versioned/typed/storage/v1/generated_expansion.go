@@ -22,11 +22,11 @@ type MachineExpansion interface{}
 
 type MachineConfigTemplateExpansion interface{}
 
+type NetworkEnvironmentExpansion interface{}
+
 type NetworkPeerExpansion interface{}
 
 type NodeClaimExpansion interface{}
-
-type NodeEnvironmentExpansion interface{}
 
 type NodeProfileExpansion interface{}
 
@@ -41,8 +41,6 @@ type ProjectExpansion interface{}
 type SSHKeyExpansion interface{}
 
 type SharedSecretExpansion interface{}
-
-type SlurmInstanceExpansion interface{}
 
 type SpaceInstanceExpansion interface{}
 

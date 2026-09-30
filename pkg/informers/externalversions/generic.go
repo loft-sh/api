@@ -62,8 +62,6 @@ func (f *sharedInformerFactory) ForResource(resource schema.GroupVersionResource
 		return &genericInformer{resource: resource.GroupResource(), informer: f.Management().V1().Configs().Informer()}, nil
 	case v1.SchemeGroupVersion.WithResource("convertvirtualclusterconfigs"):
 		return &genericInformer{resource: resource.GroupResource(), informer: f.Management().V1().ConvertVirtualClusterConfigs().Informer()}, nil
-	case v1.SchemeGroupVersion.WithResource("databaseconnectors"):
-		return &genericInformer{resource: resource.GroupResource(), informer: f.Management().V1().DatabaseConnectors().Informer()}, nil
 	case v1.SchemeGroupVersion.WithResource("directclusterendpointtokens"):
 		return &genericInformer{resource: resource.GroupResource(), informer: f.Management().V1().DirectClusterEndpointTokens().Informer()}, nil
 	case v1.SchemeGroupVersion.WithResource("events"):
@@ -80,20 +78,18 @@ func (f *sharedInformerFactory) ForResource(resource schema.GroupVersionResource
 		return &genericInformer{resource: resource.GroupResource(), informer: f.Management().V1().Machines().Informer()}, nil
 	case v1.SchemeGroupVersion.WithResource("machineconfigtemplates"):
 		return &genericInformer{resource: resource.GroupResource(), informer: f.Management().V1().MachineConfigTemplates().Informer()}, nil
+	case v1.SchemeGroupVersion.WithResource("networkenvironments"):
+		return &genericInformer{resource: resource.GroupResource(), informer: f.Management().V1().NetworkEnvironments().Informer()}, nil
 	case v1.SchemeGroupVersion.WithResource("networkpeers"):
 		return &genericInformer{resource: resource.GroupResource(), informer: f.Management().V1().NetworkPeers().Informer()}, nil
 	case v1.SchemeGroupVersion.WithResource("nodeclaims"):
 		return &genericInformer{resource: resource.GroupResource(), informer: f.Management().V1().NodeClaims().Informer()}, nil
-	case v1.SchemeGroupVersion.WithResource("nodeenvironments"):
-		return &genericInformer{resource: resource.GroupResource(), informer: f.Management().V1().NodeEnvironments().Informer()}, nil
 	case v1.SchemeGroupVersion.WithResource("nodeprofiles"):
 		return &genericInformer{resource: resource.GroupResource(), informer: f.Management().V1().NodeProfiles().Informer()}, nil
 	case v1.SchemeGroupVersion.WithResource("nodeproviders"):
 		return &genericInformer{resource: resource.GroupResource(), informer: f.Management().V1().NodeProviders().Informer()}, nil
 	case v1.SchemeGroupVersion.WithResource("nodetypes"):
 		return &genericInformer{resource: resource.GroupResource(), informer: f.Management().V1().NodeTypes().Informer()}, nil
-	case v1.SchemeGroupVersion.WithResource("oidcclients"):
-		return &genericInformer{resource: resource.GroupResource(), informer: f.Management().V1().OIDCClients().Informer()}, nil
 	case v1.SchemeGroupVersion.WithResource("osimages"):
 		return &genericInformer{resource: resource.GroupResource(), informer: f.Management().V1().OSImages().Informer()}, nil
 	case v1.SchemeGroupVersion.WithResource("ownedaccesskeys"):
@@ -118,8 +114,6 @@ func (f *sharedInformerFactory) ForResource(resource schema.GroupVersionResource
 		return &genericInformer{resource: resource.GroupResource(), informer: f.Management().V1().SelfSubjectAccessReviews().Informer()}, nil
 	case v1.SchemeGroupVersion.WithResource("sharedsecrets"):
 		return &genericInformer{resource: resource.GroupResource(), informer: f.Management().V1().SharedSecrets().Informer()}, nil
-	case v1.SchemeGroupVersion.WithResource("slurminstances"):
-		return &genericInformer{resource: resource.GroupResource(), informer: f.Management().V1().SlurmInstances().Informer()}, nil
 	case v1.SchemeGroupVersion.WithResource("spaceinstances"):
 		return &genericInformer{resource: resource.GroupResource(), informer: f.Management().V1().SpaceInstances().Informer()}, nil
 	case v1.SchemeGroupVersion.WithResource("spacetemplates"):
@@ -168,12 +162,12 @@ func (f *sharedInformerFactory) ForResource(resource schema.GroupVersionResource
 		return &genericInformer{resource: resource.GroupResource(), informer: f.Storage().V1().Machines().Informer()}, nil
 	case storagev1.SchemeGroupVersion.WithResource("machineconfigtemplates"):
 		return &genericInformer{resource: resource.GroupResource(), informer: f.Storage().V1().MachineConfigTemplates().Informer()}, nil
+	case storagev1.SchemeGroupVersion.WithResource("networkenvironments"):
+		return &genericInformer{resource: resource.GroupResource(), informer: f.Storage().V1().NetworkEnvironments().Informer()}, nil
 	case storagev1.SchemeGroupVersion.WithResource("networkpeers"):
 		return &genericInformer{resource: resource.GroupResource(), informer: f.Storage().V1().NetworkPeers().Informer()}, nil
 	case storagev1.SchemeGroupVersion.WithResource("nodeclaims"):
 		return &genericInformer{resource: resource.GroupResource(), informer: f.Storage().V1().NodeClaims().Informer()}, nil
-	case storagev1.SchemeGroupVersion.WithResource("nodeenvironments"):
-		return &genericInformer{resource: resource.GroupResource(), informer: f.Storage().V1().NodeEnvironments().Informer()}, nil
 	case storagev1.SchemeGroupVersion.WithResource("nodeprofiles"):
 		return &genericInformer{resource: resource.GroupResource(), informer: f.Storage().V1().NodeProfiles().Informer()}, nil
 	case storagev1.SchemeGroupVersion.WithResource("nodeproviders"):
@@ -188,8 +182,6 @@ func (f *sharedInformerFactory) ForResource(resource schema.GroupVersionResource
 		return &genericInformer{resource: resource.GroupResource(), informer: f.Storage().V1().SSHKeys().Informer()}, nil
 	case storagev1.SchemeGroupVersion.WithResource("sharedsecrets"):
 		return &genericInformer{resource: resource.GroupResource(), informer: f.Storage().V1().SharedSecrets().Informer()}, nil
-	case storagev1.SchemeGroupVersion.WithResource("slurminstances"):
-		return &genericInformer{resource: resource.GroupResource(), informer: f.Storage().V1().SlurmInstances().Informer()}, nil
 	case storagev1.SchemeGroupVersion.WithResource("spaceinstances"):
 		return &genericInformer{resource: resource.GroupResource(), informer: f.Storage().V1().SpaceInstances().Informer()}, nil
 	case storagev1.SchemeGroupVersion.WithResource("spacetemplates"):

@@ -24,6 +24,8 @@ type ClusterRoleTemplateExpansion interface{}
 
 type ConfigExpansion interface{}
 
+type ConnectorExpansion interface{}
+
 type ConvertVirtualClusterConfigExpansion interface{}
 
 type DatabaseConnectorExpansion interface{}
@@ -31,8 +33,6 @@ type DatabaseConnectorExpansion interface{}
 type DirectClusterEndpointTokenExpansion interface{}
 
 type EventExpansion interface{}
-
-type ExternalCredentialExpansion interface{}
 
 type FeatureExpansion interface{}
 
@@ -46,11 +46,11 @@ type MachineExpansion interface{}
 
 type MachineConfigTemplateExpansion interface{}
 
+type NetworkEnvironmentExpansion interface{}
+
 type NetworkPeerExpansion interface{}
 
 type NodeClaimExpansion interface{}
-
-type NodeEnvironmentExpansion interface{}
 
 type NodeProfileExpansion interface{}
 
@@ -83,8 +83,6 @@ type SelfExpansion interface{}
 type SelfSubjectAccessReviewExpansion interface{}
 
 type SharedSecretExpansion interface{}
-
-type SlurmInstanceExpansion interface{}
 
 type SpaceInstanceExpansion interface{}
 

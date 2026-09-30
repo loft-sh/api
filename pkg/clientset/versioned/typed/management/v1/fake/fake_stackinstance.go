@@ -3,9 +3,13 @@
 package fake
 
 import (
+	context "context"
+
 	v1 "github.com/loft-sh/api/v4/pkg/apis/management/v1"
 	managementv1 "github.com/loft-sh/api/v4/pkg/clientset/versioned/typed/management/v1"
+	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	gentype "k8s.io/client-go/gentype"
+	testing "k8s.io/client-go/testing"
 )
 
 // fakeStackInstances implements StackInstanceInterface
@@ -31,4 +35,16 @@ func newFakeStackInstances(fake *FakeManagementV1, namespace string) managementv
 		),
 		fake,
 	}
+}
+
+// GetOutputs takes name of the stackInstance, and returns the corresponding stackInstanceOutputs object, and an error if there is any.
+func (c *fakeStackInstances) GetOutputs(ctx context.Context, stackInstanceName string, options metav1.GetOptions) (result *v1.StackInstanceOutputs, err error) {
+	emptyResult := &v1.StackInstanceOutputs{}
+	obj, err := c.Fake.
+		Invokes(testing.NewGetSubresourceActionWithOptions(c.Resource(), c.Namespace(), "outputs", stackInstanceName, options), emptyResult)
+
+	if obj == nil {
+		return emptyResult, err
+	}
+	return obj.(*v1.StackInstanceOutputs), err
 }
