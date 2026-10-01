@@ -801,6 +801,66 @@ func RegisterConversions(s *runtime.Scheme) error {
 	}); err != nil {
 		return err
 	}
+	if err := s.AddGeneratedConversionFunc((*ConnectorArgoCDAkuitySpec)(nil), (*management.ConnectorArgoCDAkuitySpec)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_v1_ConnectorArgoCDAkuitySpec_To_management_ConnectorArgoCDAkuitySpec(a.(*ConnectorArgoCDAkuitySpec), b.(*management.ConnectorArgoCDAkuitySpec), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*management.ConnectorArgoCDAkuitySpec)(nil), (*ConnectorArgoCDAkuitySpec)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_management_ConnectorArgoCDAkuitySpec_To_v1_ConnectorArgoCDAkuitySpec(a.(*management.ConnectorArgoCDAkuitySpec), b.(*ConnectorArgoCDAkuitySpec), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*ConnectorArgoCDSelfHostedSpec)(nil), (*management.ConnectorArgoCDSelfHostedSpec)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_v1_ConnectorArgoCDSelfHostedSpec_To_management_ConnectorArgoCDSelfHostedSpec(a.(*ConnectorArgoCDSelfHostedSpec), b.(*management.ConnectorArgoCDSelfHostedSpec), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*management.ConnectorArgoCDSelfHostedSpec)(nil), (*ConnectorArgoCDSelfHostedSpec)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_management_ConnectorArgoCDSelfHostedSpec_To_v1_ConnectorArgoCDSelfHostedSpec(a.(*management.ConnectorArgoCDSelfHostedSpec), b.(*ConnectorArgoCDSelfHostedSpec), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*ConnectorArgoCDServer)(nil), (*management.ConnectorArgoCDServer)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_v1_ConnectorArgoCDServer_To_management_ConnectorArgoCDServer(a.(*ConnectorArgoCDServer), b.(*management.ConnectorArgoCDServer), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*management.ConnectorArgoCDServer)(nil), (*ConnectorArgoCDServer)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_management_ConnectorArgoCDServer_To_v1_ConnectorArgoCDServer(a.(*management.ConnectorArgoCDServer), b.(*ConnectorArgoCDServer), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*ConnectorArgoCDSpec)(nil), (*management.ConnectorArgoCDSpec)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_v1_ConnectorArgoCDSpec_To_management_ConnectorArgoCDSpec(a.(*ConnectorArgoCDSpec), b.(*management.ConnectorArgoCDSpec), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*management.ConnectorArgoCDSpec)(nil), (*ConnectorArgoCDSpec)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_management_ConnectorArgoCDSpec_To_v1_ConnectorArgoCDSpec(a.(*management.ConnectorArgoCDSpec), b.(*ConnectorArgoCDSpec), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*ConnectorImageStoreS3Spec)(nil), (*management.ConnectorImageStoreS3Spec)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_v1_ConnectorImageStoreS3Spec_To_management_ConnectorImageStoreS3Spec(a.(*ConnectorImageStoreS3Spec), b.(*management.ConnectorImageStoreS3Spec), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*management.ConnectorImageStoreS3Spec)(nil), (*ConnectorImageStoreS3Spec)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_management_ConnectorImageStoreS3Spec_To_v1_ConnectorImageStoreS3Spec(a.(*management.ConnectorImageStoreS3Spec), b.(*ConnectorImageStoreS3Spec), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*ConnectorImageStoreSpec)(nil), (*management.ConnectorImageStoreSpec)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_v1_ConnectorImageStoreSpec_To_management_ConnectorImageStoreSpec(a.(*ConnectorImageStoreSpec), b.(*management.ConnectorImageStoreSpec), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*management.ConnectorImageStoreSpec)(nil), (*ConnectorImageStoreSpec)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_management_ConnectorImageStoreSpec_To_v1_ConnectorImageStoreSpec(a.(*management.ConnectorImageStoreSpec), b.(*ConnectorImageStoreSpec), scope)
+	}); err != nil {
+		return err
+	}
 	if err := s.AddGeneratedConversionFunc((*ConnectorList)(nil), (*management.ConnectorList)(nil), func(a, b interface{}, scope conversion.Scope) error {
 		return Convert_v1_ConnectorList_To_management_ConnectorList(a.(*ConnectorList), b.(*management.ConnectorList), scope)
 	}); err != nil {
@@ -6264,6 +6324,174 @@ func Convert_management_Connector_To_v1_Connector(in *management.Connector, out 
 	return autoConvert_management_Connector_To_v1_Connector(in, out, s)
 }
 
+func autoConvert_v1_ConnectorArgoCDAkuitySpec_To_management_ConnectorArgoCDAkuitySpec(in *ConnectorArgoCDAkuitySpec, out *management.ConnectorArgoCDAkuitySpec, s conversion.Scope) error {
+	if err := Convert_v1_ConnectorArgoCDServer_To_management_ConnectorArgoCDServer(&in.ConnectorArgoCDServer, &out.ConnectorArgoCDServer, s); err != nil {
+		return err
+	}
+	out.OrgID = in.OrgID
+	out.InstanceID = in.InstanceID
+	out.APIKeyID = in.APIKeyID
+	out.APIKeySecret = in.APIKeySecret
+	out.AgentSize = in.AgentSize
+	out.RepoServerReplicas = in.RepoServerReplicas
+	out.RepoServerMemory = in.RepoServerMemory
+	return nil
+}
+
+// Convert_v1_ConnectorArgoCDAkuitySpec_To_management_ConnectorArgoCDAkuitySpec is an autogenerated conversion function.
+func Convert_v1_ConnectorArgoCDAkuitySpec_To_management_ConnectorArgoCDAkuitySpec(in *ConnectorArgoCDAkuitySpec, out *management.ConnectorArgoCDAkuitySpec, s conversion.Scope) error {
+	return autoConvert_v1_ConnectorArgoCDAkuitySpec_To_management_ConnectorArgoCDAkuitySpec(in, out, s)
+}
+
+func autoConvert_management_ConnectorArgoCDAkuitySpec_To_v1_ConnectorArgoCDAkuitySpec(in *management.ConnectorArgoCDAkuitySpec, out *ConnectorArgoCDAkuitySpec, s conversion.Scope) error {
+	if err := Convert_management_ConnectorArgoCDServer_To_v1_ConnectorArgoCDServer(&in.ConnectorArgoCDServer, &out.ConnectorArgoCDServer, s); err != nil {
+		return err
+	}
+	out.OrgID = in.OrgID
+	out.InstanceID = in.InstanceID
+	out.APIKeyID = in.APIKeyID
+	out.APIKeySecret = in.APIKeySecret
+	out.AgentSize = in.AgentSize
+	out.RepoServerReplicas = in.RepoServerReplicas
+	out.RepoServerMemory = in.RepoServerMemory
+	return nil
+}
+
+// Convert_management_ConnectorArgoCDAkuitySpec_To_v1_ConnectorArgoCDAkuitySpec is an autogenerated conversion function.
+func Convert_management_ConnectorArgoCDAkuitySpec_To_v1_ConnectorArgoCDAkuitySpec(in *management.ConnectorArgoCDAkuitySpec, out *ConnectorArgoCDAkuitySpec, s conversion.Scope) error {
+	return autoConvert_management_ConnectorArgoCDAkuitySpec_To_v1_ConnectorArgoCDAkuitySpec(in, out, s)
+}
+
+func autoConvert_v1_ConnectorArgoCDSelfHostedSpec_To_management_ConnectorArgoCDSelfHostedSpec(in *ConnectorArgoCDSelfHostedSpec, out *management.ConnectorArgoCDSelfHostedSpec, s conversion.Scope) error {
+	if err := Convert_v1_ConnectorArgoCDServer_To_management_ConnectorArgoCDServer(&in.ConnectorArgoCDServer, &out.ConnectorArgoCDServer, s); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Convert_v1_ConnectorArgoCDSelfHostedSpec_To_management_ConnectorArgoCDSelfHostedSpec is an autogenerated conversion function.
+func Convert_v1_ConnectorArgoCDSelfHostedSpec_To_management_ConnectorArgoCDSelfHostedSpec(in *ConnectorArgoCDSelfHostedSpec, out *management.ConnectorArgoCDSelfHostedSpec, s conversion.Scope) error {
+	return autoConvert_v1_ConnectorArgoCDSelfHostedSpec_To_management_ConnectorArgoCDSelfHostedSpec(in, out, s)
+}
+
+func autoConvert_management_ConnectorArgoCDSelfHostedSpec_To_v1_ConnectorArgoCDSelfHostedSpec(in *management.ConnectorArgoCDSelfHostedSpec, out *ConnectorArgoCDSelfHostedSpec, s conversion.Scope) error {
+	if err := Convert_management_ConnectorArgoCDServer_To_v1_ConnectorArgoCDServer(&in.ConnectorArgoCDServer, &out.ConnectorArgoCDServer, s); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Convert_management_ConnectorArgoCDSelfHostedSpec_To_v1_ConnectorArgoCDSelfHostedSpec is an autogenerated conversion function.
+func Convert_management_ConnectorArgoCDSelfHostedSpec_To_v1_ConnectorArgoCDSelfHostedSpec(in *management.ConnectorArgoCDSelfHostedSpec, out *ConnectorArgoCDSelfHostedSpec, s conversion.Scope) error {
+	return autoConvert_management_ConnectorArgoCDSelfHostedSpec_To_v1_ConnectorArgoCDSelfHostedSpec(in, out, s)
+}
+
+func autoConvert_v1_ConnectorArgoCDServer_To_management_ConnectorArgoCDServer(in *ConnectorArgoCDServer, out *management.ConnectorArgoCDServer, s conversion.Scope) error {
+	out.Server = in.Server
+	out.Namespace = in.Namespace
+	out.Token = in.Token
+	out.Username = in.Username
+	out.Password = in.Password
+	out.CAData = in.CAData
+	out.Insecure = in.Insecure
+	return nil
+}
+
+// Convert_v1_ConnectorArgoCDServer_To_management_ConnectorArgoCDServer is an autogenerated conversion function.
+func Convert_v1_ConnectorArgoCDServer_To_management_ConnectorArgoCDServer(in *ConnectorArgoCDServer, out *management.ConnectorArgoCDServer, s conversion.Scope) error {
+	return autoConvert_v1_ConnectorArgoCDServer_To_management_ConnectorArgoCDServer(in, out, s)
+}
+
+func autoConvert_management_ConnectorArgoCDServer_To_v1_ConnectorArgoCDServer(in *management.ConnectorArgoCDServer, out *ConnectorArgoCDServer, s conversion.Scope) error {
+	out.Server = in.Server
+	out.Namespace = in.Namespace
+	out.Token = in.Token
+	out.Username = in.Username
+	out.Password = in.Password
+	out.CAData = in.CAData
+	out.Insecure = in.Insecure
+	return nil
+}
+
+// Convert_management_ConnectorArgoCDServer_To_v1_ConnectorArgoCDServer is an autogenerated conversion function.
+func Convert_management_ConnectorArgoCDServer_To_v1_ConnectorArgoCDServer(in *management.ConnectorArgoCDServer, out *ConnectorArgoCDServer, s conversion.Scope) error {
+	return autoConvert_management_ConnectorArgoCDServer_To_v1_ConnectorArgoCDServer(in, out, s)
+}
+
+func autoConvert_v1_ConnectorArgoCDSpec_To_management_ConnectorArgoCDSpec(in *ConnectorArgoCDSpec, out *management.ConnectorArgoCDSpec, s conversion.Scope) error {
+	out.SelfHosted = (*management.ConnectorArgoCDSelfHostedSpec)(unsafe.Pointer(in.SelfHosted))
+	out.Akuity = (*management.ConnectorArgoCDAkuitySpec)(unsafe.Pointer(in.Akuity))
+	return nil
+}
+
+// Convert_v1_ConnectorArgoCDSpec_To_management_ConnectorArgoCDSpec is an autogenerated conversion function.
+func Convert_v1_ConnectorArgoCDSpec_To_management_ConnectorArgoCDSpec(in *ConnectorArgoCDSpec, out *management.ConnectorArgoCDSpec, s conversion.Scope) error {
+	return autoConvert_v1_ConnectorArgoCDSpec_To_management_ConnectorArgoCDSpec(in, out, s)
+}
+
+func autoConvert_management_ConnectorArgoCDSpec_To_v1_ConnectorArgoCDSpec(in *management.ConnectorArgoCDSpec, out *ConnectorArgoCDSpec, s conversion.Scope) error {
+	out.SelfHosted = (*ConnectorArgoCDSelfHostedSpec)(unsafe.Pointer(in.SelfHosted))
+	out.Akuity = (*ConnectorArgoCDAkuitySpec)(unsafe.Pointer(in.Akuity))
+	return nil
+}
+
+// Convert_management_ConnectorArgoCDSpec_To_v1_ConnectorArgoCDSpec is an autogenerated conversion function.
+func Convert_management_ConnectorArgoCDSpec_To_v1_ConnectorArgoCDSpec(in *management.ConnectorArgoCDSpec, out *ConnectorArgoCDSpec, s conversion.Scope) error {
+	return autoConvert_management_ConnectorArgoCDSpec_To_v1_ConnectorArgoCDSpec(in, out, s)
+}
+
+func autoConvert_v1_ConnectorImageStoreS3Spec_To_management_ConnectorImageStoreS3Spec(in *ConnectorImageStoreS3Spec, out *management.ConnectorImageStoreS3Spec, s conversion.Scope) error {
+	out.Endpoint = in.Endpoint
+	out.Bucket = in.Bucket
+	out.Region = in.Region
+	out.ForcePathStyle = in.ForcePathStyle
+	out.AccessKey = in.AccessKey
+	out.SecretKey = in.SecretKey
+	return nil
+}
+
+// Convert_v1_ConnectorImageStoreS3Spec_To_management_ConnectorImageStoreS3Spec is an autogenerated conversion function.
+func Convert_v1_ConnectorImageStoreS3Spec_To_management_ConnectorImageStoreS3Spec(in *ConnectorImageStoreS3Spec, out *management.ConnectorImageStoreS3Spec, s conversion.Scope) error {
+	return autoConvert_v1_ConnectorImageStoreS3Spec_To_management_ConnectorImageStoreS3Spec(in, out, s)
+}
+
+func autoConvert_management_ConnectorImageStoreS3Spec_To_v1_ConnectorImageStoreS3Spec(in *management.ConnectorImageStoreS3Spec, out *ConnectorImageStoreS3Spec, s conversion.Scope) error {
+	out.Endpoint = in.Endpoint
+	out.Bucket = in.Bucket
+	out.Region = in.Region
+	out.ForcePathStyle = in.ForcePathStyle
+	out.AccessKey = in.AccessKey
+	out.SecretKey = in.SecretKey
+	return nil
+}
+
+// Convert_management_ConnectorImageStoreS3Spec_To_v1_ConnectorImageStoreS3Spec is an autogenerated conversion function.
+func Convert_management_ConnectorImageStoreS3Spec_To_v1_ConnectorImageStoreS3Spec(in *management.ConnectorImageStoreS3Spec, out *ConnectorImageStoreS3Spec, s conversion.Scope) error {
+	return autoConvert_management_ConnectorImageStoreS3Spec_To_v1_ConnectorImageStoreS3Spec(in, out, s)
+}
+
+func autoConvert_v1_ConnectorImageStoreSpec_To_management_ConnectorImageStoreSpec(in *ConnectorImageStoreSpec, out *management.ConnectorImageStoreSpec, s conversion.Scope) error {
+	out.Protocol = management.ImageStoreProtocol(in.Protocol)
+	out.S3 = (*management.ConnectorImageStoreS3Spec)(unsafe.Pointer(in.S3))
+	return nil
+}
+
+// Convert_v1_ConnectorImageStoreSpec_To_management_ConnectorImageStoreSpec is an autogenerated conversion function.
+func Convert_v1_ConnectorImageStoreSpec_To_management_ConnectorImageStoreSpec(in *ConnectorImageStoreSpec, out *management.ConnectorImageStoreSpec, s conversion.Scope) error {
+	return autoConvert_v1_ConnectorImageStoreSpec_To_management_ConnectorImageStoreSpec(in, out, s)
+}
+
+func autoConvert_management_ConnectorImageStoreSpec_To_v1_ConnectorImageStoreSpec(in *management.ConnectorImageStoreSpec, out *ConnectorImageStoreSpec, s conversion.Scope) error {
+	out.Protocol = ImageStoreProtocol(in.Protocol)
+	out.S3 = (*ConnectorImageStoreS3Spec)(unsafe.Pointer(in.S3))
+	return nil
+}
+
+// Convert_management_ConnectorImageStoreSpec_To_v1_ConnectorImageStoreSpec is an autogenerated conversion function.
+func Convert_management_ConnectorImageStoreSpec_To_v1_ConnectorImageStoreSpec(in *management.ConnectorImageStoreSpec, out *ConnectorImageStoreSpec, s conversion.Scope) error {
+	return autoConvert_management_ConnectorImageStoreSpec_To_v1_ConnectorImageStoreSpec(in, out, s)
+}
+
 func autoConvert_v1_ConnectorList_To_management_ConnectorList(in *ConnectorList, out *management.ConnectorList, s conversion.Scope) error {
 	out.ListMeta = in.ListMeta
 	out.Items = *(*[]management.Connector)(unsafe.Pointer(&in.Items))
@@ -6323,9 +6551,10 @@ func Convert_management_ConnectorSharedDatabaseSpec_To_v1_ConnectorSharedDatabas
 }
 
 func autoConvert_v1_ConnectorSpec_To_management_ConnectorSpec(in *ConnectorSpec, out *management.ConnectorSpec, s conversion.Scope) error {
-	out.Type = management.ConnectorType(in.Type)
 	out.DisplayName = in.DisplayName
 	out.SharedDatabase = (*management.ConnectorSharedDatabaseSpec)(unsafe.Pointer(in.SharedDatabase))
+	out.ArgoCD = (*management.ConnectorArgoCDSpec)(unsafe.Pointer(in.ArgoCD))
+	out.ImageStore = (*management.ConnectorImageStoreSpec)(unsafe.Pointer(in.ImageStore))
 	return nil
 }
 
@@ -6335,9 +6564,10 @@ func Convert_v1_ConnectorSpec_To_management_ConnectorSpec(in *ConnectorSpec, out
 }
 
 func autoConvert_management_ConnectorSpec_To_v1_ConnectorSpec(in *management.ConnectorSpec, out *ConnectorSpec, s conversion.Scope) error {
-	out.Type = ConnectorType(in.Type)
 	out.DisplayName = in.DisplayName
 	out.SharedDatabase = (*ConnectorSharedDatabaseSpec)(unsafe.Pointer(in.SharedDatabase))
+	out.ArgoCD = (*ConnectorArgoCDSpec)(unsafe.Pointer(in.ArgoCD))
+	out.ImageStore = (*ConnectorImageStoreSpec)(unsafe.Pointer(in.ImageStore))
 	return nil
 }
 

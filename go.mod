@@ -18,7 +18,7 @@ require (
 	github.com/go-logr/logr v1.4.3
 	github.com/google/go-containerregistry v0.20.7
 	github.com/loft-sh/admin-apis v0.0.0-20260928151145-c0a92a2b2cf8
-	github.com/loft-sh/agentapi/v4 v4.13.0-next.internal.4
+	github.com/loft-sh/agentapi/v4 v4.13.0-next.internal.5
 	github.com/loft-sh/apiserver v0.0.0-20260707184419-aef558a5ae8d
 	github.com/loft-sh/external-types v0.1.0-alpha.2.0.20260409132559-a38365a8cbf2
 	github.com/opencontainers/image-spec v1.1.1

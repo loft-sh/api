@@ -132,11 +132,6 @@ type NodeProviderSpec struct {
 	// DisplayName is the name that should be displayed in the UI
 	// +optional
 	DisplayName string `json:"displayName,omitempty"`
-
-	// MachinePool is the machine pool of this provider's node types that do not set their own.
-	// See NodeTypeSpec.MachinePool. Discovered node types (nico) can only be set here.
-	// +optional
-	MachinePool NodeTypeMachinePool `json:"machinePool,omitempty"`
 }
 
 type NodeProviderClusterAPI struct {

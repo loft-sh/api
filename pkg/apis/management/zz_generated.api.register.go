@@ -1819,7 +1819,7 @@ func Resource(resource string) schema.GroupResource {
 }
 
 type AccessKeyType string
-type ConnectorType string
+type ImageStoreProtocol string
 type Level string
 type OperationPhase string
 type RequestTarget string
@@ -2243,6 +2243,50 @@ type Connector struct {
 	Status            ConnectorStatus `json:"status,omitempty"`
 }
 
+type ConnectorArgoCDAkuitySpec struct {
+	ConnectorArgoCDServer `json:",inline"`
+	OrgID                 string `json:"orgId"`
+	InstanceID            string `json:"instanceId"`
+	APIKeyID              string `json:"apiKeyId"`
+	APIKeySecret          string `json:"apiKeySecret,omitempty"`
+	AgentSize             string `json:"agentSize,omitempty"`
+	RepoServerReplicas    string `json:"repoServerReplicas,omitempty"`
+	RepoServerMemory      string `json:"repoServerMemory,omitempty"`
+}
+
+type ConnectorArgoCDSelfHostedSpec struct {
+	ConnectorArgoCDServer `json:",inline"`
+}
+
+type ConnectorArgoCDServer struct {
+	Server    string `json:"server"`
+	Namespace string `json:"namespace,omitempty"`
+	Token     string `json:"token,omitempty"`
+	Username  string `json:"username,omitempty"`
+	Password  string `json:"password,omitempty"`
+	CAData    string `json:"caData,omitempty"`
+	Insecure  bool   `json:"insecure,omitempty"`
+}
+
+type ConnectorArgoCDSpec struct {
+	SelfHosted *ConnectorArgoCDSelfHostedSpec `json:"selfHosted,omitempty"`
+	Akuity     *ConnectorArgoCDAkuitySpec     `json:"akuity,omitempty"`
+}
+
+type ConnectorImageStoreS3Spec struct {
+	Endpoint       string `json:"endpoint,omitempty"`
+	Bucket         string `json:"bucket"`
+	Region         string `json:"region"`
+	ForcePathStyle bool   `json:"forcePathStyle,omitempty"`
+	AccessKey      string `json:"accessKey"`
+	SecretKey      string `json:"secretKey,omitempty"`
+}
+
+type ConnectorImageStoreSpec struct {
+	Protocol ImageStoreProtocol         `json:"protocol"`
+	S3       *ConnectorImageStoreS3Spec `json:"s3,omitempty"`
+}
+
 type ConnectorSharedDatabaseSpec struct {
 	Dialect                        SharedDatabaseDialect `json:"dialect"`
 	Endpoint                       string                `json:"endpoint"`
@@ -2256,9 +2300,10 @@ type ConnectorSharedDatabaseSpec struct {
 }
 
 type ConnectorSpec struct {
-	Type           ConnectorType                `json:"type"`
 	DisplayName    string                       `json:"displayName,omitempty"`
 	SharedDatabase *ConnectorSharedDatabaseSpec `json:"sharedDatabase,omitempty"`
+	ArgoCD         *ConnectorArgoCDSpec         `json:"argoCd,omitempty"`
+	ImageStore     *ConnectorImageStoreSpec     `json:"imageStore,omitempty"`
 }
 
 type ConnectorStatus struct {

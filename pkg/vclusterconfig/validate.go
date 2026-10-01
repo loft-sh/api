@@ -175,13 +175,23 @@ func ValidateObservability(fldPath *field.Path, integration *ObservabilityIntegr
 
 // ValidateArgoCD validates the Argo CD integration and deploy configuration.
 func ValidateArgoCD(fldPath *field.Path, integration *ArgoCDIntegration, deploy *ArgoCDDeploy) field.ErrorList {
-	if deploy == nil || len(deploy.Applications) == 0 {
-		return nil
+	var errs field.ErrorList
+	integrationPath := fldPath.Child("integrations", "argoCD")
+
+	// Check metadata first, since labels with no applications is the common case.
+	if integration != nil && integration.Cluster != nil {
+		errs = append(errs, storagev1.ValidateTemplateMetadata(
+			integrationPath.Child("cluster", "metadata"),
+			integration.Cluster.Metadata.Labels,
+			integration.Cluster.Metadata.Annotations,
+		)...)
 	}
 
-	var errs field.ErrorList
+	if deploy == nil || len(deploy.Applications) == 0 {
+		return errs
+	}
+
 	deployPath := fldPath.Child("deploy", "argoCD")
-	integrationPath := fldPath.Child("integrations", "argoCD")
 
 	if integration == nil || !integration.Enabled {
 		errs = append(errs, field.Invalid(deployPath.Child("applications"), deploy.Applications, "argoCD integration must be enabled when applications are configured"))

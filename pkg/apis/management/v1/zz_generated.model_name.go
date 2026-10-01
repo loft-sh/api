@@ -396,6 +396,36 @@ func (in Connector) OpenAPIModelName() string {
 }
 
 // OpenAPIModelName returns the OpenAPI model name for this type.
+func (in ConnectorArgoCDAkuitySpec) OpenAPIModelName() string {
+	return "com.github.loft-sh.api.v4.pkg.apis.management.v1.ConnectorArgoCDAkuitySpec"
+}
+
+// OpenAPIModelName returns the OpenAPI model name for this type.
+func (in ConnectorArgoCDSelfHostedSpec) OpenAPIModelName() string {
+	return "com.github.loft-sh.api.v4.pkg.apis.management.v1.ConnectorArgoCDSelfHostedSpec"
+}
+
+// OpenAPIModelName returns the OpenAPI model name for this type.
+func (in ConnectorArgoCDServer) OpenAPIModelName() string {
+	return "com.github.loft-sh.api.v4.pkg.apis.management.v1.ConnectorArgoCDServer"
+}
+
+// OpenAPIModelName returns the OpenAPI model name for this type.
+func (in ConnectorArgoCDSpec) OpenAPIModelName() string {
+	return "com.github.loft-sh.api.v4.pkg.apis.management.v1.ConnectorArgoCDSpec"
+}
+
+// OpenAPIModelName returns the OpenAPI model name for this type.
+func (in ConnectorImageStoreS3Spec) OpenAPIModelName() string {
+	return "com.github.loft-sh.api.v4.pkg.apis.management.v1.ConnectorImageStoreS3Spec"
+}
+
+// OpenAPIModelName returns the OpenAPI model name for this type.
+func (in ConnectorImageStoreSpec) OpenAPIModelName() string {
+	return "com.github.loft-sh.api.v4.pkg.apis.management.v1.ConnectorImageStoreSpec"
+}
+
+// OpenAPIModelName returns the OpenAPI model name for this type.
 func (in ConnectorList) OpenAPIModelName() string {
 	return "com.github.loft-sh.api.v4.pkg.apis.management.v1.ConnectorList"
 }

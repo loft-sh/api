@@ -34,7 +34,7 @@ import (
 // Metadata is the backing Secret's. Labels and annotations are served and written as they are
 // stored, as on every other management kind, with the exceptions each connector type declares.
 // Projected keys become fields and are not served as metadata: the loft.sh/connector-type
-// label is spec.type, the loft.sh/display-name annotation is spec.displayName. Server-owned keys
+// label is derived from the payload section, the loft.sh/display-name annotation is spec.displayName. Server-owned keys
 // are the platform's, never served, and a write that names one is refused: the status
 // annotation controllers publish, unpacked into status. Withheld keys are never served: kubectl's
 // last-applied-configuration annotation, because on a Secret written by hand it carries the
@@ -82,53 +82,40 @@ type Connector struct {
 	Status ConnectorStatus `json:"status,omitempty"`
 }
 
-// ConnectorType discriminates the connector types. The values are exactly the values
-// of the loft.sh/connector-type label on the backing Secret, so projecting between
-// spec.type and the label never requires a mapping.
-// +enum
-type ConnectorType string
-
-const (
-	// ConnectorTypeSharedDatabase connects the platform to a shared database server
-	// used to provision databases as tenant cluster backing stores.
-	ConnectorTypeSharedDatabase ConnectorType = "shared-database"
-
-	// ConnectorTypeArgoCD connects the platform to an Argo CD (or Akuity) instance.
-	ConnectorTypeArgoCD ConnectorType = "argocd"
-
-	// ConnectorTypeObservability connects the platform to an observability stack.
-	ConnectorTypeObservability ConnectorType = "observability"
-)
-
-// ConnectorSpec holds the specification
+// ConnectorSpec holds the specification. Exactly one payload section must be set.
+// The section determines the connector type, stamped to the loft.sh/connector-type
+// label on create. The connector type is immutable after create.
 type ConnectorSpec struct {
-	// Type is the connector type and selects which payload section below applies.
-	// Required: create rejects an empty or unknown type and update rejects a change,
-	// so the field is immutable after create. It is projected from and stamped to the
-	// loft.sh/connector-type label on the backing Secret. Required fields carry no
-	// omitempty, so a read always serializes them (as "" for a sparse pre-existing
-	// Secret) and the object stays valid against the published schema, which lists
-	// them as required.
-	// +required
-	Type ConnectorType `json:"type"`
-
 	// DisplayName is the human-readable name shown in the UI. It is projected from
 	// and stamped to the loft.sh/display-name annotation on the backing Secret.
 	// +optional
 	DisplayName string `json:"displayName,omitempty"`
 
-	// SharedDatabase is the shared-database connector payload. It is required when
-	// type is shared-database and must be unset for every other type. Its fields
+	// SharedDatabase is the shared-database connector payload. Exactly one payload
+	// section must be set. Its fields
 	// mirror the Data keys of the backing Secret one to one, so a connector written
 	// through this API is byte-compatible with one written by the UI directly.
 	// +optional
 	SharedDatabase *ConnectorSharedDatabaseSpec `json:"sharedDatabase,omitempty"`
+
+	// ArgoCD is the argocd connector payload. Exactly one payload section
+	// must be set. Its fields mirror the Data keys of the
+	// backing Secret one to one, so a connector written through this API is
+	// byte-compatible with one written by the UI directly.
+	// +optional
+	ArgoCD *ConnectorArgoCDSpec `json:"argoCd,omitempty"`
+
+	// ImageStore is the os-image-store connector payload. Exactly one payload section
+	// must be set. The fields of its protocol
+	// block mirror the Data keys of the backing Secret one to one, so a connector
+	// written through this API is exactly what the OSImage store loader reads.
+	// +optional
+	ImageStore *ConnectorImageStoreSpec `json:"imageStore,omitempty"`
 }
 
 // SharedDatabaseDialect is the database server dialect of a shared-database
 // connector. It is stored in the "type" Data key of the backing Secret; the field is
-// named dialect on the wire because spec.type is the connector type discriminator and
-// must not be conflated with the database dialect.
+// named dialect on the wire to distinguish it from the connector type label.
 type SharedDatabaseDialect string
 
 const (
@@ -147,7 +134,7 @@ const (
 // writers and this API stay byte-compatible in both directions.
 type ConnectorSharedDatabaseSpec struct {
 	// Dialect is the database server dialect, mysql or postgres. Data key "type"
-	// (distinct from spec.type, the connector type). Required on every write: there
+	// (distinct from the connector type label). Required on every write: there
 	// is no server-side default and unknown values are rejected. Reads of a
 	// pre-existing Secret without the key still project mysql, matching how the read
 	// consumers treat such Secrets.
@@ -215,6 +202,223 @@ type ConnectorSharedDatabaseSpec struct {
 	// Data key "sslMode".
 	// +optional
 	SSLMode string `json:"sslMode,omitempty"`
+}
+
+// ConnectorArgoCDSpec configures a connection to an Argo CD instance used by the Argo CD
+// integration. Exactly one of selfHosted or akuity must be set. The flavor is stored in
+// the "connectorType" Data key of the backing Secret: "akuity" for akuity, and absent
+// (or any other value, as on legacy Secrets) for selfHosted, exactly like the UI.
+//
+// Every field maps to one Data key of the backing Secret (given in each field comment),
+// so direct Secret writers and this API stay byte-compatible in both directions.
+//
+// Three fields are credentials under the Connector type's view rule: token, password
+// and the Akuity apiKeySecret are served to a caller who could update this connector
+// and empty for every other caller, and on update an empty value keeps the stored one,
+// so a redacted read written back never clears a credential.
+type ConnectorArgoCDSpec struct {
+	// SelfHosted is a self-hosted Argo CD instance reached directly at the server URL.
+	// Must be unset when akuity is set.
+	// +optional
+	SelfHosted *ConnectorArgoCDSelfHostedSpec `json:"selfHosted,omitempty"`
+
+	// Akuity is an Argo CD instance managed by the Akuity Platform: cluster
+	// registration goes through Akuity's control plane API. Must be unset when
+	// selfHosted is set.
+	// +optional
+	Akuity *ConnectorArgoCDAkuitySpec `json:"akuity,omitempty"`
+}
+
+// ConnectorArgoCDSelfHostedSpec configures a self-hosted Argo CD instance.
+type ConnectorArgoCDSelfHostedSpec struct {
+	ConnectorArgoCDServer `json:",inline"`
+}
+
+// ConnectorArgoCDAkuitySpec configures an Akuity-managed Argo CD instance. The Argo CD
+// API server fields apply as for a self-hosted instance, with the Akuity Platform
+// fields on top.
+type ConnectorArgoCDAkuitySpec struct {
+	ConnectorArgoCDServer `json:",inline"`
+
+	// OrgID is the Akuity Platform organization ID. Data key "akuityOrgId". Required.
+	// +required
+	OrgID string `json:"orgId"`
+
+	// InstanceID is the Akuity-hosted Argo CD instance ID. Data key "akuityInstanceId".
+	// Required.
+	// +required
+	InstanceID string `json:"instanceId"`
+
+	// APIKeyID is the Akuity API key ID. Data key "akuityApiKeyId". Required.
+	// +required
+	APIKeyID string `json:"apiKeyId"`
+
+	// APIKeySecret is the Akuity API key secret. Data key "akuityApiKeySecret".
+	// Required whenever no stored value exists: on create, and on an update that
+	// switches from selfHosted to akuity, since the live Secret of a self-hosted
+	// connector carries no Akuity keys. A credential (see ConnectorArgoCDSpec): an
+	// empty value on an update that stays akuity keeps the stored one.
+	// +optional
+	APIKeySecret string `json:"apiKeySecret,omitempty"`
+
+	// AgentSize is the resource allocation of the Akuity agent, an Akuity size name of
+	// the form CLUSTER_SIZE_<NAME> such as CLUSTER_SIZE_SMALL, CLUSTER_SIZE_MEDIUM or
+	// CLUSTER_SIZE_LARGE; the value is passed to Akuity as given, so any size Akuity
+	// accepts is valid here. Data key "akuityAgentSize". Empty leaves the sizing to
+	// the Akuity side (medium), like the UI.
+	// +optional
+	AgentSize string `json:"agentSize,omitempty"`
+
+	// RepoServerReplicas is an optional replica count override for the
+	// argocd-repo-server of the Akuity agent, a positive integer kept as a string
+	// exactly as stored in the Data key "akuityRepoServerReplicas".
+	// +optional
+	RepoServerReplicas string `json:"repoServerReplicas,omitempty"`
+
+	// RepoServerMemory is an optional memory limit/request override for the
+	// argocd-repo-server of the Akuity agent, written as a number with an optional
+	// decimal part and an optional SI or binary suffix (k, M, G, T, P, E, Ki, Mi, Gi,
+	// Ti, Pi, Ei), for example "512Mi" or "1Gi". This is the shape the UI accepts; it
+	// is narrower than a full Kubernetes quantity, which also allows exponents such as
+	// 1e9 and the milli suffix. Data key "akuityRepoServerMemory".
+	// +optional
+	RepoServerMemory string `json:"repoServerMemory,omitempty"`
+}
+
+// ConnectorArgoCDServer is how the platform reaches and authenticates against the
+// Argo CD API server. Both flavors talk to it, so both carry these fields.
+type ConnectorArgoCDServer struct {
+	// Server is the URL the Argo CD API server is reachable at; for akuity this is the
+	// Akuity-hosted Argo CD instance URL. Data key "server". Required, must be an
+	// http or https URL.
+	// +required
+	Server string `json:"server"`
+
+	// Namespace is the namespace Argo CD runs in on the destination cluster. Data key
+	// "namespace". An empty namespace is defaulted to "argocd" on create only (the
+	// same default the UI pre-fills and consumers assume for Secrets without the
+	// key); on update an empty namespace removes the key, and reads fall back to the
+	// same default, so the effective namespace consumers use never changes.
+	// +optional
+	Namespace string `json:"namespace,omitempty"`
+
+	// Token is the Argo CD API token, the default authentication method. Data key
+	// "token". Required on create unless username and password are set. A credential
+	// (see ConnectorArgoCDSpec): an empty token on update keeps the stored one, and
+	// setting username/password removes it (switching the authentication method, like
+	// the UI does). Keeping is only valid while the stored connector holds a usable
+	// credential: a token, or a full username and password pair (half a pair does not
+	// count). A pre-existing Secret holding neither cannot be updated through this
+	// API, even on unrelated fields, until the request supplies a credential; the
+	// escape hatch is editing the backing Secret directly.
+	// +optional
+	Token string `json:"token,omitempty"`
+
+	// Username is the Argo CD username for basic authentication, used together with
+	// password as the alternative to token. Data key "username". Projected only when no
+	// token is stored, because the consumer authenticates with the token whenever one
+	// is present and a username beside it describes a method the connector does not use.
+	// +optional
+	Username string `json:"username,omitempty"`
+
+	// Password is the Argo CD password for basic authentication. Data key "password".
+	// Required whenever username is set and no stored password exists: on create, and
+	// on an update that switches from token to basic authentication, since setting the
+	// token had removed the stored password. A credential (see ConnectorArgoCDSpec): an
+	// empty password on an update that keeps basic authentication keeps the stored one,
+	// and setting token removes it (switching the authentication method, like the UI
+	// does).
+	// +optional
+	Password string `json:"password,omitempty"`
+
+	// CAData is the PEM-encoded CA bundle used to verify the Argo CD server's TLS
+	// certificate. Data key "caData".
+	// +optional
+	CAData string `json:"caData,omitempty"`
+
+	// Insecure skips TLS verification when talking to the Argo CD server. Data key
+	// "insecure". Defaults to false and is always stamped explicitly ("true" or
+	// "false"), exactly like the UI writes it.
+	// +optional
+	Insecure bool `json:"insecure,omitempty"`
+}
+
+// ImageStoreProtocol discriminates the object store implementations an os-image-store
+// connector can point at. Each value has a block of its own in ConnectorImageStoreSpec,
+// so a second implementation becomes a new block, not a new connector type, the same
+// way a NodeProvider discriminates between spec.metal3 and spec.kubeVirt.
+// +enum
+type ImageStoreProtocol string
+
+const (
+	// ImageStoreProtocolS3 is an S3-compatible object store reached with SigV4 pre-signed
+	// URLs: AWS S3 itself, MinIO, Ceph RGW, SeaweedFS and the like.
+	ImageStoreProtocolS3 ImageStoreProtocol = "s3"
+)
+
+// ConnectorImageStoreSpec configures the object store the platform uploads OSImage bytes
+// to and serves them from. An OSImage names the connector through spec.connectorRef and
+// the platform mints pre-signed URLs from these credentials on the image's behalf: the
+// client uploading the bytes and the node provider reading them only ever see a URL,
+// never the keys. The Secret behind this payload is read by pkg/osimage/store, whose
+// loader is the arbiter of the Data keys named in the field comments below.
+//
+// One field is a credential under the Connector type's view rule: s3.secretKey is served
+// to a caller who could update this connector and empty for every other caller, and on
+// update an empty value keeps the stored one, so a redacted read written back never
+// clears the key. The access key is not a credential in that sense: SigV4 puts it into
+// every pre-signed URL as X-Amz-Credential, so withholding it would protect nothing.
+type ConnectorImageStoreSpec struct {
+	// Protocol selects the object store implementation and which block below applies.
+	// Required; only s3 is supported. It is not stored on the backing Secret because
+	// every os-image-store Secret currently describes an S3-compatible store.
+	// +required
+	Protocol ImageStoreProtocol `json:"protocol"`
+
+	// S3 carries the settings of an S3-compatible store. Required when protocol is s3.
+	// +optional
+	S3 *ConnectorImageStoreS3Spec `json:"s3,omitempty"`
+}
+
+// ConnectorImageStoreS3Spec is the S3 block of an os-image-store connector. Every field maps
+// to one Data key of the backing Secret (given in each field comment), spelled exactly as
+// pkg/osimage/store reads it.
+type ConnectorImageStoreS3Spec struct {
+	// Endpoint is the object store address, for example https://minio.example.com. Data
+	// key "endpoint". Optional: empty means AWS S3 itself, resolved from the region. When
+	// set it must be an http or https URL.
+	// +optional
+	Endpoint string `json:"endpoint,omitempty"`
+
+	// Bucket is the bucket image objects live in. Data key "bucket". Required.
+	// +required
+	Bucket string `json:"bucket"`
+
+	// Region is the region SigV4 signs for. Data key "region". Required also for stores
+	// that ignore it, because the signature covers it and there is nothing to fall back
+	// to.
+	// +required
+	Region string `json:"region"`
+
+	// ForcePathStyle addresses the bucket as a path (https://endpoint/bucket/key) instead
+	// of a virtual host (https://bucket.endpoint/key), which most self-hosted stores need.
+	// Data key "forcePathStyle", always stamped as "true" or "false"; a missing stored
+	// value projects as false, which is how the store loader reads it too.
+	// +optional
+	ForcePathStyle bool `json:"forcePathStyle,omitempty"`
+
+	// AccessKey is the access key ID of the static credentials. Data key "accessKey".
+	// Required. The credentials must be long-lived: a pre-signed URL is only valid as
+	// long as the credentials that signed it, and upload URLs live 24 hours.
+	// +required
+	AccessKey string `json:"accessKey"`
+
+	// SecretKey is the secret access key of the static credentials. Data key "secretKey".
+	// Required on create. A credential (see the type comment): an empty value on update
+	// keeps the stored key, and a pre-existing Secret without a stored key cannot be
+	// updated through this API until the request supplies one.
+	// +optional
+	SecretKey string `json:"secretKey,omitempty"`
 }
 
 // ConnectorStatus reports what the platform knows about a connector. Nothing here is

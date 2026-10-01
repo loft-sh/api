@@ -177,14 +177,6 @@ type MachineStatus struct {
 	// +optional
 	PowerState MachinePowerState `json:"powerState,omitempty"`
 
-	// NodeTypes names the NodeTypes whose pool includes this machine: the ones a claim of the
-	// type may be placed on, whoever the machine is assigned to. It is filled from the provider
-	// inventory: for metal3, the node types whose host selector and resources the machine
-	// matches; for nico, the node type of its instance type; for externalPlatform, the mirrored
-	// node types the remote machine is in. Sorted.
-	// +optional
-	NodeTypes []string `json:"nodeTypes,omitempty"`
-
 	// LastSyncTime is when this state was last confirmed against the provider.
 	// +optional
 	LastSyncTime metav1.Time `json:"lastSyncTime,omitempty"`
