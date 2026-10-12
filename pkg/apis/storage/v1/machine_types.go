@@ -1,7 +1,7 @@
 package v1
 
 import (
-	agentstoragev1 "github.com/loft-sh/agentapi/v4/pkg/apis/loft/storage/v1"
+	agentstoragev1 "github.com/loft-sh/agentapi/v5/pkg/apis/loft/storage/v1"
 	"k8s.io/apimachinery/pkg/api/resource"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 )
@@ -59,18 +59,24 @@ const (
 	// and Message say which.
 	MachinePhasePending MachinePhase = "Pending"
 	// MachinePhaseAvailable means the provider reports the machine as
-	// inventoried and free.
+	// inventoried and free. For metal3 this is the host's reported state, so a
+	// host a consumer has just asked for reads Available until BMO starts on it.
 	MachinePhaseAvailable MachinePhase = "Available"
 	// MachinePhaseProvisioned means the provider handed the machine to a
-	// consumer: metal3 wrote an image or a consumerRef onto the host, NICo
-	// assigned it to an instance. Whether that consumer is one of this
+	// consumer: metal3 reports the host provisioned or externally provisioned,
+	// NICo assigned it to an instance. Whether that consumer is one of this
 	// platform's NodeClaims is answered by the node-claim annotation.
 	MachinePhaseProvisioned MachinePhase = "Provisioned"
-	// MachinePhaseProvisioning means the provider is working on the machine:
-	// registering, inspecting, cleaning, imaging, tearing down. The provider's
-	// own word for the step is in Reason, which for metal3 can be its literal
-	// "provisioning" as well as "deprovisioning" or "inspecting".
+	// MachinePhaseProvisioning means the provider is bringing the machine up:
+	// registering, inspecting, preparing, imaging. The provider's own word for
+	// the step is in Reason, which for metal3 can be its literal "provisioning"
+	// as well as "inspecting" or "preparing".
 	MachinePhaseProvisioning MachinePhase = "Provisioning"
+	// MachinePhaseDeprovisioning means the provider is tearing the machine
+	// down: wiping it after release or powering it off for deletion. Reason
+	// carries the provider's step, for metal3 "deprovisioning", "powering off
+	// before delete" or "deleting".
+	MachinePhaseDeprovisioning MachinePhase = "Deprovisioning"
 	// MachinePhaseMaintenance means the machine was deliberately taken out of
 	// service (metal3 detached, NICo Maintenance or Decommissioned).
 	MachinePhaseMaintenance MachinePhase = "Maintenance"

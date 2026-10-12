@@ -1,7 +1,7 @@
 package v1
 
 import (
-	agentstoragev1 "github.com/loft-sh/agentapi/v4/pkg/apis/loft/storage/v1"
+	agentstoragev1 "github.com/loft-sh/agentapi/v5/pkg/apis/loft/storage/v1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime"
 )
@@ -469,6 +469,11 @@ type StackTaskStatus struct {
 	// LastTransitionTime is when this task last changed phase.
 	// +optional
 	LastTransitionTime metav1.Time `json:"lastTransitionTime,omitempty"`
+
+	// TimeoutAt is when the stack fails the task if it is still progressing. Set only while the
+	// task is Progressing, and moved when the task starts a new wait, such as capturing its outputs.
+	// +optional
+	TimeoutAt *metav1.Time `json:"timeoutAt,omitempty"`
 }
 
 // StackOrphanedApplication is an owned child whose task is no longer in the resolved set.

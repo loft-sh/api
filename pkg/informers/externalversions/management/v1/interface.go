@@ -3,7 +3,7 @@
 package v1
 
 import (
-	internalinterfaces "github.com/loft-sh/api/v4/pkg/informers/externalversions/internalinterfaces"
+	internalinterfaces "github.com/loft-sh/api/v5/pkg/informers/externalversions/internalinterfaces"
 )
 
 // Interface provides access to all the informers in this group version.

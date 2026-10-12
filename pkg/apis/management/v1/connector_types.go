@@ -1,7 +1,7 @@
 package v1
 
 import (
-	agentstoragev1 "github.com/loft-sh/agentapi/v4/pkg/apis/loft/storage/v1"
+	agentstoragev1 "github.com/loft-sh/agentapi/v5/pkg/apis/loft/storage/v1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 )
 
@@ -29,7 +29,8 @@ import (
 // Status is read-only on the wire. Whatever a request carries is ignored: a create stores
 // no status and an update keeps the stored object's. Status is assembled on every read,
 // part of it computed from the stored payload and part of it unpacked from an annotation
-// controllers publish on the backing Secret.
+// controllers publish on the backing Secret. The redacted view serves the conditions without
+// their messages, which can quote payload values and endpoints.
 //
 // Metadata is the backing Secret's. Labels and annotations are served and written as they are
 // stored, as on every other management kind, with the exceptions each connector type declares.
@@ -47,15 +48,22 @@ import (
 // loft.sh/connector-type still narrows a list to that type although the served object does not
 // carry the label. Because the last-applied annotation is withheld, a client-side kubectl apply
 // never finds it and reports a permanent diff: use server-side apply, imperative writes or
-// full-replace updates.
+// full-replace updates. This describes the full view. The redacted view keeps the identity
+// fields and labels and drops annotations, managedFields, ownerReferences and finalizers.
 //
-// Credentials live in the type-specific payload sections of spec and are served only to
-// a caller who could update this connector: one holding the update verb on it. Every
-// other caller reads a redacted projection with the credential fields empty.
+// Credentials and connection details live in the type-specific payload sections of spec and
+// are served only to a caller who could update this connector, such as a holder of
+// loft-connectors-admin. Every other caller, holders of loft-connectors-viewer and tenants
+// included, reads a redacted view built from an allowlist: the name, the display name, the
+// payload section as a type marker, and the fields the type opts in (the shared-database
+// dialect, the image-store protocol). A field the type adds later is not served in it. A
+// platform component that needs the connection details reads the backing Secret or
+// authenticates as an identity holding loft-connectors-admin; with a lesser identity it reads
+// the redacted view, and the empty fields there are not an error.
 //
 // Tenancy in this release: a platform admin creates connectors and assigns one to a
 // tenant through the tenancy layer's exclusive assignment. A tenant reads the connectors
-// assigned to it, redacted, and cannot create, update or delete a connector; every other
+// assigned to it in the redacted view, and cannot create, update or delete a connector; every other
 // connector is not found. Tenant-authored connectors come later, without a change to this
 // type.
 //
@@ -163,9 +171,9 @@ type ConnectorSharedDatabaseSpec struct {
 
 	// Password is the password of the database user. Data key "password". Required
 	// on create unless identityProvider is set. It is a credential: served only to a
-	// caller who could update this connector and empty for every other caller (see
+	// caller who could update this connector and absent for every other caller (see
 	// the Connector type). On update an empty password keeps the stored one, so a
-	// redacted read written back never clears a credential; switching to
+	// read without the credential written back never clears it; switching to
 	// identityProvider removes it. Switching back from identityProvider to password
 	// authentication requires a non-empty password in the request: the stored one
 	// was removed by the earlier switch, so there is nothing to keep.
@@ -214,8 +222,8 @@ type ConnectorSharedDatabaseSpec struct {
 //
 // Three fields are credentials under the Connector type's view rule: token, password
 // and the Akuity apiKeySecret are served to a caller who could update this connector
-// and empty for every other caller, and on update an empty value keeps the stored one,
-// so a redacted read written back never clears a credential.
+// and absent for every other caller, and on update an empty value keeps the stored one,
+// so a read without the credential written back never clears it.
 type ConnectorArgoCDSpec struct {
 	// SelfHosted is a self-hosted Argo CD instance reached directly at the server URL.
 	// Must be unset when akuity is set.
@@ -315,8 +323,8 @@ type ConnectorArgoCDServer struct {
 	Token string `json:"token,omitempty"`
 
 	// Username is the Argo CD username for basic authentication, used together with
-	// password as the alternative to token. Data key "username". Projected only when no
-	// token is stored, because the consumer authenticates with the token whenever one
+	// password as the alternative to token. Data key "username". Projected in the full view
+	// only when no token is stored, because the consumer authenticates with the token whenever one
 	// is present and a username beside it describes a method the connector does not use.
 	// +optional
 	Username string `json:"username,omitempty"`
@@ -363,11 +371,13 @@ const (
 // never the keys. The Secret behind this payload is read by pkg/osimage/store, whose
 // loader is the arbiter of the Data keys named in the field comments below.
 //
-// One field is a credential under the Connector type's view rule: s3.secretKey is served
-// to a caller who could update this connector and empty for every other caller, and on
-// update an empty value keeps the stored one, so a redacted read written back never
-// clears the key. The access key is not a credential in that sense: SigV4 puts it into
-// every pre-signed URL as X-Amz-Credential, so withholding it would protect nothing.
+// Two fields are credentials under the Connector type's view rule: s3.secretKey and
+// s3.sessionToken are served to a caller who could update this connector and absent for
+// every other caller. On update an empty secretKey keeps the stored one, so a read without
+// the credential written back never clears the key. The access key is not a credential:
+// SigV4 puts it into every pre-signed URL as X-Amz-Credential, so a caller who could update
+// this connector is served it, and an empty value on update is not "keep". Like every other
+// payload field except protocol, it is absent from the redacted view.
 type ConnectorImageStoreSpec struct {
 	// Protocol selects the object store implementation and which block below applies.
 	// Required; only s3 is supported. It is not stored on the backing Secret because
@@ -419,6 +429,12 @@ type ConnectorImageStoreS3Spec struct {
 	// updated through this API until the request supplies one.
 	// +optional
 	SecretKey string `json:"secretKey,omitempty"`
+
+	// SessionToken is set only for temporary credentials. Data key "sessionToken".
+	// Optional; an empty value on update removes it. A credential (see the type comment).
+	// Pre-signed URLs expire with the session, so this is meant for short-lived use.
+	// +optional
+	SessionToken string `json:"sessionToken,omitempty"`
 }
 
 // ConnectorStatus reports what the platform knows about a connector. Nothing here is

@@ -7,7 +7,7 @@ import (
 	"testing"
 
 	"github.com/go-logr/logr"
-	snapshotapi "github.com/loft-sh/api/v4/pkg/snapshot"
+	snapshotapi "github.com/loft-sh/api/v5/pkg/snapshot"
 )
 
 // TestWithStaticCredentials pins that credentials stay on the config. The platform builds one store per

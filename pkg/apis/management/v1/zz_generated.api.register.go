@@ -3,7 +3,7 @@
 package v1
 
 import (
-	"github.com/loft-sh/api/v4/pkg/apis/management"
+	"github.com/loft-sh/api/v5/pkg/apis/management"
 	"github.com/loft-sh/apiserver/pkg/builders"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime"
@@ -160,6 +160,7 @@ func addKnownTypes(scheme *runtime.Scheme) error {
 		&VirtualClusterInstanceKubeConfig{},
 		&VirtualClusterInstanceLog{},
 		&VirtualClusterNodeAccessKey{},
+		&VirtualClusterObservabilityConnector{},
 		&VirtualClusterResourceUsage{},
 		&VirtualClusterInstanceShell{},
 		&VirtualClusterInstanceSnapshot{},
@@ -508,6 +509,12 @@ var (
 			func() runtime.Object { return &VirtualClusterNodeAccessKey{} }, // Register versioned resource
 			nil,
 			management.NewVirtualClusterNodeAccessKeyREST,
+		),
+		builders.NewApiResourceWithStorage(
+			management.InternalVirtualClusterObservabilityConnectorREST,
+			func() runtime.Object { return &VirtualClusterObservabilityConnector{} }, // Register versioned resource
+			nil,
+			management.NewVirtualClusterObservabilityConnectorREST,
 		),
 		builders.NewApiResourceWithStorage(
 			management.InternalVirtualClusterResourceUsageREST,
@@ -1322,6 +1329,14 @@ type VirtualClusterNodeAccessKeyList struct {
 	metav1.TypeMeta `json:",inline"`
 	metav1.ListMeta `json:"metadata,omitempty"`
 	Items           []VirtualClusterNodeAccessKey `json:"items"`
+}
+
+// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+
+type VirtualClusterObservabilityConnectorList struct {
+	metav1.TypeMeta `json:",inline"`
+	metav1.ListMeta `json:"metadata,omitempty"`
+	Items           []VirtualClusterObservabilityConnector `json:"items"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object

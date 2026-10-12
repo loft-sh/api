@@ -10,8 +10,8 @@ import (
 	"github.com/Azure/azure-sdk-for-go/sdk/storage/azblob/blockblob"
 	"github.com/Azure/azure-sdk-for-go/sdk/storage/azblob/container"
 	"github.com/go-logr/logr"
-	snapshotapi "github.com/loft-sh/api/v4/pkg/snapshot"
-	"github.com/loft-sh/api/v4/pkg/snapshot/storage/types"
+	snapshotapi "github.com/loft-sh/api/v5/pkg/snapshot"
+	"github.com/loft-sh/api/v5/pkg/snapshot/storage/types"
 )
 
 type ObjectStore struct {

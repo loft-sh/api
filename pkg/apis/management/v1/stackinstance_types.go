@@ -1,14 +1,14 @@
 package v1
 
 import (
-	agentstoragev1 "github.com/loft-sh/agentapi/v4/pkg/apis/loft/storage/v1"
-	storagev1 "github.com/loft-sh/api/v4/pkg/apis/storage/v1"
+	agentstoragev1 "github.com/loft-sh/agentapi/v5/pkg/apis/loft/storage/v1"
+	storagev1 "github.com/loft-sh/api/v5/pkg/apis/storage/v1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 )
 
 // +genclient
 // +genclient:noStatus
-// +genclient:method=GetOutputs,verb=get,subresource=outputs,result=github.com/loft-sh/api/v4/pkg/apis/management/v1.StackInstanceOutputs
+// +genclient:method=GetOutputs,verb=get,subresource=outputs,result=github.com/loft-sh/api/v5/pkg/apis/management/v1.StackInstanceOutputs
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
 
 // StackInstance holds the StackInstance information

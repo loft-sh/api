@@ -3,9 +3,9 @@
 package apis
 
 import (
-	"github.com/loft-sh/api/v4/pkg/apis/management"
-	_ "github.com/loft-sh/api/v4/pkg/apis/management/install" // Install the management group
-	managementv1 "github.com/loft-sh/api/v4/pkg/apis/management/v1"
+	"github.com/loft-sh/api/v5/pkg/apis/management"
+	_ "github.com/loft-sh/api/v5/pkg/apis/management/install" // Install the management group
+	managementv1 "github.com/loft-sh/api/v5/pkg/apis/management/v1"
 	"github.com/loft-sh/apiserver/pkg/builders"
 	"k8s.io/apimachinery/pkg/runtime"
 )
@@ -28,7 +28,7 @@ func GetAllApiBuilders() []*builders.APIGroupBuilder {
 func GetManagementAPIBuilder() *builders.APIGroupBuilder {
 	return builders.NewApiGroupBuilder(
 		"management.loft.sh",
-		"github.com/loft-sh/api/v4/pkg/apis/management").
+		"github.com/loft-sh/api/v5/pkg/apis/management").
 		WithUnVersionedApi(management.ApiVersion).
 		WithVersionedApis(
 			managementv1.ApiVersion,

@@ -5,7 +5,10 @@ package vclusterconfig
 import (
 	"encoding/json"
 	"errors"
+	"strings"
 	"time"
+
+	"github.com/loft-sh/api/v5/pkg/vclusterconfig/constants"
 )
 
 type PlatformConfig struct {
@@ -727,32 +730,37 @@ type ObservabilityIntegration struct {
 // GatewaySecret identifies a Secret delivery target by namespace and name.
 type GatewaySecret struct {
 	// Namespace is the namespace the Secret is delivered to.
-	// Required once a gatewaySecrets entry is present.
+	// Required when gatewaySecret is set.
 	// +optional
 	Namespace string `json:"namespace,omitempty"`
 	// Name is the name of the delivered Secret.
-	// Required once a gatewaySecrets entry is present.
+	// Required when gatewaySecret is set.
 	// +optional
 	Name string `json:"name,omitempty"`
 }
 
-const (
-	// DefaultObservabilityNamespace is the default namespace the metrics-writer Secret is delivered to.
-	DefaultObservabilityNamespace = "observability"
-	// DefaultMetricsWriterSecretName is the default name of the delivered metrics-writer Secret.
-	DefaultMetricsWriterSecretName = "metrics-writer"
-)
+// hasConnector reports whether the connector names something the platform can resolve. Trimmed,
+// because it resolves by exact name.
+func (o *ObservabilityIntegration) hasConnector() bool {
+	return strings.TrimSpace(o.Connector) != ""
+}
 
-// DeliveryTarget returns where the metrics-writer Secret should be delivered.
-// It returns nil when the integration is nil or disabled, so "off" stays
-// distinguishable from "default target". For an enabled integration it returns the
-// configured GatewaySecret, or the default namespace/name when none is set.
+func (o *ObservabilityIntegration) isConfigured() bool {
+	return o != nil && o.Enabled && o.hasConnector()
+}
+
+// DeliveryTarget returns where the metrics-writer Secret should be delivered, and nil when nothing
+// is delivered at all, which keeps "off" distinguishable from "default target". For a configured
+// integration it returns the configured GatewaySecret, or the default target when none is set.
 func (o *ObservabilityIntegration) DeliveryTarget() *GatewaySecret {
-	if o == nil || !o.Enabled {
+	if !o.isConfigured() {
 		return nil
 	}
 	if o.GatewaySecret != nil {
 		return o.GatewaySecret
 	}
-	return &GatewaySecret{Namespace: DefaultObservabilityNamespace, Name: DefaultMetricsWriterSecretName}
+	return &GatewaySecret{
+		Namespace: constants.DefaultObservabilityNamespace,
+		Name:      constants.DefaultMetricsWriterSecretName,
+	}
 }

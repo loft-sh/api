@@ -3,7 +3,7 @@ package v1
 import (
 	"strings"
 
-	agentstoragev1 "github.com/loft-sh/agentapi/v4/pkg/apis/loft/storage/v1"
+	agentstoragev1 "github.com/loft-sh/agentapi/v5/pkg/apis/loft/storage/v1"
 	argoapplicationsv1alpha1 "github.com/loft-sh/external-types/argoproj/argo-cd/v2/pkg/apis/application/v1alpha1"
 	corev1 "k8s.io/api/core/v1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
@@ -211,10 +211,11 @@ type Quotas struct {
 var (
 	SpaceTemplateKind          = "SpaceTemplate"
 	VirtualClusterTemplateKind = "VirtualClusterTemplate"
+	StackTemplateKind          = "StackTemplate"
 )
 
 type AllowedTemplate struct {
-	// Kind of the template that is allowed. Currently only supports DevPodWorkspaceTemplate, VirtualClusterTemplate & SpaceTemplate
+	// Kind of the template that is allowed. Supports DevPodWorkspaceTemplate, VirtualClusterTemplate, SpaceTemplate and StackTemplate.
 	// +optional
 	Kind string `json:"kind,omitempty"`
 

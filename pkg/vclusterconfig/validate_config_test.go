@@ -5,7 +5,7 @@ import (
 	"testing"
 	"time"
 
-	storagev1 "github.com/loft-sh/api/v4/pkg/apis/storage/v1"
+	storagev1 "github.com/loft-sh/api/v5/pkg/apis/storage/v1"
 	"k8s.io/apimachinery/pkg/util/validation/field"
 )
 

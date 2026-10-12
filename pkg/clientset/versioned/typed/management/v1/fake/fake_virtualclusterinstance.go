@@ -5,8 +5,8 @@ package fake
 import (
 	context "context"
 
-	v1 "github.com/loft-sh/api/v4/pkg/apis/management/v1"
-	managementv1 "github.com/loft-sh/api/v4/pkg/clientset/versioned/typed/management/v1"
+	v1 "github.com/loft-sh/api/v5/pkg/apis/management/v1"
+	managementv1 "github.com/loft-sh/api/v5/pkg/clientset/versioned/typed/management/v1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	gentype "k8s.io/client-go/gentype"
 	testing "k8s.io/client-go/testing"
@@ -145,4 +145,16 @@ func (c *fakeVirtualClusterInstances) GetJoinScript(ctx context.Context, virtual
 		return emptyResult, err
 	}
 	return obj.(*v1.VirtualClusterInstanceJoinScript), err
+}
+
+// GetObservabilityConnector takes the representation of a virtualClusterObservabilityConnector and creates it.  Returns the server's representation of the virtualClusterObservabilityConnector, and an error, if there is any.
+func (c *fakeVirtualClusterInstances) GetObservabilityConnector(ctx context.Context, virtualClusterInstanceName string, virtualClusterObservabilityConnector *v1.VirtualClusterObservabilityConnector, opts metav1.CreateOptions) (result *v1.VirtualClusterObservabilityConnector, err error) {
+	emptyResult := &v1.VirtualClusterObservabilityConnector{}
+	obj, err := c.Fake.
+		Invokes(testing.NewCreateSubresourceActionWithOptions(c.Resource(), virtualClusterInstanceName, "observabilityconnector", c.Namespace(), virtualClusterObservabilityConnector, opts), emptyResult)
+
+	if obj == nil {
+		return emptyResult, err
+	}
+	return obj.(*v1.VirtualClusterObservabilityConnector), err
 }

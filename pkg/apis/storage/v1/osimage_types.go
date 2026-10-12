@@ -3,7 +3,7 @@ package v1
 import (
 	"slices"
 
-	agentstoragev1 "github.com/loft-sh/agentapi/v4/pkg/apis/loft/storage/v1"
+	agentstoragev1 "github.com/loft-sh/agentapi/v5/pkg/apis/loft/storage/v1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 )
 
@@ -43,6 +43,12 @@ func (a *OSImage) GetConditions() agentstoragev1.Conditions {
 
 func (a *OSImage) SetConditions(conditions agentstoragev1.Conditions) {
 	a.Status.Conditions = conditions
+}
+
+// SessionObserved reports whether the current phase was decided for the session the
+// annotations name, so a new session is what takes an image out of Ready or Failed.
+func (a *OSImage) SessionObserved() bool {
+	return a.Status.ObservedSessionID == a.Annotations[OSImageUploadSessionIDAnnotation]
 }
 
 type OSImageSpec struct {
@@ -100,19 +106,12 @@ const (
 	OSImageUploadChecksumAnnotation = "machines.vcluster.com/os-image-upload-checksum"
 )
 
-// OSImageUploadSessionIdentityAnnotations is what names the open session, as opposed to what
-// it is uploading. A settled image drops these and keeps the rest: the size is what a later
-// pass re-checks the object against.
-var OSImageUploadSessionIdentityAnnotations = []string{
+// OSImageUploadInitiateAnnotations is what opening a session writes.
+var OSImageUploadInitiateAnnotations = []string{
 	OSImageUploadSessionIDAnnotation,
 	OSImageUploadLastInitiatedAtAnnotation,
+	OSImageUploadDeclaredSizeAnnotation,
 }
-
-// OSImageUploadInitiateAnnotations is what opening a session writes.
-var OSImageUploadInitiateAnnotations = slices.Concat(
-	OSImageUploadSessionIdentityAnnotations,
-	[]string{OSImageUploadDeclaredSizeAnnotation},
-)
 
 // OSImageUploadFinalizeAnnotations is what completing the object writes.
 var OSImageUploadFinalizeAnnotations = []string{
@@ -156,6 +155,11 @@ type OSImageStatus struct {
 	// bytes. The controller owns every transition; the upload endpoints only annotate.
 	// +optional
 	Phase OSImagePhase `json:"phase,omitempty"`
+
+	// ObservedSessionID is the upload session the phase was decided for. Empty when it was
+	// decided before any session was opened.
+	// +optional
+	ObservedSessionID string `json:"observedSessionID,omitempty"`
 
 	// Conditions holds the upload conditions of the image.
 	// +optional

@@ -1,7 +1,7 @@
 package v1
 
 import (
-	agentstoragev1 "github.com/loft-sh/agentapi/v4/pkg/apis/loft/storage/v1"
+	agentstoragev1 "github.com/loft-sh/agentapi/v5/pkg/apis/loft/storage/v1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime"
 )
@@ -132,6 +132,11 @@ type NodeProviderSpec struct {
 	// DisplayName is the name that should be displayed in the UI
 	// +optional
 	DisplayName string `json:"displayName,omitempty"`
+
+	// MachineAllocationPolicy is the NodeTypeSpec.MachineAllocationPolicy of this provider's node types
+	// that leave theirs empty, and the only one discovered (nico) node types can have.
+	// +optional
+	MachineAllocationPolicy MachineAllocationPolicy `json:"machineAllocationPolicy,omitempty"`
 }
 
 type NodeProviderClusterAPI struct {
@@ -158,7 +163,8 @@ type NodeProviderBCM struct {
 
 // NodeProviderNICo configures a node provider backed by the NVIDIA Infra
 // Controller (NICo) REST API. Platform workloads use the provider org.
-// Tenant workloads use the org from their Tenant's nico.vcluster.com/org annotation.
+// Tenant workloads use an org named after their Tenant; the platform owns the
+// tenant-org namespace of this NICo instance.
 type NodeProviderNICo struct {
 	// Endpoint is the base URL (scheme + host + optional port) of the NICo REST
 	// API. The /v2/org/{org}/nico path is appended by the client.
@@ -174,15 +180,9 @@ type NodeProviderNICo struct {
 	// +optional
 	SiteID string `json:"siteId,omitempty"`
 
-	// SiteIPBlockID adopts an existing NICo site-level parent IPBlock. Mutually
-	// exclusive with SiteIPBlockCIDR.
+	// SiteIPBlockID adopts an existing NICo site-level parent IPBlock.
 	// +optional
 	SiteIPBlockID string `json:"siteIPBlockID,omitempty"`
-
-	// SiteIPBlockCIDR creates the NICo site-level parent IPBlock with this CIDR.
-	// Mutually exclusive with SiteIPBlockID.
-	// +optional
-	SiteIPBlockCIDR string `json:"siteIPBlockCIDR,omitempty"`
 
 	// InstanceTypeIDs is an allow-list of NICo InstanceType IDs to surface as
 	// NodeTypes. Empty surfaces all.

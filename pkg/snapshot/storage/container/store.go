@@ -9,7 +9,7 @@ import (
 	"path/filepath"
 	"strings"
 
-	snapshotapi "github.com/loft-sh/api/v4/pkg/snapshot"
+	snapshotapi "github.com/loft-sh/api/v5/pkg/snapshot"
 )
 
 func NewStore(options *snapshotapi.ContainerOptions) *Store {

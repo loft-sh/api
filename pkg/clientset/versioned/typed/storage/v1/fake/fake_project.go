@@ -3,8 +3,8 @@
 package fake
 
 import (
-	v1 "github.com/loft-sh/api/v4/pkg/apis/storage/v1"
-	storagev1 "github.com/loft-sh/api/v4/pkg/clientset/versioned/typed/storage/v1"
+	v1 "github.com/loft-sh/api/v5/pkg/apis/storage/v1"
+	storagev1 "github.com/loft-sh/api/v5/pkg/clientset/versioned/typed/storage/v1"
 	gentype "k8s.io/client-go/gentype"
 )
 

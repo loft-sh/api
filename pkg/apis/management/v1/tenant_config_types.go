@@ -1,8 +1,8 @@
 package v1
 
 import (
-	storagev1 "github.com/loft-sh/api/v4/pkg/apis/storage/v1"
-	uiv1 "github.com/loft-sh/api/v4/pkg/apis/ui/v1"
+	storagev1 "github.com/loft-sh/api/v5/pkg/apis/storage/v1"
+	uiv1 "github.com/loft-sh/api/v5/pkg/apis/ui/v1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 )
 

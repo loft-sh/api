@@ -7,15 +7,15 @@ package v1
 
 // OpenAPIModelName returns the OpenAPI model name for this type.
 func (in Event) OpenAPIModelName() string {
-	return "com.github.loft-sh.api.v4.pkg.apis.audit.v1.Event"
+	return "com.github.loft-sh.api.v5.pkg.apis.audit.v1.Event"
 }
 
 // OpenAPIModelName returns the OpenAPI model name for this type.
 func (in EventList) OpenAPIModelName() string {
-	return "com.github.loft-sh.api.v4.pkg.apis.audit.v1.EventList"
+	return "com.github.loft-sh.api.v5.pkg.apis.audit.v1.EventList"
 }
 
 // OpenAPIModelName returns the OpenAPI model name for this type.
 func (in ObjectReference) OpenAPIModelName() string {
-	return "com.github.loft-sh.api.v4.pkg.apis.audit.v1.ObjectReference"
+	return "com.github.loft-sh.api.v5.pkg.apis.audit.v1.ObjectReference"
 }

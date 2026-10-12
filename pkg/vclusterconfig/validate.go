@@ -7,8 +7,8 @@ import (
 	"strings"
 	"time"
 
-	storagev1 "github.com/loft-sh/api/v4/pkg/apis/storage/v1"
-	"github.com/loft-sh/api/v4/pkg/vclusterconfig/constants"
+	storagev1 "github.com/loft-sh/api/v5/pkg/apis/storage/v1"
+	"github.com/loft-sh/api/v5/pkg/vclusterconfig/constants"
 	"github.com/robfig/cron/v3"
 	"golang.org/x/mod/semver"
 	"k8s.io/apimachinery/pkg/util/validation"
@@ -156,16 +156,18 @@ func ValidateObservability(fldPath *field.Path, integration *ObservabilityIntegr
 	var errs field.ErrorList
 	path := fldPath.Child("integrations", "observability")
 
-	if integration.Connector == "" {
+	if !integration.hasConnector() {
 		errs = append(errs, field.Required(path.Child("connector"), "connector is required when observability is enabled"))
 	}
 
+	// Trimmed too: a whitespace-only namespace or name is not a Secret anything can be delivered
+	// to, so accepting it would leave the delivery retrying a write the apiserver always rejects.
 	if integration.GatewaySecret != nil {
 		gsPath := path.Child("gatewaySecret")
-		if integration.GatewaySecret.Namespace == "" {
+		if strings.TrimSpace(integration.GatewaySecret.Namespace) == "" {
 			errs = append(errs, field.Required(gsPath.Child("namespace"), "namespace is required"))
 		}
-		if integration.GatewaySecret.Name == "" {
+		if strings.TrimSpace(integration.GatewaySecret.Name) == "" {
 			errs = append(errs, field.Required(gsPath.Child("name"), "name is required"))
 		}
 	}

@@ -7,12 +7,12 @@ import (
 	"fmt"
 
 	pkglicenseapi "github.com/loft-sh/admin-apis/pkg/licenseapi"
-	clusterv1 "github.com/loft-sh/agentapi/v4/pkg/apis/loft/cluster/v1"
-	agentstoragev1 "github.com/loft-sh/agentapi/v4/pkg/apis/loft/storage/v1"
-	auditv1 "github.com/loft-sh/api/v4/pkg/apis/audit/v1"
-	storagev1 "github.com/loft-sh/api/v4/pkg/apis/storage/v1"
-	uiv1 "github.com/loft-sh/api/v4/pkg/apis/ui/v1"
-	"github.com/loft-sh/api/v4/pkg/managerfactory"
+	clusterv1 "github.com/loft-sh/agentapi/v5/pkg/apis/loft/cluster/v1"
+	agentstoragev1 "github.com/loft-sh/agentapi/v5/pkg/apis/loft/storage/v1"
+	auditv1 "github.com/loft-sh/api/v5/pkg/apis/audit/v1"
+	storagev1 "github.com/loft-sh/api/v5/pkg/apis/storage/v1"
+	uiv1 "github.com/loft-sh/api/v5/pkg/apis/ui/v1"
+	"github.com/loft-sh/api/v5/pkg/managerfactory"
 	"github.com/loft-sh/apiserver/pkg/builders"
 	authorizationv1 "k8s.io/api/authorization/v1"
 	corev1 "k8s.io/api/core/v1"
@@ -1571,8 +1571,16 @@ var (
 	NewVirtualClusterNodeAccessKeyREST = func(getter generic.RESTOptionsGetter) rest.Storage {
 		return NewVirtualClusterNodeAccessKeyRESTFunc(Factory)
 	}
-	NewVirtualClusterNodeAccessKeyRESTFunc  NewRESTFunc
-	InternalVirtualClusterResourceUsageREST = builders.NewInternalSubresource(
+	NewVirtualClusterNodeAccessKeyRESTFunc           NewRESTFunc
+	InternalVirtualClusterObservabilityConnectorREST = builders.NewInternalSubresource(
+		"virtualclusterinstances", "VirtualClusterObservabilityConnector", "observabilityconnector",
+		func() runtime.Object { return &VirtualClusterObservabilityConnector{} },
+	)
+	NewVirtualClusterObservabilityConnectorREST = func(getter generic.RESTOptionsGetter) rest.Storage {
+		return NewVirtualClusterObservabilityConnectorRESTFunc(Factory)
+	}
+	NewVirtualClusterObservabilityConnectorRESTFunc NewRESTFunc
+	InternalVirtualClusterResourceUsageREST         = builders.NewInternalSubresource(
 		"virtualclusterinstances", "VirtualClusterResourceUsage", "resourceusage",
 		func() runtime.Object { return &VirtualClusterResourceUsage{} },
 	)
@@ -1785,6 +1793,7 @@ var (
 		InternalVirtualClusterInstanceKubeConfigREST,
 		InternalVirtualClusterInstanceLogREST,
 		InternalVirtualClusterNodeAccessKeyREST,
+		InternalVirtualClusterObservabilityConnectorREST,
 		InternalVirtualClusterResourceUsageREST,
 		InternalVirtualClusterInstanceShellREST,
 		InternalVirtualClusterInstanceSnapshotREST,
@@ -2280,6 +2289,7 @@ type ConnectorImageStoreS3Spec struct {
 	ForcePathStyle bool   `json:"forcePathStyle,omitempty"`
 	AccessKey      string `json:"accessKey"`
 	SecretKey      string `json:"secretKey,omitempty"`
+	SessionToken   string `json:"sessionToken,omitempty"`
 }
 
 type ConnectorImageStoreSpec struct {
@@ -3864,6 +3874,24 @@ type VirtualClusterNodeAccessKeySpec struct {
 
 type VirtualClusterNodeAccessKeyStatus struct {
 	AccessKey string `json:"accessKey,omitempty"`
+}
+
+// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+
+type VirtualClusterObservabilityConnector struct {
+	metav1.TypeMeta   `json:",inline"`
+	metav1.ObjectMeta `json:"metadata,omitempty"`
+	Spec              VirtualClusterObservabilityConnectorSpec   `json:"spec,omitempty"`
+	Status            VirtualClusterObservabilityConnectorStatus `json:"status,omitempty"`
+}
+
+type VirtualClusterObservabilityConnectorSpec struct {
+}
+
+type VirtualClusterObservabilityConnectorStatus struct {
+	Endpoint string `json:"endpoint,omitempty"`
+	Token    string `json:"token,omitempty"`
+	CaCert   string `json:"caCert,omitempty"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -10507,6 +10535,14 @@ type VirtualClusterNodeAccessKeyList struct {
 	metav1.TypeMeta `json:",inline"`
 	metav1.ListMeta `json:"metadata,omitempty"`
 	Items           []VirtualClusterNodeAccessKey `json:"items"`
+}
+
+// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+
+type VirtualClusterObservabilityConnectorList struct {
+	metav1.TypeMeta `json:",inline"`
+	metav1.ListMeta `json:"metadata,omitempty"`
+	Items           []VirtualClusterObservabilityConnector `json:"items"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object

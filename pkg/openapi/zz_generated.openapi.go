@@ -7,12 +7,12 @@ package openapi
 
 import (
 	licenseapi "github.com/loft-sh/admin-apis/pkg/licenseapi"
-	v1 "github.com/loft-sh/agentapi/v4/pkg/apis/loft/cluster/v1"
-	storagev1 "github.com/loft-sh/agentapi/v4/pkg/apis/loft/storage/v1"
-	auditv1 "github.com/loft-sh/api/v4/pkg/apis/audit/v1"
-	managementv1 "github.com/loft-sh/api/v4/pkg/apis/management/v1"
-	apisstoragev1 "github.com/loft-sh/api/v4/pkg/apis/storage/v1"
-	uiv1 "github.com/loft-sh/api/v4/pkg/apis/ui/v1"
+	v1 "github.com/loft-sh/agentapi/v5/pkg/apis/loft/cluster/v1"
+	storagev1 "github.com/loft-sh/agentapi/v5/pkg/apis/loft/storage/v1"
+	auditv1 "github.com/loft-sh/api/v5/pkg/apis/audit/v1"
+	managementv1 "github.com/loft-sh/api/v5/pkg/apis/management/v1"
+	apisstoragev1 "github.com/loft-sh/api/v5/pkg/apis/storage/v1"
+	uiv1 "github.com/loft-sh/api/v5/pkg/apis/ui/v1"
 	v1alpha1 "github.com/loft-sh/external-types/argoproj/argo-cd/v2/pkg/apis/application/v1alpha1"
 	admissionregistrationv1 "k8s.io/api/admissionregistration/v1"
 	v1beta1 "k8s.io/api/admissionregistration/v1beta1"
@@ -107,6 +107,16 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 		v1.FeatureList{}.OpenAPIModelName():                                                  schema_apis_loft_cluster_v1_FeatureList(ref),
 		v1.FeatureSpec{}.OpenAPIModelName():                                                  schema_apis_loft_cluster_v1_FeatureSpec(ref),
 		v1.FeatureStatus{}.OpenAPIModelName():                                                schema_apis_loft_cluster_v1_FeatureStatus(ref),
+		v1.IronicNode{}.OpenAPIModelName():                                                   schema_apis_loft_cluster_v1_IronicNode(ref),
+		v1.IronicNodeAbort{}.OpenAPIModelName():                                              schema_apis_loft_cluster_v1_IronicNodeAbort(ref),
+		v1.IronicNodeAbortList{}.OpenAPIModelName():                                          schema_apis_loft_cluster_v1_IronicNodeAbortList(ref),
+		v1.IronicNodeAgent{}.OpenAPIModelName():                                              schema_apis_loft_cluster_v1_IronicNodeAgent(ref),
+		v1.IronicNodeHistoryEvent{}.OpenAPIModelName():                                       schema_apis_loft_cluster_v1_IronicNodeHistoryEvent(ref),
+		v1.IronicNodeInterfaces{}.OpenAPIModelName():                                         schema_apis_loft_cluster_v1_IronicNodeInterfaces(ref),
+		v1.IronicNodeList{}.OpenAPIModelName():                                               schema_apis_loft_cluster_v1_IronicNodeList(ref),
+		v1.IronicNodeSpec{}.OpenAPIModelName():                                               schema_apis_loft_cluster_v1_IronicNodeSpec(ref),
+		v1.IronicNodeStatus{}.OpenAPIModelName():                                             schema_apis_loft_cluster_v1_IronicNodeStatus(ref),
+		v1.IronicNodeStep{}.OpenAPIModelName():                                               schema_apis_loft_cluster_v1_IronicNodeStep(ref),
 		v1.LastActivityInfo{}.OpenAPIModelName():                                             schema_apis_loft_cluster_v1_LastActivityInfo(ref),
 		v1.SleepModeConfig{}.OpenAPIModelName():                                              schema_apis_loft_cluster_v1_SleepModeConfig(ref),
 		v1.SleepModeConfigSpec{}.OpenAPIModelName():                                          schema_apis_loft_cluster_v1_SleepModeConfigSpec(ref),
@@ -524,6 +534,10 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 		managementv1.VirtualClusterNodeAccessKeyList{}.OpenAPIModelName():                    schema_pkg_apis_management_v1_VirtualClusterNodeAccessKeyList(ref),
 		managementv1.VirtualClusterNodeAccessKeySpec{}.OpenAPIModelName():                    schema_pkg_apis_management_v1_VirtualClusterNodeAccessKeySpec(ref),
 		managementv1.VirtualClusterNodeAccessKeyStatus{}.OpenAPIModelName():                  schema_pkg_apis_management_v1_VirtualClusterNodeAccessKeyStatus(ref),
+		managementv1.VirtualClusterObservabilityConnector{}.OpenAPIModelName():               schema_pkg_apis_management_v1_VirtualClusterObservabilityConnector(ref),
+		managementv1.VirtualClusterObservabilityConnectorList{}.OpenAPIModelName():           schema_pkg_apis_management_v1_VirtualClusterObservabilityConnectorList(ref),
+		managementv1.VirtualClusterObservabilityConnectorSpec{}.OpenAPIModelName():           schema_pkg_apis_management_v1_VirtualClusterObservabilityConnectorSpec(ref),
+		managementv1.VirtualClusterObservabilityConnectorStatus{}.OpenAPIModelName():         schema_pkg_apis_management_v1_VirtualClusterObservabilityConnectorStatus(ref),
 		managementv1.VirtualClusterResourceUsage{}.OpenAPIModelName():                        schema_pkg_apis_management_v1_VirtualClusterResourceUsage(ref),
 		managementv1.VirtualClusterResourceUsageList{}.OpenAPIModelName():                    schema_pkg_apis_management_v1_VirtualClusterResourceUsageList(ref),
 		managementv1.VirtualClusterResourceUsageMap{}.OpenAPIModelName():                     schema_pkg_apis_management_v1_VirtualClusterResourceUsageMap(ref),
@@ -697,6 +711,10 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 		apisstoragev1.NetworkPeerStatus{}.OpenAPIModelName():                                 schema_pkg_apis_storage_v1_NetworkPeerStatus(ref),
 		apisstoragev1.NodeClaim{}.OpenAPIModelName():                                         schema_pkg_apis_storage_v1_NodeClaim(ref),
 		apisstoragev1.NodeClaimList{}.OpenAPIModelName():                                     schema_pkg_apis_storage_v1_NodeClaimList(ref),
+		apisstoragev1.NodeClaimNestedInstances{}.OpenAPIModelName():                          schema_pkg_apis_storage_v1_NodeClaimNestedInstances(ref),
+		apisstoragev1.NodeClaimNestedNodeTypes{}.OpenAPIModelName():                          schema_pkg_apis_storage_v1_NodeClaimNestedNodeTypes(ref),
+		apisstoragev1.NodeClaimNestedNodeTypesAllow{}.OpenAPIModelName():                     schema_pkg_apis_storage_v1_NodeClaimNestedNodeTypesAllow(ref),
+		apisstoragev1.NodeClaimNestedNodeTypesQuota{}.OpenAPIModelName():                     schema_pkg_apis_storage_v1_NodeClaimNestedNodeTypesQuota(ref),
 		apisstoragev1.NodeClaimPower{}.OpenAPIModelName():                                    schema_pkg_apis_storage_v1_NodeClaimPower(ref),
 		apisstoragev1.NodeClaimSpec{}.OpenAPIModelName():                                     schema_pkg_apis_storage_v1_NodeClaimSpec(ref),
 		apisstoragev1.NodeClaimStatus{}.OpenAPIModelName():                                   schema_pkg_apis_storage_v1_NodeClaimStatus(ref),
@@ -810,11 +828,14 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 		apisstoragev1.TemplateMetadata{}.OpenAPIModelName():                                  schema_pkg_apis_storage_v1_TemplateMetadata(ref),
 		apisstoragev1.TemplateRef{}.OpenAPIModelName():                                       schema_pkg_apis_storage_v1_TemplateRef(ref),
 		apisstoragev1.Tenant{}.OpenAPIModelName():                                            schema_pkg_apis_storage_v1_Tenant(ref),
+		apisstoragev1.TenantConnectorAllow{}.OpenAPIModelName():                              schema_pkg_apis_storage_v1_TenantConnectorAllow(ref),
+		apisstoragev1.TenantConnectors{}.OpenAPIModelName():                                  schema_pkg_apis_storage_v1_TenantConnectors(ref),
 		apisstoragev1.TenantControlPlaneClusterAllow{}.OpenAPIModelName():                    schema_pkg_apis_storage_v1_TenantControlPlaneClusterAllow(ref),
 		apisstoragev1.TenantControlPlaneClusters{}.OpenAPIModelName():                        schema_pkg_apis_storage_v1_TenantControlPlaneClusters(ref),
 		apisstoragev1.TenantCustomAllow{}.OpenAPIModelName():                                 schema_pkg_apis_storage_v1_TenantCustomAllow(ref),
 		apisstoragev1.TenantHostnameBinding{}.OpenAPIModelName():                             schema_pkg_apis_storage_v1_TenantHostnameBinding(ref),
 		apisstoragev1.TenantList{}.OpenAPIModelName():                                        schema_pkg_apis_storage_v1_TenantList(ref),
+		apisstoragev1.TenantNICoSiteAccess{}.OpenAPIModelName():                              schema_pkg_apis_storage_v1_TenantNICoSiteAccess(ref),
 		apisstoragev1.TenantNICoStatus{}.OpenAPIModelName():                                  schema_pkg_apis_storage_v1_TenantNICoStatus(ref),
 		apisstoragev1.TenantNodeTypeAllow{}.OpenAPIModelName():                               schema_pkg_apis_storage_v1_TenantNodeTypeAllow(ref),
 		apisstoragev1.TenantNodeTypeQuota{}.OpenAPIModelName():                               schema_pkg_apis_storage_v1_TenantNodeTypeQuota(ref),
@@ -3982,6 +4003,600 @@ func schema_apis_loft_cluster_v1_FeatureStatus(ref common.ReferenceCallback) com
 					},
 				},
 				Required: []string{"name"},
+			},
+		},
+	}
+}
+
+func schema_apis_loft_cluster_v1_IronicNode(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "IronicNode is the Ironic node behind a metal3 BareMetalHost, read live from the Ironic API of this cluster on every request. It carries the same name and namespace as the BareMetalHost.",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"kind": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"apiVersion": {
+						SchemaProps: spec.SchemaProps{
+							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"metadata": {
+						SchemaProps: spec.SchemaProps{
+							Default: map[string]interface{}{},
+							Ref:     ref(metav1.ObjectMeta{}.OpenAPIModelName()),
+						},
+					},
+					"spec": {
+						SchemaProps: spec.SchemaProps{
+							Default: map[string]interface{}{},
+							Ref:     ref(v1.IronicNodeSpec{}.OpenAPIModelName()),
+						},
+					},
+					"status": {
+						SchemaProps: spec.SchemaProps{
+							Default: map[string]interface{}{},
+							Ref:     ref(v1.IronicNodeStatus{}.OpenAPIModelName()),
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			v1.IronicNodeSpec{}.OpenAPIModelName(), v1.IronicNodeStatus{}.OpenAPIModelName(), metav1.ObjectMeta{}.OpenAPIModelName()},
+	}
+}
+
+func schema_apis_loft_cluster_v1_IronicNodeAbort(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "IronicNodeAbort aborts the operation an Ironic node is waiting in. Ironic then fails the operation and the bare metal operator retries it, the same way it does when Ironic's own callback timeout expires.",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"kind": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"apiVersion": {
+						SchemaProps: spec.SchemaProps{
+							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"metadata": {
+						SchemaProps: spec.SchemaProps{
+							Default: map[string]interface{}{},
+							Ref:     ref(metav1.ObjectMeta{}.OpenAPIModelName()),
+						},
+					},
+					"status": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Status is the node as Ironic reports it right after the abort request.",
+							Default:     map[string]interface{}{},
+							Ref:         ref(v1.IronicNodeStatus{}.OpenAPIModelName()),
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			v1.IronicNodeStatus{}.OpenAPIModelName(), metav1.ObjectMeta{}.OpenAPIModelName()},
+	}
+}
+
+func schema_apis_loft_cluster_v1_IronicNodeAbortList(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"kind": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"apiVersion": {
+						SchemaProps: spec.SchemaProps{
+							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"metadata": {
+						SchemaProps: spec.SchemaProps{
+							Default: map[string]interface{}{},
+							Ref:     ref(metav1.ListMeta{}.OpenAPIModelName()),
+						},
+					},
+					"items": {
+						SchemaProps: spec.SchemaProps{
+							Type: []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref(v1.IronicNodeAbort{}.OpenAPIModelName()),
+									},
+								},
+							},
+						},
+					},
+				},
+				Required: []string{"items"},
+			},
+		},
+		Dependencies: []string{
+			v1.IronicNodeAbort{}.OpenAPIModelName(), metav1.ListMeta{}.OpenAPIModelName()},
+	}
+}
+
+func schema_apis_loft_cluster_v1_IronicNodeAgent(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "IronicNodeAgent is what Ironic knows about the ramdisk agent of a node.",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"started": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Started is true once the agent has looked up its node and been given a token, so the ramdisk booted and reached Ironic.",
+							Type:        []string{"boolean"},
+							Format:      "",
+						},
+					},
+					"lastHeartbeat": {
+						SchemaProps: spec.SchemaProps{
+							Description: "LastHeartbeat is when the agent last called back to Ironic.",
+							Ref:         ref(metav1.Time{}.OpenAPIModelName()),
+						},
+					},
+					"version": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Version is the agent version.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			metav1.Time{}.OpenAPIModelName()},
+	}
+}
+
+func schema_apis_loft_cluster_v1_IronicNodeHistoryEvent(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "IronicNodeHistoryEvent is one entry of an Ironic node's history.",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"createdAt": {
+						SchemaProps: spec.SchemaProps{
+							Description: "CreatedAt is when Ironic recorded the event.",
+							Ref:         ref(metav1.Time{}.OpenAPIModelName()),
+						},
+					},
+					"severity": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Severity is the event severity, such as \"ERROR\" or \"INFO\".",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"eventType": {
+						SchemaProps: spec.SchemaProps{
+							Description: "EventType is the operation the event belongs to, such as \"deployment\" or \"cleaning\".",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"event": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Event is the event message.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"conductor": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Conductor is the conductor that recorded the event.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+				},
+				Required: []string{"createdAt"},
+			},
+		},
+		Dependencies: []string{
+			metav1.Time{}.OpenAPIModelName()},
+	}
+}
+
+func schema_apis_loft_cluster_v1_IronicNodeInterfaces(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "IronicNodeInterfaces are the driver interfaces of an Ironic node, each the implementation Ironic uses for it, such as \"redfish-virtual-media\" for boot.",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"boot": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"string"},
+							Format: "",
+						},
+					},
+					"deploy": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"string"},
+							Format: "",
+						},
+					},
+					"power": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"string"},
+							Format: "",
+						},
+					},
+					"management": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"string"},
+							Format: "",
+						},
+					},
+					"inspect": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"string"},
+							Format: "",
+						},
+					},
+					"console": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"string"},
+							Format: "",
+						},
+					},
+					"network": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"string"},
+							Format: "",
+						},
+					},
+					"storage": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"string"},
+							Format: "",
+						},
+					},
+					"raid": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"string"},
+							Format: "",
+						},
+					},
+					"bios": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"string"},
+							Format: "",
+						},
+					},
+					"firmware": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"string"},
+							Format: "",
+						},
+					},
+					"rescue": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"string"},
+							Format: "",
+						},
+					},
+					"vendor": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"string"},
+							Format: "",
+						},
+					},
+				},
+			},
+		},
+	}
+}
+
+func schema_apis_loft_cluster_v1_IronicNodeList(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"kind": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"apiVersion": {
+						SchemaProps: spec.SchemaProps{
+							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"metadata": {
+						SchemaProps: spec.SchemaProps{
+							Default: map[string]interface{}{},
+							Ref:     ref(metav1.ListMeta{}.OpenAPIModelName()),
+						},
+					},
+					"items": {
+						SchemaProps: spec.SchemaProps{
+							Type: []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref(v1.IronicNode{}.OpenAPIModelName()),
+									},
+								},
+							},
+						},
+					},
+				},
+				Required: []string{"items"},
+			},
+		},
+		Dependencies: []string{
+			v1.IronicNode{}.OpenAPIModelName(), metav1.ListMeta{}.OpenAPIModelName()},
+	}
+}
+
+func schema_apis_loft_cluster_v1_IronicNodeSpec(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "IronicNodeSpec is empty: an IronicNode is read-only.",
+				Type:        []string{"object"},
+			},
+		},
+	}
+}
+
+func schema_apis_loft_cluster_v1_IronicNodeStatus(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "IronicNodeStatus is what Ironic reports about the node. Only the fields below are copied from Ironic, and driver info without its credentials, so BMC credentials, agent tokens and instance data stay in Ironic.",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"uuid": {
+						SchemaProps: spec.SchemaProps{
+							Description: "UUID is the Ironic node uuid, the BareMetalHost's status.provisioning.ID.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"provisionState": {
+						SchemaProps: spec.SchemaProps{
+							Description: "ProvisionState is the Ironic provision state, such as \"wait call-back\" or \"clean wait\".",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"targetProvisionState": {
+						SchemaProps: spec.SchemaProps{
+							Description: "TargetProvisionState is the state Ironic is moving the node to.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"provisionUpdatedAt": {
+						SchemaProps: spec.SchemaProps{
+							Description: "ProvisionUpdatedAt is when ProvisionState last changed.",
+							Ref:         ref(metav1.Time{}.OpenAPIModelName()),
+						},
+					},
+					"powerState": {
+						SchemaProps: spec.SchemaProps{
+							Description: "PowerState is the power state Ironic last read from the BMC.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"targetPowerState": {
+						SchemaProps: spec.SchemaProps{
+							Description: "TargetPowerState is the power state Ironic is moving the node to.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"lastError": {
+						SchemaProps: spec.SchemaProps{
+							Description: "LastError is the last error Ironic recorded for the node.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"maintenance": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Maintenance is set when the node is in maintenance mode, by an operator or by Ironic itself after a fault.",
+							Type:        []string{"boolean"},
+							Format:      "",
+						},
+					},
+					"maintenanceReason": {
+						SchemaProps: spec.SchemaProps{
+							Description: "MaintenanceReason says why the node is in maintenance mode.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"fault": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Fault is the fault that made Ironic put the node in maintenance mode, such as \"power failure\" or \"clean failure\".",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"conductor": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Conductor is the Ironic conductor that manages the node, and so the one whose logs cover it.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"reservation": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Reservation is the conductor that currently holds the node's lock.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"deployStep": {
+						SchemaProps: spec.SchemaProps{
+							Description: "DeployStep is the deploy step the node is running or waiting in.",
+							Ref:         ref(v1.IronicNodeStep{}.OpenAPIModelName()),
+						},
+					},
+					"cleanStep": {
+						SchemaProps: spec.SchemaProps{
+							Description: "CleanStep is the clean step the node is running or waiting in.",
+							Ref:         ref(v1.IronicNodeStep{}.OpenAPIModelName()),
+						},
+					},
+					"serviceStep": {
+						SchemaProps: spec.SchemaProps{
+							Description: "ServiceStep is the service step the node is running or waiting in.",
+							Ref:         ref(v1.IronicNodeStep{}.OpenAPIModelName()),
+						},
+					},
+					"agent": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Agent is what Ironic knows about the ironic-python-agent ramdisk.",
+							Default:     map[string]interface{}{},
+							Ref:         ref(v1.IronicNodeAgent{}.OpenAPIModelName()),
+						},
+					},
+					"driver": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Driver is the hardware type Ironic manages the node with, such as \"redfish\" or \"ipmi\".",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"interfaces": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Interfaces are the driver interfaces the node uses.",
+							Default:     map[string]interface{}{},
+							Ref:         ref(v1.IronicNodeInterfaces{}.OpenAPIModelName()),
+						},
+					},
+					"driverInfo": {
+						SchemaProps: spec.SchemaProps{
+							Description: "DriverInfo holds the node's driver settings, such as the BMC address, the deploy ramdisk or force_persistent_boot_device. A value that is not a string is JSON. Credentials are left out: whatever Ironic masks, and every username, password, token, key, secret or certificate.",
+							Type:        []string{"object"},
+							AdditionalProperties: &spec.SchemaOrBool{
+								Allows: true,
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: "",
+										Type:    []string{"string"},
+										Format:  "",
+									},
+								},
+							},
+						},
+					},
+					"bootMode": {
+						SchemaProps: spec.SchemaProps{
+							Description: "BootMode is the boot mode Ironic last read from the BMC, \"uefi\" or \"bios\".",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"secureBoot": {
+						SchemaProps: spec.SchemaProps{
+							Description: "SecureBoot is whether UEFI secure boot is on, as Ironic last read it from the BMC. Unset when the BMC does not report it.",
+							Type:        []string{"boolean"},
+							Format:      "",
+						},
+					},
+					"abortable": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Abortable is true when the node waits in a state that the abort subresource accepts.",
+							Type:        []string{"boolean"},
+							Format:      "",
+						},
+					},
+					"history": {
+						SchemaProps: spec.SchemaProps{
+							Description: "History holds the node's most recent Ironic history events, newest first. Only a get fills it: a list leaves it empty.",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref(v1.IronicNodeHistoryEvent{}.OpenAPIModelName()),
+									},
+								},
+							},
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			v1.IronicNodeAgent{}.OpenAPIModelName(), v1.IronicNodeHistoryEvent{}.OpenAPIModelName(), v1.IronicNodeInterfaces{}.OpenAPIModelName(), v1.IronicNodeStep{}.OpenAPIModelName(), metav1.Time{}.OpenAPIModelName()},
+	}
+}
+
+func schema_apis_loft_cluster_v1_IronicNodeStep(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "IronicNodeStep is a deploy, clean or service step of an Ironic node.",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"driverInterface": {
+						SchemaProps: spec.SchemaProps{
+							Description: "DriverInterface is the driver interface the step belongs to, such as \"deploy\" or \"raid\".",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"step": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Step is the step name, such as \"write_image\".",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"abortable": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Abortable is true when Ironic can abort the step while it runs. An abort requested during a step that is not abortable takes effect once the step is done.",
+							Type:        []string{"boolean"},
+							Format:      "",
+						},
+					},
+				},
 			},
 		},
 	}
@@ -8862,7 +9477,7 @@ func schema_pkg_apis_management_v1_Connector(ref common.ReferenceCallback) commo
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
-				Description: "Connector represents an integration connector of the platform (shared database, Argo CD, observability). It is a cluster-scoped virtual resource: it has no CRD of its own and is served straight from the connector Secret (labeled with loft.sh/connector-type) in the platform namespace, through the same translating client every other Secret-backed management kind uses. Watch is not served in v1: a watch request fails instead of hanging, so list and poll instead.\n\nRejection happens at write time only: create and update through this API validate the request, while a read never rejects, so pre-existing Secrets with missing optional fields still project. A read does re-run that validation, but only to report the outcome in status, so a malformed Secret is described rather than hidden. Writers that bypass this API and write the backing Secrets directly (the UI and platform controllers today) are trusted to keep the Secrets well-formed; this API does not defend against out-of-band malformed Secrets.\n\nStatus is read-only on the wire. Whatever a request carries is ignored: a create stores no status and an update keeps the stored object's. Status is assembled on every read, part of it computed from the stored payload and part of it unpacked from an annotation controllers publish on the backing Secret.\n\nMetadata is the backing Secret's. Labels and annotations are served and written as they are stored, as on every other management kind, with the exceptions each connector type declares. Projected keys become fields and are not served as metadata: the loft.sh/connector-type label is derived from the payload section, the loft.sh/display-name annotation is spec.displayName. Server-owned keys are the platform's, never served, and a write that names one is refused: the status annotation controllers publish, unpacked into status. Withheld keys are never served: kubectl's last-applied-configuration annotation, because on a Secret written by hand it carries the whole manifest, credentials included. A write that sends a projected key disagreeing with the field it mirrors is refused. Labels the tenancy layer owns (tenant.vcluster.com/*) are that layer's, not this type's: an operator sees them and assigns a connector to a tenant by writing one, while a tenant never sees them and a tenant's write naming one is refused. Finalizers and ownerReferences round-trip. managedFields are served with this API's apiVersion. A label selector on loft.sh/connector-type still narrows a list to that type although the served object does not carry the label. Because the last-applied annotation is withheld, a client-side kubectl apply never finds it and reports a permanent diff: use server-side apply, imperative writes or full-replace updates.\n\nCredentials live in the type-specific payload sections of spec and are served only to a caller who could update this connector: one holding the update verb on it. Every other caller reads a redacted projection with the credential fields empty.\n\nTenancy in this release: a platform admin creates connectors and assigns one to a tenant through the tenancy layer's exclusive assignment. A tenant reads the connectors assigned to it, redacted, and cannot create, update or delete a connector; every other connector is not found. Tenant-authored connectors come later, without a change to this type.\n\nAn update through this API replaces the backing Secret from the request; nothing is read from the stored Secret to merge with. Passthrough labels and annotations, finalizers and ownerReferences round-trip because they are served and sent back. A credential the request leaves empty keeps its stored value, and the conditions controllers published are carried over from the stored object. What this API never serves does not survive an update: Data keys the connector type does not model, and the withheld annotations. The keys this API writes are the ones the platform's consumers of a connector read.\n\nThe verbs behave as the generic path serves every Secret-backed kind. A delete is by name, with no precondition on the object's UID, and is reported as completed even when a finalizer on the backing Secret holds the Secret back. NotFound, AlreadyExists and Conflict speak of connectors; an Invalid or Forbidden raised by the store itself is passed through as the store phrased it.",
+				Description: "Connector represents an integration connector of the platform (shared database, Argo CD, observability). It is a cluster-scoped virtual resource: it has no CRD of its own and is served straight from the connector Secret (labeled with loft.sh/connector-type) in the platform namespace, through the same translating client every other Secret-backed management kind uses. Watch is not served in v1: a watch request fails instead of hanging, so list and poll instead.\n\nRejection happens at write time only: create and update through this API validate the request, while a read never rejects, so pre-existing Secrets with missing optional fields still project. A read does re-run that validation, but only to report the outcome in status, so a malformed Secret is described rather than hidden. Writers that bypass this API and write the backing Secrets directly (the UI and platform controllers today) are trusted to keep the Secrets well-formed; this API does not defend against out-of-band malformed Secrets.\n\nStatus is read-only on the wire. Whatever a request carries is ignored: a create stores no status and an update keeps the stored object's. Status is assembled on every read, part of it computed from the stored payload and part of it unpacked from an annotation controllers publish on the backing Secret. The redacted view serves the conditions without their messages, which can quote payload values and endpoints.\n\nMetadata is the backing Secret's. Labels and annotations are served and written as they are stored, as on every other management kind, with the exceptions each connector type declares. Projected keys become fields and are not served as metadata: the loft.sh/connector-type label is derived from the payload section, the loft.sh/display-name annotation is spec.displayName. Server-owned keys are the platform's, never served, and a write that names one is refused: the status annotation controllers publish, unpacked into status. Withheld keys are never served: kubectl's last-applied-configuration annotation, because on a Secret written by hand it carries the whole manifest, credentials included. A write that sends a projected key disagreeing with the field it mirrors is refused. Labels the tenancy layer owns (tenant.vcluster.com/*) are that layer's, not this type's: an operator sees them and assigns a connector to a tenant by writing one, while a tenant never sees them and a tenant's write naming one is refused. Finalizers and ownerReferences round-trip. managedFields are served with this API's apiVersion. A label selector on loft.sh/connector-type still narrows a list to that type although the served object does not carry the label. Because the last-applied annotation is withheld, a client-side kubectl apply never finds it and reports a permanent diff: use server-side apply, imperative writes or full-replace updates. This describes the full view. The redacted view keeps the identity fields and labels and drops annotations, managedFields, ownerReferences and finalizers.\n\nCredentials and connection details live in the type-specific payload sections of spec and are served only to a caller who could update this connector, such as a holder of loft-connectors-admin. Every other caller, holders of loft-connectors-viewer and tenants included, reads a redacted view built from an allowlist: the name, the display name, the payload section as a type marker, and the fields the type opts in (the shared-database dialect, the image-store protocol). A field the type adds later is not served in it. A platform component that needs the connection details reads the backing Secret or authenticates as an identity holding loft-connectors-admin; with a lesser identity it reads the redacted view, and the empty fields there are not an error.\n\nTenancy in this release: a platform admin creates connectors and assigns one to a tenant through the tenancy layer's exclusive assignment. A tenant reads the connectors assigned to it in the redacted view, and cannot create, update or delete a connector; every other connector is not found. Tenant-authored connectors come later, without a change to this type.\n\nAn update through this API replaces the backing Secret from the request; nothing is read from the stored Secret to merge with. Passthrough labels and annotations, finalizers and ownerReferences round-trip because they are served and sent back. A credential the request leaves empty keeps its stored value, and the conditions controllers published are carried over from the stored object. What this API never serves does not survive an update: Data keys the connector type does not model, and the withheld annotations. The keys this API writes are the ones the platform's consumers of a connector read.\n\nThe verbs behave as the generic path serves every Secret-backed kind. A delete is by name, with no precondition on the object's UID, and is reported as completed even when a finalizer on the backing Secret holds the Secret back. NotFound, AlreadyExists and Conflict speak of connectors; an Invalid or Forbidden raised by the store itself is passed through as the store phrased it.",
 				Type:        []string{"object"},
 				Properties: map[string]spec.Schema{
 					"kind": {
@@ -8936,7 +9551,7 @@ func schema_pkg_apis_management_v1_ConnectorArgoCDAkuitySpec(ref common.Referenc
 					},
 					"username": {
 						SchemaProps: spec.SchemaProps{
-							Description: "Username is the Argo CD username for basic authentication, used together with password as the alternative to token. Data key \"username\". Projected only when no token is stored, because the consumer authenticates with the token whenever one is present and a username beside it describes a method the connector does not use.",
+							Description: "Username is the Argo CD username for basic authentication, used together with password as the alternative to token. Data key \"username\". Projected in the full view only when no token is stored, because the consumer authenticates with the token whenever one is present and a username beside it describes a method the connector does not use.",
 							Type:        []string{"string"},
 							Format:      "",
 						},
@@ -9052,7 +9667,7 @@ func schema_pkg_apis_management_v1_ConnectorArgoCDSelfHostedSpec(ref common.Refe
 					},
 					"username": {
 						SchemaProps: spec.SchemaProps{
-							Description: "Username is the Argo CD username for basic authentication, used together with password as the alternative to token. Data key \"username\". Projected only when no token is stored, because the consumer authenticates with the token whenever one is present and a username beside it describes a method the connector does not use.",
+							Description: "Username is the Argo CD username for basic authentication, used together with password as the alternative to token. Data key \"username\". Projected in the full view only when no token is stored, because the consumer authenticates with the token whenever one is present and a username beside it describes a method the connector does not use.",
 							Type:        []string{"string"},
 							Format:      "",
 						},
@@ -9116,7 +9731,7 @@ func schema_pkg_apis_management_v1_ConnectorArgoCDServer(ref common.ReferenceCal
 					},
 					"username": {
 						SchemaProps: spec.SchemaProps{
-							Description: "Username is the Argo CD username for basic authentication, used together with password as the alternative to token. Data key \"username\". Projected only when no token is stored, because the consumer authenticates with the token whenever one is present and a username beside it describes a method the connector does not use.",
+							Description: "Username is the Argo CD username for basic authentication, used together with password as the alternative to token. Data key \"username\". Projected in the full view only when no token is stored, because the consumer authenticates with the token whenever one is present and a username beside it describes a method the connector does not use.",
 							Type:        []string{"string"},
 							Format:      "",
 						},
@@ -9153,7 +9768,7 @@ func schema_pkg_apis_management_v1_ConnectorArgoCDSpec(ref common.ReferenceCallb
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
-				Description: "ConnectorArgoCDSpec configures a connection to an Argo CD instance used by the Argo CD integration. Exactly one of selfHosted or akuity must be set. The flavor is stored in the \"connectorType\" Data key of the backing Secret: \"akuity\" for akuity, and absent (or any other value, as on legacy Secrets) for selfHosted, exactly like the UI.\n\nEvery field maps to one Data key of the backing Secret (given in each field comment), so direct Secret writers and this API stay byte-compatible in both directions.\n\nThree fields are credentials under the Connector type's view rule: token, password and the Akuity apiKeySecret are served to a caller who could update this connector and empty for every other caller, and on update an empty value keeps the stored one, so a redacted read written back never clears a credential.",
+				Description: "ConnectorArgoCDSpec configures a connection to an Argo CD instance used by the Argo CD integration. Exactly one of selfHosted or akuity must be set. The flavor is stored in the \"connectorType\" Data key of the backing Secret: \"akuity\" for akuity, and absent (or any other value, as on legacy Secrets) for selfHosted, exactly like the UI.\n\nEvery field maps to one Data key of the backing Secret (given in each field comment), so direct Secret writers and this API stay byte-compatible in both directions.\n\nThree fields are credentials under the Connector type's view rule: token, password and the Akuity apiKeySecret are served to a caller who could update this connector and absent for every other caller, and on update an empty value keeps the stored one, so a read without the credential written back never clears it.",
 				Type:        []string{"object"},
 				Properties: map[string]spec.Schema{
 					"selfHosted": {
@@ -9228,6 +9843,13 @@ func schema_pkg_apis_management_v1_ConnectorImageStoreS3Spec(ref common.Referenc
 							Format:      "",
 						},
 					},
+					"sessionToken": {
+						SchemaProps: spec.SchemaProps{
+							Description: "SessionToken is set only for temporary credentials. Data key \"sessionToken\". Optional; an empty value on update removes it. A credential (see the type comment). Pre-signed URLs expire with the session, so this is meant for short-lived use.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
 				},
 				Required: []string{"bucket", "region", "accessKey"},
 			},
@@ -9239,7 +9861,7 @@ func schema_pkg_apis_management_v1_ConnectorImageStoreSpec(ref common.ReferenceC
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
-				Description: "ConnectorImageStoreSpec configures the object store the platform uploads OSImage bytes to and serves them from. An OSImage names the connector through spec.connectorRef and the platform mints pre-signed URLs from these credentials on the image's behalf: the client uploading the bytes and the node provider reading them only ever see a URL, never the keys. The Secret behind this payload is read by pkg/osimage/store, whose loader is the arbiter of the Data keys named in the field comments below.\n\nOne field is a credential under the Connector type's view rule: s3.secretKey is served to a caller who could update this connector and empty for every other caller, and on update an empty value keeps the stored one, so a redacted read written back never clears the key. The access key is not a credential in that sense: SigV4 puts it into every pre-signed URL as X-Amz-Credential, so withholding it would protect nothing.",
+				Description: "ConnectorImageStoreSpec configures the object store the platform uploads OSImage bytes to and serves them from. An OSImage names the connector through spec.connectorRef and the platform mints pre-signed URLs from these credentials on the image's behalf: the client uploading the bytes and the node provider reading them only ever see a URL, never the keys. The Secret behind this payload is read by pkg/osimage/store, whose loader is the arbiter of the Data keys named in the field comments below.\n\nTwo fields are credentials under the Connector type's view rule: s3.secretKey and s3.sessionToken are served to a caller who could update this connector and absent for every other caller. On update an empty secretKey keeps the stored one, so a read without the credential written back never clears the key. The access key is not a credential: SigV4 puts it into every pre-signed URL as X-Amz-Credential, so a caller who could update this connector is served it, and an empty value on update is not \"keep\". Like every other payload field except protocol, it is absent from the redacted view.",
 				Type:        []string{"object"},
 				Properties: map[string]spec.Schema{
 					"protocol": {
@@ -9354,7 +9976,7 @@ func schema_pkg_apis_management_v1_ConnectorSharedDatabaseSpec(ref common.Refere
 					},
 					"password": {
 						SchemaProps: spec.SchemaProps{
-							Description: "Password is the password of the database user. Data key \"password\". Required on create unless identityProvider is set. It is a credential: served only to a caller who could update this connector and empty for every other caller (see the Connector type). On update an empty password keeps the stored one, so a redacted read written back never clears a credential; switching to identityProvider removes it. Switching back from identityProvider to password authentication requires a non-empty password in the request: the stored one was removed by the earlier switch, so there is nothing to keep.",
+							Description: "Password is the password of the database user. Data key \"password\". Required on create unless identityProvider is set. It is a credential: served only to a caller who could update this connector and absent for every other caller (see the Connector type). On update an empty password keeps the stored one, so a read without the credential written back never clears it; switching to identityProvider removes it. Switching back from identityProvider to password authentication requires a non-empty password in the request: the stored one was removed by the earlier switch, so there is nothing to keep.",
 							Type:        []string{"string"},
 							Format:      "",
 						},
@@ -12135,7 +12757,7 @@ func schema_pkg_apis_management_v1_NetworkEnvironmentSpec(ref common.ReferenceCa
 					},
 					"providerRef": {
 						SchemaProps: spec.SchemaProps{
-							Description: "ProviderRef is the name of the NodeProvider that this NetworkEnvironment is based on. It may be left empty, in which case the NetworkEnvironment is a pure property container: it provisions no infrastructure, becomes available immediately, carries no cleanup finalizer, and can never be a provider's default environment - NodeClaims must reference it explicitly. A NodeProvider that requires a network environment cannot be served by one. Once set, it cannot be changed.",
+							Description: "ProviderRef is the name of the NodeProvider that this NetworkEnvironment is based on. A NodeClaim of another provider that names this environment is refused at admission, and a project is offered it only alongside a NodeType of this provider. Required at creation and immutable afterwards. Objects created without one before that requirement provision nothing, are available immediately, carry no cleanup finalizer, and admission refuses new NodeClaims naming them.",
 							Type:        []string{"string"},
 							Format:      "",
 						},
@@ -12842,12 +13464,18 @@ func schema_pkg_apis_management_v1_NodeClaimSpec(ref common.ReferenceCallback) c
 							Ref:         ref(apisstoragev1.NodeClaimPower{}.OpenAPIModelName()),
 						},
 					},
+					"nestedInstances": {
+						SchemaProps: spec.SchemaProps{
+							Description: "NestedInstances configures the instances that can be created on this Machine node claim.",
+							Ref:         ref(apisstoragev1.NodeClaimNestedInstances{}.OpenAPIModelName()),
+						},
+					},
 				},
 				Required: []string{"providerRef"},
 			},
 		},
 		Dependencies: []string{
-			apisstoragev1.Access{}.OpenAPIModelName(), apisstoragev1.NodeClaimPower{}.OpenAPIModelName(), apisstoragev1.UserOrTeam{}.OpenAPIModelName(), corev1.NodeSelectorRequirement{}.OpenAPIModelName(), corev1.Taint{}.OpenAPIModelName(), resource.Quantity{}.OpenAPIModelName()},
+			apisstoragev1.Access{}.OpenAPIModelName(), apisstoragev1.NodeClaimNestedInstances{}.OpenAPIModelName(), apisstoragev1.NodeClaimPower{}.OpenAPIModelName(), apisstoragev1.UserOrTeam{}.OpenAPIModelName(), corev1.NodeSelectorRequirement{}.OpenAPIModelName(), corev1.Taint{}.OpenAPIModelName(), resource.Quantity{}.OpenAPIModelName()},
 	}
 }
 
@@ -13593,6 +14221,13 @@ func schema_pkg_apis_management_v1_NodeProviderSpec(ref common.ReferenceCallback
 							Format:      "",
 						},
 					},
+					"machineAllocationPolicy": {
+						SchemaProps: spec.SchemaProps{
+							Description: "MachineAllocationPolicy is the NodeTypeSpec.MachineAllocationPolicy of this provider's node types that leave theirs empty, and the only one discovered (nico) node types can have.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
 				},
 			},
 		},
@@ -13832,6 +14467,13 @@ func schema_pkg_apis_management_v1_NodeTypeSpec(ref common.ReferenceCallback) co
 					"displayName": {
 						SchemaProps: spec.SchemaProps{
 							Description: "DisplayName is the name that should be displayed in the UI",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"machineAllocationPolicy": {
+						SchemaProps: spec.SchemaProps{
+							Description: "MachineAllocationPolicy selects the machines a tenant's NodeClaims of this type may use: Assigned only those the tenant owns or was assigned exclusively, OnDemand also those no tenant owns or holds (never another tenant's or the platform's). Claims no tenant owns reach unassigned machines either way. Honored by metal3 and nico; externalPlatform node types mirror the remote's value. For kubevirt, Assigned runs the VMs on the tenant's machines provisioned for VMs and OnDemand on the cluster's shared nodes. Empty falls back to the provider's spec.machineAllocationPolicy, then to OnDemand for kubevirt and Assigned for the rest.",
 							Type:        []string{"string"},
 							Format:      "",
 						},
@@ -14438,6 +15080,13 @@ func schema_pkg_apis_management_v1_OSImageStatus(ref common.ReferenceCallback) c
 					"phase": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Phase is where the image is in its upload lifecycle. Empty for an image that holds no bytes. The controller owns every transition; the upload endpoints only annotate.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"observedSessionID": {
+						SchemaProps: spec.SchemaProps{
+							Description: "ObservedSessionID is the upload session the phase was decided for. Empty when it was decided before any session was opened.",
 							Type:        []string{"string"},
 							Format:      "",
 						},
@@ -20855,11 +21504,17 @@ func schema_pkg_apis_management_v1_TenantSpec(ref common.ReferenceCallback) comm
 							Ref:         ref(apisstoragev1.TenantTemplates{}.OpenAPIModelName()),
 						},
 					},
+					"connectors": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Connectors governs the admin-owned connectors this tenant may read.",
+							Ref:         ref(apisstoragev1.TenantConnectors{}.OpenAPIModelName()),
+						},
+					},
 				},
 			},
 		},
 		Dependencies: []string{
-			apisstoragev1.Access{}.OpenAPIModelName(), apisstoragev1.TenantControlPlaneClusters{}.OpenAPIModelName(), apisstoragev1.TenantNodeTypes{}.OpenAPIModelName(), apisstoragev1.TenantOSImages{}.OpenAPIModelName(), apisstoragev1.TenantPlatformConfig{}.OpenAPIModelName(), apisstoragev1.TenantSSHKeys{}.OpenAPIModelName(), apisstoragev1.TenantTemplates{}.OpenAPIModelName(), apisstoragev1.UserOrTeam{}.OpenAPIModelName()},
+			apisstoragev1.Access{}.OpenAPIModelName(), apisstoragev1.TenantConnectors{}.OpenAPIModelName(), apisstoragev1.TenantControlPlaneClusters{}.OpenAPIModelName(), apisstoragev1.TenantNodeTypes{}.OpenAPIModelName(), apisstoragev1.TenantOSImages{}.OpenAPIModelName(), apisstoragev1.TenantPlatformConfig{}.OpenAPIModelName(), apisstoragev1.TenantSSHKeys{}.OpenAPIModelName(), apisstoragev1.TenantTemplates{}.OpenAPIModelName(), apisstoragev1.UserOrTeam{}.OpenAPIModelName()},
 	}
 }
 
@@ -20914,7 +21569,7 @@ func schema_pkg_apis_management_v1_TenantStatus(ref common.ReferenceCallback) co
 					},
 					"nico": {
 						SchemaProps: spec.SchemaProps{
-							Description: "NICo reports the NICo tenant org materialized for this Tenant, set once the Tenant opts into NICo via the nico.vcluster.com/org annotation.",
+							Description: "NICo reports the NICo tenant org materialized for this Tenant, set once the Tenant is onboarded into NICo.",
 							Ref:         ref(apisstoragev1.TenantNICoStatus{}.OpenAPIModelName()),
 						},
 					},
@@ -24246,6 +24901,144 @@ func schema_pkg_apis_management_v1_VirtualClusterNodeAccessKeyStatus(ref common.
 	}
 }
 
+func schema_pkg_apis_management_v1_VirtualClusterObservabilityConnector(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "VirtualClusterObservabilityConnector holds the credential and write-gateway connection details a tenant cluster's collector needs to push metrics to the Platform.\n\nCreating it refuses in one of five ways, which differ only in what the caller should do next:\n\n  - 400: the connector, or the instance's own config, is missing or has to be repaired\n  - 403: the platform refuses the caller's entitlement or identity\n  - 404: the instance is not there, or is on its way out\n  - 405: the deployment builds no connector at all\n  - 503: the write gateway is still coming up\n\nThe code carries the whole of that answer, so a caller decides whether to retry from it alone. The status message is for people: it names the specific cause, and the platform reports the same finding as a warning condition on the virtual cluster instance, which is where the admin who owns the connector is looking.",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"kind": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"apiVersion": {
+						SchemaProps: spec.SchemaProps{
+							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"metadata": {
+						SchemaProps: spec.SchemaProps{
+							Default: map[string]interface{}{},
+							Ref:     ref(metav1.ObjectMeta{}.OpenAPIModelName()),
+						},
+					},
+					"spec": {
+						SchemaProps: spec.SchemaProps{
+							Default: map[string]interface{}{},
+							Ref:     ref(managementv1.VirtualClusterObservabilityConnectorSpec{}.OpenAPIModelName()),
+						},
+					},
+					"status": {
+						SchemaProps: spec.SchemaProps{
+							Default: map[string]interface{}{},
+							Ref:     ref(managementv1.VirtualClusterObservabilityConnectorStatus{}.OpenAPIModelName()),
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			managementv1.VirtualClusterObservabilityConnectorSpec{}.OpenAPIModelName(), managementv1.VirtualClusterObservabilityConnectorStatus{}.OpenAPIModelName(), metav1.ObjectMeta{}.OpenAPIModelName()},
+	}
+}
+
+func schema_pkg_apis_management_v1_VirtualClusterObservabilityConnectorList(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"kind": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"apiVersion": {
+						SchemaProps: spec.SchemaProps{
+							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"metadata": {
+						SchemaProps: spec.SchemaProps{
+							Default: map[string]interface{}{},
+							Ref:     ref(metav1.ListMeta{}.OpenAPIModelName()),
+						},
+					},
+					"items": {
+						SchemaProps: spec.SchemaProps{
+							Type: []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref(managementv1.VirtualClusterObservabilityConnector{}.OpenAPIModelName()),
+									},
+								},
+							},
+						},
+					},
+				},
+				Required: []string{"items"},
+			},
+		},
+		Dependencies: []string{
+			managementv1.VirtualClusterObservabilityConnector{}.OpenAPIModelName(), metav1.ListMeta{}.OpenAPIModelName()},
+	}
+}
+
+func schema_pkg_apis_management_v1_VirtualClusterObservabilityConnectorSpec(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+			},
+		},
+	}
+}
+
+func schema_pkg_apis_management_v1_VirtualClusterObservabilityConnectorStatus(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"endpoint": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Endpoint is the OTLP/HTTP URL of the write gateway backing the connector named by the instance's integrations.observability.connector.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"token": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Token is the metrics-writer access key scoped to this instance. Stable across calls.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"caCert": {
+						SchemaProps: spec.SchemaProps{
+							Description: "CaCert is the PEM trust anchor for Endpoint. Empty when the gateway serves a cert signed by a publicly trusted CA, in which case the system trust store applies.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+				},
+			},
+		},
+	}
+}
+
 func schema_pkg_apis_management_v1_VirtualClusterResourceUsage(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
@@ -24749,7 +25542,7 @@ func schema_pkg_apis_management_v1_VirtualClusterSnapshotCredentialsStatus(ref c
 				Properties: map[string]spec.Schema{
 					"options": {
 						SchemaProps: spec.SchemaProps{
-							Description: "Options is the JSON-encoded snapshot storage options (github.com/loft-sh/api/v4/pkg/snapshot.Options), resolved server-side from the instance's auto-snapshot configuration. It carries the storage credentials (the storage location comes from the snapshot request itself). The tenant cluster is expected to unmarshal it and use the credentials in memory only, without persisting them.",
+							Description: "Options is the JSON-encoded snapshot storage options (github.com/loft-sh/api/v5/pkg/snapshot.Options), resolved server-side from the instance's auto-snapshot configuration. It carries the storage credentials (the storage location comes from the snapshot request itself). The tenant cluster is expected to unmarshal it and use the credentials in memory only, without persisting them.",
 							Type:        []string{"string"},
 							Format:      "",
 						},
@@ -26052,7 +26845,7 @@ func schema_pkg_apis_storage_v1_AllowedTemplate(ref common.ReferenceCallback) co
 				Properties: map[string]spec.Schema{
 					"kind": {
 						SchemaProps: spec.SchemaProps{
-							Description: "Kind of the template that is allowed. Currently only supports DevPodWorkspaceTemplate, VirtualClusterTemplate & SpaceTemplate",
+							Description: "Kind of the template that is allowed. Supports DevPodWorkspaceTemplate, VirtualClusterTemplate, SpaceTemplate and StackTemplate.",
 							Type:        []string{"string"},
 							Format:      "",
 						},
@@ -28878,6 +29671,13 @@ func schema_pkg_apis_storage_v1_BCMNodeTypeSpec(ref common.ReferenceCallback) co
 							Format:      "",
 						},
 					},
+					"machineAllocationPolicy": {
+						SchemaProps: spec.SchemaProps{
+							Description: "MachineAllocationPolicy selects the machines a tenant's NodeClaims of this type may use: Assigned only those the tenant owns or was assigned exclusively, OnDemand also those no tenant owns or holds (never another tenant's or the platform's). Claims no tenant owns reach unassigned machines either way. Honored by metal3 and nico; externalPlatform node types mirror the remote's value. For kubevirt, Assigned runs the VMs on the tenant's machines provisioned for VMs and OnDemand on the cluster's shared nodes. Empty falls back to the provider's spec.machineAllocationPolicy, then to OnDemand for kubevirt and Assigned for the rest.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
 					"name": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Name is the name of this node type.",
@@ -29248,6 +30048,13 @@ func schema_pkg_apis_storage_v1_ClusterAPINodeTypeSpec(ref common.ReferenceCallb
 					"displayName": {
 						SchemaProps: spec.SchemaProps{
 							Description: "DisplayName is the name that should be displayed in the UI",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"machineAllocationPolicy": {
+						SchemaProps: spec.SchemaProps{
+							Description: "MachineAllocationPolicy selects the machines a tenant's NodeClaims of this type may use: Assigned only those the tenant owns or was assigned exclusively, OnDemand also those no tenant owns or holds (never another tenant's or the platform's). Claims no tenant owns reach unassigned machines either way. Honored by metal3 and nico; externalPlatform node types mirror the remote's value. For kubevirt, Assigned runs the VMs on the tenant's machines provisioned for VMs and OnDemand on the cluster's shared nodes. Empty falls back to the provider's spec.machineAllocationPolicy, then to OnDemand for kubevirt and Assigned for the rest.",
 							Type:        []string{"string"},
 							Format:      "",
 						},
@@ -30772,6 +31579,13 @@ func schema_pkg_apis_storage_v1_KubeVirtNodeTypeSpec(ref common.ReferenceCallbac
 							Format:      "",
 						},
 					},
+					"machineAllocationPolicy": {
+						SchemaProps: spec.SchemaProps{
+							Description: "MachineAllocationPolicy selects the machines a tenant's NodeClaims of this type may use: Assigned only those the tenant owns or was assigned exclusively, OnDemand also those no tenant owns or holds (never another tenant's or the platform's). Claims no tenant owns reach unassigned machines either way. Honored by metal3 and nico; externalPlatform node types mirror the remote's value. For kubevirt, Assigned runs the VMs on the tenant's machines provisioned for VMs and OnDemand on the cluster's shared nodes. Empty falls back to the provider's spec.machineAllocationPolicy, then to OnDemand for kubevirt and Assigned for the rest.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
 					"name": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Name is the name of this node type.",
@@ -32014,6 +32828,13 @@ func schema_pkg_apis_storage_v1_Metal3NodeTypeSpec(ref common.ReferenceCallback)
 							Format:      "",
 						},
 					},
+					"machineAllocationPolicy": {
+						SchemaProps: spec.SchemaProps{
+							Description: "MachineAllocationPolicy selects the machines a tenant's NodeClaims of this type may use: Assigned only those the tenant owns or was assigned exclusively, OnDemand also those no tenant owns or holds (never another tenant's or the platform's). Claims no tenant owns reach unassigned machines either way. Honored by metal3 and nico; externalPlatform node types mirror the remote's value. For kubevirt, Assigned runs the VMs on the tenant's machines provisioned for VMs and OnDemand on the cluster's shared nodes. Empty falls back to the provider's spec.machineAllocationPolicy, then to OnDemand for kubevirt and Assigned for the rest.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
 					"name": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Name is the name of this node type.",
@@ -32257,6 +33078,13 @@ func schema_pkg_apis_storage_v1_NamedNodeTypeSpec(ref common.ReferenceCallback) 
 							Format:      "",
 						},
 					},
+					"machineAllocationPolicy": {
+						SchemaProps: spec.SchemaProps{
+							Description: "MachineAllocationPolicy selects the machines a tenant's NodeClaims of this type may use: Assigned only those the tenant owns or was assigned exclusively, OnDemand also those no tenant owns or holds (never another tenant's or the platform's). Claims no tenant owns reach unassigned machines either way. Honored by metal3 and nico; externalPlatform node types mirror the remote's value. For kubevirt, Assigned runs the VMs on the tenant's machines provisioned for VMs and OnDemand on the cluster's shared nodes. Empty falls back to the provider's spec.machineAllocationPolicy, then to OnDemand for kubevirt and Assigned for the rest.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
 					"name": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Name is the name of this node type.",
@@ -32484,7 +33312,7 @@ func schema_pkg_apis_storage_v1_NetworkEnvironmentSpec(ref common.ReferenceCallb
 					},
 					"providerRef": {
 						SchemaProps: spec.SchemaProps{
-							Description: "ProviderRef is the name of the NodeProvider that this NetworkEnvironment is based on. It may be left empty, in which case the NetworkEnvironment is a pure property container: it provisions no infrastructure, becomes available immediately, carries no cleanup finalizer, and can never be a provider's default environment - NodeClaims must reference it explicitly. A NodeProvider that requires a network environment cannot be served by one. Once set, it cannot be changed.",
+							Description: "ProviderRef is the name of the NodeProvider that this NetworkEnvironment is based on. A NodeClaim of another provider that names this environment is refused at admission, and a project is offered it only alongside a NodeType of this provider. Required at creation and immutable afterwards. Objects created without one before that requirement provision nothing, are available immediately, carry no cleanup finalizer, and admission refuses new NodeClaims naming them.",
 							Type:        []string{"string"},
 							Format:      "",
 						},
@@ -32849,6 +33677,111 @@ func schema_pkg_apis_storage_v1_NodeClaimList(ref common.ReferenceCallback) comm
 	}
 }
 
+func schema_pkg_apis_storage_v1_NodeClaimNestedInstances(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "NodeClaimNestedInstances configures the instances that can be created on this Machine node claim.",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"nodeTypes": {
+						SchemaProps: spec.SchemaProps{
+							Description: "NodeTypes configures the node types allowed to be created on this Machine node claim.",
+							Ref:         ref(apisstoragev1.NodeClaimNestedNodeTypes{}.OpenAPIModelName()),
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			apisstoragev1.NodeClaimNestedNodeTypes{}.OpenAPIModelName()},
+	}
+}
+
+func schema_pkg_apis_storage_v1_NodeClaimNestedNodeTypes(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "NodeClaimNestedNodeTypes configures the node types allowed to be created on this Machine node claim.",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"allow": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Allow narrows the node types the tenant may provision from. Omitted, every reserved NodeType of the claim's KubeVirt provider is allowed.",
+							Ref:         ref(apisstoragev1.NodeClaimNestedNodeTypesAllow{}.OpenAPIModelName()),
+						},
+					},
+					"quota": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Quota caps what the tenant may provision from those node types. Omitted, they are uncapped.",
+							Ref:         ref(apisstoragev1.NodeClaimNestedNodeTypesQuota{}.OpenAPIModelName()),
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			apisstoragev1.NodeClaimNestedNodeTypesAllow{}.OpenAPIModelName(), apisstoragev1.NodeClaimNestedNodeTypesQuota{}.OpenAPIModelName()},
+	}
+}
+
+func schema_pkg_apis_storage_v1_NodeClaimNestedNodeTypesAllow(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "NodeClaimNestedNodeTypesAllow selects the NodeTypes a tenant may provision from for this Machine node claim.",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"byName": {
+						SchemaProps: spec.SchemaProps{
+							Description: "ByName selects NodeTypes by their exact names. An Allow without names allows none.",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: "",
+										Type:    []string{"string"},
+										Format:  "",
+									},
+								},
+							},
+						},
+					},
+				},
+			},
+		},
+	}
+}
+
+func schema_pkg_apis_storage_v1_NodeClaimNestedNodeTypesQuota(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "NodeClaimNestedNodeTypesQuota caps what a tenant may provision from the node types it is allowed on this Machine node claim.",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"byType": {
+						SchemaProps: spec.SchemaProps{
+							Description: "ByType caps how many instances the tenant may run of each NodeType, keyed by NodeType name (e.g. \"eu-west.medium\": \"5\"). Values are non-negative integer counts, the same encoding a Project's Quotas use and the same one pkg/quota's admission path parses for management resources such as nodeclaims. A NodeType without an entry is uncapped.",
+							Type:        []string{"object"},
+							AdditionalProperties: &spec.SchemaOrBool{
+								Allows: true,
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: "",
+										Type:    []string{"string"},
+										Format:  "",
+									},
+								},
+							},
+						},
+					},
+				},
+			},
+		},
+	}
+}
+
 func schema_pkg_apis_storage_v1_NodeClaimPower(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
@@ -33047,12 +33980,18 @@ func schema_pkg_apis_storage_v1_NodeClaimSpec(ref common.ReferenceCallback) comm
 							Ref:         ref(apisstoragev1.NodeClaimPower{}.OpenAPIModelName()),
 						},
 					},
+					"nestedInstances": {
+						SchemaProps: spec.SchemaProps{
+							Description: "NestedInstances configures the instances that can be created on this Machine node claim.",
+							Ref:         ref(apisstoragev1.NodeClaimNestedInstances{}.OpenAPIModelName()),
+						},
+					},
 				},
 				Required: []string{"providerRef"},
 			},
 		},
 		Dependencies: []string{
-			apisstoragev1.Access{}.OpenAPIModelName(), apisstoragev1.NodeClaimPower{}.OpenAPIModelName(), apisstoragev1.UserOrTeam{}.OpenAPIModelName(), corev1.NodeSelectorRequirement{}.OpenAPIModelName(), corev1.Taint{}.OpenAPIModelName(), resource.Quantity{}.OpenAPIModelName()},
+			apisstoragev1.Access{}.OpenAPIModelName(), apisstoragev1.NodeClaimNestedInstances{}.OpenAPIModelName(), apisstoragev1.NodeClaimPower{}.OpenAPIModelName(), apisstoragev1.UserOrTeam{}.OpenAPIModelName(), corev1.NodeSelectorRequirement{}.OpenAPIModelName(), corev1.Taint{}.OpenAPIModelName(), resource.Quantity{}.OpenAPIModelName()},
 	}
 }
 
@@ -33826,7 +34765,7 @@ func schema_pkg_apis_storage_v1_NodeProviderNICo(ref common.ReferenceCallback) c
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
-				Description: "NodeProviderNICo configures a node provider backed by the NVIDIA Infra Controller (NICo) REST API. Platform workloads use the provider org. Tenant workloads use the org from their Tenant's nico.vcluster.com/org annotation.",
+				Description: "NodeProviderNICo configures a node provider backed by the NVIDIA Infra Controller (NICo) REST API. Platform workloads use the provider org. Tenant workloads use an org named after their Tenant; the platform owns the tenant-org namespace of this NICo instance.",
 				Type:        []string{"object"},
 				Properties: map[string]spec.Schema{
 					"endpoint": {
@@ -33853,14 +34792,7 @@ func schema_pkg_apis_storage_v1_NodeProviderNICo(ref common.ReferenceCallback) c
 					},
 					"siteIPBlockID": {
 						SchemaProps: spec.SchemaProps{
-							Description: "SiteIPBlockID adopts an existing NICo site-level parent IPBlock. Mutually exclusive with SiteIPBlockCIDR.",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"siteIPBlockCIDR": {
-						SchemaProps: spec.SchemaProps{
-							Description: "SiteIPBlockCIDR creates the NICo site-level parent IPBlock with this CIDR. Mutually exclusive with SiteIPBlockID.",
+							Description: "SiteIPBlockID adopts an existing NICo site-level parent IPBlock.",
 							Type:        []string{"string"},
 							Format:      "",
 						},
@@ -33978,6 +34910,13 @@ func schema_pkg_apis_storage_v1_NodeProviderSpec(ref common.ReferenceCallback) c
 					"displayName": {
 						SchemaProps: spec.SchemaProps{
 							Description: "DisplayName is the name that should be displayed in the UI",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"machineAllocationPolicy": {
+						SchemaProps: spec.SchemaProps{
+							Description: "MachineAllocationPolicy is the NodeTypeSpec.MachineAllocationPolicy of this provider's node types that leave theirs empty, and the only one discovered (nico) node types can have.",
 							Type:        []string{"string"},
 							Format:      "",
 						},
@@ -34299,6 +35238,13 @@ func schema_pkg_apis_storage_v1_NodeTypeSpec(ref common.ReferenceCallback) commo
 							Format:      "",
 						},
 					},
+					"machineAllocationPolicy": {
+						SchemaProps: spec.SchemaProps{
+							Description: "MachineAllocationPolicy selects the machines a tenant's NodeClaims of this type may use: Assigned only those the tenant owns or was assigned exclusively, OnDemand also those no tenant owns or holds (never another tenant's or the platform's). Claims no tenant owns reach unassigned machines either way. Honored by metal3 and nico; externalPlatform node types mirror the remote's value. For kubevirt, Assigned runs the VMs on the tenant's machines provisioned for VMs and OnDemand on the cluster's shared nodes. Empty falls back to the provider's spec.machineAllocationPolicy, then to OnDemand for kubevirt and Assigned for the rest.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
 				},
 			},
 		},
@@ -34568,6 +35514,13 @@ func schema_pkg_apis_storage_v1_OSImageStatus(ref common.ReferenceCallback) comm
 					"phase": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Phase is where the image is in its upload lifecycle. Empty for an image that holds no bytes. The controller owns every transition; the upload endpoints only annotate.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"observedSessionID": {
+						SchemaProps: spec.SchemaProps{
+							Description: "ObservedSessionID is the upload session the phase was decided for. Empty when it was decided before any session was opened.",
 							Type:        []string{"string"},
 							Format:      "",
 						},
@@ -37461,6 +38414,12 @@ func schema_pkg_apis_storage_v1_StackTaskStatus(ref common.ReferenceCallback) co
 							Ref:         ref(metav1.Time{}.OpenAPIModelName()),
 						},
 					},
+					"timeoutAt": {
+						SchemaProps: spec.SchemaProps{
+							Description: "TimeoutAt is when the stack fails the task if it is still progressing. Set only while the task is Progressing, and moved when the task starts a new wait, such as capturing its outputs.",
+							Ref:         ref(metav1.Time{}.OpenAPIModelName()),
+						},
+					},
 				},
 				Required: []string{"name", "phase"},
 			},
@@ -38369,6 +39328,63 @@ func schema_pkg_apis_storage_v1_Tenant(ref common.ReferenceCallback) common.Open
 	}
 }
 
+func schema_pkg_apis_storage_v1_TenantConnectorAllow(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "TenantConnectorAllow selects the admin-owned connectors a tenant may read. A tenant cannot create a connector of its own, so there is no custom allowance.",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"byLabels": {
+						SchemaProps: spec.SchemaProps{
+							Description: "ByLabels selects admin-owned connectors carrying all of these labels. Only labels returned on connectors may be selected on: a label the API does not return, such as the connector type, is refused.\n\nAn empty map and an absent one are deliberately different, which is why this field carries no omitempty. An empty conjunction is vacuously true, so byLabels: {} matches every admin-owned instance; absent or null matches none. With omitempty the two forms both serialize to nothing and the distinction dies on the first round trip, which is why it has to be stated here rather than inferred from emptiness on Allow. ByName gets no equivalent treatment: an empty enumeration reads as \"nothing\" to everyone, and only a conjunction has the vacuous-truth property that makes empty mean everything.",
+							Type:        []string{"object"},
+							AdditionalProperties: &spec.SchemaOrBool{
+								Allows: true,
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: "",
+										Type:    []string{"string"},
+										Format:  "",
+									},
+								},
+							},
+						},
+					},
+				},
+			},
+		},
+	}
+}
+
+func schema_pkg_apis_storage_v1_TenantConnectors(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "TenantConnectors governs the admin-owned connectors a tenant may read. A shared connector is read-only for the tenant and its credentials are redacted, because the tenant is not allowed to update it.",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"enabled": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Enabled gates the capability. False denies the tenant every connector, including one an operator assigned to it, and an operator cannot assign one to it; only true enables it. Default: disabled.",
+							Type:        []string{"boolean"},
+							Format:      "",
+						},
+					},
+					"allow": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Allow selects the admin-owned connectors the tenant may read.",
+							Ref:         ref(apisstoragev1.TenantConnectorAllow{}.OpenAPIModelName()),
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			apisstoragev1.TenantConnectorAllow{}.OpenAPIModelName()},
+	}
+}
+
 func schema_pkg_apis_storage_v1_TenantControlPlaneClusterAllow(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
@@ -38517,6 +39533,33 @@ func schema_pkg_apis_storage_v1_TenantList(ref common.ReferenceCallback) common.
 	}
 }
 
+func schema_pkg_apis_storage_v1_TenantNICoSiteAccess(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "TenantNICoSiteAccess records the tenant's NICo site-access allocation.",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"allocationId": {
+						SchemaProps: spec.SchemaProps{
+							Description: "AllocationID is the NICo allocation ID.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"cidr": {
+						SchemaProps: spec.SchemaProps{
+							Description: "CIDR is the /32 CIDR derived from the allocation.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+				},
+			},
+		},
+	}
+}
+
 func schema_pkg_apis_storage_v1_TenantNICoStatus(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
@@ -38587,9 +39630,17 @@ func schema_pkg_apis_storage_v1_TenantNICoStatus(ref common.ReferenceCallback) c
 							Format:      "",
 						},
 					},
+					"siteAccess": {
+						SchemaProps: spec.SchemaProps{
+							Description: "SiteAccess is the /32 allocation the tenant holds for NICo site access while it has no other allocation at the site.",
+							Ref:         ref(apisstoragev1.TenantNICoSiteAccess{}.OpenAPIModelName()),
+						},
+					},
 				},
 			},
 		},
+		Dependencies: []string{
+			apisstoragev1.TenantNICoSiteAccess{}.OpenAPIModelName()},
 	}
 }
 
@@ -38801,6 +39852,13 @@ func schema_pkg_apis_storage_v1_TenantResourceBoundary(ref common.ReferenceCallb
 							Format:      "",
 						},
 					},
+					"enabled": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Enabled reports the governing capability's switch: absent where none governs the kind, false where one does and is off, true where one does and is on. False outranks every other field here -- the tenant reaches nothing of the kind, not even an instance lent to it. Reported only.",
+							Type:        []string{"boolean"},
+							Format:      "",
+						},
+					},
 					"own": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Own reports whether the tenant may author instances of this kind; reading what it already owns is not gated by it. Reported only.",
@@ -38921,7 +39979,7 @@ func schema_pkg_apis_storage_v1_TenantSpec(ref common.ReferenceCallback) common.
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
-				Description: "TenantSpec is the operator's intent for one tenant: who administers the Tenant object, what platform capacity it may consume, and how much of its own platform configuration it may set for itself.\n\nEvery field here is operator intent. None of them holds tenant-authored data: the capability fields say which platform resources the tenant may consume, PlatformConfig says which parts of its configuration the tenant may write, and the configuration values themselves live in the management tenants/config subresource.\n\nThe capability fields (ControlPlaneClusters, SSHKeys, OSImages, NodeTypes, Templates) each describe one class of platform resource, in up to three parts:\n\n  - Enabled gates the capability as a whole. It is off unless it is switched on:\n    false denies the capability regardless of the rest of the entry, and only true\n    makes it available. It is a plain bool rather than a pointer because there is\n    nothing for \"unset\" to mean once the default is deny: absent and false are the\n    same answer, so a pointer would only offer two spellings of it. A Tenant\n    therefore grants nothing by existing (an operator has to say what the tenant may\n    reach), and a capability added to this API in a later release cannot silently\n    widen what an existing Tenant is allowed, because every stored object reads as\n    false for it.\n  - Allow narrows which admin-owned instances the tenant may use (ByName, ByLabels)\n    and, where the capability supports it, whether the tenant may author its own\n    (Custom). An omitted Allow leaves admin-owned instances to plain RBAC, which\n    denies tenants by default. A present Allow is answered by its selectors, and a\n    present Allow whose selectors are all absent therefore admits nothing.\n  - Quota caps how much of the capability the tenant may consume, aggregated across\n    all of the tenant's projects. An omitted Quota is uncapped.\n\n\"All of them\" is written as ByLabels: {}, not as an empty Allow. An empty conjunction is vacuously true, so a label selector with no pairs matches every instance, while an absent one matches none. That puts the two extremes at opposite ends of one field instead of splitting them across two, and it means the most permissive answer has to be typed rather than reached by omission. ByLabels carries no omitempty for exactly this reason: with it, an empty map and an absent one both serialize to nothing and the distinction dies on the first round trip.\n\nAllow is still a pointer, but for a narrower reason than it once was: it is what separates \"left to RBAC\" from \"answered, and the answer is nothing\".\n\nA capability only exposes the parts that are meaningful for it, so no field is silently ignored: Control Plane Clusters and templates cannot be authored by a tenant and so carry no Custom, and SSH keys are never shared and so carry only Custom. Templates is also the one capability that spans several kinds at once, which is why it is addressed by label alone (see TenantTemplates). Only NodeTypes carries a Quota today, because it is the only capability with a consumer: the NICo allocation reconciler reserves provider capacity from it. Quotas for the other capabilities are added when something enforces them.\n\nA capability Quota is the only consumption ceiling a Tenant carries, and ceilings are expressed per capability rather than keyed by management.loft.sh resource.\n\nCapabilities are stored and validated for well-formedness here; the visibility and usability treatment they describe is enforced by the tenant scope library in pkg/tenancy.",
+				Description: "TenantSpec is the operator's intent for one tenant: who administers the Tenant object, what platform capacity it may consume, and how much of its own platform configuration it may set for itself.\n\nEvery field here is operator intent. None of them holds tenant-authored data: the capability fields say which platform resources the tenant may consume, PlatformConfig says which parts of its configuration the tenant may write, and the configuration values themselves live in the management tenants/config subresource.\n\nThe capability fields (ControlPlaneClusters, SSHKeys, OSImages, NodeTypes, Templates, Connectors) each describe one class of platform resource, in up to three parts:\n\n  - Enabled gates the capability as a whole. It is off unless it is switched on:\n    false denies the capability regardless of the rest of the entry, and only true\n    makes it available. It is a plain bool rather than a pointer because there is\n    nothing for \"unset\" to mean once the default is deny: absent and false are the\n    same answer, so a pointer would only offer two spellings of it. A Tenant\n    therefore grants nothing by existing (an operator has to say what the tenant may\n    reach), and a capability added to this API in a later release cannot silently\n    widen what an existing Tenant is allowed, because every stored object reads as\n    false for it.\n  - Allow narrows which admin-owned instances the tenant may use (ByName, ByLabels)\n    and, where the capability supports it, whether the tenant may author its own\n    (Custom). An omitted Allow leaves admin-owned instances to plain RBAC, which\n    denies tenants by default. A present Allow is answered by its selectors, and a\n    present Allow whose selectors are all absent therefore admits nothing.\n  - Quota caps how much of the capability the tenant may consume, aggregated across\n    all of the tenant's projects. An omitted Quota is uncapped.\n\n\"All of them\" is written as ByLabels: {}, not as an empty Allow. An empty conjunction is vacuously true, so a label selector with no pairs matches every instance, while an absent one matches none. That puts the two extremes at opposite ends of one field instead of splitting them across two, and it means the most permissive answer has to be typed rather than reached by omission. ByLabels carries no omitempty for exactly this reason: with it, an empty map and an absent one both serialize to nothing and the distinction dies on the first round trip.\n\nAllow is still a pointer, but for a narrower reason than it once was: it is what separates \"left to RBAC\" from \"answered, and the answer is nothing\".\n\nA capability only exposes the parts that are meaningful for it, so no field is silently ignored: Control Plane Clusters, templates and connectors cannot be authored by a tenant and so carry no Custom, and SSH keys are never shared and so carry only Custom. Templates is also the one capability that spans several kinds at once, which is why it is addressed by label alone (see TenantTemplates). Only NodeTypes carries a Quota today, because it is the only capability with a consumer: the NICo allocation reconciler reserves provider capacity from it. Quotas for the other capabilities are added when something enforces them.\n\nA capability Quota is the only consumption ceiling a Tenant carries, and ceilings are expressed per capability rather than keyed by management.loft.sh resource.\n\nCapabilities are stored and validated for well-formedness here; the visibility and usability treatment they describe is enforced by the tenant scope library in pkg/tenancy.",
 				Type:        []string{"object"},
 				Properties: map[string]spec.Schema{
 					"displayName": {
@@ -38994,11 +40052,17 @@ func schema_pkg_apis_storage_v1_TenantSpec(ref common.ReferenceCallback) common.
 							Ref:         ref(apisstoragev1.TenantTemplates{}.OpenAPIModelName()),
 						},
 					},
+					"connectors": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Connectors governs the admin-owned connectors this tenant may read.",
+							Ref:         ref(apisstoragev1.TenantConnectors{}.OpenAPIModelName()),
+						},
+					},
 				},
 			},
 		},
 		Dependencies: []string{
-			apisstoragev1.Access{}.OpenAPIModelName(), apisstoragev1.TenantControlPlaneClusters{}.OpenAPIModelName(), apisstoragev1.TenantNodeTypes{}.OpenAPIModelName(), apisstoragev1.TenantOSImages{}.OpenAPIModelName(), apisstoragev1.TenantPlatformConfig{}.OpenAPIModelName(), apisstoragev1.TenantSSHKeys{}.OpenAPIModelName(), apisstoragev1.TenantTemplates{}.OpenAPIModelName(), apisstoragev1.UserOrTeam{}.OpenAPIModelName()},
+			apisstoragev1.Access{}.OpenAPIModelName(), apisstoragev1.TenantConnectors{}.OpenAPIModelName(), apisstoragev1.TenantControlPlaneClusters{}.OpenAPIModelName(), apisstoragev1.TenantNodeTypes{}.OpenAPIModelName(), apisstoragev1.TenantOSImages{}.OpenAPIModelName(), apisstoragev1.TenantPlatformConfig{}.OpenAPIModelName(), apisstoragev1.TenantSSHKeys{}.OpenAPIModelName(), apisstoragev1.TenantTemplates{}.OpenAPIModelName(), apisstoragev1.UserOrTeam{}.OpenAPIModelName()},
 	}
 }
 
@@ -39053,7 +40117,7 @@ func schema_pkg_apis_storage_v1_TenantStatus(ref common.ReferenceCallback) commo
 					},
 					"nico": {
 						SchemaProps: spec.SchemaProps{
-							Description: "NICo reports the NICo tenant org materialized for this Tenant, set once the Tenant opts into NICo via the nico.vcluster.com/org annotation.",
+							Description: "NICo reports the NICo tenant org materialized for this Tenant, set once the Tenant is onboarded into NICo.",
 							Ref:         ref(apisstoragev1.TenantNICoStatus{}.OpenAPIModelName()),
 						},
 					},
@@ -39270,6 +40334,13 @@ func schema_pkg_apis_storage_v1_TerraformNodeTypeSpec(ref common.ReferenceCallba
 					"displayName": {
 						SchemaProps: spec.SchemaProps{
 							Description: "DisplayName is the name that should be displayed in the UI",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"machineAllocationPolicy": {
+						SchemaProps: spec.SchemaProps{
+							Description: "MachineAllocationPolicy selects the machines a tenant's NodeClaims of this type may use: Assigned only those the tenant owns or was assigned exclusively, OnDemand also those no tenant owns or holds (never another tenant's or the platform's). Claims no tenant owns reach unassigned machines either way. Honored by metal3 and nico; externalPlatform node types mirror the remote's value. For kubevirt, Assigned runs the VMs on the tenant's machines provisioned for VMs and OnDemand on the cluster's shared nodes. Empty falls back to the provider's spec.machineAllocationPolicy, then to OnDemand for kubevirt and Assigned for the rest.",
 							Type:        []string{"string"},
 							Format:      "",
 						},

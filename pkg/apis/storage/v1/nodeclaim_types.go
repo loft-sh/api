@@ -1,7 +1,7 @@
 package v1
 
 import (
-	agentstoragev1 "github.com/loft-sh/agentapi/v4/pkg/apis/loft/storage/v1"
+	agentstoragev1 "github.com/loft-sh/agentapi/v5/pkg/apis/loft/storage/v1"
 	corev1 "k8s.io/api/core/v1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 )
@@ -162,6 +162,11 @@ type NodeClaimSpec struct {
 	// +optional
 	// +kubebuilder:validation:XValidation:rule="!has(self.state) || self.state == '' || self.state == 'On' || self.state == 'Off'",message="state must be On or Off"
 	Power *NodeClaimPower `json:"power,omitempty"`
+
+	// NestedInstances configures the instances that can be created
+	// on this Machine node claim.
+	// +optional
+	NestedInstances *NodeClaimNestedInstances `json:"nestedInstances,omitempty"`
 }
 
 type NodeClaimStatus struct {
@@ -210,6 +215,49 @@ type NodeClaimPower struct {
 	// value means the state could not be determined.
 	// +optional
 	State NodeClaimPowerState `json:"state,omitempty"`
+}
+
+// NodeClaimNestedInstances configures the instances that can be created
+// on this Machine node claim.
+type NodeClaimNestedInstances struct {
+	// NodeTypes configures the node types allowed
+	// to be created on this Machine node claim.
+	// +optional
+	NodeTypes *NodeClaimNestedNodeTypes `json:"nodeTypes,omitempty"`
+}
+
+// NodeClaimNestedNodeTypes configures the node types allowed
+// to be created on this Machine node claim.
+type NodeClaimNestedNodeTypes struct {
+	// Allow narrows the node types the tenant may provision from. Omitted, every
+	// reserved NodeType of the claim's KubeVirt provider is allowed.
+	// +optional
+	Allow *NodeClaimNestedNodeTypesAllow `json:"allow,omitempty"`
+
+	// Quota caps what the tenant may provision from those node types. Omitted, they
+	// are uncapped.
+	// +optional
+	Quota *NodeClaimNestedNodeTypesQuota `json:"quota,omitempty"`
+}
+
+// NodeClaimNestedNodeTypesAllow selects the NodeTypes a tenant may provision from
+// for this Machine node claim.
+type NodeClaimNestedNodeTypesAllow struct {
+	// ByName selects NodeTypes by their exact names. An Allow without names allows none.
+	// +optional
+	ByName []string `json:"byName,omitempty"`
+}
+
+// NodeClaimNestedNodeTypesQuota caps what a tenant may provision from the node types it is
+// allowed on this Machine node claim.
+type NodeClaimNestedNodeTypesQuota struct {
+	// ByType caps how many instances the tenant may run of each NodeType, keyed by
+	// NodeType name (e.g. "eu-west.medium": "5"). Values are non-negative integer
+	// counts, the same encoding a Project's Quotas use and the same one pkg/quota's
+	// admission path parses for management resources such as nodeclaims. A NodeType
+	// without an entry is uncapped.
+	// +optional
+	ByType map[string]string `json:"byType,omitempty"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object

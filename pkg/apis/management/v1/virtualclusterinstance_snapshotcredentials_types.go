@@ -22,7 +22,7 @@ type VirtualClusterSnapshotCredentialsSpec struct {
 
 type VirtualClusterSnapshotCredentialsStatus struct {
 	// Options is the JSON-encoded snapshot storage options
-	// (github.com/loft-sh/api/v4/pkg/snapshot.Options), resolved server-side from the instance's
+	// (github.com/loft-sh/api/v5/pkg/snapshot.Options), resolved server-side from the instance's
 	// auto-snapshot configuration. It carries the storage credentials (the storage location comes
 	// from the snapshot request itself). The tenant cluster is expected to unmarshal it and use the
 	// credentials in memory only, without persisting them.

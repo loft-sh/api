@@ -7,45 +7,45 @@ package v1
 
 // OpenAPIModelName returns the OpenAPI model name for this type.
 func (in CspPolicy) OpenAPIModelName() string {
-	return "com.github.loft-sh.api.v4.pkg.apis.ui.v1.CspPolicy"
+	return "com.github.loft-sh.api.v5.pkg.apis.ui.v1.CspPolicy"
 }
 
 // OpenAPIModelName returns the OpenAPI model name for this type.
 func (in ExternalURLs) OpenAPIModelName() string {
-	return "com.github.loft-sh.api.v4.pkg.apis.ui.v1.ExternalURLs"
+	return "com.github.loft-sh.api.v5.pkg.apis.ui.v1.ExternalURLs"
 }
 
 // OpenAPIModelName returns the OpenAPI model name for this type.
 func (in MultiRegion) OpenAPIModelName() string {
-	return "com.github.loft-sh.api.v4.pkg.apis.ui.v1.MultiRegion"
+	return "com.github.loft-sh.api.v5.pkg.apis.ui.v1.MultiRegion"
 }
 
 // OpenAPIModelName returns the OpenAPI model name for this type.
 func (in NavBarButton) OpenAPIModelName() string {
-	return "com.github.loft-sh.api.v4.pkg.apis.ui.v1.NavBarButton"
+	return "com.github.loft-sh.api.v5.pkg.apis.ui.v1.NavBarButton"
 }
 
 // OpenAPIModelName returns the OpenAPI model name for this type.
 func (in UISettings) OpenAPIModelName() string {
-	return "com.github.loft-sh.api.v4.pkg.apis.ui.v1.UISettings"
+	return "com.github.loft-sh.api.v5.pkg.apis.ui.v1.UISettings"
 }
 
 // OpenAPIModelName returns the OpenAPI model name for this type.
 func (in UISettingsConfig) OpenAPIModelName() string {
-	return "com.github.loft-sh.api.v4.pkg.apis.ui.v1.UISettingsConfig"
+	return "com.github.loft-sh.api.v5.pkg.apis.ui.v1.UISettingsConfig"
 }
 
 // OpenAPIModelName returns the OpenAPI model name for this type.
 func (in UISettingsSpec) OpenAPIModelName() string {
-	return "com.github.loft-sh.api.v4.pkg.apis.ui.v1.UISettingsSpec"
+	return "com.github.loft-sh.api.v5.pkg.apis.ui.v1.UISettingsSpec"
 }
 
 // OpenAPIModelName returns the OpenAPI model name for this type.
 func (in UISettingsStatus) OpenAPIModelName() string {
-	return "com.github.loft-sh.api.v4.pkg.apis.ui.v1.UISettingsStatus"
+	return "com.github.loft-sh.api.v5.pkg.apis.ui.v1.UISettingsStatus"
 }
 
 // OpenAPIModelName returns the OpenAPI model name for this type.
 func (in VClusterVersion) OpenAPIModelName() string {
-	return "com.github.loft-sh.api.v4.pkg.apis.ui.v1.VClusterVersion"
+	return "com.github.loft-sh.api.v5.pkg.apis.ui.v1.VClusterVersion"
 }

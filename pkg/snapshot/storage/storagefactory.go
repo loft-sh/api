@@ -4,12 +4,12 @@ import (
 	"context"
 	"fmt"
 
-	snapshotapi "github.com/loft-sh/api/v4/pkg/snapshot"
-	"github.com/loft-sh/api/v4/pkg/snapshot/storage/azure"
-	"github.com/loft-sh/api/v4/pkg/snapshot/storage/container"
-	"github.com/loft-sh/api/v4/pkg/snapshot/storage/oci"
-	"github.com/loft-sh/api/v4/pkg/snapshot/storage/s3"
-	"github.com/loft-sh/api/v4/pkg/snapshot/storage/types"
+	snapshotapi "github.com/loft-sh/api/v5/pkg/snapshot"
+	"github.com/loft-sh/api/v5/pkg/snapshot/storage/azure"
+	"github.com/loft-sh/api/v5/pkg/snapshot/storage/container"
+	"github.com/loft-sh/api/v5/pkg/snapshot/storage/oci"
+	"github.com/loft-sh/api/v5/pkg/snapshot/storage/s3"
+	"github.com/loft-sh/api/v5/pkg/snapshot/storage/types"
 	"k8s.io/klog/v2"
 )
 

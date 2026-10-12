@@ -4,7 +4,7 @@ import (
 	"context"
 	"testing"
 
-	snapshotapi "github.com/loft-sh/api/v4/pkg/snapshot"
+	snapshotapi "github.com/loft-sh/api/v5/pkg/snapshot"
 )
 
 func TestGetSubscriptionID(t *testing.T) {

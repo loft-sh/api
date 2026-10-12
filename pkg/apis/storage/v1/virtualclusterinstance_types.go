@@ -1,7 +1,7 @@
 package v1
 
 import (
-	agentstoragev1 "github.com/loft-sh/agentapi/v4/pkg/apis/loft/storage/v1"
+	agentstoragev1 "github.com/loft-sh/agentapi/v5/pkg/apis/loft/storage/v1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 )
 
@@ -19,6 +19,22 @@ const (
 	InstanceNodesProvisioned                  agentstoragev1.ConditionType = "NodesProvisioned"
 	InstanceExternalResourcesCleanedUp        agentstoragev1.ConditionType = "ExternalResourcesCleanedUp"
 	InstanceVirtualClusterAutoDeletionBlocked agentstoragev1.ConditionType = "VirtualClusterAutoDeletionBlocked"
+
+	// InstanceObservabilityUnsupported is set when an instance requests observability that this
+	// platform deployment cannot serve, and is removed when there is nothing to report. Problems
+	// are reported as status False with a severity, so this condition is never True.
+	InstanceObservabilityUnsupported agentstoragev1.ConditionType = "ObservabilityUnsupported"
+
+	// InstanceObservabilityConnectorUnresolved is set when the platform cannot resolve the
+	// instance's observability connector into a write gateway its tenant collector could reach.
+	// Never True; the condition is removed when there is nothing to report.
+	//
+	// It covers only causes an admin has to fix on the platform. A connector is shared across
+	// instances, so reporting a cause that resolves on its own, such as a gateway still waiting
+	// for its LoadBalancer address, would make this condition flap on every instance using that
+	// connector. Transient causes are instead reported per request, in the error a tenant cluster
+	// gets when it pulls the connector.
+	InstanceObservabilityConnectorUnresolved agentstoragev1.ConditionType = "ObservabilityConnectorUnresolved"
 
 	InstanceVirtualClusterAppsAndObjectsSynced     agentstoragev1.ConditionType = "VirtualClusterAppsAndObjectsSynced"
 	InstanceVirtualClusterDBConnectorSynced        agentstoragev1.ConditionType = "DBConnectorSynced"

@@ -1,7 +1,7 @@
 package v1
 
 import (
-	storagev1 "github.com/loft-sh/api/v4/pkg/apis/storage/v1"
+	storagev1 "github.com/loft-sh/api/v5/pkg/apis/storage/v1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 )
 
@@ -14,9 +14,9 @@ import (
 // +k8s:openapi-gen=true
 // +resource:path=osimages,rest=OSImageREST
 // +subresource:request=OSImageUpload,path=upload,kind=OSImageUpload,rest=OSImageUploadREST
-// +genclient:method=Upload,verb=create,subresource=upload,input=github.com/loft-sh/api/v4/pkg/apis/management/v1.OSImageUpload,result=github.com/loft-sh/api/v4/pkg/apis/management/v1.OSImageUpload
+// +genclient:method=Upload,verb=create,subresource=upload,input=github.com/loft-sh/api/v5/pkg/apis/management/v1.OSImageUpload,result=github.com/loft-sh/api/v5/pkg/apis/management/v1.OSImageUpload
 // +subresource:request=OSImageFinalize,path=finalize,kind=OSImageFinalize,rest=OSImageFinalizeREST
-// +genclient:method=Finalize,verb=create,subresource=finalize,input=github.com/loft-sh/api/v4/pkg/apis/management/v1.OSImageFinalize,result=github.com/loft-sh/api/v4/pkg/apis/management/v1.OSImageFinalize
+// +genclient:method=Finalize,verb=create,subresource=finalize,input=github.com/loft-sh/api/v5/pkg/apis/management/v1.OSImageFinalize,result=github.com/loft-sh/api/v5/pkg/apis/management/v1.OSImageFinalize
 type OSImage struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`

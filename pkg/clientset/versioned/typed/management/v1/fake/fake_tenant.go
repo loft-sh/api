@@ -5,8 +5,8 @@ package fake
 import (
 	context "context"
 
-	v1 "github.com/loft-sh/api/v4/pkg/apis/management/v1"
-	managementv1 "github.com/loft-sh/api/v4/pkg/clientset/versioned/typed/management/v1"
+	v1 "github.com/loft-sh/api/v5/pkg/apis/management/v1"
+	managementv1 "github.com/loft-sh/api/v5/pkg/clientset/versioned/typed/management/v1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	gentype "k8s.io/client-go/gentype"
 	testing "k8s.io/client-go/testing"

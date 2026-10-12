@@ -1,7 +1,7 @@
 package v1
 
 import (
-	agentstoragev1 "github.com/loft-sh/agentapi/v4/pkg/apis/loft/storage/v1"
+	agentstoragev1 "github.com/loft-sh/agentapi/v5/pkg/apis/loft/storage/v1"
 	corev1 "k8s.io/api/core/v1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 )
@@ -27,6 +27,7 @@ var (
 // +kubebuilder:printcolumn:name="Available",type="integer",JSONPath=".status.capacity.available"
 // +kubebuilder:printcolumn:name="Total",type="integer",JSONPath=".status.capacity.total"
 // +kubebuilder:printcolumn:name="Phase",type="string",JSONPath=".status.phase"
+// +kubebuilder:printcolumn:name="Allocation",type="string",JSONPath=".spec.machineAllocationPolicy"
 // +kubebuilder:resource:scope=Cluster
 
 // NodeType holds the information of a node type.
@@ -70,7 +71,29 @@ type NodeTypeSpec struct {
 	// DisplayName is the name that should be displayed in the UI
 	// +optional
 	DisplayName string `json:"displayName,omitempty"`
+
+	// MachineAllocationPolicy selects the machines a tenant's NodeClaims of this type may use: Assigned
+	// only those the tenant owns or was assigned exclusively, OnDemand also those no tenant owns or
+	// holds (never another tenant's or the platform's). Claims no tenant owns reach unassigned machines
+	// either way. Honored by metal3 and nico; externalPlatform node types mirror the remote's value.
+	// For kubevirt, Assigned runs the VMs on the tenant's machines provisioned for VMs and OnDemand on
+	// the cluster's shared nodes. Empty falls back to the provider's spec.machineAllocationPolicy,
+	// then to OnDemand for kubevirt and Assigned for the rest.
+	// +optional
+	MachineAllocationPolicy MachineAllocationPolicy `json:"machineAllocationPolicy,omitempty"`
 }
+
+// MachineAllocationPolicy names the machines a tenant's NodeClaims of a NodeType may be placed on.
+// +kubebuilder:validation:Enum=Assigned;OnDemand
+type MachineAllocationPolicy string
+
+const (
+	// MachineAllocationPolicyAssigned places a tenant's claims only on machines it owns or was
+	// assigned exclusively.
+	MachineAllocationPolicyAssigned MachineAllocationPolicy = "Assigned"
+	// MachineAllocationPolicyOnDemand also places them on machines no tenant owns or holds.
+	MachineAllocationPolicyOnDemand MachineAllocationPolicy = "OnDemand"
+)
 
 // NodeTypeOverhead defines the resource overhead for a node type.
 type NodeTypeOverhead struct {

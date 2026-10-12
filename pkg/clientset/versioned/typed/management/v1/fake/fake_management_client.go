@@ -3,7 +3,7 @@
 package fake
 
 import (
-	v1 "github.com/loft-sh/api/v4/pkg/clientset/versioned/typed/management/v1"
+	v1 "github.com/loft-sh/api/v5/pkg/clientset/versioned/typed/management/v1"
 	rest "k8s.io/client-go/rest"
 	testing "k8s.io/client-go/testing"
 )

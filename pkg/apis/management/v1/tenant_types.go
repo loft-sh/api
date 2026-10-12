@@ -1,14 +1,14 @@
 package v1
 
 import (
-	storagev1 "github.com/loft-sh/api/v4/pkg/apis/storage/v1"
+	storagev1 "github.com/loft-sh/api/v5/pkg/apis/storage/v1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 )
 
 // +genclient
 // +genclient:nonNamespaced
-// +genclient:method=GetConfig,verb=get,subresource=config,result=github.com/loft-sh/api/v4/pkg/apis/management/v1.TenantConfig
-// +genclient:method=UpdateConfig,verb=create,subresource=config,input=github.com/loft-sh/api/v4/pkg/apis/management/v1.TenantConfig,result=github.com/loft-sh/api/v4/pkg/apis/management/v1.TenantConfig
+// +genclient:method=GetConfig,verb=get,subresource=config,result=github.com/loft-sh/api/v5/pkg/apis/management/v1.TenantConfig
+// +genclient:method=UpdateConfig,verb=create,subresource=config,input=github.com/loft-sh/api/v5/pkg/apis/management/v1.TenantConfig,result=github.com/loft-sh/api/v5/pkg/apis/management/v1.TenantConfig
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
 
 // Tenant is the management API projection of the storage.loft.sh/v1 Tenant

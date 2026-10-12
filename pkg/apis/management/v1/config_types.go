@@ -1,9 +1,9 @@
 package v1
 
 import (
-	auditv1 "github.com/loft-sh/api/v4/pkg/apis/audit/v1"
-	storagev1 "github.com/loft-sh/api/v4/pkg/apis/storage/v1"
-	uiv1 "github.com/loft-sh/api/v4/pkg/apis/ui/v1"
+	auditv1 "github.com/loft-sh/api/v5/pkg/apis/audit/v1"
+	storagev1 "github.com/loft-sh/api/v5/pkg/apis/storage/v1"
+	uiv1 "github.com/loft-sh/api/v5/pkg/apis/ui/v1"
 	corev1 "k8s.io/api/core/v1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 )
@@ -281,7 +281,7 @@ type OIDC struct {
 }
 
 // Authentication and related connector types moved to storage/v1 — see
-// staging/src/github.com/loft-sh/api/v4/pkg/apis/storage/v1/authentication_types.go.
+// staging/src/github.com/loft-sh/api/v5/pkg/apis/storage/v1/authentication_types.go.
 // management/v1 still references the type via storagev1.Authentication on
 // ConfigStatus and elsewhere; storage/v1 owns the canonical definition so
 // the storage/v1.Tenant CRD can reference it without an import cycle.

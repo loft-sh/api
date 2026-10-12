@@ -10,12 +10,12 @@ import (
 	unsafe "unsafe"
 
 	licenseapi "github.com/loft-sh/admin-apis/pkg/licenseapi"
-	clusterv1 "github.com/loft-sh/agentapi/v4/pkg/apis/loft/cluster/v1"
-	loftstoragev1 "github.com/loft-sh/agentapi/v4/pkg/apis/loft/storage/v1"
-	auditv1 "github.com/loft-sh/api/v4/pkg/apis/audit/v1"
-	management "github.com/loft-sh/api/v4/pkg/apis/management"
-	storagev1 "github.com/loft-sh/api/v4/pkg/apis/storage/v1"
-	uiv1 "github.com/loft-sh/api/v4/pkg/apis/ui/v1"
+	clusterv1 "github.com/loft-sh/agentapi/v5/pkg/apis/loft/cluster/v1"
+	loftstoragev1 "github.com/loft-sh/agentapi/v5/pkg/apis/loft/storage/v1"
+	auditv1 "github.com/loft-sh/api/v5/pkg/apis/audit/v1"
+	management "github.com/loft-sh/api/v5/pkg/apis/management"
+	storagev1 "github.com/loft-sh/api/v5/pkg/apis/storage/v1"
+	uiv1 "github.com/loft-sh/api/v5/pkg/apis/ui/v1"
 	corev1 "k8s.io/api/core/v1"
 	rbacv1 "k8s.io/api/rbac/v1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
@@ -4041,6 +4041,46 @@ func RegisterConversions(s *runtime.Scheme) error {
 	}); err != nil {
 		return err
 	}
+	if err := s.AddGeneratedConversionFunc((*VirtualClusterObservabilityConnector)(nil), (*management.VirtualClusterObservabilityConnector)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_v1_VirtualClusterObservabilityConnector_To_management_VirtualClusterObservabilityConnector(a.(*VirtualClusterObservabilityConnector), b.(*management.VirtualClusterObservabilityConnector), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*management.VirtualClusterObservabilityConnector)(nil), (*VirtualClusterObservabilityConnector)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_management_VirtualClusterObservabilityConnector_To_v1_VirtualClusterObservabilityConnector(a.(*management.VirtualClusterObservabilityConnector), b.(*VirtualClusterObservabilityConnector), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*VirtualClusterObservabilityConnectorList)(nil), (*management.VirtualClusterObservabilityConnectorList)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_v1_VirtualClusterObservabilityConnectorList_To_management_VirtualClusterObservabilityConnectorList(a.(*VirtualClusterObservabilityConnectorList), b.(*management.VirtualClusterObservabilityConnectorList), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*management.VirtualClusterObservabilityConnectorList)(nil), (*VirtualClusterObservabilityConnectorList)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_management_VirtualClusterObservabilityConnectorList_To_v1_VirtualClusterObservabilityConnectorList(a.(*management.VirtualClusterObservabilityConnectorList), b.(*VirtualClusterObservabilityConnectorList), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*VirtualClusterObservabilityConnectorSpec)(nil), (*management.VirtualClusterObservabilityConnectorSpec)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_v1_VirtualClusterObservabilityConnectorSpec_To_management_VirtualClusterObservabilityConnectorSpec(a.(*VirtualClusterObservabilityConnectorSpec), b.(*management.VirtualClusterObservabilityConnectorSpec), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*management.VirtualClusterObservabilityConnectorSpec)(nil), (*VirtualClusterObservabilityConnectorSpec)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_management_VirtualClusterObservabilityConnectorSpec_To_v1_VirtualClusterObservabilityConnectorSpec(a.(*management.VirtualClusterObservabilityConnectorSpec), b.(*VirtualClusterObservabilityConnectorSpec), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*VirtualClusterObservabilityConnectorStatus)(nil), (*management.VirtualClusterObservabilityConnectorStatus)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_v1_VirtualClusterObservabilityConnectorStatus_To_management_VirtualClusterObservabilityConnectorStatus(a.(*VirtualClusterObservabilityConnectorStatus), b.(*management.VirtualClusterObservabilityConnectorStatus), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*management.VirtualClusterObservabilityConnectorStatus)(nil), (*VirtualClusterObservabilityConnectorStatus)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_management_VirtualClusterObservabilityConnectorStatus_To_v1_VirtualClusterObservabilityConnectorStatus(a.(*management.VirtualClusterObservabilityConnectorStatus), b.(*VirtualClusterObservabilityConnectorStatus), scope)
+	}); err != nil {
+		return err
+	}
 	if err := s.AddGeneratedConversionFunc((*VirtualClusterResourceUsage)(nil), (*management.VirtualClusterResourceUsage)(nil), func(a, b interface{}, scope conversion.Scope) error {
 		return Convert_v1_VirtualClusterResourceUsage_To_management_VirtualClusterResourceUsage(a.(*VirtualClusterResourceUsage), b.(*management.VirtualClusterResourceUsage), scope)
 	}); err != nil {
@@ -6447,6 +6487,7 @@ func autoConvert_v1_ConnectorImageStoreS3Spec_To_management_ConnectorImageStoreS
 	out.ForcePathStyle = in.ForcePathStyle
 	out.AccessKey = in.AccessKey
 	out.SecretKey = in.SecretKey
+	out.SessionToken = in.SessionToken
 	return nil
 }
 
@@ -6462,6 +6503,7 @@ func autoConvert_management_ConnectorImageStoreS3Spec_To_v1_ConnectorImageStoreS
 	out.ForcePathStyle = in.ForcePathStyle
 	out.AccessKey = in.AccessKey
 	out.SecretKey = in.SecretKey
+	out.SessionToken = in.SessionToken
 	return nil
 }
 
@@ -14423,6 +14465,102 @@ func autoConvert_management_VirtualClusterNodeAccessKeyStatus_To_v1_VirtualClust
 // Convert_management_VirtualClusterNodeAccessKeyStatus_To_v1_VirtualClusterNodeAccessKeyStatus is an autogenerated conversion function.
 func Convert_management_VirtualClusterNodeAccessKeyStatus_To_v1_VirtualClusterNodeAccessKeyStatus(in *management.VirtualClusterNodeAccessKeyStatus, out *VirtualClusterNodeAccessKeyStatus, s conversion.Scope) error {
 	return autoConvert_management_VirtualClusterNodeAccessKeyStatus_To_v1_VirtualClusterNodeAccessKeyStatus(in, out, s)
+}
+
+func autoConvert_v1_VirtualClusterObservabilityConnector_To_management_VirtualClusterObservabilityConnector(in *VirtualClusterObservabilityConnector, out *management.VirtualClusterObservabilityConnector, s conversion.Scope) error {
+	out.ObjectMeta = in.ObjectMeta
+	if err := Convert_v1_VirtualClusterObservabilityConnectorSpec_To_management_VirtualClusterObservabilityConnectorSpec(&in.Spec, &out.Spec, s); err != nil {
+		return err
+	}
+	if err := Convert_v1_VirtualClusterObservabilityConnectorStatus_To_management_VirtualClusterObservabilityConnectorStatus(&in.Status, &out.Status, s); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Convert_v1_VirtualClusterObservabilityConnector_To_management_VirtualClusterObservabilityConnector is an autogenerated conversion function.
+func Convert_v1_VirtualClusterObservabilityConnector_To_management_VirtualClusterObservabilityConnector(in *VirtualClusterObservabilityConnector, out *management.VirtualClusterObservabilityConnector, s conversion.Scope) error {
+	return autoConvert_v1_VirtualClusterObservabilityConnector_To_management_VirtualClusterObservabilityConnector(in, out, s)
+}
+
+func autoConvert_management_VirtualClusterObservabilityConnector_To_v1_VirtualClusterObservabilityConnector(in *management.VirtualClusterObservabilityConnector, out *VirtualClusterObservabilityConnector, s conversion.Scope) error {
+	out.ObjectMeta = in.ObjectMeta
+	if err := Convert_management_VirtualClusterObservabilityConnectorSpec_To_v1_VirtualClusterObservabilityConnectorSpec(&in.Spec, &out.Spec, s); err != nil {
+		return err
+	}
+	if err := Convert_management_VirtualClusterObservabilityConnectorStatus_To_v1_VirtualClusterObservabilityConnectorStatus(&in.Status, &out.Status, s); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Convert_management_VirtualClusterObservabilityConnector_To_v1_VirtualClusterObservabilityConnector is an autogenerated conversion function.
+func Convert_management_VirtualClusterObservabilityConnector_To_v1_VirtualClusterObservabilityConnector(in *management.VirtualClusterObservabilityConnector, out *VirtualClusterObservabilityConnector, s conversion.Scope) error {
+	return autoConvert_management_VirtualClusterObservabilityConnector_To_v1_VirtualClusterObservabilityConnector(in, out, s)
+}
+
+func autoConvert_v1_VirtualClusterObservabilityConnectorList_To_management_VirtualClusterObservabilityConnectorList(in *VirtualClusterObservabilityConnectorList, out *management.VirtualClusterObservabilityConnectorList, s conversion.Scope) error {
+	out.ListMeta = in.ListMeta
+	out.Items = *(*[]management.VirtualClusterObservabilityConnector)(unsafe.Pointer(&in.Items))
+	return nil
+}
+
+// Convert_v1_VirtualClusterObservabilityConnectorList_To_management_VirtualClusterObservabilityConnectorList is an autogenerated conversion function.
+func Convert_v1_VirtualClusterObservabilityConnectorList_To_management_VirtualClusterObservabilityConnectorList(in *VirtualClusterObservabilityConnectorList, out *management.VirtualClusterObservabilityConnectorList, s conversion.Scope) error {
+	return autoConvert_v1_VirtualClusterObservabilityConnectorList_To_management_VirtualClusterObservabilityConnectorList(in, out, s)
+}
+
+func autoConvert_management_VirtualClusterObservabilityConnectorList_To_v1_VirtualClusterObservabilityConnectorList(in *management.VirtualClusterObservabilityConnectorList, out *VirtualClusterObservabilityConnectorList, s conversion.Scope) error {
+	out.ListMeta = in.ListMeta
+	out.Items = *(*[]VirtualClusterObservabilityConnector)(unsafe.Pointer(&in.Items))
+	return nil
+}
+
+// Convert_management_VirtualClusterObservabilityConnectorList_To_v1_VirtualClusterObservabilityConnectorList is an autogenerated conversion function.
+func Convert_management_VirtualClusterObservabilityConnectorList_To_v1_VirtualClusterObservabilityConnectorList(in *management.VirtualClusterObservabilityConnectorList, out *VirtualClusterObservabilityConnectorList, s conversion.Scope) error {
+	return autoConvert_management_VirtualClusterObservabilityConnectorList_To_v1_VirtualClusterObservabilityConnectorList(in, out, s)
+}
+
+func autoConvert_v1_VirtualClusterObservabilityConnectorSpec_To_management_VirtualClusterObservabilityConnectorSpec(in *VirtualClusterObservabilityConnectorSpec, out *management.VirtualClusterObservabilityConnectorSpec, s conversion.Scope) error {
+	return nil
+}
+
+// Convert_v1_VirtualClusterObservabilityConnectorSpec_To_management_VirtualClusterObservabilityConnectorSpec is an autogenerated conversion function.
+func Convert_v1_VirtualClusterObservabilityConnectorSpec_To_management_VirtualClusterObservabilityConnectorSpec(in *VirtualClusterObservabilityConnectorSpec, out *management.VirtualClusterObservabilityConnectorSpec, s conversion.Scope) error {
+	return autoConvert_v1_VirtualClusterObservabilityConnectorSpec_To_management_VirtualClusterObservabilityConnectorSpec(in, out, s)
+}
+
+func autoConvert_management_VirtualClusterObservabilityConnectorSpec_To_v1_VirtualClusterObservabilityConnectorSpec(in *management.VirtualClusterObservabilityConnectorSpec, out *VirtualClusterObservabilityConnectorSpec, s conversion.Scope) error {
+	return nil
+}
+
+// Convert_management_VirtualClusterObservabilityConnectorSpec_To_v1_VirtualClusterObservabilityConnectorSpec is an autogenerated conversion function.
+func Convert_management_VirtualClusterObservabilityConnectorSpec_To_v1_VirtualClusterObservabilityConnectorSpec(in *management.VirtualClusterObservabilityConnectorSpec, out *VirtualClusterObservabilityConnectorSpec, s conversion.Scope) error {
+	return autoConvert_management_VirtualClusterObservabilityConnectorSpec_To_v1_VirtualClusterObservabilityConnectorSpec(in, out, s)
+}
+
+func autoConvert_v1_VirtualClusterObservabilityConnectorStatus_To_management_VirtualClusterObservabilityConnectorStatus(in *VirtualClusterObservabilityConnectorStatus, out *management.VirtualClusterObservabilityConnectorStatus, s conversion.Scope) error {
+	out.Endpoint = in.Endpoint
+	out.Token = in.Token
+	out.CaCert = in.CaCert
+	return nil
+}
+
+// Convert_v1_VirtualClusterObservabilityConnectorStatus_To_management_VirtualClusterObservabilityConnectorStatus is an autogenerated conversion function.
+func Convert_v1_VirtualClusterObservabilityConnectorStatus_To_management_VirtualClusterObservabilityConnectorStatus(in *VirtualClusterObservabilityConnectorStatus, out *management.VirtualClusterObservabilityConnectorStatus, s conversion.Scope) error {
+	return autoConvert_v1_VirtualClusterObservabilityConnectorStatus_To_management_VirtualClusterObservabilityConnectorStatus(in, out, s)
+}
+
+func autoConvert_management_VirtualClusterObservabilityConnectorStatus_To_v1_VirtualClusterObservabilityConnectorStatus(in *management.VirtualClusterObservabilityConnectorStatus, out *VirtualClusterObservabilityConnectorStatus, s conversion.Scope) error {
+	out.Endpoint = in.Endpoint
+	out.Token = in.Token
+	out.CaCert = in.CaCert
+	return nil
+}
+
+// Convert_management_VirtualClusterObservabilityConnectorStatus_To_v1_VirtualClusterObservabilityConnectorStatus is an autogenerated conversion function.
+func Convert_management_VirtualClusterObservabilityConnectorStatus_To_v1_VirtualClusterObservabilityConnectorStatus(in *management.VirtualClusterObservabilityConnectorStatus, out *VirtualClusterObservabilityConnectorStatus, s conversion.Scope) error {
+	return autoConvert_management_VirtualClusterObservabilityConnectorStatus_To_v1_VirtualClusterObservabilityConnectorStatus(in, out, s)
 }
 
 func autoConvert_v1_VirtualClusterResourceUsage_To_management_VirtualClusterResourceUsage(in *VirtualClusterResourceUsage, out *management.VirtualClusterResourceUsage, s conversion.Scope) error {

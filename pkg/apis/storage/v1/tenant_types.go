@@ -1,7 +1,7 @@
 package v1
 
 import (
-	agentstoragev1 "github.com/loft-sh/agentapi/v4/pkg/apis/loft/storage/v1"
+	agentstoragev1 "github.com/loft-sh/agentapi/v5/pkg/apis/loft/storage/v1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 )
 
@@ -57,10 +57,29 @@ const TenantLabel = "tenant.vcluster.com/owner"
 // The holder reads and references it; the operator keeps every write, including the delete.
 const TenantExclusiveHolderLabel = "tenant.vcluster.com/exclusive-to"
 
-// TenantConditionNICoOnboarded is set on a Tenant that opts into NICo (via the
-// nico.vcluster.com/org annotation) once its NICo tenant org has been
-// materialized. It is False with a reason while onboarding is pending or
-// failing.
+// TenantSharedWithAllLabel marks an operator-owned resource readable by every tenant. It is the
+// fourth sharing cell: a capability shares a kind with one tenant, a shipped shared baseline
+// shares a kind with all, TenantExclusiveHolderLabel shares one resource with one tenant, and
+// this shares one resource with all.
+//
+// Only TenantSharedWithAllValue shares, so a misspelled "false" withholds rather than grants --
+// as a scope key holding anything but tenancy.ScopeShared admits nothing.
+//
+// A key of its own rather than a value of TenantExclusiveHolderLabel, whose name means "lent to
+// exactly one tenant"; a wildcard there was not open either, since "*" is not a legal label
+// value and could neither be stored nor selected on.
+//
+// Refused alongside either of the other two: what a tenant owns is not the operator's to share,
+// and shared with all contradicts lent to one. It grants reading and using, never writing.
+const TenantSharedWithAllLabel = "tenant.vcluster.com/all"
+
+// TenantSharedWithAllValue is the only value TenantSharedWithAllLabel shares on.
+const TenantSharedWithAllValue = "true"
+
+// TenantConditionNICoOnboarded is set on a Tenant whose granted NodeTypes or
+// assigned NetworkEnvironments reference a NICo NodeProvider. It is True once
+// its NICo tenant org, the Tenant name, is materialized, and False with a reason
+// while onboarding is pending or failing.
 const TenantConditionNICoOnboarded agentstoragev1.ConditionType = "NICoOnboarded"
 
 // TenantConditionNICoNodeProviderFound reports whether exactly one NICo
@@ -123,7 +142,7 @@ func (a *Tenant) SetAccess(access []Access) {
 // values themselves live in the management tenants/config subresource.
 //
 // The capability fields (ControlPlaneClusters, SSHKeys, OSImages, NodeTypes,
-// Templates) each describe one class of platform resource, in up to three parts:
+// Templates, Connectors) each describe one class of platform resource, in up to three parts:
 //
 //   - Enabled gates the capability as a whole. It is off unless it is switched on:
 //     false denies the capability regardless of the rest of the entry, and only true
@@ -154,8 +173,8 @@ func (a *Tenant) SetAccess(access []Access) {
 // separates "left to RBAC" from "answered, and the answer is nothing".
 //
 // A capability only exposes the parts that are meaningful for it, so no field is
-// silently ignored: Control Plane Clusters and templates cannot be authored by a
-// tenant and so carry no Custom, and SSH keys are never shared and so carry only
+// silently ignored: Control Plane Clusters, templates and connectors cannot be authored
+// by a tenant and so carry no Custom, and SSH keys are never shared and so carry only
 // Custom. Templates is also the one capability that spans several kinds at once, which
 // is why it is addressed by label alone (see TenantTemplates). Only NodeTypes carries a
 // Quota today, because it is the only capability with a consumer: the NICo allocation
@@ -222,6 +241,10 @@ type TenantSpec struct {
 	// kind rather than one selector per kind.
 	// +optional
 	Templates *TenantTemplates `json:"templates,omitempty"`
+
+	// Connectors governs the admin-owned connectors this tenant may read.
+	// +optional
+	Connectors *TenantConnectors `json:"connectors,omitempty"`
 }
 
 // TenantControlPlaneClusters governs the Control Plane Clusters a tenant may target.
@@ -437,6 +460,41 @@ type TenantTemplateAllow struct {
 	ByLabels map[string]string `json:"byLabels"`
 }
 
+// TenantConnectors governs the admin-owned connectors a tenant may read. A shared
+// connector is read-only for the tenant and its credentials are redacted, because the
+// tenant is not allowed to update it.
+type TenantConnectors struct {
+	// Enabled gates the capability. False denies the tenant every connector, including one an
+	// operator assigned to it, and an operator cannot assign one to it; only true enables it.
+	// Default: disabled.
+	// +optional
+	Enabled bool `json:"enabled,omitempty"`
+
+	// Allow selects the admin-owned connectors the tenant may read.
+	// +optional
+	Allow *TenantConnectorAllow `json:"allow,omitempty"`
+}
+
+// TenantConnectorAllow selects the admin-owned connectors a tenant may read. A tenant
+// cannot create a connector of its own, so there is no custom allowance.
+type TenantConnectorAllow struct {
+	// ByLabels selects admin-owned connectors carrying all of these labels. Only labels
+	// returned on connectors may be selected on: a label the API does not return, such as
+	// the connector type, is refused.
+	//
+	// An empty map and an absent one are deliberately different, which is why this
+	// field carries no omitempty. An empty conjunction is vacuously true, so
+	// byLabels: {} matches every admin-owned instance; absent or null matches none.
+	// With omitempty the two forms both serialize to nothing and the distinction dies
+	// on the first round trip, which is why it has to be stated here rather than
+	// inferred from emptiness on Allow. ByName gets no equivalent treatment: an empty
+	// enumeration reads as "nothing" to everyone, and only a conjunction has the
+	// vacuous-truth property that makes empty mean everything.
+	// +optional
+	// +nullable
+	ByLabels map[string]string `json:"byLabels"`
+}
+
 // TenantCustomAllow controls whether a tenant may author its own value, as opposed to
 // only choosing from what an operator has already provided. Under a capability that
 // means authoring its own instances of the capability's resource rather than only using
@@ -534,6 +592,13 @@ type TenantResourceBoundary struct {
 	// Resource is the lowercase plural management.loft.sh resource name.
 	Resource string `json:"resource"`
 
+	// Enabled reports the governing capability's switch: absent where none governs the kind,
+	// false where one does and is off, true where one does and is on. False outranks every other
+	// field here -- the tenant reaches nothing of the kind, not even an instance lent to it.
+	// Reported only.
+	// +optional
+	Enabled *bool `json:"enabled,omitempty"`
+
 	// Own reports whether the tenant may author instances of this kind; reading what it already
 	// owns is not gated by it. Reported only.
 	// +optional
@@ -600,7 +665,7 @@ type TenantStatus struct {
 	Conditions agentstoragev1.Conditions `json:"conditions,omitempty"`
 
 	// NICo reports the NICo tenant org materialized for this Tenant, set once
-	// the Tenant opts into NICo via the nico.vcluster.com/org annotation.
+	// the Tenant is onboarded into NICo.
 	// +optional
 	NICo *TenantNICoStatus `json:"nico,omitempty"`
 }
@@ -647,6 +712,20 @@ type TenantNICoStatus struct {
 	// prefixes are carved. Set by the tenant onboarding flow (ENGNODE-604).
 	// +optional
 	IPBlockID string `json:"ipBlockId,omitempty"`
+
+	// SiteAccess is the /32 allocation the tenant holds for NICo site access
+	// while it has no other allocation at the site.
+	// +optional
+	SiteAccess *TenantNICoSiteAccess `json:"siteAccess,omitempty"`
+}
+
+// TenantNICoSiteAccess records the tenant's NICo site-access allocation.
+type TenantNICoSiteAccess struct {
+	// AllocationID is the NICo allocation ID.
+	AllocationID string `json:"allocationId,omitempty"`
+
+	// CIDR is the /32 CIDR derived from the allocation.
+	CIDR string `json:"cidr,omitempty"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object

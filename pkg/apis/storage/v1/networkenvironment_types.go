@@ -1,7 +1,7 @@
 package v1
 
 import (
-	agentstoragev1 "github.com/loft-sh/agentapi/v4/pkg/apis/loft/storage/v1"
+	agentstoragev1 "github.com/loft-sh/agentapi/v5/pkg/apis/loft/storage/v1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 )
 
@@ -91,11 +91,11 @@ type NetworkEnvironmentSpec struct {
 	Properties map[string]string `json:"properties"`
 
 	// ProviderRef is the name of the NodeProvider that this NetworkEnvironment is based on.
-	// It may be left empty, in which case the NetworkEnvironment is a pure property container:
-	// it provisions no infrastructure, becomes available immediately, carries no cleanup
-	// finalizer, and can never be a provider's default environment - NodeClaims must reference
-	// it explicitly. A NodeProvider that requires a network environment cannot be served by one.
-	// Once set, it cannot be changed.
+	// A NodeClaim of another provider that names this environment is refused at admission, and
+	// a project is offered it only alongside a NodeType of this provider. Required at creation
+	// and immutable afterwards. Objects created without one before that requirement provision
+	// nothing, are available immediately, carry no cleanup finalizer, and admission refuses new
+	// NodeClaims naming them.
 	// +optional
 	ProviderRef string `json:"providerRef,omitempty"`
 }

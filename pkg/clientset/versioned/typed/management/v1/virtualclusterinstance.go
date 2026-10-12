@@ -5,8 +5,8 @@ package v1
 import (
 	context "context"
 
-	managementv1 "github.com/loft-sh/api/v4/pkg/apis/management/v1"
-	scheme "github.com/loft-sh/api/v4/pkg/clientset/versioned/scheme"
+	managementv1 "github.com/loft-sh/api/v5/pkg/apis/management/v1"
+	scheme "github.com/loft-sh/api/v5/pkg/clientset/versioned/scheme"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	types "k8s.io/apimachinery/pkg/types"
 	watch "k8s.io/apimachinery/pkg/watch"
@@ -38,6 +38,7 @@ type VirtualClusterInstanceInterface interface {
 	GetShellPod(ctx context.Context, virtualClusterInstanceName string, virtualClusterInstanceShell *managementv1.VirtualClusterInstanceShell, opts metav1.CreateOptions) (*managementv1.VirtualClusterInstanceShell, error)
 	GetDebugShell(ctx context.Context, virtualClusterInstanceName string, virtualClusterInstanceDebugShell *managementv1.VirtualClusterInstanceDebugShell, opts metav1.CreateOptions) (*managementv1.VirtualClusterInstanceDebugShell, error)
 	GetJoinScript(ctx context.Context, virtualClusterInstanceName string, virtualClusterInstanceJoinScript *managementv1.VirtualClusterInstanceJoinScript, opts metav1.CreateOptions) (*managementv1.VirtualClusterInstanceJoinScript, error)
+	GetObservabilityConnector(ctx context.Context, virtualClusterInstanceName string, virtualClusterObservabilityConnector *managementv1.VirtualClusterObservabilityConnector, opts metav1.CreateOptions) (*managementv1.VirtualClusterObservabilityConnector, error)
 
 	VirtualClusterInstanceExpansion
 }
@@ -190,6 +191,21 @@ func (c *virtualClusterInstances) GetJoinScript(ctx context.Context, virtualClus
 		SubResource("joinscript").
 		VersionedParams(&opts, scheme.ParameterCodec).
 		Body(virtualClusterInstanceJoinScript).
+		Do(ctx).
+		Into(result)
+	return
+}
+
+// GetObservabilityConnector takes the representation of a virtualClusterObservabilityConnector and creates it.  Returns the server's representation of the virtualClusterObservabilityConnector, and an error, if there is any.
+func (c *virtualClusterInstances) GetObservabilityConnector(ctx context.Context, virtualClusterInstanceName string, virtualClusterObservabilityConnector *managementv1.VirtualClusterObservabilityConnector, opts metav1.CreateOptions) (result *managementv1.VirtualClusterObservabilityConnector, err error) {
+	result = &managementv1.VirtualClusterObservabilityConnector{}
+	err = c.GetClient().Post().
+		Namespace(c.GetNamespace()).
+		Resource("virtualclusterinstances").
+		Name(virtualClusterInstanceName).
+		SubResource("observabilityconnector").
+		VersionedParams(&opts, scheme.ParameterCodec).
+		Body(virtualClusterObservabilityConnector).
 		Do(ctx).
 		Into(result)
 	return

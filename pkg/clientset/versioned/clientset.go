@@ -6,8 +6,8 @@ import (
 	fmt "fmt"
 	http "net/http"
 
-	managementv1 "github.com/loft-sh/api/v4/pkg/clientset/versioned/typed/management/v1"
-	storagev1 "github.com/loft-sh/api/v4/pkg/clientset/versioned/typed/storage/v1"
+	managementv1 "github.com/loft-sh/api/v5/pkg/clientset/versioned/typed/management/v1"
+	storagev1 "github.com/loft-sh/api/v5/pkg/clientset/versioned/typed/storage/v1"
 	discovery "k8s.io/client-go/discovery"
 	rest "k8s.io/client-go/rest"
 	flowcontrol "k8s.io/client-go/util/flowcontrol"
