@@ -118,6 +118,17 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 		v1.IronicNodeStatus{}.OpenAPIModelName():                                             schema_apis_loft_cluster_v1_IronicNodeStatus(ref),
 		v1.IronicNodeStep{}.OpenAPIModelName():                                               schema_apis_loft_cluster_v1_IronicNodeStep(ref),
 		v1.LastActivityInfo{}.OpenAPIModelName():                                             schema_apis_loft_cluster_v1_LastActivityInfo(ref),
+		v1.Metal3BMC{}.OpenAPIModelName():                                                    schema_apis_loft_cluster_v1_Metal3BMC(ref),
+		v1.Metal3BMCConsole{}.OpenAPIModelName():                                             schema_apis_loft_cluster_v1_Metal3BMCConsole(ref),
+		v1.Metal3BMCConsoleList{}.OpenAPIModelName():                                         schema_apis_loft_cluster_v1_Metal3BMCConsoleList(ref),
+		v1.Metal3BMCConsoleOptions{}.OpenAPIModelName():                                      schema_apis_loft_cluster_v1_Metal3BMCConsoleOptions(ref),
+		v1.Metal3BMCList{}.OpenAPIModelName():                                                schema_apis_loft_cluster_v1_Metal3BMCList(ref),
+		v1.Metal3BMCRedfish{}.OpenAPIModelName():                                             schema_apis_loft_cluster_v1_Metal3BMCRedfish(ref),
+		v1.Metal3BMCRedfishList{}.OpenAPIModelName():                                         schema_apis_loft_cluster_v1_Metal3BMCRedfishList(ref),
+		v1.Metal3BMCRedfishSpec{}.OpenAPIModelName():                                         schema_apis_loft_cluster_v1_Metal3BMCRedfishSpec(ref),
+		v1.Metal3BMCRedfishStatus{}.OpenAPIModelName():                                       schema_apis_loft_cluster_v1_Metal3BMCRedfishStatus(ref),
+		v1.Metal3BMCSpec{}.OpenAPIModelName():                                                schema_apis_loft_cluster_v1_Metal3BMCSpec(ref),
+		v1.Metal3BMCStatus{}.OpenAPIModelName():                                              schema_apis_loft_cluster_v1_Metal3BMCStatus(ref),
 		v1.SleepModeConfig{}.OpenAPIModelName():                                              schema_apis_loft_cluster_v1_SleepModeConfig(ref),
 		v1.SleepModeConfigSpec{}.OpenAPIModelName():                                          schema_apis_loft_cluster_v1_SleepModeConfigSpec(ref),
 		v1.SleepModeConfigStatus{}.OpenAPIModelName():                                        schema_apis_loft_cluster_v1_SleepModeConfigStatus(ref),
@@ -215,6 +226,9 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 		managementv1.ConnectorImageStoreS3Spec{}.OpenAPIModelName():                          schema_pkg_apis_management_v1_ConnectorImageStoreS3Spec(ref),
 		managementv1.ConnectorImageStoreSpec{}.OpenAPIModelName():                            schema_pkg_apis_management_v1_ConnectorImageStoreSpec(ref),
 		managementv1.ConnectorList{}.OpenAPIModelName():                                      schema_pkg_apis_management_v1_ConnectorList(ref),
+		managementv1.ConnectorNetBoxSpec{}.OpenAPIModelName():                                schema_pkg_apis_management_v1_ConnectorNetBoxSpec(ref),
+		managementv1.ConnectorObservabilitySpec{}.OpenAPIModelName():                         schema_pkg_apis_management_v1_ConnectorObservabilitySpec(ref),
+		managementv1.ConnectorObservabilityStatus{}.OpenAPIModelName():                       schema_pkg_apis_management_v1_ConnectorObservabilityStatus(ref),
 		managementv1.ConnectorSharedDatabaseSpec{}.OpenAPIModelName():                        schema_pkg_apis_management_v1_ConnectorSharedDatabaseSpec(ref),
 		managementv1.ConnectorSpec{}.OpenAPIModelName():                                      schema_pkg_apis_management_v1_ConnectorSpec(ref),
 		managementv1.ConnectorStatus{}.OpenAPIModelName():                                    schema_pkg_apis_management_v1_ConnectorStatus(ref),
@@ -4673,6 +4687,424 @@ func schema_apis_loft_cluster_v1_LastActivityInfo(ref common.ReferenceCallback) 
 						},
 					},
 				},
+			},
+		},
+	}
+}
+
+func schema_apis_loft_cluster_v1_Metal3BMC(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "Metal3BMC addresses the BMC of the metal3 BareMetalHost with the same name and namespace. It has no verbs of its own and only carries the redfish and console subresources, which the agent serves from inside the cluster that can reach the BMC.",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"kind": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"apiVersion": {
+						SchemaProps: spec.SchemaProps{
+							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"metadata": {
+						SchemaProps: spec.SchemaProps{
+							Default: map[string]interface{}{},
+							Ref:     ref(metav1.ObjectMeta{}.OpenAPIModelName()),
+						},
+					},
+					"spec": {
+						SchemaProps: spec.SchemaProps{
+							Default: map[string]interface{}{},
+							Ref:     ref(v1.Metal3BMCSpec{}.OpenAPIModelName()),
+						},
+					},
+					"status": {
+						SchemaProps: spec.SchemaProps{
+							Default: map[string]interface{}{},
+							Ref:     ref(v1.Metal3BMCStatus{}.OpenAPIModelName()),
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			v1.Metal3BMCSpec{}.OpenAPIModelName(), v1.Metal3BMCStatus{}.OpenAPIModelName(), metav1.ObjectMeta{}.OpenAPIModelName()},
+	}
+}
+
+func schema_apis_loft_cluster_v1_Metal3BMCConsole(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "Metal3BMCConsole attaches a WebSocket (v4.channel.k8s.io) to the BareMetalHost's BMC serial console over SSH or IPMI Serial-over-LAN. It is connect-only; options are passed as Metal3BMCConsoleOptions query parameters.",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"kind": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"apiVersion": {
+						SchemaProps: spec.SchemaProps{
+							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"metadata": {
+						SchemaProps: spec.SchemaProps{
+							Default: map[string]interface{}{},
+							Ref:     ref(metav1.ObjectMeta{}.OpenAPIModelName()),
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			metav1.ObjectMeta{}.OpenAPIModelName()},
+	}
+}
+
+func schema_apis_loft_cluster_v1_Metal3BMCConsoleList(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"kind": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"apiVersion": {
+						SchemaProps: spec.SchemaProps{
+							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"metadata": {
+						SchemaProps: spec.SchemaProps{
+							Default: map[string]interface{}{},
+							Ref:     ref(metav1.ListMeta{}.OpenAPIModelName()),
+						},
+					},
+					"items": {
+						SchemaProps: spec.SchemaProps{
+							Type: []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref(v1.Metal3BMCConsole{}.OpenAPIModelName()),
+									},
+								},
+							},
+						},
+					},
+				},
+				Required: []string{"items"},
+			},
+		},
+		Dependencies: []string{
+			v1.Metal3BMCConsole{}.OpenAPIModelName(), metav1.ListMeta{}.OpenAPIModelName()},
+	}
+}
+
+func schema_apis_loft_cluster_v1_Metal3BMCConsoleOptions(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"kind": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"apiVersion": {
+						SchemaProps: spec.SchemaProps{
+							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"method": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Method is the BMC console transport: \"ssh\" or \"ipmi\" (Serial-over-LAN).",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"port": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Port on the BMC. Defaults to 22 for ssh and 623 for ipmi.",
+							Type:        []string{"integer"},
+							Format:      "int32",
+						},
+					},
+					"encryption": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Encryption activates the IPMI Serial-over-LAN payload with encryption and authentication, negotiating an AES cipher suite. Only valid for ipmi.",
+							Type:        []string{"boolean"},
+							Format:      "",
+						},
+					},
+				},
+			},
+		},
+	}
+}
+
+func schema_apis_loft_cluster_v1_Metal3BMCList(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"kind": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"apiVersion": {
+						SchemaProps: spec.SchemaProps{
+							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"metadata": {
+						SchemaProps: spec.SchemaProps{
+							Default: map[string]interface{}{},
+							Ref:     ref(metav1.ListMeta{}.OpenAPIModelName()),
+						},
+					},
+					"items": {
+						SchemaProps: spec.SchemaProps{
+							Type: []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref(v1.Metal3BMC{}.OpenAPIModelName()),
+									},
+								},
+							},
+						},
+					},
+				},
+				Required: []string{"items"},
+			},
+		},
+		Dependencies: []string{
+			v1.Metal3BMC{}.OpenAPIModelName(), metav1.ListMeta{}.OpenAPIModelName()},
+	}
+}
+
+func schema_apis_loft_cluster_v1_Metal3BMCRedfish(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "Metal3BMCRedfish sends a single Redfish request to the BareMetalHost's BMC and returns the BMC's response. A BMC HTTP status is carried in Status.StatusCode; only resolution or transport failures surface as an API error.",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"kind": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"apiVersion": {
+						SchemaProps: spec.SchemaProps{
+							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"metadata": {
+						SchemaProps: spec.SchemaProps{
+							Default: map[string]interface{}{},
+							Ref:     ref(metav1.ObjectMeta{}.OpenAPIModelName()),
+						},
+					},
+					"spec": {
+						SchemaProps: spec.SchemaProps{
+							Default: map[string]interface{}{},
+							Ref:     ref(v1.Metal3BMCRedfishSpec{}.OpenAPIModelName()),
+						},
+					},
+					"status": {
+						SchemaProps: spec.SchemaProps{
+							Default: map[string]interface{}{},
+							Ref:     ref(v1.Metal3BMCRedfishStatus{}.OpenAPIModelName()),
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			v1.Metal3BMCRedfishSpec{}.OpenAPIModelName(), v1.Metal3BMCRedfishStatus{}.OpenAPIModelName(), metav1.ObjectMeta{}.OpenAPIModelName()},
+	}
+}
+
+func schema_apis_loft_cluster_v1_Metal3BMCRedfishList(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"kind": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"apiVersion": {
+						SchemaProps: spec.SchemaProps{
+							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"metadata": {
+						SchemaProps: spec.SchemaProps{
+							Default: map[string]interface{}{},
+							Ref:     ref(metav1.ListMeta{}.OpenAPIModelName()),
+						},
+					},
+					"items": {
+						SchemaProps: spec.SchemaProps{
+							Type: []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref(v1.Metal3BMCRedfish{}.OpenAPIModelName()),
+									},
+								},
+							},
+						},
+					},
+				},
+				Required: []string{"items"},
+			},
+		},
+		Dependencies: []string{
+			v1.Metal3BMCRedfish{}.OpenAPIModelName(), metav1.ListMeta{}.OpenAPIModelName()},
+	}
+}
+
+func schema_apis_loft_cluster_v1_Metal3BMCRedfishSpec(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "Metal3BMCRedfishSpec is the Redfish request to send to the BMC.",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"method": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"string"},
+							Format: "",
+						},
+					},
+					"path": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"string"},
+							Format: "",
+						},
+					},
+					"body": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"string"},
+							Format: "byte",
+						},
+					},
+				},
+			},
+		},
+	}
+}
+
+func schema_apis_loft_cluster_v1_Metal3BMCRedfishStatus(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "Metal3BMCRedfishStatus is the BMC's response.",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"statusCode": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"integer"},
+							Format: "int32",
+						},
+					},
+					"header": {
+						SchemaProps: spec.SchemaProps{
+							Type: []string{"object"},
+							AdditionalProperties: &spec.SchemaOrBool{
+								Allows: true,
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Type: []string{"array"},
+										Items: &spec.SchemaOrArray{
+											Schema: &spec.Schema{
+												SchemaProps: spec.SchemaProps{
+													Default: "",
+													Type:    []string{"string"},
+													Format:  "",
+												},
+											},
+										},
+									},
+								},
+							},
+						},
+					},
+					"body": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"string"},
+							Format: "byte",
+						},
+					},
+				},
+			},
+		},
+	}
+}
+
+func schema_apis_loft_cluster_v1_Metal3BMCSpec(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+			},
+		},
+	}
+}
+
+func schema_apis_loft_cluster_v1_Metal3BMCStatus(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
 			},
 		},
 	}
@@ -9936,6 +10368,209 @@ func schema_pkg_apis_management_v1_ConnectorList(ref common.ReferenceCallback) c
 	}
 }
 
+func schema_pkg_apis_management_v1_ConnectorNetBoxSpec(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "ConnectorNetBoxSpec configures the connection to a NetBox instance the metal3 node provider reads its bare metal inventory from. Every field maps to one Data key of the backing Secret (given in each field comment), so a Secret written through this API is exactly what pkg/netbox reads: a NodeProvider names it through spec.metal3.netBox.secretRef with the connector's name and the platform namespace.\n\nOne field is a credential under the Connector type's view rule: apiToken is served to a caller who could update this connector and empty for every other caller, and on update an empty value keeps the stored one, so a redacted read written back never clears the token.",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"url": {
+						SchemaProps: spec.SchemaProps{
+							Description: "URL is the base URL of the NetBox instance, for example https://netbox.example.com. Data key \"url\". Required, must be an http or https URL.",
+							Default:     "",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"apiToken": {
+						SchemaProps: spec.SchemaProps{
+							Description: "APIToken is the NetBox API token requests are authenticated with. Data key \"apiToken\". Required on create. A credential (see the type comment): an empty value on update keeps the stored token, and a pre-existing Secret without a stored token cannot be updated through this API until the request supplies one. The token must be one created in the NetBox UI: NetBox rejects tokens obtained from its provisioning endpoint.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"insecure": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Insecure skips TLS certificate verification of the NetBox URL. Data key \"insecure\", always stamped as \"true\" or \"false\" exactly like the UI writes it; a missing or unparsable stored value projects as false, which is how the NetBox client reads it too.",
+							Type:        []string{"boolean"},
+							Format:      "",
+						},
+					},
+				},
+				Required: []string{"url"},
+			},
+		},
+	}
+}
+
+func schema_pkg_apis_management_v1_ConnectorObservabilitySpec(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "ConnectorObservabilitySpec configures the connection to an observability stack: the Grafana instance the platform proxies under /grafana/ and the metrics backend the observability gateway writes to and queries from. Every field except fleetDefault maps to one Data key of the backing Secret (given in each field comment), so direct Secret writers and this API stay byte-compatible in both directions.\n\nThe four Grafana and metrics backend fields default on CREATE ONLY to the same in-cluster endpoints the UI pre-fills on create (the Prometheus and Grafana the platform ships), so a minimal create through this API produces the same Secret as an untouched UI create. Updates never default them. Only grafanaUrl is required afterwards: the metrics backend endpoints and the dashboard UID may be emptied, which leaves the gateway idle until they are set again, a state the platform tolerates and the UI form does not offer.\n\nobservabilityGatewayCertSecretName appears both here and in status.observability.gatewayCertSecretName. That is one stored value reported twice, not two: a single Data key backs both, so they can never disagree. It stays settable here because leaving it empty and bringing your own certificate are different requests, and it is reported in status so a consumer finds the stored name next to the other gateway observations instead of having to read spec for one of them.\n\nThis type has no credential fields: every Secret the connector refers to is named, not embedded, so the whole payload is served to every caller who may read it.",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"fleetDefault": {
+						SchemaProps: spec.SchemaProps{
+							Description: "FleetDefault marks this connector as the one backing the platform-wide fleet metrics Grafana. It is projected from and stamped to the platform.vcluster.com/fleet-observability-connector label on the backing Secret, which is the API for it: a metadata write carrying the label with a value that disagrees with this field is refused. At most one connector may be the fleet default: a write claiming it while another connector (including a terminating one) holds it is rejected with a 409 Conflict naming the holder.\n\nThe field is tri-state. Unset carries no opinion: on create the connector claims the label automatically only when no holder exists anywhere (exactly like the UI's first create), on update it keeps the connector's current holder state and can never demote it. True claims the label explicitly (or is rejected naming the holder), false never claims it and releases it when this connector is the holder. Reads carry the value true when the label is present and leave the field unset when it is absent, never an explicit false, so a read-modify-write round trip of a non-holder stays a no-op instead of becoming a demotion request. An explicit false is accepted and demotes, but is never echoed back, so declarative tooling that keeps fleetDefault: false in its manifest sees a permanent diff on that field.\n\nMoving the fleet default to another connector takes two writes: demote the holder with an explicit false first, then claim with true on the new connector. A claim while a holder exists is never an implicit steal.\n\nA pre-existing sparse Secret missing the grafanaUrl key cannot be demoted through this API: write-time validation rejects the whole update until the field is filled in. The escape hatch is removing the fleet label on the backing Secret directly.",
+							Type:        []string{"boolean"},
+							Format:      "",
+						},
+					},
+					"grafanaUrl": {
+						SchemaProps: spec.SchemaProps{
+							Description: "GrafanaURL is the URL of the Grafana instance the platform proxies under /grafana/. Data key \"grafanaUrl\". Must be an http or https URL; an empty value defaults on CREATE ONLY to the in-cluster Grafana the platform ships (https://grafana.<platform namespace>.svc.cluster.local). An emptied value on update is rejected, matching the UI edit form.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"grafanaInsecureSkipVerify": {
+						SchemaProps: spec.SchemaProps{
+							Description: "GrafanaInsecureSkipVerify skips TLS verification when the platform talks to Grafana. Data key \"grafanaInsecureSkipVerify\": true stores \"true\", false stores no key. A write replaces the Secret from the request, so a \"false\" the UI wrote earlier does not survive an update; every consumer reads an absent key and \"false\" the same way.",
+							Type:        []string{"boolean"},
+							Format:      "",
+						},
+					},
+					"fleetObservabilityDashboardUid": {
+						SchemaProps: spec.SchemaProps{
+							Description: "FleetObservabilityDashboardUID is the UID of the Grafana dashboard the fleet observability view embeds. Data key \"fleetObservabilityDashboardUid\". An empty value defaults on CREATE ONLY to \"vcluster-fleet-observability\", the dashboard the platform provisions. It may be emptied on update: the fleet view then shows an empty state until a dashboard is named again.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"metricsBackendOtlpEndpoint": {
+						SchemaProps: spec.SchemaProps{
+							Description: "MetricsBackendOtlpEndpoint is the metrics backend's OTLP write endpoint the observability gateway forwards tenant metrics to. Data key \"metricsBackendOtlpEndpoint\". Must be an http or https URL; an empty value defaults on CREATE ONLY to the in-cluster Prometheus the platform ships (https://prom-prometheus-server.<platform namespace>.svc.cluster.local/api/v1/otlp). It may be emptied on update: the gateway controller skips the connector until both metrics backend endpoints are set.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"metricsBackendPromQLEndpoint": {
+						SchemaProps: spec.SchemaProps{
+							Description: "MetricsBackendPromQLEndpoint is the metrics backend's PromQL query endpoint. Data key \"metricsBackendPromQLEndpoint\". Must be an http or https URL; an empty value defaults on CREATE ONLY to the in-cluster Prometheus the platform ships (https://prom-prometheus-server.<platform namespace>.svc.cluster.local). It may be emptied on update: the gateway controller skips the connector until both metrics backend endpoints are set.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"metricsBackendCertSecretName": {
+						SchemaProps: spec.SchemaProps{
+							Description: "MetricsBackendCertSecretName references the kubernetes.io/tls Secret with the client certificate the gateway presents to the metrics backend for mTLS. Data key \"metricsBackendCertSecretName\". Optional.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"metricsBackendInsecureSkipVerify": {
+						SchemaProps: spec.SchemaProps{
+							Description: "MetricsBackendInsecureSkipVerify disables TLS verification against the metrics backend on both the OTLP write and PromQL query paths. Data key \"metricsBackendInsecureSkipVerify\": true stores \"true\", false stores no key. A write replaces the Secret from the request, so a \"false\" the UI wrote earlier does not survive an update; every consumer reads an absent key and \"false\" the same way.",
+							Type:        []string{"boolean"},
+							Format:      "",
+						},
+					},
+					"metricsBackendServerName": {
+						SchemaProps: spec.SchemaProps{
+							Description: "MetricsBackendServerName overrides the TLS server name the query proxy expects on the metrics backend's certificate, for backends fronted by a proxy or an SNI router. It applies to the PromQL reads only; the OTLP endpoint's certificate must still match the endpoint hostname. Data key \"metricsBackendServerName\". Optional; the UI has no field for it and the gateway documentation describes it.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"grafanaCertSecretName": {
+						SchemaProps: spec.SchemaProps{
+							Description: "GrafanaCertSecretName references the kubernetes.io/tls Secret Grafana serves; the /grafana/ proxy trusts its ca.crt. Data key \"grafanaCertSecretName\". Optional.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"observabilityGatewayCertSecretName": {
+						SchemaProps: spec.SchemaProps{
+							Description: "ObservabilityGatewayCertSecretName references the kubernetes.io/tls Secret the observability gateway serves on the OTLP write receiver and metrics query-proxy. Data key \"observabilityGatewayCertSecretName\". Optional, and the two cases are different requests rather than set-versus-unset:\n\nSet it to bring your own certificate. The Secret must exist before you name it here: the platform never modifies and never deletes a certificate Secret it did not create, but it does not check that a named Secret exists. Whenever a reconcile finds no Secret under the name (with the default ClusterIP service type that is the first reconcile after the create), the gateway self-issues a certificate under that name and owns it from then on, rotating it when its SANs change and deleting it with the connector. The name is reported in status either way; nothing there says who created the Secret.\n\nLeave it empty and the platform owns the certificate: the gateway controller derives a name, self-issues a certificate under it and writes the derived name back into this same Data key. A later read therefore projects the derived name here. Clearing the field again removes the key, and the controller then derives the same name from the connector's own name and writes it back, reusing the certificate already stored under it, so clearing a platform-derived name is not a way to force a rotation. Clearing a name you brought yourself is the real handover: there the controller derives its own name and self-issues under it.\n\nstatus.observability.gatewayCertSecretName reports the same single stored value, alongside the other gateway observations.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"serviceType": {
+						SchemaProps: spec.SchemaProps{
+							Description: "ServiceType selects the observability gateway Service type, ClusterIP or LoadBalancer. Data key \"serviceType\". Empty keeps the key absent and means ClusterIP, exactly how consumers treat a Secret without the key; the implied default is deliberately not materialized so an untouched UI create and an API create stay byte-identical.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"serviceAnnotations": {
+						SchemaProps: spec.SchemaProps{
+							Description: "ServiceAnnotations is raw YAML text with flat \"key: value\" pairs merged into the gateway Service's annotations. Data key \"serviceAnnotations\". The gateway controller stamps them onto the Service whatever its type, and the value is stored as sent for any serviceType; it only has a visible effect on a LoadBalancer Service, where the cloud provider reads it. The UI drops the value on save for other service types; the API keeps it.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"gatewayResources": {
+						SchemaProps: spec.SchemaProps{
+							Description: "GatewayResources overrides the resource requests and limits of the gateway's write container. Data key \"gatewayResources\", stored as the JSON serialization of this value, which the gateway controller parses the same way it parses a YAML block a hand-written Secret carries. Unset leaves the key absent and the controller's defaults in effect. A stored value the controller could not parse projects as unset; the controller reports that failure itself.",
+							Ref:         ref(corev1.ResourceRequirements{}.OpenAPIModelName()),
+						},
+					},
+					"queryProxyResources": {
+						SchemaProps: spec.SchemaProps{
+							Description: "QueryProxyResources overrides the resource requests and limits of the gateway's query proxy container. Data key \"queryProxyResources\"; the same storage and parsing rules as gatewayResources apply.",
+							Ref:         ref(corev1.ResourceRequirements{}.OpenAPIModelName()),
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			corev1.ResourceRequirements{}.OpenAPIModelName()},
+	}
+}
+
+func schema_pkg_apis_management_v1_ConnectorObservabilityStatus(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "ConnectorObservabilityStatus holds the observability gateway facts the platform observes rather than accepts. They are observations and references for display, not conditions: readiness rides the conditions list instead.\n\nAll but one field stay absent until a controller publishes them, so an unpublished connector reports an absent section rather than zero values that would read as facts. The exception is GatewayCertSecretName, which the API fills from the connector's own stored configuration on every read, with no controller involved; its own comment says so in full.",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"gatewayEndpoint": {
+						SchemaProps: spec.SchemaProps{
+							Description: "GatewayEndpoint is the address collectors send OTLP traffic to and the metrics query proxy is reached at, taken from the gateway Service's load balancer hostname or IP.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"gatewayCA": {
+						SchemaProps: spec.SchemaProps{
+							Description: "GatewayCA is the PEM-encoded CA certificate a collector must trust to talk to the gateway, so it can be copied straight out of a connector into a collector configuration.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"gatewayCertSecretName": {
+						SchemaProps: spec.SchemaProps{
+							Description: "GatewayCertSecretName is the name of the kubernetes.io/tls Secret the observability gateway is configured to serve, as stored on the connector: either the one an admin brought through spec.observability.observabilityGatewayCertSecretName, or the one the gateway controller derived, self-issued and wrote back when that field was left empty.\n\nIt is the same single Data key the spec field is backed by, so the two can never report different names; it is repeated here so a consumer reading status finds the certificate reference next to the other gateway observations. Unlike the rest of this section, which stays absent until a controller publishes it, the API fills this field from the connector's stored configuration on every read, so no controller has to publish it and a published copy never wins. It stays absent until the gateway controller has written its derived name back: until then the name in effect is the one the controller and the datasource consumers derive from the connector name, and this field does not report it.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"certExpiresAt": {
+						SchemaProps: spec.SchemaProps{
+							Description: "CertExpiresAt is the NotAfter of the certificate the gateway serves. It is a pointer so an unpublished expiry is absent rather than the zero time, which would read as a certificate that expired in year one.",
+							Ref:         ref(metav1.Time{}.OpenAPIModelName()),
+						},
+					},
+					"certSelfIssued": {
+						SchemaProps: spec.SchemaProps{
+							Description: "CertSelfIssued reports whether the platform issued the gateway certificate itself rather than the admin bringing one. It is a pointer because false is a meaningful answer here and must stay distinguishable from \"no controller has published cert facts yet\".",
+							Type:        []string{"boolean"},
+							Format:      "",
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			metav1.Time{}.OpenAPIModelName()},
+	}
+}
+
 func schema_pkg_apis_management_v1_ConnectorSharedDatabaseSpec(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
@@ -10030,6 +10665,13 @@ func schema_pkg_apis_management_v1_ConnectorSpec(ref common.ReferenceCallback) c
 							Format:      "",
 						},
 					},
+					"description": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Description is the free-text description shown in the UI. It is projected from and stamped to the loft.sh/description annotation on the backing Secret.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
 					"sharedDatabase": {
 						SchemaProps: spec.SchemaProps{
 							Description: "SharedDatabase is the shared-database connector payload. Exactly one payload section must be set. Its fields mirror the Data keys of the backing Secret one to one, so a connector written through this API is byte-compatible with one written by the UI directly.",
@@ -10042,17 +10684,29 @@ func schema_pkg_apis_management_v1_ConnectorSpec(ref common.ReferenceCallback) c
 							Ref:         ref(managementv1.ConnectorArgoCDSpec{}.OpenAPIModelName()),
 						},
 					},
+					"netBox": {
+						SchemaProps: spec.SchemaProps{
+							Description: "NetBox is the netbox connector payload. Exactly one payload section must be set. Its fields mirror the Data keys of the backing Secret one to one, so a connector written through this API is byte-compatible with one written by the UI directly.",
+							Ref:         ref(managementv1.ConnectorNetBoxSpec{}.OpenAPIModelName()),
+						},
+					},
 					"imageStore": {
 						SchemaProps: spec.SchemaProps{
 							Description: "ImageStore is the os-image-store connector payload. Exactly one payload section must be set. The fields of its protocol block mirror the Data keys of the backing Secret one to one, so a connector written through this API is exactly what the OSImage store loader reads.",
 							Ref:         ref(managementv1.ConnectorImageStoreSpec{}.OpenAPIModelName()),
 						},
 					},
+					"observability": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Observability is the observability connector payload. It is required when type is observability and must be unset for every other type. Its fields mirror the Data keys of the backing Secret one to one (fleetDefault excepted, which is backed by a server-owned label), so a connector written through this API is byte-compatible with one written by the UI directly.",
+							Ref:         ref(managementv1.ConnectorObservabilitySpec{}.OpenAPIModelName()),
+						},
+					},
 				},
 			},
 		},
 		Dependencies: []string{
-			managementv1.ConnectorArgoCDSpec{}.OpenAPIModelName(), managementv1.ConnectorImageStoreSpec{}.OpenAPIModelName(), managementv1.ConnectorSharedDatabaseSpec{}.OpenAPIModelName()},
+			managementv1.ConnectorArgoCDSpec{}.OpenAPIModelName(), managementv1.ConnectorImageStoreSpec{}.OpenAPIModelName(), managementv1.ConnectorNetBoxSpec{}.OpenAPIModelName(), managementv1.ConnectorObservabilitySpec{}.OpenAPIModelName(), managementv1.ConnectorSharedDatabaseSpec{}.OpenAPIModelName()},
 	}
 }
 
@@ -10077,11 +10731,17 @@ func schema_pkg_apis_management_v1_ConnectorStatus(ref common.ReferenceCallback)
 							},
 						},
 					},
+					"observability": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Observability holds the observations that only the observability connector type has and is set only when spec.type is observability. Its fields are what the gateway controller reports, not a copy of the spec: the endpoint, CA and certificate facts exist nowhere in the configuration. The other two types have no type-specific facts in v1 and therefore have no status section of their own.",
+							Ref:         ref(managementv1.ConnectorObservabilityStatus{}.OpenAPIModelName()),
+						},
+					},
 				},
 			},
 		},
 		Dependencies: []string{
-			storagev1.Condition{}.OpenAPIModelName()},
+			storagev1.Condition{}.OpenAPIModelName(), managementv1.ConnectorObservabilityStatus{}.OpenAPIModelName()},
 	}
 }
 
