@@ -6,25 +6,39 @@ type AccessKeyExpansion interface{}
 
 type AppExpansion interface{}
 
+type AppInstanceExpansion interface{}
+
+type ArgoCDApplicationExpansion interface{}
+
+type ArgoCDApplicationTemplateExpansion interface{}
+
 type ClusterExpansion interface{}
 
 type ClusterAccessExpansion interface{}
 
 type ClusterRoleTemplateExpansion interface{}
 
-type DevPodEnvironmentTemplateExpansion interface{}
+type MachineExpansion interface{}
 
-type DevPodWorkspaceInstanceExpansion interface{}
+type MachineConfigTemplateExpansion interface{}
 
-type DevPodWorkspacePresetExpansion interface{}
-
-type DevPodWorkspaceTemplateExpansion interface{}
+type NetworkEnvironmentExpansion interface{}
 
 type NetworkPeerExpansion interface{}
 
+type NodeClaimExpansion interface{}
+
+type NodeProfileExpansion interface{}
+
+type NodeProviderExpansion interface{}
+
+type NodeTypeExpansion interface{}
+
+type OSImageExpansion interface{}
+
 type ProjectExpansion interface{}
 
-type RunnerExpansion interface{}
+type SSHKeyExpansion interface{}
 
 type SharedSecretExpansion interface{}
 
@@ -32,9 +46,13 @@ type SpaceInstanceExpansion interface{}
 
 type SpaceTemplateExpansion interface{}
 
-type TaskExpansion interface{}
+type StackInstanceExpansion interface{}
+
+type StackTemplateExpansion interface{}
 
 type TeamExpansion interface{}
+
+type TenantExpansion interface{}
 
 type UserExpansion interface{}
 
