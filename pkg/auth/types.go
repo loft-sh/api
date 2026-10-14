@@ -73,7 +73,6 @@ type Info struct {
 
 type InfoMethods struct {
 	SSO      []*MethodSSO    `json:"sso,omitempty"`
-	Rancher  *MethodRancher  `json:"rancher,omitempty"`
 	Password *MethodPassword `json:"password,omitempty"`
 }
 
@@ -89,19 +88,14 @@ type MethodSSO struct {
 
 	// LogoutEndpoint is the path the UI will request a logout url from
 	LogoutEndpoint string `json:"logoutEndpoint,omitempty"`
+
+	// TokenEndpoint is the path for RFC 8693 token exchange (non-interactive authentication)
+	TokenEndpoint string `json:"tokenEndpoint,omitempty"`
 }
 
 type MethodPassword struct {
 	// Indicates if the authentication method is enabled
 	Enabled bool `json:"enabled,omitempty"`
-}
-
-type MethodRancher struct {
-	// Indicates if the authentication method is enabled
-	Enabled bool `json:"enabled,omitempty"`
-
-	// Host is the rancher host to use for redirects
-	Host string `json:"host,omitempty"`
 }
 
 type Version struct {
@@ -112,8 +106,7 @@ type Version struct {
 	Major   string `json:"major,omitempty"`
 	Minor   string `json:"minor,omitempty"`
 
-	KubeVersion   string `json:"kubeVersion,omitempty"`
-	DevPodVersion string `json:"devPodVersion,omitempty"`
+	KubeVersion string `json:"kubeVersion,omitempty"`
 
 	NewerVersion  string `json:"newerVersion,omitempty"`
 	ShouldUpgrade bool   `json:"shouldUpgrade,omitempty"`
