@@ -11101,7 +11101,7 @@ func schema_pkg_apis_management_v1_DatabaseConnector(ref common.ReferenceCallbac
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
-				Description: "DatabaseConnector represents a connector that can be used to provision and manage a backingstore for a vCluster",
+				Description: "DatabaseConnector represents a connector that can be used to provision and manage a backingstore for a vCluster\n\nDeprecated: the Connector API (connectors.management.loft.sh) supersedes this list-only kind. It serves the same shared-database connector Secrets as Connector objects with spec.sharedDatabase, carrying the display name and the connection settings this kind never had. Read connectors instead.",
 				Type:        []string{"object"},
 				Properties: map[string]spec.Schema{
 					"kind": {
@@ -22794,6 +22794,13 @@ func schema_pkg_apis_management_v1_UserInfo(ref common.ReferenceCallback) common
 							Format:      "",
 						},
 					},
+					"tenant": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Tenant is the name of the Tenant that owns this user or team, derived from its tenant.vcluster.com/owner label. Empty for a user or team no tenant owns, including a user that only inherits a label from a Team, since Team labels do not grant tenancy. Empty for any other kind of entity.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
 					"teams": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Teams are the teams the user is part of",
@@ -22805,13 +22812,6 @@ func schema_pkg_apis_management_v1_UserInfo(ref common.ReferenceCallback) common
 									},
 								},
 							},
-						},
-					},
-					"tenant": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Tenant is the name of the Tenant this user belongs to, derived from the tenant.vcluster.com/owner label on the User. Empty for an operator (unscoped) user, including a user that only inherits a label from a Team, since Team labels do not grant tenancy. The UI reads this to pre-fill the \"<tenant>--\" prefix required on cluster-scoped tenant-owned resources.",
-							Type:        []string{"string"},
-							Format:      "",
 						},
 					},
 				},
@@ -31658,6 +31658,13 @@ func schema_pkg_apis_storage_v1_EntityInfo(ref common.ReferenceCallback) common.
 					"subject": {
 						SchemaProps: spec.SchemaProps{
 							Description: "The user subject",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"tenant": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Tenant is the name of the Tenant that owns this user or team, derived from its tenant.vcluster.com/owner label. Empty for a user or team no tenant owns, including a user that only inherits a label from a Team, since Team labels do not grant tenancy. Empty for any other kind of entity.",
 							Type:        []string{"string"},
 							Format:      "",
 						},

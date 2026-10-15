@@ -13056,7 +13056,6 @@ func Convert_management_UserClustersList_To_v1_UserClustersList(in *management.U
 func autoConvert_v1_UserInfo_To_management_UserInfo(in *UserInfo, out *management.UserInfo, s conversion.Scope) error {
 	out.EntityInfo = in.EntityInfo
 	out.Teams = *(*[]*storagev1.EntityInfo)(unsafe.Pointer(&in.Teams))
-	out.Tenant = in.Tenant
 	return nil
 }
 
@@ -13068,7 +13067,6 @@ func Convert_v1_UserInfo_To_management_UserInfo(in *UserInfo, out *management.Us
 func autoConvert_management_UserInfo_To_v1_UserInfo(in *management.UserInfo, out *UserInfo, s conversion.Scope) error {
 	out.EntityInfo = in.EntityInfo
 	out.Teams = *(*[]*storagev1.EntityInfo)(unsafe.Pointer(&in.Teams))
-	out.Tenant = in.Tenant
 	return nil
 }
 

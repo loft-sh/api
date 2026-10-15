@@ -3647,7 +3647,6 @@ type UserClusters struct {
 type UserInfo struct {
 	storagev1.EntityInfo `json:",inline"`
 	Teams                []*storagev1.EntityInfo `json:"teams,omitempty"`
-	Tenant               string                  `json:"tenant,omitempty"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
