@@ -755,6 +755,7 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 		apisstoragev1.NodeType{}.OpenAPIModelName():                                          schema_pkg_apis_storage_v1_NodeType(ref),
 		apisstoragev1.NodeTypeCapacity{}.OpenAPIModelName():                                  schema_pkg_apis_storage_v1_NodeTypeCapacity(ref),
 		apisstoragev1.NodeTypeList{}.OpenAPIModelName():                                      schema_pkg_apis_storage_v1_NodeTypeList(ref),
+		apisstoragev1.NodeTypeMachines{}.OpenAPIModelName():                                  schema_pkg_apis_storage_v1_NodeTypeMachines(ref),
 		apisstoragev1.NodeTypeOverhead{}.OpenAPIModelName():                                  schema_pkg_apis_storage_v1_NodeTypeOverhead(ref),
 		apisstoragev1.NodeTypeSpec{}.OpenAPIModelName():                                      schema_pkg_apis_storage_v1_NodeTypeSpec(ref),
 		apisstoragev1.NodeTypeStatus{}.OpenAPIModelName():                                    schema_pkg_apis_storage_v1_NodeTypeStatus(ref),
@@ -10498,6 +10499,13 @@ func schema_pkg_apis_management_v1_ConnectorObservabilitySpec(ref common.Referen
 					"serviceAnnotations": {
 						SchemaProps: spec.SchemaProps{
 							Description: "ServiceAnnotations is raw YAML text with flat \"key: value\" pairs merged into the gateway Service's annotations. Data key \"serviceAnnotations\". The gateway controller stamps them onto the Service whatever its type, and the value is stored as sent for any serviceType; it only has a visible effect on a LoadBalancer Service, where the cloud provider reads it. The UI drops the value on save for other service types; the API keeps it.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"destinations": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Destinations is raw YAML text listing additional OTLP destinations the gateway forwards to. Data key \"destinations\". Each entry has:\n\n  - name: unique, lowercase, up to 40 characters\n  - signal: metrics or logs\n  - endpoint: an http or https URL\n  - insecureSkipVerify: optional, skips TLS verification\n  - certSecretName: optional, a kubernetes.io/tls Secret for mTLS\n\nThe list is checked with the gateway controller's parser and stored as sent.",
 							Type:        []string{"string"},
 							Format:      "",
 						},
@@ -33371,7 +33379,7 @@ func schema_pkg_apis_storage_v1_Metal3BareMetalHosts(ref common.ReferenceCallbac
 				Properties: map[string]spec.Schema{
 					"selector": {
 						SchemaProps: spec.SchemaProps{
-							Description: "Selector is a label selector to select the BareMetalHosts to use for this NodeType.",
+							Description: "Deprecated: use machines.selector.",
 							Ref:         ref(metav1.LabelSelector{}.OpenAPIModelName()),
 						},
 					},
@@ -33517,9 +33525,16 @@ func schema_pkg_apis_storage_v1_Metal3NodeTypeSpec(ref common.ReferenceCallback)
 							Ref:         ref(apisstoragev1.ManagedNodeTypeObjectMeta{}.OpenAPIModelName()),
 						},
 					},
+					"machines": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Machines selects the provider's Machines this NodeType draws from.",
+							Default:     map[string]interface{}{},
+							Ref:         ref(apisstoragev1.NodeTypeMachines{}.OpenAPIModelName()),
+						},
+					},
 					"bareMetalHosts": {
 						SchemaProps: spec.SchemaProps{
-							Description: "BareMetalHosts is a list of BareMetalHosts to use for this NodeType.",
+							Description: "Deprecated: use machines.selector. Read only while machines.selector is unset.",
 							Default:     map[string]interface{}{},
 							Ref:         ref(apisstoragev1.Metal3BareMetalHosts{}.OpenAPIModelName()),
 						},
@@ -33529,7 +33544,7 @@ func schema_pkg_apis_storage_v1_Metal3NodeTypeSpec(ref common.ReferenceCallback)
 			},
 		},
 		Dependencies: []string{
-			apisstoragev1.ManagedNodeTypeObjectMeta{}.OpenAPIModelName(), apisstoragev1.Metal3BareMetalHosts{}.OpenAPIModelName(), apisstoragev1.NodeTypeOverhead{}.OpenAPIModelName(), resource.Quantity{}.OpenAPIModelName()},
+			apisstoragev1.ManagedNodeTypeObjectMeta{}.OpenAPIModelName(), apisstoragev1.Metal3BareMetalHosts{}.OpenAPIModelName(), apisstoragev1.NodeTypeMachines{}.OpenAPIModelName(), apisstoragev1.NodeTypeOverhead{}.OpenAPIModelName(), resource.Quantity{}.OpenAPIModelName()},
 	}
 }
 
@@ -35810,6 +35825,27 @@ func schema_pkg_apis_storage_v1_NodeTypeList(ref common.ReferenceCallback) commo
 		},
 		Dependencies: []string{
 			apisstoragev1.NodeType{}.OpenAPIModelName(), metav1.ListMeta{}.OpenAPIModelName()},
+	}
+}
+
+func schema_pkg_apis_storage_v1_NodeTypeMachines(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "NodeTypeMachines selects the machines a node type draws from.",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"selector": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Selector is matched against the labels of this provider's Machines. A Machine carries its BareMetalHost's labels except platform keys and the labels set on the Machine itself. Unset or empty selects every Machine of the provider.",
+							Ref:         ref(metav1.LabelSelector{}.OpenAPIModelName()),
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			metav1.LabelSelector{}.OpenAPIModelName()},
 	}
 }
 

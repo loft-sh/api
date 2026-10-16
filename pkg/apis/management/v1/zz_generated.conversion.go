@@ -6624,6 +6624,7 @@ func autoConvert_v1_ConnectorObservabilitySpec_To_management_ConnectorObservabil
 	out.ObservabilityGatewayCertSecretName = in.ObservabilityGatewayCertSecretName
 	out.ServiceType = in.ServiceType
 	out.ServiceAnnotations = in.ServiceAnnotations
+	out.Destinations = in.Destinations
 	out.GatewayResources = (*corev1.ResourceRequirements)(unsafe.Pointer(in.GatewayResources))
 	out.QueryProxyResources = (*corev1.ResourceRequirements)(unsafe.Pointer(in.QueryProxyResources))
 	return nil
@@ -6648,6 +6649,7 @@ func autoConvert_management_ConnectorObservabilitySpec_To_v1_ConnectorObservabil
 	out.ObservabilityGatewayCertSecretName = in.ObservabilityGatewayCertSecretName
 	out.ServiceType = in.ServiceType
 	out.ServiceAnnotations = in.ServiceAnnotations
+	out.Destinations = in.Destinations
 	out.GatewayResources = (*corev1.ResourceRequirements)(unsafe.Pointer(in.GatewayResources))
 	out.QueryProxyResources = (*corev1.ResourceRequirements)(unsafe.Pointer(in.QueryProxyResources))
 	return nil

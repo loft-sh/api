@@ -906,6 +906,11 @@ func (in NodeTypeList) OpenAPIModelName() string {
 }
 
 // OpenAPIModelName returns the OpenAPI model name for this type.
+func (in NodeTypeMachines) OpenAPIModelName() string {
+	return "com.github.loft-sh.api.v5.pkg.apis.storage.v1.NodeTypeMachines"
+}
+
+// OpenAPIModelName returns the OpenAPI model name for this type.
 func (in NodeTypeOverhead) OpenAPIModelName() string {
 	return "com.github.loft-sh.api.v5.pkg.apis.storage.v1.NodeTypeOverhead"
 }

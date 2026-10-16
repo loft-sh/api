@@ -2317,6 +2317,7 @@ type ConnectorObservabilitySpec struct {
 	ObservabilityGatewayCertSecretName string                       `json:"observabilityGatewayCertSecretName,omitempty"`
 	ServiceType                        string                       `json:"serviceType,omitempty"`
 	ServiceAnnotations                 string                       `json:"serviceAnnotations,omitempty"`
+	Destinations                       string                       `json:"destinations,omitempty"`
 	GatewayResources                   *corev1.ResourceRequirements `json:"gatewayResources,omitempty"`
 	QueryProxyResources                *corev1.ResourceRequirements `json:"queryProxyResources,omitempty"`
 }

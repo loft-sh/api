@@ -629,6 +629,19 @@ type ConnectorObservabilitySpec struct {
 	// +optional
 	ServiceAnnotations string `json:"serviceAnnotations,omitempty"`
 
+	// Destinations is raw YAML text listing additional OTLP destinations the
+	// gateway forwards to. Data key "destinations". Each entry has:
+	//
+	//   - name: unique, lowercase, up to 40 characters
+	//   - signal: metrics or logs
+	//   - endpoint: an http or https URL
+	//   - insecureSkipVerify: optional, skips TLS verification
+	//   - certSecretName: optional, a kubernetes.io/tls Secret for mTLS
+	//
+	// The list is checked with the gateway controller's parser and stored as sent.
+	// +optional
+	Destinations string `json:"destinations,omitempty"`
+
 	// GatewayResources overrides the resource requests and limits of the gateway's
 	// write container. Data key "gatewayResources", stored as the JSON serialization
 	// of this value, which the gateway controller parses the same way it parses a YAML
