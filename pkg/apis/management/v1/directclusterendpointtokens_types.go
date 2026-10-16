@@ -1,7 +1,7 @@
 package v1
 
 import (
-	storagev1 "github.com/loft-sh/api/v4/pkg/apis/storage/v1"
+	storagev1 "github.com/loft-sh/api/v5/pkg/apis/storage/v1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 )
 
@@ -24,7 +24,7 @@ type DirectClusterEndpointToken struct {
 
 // DirectClusterEndpointTokenSpec holds the object specification
 type DirectClusterEndpointTokenSpec struct {
-	// The time to life for this access token in seconds
+	// The time to live for this access token in seconds
 	// +optional
 	TTL int64 `json:"ttl,omitempty"`
 
