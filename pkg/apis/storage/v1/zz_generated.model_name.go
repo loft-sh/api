@@ -616,6 +616,11 @@ func (in MachineNetworkInterface) OpenAPIModelName() string {
 }
 
 // OpenAPIModelName returns the OpenAPI model name for this type.
+func (in MachineNodeTypeSpec) OpenAPIModelName() string {
+	return "com.github.loft-sh.api.v5.pkg.apis.storage.v1.MachineNodeTypeSpec"
+}
+
+// OpenAPIModelName returns the OpenAPI model name for this type.
 func (in MachineSpec) OpenAPIModelName() string {
 	return "com.github.loft-sh.api.v5.pkg.apis.storage.v1.MachineSpec"
 }

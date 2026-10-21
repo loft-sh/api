@@ -50,9 +50,8 @@ const TenantLabel = "tenant.vcluster.com/owner"
 // It is mutually exclusive with TenantLabel; see the note there for what happens when a
 // resource carries both.
 //
-// An empty value reserves the resource for the platform, whose tenant is nameless. That is a
-// claim and not the absence of one, so the label's presence is the question to ask; see
-// tenancy.IsPlatformAssigned.
+// The value must name a tenant. The platform uses whatever no tenant owns or holds, so there
+// is nothing to reserve for it and an empty value is refused.
 //
 // The holder reads and references it; the operator keeps every write, including the delete.
 const TenantExclusiveHolderLabel = "tenant.vcluster.com/exclusive-to"

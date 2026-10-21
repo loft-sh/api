@@ -697,6 +697,7 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 		apisstoragev1.MachineList{}.OpenAPIModelName():                                       schema_pkg_apis_storage_v1_MachineList(ref),
 		apisstoragev1.MachineNetwork{}.OpenAPIModelName():                                    schema_pkg_apis_storage_v1_MachineNetwork(ref),
 		apisstoragev1.MachineNetworkInterface{}.OpenAPIModelName():                           schema_pkg_apis_storage_v1_MachineNetworkInterface(ref),
+		apisstoragev1.MachineNodeTypeSpec{}.OpenAPIModelName():                               schema_pkg_apis_storage_v1_MachineNodeTypeSpec(ref),
 		apisstoragev1.MachineSpec{}.OpenAPIModelName():                                       schema_pkg_apis_storage_v1_MachineSpec(ref),
 		apisstoragev1.MachineStatus{}.OpenAPIModelName():                                     schema_pkg_apis_storage_v1_MachineStatus(ref),
 		apisstoragev1.MachineSystem{}.OpenAPIModelName():                                     schema_pkg_apis_storage_v1_MachineSystem(ref),
@@ -14891,7 +14892,7 @@ func schema_pkg_apis_management_v1_NodeProviderSpec(ref common.ReferenceCallback
 					},
 					"machineAllocationPolicy": {
 						SchemaProps: spec.SchemaProps{
-							Description: "MachineAllocationPolicy is the NodeTypeSpec.MachineAllocationPolicy of this provider's node types that leave theirs empty, and the only one discovered (nico) node types can have.",
+							Description: "MachineAllocationPolicy is the NodeTypeSpec.MachineAllocationPolicy of this provider's node types that leave theirs empty.",
 							Type:        []string{"string"},
 							Format:      "",
 						},
@@ -32955,6 +32956,108 @@ func schema_pkg_apis_storage_v1_MachineNetworkInterface(ref common.ReferenceCall
 	}
 }
 
+func schema_pkg_apis_storage_v1_MachineNodeTypeSpec(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "MachineNodeTypeSpec is a node type that draws from its provider's inventory Machines.",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"providerRef": {
+						SchemaProps: spec.SchemaProps{
+							Description: "ProviderRef is the node provider to use for this node type.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"properties": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Properties returns a flexible set of properties that may be selected for scheduling.",
+							Type:        []string{"object"},
+							AdditionalProperties: &spec.SchemaOrBool{
+								Allows: true,
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: "",
+										Type:    []string{"string"},
+										Format:  "",
+									},
+								},
+							},
+						},
+					},
+					"resources": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Resources lists the full resources for a single node.",
+							Type:        []string{"object"},
+							AdditionalProperties: &spec.SchemaOrBool{
+								Allows: true,
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Ref: ref(resource.Quantity{}.OpenAPIModelName()),
+									},
+								},
+							},
+						},
+					},
+					"overhead": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Overhead defines the resource overhead for this node type.",
+							Ref:         ref(apisstoragev1.NodeTypeOverhead{}.OpenAPIModelName()),
+						},
+					},
+					"cost": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Cost is the instance cost. The higher the cost, the less likely it is to be selected. If empty, cost is automatically calculated from the resources specified.",
+							Type:        []string{"integer"},
+							Format:      "int64",
+						},
+					},
+					"displayName": {
+						SchemaProps: spec.SchemaProps{
+							Description: "DisplayName is the name that should be displayed in the UI",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"machineAllocationPolicy": {
+						SchemaProps: spec.SchemaProps{
+							Description: "MachineAllocationPolicy selects the machines a tenant's NodeClaims of this type may use: Assigned only those the tenant owns or was assigned exclusively, OnDemand also those no tenant owns or holds (never another tenant's or the platform's). Claims no tenant owns reach unassigned machines either way. Honored by metal3 and nico; externalPlatform node types mirror the remote's value. For kubevirt, Assigned runs the VMs on the tenant's machines provisioned for VMs and OnDemand on the cluster's shared nodes. Empty falls back to the provider's spec.machineAllocationPolicy, then to OnDemand for kubevirt and Assigned for the rest.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"name": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Name is the name of this node type.",
+							Default:     "",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"metadata": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Metadata holds metadata to add to this managed NodeType.",
+							Default:     map[string]interface{}{},
+							Ref:         ref(apisstoragev1.ManagedNodeTypeObjectMeta{}.OpenAPIModelName()),
+						},
+					},
+					"machines": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Machines selects the provider's Machines this NodeType draws from.",
+							Default:     map[string]interface{}{},
+							Ref:         ref(apisstoragev1.NodeTypeMachines{}.OpenAPIModelName()),
+						},
+					},
+				},
+				Required: []string{"name"},
+			},
+		},
+		Dependencies: []string{
+			apisstoragev1.ManagedNodeTypeObjectMeta{}.OpenAPIModelName(), apisstoragev1.NodeTypeMachines{}.OpenAPIModelName(), apisstoragev1.NodeTypeOverhead{}.OpenAPIModelName(), resource.Quantity{}.OpenAPIModelName()},
+	}
+}
+
 func schema_pkg_apis_storage_v1_MachineSpec(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
@@ -35479,16 +35582,15 @@ func schema_pkg_apis_storage_v1_NodeProviderNICo(ref common.ReferenceCallback) c
 							Format:      "",
 						},
 					},
-					"instanceTypeIds": {
+					"nodeTypes": {
 						SchemaProps: spec.SchemaProps{
-							Description: "InstanceTypeIDs is an allow-list of NICo InstanceType IDs to surface as NodeTypes. Empty surfaces all.",
+							Description: "NodeTypes define the NodeTypes this provider offers. A Machine with a NICo instance type carries it as the nico.vcluster.com/instance-type-id label, so a NodeType selects an instance type by label.",
 							Type:        []string{"array"},
 							Items: &spec.SchemaOrArray{
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
-										Default: "",
-										Type:    []string{"string"},
-										Format:  "",
+										Default: map[string]interface{}{},
+										Ref:     ref(apisstoragev1.MachineNodeTypeSpec{}.OpenAPIModelName()),
 									},
 								},
 							},
@@ -35520,7 +35622,7 @@ func schema_pkg_apis_storage_v1_NodeProviderNICo(ref common.ReferenceCallback) c
 			},
 		},
 		Dependencies: []string{
-			apisstoragev1.NICoIdentity{}.OpenAPIModelName()},
+			apisstoragev1.MachineNodeTypeSpec{}.OpenAPIModelName(), apisstoragev1.NICoIdentity{}.OpenAPIModelName()},
 	}
 }
 
@@ -35598,7 +35700,7 @@ func schema_pkg_apis_storage_v1_NodeProviderSpec(ref common.ReferenceCallback) c
 					},
 					"machineAllocationPolicy": {
 						SchemaProps: spec.SchemaProps{
-							Description: "MachineAllocationPolicy is the NodeTypeSpec.MachineAllocationPolicy of this provider's node types that leave theirs empty, and the only one discovered (nico) node types can have.",
+							Description: "MachineAllocationPolicy is the NodeTypeSpec.MachineAllocationPolicy of this provider's node types that leave theirs empty.",
 							Type:        []string{"string"},
 							Format:      "",
 						},
@@ -35837,7 +35939,7 @@ func schema_pkg_apis_storage_v1_NodeTypeMachines(ref common.ReferenceCallback) c
 				Properties: map[string]spec.Schema{
 					"selector": {
 						SchemaProps: spec.SchemaProps{
-							Description: "Selector is matched against the labels of this provider's Machines. A Machine carries its BareMetalHost's labels except platform keys and the labels set on the Machine itself. Unset or empty selects every Machine of the provider.",
+							Description: "Selector is matched against the labels of this provider's Machines. A Machine carries its provider record's labels (BareMetalHost, NICo machine) except platform keys, plus labels set on the Machine itself. Unset or empty selects every Machine of the provider.",
 							Ref:         ref(metav1.LabelSelector{}.OpenAPIModelName()),
 						},
 					},
