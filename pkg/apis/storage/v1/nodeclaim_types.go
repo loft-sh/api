@@ -41,6 +41,9 @@ const (
 	NodeClaimPhaseFailed NodeClaimPhase = "Failed"
 )
 
+// NodeClaimReasonMachineNotFound marks a provisioned claim whose Machine is gone.
+const NodeClaimReasonMachineNotFound = "MachineNotFound"
+
 // +genclient
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
 // +kubebuilder:printcolumn:name="Status",type="string",JSONPath=".status.phase"

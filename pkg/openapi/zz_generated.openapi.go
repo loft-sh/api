@@ -25574,7 +25574,7 @@ func schema_pkg_apis_management_v1_VirtualClusterObservabilityConnector(ref comm
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
-				Description: "VirtualClusterObservabilityConnector holds the credential and write-gateway connection details a tenant cluster's collector needs to push metrics to the Platform.\n\nCreating it refuses in one of five ways, which differ only in what the caller should do next:\n\n  - 400: the connector, or the instance's own config, is missing or has to be repaired\n  - 403: the platform refuses the caller's entitlement or identity\n  - 404: the instance is not there, or is on its way out\n  - 405: the deployment builds no connector at all\n  - 503: the write gateway is still coming up\n\nThe code carries the whole of that answer, so a caller decides whether to retry from it alone. The status message is for people: it names the specific cause, and the platform reports the same finding as a warning condition on the virtual cluster instance, which is where the admin who owns the connector is looking.",
+				Description: "VirtualClusterObservabilityConnector holds the credential and write-gateway connection details a tenant cluster's collector needs to push metrics to the Platform.\n\nCreating it refuses in one of five ways, which differ only in what the caller should do next:\n\n  - 400: the connector or the instance's own config is missing, unusable or has to be repaired\n  - 403: the platform refuses the caller's entitlement or identity\n  - 404: the instance is not there, or is on its way out\n  - 405: the deployment builds no connector at all\n  - 503: the write gateway is still coming up\n\nThe code carries the whole of that answer, so a caller decides whether to retry from it alone. The status message is for people: it names the specific cause, and the platform reports the same finding as a warning condition on the virtual cluster instance, which is where the admin who owns the connector is looking.",
 				Type:        []string{"object"},
 				Properties: map[string]spec.Schema{
 					"kind": {
@@ -40502,7 +40502,7 @@ func schema_pkg_apis_storage_v1_TenantNodeTypeQuota(ref common.ReferenceCallback
 				Properties: map[string]spec.Schema{
 					"byType": {
 						SchemaProps: spec.SchemaProps{
-							Description: "ByType caps how many nodes the tenant may run of each NodeType, keyed by NodeType name (e.g. \"eu-west.medium\": \"5\"). Values are non-negative integer counts, the same encoding a Project's Quotas use and the same one pkg/quota's admission path parses for management resources such as nodeclaims.",
+							Description: "ByType caps on-demand capacity per NodeType name (e.g. \"eu-west.medium\": \"5\"). Values are non-negative integer counts, the same encoding a Project's quotas use. Claims bound to machines the tenant owns or was assigned exclusively, and pinned claims, do not count. Metal3 and NICo types not OnDemand, and KubeVirt Assigned types, are not limited. Under OnDemand, an over-quota claim waits even with an assigned machine free; pin it with machineRef.",
 							Type:        []string{"object"},
 							AdditionalProperties: &spec.SchemaOrBool{
 								Allows: true,

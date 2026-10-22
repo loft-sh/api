@@ -80,7 +80,8 @@ const (
 	// MachinePhaseDeprovisioning means the provider is tearing the machine
 	// down: wiping it after release or powering it off for deletion. Reason
 	// carries the provider's step, for metal3 "deprovisioning", "powering off
-	// before delete" or "deleting".
+	// before delete" or "deleting"; NICo reports InUse after the instance is
+	// gone.
 	MachinePhaseDeprovisioning MachinePhase = "Deprovisioning"
 	// MachinePhaseMaintenance means the machine was deliberately taken out of
 	// service (metal3 detached, NICo Maintenance or Decommissioned).
