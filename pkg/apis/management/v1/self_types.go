@@ -1,7 +1,7 @@
 package v1
 
 import (
-	storagev1 "github.com/loft-sh/api/v4/pkg/apis/storage/v1"
+	storagev1 "github.com/loft-sh/api/v5/pkg/apis/storage/v1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 )
 
@@ -66,6 +66,10 @@ type SelfStatus struct {
 	// InstanceID is the loft instance id
 	// +optional
 	InstanceID string `json:"instanceID,omitempty"`
+
+	// LoftHost is the host of the loft instance
+	// +optional
+	LoftHost string `json:"loftHost,omitempty"`
 
 	// ProjectNamespacePrefix is the prefix used to name project namespaces after defaulting has been applied
 	// +optional
