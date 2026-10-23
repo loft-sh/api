@@ -311,8 +311,17 @@ type TenantOSImages struct {
 }
 
 // TenantOSImageAllow selects the OS images a tenant may boot from: the admin-owned
-// images matching ByLabels, plus the tenant's own images when Custom allows them.
+// images named by ByName or matching ByLabels, plus the tenant's own images when Custom
+// allows them. ByName and ByLabels may not both be set: an image that is both named
+// and labelled would be served twice. To grant a set plus one more image, label it
+// and widen ByLabels.
+//
+// +kubebuilder:validation:XValidation:rule="!has(self.byName) || size(self.byName) == 0 || !has(self.byLabels) || size(self.byLabels) == 0",message="byName and byLabels cannot both be set: label the OS images you want and select them with byLabels"
 type TenantOSImageAllow struct {
+	// ByName selects admin-owned OS images by their exact names. There is no wildcard.
+	// +optional
+	ByName []string `json:"byName,omitempty"`
+
 	// ByLabels selects admin-owned OS images carrying all of these labels.
 	//
 	// An empty map and an absent one are deliberately different, which is why this
@@ -358,8 +367,7 @@ type TenantNodeTypes struct {
 // disjoint -- so a NodeType that is both named here and matched by these labels would be
 // served twice in one page, counted twice, and delivered twice to a watch.
 //
-// Only this capability can produce the collision, because it is the only one offering a
-// name selector at all. An empty byLabels is still allowed alongside byName: it resolves
+// Only capabilities offering a name selector can produce the collision. An empty byLabels is still allowed alongside byName: it resolves
 // to a shared baseline, which drops the name selector rather than adding a second leg.
 //
 // To grant a set plus an extra instance, label the extra one and widen byLabels. That is

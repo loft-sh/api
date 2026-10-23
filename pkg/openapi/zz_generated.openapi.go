@@ -40453,7 +40453,7 @@ func schema_pkg_apis_storage_v1_TenantNodeTypeAllow(ref common.ReferenceCallback
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
-				Description: "TenantNodeTypeAllow selects the NodeTypes a tenant may provision from. A tenant cannot author a NodeType of its own, so there is no custom allowance. Setting neither selector allows every NodeType (see TenantSpec).\n\nA name grant and a label grant may not both be set. Each produces its own leg in the read plan, and the plan's legs are concatenated on the assumption that they are disjoint -- so a NodeType that is both named here and matched by these labels would be served twice in one page, counted twice, and delivered twice to a watch.\n\nOnly this capability can produce the collision, because it is the only one offering a name selector at all. An empty byLabels is still allowed alongside byName: it resolves to a shared baseline, which drops the name selector rather than adding a second leg.\n\nTo grant a set plus an extra instance, label the extra one and widen byLabels. That is what byLabels is for, and it keeps the grant expressed in one place.",
+				Description: "TenantNodeTypeAllow selects the NodeTypes a tenant may provision from. A tenant cannot author a NodeType of its own, so there is no custom allowance. Setting neither selector allows every NodeType (see TenantSpec).\n\nA name grant and a label grant may not both be set. Each produces its own leg in the read plan, and the plan's legs are concatenated on the assumption that they are disjoint -- so a NodeType that is both named here and matched by these labels would be served twice in one page, counted twice, and delivered twice to a watch.\n\nOnly capabilities offering a name selector can produce the collision. An empty byLabels is still allowed alongside byName: it resolves to a shared baseline, which drops the name selector rather than adding a second leg.\n\nTo grant a set plus an extra instance, label the extra one and widen byLabels. That is what byLabels is for, and it keeps the grant expressed in one place.",
 				Type:        []string{"object"},
 				Properties: map[string]spec.Schema{
 					"byName": {
@@ -40560,9 +40560,24 @@ func schema_pkg_apis_storage_v1_TenantOSImageAllow(ref common.ReferenceCallback)
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
-				Description: "TenantOSImageAllow selects the OS images a tenant may boot from: the admin-owned images matching ByLabels, plus the tenant's own images when Custom allows them.",
+				Description: "TenantOSImageAllow selects the OS images a tenant may boot from: the admin-owned images named by ByName or matching ByLabels, plus the tenant's own images when Custom allows them. ByName and ByLabels may not both be set: an image that is both named and labelled would be served twice. To grant a set plus one more image, label it and widen ByLabels.",
 				Type:        []string{"object"},
 				Properties: map[string]spec.Schema{
+					"byName": {
+						SchemaProps: spec.SchemaProps{
+							Description: "ByName selects admin-owned OS images by their exact names. There is no wildcard.",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: "",
+										Type:    []string{"string"},
+										Format:  "",
+									},
+								},
+							},
+						},
+					},
 					"byLabels": {
 						SchemaProps: spec.SchemaProps{
 							Description: "ByLabels selects admin-owned OS images carrying all of these labels.\n\nAn empty map and an absent one are deliberately different, which is why this field carries no omitempty. An empty conjunction is vacuously true, so byLabels: {} matches every admin-owned instance; absent or null matches none. With omitempty the two forms both serialize to nothing and the distinction dies on the first round trip, which is why it has to be stated here rather than inferred from emptiness on Allow. ByName gets no equivalent treatment: an empty enumeration reads as \"nothing\" to everyone, and only a conjunction has the vacuous-truth property that makes empty mean everything.",
