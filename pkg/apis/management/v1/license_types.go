@@ -7,7 +7,7 @@ import (
 
 // +genclient
 // +genclient:nonNamespaced
-// +genclient:method=LicenseRequest,verb=create,subresource=request,input=github.com/loft-sh/api/v4/pkg/apis/management/v1.LicenseRequest,result=github.com/loft-sh/api/v4/pkg/apis/management/v1.LicenseRequest
+// +genclient:method=LicenseRequest,verb=create,subresource=request,input=github.com/loft-sh/api/v5/pkg/apis/management/v1.LicenseRequest,result=github.com/loft-sh/api/v5/pkg/apis/management/v1.LicenseRequest
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
 
 // License holds the license information
@@ -33,4 +33,7 @@ type LicenseStatus struct {
 	// ResourceUsage shows the current usage of license limit.
 	// +optional
 	ResourceUsage map[string]licenseapi.ResourceCount `json:"resourceUsage,omitempty"`
+
+	// PlatformDatabase shows information about the platform database installation
+	PlatformDatabase *licenseapi.PlatformDatabase `json:"platformDatabase,omitempty"`
 }
