@@ -3,13 +3,13 @@
 package v1
 
 import (
-	"context"
+	context "context"
 	time "time"
 
-	storagev1 "github.com/loft-sh/api/v4/pkg/apis/storage/v1"
+	apisstoragev1 "github.com/loft-sh/api/v4/pkg/apis/storage/v1"
 	versioned "github.com/loft-sh/api/v4/pkg/clientset/versioned"
 	internalinterfaces "github.com/loft-sh/api/v4/pkg/informers/externalversions/internalinterfaces"
-	v1 "github.com/loft-sh/api/v4/pkg/listers/storage/v1"
+	storagev1 "github.com/loft-sh/api/v4/pkg/listers/storage/v1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	runtime "k8s.io/apimachinery/pkg/runtime"
 	watch "k8s.io/apimachinery/pkg/watch"
@@ -20,7 +20,7 @@ import (
 // Tasks.
 type TaskInformer interface {
 	Informer() cache.SharedIndexInformer
-	Lister() v1.TaskLister
+	Lister() storagev1.TaskLister
 }
 
 type taskInformer struct {
@@ -40,21 +40,33 @@ func NewTaskInformer(client versioned.Interface, resyncPeriod time.Duration, ind
 // one. This reduces memory footprint and number of connections to the server.
 func NewFilteredTaskInformer(client versioned.Interface, resyncPeriod time.Duration, indexers cache.Indexers, tweakListOptions internalinterfaces.TweakListOptionsFunc) cache.SharedIndexInformer {
 	return cache.NewSharedIndexInformer(
-		&cache.ListWatch{
+		cache.ToListWatcherWithWatchListSemantics(&cache.ListWatch{
 			ListFunc: func(options metav1.ListOptions) (runtime.Object, error) {
 				if tweakListOptions != nil {
 					tweakListOptions(&options)
 				}
-				return client.StorageV1().Tasks().List(context.TODO(), options)
+				return client.StorageV1().Tasks().List(context.Background(), options)
 			},
 			WatchFunc: func(options metav1.ListOptions) (watch.Interface, error) {
 				if tweakListOptions != nil {
 					tweakListOptions(&options)
 				}
-				return client.StorageV1().Tasks().Watch(context.TODO(), options)
+				return client.StorageV1().Tasks().Watch(context.Background(), options)
 			},
-		},
-		&storagev1.Task{},
+			ListWithContextFunc: func(ctx context.Context, options metav1.ListOptions) (runtime.Object, error) {
+				if tweakListOptions != nil {
+					tweakListOptions(&options)
+				}
+				return client.StorageV1().Tasks().List(ctx, options)
+			},
+			WatchFuncWithContext: func(ctx context.Context, options metav1.ListOptions) (watch.Interface, error) {
+				if tweakListOptions != nil {
+					tweakListOptions(&options)
+				}
+				return client.StorageV1().Tasks().Watch(ctx, options)
+			},
+		}, client),
+		&apisstoragev1.Task{},
 		resyncPeriod,
 		indexers,
 	)
@@ -65,9 +77,9 @@ func (f *taskInformer) defaultInformer(client versioned.Interface, resyncPeriod 
 }
 
 func (f *taskInformer) Informer() cache.SharedIndexInformer {
-	return f.factory.InformerFor(&storagev1.Task{}, f.defaultInformer)
+	return f.factory.InformerFor(&apisstoragev1.Task{}, f.defaultInformer)
 }
 
-func (f *taskInformer) Lister() v1.TaskLister {
-	return v1.NewTaskLister(f.Informer().GetIndexer())
+func (f *taskInformer) Lister() storagev1.TaskLister {
+	return storagev1.NewTaskLister(f.Informer().GetIndexer())
 }
