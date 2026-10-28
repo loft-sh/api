@@ -849,6 +849,7 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 		apisstoragev1.TenantControlPlaneClusterAllow{}.OpenAPIModelName():                    schema_pkg_apis_storage_v1_TenantControlPlaneClusterAllow(ref),
 		apisstoragev1.TenantControlPlaneClusters{}.OpenAPIModelName():                        schema_pkg_apis_storage_v1_TenantControlPlaneClusters(ref),
 		apisstoragev1.TenantCustomAllow{}.OpenAPIModelName():                                 schema_pkg_apis_storage_v1_TenantCustomAllow(ref),
+		apisstoragev1.TenantExternalClusters{}.OpenAPIModelName():                            schema_pkg_apis_storage_v1_TenantExternalClusters(ref),
 		apisstoragev1.TenantHostnameBinding{}.OpenAPIModelName():                             schema_pkg_apis_storage_v1_TenantHostnameBinding(ref),
 		apisstoragev1.TenantList{}.OpenAPIModelName():                                        schema_pkg_apis_storage_v1_TenantList(ref),
 		apisstoragev1.TenantNICoSiteAccess{}.OpenAPIModelName():                              schema_pkg_apis_storage_v1_TenantNICoSiteAccess(ref),
@@ -19276,6 +19277,13 @@ func schema_pkg_apis_management_v1_SelfStatus(ref common.ReferenceCallback) comm
 							Format:      "",
 						},
 					},
+					"externalClustersAllowed": {
+						SchemaProps: spec.SchemaProps{
+							Description: "ExternalClustersAllowed reports whether the described subject's tenant allows importing externally deployed clusters: its tenant's setting, or true outside any tenant. It does not account for RBAC: registering a cluster still needs create on registervirtualclusters. Unset if it could not be determined.",
+							Type:        []string{"boolean"},
+							Format:      "",
+						},
+					},
 				},
 			},
 		},
@@ -22179,11 +22187,17 @@ func schema_pkg_apis_management_v1_TenantSpec(ref common.ReferenceCallback) comm
 							Ref:         ref(apisstoragev1.TenantConnectors{}.OpenAPIModelName()),
 						},
 					},
+					"externalClusters": {
+						SchemaProps: spec.SchemaProps{
+							Description: "ExternalClusters governs whether this tenant's users may import externally deployed clusters, that is, clusters deployed outside the platform that register themselves with it afterwards.",
+							Ref:         ref(apisstoragev1.TenantExternalClusters{}.OpenAPIModelName()),
+						},
+					},
 				},
 			},
 		},
 		Dependencies: []string{
-			apisstoragev1.Access{}.OpenAPIModelName(), apisstoragev1.TenantConnectors{}.OpenAPIModelName(), apisstoragev1.TenantControlPlaneClusters{}.OpenAPIModelName(), apisstoragev1.TenantNodeTypes{}.OpenAPIModelName(), apisstoragev1.TenantOSImages{}.OpenAPIModelName(), apisstoragev1.TenantPlatformConfig{}.OpenAPIModelName(), apisstoragev1.TenantSSHKeys{}.OpenAPIModelName(), apisstoragev1.TenantTemplates{}.OpenAPIModelName(), apisstoragev1.UserOrTeam{}.OpenAPIModelName()},
+			apisstoragev1.Access{}.OpenAPIModelName(), apisstoragev1.TenantConnectors{}.OpenAPIModelName(), apisstoragev1.TenantControlPlaneClusters{}.OpenAPIModelName(), apisstoragev1.TenantExternalClusters{}.OpenAPIModelName(), apisstoragev1.TenantNodeTypes{}.OpenAPIModelName(), apisstoragev1.TenantOSImages{}.OpenAPIModelName(), apisstoragev1.TenantPlatformConfig{}.OpenAPIModelName(), apisstoragev1.TenantSSHKeys{}.OpenAPIModelName(), apisstoragev1.TenantTemplates{}.OpenAPIModelName(), apisstoragev1.UserOrTeam{}.OpenAPIModelName()},
 	}
 }
 
@@ -40137,9 +40151,24 @@ func schema_pkg_apis_storage_v1_TenantConnectorAllow(ref common.ReferenceCallbac
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
-				Description: "TenantConnectorAllow selects the admin-owned connectors a tenant may read. A tenant cannot create a connector of its own, so there is no custom allowance.",
+				Description: "TenantConnectorAllow selects the admin-owned connectors a tenant may read, by ByName or ByLabels. A tenant cannot create a connector of its own, so there is no custom allowance.\n\nByName and a non-empty ByLabels may not both be set: a connector that is both named and labelled would be served twice. To grant a set plus one more connector, label it and widen ByLabels.\n\nAn empty ByLabels is not an unset one: byLabels: {} matches every admin-owned connector, so beside ByName it admits all of them and ByName is ignored. Leave ByLabels absent to grant by name.",
 				Type:        []string{"object"},
 				Properties: map[string]spec.Schema{
+					"byName": {
+						SchemaProps: spec.SchemaProps{
+							Description: "ByName selects admin-owned connectors by their exact names. There is no wildcard.",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: "",
+										Type:    []string{"string"},
+										Format:  "",
+									},
+								},
+							},
+						},
+					},
 					"byLabels": {
 						SchemaProps: spec.SchemaProps{
 							Description: "ByLabels selects admin-owned connectors carrying all of these labels. Only labels returned on connectors may be selected on: a label the API does not return, such as the connector type, is refused.\n\nAn empty map and an absent one are deliberately different, which is why this field carries no omitempty. An empty conjunction is vacuously true, so byLabels: {} matches every admin-owned instance; absent or null matches none. With omitempty the two forms both serialize to nothing and the distinction dies on the first round trip, which is why it has to be stated here rather than inferred from emptiness on Allow. ByName gets no equivalent treatment: an empty enumeration reads as \"nothing\" to everyone, and only a conjunction has the vacuous-truth property that makes empty mean everything.",
@@ -40194,9 +40223,24 @@ func schema_pkg_apis_storage_v1_TenantControlPlaneClusterAllow(ref common.Refere
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
-				Description: "TenantControlPlaneClusterAllow selects the admin-owned Control Plane Clusters a tenant may target. A tenant cannot register a Control Plane Cluster of its own, so there is no custom allowance.",
+				Description: "TenantControlPlaneClusterAllow selects the admin-owned Control Plane Clusters a tenant may target, by ByName or ByLabels. A tenant cannot register a Control Plane Cluster of its own, so there is no custom allowance.\n\nByName and a non-empty ByLabels may not both be set: a cluster that is both named and labelled would be served twice. To grant a set plus one more cluster, label it and widen ByLabels.\n\nAn empty ByLabels is not an unset one: byLabels: {} matches every admin-owned Control Plane Cluster, so beside ByName it admits all of them and ByName is ignored. Leave ByLabels absent to grant by name.",
 				Type:        []string{"object"},
 				Properties: map[string]spec.Schema{
+					"byName": {
+						SchemaProps: spec.SchemaProps{
+							Description: "ByName selects admin-owned Control Plane Clusters by their exact names. There is no wildcard.",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: "",
+										Type:    []string{"string"},
+										Format:  "",
+									},
+								},
+							},
+						},
+					},
 					"byLabels": {
 						SchemaProps: spec.SchemaProps{
 							Description: "ByLabels selects Control Plane Clusters carrying all of these labels.\n\nAn empty map and an absent one are deliberately different, which is why this field carries no omitempty. An empty conjunction is vacuously true, so byLabels: {} matches every admin-owned instance; absent or null matches none. With omitempty the two forms both serialize to nothing and the distinction dies on the first round trip, which is why it has to be stated here rather than inferred from emptiness on Allow. ByName gets no equivalent treatment: an empty enumeration reads as \"nothing\" to everyone, and only a conjunction has the vacuous-truth property that makes empty mean everything.",
@@ -40257,6 +40301,26 @@ func schema_pkg_apis_storage_v1_TenantCustomAllow(ref common.ReferenceCallback) 
 					"enabled": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Enabled controls whether the tenant may author its own instances. False denies it; only true allows it. Default: disabled, which is also what omitting the whole Custom block means, so the two agree rather than a present-but-empty Custom quietly granting what an absent one withholds.",
+							Type:        []string{"boolean"},
+							Format:      "",
+						},
+					},
+				},
+			},
+		},
+	}
+}
+
+func schema_pkg_apis_storage_v1_TenantExternalClusters(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "TenantExternalClusters holds a tenant's external cluster import setting.",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"enabled": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Enabled lets the tenant's users register new externally deployed clusters into its projects. While it is off, clusters already imported keep re-registering, and operators registering into the tenant's projects are never refused. Default: disabled.",
 							Type:        []string{"boolean"},
 							Format:      "",
 						},
@@ -40666,7 +40730,7 @@ func schema_pkg_apis_storage_v1_TenantResourceBoundary(ref common.ReferenceCallb
 				Properties: map[string]spec.Schema{
 					"resource": {
 						SchemaProps: spec.SchemaProps{
-							Description: "Resource is the lowercase plural management.loft.sh resource name.",
+							Description: "Resource is the lowercase plural resource name: a management.loft.sh kind, or clusterroles or roles for the RBAC role kinds.",
 							Default:     "",
 							Type:        []string{"string"},
 							Format:      "",
@@ -40878,11 +40942,17 @@ func schema_pkg_apis_storage_v1_TenantSpec(ref common.ReferenceCallback) common.
 							Ref:         ref(apisstoragev1.TenantConnectors{}.OpenAPIModelName()),
 						},
 					},
+					"externalClusters": {
+						SchemaProps: spec.SchemaProps{
+							Description: "ExternalClusters governs whether this tenant's users may import externally deployed clusters, that is, clusters deployed outside the platform that register themselves with it afterwards.",
+							Ref:         ref(apisstoragev1.TenantExternalClusters{}.OpenAPIModelName()),
+						},
+					},
 				},
 			},
 		},
 		Dependencies: []string{
-			apisstoragev1.Access{}.OpenAPIModelName(), apisstoragev1.TenantConnectors{}.OpenAPIModelName(), apisstoragev1.TenantControlPlaneClusters{}.OpenAPIModelName(), apisstoragev1.TenantNodeTypes{}.OpenAPIModelName(), apisstoragev1.TenantOSImages{}.OpenAPIModelName(), apisstoragev1.TenantPlatformConfig{}.OpenAPIModelName(), apisstoragev1.TenantSSHKeys{}.OpenAPIModelName(), apisstoragev1.TenantTemplates{}.OpenAPIModelName(), apisstoragev1.UserOrTeam{}.OpenAPIModelName()},
+			apisstoragev1.Access{}.OpenAPIModelName(), apisstoragev1.TenantConnectors{}.OpenAPIModelName(), apisstoragev1.TenantControlPlaneClusters{}.OpenAPIModelName(), apisstoragev1.TenantExternalClusters{}.OpenAPIModelName(), apisstoragev1.TenantNodeTypes{}.OpenAPIModelName(), apisstoragev1.TenantOSImages{}.OpenAPIModelName(), apisstoragev1.TenantPlatformConfig{}.OpenAPIModelName(), apisstoragev1.TenantSSHKeys{}.OpenAPIModelName(), apisstoragev1.TenantTemplates{}.OpenAPIModelName(), apisstoragev1.UserOrTeam{}.OpenAPIModelName()},
 	}
 }
 

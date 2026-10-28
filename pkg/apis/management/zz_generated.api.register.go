@@ -3280,18 +3280,19 @@ type SelfSpec struct {
 }
 
 type SelfStatus struct {
-	User                   *UserInfo                 `json:"user,omitempty"`
-	Team                   *storagev1.EntityInfo     `json:"team,omitempty"`
-	AccessKey              string                    `json:"accessKey,omitempty"`
-	AccessKeyScope         *storagev1.AccessKeyScope `json:"accessKeyScope,omitempty"`
-	AccessKeyType          storagev1.AccessKeyType   `json:"accessKeyType,omitempty"`
-	Subject                string                    `json:"subject,omitempty"`
-	UID                    string                    `json:"uid,omitempty"`
-	Groups                 []string                  `json:"groups,omitempty"`
-	ChatAuthToken          string                    `json:"chatAuthToken,omitempty"`
-	InstanceID             string                    `json:"instanceID,omitempty"`
-	LoftHost               string                    `json:"loftHost,omitempty"`
-	ProjectNamespacePrefix *string                   `json:"projectNamespacePrefix,omitempty"`
+	User                    *UserInfo                 `json:"user,omitempty"`
+	Team                    *storagev1.EntityInfo     `json:"team,omitempty"`
+	AccessKey               string                    `json:"accessKey,omitempty"`
+	AccessKeyScope          *storagev1.AccessKeyScope `json:"accessKeyScope,omitempty"`
+	AccessKeyType           storagev1.AccessKeyType   `json:"accessKeyType,omitempty"`
+	Subject                 string                    `json:"subject,omitempty"`
+	UID                     string                    `json:"uid,omitempty"`
+	Groups                  []string                  `json:"groups,omitempty"`
+	ChatAuthToken           string                    `json:"chatAuthToken,omitempty"`
+	InstanceID              string                    `json:"instanceID,omitempty"`
+	LoftHost                string                    `json:"loftHost,omitempty"`
+	ProjectNamespacePrefix  *string                   `json:"projectNamespacePrefix,omitempty"`
+	ExternalClustersAllowed *bool                     `json:"externalClustersAllowed,omitempty"`
 }
 
 // +genclient

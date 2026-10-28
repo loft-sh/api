@@ -244,6 +244,12 @@ type TenantSpec struct {
 	// Connectors governs the admin-owned connectors this tenant may read.
 	// +optional
 	Connectors *TenantConnectors `json:"connectors,omitempty"`
+
+	// ExternalClusters governs whether this tenant's users may import externally
+	// deployed clusters, that is, clusters deployed outside the platform that
+	// register themselves with it afterwards.
+	// +optional
+	ExternalClusters *TenantExternalClusters `json:"externalClusters,omitempty"`
 }
 
 // TenantControlPlaneClusters governs the Control Plane Clusters a tenant may target.
@@ -259,9 +265,24 @@ type TenantControlPlaneClusters struct {
 }
 
 // TenantControlPlaneClusterAllow selects the admin-owned Control Plane Clusters a
-// tenant may target. A tenant cannot register a Control Plane Cluster of its own, so
-// there is no custom allowance.
+// tenant may target, by ByName or ByLabels. A tenant cannot register a Control Plane
+// Cluster of its own, so there is no custom allowance.
+//
+// ByName and a non-empty ByLabels may not both be set: a cluster that is both named and
+// labelled would be served twice. To grant a set plus one more cluster, label it and
+// widen ByLabels.
+//
+// An empty ByLabels is not an unset one: byLabels: {} matches every admin-owned Control
+// Plane Cluster, so beside ByName it admits all of them and ByName is ignored. Leave
+// ByLabels absent to grant by name.
+//
+// +kubebuilder:validation:XValidation:rule="!has(self.byName) || size(self.byName) == 0 || !has(self.byLabels) || size(self.byLabels) == 0",message="byName and byLabels cannot both be set: label the Control Plane Clusters you want and select them with byLabels"
 type TenantControlPlaneClusterAllow struct {
+	// ByName selects admin-owned Control Plane Clusters by their exact names. There is
+	// no wildcard.
+	// +optional
+	ByName []string `json:"byName,omitempty"`
+
 	// ByLabels selects Control Plane Clusters carrying all of these labels.
 	//
 	// An empty map and an absent one are deliberately different, which is why this
@@ -483,9 +504,33 @@ type TenantConnectors struct {
 	Allow *TenantConnectorAllow `json:"allow,omitempty"`
 }
 
-// TenantConnectorAllow selects the admin-owned connectors a tenant may read. A tenant
-// cannot create a connector of its own, so there is no custom allowance.
+// TenantExternalClusters holds a tenant's external cluster import setting.
+type TenantExternalClusters struct {
+	// Enabled lets the tenant's users register new externally deployed clusters into its
+	// projects. While it is off, clusters already imported keep re-registering, and operators
+	// registering into the tenant's projects are never refused. Default: disabled.
+	// +optional
+	Enabled bool `json:"enabled,omitempty"`
+}
+
+// TenantConnectorAllow selects the admin-owned connectors a tenant may read, by ByName
+// or ByLabels. A tenant cannot create a connector of its own, so there is no custom
+// allowance.
+//
+// ByName and a non-empty ByLabels may not both be set: a connector that is both named and
+// labelled would be served twice. To grant a set plus one more connector, label it and
+// widen ByLabels.
+//
+// An empty ByLabels is not an unset one: byLabels: {} matches every admin-owned connector,
+// so beside ByName it admits all of them and ByName is ignored. Leave ByLabels absent to
+// grant by name.
+//
+// +kubebuilder:validation:XValidation:rule="!has(self.byName) || size(self.byName) == 0 || !has(self.byLabels) || size(self.byLabels) == 0",message="byName and byLabels cannot both be set: label the connectors you want and select them with byLabels"
 type TenantConnectorAllow struct {
+	// ByName selects admin-owned connectors by their exact names. There is no wildcard.
+	// +optional
+	ByName []string `json:"byName,omitempty"`
+
 	// ByLabels selects admin-owned connectors carrying all of these labels. Only labels
 	// returned on connectors may be selected on: a label the API does not return, such as
 	// the connector type, is refused.
@@ -597,7 +642,8 @@ type TenantHostnameBinding struct {
 // instance, so projecting it would delay an operator's claim by a reconcile. A complete "who
 // can see this" answer is this boundary plus the instances carrying TenantExclusiveHolderLabel.
 type TenantResourceBoundary struct {
-	// Resource is the lowercase plural management.loft.sh resource name.
+	// Resource is the lowercase plural resource name: a management.loft.sh kind, or clusterroles
+	// or roles for the RBAC role kinds.
 	Resource string `json:"resource"`
 
 	// Enabled reports the governing capability's switch: absent where none governs the kind,

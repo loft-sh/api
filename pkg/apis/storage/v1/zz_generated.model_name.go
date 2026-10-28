@@ -1376,6 +1376,11 @@ func (in TenantCustomAllow) OpenAPIModelName() string {
 }
 
 // OpenAPIModelName returns the OpenAPI model name for this type.
+func (in TenantExternalClusters) OpenAPIModelName() string {
+	return "com.github.loft-sh.api.v5.pkg.apis.storage.v1.TenantExternalClusters"
+}
+
+// OpenAPIModelName returns the OpenAPI model name for this type.
 func (in TenantHostnameBinding) OpenAPIModelName() string {
 	return "com.github.loft-sh.api.v5.pkg.apis.storage.v1.TenantHostnameBinding"
 }

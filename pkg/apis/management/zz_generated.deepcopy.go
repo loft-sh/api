@@ -6959,6 +6959,11 @@ func (in *SelfStatus) DeepCopyInto(out *SelfStatus) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.ExternalClustersAllowed != nil {
+		in, out := &in.ExternalClustersAllowed, &out.ExternalClustersAllowed
+		*out = new(bool)
+		**out = **in
+	}
 	return
 }
 

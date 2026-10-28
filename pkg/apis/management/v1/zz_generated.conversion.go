@@ -11330,6 +11330,7 @@ func autoConvert_v1_SelfStatus_To_management_SelfStatus(in *SelfStatus, out *man
 	out.InstanceID = in.InstanceID
 	out.LoftHost = in.LoftHost
 	out.ProjectNamespacePrefix = (*string)(unsafe.Pointer(in.ProjectNamespacePrefix))
+	out.ExternalClustersAllowed = (*bool)(unsafe.Pointer(in.ExternalClustersAllowed))
 	return nil
 }
 
@@ -11351,6 +11352,7 @@ func autoConvert_management_SelfStatus_To_v1_SelfStatus(in *management.SelfStatu
 	out.InstanceID = in.InstanceID
 	out.LoftHost = in.LoftHost
 	out.ProjectNamespacePrefix = (*string)(unsafe.Pointer(in.ProjectNamespacePrefix))
+	out.ExternalClustersAllowed = (*bool)(unsafe.Pointer(in.ExternalClustersAllowed))
 	return nil
 }
 
