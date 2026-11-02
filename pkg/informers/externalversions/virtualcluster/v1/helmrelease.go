@@ -3,13 +3,13 @@
 package v1
 
 import (
-	"context"
+	context "context"
 	time "time"
 
-	virtualclusterv1 "github.com/loft-sh/api/v4/pkg/apis/virtualcluster/v1"
+	apisvirtualclusterv1 "github.com/loft-sh/api/v4/pkg/apis/virtualcluster/v1"
 	versioned "github.com/loft-sh/api/v4/pkg/clientset/versioned"
 	internalinterfaces "github.com/loft-sh/api/v4/pkg/informers/externalversions/internalinterfaces"
-	v1 "github.com/loft-sh/api/v4/pkg/listers/virtualcluster/v1"
+	virtualclusterv1 "github.com/loft-sh/api/v4/pkg/listers/virtualcluster/v1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	runtime "k8s.io/apimachinery/pkg/runtime"
 	watch "k8s.io/apimachinery/pkg/watch"
@@ -20,7 +20,7 @@ import (
 // HelmReleases.
 type HelmReleaseInformer interface {
 	Informer() cache.SharedIndexInformer
-	Lister() v1.HelmReleaseLister
+	Lister() virtualclusterv1.HelmReleaseLister
 }
 
 type helmReleaseInformer struct {
@@ -41,21 +41,33 @@ func NewHelmReleaseInformer(client versioned.Interface, namespace string, resync
 // one. This reduces memory footprint and number of connections to the server.
 func NewFilteredHelmReleaseInformer(client versioned.Interface, namespace string, resyncPeriod time.Duration, indexers cache.Indexers, tweakListOptions internalinterfaces.TweakListOptionsFunc) cache.SharedIndexInformer {
 	return cache.NewSharedIndexInformer(
-		&cache.ListWatch{
+		cache.ToListWatcherWithWatchListSemantics(&cache.ListWatch{
 			ListFunc: func(options metav1.ListOptions) (runtime.Object, error) {
 				if tweakListOptions != nil {
 					tweakListOptions(&options)
 				}
-				return client.VirtualclusterV1().HelmReleases(namespace).List(context.TODO(), options)
+				return client.VirtualclusterV1().HelmReleases(namespace).List(context.Background(), options)
 			},
 			WatchFunc: func(options metav1.ListOptions) (watch.Interface, error) {
 				if tweakListOptions != nil {
 					tweakListOptions(&options)
 				}
-				return client.VirtualclusterV1().HelmReleases(namespace).Watch(context.TODO(), options)
+				return client.VirtualclusterV1().HelmReleases(namespace).Watch(context.Background(), options)
 			},
-		},
-		&virtualclusterv1.HelmRelease{},
+			ListWithContextFunc: func(ctx context.Context, options metav1.ListOptions) (runtime.Object, error) {
+				if tweakListOptions != nil {
+					tweakListOptions(&options)
+				}
+				return client.VirtualclusterV1().HelmReleases(namespace).List(ctx, options)
+			},
+			WatchFuncWithContext: func(ctx context.Context, options metav1.ListOptions) (watch.Interface, error) {
+				if tweakListOptions != nil {
+					tweakListOptions(&options)
+				}
+				return client.VirtualclusterV1().HelmReleases(namespace).Watch(ctx, options)
+			},
+		}, client),
+		&apisvirtualclusterv1.HelmRelease{},
 		resyncPeriod,
 		indexers,
 	)
@@ -66,9 +78,9 @@ func (f *helmReleaseInformer) defaultInformer(client versioned.Interface, resync
 }
 
 func (f *helmReleaseInformer) Informer() cache.SharedIndexInformer {
-	return f.factory.InformerFor(&virtualclusterv1.HelmRelease{}, f.defaultInformer)
+	return f.factory.InformerFor(&apisvirtualclusterv1.HelmRelease{}, f.defaultInformer)
 }
 
-func (f *helmReleaseInformer) Lister() v1.HelmReleaseLister {
-	return v1.NewHelmReleaseLister(f.Informer().GetIndexer())
+func (f *helmReleaseInformer) Lister() virtualclusterv1.HelmReleaseLister {
+	return virtualclusterv1.NewHelmReleaseLister(f.Informer().GetIndexer())
 }
