@@ -2478,6 +2478,7 @@ type EventSpec struct {
 
 type EventStatus struct {
 	auditv1.Event `json:",inline"`
+	Tenant        string `json:"tenant,omitempty"`
 }
 
 // +genclient

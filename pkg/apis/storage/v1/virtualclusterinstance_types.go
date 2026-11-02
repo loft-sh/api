@@ -41,6 +41,26 @@ const (
 	// gets when it pulls the connector.
 	InstanceObservabilityConnectorUnresolved agentstoragev1.ConditionType = "ObservabilityConnectorUnresolved"
 
+	// Reasons of the InstanceObservabilityConnectorUnresolved condition. Tooling outside the platform
+	// matches them, so the set may grow, but a released reason is never renamed or removed.
+
+	// InstanceReasonObservabilityNotConfigured is set when the instance enables observability but
+	// names no connector.
+	InstanceReasonObservabilityNotConfigured = "ObservabilityNotConfiguredOnInstance"
+	// InstanceReasonObservabilityConnectorNotFound is set when the instance's owner holds a grant for
+	// the connector, but its backing Secret does not exist or is being deleted.
+	InstanceReasonObservabilityConnectorNotFound = "ObservabilityConnectorNotFound"
+	// InstanceReasonObservabilityConnectorUnusable is set when the instance's owner holds no grant for
+	// the connector it names. A name that does not exist or is of another type reports the same, so the
+	// condition does not reveal which connectors exist.
+	InstanceReasonObservabilityConnectorUnusable = "ObservabilityConnectorUnusable"
+	// InstanceReasonObservabilityConnectorMisconfigured is set when the connector's settings can
+	// never yield a usable write gateway.
+	InstanceReasonObservabilityConnectorMisconfigured = "ObservabilityConnectorMisconfigured"
+	// InstanceReasonObservabilityGatewayInternalOnly is set when the connector's write gateway is
+	// not reachable from the instance's cluster.
+	InstanceReasonObservabilityGatewayInternalOnly = "WriteGatewayInternalOnly"
+
 	InstanceVirtualClusterAppsAndObjectsSynced     agentstoragev1.ConditionType = "VirtualClusterAppsAndObjectsSynced"
 	InstanceVirtualClusterDBConnectorSynced        agentstoragev1.ConditionType = "DBConnectorSynced"
 	InstanceVirtualClusterDBIdentityProviderSynced agentstoragev1.ConditionType = "DBIdentityProviderSynced"

@@ -7322,6 +7322,7 @@ func Convert_management_EventSpec_To_v1_EventSpec(in *management.EventSpec, out 
 
 func autoConvert_v1_EventStatus_To_management_EventStatus(in *EventStatus, out *management.EventStatus, s conversion.Scope) error {
 	out.Event = in.Event
+	out.Tenant = in.Tenant
 	return nil
 }
 
@@ -7332,6 +7333,7 @@ func Convert_v1_EventStatus_To_management_EventStatus(in *EventStatus, out *mana
 
 func autoConvert_management_EventStatus_To_v1_EventStatus(in *management.EventStatus, out *EventStatus, s conversion.Scope) error {
 	out.Event = in.Event
+	out.Tenant = in.Tenant
 	return nil
 }
 
