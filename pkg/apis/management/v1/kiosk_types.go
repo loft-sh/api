@@ -3,6 +3,7 @@ package v1
 import (
 	clusterv1 "github.com/loft-sh/agentapi/v4/pkg/apis/loft/cluster/v1"
 	agentstoragev1 "github.com/loft-sh/agentapi/v4/pkg/apis/loft/storage/v1"
+	storagev1 "github.com/loft-sh/api/v4/pkg/apis/storage/v1"
 	uiv1 "github.com/loft-sh/api/v4/pkg/apis/ui/v1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 )
@@ -30,11 +31,22 @@ type KioskSpec struct {
 
 	// storage.loft.sh
 	StorageClusterQuota agentstoragev1.ClusterQuota `json:"storageClusterQuota,omitempty"`
+	AccessKey           storagev1.AccessKey         `json:"accessKey,omitempty"`
 
 	// ui.loft.sh
 	UISettings uiv1.UISettings `json:"UISettings,omitempty"`
 
 	License License `json:"license,omitempty"`
+
+	// autoscaling
+	NodeProviderBCMNodeWithResources    NodeProviderBCMNodeWithResources    `json:"nodeProviderBCMNodeWithResources,omitempty"`
+	NodeProviderBCMGetResourcesResult   NodeProviderBCMGetResourcesResult   `json:"nodeProviderBCMGetResourcesResult,omitempty"`
+	NodeProviderBCMTestConnectionResult NodeProviderBCMTestConnectionResult `json:"nodeProviderBCMTestConnectionResult,omitempty"`
+	NodeProviderCalculateCostResult     NodeProviderCalculateCostResult     `json:"nodeProviderCalculateCostResult,omitempty"`
+	NodeProviderTerraformValidateResult NodeProviderTerraformValidateResult `json:"nodeProviderTerraformValidateResult,omitempty"`
+	NodeProviderExecResult              NodeProviderExecResult              `json:"nodeProviderExecResult,omitempty"`
+	NodeClaimData                       NodeClaimData                       `json:"nodeClaimData,omitempty"`
+	NodeEnvironmentData                 NodeEnvironmentData                 `json:"nodeEnvironmentData,omitempty"`
 }
 
 type KioskStatus struct {
