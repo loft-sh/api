@@ -84,6 +84,8 @@ func (f *sharedInformerFactory) ForResource(resource schema.GroupVersionResource
 		return &genericInformer{resource: resource.GroupResource(), informer: f.Management().V1().NetworkPeers().Informer()}, nil
 	case v1.SchemeGroupVersion.WithResource("nodeclaims"):
 		return &genericInformer{resource: resource.GroupResource(), informer: f.Management().V1().NodeClaims().Informer()}, nil
+	case v1.SchemeGroupVersion.WithResource("nodepools"):
+		return &genericInformer{resource: resource.GroupResource(), informer: f.Management().V1().NodePools().Informer()}, nil
 	case v1.SchemeGroupVersion.WithResource("nodeprofiles"):
 		return &genericInformer{resource: resource.GroupResource(), informer: f.Management().V1().NodeProfiles().Informer()}, nil
 	case v1.SchemeGroupVersion.WithResource("nodeproviders"):
@@ -168,6 +170,8 @@ func (f *sharedInformerFactory) ForResource(resource schema.GroupVersionResource
 		return &genericInformer{resource: resource.GroupResource(), informer: f.Storage().V1().NetworkPeers().Informer()}, nil
 	case storagev1.SchemeGroupVersion.WithResource("nodeclaims"):
 		return &genericInformer{resource: resource.GroupResource(), informer: f.Storage().V1().NodeClaims().Informer()}, nil
+	case storagev1.SchemeGroupVersion.WithResource("nodepools"):
+		return &genericInformer{resource: resource.GroupResource(), informer: f.Storage().V1().NodePools().Informer()}, nil
 	case storagev1.SchemeGroupVersion.WithResource("nodeprofiles"):
 		return &genericInformer{resource: resource.GroupResource(), informer: f.Storage().V1().NodeProfiles().Informer()}, nil
 	case storagev1.SchemeGroupVersion.WithResource("nodeproviders"):

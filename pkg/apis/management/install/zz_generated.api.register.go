@@ -85,6 +85,8 @@ func addKnownTypes(scheme *runtime.Scheme) error {
 		&management.NetworkPeerDebug{},
 		&management.NodeClaim{},
 		&management.NodeClaimList{},
+		&management.NodePool{},
+		&management.NodePoolList{},
 		&management.NodeProfile{},
 		&management.NodeProfileList{},
 		&management.NodeProvider{},

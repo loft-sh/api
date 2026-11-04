@@ -310,6 +310,10 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 		managementv1.NodeClaimList{}.OpenAPIModelName():                                      schema_pkg_apis_management_v1_NodeClaimList(ref),
 		managementv1.NodeClaimSpec{}.OpenAPIModelName():                                      schema_pkg_apis_management_v1_NodeClaimSpec(ref),
 		managementv1.NodeClaimStatus{}.OpenAPIModelName():                                    schema_pkg_apis_management_v1_NodeClaimStatus(ref),
+		managementv1.NodePool{}.OpenAPIModelName():                                           schema_pkg_apis_management_v1_NodePool(ref),
+		managementv1.NodePoolList{}.OpenAPIModelName():                                       schema_pkg_apis_management_v1_NodePoolList(ref),
+		managementv1.NodePoolSpec{}.OpenAPIModelName():                                       schema_pkg_apis_management_v1_NodePoolSpec(ref),
+		managementv1.NodePoolStatus{}.OpenAPIModelName():                                     schema_pkg_apis_management_v1_NodePoolStatus(ref),
 		managementv1.NodeProfile{}.OpenAPIModelName():                                        schema_pkg_apis_management_v1_NodeProfile(ref),
 		managementv1.NodeProfileList{}.OpenAPIModelName():                                    schema_pkg_apis_management_v1_NodeProfileList(ref),
 		managementv1.NodeProfileSpec{}.OpenAPIModelName():                                    schema_pkg_apis_management_v1_NodeProfileSpec(ref),
@@ -733,6 +737,16 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 		apisstoragev1.NodeClaimPower{}.OpenAPIModelName():                                    schema_pkg_apis_storage_v1_NodeClaimPower(ref),
 		apisstoragev1.NodeClaimSpec{}.OpenAPIModelName():                                     schema_pkg_apis_storage_v1_NodeClaimSpec(ref),
 		apisstoragev1.NodeClaimStatus{}.OpenAPIModelName():                                   schema_pkg_apis_storage_v1_NodeClaimStatus(ref),
+		apisstoragev1.NodePool{}.OpenAPIModelName():                                          schema_pkg_apis_storage_v1_NodePool(ref),
+		apisstoragev1.NodePoolDisruption{}.OpenAPIModelName():                                schema_pkg_apis_storage_v1_NodePoolDisruption(ref),
+		apisstoragev1.NodePoolDisruptionBudget{}.OpenAPIModelName():                          schema_pkg_apis_storage_v1_NodePoolDisruptionBudget(ref),
+		apisstoragev1.NodePoolDynamic{}.OpenAPIModelName():                                   schema_pkg_apis_storage_v1_NodePoolDynamic(ref),
+		apisstoragev1.NodePoolDynamicStatus{}.OpenAPIModelName():                             schema_pkg_apis_storage_v1_NodePoolDynamicStatus(ref),
+		apisstoragev1.NodePoolList{}.OpenAPIModelName():                                      schema_pkg_apis_storage_v1_NodePoolList(ref),
+		apisstoragev1.NodePoolSpec{}.OpenAPIModelName():                                      schema_pkg_apis_storage_v1_NodePoolSpec(ref),
+		apisstoragev1.NodePoolStatic{}.OpenAPIModelName():                                    schema_pkg_apis_storage_v1_NodePoolStatic(ref),
+		apisstoragev1.NodePoolStatus{}.OpenAPIModelName():                                    schema_pkg_apis_storage_v1_NodePoolStatus(ref),
+		apisstoragev1.NodePoolTemplate{}.OpenAPIModelName():                                  schema_pkg_apis_storage_v1_NodePoolTemplate(ref),
 		apisstoragev1.NodeProfile{}.OpenAPIModelName():                                       schema_pkg_apis_storage_v1_NodeProfile(ref),
 		apisstoragev1.NodeProfileList{}.OpenAPIModelName():                                   schema_pkg_apis_storage_v1_NodeProfileList(ref),
 		apisstoragev1.NodeProfileSpec{}.OpenAPIModelName():                                   schema_pkg_apis_storage_v1_NodeProfileSpec(ref),
@@ -14208,6 +14222,268 @@ func schema_pkg_apis_management_v1_NodeClaimStatus(ref common.ReferenceCallback)
 		},
 		Dependencies: []string{
 			storagev1.Condition{}.OpenAPIModelName(), apisstoragev1.NodeClaimPower{}.OpenAPIModelName()},
+	}
+}
+
+func schema_pkg_apis_management_v1_NodePool(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "NodePool keeps a set of NodeClaims for a cluster that are all built from one template.",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"kind": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"apiVersion": {
+						SchemaProps: spec.SchemaProps{
+							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"metadata": {
+						SchemaProps: spec.SchemaProps{
+							Default: map[string]interface{}{},
+							Ref:     ref(metav1.ObjectMeta{}.OpenAPIModelName()),
+						},
+					},
+					"spec": {
+						SchemaProps: spec.SchemaProps{
+							Default: map[string]interface{}{},
+							Ref:     ref(managementv1.NodePoolSpec{}.OpenAPIModelName()),
+						},
+					},
+					"status": {
+						SchemaProps: spec.SchemaProps{
+							Default: map[string]interface{}{},
+							Ref:     ref(managementv1.NodePoolStatus{}.OpenAPIModelName()),
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			managementv1.NodePoolSpec{}.OpenAPIModelName(), managementv1.NodePoolStatus{}.OpenAPIModelName(), metav1.ObjectMeta{}.OpenAPIModelName()},
+	}
+}
+
+func schema_pkg_apis_management_v1_NodePoolList(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"kind": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"apiVersion": {
+						SchemaProps: spec.SchemaProps{
+							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"metadata": {
+						SchemaProps: spec.SchemaProps{
+							Default: map[string]interface{}{},
+							Ref:     ref(metav1.ListMeta{}.OpenAPIModelName()),
+						},
+					},
+					"items": {
+						SchemaProps: spec.SchemaProps{
+							Type: []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref(managementv1.NodePool{}.OpenAPIModelName()),
+									},
+								},
+							},
+						},
+					},
+				},
+				Required: []string{"items"},
+			},
+		},
+		Dependencies: []string{
+			managementv1.NodePool{}.OpenAPIModelName(), metav1.ListMeta{}.OpenAPIModelName()},
+	}
+}
+
+func schema_pkg_apis_management_v1_NodePoolSpec(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "NodePoolSpec defines spec of node pool.",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"displayName": {
+						SchemaProps: spec.SchemaProps{
+							Description: "DisplayName is the name of the NodePool that is displayed in the UI.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"owner": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Owner holds the owner of this object",
+							Ref:         ref(apisstoragev1.UserOrTeam{}.OpenAPIModelName()),
+						},
+					},
+					"access": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Access holds the access rights for users and teams",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref(apisstoragev1.Access{}.OpenAPIModelName()),
+									},
+								},
+							},
+						},
+					},
+					"vClusterRef": {
+						SchemaProps: spec.SchemaProps{
+							Description: "VClusterRef is the name of the cluster in this namespace the pool's nodes join. It cannot be changed.",
+							Default:     "",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"static": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Static keeps a fixed number of nodes. The platform creates the pool's NodeClaims and, when the template changes, replaces them one at a time. Mutually exclusive with Dynamic.",
+							Ref:         ref(apisstoragev1.NodePoolStatic{}.OpenAPIModelName()),
+						},
+					},
+					"dynamic": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Dynamic hands the pool to Karpenter inside the cluster, which creates nodes for the pods that need them, removes the ones it can consolidate and replaces drifted ones within the disruption budgets. The cluster has to run a vCluster version that reads node pools from the platform. Mutually exclusive with Static.",
+							Ref:         ref(apisstoragev1.NodePoolDynamic{}.OpenAPIModelName()),
+						},
+					},
+					"template": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Template is what every node of the pool is built from.",
+							Default:     map[string]interface{}{},
+							Ref:         ref(apisstoragev1.NodePoolTemplate{}.OpenAPIModelName()),
+						},
+					},
+				},
+				Required: []string{"vClusterRef", "template"},
+			},
+		},
+		Dependencies: []string{
+			apisstoragev1.Access{}.OpenAPIModelName(), apisstoragev1.NodePoolDynamic{}.OpenAPIModelName(), apisstoragev1.NodePoolStatic{}.OpenAPIModelName(), apisstoragev1.NodePoolTemplate{}.OpenAPIModelName(), apisstoragev1.UserOrTeam{}.OpenAPIModelName()},
+	}
+}
+
+func schema_pkg_apis_management_v1_NodePoolStatus(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"phase": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Phase is the current lifecycle phase of the NodePool.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"reason": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Reason describes the reason in machine-readable form",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"message": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Message describes the reason in human-readable form",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"observedGeneration": {
+						SchemaProps: spec.SchemaProps{
+							Description: "ObservedGeneration is the pool generation the platform last reconciled.",
+							Type:        []string{"integer"},
+							Format:      "int64",
+						},
+					},
+					"replicas": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Replicas is the number of NodeClaims of the pool that are not being deleted.",
+							Type:        []string{"integer"},
+							Format:      "int32",
+						},
+					},
+					"readyReplicas": {
+						SchemaProps: spec.SchemaProps{
+							Description: "ReadyReplicas is the number of the pool's NodeClaims that are available.",
+							Type:        []string{"integer"},
+							Format:      "int32",
+						},
+					},
+					"updatedReplicas": {
+						SchemaProps: spec.SchemaProps{
+							Description: "UpdatedReplicas is the number of the pool's NodeClaims built from the current template. Only static pools track it.",
+							Type:        []string{"integer"},
+							Format:      "int32",
+						},
+					},
+					"templateHash": {
+						SchemaProps: spec.SchemaProps{
+							Description: "TemplateHash is the hash of the current template, as set on the NodeClaims of a static pool.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"networkEnvironment": {
+						SchemaProps: spec.SchemaProps{
+							Description: "NetworkEnvironment is the network environment the pool places its nodes in: the one the template or the node provider names, else the provider's default when the pool first found one. A pool keeps it when the default changes, so all its nodes share one network.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"conditions": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Conditions describe the current state of the NodePool.",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref(storagev1.Condition{}.OpenAPIModelName()),
+									},
+								},
+							},
+						},
+					},
+					"dynamic": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Dynamic is reported by the cluster for a dynamic pool. The platform never writes it.",
+							Ref:         ref(apisstoragev1.NodePoolDynamicStatus{}.OpenAPIModelName()),
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			storagev1.Condition{}.OpenAPIModelName(), apisstoragev1.NodePoolDynamicStatus{}.OpenAPIModelName()},
 	}
 }
 
@@ -34853,6 +35129,573 @@ func schema_pkg_apis_storage_v1_NodeClaimStatus(ref common.ReferenceCallback) co
 		},
 		Dependencies: []string{
 			storagev1.Condition{}.OpenAPIModelName(), apisstoragev1.NodeClaimPower{}.OpenAPIModelName()},
+	}
+}
+
+func schema_pkg_apis_storage_v1_NodePool(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "NodePool keeps a set of NodeClaims for a cluster that are all built from one template.",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"kind": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"apiVersion": {
+						SchemaProps: spec.SchemaProps{
+							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"metadata": {
+						SchemaProps: spec.SchemaProps{
+							Default: map[string]interface{}{},
+							Ref:     ref(metav1.ObjectMeta{}.OpenAPIModelName()),
+						},
+					},
+					"spec": {
+						SchemaProps: spec.SchemaProps{
+							Default: map[string]interface{}{},
+							Ref:     ref(apisstoragev1.NodePoolSpec{}.OpenAPIModelName()),
+						},
+					},
+					"status": {
+						SchemaProps: spec.SchemaProps{
+							Default: map[string]interface{}{},
+							Ref:     ref(apisstoragev1.NodePoolStatus{}.OpenAPIModelName()),
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			apisstoragev1.NodePoolSpec{}.OpenAPIModelName(), apisstoragev1.NodePoolStatus{}.OpenAPIModelName(), metav1.ObjectMeta{}.OpenAPIModelName()},
+	}
+}
+
+func schema_pkg_apis_storage_v1_NodePoolDisruption(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "NodePoolDisruption configures Karpenter consolidation.",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"consolidationPolicy": {
+						SchemaProps: spec.SchemaProps{
+							Description: "ConsolidationPolicy is WhenEmpty or WhenEmptyOrUnderutilized (the default).",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"consolidateAfter": {
+						SchemaProps: spec.SchemaProps{
+							Description: "ConsolidateAfter is how long a node has to be consolidatable before Karpenter acts. Defaults to 0s.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"budgets": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Budgets limit how many nodes Karpenter may disrupt at once. Defaults to 10%.",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref(apisstoragev1.NodePoolDisruptionBudget{}.OpenAPIModelName()),
+									},
+								},
+							},
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			apisstoragev1.NodePoolDisruptionBudget{}.OpenAPIModelName()},
+	}
+}
+
+func schema_pkg_apis_storage_v1_NodePoolDisruptionBudget(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "NodePoolDisruptionBudget limits disruption, optionally during a schedule.",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"nodes": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Nodes is a count or percentage of the pool's nodes that may be disrupted at once.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"schedule": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Schedule is a cron schedule the budget is active from.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"duration": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Duration is how long the budget is active after each schedule hit.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+				},
+			},
+		},
+	}
+}
+
+func schema_pkg_apis_storage_v1_NodePoolDynamic(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "NodePoolDynamic configures the Karpenter NodePool the cluster creates for a dynamic pool.",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"limits": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Limits cap the total resources of the pool's nodes, for example cpu: \"64\".",
+							Type:        []string{"object"},
+							AdditionalProperties: &spec.SchemaOrBool{
+								Allows: true,
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Ref: ref(resource.Quantity{}.OpenAPIModelName()),
+									},
+								},
+							},
+						},
+					},
+					"disruption": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Disruption configures how Karpenter consolidates the pool's nodes.",
+							Default:     map[string]interface{}{},
+							Ref:         ref(apisstoragev1.NodePoolDisruption{}.OpenAPIModelName()),
+						},
+					},
+					"expireAfter": {
+						SchemaProps: spec.SchemaProps{
+							Description: "ExpireAfter is how long a node lives before Karpenter replaces it, for example 720h. \"Never\" or empty keeps nodes forever.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"terminationGracePeriod": {
+						SchemaProps: spec.SchemaProps{
+							Description: "TerminationGracePeriod is how long Karpenter waits for pods to drain before it forcibly removes a node. \"Never\" waits forever. Defaults to 30s.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"weight": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Weight orders this pool against the cluster's other dynamic pools; higher weights are tried first.",
+							Type:        []string{"integer"},
+							Format:      "int32",
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			apisstoragev1.NodePoolDisruption{}.OpenAPIModelName(), resource.Quantity{}.OpenAPIModelName()},
+	}
+}
+
+func schema_pkg_apis_storage_v1_NodePoolDynamicStatus(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "NodePoolDynamicStatus is the state of the Karpenter NodePool the cluster created for a dynamic pool.",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"observedGeneration": {
+						SchemaProps: spec.SchemaProps{
+							Description: "ObservedGeneration is the pool generation the cluster last applied.",
+							Type:        []string{"integer"},
+							Format:      "int64",
+						},
+					},
+					"resources": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Resources are the resources of the pool's nodes, to compare against the limits.",
+							Type:        []string{"object"},
+							AdditionalProperties: &spec.SchemaOrBool{
+								Allows: true,
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Ref: ref(resource.Quantity{}.OpenAPIModelName()),
+									},
+								},
+							},
+						},
+					},
+					"ready": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Ready is true when Karpenter reports the pool ready.",
+							Type:        []string{"boolean"},
+							Format:      "",
+						},
+					},
+					"reason": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Reason describes why the pool is not ready in machine-readable form.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"message": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Message describes why the pool is not ready in human-readable form.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			resource.Quantity{}.OpenAPIModelName()},
+	}
+}
+
+func schema_pkg_apis_storage_v1_NodePoolList(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "NodePoolList contains a list of NodePool",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"kind": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"apiVersion": {
+						SchemaProps: spec.SchemaProps{
+							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"metadata": {
+						SchemaProps: spec.SchemaProps{
+							Default: map[string]interface{}{},
+							Ref:     ref(metav1.ListMeta{}.OpenAPIModelName()),
+						},
+					},
+					"items": {
+						SchemaProps: spec.SchemaProps{
+							Type: []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref(apisstoragev1.NodePool{}.OpenAPIModelName()),
+									},
+								},
+							},
+						},
+					},
+				},
+				Required: []string{"items"},
+			},
+		},
+		Dependencies: []string{
+			apisstoragev1.NodePool{}.OpenAPIModelName(), metav1.ListMeta{}.OpenAPIModelName()},
+	}
+}
+
+func schema_pkg_apis_storage_v1_NodePoolSpec(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "NodePoolSpec defines spec of node pool. A pool is either static, a fixed number of nodes the platform creates, or dynamic, scaled by Karpenter inside the cluster. Exactly one of the two is set, and a pool cannot switch between them.",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"displayName": {
+						SchemaProps: spec.SchemaProps{
+							Description: "DisplayName is the name of the NodePool that is displayed in the UI.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"owner": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Owner holds the owner of this object",
+							Ref:         ref(apisstoragev1.UserOrTeam{}.OpenAPIModelName()),
+						},
+					},
+					"access": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Access holds the access rights for users and teams",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref(apisstoragev1.Access{}.OpenAPIModelName()),
+									},
+								},
+							},
+						},
+					},
+					"vClusterRef": {
+						SchemaProps: spec.SchemaProps{
+							Description: "VClusterRef is the name of the cluster in this namespace the pool's nodes join. It cannot be changed.",
+							Default:     "",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"static": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Static keeps a fixed number of nodes. The platform creates the pool's NodeClaims and, when the template changes, replaces them one at a time. Mutually exclusive with Dynamic.",
+							Ref:         ref(apisstoragev1.NodePoolStatic{}.OpenAPIModelName()),
+						},
+					},
+					"dynamic": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Dynamic hands the pool to Karpenter inside the cluster, which creates nodes for the pods that need them, removes the ones it can consolidate and replaces drifted ones within the disruption budgets. The cluster has to run a vCluster version that reads node pools from the platform. Mutually exclusive with Static.",
+							Ref:         ref(apisstoragev1.NodePoolDynamic{}.OpenAPIModelName()),
+						},
+					},
+					"template": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Template is what every node of the pool is built from.",
+							Default:     map[string]interface{}{},
+							Ref:         ref(apisstoragev1.NodePoolTemplate{}.OpenAPIModelName()),
+						},
+					},
+				},
+				Required: []string{"vClusterRef", "template"},
+			},
+		},
+		Dependencies: []string{
+			apisstoragev1.Access{}.OpenAPIModelName(), apisstoragev1.NodePoolDynamic{}.OpenAPIModelName(), apisstoragev1.NodePoolStatic{}.OpenAPIModelName(), apisstoragev1.NodePoolTemplate{}.OpenAPIModelName(), apisstoragev1.UserOrTeam{}.OpenAPIModelName()},
+	}
+}
+
+func schema_pkg_apis_storage_v1_NodePoolStatic(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "NodePoolStatic configures a static pool.",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"replicas": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Replicas is the number of nodes the platform keeps for the pool.",
+							Default:     0,
+							Type:        []string{"integer"},
+							Format:      "int32",
+						},
+					},
+				},
+				Required: []string{"replicas"},
+			},
+		},
+	}
+}
+
+func schema_pkg_apis_storage_v1_NodePoolStatus(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"phase": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Phase is the current lifecycle phase of the NodePool.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"reason": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Reason describes the reason in machine-readable form",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"message": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Message describes the reason in human-readable form",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"observedGeneration": {
+						SchemaProps: spec.SchemaProps{
+							Description: "ObservedGeneration is the pool generation the platform last reconciled.",
+							Type:        []string{"integer"},
+							Format:      "int64",
+						},
+					},
+					"replicas": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Replicas is the number of NodeClaims of the pool that are not being deleted.",
+							Type:        []string{"integer"},
+							Format:      "int32",
+						},
+					},
+					"readyReplicas": {
+						SchemaProps: spec.SchemaProps{
+							Description: "ReadyReplicas is the number of the pool's NodeClaims that are available.",
+							Type:        []string{"integer"},
+							Format:      "int32",
+						},
+					},
+					"updatedReplicas": {
+						SchemaProps: spec.SchemaProps{
+							Description: "UpdatedReplicas is the number of the pool's NodeClaims built from the current template. Only static pools track it.",
+							Type:        []string{"integer"},
+							Format:      "int32",
+						},
+					},
+					"templateHash": {
+						SchemaProps: spec.SchemaProps{
+							Description: "TemplateHash is the hash of the current template, as set on the NodeClaims of a static pool.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"networkEnvironment": {
+						SchemaProps: spec.SchemaProps{
+							Description: "NetworkEnvironment is the network environment the pool places its nodes in: the one the template or the node provider names, else the provider's default when the pool first found one. A pool keeps it when the default changes, so all its nodes share one network.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"conditions": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Conditions describe the current state of the NodePool.",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref(storagev1.Condition{}.OpenAPIModelName()),
+									},
+								},
+							},
+						},
+					},
+					"dynamic": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Dynamic is reported by the cluster for a dynamic pool. The platform never writes it.",
+							Ref:         ref(apisstoragev1.NodePoolDynamicStatus{}.OpenAPIModelName()),
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			storagev1.Condition{}.OpenAPIModelName(), apisstoragev1.NodePoolDynamicStatus{}.OpenAPIModelName()},
+	}
+}
+
+func schema_pkg_apis_storage_v1_NodePoolTemplate(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "NodePoolTemplate describes the nodes of a pool.",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"providerRef": {
+						SchemaProps: spec.SchemaProps{
+							Description: "ProviderRef is the name of the NodeProvider the pool's nodes are provisioned with.",
+							Default:     "",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"requirements": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Requirements select the NodeTypes the pool's nodes may be scheduled onto.",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref(corev1.NodeSelectorRequirement{}.OpenAPIModelName()),
+									},
+								},
+							},
+						},
+					},
+					"properties": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Properties are extra properties for the pool's NodeClaims. The vcluster.com/network-environment property places the pool's nodes in that network environment; without it, the pool uses its provider's default, see status.networkEnvironment.",
+							Type:        []string{"object"},
+							AdditionalProperties: &spec.SchemaOrBool{
+								Allows: true,
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: "",
+										Type:    []string{"string"},
+										Format:  "",
+									},
+								},
+							},
+						},
+					},
+					"taints": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Taints are applied to the pool's nodes.",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref(corev1.Taint{}.OpenAPIModelName()),
+									},
+								},
+							},
+						},
+					},
+					"nodeLabels": {
+						SchemaProps: spec.SchemaProps{
+							Description: "NodeLabels are applied to the pool's nodes. Labels in the kubernetes.io and k8s.io namespaces are refused, except below node.kubernetes.io, since the kubelet may not set them.",
+							Type:        []string{"object"},
+							AdditionalProperties: &spec.SchemaOrBool{
+								Allows: true,
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: "",
+										Type:    []string{"string"},
+										Format:  "",
+									},
+								},
+							},
+						},
+					},
+					"profileRef": {
+						SchemaProps: spec.SchemaProps{
+							Description: "ProfileRef is the name of a NodeProfile to apply to the pool's nodes. It must be permitted by the project's allowedNodeProfiles.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+				},
+				Required: []string{"providerRef"},
+			},
+		},
+		Dependencies: []string{
+			corev1.NodeSelectorRequirement{}.OpenAPIModelName(), corev1.Taint{}.OpenAPIModelName()},
 	}
 }
 

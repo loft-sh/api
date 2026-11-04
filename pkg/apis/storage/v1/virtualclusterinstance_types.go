@@ -25,6 +25,10 @@ const (
 	// keeps it instead of marking an unassigned external instance synced.
 	InstanceReasonClusterRefRejected = "ClusterRefRejected"
 
+	// InstanceReasonNamespaceExists is set on SpaceSynced or VirtualClusterSynced when the agent
+	// refuses to sync into an existing namespace the instance does not manage.
+	InstanceReasonNamespaceExists = "NamespaceExists"
+
 	// InstanceObservabilityUnsupported is set when an instance requests observability that this
 	// platform deployment cannot serve, and is removed when there is nothing to report. Problems
 	// are reported as status False with a severity, so this condition is never True.

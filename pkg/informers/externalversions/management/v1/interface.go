@@ -54,6 +54,8 @@ type Interface interface {
 	NetworkPeers() NetworkPeerInformer
 	// NodeClaims returns a NodeClaimInformer.
 	NodeClaims() NodeClaimInformer
+	// NodePools returns a NodePoolInformer.
+	NodePools() NodePoolInformer
 	// NodeProfiles returns a NodeProfileInformer.
 	NodeProfiles() NodeProfileInformer
 	// NodeProviders returns a NodeProviderInformer.
@@ -236,6 +238,11 @@ func (v *version) NetworkPeers() NetworkPeerInformer {
 // NodeClaims returns a NodeClaimInformer.
 func (v *version) NodeClaims() NodeClaimInformer {
 	return &nodeClaimInformer{factory: v.factory, namespace: v.namespace, tweakListOptions: v.tweakListOptions}
+}
+
+// NodePools returns a NodePoolInformer.
+func (v *version) NodePools() NodePoolInformer {
+	return &nodePoolInformer{factory: v.factory, namespace: v.namespace, tweakListOptions: v.tweakListOptions}
 }
 
 // NodeProfiles returns a NodeProfileInformer.

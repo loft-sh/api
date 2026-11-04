@@ -70,6 +70,14 @@ type NodeClaimListerExpansion interface{}
 // NodeClaimNamespaceLister.
 type NodeClaimNamespaceListerExpansion interface{}
 
+// NodePoolListerExpansion allows custom methods to be added to
+// NodePoolLister.
+type NodePoolListerExpansion interface{}
+
+// NodePoolNamespaceListerExpansion allows custom methods to be added to
+// NodePoolNamespaceLister.
+type NodePoolNamespaceListerExpansion interface{}
+
 // NodeProfileListerExpansion allows custom methods to be added to
 // NodeProfileLister.
 type NodeProfileListerExpansion interface{}
