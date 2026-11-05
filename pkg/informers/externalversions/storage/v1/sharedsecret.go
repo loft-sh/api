@@ -3,15 +3,16 @@
 package v1
 
 import (
-	"context"
+	context "context"
 	time "time"
 
-	storagev1 "github.com/loft-sh/api/v4/pkg/apis/storage/v1"
+	apisstoragev1 "github.com/loft-sh/api/v4/pkg/apis/storage/v1"
 	versioned "github.com/loft-sh/api/v4/pkg/clientset/versioned"
 	internalinterfaces "github.com/loft-sh/api/v4/pkg/informers/externalversions/internalinterfaces"
-	v1 "github.com/loft-sh/api/v4/pkg/listers/storage/v1"
+	storagev1 "github.com/loft-sh/api/v4/pkg/listers/storage/v1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	runtime "k8s.io/apimachinery/pkg/runtime"
+	schema "k8s.io/apimachinery/pkg/runtime/schema"
 	watch "k8s.io/apimachinery/pkg/watch"
 	cache "k8s.io/client-go/tools/cache"
 )
@@ -20,7 +21,7 @@ import (
 // SharedSecrets.
 type SharedSecretInformer interface {
 	Informer() cache.SharedIndexInformer
-	Lister() v1.SharedSecretLister
+	Lister() storagev1.SharedSecretLister
 }
 
 type sharedSecretInformer struct {
@@ -33,42 +34,67 @@ type sharedSecretInformer struct {
 // Always prefer using an informer factory to get a shared informer instead of getting an independent
 // one. This reduces memory footprint and number of connections to the server.
 func NewSharedSecretInformer(client versioned.Interface, namespace string, resyncPeriod time.Duration, indexers cache.Indexers) cache.SharedIndexInformer {
-	return NewFilteredSharedSecretInformer(client, namespace, resyncPeriod, indexers, nil)
+	return NewSharedSecretInformerWithOptions(client, namespace, internalinterfaces.InformerOptions{ResyncPeriod: resyncPeriod, Indexers: indexers})
 }
 
 // NewFilteredSharedSecretInformer constructs a new informer for SharedSecret type.
 // Always prefer using an informer factory to get a shared informer instead of getting an independent
 // one. This reduces memory footprint and number of connections to the server.
 func NewFilteredSharedSecretInformer(client versioned.Interface, namespace string, resyncPeriod time.Duration, indexers cache.Indexers, tweakListOptions internalinterfaces.TweakListOptionsFunc) cache.SharedIndexInformer {
-	return cache.NewSharedIndexInformer(
-		&cache.ListWatch{
-			ListFunc: func(options metav1.ListOptions) (runtime.Object, error) {
+	return NewSharedSecretInformerWithOptions(client, namespace, internalinterfaces.InformerOptions{ResyncPeriod: resyncPeriod, Indexers: indexers, TweakListOptions: tweakListOptions})
+}
+
+// NewSharedSecretInformerWithOptions constructs a new informer for SharedSecret type with additional options.
+// Always prefer using an informer factory to get a shared informer instead of getting an independent
+// one. This reduces memory footprint and number of connections to the server.
+func NewSharedSecretInformerWithOptions(client versioned.Interface, namespace string, options internalinterfaces.InformerOptions) cache.SharedIndexInformer {
+	gvr := schema.GroupVersionResource{Group: "storage.loft.sh", Version: "v1", Resource: "sharedsecrets"}
+	identifier := options.InformerName.WithResource(gvr)
+	tweakListOptions := options.TweakListOptions
+	return cache.NewSharedIndexInformerWithOptions(
+		cache.ToListWatcherWithWatchListSemantics(&cache.ListWatch{
+			ListFunc: func(opts metav1.ListOptions) (runtime.Object, error) {
 				if tweakListOptions != nil {
-					tweakListOptions(&options)
+					tweakListOptions(&opts)
 				}
-				return client.StorageV1().SharedSecrets(namespace).List(context.TODO(), options)
+				return client.StorageV1().SharedSecrets(namespace).List(context.Background(), opts)
 			},
-			WatchFunc: func(options metav1.ListOptions) (watch.Interface, error) {
+			WatchFunc: func(opts metav1.ListOptions) (watch.Interface, error) {
 				if tweakListOptions != nil {
-					tweakListOptions(&options)
+					tweakListOptions(&opts)
 				}
-				return client.StorageV1().SharedSecrets(namespace).Watch(context.TODO(), options)
+				return client.StorageV1().SharedSecrets(namespace).Watch(context.Background(), opts)
 			},
+			ListWithContextFunc: func(ctx context.Context, opts metav1.ListOptions) (runtime.Object, error) {
+				if tweakListOptions != nil {
+					tweakListOptions(&opts)
+				}
+				return client.StorageV1().SharedSecrets(namespace).List(ctx, opts)
+			},
+			WatchFuncWithContext: func(ctx context.Context, opts metav1.ListOptions) (watch.Interface, error) {
+				if tweakListOptions != nil {
+					tweakListOptions(&opts)
+				}
+				return client.StorageV1().SharedSecrets(namespace).Watch(ctx, opts)
+			},
+		}, client),
+		&apisstoragev1.SharedSecret{},
+		cache.SharedIndexInformerOptions{
+			ResyncPeriod: options.ResyncPeriod,
+			Indexers:     options.Indexers,
+			Identifier:   identifier,
 		},
-		&storagev1.SharedSecret{},
-		resyncPeriod,
-		indexers,
 	)
 }
 
 func (f *sharedSecretInformer) defaultInformer(client versioned.Interface, resyncPeriod time.Duration) cache.SharedIndexInformer {
-	return NewFilteredSharedSecretInformer(client, f.namespace, resyncPeriod, cache.Indexers{cache.NamespaceIndex: cache.MetaNamespaceIndexFunc}, f.tweakListOptions)
+	return NewSharedSecretInformerWithOptions(client, f.namespace, internalinterfaces.InformerOptions{ResyncPeriod: resyncPeriod, Indexers: cache.Indexers{cache.NamespaceIndex: cache.MetaNamespaceIndexFunc}, InformerName: f.factory.InformerName(), TweakListOptions: f.tweakListOptions})
 }
 
 func (f *sharedSecretInformer) Informer() cache.SharedIndexInformer {
-	return f.factory.InformerFor(&storagev1.SharedSecret{}, f.defaultInformer)
+	return f.factory.InformerFor(&apisstoragev1.SharedSecret{}, f.defaultInformer)
 }
 
-func (f *sharedSecretInformer) Lister() v1.SharedSecretLister {
-	return v1.NewSharedSecretLister(f.Informer().GetIndexer())
+func (f *sharedSecretInformer) Lister() storagev1.SharedSecretLister {
+	return storagev1.NewSharedSecretLister(f.Informer().GetIndexer())
 }
