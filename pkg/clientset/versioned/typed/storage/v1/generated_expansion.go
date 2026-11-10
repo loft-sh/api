@@ -52,9 +52,15 @@ type StackInstanceExpansion interface{}
 
 type StackTemplateExpansion interface{}
 
+type StorageAccountExpansion interface{}
+
+type StorageProfileExpansion interface{}
+
 type TeamExpansion interface{}
 
 type TenantExpansion interface{}
+
+type TenantStorageExpansion interface{}
 
 type UserExpansion interface{}
 

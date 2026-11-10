@@ -58,10 +58,16 @@ type Interface interface {
 	StackInstances() StackInstanceInformer
 	// StackTemplates returns a StackTemplateInformer.
 	StackTemplates() StackTemplateInformer
+	// StorageAccounts returns a StorageAccountInformer.
+	StorageAccounts() StorageAccountInformer
+	// StorageProfiles returns a StorageProfileInformer.
+	StorageProfiles() StorageProfileInformer
 	// Teams returns a TeamInformer.
 	Teams() TeamInformer
 	// Tenants returns a TenantInformer.
 	Tenants() TenantInformer
+	// TenantStorages returns a TenantStorageInformer.
+	TenantStorages() TenantStorageInformer
 	// Users returns a UserInformer.
 	Users() UserInformer
 	// VirtualClusterInstances returns a VirtualClusterInstanceInformer.
@@ -206,6 +212,16 @@ func (v *version) StackTemplates() StackTemplateInformer {
 	return &stackTemplateInformer{factory: v.factory, tweakListOptions: v.tweakListOptions}
 }
 
+// StorageAccounts returns a StorageAccountInformer.
+func (v *version) StorageAccounts() StorageAccountInformer {
+	return &storageAccountInformer{factory: v.factory, tweakListOptions: v.tweakListOptions}
+}
+
+// StorageProfiles returns a StorageProfileInformer.
+func (v *version) StorageProfiles() StorageProfileInformer {
+	return &storageProfileInformer{factory: v.factory, tweakListOptions: v.tweakListOptions}
+}
+
 // Teams returns a TeamInformer.
 func (v *version) Teams() TeamInformer {
 	return &teamInformer{factory: v.factory, tweakListOptions: v.tweakListOptions}
@@ -214,6 +230,11 @@ func (v *version) Teams() TeamInformer {
 // Tenants returns a TenantInformer.
 func (v *version) Tenants() TenantInformer {
 	return &tenantInformer{factory: v.factory, tweakListOptions: v.tweakListOptions}
+}
+
+// TenantStorages returns a TenantStorageInformer.
+func (v *version) TenantStorages() TenantStorageInformer {
+	return &tenantStorageInformer{factory: v.factory, tweakListOptions: v.tweakListOptions}
 }
 
 // Users returns a UserInformer.

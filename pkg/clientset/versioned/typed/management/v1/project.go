@@ -34,7 +34,6 @@ type ProjectInterface interface {
 	ListMembers(ctx context.Context, projectName string, options metav1.GetOptions) (*managementv1.ProjectMembers, error)
 	ListTemplates(ctx context.Context, projectName string, options metav1.GetOptions) (*managementv1.ProjectTemplates, error)
 	ListClusters(ctx context.Context, projectName string, options metav1.GetOptions) (*managementv1.ProjectClusters, error)
-	MigrateVirtualClusterInstance(ctx context.Context, projectName string, projectMigrateVirtualClusterInstance *managementv1.ProjectMigrateVirtualClusterInstance, opts metav1.CreateOptions) (*managementv1.ProjectMigrateVirtualClusterInstance, error)
 	ImportSpace(ctx context.Context, projectName string, projectImportSpace *managementv1.ProjectImportSpace, opts metav1.CreateOptions) (*managementv1.ProjectImportSpace, error)
 	MigrateSpaceInstance(ctx context.Context, projectName string, projectMigrateSpaceInstance *managementv1.ProjectMigrateSpaceInstance, opts metav1.CreateOptions) (*managementv1.ProjectMigrateSpaceInstance, error)
 
@@ -94,20 +93,6 @@ func (c *projects) ListClusters(ctx context.Context, projectName string, options
 		Name(projectName).
 		SubResource("clusters").
 		VersionedParams(&options, scheme.ParameterCodec).
-		Do(ctx).
-		Into(result)
-	return
-}
-
-// MigrateVirtualClusterInstance takes the representation of a projectMigrateVirtualClusterInstance and creates it.  Returns the server's representation of the projectMigrateVirtualClusterInstance, and an error, if there is any.
-func (c *projects) MigrateVirtualClusterInstance(ctx context.Context, projectName string, projectMigrateVirtualClusterInstance *managementv1.ProjectMigrateVirtualClusterInstance, opts metav1.CreateOptions) (result *managementv1.ProjectMigrateVirtualClusterInstance, err error) {
-	result = &managementv1.ProjectMigrateVirtualClusterInstance{}
-	err = c.GetClient().Post().
-		Resource("projects").
-		Name(projectName).
-		SubResource("migratevirtualclusterinstance").
-		VersionedParams(&opts, scheme.ParameterCodec).
-		Body(projectMigrateVirtualClusterInstance).
 		Do(ctx).
 		Into(result)
 	return

@@ -931,6 +931,56 @@ func RegisterConversions(s *runtime.Scheme) error {
 	}); err != nil {
 		return err
 	}
+	if err := s.AddGeneratedConversionFunc((*ConnectorStorageCSISpec)(nil), (*management.ConnectorStorageCSISpec)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_v1_ConnectorStorageCSISpec_To_management_ConnectorStorageCSISpec(a.(*ConnectorStorageCSISpec), b.(*management.ConnectorStorageCSISpec), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*management.ConnectorStorageCSISpec)(nil), (*ConnectorStorageCSISpec)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_management_ConnectorStorageCSISpec_To_v1_ConnectorStorageCSISpec(a.(*management.ConnectorStorageCSISpec), b.(*ConnectorStorageCSISpec), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*ConnectorStorageS3Spec)(nil), (*management.ConnectorStorageS3Spec)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_v1_ConnectorStorageS3Spec_To_management_ConnectorStorageS3Spec(a.(*ConnectorStorageS3Spec), b.(*management.ConnectorStorageS3Spec), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*management.ConnectorStorageS3Spec)(nil), (*ConnectorStorageS3Spec)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_management_ConnectorStorageS3Spec_To_v1_ConnectorStorageS3Spec(a.(*management.ConnectorStorageS3Spec), b.(*ConnectorStorageS3Spec), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*ConnectorStorageSpec)(nil), (*management.ConnectorStorageSpec)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_v1_ConnectorStorageSpec_To_management_ConnectorStorageSpec(a.(*ConnectorStorageSpec), b.(*management.ConnectorStorageSpec), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*management.ConnectorStorageSpec)(nil), (*ConnectorStorageSpec)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_management_ConnectorStorageSpec_To_v1_ConnectorStorageSpec(a.(*management.ConnectorStorageSpec), b.(*ConnectorStorageSpec), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*ConnectorStorageVastSpec)(nil), (*management.ConnectorStorageVastSpec)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_v1_ConnectorStorageVastSpec_To_management_ConnectorStorageVastSpec(a.(*ConnectorStorageVastSpec), b.(*management.ConnectorStorageVastSpec), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*management.ConnectorStorageVastSpec)(nil), (*ConnectorStorageVastSpec)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_management_ConnectorStorageVastSpec_To_v1_ConnectorStorageVastSpec(a.(*management.ConnectorStorageVastSpec), b.(*ConnectorStorageVastSpec), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*ConnectorStorageWekaSpec)(nil), (*management.ConnectorStorageWekaSpec)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_v1_ConnectorStorageWekaSpec_To_management_ConnectorStorageWekaSpec(a.(*ConnectorStorageWekaSpec), b.(*management.ConnectorStorageWekaSpec), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*management.ConnectorStorageWekaSpec)(nil), (*ConnectorStorageWekaSpec)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_management_ConnectorStorageWekaSpec_To_v1_ConnectorStorageWekaSpec(a.(*management.ConnectorStorageWekaSpec), b.(*ConnectorStorageWekaSpec), scope)
+	}); err != nil {
+		return err
+	}
 	if err := s.AddGeneratedConversionFunc((*ConvertVirtualClusterConfig)(nil), (*management.ConvertVirtualClusterConfig)(nil), func(a, b interface{}, scope conversion.Scope) error {
 		return Convert_v1_ConvertVirtualClusterConfig_To_management_ConvertVirtualClusterConfig(a.(*ConvertVirtualClusterConfig), b.(*management.ConvertVirtualClusterConfig), scope)
 	}); err != nil {
@@ -2421,36 +2471,6 @@ func RegisterConversions(s *runtime.Scheme) error {
 	}); err != nil {
 		return err
 	}
-	if err := s.AddGeneratedConversionFunc((*ProjectMigrateVirtualClusterInstance)(nil), (*management.ProjectMigrateVirtualClusterInstance)(nil), func(a, b interface{}, scope conversion.Scope) error {
-		return Convert_v1_ProjectMigrateVirtualClusterInstance_To_management_ProjectMigrateVirtualClusterInstance(a.(*ProjectMigrateVirtualClusterInstance), b.(*management.ProjectMigrateVirtualClusterInstance), scope)
-	}); err != nil {
-		return err
-	}
-	if err := s.AddGeneratedConversionFunc((*management.ProjectMigrateVirtualClusterInstance)(nil), (*ProjectMigrateVirtualClusterInstance)(nil), func(a, b interface{}, scope conversion.Scope) error {
-		return Convert_management_ProjectMigrateVirtualClusterInstance_To_v1_ProjectMigrateVirtualClusterInstance(a.(*management.ProjectMigrateVirtualClusterInstance), b.(*ProjectMigrateVirtualClusterInstance), scope)
-	}); err != nil {
-		return err
-	}
-	if err := s.AddGeneratedConversionFunc((*ProjectMigrateVirtualClusterInstanceList)(nil), (*management.ProjectMigrateVirtualClusterInstanceList)(nil), func(a, b interface{}, scope conversion.Scope) error {
-		return Convert_v1_ProjectMigrateVirtualClusterInstanceList_To_management_ProjectMigrateVirtualClusterInstanceList(a.(*ProjectMigrateVirtualClusterInstanceList), b.(*management.ProjectMigrateVirtualClusterInstanceList), scope)
-	}); err != nil {
-		return err
-	}
-	if err := s.AddGeneratedConversionFunc((*management.ProjectMigrateVirtualClusterInstanceList)(nil), (*ProjectMigrateVirtualClusterInstanceList)(nil), func(a, b interface{}, scope conversion.Scope) error {
-		return Convert_management_ProjectMigrateVirtualClusterInstanceList_To_v1_ProjectMigrateVirtualClusterInstanceList(a.(*management.ProjectMigrateVirtualClusterInstanceList), b.(*ProjectMigrateVirtualClusterInstanceList), scope)
-	}); err != nil {
-		return err
-	}
-	if err := s.AddGeneratedConversionFunc((*ProjectMigrateVirtualClusterInstanceSource)(nil), (*management.ProjectMigrateVirtualClusterInstanceSource)(nil), func(a, b interface{}, scope conversion.Scope) error {
-		return Convert_v1_ProjectMigrateVirtualClusterInstanceSource_To_management_ProjectMigrateVirtualClusterInstanceSource(a.(*ProjectMigrateVirtualClusterInstanceSource), b.(*management.ProjectMigrateVirtualClusterInstanceSource), scope)
-	}); err != nil {
-		return err
-	}
-	if err := s.AddGeneratedConversionFunc((*management.ProjectMigrateVirtualClusterInstanceSource)(nil), (*ProjectMigrateVirtualClusterInstanceSource)(nil), func(a, b interface{}, scope conversion.Scope) error {
-		return Convert_management_ProjectMigrateVirtualClusterInstanceSource_To_v1_ProjectMigrateVirtualClusterInstanceSource(a.(*management.ProjectMigrateVirtualClusterInstanceSource), b.(*ProjectMigrateVirtualClusterInstanceSource), scope)
-	}); err != nil {
-		return err
-	}
 	if err := s.AddGeneratedConversionFunc((*ProjectNodeTypes)(nil), (*management.ProjectNodeTypes)(nil), func(a, b interface{}, scope conversion.Scope) error {
 		return Convert_v1_ProjectNodeTypes_To_management_ProjectNodeTypes(a.(*ProjectNodeTypes), b.(*management.ProjectNodeTypes), scope)
 	}); err != nil {
@@ -3161,6 +3181,86 @@ func RegisterConversions(s *runtime.Scheme) error {
 	}); err != nil {
 		return err
 	}
+	if err := s.AddGeneratedConversionFunc((*StorageAccount)(nil), (*management.StorageAccount)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_v1_StorageAccount_To_management_StorageAccount(a.(*StorageAccount), b.(*management.StorageAccount), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*management.StorageAccount)(nil), (*StorageAccount)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_management_StorageAccount_To_v1_StorageAccount(a.(*management.StorageAccount), b.(*StorageAccount), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*StorageAccountList)(nil), (*management.StorageAccountList)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_v1_StorageAccountList_To_management_StorageAccountList(a.(*StorageAccountList), b.(*management.StorageAccountList), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*management.StorageAccountList)(nil), (*StorageAccountList)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_management_StorageAccountList_To_v1_StorageAccountList(a.(*management.StorageAccountList), b.(*StorageAccountList), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*StorageAccountSpec)(nil), (*management.StorageAccountSpec)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_v1_StorageAccountSpec_To_management_StorageAccountSpec(a.(*StorageAccountSpec), b.(*management.StorageAccountSpec), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*management.StorageAccountSpec)(nil), (*StorageAccountSpec)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_management_StorageAccountSpec_To_v1_StorageAccountSpec(a.(*management.StorageAccountSpec), b.(*StorageAccountSpec), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*StorageAccountStatus)(nil), (*management.StorageAccountStatus)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_v1_StorageAccountStatus_To_management_StorageAccountStatus(a.(*StorageAccountStatus), b.(*management.StorageAccountStatus), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*management.StorageAccountStatus)(nil), (*StorageAccountStatus)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_management_StorageAccountStatus_To_v1_StorageAccountStatus(a.(*management.StorageAccountStatus), b.(*StorageAccountStatus), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*StorageProfile)(nil), (*management.StorageProfile)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_v1_StorageProfile_To_management_StorageProfile(a.(*StorageProfile), b.(*management.StorageProfile), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*management.StorageProfile)(nil), (*StorageProfile)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_management_StorageProfile_To_v1_StorageProfile(a.(*management.StorageProfile), b.(*StorageProfile), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*StorageProfileList)(nil), (*management.StorageProfileList)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_v1_StorageProfileList_To_management_StorageProfileList(a.(*StorageProfileList), b.(*management.StorageProfileList), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*management.StorageProfileList)(nil), (*StorageProfileList)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_management_StorageProfileList_To_v1_StorageProfileList(a.(*management.StorageProfileList), b.(*StorageProfileList), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*StorageProfileSpec)(nil), (*management.StorageProfileSpec)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_v1_StorageProfileSpec_To_management_StorageProfileSpec(a.(*StorageProfileSpec), b.(*management.StorageProfileSpec), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*management.StorageProfileSpec)(nil), (*StorageProfileSpec)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_management_StorageProfileSpec_To_v1_StorageProfileSpec(a.(*management.StorageProfileSpec), b.(*StorageProfileSpec), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*StorageProfileStatus)(nil), (*management.StorageProfileStatus)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_v1_StorageProfileStatus_To_management_StorageProfileStatus(a.(*StorageProfileStatus), b.(*management.StorageProfileStatus), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*management.StorageProfileStatus)(nil), (*StorageProfileStatus)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_management_StorageProfileStatus_To_v1_StorageProfileStatus(a.(*management.StorageProfileStatus), b.(*StorageProfileStatus), scope)
+	}); err != nil {
+		return err
+	}
 	if err := s.AddGeneratedConversionFunc((*SubjectAccessReview)(nil), (*management.SubjectAccessReview)(nil), func(a, b interface{}, scope conversion.Scope) error {
 		return Convert_v1_SubjectAccessReview_To_management_SubjectAccessReview(a.(*SubjectAccessReview), b.(*management.SubjectAccessReview), scope)
 	}); err != nil {
@@ -3388,6 +3488,66 @@ func RegisterConversions(s *runtime.Scheme) error {
 	}
 	if err := s.AddGeneratedConversionFunc((*management.TenantStatus)(nil), (*TenantStatus)(nil), func(a, b interface{}, scope conversion.Scope) error {
 		return Convert_management_TenantStatus_To_v1_TenantStatus(a.(*management.TenantStatus), b.(*TenantStatus), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*TenantStorage)(nil), (*management.TenantStorage)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_v1_TenantStorage_To_management_TenantStorage(a.(*TenantStorage), b.(*management.TenantStorage), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*management.TenantStorage)(nil), (*TenantStorage)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_management_TenantStorage_To_v1_TenantStorage(a.(*management.TenantStorage), b.(*TenantStorage), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*TenantStorageCredentials)(nil), (*management.TenantStorageCredentials)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_v1_TenantStorageCredentials_To_management_TenantStorageCredentials(a.(*TenantStorageCredentials), b.(*management.TenantStorageCredentials), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*management.TenantStorageCredentials)(nil), (*TenantStorageCredentials)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_management_TenantStorageCredentials_To_v1_TenantStorageCredentials(a.(*management.TenantStorageCredentials), b.(*TenantStorageCredentials), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*TenantStorageCredentialsList)(nil), (*management.TenantStorageCredentialsList)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_v1_TenantStorageCredentialsList_To_management_TenantStorageCredentialsList(a.(*TenantStorageCredentialsList), b.(*management.TenantStorageCredentialsList), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*management.TenantStorageCredentialsList)(nil), (*TenantStorageCredentialsList)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_management_TenantStorageCredentialsList_To_v1_TenantStorageCredentialsList(a.(*management.TenantStorageCredentialsList), b.(*TenantStorageCredentialsList), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*TenantStorageList)(nil), (*management.TenantStorageList)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_v1_TenantStorageList_To_management_TenantStorageList(a.(*TenantStorageList), b.(*management.TenantStorageList), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*management.TenantStorageList)(nil), (*TenantStorageList)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_management_TenantStorageList_To_v1_TenantStorageList(a.(*management.TenantStorageList), b.(*TenantStorageList), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*TenantStorageSpec)(nil), (*management.TenantStorageSpec)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_v1_TenantStorageSpec_To_management_TenantStorageSpec(a.(*TenantStorageSpec), b.(*management.TenantStorageSpec), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*management.TenantStorageSpec)(nil), (*TenantStorageSpec)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_management_TenantStorageSpec_To_v1_TenantStorageSpec(a.(*management.TenantStorageSpec), b.(*TenantStorageSpec), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*TenantStorageStatus)(nil), (*management.TenantStorageStatus)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_v1_TenantStorageStatus_To_management_TenantStorageStatus(a.(*TenantStorageStatus), b.(*management.TenantStorageStatus), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*management.TenantStorageStatus)(nil), (*TenantStorageStatus)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_management_TenantStorageStatus_To_v1_TenantStorageStatus(a.(*management.TenantStorageStatus), b.(*TenantStorageStatus), scope)
 	}); err != nil {
 		return err
 	}
@@ -6772,6 +6932,7 @@ func autoConvert_v1_ConnectorSpec_To_management_ConnectorSpec(in *ConnectorSpec,
 	out.NetBox = (*management.ConnectorNetBoxSpec)(unsafe.Pointer(in.NetBox))
 	out.ImageStore = (*management.ConnectorImageStoreSpec)(unsafe.Pointer(in.ImageStore))
 	out.Observability = (*management.ConnectorObservabilitySpec)(unsafe.Pointer(in.Observability))
+	out.Storage = (*management.ConnectorStorageSpec)(unsafe.Pointer(in.Storage))
 	return nil
 }
 
@@ -6788,6 +6949,7 @@ func autoConvert_management_ConnectorSpec_To_v1_ConnectorSpec(in *management.Con
 	out.NetBox = (*ConnectorNetBoxSpec)(unsafe.Pointer(in.NetBox))
 	out.ImageStore = (*ConnectorImageStoreSpec)(unsafe.Pointer(in.ImageStore))
 	out.Observability = (*ConnectorObservabilitySpec)(unsafe.Pointer(in.Observability))
+	out.Storage = (*ConnectorStorageSpec)(unsafe.Pointer(in.Storage))
 	return nil
 }
 
@@ -6816,6 +6978,146 @@ func autoConvert_management_ConnectorStatus_To_v1_ConnectorStatus(in *management
 // Convert_management_ConnectorStatus_To_v1_ConnectorStatus is an autogenerated conversion function.
 func Convert_management_ConnectorStatus_To_v1_ConnectorStatus(in *management.ConnectorStatus, out *ConnectorStatus, s conversion.Scope) error {
 	return autoConvert_management_ConnectorStatus_To_v1_ConnectorStatus(in, out, s)
+}
+
+func autoConvert_v1_ConnectorStorageCSISpec_To_management_ConnectorStorageCSISpec(in *ConnectorStorageCSISpec, out *management.ConnectorStorageCSISpec, s conversion.Scope) error {
+	out.ChartRepo = in.ChartRepo
+	out.ChartVersion = in.ChartVersion
+	out.Values = in.Values
+	return nil
+}
+
+// Convert_v1_ConnectorStorageCSISpec_To_management_ConnectorStorageCSISpec is an autogenerated conversion function.
+func Convert_v1_ConnectorStorageCSISpec_To_management_ConnectorStorageCSISpec(in *ConnectorStorageCSISpec, out *management.ConnectorStorageCSISpec, s conversion.Scope) error {
+	return autoConvert_v1_ConnectorStorageCSISpec_To_management_ConnectorStorageCSISpec(in, out, s)
+}
+
+func autoConvert_management_ConnectorStorageCSISpec_To_v1_ConnectorStorageCSISpec(in *management.ConnectorStorageCSISpec, out *ConnectorStorageCSISpec, s conversion.Scope) error {
+	out.ChartRepo = in.ChartRepo
+	out.ChartVersion = in.ChartVersion
+	out.Values = in.Values
+	return nil
+}
+
+// Convert_management_ConnectorStorageCSISpec_To_v1_ConnectorStorageCSISpec is an autogenerated conversion function.
+func Convert_management_ConnectorStorageCSISpec_To_v1_ConnectorStorageCSISpec(in *management.ConnectorStorageCSISpec, out *ConnectorStorageCSISpec, s conversion.Scope) error {
+	return autoConvert_management_ConnectorStorageCSISpec_To_v1_ConnectorStorageCSISpec(in, out, s)
+}
+
+func autoConvert_v1_ConnectorStorageS3Spec_To_management_ConnectorStorageS3Spec(in *ConnectorStorageS3Spec, out *management.ConnectorStorageS3Spec, s conversion.Scope) error {
+	out.Endpoint = in.Endpoint
+	out.CAData = in.CAData
+	return nil
+}
+
+// Convert_v1_ConnectorStorageS3Spec_To_management_ConnectorStorageS3Spec is an autogenerated conversion function.
+func Convert_v1_ConnectorStorageS3Spec_To_management_ConnectorStorageS3Spec(in *ConnectorStorageS3Spec, out *management.ConnectorStorageS3Spec, s conversion.Scope) error {
+	return autoConvert_v1_ConnectorStorageS3Spec_To_management_ConnectorStorageS3Spec(in, out, s)
+}
+
+func autoConvert_management_ConnectorStorageS3Spec_To_v1_ConnectorStorageS3Spec(in *management.ConnectorStorageS3Spec, out *ConnectorStorageS3Spec, s conversion.Scope) error {
+	out.Endpoint = in.Endpoint
+	out.CAData = in.CAData
+	return nil
+}
+
+// Convert_management_ConnectorStorageS3Spec_To_v1_ConnectorStorageS3Spec is an autogenerated conversion function.
+func Convert_management_ConnectorStorageS3Spec_To_v1_ConnectorStorageS3Spec(in *management.ConnectorStorageS3Spec, out *ConnectorStorageS3Spec, s conversion.Scope) error {
+	return autoConvert_management_ConnectorStorageS3Spec_To_v1_ConnectorStorageS3Spec(in, out, s)
+}
+
+func autoConvert_v1_ConnectorStorageSpec_To_management_ConnectorStorageSpec(in *ConnectorStorageSpec, out *management.ConnectorStorageSpec, s conversion.Scope) error {
+	out.Provider = management.StorageConnectorProvider(in.Provider)
+	out.Weka = (*management.ConnectorStorageWekaSpec)(unsafe.Pointer(in.Weka))
+	out.Vast = (*management.ConnectorStorageVastSpec)(unsafe.Pointer(in.Vast))
+	return nil
+}
+
+// Convert_v1_ConnectorStorageSpec_To_management_ConnectorStorageSpec is an autogenerated conversion function.
+func Convert_v1_ConnectorStorageSpec_To_management_ConnectorStorageSpec(in *ConnectorStorageSpec, out *management.ConnectorStorageSpec, s conversion.Scope) error {
+	return autoConvert_v1_ConnectorStorageSpec_To_management_ConnectorStorageSpec(in, out, s)
+}
+
+func autoConvert_management_ConnectorStorageSpec_To_v1_ConnectorStorageSpec(in *management.ConnectorStorageSpec, out *ConnectorStorageSpec, s conversion.Scope) error {
+	out.Provider = StorageConnectorProvider(in.Provider)
+	out.Weka = (*ConnectorStorageWekaSpec)(unsafe.Pointer(in.Weka))
+	out.Vast = (*ConnectorStorageVastSpec)(unsafe.Pointer(in.Vast))
+	return nil
+}
+
+// Convert_management_ConnectorStorageSpec_To_v1_ConnectorStorageSpec is an autogenerated conversion function.
+func Convert_management_ConnectorStorageSpec_To_v1_ConnectorStorageSpec(in *management.ConnectorStorageSpec, out *ConnectorStorageSpec, s conversion.Scope) error {
+	return autoConvert_management_ConnectorStorageSpec_To_v1_ConnectorStorageSpec(in, out, s)
+}
+
+func autoConvert_v1_ConnectorStorageVastSpec_To_management_ConnectorStorageVastSpec(in *ConnectorStorageVastSpec, out *management.ConnectorStorageVastSpec, s conversion.Scope) error {
+	out.Endpoint = in.Endpoint
+	out.Username = in.Username
+	out.Password = in.Password
+	out.InsecureSkipTLSVerify = in.InsecureSkipTLSVerify
+	out.CAData = in.CAData
+	out.TenantPrefix = in.TenantPrefix
+	out.VIPRange = in.VIPRange
+	out.VIPSubnetCIDR = in.VIPSubnetCIDR
+	out.VIPsPerTenant = in.VIPsPerTenant
+	return nil
+}
+
+// Convert_v1_ConnectorStorageVastSpec_To_management_ConnectorStorageVastSpec is an autogenerated conversion function.
+func Convert_v1_ConnectorStorageVastSpec_To_management_ConnectorStorageVastSpec(in *ConnectorStorageVastSpec, out *management.ConnectorStorageVastSpec, s conversion.Scope) error {
+	return autoConvert_v1_ConnectorStorageVastSpec_To_management_ConnectorStorageVastSpec(in, out, s)
+}
+
+func autoConvert_management_ConnectorStorageVastSpec_To_v1_ConnectorStorageVastSpec(in *management.ConnectorStorageVastSpec, out *ConnectorStorageVastSpec, s conversion.Scope) error {
+	out.Endpoint = in.Endpoint
+	out.Username = in.Username
+	out.Password = in.Password
+	out.InsecureSkipTLSVerify = in.InsecureSkipTLSVerify
+	out.CAData = in.CAData
+	out.TenantPrefix = in.TenantPrefix
+	out.VIPRange = in.VIPRange
+	out.VIPSubnetCIDR = in.VIPSubnetCIDR
+	out.VIPsPerTenant = in.VIPsPerTenant
+	return nil
+}
+
+// Convert_management_ConnectorStorageVastSpec_To_v1_ConnectorStorageVastSpec is an autogenerated conversion function.
+func Convert_management_ConnectorStorageVastSpec_To_v1_ConnectorStorageVastSpec(in *management.ConnectorStorageVastSpec, out *ConnectorStorageVastSpec, s conversion.Scope) error {
+	return autoConvert_management_ConnectorStorageVastSpec_To_v1_ConnectorStorageVastSpec(in, out, s)
+}
+
+func autoConvert_v1_ConnectorStorageWekaSpec_To_management_ConnectorStorageWekaSpec(in *ConnectorStorageWekaSpec, out *management.ConnectorStorageWekaSpec, s conversion.Scope) error {
+	out.Endpoints = in.Endpoints
+	out.Username = in.Username
+	out.Password = in.Password
+	out.InsecureSkipTLSVerify = in.InsecureSkipTLSVerify
+	out.CAData = in.CAData
+	out.TenantPrefix = in.TenantPrefix
+	out.CSI = (*management.ConnectorStorageCSISpec)(unsafe.Pointer(in.CSI))
+	out.S3 = (*management.ConnectorStorageS3Spec)(unsafe.Pointer(in.S3))
+	return nil
+}
+
+// Convert_v1_ConnectorStorageWekaSpec_To_management_ConnectorStorageWekaSpec is an autogenerated conversion function.
+func Convert_v1_ConnectorStorageWekaSpec_To_management_ConnectorStorageWekaSpec(in *ConnectorStorageWekaSpec, out *management.ConnectorStorageWekaSpec, s conversion.Scope) error {
+	return autoConvert_v1_ConnectorStorageWekaSpec_To_management_ConnectorStorageWekaSpec(in, out, s)
+}
+
+func autoConvert_management_ConnectorStorageWekaSpec_To_v1_ConnectorStorageWekaSpec(in *management.ConnectorStorageWekaSpec, out *ConnectorStorageWekaSpec, s conversion.Scope) error {
+	out.Endpoints = in.Endpoints
+	out.Username = in.Username
+	out.Password = in.Password
+	out.InsecureSkipTLSVerify = in.InsecureSkipTLSVerify
+	out.CAData = in.CAData
+	out.TenantPrefix = in.TenantPrefix
+	out.CSI = (*ConnectorStorageCSISpec)(unsafe.Pointer(in.CSI))
+	out.S3 = (*ConnectorStorageS3Spec)(unsafe.Pointer(in.S3))
+	return nil
+}
+
+// Convert_management_ConnectorStorageWekaSpec_To_v1_ConnectorStorageWekaSpec is an autogenerated conversion function.
+func Convert_management_ConnectorStorageWekaSpec_To_v1_ConnectorStorageWekaSpec(in *management.ConnectorStorageWekaSpec, out *ConnectorStorageWekaSpec, s conversion.Scope) error {
+	return autoConvert_management_ConnectorStorageWekaSpec_To_v1_ConnectorStorageWekaSpec(in, out, s)
 }
 
 func autoConvert_v1_ConvertVirtualClusterConfig_To_management_ConvertVirtualClusterConfig(in *ConvertVirtualClusterConfig, out *management.ConvertVirtualClusterConfig, s conversion.Scope) error {
@@ -10513,76 +10815,6 @@ func Convert_management_ProjectMigrateSpaceInstanceSource_To_v1_ProjectMigrateSp
 	return autoConvert_management_ProjectMigrateSpaceInstanceSource_To_v1_ProjectMigrateSpaceInstanceSource(in, out, s)
 }
 
-func autoConvert_v1_ProjectMigrateVirtualClusterInstance_To_management_ProjectMigrateVirtualClusterInstance(in *ProjectMigrateVirtualClusterInstance, out *management.ProjectMigrateVirtualClusterInstance, s conversion.Scope) error {
-	out.ObjectMeta = in.ObjectMeta
-	if err := Convert_v1_ProjectMigrateVirtualClusterInstanceSource_To_management_ProjectMigrateVirtualClusterInstanceSource(&in.SourceVirtualClusterInstance, &out.SourceVirtualClusterInstance, s); err != nil {
-		return err
-	}
-	return nil
-}
-
-// Convert_v1_ProjectMigrateVirtualClusterInstance_To_management_ProjectMigrateVirtualClusterInstance is an autogenerated conversion function.
-func Convert_v1_ProjectMigrateVirtualClusterInstance_To_management_ProjectMigrateVirtualClusterInstance(in *ProjectMigrateVirtualClusterInstance, out *management.ProjectMigrateVirtualClusterInstance, s conversion.Scope) error {
-	return autoConvert_v1_ProjectMigrateVirtualClusterInstance_To_management_ProjectMigrateVirtualClusterInstance(in, out, s)
-}
-
-func autoConvert_management_ProjectMigrateVirtualClusterInstance_To_v1_ProjectMigrateVirtualClusterInstance(in *management.ProjectMigrateVirtualClusterInstance, out *ProjectMigrateVirtualClusterInstance, s conversion.Scope) error {
-	out.ObjectMeta = in.ObjectMeta
-	if err := Convert_management_ProjectMigrateVirtualClusterInstanceSource_To_v1_ProjectMigrateVirtualClusterInstanceSource(&in.SourceVirtualClusterInstance, &out.SourceVirtualClusterInstance, s); err != nil {
-		return err
-	}
-	return nil
-}
-
-// Convert_management_ProjectMigrateVirtualClusterInstance_To_v1_ProjectMigrateVirtualClusterInstance is an autogenerated conversion function.
-func Convert_management_ProjectMigrateVirtualClusterInstance_To_v1_ProjectMigrateVirtualClusterInstance(in *management.ProjectMigrateVirtualClusterInstance, out *ProjectMigrateVirtualClusterInstance, s conversion.Scope) error {
-	return autoConvert_management_ProjectMigrateVirtualClusterInstance_To_v1_ProjectMigrateVirtualClusterInstance(in, out, s)
-}
-
-func autoConvert_v1_ProjectMigrateVirtualClusterInstanceList_To_management_ProjectMigrateVirtualClusterInstanceList(in *ProjectMigrateVirtualClusterInstanceList, out *management.ProjectMigrateVirtualClusterInstanceList, s conversion.Scope) error {
-	out.ListMeta = in.ListMeta
-	out.Items = *(*[]management.ProjectMigrateVirtualClusterInstance)(unsafe.Pointer(&in.Items))
-	return nil
-}
-
-// Convert_v1_ProjectMigrateVirtualClusterInstanceList_To_management_ProjectMigrateVirtualClusterInstanceList is an autogenerated conversion function.
-func Convert_v1_ProjectMigrateVirtualClusterInstanceList_To_management_ProjectMigrateVirtualClusterInstanceList(in *ProjectMigrateVirtualClusterInstanceList, out *management.ProjectMigrateVirtualClusterInstanceList, s conversion.Scope) error {
-	return autoConvert_v1_ProjectMigrateVirtualClusterInstanceList_To_management_ProjectMigrateVirtualClusterInstanceList(in, out, s)
-}
-
-func autoConvert_management_ProjectMigrateVirtualClusterInstanceList_To_v1_ProjectMigrateVirtualClusterInstanceList(in *management.ProjectMigrateVirtualClusterInstanceList, out *ProjectMigrateVirtualClusterInstanceList, s conversion.Scope) error {
-	out.ListMeta = in.ListMeta
-	out.Items = *(*[]ProjectMigrateVirtualClusterInstance)(unsafe.Pointer(&in.Items))
-	return nil
-}
-
-// Convert_management_ProjectMigrateVirtualClusterInstanceList_To_v1_ProjectMigrateVirtualClusterInstanceList is an autogenerated conversion function.
-func Convert_management_ProjectMigrateVirtualClusterInstanceList_To_v1_ProjectMigrateVirtualClusterInstanceList(in *management.ProjectMigrateVirtualClusterInstanceList, out *ProjectMigrateVirtualClusterInstanceList, s conversion.Scope) error {
-	return autoConvert_management_ProjectMigrateVirtualClusterInstanceList_To_v1_ProjectMigrateVirtualClusterInstanceList(in, out, s)
-}
-
-func autoConvert_v1_ProjectMigrateVirtualClusterInstanceSource_To_management_ProjectMigrateVirtualClusterInstanceSource(in *ProjectMigrateVirtualClusterInstanceSource, out *management.ProjectMigrateVirtualClusterInstanceSource, s conversion.Scope) error {
-	out.Name = in.Name
-	out.Namespace = in.Namespace
-	return nil
-}
-
-// Convert_v1_ProjectMigrateVirtualClusterInstanceSource_To_management_ProjectMigrateVirtualClusterInstanceSource is an autogenerated conversion function.
-func Convert_v1_ProjectMigrateVirtualClusterInstanceSource_To_management_ProjectMigrateVirtualClusterInstanceSource(in *ProjectMigrateVirtualClusterInstanceSource, out *management.ProjectMigrateVirtualClusterInstanceSource, s conversion.Scope) error {
-	return autoConvert_v1_ProjectMigrateVirtualClusterInstanceSource_To_management_ProjectMigrateVirtualClusterInstanceSource(in, out, s)
-}
-
-func autoConvert_management_ProjectMigrateVirtualClusterInstanceSource_To_v1_ProjectMigrateVirtualClusterInstanceSource(in *management.ProjectMigrateVirtualClusterInstanceSource, out *ProjectMigrateVirtualClusterInstanceSource, s conversion.Scope) error {
-	out.Name = in.Name
-	out.Namespace = in.Namespace
-	return nil
-}
-
-// Convert_management_ProjectMigrateVirtualClusterInstanceSource_To_v1_ProjectMigrateVirtualClusterInstanceSource is an autogenerated conversion function.
-func Convert_management_ProjectMigrateVirtualClusterInstanceSource_To_v1_ProjectMigrateVirtualClusterInstanceSource(in *management.ProjectMigrateVirtualClusterInstanceSource, out *ProjectMigrateVirtualClusterInstanceSource, s conversion.Scope) error {
-	return autoConvert_management_ProjectMigrateVirtualClusterInstanceSource_To_v1_ProjectMigrateVirtualClusterInstanceSource(in, out, s)
-}
-
 func autoConvert_v1_ProjectNodeTypes_To_management_ProjectNodeTypes(in *ProjectNodeTypes, out *management.ProjectNodeTypes, s conversion.Scope) error {
 	out.ObjectMeta = in.ObjectMeta
 	out.NodeProviders = *(*[]storagev1.NodeProvider)(unsafe.Pointer(&in.NodeProviders))
@@ -12347,6 +12579,194 @@ func Convert_management_StandalonePKI_To_v1_StandalonePKI(in *management.Standal
 	return autoConvert_management_StandalonePKI_To_v1_StandalonePKI(in, out, s)
 }
 
+func autoConvert_v1_StorageAccount_To_management_StorageAccount(in *StorageAccount, out *management.StorageAccount, s conversion.Scope) error {
+	out.ObjectMeta = in.ObjectMeta
+	if err := Convert_v1_StorageAccountSpec_To_management_StorageAccountSpec(&in.Spec, &out.Spec, s); err != nil {
+		return err
+	}
+	if err := Convert_v1_StorageAccountStatus_To_management_StorageAccountStatus(&in.Status, &out.Status, s); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Convert_v1_StorageAccount_To_management_StorageAccount is an autogenerated conversion function.
+func Convert_v1_StorageAccount_To_management_StorageAccount(in *StorageAccount, out *management.StorageAccount, s conversion.Scope) error {
+	return autoConvert_v1_StorageAccount_To_management_StorageAccount(in, out, s)
+}
+
+func autoConvert_management_StorageAccount_To_v1_StorageAccount(in *management.StorageAccount, out *StorageAccount, s conversion.Scope) error {
+	out.ObjectMeta = in.ObjectMeta
+	if err := Convert_management_StorageAccountSpec_To_v1_StorageAccountSpec(&in.Spec, &out.Spec, s); err != nil {
+		return err
+	}
+	if err := Convert_management_StorageAccountStatus_To_v1_StorageAccountStatus(&in.Status, &out.Status, s); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Convert_management_StorageAccount_To_v1_StorageAccount is an autogenerated conversion function.
+func Convert_management_StorageAccount_To_v1_StorageAccount(in *management.StorageAccount, out *StorageAccount, s conversion.Scope) error {
+	return autoConvert_management_StorageAccount_To_v1_StorageAccount(in, out, s)
+}
+
+func autoConvert_v1_StorageAccountList_To_management_StorageAccountList(in *StorageAccountList, out *management.StorageAccountList, s conversion.Scope) error {
+	out.ListMeta = in.ListMeta
+	out.Items = *(*[]management.StorageAccount)(unsafe.Pointer(&in.Items))
+	return nil
+}
+
+// Convert_v1_StorageAccountList_To_management_StorageAccountList is an autogenerated conversion function.
+func Convert_v1_StorageAccountList_To_management_StorageAccountList(in *StorageAccountList, out *management.StorageAccountList, s conversion.Scope) error {
+	return autoConvert_v1_StorageAccountList_To_management_StorageAccountList(in, out, s)
+}
+
+func autoConvert_management_StorageAccountList_To_v1_StorageAccountList(in *management.StorageAccountList, out *StorageAccountList, s conversion.Scope) error {
+	out.ListMeta = in.ListMeta
+	out.Items = *(*[]StorageAccount)(unsafe.Pointer(&in.Items))
+	return nil
+}
+
+// Convert_management_StorageAccountList_To_v1_StorageAccountList is an autogenerated conversion function.
+func Convert_management_StorageAccountList_To_v1_StorageAccountList(in *management.StorageAccountList, out *StorageAccountList, s conversion.Scope) error {
+	return autoConvert_management_StorageAccountList_To_v1_StorageAccountList(in, out, s)
+}
+
+func autoConvert_v1_StorageAccountSpec_To_management_StorageAccountSpec(in *StorageAccountSpec, out *management.StorageAccountSpec, s conversion.Scope) error {
+	out.StorageAccountSpec = in.StorageAccountSpec
+	return nil
+}
+
+// Convert_v1_StorageAccountSpec_To_management_StorageAccountSpec is an autogenerated conversion function.
+func Convert_v1_StorageAccountSpec_To_management_StorageAccountSpec(in *StorageAccountSpec, out *management.StorageAccountSpec, s conversion.Scope) error {
+	return autoConvert_v1_StorageAccountSpec_To_management_StorageAccountSpec(in, out, s)
+}
+
+func autoConvert_management_StorageAccountSpec_To_v1_StorageAccountSpec(in *management.StorageAccountSpec, out *StorageAccountSpec, s conversion.Scope) error {
+	out.StorageAccountSpec = in.StorageAccountSpec
+	return nil
+}
+
+// Convert_management_StorageAccountSpec_To_v1_StorageAccountSpec is an autogenerated conversion function.
+func Convert_management_StorageAccountSpec_To_v1_StorageAccountSpec(in *management.StorageAccountSpec, out *StorageAccountSpec, s conversion.Scope) error {
+	return autoConvert_management_StorageAccountSpec_To_v1_StorageAccountSpec(in, out, s)
+}
+
+func autoConvert_v1_StorageAccountStatus_To_management_StorageAccountStatus(in *StorageAccountStatus, out *management.StorageAccountStatus, s conversion.Scope) error {
+	out.StorageAccountStatus = in.StorageAccountStatus
+	return nil
+}
+
+// Convert_v1_StorageAccountStatus_To_management_StorageAccountStatus is an autogenerated conversion function.
+func Convert_v1_StorageAccountStatus_To_management_StorageAccountStatus(in *StorageAccountStatus, out *management.StorageAccountStatus, s conversion.Scope) error {
+	return autoConvert_v1_StorageAccountStatus_To_management_StorageAccountStatus(in, out, s)
+}
+
+func autoConvert_management_StorageAccountStatus_To_v1_StorageAccountStatus(in *management.StorageAccountStatus, out *StorageAccountStatus, s conversion.Scope) error {
+	out.StorageAccountStatus = in.StorageAccountStatus
+	return nil
+}
+
+// Convert_management_StorageAccountStatus_To_v1_StorageAccountStatus is an autogenerated conversion function.
+func Convert_management_StorageAccountStatus_To_v1_StorageAccountStatus(in *management.StorageAccountStatus, out *StorageAccountStatus, s conversion.Scope) error {
+	return autoConvert_management_StorageAccountStatus_To_v1_StorageAccountStatus(in, out, s)
+}
+
+func autoConvert_v1_StorageProfile_To_management_StorageProfile(in *StorageProfile, out *management.StorageProfile, s conversion.Scope) error {
+	out.ObjectMeta = in.ObjectMeta
+	if err := Convert_v1_StorageProfileSpec_To_management_StorageProfileSpec(&in.Spec, &out.Spec, s); err != nil {
+		return err
+	}
+	if err := Convert_v1_StorageProfileStatus_To_management_StorageProfileStatus(&in.Status, &out.Status, s); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Convert_v1_StorageProfile_To_management_StorageProfile is an autogenerated conversion function.
+func Convert_v1_StorageProfile_To_management_StorageProfile(in *StorageProfile, out *management.StorageProfile, s conversion.Scope) error {
+	return autoConvert_v1_StorageProfile_To_management_StorageProfile(in, out, s)
+}
+
+func autoConvert_management_StorageProfile_To_v1_StorageProfile(in *management.StorageProfile, out *StorageProfile, s conversion.Scope) error {
+	out.ObjectMeta = in.ObjectMeta
+	if err := Convert_management_StorageProfileSpec_To_v1_StorageProfileSpec(&in.Spec, &out.Spec, s); err != nil {
+		return err
+	}
+	if err := Convert_management_StorageProfileStatus_To_v1_StorageProfileStatus(&in.Status, &out.Status, s); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Convert_management_StorageProfile_To_v1_StorageProfile is an autogenerated conversion function.
+func Convert_management_StorageProfile_To_v1_StorageProfile(in *management.StorageProfile, out *StorageProfile, s conversion.Scope) error {
+	return autoConvert_management_StorageProfile_To_v1_StorageProfile(in, out, s)
+}
+
+func autoConvert_v1_StorageProfileList_To_management_StorageProfileList(in *StorageProfileList, out *management.StorageProfileList, s conversion.Scope) error {
+	out.ListMeta = in.ListMeta
+	out.Items = *(*[]management.StorageProfile)(unsafe.Pointer(&in.Items))
+	return nil
+}
+
+// Convert_v1_StorageProfileList_To_management_StorageProfileList is an autogenerated conversion function.
+func Convert_v1_StorageProfileList_To_management_StorageProfileList(in *StorageProfileList, out *management.StorageProfileList, s conversion.Scope) error {
+	return autoConvert_v1_StorageProfileList_To_management_StorageProfileList(in, out, s)
+}
+
+func autoConvert_management_StorageProfileList_To_v1_StorageProfileList(in *management.StorageProfileList, out *StorageProfileList, s conversion.Scope) error {
+	out.ListMeta = in.ListMeta
+	out.Items = *(*[]StorageProfile)(unsafe.Pointer(&in.Items))
+	return nil
+}
+
+// Convert_management_StorageProfileList_To_v1_StorageProfileList is an autogenerated conversion function.
+func Convert_management_StorageProfileList_To_v1_StorageProfileList(in *management.StorageProfileList, out *StorageProfileList, s conversion.Scope) error {
+	return autoConvert_management_StorageProfileList_To_v1_StorageProfileList(in, out, s)
+}
+
+func autoConvert_v1_StorageProfileSpec_To_management_StorageProfileSpec(in *StorageProfileSpec, out *management.StorageProfileSpec, s conversion.Scope) error {
+	out.StorageProfileSpec = in.StorageProfileSpec
+	return nil
+}
+
+// Convert_v1_StorageProfileSpec_To_management_StorageProfileSpec is an autogenerated conversion function.
+func Convert_v1_StorageProfileSpec_To_management_StorageProfileSpec(in *StorageProfileSpec, out *management.StorageProfileSpec, s conversion.Scope) error {
+	return autoConvert_v1_StorageProfileSpec_To_management_StorageProfileSpec(in, out, s)
+}
+
+func autoConvert_management_StorageProfileSpec_To_v1_StorageProfileSpec(in *management.StorageProfileSpec, out *StorageProfileSpec, s conversion.Scope) error {
+	out.StorageProfileSpec = in.StorageProfileSpec
+	return nil
+}
+
+// Convert_management_StorageProfileSpec_To_v1_StorageProfileSpec is an autogenerated conversion function.
+func Convert_management_StorageProfileSpec_To_v1_StorageProfileSpec(in *management.StorageProfileSpec, out *StorageProfileSpec, s conversion.Scope) error {
+	return autoConvert_management_StorageProfileSpec_To_v1_StorageProfileSpec(in, out, s)
+}
+
+func autoConvert_v1_StorageProfileStatus_To_management_StorageProfileStatus(in *StorageProfileStatus, out *management.StorageProfileStatus, s conversion.Scope) error {
+	out.StorageProfileStatus = in.StorageProfileStatus
+	return nil
+}
+
+// Convert_v1_StorageProfileStatus_To_management_StorageProfileStatus is an autogenerated conversion function.
+func Convert_v1_StorageProfileStatus_To_management_StorageProfileStatus(in *StorageProfileStatus, out *management.StorageProfileStatus, s conversion.Scope) error {
+	return autoConvert_v1_StorageProfileStatus_To_management_StorageProfileStatus(in, out, s)
+}
+
+func autoConvert_management_StorageProfileStatus_To_v1_StorageProfileStatus(in *management.StorageProfileStatus, out *StorageProfileStatus, s conversion.Scope) error {
+	out.StorageProfileStatus = in.StorageProfileStatus
+	return nil
+}
+
+// Convert_management_StorageProfileStatus_To_v1_StorageProfileStatus is an autogenerated conversion function.
+func Convert_management_StorageProfileStatus_To_v1_StorageProfileStatus(in *management.StorageProfileStatus, out *StorageProfileStatus, s conversion.Scope) error {
+	return autoConvert_management_StorageProfileStatus_To_v1_StorageProfileStatus(in, out, s)
+}
+
 func autoConvert_v1_SubjectAccessReview_To_management_SubjectAccessReview(in *SubjectAccessReview, out *management.SubjectAccessReview, s conversion.Scope) error {
 	out.ObjectMeta = in.ObjectMeta
 	if err := Convert_v1_SubjectAccessReviewSpec_To_management_SubjectAccessReviewSpec(&in.Spec, &out.Spec, s); err != nil {
@@ -12883,6 +13303,152 @@ func autoConvert_management_TenantStatus_To_v1_TenantStatus(in *management.Tenan
 // Convert_management_TenantStatus_To_v1_TenantStatus is an autogenerated conversion function.
 func Convert_management_TenantStatus_To_v1_TenantStatus(in *management.TenantStatus, out *TenantStatus, s conversion.Scope) error {
 	return autoConvert_management_TenantStatus_To_v1_TenantStatus(in, out, s)
+}
+
+func autoConvert_v1_TenantStorage_To_management_TenantStorage(in *TenantStorage, out *management.TenantStorage, s conversion.Scope) error {
+	out.ObjectMeta = in.ObjectMeta
+	if err := Convert_v1_TenantStorageSpec_To_management_TenantStorageSpec(&in.Spec, &out.Spec, s); err != nil {
+		return err
+	}
+	if err := Convert_v1_TenantStorageStatus_To_management_TenantStorageStatus(&in.Status, &out.Status, s); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Convert_v1_TenantStorage_To_management_TenantStorage is an autogenerated conversion function.
+func Convert_v1_TenantStorage_To_management_TenantStorage(in *TenantStorage, out *management.TenantStorage, s conversion.Scope) error {
+	return autoConvert_v1_TenantStorage_To_management_TenantStorage(in, out, s)
+}
+
+func autoConvert_management_TenantStorage_To_v1_TenantStorage(in *management.TenantStorage, out *TenantStorage, s conversion.Scope) error {
+	out.ObjectMeta = in.ObjectMeta
+	if err := Convert_management_TenantStorageSpec_To_v1_TenantStorageSpec(&in.Spec, &out.Spec, s); err != nil {
+		return err
+	}
+	if err := Convert_management_TenantStorageStatus_To_v1_TenantStorageStatus(&in.Status, &out.Status, s); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Convert_management_TenantStorage_To_v1_TenantStorage is an autogenerated conversion function.
+func Convert_management_TenantStorage_To_v1_TenantStorage(in *management.TenantStorage, out *TenantStorage, s conversion.Scope) error {
+	return autoConvert_management_TenantStorage_To_v1_TenantStorage(in, out, s)
+}
+
+func autoConvert_v1_TenantStorageCredentials_To_management_TenantStorageCredentials(in *TenantStorageCredentials, out *management.TenantStorageCredentials, s conversion.Scope) error {
+	out.ObjectMeta = in.ObjectMeta
+	out.Endpoint = in.Endpoint
+	out.Bucket = in.Bucket
+	out.AccessKey = in.AccessKey
+	out.SecretKey = in.SecretKey
+	out.CAData = in.CAData
+	return nil
+}
+
+// Convert_v1_TenantStorageCredentials_To_management_TenantStorageCredentials is an autogenerated conversion function.
+func Convert_v1_TenantStorageCredentials_To_management_TenantStorageCredentials(in *TenantStorageCredentials, out *management.TenantStorageCredentials, s conversion.Scope) error {
+	return autoConvert_v1_TenantStorageCredentials_To_management_TenantStorageCredentials(in, out, s)
+}
+
+func autoConvert_management_TenantStorageCredentials_To_v1_TenantStorageCredentials(in *management.TenantStorageCredentials, out *TenantStorageCredentials, s conversion.Scope) error {
+	out.ObjectMeta = in.ObjectMeta
+	out.Endpoint = in.Endpoint
+	out.Bucket = in.Bucket
+	out.AccessKey = in.AccessKey
+	out.SecretKey = in.SecretKey
+	out.CAData = in.CAData
+	return nil
+}
+
+// Convert_management_TenantStorageCredentials_To_v1_TenantStorageCredentials is an autogenerated conversion function.
+func Convert_management_TenantStorageCredentials_To_v1_TenantStorageCredentials(in *management.TenantStorageCredentials, out *TenantStorageCredentials, s conversion.Scope) error {
+	return autoConvert_management_TenantStorageCredentials_To_v1_TenantStorageCredentials(in, out, s)
+}
+
+func autoConvert_v1_TenantStorageCredentialsList_To_management_TenantStorageCredentialsList(in *TenantStorageCredentialsList, out *management.TenantStorageCredentialsList, s conversion.Scope) error {
+	out.ListMeta = in.ListMeta
+	out.Items = *(*[]management.TenantStorageCredentials)(unsafe.Pointer(&in.Items))
+	return nil
+}
+
+// Convert_v1_TenantStorageCredentialsList_To_management_TenantStorageCredentialsList is an autogenerated conversion function.
+func Convert_v1_TenantStorageCredentialsList_To_management_TenantStorageCredentialsList(in *TenantStorageCredentialsList, out *management.TenantStorageCredentialsList, s conversion.Scope) error {
+	return autoConvert_v1_TenantStorageCredentialsList_To_management_TenantStorageCredentialsList(in, out, s)
+}
+
+func autoConvert_management_TenantStorageCredentialsList_To_v1_TenantStorageCredentialsList(in *management.TenantStorageCredentialsList, out *TenantStorageCredentialsList, s conversion.Scope) error {
+	out.ListMeta = in.ListMeta
+	out.Items = *(*[]TenantStorageCredentials)(unsafe.Pointer(&in.Items))
+	return nil
+}
+
+// Convert_management_TenantStorageCredentialsList_To_v1_TenantStorageCredentialsList is an autogenerated conversion function.
+func Convert_management_TenantStorageCredentialsList_To_v1_TenantStorageCredentialsList(in *management.TenantStorageCredentialsList, out *TenantStorageCredentialsList, s conversion.Scope) error {
+	return autoConvert_management_TenantStorageCredentialsList_To_v1_TenantStorageCredentialsList(in, out, s)
+}
+
+func autoConvert_v1_TenantStorageList_To_management_TenantStorageList(in *TenantStorageList, out *management.TenantStorageList, s conversion.Scope) error {
+	out.ListMeta = in.ListMeta
+	out.Items = *(*[]management.TenantStorage)(unsafe.Pointer(&in.Items))
+	return nil
+}
+
+// Convert_v1_TenantStorageList_To_management_TenantStorageList is an autogenerated conversion function.
+func Convert_v1_TenantStorageList_To_management_TenantStorageList(in *TenantStorageList, out *management.TenantStorageList, s conversion.Scope) error {
+	return autoConvert_v1_TenantStorageList_To_management_TenantStorageList(in, out, s)
+}
+
+func autoConvert_management_TenantStorageList_To_v1_TenantStorageList(in *management.TenantStorageList, out *TenantStorageList, s conversion.Scope) error {
+	out.ListMeta = in.ListMeta
+	out.Items = *(*[]TenantStorage)(unsafe.Pointer(&in.Items))
+	return nil
+}
+
+// Convert_management_TenantStorageList_To_v1_TenantStorageList is an autogenerated conversion function.
+func Convert_management_TenantStorageList_To_v1_TenantStorageList(in *management.TenantStorageList, out *TenantStorageList, s conversion.Scope) error {
+	return autoConvert_management_TenantStorageList_To_v1_TenantStorageList(in, out, s)
+}
+
+func autoConvert_v1_TenantStorageSpec_To_management_TenantStorageSpec(in *TenantStorageSpec, out *management.TenantStorageSpec, s conversion.Scope) error {
+	out.TenantStorageSpec = in.TenantStorageSpec
+	return nil
+}
+
+// Convert_v1_TenantStorageSpec_To_management_TenantStorageSpec is an autogenerated conversion function.
+func Convert_v1_TenantStorageSpec_To_management_TenantStorageSpec(in *TenantStorageSpec, out *management.TenantStorageSpec, s conversion.Scope) error {
+	return autoConvert_v1_TenantStorageSpec_To_management_TenantStorageSpec(in, out, s)
+}
+
+func autoConvert_management_TenantStorageSpec_To_v1_TenantStorageSpec(in *management.TenantStorageSpec, out *TenantStorageSpec, s conversion.Scope) error {
+	out.TenantStorageSpec = in.TenantStorageSpec
+	return nil
+}
+
+// Convert_management_TenantStorageSpec_To_v1_TenantStorageSpec is an autogenerated conversion function.
+func Convert_management_TenantStorageSpec_To_v1_TenantStorageSpec(in *management.TenantStorageSpec, out *TenantStorageSpec, s conversion.Scope) error {
+	return autoConvert_management_TenantStorageSpec_To_v1_TenantStorageSpec(in, out, s)
+}
+
+func autoConvert_v1_TenantStorageStatus_To_management_TenantStorageStatus(in *TenantStorageStatus, out *management.TenantStorageStatus, s conversion.Scope) error {
+	out.TenantStorageStatus = in.TenantStorageStatus
+	return nil
+}
+
+// Convert_v1_TenantStorageStatus_To_management_TenantStorageStatus is an autogenerated conversion function.
+func Convert_v1_TenantStorageStatus_To_management_TenantStorageStatus(in *TenantStorageStatus, out *management.TenantStorageStatus, s conversion.Scope) error {
+	return autoConvert_v1_TenantStorageStatus_To_management_TenantStorageStatus(in, out, s)
+}
+
+func autoConvert_management_TenantStorageStatus_To_v1_TenantStorageStatus(in *management.TenantStorageStatus, out *TenantStorageStatus, s conversion.Scope) error {
+	out.TenantStorageStatus = in.TenantStorageStatus
+	return nil
+}
+
+// Convert_management_TenantStorageStatus_To_v1_TenantStorageStatus is an autogenerated conversion function.
+func Convert_management_TenantStorageStatus_To_v1_TenantStorageStatus(in *management.TenantStorageStatus, out *TenantStorageStatus, s conversion.Scope) error {
+	return autoConvert_management_TenantStorageStatus_To_v1_TenantStorageStatus(in, out, s)
 }
 
 func autoConvert_v1_TranslateVClusterResourceName_To_management_TranslateVClusterResourceName(in *TranslateVClusterResourceName, out *management.TranslateVClusterResourceName, s conversion.Scope) error {

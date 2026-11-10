@@ -20,6 +20,10 @@ const (
 	// NodeClaimConditionTypePreferredDeletion indicates the NodeClaim is a preferred candidate for deletion.
 	NodeClaimConditionTypePreferredDeletion = "PreferredDeletion"
 	NodeClaimReasonMachineLeftNodeType      = "MachineLeftNodeType"
+	// NodeClaimConditionTypeStorageMounted reports whether a joined worker mounted the tenant
+	// storages its TenantStorageMountsProperty names. It is not part of the claim's readiness: a
+	// machine whose mount failed still joins.
+	NodeClaimConditionTypeStorageMounted = "StorageMounted"
 )
 
 var (
@@ -206,6 +210,18 @@ const (
 // NodeClaimRebootAnnotation triggers a one-shot reboot of the machine. The
 // controller removes the annotation once the reboot has been initiated.
 const NodeClaimRebootAnnotation = "machines.vcluster.com/reboot"
+
+// NodeClaimHostValidationTierLabel marks the NodeClaim that joins the machine it
+// pins (spec.machineRef) to the validation tenant cluster of its provider, and
+// names the tier, such as ValidationTierPreIngestion. Only the platform sets it,
+// as it is what lets a claim pin a machine that has not passed validation.
+const NodeClaimHostValidationTierLabel = "machines.vcluster.com/host-validation-tier"
+
+// NodeClaimHostValidationTaintKey taints, with NoSchedule, the node a validation
+// NodeClaim joins: the platform takes that node away whenever a tenant takes
+// its machine, so only the tests and what the customer deployment of the
+// validation cluster tolerates may run there.
+const NodeClaimHostValidationTaintKey = "machines.vcluster.com/host-validation"
 
 // ClaimMachineIDAnnotation, on a NodeClaim, records the provider-side id of the
 // machine backing the claim. Machine mirrors are named "<provider>.<machine id>",

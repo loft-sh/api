@@ -58,9 +58,12 @@ type ManagementV1Interface interface {
 	SpaceTemplatesGetter
 	StackInstancesGetter
 	StackTemplatesGetter
+	StorageAccountsGetter
+	StorageProfilesGetter
 	SubjectAccessReviewsGetter
 	TeamsGetter
 	TenantsGetter
+	TenantStoragesGetter
 	TranslateVClusterResourceNamesGetter
 	UsageDownloadsGetter
 	UsersGetter
@@ -258,6 +261,14 @@ func (c *ManagementV1Client) StackTemplates() StackTemplateInterface {
 	return newStackTemplates(c)
 }
 
+func (c *ManagementV1Client) StorageAccounts() StorageAccountInterface {
+	return newStorageAccounts(c)
+}
+
+func (c *ManagementV1Client) StorageProfiles() StorageProfileInterface {
+	return newStorageProfiles(c)
+}
+
 func (c *ManagementV1Client) SubjectAccessReviews() SubjectAccessReviewInterface {
 	return newSubjectAccessReviews(c)
 }
@@ -268,6 +279,10 @@ func (c *ManagementV1Client) Teams() TeamInterface {
 
 func (c *ManagementV1Client) Tenants() TenantInterface {
 	return newTenants(c)
+}
+
+func (c *ManagementV1Client) TenantStorages() TenantStorageInterface {
+	return newTenantStorages(c)
 }
 
 func (c *ManagementV1Client) TranslateVClusterResourceNames() TranslateVClusterResourceNameInterface {

@@ -65,6 +65,15 @@ const (
 	// not reachable from the instance's cluster.
 	InstanceReasonObservabilityGatewayInternalOnly = "WriteGatewayInternalOnly"
 
+	// InstanceStorageAttached reports whether every entry of spec.storage is attached to the tenant
+	// cluster. False names the storages that are missing, not provisioned or not Available, and the
+	// reason nothing could be attached; it also covers a change to spec.storage the template has not
+	// rendered yet and a tenant cluster that lacks the Secret its volumes mount with. Removed once
+	// the instance attaches no storage and nothing is left to remove: after a detach, False can stay
+	// on an instance with an empty spec.storage while the Secret's removal from the tenant cluster
+	// is pending.
+	InstanceStorageAttached agentstoragev1.ConditionType = "StorageAttached"
+
 	InstanceVirtualClusterAppsAndObjectsSynced     agentstoragev1.ConditionType = "VirtualClusterAppsAndObjectsSynced"
 	InstanceVirtualClusterDBConnectorSynced        agentstoragev1.ConditionType = "DBConnectorSynced"
 	InstanceVirtualClusterDBIdentityProviderSynced agentstoragev1.ConditionType = "DBIdentityProviderSynced"
@@ -175,6 +184,45 @@ type VirtualClusterInstanceSpec struct {
 	// Standalone specifies if the tenant cluster is standalone and not hosted in another Kubernetes cluster.
 	// +optional
 	Standalone bool `json:"standalone,omitempty"`
+
+	// Storage attaches TenantStorages of the instance's tenant to the tenant cluster, statically:
+	// each entry becomes one PersistentVolume of the volume the platform provisioned and one
+	// StorageClass named after the storage that binds claims to it and provisions nothing. The
+	// platform adds the vendor's node driver to experimental.deploy and writes the tenant's CSI
+	// identity, scoped to the tenant on the storage system, into the tenant cluster directly, since
+	// the driver refuses a mount-only login. The storage system's and the vendor tenant's admin
+	// identities never reach the tenant cluster. Removing an entry removes its PersistentVolume
+	// and StorageClass; the volume itself is never touched. Needs private nodes or a standalone
+	// control plane.
+	// +optional
+	Storage []VirtualClusterInstanceStorage `json:"storage,omitempty"`
+}
+
+// VirtualClusterInstanceStorage attaches one TenantStorage to a tenant cluster.
+type VirtualClusterInstanceStorage struct {
+	// StorageRef names a TenantStorage assigned to the instance's tenant. It has to be Available
+	// when it is attached.
+	StorageRef string `json:"storageRef"`
+
+	// Default marks the storage's StorageClass as the tenant cluster's default. At most one entry
+	// may set it; when none does, the first attached storage is the default.
+	// +optional
+	Default bool `json:"default,omitempty"`
+}
+
+// VirtualClusterInstanceStorageStatus is one storage the rendered values attach.
+type VirtualClusterInstanceStorageStatus struct {
+	// StorageRef names the TenantStorage.
+	StorageRef string `json:"storageRef"`
+
+	// StorageClass is the StorageClass that binds claims in the tenant cluster to the storage's
+	// PersistentVolume, of the same name.
+	// +optional
+	StorageClass string `json:"storageClass,omitempty"`
+
+	// Default is true for the tenant cluster's default StorageClass.
+	// +optional
+	Default bool `json:"default,omitempty"`
 }
 
 type VirtualClusterInstanceStatus struct {
@@ -227,6 +275,12 @@ type VirtualClusterInstanceStatus struct {
 	// Once the tenant cluster instance has been cloned and placed into the new project, this
 	// (the "old") tenant cluster instance can safely be deleted.
 	IgnoreReconciliation bool `json:"ignoreReconciliation,omitempty"`
+
+	// Storage lists the TenantStorages the rendered values attach to the tenant cluster. It follows
+	// status.virtualCluster, so on an instance that waits for a template sync it shows what the
+	// tenant cluster runs, not what spec.storage asks for.
+	// +optional
+	Storage []VirtualClusterInstanceStorageStatus `json:"storage,omitempty"`
 }
 
 // VirtualClusterCommonSpec holds common attributes for tenant clusters and tenant cluster templates

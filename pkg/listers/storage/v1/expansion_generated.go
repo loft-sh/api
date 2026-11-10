@@ -134,6 +134,14 @@ type StackInstanceNamespaceListerExpansion interface{}
 // StackTemplateLister.
 type StackTemplateListerExpansion interface{}
 
+// StorageAccountListerExpansion allows custom methods to be added to
+// StorageAccountLister.
+type StorageAccountListerExpansion interface{}
+
+// StorageProfileListerExpansion allows custom methods to be added to
+// StorageProfileLister.
+type StorageProfileListerExpansion interface{}
+
 // TeamListerExpansion allows custom methods to be added to
 // TeamLister.
 type TeamListerExpansion interface{}
@@ -141,6 +149,10 @@ type TeamListerExpansion interface{}
 // TenantListerExpansion allows custom methods to be added to
 // TenantLister.
 type TenantListerExpansion interface{}
+
+// TenantStorageListerExpansion allows custom methods to be added to
+// TenantStorageLister.
+type TenantStorageListerExpansion interface{}
 
 // UserListerExpansion allows custom methods to be added to
 // UserLister.

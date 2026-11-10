@@ -139,6 +139,179 @@ type ConnectorSpec struct {
 	// byte-compatible with one written by the UI directly.
 	// +optional
 	Observability *ConnectorObservabilitySpec `json:"observability,omitempty"`
+
+	// Storage is the storage connector payload: how the platform reaches a storage system it
+	// provisions tenant storage on. Exactly one payload section must be set. The fields of its
+	// vendor block mirror the Data keys of the backing Secret one to one, so a connector written
+	// through this API is exactly what the tenant storage controller reads.
+	// +optional
+	Storage *ConnectorStorageSpec `json:"storage,omitempty"`
+}
+
+// StorageConnectorProvider discriminates the storage systems a storage connector can point at.
+// Each value has a block of its own in ConnectorStorageSpec, so a second vendor becomes a new
+// block, not a new connector type, the same way imageStore discriminates on protocol.
+// +enum
+type StorageConnectorProvider string
+
+const (
+	// StorageConnectorProviderWeka is a WEKA cluster reached through its REST API v2 (Tenancy 2.0).
+	StorageConnectorProviderWeka StorageConnectorProvider = "weka"
+	// StorageConnectorProviderVast is a VAST cluster reached through its VMS REST API.
+	StorageConnectorProviderVast StorageConnectorProvider = "vast"
+)
+
+// ConnectorStorageSpec configures the storage system StorageProfiles provision tenant storage on.
+// A StorageProfile names the connector through spec.connectorRef and the tenant storage controller
+// logs in with these credentials to create vendor tenants, identities and volumes.
+//
+// One field per block is a credential under the Connector type's view rule: weka.password and
+// vast.password are served to a caller who could update this connector and empty for every other
+// caller, and on update an empty value keeps the stored one, so a redacted read written back never
+// clears the password.
+type ConnectorStorageSpec struct {
+	// Provider selects the storage system and which block below applies. Required; weka or vast.
+	// Data key "provider".
+	// +required
+	Provider StorageConnectorProvider `json:"provider"`
+
+	// Weka carries the settings of a WEKA cluster. Required when provider is weka.
+	// +optional
+	Weka *ConnectorStorageWekaSpec `json:"weka,omitempty"`
+
+	// Vast carries the settings of a VAST cluster. Required when provider is vast.
+	// +optional
+	Vast *ConnectorStorageVastSpec `json:"vast,omitempty"`
+}
+
+// ConnectorStorageVastSpec is the vast block of a storage connector. Every field maps to one Data
+// key of the backing Secret (given in each field comment); the keys shared with the weka block
+// hold the same thing.
+type ConnectorStorageVastSpec struct {
+	// Endpoint is the VMS management URL, https://host. Data key "endpoints". Required.
+	// +required
+	Endpoint string `json:"endpoint"`
+
+	// Username is the super admin manager the platform logs in with. Data key "username".
+	// Required.
+	// +required
+	Username string `json:"username"`
+
+	// Password is its password. Data key "password". Required on create. A credential (see the type
+	// comment): an empty value on update keeps the stored one.
+	// +optional
+	Password string `json:"password,omitempty"`
+
+	// InsecureSkipTLSVerify accepts a management certificate the platform cannot verify, as a lab
+	// with a self-signed certificate needs. Data key "insecureSkipTLSVerify", always stamped as
+	// "true" or "false".
+	// +optional
+	InsecureSkipTLSVerify bool `json:"insecureSkipTLSVerify,omitempty"`
+
+	// CAData is the PEM bundle that verifies the management endpoint. Data key "caData".
+	// +optional
+	CAData string `json:"caData,omitempty"`
+
+	// TenantPrefix is prepended to platform tenant names on the VAST side, so several platforms
+	// can share one cluster. Data key "tenantPrefix".
+	// +optional
+	TenantPrefix string `json:"tenantPrefix,omitempty"`
+
+	// VIPRange is the IPv4 range the platform allocates tenant-bound VIP pools from, written as
+	// first-last, for example 11.0.0.200-11.0.0.239. Several platforms sharing one cluster need
+	// disjoint ranges. Data key "vipRange". Required.
+	// +required
+	VIPRange string `json:"vipRange"`
+
+	// VIPSubnetCIDR is the prefix length of the subnet the VIPs live in, for example 24. Data key
+	// "vipSubnetCIDR". Required.
+	// +required
+	VIPSubnetCIDR int32 `json:"vipSubnetCIDR"`
+
+	// VIPsPerTenant is how many addresses each tenant's pool gets; at least the number of CNodes
+	// spreads a tenant's clients over all of them. Defaults to 2. Data key "vipsPerTenant".
+	// +optional
+	VIPsPerTenant int32 `json:"vipsPerTenant,omitempty"`
+}
+
+// ConnectorStorageWekaSpec is the weka block of a storage connector. Every field maps to one Data
+// key of the backing Secret (given in each field comment).
+type ConnectorStorageWekaSpec struct {
+	// Endpoints are the management URLs of the cluster's backends, https://host:14000, comma
+	// separated; two or more give the platform a failover. Data key "endpoints". Required.
+	// +required
+	Endpoints string `json:"endpoints"`
+
+	// Username is the ClusterAdmin identity the platform logs in with. Data key "username".
+	// Required.
+	// +required
+	Username string `json:"username"`
+
+	// Password is its password. Data key "password". Required on create. A credential (see the type
+	// comment): an empty value on update keeps the stored one.
+	// +optional
+	Password string `json:"password,omitempty"`
+
+	// InsecureSkipTLSVerify accepts a management certificate the platform cannot verify, as a lab
+	// with a self-signed certificate needs. Data key "insecureSkipTLSVerify", always stamped as
+	// "true" or "false".
+	// +optional
+	InsecureSkipTLSVerify bool `json:"insecureSkipTLSVerify,omitempty"`
+
+	// CAData is the PEM bundle that verifies the management endpoints. Data key "caData".
+	// +optional
+	CAData string `json:"caData,omitempty"`
+
+	// TenantPrefix is prepended to platform tenant names on the WEKA side, so several platforms
+	// can share one cluster. Data key "tenantPrefix".
+	// +optional
+	TenantPrefix string `json:"tenantPrefix,omitempty"`
+
+	// CSI configures the csi-wekafs driver the platform installs into the tenant clusters that
+	// attach storage from this connector.
+	// +optional
+	CSI *ConnectorStorageCSISpec `json:"csi,omitempty"`
+
+	// S3 is where tenants reach the cluster's S3 service. Without it, storages whose profile lists
+	// s3 get no object access.
+	// +optional
+	S3 *ConnectorStorageS3Spec `json:"s3,omitempty"`
+}
+
+// ConnectorStorageS3Spec is the S3 endpoint a storage system's tenants use. Clients address buckets
+// path-style.
+type ConnectorStorageS3Spec struct {
+	// Endpoint is the URL the AI cloud exposes in front of the S3 servers, for example
+	// https://s3.example.com:9000. Data key "s3Endpoint".
+	// +optional
+	Endpoint string `json:"endpoint,omitempty"`
+
+	// CAData is the PEM bundle that verifies the S3 endpoint; the connector's caData when empty.
+	// Data key "s3CaData".
+	// +optional
+	CAData string `json:"caData,omitempty"`
+}
+
+// ConnectorStorageCSISpec is the operator's say over the CSI driver of one storage system. It lives
+// on the connector because a tenant cluster runs one driver per storage system, and the driver
+// release follows the storage system's release.
+type ConnectorStorageCSISpec struct {
+	// ChartRepo replaces the chart repository, for a mirror. Data key "csiChartRepo".
+	// +optional
+	ChartRepo string `json:"chartRepo,omitempty"`
+
+	// ChartVersion replaces the chart version the platform pins. Data key "csiChartVersion".
+	// +optional
+	ChartVersion string `json:"chartVersion,omitempty"`
+
+	// Values is YAML passed to the chart under the values the platform owns, for the image registry,
+	// node selector, tolerations and driver options. The platform owns the driver name, the TLS
+	// verification of the endpoints and filesystem creation, and overwrites those keys: it sets
+	// pluginConfig.allowedOperations.autoCreateFilesystems and autoExpandFilesystems to false, so
+	// the driver neither creates nor grows a filesystem whatever these values say. Data key
+	// "csiValues".
+	// +optional
+	Values string `json:"values,omitempty"`
 }
 
 // SharedDatabaseDialect is the database server dialect of a shared-database

@@ -196,6 +196,14 @@ func (c *FakeManagementV1) StackTemplates() v1.StackTemplateInterface {
 	return newFakeStackTemplates(c)
 }
 
+func (c *FakeManagementV1) StorageAccounts() v1.StorageAccountInterface {
+	return newFakeStorageAccounts(c)
+}
+
+func (c *FakeManagementV1) StorageProfiles() v1.StorageProfileInterface {
+	return newFakeStorageProfiles(c)
+}
+
 func (c *FakeManagementV1) SubjectAccessReviews() v1.SubjectAccessReviewInterface {
 	return newFakeSubjectAccessReviews(c)
 }
@@ -206,6 +214,10 @@ func (c *FakeManagementV1) Teams() v1.TeamInterface {
 
 func (c *FakeManagementV1) Tenants() v1.TenantInterface {
 	return newFakeTenants(c)
+}
+
+func (c *FakeManagementV1) TenantStorages() v1.TenantStorageInterface {
+	return newFakeTenantStorages(c)
 }
 
 func (c *FakeManagementV1) TranslateVClusterResourceNames() v1.TranslateVClusterResourceNameInterface {

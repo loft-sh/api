@@ -137,6 +137,60 @@ type NodeProviderSpec struct {
 	// that leave theirs empty.
 	// +optional
 	MachineAllocationPolicy MachineAllocationPolicy `json:"machineAllocationPolicy,omitempty"`
+
+	// Validation names where this provider's machines are burned in before they are used. Without it
+	// the machines are used as they come.
+	// +optional
+	Validation *NodeProviderValidation `json:"validation,omitempty"`
+}
+
+// ValidationTierPreIngestion names the pre-ingestion tier on the NodeClaims it joins machines with
+// (NodeClaimHostValidationTierLabel) and on the attempts it records (MachineInBandValidationStatus.Tier).
+const ValidationTierPreIngestion = "pre-ingestion"
+
+// NodeProviderValidation configures the validation tiers of a NodeProvider. A tier is a point in a
+// machine's lifecycle where it is validated.
+type NodeProviderValidation struct {
+	// PreIngestion validates a machine before it is first assigned to a tenant or used for an
+	// instance.
+	// +optional
+	PreIngestion *NodeProviderValidationTier `json:"preIngestion,omitempty"`
+}
+
+// NodeProviderValidationTier names the validation tenant cluster a tier joins machines to, and what
+// a machine is provisioned with to join it.
+type NodeProviderValidationTier struct {
+	// VirtualClusterRef is the validation tenant cluster. It has to use private nodes and live in a
+	// project no tenant owns.
+	VirtualClusterRef NodeProviderValidationVirtualClusterRef `json:"virtualClusterRef"`
+
+	// OSImageRef is the OSImage a machine is provisioned with to join the validation cluster. It has
+	// to match the GPU driver deployed there.
+	OSImageRef string `json:"osImageRef"`
+
+	// NetworkEnvironmentRef is the NetworkEnvironment of this provider a machine joins the validation
+	// cluster in, for a provider that needs one.
+	// +optional
+	NetworkEnvironmentRef string `json:"networkEnvironmentRef,omitempty"`
+
+	// SuiteConfigMapName is the ConfigMap in the validation cluster that holds the suite, the tests
+	// a machine runs there. Defaults to "pre-ingestion-validation".
+	// +optional
+	SuiteConfigMapName string `json:"suiteConfigMapName,omitempty"`
+
+	// SuiteConfigMapNamespace is the namespace of the suite's ConfigMap in the validation cluster.
+	// The tests run in it too. Defaults to "vcluster-platform".
+	// +optional
+	SuiteConfigMapNamespace string `json:"suiteConfigMapNamespace,omitempty"`
+}
+
+// NodeProviderValidationVirtualClusterRef references a tenant cluster by name and project.
+type NodeProviderValidationVirtualClusterRef struct {
+	// Name is the name of the tenant cluster.
+	Name string `json:"name"`
+
+	// Project is the project the tenant cluster lives in.
+	Project string `json:"project"`
 }
 
 type NodeProviderClusterAPI struct {
@@ -606,10 +660,19 @@ type NodeProviderMetal3 struct {
 	// with different tags, or from different NetBox instances.
 	// +optional
 	NetBox *NodeProviderMetal3NetBox `json:"netBox,omitempty"`
+
+	// Aviz attaches BareMetalHosts to an Aviz fabric tenant on provisioning.
+	// +optional
+	Aviz *NodeProviderMetal3Aviz `json:"aviz,omitempty"`
 }
 
 type NodeProviderMetal3Netris struct {
 	// SecretRef references a Secret with keys url, username and password for the Netris API.
+	SecretRef *NamespacedRef `json:"secretRef"`
+}
+
+type NodeProviderMetal3Aviz struct {
+	// SecretRef references a Secret with keys url, username and password for the Aviz API.
 	SecretRef *NamespacedRef `json:"secretRef"`
 }
 

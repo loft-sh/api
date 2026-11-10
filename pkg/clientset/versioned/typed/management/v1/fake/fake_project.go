@@ -68,17 +68,6 @@ func (c *fakeProjects) ListClusters(ctx context.Context, projectName string, opt
 	return obj.(*v1.ProjectClusters), err
 }
 
-// MigrateVirtualClusterInstance takes the representation of a projectMigrateVirtualClusterInstance and creates it.  Returns the server's representation of the projectMigrateVirtualClusterInstance, and an error, if there is any.
-func (c *fakeProjects) MigrateVirtualClusterInstance(ctx context.Context, projectName string, projectMigrateVirtualClusterInstance *v1.ProjectMigrateVirtualClusterInstance, opts metav1.CreateOptions) (result *v1.ProjectMigrateVirtualClusterInstance, err error) {
-	emptyResult := &v1.ProjectMigrateVirtualClusterInstance{}
-	obj, err := c.Fake.
-		Invokes(testing.NewRootCreateSubresourceActionWithOptions(c.Resource(), projectName, "migratevirtualclusterinstance", projectMigrateVirtualClusterInstance, opts), emptyResult)
-	if obj == nil {
-		return emptyResult, err
-	}
-	return obj.(*v1.ProjectMigrateVirtualClusterInstance), err
-}
-
 // ImportSpace takes the representation of a projectImportSpace and creates it.  Returns the server's representation of the projectImportSpace, and an error, if there is any.
 func (c *fakeProjects) ImportSpace(ctx context.Context, projectName string, projectImportSpace *v1.ProjectImportSpace, opts metav1.CreateOptions) (result *v1.ProjectImportSpace, err error) {
 	emptyResult := &v1.ProjectImportSpace{}

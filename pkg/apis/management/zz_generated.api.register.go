@@ -531,7 +531,31 @@ var (
 	NewStackTemplateREST = func(getter generic.RESTOptionsGetter) rest.Storage {
 		return NewStackTemplateRESTFunc(Factory)
 	}
-	NewStackTemplateRESTFunc             NewRESTFunc
+	NewStackTemplateRESTFunc        NewRESTFunc
+	ManagementStorageAccountStorage = builders.NewApiResourceWithStorage( // Resource status endpoint
+		InternalStorageAccount,
+		func() runtime.Object { return &StorageAccount{} },     // Register versioned resource
+		func() runtime.Object { return &StorageAccountList{} }, // Register versioned resource list
+		NewStorageAccountREST,
+	)
+	NewStorageAccountREST = func(getter generic.RESTOptionsGetter) rest.Storage {
+		return NewStorageAccountRESTFunc(Factory)
+	}
+	NewStorageAccountRESTFunc   NewRESTFunc
+	NewStorageAccountStatusREST = func(getter generic.RESTOptionsGetter) rest.Storage {
+		return NewStorageAccountStatusRESTFunc(Factory)
+	}
+	NewStorageAccountStatusRESTFunc NewRESTFunc
+	ManagementStorageProfileStorage = builders.NewApiResourceWithStorage( // Resource status endpoint
+		InternalStorageProfile,
+		func() runtime.Object { return &StorageProfile{} },     // Register versioned resource
+		func() runtime.Object { return &StorageProfileList{} }, // Register versioned resource list
+		NewStorageProfileREST,
+	)
+	NewStorageProfileREST = func(getter generic.RESTOptionsGetter) rest.Storage {
+		return NewStorageProfileRESTFunc(Factory)
+	}
+	NewStorageProfileRESTFunc            NewRESTFunc
 	ManagementSubjectAccessReviewStorage = builders.NewApiResourceWithStorage( // Resource status endpoint
 		InternalSubjectAccessReview,
 		func() runtime.Object { return &SubjectAccessReview{} },     // Register versioned resource
@@ -561,7 +585,21 @@ var (
 	NewTenantREST = func(getter generic.RESTOptionsGetter) rest.Storage {
 		return NewTenantRESTFunc(Factory)
 	}
-	NewTenantRESTFunc                              NewRESTFunc
+	NewTenantRESTFunc              NewRESTFunc
+	ManagementTenantStorageStorage = builders.NewApiResourceWithStorage( // Resource status endpoint
+		InternalTenantStorage,
+		func() runtime.Object { return &TenantStorage{} },     // Register versioned resource
+		func() runtime.Object { return &TenantStorageList{} }, // Register versioned resource list
+		NewTenantStorageREST,
+	)
+	NewTenantStorageREST = func(getter generic.RESTOptionsGetter) rest.Storage {
+		return NewTenantStorageRESTFunc(Factory)
+	}
+	NewTenantStorageRESTFunc   NewRESTFunc
+	NewTenantStorageStatusREST = func(getter generic.RESTOptionsGetter) rest.Storage {
+		return NewTenantStorageStatusRESTFunc(Factory)
+	}
+	NewTenantStorageStatusRESTFunc                 NewRESTFunc
 	ManagementTranslateVClusterResourceNameStorage = builders.NewApiResourceWithStorage( // Resource status endpoint
 		InternalTranslateVClusterResourceName,
 		func() runtime.Object { return &TranslateVClusterResourceName{} },     // Register versioned resource
@@ -1181,16 +1219,8 @@ var (
 	NewProjectMigrateSpaceInstanceREST = func(getter generic.RESTOptionsGetter) rest.Storage {
 		return NewProjectMigrateSpaceInstanceRESTFunc(Factory)
 	}
-	NewProjectMigrateSpaceInstanceRESTFunc           NewRESTFunc
-	InternalProjectMigrateVirtualClusterInstanceREST = builders.NewInternalSubresource(
-		"projects", "ProjectMigrateVirtualClusterInstance", "migratevirtualclusterinstance",
-		func() runtime.Object { return &ProjectMigrateVirtualClusterInstance{} },
-	)
-	NewProjectMigrateVirtualClusterInstanceREST = func(getter generic.RESTOptionsGetter) rest.Storage {
-		return NewProjectMigrateVirtualClusterInstanceRESTFunc(Factory)
-	}
-	NewProjectMigrateVirtualClusterInstanceRESTFunc NewRESTFunc
-	InternalProjectNodeTypesREST                    = builders.NewInternalSubresource(
+	NewProjectMigrateSpaceInstanceRESTFunc NewRESTFunc
+	InternalProjectNodeTypesREST           = builders.NewInternalSubresource(
 		"projects", "ProjectNodeTypes", "nodetypes",
 		func() runtime.Object { return &ProjectNodeTypes{} },
 	)
@@ -1370,6 +1400,30 @@ var (
 		func() runtime.Object { return &StackTemplate{} },
 		func() runtime.Object { return &StackTemplateList{} },
 	)
+	InternalStorageAccount = builders.NewInternalResource(
+		"storageaccounts",
+		"StorageAccount",
+		func() runtime.Object { return &StorageAccount{} },
+		func() runtime.Object { return &StorageAccountList{} },
+	)
+	InternalStorageAccountStatus = builders.NewInternalResourceStatus(
+		"storageaccounts",
+		"StorageAccountStatus",
+		func() runtime.Object { return &StorageAccount{} },
+		func() runtime.Object { return &StorageAccountList{} },
+	)
+	InternalStorageProfile = builders.NewInternalResource(
+		"storageprofiles",
+		"StorageProfile",
+		func() runtime.Object { return &StorageProfile{} },
+		func() runtime.Object { return &StorageProfileList{} },
+	)
+	InternalStorageProfileStatus = builders.NewInternalResourceStatus(
+		"storageprofiles",
+		"StorageProfileStatus",
+		func() runtime.Object { return &StorageProfile{} },
+		func() runtime.Object { return &StorageProfileList{} },
+	)
 	InternalSubjectAccessReview = builders.NewInternalResource(
 		"subjectaccessreviews",
 		"SubjectAccessReview",
@@ -1445,7 +1499,27 @@ var (
 	NewTenantConfigREST = func(getter generic.RESTOptionsGetter) rest.Storage {
 		return NewTenantConfigRESTFunc(Factory)
 	}
-	NewTenantConfigRESTFunc               NewRESTFunc
+	NewTenantConfigRESTFunc NewRESTFunc
+	InternalTenantStorage   = builders.NewInternalResource(
+		"tenantstorages",
+		"TenantStorage",
+		func() runtime.Object { return &TenantStorage{} },
+		func() runtime.Object { return &TenantStorageList{} },
+	)
+	InternalTenantStorageStatus = builders.NewInternalResourceStatus(
+		"tenantstorages",
+		"TenantStorageStatus",
+		func() runtime.Object { return &TenantStorage{} },
+		func() runtime.Object { return &TenantStorageList{} },
+	)
+	InternalTenantStorageCredentialsREST = builders.NewInternalSubresource(
+		"tenantstorages", "TenantStorageCredentials", "credentials",
+		func() runtime.Object { return &TenantStorageCredentials{} },
+	)
+	NewTenantStorageCredentialsREST = func(getter generic.RESTOptionsGetter) rest.Storage {
+		return NewTenantStorageCredentialsRESTFunc(Factory)
+	}
+	NewTenantStorageCredentialsRESTFunc   NewRESTFunc
 	InternalTranslateVClusterResourceName = builders.NewInternalResource(
 		"translatevclusterresourcenames",
 		"TranslateVClusterResourceName",
@@ -1759,7 +1833,6 @@ var (
 		InternalProjectImportSpaceREST,
 		InternalProjectMembersREST,
 		InternalProjectMigrateSpaceInstanceREST,
-		InternalProjectMigrateVirtualClusterInstanceREST,
 		InternalProjectNodeTypesREST,
 		InternalProjectTemplatesREST,
 		InternalProjectSecret,
@@ -1789,6 +1862,10 @@ var (
 		InternalStackInstanceOutputsREST,
 		InternalStackTemplate,
 		InternalStackTemplateStatus,
+		InternalStorageAccount,
+		InternalStorageAccountStatus,
+		InternalStorageProfile,
+		InternalStorageProfileStatus,
 		InternalSubjectAccessReview,
 		InternalSubjectAccessReviewStatus,
 		InternalTeam,
@@ -1800,6 +1877,9 @@ var (
 		InternalTenant,
 		InternalTenantStatus,
 		InternalTenantConfigREST,
+		InternalTenantStorage,
+		InternalTenantStorageStatus,
+		InternalTenantStorageCredentialsREST,
 		InternalTranslateVClusterResourceName,
 		InternalTranslateVClusterResourceNameStatus,
 		InternalUsageDownload,
@@ -1866,6 +1946,7 @@ type SnapshotTakenStatus string
 type StackOutputReason string
 type StackOutputState string
 type Stage string
+type StorageConnectorProvider string
 type UID string
 
 type AgentAnalyticsSpec struct {
@@ -2378,11 +2459,52 @@ type ConnectorSpec struct {
 	NetBox         *ConnectorNetBoxSpec         `json:"netBox,omitempty"`
 	ImageStore     *ConnectorImageStoreSpec     `json:"imageStore,omitempty"`
 	Observability  *ConnectorObservabilitySpec  `json:"observability,omitempty"`
+	Storage        *ConnectorStorageSpec        `json:"storage,omitempty"`
 }
 
 type ConnectorStatus struct {
 	Conditions    agentstoragev1.Conditions     `json:"conditions,omitempty"`
 	Observability *ConnectorObservabilityStatus `json:"observability,omitempty"`
+}
+
+type ConnectorStorageCSISpec struct {
+	ChartRepo    string `json:"chartRepo,omitempty"`
+	ChartVersion string `json:"chartVersion,omitempty"`
+	Values       string `json:"values,omitempty"`
+}
+
+type ConnectorStorageS3Spec struct {
+	Endpoint string `json:"endpoint,omitempty"`
+	CAData   string `json:"caData,omitempty"`
+}
+
+type ConnectorStorageSpec struct {
+	Provider StorageConnectorProvider  `json:"provider"`
+	Weka     *ConnectorStorageWekaSpec `json:"weka,omitempty"`
+	Vast     *ConnectorStorageVastSpec `json:"vast,omitempty"`
+}
+
+type ConnectorStorageVastSpec struct {
+	Endpoint              string `json:"endpoint"`
+	Username              string `json:"username"`
+	Password              string `json:"password,omitempty"`
+	InsecureSkipTLSVerify bool   `json:"insecureSkipTLSVerify,omitempty"`
+	CAData                string `json:"caData,omitempty"`
+	TenantPrefix          string `json:"tenantPrefix,omitempty"`
+	VIPRange              string `json:"vipRange"`
+	VIPSubnetCIDR         int32  `json:"vipSubnetCIDR"`
+	VIPsPerTenant         int32  `json:"vipsPerTenant,omitempty"`
+}
+
+type ConnectorStorageWekaSpec struct {
+	Endpoints             string                   `json:"endpoints"`
+	Username              string                   `json:"username"`
+	Password              string                   `json:"password,omitempty"`
+	InsecureSkipTLSVerify bool                     `json:"insecureSkipTLSVerify,omitempty"`
+	CAData                string                   `json:"caData,omitempty"`
+	TenantPrefix          string                   `json:"tenantPrefix,omitempty"`
+	CSI                   *ConnectorStorageCSISpec `json:"csi,omitempty"`
+	S3                    *ConnectorStorageS3Spec  `json:"s3,omitempty"`
 }
 
 // +genclient
@@ -3127,19 +3249,6 @@ type ProjectMigrateSpaceInstanceSource struct {
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
 
-type ProjectMigrateVirtualClusterInstance struct {
-	metav1.TypeMeta              `json:",inline"`
-	metav1.ObjectMeta            `json:"metadata,omitempty"`
-	SourceVirtualClusterInstance ProjectMigrateVirtualClusterInstanceSource `json:"sourceVirtualClusterInstance"`
-}
-
-type ProjectMigrateVirtualClusterInstanceSource struct {
-	Name      string `json:"name,omitempty"`
-	Namespace string `json:"namespace,omitempty"`
-}
-
-// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
-
 type ProjectNodeTypes struct {
 	metav1.TypeMeta     `json:",inline"`
 	metav1.ObjectMeta   `json:"metadata,omitempty"`
@@ -3526,6 +3635,44 @@ type StandalonePKI struct {
 // +genclient:nonNamespaced
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
 
+type StorageAccount struct {
+	metav1.TypeMeta   `json:",inline"`
+	metav1.ObjectMeta `json:"metadata,omitempty"`
+	Spec              StorageAccountSpec   `json:"spec,omitempty"`
+	Status            StorageAccountStatus `json:"status,omitempty"`
+}
+
+type StorageAccountSpec struct {
+	storagev1.StorageAccountSpec `json:",inline"`
+}
+
+type StorageAccountStatus struct {
+	storagev1.StorageAccountStatus `json:",inline"`
+}
+
+// +genclient
+// +genclient:nonNamespaced
+// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+
+type StorageProfile struct {
+	metav1.TypeMeta   `json:",inline"`
+	metav1.ObjectMeta `json:"metadata,omitempty"`
+	Spec              StorageProfileSpec   `json:"spec,omitempty"`
+	Status            StorageProfileStatus `json:"status,omitempty"`
+}
+
+type StorageProfileSpec struct {
+	storagev1.StorageProfileSpec `json:",inline"`
+}
+
+type StorageProfileStatus struct {
+	storagev1.StorageProfileStatus `json:",inline"`
+}
+
+// +genclient
+// +genclient:nonNamespaced
+// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+
 type SubjectAccessReview struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
@@ -3627,6 +3774,37 @@ type TenantSpec struct {
 
 type TenantStatus struct {
 	storagev1.TenantStatus `json:",inline"`
+}
+
+// +genclient
+// +genclient:nonNamespaced
+// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+
+type TenantStorage struct {
+	metav1.TypeMeta   `json:",inline"`
+	metav1.ObjectMeta `json:"metadata,omitempty"`
+	Spec              TenantStorageSpec   `json:"spec,omitempty"`
+	Status            TenantStorageStatus `json:"status,omitempty"`
+}
+
+// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+
+type TenantStorageCredentials struct {
+	metav1.TypeMeta   `json:",inline"`
+	metav1.ObjectMeta `json:"metadata,omitempty"`
+	Endpoint          string `json:"endpoint,omitempty"`
+	Bucket            string `json:"bucket,omitempty"`
+	AccessKey         string `json:"accessKey,omitempty"`
+	SecretKey         string `json:"secretKey,omitempty"`
+	CAData            string `json:"caData,omitempty"`
+}
+
+type TenantStorageSpec struct {
+	storagev1.TenantStorageSpec `json:",inline"`
+}
+
+type TenantStorageStatus struct {
+	storagev1.TenantStorageStatus `json:",inline"`
 }
 
 // +genclient
@@ -8187,14 +8365,6 @@ type ProjectMigrateSpaceInstanceList struct {
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
 
-type ProjectMigrateVirtualClusterInstanceList struct {
-	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
-	Items           []ProjectMigrateVirtualClusterInstance `json:"items"`
-}
-
-// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
-
 type ProjectNodeTypesList struct {
 	metav1.TypeMeta `json:",inline"`
 	metav1.ListMeta `json:"metadata,omitempty"`
@@ -9863,6 +10033,244 @@ func (s *storageStackTemplate) DeleteStackTemplate(ctx context.Context, id strin
 	return sync, err
 }
 
+// StorageAccount Functions and Structs
+//
+// +k8s:deepcopy-gen=false
+type StorageAccountStrategy struct {
+	builders.DefaultStorageStrategy
+}
+
+// +k8s:deepcopy-gen=false
+type StorageAccountStatusStrategy struct {
+	builders.DefaultStatusStorageStrategy
+}
+
+// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+
+type StorageAccountList struct {
+	metav1.TypeMeta `json:",inline"`
+	metav1.ListMeta `json:"metadata,omitempty"`
+	Items           []StorageAccount `json:"items"`
+}
+
+func (StorageAccount) NewStatus() interface{} {
+	return StorageAccountStatus{}
+}
+
+func (pc *StorageAccount) GetStatus() interface{} {
+	return pc.Status
+}
+
+func (pc *StorageAccount) SetStatus(s interface{}) {
+	pc.Status = s.(StorageAccountStatus)
+}
+
+func (pc *StorageAccount) GetSpec() interface{} {
+	return pc.Spec
+}
+
+func (pc *StorageAccount) SetSpec(s interface{}) {
+	pc.Spec = s.(StorageAccountSpec)
+}
+
+func (pc *StorageAccount) GetObjectMeta() *metav1.ObjectMeta {
+	return &pc.ObjectMeta
+}
+
+func (pc *StorageAccount) SetGeneration(generation int64) {
+	pc.ObjectMeta.Generation = generation
+}
+
+func (pc StorageAccount) GetGeneration() int64 {
+	return pc.ObjectMeta.Generation
+}
+
+// Registry is an interface for things that know how to store StorageAccount.
+// +k8s:deepcopy-gen=false
+type StorageAccountRegistry interface {
+	ListStorageAccounts(ctx context.Context, options *internalversion.ListOptions) (*StorageAccountList, error)
+	GetStorageAccount(ctx context.Context, id string, options *metav1.GetOptions) (*StorageAccount, error)
+	CreateStorageAccount(ctx context.Context, id *StorageAccount) (*StorageAccount, error)
+	UpdateStorageAccount(ctx context.Context, id *StorageAccount) (*StorageAccount, error)
+	DeleteStorageAccount(ctx context.Context, id string) (bool, error)
+}
+
+// NewRegistry returns a new Registry interface for the given Storage. Any mismatched types will panic.
+func NewStorageAccountRegistry(sp builders.StandardStorageProvider) StorageAccountRegistry {
+	return &storageStorageAccount{sp}
+}
+
+// Implement Registry
+// storage puts strong typing around storage calls
+// +k8s:deepcopy-gen=false
+type storageStorageAccount struct {
+	builders.StandardStorageProvider
+}
+
+func (s *storageStorageAccount) ListStorageAccounts(ctx context.Context, options *internalversion.ListOptions) (*StorageAccountList, error) {
+	if options != nil && options.FieldSelector != nil && !options.FieldSelector.Empty() {
+		return nil, fmt.Errorf("field selector not supported yet")
+	}
+	st := s.GetStandardStorage()
+	obj, err := st.List(ctx, options)
+	if err != nil {
+		return nil, err
+	}
+	return obj.(*StorageAccountList), err
+}
+
+func (s *storageStorageAccount) GetStorageAccount(ctx context.Context, id string, options *metav1.GetOptions) (*StorageAccount, error) {
+	st := s.GetStandardStorage()
+	obj, err := st.Get(ctx, id, options)
+	if err != nil {
+		return nil, err
+	}
+	return obj.(*StorageAccount), nil
+}
+
+func (s *storageStorageAccount) CreateStorageAccount(ctx context.Context, object *StorageAccount) (*StorageAccount, error) {
+	st := s.GetStandardStorage()
+	obj, err := st.Create(ctx, object, nil, &metav1.CreateOptions{})
+	if err != nil {
+		return nil, err
+	}
+	return obj.(*StorageAccount), nil
+}
+
+func (s *storageStorageAccount) UpdateStorageAccount(ctx context.Context, object *StorageAccount) (*StorageAccount, error) {
+	st := s.GetStandardStorage()
+	obj, _, err := st.Update(ctx, object.Name, rest.DefaultUpdatedObjectInfo(object), nil, nil, false, &metav1.UpdateOptions{})
+	if err != nil {
+		return nil, err
+	}
+	return obj.(*StorageAccount), nil
+}
+
+func (s *storageStorageAccount) DeleteStorageAccount(ctx context.Context, id string) (bool, error) {
+	st := s.GetStandardStorage()
+	_, sync, err := st.Delete(ctx, id, nil, &metav1.DeleteOptions{})
+	return sync, err
+}
+
+// StorageProfile Functions and Structs
+//
+// +k8s:deepcopy-gen=false
+type StorageProfileStrategy struct {
+	builders.DefaultStorageStrategy
+}
+
+// +k8s:deepcopy-gen=false
+type StorageProfileStatusStrategy struct {
+	builders.DefaultStatusStorageStrategy
+}
+
+// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+
+type StorageProfileList struct {
+	metav1.TypeMeta `json:",inline"`
+	metav1.ListMeta `json:"metadata,omitempty"`
+	Items           []StorageProfile `json:"items"`
+}
+
+func (StorageProfile) NewStatus() interface{} {
+	return StorageProfileStatus{}
+}
+
+func (pc *StorageProfile) GetStatus() interface{} {
+	return pc.Status
+}
+
+func (pc *StorageProfile) SetStatus(s interface{}) {
+	pc.Status = s.(StorageProfileStatus)
+}
+
+func (pc *StorageProfile) GetSpec() interface{} {
+	return pc.Spec
+}
+
+func (pc *StorageProfile) SetSpec(s interface{}) {
+	pc.Spec = s.(StorageProfileSpec)
+}
+
+func (pc *StorageProfile) GetObjectMeta() *metav1.ObjectMeta {
+	return &pc.ObjectMeta
+}
+
+func (pc *StorageProfile) SetGeneration(generation int64) {
+	pc.ObjectMeta.Generation = generation
+}
+
+func (pc StorageProfile) GetGeneration() int64 {
+	return pc.ObjectMeta.Generation
+}
+
+// Registry is an interface for things that know how to store StorageProfile.
+// +k8s:deepcopy-gen=false
+type StorageProfileRegistry interface {
+	ListStorageProfiles(ctx context.Context, options *internalversion.ListOptions) (*StorageProfileList, error)
+	GetStorageProfile(ctx context.Context, id string, options *metav1.GetOptions) (*StorageProfile, error)
+	CreateStorageProfile(ctx context.Context, id *StorageProfile) (*StorageProfile, error)
+	UpdateStorageProfile(ctx context.Context, id *StorageProfile) (*StorageProfile, error)
+	DeleteStorageProfile(ctx context.Context, id string) (bool, error)
+}
+
+// NewRegistry returns a new Registry interface for the given Storage. Any mismatched types will panic.
+func NewStorageProfileRegistry(sp builders.StandardStorageProvider) StorageProfileRegistry {
+	return &storageStorageProfile{sp}
+}
+
+// Implement Registry
+// storage puts strong typing around storage calls
+// +k8s:deepcopy-gen=false
+type storageStorageProfile struct {
+	builders.StandardStorageProvider
+}
+
+func (s *storageStorageProfile) ListStorageProfiles(ctx context.Context, options *internalversion.ListOptions) (*StorageProfileList, error) {
+	if options != nil && options.FieldSelector != nil && !options.FieldSelector.Empty() {
+		return nil, fmt.Errorf("field selector not supported yet")
+	}
+	st := s.GetStandardStorage()
+	obj, err := st.List(ctx, options)
+	if err != nil {
+		return nil, err
+	}
+	return obj.(*StorageProfileList), err
+}
+
+func (s *storageStorageProfile) GetStorageProfile(ctx context.Context, id string, options *metav1.GetOptions) (*StorageProfile, error) {
+	st := s.GetStandardStorage()
+	obj, err := st.Get(ctx, id, options)
+	if err != nil {
+		return nil, err
+	}
+	return obj.(*StorageProfile), nil
+}
+
+func (s *storageStorageProfile) CreateStorageProfile(ctx context.Context, object *StorageProfile) (*StorageProfile, error) {
+	st := s.GetStandardStorage()
+	obj, err := st.Create(ctx, object, nil, &metav1.CreateOptions{})
+	if err != nil {
+		return nil, err
+	}
+	return obj.(*StorageProfile), nil
+}
+
+func (s *storageStorageProfile) UpdateStorageProfile(ctx context.Context, object *StorageProfile) (*StorageProfile, error) {
+	st := s.GetStandardStorage()
+	obj, _, err := st.Update(ctx, object.Name, rest.DefaultUpdatedObjectInfo(object), nil, nil, false, &metav1.UpdateOptions{})
+	if err != nil {
+		return nil, err
+	}
+	return obj.(*StorageProfile), nil
+}
+
+func (s *storageStorageProfile) DeleteStorageProfile(ctx context.Context, id string) (bool, error) {
+	st := s.GetStandardStorage()
+	_, sync, err := st.Delete(ctx, id, nil, &metav1.DeleteOptions{})
+	return sync, err
+}
+
 // SubjectAccessReview Functions and Structs
 //
 // +k8s:deepcopy-gen=false
@@ -10255,6 +10663,133 @@ func (s *storageTenant) UpdateTenant(ctx context.Context, object *Tenant) (*Tena
 }
 
 func (s *storageTenant) DeleteTenant(ctx context.Context, id string) (bool, error) {
+	st := s.GetStandardStorage()
+	_, sync, err := st.Delete(ctx, id, nil, &metav1.DeleteOptions{})
+	return sync, err
+}
+
+// TenantStorage Functions and Structs
+//
+// +k8s:deepcopy-gen=false
+type TenantStorageStrategy struct {
+	builders.DefaultStorageStrategy
+}
+
+// +k8s:deepcopy-gen=false
+type TenantStorageStatusStrategy struct {
+	builders.DefaultStatusStorageStrategy
+}
+
+// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+
+type TenantStorageList struct {
+	metav1.TypeMeta `json:",inline"`
+	metav1.ListMeta `json:"metadata,omitempty"`
+	Items           []TenantStorage `json:"items"`
+}
+
+// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+
+type TenantStorageCredentialsList struct {
+	metav1.TypeMeta `json:",inline"`
+	metav1.ListMeta `json:"metadata,omitempty"`
+	Items           []TenantStorageCredentials `json:"items"`
+}
+
+func (TenantStorage) NewStatus() interface{} {
+	return TenantStorageStatus{}
+}
+
+func (pc *TenantStorage) GetStatus() interface{} {
+	return pc.Status
+}
+
+func (pc *TenantStorage) SetStatus(s interface{}) {
+	pc.Status = s.(TenantStorageStatus)
+}
+
+func (pc *TenantStorage) GetSpec() interface{} {
+	return pc.Spec
+}
+
+func (pc *TenantStorage) SetSpec(s interface{}) {
+	pc.Spec = s.(TenantStorageSpec)
+}
+
+func (pc *TenantStorage) GetObjectMeta() *metav1.ObjectMeta {
+	return &pc.ObjectMeta
+}
+
+func (pc *TenantStorage) SetGeneration(generation int64) {
+	pc.ObjectMeta.Generation = generation
+}
+
+func (pc TenantStorage) GetGeneration() int64 {
+	return pc.ObjectMeta.Generation
+}
+
+// Registry is an interface for things that know how to store TenantStorage.
+// +k8s:deepcopy-gen=false
+type TenantStorageRegistry interface {
+	ListTenantStorages(ctx context.Context, options *internalversion.ListOptions) (*TenantStorageList, error)
+	GetTenantStorage(ctx context.Context, id string, options *metav1.GetOptions) (*TenantStorage, error)
+	CreateTenantStorage(ctx context.Context, id *TenantStorage) (*TenantStorage, error)
+	UpdateTenantStorage(ctx context.Context, id *TenantStorage) (*TenantStorage, error)
+	DeleteTenantStorage(ctx context.Context, id string) (bool, error)
+}
+
+// NewRegistry returns a new Registry interface for the given Storage. Any mismatched types will panic.
+func NewTenantStorageRegistry(sp builders.StandardStorageProvider) TenantStorageRegistry {
+	return &storageTenantStorage{sp}
+}
+
+// Implement Registry
+// storage puts strong typing around storage calls
+// +k8s:deepcopy-gen=false
+type storageTenantStorage struct {
+	builders.StandardStorageProvider
+}
+
+func (s *storageTenantStorage) ListTenantStorages(ctx context.Context, options *internalversion.ListOptions) (*TenantStorageList, error) {
+	if options != nil && options.FieldSelector != nil && !options.FieldSelector.Empty() {
+		return nil, fmt.Errorf("field selector not supported yet")
+	}
+	st := s.GetStandardStorage()
+	obj, err := st.List(ctx, options)
+	if err != nil {
+		return nil, err
+	}
+	return obj.(*TenantStorageList), err
+}
+
+func (s *storageTenantStorage) GetTenantStorage(ctx context.Context, id string, options *metav1.GetOptions) (*TenantStorage, error) {
+	st := s.GetStandardStorage()
+	obj, err := st.Get(ctx, id, options)
+	if err != nil {
+		return nil, err
+	}
+	return obj.(*TenantStorage), nil
+}
+
+func (s *storageTenantStorage) CreateTenantStorage(ctx context.Context, object *TenantStorage) (*TenantStorage, error) {
+	st := s.GetStandardStorage()
+	obj, err := st.Create(ctx, object, nil, &metav1.CreateOptions{})
+	if err != nil {
+		return nil, err
+	}
+	return obj.(*TenantStorage), nil
+}
+
+func (s *storageTenantStorage) UpdateTenantStorage(ctx context.Context, object *TenantStorage) (*TenantStorage, error) {
+	st := s.GetStandardStorage()
+	obj, _, err := st.Update(ctx, object.Name, rest.DefaultUpdatedObjectInfo(object), nil, nil, false, &metav1.UpdateOptions{})
+	if err != nil {
+		return nil, err
+	}
+	return obj.(*TenantStorage), nil
+}
+
+func (s *storageTenantStorage) DeleteTenantStorage(ctx context.Context, id string) (bool, error) {
 	st := s.GetStandardStorage()
 	_, sync, err := st.Delete(ctx, id, nil, &metav1.DeleteOptions{})
 	return sync, err

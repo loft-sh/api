@@ -94,11 +94,17 @@ type StackInstanceExpansion interface{}
 
 type StackTemplateExpansion interface{}
 
+type StorageAccountExpansion interface{}
+
+type StorageProfileExpansion interface{}
+
 type SubjectAccessReviewExpansion interface{}
 
 type TeamExpansion interface{}
 
 type TenantExpansion interface{}
+
+type TenantStorageExpansion interface{}
 
 type TranslateVClusterResourceNameExpansion interface{}
 
