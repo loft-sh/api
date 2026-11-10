@@ -3,12 +3,9 @@
 package apis
 
 import (
-	"github.com/loft-sh/api/v4/pkg/apis/management"
-	_ "github.com/loft-sh/api/v4/pkg/apis/management/install" // Install the management group
-	managementv1 "github.com/loft-sh/api/v4/pkg/apis/management/v1"
-	"github.com/loft-sh/api/v4/pkg/apis/virtualcluster"
-	_ "github.com/loft-sh/api/v4/pkg/apis/virtualcluster/install" // Install the virtualcluster group
-	virtualclusterv1 "github.com/loft-sh/api/v4/pkg/apis/virtualcluster/v1"
+	"github.com/loft-sh/api/v5/pkg/apis/management"
+	_ "github.com/loft-sh/api/v5/pkg/apis/management/install" // Install the management group
+	managementv1 "github.com/loft-sh/api/v5/pkg/apis/management/v1"
 	"github.com/loft-sh/apiserver/pkg/builders"
 	"k8s.io/apimachinery/pkg/runtime"
 )
@@ -16,7 +13,6 @@ import (
 var (
 	localSchemeBuilder = runtime.SchemeBuilder{
 		managementv1.AddToScheme,
-		virtualclusterv1.AddToScheme,
 	}
 	AddToScheme = localSchemeBuilder.AddToScheme
 )
@@ -26,14 +22,13 @@ var (
 func GetAllApiBuilders() []*builders.APIGroupBuilder {
 	return []*builders.APIGroupBuilder{
 		GetManagementAPIBuilder(),
-		GetVirtualclusterAPIBuilder(),
 	}
 }
 
 func GetManagementAPIBuilder() *builders.APIGroupBuilder {
 	return builders.NewApiGroupBuilder(
 		"management.loft.sh",
-		"github.com/loft-sh/api/v4/pkg/apis/management").
+		"github.com/loft-sh/api/v5/pkg/apis/management").
 		WithUnVersionedApi(management.ApiVersion).
 		WithVersionedApis(
 			managementv1.ApiVersion,
@@ -42,47 +37,47 @@ func GetManagementAPIBuilder() *builders.APIGroupBuilder {
 			"AgentAuditEvent",
 			"Announcement",
 			"App",
+			"ArgoCDApplicationTemplate",
 			"Backup",
 			"Cluster",
 			"ClusterAccess",
 			"ClusterRoleTemplate",
 			"Config",
+			"Connector",
 			"ConvertVirtualClusterConfig",
-			"DevPodEnvironmentTemplate",
-			"DevPodWorkspacePreset",
-			"DevPodWorkspaceTemplate",
+			"DatabaseConnector",
 			"DirectClusterEndpointToken",
 			"Event",
 			"Feature",
 			"IngressAuthToken",
 			"License",
-			"LicenseToken",
 			"LoftUpgrade",
+			"Machine",
+			"NetworkEnvironment",
+			"NetworkPeer",
+			"NodeProfile",
+			"NodeProvider",
+			"NodeType",
 			"OIDCClient",
+			"OSImage",
 			"OwnedAccessKey",
 			"Project",
 			"RedirectToken",
 			"RegisterVirtualCluster",
+			"RenderVirtualClusterTemplate",
 			"ResetAccessKey",
-			"Runner",
+			"SSHKey",
 			"Self",
 			"SelfSubjectAccessReview",
 			"SpaceTemplate",
+			"StackTemplate",
 			"SubjectAccessReview",
-			"Task",
 			"Team",
+			"Tenant",
 			"TranslateVClusterResourceName",
+			"UsageDownload",
 			"User",
+			"VirtualClusterSchema",
 			"VirtualClusterTemplate",
 		)
-}
-func GetVirtualclusterAPIBuilder() *builders.APIGroupBuilder {
-	return builders.NewApiGroupBuilder(
-		"virtualcluster.loft.sh",
-		"github.com/loft-sh/api/v4/pkg/apis/virtualcluster").
-		WithUnVersionedApi(virtualcluster.ApiVersion).
-		WithVersionedApis(
-			virtualclusterv1.ApiVersion,
-		).
-		WithRootScopedKinds()
 }
