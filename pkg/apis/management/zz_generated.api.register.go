@@ -555,7 +555,21 @@ var (
 	NewStorageProfileREST = func(getter generic.RESTOptionsGetter) rest.Storage {
 		return NewStorageProfileRESTFunc(Factory)
 	}
-	NewStorageProfileRESTFunc            NewRESTFunc
+	NewStorageProfileRESTFunc      NewRESTFunc
+	ManagementStorageVolumeStorage = builders.NewApiResourceWithStorage( // Resource status endpoint
+		InternalStorageVolume,
+		func() runtime.Object { return &StorageVolume{} },     // Register versioned resource
+		func() runtime.Object { return &StorageVolumeList{} }, // Register versioned resource list
+		NewStorageVolumeREST,
+	)
+	NewStorageVolumeREST = func(getter generic.RESTOptionsGetter) rest.Storage {
+		return NewStorageVolumeRESTFunc(Factory)
+	}
+	NewStorageVolumeRESTFunc   NewRESTFunc
+	NewStorageVolumeStatusREST = func(getter generic.RESTOptionsGetter) rest.Storage {
+		return NewStorageVolumeStatusRESTFunc(Factory)
+	}
+	NewStorageVolumeStatusRESTFunc       NewRESTFunc
 	ManagementSubjectAccessReviewStorage = builders.NewApiResourceWithStorage( // Resource status endpoint
 		InternalSubjectAccessReview,
 		func() runtime.Object { return &SubjectAccessReview{} },     // Register versioned resource
@@ -585,21 +599,7 @@ var (
 	NewTenantREST = func(getter generic.RESTOptionsGetter) rest.Storage {
 		return NewTenantRESTFunc(Factory)
 	}
-	NewTenantRESTFunc              NewRESTFunc
-	ManagementTenantStorageStorage = builders.NewApiResourceWithStorage( // Resource status endpoint
-		InternalTenantStorage,
-		func() runtime.Object { return &TenantStorage{} },     // Register versioned resource
-		func() runtime.Object { return &TenantStorageList{} }, // Register versioned resource list
-		NewTenantStorageREST,
-	)
-	NewTenantStorageREST = func(getter generic.RESTOptionsGetter) rest.Storage {
-		return NewTenantStorageRESTFunc(Factory)
-	}
-	NewTenantStorageRESTFunc   NewRESTFunc
-	NewTenantStorageStatusREST = func(getter generic.RESTOptionsGetter) rest.Storage {
-		return NewTenantStorageStatusRESTFunc(Factory)
-	}
-	NewTenantStorageStatusRESTFunc                 NewRESTFunc
+	NewTenantRESTFunc                              NewRESTFunc
 	ManagementTranslateVClusterResourceNameStorage = builders.NewApiResourceWithStorage( // Resource status endpoint
 		InternalTranslateVClusterResourceName,
 		func() runtime.Object { return &TranslateVClusterResourceName{} },     // Register versioned resource
@@ -1424,7 +1424,27 @@ var (
 		func() runtime.Object { return &StorageProfile{} },
 		func() runtime.Object { return &StorageProfileList{} },
 	)
-	InternalSubjectAccessReview = builders.NewInternalResource(
+	InternalStorageVolume = builders.NewInternalResource(
+		"storagevolumes",
+		"StorageVolume",
+		func() runtime.Object { return &StorageVolume{} },
+		func() runtime.Object { return &StorageVolumeList{} },
+	)
+	InternalStorageVolumeStatus = builders.NewInternalResourceStatus(
+		"storagevolumes",
+		"StorageVolumeStatus",
+		func() runtime.Object { return &StorageVolume{} },
+		func() runtime.Object { return &StorageVolumeList{} },
+	)
+	InternalStorageVolumeCredentialsREST = builders.NewInternalSubresource(
+		"storagevolumes", "StorageVolumeCredentials", "credentials",
+		func() runtime.Object { return &StorageVolumeCredentials{} },
+	)
+	NewStorageVolumeCredentialsREST = func(getter generic.RESTOptionsGetter) rest.Storage {
+		return NewStorageVolumeCredentialsRESTFunc(Factory)
+	}
+	NewStorageVolumeCredentialsRESTFunc NewRESTFunc
+	InternalSubjectAccessReview         = builders.NewInternalResource(
 		"subjectaccessreviews",
 		"SubjectAccessReview",
 		func() runtime.Object { return &SubjectAccessReview{} },
@@ -1499,27 +1519,7 @@ var (
 	NewTenantConfigREST = func(getter generic.RESTOptionsGetter) rest.Storage {
 		return NewTenantConfigRESTFunc(Factory)
 	}
-	NewTenantConfigRESTFunc NewRESTFunc
-	InternalTenantStorage   = builders.NewInternalResource(
-		"tenantstorages",
-		"TenantStorage",
-		func() runtime.Object { return &TenantStorage{} },
-		func() runtime.Object { return &TenantStorageList{} },
-	)
-	InternalTenantStorageStatus = builders.NewInternalResourceStatus(
-		"tenantstorages",
-		"TenantStorageStatus",
-		func() runtime.Object { return &TenantStorage{} },
-		func() runtime.Object { return &TenantStorageList{} },
-	)
-	InternalTenantStorageCredentialsREST = builders.NewInternalSubresource(
-		"tenantstorages", "TenantStorageCredentials", "credentials",
-		func() runtime.Object { return &TenantStorageCredentials{} },
-	)
-	NewTenantStorageCredentialsREST = func(getter generic.RESTOptionsGetter) rest.Storage {
-		return NewTenantStorageCredentialsRESTFunc(Factory)
-	}
-	NewTenantStorageCredentialsRESTFunc   NewRESTFunc
+	NewTenantConfigRESTFunc               NewRESTFunc
 	InternalTranslateVClusterResourceName = builders.NewInternalResource(
 		"translatevclusterresourcenames",
 		"TranslateVClusterResourceName",
@@ -1866,6 +1866,9 @@ var (
 		InternalStorageAccountStatus,
 		InternalStorageProfile,
 		InternalStorageProfileStatus,
+		InternalStorageVolume,
+		InternalStorageVolumeStatus,
+		InternalStorageVolumeCredentialsREST,
 		InternalSubjectAccessReview,
 		InternalSubjectAccessReviewStatus,
 		InternalTeam,
@@ -1877,9 +1880,6 @@ var (
 		InternalTenant,
 		InternalTenantStatus,
 		InternalTenantConfigREST,
-		InternalTenantStorage,
-		InternalTenantStorageStatus,
-		InternalTenantStorageCredentialsREST,
 		InternalTranslateVClusterResourceName,
 		InternalTranslateVClusterResourceNameStatus,
 		InternalUsageDownload,
@@ -2707,9 +2707,6 @@ type KioskSpec struct {
 	AccessKey                           storagev1.AccessKey                 `json:"accessKey,omitempty"`
 	UISettings                          uiv1.UISettings                     `json:"UISettings,omitempty"`
 	License                             License                             `json:"license,omitempty"`
-	NodeProviderBCMNodeWithResources    NodeProviderBCMNodeWithResources    `json:"nodeProviderBCMNodeWithResources,omitempty"`
-	NodeProviderBCMGetResourcesResult   NodeProviderBCMGetResourcesResult   `json:"nodeProviderBCMGetResourcesResult,omitempty"`
-	NodeProviderBCMTestConnectionResult NodeProviderBCMTestConnectionResult `json:"nodeProviderBCMTestConnectionResult,omitempty"`
 	NodeProviderCalculateCostResult     NodeProviderCalculateCostResult     `json:"nodeProviderCalculateCostResult,omitempty"`
 	NodeProviderTerraformValidateResult NodeProviderTerraformValidateResult `json:"nodeProviderTerraformValidateResult,omitempty"`
 	NodeProviderExecResult              NodeProviderExecResult              `json:"nodeProviderExecResult,omitempty"`
@@ -2950,26 +2947,6 @@ type NodeProvider struct {
 	metav1.ObjectMeta `json:"metadata,omitempty"`
 	Spec              NodeProviderSpec   `json:"spec,omitempty"`
 	Status            NodeProviderStatus `json:"status,omitempty"`
-}
-
-type NodeProviderBCMGetResourcesResult struct {
-	Nodes      []NodeProviderBCMNodeWithResources `json:"nodes"`
-	NodeGroups []NodeProviderBCMNodeGroup         `json:"nodeGroups"`
-}
-
-type NodeProviderBCMNodeGroup struct {
-	Name  string   `json:"name"`
-	Nodes []string `json:"nodes"`
-}
-
-type NodeProviderBCMNodeWithResources struct {
-	Name      string               `json:"name"`
-	Resources *corev1.ResourceList `json:"resources,omitempty"`
-}
-
-type NodeProviderBCMTestConnectionResult struct {
-	Success bool   `json:"success"`
-	Message string `json:"message"`
 }
 
 type NodeProviderCalculateCostResult struct {
@@ -3673,6 +3650,37 @@ type StorageProfileStatus struct {
 // +genclient:nonNamespaced
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
 
+type StorageVolume struct {
+	metav1.TypeMeta   `json:",inline"`
+	metav1.ObjectMeta `json:"metadata,omitempty"`
+	Spec              StorageVolumeSpec   `json:"spec,omitempty"`
+	Status            StorageVolumeStatus `json:"status,omitempty"`
+}
+
+// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+
+type StorageVolumeCredentials struct {
+	metav1.TypeMeta   `json:",inline"`
+	metav1.ObjectMeta `json:"metadata,omitempty"`
+	Endpoint          string `json:"endpoint,omitempty"`
+	Bucket            string `json:"bucket,omitempty"`
+	AccessKey         string `json:"accessKey,omitempty"`
+	SecretKey         string `json:"secretKey,omitempty"`
+	CAData            string `json:"caData,omitempty"`
+}
+
+type StorageVolumeSpec struct {
+	storagev1.StorageVolumeSpec `json:",inline"`
+}
+
+type StorageVolumeStatus struct {
+	storagev1.StorageVolumeStatus `json:",inline"`
+}
+
+// +genclient
+// +genclient:nonNamespaced
+// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+
 type SubjectAccessReview struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
@@ -3774,37 +3782,6 @@ type TenantSpec struct {
 
 type TenantStatus struct {
 	storagev1.TenantStatus `json:",inline"`
-}
-
-// +genclient
-// +genclient:nonNamespaced
-// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
-
-type TenantStorage struct {
-	metav1.TypeMeta   `json:",inline"`
-	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              TenantStorageSpec   `json:"spec,omitempty"`
-	Status            TenantStorageStatus `json:"status,omitempty"`
-}
-
-// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
-
-type TenantStorageCredentials struct {
-	metav1.TypeMeta   `json:",inline"`
-	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Endpoint          string `json:"endpoint,omitempty"`
-	Bucket            string `json:"bucket,omitempty"`
-	AccessKey         string `json:"accessKey,omitempty"`
-	SecretKey         string `json:"secretKey,omitempty"`
-	CAData            string `json:"caData,omitempty"`
-}
-
-type TenantStorageSpec struct {
-	storagev1.TenantStorageSpec `json:",inline"`
-}
-
-type TenantStorageStatus struct {
-	storagev1.TenantStorageStatus `json:",inline"`
 }
 
 // +genclient
@@ -10271,6 +10248,133 @@ func (s *storageStorageProfile) DeleteStorageProfile(ctx context.Context, id str
 	return sync, err
 }
 
+// StorageVolume Functions and Structs
+//
+// +k8s:deepcopy-gen=false
+type StorageVolumeStrategy struct {
+	builders.DefaultStorageStrategy
+}
+
+// +k8s:deepcopy-gen=false
+type StorageVolumeStatusStrategy struct {
+	builders.DefaultStatusStorageStrategy
+}
+
+// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+
+type StorageVolumeList struct {
+	metav1.TypeMeta `json:",inline"`
+	metav1.ListMeta `json:"metadata,omitempty"`
+	Items           []StorageVolume `json:"items"`
+}
+
+// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+
+type StorageVolumeCredentialsList struct {
+	metav1.TypeMeta `json:",inline"`
+	metav1.ListMeta `json:"metadata,omitempty"`
+	Items           []StorageVolumeCredentials `json:"items"`
+}
+
+func (StorageVolume) NewStatus() interface{} {
+	return StorageVolumeStatus{}
+}
+
+func (pc *StorageVolume) GetStatus() interface{} {
+	return pc.Status
+}
+
+func (pc *StorageVolume) SetStatus(s interface{}) {
+	pc.Status = s.(StorageVolumeStatus)
+}
+
+func (pc *StorageVolume) GetSpec() interface{} {
+	return pc.Spec
+}
+
+func (pc *StorageVolume) SetSpec(s interface{}) {
+	pc.Spec = s.(StorageVolumeSpec)
+}
+
+func (pc *StorageVolume) GetObjectMeta() *metav1.ObjectMeta {
+	return &pc.ObjectMeta
+}
+
+func (pc *StorageVolume) SetGeneration(generation int64) {
+	pc.ObjectMeta.Generation = generation
+}
+
+func (pc StorageVolume) GetGeneration() int64 {
+	return pc.ObjectMeta.Generation
+}
+
+// Registry is an interface for things that know how to store StorageVolume.
+// +k8s:deepcopy-gen=false
+type StorageVolumeRegistry interface {
+	ListStorageVolumes(ctx context.Context, options *internalversion.ListOptions) (*StorageVolumeList, error)
+	GetStorageVolume(ctx context.Context, id string, options *metav1.GetOptions) (*StorageVolume, error)
+	CreateStorageVolume(ctx context.Context, id *StorageVolume) (*StorageVolume, error)
+	UpdateStorageVolume(ctx context.Context, id *StorageVolume) (*StorageVolume, error)
+	DeleteStorageVolume(ctx context.Context, id string) (bool, error)
+}
+
+// NewRegistry returns a new Registry interface for the given Storage. Any mismatched types will panic.
+func NewStorageVolumeRegistry(sp builders.StandardStorageProvider) StorageVolumeRegistry {
+	return &storageStorageVolume{sp}
+}
+
+// Implement Registry
+// storage puts strong typing around storage calls
+// +k8s:deepcopy-gen=false
+type storageStorageVolume struct {
+	builders.StandardStorageProvider
+}
+
+func (s *storageStorageVolume) ListStorageVolumes(ctx context.Context, options *internalversion.ListOptions) (*StorageVolumeList, error) {
+	if options != nil && options.FieldSelector != nil && !options.FieldSelector.Empty() {
+		return nil, fmt.Errorf("field selector not supported yet")
+	}
+	st := s.GetStandardStorage()
+	obj, err := st.List(ctx, options)
+	if err != nil {
+		return nil, err
+	}
+	return obj.(*StorageVolumeList), err
+}
+
+func (s *storageStorageVolume) GetStorageVolume(ctx context.Context, id string, options *metav1.GetOptions) (*StorageVolume, error) {
+	st := s.GetStandardStorage()
+	obj, err := st.Get(ctx, id, options)
+	if err != nil {
+		return nil, err
+	}
+	return obj.(*StorageVolume), nil
+}
+
+func (s *storageStorageVolume) CreateStorageVolume(ctx context.Context, object *StorageVolume) (*StorageVolume, error) {
+	st := s.GetStandardStorage()
+	obj, err := st.Create(ctx, object, nil, &metav1.CreateOptions{})
+	if err != nil {
+		return nil, err
+	}
+	return obj.(*StorageVolume), nil
+}
+
+func (s *storageStorageVolume) UpdateStorageVolume(ctx context.Context, object *StorageVolume) (*StorageVolume, error) {
+	st := s.GetStandardStorage()
+	obj, _, err := st.Update(ctx, object.Name, rest.DefaultUpdatedObjectInfo(object), nil, nil, false, &metav1.UpdateOptions{})
+	if err != nil {
+		return nil, err
+	}
+	return obj.(*StorageVolume), nil
+}
+
+func (s *storageStorageVolume) DeleteStorageVolume(ctx context.Context, id string) (bool, error) {
+	st := s.GetStandardStorage()
+	_, sync, err := st.Delete(ctx, id, nil, &metav1.DeleteOptions{})
+	return sync, err
+}
+
 // SubjectAccessReview Functions and Structs
 //
 // +k8s:deepcopy-gen=false
@@ -10663,133 +10767,6 @@ func (s *storageTenant) UpdateTenant(ctx context.Context, object *Tenant) (*Tena
 }
 
 func (s *storageTenant) DeleteTenant(ctx context.Context, id string) (bool, error) {
-	st := s.GetStandardStorage()
-	_, sync, err := st.Delete(ctx, id, nil, &metav1.DeleteOptions{})
-	return sync, err
-}
-
-// TenantStorage Functions and Structs
-//
-// +k8s:deepcopy-gen=false
-type TenantStorageStrategy struct {
-	builders.DefaultStorageStrategy
-}
-
-// +k8s:deepcopy-gen=false
-type TenantStorageStatusStrategy struct {
-	builders.DefaultStatusStorageStrategy
-}
-
-// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
-
-type TenantStorageList struct {
-	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
-	Items           []TenantStorage `json:"items"`
-}
-
-// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
-
-type TenantStorageCredentialsList struct {
-	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
-	Items           []TenantStorageCredentials `json:"items"`
-}
-
-func (TenantStorage) NewStatus() interface{} {
-	return TenantStorageStatus{}
-}
-
-func (pc *TenantStorage) GetStatus() interface{} {
-	return pc.Status
-}
-
-func (pc *TenantStorage) SetStatus(s interface{}) {
-	pc.Status = s.(TenantStorageStatus)
-}
-
-func (pc *TenantStorage) GetSpec() interface{} {
-	return pc.Spec
-}
-
-func (pc *TenantStorage) SetSpec(s interface{}) {
-	pc.Spec = s.(TenantStorageSpec)
-}
-
-func (pc *TenantStorage) GetObjectMeta() *metav1.ObjectMeta {
-	return &pc.ObjectMeta
-}
-
-func (pc *TenantStorage) SetGeneration(generation int64) {
-	pc.ObjectMeta.Generation = generation
-}
-
-func (pc TenantStorage) GetGeneration() int64 {
-	return pc.ObjectMeta.Generation
-}
-
-// Registry is an interface for things that know how to store TenantStorage.
-// +k8s:deepcopy-gen=false
-type TenantStorageRegistry interface {
-	ListTenantStorages(ctx context.Context, options *internalversion.ListOptions) (*TenantStorageList, error)
-	GetTenantStorage(ctx context.Context, id string, options *metav1.GetOptions) (*TenantStorage, error)
-	CreateTenantStorage(ctx context.Context, id *TenantStorage) (*TenantStorage, error)
-	UpdateTenantStorage(ctx context.Context, id *TenantStorage) (*TenantStorage, error)
-	DeleteTenantStorage(ctx context.Context, id string) (bool, error)
-}
-
-// NewRegistry returns a new Registry interface for the given Storage. Any mismatched types will panic.
-func NewTenantStorageRegistry(sp builders.StandardStorageProvider) TenantStorageRegistry {
-	return &storageTenantStorage{sp}
-}
-
-// Implement Registry
-// storage puts strong typing around storage calls
-// +k8s:deepcopy-gen=false
-type storageTenantStorage struct {
-	builders.StandardStorageProvider
-}
-
-func (s *storageTenantStorage) ListTenantStorages(ctx context.Context, options *internalversion.ListOptions) (*TenantStorageList, error) {
-	if options != nil && options.FieldSelector != nil && !options.FieldSelector.Empty() {
-		return nil, fmt.Errorf("field selector not supported yet")
-	}
-	st := s.GetStandardStorage()
-	obj, err := st.List(ctx, options)
-	if err != nil {
-		return nil, err
-	}
-	return obj.(*TenantStorageList), err
-}
-
-func (s *storageTenantStorage) GetTenantStorage(ctx context.Context, id string, options *metav1.GetOptions) (*TenantStorage, error) {
-	st := s.GetStandardStorage()
-	obj, err := st.Get(ctx, id, options)
-	if err != nil {
-		return nil, err
-	}
-	return obj.(*TenantStorage), nil
-}
-
-func (s *storageTenantStorage) CreateTenantStorage(ctx context.Context, object *TenantStorage) (*TenantStorage, error) {
-	st := s.GetStandardStorage()
-	obj, err := st.Create(ctx, object, nil, &metav1.CreateOptions{})
-	if err != nil {
-		return nil, err
-	}
-	return obj.(*TenantStorage), nil
-}
-
-func (s *storageTenantStorage) UpdateTenantStorage(ctx context.Context, object *TenantStorage) (*TenantStorage, error) {
-	st := s.GetStandardStorage()
-	obj, _, err := st.Update(ctx, object.Name, rest.DefaultUpdatedObjectInfo(object), nil, nil, false, &metav1.UpdateOptions{})
-	if err != nil {
-		return nil, err
-	}
-	return obj.(*TenantStorage), nil
-}
-
-func (s *storageTenantStorage) DeleteTenantStorage(ctx context.Context, id string) (bool, error) {
 	st := s.GetStandardStorage()
 	_, sync, err := st.Delete(ctx, id, nil, &metav1.DeleteOptions{})
 	return sync, err

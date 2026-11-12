@@ -14,7 +14,7 @@ import (
 // +kubebuilder:printcolumn:name="Protocols",type="string",JSONPath=".spec.protocols"
 // +kubebuilder:subresource:status
 
-// StorageProfile holds a tier of tenant storage.
+// StorageProfile holds a tier of storage volume.
 // +k8s:openapi-gen=true
 // +resource:path=storageprofiles,rest=StorageProfileREST
 type StorageProfile struct {

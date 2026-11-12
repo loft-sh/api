@@ -1841,46 +1841,6 @@ func RegisterConversions(s *runtime.Scheme) error {
 	}); err != nil {
 		return err
 	}
-	if err := s.AddGeneratedConversionFunc((*NodeProviderBCMGetResourcesResult)(nil), (*management.NodeProviderBCMGetResourcesResult)(nil), func(a, b interface{}, scope conversion.Scope) error {
-		return Convert_v1_NodeProviderBCMGetResourcesResult_To_management_NodeProviderBCMGetResourcesResult(a.(*NodeProviderBCMGetResourcesResult), b.(*management.NodeProviderBCMGetResourcesResult), scope)
-	}); err != nil {
-		return err
-	}
-	if err := s.AddGeneratedConversionFunc((*management.NodeProviderBCMGetResourcesResult)(nil), (*NodeProviderBCMGetResourcesResult)(nil), func(a, b interface{}, scope conversion.Scope) error {
-		return Convert_management_NodeProviderBCMGetResourcesResult_To_v1_NodeProviderBCMGetResourcesResult(a.(*management.NodeProviderBCMGetResourcesResult), b.(*NodeProviderBCMGetResourcesResult), scope)
-	}); err != nil {
-		return err
-	}
-	if err := s.AddGeneratedConversionFunc((*NodeProviderBCMNodeGroup)(nil), (*management.NodeProviderBCMNodeGroup)(nil), func(a, b interface{}, scope conversion.Scope) error {
-		return Convert_v1_NodeProviderBCMNodeGroup_To_management_NodeProviderBCMNodeGroup(a.(*NodeProviderBCMNodeGroup), b.(*management.NodeProviderBCMNodeGroup), scope)
-	}); err != nil {
-		return err
-	}
-	if err := s.AddGeneratedConversionFunc((*management.NodeProviderBCMNodeGroup)(nil), (*NodeProviderBCMNodeGroup)(nil), func(a, b interface{}, scope conversion.Scope) error {
-		return Convert_management_NodeProviderBCMNodeGroup_To_v1_NodeProviderBCMNodeGroup(a.(*management.NodeProviderBCMNodeGroup), b.(*NodeProviderBCMNodeGroup), scope)
-	}); err != nil {
-		return err
-	}
-	if err := s.AddGeneratedConversionFunc((*NodeProviderBCMNodeWithResources)(nil), (*management.NodeProviderBCMNodeWithResources)(nil), func(a, b interface{}, scope conversion.Scope) error {
-		return Convert_v1_NodeProviderBCMNodeWithResources_To_management_NodeProviderBCMNodeWithResources(a.(*NodeProviderBCMNodeWithResources), b.(*management.NodeProviderBCMNodeWithResources), scope)
-	}); err != nil {
-		return err
-	}
-	if err := s.AddGeneratedConversionFunc((*management.NodeProviderBCMNodeWithResources)(nil), (*NodeProviderBCMNodeWithResources)(nil), func(a, b interface{}, scope conversion.Scope) error {
-		return Convert_management_NodeProviderBCMNodeWithResources_To_v1_NodeProviderBCMNodeWithResources(a.(*management.NodeProviderBCMNodeWithResources), b.(*NodeProviderBCMNodeWithResources), scope)
-	}); err != nil {
-		return err
-	}
-	if err := s.AddGeneratedConversionFunc((*NodeProviderBCMTestConnectionResult)(nil), (*management.NodeProviderBCMTestConnectionResult)(nil), func(a, b interface{}, scope conversion.Scope) error {
-		return Convert_v1_NodeProviderBCMTestConnectionResult_To_management_NodeProviderBCMTestConnectionResult(a.(*NodeProviderBCMTestConnectionResult), b.(*management.NodeProviderBCMTestConnectionResult), scope)
-	}); err != nil {
-		return err
-	}
-	if err := s.AddGeneratedConversionFunc((*management.NodeProviderBCMTestConnectionResult)(nil), (*NodeProviderBCMTestConnectionResult)(nil), func(a, b interface{}, scope conversion.Scope) error {
-		return Convert_management_NodeProviderBCMTestConnectionResult_To_v1_NodeProviderBCMTestConnectionResult(a.(*management.NodeProviderBCMTestConnectionResult), b.(*NodeProviderBCMTestConnectionResult), scope)
-	}); err != nil {
-		return err
-	}
 	if err := s.AddGeneratedConversionFunc((*NodeProviderCalculateCostResult)(nil), (*management.NodeProviderCalculateCostResult)(nil), func(a, b interface{}, scope conversion.Scope) error {
 		return Convert_v1_NodeProviderCalculateCostResult_To_management_NodeProviderCalculateCostResult(a.(*NodeProviderCalculateCostResult), b.(*management.NodeProviderCalculateCostResult), scope)
 	}); err != nil {
@@ -3261,6 +3221,66 @@ func RegisterConversions(s *runtime.Scheme) error {
 	}); err != nil {
 		return err
 	}
+	if err := s.AddGeneratedConversionFunc((*StorageVolume)(nil), (*management.StorageVolume)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_v1_StorageVolume_To_management_StorageVolume(a.(*StorageVolume), b.(*management.StorageVolume), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*management.StorageVolume)(nil), (*StorageVolume)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_management_StorageVolume_To_v1_StorageVolume(a.(*management.StorageVolume), b.(*StorageVolume), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*StorageVolumeCredentials)(nil), (*management.StorageVolumeCredentials)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_v1_StorageVolumeCredentials_To_management_StorageVolumeCredentials(a.(*StorageVolumeCredentials), b.(*management.StorageVolumeCredentials), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*management.StorageVolumeCredentials)(nil), (*StorageVolumeCredentials)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_management_StorageVolumeCredentials_To_v1_StorageVolumeCredentials(a.(*management.StorageVolumeCredentials), b.(*StorageVolumeCredentials), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*StorageVolumeCredentialsList)(nil), (*management.StorageVolumeCredentialsList)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_v1_StorageVolumeCredentialsList_To_management_StorageVolumeCredentialsList(a.(*StorageVolumeCredentialsList), b.(*management.StorageVolumeCredentialsList), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*management.StorageVolumeCredentialsList)(nil), (*StorageVolumeCredentialsList)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_management_StorageVolumeCredentialsList_To_v1_StorageVolumeCredentialsList(a.(*management.StorageVolumeCredentialsList), b.(*StorageVolumeCredentialsList), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*StorageVolumeList)(nil), (*management.StorageVolumeList)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_v1_StorageVolumeList_To_management_StorageVolumeList(a.(*StorageVolumeList), b.(*management.StorageVolumeList), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*management.StorageVolumeList)(nil), (*StorageVolumeList)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_management_StorageVolumeList_To_v1_StorageVolumeList(a.(*management.StorageVolumeList), b.(*StorageVolumeList), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*StorageVolumeSpec)(nil), (*management.StorageVolumeSpec)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_v1_StorageVolumeSpec_To_management_StorageVolumeSpec(a.(*StorageVolumeSpec), b.(*management.StorageVolumeSpec), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*management.StorageVolumeSpec)(nil), (*StorageVolumeSpec)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_management_StorageVolumeSpec_To_v1_StorageVolumeSpec(a.(*management.StorageVolumeSpec), b.(*StorageVolumeSpec), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*StorageVolumeStatus)(nil), (*management.StorageVolumeStatus)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_v1_StorageVolumeStatus_To_management_StorageVolumeStatus(a.(*StorageVolumeStatus), b.(*management.StorageVolumeStatus), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*management.StorageVolumeStatus)(nil), (*StorageVolumeStatus)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_management_StorageVolumeStatus_To_v1_StorageVolumeStatus(a.(*management.StorageVolumeStatus), b.(*StorageVolumeStatus), scope)
+	}); err != nil {
+		return err
+	}
 	if err := s.AddGeneratedConversionFunc((*SubjectAccessReview)(nil), (*management.SubjectAccessReview)(nil), func(a, b interface{}, scope conversion.Scope) error {
 		return Convert_v1_SubjectAccessReview_To_management_SubjectAccessReview(a.(*SubjectAccessReview), b.(*management.SubjectAccessReview), scope)
 	}); err != nil {
@@ -3488,66 +3508,6 @@ func RegisterConversions(s *runtime.Scheme) error {
 	}
 	if err := s.AddGeneratedConversionFunc((*management.TenantStatus)(nil), (*TenantStatus)(nil), func(a, b interface{}, scope conversion.Scope) error {
 		return Convert_management_TenantStatus_To_v1_TenantStatus(a.(*management.TenantStatus), b.(*TenantStatus), scope)
-	}); err != nil {
-		return err
-	}
-	if err := s.AddGeneratedConversionFunc((*TenantStorage)(nil), (*management.TenantStorage)(nil), func(a, b interface{}, scope conversion.Scope) error {
-		return Convert_v1_TenantStorage_To_management_TenantStorage(a.(*TenantStorage), b.(*management.TenantStorage), scope)
-	}); err != nil {
-		return err
-	}
-	if err := s.AddGeneratedConversionFunc((*management.TenantStorage)(nil), (*TenantStorage)(nil), func(a, b interface{}, scope conversion.Scope) error {
-		return Convert_management_TenantStorage_To_v1_TenantStorage(a.(*management.TenantStorage), b.(*TenantStorage), scope)
-	}); err != nil {
-		return err
-	}
-	if err := s.AddGeneratedConversionFunc((*TenantStorageCredentials)(nil), (*management.TenantStorageCredentials)(nil), func(a, b interface{}, scope conversion.Scope) error {
-		return Convert_v1_TenantStorageCredentials_To_management_TenantStorageCredentials(a.(*TenantStorageCredentials), b.(*management.TenantStorageCredentials), scope)
-	}); err != nil {
-		return err
-	}
-	if err := s.AddGeneratedConversionFunc((*management.TenantStorageCredentials)(nil), (*TenantStorageCredentials)(nil), func(a, b interface{}, scope conversion.Scope) error {
-		return Convert_management_TenantStorageCredentials_To_v1_TenantStorageCredentials(a.(*management.TenantStorageCredentials), b.(*TenantStorageCredentials), scope)
-	}); err != nil {
-		return err
-	}
-	if err := s.AddGeneratedConversionFunc((*TenantStorageCredentialsList)(nil), (*management.TenantStorageCredentialsList)(nil), func(a, b interface{}, scope conversion.Scope) error {
-		return Convert_v1_TenantStorageCredentialsList_To_management_TenantStorageCredentialsList(a.(*TenantStorageCredentialsList), b.(*management.TenantStorageCredentialsList), scope)
-	}); err != nil {
-		return err
-	}
-	if err := s.AddGeneratedConversionFunc((*management.TenantStorageCredentialsList)(nil), (*TenantStorageCredentialsList)(nil), func(a, b interface{}, scope conversion.Scope) error {
-		return Convert_management_TenantStorageCredentialsList_To_v1_TenantStorageCredentialsList(a.(*management.TenantStorageCredentialsList), b.(*TenantStorageCredentialsList), scope)
-	}); err != nil {
-		return err
-	}
-	if err := s.AddGeneratedConversionFunc((*TenantStorageList)(nil), (*management.TenantStorageList)(nil), func(a, b interface{}, scope conversion.Scope) error {
-		return Convert_v1_TenantStorageList_To_management_TenantStorageList(a.(*TenantStorageList), b.(*management.TenantStorageList), scope)
-	}); err != nil {
-		return err
-	}
-	if err := s.AddGeneratedConversionFunc((*management.TenantStorageList)(nil), (*TenantStorageList)(nil), func(a, b interface{}, scope conversion.Scope) error {
-		return Convert_management_TenantStorageList_To_v1_TenantStorageList(a.(*management.TenantStorageList), b.(*TenantStorageList), scope)
-	}); err != nil {
-		return err
-	}
-	if err := s.AddGeneratedConversionFunc((*TenantStorageSpec)(nil), (*management.TenantStorageSpec)(nil), func(a, b interface{}, scope conversion.Scope) error {
-		return Convert_v1_TenantStorageSpec_To_management_TenantStorageSpec(a.(*TenantStorageSpec), b.(*management.TenantStorageSpec), scope)
-	}); err != nil {
-		return err
-	}
-	if err := s.AddGeneratedConversionFunc((*management.TenantStorageSpec)(nil), (*TenantStorageSpec)(nil), func(a, b interface{}, scope conversion.Scope) error {
-		return Convert_management_TenantStorageSpec_To_v1_TenantStorageSpec(a.(*management.TenantStorageSpec), b.(*TenantStorageSpec), scope)
-	}); err != nil {
-		return err
-	}
-	if err := s.AddGeneratedConversionFunc((*TenantStorageStatus)(nil), (*management.TenantStorageStatus)(nil), func(a, b interface{}, scope conversion.Scope) error {
-		return Convert_v1_TenantStorageStatus_To_management_TenantStorageStatus(a.(*TenantStorageStatus), b.(*management.TenantStorageStatus), scope)
-	}); err != nil {
-		return err
-	}
-	if err := s.AddGeneratedConversionFunc((*management.TenantStorageStatus)(nil), (*TenantStorageStatus)(nil), func(a, b interface{}, scope conversion.Scope) error {
-		return Convert_management_TenantStorageStatus_To_v1_TenantStorageStatus(a.(*management.TenantStorageStatus), b.(*TenantStorageStatus), scope)
 	}); err != nil {
 		return err
 	}
@@ -8012,15 +7972,6 @@ func autoConvert_v1_KioskSpec_To_management_KioskSpec(in *KioskSpec, out *manage
 	if err := Convert_v1_License_To_management_License(&in.License, &out.License, s); err != nil {
 		return err
 	}
-	if err := Convert_v1_NodeProviderBCMNodeWithResources_To_management_NodeProviderBCMNodeWithResources(&in.NodeProviderBCMNodeWithResources, &out.NodeProviderBCMNodeWithResources, s); err != nil {
-		return err
-	}
-	if err := Convert_v1_NodeProviderBCMGetResourcesResult_To_management_NodeProviderBCMGetResourcesResult(&in.NodeProviderBCMGetResourcesResult, &out.NodeProviderBCMGetResourcesResult, s); err != nil {
-		return err
-	}
-	if err := Convert_v1_NodeProviderBCMTestConnectionResult_To_management_NodeProviderBCMTestConnectionResult(&in.NodeProviderBCMTestConnectionResult, &out.NodeProviderBCMTestConnectionResult, s); err != nil {
-		return err
-	}
 	if err := Convert_v1_NodeProviderCalculateCostResult_To_management_NodeProviderCalculateCostResult(&in.NodeProviderCalculateCostResult, &out.NodeProviderCalculateCostResult, s); err != nil {
 		return err
 	}
@@ -8050,15 +8001,6 @@ func autoConvert_management_KioskSpec_To_v1_KioskSpec(in *management.KioskSpec, 
 	out.AccessKey = in.AccessKey
 	out.UISettings = in.UISettings
 	if err := Convert_management_License_To_v1_License(&in.License, &out.License, s); err != nil {
-		return err
-	}
-	if err := Convert_management_NodeProviderBCMNodeWithResources_To_v1_NodeProviderBCMNodeWithResources(&in.NodeProviderBCMNodeWithResources, &out.NodeProviderBCMNodeWithResources, s); err != nil {
-		return err
-	}
-	if err := Convert_management_NodeProviderBCMGetResourcesResult_To_v1_NodeProviderBCMGetResourcesResult(&in.NodeProviderBCMGetResourcesResult, &out.NodeProviderBCMGetResourcesResult, s); err != nil {
-		return err
-	}
-	if err := Convert_management_NodeProviderBCMTestConnectionResult_To_v1_NodeProviderBCMTestConnectionResult(&in.NodeProviderBCMTestConnectionResult, &out.NodeProviderBCMTestConnectionResult, s); err != nil {
 		return err
 	}
 	if err := Convert_management_NodeProviderCalculateCostResult_To_v1_NodeProviderCalculateCostResult(&in.NodeProviderCalculateCostResult, &out.NodeProviderCalculateCostResult, s); err != nil {
@@ -9260,94 +9202,6 @@ func autoConvert_management_NodeProvider_To_v1_NodeProvider(in *management.NodeP
 // Convert_management_NodeProvider_To_v1_NodeProvider is an autogenerated conversion function.
 func Convert_management_NodeProvider_To_v1_NodeProvider(in *management.NodeProvider, out *NodeProvider, s conversion.Scope) error {
 	return autoConvert_management_NodeProvider_To_v1_NodeProvider(in, out, s)
-}
-
-func autoConvert_v1_NodeProviderBCMGetResourcesResult_To_management_NodeProviderBCMGetResourcesResult(in *NodeProviderBCMGetResourcesResult, out *management.NodeProviderBCMGetResourcesResult, s conversion.Scope) error {
-	out.Nodes = *(*[]management.NodeProviderBCMNodeWithResources)(unsafe.Pointer(&in.Nodes))
-	out.NodeGroups = *(*[]management.NodeProviderBCMNodeGroup)(unsafe.Pointer(&in.NodeGroups))
-	return nil
-}
-
-// Convert_v1_NodeProviderBCMGetResourcesResult_To_management_NodeProviderBCMGetResourcesResult is an autogenerated conversion function.
-func Convert_v1_NodeProviderBCMGetResourcesResult_To_management_NodeProviderBCMGetResourcesResult(in *NodeProviderBCMGetResourcesResult, out *management.NodeProviderBCMGetResourcesResult, s conversion.Scope) error {
-	return autoConvert_v1_NodeProviderBCMGetResourcesResult_To_management_NodeProviderBCMGetResourcesResult(in, out, s)
-}
-
-func autoConvert_management_NodeProviderBCMGetResourcesResult_To_v1_NodeProviderBCMGetResourcesResult(in *management.NodeProviderBCMGetResourcesResult, out *NodeProviderBCMGetResourcesResult, s conversion.Scope) error {
-	out.Nodes = *(*[]NodeProviderBCMNodeWithResources)(unsafe.Pointer(&in.Nodes))
-	out.NodeGroups = *(*[]NodeProviderBCMNodeGroup)(unsafe.Pointer(&in.NodeGroups))
-	return nil
-}
-
-// Convert_management_NodeProviderBCMGetResourcesResult_To_v1_NodeProviderBCMGetResourcesResult is an autogenerated conversion function.
-func Convert_management_NodeProviderBCMGetResourcesResult_To_v1_NodeProviderBCMGetResourcesResult(in *management.NodeProviderBCMGetResourcesResult, out *NodeProviderBCMGetResourcesResult, s conversion.Scope) error {
-	return autoConvert_management_NodeProviderBCMGetResourcesResult_To_v1_NodeProviderBCMGetResourcesResult(in, out, s)
-}
-
-func autoConvert_v1_NodeProviderBCMNodeGroup_To_management_NodeProviderBCMNodeGroup(in *NodeProviderBCMNodeGroup, out *management.NodeProviderBCMNodeGroup, s conversion.Scope) error {
-	out.Name = in.Name
-	out.Nodes = *(*[]string)(unsafe.Pointer(&in.Nodes))
-	return nil
-}
-
-// Convert_v1_NodeProviderBCMNodeGroup_To_management_NodeProviderBCMNodeGroup is an autogenerated conversion function.
-func Convert_v1_NodeProviderBCMNodeGroup_To_management_NodeProviderBCMNodeGroup(in *NodeProviderBCMNodeGroup, out *management.NodeProviderBCMNodeGroup, s conversion.Scope) error {
-	return autoConvert_v1_NodeProviderBCMNodeGroup_To_management_NodeProviderBCMNodeGroup(in, out, s)
-}
-
-func autoConvert_management_NodeProviderBCMNodeGroup_To_v1_NodeProviderBCMNodeGroup(in *management.NodeProviderBCMNodeGroup, out *NodeProviderBCMNodeGroup, s conversion.Scope) error {
-	out.Name = in.Name
-	out.Nodes = *(*[]string)(unsafe.Pointer(&in.Nodes))
-	return nil
-}
-
-// Convert_management_NodeProviderBCMNodeGroup_To_v1_NodeProviderBCMNodeGroup is an autogenerated conversion function.
-func Convert_management_NodeProviderBCMNodeGroup_To_v1_NodeProviderBCMNodeGroup(in *management.NodeProviderBCMNodeGroup, out *NodeProviderBCMNodeGroup, s conversion.Scope) error {
-	return autoConvert_management_NodeProviderBCMNodeGroup_To_v1_NodeProviderBCMNodeGroup(in, out, s)
-}
-
-func autoConvert_v1_NodeProviderBCMNodeWithResources_To_management_NodeProviderBCMNodeWithResources(in *NodeProviderBCMNodeWithResources, out *management.NodeProviderBCMNodeWithResources, s conversion.Scope) error {
-	out.Name = in.Name
-	out.Resources = (*corev1.ResourceList)(unsafe.Pointer(in.Resources))
-	return nil
-}
-
-// Convert_v1_NodeProviderBCMNodeWithResources_To_management_NodeProviderBCMNodeWithResources is an autogenerated conversion function.
-func Convert_v1_NodeProviderBCMNodeWithResources_To_management_NodeProviderBCMNodeWithResources(in *NodeProviderBCMNodeWithResources, out *management.NodeProviderBCMNodeWithResources, s conversion.Scope) error {
-	return autoConvert_v1_NodeProviderBCMNodeWithResources_To_management_NodeProviderBCMNodeWithResources(in, out, s)
-}
-
-func autoConvert_management_NodeProviderBCMNodeWithResources_To_v1_NodeProviderBCMNodeWithResources(in *management.NodeProviderBCMNodeWithResources, out *NodeProviderBCMNodeWithResources, s conversion.Scope) error {
-	out.Name = in.Name
-	out.Resources = (*corev1.ResourceList)(unsafe.Pointer(in.Resources))
-	return nil
-}
-
-// Convert_management_NodeProviderBCMNodeWithResources_To_v1_NodeProviderBCMNodeWithResources is an autogenerated conversion function.
-func Convert_management_NodeProviderBCMNodeWithResources_To_v1_NodeProviderBCMNodeWithResources(in *management.NodeProviderBCMNodeWithResources, out *NodeProviderBCMNodeWithResources, s conversion.Scope) error {
-	return autoConvert_management_NodeProviderBCMNodeWithResources_To_v1_NodeProviderBCMNodeWithResources(in, out, s)
-}
-
-func autoConvert_v1_NodeProviderBCMTestConnectionResult_To_management_NodeProviderBCMTestConnectionResult(in *NodeProviderBCMTestConnectionResult, out *management.NodeProviderBCMTestConnectionResult, s conversion.Scope) error {
-	out.Success = in.Success
-	out.Message = in.Message
-	return nil
-}
-
-// Convert_v1_NodeProviderBCMTestConnectionResult_To_management_NodeProviderBCMTestConnectionResult is an autogenerated conversion function.
-func Convert_v1_NodeProviderBCMTestConnectionResult_To_management_NodeProviderBCMTestConnectionResult(in *NodeProviderBCMTestConnectionResult, out *management.NodeProviderBCMTestConnectionResult, s conversion.Scope) error {
-	return autoConvert_v1_NodeProviderBCMTestConnectionResult_To_management_NodeProviderBCMTestConnectionResult(in, out, s)
-}
-
-func autoConvert_management_NodeProviderBCMTestConnectionResult_To_v1_NodeProviderBCMTestConnectionResult(in *management.NodeProviderBCMTestConnectionResult, out *NodeProviderBCMTestConnectionResult, s conversion.Scope) error {
-	out.Success = in.Success
-	out.Message = in.Message
-	return nil
-}
-
-// Convert_management_NodeProviderBCMTestConnectionResult_To_v1_NodeProviderBCMTestConnectionResult is an autogenerated conversion function.
-func Convert_management_NodeProviderBCMTestConnectionResult_To_v1_NodeProviderBCMTestConnectionResult(in *management.NodeProviderBCMTestConnectionResult, out *NodeProviderBCMTestConnectionResult, s conversion.Scope) error {
-	return autoConvert_management_NodeProviderBCMTestConnectionResult_To_v1_NodeProviderBCMTestConnectionResult(in, out, s)
 }
 
 func autoConvert_v1_NodeProviderCalculateCostResult_To_management_NodeProviderCalculateCostResult(in *NodeProviderCalculateCostResult, out *management.NodeProviderCalculateCostResult, s conversion.Scope) error {
@@ -12767,6 +12621,152 @@ func Convert_management_StorageProfileStatus_To_v1_StorageProfileStatus(in *mana
 	return autoConvert_management_StorageProfileStatus_To_v1_StorageProfileStatus(in, out, s)
 }
 
+func autoConvert_v1_StorageVolume_To_management_StorageVolume(in *StorageVolume, out *management.StorageVolume, s conversion.Scope) error {
+	out.ObjectMeta = in.ObjectMeta
+	if err := Convert_v1_StorageVolumeSpec_To_management_StorageVolumeSpec(&in.Spec, &out.Spec, s); err != nil {
+		return err
+	}
+	if err := Convert_v1_StorageVolumeStatus_To_management_StorageVolumeStatus(&in.Status, &out.Status, s); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Convert_v1_StorageVolume_To_management_StorageVolume is an autogenerated conversion function.
+func Convert_v1_StorageVolume_To_management_StorageVolume(in *StorageVolume, out *management.StorageVolume, s conversion.Scope) error {
+	return autoConvert_v1_StorageVolume_To_management_StorageVolume(in, out, s)
+}
+
+func autoConvert_management_StorageVolume_To_v1_StorageVolume(in *management.StorageVolume, out *StorageVolume, s conversion.Scope) error {
+	out.ObjectMeta = in.ObjectMeta
+	if err := Convert_management_StorageVolumeSpec_To_v1_StorageVolumeSpec(&in.Spec, &out.Spec, s); err != nil {
+		return err
+	}
+	if err := Convert_management_StorageVolumeStatus_To_v1_StorageVolumeStatus(&in.Status, &out.Status, s); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Convert_management_StorageVolume_To_v1_StorageVolume is an autogenerated conversion function.
+func Convert_management_StorageVolume_To_v1_StorageVolume(in *management.StorageVolume, out *StorageVolume, s conversion.Scope) error {
+	return autoConvert_management_StorageVolume_To_v1_StorageVolume(in, out, s)
+}
+
+func autoConvert_v1_StorageVolumeCredentials_To_management_StorageVolumeCredentials(in *StorageVolumeCredentials, out *management.StorageVolumeCredentials, s conversion.Scope) error {
+	out.ObjectMeta = in.ObjectMeta
+	out.Endpoint = in.Endpoint
+	out.Bucket = in.Bucket
+	out.AccessKey = in.AccessKey
+	out.SecretKey = in.SecretKey
+	out.CAData = in.CAData
+	return nil
+}
+
+// Convert_v1_StorageVolumeCredentials_To_management_StorageVolumeCredentials is an autogenerated conversion function.
+func Convert_v1_StorageVolumeCredentials_To_management_StorageVolumeCredentials(in *StorageVolumeCredentials, out *management.StorageVolumeCredentials, s conversion.Scope) error {
+	return autoConvert_v1_StorageVolumeCredentials_To_management_StorageVolumeCredentials(in, out, s)
+}
+
+func autoConvert_management_StorageVolumeCredentials_To_v1_StorageVolumeCredentials(in *management.StorageVolumeCredentials, out *StorageVolumeCredentials, s conversion.Scope) error {
+	out.ObjectMeta = in.ObjectMeta
+	out.Endpoint = in.Endpoint
+	out.Bucket = in.Bucket
+	out.AccessKey = in.AccessKey
+	out.SecretKey = in.SecretKey
+	out.CAData = in.CAData
+	return nil
+}
+
+// Convert_management_StorageVolumeCredentials_To_v1_StorageVolumeCredentials is an autogenerated conversion function.
+func Convert_management_StorageVolumeCredentials_To_v1_StorageVolumeCredentials(in *management.StorageVolumeCredentials, out *StorageVolumeCredentials, s conversion.Scope) error {
+	return autoConvert_management_StorageVolumeCredentials_To_v1_StorageVolumeCredentials(in, out, s)
+}
+
+func autoConvert_v1_StorageVolumeCredentialsList_To_management_StorageVolumeCredentialsList(in *StorageVolumeCredentialsList, out *management.StorageVolumeCredentialsList, s conversion.Scope) error {
+	out.ListMeta = in.ListMeta
+	out.Items = *(*[]management.StorageVolumeCredentials)(unsafe.Pointer(&in.Items))
+	return nil
+}
+
+// Convert_v1_StorageVolumeCredentialsList_To_management_StorageVolumeCredentialsList is an autogenerated conversion function.
+func Convert_v1_StorageVolumeCredentialsList_To_management_StorageVolumeCredentialsList(in *StorageVolumeCredentialsList, out *management.StorageVolumeCredentialsList, s conversion.Scope) error {
+	return autoConvert_v1_StorageVolumeCredentialsList_To_management_StorageVolumeCredentialsList(in, out, s)
+}
+
+func autoConvert_management_StorageVolumeCredentialsList_To_v1_StorageVolumeCredentialsList(in *management.StorageVolumeCredentialsList, out *StorageVolumeCredentialsList, s conversion.Scope) error {
+	out.ListMeta = in.ListMeta
+	out.Items = *(*[]StorageVolumeCredentials)(unsafe.Pointer(&in.Items))
+	return nil
+}
+
+// Convert_management_StorageVolumeCredentialsList_To_v1_StorageVolumeCredentialsList is an autogenerated conversion function.
+func Convert_management_StorageVolumeCredentialsList_To_v1_StorageVolumeCredentialsList(in *management.StorageVolumeCredentialsList, out *StorageVolumeCredentialsList, s conversion.Scope) error {
+	return autoConvert_management_StorageVolumeCredentialsList_To_v1_StorageVolumeCredentialsList(in, out, s)
+}
+
+func autoConvert_v1_StorageVolumeList_To_management_StorageVolumeList(in *StorageVolumeList, out *management.StorageVolumeList, s conversion.Scope) error {
+	out.ListMeta = in.ListMeta
+	out.Items = *(*[]management.StorageVolume)(unsafe.Pointer(&in.Items))
+	return nil
+}
+
+// Convert_v1_StorageVolumeList_To_management_StorageVolumeList is an autogenerated conversion function.
+func Convert_v1_StorageVolumeList_To_management_StorageVolumeList(in *StorageVolumeList, out *management.StorageVolumeList, s conversion.Scope) error {
+	return autoConvert_v1_StorageVolumeList_To_management_StorageVolumeList(in, out, s)
+}
+
+func autoConvert_management_StorageVolumeList_To_v1_StorageVolumeList(in *management.StorageVolumeList, out *StorageVolumeList, s conversion.Scope) error {
+	out.ListMeta = in.ListMeta
+	out.Items = *(*[]StorageVolume)(unsafe.Pointer(&in.Items))
+	return nil
+}
+
+// Convert_management_StorageVolumeList_To_v1_StorageVolumeList is an autogenerated conversion function.
+func Convert_management_StorageVolumeList_To_v1_StorageVolumeList(in *management.StorageVolumeList, out *StorageVolumeList, s conversion.Scope) error {
+	return autoConvert_management_StorageVolumeList_To_v1_StorageVolumeList(in, out, s)
+}
+
+func autoConvert_v1_StorageVolumeSpec_To_management_StorageVolumeSpec(in *StorageVolumeSpec, out *management.StorageVolumeSpec, s conversion.Scope) error {
+	out.StorageVolumeSpec = in.StorageVolumeSpec
+	return nil
+}
+
+// Convert_v1_StorageVolumeSpec_To_management_StorageVolumeSpec is an autogenerated conversion function.
+func Convert_v1_StorageVolumeSpec_To_management_StorageVolumeSpec(in *StorageVolumeSpec, out *management.StorageVolumeSpec, s conversion.Scope) error {
+	return autoConvert_v1_StorageVolumeSpec_To_management_StorageVolumeSpec(in, out, s)
+}
+
+func autoConvert_management_StorageVolumeSpec_To_v1_StorageVolumeSpec(in *management.StorageVolumeSpec, out *StorageVolumeSpec, s conversion.Scope) error {
+	out.StorageVolumeSpec = in.StorageVolumeSpec
+	return nil
+}
+
+// Convert_management_StorageVolumeSpec_To_v1_StorageVolumeSpec is an autogenerated conversion function.
+func Convert_management_StorageVolumeSpec_To_v1_StorageVolumeSpec(in *management.StorageVolumeSpec, out *StorageVolumeSpec, s conversion.Scope) error {
+	return autoConvert_management_StorageVolumeSpec_To_v1_StorageVolumeSpec(in, out, s)
+}
+
+func autoConvert_v1_StorageVolumeStatus_To_management_StorageVolumeStatus(in *StorageVolumeStatus, out *management.StorageVolumeStatus, s conversion.Scope) error {
+	out.StorageVolumeStatus = in.StorageVolumeStatus
+	return nil
+}
+
+// Convert_v1_StorageVolumeStatus_To_management_StorageVolumeStatus is an autogenerated conversion function.
+func Convert_v1_StorageVolumeStatus_To_management_StorageVolumeStatus(in *StorageVolumeStatus, out *management.StorageVolumeStatus, s conversion.Scope) error {
+	return autoConvert_v1_StorageVolumeStatus_To_management_StorageVolumeStatus(in, out, s)
+}
+
+func autoConvert_management_StorageVolumeStatus_To_v1_StorageVolumeStatus(in *management.StorageVolumeStatus, out *StorageVolumeStatus, s conversion.Scope) error {
+	out.StorageVolumeStatus = in.StorageVolumeStatus
+	return nil
+}
+
+// Convert_management_StorageVolumeStatus_To_v1_StorageVolumeStatus is an autogenerated conversion function.
+func Convert_management_StorageVolumeStatus_To_v1_StorageVolumeStatus(in *management.StorageVolumeStatus, out *StorageVolumeStatus, s conversion.Scope) error {
+	return autoConvert_management_StorageVolumeStatus_To_v1_StorageVolumeStatus(in, out, s)
+}
+
 func autoConvert_v1_SubjectAccessReview_To_management_SubjectAccessReview(in *SubjectAccessReview, out *management.SubjectAccessReview, s conversion.Scope) error {
 	out.ObjectMeta = in.ObjectMeta
 	if err := Convert_v1_SubjectAccessReviewSpec_To_management_SubjectAccessReviewSpec(&in.Spec, &out.Spec, s); err != nil {
@@ -13303,152 +13303,6 @@ func autoConvert_management_TenantStatus_To_v1_TenantStatus(in *management.Tenan
 // Convert_management_TenantStatus_To_v1_TenantStatus is an autogenerated conversion function.
 func Convert_management_TenantStatus_To_v1_TenantStatus(in *management.TenantStatus, out *TenantStatus, s conversion.Scope) error {
 	return autoConvert_management_TenantStatus_To_v1_TenantStatus(in, out, s)
-}
-
-func autoConvert_v1_TenantStorage_To_management_TenantStorage(in *TenantStorage, out *management.TenantStorage, s conversion.Scope) error {
-	out.ObjectMeta = in.ObjectMeta
-	if err := Convert_v1_TenantStorageSpec_To_management_TenantStorageSpec(&in.Spec, &out.Spec, s); err != nil {
-		return err
-	}
-	if err := Convert_v1_TenantStorageStatus_To_management_TenantStorageStatus(&in.Status, &out.Status, s); err != nil {
-		return err
-	}
-	return nil
-}
-
-// Convert_v1_TenantStorage_To_management_TenantStorage is an autogenerated conversion function.
-func Convert_v1_TenantStorage_To_management_TenantStorage(in *TenantStorage, out *management.TenantStorage, s conversion.Scope) error {
-	return autoConvert_v1_TenantStorage_To_management_TenantStorage(in, out, s)
-}
-
-func autoConvert_management_TenantStorage_To_v1_TenantStorage(in *management.TenantStorage, out *TenantStorage, s conversion.Scope) error {
-	out.ObjectMeta = in.ObjectMeta
-	if err := Convert_management_TenantStorageSpec_To_v1_TenantStorageSpec(&in.Spec, &out.Spec, s); err != nil {
-		return err
-	}
-	if err := Convert_management_TenantStorageStatus_To_v1_TenantStorageStatus(&in.Status, &out.Status, s); err != nil {
-		return err
-	}
-	return nil
-}
-
-// Convert_management_TenantStorage_To_v1_TenantStorage is an autogenerated conversion function.
-func Convert_management_TenantStorage_To_v1_TenantStorage(in *management.TenantStorage, out *TenantStorage, s conversion.Scope) error {
-	return autoConvert_management_TenantStorage_To_v1_TenantStorage(in, out, s)
-}
-
-func autoConvert_v1_TenantStorageCredentials_To_management_TenantStorageCredentials(in *TenantStorageCredentials, out *management.TenantStorageCredentials, s conversion.Scope) error {
-	out.ObjectMeta = in.ObjectMeta
-	out.Endpoint = in.Endpoint
-	out.Bucket = in.Bucket
-	out.AccessKey = in.AccessKey
-	out.SecretKey = in.SecretKey
-	out.CAData = in.CAData
-	return nil
-}
-
-// Convert_v1_TenantStorageCredentials_To_management_TenantStorageCredentials is an autogenerated conversion function.
-func Convert_v1_TenantStorageCredentials_To_management_TenantStorageCredentials(in *TenantStorageCredentials, out *management.TenantStorageCredentials, s conversion.Scope) error {
-	return autoConvert_v1_TenantStorageCredentials_To_management_TenantStorageCredentials(in, out, s)
-}
-
-func autoConvert_management_TenantStorageCredentials_To_v1_TenantStorageCredentials(in *management.TenantStorageCredentials, out *TenantStorageCredentials, s conversion.Scope) error {
-	out.ObjectMeta = in.ObjectMeta
-	out.Endpoint = in.Endpoint
-	out.Bucket = in.Bucket
-	out.AccessKey = in.AccessKey
-	out.SecretKey = in.SecretKey
-	out.CAData = in.CAData
-	return nil
-}
-
-// Convert_management_TenantStorageCredentials_To_v1_TenantStorageCredentials is an autogenerated conversion function.
-func Convert_management_TenantStorageCredentials_To_v1_TenantStorageCredentials(in *management.TenantStorageCredentials, out *TenantStorageCredentials, s conversion.Scope) error {
-	return autoConvert_management_TenantStorageCredentials_To_v1_TenantStorageCredentials(in, out, s)
-}
-
-func autoConvert_v1_TenantStorageCredentialsList_To_management_TenantStorageCredentialsList(in *TenantStorageCredentialsList, out *management.TenantStorageCredentialsList, s conversion.Scope) error {
-	out.ListMeta = in.ListMeta
-	out.Items = *(*[]management.TenantStorageCredentials)(unsafe.Pointer(&in.Items))
-	return nil
-}
-
-// Convert_v1_TenantStorageCredentialsList_To_management_TenantStorageCredentialsList is an autogenerated conversion function.
-func Convert_v1_TenantStorageCredentialsList_To_management_TenantStorageCredentialsList(in *TenantStorageCredentialsList, out *management.TenantStorageCredentialsList, s conversion.Scope) error {
-	return autoConvert_v1_TenantStorageCredentialsList_To_management_TenantStorageCredentialsList(in, out, s)
-}
-
-func autoConvert_management_TenantStorageCredentialsList_To_v1_TenantStorageCredentialsList(in *management.TenantStorageCredentialsList, out *TenantStorageCredentialsList, s conversion.Scope) error {
-	out.ListMeta = in.ListMeta
-	out.Items = *(*[]TenantStorageCredentials)(unsafe.Pointer(&in.Items))
-	return nil
-}
-
-// Convert_management_TenantStorageCredentialsList_To_v1_TenantStorageCredentialsList is an autogenerated conversion function.
-func Convert_management_TenantStorageCredentialsList_To_v1_TenantStorageCredentialsList(in *management.TenantStorageCredentialsList, out *TenantStorageCredentialsList, s conversion.Scope) error {
-	return autoConvert_management_TenantStorageCredentialsList_To_v1_TenantStorageCredentialsList(in, out, s)
-}
-
-func autoConvert_v1_TenantStorageList_To_management_TenantStorageList(in *TenantStorageList, out *management.TenantStorageList, s conversion.Scope) error {
-	out.ListMeta = in.ListMeta
-	out.Items = *(*[]management.TenantStorage)(unsafe.Pointer(&in.Items))
-	return nil
-}
-
-// Convert_v1_TenantStorageList_To_management_TenantStorageList is an autogenerated conversion function.
-func Convert_v1_TenantStorageList_To_management_TenantStorageList(in *TenantStorageList, out *management.TenantStorageList, s conversion.Scope) error {
-	return autoConvert_v1_TenantStorageList_To_management_TenantStorageList(in, out, s)
-}
-
-func autoConvert_management_TenantStorageList_To_v1_TenantStorageList(in *management.TenantStorageList, out *TenantStorageList, s conversion.Scope) error {
-	out.ListMeta = in.ListMeta
-	out.Items = *(*[]TenantStorage)(unsafe.Pointer(&in.Items))
-	return nil
-}
-
-// Convert_management_TenantStorageList_To_v1_TenantStorageList is an autogenerated conversion function.
-func Convert_management_TenantStorageList_To_v1_TenantStorageList(in *management.TenantStorageList, out *TenantStorageList, s conversion.Scope) error {
-	return autoConvert_management_TenantStorageList_To_v1_TenantStorageList(in, out, s)
-}
-
-func autoConvert_v1_TenantStorageSpec_To_management_TenantStorageSpec(in *TenantStorageSpec, out *management.TenantStorageSpec, s conversion.Scope) error {
-	out.TenantStorageSpec = in.TenantStorageSpec
-	return nil
-}
-
-// Convert_v1_TenantStorageSpec_To_management_TenantStorageSpec is an autogenerated conversion function.
-func Convert_v1_TenantStorageSpec_To_management_TenantStorageSpec(in *TenantStorageSpec, out *management.TenantStorageSpec, s conversion.Scope) error {
-	return autoConvert_v1_TenantStorageSpec_To_management_TenantStorageSpec(in, out, s)
-}
-
-func autoConvert_management_TenantStorageSpec_To_v1_TenantStorageSpec(in *management.TenantStorageSpec, out *TenantStorageSpec, s conversion.Scope) error {
-	out.TenantStorageSpec = in.TenantStorageSpec
-	return nil
-}
-
-// Convert_management_TenantStorageSpec_To_v1_TenantStorageSpec is an autogenerated conversion function.
-func Convert_management_TenantStorageSpec_To_v1_TenantStorageSpec(in *management.TenantStorageSpec, out *TenantStorageSpec, s conversion.Scope) error {
-	return autoConvert_management_TenantStorageSpec_To_v1_TenantStorageSpec(in, out, s)
-}
-
-func autoConvert_v1_TenantStorageStatus_To_management_TenantStorageStatus(in *TenantStorageStatus, out *management.TenantStorageStatus, s conversion.Scope) error {
-	out.TenantStorageStatus = in.TenantStorageStatus
-	return nil
-}
-
-// Convert_v1_TenantStorageStatus_To_management_TenantStorageStatus is an autogenerated conversion function.
-func Convert_v1_TenantStorageStatus_To_management_TenantStorageStatus(in *TenantStorageStatus, out *management.TenantStorageStatus, s conversion.Scope) error {
-	return autoConvert_v1_TenantStorageStatus_To_management_TenantStorageStatus(in, out, s)
-}
-
-func autoConvert_management_TenantStorageStatus_To_v1_TenantStorageStatus(in *management.TenantStorageStatus, out *TenantStorageStatus, s conversion.Scope) error {
-	out.TenantStorageStatus = in.TenantStorageStatus
-	return nil
-}
-
-// Convert_management_TenantStorageStatus_To_v1_TenantStorageStatus is an autogenerated conversion function.
-func Convert_management_TenantStorageStatus_To_v1_TenantStorageStatus(in *management.TenantStorageStatus, out *TenantStorageStatus, s conversion.Scope) error {
-	return autoConvert_management_TenantStorageStatus_To_v1_TenantStorageStatus(in, out, s)
 }
 
 func autoConvert_v1_TranslateVClusterResourceName_To_management_TranslateVClusterResourceName(in *TranslateVClusterResourceName, out *management.TranslateVClusterResourceName, s conversion.Scope) error {

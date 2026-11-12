@@ -60,10 +60,10 @@ type ManagementV1Interface interface {
 	StackTemplatesGetter
 	StorageAccountsGetter
 	StorageProfilesGetter
+	StorageVolumesGetter
 	SubjectAccessReviewsGetter
 	TeamsGetter
 	TenantsGetter
-	TenantStoragesGetter
 	TranslateVClusterResourceNamesGetter
 	UsageDownloadsGetter
 	UsersGetter
@@ -269,6 +269,10 @@ func (c *ManagementV1Client) StorageProfiles() StorageProfileInterface {
 	return newStorageProfiles(c)
 }
 
+func (c *ManagementV1Client) StorageVolumes() StorageVolumeInterface {
+	return newStorageVolumes(c)
+}
+
 func (c *ManagementV1Client) SubjectAccessReviews() SubjectAccessReviewInterface {
 	return newSubjectAccessReviews(c)
 }
@@ -279,10 +283,6 @@ func (c *ManagementV1Client) Teams() TeamInterface {
 
 func (c *ManagementV1Client) Tenants() TenantInterface {
 	return newTenants(c)
-}
-
-func (c *ManagementV1Client) TenantStorages() TenantStorageInterface {
-	return newTenantStorages(c)
 }
 
 func (c *ManagementV1Client) TranslateVClusterResourceNames() TranslateVClusterResourceNameInterface {

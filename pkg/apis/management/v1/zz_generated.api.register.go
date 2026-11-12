@@ -133,6 +133,9 @@ func addKnownTypes(scheme *runtime.Scheme) error {
 		&StorageAccountList{},
 		&StorageProfile{},
 		&StorageProfileList{},
+		&StorageVolume{},
+		&StorageVolumeList{},
+		&StorageVolumeCredentials{},
 		&SubjectAccessReview{},
 		&SubjectAccessReviewList{},
 		&Team{},
@@ -144,9 +147,6 @@ func addKnownTypes(scheme *runtime.Scheme) error {
 		&Tenant{},
 		&TenantList{},
 		&TenantConfig{},
-		&TenantStorage{},
-		&TenantStorageList{},
-		&TenantStorageCredentials{},
 		&TranslateVClusterResourceName{},
 		&TranslateVClusterResourceNameList{},
 		&UsageDownload{},
@@ -410,6 +410,18 @@ var (
 			func() runtime.Object { return &StorageAccountList{} }, // Register versioned resource list
 			management.NewStorageAccountStatusREST),
 		management.ManagementStorageProfileStorage,
+		management.ManagementStorageVolumeStorage,
+		builders.NewApiResourceWithStorage(
+			management.InternalStorageVolumeStatus,
+			func() runtime.Object { return &StorageVolume{} },     // Register versioned resource
+			func() runtime.Object { return &StorageVolumeList{} }, // Register versioned resource list
+			management.NewStorageVolumeStatusREST),
+		builders.NewApiResourceWithStorage(
+			management.InternalStorageVolumeCredentialsREST,
+			func() runtime.Object { return &StorageVolumeCredentials{} }, // Register versioned resource
+			nil,
+			management.NewStorageVolumeCredentialsREST,
+		),
 		management.ManagementSubjectAccessReviewStorage,
 		management.ManagementTeamStorage,
 		builders.NewApiResourceWithStorage(
@@ -442,18 +454,6 @@ var (
 			func() runtime.Object { return &TenantConfig{} }, // Register versioned resource
 			nil,
 			management.NewTenantConfigREST,
-		),
-		management.ManagementTenantStorageStorage,
-		builders.NewApiResourceWithStorage(
-			management.InternalTenantStorageStatus,
-			func() runtime.Object { return &TenantStorage{} },     // Register versioned resource
-			func() runtime.Object { return &TenantStorageList{} }, // Register versioned resource list
-			management.NewTenantStorageStatusREST),
-		builders.NewApiResourceWithStorage(
-			management.InternalTenantStorageCredentialsREST,
-			func() runtime.Object { return &TenantStorageCredentials{} }, // Register versioned resource
-			nil,
-			management.NewTenantStorageCredentialsREST,
 		),
 		management.ManagementTranslateVClusterResourceNameStorage,
 		management.ManagementUsageDownloadStorage,
@@ -1176,6 +1176,22 @@ type StorageProfileList struct {
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
 
+type StorageVolumeList struct {
+	metav1.TypeMeta `json:",inline"`
+	metav1.ListMeta `json:"metadata,omitempty"`
+	Items           []StorageVolume `json:"items"`
+}
+
+// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+
+type StorageVolumeCredentialsList struct {
+	metav1.TypeMeta `json:",inline"`
+	metav1.ListMeta `json:"metadata,omitempty"`
+	Items           []StorageVolumeCredentials `json:"items"`
+}
+
+// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+
 type SubjectAccessReviewList struct {
 	metav1.TypeMeta `json:",inline"`
 	metav1.ListMeta `json:"metadata,omitempty"`
@@ -1236,22 +1252,6 @@ type TenantConfigList struct {
 	metav1.TypeMeta `json:",inline"`
 	metav1.ListMeta `json:"metadata,omitempty"`
 	Items           []TenantConfig `json:"items"`
-}
-
-// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
-
-type TenantStorageList struct {
-	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
-	Items           []TenantStorage `json:"items"`
-}
-
-// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
-
-type TenantStorageCredentialsList struct {
-	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
-	Items           []TenantStorageCredentials `json:"items"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object

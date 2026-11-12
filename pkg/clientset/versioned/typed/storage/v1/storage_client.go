@@ -39,9 +39,9 @@ type StorageV1Interface interface {
 	StackTemplatesGetter
 	StorageAccountsGetter
 	StorageProfilesGetter
+	StorageVolumesGetter
 	TeamsGetter
 	TenantsGetter
-	TenantStoragesGetter
 	UsersGetter
 	VirtualClusterInstancesGetter
 	VirtualClusterTemplatesGetter
@@ -160,16 +160,16 @@ func (c *StorageV1Client) StorageProfiles() StorageProfileInterface {
 	return newStorageProfiles(c)
 }
 
+func (c *StorageV1Client) StorageVolumes() StorageVolumeInterface {
+	return newStorageVolumes(c)
+}
+
 func (c *StorageV1Client) Teams() TeamInterface {
 	return newTeams(c)
 }
 
 func (c *StorageV1Client) Tenants() TenantInterface {
 	return newTenants(c)
-}
-
-func (c *StorageV1Client) TenantStorages() TenantStorageInterface {
-	return newTenantStorages(c)
 }
 
 func (c *StorageV1Client) Users() UserInterface {

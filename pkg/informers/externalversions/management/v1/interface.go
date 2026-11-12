@@ -98,14 +98,14 @@ type Interface interface {
 	StorageAccounts() StorageAccountInformer
 	// StorageProfiles returns a StorageProfileInformer.
 	StorageProfiles() StorageProfileInformer
+	// StorageVolumes returns a StorageVolumeInformer.
+	StorageVolumes() StorageVolumeInformer
 	// SubjectAccessReviews returns a SubjectAccessReviewInformer.
 	SubjectAccessReviews() SubjectAccessReviewInformer
 	// Teams returns a TeamInformer.
 	Teams() TeamInformer
 	// Tenants returns a TenantInformer.
 	Tenants() TenantInformer
-	// TenantStorages returns a TenantStorageInformer.
-	TenantStorages() TenantStorageInformer
 	// TranslateVClusterResourceNames returns a TranslateVClusterResourceNameInformer.
 	TranslateVClusterResourceNames() TranslateVClusterResourceNameInformer
 	// UsageDownloads returns a UsageDownloadInformer.
@@ -356,6 +356,11 @@ func (v *version) StorageProfiles() StorageProfileInformer {
 	return &storageProfileInformer{factory: v.factory, tweakListOptions: v.tweakListOptions}
 }
 
+// StorageVolumes returns a StorageVolumeInformer.
+func (v *version) StorageVolumes() StorageVolumeInformer {
+	return &storageVolumeInformer{factory: v.factory, tweakListOptions: v.tweakListOptions}
+}
+
 // SubjectAccessReviews returns a SubjectAccessReviewInformer.
 func (v *version) SubjectAccessReviews() SubjectAccessReviewInformer {
 	return &subjectAccessReviewInformer{factory: v.factory, tweakListOptions: v.tweakListOptions}
@@ -369,11 +374,6 @@ func (v *version) Teams() TeamInformer {
 // Tenants returns a TenantInformer.
 func (v *version) Tenants() TenantInformer {
 	return &tenantInformer{factory: v.factory, tweakListOptions: v.tweakListOptions}
-}
-
-// TenantStorages returns a TenantStorageInformer.
-func (v *version) TenantStorages() TenantStorageInformer {
-	return &tenantStorageInformer{factory: v.factory, tweakListOptions: v.tweakListOptions}
 }
 
 // TranslateVClusterResourceNames returns a TranslateVClusterResourceNameInformer.

@@ -185,7 +185,7 @@ type VirtualClusterInstanceSpec struct {
 	// +optional
 	Standalone bool `json:"standalone,omitempty"`
 
-	// Storage attaches TenantStorages of the instance's tenant to the tenant cluster, statically:
+	// Storage attaches StorageVolumes of the instance's tenant to the tenant cluster, statically:
 	// each entry becomes one PersistentVolume of the volume the platform provisioned and one
 	// StorageClass named after the storage that binds claims to it and provisions nothing. The
 	// platform adds the vendor's node driver to experimental.deploy and writes the tenant's CSI
@@ -198,9 +198,9 @@ type VirtualClusterInstanceSpec struct {
 	Storage []VirtualClusterInstanceStorage `json:"storage,omitempty"`
 }
 
-// VirtualClusterInstanceStorage attaches one TenantStorage to a tenant cluster.
+// VirtualClusterInstanceStorage attaches one StorageVolume to a tenant cluster.
 type VirtualClusterInstanceStorage struct {
-	// StorageRef names a TenantStorage assigned to the instance's tenant. It has to be Available
+	// StorageRef names a StorageVolume assigned to the instance's tenant. It has to be Available
 	// when it is attached.
 	StorageRef string `json:"storageRef"`
 
@@ -212,7 +212,7 @@ type VirtualClusterInstanceStorage struct {
 
 // VirtualClusterInstanceStorageStatus is one storage the rendered values attach.
 type VirtualClusterInstanceStorageStatus struct {
-	// StorageRef names the TenantStorage.
+	// StorageRef names the StorageVolume.
 	StorageRef string `json:"storageRef"`
 
 	// StorageClass is the StorageClass that binds claims in the tenant cluster to the storage's
@@ -276,7 +276,7 @@ type VirtualClusterInstanceStatus struct {
 	// (the "old") tenant cluster instance can safely be deleted.
 	IgnoreReconciliation bool `json:"ignoreReconciliation,omitempty"`
 
-	// Storage lists the TenantStorages the rendered values attach to the tenant cluster. It follows
+	// Storage lists the StorageVolumes the rendered values attach to the tenant cluster. It follows
 	// status.virtualCluster, so on an instance that waits for a template sync it shows what the
 	// tenant cluster runs, not what spec.storage asks for.
 	// +optional

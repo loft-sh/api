@@ -128,14 +128,14 @@ func (f *sharedInformerFactory) ForResource(resource schema.GroupVersionResource
 		return &genericInformer{resource: resource.GroupResource(), informer: f.Management().V1().StorageAccounts().Informer()}, nil
 	case v1.SchemeGroupVersion.WithResource("storageprofiles"):
 		return &genericInformer{resource: resource.GroupResource(), informer: f.Management().V1().StorageProfiles().Informer()}, nil
+	case v1.SchemeGroupVersion.WithResource("storagevolumes"):
+		return &genericInformer{resource: resource.GroupResource(), informer: f.Management().V1().StorageVolumes().Informer()}, nil
 	case v1.SchemeGroupVersion.WithResource("subjectaccessreviews"):
 		return &genericInformer{resource: resource.GroupResource(), informer: f.Management().V1().SubjectAccessReviews().Informer()}, nil
 	case v1.SchemeGroupVersion.WithResource("teams"):
 		return &genericInformer{resource: resource.GroupResource(), informer: f.Management().V1().Teams().Informer()}, nil
 	case v1.SchemeGroupVersion.WithResource("tenants"):
 		return &genericInformer{resource: resource.GroupResource(), informer: f.Management().V1().Tenants().Informer()}, nil
-	case v1.SchemeGroupVersion.WithResource("tenantstorages"):
-		return &genericInformer{resource: resource.GroupResource(), informer: f.Management().V1().TenantStorages().Informer()}, nil
 	case v1.SchemeGroupVersion.WithResource("translatevclusterresourcenames"):
 		return &genericInformer{resource: resource.GroupResource(), informer: f.Management().V1().TranslateVClusterResourceNames().Informer()}, nil
 	case v1.SchemeGroupVersion.WithResource("usagedownloads"):
@@ -204,12 +204,12 @@ func (f *sharedInformerFactory) ForResource(resource schema.GroupVersionResource
 		return &genericInformer{resource: resource.GroupResource(), informer: f.Storage().V1().StorageAccounts().Informer()}, nil
 	case storagev1.SchemeGroupVersion.WithResource("storageprofiles"):
 		return &genericInformer{resource: resource.GroupResource(), informer: f.Storage().V1().StorageProfiles().Informer()}, nil
+	case storagev1.SchemeGroupVersion.WithResource("storagevolumes"):
+		return &genericInformer{resource: resource.GroupResource(), informer: f.Storage().V1().StorageVolumes().Informer()}, nil
 	case storagev1.SchemeGroupVersion.WithResource("teams"):
 		return &genericInformer{resource: resource.GroupResource(), informer: f.Storage().V1().Teams().Informer()}, nil
 	case storagev1.SchemeGroupVersion.WithResource("tenants"):
 		return &genericInformer{resource: resource.GroupResource(), informer: f.Storage().V1().Tenants().Informer()}, nil
-	case storagev1.SchemeGroupVersion.WithResource("tenantstorages"):
-		return &genericInformer{resource: resource.GroupResource(), informer: f.Storage().V1().TenantStorages().Informer()}, nil
 	case storagev1.SchemeGroupVersion.WithResource("users"):
 		return &genericInformer{resource: resource.GroupResource(), informer: f.Storage().V1().Users().Informer()}, nil
 	case storagev1.SchemeGroupVersion.WithResource("virtualclusterinstances"):

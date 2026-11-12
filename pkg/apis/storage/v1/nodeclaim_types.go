@@ -20,8 +20,8 @@ const (
 	// NodeClaimConditionTypePreferredDeletion indicates the NodeClaim is a preferred candidate for deletion.
 	NodeClaimConditionTypePreferredDeletion = "PreferredDeletion"
 	NodeClaimReasonMachineLeftNodeType      = "MachineLeftNodeType"
-	// NodeClaimConditionTypeStorageMounted reports whether a joined worker mounted the tenant
-	// storages its TenantStorageMountsProperty names. It is not part of the claim's readiness: a
+	// NodeClaimConditionTypeStorageMounted reports whether a joined worker mounted the storage
+	// volumes its StorageVolumeMountsProperty names. It is not part of the claim's readiness: a
 	// machine whose mount failed still joins.
 	NodeClaimConditionTypeStorageMounted = "StorageMounted"
 )

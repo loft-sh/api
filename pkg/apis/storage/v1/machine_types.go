@@ -458,6 +458,12 @@ type MachineInBandValidationStatus struct {
 	// +optional
 	StartTime *metav1.Time `json:"startTime,omitempty"`
 
+	// JoinTime is when the attempt's node joined the validation cluster. The
+	// setup of the first test counts from it. Unset while the node joins, and
+	// for an attempt that started on a node the machine already had there.
+	// +optional
+	JoinTime *metav1.Time `json:"joinTime,omitempty"`
+
 	// FinishTime is when the attempt ended, unset while it runs.
 	// +optional
 	FinishTime *metav1.Time `json:"finishTime,omitempty"`

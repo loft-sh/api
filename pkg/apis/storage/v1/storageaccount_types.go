@@ -39,7 +39,7 @@ type StorageAccountDeletionPolicy string
 
 const (
 	// StorageAccountDeletionPolicyDelete removes the vendor tenant, its identities and the
-	// credentials Secret once no TenantStorage uses the tenant any more. The default.
+	// credentials Secret once no StorageVolume uses the tenant any more. The default.
 	StorageAccountDeletionPolicyDelete StorageAccountDeletionPolicy = "Delete"
 	// StorageAccountDeletionPolicyRetain leaves the vendor tenant, its identities and the credentials
 	// Secret in place, so the tenant can be imported again later.
@@ -65,8 +65,8 @@ func StorageAccountName(tenant, connector string) string {
 
 // StorageAccount is one platform tenant's presence on one storage system: the vendor tenant, the
 // identities the platform minted for it and the quota it reserves there, which is the sum of the
-// sizes of the tenant's TenantStorages on that system. The platform creates it with the tenant's
-// first TenantStorage on a connector unless an admin created it first, and it is assigned to the
+// sizes of the tenant's StorageVolumes on that system. The platform creates it with the tenant's
+// first StorageVolume on a connector unless an admin created it first, and it is assigned to the
 // tenant by the tenant.vcluster.com/exclusive-to label like a NetworkEnvironment. The vendor tenant
 // lives as long as the StorageAccount does.
 // +k8s:openapi-gen=true
@@ -172,8 +172,9 @@ type StorageAccountStatus struct {
 	// +optional
 	Tenant *StorageAccountVendor `json:"tenant,omitempty"`
 
-	// Applied holds the tenant document last written, platform-owned keys included except
-	// credentials, so a change in the spec can be diffed against what the vendor has.
+	// Applied is an informational copy of the tenant document last written, platform-owned keys
+	// included except credentials. The controller diffs spec changes against the record in the
+	// credentials Secret, never against this field.
 	// +optional
 	Applied *runtime.RawExtension `json:"applied,omitempty"`
 
@@ -206,11 +207,11 @@ type StorageAccountVendor struct {
 
 // StorageAccountQuota is the reservation the platform keeps on the vendor tenant.
 type StorageAccountQuota struct {
-	// Reserved is the sum of the sizes of the tenant's TenantStorages on this connector, the value
+	// Reserved is the sum of the sizes of the tenant's StorageVolumes on this connector, the value
 	// written to the vendor's quota keys.
 	// +optional
 	Reserved *resource.Quantity `json:"reserved,omitempty"`
-	// Storages is how many TenantStorages the sum covers.
+	// Storages is how many StorageVolumes the sum covers.
 	// +optional
 	Storages int32 `json:"storages,omitempty"`
 }

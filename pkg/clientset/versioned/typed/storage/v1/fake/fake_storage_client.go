@@ -120,16 +120,16 @@ func (c *FakeStorageV1) StorageProfiles() v1.StorageProfileInterface {
 	return newFakeStorageProfiles(c)
 }
 
+func (c *FakeStorageV1) StorageVolumes() v1.StorageVolumeInterface {
+	return newFakeStorageVolumes(c)
+}
+
 func (c *FakeStorageV1) Teams() v1.TeamInterface {
 	return newFakeTeams(c)
 }
 
 func (c *FakeStorageV1) Tenants() v1.TenantInterface {
 	return newFakeTenants(c)
-}
-
-func (c *FakeStorageV1) TenantStorages() v1.TenantStorageInterface {
-	return newFakeTenantStorages(c)
 }
 
 func (c *FakeStorageV1) Users() v1.UserInterface {

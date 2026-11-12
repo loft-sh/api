@@ -6,11 +6,11 @@ import (
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
 
-// TenantStorageCredentials is the S3 access to one tenant storage: where its bucket is and the
+// StorageVolumeCredentials is the S3 access to one storage volume: where its bucket is and the
 // tenant's S3 keys. Served by GET on the credentials subresource to callers that can see the
-// storage and hold get on tenantstorages/credentials. Every read is audited.
+// storage and hold get on storagevolumes/credentials. Every read is audited.
 // +subresource-request
-type TenantStorageCredentials struct {
+type StorageVolumeCredentials struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
 

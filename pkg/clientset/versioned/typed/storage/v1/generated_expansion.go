@@ -56,11 +56,11 @@ type StorageAccountExpansion interface{}
 
 type StorageProfileExpansion interface{}
 
+type StorageVolumeExpansion interface{}
+
 type TeamExpansion interface{}
 
 type TenantExpansion interface{}
-
-type TenantStorageExpansion interface{}
 
 type UserExpansion interface{}
 

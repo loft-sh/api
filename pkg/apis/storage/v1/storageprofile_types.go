@@ -40,9 +40,9 @@ const (
 // +kubebuilder:printcolumn:name="Protocols",type="string",JSONPath=".spec.protocols"
 // +kubebuilder:subresource:status
 
-// StorageProfile is a tier of tenant storage: which storage system it is provisioned on and the
+// StorageProfile is a tier of storage volume: which storage system it is provisioned on and the
 // vendor's own object model, written as YAML and passed to the vendor API as JSON when a
-// TenantStorage is created from it. The platform fills names, sizes and credentials and nothing
+// StorageVolume is created from it. The platform fills names, sizes and credentials and nothing
 // else, so a new vendor setting is a new line in a profile, not a platform change.
 // +k8s:openapi-gen=true
 type StorageProfile struct {
@@ -120,7 +120,7 @@ type StorageProfileSpec struct {
 // (names, tenant_id, policy_id, the path, the quota size and credentials); unknown keys pass through
 // untouched. Capacity keys may use the template "{{ .storage.size }}" and may be written as
 // Kubernetes quantities. At creation the tenant-level documents are copied into the tenant's
-// StorageAccount and the volume-level ones into the TenantStorage.
+// StorageAccount and the volume-level ones into the StorageVolume.
 type VastStorageSection struct {
 	VastTenantSection `json:",inline"`
 	VastVolumeSection `json:",inline"`
@@ -209,10 +209,10 @@ type VastStorageMount struct {
 // WekaStorageSection is WEKA's object model as YAML, as a profile carries it. Each document is sent
 // as the JSON body of the matching create call after the platform fills the keys it owns (names,
 // sizes and credentials); unknown keys pass through untouched. Capacity keys may use the templates
-// "{{ .storage.size }}" (the TenantStorage size) and "{{ .tenant.size }}" (the sum of the tenant's
-// TenantStorage sizes) and may be written with units, which WEKA parses itself. At creation the
+// "{{ .storage.size }}" (the StorageVolume size) and "{{ .tenant.size }}" (the sum of the tenant's
+// StorageVolume sizes) and may be written with units, which WEKA parses itself. At creation the
 // tenant-level documents are copied into the tenant's StorageAccount and the volume-level ones into
-// the TenantStorage.
+// the StorageVolume.
 type WekaStorageSection struct {
 	WekaTenantSection `json:",inline"`
 	WekaVolumeSection `json:",inline"`

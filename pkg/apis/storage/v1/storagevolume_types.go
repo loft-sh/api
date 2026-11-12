@@ -8,55 +8,55 @@ import (
 )
 
 const (
-	// TenantStorageConditionTypeProvisioned is true once the vendor tenant, its credentials and the
+	// StorageVolumeConditionTypeProvisioned is true once the vendor tenant, its credentials and the
 	// volume exist.
-	TenantStorageConditionTypeProvisioned = "Provisioned"
-	// TenantStorageConditionTypeSynced is true when the vendor section has been written in full;
+	StorageVolumeConditionTypeProvisioned = "Provisioned"
+	// StorageVolumeConditionTypeSynced is true when the vendor section has been written in full;
 	// false names the keys the vendor refused on update, so their change was not applied.
-	TenantStorageConditionTypeSynced = "Synced"
-	// TenantStorageConditionTypeObjectReady is true once the storage's bucket and the tenant's S3
+	StorageVolumeConditionTypeSynced = "Synced"
+	// StorageVolumeConditionTypeObjectReady is true once the storage's bucket and the tenant's S3
 	// identity exist. Only present when the profile lists s3; file access does not depend on it.
-	TenantStorageConditionTypeObjectReady = "ObjectReady"
+	StorageVolumeConditionTypeObjectReady = "ObjectReady"
 )
 
-var TenantStorageConditions = []agentstoragev1.ConditionType{
-	TenantStorageConditionTypeProvisioned,
-	TenantStorageConditionTypeSynced,
-	TenantStorageConditionTypeObjectReady,
+var StorageVolumeConditions = []agentstoragev1.ConditionType{
+	StorageVolumeConditionTypeProvisioned,
+	StorageVolumeConditionTypeSynced,
+	StorageVolumeConditionTypeObjectReady,
 }
 
-// TenantStoragePhase is where a TenantStorage is in its lifecycle.
-type TenantStoragePhase string
+// StorageVolumePhase is where a StorageVolume is in its lifecycle.
+type StorageVolumePhase string
 
 const (
-	TenantStoragePhasePending   TenantStoragePhase = "Pending"
-	TenantStoragePhaseAvailable TenantStoragePhase = "Available"
-	TenantStoragePhaseFailed    TenantStoragePhase = "Failed"
+	StorageVolumePhasePending   StorageVolumePhase = "Pending"
+	StorageVolumePhaseAvailable StorageVolumePhase = "Available"
+	StorageVolumePhaseFailed    StorageVolumePhase = "Failed"
 )
 
-// TenantStorageMountsProperty is the NodeClaim property that lists the TenantStorages a machine
+// StorageVolumeMountsProperty is the NodeClaim property that lists the StorageVolumes a machine
 // mounts at boot as comma separated <storage>:<path> pairs, for example
 // "datasets:/mnt/datasets,scratch:/mnt/scratch". The <storage>=<path> form is accepted too.
-const TenantStorageMountsProperty = "vcluster.com/storage-mounts"
+const StorageVolumeMountsProperty = "vcluster.com/storage-mounts"
 
-// TenantStorageClientOptionsProperty carries a machine's WEKA client-mode mount options, comma
+// StorageVolumeClientOptionsProperty carries a machine's WEKA client-mode mount options, comma
 // separated in the mount option grammar, for example "num_cores=1" or "net=udp". They set up the
 // client container the host's first mount creates (its NIC, dedicated cores and pinned memory),
 // which every later mount and csi-wekafs reuse, so they belong to the machine and not to the storage
 // tier. Only client-mode keys are accepted; a storage's own options stay in its mount section. VAST
 // mounts over NFS, which has no client container, so its mount script ignores the property.
-const TenantStorageClientOptionsProperty = "vcluster.com/storage-client-options"
+const StorageVolumeClientOptionsProperty = "vcluster.com/storage-client-options"
 
 const (
-	// TenantStorageMountLabel is the label a worker that mounts tenant storage puts on its own
-	// Node once it joined, TenantStorageMountSucceeded or TenantStorageMountFailed. A workload
+	// StorageVolumeMountLabel is the label a worker that mounts storage volume puts on its own
+	// Node once it joined, StorageVolumeMountSucceeded or StorageVolumeMountFailed. A workload
 	// that needs the mounts selects nodes labelled succeeded.
-	TenantStorageMountLabel = "storage.vcluster.com/mount"
-	// TenantStorageMountMessageAnnotation carries the mount step's last output lines on the Node.
-	TenantStorageMountMessageAnnotation = "storage.vcluster.com/mount-message"
+	StorageVolumeMountLabel = "storage.vcluster.com/mount"
+	// StorageVolumeMountMessageAnnotation carries the mount step's last output lines on the Node.
+	StorageVolumeMountMessageAnnotation = "storage.vcluster.com/mount-message"
 
-	TenantStorageMountSucceeded = "succeeded"
-	TenantStorageMountFailed    = "failed"
+	StorageVolumeMountSucceeded = "succeeded"
+	StorageVolumeMountFailed    = "failed"
 )
 
 // +genclient
@@ -68,46 +68,46 @@ const (
 // +kubebuilder:printcolumn:name="Size",type="string",JSONPath=".spec.size"
 // +kubebuilder:subresource:status
 
-// TenantStorage is storage of one tier assigned to one tenant. A platform admin creates it with a
+// StorageVolume is storage of one tier assigned to one tenant. A platform admin creates it with a
 // profile and a size and assigns it with the tenant.vcluster.com/exclusive-to label, like a
-// NetworkEnvironment. The first TenantStorage of a tenant on a storage system creates the tenant's
-// StorageAccount there unless an admin created it first; every TenantStorage is one volume (a
+// NetworkEnvironment. The first StorageVolume of a tenant on a storage system creates the tenant's
+// StorageAccount there unless an admin created it first; every StorageVolume is one volume (a
 // filesystem on WEKA) the tenant's clusters and machines mount.
 // +k8s:openapi-gen=true
-type TenantStorage struct {
+type StorageVolume struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
 
-	Spec   TenantStorageSpec   `json:"spec,omitempty"`
-	Status TenantStorageStatus `json:"status,omitempty"`
+	Spec   StorageVolumeSpec   `json:"spec,omitempty"`
+	Status StorageVolumeStatus `json:"status,omitempty"`
 }
 
-func (a *TenantStorage) GetConditions() agentstoragev1.Conditions {
+func (a *StorageVolume) GetConditions() agentstoragev1.Conditions {
 	return a.Status.Conditions
 }
 
-func (a *TenantStorage) SetConditions(conditions agentstoragev1.Conditions) {
+func (a *StorageVolume) SetConditions(conditions agentstoragev1.Conditions) {
 	a.Status.Conditions = conditions
 }
 
-func (a *TenantStorage) GetOwner() *UserOrTeam {
+func (a *StorageVolume) GetOwner() *UserOrTeam {
 	return a.Spec.Owner
 }
 
-func (a *TenantStorage) SetOwner(userOrTeam *UserOrTeam) {
+func (a *StorageVolume) SetOwner(userOrTeam *UserOrTeam) {
 	a.Spec.Owner = userOrTeam
 }
 
-func (a *TenantStorage) GetAccess() []Access {
+func (a *StorageVolume) GetAccess() []Access {
 	return a.Spec.Access
 }
 
-func (a *TenantStorage) SetAccess(access []Access) {
+func (a *StorageVolume) SetAccess(access []Access) {
 	a.Spec.Access = access
 }
 
-// TenantStorageSpec defines the storage a tenant gets.
-type TenantStorageSpec struct {
+// StorageVolumeSpec defines the storage a tenant gets.
+type StorageVolumeSpec struct {
 	// DisplayName is the name that should be displayed in the UI
 	// +optional
 	DisplayName string `json:"displayName,omitempty"`
@@ -153,11 +153,11 @@ type TenantStorageSpec struct {
 	Encrypted bool `json:"encrypted,omitempty"`
 }
 
-// TenantStorageStatus holds what the platform observed on the vendor side.
-type TenantStorageStatus struct {
+// StorageVolumeStatus holds what the platform observed on the vendor side.
+type StorageVolumeStatus struct {
 	// Phase is the lifecycle phase.
 	// +optional
-	Phase TenantStoragePhase `json:"phase,omitempty"`
+	Phase StorageVolumePhase `json:"phase,omitempty"`
 
 	// Reason is a machine readable reason for the phase.
 	// +optional
@@ -186,20 +186,20 @@ type TenantStorageStatus struct {
 
 	// Volume identifies the vendor-side objects that back the storage.
 	// +optional
-	Volume *TenantStorageVolume `json:"volume,omitempty"`
+	Volume *StorageVolumeVendor `json:"volume,omitempty"`
 
 	// Capacity is the last observed size, used and available capacity of the volume.
 	// +optional
-	Capacity *TenantStorageCapacity `json:"capacity,omitempty"`
+	Capacity *StorageVolumeCapacity `json:"capacity,omitempty"`
 
 	// Applied holds the volume document last written, so a change in the spec can be diffed against
 	// what the vendor has.
 	// +optional
-	Applied *TenantStorageApplied `json:"applied,omitempty"`
+	Applied *StorageVolumeApplied `json:"applied,omitempty"`
 
 	// CredentialsSecret names the Secret in the platform namespace that holds the vendor tenant's
 	// administrative, CSI and mount identities. It belongs to the StorageAccount and is shared by the
-	// TenantStorages of one tenant on one storage system.
+	// StorageVolumes of one tenant on one storage system.
 	// +optional
 	CredentialsSecret string `json:"credentialsSecret,omitempty"`
 
@@ -212,11 +212,11 @@ type TenantStorageStatus struct {
 	// the bucket out of the tenant's policy; a tenant reads it only while ObjectReady is True. Only
 	// for a storage whose profile lists s3.
 	// +optional
-	Object *TenantStorageObject `json:"object,omitempty"`
+	Object *StorageVolumeObject `json:"object,omitempty"`
 }
 
-// TenantStorageObject is where a storage's data is reached over S3.
-type TenantStorageObject struct {
+// StorageVolumeObject is where a storage's data is reached over S3.
+type StorageVolumeObject struct {
 	// Endpoint is the S3 endpoint URL the connector names.
 	// +optional
 	Endpoint string `json:"endpoint,omitempty"`
@@ -228,8 +228,8 @@ type TenantStorageObject struct {
 	PathStyle bool `json:"pathStyle,omitempty"`
 }
 
-// TenantStorageVolume identifies the vendor objects behind a TenantStorage.
-type TenantStorageVolume struct {
+// StorageVolumeVendor identifies the vendor objects behind a StorageVolume.
+type StorageVolumeVendor struct {
 	// Tenant is the vendor-side tenant name.
 	// +optional
 	Tenant string `json:"tenant,omitempty"`
@@ -247,8 +247,8 @@ type TenantStorageVolume struct {
 	CreatedByPlatform bool `json:"createdByPlatform,omitempty"`
 }
 
-// TenantStorageCapacity is the observed capacity of a volume.
-type TenantStorageCapacity struct {
+// StorageVolumeCapacity is the observed capacity of a volume.
+type StorageVolumeCapacity struct {
 	// +optional
 	Size *resource.Quantity `json:"size,omitempty"`
 	// +optional
@@ -257,8 +257,8 @@ type TenantStorageCapacity struct {
 	Available *resource.Quantity `json:"available,omitempty"`
 }
 
-// TenantStorageApplied holds the vendor document last written.
-type TenantStorageApplied struct {
+// StorageVolumeApplied holds the vendor document last written.
+type StorageVolumeApplied struct {
 	// Volume is the volume document as written, platform-owned keys included.
 	// +optional
 	Volume *runtime.RawExtension `json:"volume,omitempty"`
@@ -266,13 +266,13 @@ type TenantStorageApplied struct {
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
 
-// TenantStorageList contains a list of TenantStorage
-type TenantStorageList struct {
+// StorageVolumeList contains a list of StorageVolume
+type StorageVolumeList struct {
 	metav1.TypeMeta `json:",inline"`
 	metav1.ListMeta `json:"metadata,omitempty"`
-	Items           []TenantStorage `json:"items"`
+	Items           []StorageVolume `json:"items"`
 }
 
 func init() {
-	SchemeBuilder.Register(&TenantStorage{}, &TenantStorageList{})
+	SchemeBuilder.Register(&StorageVolume{}, &StorageVolumeList{})
 }

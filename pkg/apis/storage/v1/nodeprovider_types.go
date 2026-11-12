@@ -7,7 +7,6 @@ import (
 )
 
 const (
-	NodeProviderTypeBCM              string = "bcm"
 	NodeProviderTypeKubeVirt         string = "kubeVirt"
 	NodeProviderTypeTerraform        string = "terraform"
 	NodeProviderTypeClusterAPI       string = "clusterAPI"
@@ -51,10 +50,6 @@ const (
 	// NodeTypeMaxCapacityAnnotation is the annotation used to store the maximum capacity of a NodeType
 	NodeTypeMaxCapacityAnnotation = "autoscaling.loft.sh/max-capacity"
 
-	// BCM specific annotations
-	NodeTypeNodesAnnotation      = "bcm.loft.sh/nodes"
-	NodeTypeNodeGroupsAnnotation = "bcm.loft.sh/node-groups"
-
 	// KubeVirt specific annotations
 	NodeTypeVMTemplateAnnotation = "kubevirt.vcluster.com/vm-template"
 
@@ -90,15 +85,11 @@ func (a *NodeProvider) SetConditions(conditions agentstoragev1.Conditions) {
 }
 
 // NodeProviderSpec defines the desired state of NodeProvider.
-// Only one of the provider types (Pods, BCM, Kubevirt) should be specified at a time.
+// Exactly one provider type must be set.
 type NodeProviderSpec struct {
 	// Properties are global properties that are applied to all node claims and environments managed by this provider.
 	// +optional
 	Properties map[string]string `json:"properties,omitempty"`
-
-	// BCM configures a node provider for BCM Bare Metal Cloud environments.
-	// +optional
-	BCM *NodeProviderBCM `json:"bcm,omitempty"`
 
 	// Kubevirt configures a node provider using KubeVirt, enabling virtual machines
 	// to be provisioned as nodes within a vCluster.
@@ -182,6 +173,23 @@ type NodeProviderValidationTier struct {
 	// The tests run in it too. Defaults to "vcluster-platform".
 	// +optional
 	SuiteConfigMapNamespace string `json:"suiteConfigMapNamespace,omitempty"`
+
+	// JoinTimeout is how long a machine has to join the validation cluster once the platform starts
+	// joining it. Defaults to 1h.
+	// +optional
+	JoinTimeout *metav1.Duration `json:"joinTimeout,omitempty"`
+
+	// SetupTimeout is how long the platform keeps trying to set up each test of the suite before it
+	// fails the attempt as SetupFailed: from the start of the attempt for the first test, and from
+	// the end of the test before it for a later one. How long a test may run is the suite's, set in
+	// the test itself. Defaults to 45m.
+	// +optional
+	SetupTimeout *metav1.Duration `json:"setupTimeout,omitempty"`
+
+	// TestPollInterval is how often the platform checks a running test for its result. A suite whose
+	// tests run for hours can be checked less often. Defaults to 1m.
+	// +optional
+	TestPollInterval *metav1.Duration `json:"testPollInterval,omitempty"`
 }
 
 // NodeProviderValidationVirtualClusterRef references a tenant cluster by name and project.
@@ -201,18 +209,6 @@ type NodeProviderClusterAPI struct {
 
 	// NodeTypes define NodeTypes that should be automatically created for this provider.
 	NodeTypes []ClusterAPINodeTypeSpec `json:"nodeTypes,omitempty"`
-}
-
-// NodeProviderBCMSpec defines the configuration for a BCM node provider.
-type NodeProviderBCM struct {
-	// SecretRef is a reference to secret with keys for BCM auth.
-	SecretRef *NamespacedRef `json:"secretRef"`
-
-	// Endpoint is an address for head node.
-	Endpoint string `json:"endpoint"`
-
-	// NodeTypes define NodeTypes that should be automatically created for this provider.
-	NodeTypes []BCMNodeTypeSpec `json:"nodeTypes,omitempty"`
 }
 
 // NodeProviderNICo configures a node provider backed by the NVIDIA Infra
@@ -392,7 +388,7 @@ type TerraformTemplateSourceGit struct {
 	// Credentials is the reference to a secret containing the username and password for the git repository.
 	Credentials *SecretRef `json:"credentials,omitempty"`
 
-	// FetchInterval is the interval to use for refetching the git repository. Defaults to 5m. Refetching only checks for remote changes but does not do a complete repull.
+	// FetchInterval is the interval to use for refetching the git repository. Defaults to 1m. Refetching only checks for remote changes but does not do a complete repull.
 	FetchInterval string `json:"fetchInterval,omitempty"`
 
 	// ExtraEnv is the extra environment variables to use for the clone
@@ -407,16 +403,6 @@ type TerraformNodeTypeSpec struct {
 
 	// MaxCapacity is the maximum number of nodes that can be created for this NodeType.
 	MaxCapacity int `json:"maxCapacity,omitempty"`
-}
-
-type BCMNodeTypeSpec struct {
-	NamedNodeTypeSpec `json:",inline"`
-
-	// Nodes specifies nodes.
-	Nodes []string `json:"nodes,omitempty"`
-
-	// NodeGroups is the name of the node groups to use for this provider.
-	NodeGroups []string `json:"nodeGroups,omitempty"`
 }
 
 type NamespacedRef struct {

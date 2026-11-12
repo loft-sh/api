@@ -141,9 +141,9 @@ type ConnectorSpec struct {
 	Observability *ConnectorObservabilitySpec `json:"observability,omitempty"`
 
 	// Storage is the storage connector payload: how the platform reaches a storage system it
-	// provisions tenant storage on. Exactly one payload section must be set. The fields of its
+	// provisions storage volume on. Exactly one payload section must be set. The fields of its
 	// vendor block mirror the Data keys of the backing Secret one to one, so a connector written
-	// through this API is exactly what the tenant storage controller reads.
+	// through this API is exactly what the storage volume controller reads.
 	// +optional
 	Storage *ConnectorStorageSpec `json:"storage,omitempty"`
 }
@@ -161,8 +161,8 @@ const (
 	StorageConnectorProviderVast StorageConnectorProvider = "vast"
 )
 
-// ConnectorStorageSpec configures the storage system StorageProfiles provision tenant storage on.
-// A StorageProfile names the connector through spec.connectorRef and the tenant storage controller
+// ConnectorStorageSpec configures the storage system StorageProfiles provision storage volume on.
+// A StorageProfile names the connector through spec.connectorRef and the storage volume controller
 // logs in with these credentials to create vendor tenants, identities and volumes.
 //
 // One field per block is a credential under the Connector type's view rule: weka.password and
