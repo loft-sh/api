@@ -78,16 +78,11 @@ type UserSpec struct {
 	// +optional
 	CodesRef *SecretRef `json:"codesRef,omitempty"`
 
-	// ImagePullSecrets holds secret references to image pull
-	// secrets the user has access to.
-	// +optional
-	ImagePullSecrets []*KindSecretRef `json:"imagePullSecrets,omitempty"`
-
 	// TokenGeneration can be used to invalidate all user tokens
 	// +optional
 	TokenGeneration int64 `json:"tokenGeneration,omitempty"`
 
-	// If disabled is true, an user will not be able to login anymore. All other user resources
+	// If disabled is true, a user will not be able to login anymore. All other user resources
 	// are unaffected and other users can still interact with this user
 	// +optional
 	Disabled bool `json:"disabled,omitempty"`
@@ -99,27 +94,17 @@ type UserSpec struct {
 	// Access holds the access rights for users and teams
 	// +optional
 	Access []Access `json:"access,omitempty"`
+
+	// ExtraClaims are additional claims that have been added to the user by an admin.
+	// +optional
+	ExtraClaims map[string]string `json:"extraClaims,omitempty"`
 }
 
-// UserStatus holds the status of an user
+// UserStatus holds the status of a user
 type UserStatus struct {
 	// Teams the user is currently part of
 	// +optional
 	Teams []string `json:"teams,omitempty"`
-}
-
-// KindSecretRef is the reference to a secret containing the user password
-type KindSecretRef struct {
-	// APIGroup is the api group of the secret
-	APIGroup string `json:"apiGroup,omitempty"`
-	// Kind is the kind of the secret
-	Kind string `json:"kind,omitempty"`
-	// +optional
-	SecretName string `json:"secretName,omitempty"`
-	// +optional
-	SecretNamespace string `json:"secretNamespace,omitempty"`
-	// +optional
-	Key string `json:"key,omitempty"`
 }
 
 // SecretRef is the reference to a secret containing the user password
