@@ -1,17 +1,24 @@
 package v1
 
 import (
-	clusterv1 "github.com/loft-sh/agentapi/v4/pkg/apis/loft/cluster/v1"
-	agentstoragev1 "github.com/loft-sh/agentapi/v4/pkg/apis/loft/storage/v1"
-	storagev1 "github.com/loft-sh/api/v4/pkg/apis/storage/v1"
+	clusterv1 "github.com/loft-sh/agentapi/v5/pkg/apis/loft/cluster/v1"
+	agentstoragev1 "github.com/loft-sh/agentapi/v5/pkg/apis/loft/storage/v1"
+	storagev1 "github.com/loft-sh/api/v5/pkg/apis/storage/v1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 )
 
 // +genclient
 // +genclient:noStatus
-// +genclient:method=GetKubeConfig,verb=create,subresource=kubeconfig,input=github.com/loft-sh/api/v4/pkg/apis/management/v1.VirtualClusterInstanceKubeConfig,result=github.com/loft-sh/api/v4/pkg/apis/management/v1.VirtualClusterInstanceKubeConfig
-// +genclient:method=GetAccessKey,verb=get,subresource=accesskey,result=github.com/loft-sh/api/v4/pkg/apis/management/v1.VirtualClusterAccessKey
-// +genclient:method=GetExternalDatabase,verb=create,subresource=externaldatabase,input=github.com/loft-sh/api/v4/pkg/apis/management/v1.VirtualClusterExternalDatabase,result=github.com/loft-sh/api/v4/pkg/apis/management/v1.VirtualClusterExternalDatabase
+// +genclient:method=GetKubeConfig,verb=create,subresource=kubeconfig,input=github.com/loft-sh/api/v5/pkg/apis/management/v1.VirtualClusterInstanceKubeConfig,result=github.com/loft-sh/api/v5/pkg/apis/management/v1.VirtualClusterInstanceKubeConfig
+// +genclient:method=GetAccessKey,verb=get,subresource=accesskey,result=github.com/loft-sh/api/v5/pkg/apis/management/v1.VirtualClusterAccessKey
+// +genclient:method=GetExternalDatabase,verb=create,subresource=externaldatabase,input=github.com/loft-sh/api/v5/pkg/apis/management/v1.VirtualClusterExternalDatabase,result=github.com/loft-sh/api/v5/pkg/apis/management/v1.VirtualClusterExternalDatabase
+// +genclient:method=GetNodeAccessKey,verb=create,subresource=nodeaccesskey,input=github.com/loft-sh/api/v5/pkg/apis/management/v1.VirtualClusterNodeAccessKey,result=github.com/loft-sh/api/v5/pkg/apis/management/v1.VirtualClusterNodeAccessKey
+// +genclient:method=GetSnapshotCredentials,verb=create,subresource=snapshotcredentials,input=github.com/loft-sh/api/v5/pkg/apis/management/v1.VirtualClusterSnapshotCredentials,result=github.com/loft-sh/api/v5/pkg/apis/management/v1.VirtualClusterSnapshotCredentials
+// +genclient:method=GetStandaloneETCDPeers,verb=create,subresource=standalone,input=github.com/loft-sh/api/v5/pkg/apis/management/v1.VirtualClusterStandalone,result=github.com/loft-sh/api/v5/pkg/apis/management/v1.VirtualClusterStandalone
+// +genclient:method=GetShellPod,verb=create,subresource=shell,input=github.com/loft-sh/api/v5/pkg/apis/management/v1.VirtualClusterInstanceShell,result=github.com/loft-sh/api/v5/pkg/apis/management/v1.VirtualClusterInstanceShell
+// +genclient:method=GetDebugShell,verb=create,subresource=debug-shell,input=github.com/loft-sh/api/v5/pkg/apis/management/v1.VirtualClusterInstanceDebugShell,result=github.com/loft-sh/api/v5/pkg/apis/management/v1.VirtualClusterInstanceDebugShell
+// +genclient:method=GetJoinScript,verb=create,subresource=joinscript,input=github.com/loft-sh/api/v5/pkg/apis/management/v1.VirtualClusterInstanceJoinScript,result=github.com/loft-sh/api/v5/pkg/apis/management/v1.VirtualClusterInstanceJoinScript
+// +genclient:method=GetObservabilityConnector,verb=create,subresource=observabilityconnector,input=github.com/loft-sh/api/v5/pkg/apis/management/v1.VirtualClusterObservabilityConnector,result=github.com/loft-sh/api/v5/pkg/apis/management/v1.VirtualClusterObservabilityConnector
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
 
 // VirtualClusterInstance holds the VirtualClusterInstance information
@@ -20,7 +27,17 @@ import (
 // +subresource:request=VirtualClusterInstanceLog,path=log,kind=VirtualClusterInstanceLog,rest=VirtualClusterInstanceLogREST
 // +subresource:request=VirtualClusterInstanceKubeConfig,path=kubeconfig,kind=VirtualClusterInstanceKubeConfig,rest=VirtualClusterInstanceKubeConfigREST
 // +subresource:request=VirtualClusterAccessKey,path=accesskey,kind=VirtualClusterAccessKey,rest=VirtualClusterAccessKeyREST
+// +subresource:request=VirtualClusterNodeAccessKey,path=nodeaccesskey,kind=VirtualClusterNodeAccessKey,rest=VirtualClusterNodeAccessKeyREST
+// +subresource:request=VirtualClusterSnapshotCredentials,path=snapshotcredentials,kind=VirtualClusterSnapshotCredentials,rest=VirtualClusterSnapshotCredentialsREST
 // +subresource:request=VirtualClusterExternalDatabase,path=externaldatabase,kind=VirtualClusterExternalDatabase,rest=VirtualClusterExternalDatabaseREST
+// +subresource:request=VirtualClusterStandalone,path=standalone,kind=VirtualClusterStandalone,rest=VirtualClusterStandaloneREST
+// +subresource:request=VirtualClusterInstanceSnapshot,path=snapshot,kind=VirtualClusterInstanceSnapshot,rest=VirtualClusterInstanceSnapshotREST
+// +subresource:request=VirtualClusterInstanceShell,path=shell,kind=VirtualClusterInstanceShell,rest=VirtualClusterInstanceShellREST
+// +subresource:request=VirtualClusterInstanceDebugShell,path=debug-shell,kind=VirtualClusterInstanceDebugShell,rest=VirtualClusterInstanceDebugShellREST
+// +subresource:request=VirtualClusterControlPlanePods,path=controlplanepods,kind=VirtualClusterControlPlanePods,rest=VirtualClusterControlPlanePodsREST
+// +subresource:request=VirtualClusterResourceUsage,path=resourceusage,kind=VirtualClusterResourceUsage,rest=VirtualClusterResourceUsageREST
+// +subresource:request=VirtualClusterInstanceJoinScript,path=joinscript,kind=VirtualClusterInstanceJoinScript,rest=VirtualClusterInstanceJoinScriptREST
+// +subresource:request=VirtualClusterObservabilityConnector,path=observabilityconnector,kind=VirtualClusterObservabilityConnector,rest=VirtualClusterObservabilityConnectorREST
 type VirtualClusterInstance struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
