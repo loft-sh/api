@@ -4,7 +4,7 @@ import metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
 
-// VirtualClusterInstanceKubeConfig holds kube config request and response data for virtual clusters
+// VirtualClusterInstanceKubeConfig holds kube config request and response data for tenant clusters
 // +subresource-request
 type VirtualClusterInstanceKubeConfig struct {
 	metav1.TypeMeta   `json:",inline"`
@@ -23,6 +23,12 @@ type VirtualClusterInstanceKubeConfigSpec struct {
 	// which is typically one year.
 	// +optional
 	CertificateTTL *int32 `json:"certificateTTL,omitempty"`
+	// Server allows user to override server in the kubeconfig.
+	// +optional
+	Server string `json:"server,omitempty"`
+	// ClientCert, if set to true, will return kube config with generated client certs instead of platform token
+	// +optional
+	ClientCert bool `json:"clientCert,omitempty"`
 }
 
 type VirtualClusterInstanceKubeConfigStatus struct {

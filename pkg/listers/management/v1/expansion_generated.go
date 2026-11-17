@@ -14,6 +14,26 @@ type AnnouncementListerExpansion interface{}
 // AppLister.
 type AppListerExpansion interface{}
 
+// AppInstanceListerExpansion allows custom methods to be added to
+// AppInstanceLister.
+type AppInstanceListerExpansion interface{}
+
+// AppInstanceNamespaceListerExpansion allows custom methods to be added to
+// AppInstanceNamespaceLister.
+type AppInstanceNamespaceListerExpansion interface{}
+
+// ArgoCDApplicationListerExpansion allows custom methods to be added to
+// ArgoCDApplicationLister.
+type ArgoCDApplicationListerExpansion interface{}
+
+// ArgoCDApplicationNamespaceListerExpansion allows custom methods to be added to
+// ArgoCDApplicationNamespaceLister.
+type ArgoCDApplicationNamespaceListerExpansion interface{}
+
+// ArgoCDApplicationTemplateListerExpansion allows custom methods to be added to
+// ArgoCDApplicationTemplateLister.
+type ArgoCDApplicationTemplateListerExpansion interface{}
+
 // BackupListerExpansion allows custom methods to be added to
 // BackupLister.
 type BackupListerExpansion interface{}
@@ -38,25 +58,9 @@ type ConfigListerExpansion interface{}
 // ConvertVirtualClusterConfigLister.
 type ConvertVirtualClusterConfigListerExpansion interface{}
 
-// DevPodEnvironmentTemplateListerExpansion allows custom methods to be added to
-// DevPodEnvironmentTemplateLister.
-type DevPodEnvironmentTemplateListerExpansion interface{}
-
-// DevPodWorkspaceInstanceListerExpansion allows custom methods to be added to
-// DevPodWorkspaceInstanceLister.
-type DevPodWorkspaceInstanceListerExpansion interface{}
-
-// DevPodWorkspaceInstanceNamespaceListerExpansion allows custom methods to be added to
-// DevPodWorkspaceInstanceNamespaceLister.
-type DevPodWorkspaceInstanceNamespaceListerExpansion interface{}
-
-// DevPodWorkspacePresetListerExpansion allows custom methods to be added to
-// DevPodWorkspacePresetLister.
-type DevPodWorkspacePresetListerExpansion interface{}
-
-// DevPodWorkspaceTemplateListerExpansion allows custom methods to be added to
-// DevPodWorkspaceTemplateLister.
-type DevPodWorkspaceTemplateListerExpansion interface{}
+// DatabaseConnectorListerExpansion allows custom methods to be added to
+// DatabaseConnectorLister.
+type DatabaseConnectorListerExpansion interface{}
 
 // DirectClusterEndpointTokenListerExpansion allows custom methods to be added to
 // DirectClusterEndpointTokenLister.
@@ -78,17 +82,57 @@ type IngressAuthTokenListerExpansion interface{}
 // LicenseLister.
 type LicenseListerExpansion interface{}
 
-// LicenseTokenListerExpansion allows custom methods to be added to
-// LicenseTokenLister.
-type LicenseTokenListerExpansion interface{}
-
 // LoftUpgradeListerExpansion allows custom methods to be added to
 // LoftUpgradeLister.
 type LoftUpgradeListerExpansion interface{}
 
+// MachineConfigTemplateListerExpansion allows custom methods to be added to
+// MachineConfigTemplateLister.
+type MachineConfigTemplateListerExpansion interface{}
+
+// MachineConfigTemplateNamespaceListerExpansion allows custom methods to be added to
+// MachineConfigTemplateNamespaceLister.
+type MachineConfigTemplateNamespaceListerExpansion interface{}
+
+// NetworkPeerListerExpansion allows custom methods to be added to
+// NetworkPeerLister.
+type NetworkPeerListerExpansion interface{}
+
+// NodeClaimListerExpansion allows custom methods to be added to
+// NodeClaimLister.
+type NodeClaimListerExpansion interface{}
+
+// NodeClaimNamespaceListerExpansion allows custom methods to be added to
+// NodeClaimNamespaceLister.
+type NodeClaimNamespaceListerExpansion interface{}
+
+// NodeEnvironmentListerExpansion allows custom methods to be added to
+// NodeEnvironmentLister.
+type NodeEnvironmentListerExpansion interface{}
+
+// NodeEnvironmentNamespaceListerExpansion allows custom methods to be added to
+// NodeEnvironmentNamespaceLister.
+type NodeEnvironmentNamespaceListerExpansion interface{}
+
+// NodeProfileListerExpansion allows custom methods to be added to
+// NodeProfileLister.
+type NodeProfileListerExpansion interface{}
+
+// NodeProviderListerExpansion allows custom methods to be added to
+// NodeProviderLister.
+type NodeProviderListerExpansion interface{}
+
+// NodeTypeListerExpansion allows custom methods to be added to
+// NodeTypeLister.
+type NodeTypeListerExpansion interface{}
+
 // OIDCClientListerExpansion allows custom methods to be added to
 // OIDCClientLister.
 type OIDCClientListerExpansion interface{}
+
+// OSImageListerExpansion allows custom methods to be added to
+// OSImageLister.
+type OSImageListerExpansion interface{}
 
 // OwnedAccessKeyListerExpansion allows custom methods to be added to
 // OwnedAccessKeyLister.
@@ -114,13 +158,17 @@ type RedirectTokenListerExpansion interface{}
 // RegisterVirtualClusterLister.
 type RegisterVirtualClusterListerExpansion interface{}
 
+// RenderVirtualClusterTemplateListerExpansion allows custom methods to be added to
+// RenderVirtualClusterTemplateLister.
+type RenderVirtualClusterTemplateListerExpansion interface{}
+
 // ResetAccessKeyListerExpansion allows custom methods to be added to
 // ResetAccessKeyLister.
 type ResetAccessKeyListerExpansion interface{}
 
-// RunnerListerExpansion allows custom methods to be added to
-// RunnerLister.
-type RunnerListerExpansion interface{}
+// SSHKeyListerExpansion allows custom methods to be added to
+// SSHKeyLister.
+type SSHKeyListerExpansion interface{}
 
 // SelfListerExpansion allows custom methods to be added to
 // SelfLister.
@@ -150,21 +198,37 @@ type SpaceInstanceNamespaceListerExpansion interface{}
 // SpaceTemplateLister.
 type SpaceTemplateListerExpansion interface{}
 
+// StackInstanceListerExpansion allows custom methods to be added to
+// StackInstanceLister.
+type StackInstanceListerExpansion interface{}
+
+// StackInstanceNamespaceListerExpansion allows custom methods to be added to
+// StackInstanceNamespaceLister.
+type StackInstanceNamespaceListerExpansion interface{}
+
+// StackTemplateListerExpansion allows custom methods to be added to
+// StackTemplateLister.
+type StackTemplateListerExpansion interface{}
+
 // SubjectAccessReviewListerExpansion allows custom methods to be added to
 // SubjectAccessReviewLister.
 type SubjectAccessReviewListerExpansion interface{}
-
-// TaskListerExpansion allows custom methods to be added to
-// TaskLister.
-type TaskListerExpansion interface{}
 
 // TeamListerExpansion allows custom methods to be added to
 // TeamLister.
 type TeamListerExpansion interface{}
 
+// TenantListerExpansion allows custom methods to be added to
+// TenantLister.
+type TenantListerExpansion interface{}
+
 // TranslateVClusterResourceNameListerExpansion allows custom methods to be added to
 // TranslateVClusterResourceNameLister.
 type TranslateVClusterResourceNameListerExpansion interface{}
+
+// UsageDownloadListerExpansion allows custom methods to be added to
+// UsageDownloadLister.
+type UsageDownloadListerExpansion interface{}
 
 // UserListerExpansion allows custom methods to be added to
 // UserLister.
@@ -177,6 +241,10 @@ type VirtualClusterInstanceListerExpansion interface{}
 // VirtualClusterInstanceNamespaceListerExpansion allows custom methods to be added to
 // VirtualClusterInstanceNamespaceLister.
 type VirtualClusterInstanceNamespaceListerExpansion interface{}
+
+// VirtualClusterSchemaListerExpansion allows custom methods to be added to
+// VirtualClusterSchemaLister.
+type VirtualClusterSchemaListerExpansion interface{}
 
 // VirtualClusterTemplateListerExpansion allows custom methods to be added to
 // VirtualClusterTemplateLister.
