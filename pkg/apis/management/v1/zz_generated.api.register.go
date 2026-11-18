@@ -127,6 +127,7 @@ func addKnownTypes(scheme *runtime.Scheme) error {
 		&StackInstance{},
 		&StackInstanceList{},
 		&StackInstanceOutputs{},
+		&StackInstanceView{},
 		&StackTemplate{},
 		&StackTemplateList{},
 		&StorageAccount{},
@@ -135,7 +136,6 @@ func addKnownTypes(scheme *runtime.Scheme) error {
 		&StorageProfileList{},
 		&StorageVolume{},
 		&StorageVolumeList{},
-		&StorageVolumeCredentials{},
 		&SubjectAccessReview{},
 		&SubjectAccessReviewList{},
 		&Team{},
@@ -402,6 +402,12 @@ var (
 			nil,
 			management.NewStackInstanceOutputsREST,
 		),
+		builders.NewApiResourceWithStorage(
+			management.InternalStackInstanceViewREST,
+			func() runtime.Object { return &StackInstanceView{} }, // Register versioned resource
+			nil,
+			management.NewStackInstanceViewREST,
+		),
 		management.ManagementStackTemplateStorage,
 		management.ManagementStorageAccountStorage,
 		builders.NewApiResourceWithStorage(
@@ -416,12 +422,6 @@ var (
 			func() runtime.Object { return &StorageVolume{} },     // Register versioned resource
 			func() runtime.Object { return &StorageVolumeList{} }, // Register versioned resource list
 			management.NewStorageVolumeStatusREST),
-		builders.NewApiResourceWithStorage(
-			management.InternalStorageVolumeCredentialsREST,
-			func() runtime.Object { return &StorageVolumeCredentials{} }, // Register versioned resource
-			nil,
-			management.NewStorageVolumeCredentialsREST,
-		),
 		management.ManagementSubjectAccessReviewStorage,
 		management.ManagementTeamStorage,
 		builders.NewApiResourceWithStorage(
@@ -1152,6 +1152,14 @@ type StackInstanceOutputsList struct {
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
 
+type StackInstanceViewList struct {
+	metav1.TypeMeta `json:",inline"`
+	metav1.ListMeta `json:"metadata,omitempty"`
+	Items           []StackInstanceView `json:"items"`
+}
+
+// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+
 type StackTemplateList struct {
 	metav1.TypeMeta `json:",inline"`
 	metav1.ListMeta `json:"metadata,omitempty"`
@@ -1180,14 +1188,6 @@ type StorageVolumeList struct {
 	metav1.TypeMeta `json:",inline"`
 	metav1.ListMeta `json:"metadata,omitempty"`
 	Items           []StorageVolume `json:"items"`
-}
-
-// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
-
-type StorageVolumeCredentialsList struct {
-	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
-	Items           []StorageVolumeCredentials `json:"items"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object

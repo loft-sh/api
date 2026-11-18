@@ -9,12 +9,14 @@ import (
 // +genclient
 // +genclient:noStatus
 // +genclient:method=GetOutputs,verb=get,subresource=outputs,result=github.com/loft-sh/api/v5/pkg/apis/management/v1.StackInstanceOutputs
+// +genclient:method=View,verb=create,subresource=view,input=github.com/loft-sh/api/v5/pkg/apis/management/v1.StackInstanceView,result=github.com/loft-sh/api/v5/pkg/apis/management/v1.StackInstanceView
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
 
 // StackInstance holds the StackInstance information
 // +k8s:openapi-gen=true
 // +resource:path=stackinstances,rest=StackInstanceREST
 // +subresource:request=StackInstanceOutputs,path=outputs,kind=StackInstanceOutputs,rest=StackInstanceOutputsREST
+// +subresource:request=StackInstanceView,path=view,kind=StackInstanceView,rest=StackInstanceViewREST
 type StackInstance struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`

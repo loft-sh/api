@@ -931,26 +931,6 @@ func RegisterConversions(s *runtime.Scheme) error {
 	}); err != nil {
 		return err
 	}
-	if err := s.AddGeneratedConversionFunc((*ConnectorStorageCSISpec)(nil), (*management.ConnectorStorageCSISpec)(nil), func(a, b interface{}, scope conversion.Scope) error {
-		return Convert_v1_ConnectorStorageCSISpec_To_management_ConnectorStorageCSISpec(a.(*ConnectorStorageCSISpec), b.(*management.ConnectorStorageCSISpec), scope)
-	}); err != nil {
-		return err
-	}
-	if err := s.AddGeneratedConversionFunc((*management.ConnectorStorageCSISpec)(nil), (*ConnectorStorageCSISpec)(nil), func(a, b interface{}, scope conversion.Scope) error {
-		return Convert_management_ConnectorStorageCSISpec_To_v1_ConnectorStorageCSISpec(a.(*management.ConnectorStorageCSISpec), b.(*ConnectorStorageCSISpec), scope)
-	}); err != nil {
-		return err
-	}
-	if err := s.AddGeneratedConversionFunc((*ConnectorStorageS3Spec)(nil), (*management.ConnectorStorageS3Spec)(nil), func(a, b interface{}, scope conversion.Scope) error {
-		return Convert_v1_ConnectorStorageS3Spec_To_management_ConnectorStorageS3Spec(a.(*ConnectorStorageS3Spec), b.(*management.ConnectorStorageS3Spec), scope)
-	}); err != nil {
-		return err
-	}
-	if err := s.AddGeneratedConversionFunc((*management.ConnectorStorageS3Spec)(nil), (*ConnectorStorageS3Spec)(nil), func(a, b interface{}, scope conversion.Scope) error {
-		return Convert_management_ConnectorStorageS3Spec_To_v1_ConnectorStorageS3Spec(a.(*management.ConnectorStorageS3Spec), b.(*ConnectorStorageS3Spec), scope)
-	}); err != nil {
-		return err
-	}
 	if err := s.AddGeneratedConversionFunc((*ConnectorStorageSpec)(nil), (*management.ConnectorStorageSpec)(nil), func(a, b interface{}, scope conversion.Scope) error {
 		return Convert_v1_ConnectorStorageSpec_To_management_ConnectorStorageSpec(a.(*ConnectorStorageSpec), b.(*management.ConnectorStorageSpec), scope)
 	}); err != nil {
@@ -958,16 +938,6 @@ func RegisterConversions(s *runtime.Scheme) error {
 	}
 	if err := s.AddGeneratedConversionFunc((*management.ConnectorStorageSpec)(nil), (*ConnectorStorageSpec)(nil), func(a, b interface{}, scope conversion.Scope) error {
 		return Convert_management_ConnectorStorageSpec_To_v1_ConnectorStorageSpec(a.(*management.ConnectorStorageSpec), b.(*ConnectorStorageSpec), scope)
-	}); err != nil {
-		return err
-	}
-	if err := s.AddGeneratedConversionFunc((*ConnectorStorageVastSpec)(nil), (*management.ConnectorStorageVastSpec)(nil), func(a, b interface{}, scope conversion.Scope) error {
-		return Convert_v1_ConnectorStorageVastSpec_To_management_ConnectorStorageVastSpec(a.(*ConnectorStorageVastSpec), b.(*management.ConnectorStorageVastSpec), scope)
-	}); err != nil {
-		return err
-	}
-	if err := s.AddGeneratedConversionFunc((*management.ConnectorStorageVastSpec)(nil), (*ConnectorStorageVastSpec)(nil), func(a, b interface{}, scope conversion.Scope) error {
-		return Convert_management_ConnectorStorageVastSpec_To_v1_ConnectorStorageVastSpec(a.(*management.ConnectorStorageVastSpec), b.(*ConnectorStorageVastSpec), scope)
 	}); err != nil {
 		return err
 	}
@@ -3071,6 +3041,46 @@ func RegisterConversions(s *runtime.Scheme) error {
 	}); err != nil {
 		return err
 	}
+	if err := s.AddGeneratedConversionFunc((*StackInstanceView)(nil), (*management.StackInstanceView)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_v1_StackInstanceView_To_management_StackInstanceView(a.(*StackInstanceView), b.(*management.StackInstanceView), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*management.StackInstanceView)(nil), (*StackInstanceView)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_management_StackInstanceView_To_v1_StackInstanceView(a.(*management.StackInstanceView), b.(*StackInstanceView), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*StackInstanceViewList)(nil), (*management.StackInstanceViewList)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_v1_StackInstanceViewList_To_management_StackInstanceViewList(a.(*StackInstanceViewList), b.(*management.StackInstanceViewList), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*management.StackInstanceViewList)(nil), (*StackInstanceViewList)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_management_StackInstanceViewList_To_v1_StackInstanceViewList(a.(*management.StackInstanceViewList), b.(*StackInstanceViewList), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*StackInstanceViewSpec)(nil), (*management.StackInstanceViewSpec)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_v1_StackInstanceViewSpec_To_management_StackInstanceViewSpec(a.(*StackInstanceViewSpec), b.(*management.StackInstanceViewSpec), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*management.StackInstanceViewSpec)(nil), (*StackInstanceViewSpec)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_management_StackInstanceViewSpec_To_v1_StackInstanceViewSpec(a.(*management.StackInstanceViewSpec), b.(*StackInstanceViewSpec), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*StackInstanceViewStatus)(nil), (*management.StackInstanceViewStatus)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_v1_StackInstanceViewStatus_To_management_StackInstanceViewStatus(a.(*StackInstanceViewStatus), b.(*management.StackInstanceViewStatus), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*management.StackInstanceViewStatus)(nil), (*StackInstanceViewStatus)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_management_StackInstanceViewStatus_To_v1_StackInstanceViewStatus(a.(*management.StackInstanceViewStatus), b.(*StackInstanceViewStatus), scope)
+	}); err != nil {
+		return err
+	}
 	if err := s.AddGeneratedConversionFunc((*StackTemplate)(nil), (*management.StackTemplate)(nil), func(a, b interface{}, scope conversion.Scope) error {
 		return Convert_v1_StackTemplate_To_management_StackTemplate(a.(*StackTemplate), b.(*management.StackTemplate), scope)
 	}); err != nil {
@@ -3108,6 +3118,116 @@ func RegisterConversions(s *runtime.Scheme) error {
 	}
 	if err := s.AddGeneratedConversionFunc((*management.StackTemplateStatus)(nil), (*StackTemplateStatus)(nil), func(a, b interface{}, scope conversion.Scope) error {
 		return Convert_management_StackTemplateStatus_To_v1_StackTemplateStatus(a.(*management.StackTemplateStatus), b.(*StackTemplateStatus), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*StackViewAction)(nil), (*management.StackViewAction)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_v1_StackViewAction_To_management_StackViewAction(a.(*StackViewAction), b.(*management.StackViewAction), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*management.StackViewAction)(nil), (*StackViewAction)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_management_StackViewAction_To_v1_StackViewAction(a.(*management.StackViewAction), b.(*StackViewAction), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*StackViewApp)(nil), (*management.StackViewApp)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_v1_StackViewApp_To_management_StackViewApp(a.(*StackViewApp), b.(*management.StackViewApp), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*management.StackViewApp)(nil), (*StackViewApp)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_management_StackViewApp_To_v1_StackViewApp(a.(*management.StackViewApp), b.(*StackViewApp), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*StackViewCard)(nil), (*management.StackViewCard)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_v1_StackViewCard_To_management_StackViewCard(a.(*StackViewCard), b.(*management.StackViewCard), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*management.StackViewCard)(nil), (*StackViewCard)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_management_StackViewCard_To_v1_StackViewCard(a.(*management.StackViewCard), b.(*StackViewCard), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*StackViewCondition)(nil), (*management.StackViewCondition)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_v1_StackViewCondition_To_management_StackViewCondition(a.(*StackViewCondition), b.(*management.StackViewCondition), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*management.StackViewCondition)(nil), (*StackViewCondition)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_management_StackViewCondition_To_v1_StackViewCondition(a.(*management.StackViewCondition), b.(*StackViewCondition), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*StackViewEvent)(nil), (*management.StackViewEvent)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_v1_StackViewEvent_To_management_StackViewEvent(a.(*StackViewEvent), b.(*management.StackViewEvent), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*management.StackViewEvent)(nil), (*StackViewEvent)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_management_StackViewEvent_To_v1_StackViewEvent(a.(*management.StackViewEvent), b.(*StackViewEvent), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*StackViewForm)(nil), (*management.StackViewForm)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_v1_StackViewForm_To_management_StackViewForm(a.(*StackViewForm), b.(*management.StackViewForm), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*management.StackViewForm)(nil), (*StackViewForm)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_management_StackViewForm_To_v1_StackViewForm(a.(*management.StackViewForm), b.(*StackViewForm), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*StackViewItem)(nil), (*management.StackViewItem)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_v1_StackViewItem_To_management_StackViewItem(a.(*StackViewItem), b.(*management.StackViewItem), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*management.StackViewItem)(nil), (*StackViewItem)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_management_StackViewItem_To_v1_StackViewItem(a.(*management.StackViewItem), b.(*StackViewItem), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*StackViewLogs)(nil), (*management.StackViewLogs)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_v1_StackViewLogs_To_management_StackViewLogs(a.(*StackViewLogs), b.(*management.StackViewLogs), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*management.StackViewLogs)(nil), (*StackViewLogs)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_management_StackViewLogs_To_v1_StackViewLogs(a.(*management.StackViewLogs), b.(*StackViewLogs), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*StackViewParameter)(nil), (*management.StackViewParameter)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_v1_StackViewParameter_To_management_StackViewParameter(a.(*StackViewParameter), b.(*management.StackViewParameter), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*management.StackViewParameter)(nil), (*StackViewParameter)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_management_StackViewParameter_To_v1_StackViewParameter(a.(*management.StackViewParameter), b.(*StackViewParameter), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*StackViewResource)(nil), (*management.StackViewResource)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_v1_StackViewResource_To_management_StackViewResource(a.(*StackViewResource), b.(*management.StackViewResource), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*management.StackViewResource)(nil), (*StackViewResource)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_management_StackViewResource_To_v1_StackViewResource(a.(*management.StackViewResource), b.(*StackViewResource), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*StackViewRow)(nil), (*management.StackViewRow)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_v1_StackViewRow_To_management_StackViewRow(a.(*StackViewRow), b.(*management.StackViewRow), scope)
+	}); err != nil {
+		return err
+	}
+	if err := s.AddGeneratedConversionFunc((*management.StackViewRow)(nil), (*StackViewRow)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_management_StackViewRow_To_v1_StackViewRow(a.(*management.StackViewRow), b.(*StackViewRow), scope)
 	}); err != nil {
 		return err
 	}
@@ -3228,26 +3348,6 @@ func RegisterConversions(s *runtime.Scheme) error {
 	}
 	if err := s.AddGeneratedConversionFunc((*management.StorageVolume)(nil), (*StorageVolume)(nil), func(a, b interface{}, scope conversion.Scope) error {
 		return Convert_management_StorageVolume_To_v1_StorageVolume(a.(*management.StorageVolume), b.(*StorageVolume), scope)
-	}); err != nil {
-		return err
-	}
-	if err := s.AddGeneratedConversionFunc((*StorageVolumeCredentials)(nil), (*management.StorageVolumeCredentials)(nil), func(a, b interface{}, scope conversion.Scope) error {
-		return Convert_v1_StorageVolumeCredentials_To_management_StorageVolumeCredentials(a.(*StorageVolumeCredentials), b.(*management.StorageVolumeCredentials), scope)
-	}); err != nil {
-		return err
-	}
-	if err := s.AddGeneratedConversionFunc((*management.StorageVolumeCredentials)(nil), (*StorageVolumeCredentials)(nil), func(a, b interface{}, scope conversion.Scope) error {
-		return Convert_management_StorageVolumeCredentials_To_v1_StorageVolumeCredentials(a.(*management.StorageVolumeCredentials), b.(*StorageVolumeCredentials), scope)
-	}); err != nil {
-		return err
-	}
-	if err := s.AddGeneratedConversionFunc((*StorageVolumeCredentialsList)(nil), (*management.StorageVolumeCredentialsList)(nil), func(a, b interface{}, scope conversion.Scope) error {
-		return Convert_v1_StorageVolumeCredentialsList_To_management_StorageVolumeCredentialsList(a.(*StorageVolumeCredentialsList), b.(*management.StorageVolumeCredentialsList), scope)
-	}); err != nil {
-		return err
-	}
-	if err := s.AddGeneratedConversionFunc((*management.StorageVolumeCredentialsList)(nil), (*StorageVolumeCredentialsList)(nil), func(a, b interface{}, scope conversion.Scope) error {
-		return Convert_management_StorageVolumeCredentialsList_To_v1_StorageVolumeCredentialsList(a.(*management.StorageVolumeCredentialsList), b.(*StorageVolumeCredentialsList), scope)
 	}); err != nil {
 		return err
 	}
@@ -6940,56 +7040,9 @@ func Convert_management_ConnectorStatus_To_v1_ConnectorStatus(in *management.Con
 	return autoConvert_management_ConnectorStatus_To_v1_ConnectorStatus(in, out, s)
 }
 
-func autoConvert_v1_ConnectorStorageCSISpec_To_management_ConnectorStorageCSISpec(in *ConnectorStorageCSISpec, out *management.ConnectorStorageCSISpec, s conversion.Scope) error {
-	out.ChartRepo = in.ChartRepo
-	out.ChartVersion = in.ChartVersion
-	out.Values = in.Values
-	return nil
-}
-
-// Convert_v1_ConnectorStorageCSISpec_To_management_ConnectorStorageCSISpec is an autogenerated conversion function.
-func Convert_v1_ConnectorStorageCSISpec_To_management_ConnectorStorageCSISpec(in *ConnectorStorageCSISpec, out *management.ConnectorStorageCSISpec, s conversion.Scope) error {
-	return autoConvert_v1_ConnectorStorageCSISpec_To_management_ConnectorStorageCSISpec(in, out, s)
-}
-
-func autoConvert_management_ConnectorStorageCSISpec_To_v1_ConnectorStorageCSISpec(in *management.ConnectorStorageCSISpec, out *ConnectorStorageCSISpec, s conversion.Scope) error {
-	out.ChartRepo = in.ChartRepo
-	out.ChartVersion = in.ChartVersion
-	out.Values = in.Values
-	return nil
-}
-
-// Convert_management_ConnectorStorageCSISpec_To_v1_ConnectorStorageCSISpec is an autogenerated conversion function.
-func Convert_management_ConnectorStorageCSISpec_To_v1_ConnectorStorageCSISpec(in *management.ConnectorStorageCSISpec, out *ConnectorStorageCSISpec, s conversion.Scope) error {
-	return autoConvert_management_ConnectorStorageCSISpec_To_v1_ConnectorStorageCSISpec(in, out, s)
-}
-
-func autoConvert_v1_ConnectorStorageS3Spec_To_management_ConnectorStorageS3Spec(in *ConnectorStorageS3Spec, out *management.ConnectorStorageS3Spec, s conversion.Scope) error {
-	out.Endpoint = in.Endpoint
-	out.CAData = in.CAData
-	return nil
-}
-
-// Convert_v1_ConnectorStorageS3Spec_To_management_ConnectorStorageS3Spec is an autogenerated conversion function.
-func Convert_v1_ConnectorStorageS3Spec_To_management_ConnectorStorageS3Spec(in *ConnectorStorageS3Spec, out *management.ConnectorStorageS3Spec, s conversion.Scope) error {
-	return autoConvert_v1_ConnectorStorageS3Spec_To_management_ConnectorStorageS3Spec(in, out, s)
-}
-
-func autoConvert_management_ConnectorStorageS3Spec_To_v1_ConnectorStorageS3Spec(in *management.ConnectorStorageS3Spec, out *ConnectorStorageS3Spec, s conversion.Scope) error {
-	out.Endpoint = in.Endpoint
-	out.CAData = in.CAData
-	return nil
-}
-
-// Convert_management_ConnectorStorageS3Spec_To_v1_ConnectorStorageS3Spec is an autogenerated conversion function.
-func Convert_management_ConnectorStorageS3Spec_To_v1_ConnectorStorageS3Spec(in *management.ConnectorStorageS3Spec, out *ConnectorStorageS3Spec, s conversion.Scope) error {
-	return autoConvert_management_ConnectorStorageS3Spec_To_v1_ConnectorStorageS3Spec(in, out, s)
-}
-
 func autoConvert_v1_ConnectorStorageSpec_To_management_ConnectorStorageSpec(in *ConnectorStorageSpec, out *management.ConnectorStorageSpec, s conversion.Scope) error {
 	out.Provider = management.StorageConnectorProvider(in.Provider)
 	out.Weka = (*management.ConnectorStorageWekaSpec)(unsafe.Pointer(in.Weka))
-	out.Vast = (*management.ConnectorStorageVastSpec)(unsafe.Pointer(in.Vast))
 	return nil
 }
 
@@ -7001,49 +7054,12 @@ func Convert_v1_ConnectorStorageSpec_To_management_ConnectorStorageSpec(in *Conn
 func autoConvert_management_ConnectorStorageSpec_To_v1_ConnectorStorageSpec(in *management.ConnectorStorageSpec, out *ConnectorStorageSpec, s conversion.Scope) error {
 	out.Provider = StorageConnectorProvider(in.Provider)
 	out.Weka = (*ConnectorStorageWekaSpec)(unsafe.Pointer(in.Weka))
-	out.Vast = (*ConnectorStorageVastSpec)(unsafe.Pointer(in.Vast))
 	return nil
 }
 
 // Convert_management_ConnectorStorageSpec_To_v1_ConnectorStorageSpec is an autogenerated conversion function.
 func Convert_management_ConnectorStorageSpec_To_v1_ConnectorStorageSpec(in *management.ConnectorStorageSpec, out *ConnectorStorageSpec, s conversion.Scope) error {
 	return autoConvert_management_ConnectorStorageSpec_To_v1_ConnectorStorageSpec(in, out, s)
-}
-
-func autoConvert_v1_ConnectorStorageVastSpec_To_management_ConnectorStorageVastSpec(in *ConnectorStorageVastSpec, out *management.ConnectorStorageVastSpec, s conversion.Scope) error {
-	out.Endpoint = in.Endpoint
-	out.Username = in.Username
-	out.Password = in.Password
-	out.InsecureSkipTLSVerify = in.InsecureSkipTLSVerify
-	out.CAData = in.CAData
-	out.TenantPrefix = in.TenantPrefix
-	out.VIPRange = in.VIPRange
-	out.VIPSubnetCIDR = in.VIPSubnetCIDR
-	out.VIPsPerTenant = in.VIPsPerTenant
-	return nil
-}
-
-// Convert_v1_ConnectorStorageVastSpec_To_management_ConnectorStorageVastSpec is an autogenerated conversion function.
-func Convert_v1_ConnectorStorageVastSpec_To_management_ConnectorStorageVastSpec(in *ConnectorStorageVastSpec, out *management.ConnectorStorageVastSpec, s conversion.Scope) error {
-	return autoConvert_v1_ConnectorStorageVastSpec_To_management_ConnectorStorageVastSpec(in, out, s)
-}
-
-func autoConvert_management_ConnectorStorageVastSpec_To_v1_ConnectorStorageVastSpec(in *management.ConnectorStorageVastSpec, out *ConnectorStorageVastSpec, s conversion.Scope) error {
-	out.Endpoint = in.Endpoint
-	out.Username = in.Username
-	out.Password = in.Password
-	out.InsecureSkipTLSVerify = in.InsecureSkipTLSVerify
-	out.CAData = in.CAData
-	out.TenantPrefix = in.TenantPrefix
-	out.VIPRange = in.VIPRange
-	out.VIPSubnetCIDR = in.VIPSubnetCIDR
-	out.VIPsPerTenant = in.VIPsPerTenant
-	return nil
-}
-
-// Convert_management_ConnectorStorageVastSpec_To_v1_ConnectorStorageVastSpec is an autogenerated conversion function.
-func Convert_management_ConnectorStorageVastSpec_To_v1_ConnectorStorageVastSpec(in *management.ConnectorStorageVastSpec, out *ConnectorStorageVastSpec, s conversion.Scope) error {
-	return autoConvert_management_ConnectorStorageVastSpec_To_v1_ConnectorStorageVastSpec(in, out, s)
 }
 
 func autoConvert_v1_ConnectorStorageWekaSpec_To_management_ConnectorStorageWekaSpec(in *ConnectorStorageWekaSpec, out *management.ConnectorStorageWekaSpec, s conversion.Scope) error {
@@ -7053,8 +7069,6 @@ func autoConvert_v1_ConnectorStorageWekaSpec_To_management_ConnectorStorageWekaS
 	out.InsecureSkipTLSVerify = in.InsecureSkipTLSVerify
 	out.CAData = in.CAData
 	out.TenantPrefix = in.TenantPrefix
-	out.CSI = (*management.ConnectorStorageCSISpec)(unsafe.Pointer(in.CSI))
-	out.S3 = (*management.ConnectorStorageS3Spec)(unsafe.Pointer(in.S3))
 	return nil
 }
 
@@ -7070,8 +7084,6 @@ func autoConvert_management_ConnectorStorageWekaSpec_To_v1_ConnectorStorageWekaS
 	out.InsecureSkipTLSVerify = in.InsecureSkipTLSVerify
 	out.CAData = in.CAData
 	out.TenantPrefix = in.TenantPrefix
-	out.CSI = (*ConnectorStorageCSISpec)(unsafe.Pointer(in.CSI))
-	out.S3 = (*ConnectorStorageS3Spec)(unsafe.Pointer(in.S3))
 	return nil
 }
 
@@ -12269,6 +12281,124 @@ func Convert_management_StackInstanceStatus_To_v1_StackInstanceStatus(in *manage
 	return autoConvert_management_StackInstanceStatus_To_v1_StackInstanceStatus(in, out, s)
 }
 
+func autoConvert_v1_StackInstanceView_To_management_StackInstanceView(in *StackInstanceView, out *management.StackInstanceView, s conversion.Scope) error {
+	out.ObjectMeta = in.ObjectMeta
+	if err := Convert_v1_StackInstanceViewSpec_To_management_StackInstanceViewSpec(&in.Spec, &out.Spec, s); err != nil {
+		return err
+	}
+	if err := Convert_v1_StackInstanceViewStatus_To_management_StackInstanceViewStatus(&in.Status, &out.Status, s); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Convert_v1_StackInstanceView_To_management_StackInstanceView is an autogenerated conversion function.
+func Convert_v1_StackInstanceView_To_management_StackInstanceView(in *StackInstanceView, out *management.StackInstanceView, s conversion.Scope) error {
+	return autoConvert_v1_StackInstanceView_To_management_StackInstanceView(in, out, s)
+}
+
+func autoConvert_management_StackInstanceView_To_v1_StackInstanceView(in *management.StackInstanceView, out *StackInstanceView, s conversion.Scope) error {
+	out.ObjectMeta = in.ObjectMeta
+	if err := Convert_management_StackInstanceViewSpec_To_v1_StackInstanceViewSpec(&in.Spec, &out.Spec, s); err != nil {
+		return err
+	}
+	if err := Convert_management_StackInstanceViewStatus_To_v1_StackInstanceViewStatus(&in.Status, &out.Status, s); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Convert_management_StackInstanceView_To_v1_StackInstanceView is an autogenerated conversion function.
+func Convert_management_StackInstanceView_To_v1_StackInstanceView(in *management.StackInstanceView, out *StackInstanceView, s conversion.Scope) error {
+	return autoConvert_management_StackInstanceView_To_v1_StackInstanceView(in, out, s)
+}
+
+func autoConvert_v1_StackInstanceViewList_To_management_StackInstanceViewList(in *StackInstanceViewList, out *management.StackInstanceViewList, s conversion.Scope) error {
+	out.ListMeta = in.ListMeta
+	out.Items = *(*[]management.StackInstanceView)(unsafe.Pointer(&in.Items))
+	return nil
+}
+
+// Convert_v1_StackInstanceViewList_To_management_StackInstanceViewList is an autogenerated conversion function.
+func Convert_v1_StackInstanceViewList_To_management_StackInstanceViewList(in *StackInstanceViewList, out *management.StackInstanceViewList, s conversion.Scope) error {
+	return autoConvert_v1_StackInstanceViewList_To_management_StackInstanceViewList(in, out, s)
+}
+
+func autoConvert_management_StackInstanceViewList_To_v1_StackInstanceViewList(in *management.StackInstanceViewList, out *StackInstanceViewList, s conversion.Scope) error {
+	out.ListMeta = in.ListMeta
+	out.Items = *(*[]StackInstanceView)(unsafe.Pointer(&in.Items))
+	return nil
+}
+
+// Convert_management_StackInstanceViewList_To_v1_StackInstanceViewList is an autogenerated conversion function.
+func Convert_management_StackInstanceViewList_To_v1_StackInstanceViewList(in *management.StackInstanceViewList, out *StackInstanceViewList, s conversion.Scope) error {
+	return autoConvert_management_StackInstanceViewList_To_v1_StackInstanceViewList(in, out, s)
+}
+
+func autoConvert_v1_StackInstanceViewSpec_To_management_StackInstanceViewSpec(in *StackInstanceViewSpec, out *management.StackInstanceViewSpec, s conversion.Scope) error {
+	out.Resource = in.Resource
+	out.Namespace = in.Namespace
+	out.Name = in.Name
+	out.Action = in.Action
+	out.Parameters = *(*map[string]string)(unsafe.Pointer(&in.Parameters))
+	out.Form = management.StackViewFormMode(in.Form)
+	out.Object = in.Object
+	return nil
+}
+
+// Convert_v1_StackInstanceViewSpec_To_management_StackInstanceViewSpec is an autogenerated conversion function.
+func Convert_v1_StackInstanceViewSpec_To_management_StackInstanceViewSpec(in *StackInstanceViewSpec, out *management.StackInstanceViewSpec, s conversion.Scope) error {
+	return autoConvert_v1_StackInstanceViewSpec_To_management_StackInstanceViewSpec(in, out, s)
+}
+
+func autoConvert_management_StackInstanceViewSpec_To_v1_StackInstanceViewSpec(in *management.StackInstanceViewSpec, out *StackInstanceViewSpec, s conversion.Scope) error {
+	out.Resource = in.Resource
+	out.Namespace = in.Namespace
+	out.Name = in.Name
+	out.Action = in.Action
+	out.Parameters = *(*map[string]string)(unsafe.Pointer(&in.Parameters))
+	out.Form = StackViewFormMode(in.Form)
+	out.Object = in.Object
+	return nil
+}
+
+// Convert_management_StackInstanceViewSpec_To_v1_StackInstanceViewSpec is an autogenerated conversion function.
+func Convert_management_StackInstanceViewSpec_To_v1_StackInstanceViewSpec(in *management.StackInstanceViewSpec, out *StackInstanceViewSpec, s conversion.Scope) error {
+	return autoConvert_management_StackInstanceViewSpec_To_v1_StackInstanceViewSpec(in, out, s)
+}
+
+func autoConvert_v1_StackInstanceViewStatus_To_management_StackInstanceViewStatus(in *StackInstanceViewStatus, out *management.StackInstanceViewStatus, s conversion.Scope) error {
+	out.Resources = *(*[]management.StackViewResource)(unsafe.Pointer(&in.Resources))
+	out.Cards = *(*[]management.StackViewCard)(unsafe.Pointer(&in.Cards))
+	out.Items = *(*[]management.StackViewItem)(unsafe.Pointer(&in.Items))
+	out.Actions = *(*[]management.StackViewAction)(unsafe.Pointer(&in.Actions))
+	out.Result = in.Result
+	out.Form = (*management.StackViewForm)(unsafe.Pointer(in.Form))
+	out.App = (*management.StackViewApp)(unsafe.Pointer(in.App))
+	return nil
+}
+
+// Convert_v1_StackInstanceViewStatus_To_management_StackInstanceViewStatus is an autogenerated conversion function.
+func Convert_v1_StackInstanceViewStatus_To_management_StackInstanceViewStatus(in *StackInstanceViewStatus, out *management.StackInstanceViewStatus, s conversion.Scope) error {
+	return autoConvert_v1_StackInstanceViewStatus_To_management_StackInstanceViewStatus(in, out, s)
+}
+
+func autoConvert_management_StackInstanceViewStatus_To_v1_StackInstanceViewStatus(in *management.StackInstanceViewStatus, out *StackInstanceViewStatus, s conversion.Scope) error {
+	out.Resources = *(*[]StackViewResource)(unsafe.Pointer(&in.Resources))
+	out.Cards = *(*[]StackViewCard)(unsafe.Pointer(&in.Cards))
+	out.Items = *(*[]StackViewItem)(unsafe.Pointer(&in.Items))
+	out.Actions = *(*[]StackViewAction)(unsafe.Pointer(&in.Actions))
+	out.Result = in.Result
+	out.Form = (*StackViewForm)(unsafe.Pointer(in.Form))
+	out.App = (*StackViewApp)(unsafe.Pointer(in.App))
+	return nil
+}
+
+// Convert_management_StackInstanceViewStatus_To_v1_StackInstanceViewStatus is an autogenerated conversion function.
+func Convert_management_StackInstanceViewStatus_To_v1_StackInstanceViewStatus(in *management.StackInstanceViewStatus, out *StackInstanceViewStatus, s conversion.Scope) error {
+	return autoConvert_management_StackInstanceViewStatus_To_v1_StackInstanceViewStatus(in, out, s)
+}
+
 func autoConvert_v1_StackTemplate_To_management_StackTemplate(in *StackTemplate, out *management.StackTemplate, s conversion.Scope) error {
 	out.ObjectMeta = in.ObjectMeta
 	if err := Convert_v1_StackTemplateSpec_To_management_StackTemplateSpec(&in.Spec, &out.Spec, s); err != nil {
@@ -12361,6 +12491,322 @@ func autoConvert_management_StackTemplateStatus_To_v1_StackTemplateStatus(in *ma
 // Convert_management_StackTemplateStatus_To_v1_StackTemplateStatus is an autogenerated conversion function.
 func Convert_management_StackTemplateStatus_To_v1_StackTemplateStatus(in *management.StackTemplateStatus, out *StackTemplateStatus, s conversion.Scope) error {
 	return autoConvert_management_StackTemplateStatus_To_v1_StackTemplateStatus(in, out, s)
+}
+
+func autoConvert_v1_StackViewAction_To_management_StackViewAction(in *StackViewAction, out *management.StackViewAction, s conversion.Scope) error {
+	out.Name = in.Name
+	out.Label = in.Label
+	out.Confirm = in.Confirm
+	out.Destructive = in.Destructive
+	out.Primary = in.Primary
+	out.Parameters = *(*[]management.StackViewParameter)(unsafe.Pointer(&in.Parameters))
+	return nil
+}
+
+// Convert_v1_StackViewAction_To_management_StackViewAction is an autogenerated conversion function.
+func Convert_v1_StackViewAction_To_management_StackViewAction(in *StackViewAction, out *management.StackViewAction, s conversion.Scope) error {
+	return autoConvert_v1_StackViewAction_To_management_StackViewAction(in, out, s)
+}
+
+func autoConvert_management_StackViewAction_To_v1_StackViewAction(in *management.StackViewAction, out *StackViewAction, s conversion.Scope) error {
+	out.Name = in.Name
+	out.Label = in.Label
+	out.Confirm = in.Confirm
+	out.Destructive = in.Destructive
+	out.Primary = in.Primary
+	out.Parameters = *(*[]StackViewParameter)(unsafe.Pointer(&in.Parameters))
+	return nil
+}
+
+// Convert_management_StackViewAction_To_v1_StackViewAction is an autogenerated conversion function.
+func Convert_management_StackViewAction_To_v1_StackViewAction(in *management.StackViewAction, out *StackViewAction, s conversion.Scope) error {
+	return autoConvert_management_StackViewAction_To_v1_StackViewAction(in, out, s)
+}
+
+func autoConvert_v1_StackViewApp_To_management_StackViewApp(in *StackViewApp, out *management.StackViewApp, s conversion.Scope) error {
+	out.Template = in.Template
+	out.DisplayName = in.DisplayName
+	out.Description = in.Description
+	out.Icon = in.Icon
+	out.Placements = *(*[]storagev1.StackUIPlacement)(unsafe.Pointer(&in.Placements))
+	return nil
+}
+
+// Convert_v1_StackViewApp_To_management_StackViewApp is an autogenerated conversion function.
+func Convert_v1_StackViewApp_To_management_StackViewApp(in *StackViewApp, out *management.StackViewApp, s conversion.Scope) error {
+	return autoConvert_v1_StackViewApp_To_management_StackViewApp(in, out, s)
+}
+
+func autoConvert_management_StackViewApp_To_v1_StackViewApp(in *management.StackViewApp, out *StackViewApp, s conversion.Scope) error {
+	out.Template = in.Template
+	out.DisplayName = in.DisplayName
+	out.Description = in.Description
+	out.Icon = in.Icon
+	out.Placements = *(*[]storagev1.StackUIPlacement)(unsafe.Pointer(&in.Placements))
+	return nil
+}
+
+// Convert_management_StackViewApp_To_v1_StackViewApp is an autogenerated conversion function.
+func Convert_management_StackViewApp_To_v1_StackViewApp(in *management.StackViewApp, out *StackViewApp, s conversion.Scope) error {
+	return autoConvert_management_StackViewApp_To_v1_StackViewApp(in, out, s)
+}
+
+func autoConvert_v1_StackViewCard_To_management_StackViewCard(in *StackViewCard, out *management.StackViewCard, s conversion.Scope) error {
+	out.Title = in.Title
+	out.Type = management.StackViewCardType(in.Type)
+	out.Rows = *(*[]management.StackViewRow)(unsafe.Pointer(&in.Rows))
+	out.Events = *(*[]management.StackViewEvent)(unsafe.Pointer(&in.Events))
+	out.Logs = (*management.StackViewLogs)(unsafe.Pointer(in.Logs))
+	out.Error = in.Error
+	return nil
+}
+
+// Convert_v1_StackViewCard_To_management_StackViewCard is an autogenerated conversion function.
+func Convert_v1_StackViewCard_To_management_StackViewCard(in *StackViewCard, out *management.StackViewCard, s conversion.Scope) error {
+	return autoConvert_v1_StackViewCard_To_management_StackViewCard(in, out, s)
+}
+
+func autoConvert_management_StackViewCard_To_v1_StackViewCard(in *management.StackViewCard, out *StackViewCard, s conversion.Scope) error {
+	out.Title = in.Title
+	out.Type = StackViewCardType(in.Type)
+	out.Rows = *(*[]StackViewRow)(unsafe.Pointer(&in.Rows))
+	out.Events = *(*[]StackViewEvent)(unsafe.Pointer(&in.Events))
+	out.Logs = (*StackViewLogs)(unsafe.Pointer(in.Logs))
+	out.Error = in.Error
+	return nil
+}
+
+// Convert_management_StackViewCard_To_v1_StackViewCard is an autogenerated conversion function.
+func Convert_management_StackViewCard_To_v1_StackViewCard(in *management.StackViewCard, out *StackViewCard, s conversion.Scope) error {
+	return autoConvert_management_StackViewCard_To_v1_StackViewCard(in, out, s)
+}
+
+func autoConvert_v1_StackViewCondition_To_management_StackViewCondition(in *StackViewCondition, out *management.StackViewCondition, s conversion.Scope) error {
+	out.Type = in.Type
+	out.Status = in.Status
+	out.Reason = in.Reason
+	out.Message = in.Message
+	return nil
+}
+
+// Convert_v1_StackViewCondition_To_management_StackViewCondition is an autogenerated conversion function.
+func Convert_v1_StackViewCondition_To_management_StackViewCondition(in *StackViewCondition, out *management.StackViewCondition, s conversion.Scope) error {
+	return autoConvert_v1_StackViewCondition_To_management_StackViewCondition(in, out, s)
+}
+
+func autoConvert_management_StackViewCondition_To_v1_StackViewCondition(in *management.StackViewCondition, out *StackViewCondition, s conversion.Scope) error {
+	out.Type = in.Type
+	out.Status = in.Status
+	out.Reason = in.Reason
+	out.Message = in.Message
+	return nil
+}
+
+// Convert_management_StackViewCondition_To_v1_StackViewCondition is an autogenerated conversion function.
+func Convert_management_StackViewCondition_To_v1_StackViewCondition(in *management.StackViewCondition, out *StackViewCondition, s conversion.Scope) error {
+	return autoConvert_management_StackViewCondition_To_v1_StackViewCondition(in, out, s)
+}
+
+func autoConvert_v1_StackViewEvent_To_management_StackViewEvent(in *StackViewEvent, out *management.StackViewEvent, s conversion.Scope) error {
+	out.Type = in.Type
+	out.Reason = in.Reason
+	out.Message = in.Message
+	out.Object = in.Object
+	out.Time = in.Time
+	out.Count = in.Count
+	return nil
+}
+
+// Convert_v1_StackViewEvent_To_management_StackViewEvent is an autogenerated conversion function.
+func Convert_v1_StackViewEvent_To_management_StackViewEvent(in *StackViewEvent, out *management.StackViewEvent, s conversion.Scope) error {
+	return autoConvert_v1_StackViewEvent_To_management_StackViewEvent(in, out, s)
+}
+
+func autoConvert_management_StackViewEvent_To_v1_StackViewEvent(in *management.StackViewEvent, out *StackViewEvent, s conversion.Scope) error {
+	out.Type = in.Type
+	out.Reason = in.Reason
+	out.Message = in.Message
+	out.Object = in.Object
+	out.Time = in.Time
+	out.Count = in.Count
+	return nil
+}
+
+// Convert_management_StackViewEvent_To_v1_StackViewEvent is an autogenerated conversion function.
+func Convert_management_StackViewEvent_To_v1_StackViewEvent(in *management.StackViewEvent, out *StackViewEvent, s conversion.Scope) error {
+	return autoConvert_management_StackViewEvent_To_v1_StackViewEvent(in, out, s)
+}
+
+func autoConvert_v1_StackViewForm_To_management_StackViewForm(in *StackViewForm, out *management.StackViewForm, s conversion.Scope) error {
+	out.Schema = in.Schema
+	out.Groups = *(*[]storagev1.StackUIFormGroup)(unsafe.Pointer(&in.Groups))
+	out.Data = in.Data
+	return nil
+}
+
+// Convert_v1_StackViewForm_To_management_StackViewForm is an autogenerated conversion function.
+func Convert_v1_StackViewForm_To_management_StackViewForm(in *StackViewForm, out *management.StackViewForm, s conversion.Scope) error {
+	return autoConvert_v1_StackViewForm_To_management_StackViewForm(in, out, s)
+}
+
+func autoConvert_management_StackViewForm_To_v1_StackViewForm(in *management.StackViewForm, out *StackViewForm, s conversion.Scope) error {
+	out.Schema = in.Schema
+	out.Groups = *(*[]storagev1.StackUIFormGroup)(unsafe.Pointer(&in.Groups))
+	out.Data = in.Data
+	return nil
+}
+
+// Convert_management_StackViewForm_To_v1_StackViewForm is an autogenerated conversion function.
+func Convert_management_StackViewForm_To_v1_StackViewForm(in *management.StackViewForm, out *StackViewForm, s conversion.Scope) error {
+	return autoConvert_management_StackViewForm_To_v1_StackViewForm(in, out, s)
+}
+
+func autoConvert_v1_StackViewItem_To_management_StackViewItem(in *StackViewItem, out *management.StackViewItem, s conversion.Scope) error {
+	out.Namespace = in.Namespace
+	out.Name = in.Name
+	out.Cells = *(*[]management.StackViewRow)(unsafe.Pointer(&in.Cells))
+	return nil
+}
+
+// Convert_v1_StackViewItem_To_management_StackViewItem is an autogenerated conversion function.
+func Convert_v1_StackViewItem_To_management_StackViewItem(in *StackViewItem, out *management.StackViewItem, s conversion.Scope) error {
+	return autoConvert_v1_StackViewItem_To_management_StackViewItem(in, out, s)
+}
+
+func autoConvert_management_StackViewItem_To_v1_StackViewItem(in *management.StackViewItem, out *StackViewItem, s conversion.Scope) error {
+	out.Namespace = in.Namespace
+	out.Name = in.Name
+	out.Cells = *(*[]StackViewRow)(unsafe.Pointer(&in.Cells))
+	return nil
+}
+
+// Convert_management_StackViewItem_To_v1_StackViewItem is an autogenerated conversion function.
+func Convert_management_StackViewItem_To_v1_StackViewItem(in *management.StackViewItem, out *StackViewItem, s conversion.Scope) error {
+	return autoConvert_management_StackViewItem_To_v1_StackViewItem(in, out, s)
+}
+
+func autoConvert_v1_StackViewLogs_To_management_StackViewLogs(in *StackViewLogs, out *management.StackViewLogs, s conversion.Scope) error {
+	out.Pod = in.Pod
+	out.Container = in.Container
+	out.Lines = in.Lines
+	return nil
+}
+
+// Convert_v1_StackViewLogs_To_management_StackViewLogs is an autogenerated conversion function.
+func Convert_v1_StackViewLogs_To_management_StackViewLogs(in *StackViewLogs, out *management.StackViewLogs, s conversion.Scope) error {
+	return autoConvert_v1_StackViewLogs_To_management_StackViewLogs(in, out, s)
+}
+
+func autoConvert_management_StackViewLogs_To_v1_StackViewLogs(in *management.StackViewLogs, out *StackViewLogs, s conversion.Scope) error {
+	out.Pod = in.Pod
+	out.Container = in.Container
+	out.Lines = in.Lines
+	return nil
+}
+
+// Convert_management_StackViewLogs_To_v1_StackViewLogs is an autogenerated conversion function.
+func Convert_management_StackViewLogs_To_v1_StackViewLogs(in *management.StackViewLogs, out *StackViewLogs, s conversion.Scope) error {
+	return autoConvert_management_StackViewLogs_To_v1_StackViewLogs(in, out, s)
+}
+
+func autoConvert_v1_StackViewParameter_To_management_StackViewParameter(in *StackViewParameter, out *management.StackViewParameter, s conversion.Scope) error {
+	out.Name = in.Name
+	out.Label = in.Label
+	out.Type = storagev1.StackUIParameterType(in.Type)
+	out.Required = in.Required
+	out.Value = in.Value
+	return nil
+}
+
+// Convert_v1_StackViewParameter_To_management_StackViewParameter is an autogenerated conversion function.
+func Convert_v1_StackViewParameter_To_management_StackViewParameter(in *StackViewParameter, out *management.StackViewParameter, s conversion.Scope) error {
+	return autoConvert_v1_StackViewParameter_To_management_StackViewParameter(in, out, s)
+}
+
+func autoConvert_management_StackViewParameter_To_v1_StackViewParameter(in *management.StackViewParameter, out *StackViewParameter, s conversion.Scope) error {
+	out.Name = in.Name
+	out.Label = in.Label
+	out.Type = storagev1.StackUIParameterType(in.Type)
+	out.Required = in.Required
+	out.Value = in.Value
+	return nil
+}
+
+// Convert_management_StackViewParameter_To_v1_StackViewParameter is an autogenerated conversion function.
+func Convert_management_StackViewParameter_To_v1_StackViewParameter(in *management.StackViewParameter, out *StackViewParameter, s conversion.Scope) error {
+	return autoConvert_management_StackViewParameter_To_v1_StackViewParameter(in, out, s)
+}
+
+func autoConvert_v1_StackViewResource_To_management_StackViewResource(in *StackViewResource, out *management.StackViewResource, s conversion.Scope) error {
+	out.Name = in.Name
+	out.Label = in.Label
+	out.Icon = in.Icon
+	out.Group = in.Group
+	out.Version = in.Version
+	out.Resource = in.Resource
+	out.Kind = in.Kind
+	out.Namespaced = in.Namespaced
+	out.Columns = *(*[]string)(unsafe.Pointer(&in.Columns))
+	out.HasForm = in.HasForm
+	out.Error = in.Error
+	return nil
+}
+
+// Convert_v1_StackViewResource_To_management_StackViewResource is an autogenerated conversion function.
+func Convert_v1_StackViewResource_To_management_StackViewResource(in *StackViewResource, out *management.StackViewResource, s conversion.Scope) error {
+	return autoConvert_v1_StackViewResource_To_management_StackViewResource(in, out, s)
+}
+
+func autoConvert_management_StackViewResource_To_v1_StackViewResource(in *management.StackViewResource, out *StackViewResource, s conversion.Scope) error {
+	out.Name = in.Name
+	out.Label = in.Label
+	out.Icon = in.Icon
+	out.Group = in.Group
+	out.Version = in.Version
+	out.Resource = in.Resource
+	out.Kind = in.Kind
+	out.Namespaced = in.Namespaced
+	out.Columns = *(*[]string)(unsafe.Pointer(&in.Columns))
+	out.HasForm = in.HasForm
+	out.Error = in.Error
+	return nil
+}
+
+// Convert_management_StackViewResource_To_v1_StackViewResource is an autogenerated conversion function.
+func Convert_management_StackViewResource_To_v1_StackViewResource(in *management.StackViewResource, out *StackViewResource, s conversion.Scope) error {
+	return autoConvert_management_StackViewResource_To_v1_StackViewResource(in, out, s)
+}
+
+func autoConvert_v1_StackViewRow_To_management_StackViewRow(in *StackViewRow, out *management.StackViewRow, s conversion.Scope) error {
+	out.Label = in.Label
+	out.Widget = storagev1.StackUIWidget(in.Widget)
+	out.Values = *(*[]string)(unsafe.Pointer(&in.Values))
+	out.Tones = *(*map[string]storagev1.StackUITone)(unsafe.Pointer(&in.Tones))
+	out.LinkTo = in.LinkTo
+	out.Conditions = *(*[]management.StackViewCondition)(unsafe.Pointer(&in.Conditions))
+	out.Error = in.Error
+	return nil
+}
+
+// Convert_v1_StackViewRow_To_management_StackViewRow is an autogenerated conversion function.
+func Convert_v1_StackViewRow_To_management_StackViewRow(in *StackViewRow, out *management.StackViewRow, s conversion.Scope) error {
+	return autoConvert_v1_StackViewRow_To_management_StackViewRow(in, out, s)
+}
+
+func autoConvert_management_StackViewRow_To_v1_StackViewRow(in *management.StackViewRow, out *StackViewRow, s conversion.Scope) error {
+	out.Label = in.Label
+	out.Widget = storagev1.StackUIWidget(in.Widget)
+	out.Values = *(*[]string)(unsafe.Pointer(&in.Values))
+	out.Tones = *(*map[string]storagev1.StackUITone)(unsafe.Pointer(&in.Tones))
+	out.LinkTo = in.LinkTo
+	out.Conditions = *(*[]StackViewCondition)(unsafe.Pointer(&in.Conditions))
+	out.Error = in.Error
+	return nil
+}
+
+// Convert_management_StackViewRow_To_v1_StackViewRow is an autogenerated conversion function.
+func Convert_management_StackViewRow_To_v1_StackViewRow(in *management.StackViewRow, out *StackViewRow, s conversion.Scope) error {
+	return autoConvert_management_StackViewRow_To_v1_StackViewRow(in, out, s)
 }
 
 func autoConvert_v1_StandaloneEtcdPeer_To_management_StandaloneEtcdPeer(in *StandaloneEtcdPeer, out *management.StandaloneEtcdPeer, s conversion.Scope) error {
@@ -12651,58 +13097,6 @@ func autoConvert_management_StorageVolume_To_v1_StorageVolume(in *management.Sto
 // Convert_management_StorageVolume_To_v1_StorageVolume is an autogenerated conversion function.
 func Convert_management_StorageVolume_To_v1_StorageVolume(in *management.StorageVolume, out *StorageVolume, s conversion.Scope) error {
 	return autoConvert_management_StorageVolume_To_v1_StorageVolume(in, out, s)
-}
-
-func autoConvert_v1_StorageVolumeCredentials_To_management_StorageVolumeCredentials(in *StorageVolumeCredentials, out *management.StorageVolumeCredentials, s conversion.Scope) error {
-	out.ObjectMeta = in.ObjectMeta
-	out.Endpoint = in.Endpoint
-	out.Bucket = in.Bucket
-	out.AccessKey = in.AccessKey
-	out.SecretKey = in.SecretKey
-	out.CAData = in.CAData
-	return nil
-}
-
-// Convert_v1_StorageVolumeCredentials_To_management_StorageVolumeCredentials is an autogenerated conversion function.
-func Convert_v1_StorageVolumeCredentials_To_management_StorageVolumeCredentials(in *StorageVolumeCredentials, out *management.StorageVolumeCredentials, s conversion.Scope) error {
-	return autoConvert_v1_StorageVolumeCredentials_To_management_StorageVolumeCredentials(in, out, s)
-}
-
-func autoConvert_management_StorageVolumeCredentials_To_v1_StorageVolumeCredentials(in *management.StorageVolumeCredentials, out *StorageVolumeCredentials, s conversion.Scope) error {
-	out.ObjectMeta = in.ObjectMeta
-	out.Endpoint = in.Endpoint
-	out.Bucket = in.Bucket
-	out.AccessKey = in.AccessKey
-	out.SecretKey = in.SecretKey
-	out.CAData = in.CAData
-	return nil
-}
-
-// Convert_management_StorageVolumeCredentials_To_v1_StorageVolumeCredentials is an autogenerated conversion function.
-func Convert_management_StorageVolumeCredentials_To_v1_StorageVolumeCredentials(in *management.StorageVolumeCredentials, out *StorageVolumeCredentials, s conversion.Scope) error {
-	return autoConvert_management_StorageVolumeCredentials_To_v1_StorageVolumeCredentials(in, out, s)
-}
-
-func autoConvert_v1_StorageVolumeCredentialsList_To_management_StorageVolumeCredentialsList(in *StorageVolumeCredentialsList, out *management.StorageVolumeCredentialsList, s conversion.Scope) error {
-	out.ListMeta = in.ListMeta
-	out.Items = *(*[]management.StorageVolumeCredentials)(unsafe.Pointer(&in.Items))
-	return nil
-}
-
-// Convert_v1_StorageVolumeCredentialsList_To_management_StorageVolumeCredentialsList is an autogenerated conversion function.
-func Convert_v1_StorageVolumeCredentialsList_To_management_StorageVolumeCredentialsList(in *StorageVolumeCredentialsList, out *management.StorageVolumeCredentialsList, s conversion.Scope) error {
-	return autoConvert_v1_StorageVolumeCredentialsList_To_management_StorageVolumeCredentialsList(in, out, s)
-}
-
-func autoConvert_management_StorageVolumeCredentialsList_To_v1_StorageVolumeCredentialsList(in *management.StorageVolumeCredentialsList, out *StorageVolumeCredentialsList, s conversion.Scope) error {
-	out.ListMeta = in.ListMeta
-	out.Items = *(*[]StorageVolumeCredentials)(unsafe.Pointer(&in.Items))
-	return nil
-}
-
-// Convert_management_StorageVolumeCredentialsList_To_v1_StorageVolumeCredentialsList is an autogenerated conversion function.
-func Convert_management_StorageVolumeCredentialsList_To_v1_StorageVolumeCredentialsList(in *management.StorageVolumeCredentialsList, out *StorageVolumeCredentialsList, s conversion.Scope) error {
-	return autoConvert_management_StorageVolumeCredentialsList_To_v1_StorageVolumeCredentialsList(in, out, s)
 }
 
 func autoConvert_v1_StorageVolumeList_To_management_StorageVolumeList(in *StorageVolumeList, out *management.StorageVolumeList, s conversion.Scope) error {

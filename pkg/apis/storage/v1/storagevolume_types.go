@@ -14,15 +14,11 @@ const (
 	// StorageVolumeConditionTypeSynced is true when the vendor section has been written in full;
 	// false names the keys the vendor refused on update, so their change was not applied.
 	StorageVolumeConditionTypeSynced = "Synced"
-	// StorageVolumeConditionTypeObjectReady is true once the storage's bucket and the tenant's S3
-	// identity exist. Only present when the profile lists s3; file access does not depend on it.
-	StorageVolumeConditionTypeObjectReady = "ObjectReady"
 )
 
 var StorageVolumeConditions = []agentstoragev1.ConditionType{
 	StorageVolumeConditionTypeProvisioned,
 	StorageVolumeConditionTypeSynced,
-	StorageVolumeConditionTypeObjectReady,
 }
 
 // StorageVolumePhase is where a StorageVolume is in its lifecycle.
@@ -38,14 +34,6 @@ const (
 // mounts at boot as comma separated <storage>:<path> pairs, for example
 // "datasets:/mnt/datasets,scratch:/mnt/scratch". The <storage>=<path> form is accepted too.
 const StorageVolumeMountsProperty = "vcluster.com/storage-mounts"
-
-// StorageVolumeClientOptionsProperty carries a machine's WEKA client-mode mount options, comma
-// separated in the mount option grammar, for example "num_cores=1" or "net=udp". They set up the
-// client container the host's first mount creates (its NIC, dedicated cores and pinned memory),
-// which every later mount and csi-wekafs reuse, so they belong to the machine and not to the storage
-// tier. Only client-mode keys are accepted; a storage's own options stay in its mount section. VAST
-// mounts over NFS, which has no client container, so its mount script ignores the property.
-const StorageVolumeClientOptionsProperty = "vcluster.com/storage-client-options"
 
 const (
 	// StorageVolumeMountLabel is the label a worker that mounts storage volume puts on its own
@@ -134,23 +122,11 @@ type StorageVolumeSpec struct {
 	// +optional
 	Weka *WekaVolumeSection `json:"weka,omitempty"`
 
-	// Vast is this storage's copy of the profile's volume-level VAST documents, filled and edited
-	// like Weka.
-	// +optional
-	Vast *VastVolumeSection `json:"vast,omitempty"`
-
 	// Import adopts a volume that exists already instead of creating it, and creates the tenant's
 	// StorageAccount in import mode when it does not exist yet. The platform never deletes what it
 	// did not create.
 	// +optional
 	Import bool `json:"import,omitempty"`
-
-	// Encrypted creates the volume encrypted at rest. On WEKA the client encrypts on the host and
-	// a KMS has to wrap the key; without one the storage is refused. It wins over an encrypted key in
-	// the vendor section, and the two have to agree at creation. Set at creation only: a later
-	// change is reported by the Synced condition and never applied.
-	// +optional
-	Encrypted bool `json:"encrypted,omitempty"`
 }
 
 // StorageVolumeStatus holds what the platform observed on the vendor side.
@@ -202,30 +178,6 @@ type StorageVolumeStatus struct {
 	// StorageVolumes of one tenant on one storage system.
 	// +optional
 	CredentialsSecret string `json:"credentialsSecret,omitempty"`
-
-	// Encrypted is whether the vendor reports the volume as encrypted at rest.
-	// +optional
-	Encrypted *bool `json:"encrypted,omitempty"`
-
-	// Object is the S3 bucket over the volume, recorded once object access is ready. It stays
-	// recorded for the delete when object access fails, and goes once a profile that drops s3 took
-	// the bucket out of the tenant's policy; a tenant reads it only while ObjectReady is True. Only
-	// for a storage whose profile lists s3.
-	// +optional
-	Object *StorageVolumeObject `json:"object,omitempty"`
-}
-
-// StorageVolumeObject is where a storage's data is reached over S3.
-type StorageVolumeObject struct {
-	// Endpoint is the S3 endpoint URL the connector names.
-	// +optional
-	Endpoint string `json:"endpoint,omitempty"`
-	// Bucket is the bucket over the storage's volume.
-	// +optional
-	Bucket string `json:"bucket,omitempty"`
-	// PathStyle is true when clients address the bucket in the path rather than the host name.
-	// +optional
-	PathStyle bool `json:"pathStyle,omitempty"`
 }
 
 // StorageVolumeVendor identifies the vendor objects behind a StorageVolume.
@@ -236,7 +188,7 @@ type StorageVolumeVendor struct {
 	// TenantUID is the vendor-side tenant identifier.
 	// +optional
 	TenantUID string `json:"tenantUID,omitempty"`
-	// Name is the vendor-side volume name, a filesystem on WEKA and the view path on VAST.
+	// Name is the vendor-side volume name, a filesystem on WEKA.
 	// +optional
 	Name string `json:"name,omitempty"`
 	// UID is the vendor-side volume identifier.

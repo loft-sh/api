@@ -631,13 +631,13 @@ func (in MachineValidationArtifact) OpenAPIModelName() string {
 }
 
 // OpenAPIModelName returns the OpenAPI model name for this type.
-func (in MachineValidationRejoin) OpenAPIModelName() string {
-	return "com.github.loft-sh.api.v5.pkg.apis.storage.v1.MachineValidationRejoin"
+func (in MachineValidationCertification) OpenAPIModelName() string {
+	return "com.github.loft-sh.api.v5.pkg.apis.storage.v1.MachineValidationCertification"
 }
 
 // OpenAPIModelName returns the OpenAPI model name for this type.
-func (in MachineValidationTestResult) OpenAPIModelName() string {
-	return "com.github.loft-sh.api.v5.pkg.apis.storage.v1.MachineValidationTestResult"
+func (in MachineValidationRejoin) OpenAPIModelName() string {
+	return "com.github.loft-sh.api.v5.pkg.apis.storage.v1.MachineValidationRejoin"
 }
 
 // OpenAPIModelName returns the OpenAPI model name for this type.
@@ -1351,6 +1351,86 @@ func (in StackTemplateStatus) OpenAPIModelName() string {
 }
 
 // OpenAPIModelName returns the OpenAPI model name for this type.
+func (in StackUI) OpenAPIModelName() string {
+	return "com.github.loft-sh.api.v5.pkg.apis.storage.v1.StackUI"
+}
+
+// OpenAPIModelName returns the OpenAPI model name for this type.
+func (in StackUIAction) OpenAPIModelName() string {
+	return "com.github.loft-sh.api.v5.pkg.apis.storage.v1.StackUIAction"
+}
+
+// OpenAPIModelName returns the OpenAPI model name for this type.
+func (in StackUIActionParameter) OpenAPIModelName() string {
+	return "com.github.loft-sh.api.v5.pkg.apis.storage.v1.StackUIActionParameter"
+}
+
+// OpenAPIModelName returns the OpenAPI model name for this type.
+func (in StackUIActionTarget) OpenAPIModelName() string {
+	return "com.github.loft-sh.api.v5.pkg.apis.storage.v1.StackUIActionTarget"
+}
+
+// OpenAPIModelName returns the OpenAPI model name for this type.
+func (in StackUICard) OpenAPIModelName() string {
+	return "com.github.loft-sh.api.v5.pkg.apis.storage.v1.StackUICard"
+}
+
+// OpenAPIModelName returns the OpenAPI model name for this type.
+func (in StackUICreateAction) OpenAPIModelName() string {
+	return "com.github.loft-sh.api.v5.pkg.apis.storage.v1.StackUICreateAction"
+}
+
+// OpenAPIModelName returns the OpenAPI model name for this type.
+func (in StackUIDetail) OpenAPIModelName() string {
+	return "com.github.loft-sh.api.v5.pkg.apis.storage.v1.StackUIDetail"
+}
+
+// OpenAPIModelName returns the OpenAPI model name for this type.
+func (in StackUIForm) OpenAPIModelName() string {
+	return "com.github.loft-sh.api.v5.pkg.apis.storage.v1.StackUIForm"
+}
+
+// OpenAPIModelName returns the OpenAPI model name for this type.
+func (in StackUIFormGroup) OpenAPIModelName() string {
+	return "com.github.loft-sh.api.v5.pkg.apis.storage.v1.StackUIFormGroup"
+}
+
+// OpenAPIModelName returns the OpenAPI model name for this type.
+func (in StackUILabelRelation) OpenAPIModelName() string {
+	return "com.github.loft-sh.api.v5.pkg.apis.storage.v1.StackUILabelRelation"
+}
+
+// OpenAPIModelName returns the OpenAPI model name for this type.
+func (in StackUILogs) OpenAPIModelName() string {
+	return "com.github.loft-sh.api.v5.pkg.apis.storage.v1.StackUILogs"
+}
+
+// OpenAPIModelName returns the OpenAPI model name for this type.
+func (in StackUIPatchAction) OpenAPIModelName() string {
+	return "com.github.loft-sh.api.v5.pkg.apis.storage.v1.StackUIPatchAction"
+}
+
+// OpenAPIModelName returns the OpenAPI model name for this type.
+func (in StackUIRelation) OpenAPIModelName() string {
+	return "com.github.loft-sh.api.v5.pkg.apis.storage.v1.StackUIRelation"
+}
+
+// OpenAPIModelName returns the OpenAPI model name for this type.
+func (in StackUIResource) OpenAPIModelName() string {
+	return "com.github.loft-sh.api.v5.pkg.apis.storage.v1.StackUIResource"
+}
+
+// OpenAPIModelName returns the OpenAPI model name for this type.
+func (in StackUIRow) OpenAPIModelName() string {
+	return "com.github.loft-sh.api.v5.pkg.apis.storage.v1.StackUIRow"
+}
+
+// OpenAPIModelName returns the OpenAPI model name for this type.
+func (in StackUITimeline) OpenAPIModelName() string {
+	return "com.github.loft-sh.api.v5.pkg.apis.storage.v1.StackUITimeline"
+}
+
+// OpenAPIModelName returns the OpenAPI model name for this type.
 func (in Storage) OpenAPIModelName() string {
 	return "com.github.loft-sh.api.v5.pkg.apis.storage.v1.Storage"
 }
@@ -1428,11 +1508,6 @@ func (in StorageVolumeCapacity) OpenAPIModelName() string {
 // OpenAPIModelName returns the OpenAPI model name for this type.
 func (in StorageVolumeList) OpenAPIModelName() string {
 	return "com.github.loft-sh.api.v5.pkg.apis.storage.v1.StorageVolumeList"
-}
-
-// OpenAPIModelName returns the OpenAPI model name for this type.
-func (in StorageVolumeObject) OpenAPIModelName() string {
-	return "com.github.loft-sh.api.v5.pkg.apis.storage.v1.StorageVolumeObject"
 }
 
 // OpenAPIModelName returns the OpenAPI model name for this type.
@@ -1696,26 +1771,6 @@ func (in VClusterDeviceOperatorDeployment) OpenAPIModelName() string {
 }
 
 // OpenAPIModelName returns the OpenAPI model name for this type.
-func (in VastStorageMount) OpenAPIModelName() string {
-	return "com.github.loft-sh.api.v5.pkg.apis.storage.v1.VastStorageMount"
-}
-
-// OpenAPIModelName returns the OpenAPI model name for this type.
-func (in VastStorageSection) OpenAPIModelName() string {
-	return "com.github.loft-sh.api.v5.pkg.apis.storage.v1.VastStorageSection"
-}
-
-// OpenAPIModelName returns the OpenAPI model name for this type.
-func (in VastTenantSection) OpenAPIModelName() string {
-	return "com.github.loft-sh.api.v5.pkg.apis.storage.v1.VastTenantSection"
-}
-
-// OpenAPIModelName returns the OpenAPI model name for this type.
-func (in VastVolumeSection) OpenAPIModelName() string {
-	return "com.github.loft-sh.api.v5.pkg.apis.storage.v1.VastVolumeSection"
-}
-
-// OpenAPIModelName returns the OpenAPI model name for this type.
 func (in VaultAuthSpec) OpenAPIModelName() string {
 	return "com.github.loft-sh.api.v5.pkg.apis.storage.v1.VaultAuthSpec"
 }
@@ -1778,16 +1833,6 @@ func (in VirtualClusterInstanceSpec) OpenAPIModelName() string {
 // OpenAPIModelName returns the OpenAPI model name for this type.
 func (in VirtualClusterInstanceStatus) OpenAPIModelName() string {
 	return "com.github.loft-sh.api.v5.pkg.apis.storage.v1.VirtualClusterInstanceStatus"
-}
-
-// OpenAPIModelName returns the OpenAPI model name for this type.
-func (in VirtualClusterInstanceStorage) OpenAPIModelName() string {
-	return "com.github.loft-sh.api.v5.pkg.apis.storage.v1.VirtualClusterInstanceStorage"
-}
-
-// OpenAPIModelName returns the OpenAPI model name for this type.
-func (in VirtualClusterInstanceStorageStatus) OpenAPIModelName() string {
-	return "com.github.loft-sh.api.v5.pkg.apis.storage.v1.VirtualClusterInstanceStorageStatus"
 }
 
 // OpenAPIModelName returns the OpenAPI model name for this type.

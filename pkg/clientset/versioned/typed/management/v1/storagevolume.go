@@ -31,8 +31,6 @@ type StorageVolumeInterface interface {
 	List(ctx context.Context, opts metav1.ListOptions) (*managementv1.StorageVolumeList, error)
 	Watch(ctx context.Context, opts metav1.ListOptions) (watch.Interface, error)
 	Patch(ctx context.Context, name string, pt types.PatchType, data []byte, opts metav1.PatchOptions, subresources ...string) (result *managementv1.StorageVolume, err error)
-	GetCredentials(ctx context.Context, storageVolumeName string, options metav1.GetOptions) (*managementv1.StorageVolumeCredentials, error)
-
 	StorageVolumeExpansion
 }
 
@@ -53,17 +51,4 @@ func newStorageVolumes(c *ManagementV1Client) *storageVolumes {
 			func() *managementv1.StorageVolumeList { return &managementv1.StorageVolumeList{} },
 		),
 	}
-}
-
-// GetCredentials takes name of the storageVolume, and returns the corresponding managementv1.StorageVolumeCredentials object, and an error if there is any.
-func (c *storageVolumes) GetCredentials(ctx context.Context, storageVolumeName string, options metav1.GetOptions) (result *managementv1.StorageVolumeCredentials, err error) {
-	result = &managementv1.StorageVolumeCredentials{}
-	err = c.GetClient().Get().
-		Resource("storagevolumes").
-		Name(storageVolumeName).
-		SubResource("credentials").
-		VersionedParams(&options, scheme.ParameterCodec).
-		Do(ctx).
-		Into(result)
-	return
 }

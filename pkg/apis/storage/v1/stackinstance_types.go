@@ -335,6 +335,10 @@ type StackTemplateDefinition struct {
 	// instance's outputs subresource, never from its status.
 	// +optional
 	PublishedOutputs []StackPublishedOutput `json:"publishedOutputs,omitempty"`
+
+	// UI declares the resources the stack adds to the platform UI on its destination.
+	// +optional
+	UI *StackUI `json:"ui,omitempty"`
 }
 
 // StackPublishedOutput exposes one captured task output under a public name.

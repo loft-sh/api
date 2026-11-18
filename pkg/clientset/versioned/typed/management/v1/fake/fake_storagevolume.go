@@ -3,13 +3,9 @@
 package fake
 
 import (
-	context "context"
-
 	v1 "github.com/loft-sh/api/v5/pkg/apis/management/v1"
 	managementv1 "github.com/loft-sh/api/v5/pkg/clientset/versioned/typed/management/v1"
-	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	gentype "k8s.io/client-go/gentype"
-	testing "k8s.io/client-go/testing"
 )
 
 // fakeStorageVolumes implements StorageVolumeInterface
@@ -35,15 +31,4 @@ func newFakeStorageVolumes(fake *FakeManagementV1) managementv1.StorageVolumeInt
 		),
 		fake,
 	}
-}
-
-// GetCredentials takes name of the storageVolume, and returns the corresponding storageVolumeCredentials object, and an error if there is any.
-func (c *fakeStorageVolumes) GetCredentials(ctx context.Context, storageVolumeName string, options metav1.GetOptions) (result *v1.StorageVolumeCredentials, err error) {
-	emptyResult := &v1.StorageVolumeCredentials{}
-	obj, err := c.Fake.
-		Invokes(testing.NewRootGetSubresourceActionWithOptions(c.Resource(), "credentials", storageVolumeName, options), emptyResult)
-	if obj == nil {
-		return emptyResult, err
-	}
-	return obj.(*v1.StorageVolumeCredentials), err
 }

@@ -46,8 +46,8 @@ const (
 	MachineConditionTypeSourceAttached agentstoragev1.ConditionType = "SourceAttached"
 
 	// MachineConditionTypeHostValidated summarizes the checks recorded in
-	// status.hostValidation: the in-band attempt, which runs tests on the
-	// machine, and the check against the host validation profiles its node types
+	// status.hostValidation: the in-band attempt, which runs a Certification on
+	// the machine, and the check against the host validation profiles its node types
 	// select, which reads its BMC. Its reason is one of the
 	// MachineHostValidatedReason constants, the worst of the checks that have a
 	// result, and its message is that check's. It is absent while no check has a
@@ -88,7 +88,7 @@ const (
 	// Mismatched, ReadFailed or Unsupported.
 	MachineHostValidatedReasonFailed = "Failed"
 	// MachineHostValidatedReasonRunning is set, as Unknown, while a check runs: an
-	// in-band test, or the read of a profile.
+	// in-band Certification, or the read of a profile.
 	MachineHostValidatedReasonRunning = "Running"
 	// MachineHostValidatedReasonPending is set, as Unknown, while a check waits to
 	// run: an in-band attempt Joining or Starting, or a profile that matches once
@@ -110,26 +110,25 @@ const (
 	// its node has not joined the validation cluster.
 	MachineInBandValidationJoining MachineInBandValidationResult = "Joining"
 	// MachineInBandValidationStarting is once the node joined and before the
-	// first test runs.
+	// Certification runs.
 	MachineInBandValidationStarting MachineInBandValidationResult = "Starting"
-	// MachineInBandValidationRunning is while a test's Certification or Job runs
-	// on the node.
+	// MachineInBandValidationRunning is while the Certification runs on the node.
 	MachineInBandValidationRunning MachineInBandValidationResult = "Running"
-	// MachineInBandValidationPassed is once every test passed.
+	// MachineInBandValidationPassed is once the Certification passed.
 	MachineInBandValidationPassed MachineInBandValidationResult = "Passed"
-	// MachineInBandValidationTestFailed is when a test failed on the node: its
-	// Certification failed and recorded the node, or its Job exited non-zero or
-	// ran past its timeout. The message is the reason recorded for the node, or
-	// the last line the Job printed.
+	// MachineInBandValidationTestFailed is when the Certification failed and
+	// recorded the node in the failed nodes of a category. The message lists the
+	// reasons recorded for the node.
 	MachineInBandValidationTestFailed MachineInBandValidationResult = "TestFailed"
 	// MachineInBandValidationJoinFailed is when the validation NodeClaim failed
 	// or the node did not join before the join deadline.
 	MachineInBandValidationJoinFailed MachineInBandValidationResult = "JoinFailed"
-	// MachineInBandValidationSetupFailed is when the tests could not run: the
-	// suite is missing or not understood, the Certification kind is not served in
-	// the validation cluster, a test's image cannot be pulled, a Certification
-	// failed without recording the node, the setup deadline passed, or a test pod
-	// was lost without an exit code.
+	// MachineInBandValidationSetupFailed is when the Certification did not test
+	// the node: its ConfigMap is missing or not understood, the Certification kind
+	// is not served in the validation cluster, the setup deadline passed, or the
+	// Certification failed without recording the node, succeeded without testing
+	// it, was deleted, or did not finish within its timeouts and the setup
+	// timeout.
 	MachineInBandValidationSetupFailed MachineInBandValidationResult = "SetupFailed"
 )
 
@@ -206,23 +205,6 @@ const (
 	HostValidationSettingResultMissing HostValidationSettingResult = "Missing"
 )
 
-// Results of one test in MachineValidationTestResult.
-const (
-	MachineValidationTestRunning = "Running"
-	MachineValidationTestPassed  = "Passed"
-	MachineValidationTestFailed  = "Failed"
-)
-
-// Kinds of object a test runs as, in MachineValidationTestResult.
-const (
-	// MachineValidationTestKindCertification is an NVIDIA Cluster Readiness
-	// Engine Certification, the default kind of test.
-	MachineValidationTestKindCertification = "Certification"
-	// MachineValidationTestKindJob is a Kubernetes Job, for a test the
-	// Certifications do not cover.
-	MachineValidationTestKindJob = "Job"
-)
-
 // Types of MachineValidationArtifact, media types of its data once
 // decompressed.
 const (
@@ -231,14 +213,6 @@ const (
 	// certification report --results-file` writes, without the sections that
 	// only several nodes, repeated runs or diagnose mode fill.
 	MachineValidationArtifactTypeCertificationReport = "application/vnd.nvidia.nvcre.certification-report+json"
-
-	// MachineValidationArtifactTypeJobReport is the report of a Job test as
-	// JSON: the Job's name, result (PASSED, FAILED or RUNNING), failureReason
-	// and runtimeSeconds, and in containers, for each container of its pods,
-	// the pod, nodeName, name, init, exitCode, reason and message of how it
-	// ended or why it waits, the end of its log in log (at most 800 lines and
-	// 32 KiB) and logError when the log could not be read.
-	MachineValidationArtifactTypeJobReport = "application/vnd.vcluster.machine-validation.job-report+json"
 )
 
 // MachineConditions lists the conditions summarized into the Ready condition.
@@ -401,8 +375,8 @@ type MachineStatus struct {
 // against its host validation profiles, which reads its BMC without running
 // anything on it.
 type MachineHostValidationStatus struct {
-	// InBand is the machine's last in-band attempt, which runs the tests of its
-	// NodeProvider's validation tier on it. It gates assigning the machine to a
+	// InBand is the machine's last in-band attempt, which runs the Certification
+	// of its NodeProvider's validation tier on it. It gates assigning the machine to a
 	// tenant and using it for an instance.
 	// +optional
 	InBand *MachineInBandValidationStatus `json:"inBand,omitempty"`
@@ -436,15 +410,10 @@ type MachineInBandValidationStatus struct {
 	// +optional
 	Tier string `json:"tier,omitempty"`
 
-	// AttemptID identifies the attempt. The Certifications and Jobs of any other
-	// attempt are ignored.
+	// AttemptID identifies the attempt. The Certifications of any other attempt
+	// are ignored.
 	// +optional
 	AttemptID string `json:"attemptID,omitempty"`
-
-	// SuiteHash is the hash of the test suite the attempt ran. A changed suite
-	// does not invalidate a pass, so this says which suite a pass was for.
-	// +optional
-	SuiteHash string `json:"suiteHash,omitempty"`
 
 	// ClusterUID is the UID of the validation tenant cluster the attempt ran in.
 	// +optional
@@ -459,7 +428,7 @@ type MachineInBandValidationStatus struct {
 	StartTime *metav1.Time `json:"startTime,omitempty"`
 
 	// JoinTime is when the attempt's node joined the validation cluster. The
-	// setup of the first test counts from it. Unset while the node joins, and
+	// setup of the Certification counts from it. Unset while the node joins, and
 	// for an attempt that started on a node the machine already had there.
 	// +optional
 	JoinTime *metav1.Time `json:"joinTime,omitempty"`
@@ -468,12 +437,14 @@ type MachineInBandValidationStatus struct {
 	// +optional
 	FinishTime *metav1.Time `json:"finishTime,omitempty"`
 
-	// Tests holds the result of each test the attempt reached, in suite order.
+	// Certification is the NVIDIA Cluster Readiness Engine Certification the
+	// attempt runs on the node, set once it is created. Its verdict is the
+	// attempt's result.
 	// +optional
-	Tests []MachineValidationTestResult `json:"tests,omitempty"`
+	Certification *MachineValidationCertification `json:"certification,omitempty"`
 
 	// Rejoin tracks putting a machine that passed back into the validation
-	// cluster after it was released. A rejoin runs no tests.
+	// cluster after it was released. A rejoin runs no Certification.
 	// +optional
 	Rejoin *MachineValidationRejoin `json:"rejoin,omitempty"`
 
@@ -553,46 +524,31 @@ type MachineHostValidationSettingResult struct {
 	Result HostValidationSettingResult `json:"result"`
 }
 
-// MachineValidationTestResult is the result of one test of a validation attempt.
-type MachineValidationTestResult struct {
-	// Name is the test's name in the suite.
-	Name string `json:"name"`
-
-	// Result is Running, Passed or Failed.
-	Result string `json:"result"`
-
-	// Message is what the test found: the reason a failed Certification recorded
-	// for the node, or the last line a Job printed.
+// MachineValidationCertification is the Certification of an in-band attempt.
+type MachineValidationCertification struct {
+	// Name is the Certification, in the namespace of its ConfigMap. It is cleared
+	// once the Certification is deleted, a day after the attempt finished.
 	// +optional
-	Message string `json:"message,omitempty"`
+	Name string `json:"name,omitempty"`
 
-	// Kind is what the test ran as in the validation cluster, Certification or
-	// Job.
-	// +optional
-	Kind string `json:"kind,omitempty"`
-
-	// StartTime is when the test's Certification or Job was created.
+	// StartTime is when the Certification was created.
 	// +optional
 	StartTime *metav1.Time `json:"startTime,omitempty"`
 
-	// FinishTime is when the test's result was recorded, unset while it runs.
+	// TemplateHash is the hash of the certificationTemplate the Certification
+	// was created from. It hashes the template's content, so neither its
+	// formatting nor the rest of its ConfigMap changes it. A changed template does
+	// not invalidate a pass, so this says which template a pass was for.
 	// +optional
-	FinishTime *metav1.Time `json:"finishTime,omitempty"`
+	TemplateHash string `json:"templateHash,omitempty"`
 
-	// ObjectName is the test's Certification or Job, in the namespace of the
-	// suite. It is cleared once the object is deleted, a day after the attempt
-	// finished.
-	// +optional
-	ObjectName string `json:"objectName,omitempty"`
-
-	// Report is the test's report, recorded with its result: a Certification's
-	// NCRE report, or how a Job's containers ended with the end of their logs.
-	// It stays after the Certification or Job is deleted.
+	// Report is the Certification's NCRE report, recorded with the attempt's
+	// result. It stays after the Certification is deleted.
 	// +optional
 	Report *MachineValidationArtifact `json:"report,omitempty"`
 }
 
-// MachineValidationArtifact is a file a validation test produced.
+// MachineValidationArtifact is a file an in-band attempt produced.
 type MachineValidationArtifact struct {
 	// Type is the media type of Data once decompressed, one of the
 	// MachineValidationArtifactType constants.

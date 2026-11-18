@@ -48,3 +48,15 @@ func (c *fakeStackInstances) GetOutputs(ctx context.Context, stackInstanceName s
 	}
 	return obj.(*v1.StackInstanceOutputs), err
 }
+
+// View takes the representation of a stackInstanceView and creates it.  Returns the server's representation of the stackInstanceView, and an error, if there is any.
+func (c *fakeStackInstances) View(ctx context.Context, stackInstanceName string, stackInstanceView *v1.StackInstanceView, opts metav1.CreateOptions) (result *v1.StackInstanceView, err error) {
+	emptyResult := &v1.StackInstanceView{}
+	obj, err := c.Fake.
+		Invokes(testing.NewCreateSubresourceActionWithOptions(c.Resource(), stackInstanceName, "view", c.Namespace(), stackInstanceView, opts), emptyResult)
+
+	if obj == nil {
+		return emptyResult, err
+	}
+	return obj.(*v1.StackInstanceView), err
+}

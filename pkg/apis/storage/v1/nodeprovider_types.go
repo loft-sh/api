@@ -164,32 +164,32 @@ type NodeProviderValidationTier struct {
 	// +optional
 	NetworkEnvironmentRef string `json:"networkEnvironmentRef,omitempty"`
 
-	// SuiteConfigMapName is the ConfigMap in the validation cluster that holds the suite, the tests
-	// a machine runs there. Defaults to "pre-ingestion-validation".
+	// CertificationConfigMapName is the ConfigMap in the validation cluster that configures the
+	// Certification a machine runs there. Defaults to "pre-ingestion-host-validation".
 	// +optional
-	SuiteConfigMapName string `json:"suiteConfigMapName,omitempty"`
+	CertificationConfigMapName string `json:"certificationConfigMapName,omitempty"`
 
-	// SuiteConfigMapNamespace is the namespace of the suite's ConfigMap in the validation cluster.
-	// The tests run in it too. Defaults to "vcluster-platform".
+	// CertificationConfigMapNamespace is the namespace of the Certification's ConfigMap in the
+	// validation cluster. The Certification runs in it too. Defaults to "vcluster-platform".
 	// +optional
-	SuiteConfigMapNamespace string `json:"suiteConfigMapNamespace,omitempty"`
+	CertificationConfigMapNamespace string `json:"certificationConfigMapNamespace,omitempty"`
 
 	// JoinTimeout is how long a machine has to join the validation cluster once the platform starts
 	// joining it. Defaults to 1h.
 	// +optional
 	JoinTimeout *metav1.Duration `json:"joinTimeout,omitempty"`
 
-	// SetupTimeout is how long the platform keeps trying to set up each test of the suite before it
-	// fails the attempt as SetupFailed: from the start of the attempt for the first test, and from
-	// the end of the test before it for a later one. How long a test may run is the suite's, set in
-	// the test itself. Defaults to 45m.
+	// SetupTimeout is how long the platform keeps trying to set up the Certification, from the join,
+	// or from the start of an attempt that did not join, before it fails the attempt as SetupFailed.
+	// A running Certification gets it on top of its own timeouts, set in its ConfigMap, for its
+	// workloads to schedule. Defaults to 45m.
 	// +optional
 	SetupTimeout *metav1.Duration `json:"setupTimeout,omitempty"`
 
-	// TestPollInterval is how often the platform checks a running test for its result. A suite whose
-	// tests run for hours can be checked less often. Defaults to 1m.
+	// CertificationPollInterval is how often the platform checks the running Certification for its
+	// result. A Certification that runs for hours can be checked less often. Defaults to 1m.
 	// +optional
-	TestPollInterval *metav1.Duration `json:"testPollInterval,omitempty"`
+	CertificationPollInterval *metav1.Duration `json:"certificationPollInterval,omitempty"`
 }
 
 // NodeProviderValidationVirtualClusterRef references a tenant cluster by name and project.

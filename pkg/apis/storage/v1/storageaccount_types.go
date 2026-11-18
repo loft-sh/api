@@ -13,16 +13,11 @@ const (
 	// StorageAccountConditionTypeSynced is true when the tenant document has been written in full;
 	// false names the keys the vendor only accepts at creation and cannot change afterwards.
 	StorageAccountConditionTypeSynced = "Synced"
-	// StorageAccountConditionTypeKMSConfigured is true when a KMS outside the storage system wraps
-	// the keys of the tenant's encrypted storages; the message names its type and scope. Storages
-	// that ask for encryption without one are refused.
-	StorageAccountConditionTypeKMSConfigured = "KMSConfigured"
 )
 
 var StorageAccountConditions = []agentstoragev1.ConditionType{
 	StorageAccountConditionTypeProvisioned,
 	StorageAccountConditionTypeSynced,
-	StorageAccountConditionTypeKMSConfigured,
 }
 
 // StorageAccountPhase is where a StorageAccount is in its lifecycle.
@@ -120,8 +115,8 @@ type StorageAccountSpec struct {
 	// on. Immutable. A platform tenant has at most one StorageAccount per connector.
 	ConnectorRef string `json:"connectorRef"`
 
-	// Profile names the StorageProfile whose tenant-level documents seed Weka or Vast at creation
-	// when both are empty. Informational afterwards.
+	// Profile names the StorageProfile whose tenant-level documents seed Weka at creation when Weka
+	// is empty. Informational afterwards.
 	// +optional
 	Profile string `json:"profile,omitempty"`
 
@@ -129,11 +124,6 @@ type StorageAccountSpec struct {
 	// the StorageAccount is created and editable per customer from then on.
 	// +optional
 	Weka *WekaTenantSection `json:"weka,omitempty"`
-
-	// Vast is this tenant's copy of the tenant-level VAST documents, filled from the profile when
-	// the StorageAccount is created and editable per customer from then on.
-	// +optional
-	Vast *VastTenantSection `json:"vast,omitempty"`
 
 	// DeletionPolicy says whether deleting the StorageAccount deletes the vendor tenant (Delete, the
 	// default) or leaves it in place (Retain). A tenant the platform imported is never deleted.
@@ -218,21 +208,15 @@ type StorageAccountQuota struct {
 
 // StorageAccountIdentities are the usernames of the identities the platform minted.
 type StorageAccountIdentities struct {
-	// Admin is the vendor tenant's administrative identity, which the platform operates with. It
-	// never reaches a tenant cluster.
+	// Admin is the vendor tenant's administrative identity, which the platform operates with.
 	// +optional
 	Admin string `json:"admin,omitempty"`
-	// CSI is the tenant's CSI identity, which tenant cluster node plugins log in with: the CSI
-	// driver refuses a mount-only one.
+	// CSI is the identity tenant clusters mount with.
 	// +optional
 	CSI string `json:"csi,omitempty"`
-	// Mount is the mount-only identity machines mount with.
+	// Mount is the identity machines mount with.
 	// +optional
 	Mount string `json:"mount,omitempty"`
-	// S3 is the tenant's S3 identity, minted with the first storage that offers s3. Its keys stay in
-	// the Secret.
-	// +optional
-	S3 string `json:"s3,omitempty"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object

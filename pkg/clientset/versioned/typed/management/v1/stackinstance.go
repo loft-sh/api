@@ -30,6 +30,7 @@ type StackInstanceInterface interface {
 	Watch(ctx context.Context, opts metav1.ListOptions) (watch.Interface, error)
 	Patch(ctx context.Context, name string, pt types.PatchType, data []byte, opts metav1.PatchOptions, subresources ...string) (result *managementv1.StackInstance, err error)
 	GetOutputs(ctx context.Context, stackInstanceName string, options metav1.GetOptions) (*managementv1.StackInstanceOutputs, error)
+	View(ctx context.Context, stackInstanceName string, stackInstanceView *managementv1.StackInstanceView, opts metav1.CreateOptions) (*managementv1.StackInstanceView, error)
 
 	StackInstanceExpansion
 }
@@ -62,6 +63,21 @@ func (c *stackInstances) GetOutputs(ctx context.Context, stackInstanceName strin
 		Name(stackInstanceName).
 		SubResource("outputs").
 		VersionedParams(&options, scheme.ParameterCodec).
+		Do(ctx).
+		Into(result)
+	return
+}
+
+// View takes the representation of a stackInstanceView and creates it.  Returns the server's representation of the stackInstanceView, and an error, if there is any.
+func (c *stackInstances) View(ctx context.Context, stackInstanceName string, stackInstanceView *managementv1.StackInstanceView, opts metav1.CreateOptions) (result *managementv1.StackInstanceView, err error) {
+	result = &managementv1.StackInstanceView{}
+	err = c.GetClient().Post().
+		Namespace(c.GetNamespace()).
+		Resource("stackinstances").
+		Name(stackInstanceName).
+		SubResource("view").
+		VersionedParams(&opts, scheme.ParameterCodec).
+		Body(stackInstanceView).
 		Do(ctx).
 		Into(result)
 	return

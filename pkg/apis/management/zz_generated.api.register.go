@@ -1388,7 +1388,15 @@ var (
 		return NewStackInstanceOutputsRESTFunc(Factory)
 	}
 	NewStackInstanceOutputsRESTFunc NewRESTFunc
-	InternalStackTemplate           = builders.NewInternalResource(
+	InternalStackInstanceViewREST   = builders.NewInternalSubresource(
+		"stackinstances", "StackInstanceView", "view",
+		func() runtime.Object { return &StackInstanceView{} },
+	)
+	NewStackInstanceViewREST = func(getter generic.RESTOptionsGetter) rest.Storage {
+		return NewStackInstanceViewRESTFunc(Factory)
+	}
+	NewStackInstanceViewRESTFunc NewRESTFunc
+	InternalStackTemplate        = builders.NewInternalResource(
 		"stacktemplates",
 		"StackTemplate",
 		func() runtime.Object { return &StackTemplate{} },
@@ -1436,15 +1444,7 @@ var (
 		func() runtime.Object { return &StorageVolume{} },
 		func() runtime.Object { return &StorageVolumeList{} },
 	)
-	InternalStorageVolumeCredentialsREST = builders.NewInternalSubresource(
-		"storagevolumes", "StorageVolumeCredentials", "credentials",
-		func() runtime.Object { return &StorageVolumeCredentials{} },
-	)
-	NewStorageVolumeCredentialsREST = func(getter generic.RESTOptionsGetter) rest.Storage {
-		return NewStorageVolumeCredentialsRESTFunc(Factory)
-	}
-	NewStorageVolumeCredentialsRESTFunc NewRESTFunc
-	InternalSubjectAccessReview         = builders.NewInternalResource(
+	InternalSubjectAccessReview = builders.NewInternalResource(
 		"subjectaccessreviews",
 		"SubjectAccessReview",
 		func() runtime.Object { return &SubjectAccessReview{} },
@@ -1860,6 +1860,7 @@ var (
 		InternalStackInstance,
 		InternalStackInstanceStatus,
 		InternalStackInstanceOutputsREST,
+		InternalStackInstanceViewREST,
 		InternalStackTemplate,
 		InternalStackTemplateStatus,
 		InternalStorageAccount,
@@ -1868,7 +1869,6 @@ var (
 		InternalStorageProfileStatus,
 		InternalStorageVolume,
 		InternalStorageVolumeStatus,
-		InternalStorageVolumeCredentialsREST,
 		InternalSubjectAccessReview,
 		InternalSubjectAccessReviewStatus,
 		InternalTeam,
@@ -1945,6 +1945,12 @@ type SnapshotRequestPhase string
 type SnapshotTakenStatus string
 type StackOutputReason string
 type StackOutputState string
+type StackUIParameterType string
+type StackUIPlacement string
+type StackUITone string
+type StackUIWidget string
+type StackViewCardType string
+type StackViewFormMode string
 type Stage string
 type StorageConnectorProvider string
 type UID string
@@ -2467,44 +2473,18 @@ type ConnectorStatus struct {
 	Observability *ConnectorObservabilityStatus `json:"observability,omitempty"`
 }
 
-type ConnectorStorageCSISpec struct {
-	ChartRepo    string `json:"chartRepo,omitempty"`
-	ChartVersion string `json:"chartVersion,omitempty"`
-	Values       string `json:"values,omitempty"`
-}
-
-type ConnectorStorageS3Spec struct {
-	Endpoint string `json:"endpoint,omitempty"`
-	CAData   string `json:"caData,omitempty"`
-}
-
 type ConnectorStorageSpec struct {
 	Provider StorageConnectorProvider  `json:"provider"`
 	Weka     *ConnectorStorageWekaSpec `json:"weka,omitempty"`
-	Vast     *ConnectorStorageVastSpec `json:"vast,omitempty"`
 }
 
-type ConnectorStorageVastSpec struct {
-	Endpoint              string `json:"endpoint"`
+type ConnectorStorageWekaSpec struct {
+	Endpoints             string `json:"endpoints"`
 	Username              string `json:"username"`
 	Password              string `json:"password,omitempty"`
 	InsecureSkipTLSVerify bool   `json:"insecureSkipTLSVerify,omitempty"`
 	CAData                string `json:"caData,omitempty"`
 	TenantPrefix          string `json:"tenantPrefix,omitempty"`
-	VIPRange              string `json:"vipRange"`
-	VIPSubnetCIDR         int32  `json:"vipSubnetCIDR"`
-	VIPsPerTenant         int32  `json:"vipsPerTenant,omitempty"`
-}
-
-type ConnectorStorageWekaSpec struct {
-	Endpoints             string                   `json:"endpoints"`
-	Username              string                   `json:"username"`
-	Password              string                   `json:"password,omitempty"`
-	InsecureSkipTLSVerify bool                     `json:"insecureSkipTLSVerify,omitempty"`
-	CAData                string                   `json:"caData,omitempty"`
-	TenantPrefix          string                   `json:"tenantPrefix,omitempty"`
-	CSI                   *ConnectorStorageCSISpec `json:"csi,omitempty"`
-	S3                    *ConnectorStorageS3Spec  `json:"s3,omitempty"`
 }
 
 // +genclient
@@ -3574,6 +3554,35 @@ type StackInstanceStatus struct {
 	storagev1.StackInstanceStatus `json:",inline"`
 }
 
+// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+
+type StackInstanceView struct {
+	metav1.TypeMeta   `json:",inline"`
+	metav1.ObjectMeta `json:"metadata,omitempty"`
+	Spec              StackInstanceViewSpec   `json:"spec,omitempty"`
+	Status            StackInstanceViewStatus `json:"status,omitempty"`
+}
+
+type StackInstanceViewSpec struct {
+	Resource   string            `json:"resource,omitempty"`
+	Namespace  string            `json:"namespace,omitempty"`
+	Name       string            `json:"name,omitempty"`
+	Action     string            `json:"action,omitempty"`
+	Parameters map[string]string `json:"parameters,omitempty"`
+	Form       StackViewFormMode `json:"form,omitempty"`
+	Object     string            `json:"object,omitempty"`
+}
+
+type StackInstanceViewStatus struct {
+	Resources []StackViewResource `json:"resources,omitempty"`
+	Cards     []StackViewCard     `json:"cards,omitempty"`
+	Items     []StackViewItem     `json:"items,omitempty"`
+	Actions   []StackViewAction   `json:"actions,omitempty"`
+	Result    string              `json:"result,omitempty"`
+	Form      *StackViewForm      `json:"form,omitempty"`
+	App       *StackViewApp       `json:"app,omitempty"`
+}
+
 // +genclient
 // +genclient:nonNamespaced
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -3591,6 +3600,98 @@ type StackTemplateSpec struct {
 
 type StackTemplateStatus struct {
 	storagev1.StackTemplateStatus `json:",inline"`
+}
+
+type StackViewAction struct {
+	Name        string               `json:"name"`
+	Label       string               `json:"label"`
+	Confirm     string               `json:"confirm,omitempty"`
+	Destructive bool                 `json:"destructive"`
+	Primary     bool                 `json:"primary"`
+	Parameters  []StackViewParameter `json:"parameters,omitempty"`
+}
+
+type StackViewApp struct {
+	Template    string                       `json:"template,omitempty"`
+	DisplayName string                       `json:"displayName"`
+	Description string                       `json:"description,omitempty"`
+	Icon        string                       `json:"icon,omitempty"`
+	Placements  []storagev1.StackUIPlacement `json:"placements"`
+}
+
+type StackViewCard struct {
+	Title  string            `json:"title"`
+	Type   StackViewCardType `json:"type"`
+	Rows   []StackViewRow    `json:"rows,omitempty"`
+	Events []StackViewEvent  `json:"events,omitempty"`
+	Logs   *StackViewLogs    `json:"logs,omitempty"`
+	Error  string            `json:"error,omitempty"`
+}
+
+type StackViewCondition struct {
+	Type    string `json:"type"`
+	Status  string `json:"status"`
+	Reason  string `json:"reason,omitempty"`
+	Message string `json:"message,omitempty"`
+}
+
+type StackViewEvent struct {
+	Type    string `json:"type"`
+	Reason  string `json:"reason"`
+	Message string `json:"message,omitempty"`
+	Object  string `json:"object"`
+	Time    string `json:"time"`
+	Count   int32  `json:"count"`
+}
+
+type StackViewForm struct {
+	Schema string                       `json:"schema"`
+	Groups []storagev1.StackUIFormGroup `json:"groups,omitempty"`
+	Data   string                       `json:"data,omitempty"`
+}
+
+type StackViewItem struct {
+	Namespace string         `json:"namespace,omitempty"`
+	Name      string         `json:"name"`
+	Cells     []StackViewRow `json:"cells,omitempty"`
+}
+
+type StackViewLogs struct {
+	Pod       string `json:"pod"`
+	Container string `json:"container"`
+	Lines     string `json:"lines,omitempty"`
+}
+
+type StackViewParameter struct {
+	Name     string                         `json:"name"`
+	Label    string                         `json:"label"`
+	Type     storagev1.StackUIParameterType `json:"type"`
+	Required bool                           `json:"required"`
+	Value    string                         `json:"value,omitempty"`
+}
+
+type StackViewResource struct {
+	Name       string   `json:"name"`
+	Label      string   `json:"label"`
+	Icon       string   `json:"icon,omitempty"`
+	Group      string   `json:"group,omitempty"`
+	Version    string   `json:"version"`
+	Resource   string   `json:"resource"`
+	Kind       string   `json:"kind,omitempty"`
+	Namespaced bool     `json:"namespaced"`
+	Columns    []string `json:"columns,omitempty"`
+	HasForm    bool     `json:"hasForm"`
+	Error      string   `json:"error,omitempty"`
+}
+
+type StackViewRow struct {
+	Label      string                           `json:"label"`
+	Widget     storagev1.StackUIWidget          `json:"widget"`
+	Values     []string                         `json:"values,omitempty"`
+	Tones      map[string]storagev1.StackUITone `json:"tones,omitempty"`
+	LinkTo     string                           `json:"linkTo,omitempty"`
+	Conditions []StackViewCondition             `json:"conditions,omitempty"`
+	Error      string                           `json:"error,omitempty"`
 }
 
 type StandaloneEtcdPeer struct {
@@ -3655,18 +3756,6 @@ type StorageVolume struct {
 	metav1.ObjectMeta `json:"metadata,omitempty"`
 	Spec              StorageVolumeSpec   `json:"spec,omitempty"`
 	Status            StorageVolumeStatus `json:"status,omitempty"`
-}
-
-// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
-
-type StorageVolumeCredentials struct {
-	metav1.TypeMeta   `json:",inline"`
-	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Endpoint          string `json:"endpoint,omitempty"`
-	Bucket            string `json:"bucket,omitempty"`
-	AccessKey         string `json:"accessKey,omitempty"`
-	SecretKey         string `json:"secretKey,omitempty"`
-	CAData            string `json:"caData,omitempty"`
 }
 
 type StorageVolumeSpec struct {
@@ -9792,6 +9881,14 @@ type StackInstanceOutputsList struct {
 	Items           []StackInstanceOutputs `json:"items"`
 }
 
+// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+
+type StackInstanceViewList struct {
+	metav1.TypeMeta `json:",inline"`
+	metav1.ListMeta `json:"metadata,omitempty"`
+	Items           []StackInstanceView `json:"items"`
+}
+
 func (StackInstance) NewStatus() interface{} {
 	return StackInstanceStatus{}
 }
@@ -10266,14 +10363,6 @@ type StorageVolumeList struct {
 	metav1.TypeMeta `json:",inline"`
 	metav1.ListMeta `json:"metadata,omitempty"`
 	Items           []StorageVolume `json:"items"`
-}
-
-// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
-
-type StorageVolumeCredentialsList struct {
-	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
-	Items           []StorageVolumeCredentials `json:"items"`
 }
 
 func (StorageVolume) NewStatus() interface{} {

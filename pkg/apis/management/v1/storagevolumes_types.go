@@ -8,7 +8,6 @@ import (
 
 // +genclient
 // +genclient:nonNamespaced
-// +genclient:method=GetCredentials,verb=get,subresource=credentials,result=github.com/loft-sh/api/v5/pkg/apis/management/v1.StorageVolumeCredentials
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
 // +kubebuilder:resource:scope=Cluster
 // +kubebuilder:printcolumn:name="Status",type="string",JSONPath=".status.phase"
@@ -19,7 +18,6 @@ import (
 // StorageVolume holds storage of one tier assigned to one tenant.
 // +k8s:openapi-gen=true
 // +resource:path=storagevolumes,rest=StorageVolumeREST,statusRest=StorageVolumeStatusREST
-// +subresource:request=StorageVolumeCredentials,path=credentials,kind=StorageVolumeCredentials,rest=StorageVolumeCredentialsREST
 type StorageVolume struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`

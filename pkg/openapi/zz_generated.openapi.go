@@ -232,10 +232,7 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 		managementv1.ConnectorSharedDatabaseSpec{}.OpenAPIModelName():                        schema_pkg_apis_management_v1_ConnectorSharedDatabaseSpec(ref),
 		managementv1.ConnectorSpec{}.OpenAPIModelName():                                      schema_pkg_apis_management_v1_ConnectorSpec(ref),
 		managementv1.ConnectorStatus{}.OpenAPIModelName():                                    schema_pkg_apis_management_v1_ConnectorStatus(ref),
-		managementv1.ConnectorStorageCSISpec{}.OpenAPIModelName():                            schema_pkg_apis_management_v1_ConnectorStorageCSISpec(ref),
-		managementv1.ConnectorStorageS3Spec{}.OpenAPIModelName():                             schema_pkg_apis_management_v1_ConnectorStorageS3Spec(ref),
 		managementv1.ConnectorStorageSpec{}.OpenAPIModelName():                               schema_pkg_apis_management_v1_ConnectorStorageSpec(ref),
-		managementv1.ConnectorStorageVastSpec{}.OpenAPIModelName():                           schema_pkg_apis_management_v1_ConnectorStorageVastSpec(ref),
 		managementv1.ConnectorStorageWekaSpec{}.OpenAPIModelName():                           schema_pkg_apis_management_v1_ConnectorStorageWekaSpec(ref),
 		managementv1.ConvertVirtualClusterConfig{}.OpenAPIModelName():                        schema_pkg_apis_management_v1_ConvertVirtualClusterConfig(ref),
 		managementv1.ConvertVirtualClusterConfigList{}.OpenAPIModelName():                    schema_pkg_apis_management_v1_ConvertVirtualClusterConfigList(ref),
@@ -448,10 +445,25 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 		managementv1.StackInstanceOutputsList{}.OpenAPIModelName():                           schema_pkg_apis_management_v1_StackInstanceOutputsList(ref),
 		managementv1.StackInstanceSpec{}.OpenAPIModelName():                                  schema_pkg_apis_management_v1_StackInstanceSpec(ref),
 		managementv1.StackInstanceStatus{}.OpenAPIModelName():                                schema_pkg_apis_management_v1_StackInstanceStatus(ref),
+		managementv1.StackInstanceView{}.OpenAPIModelName():                                  schema_pkg_apis_management_v1_StackInstanceView(ref),
+		managementv1.StackInstanceViewList{}.OpenAPIModelName():                              schema_pkg_apis_management_v1_StackInstanceViewList(ref),
+		managementv1.StackInstanceViewSpec{}.OpenAPIModelName():                              schema_pkg_apis_management_v1_StackInstanceViewSpec(ref),
+		managementv1.StackInstanceViewStatus{}.OpenAPIModelName():                            schema_pkg_apis_management_v1_StackInstanceViewStatus(ref),
 		managementv1.StackTemplate{}.OpenAPIModelName():                                      schema_pkg_apis_management_v1_StackTemplate(ref),
 		managementv1.StackTemplateList{}.OpenAPIModelName():                                  schema_pkg_apis_management_v1_StackTemplateList(ref),
 		managementv1.StackTemplateSpec{}.OpenAPIModelName():                                  schema_pkg_apis_management_v1_StackTemplateSpec(ref),
 		managementv1.StackTemplateStatus{}.OpenAPIModelName():                                schema_pkg_apis_management_v1_StackTemplateStatus(ref),
+		managementv1.StackViewAction{}.OpenAPIModelName():                                    schema_pkg_apis_management_v1_StackViewAction(ref),
+		managementv1.StackViewApp{}.OpenAPIModelName():                                       schema_pkg_apis_management_v1_StackViewApp(ref),
+		managementv1.StackViewCard{}.OpenAPIModelName():                                      schema_pkg_apis_management_v1_StackViewCard(ref),
+		managementv1.StackViewCondition{}.OpenAPIModelName():                                 schema_pkg_apis_management_v1_StackViewCondition(ref),
+		managementv1.StackViewEvent{}.OpenAPIModelName():                                     schema_pkg_apis_management_v1_StackViewEvent(ref),
+		managementv1.StackViewForm{}.OpenAPIModelName():                                      schema_pkg_apis_management_v1_StackViewForm(ref),
+		managementv1.StackViewItem{}.OpenAPIModelName():                                      schema_pkg_apis_management_v1_StackViewItem(ref),
+		managementv1.StackViewLogs{}.OpenAPIModelName():                                      schema_pkg_apis_management_v1_StackViewLogs(ref),
+		managementv1.StackViewParameter{}.OpenAPIModelName():                                 schema_pkg_apis_management_v1_StackViewParameter(ref),
+		managementv1.StackViewResource{}.OpenAPIModelName():                                  schema_pkg_apis_management_v1_StackViewResource(ref),
+		managementv1.StackViewRow{}.OpenAPIModelName():                                       schema_pkg_apis_management_v1_StackViewRow(ref),
 		managementv1.StandaloneEtcdPeer{}.OpenAPIModelName():                                 schema_pkg_apis_management_v1_StandaloneEtcdPeer(ref),
 		managementv1.StandaloneEtcdPeerCoordinator{}.OpenAPIModelName():                      schema_pkg_apis_management_v1_StandaloneEtcdPeerCoordinator(ref),
 		managementv1.StandalonePKI{}.OpenAPIModelName():                                      schema_pkg_apis_management_v1_StandalonePKI(ref),
@@ -464,8 +476,6 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 		managementv1.StorageProfileSpec{}.OpenAPIModelName():                                 schema_pkg_apis_management_v1_StorageProfileSpec(ref),
 		managementv1.StorageProfileStatus{}.OpenAPIModelName():                               schema_pkg_apis_management_v1_StorageProfileStatus(ref),
 		managementv1.StorageVolume{}.OpenAPIModelName():                                      schema_pkg_apis_management_v1_StorageVolume(ref),
-		managementv1.StorageVolumeCredentials{}.OpenAPIModelName():                           schema_pkg_apis_management_v1_StorageVolumeCredentials(ref),
-		managementv1.StorageVolumeCredentialsList{}.OpenAPIModelName():                       schema_pkg_apis_management_v1_StorageVolumeCredentialsList(ref),
 		managementv1.StorageVolumeList{}.OpenAPIModelName():                                  schema_pkg_apis_management_v1_StorageVolumeList(ref),
 		managementv1.StorageVolumeSpec{}.OpenAPIModelName():                                  schema_pkg_apis_management_v1_StorageVolumeSpec(ref),
 		managementv1.StorageVolumeStatus{}.OpenAPIModelName():                                schema_pkg_apis_management_v1_StorageVolumeStatus(ref),
@@ -716,8 +726,8 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 		apisstoragev1.MachineStatus{}.OpenAPIModelName():                                     schema_pkg_apis_storage_v1_MachineStatus(ref),
 		apisstoragev1.MachineSystem{}.OpenAPIModelName():                                     schema_pkg_apis_storage_v1_MachineSystem(ref),
 		apisstoragev1.MachineValidationArtifact{}.OpenAPIModelName():                         schema_pkg_apis_storage_v1_MachineValidationArtifact(ref),
+		apisstoragev1.MachineValidationCertification{}.OpenAPIModelName():                    schema_pkg_apis_storage_v1_MachineValidationCertification(ref),
 		apisstoragev1.MachineValidationRejoin{}.OpenAPIModelName():                           schema_pkg_apis_storage_v1_MachineValidationRejoin(ref),
-		apisstoragev1.MachineValidationTestResult{}.OpenAPIModelName():                       schema_pkg_apis_storage_v1_MachineValidationTestResult(ref),
 		apisstoragev1.Maintainer{}.OpenAPIModelName():                                        schema_pkg_apis_storage_v1_Maintainer(ref),
 		apisstoragev1.ManagedNodeTypeObjectMeta{}.OpenAPIModelName():                         schema_pkg_apis_storage_v1_ManagedNodeTypeObjectMeta(ref),
 		apisstoragev1.Member{}.OpenAPIModelName():                                            schema_pkg_apis_storage_v1_Member(ref),
@@ -860,6 +870,22 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 		apisstoragev1.StackTemplateRef{}.OpenAPIModelName():                                  schema_pkg_apis_storage_v1_StackTemplateRef(ref),
 		apisstoragev1.StackTemplateSpec{}.OpenAPIModelName():                                 schema_pkg_apis_storage_v1_StackTemplateSpec(ref),
 		apisstoragev1.StackTemplateStatus{}.OpenAPIModelName():                               schema_pkg_apis_storage_v1_StackTemplateStatus(ref),
+		apisstoragev1.StackUI{}.OpenAPIModelName():                                           schema_pkg_apis_storage_v1_StackUI(ref),
+		apisstoragev1.StackUIAction{}.OpenAPIModelName():                                     schema_pkg_apis_storage_v1_StackUIAction(ref),
+		apisstoragev1.StackUIActionParameter{}.OpenAPIModelName():                            schema_pkg_apis_storage_v1_StackUIActionParameter(ref),
+		apisstoragev1.StackUIActionTarget{}.OpenAPIModelName():                               schema_pkg_apis_storage_v1_StackUIActionTarget(ref),
+		apisstoragev1.StackUICard{}.OpenAPIModelName():                                       schema_pkg_apis_storage_v1_StackUICard(ref),
+		apisstoragev1.StackUICreateAction{}.OpenAPIModelName():                               schema_pkg_apis_storage_v1_StackUICreateAction(ref),
+		apisstoragev1.StackUIDetail{}.OpenAPIModelName():                                     schema_pkg_apis_storage_v1_StackUIDetail(ref),
+		apisstoragev1.StackUIForm{}.OpenAPIModelName():                                       schema_pkg_apis_storage_v1_StackUIForm(ref),
+		apisstoragev1.StackUIFormGroup{}.OpenAPIModelName():                                  schema_pkg_apis_storage_v1_StackUIFormGroup(ref),
+		apisstoragev1.StackUILabelRelation{}.OpenAPIModelName():                              schema_pkg_apis_storage_v1_StackUILabelRelation(ref),
+		apisstoragev1.StackUILogs{}.OpenAPIModelName():                                       schema_pkg_apis_storage_v1_StackUILogs(ref),
+		apisstoragev1.StackUIPatchAction{}.OpenAPIModelName():                                schema_pkg_apis_storage_v1_StackUIPatchAction(ref),
+		apisstoragev1.StackUIRelation{}.OpenAPIModelName():                                   schema_pkg_apis_storage_v1_StackUIRelation(ref),
+		apisstoragev1.StackUIResource{}.OpenAPIModelName():                                   schema_pkg_apis_storage_v1_StackUIResource(ref),
+		apisstoragev1.StackUIRow{}.OpenAPIModelName():                                        schema_pkg_apis_storage_v1_StackUIRow(ref),
+		apisstoragev1.StackUITimeline{}.OpenAPIModelName():                                   schema_pkg_apis_storage_v1_StackUITimeline(ref),
 		apisstoragev1.Storage{}.OpenAPIModelName():                                           schema_pkg_apis_storage_v1_Storage(ref),
 		apisstoragev1.StorageAccount{}.OpenAPIModelName():                                    schema_pkg_apis_storage_v1_StorageAccount(ref),
 		apisstoragev1.StorageAccountIdentities{}.OpenAPIModelName():                          schema_pkg_apis_storage_v1_StorageAccountIdentities(ref),
@@ -876,7 +902,6 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 		apisstoragev1.StorageVolumeApplied{}.OpenAPIModelName():                              schema_pkg_apis_storage_v1_StorageVolumeApplied(ref),
 		apisstoragev1.StorageVolumeCapacity{}.OpenAPIModelName():                             schema_pkg_apis_storage_v1_StorageVolumeCapacity(ref),
 		apisstoragev1.StorageVolumeList{}.OpenAPIModelName():                                 schema_pkg_apis_storage_v1_StorageVolumeList(ref),
-		apisstoragev1.StorageVolumeObject{}.OpenAPIModelName():                               schema_pkg_apis_storage_v1_StorageVolumeObject(ref),
 		apisstoragev1.StorageVolumeSpec{}.OpenAPIModelName():                                 schema_pkg_apis_storage_v1_StorageVolumeSpec(ref),
 		apisstoragev1.StorageVolumeStatus{}.OpenAPIModelName():                               schema_pkg_apis_storage_v1_StorageVolumeStatus(ref),
 		apisstoragev1.StorageVolumeVendor{}.OpenAPIModelName():                               schema_pkg_apis_storage_v1_StorageVolumeVendor(ref),
@@ -929,10 +954,6 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 		apisstoragev1.UserSpec{}.OpenAPIModelName():                                          schema_pkg_apis_storage_v1_UserSpec(ref),
 		apisstoragev1.UserStatus{}.OpenAPIModelName():                                        schema_pkg_apis_storage_v1_UserStatus(ref),
 		apisstoragev1.VClusterDeviceOperatorDeployment{}.OpenAPIModelName():                  schema_pkg_apis_storage_v1_VClusterDeviceOperatorDeployment(ref),
-		apisstoragev1.VastStorageMount{}.OpenAPIModelName():                                  schema_pkg_apis_storage_v1_VastStorageMount(ref),
-		apisstoragev1.VastStorageSection{}.OpenAPIModelName():                                schema_pkg_apis_storage_v1_VastStorageSection(ref),
-		apisstoragev1.VastTenantSection{}.OpenAPIModelName():                                 schema_pkg_apis_storage_v1_VastTenantSection(ref),
-		apisstoragev1.VastVolumeSection{}.OpenAPIModelName():                                 schema_pkg_apis_storage_v1_VastVolumeSection(ref),
 		apisstoragev1.VaultAuthSpec{}.OpenAPIModelName():                                     schema_pkg_apis_storage_v1_VaultAuthSpec(ref),
 		apisstoragev1.VaultIntegrationSpec{}.OpenAPIModelName():                              schema_pkg_apis_storage_v1_VaultIntegrationSpec(ref),
 		apisstoragev1.VirtualClusterAccessPoint{}.OpenAPIModelName():                         schema_pkg_apis_storage_v1_VirtualClusterAccessPoint(ref),
@@ -946,8 +967,6 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 		apisstoragev1.VirtualClusterInstanceList{}.OpenAPIModelName():                        schema_pkg_apis_storage_v1_VirtualClusterInstanceList(ref),
 		apisstoragev1.VirtualClusterInstanceSpec{}.OpenAPIModelName():                        schema_pkg_apis_storage_v1_VirtualClusterInstanceSpec(ref),
 		apisstoragev1.VirtualClusterInstanceStatus{}.OpenAPIModelName():                      schema_pkg_apis_storage_v1_VirtualClusterInstanceStatus(ref),
-		apisstoragev1.VirtualClusterInstanceStorage{}.OpenAPIModelName():                     schema_pkg_apis_storage_v1_VirtualClusterInstanceStorage(ref),
-		apisstoragev1.VirtualClusterInstanceStorageStatus{}.OpenAPIModelName():               schema_pkg_apis_storage_v1_VirtualClusterInstanceStorageStatus(ref),
 		apisstoragev1.VirtualClusterInstanceTemplateDefinition{}.OpenAPIModelName():          schema_pkg_apis_storage_v1_VirtualClusterInstanceTemplateDefinition(ref),
 		apisstoragev1.VirtualClusterProSpec{}.OpenAPIModelName():                             schema_pkg_apis_storage_v1_VirtualClusterProSpec(ref),
 		apisstoragev1.VirtualClusterSpaceTemplateDefinition{}.OpenAPIModelName():             schema_pkg_apis_storage_v1_VirtualClusterSpaceTemplateDefinition(ref),
@@ -10820,81 +10839,20 @@ func schema_pkg_apis_management_v1_ConnectorStatus(ref common.ReferenceCallback)
 	}
 }
 
-func schema_pkg_apis_management_v1_ConnectorStorageCSISpec(ref common.ReferenceCallback) common.OpenAPIDefinition {
-	return common.OpenAPIDefinition{
-		Schema: spec.Schema{
-			SchemaProps: spec.SchemaProps{
-				Description: "ConnectorStorageCSISpec is the operator's say over the CSI driver of one storage system. It lives on the connector because a tenant cluster runs one driver per storage system, and the driver release follows the storage system's release.",
-				Type:        []string{"object"},
-				Properties: map[string]spec.Schema{
-					"chartRepo": {
-						SchemaProps: spec.SchemaProps{
-							Description: "ChartRepo replaces the chart repository, for a mirror. Data key \"csiChartRepo\".",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"chartVersion": {
-						SchemaProps: spec.SchemaProps{
-							Description: "ChartVersion replaces the chart version the platform pins. Data key \"csiChartVersion\".",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"values": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Values is YAML passed to the chart under the values the platform owns, for the image registry, node selector, tolerations and driver options. The platform owns the driver name, the TLS verification of the endpoints and filesystem creation, and overwrites those keys: it sets pluginConfig.allowedOperations.autoCreateFilesystems and autoExpandFilesystems to false, so the driver neither creates nor grows a filesystem whatever these values say. Data key \"csiValues\".",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-				},
-			},
-		},
-	}
-}
-
-func schema_pkg_apis_management_v1_ConnectorStorageS3Spec(ref common.ReferenceCallback) common.OpenAPIDefinition {
-	return common.OpenAPIDefinition{
-		Schema: spec.Schema{
-			SchemaProps: spec.SchemaProps{
-				Description: "ConnectorStorageS3Spec is the S3 endpoint a storage system's tenants use. Clients address buckets path-style.",
-				Type:        []string{"object"},
-				Properties: map[string]spec.Schema{
-					"endpoint": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Endpoint is the URL the AI cloud exposes in front of the S3 servers, for example https://s3.example.com:9000. Data key \"s3Endpoint\".",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"caData": {
-						SchemaProps: spec.SchemaProps{
-							Description: "CAData is the PEM bundle that verifies the S3 endpoint; the connector's caData when empty. Data key \"s3CaData\".",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-				},
-			},
-		},
-	}
-}
-
 func schema_pkg_apis_management_v1_ConnectorStorageSpec(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
-				Description: "ConnectorStorageSpec configures the storage system StorageProfiles provision storage volume on. A StorageProfile names the connector through spec.connectorRef and the storage volume controller logs in with these credentials to create vendor tenants, identities and volumes.\n\nOne field per block is a credential under the Connector type's view rule: weka.password and vast.password are served to a caller who could update this connector and empty for every other caller, and on update an empty value keeps the stored one, so a redacted read written back never clears the password.",
+				Description: "ConnectorStorageSpec configures the storage system StorageProfiles provision storage volume on. A StorageProfile names the connector through spec.connectorRef and the storage volume controller logs in with these credentials to create vendor tenants, identities and volumes.\n\nOne field is a credential under the Connector type's view rule: weka.password is served to a caller who could update this connector and empty for every other caller, and on update an empty value keeps the stored one, so a redacted read written back never clears the password.",
 				Type:        []string{"object"},
 				Properties: map[string]spec.Schema{
 					"provider": {
 						SchemaProps: spec.SchemaProps{
-							Description: "Provider selects the storage system and which block below applies. Required; weka or vast. Data key \"provider\".\n\nPossible enum values:\n - `\"vast\"` is a VAST cluster reached through its VMS REST API.\n - `\"weka\"` is a WEKA cluster reached through its REST API v2 (Tenancy 2.0).",
+							Description: "Provider selects the storage system and which block below applies. Required; only weka is supported. Data key \"provider\".\n\nPossible enum values:\n - `\"weka\"` is a WEKA cluster reached through its REST API v2 (Tenancy 2.0).",
 							Default:     "",
 							Type:        []string{"string"},
 							Format:      "",
-							Enum:        []interface{}{"vast", "weka"},
+							Enum:        []interface{}{"weka"},
 						},
 					},
 					"weka": {
@@ -10903,99 +10861,12 @@ func schema_pkg_apis_management_v1_ConnectorStorageSpec(ref common.ReferenceCall
 							Ref:         ref(managementv1.ConnectorStorageWekaSpec{}.OpenAPIModelName()),
 						},
 					},
-					"vast": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Vast carries the settings of a VAST cluster. Required when provider is vast.",
-							Ref:         ref(managementv1.ConnectorStorageVastSpec{}.OpenAPIModelName()),
-						},
-					},
 				},
 				Required: []string{"provider"},
 			},
 		},
 		Dependencies: []string{
-			managementv1.ConnectorStorageVastSpec{}.OpenAPIModelName(), managementv1.ConnectorStorageWekaSpec{}.OpenAPIModelName()},
-	}
-}
-
-func schema_pkg_apis_management_v1_ConnectorStorageVastSpec(ref common.ReferenceCallback) common.OpenAPIDefinition {
-	return common.OpenAPIDefinition{
-		Schema: spec.Schema{
-			SchemaProps: spec.SchemaProps{
-				Description: "ConnectorStorageVastSpec is the vast block of a storage connector. Every field maps to one Data key of the backing Secret (given in each field comment); the keys shared with the weka block hold the same thing.",
-				Type:        []string{"object"},
-				Properties: map[string]spec.Schema{
-					"endpoint": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Endpoint is the VMS management URL, https://host. Data key \"endpoints\". Required.",
-							Default:     "",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"username": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Username is the super admin manager the platform logs in with. Data key \"username\". Required.",
-							Default:     "",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"password": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Password is its password. Data key \"password\". Required on create. A credential (see the type comment): an empty value on update keeps the stored one.",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"insecureSkipTLSVerify": {
-						SchemaProps: spec.SchemaProps{
-							Description: "InsecureSkipTLSVerify accepts a management certificate the platform cannot verify, as a lab with a self-signed certificate needs. Data key \"insecureSkipTLSVerify\", always stamped as \"true\" or \"false\".",
-							Type:        []string{"boolean"},
-							Format:      "",
-						},
-					},
-					"caData": {
-						SchemaProps: spec.SchemaProps{
-							Description: "CAData is the PEM bundle that verifies the management endpoint. Data key \"caData\".",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"tenantPrefix": {
-						SchemaProps: spec.SchemaProps{
-							Description: "TenantPrefix is prepended to platform tenant names on the VAST side, so several platforms can share one cluster. Data key \"tenantPrefix\".",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"vipRange": {
-						SchemaProps: spec.SchemaProps{
-							Description: "VIPRange is the IPv4 range the platform allocates tenant-bound VIP pools from, written as first-last, for example 11.0.0.200-11.0.0.239. Several platforms sharing one cluster need disjoint ranges. Data key \"vipRange\". Required.",
-							Default:     "",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"vipSubnetCIDR": {
-						SchemaProps: spec.SchemaProps{
-							Description: "VIPSubnetCIDR is the prefix length of the subnet the VIPs live in, for example 24. Data key \"vipSubnetCIDR\". Required.",
-							Default:     0,
-							Type:        []string{"integer"},
-							Format:      "int32",
-						},
-					},
-					"vipsPerTenant": {
-						SchemaProps: spec.SchemaProps{
-							Description: "VIPsPerTenant is how many addresses each tenant's pool gets; at least the number of CNodes spreads a tenant's clients over all of them. Defaults to 2. Data key \"vipsPerTenant\".",
-							Type:        []string{"integer"},
-							Format:      "int32",
-						},
-					},
-				},
-				Required: []string{"endpoint", "username", "vipRange", "vipSubnetCIDR"},
-			},
-		},
+			managementv1.ConnectorStorageWekaSpec{}.OpenAPIModelName()},
 	}
 }
 
@@ -11050,24 +10921,10 @@ func schema_pkg_apis_management_v1_ConnectorStorageWekaSpec(ref common.Reference
 							Format:      "",
 						},
 					},
-					"csi": {
-						SchemaProps: spec.SchemaProps{
-							Description: "CSI configures the csi-wekafs driver the platform installs into the tenant clusters that attach storage from this connector.",
-							Ref:         ref(managementv1.ConnectorStorageCSISpec{}.OpenAPIModelName()),
-						},
-					},
-					"s3": {
-						SchemaProps: spec.SchemaProps{
-							Description: "S3 is where tenants reach the cluster's S3 service. Without it, storages whose profile lists s3 get no object access.",
-							Ref:         ref(managementv1.ConnectorStorageS3Spec{}.OpenAPIModelName()),
-						},
-					},
 				},
 				Required: []string{"endpoints", "username"},
 			},
 		},
-		Dependencies: []string{
-			managementv1.ConnectorStorageCSISpec{}.OpenAPIModelName(), managementv1.ConnectorStorageS3Spec{}.OpenAPIModelName()},
 	}
 }
 
@@ -21005,6 +20862,263 @@ func schema_pkg_apis_management_v1_StackInstanceStatus(ref common.ReferenceCallb
 	}
 }
 
+func schema_pkg_apis_management_v1_StackInstanceView(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "StackInstanceView renders the detail page of one object that a stack declares in spec.ui. The caller posts the object to show; the platform reads it and its relations on the destination as the caller, and returns the declared cards with their values filled in.",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"kind": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"apiVersion": {
+						SchemaProps: spec.SchemaProps{
+							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"metadata": {
+						SchemaProps: spec.SchemaProps{
+							Default: map[string]interface{}{},
+							Ref:     ref(metav1.ObjectMeta{}.OpenAPIModelName()),
+						},
+					},
+					"spec": {
+						SchemaProps: spec.SchemaProps{
+							Default: map[string]interface{}{},
+							Ref:     ref(managementv1.StackInstanceViewSpec{}.OpenAPIModelName()),
+						},
+					},
+					"status": {
+						SchemaProps: spec.SchemaProps{
+							Default: map[string]interface{}{},
+							Ref:     ref(managementv1.StackInstanceViewStatus{}.OpenAPIModelName()),
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			managementv1.StackInstanceViewSpec{}.OpenAPIModelName(), managementv1.StackInstanceViewStatus{}.OpenAPIModelName(), metav1.ObjectMeta{}.OpenAPIModelName()},
+	}
+}
+
+func schema_pkg_apis_management_v1_StackInstanceViewList(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"kind": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"apiVersion": {
+						SchemaProps: spec.SchemaProps{
+							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"metadata": {
+						SchemaProps: spec.SchemaProps{
+							Default: map[string]interface{}{},
+							Ref:     ref(metav1.ListMeta{}.OpenAPIModelName()),
+						},
+					},
+					"items": {
+						SchemaProps: spec.SchemaProps{
+							Type: []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref(managementv1.StackInstanceView{}.OpenAPIModelName()),
+									},
+								},
+							},
+						},
+					},
+				},
+				Required: []string{"items"},
+			},
+		},
+		Dependencies: []string{
+			managementv1.StackInstanceView{}.OpenAPIModelName(), metav1.ListMeta{}.OpenAPIModelName()},
+	}
+}
+
+func schema_pkg_apis_management_v1_StackInstanceViewSpec(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "StackInstanceViewSpec names what to show. Without a resource, the view lists the resources the stack declares, so a client can build its navigation. With a resource and no name, it lists the objects of a resource that declares columns. With both, it renders one object's detail page.",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"resource": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Resource is the name of a resource in the stack's spec.ui.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"namespace": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Namespace is the namespace of the object on the destination. In a list, it limits the list to that namespace.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"name": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Name is the name of the object.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"action": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Action names an action of the resource to run on the object.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"parameters": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Parameters are the values for the action's parameters, as text. The platform converts them to the declared types and rejects a value that does not convert.",
+							Type:        []string{"object"},
+							AdditionalProperties: &spec.SchemaOrBool{
+								Allows: true,
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: "",
+										Type:    []string{"string"},
+										Format:  "",
+									},
+								},
+							},
+						},
+					},
+					"form": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Form asks for the create or edit form of the resource. With Object, it creates the object named by namespace and name, or replaces the spec of that object.\n\nPossible enum values:\n - `\"Create\"`\n - `\"Edit\"`",
+							Type:        []string{"string"},
+							Format:      "",
+							Enum:        []interface{}{"Create", "Edit"},
+						},
+					},
+					"object": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Object is the submitted spec as JSON.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+				},
+			},
+		},
+	}
+}
+
+func schema_pkg_apis_management_v1_StackInstanceViewStatus(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "StackInstanceViewStatus holds the declared resources, or the rendered detail page.",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"resources": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Resources are the resources the stack declares, as the destination serves them.",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref(managementv1.StackViewResource{}.OpenAPIModelName()),
+									},
+								},
+							},
+						},
+					},
+					"cards": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Cards are the declared cards whose condition holds, in order, with their values.",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref(managementv1.StackViewCard{}.OpenAPIModelName()),
+									},
+								},
+							},
+						},
+					},
+					"items": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Items are the listed objects, each with one cell per declared column.",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref(managementv1.StackViewItem{}.OpenAPIModelName()),
+									},
+								},
+							},
+						},
+					},
+					"actions": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Actions are the actions offered on the shown object, with their parameter defaults.",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref(managementv1.StackViewAction{}.OpenAPIModelName()),
+									},
+								},
+							},
+						},
+					},
+					"result": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Result says what a run action or a submitted form changed.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"form": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Form is the requested form.",
+							Ref:         ref(managementv1.StackViewForm{}.OpenAPIModelName()),
+						},
+					},
+					"app": {
+						SchemaProps: spec.SchemaProps{
+							Description: "App describes the stack as an app of the platform UI. The view sets it with Resources.",
+							Ref:         ref(managementv1.StackViewApp{}.OpenAPIModelName()),
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			managementv1.StackViewAction{}.OpenAPIModelName(), managementv1.StackViewApp{}.OpenAPIModelName(), managementv1.StackViewCard{}.OpenAPIModelName(), managementv1.StackViewForm{}.OpenAPIModelName(), managementv1.StackViewItem{}.OpenAPIModelName(), managementv1.StackViewResource{}.OpenAPIModelName()},
+	}
+}
+
 func schema_pkg_apis_management_v1_StackTemplate(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
@@ -21170,6 +21284,12 @@ func schema_pkg_apis_management_v1_StackTemplateSpec(ref common.ReferenceCallbac
 							},
 						},
 					},
+					"ui": {
+						SchemaProps: spec.SchemaProps{
+							Description: "UI declares the resources the stack adds to the platform UI on its destination.",
+							Ref:         ref(apisstoragev1.StackUI{}.OpenAPIModelName()),
+						},
+					},
 					"owner": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Owner holds the owner of this object",
@@ -21194,7 +21314,7 @@ func schema_pkg_apis_management_v1_StackTemplateSpec(ref common.ReferenceCallbac
 			},
 		},
 		Dependencies: []string{
-			apisstoragev1.Access{}.OpenAPIModelName(), apisstoragev1.AppParameter{}.OpenAPIModelName(), apisstoragev1.StackPublishedOutput{}.OpenAPIModelName(), apisstoragev1.StackTask{}.OpenAPIModelName(), apisstoragev1.UserOrTeam{}.OpenAPIModelName()},
+			apisstoragev1.Access{}.OpenAPIModelName(), apisstoragev1.AppParameter{}.OpenAPIModelName(), apisstoragev1.StackPublishedOutput{}.OpenAPIModelName(), apisstoragev1.StackTask{}.OpenAPIModelName(), apisstoragev1.StackUI{}.OpenAPIModelName(), apisstoragev1.UserOrTeam{}.OpenAPIModelName()},
 	}
 }
 
@@ -21206,6 +21326,660 @@ func schema_pkg_apis_management_v1_StackTemplateStatus(ref common.ReferenceCallb
 				Type:        []string{"object"},
 			},
 		},
+	}
+}
+
+func schema_pkg_apis_management_v1_StackViewAction(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "StackViewAction is one action offered on the shown object.",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"name": {
+						SchemaProps: spec.SchemaProps{
+							Default: "",
+							Type:    []string{"string"},
+							Format:  "",
+						},
+					},
+					"label": {
+						SchemaProps: spec.SchemaProps{
+							Default: "",
+							Type:    []string{"string"},
+							Format:  "",
+						},
+					},
+					"confirm": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"string"},
+							Format: "",
+						},
+					},
+					"destructive": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Destructive marks a delete, so a client can style it.",
+							Default:     false,
+							Type:        []string{"boolean"},
+							Format:      "",
+						},
+					},
+					"primary": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Primary marks the main action of the page.",
+							Default:     false,
+							Type:        []string{"boolean"},
+							Format:      "",
+						},
+					},
+					"parameters": {
+						SchemaProps: spec.SchemaProps{
+							Type: []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref(managementv1.StackViewParameter{}.OpenAPIModelName()),
+									},
+								},
+							},
+						},
+					},
+				},
+				Required: []string{"name", "label", "destructive", "primary"},
+			},
+		},
+		Dependencies: []string{
+			managementv1.StackViewParameter{}.OpenAPIModelName()},
+	}
+}
+
+func schema_pkg_apis_management_v1_StackViewApp(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "StackViewApp is what a client needs to show a stack as an app: its identity across installations, its name and icon, and where it appears.",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"template": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Template is the StackTemplate the stack uses. Installations of the same template are one app in a project. Empty for a stack with an inline template.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"displayName": {
+						SchemaProps: spec.SchemaProps{
+							Default: "",
+							Type:    []string{"string"},
+							Format:  "",
+						},
+					},
+					"description": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"string"},
+							Format: "",
+						},
+					},
+					"icon": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"string"},
+							Format: "",
+						},
+					},
+					"placements": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Placements are the declared placements, or Cluster when the stack declares none.",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: "",
+										Type:    []string{"string"},
+										Format:  "",
+										Enum:    []interface{}{"Cluster", "Project"},
+									},
+								},
+							},
+						},
+					},
+				},
+				Required: []string{"displayName", "placements"},
+			},
+		},
+	}
+}
+
+func schema_pkg_apis_management_v1_StackViewCard(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "StackViewCard is one rendered card: rows, a timeline or a log.",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"title": {
+						SchemaProps: spec.SchemaProps{
+							Default: "",
+							Type:    []string{"string"},
+							Format:  "",
+						},
+					},
+					"type": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Possible enum values:\n - `\"Logs\"`\n - `\"Rows\"`\n - `\"Timeline\"`",
+							Default:     "",
+							Type:        []string{"string"},
+							Format:      "",
+							Enum:        []interface{}{"Logs", "Rows", "Timeline"},
+						},
+					},
+					"rows": {
+						SchemaProps: spec.SchemaProps{
+							Type: []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref(managementv1.StackViewRow{}.OpenAPIModelName()),
+									},
+								},
+							},
+						},
+					},
+					"events": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Events are the timeline entries, newest first.",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref(managementv1.StackViewEvent{}.OpenAPIModelName()),
+									},
+								},
+							},
+						},
+					},
+					"logs": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Logs is the log of a logs card.",
+							Ref:         ref(managementv1.StackViewLogs{}.OpenAPIModelName()),
+						},
+					},
+					"error": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Error says why a timeline or a log could not be read.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+				},
+				Required: []string{"title", "type"},
+			},
+		},
+		Dependencies: []string{
+			managementv1.StackViewEvent{}.OpenAPIModelName(), managementv1.StackViewLogs{}.OpenAPIModelName(), managementv1.StackViewRow{}.OpenAPIModelName()},
+	}
+}
+
+func schema_pkg_apis_management_v1_StackViewCondition(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "StackViewCondition is one Kubernetes condition of the shown object.",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"type": {
+						SchemaProps: spec.SchemaProps{
+							Default: "",
+							Type:    []string{"string"},
+							Format:  "",
+						},
+					},
+					"status": {
+						SchemaProps: spec.SchemaProps{
+							Default: "",
+							Type:    []string{"string"},
+							Format:  "",
+						},
+					},
+					"reason": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"string"},
+							Format: "",
+						},
+					},
+					"message": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"string"},
+							Format: "",
+						},
+					},
+				},
+				Required: []string{"type", "status"},
+			},
+		},
+	}
+}
+
+func schema_pkg_apis_management_v1_StackViewEvent(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "StackViewEvent is one Kubernetes event on a timeline.",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"type": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Type is Normal or Warning.",
+							Default:     "",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"reason": {
+						SchemaProps: spec.SchemaProps{
+							Default: "",
+							Type:    []string{"string"},
+							Format:  "",
+						},
+					},
+					"message": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"string"},
+							Format: "",
+						},
+					},
+					"object": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Object is the kind and name the event is about, for example \"Pod/python-pool-7xk2p\".",
+							Default:     "",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"time": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Time is when the event last happened, in RFC 3339.",
+							Default:     "",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"count": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Count is how often the event happened.",
+							Default:     0,
+							Type:        []string{"integer"},
+							Format:      "int32",
+						},
+					},
+				},
+				Required: []string{"type", "reason", "object", "time", "count"},
+			},
+		},
+	}
+}
+
+func schema_pkg_apis_management_v1_StackViewForm(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "StackViewForm is a spec form: the schema, the declared groups and the data to start from.",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"schema": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Schema is the JSON Schema of the spec, as JSON.",
+							Default:     "",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"groups": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Groups are the declared groups. Without them, a client shows every field in schema order.",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref(apisstoragev1.StackUIFormGroup{}.OpenAPIModelName()),
+									},
+								},
+							},
+						},
+					},
+					"data": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Data is the current spec for an edit, as JSON.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+				},
+				Required: []string{"schema"},
+			},
+		},
+		Dependencies: []string{
+			apisstoragev1.StackUIFormGroup{}.OpenAPIModelName()},
+	}
+}
+
+func schema_pkg_apis_management_v1_StackViewItem(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "StackViewItem is one listed object.",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"namespace": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"string"},
+							Format: "",
+						},
+					},
+					"name": {
+						SchemaProps: spec.SchemaProps{
+							Default: "",
+							Type:    []string{"string"},
+							Format:  "",
+						},
+					},
+					"cells": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Cells follow the order of the declared columns.",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref(managementv1.StackViewRow{}.OpenAPIModelName()),
+									},
+								},
+							},
+						},
+					},
+				},
+				Required: []string{"name"},
+			},
+		},
+		Dependencies: []string{
+			managementv1.StackViewRow{}.OpenAPIModelName()},
+	}
+}
+
+func schema_pkg_apis_management_v1_StackViewLogs(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "StackViewLogs is the end of one container log.",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"pod": {
+						SchemaProps: spec.SchemaProps{
+							Default: "",
+							Type:    []string{"string"},
+							Format:  "",
+						},
+					},
+					"container": {
+						SchemaProps: spec.SchemaProps{
+							Default: "",
+							Type:    []string{"string"},
+							Format:  "",
+						},
+					},
+					"lines": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"string"},
+							Format: "",
+						},
+					},
+				},
+				Required: []string{"pod", "container"},
+			},
+		},
+	}
+}
+
+func schema_pkg_apis_management_v1_StackViewParameter(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "StackViewParameter is one input of an offered action.",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"name": {
+						SchemaProps: spec.SchemaProps{
+							Default: "",
+							Type:    []string{"string"},
+							Format:  "",
+						},
+					},
+					"label": {
+						SchemaProps: spec.SchemaProps{
+							Default: "",
+							Type:    []string{"string"},
+							Format:  "",
+						},
+					},
+					"type": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Possible enum values:\n - `\"Boolean\"`\n - `\"Number\"`\n - `\"String\"`",
+							Default:     "",
+							Type:        []string{"string"},
+							Format:      "",
+							Enum:        []interface{}{"Boolean", "Number", "String"},
+						},
+					},
+					"required": {
+						SchemaProps: spec.SchemaProps{
+							Default: false,
+							Type:    []string{"boolean"},
+							Format:  "",
+						},
+					},
+					"value": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Value is the initial value as text, from the declared default.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+				},
+				Required: []string{"name", "label", "type", "required"},
+			},
+		},
+	}
+}
+
+func schema_pkg_apis_management_v1_StackViewResource(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "StackViewResource is a declared resource with the kind and scope the destination reports.",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"name": {
+						SchemaProps: spec.SchemaProps{
+							Default: "",
+							Type:    []string{"string"},
+							Format:  "",
+						},
+					},
+					"label": {
+						SchemaProps: spec.SchemaProps{
+							Default: "",
+							Type:    []string{"string"},
+							Format:  "",
+						},
+					},
+					"icon": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"string"},
+							Format: "",
+						},
+					},
+					"group": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"string"},
+							Format: "",
+						},
+					},
+					"version": {
+						SchemaProps: spec.SchemaProps{
+							Default: "",
+							Type:    []string{"string"},
+							Format:  "",
+						},
+					},
+					"resource": {
+						SchemaProps: spec.SchemaProps{
+							Default: "",
+							Type:    []string{"string"},
+							Format:  "",
+						},
+					},
+					"kind": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Kind is empty when the destination does not serve the resource.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"namespaced": {
+						SchemaProps: spec.SchemaProps{
+							Default: false,
+							Type:    []string{"boolean"},
+							Format:  "",
+						},
+					},
+					"columns": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Columns are the labels of the declared columns. Without them, a client lists the resource with the printer columns of its kind.",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: "",
+										Type:    []string{"string"},
+										Format:  "",
+									},
+								},
+							},
+						},
+					},
+					"hasForm": {
+						SchemaProps: spec.SchemaProps{
+							Description: "HasForm says the resource declares create and edit forms.",
+							Default:     false,
+							Type:        []string{"boolean"},
+							Format:      "",
+						},
+					},
+					"error": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Error says why the destination does not serve the resource, for example a missing CRD.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+				},
+				Required: []string{"name", "label", "version", "resource", "namespaced", "hasForm"},
+			},
+		},
+	}
+}
+
+func schema_pkg_apis_management_v1_StackViewRow(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "StackViewRow is one rendered row. Values holds one entry per matched object; it is empty when the path selects nothing.",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"label": {
+						SchemaProps: spec.SchemaProps{
+							Default: "",
+							Type:    []string{"string"},
+							Format:  "",
+						},
+					},
+					"widget": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Possible enum values:\n - `\"Badge\"` shows the value as a status badge.\n - `\"Conditions\"` shows a list of Kubernetes conditions as chips.\n - `\"Link\"` shows the value as a link to an object of the LinkTo resource.\n - `\"Mono\"` shows the value in a monospace font.\n - `\"Text\"` shows the value as text.\n - `\"Time\"` shows an RFC 3339 time as a relative time.",
+							Default:     "",
+							Type:        []string{"string"},
+							Format:      "",
+							Enum:        []interface{}{"Badge", "Conditions", "Link", "Mono", "Text", "Time"},
+						},
+					},
+					"values": {
+						SchemaProps: spec.SchemaProps{
+							Type: []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: "",
+										Type:    []string{"string"},
+										Format:  "",
+									},
+								},
+							},
+						},
+					},
+					"tones": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Tones holds the declared tone of each shown value that has one.",
+							Type:        []string{"object"},
+							AdditionalProperties: &spec.SchemaOrBool{
+								Allows: true,
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: "",
+										Type:    []string{"string"},
+										Format:  "",
+										Enum:    []interface{}{"Danger", "Info", "Neutral", "Success", "Warning"},
+									},
+								},
+							},
+						},
+					},
+					"linkTo": {
+						SchemaProps: spec.SchemaProps{
+							Description: "LinkTo is the stack resource that Link values point to.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"conditions": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Conditions holds the conditions for the Conditions widget.",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref(managementv1.StackViewCondition{}.OpenAPIModelName()),
+									},
+								},
+							},
+						},
+					},
+					"error": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Error says why the row has no value, for example a relation the caller may not read.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+				},
+				Required: []string{"label", "widget"},
+			},
+		},
+		Dependencies: []string{
+			managementv1.StackViewCondition{}.OpenAPIModelName()},
 	}
 }
 
@@ -21456,7 +22230,7 @@ func schema_pkg_apis_management_v1_StorageAccountSpec(ref common.ReferenceCallba
 					},
 					"profile": {
 						SchemaProps: spec.SchemaProps{
-							Description: "Profile names the StorageProfile whose tenant-level documents seed Weka or Vast at creation when both are empty. Informational afterwards.",
+							Description: "Profile names the StorageProfile whose tenant-level documents seed Weka at creation when Weka is empty. Informational afterwards.",
 							Type:        []string{"string"},
 							Format:      "",
 						},
@@ -21465,12 +22239,6 @@ func schema_pkg_apis_management_v1_StorageAccountSpec(ref common.ReferenceCallba
 						SchemaProps: spec.SchemaProps{
 							Description: "Weka is this tenant's copy of the tenant-level WEKA documents, filled from the profile when the StorageAccount is created and editable per customer from then on.",
 							Ref:         ref(apisstoragev1.WekaTenantSection{}.OpenAPIModelName()),
-						},
-					},
-					"vast": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Vast is this tenant's copy of the tenant-level VAST documents, filled from the profile when the StorageAccount is created and editable per customer from then on.",
-							Ref:         ref(apisstoragev1.VastTenantSection{}.OpenAPIModelName()),
 						},
 					},
 					"deletionPolicy": {
@@ -21492,7 +22260,7 @@ func schema_pkg_apis_management_v1_StorageAccountSpec(ref common.ReferenceCallba
 			},
 		},
 		Dependencies: []string{
-			apisstoragev1.Access{}.OpenAPIModelName(), apisstoragev1.UserOrTeam{}.OpenAPIModelName(), apisstoragev1.VastTenantSection{}.OpenAPIModelName(), apisstoragev1.WekaTenantSection{}.OpenAPIModelName()},
+			apisstoragev1.Access{}.OpenAPIModelName(), apisstoragev1.UserOrTeam{}.OpenAPIModelName(), apisstoragev1.WekaTenantSection{}.OpenAPIModelName()},
 	}
 }
 
@@ -21692,13 +22460,6 @@ func schema_pkg_apis_management_v1_StorageProfileSpec(ref common.ReferenceCallba
 							Format:      "",
 						},
 					},
-					"description": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Description is a short summary of the tier, shown next to the display name in the admin profile picker and list. Keep the storage vendor out of it, as out of the profile name.",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
 					"owner": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Owner holds the owner of this object",
@@ -21729,7 +22490,7 @@ func schema_pkg_apis_management_v1_StorageProfileSpec(ref common.ReferenceCallba
 					},
 					"protocols": {
 						SchemaProps: spec.SchemaProps{
-							Description: "Protocols is how tenants reach the tier's data: posix (the vendor's native file client), nfs, smb, s3 or block, one or several for the same data. WEKA serves posix and s3, VAST nfs. s3 is only valid next to the file protocol: it adds a bucket over the storage's volume.",
+							Description: "Protocols is how tenants reach the tier's data: posix (the vendor's native file client), nfs, smb, s3 or block, one or several for the same data. WEKA serves posix today.",
 							Type:        []string{"array"},
 							Items: &spec.SchemaOrArray{
 								Schema: &spec.Schema{
@@ -21748,18 +22509,12 @@ func schema_pkg_apis_management_v1_StorageProfileSpec(ref common.ReferenceCallba
 							Ref:         ref(apisstoragev1.WekaStorageSection{}.OpenAPIModelName()),
 						},
 					},
-					"vast": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Vast is the VAST object model for this tier. Set when the connector's provider is vast.",
-							Ref:         ref(apisstoragev1.VastStorageSection{}.OpenAPIModelName()),
-						},
-					},
 				},
 				Required: []string{"connectorRef"},
 			},
 		},
 		Dependencies: []string{
-			apisstoragev1.Access{}.OpenAPIModelName(), apisstoragev1.UserOrTeam{}.OpenAPIModelName(), apisstoragev1.VastStorageSection{}.OpenAPIModelName(), apisstoragev1.WekaStorageSection{}.OpenAPIModelName()},
+			apisstoragev1.Access{}.OpenAPIModelName(), apisstoragev1.UserOrTeam{}.OpenAPIModelName(), apisstoragev1.WekaStorageSection{}.OpenAPIModelName()},
 	}
 }
 
@@ -21835,124 +22590,6 @@ func schema_pkg_apis_management_v1_StorageVolume(ref common.ReferenceCallback) c
 		},
 		Dependencies: []string{
 			managementv1.StorageVolumeSpec{}.OpenAPIModelName(), managementv1.StorageVolumeStatus{}.OpenAPIModelName(), metav1.ObjectMeta{}.OpenAPIModelName()},
-	}
-}
-
-func schema_pkg_apis_management_v1_StorageVolumeCredentials(ref common.ReferenceCallback) common.OpenAPIDefinition {
-	return common.OpenAPIDefinition{
-		Schema: spec.Schema{
-			SchemaProps: spec.SchemaProps{
-				Description: "StorageVolumeCredentials is the S3 access to one storage volume: where its bucket is and the tenant's S3 keys. Served by GET on the credentials subresource to callers that can see the storage and hold get on storagevolumes/credentials. Every read is audited.",
-				Type:        []string{"object"},
-				Properties: map[string]spec.Schema{
-					"kind": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"apiVersion": {
-						SchemaProps: spec.SchemaProps{
-							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"metadata": {
-						SchemaProps: spec.SchemaProps{
-							Default: map[string]interface{}{},
-							Ref:     ref(metav1.ObjectMeta{}.OpenAPIModelName()),
-						},
-					},
-					"endpoint": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Endpoint is the S3 endpoint URL. Clients address the bucket path-style.",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"bucket": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Bucket is the storage's bucket.",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"accessKey": {
-						SchemaProps: spec.SchemaProps{
-							Description: "AccessKey is the tenant's S3 access key.",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"secretKey": {
-						SchemaProps: spec.SchemaProps{
-							Description: "SecretKey is the tenant's S3 secret key.",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"caData": {
-						SchemaProps: spec.SchemaProps{
-							Description: "CAData is the PEM bundle that verifies the endpoint, empty when the endpoint needs none.",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-				},
-			},
-		},
-		Dependencies: []string{
-			metav1.ObjectMeta{}.OpenAPIModelName()},
-	}
-}
-
-func schema_pkg_apis_management_v1_StorageVolumeCredentialsList(ref common.ReferenceCallback) common.OpenAPIDefinition {
-	return common.OpenAPIDefinition{
-		Schema: spec.Schema{
-			SchemaProps: spec.SchemaProps{
-				Type: []string{"object"},
-				Properties: map[string]spec.Schema{
-					"kind": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"apiVersion": {
-						SchemaProps: spec.SchemaProps{
-							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"metadata": {
-						SchemaProps: spec.SchemaProps{
-							Default: map[string]interface{}{},
-							Ref:     ref(metav1.ListMeta{}.OpenAPIModelName()),
-						},
-					},
-					"items": {
-						SchemaProps: spec.SchemaProps{
-							Type: []string{"array"},
-							Items: &spec.SchemaOrArray{
-								Schema: &spec.Schema{
-									SchemaProps: spec.SchemaProps{
-										Default: map[string]interface{}{},
-										Ref:     ref(managementv1.StorageVolumeCredentials{}.OpenAPIModelName()),
-									},
-								},
-							},
-						},
-					},
-				},
-				Required: []string{"items"},
-			},
-		},
-		Dependencies: []string{
-			managementv1.StorageVolumeCredentials{}.OpenAPIModelName(), metav1.ListMeta{}.OpenAPIModelName()},
 	}
 }
 
@@ -22058,22 +22695,9 @@ func schema_pkg_apis_management_v1_StorageVolumeSpec(ref common.ReferenceCallbac
 							Ref:         ref(apisstoragev1.WekaVolumeSection{}.OpenAPIModelName()),
 						},
 					},
-					"vast": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Vast is this storage's copy of the profile's volume-level VAST documents, filled and edited like Weka.",
-							Ref:         ref(apisstoragev1.VastVolumeSection{}.OpenAPIModelName()),
-						},
-					},
 					"import": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Import adopts a volume that exists already instead of creating it, and creates the tenant's StorageAccount in import mode when it does not exist yet. The platform never deletes what it did not create.",
-							Type:        []string{"boolean"},
-							Format:      "",
-						},
-					},
-					"encrypted": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Encrypted creates the volume encrypted at rest. On WEKA the client encrypts on the host and a KMS has to wrap the key; without one the storage is refused. It wins over an encrypted key in the vendor section, and the two have to agree at creation. Set at creation only: a later change is reported by the Synced condition and never applied.",
 							Type:        []string{"boolean"},
 							Format:      "",
 						},
@@ -22083,7 +22707,7 @@ func schema_pkg_apis_management_v1_StorageVolumeSpec(ref common.ReferenceCallbac
 			},
 		},
 		Dependencies: []string{
-			apisstoragev1.Access{}.OpenAPIModelName(), apisstoragev1.UserOrTeam{}.OpenAPIModelName(), apisstoragev1.VastVolumeSection{}.OpenAPIModelName(), apisstoragev1.WekaVolumeSection{}.OpenAPIModelName(), resource.Quantity{}.OpenAPIModelName()},
+			apisstoragev1.Access{}.OpenAPIModelName(), apisstoragev1.UserOrTeam{}.OpenAPIModelName(), apisstoragev1.WekaVolumeSection{}.OpenAPIModelName(), resource.Quantity{}.OpenAPIModelName()},
 	}
 }
 
@@ -22174,24 +22798,11 @@ func schema_pkg_apis_management_v1_StorageVolumeStatus(ref common.ReferenceCallb
 							Format:      "",
 						},
 					},
-					"encrypted": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Encrypted is whether the vendor reports the volume as encrypted at rest.",
-							Type:        []string{"boolean"},
-							Format:      "",
-						},
-					},
-					"object": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Object is the S3 bucket over the volume, recorded once object access is ready. It stays recorded for the delete when object access fails, and goes once a profile that drops s3 took the bucket out of the tenant's policy; a tenant reads it only while ObjectReady is True. Only for a storage whose profile lists s3.",
-							Ref:         ref(apisstoragev1.StorageVolumeObject{}.OpenAPIModelName()),
-						},
-					},
 				},
 			},
 		},
 		Dependencies: []string{
-			storagev1.Condition{}.OpenAPIModelName(), apisstoragev1.StorageVolumeApplied{}.OpenAPIModelName(), apisstoragev1.StorageVolumeCapacity{}.OpenAPIModelName(), apisstoragev1.StorageVolumeObject{}.OpenAPIModelName(), apisstoragev1.StorageVolumeVendor{}.OpenAPIModelName()},
+			storagev1.Condition{}.OpenAPIModelName(), apisstoragev1.StorageVolumeApplied{}.OpenAPIModelName(), apisstoragev1.StorageVolumeCapacity{}.OpenAPIModelName(), apisstoragev1.StorageVolumeVendor{}.OpenAPIModelName()},
 	}
 }
 
@@ -26520,25 +27131,11 @@ func schema_pkg_apis_management_v1_VirtualClusterInstanceSpec(ref common.Referen
 							Format:      "",
 						},
 					},
-					"storage": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Storage attaches StorageVolumes of the instance's tenant to the tenant cluster, statically: each entry becomes one PersistentVolume of the volume the platform provisioned and one StorageClass named after the storage that binds claims to it and provisions nothing. The platform adds the vendor's node driver to experimental.deploy and writes the tenant's CSI identity, scoped to the tenant on the storage system, into the tenant cluster directly, since the driver refuses a mount-only login. The storage system's and the vendor tenant's admin identities never reach the tenant cluster. Removing an entry removes its PersistentVolume and StorageClass; the volume itself is never touched. Needs private nodes or a standalone control plane.",
-							Type:        []string{"array"},
-							Items: &spec.SchemaOrArray{
-								Schema: &spec.Schema{
-									SchemaProps: spec.SchemaProps{
-										Default: map[string]interface{}{},
-										Ref:     ref(apisstoragev1.VirtualClusterInstanceStorage{}.OpenAPIModelName()),
-									},
-								},
-							},
-						},
-					},
 				},
 			},
 		},
 		Dependencies: []string{
-			apisstoragev1.Access{}.OpenAPIModelName(), apisstoragev1.InstanceAccessRule{}.OpenAPIModelName(), apisstoragev1.TemplateRef{}.OpenAPIModelName(), apisstoragev1.UserOrTeam{}.OpenAPIModelName(), apisstoragev1.VirtualClusterClusterRef{}.OpenAPIModelName(), apisstoragev1.VirtualClusterInstanceStorage{}.OpenAPIModelName(), apisstoragev1.VirtualClusterTemplateDefinition{}.OpenAPIModelName()},
+			apisstoragev1.Access{}.OpenAPIModelName(), apisstoragev1.InstanceAccessRule{}.OpenAPIModelName(), apisstoragev1.TemplateRef{}.OpenAPIModelName(), apisstoragev1.UserOrTeam{}.OpenAPIModelName(), apisstoragev1.VirtualClusterClusterRef{}.OpenAPIModelName(), apisstoragev1.VirtualClusterTemplateDefinition{}.OpenAPIModelName()},
 	}
 }
 
@@ -26630,20 +27227,6 @@ func schema_pkg_apis_management_v1_VirtualClusterInstanceStatus(ref common.Refer
 							Format:      "",
 						},
 					},
-					"storage": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Storage lists the StorageVolumes the rendered values attach to the tenant cluster. It follows status.virtualCluster, so on an instance that waits for a template sync it shows what the tenant cluster runs, not what spec.storage asks for.",
-							Type:        []string{"array"},
-							Items: &spec.SchemaOrArray{
-								Schema: &spec.Schema{
-									SchemaProps: spec.SchemaProps{
-										Default: map[string]interface{}{},
-										Ref:     ref(apisstoragev1.VirtualClusterInstanceStorageStatus{}.OpenAPIModelName()),
-									},
-								},
-							},
-						},
-					},
 					"sleepModeConfig": {
 						SchemaProps: spec.SchemaProps{
 							Description: "SleepModeConfig is the sleep mode config of the space. This will only be shown in the front end.",
@@ -26675,7 +27258,7 @@ func schema_pkg_apis_management_v1_VirtualClusterInstanceStatus(ref common.Refer
 			},
 		},
 		Dependencies: []string{
-			v1.SleepModeConfig{}.OpenAPIModelName(), storagev1.Condition{}.OpenAPIModelName(), apisstoragev1.ObjectsStatus{}.OpenAPIModelName(), apisstoragev1.VirtualClusterInstanceStorageStatus{}.OpenAPIModelName(), apisstoragev1.VirtualClusterTemplateDefinition{}.OpenAPIModelName()},
+			v1.SleepModeConfig{}.OpenAPIModelName(), storagev1.Condition{}.OpenAPIModelName(), apisstoragev1.ObjectsStatus{}.OpenAPIModelName(), apisstoragev1.VirtualClusterTemplateDefinition{}.OpenAPIModelName()},
 	}
 }
 
@@ -33731,7 +34314,7 @@ func schema_pkg_apis_storage_v1_MachineHostValidationStatus(ref common.Reference
 				Properties: map[string]spec.Schema{
 					"inBand": {
 						SchemaProps: spec.SchemaProps{
-							Description: "InBand is the machine's last in-band attempt, which runs the tests of its NodeProvider's validation tier on it. It gates assigning the machine to a tenant and using it for an instance.",
+							Description: "InBand is the machine's last in-band attempt, which runs the Certification of its NodeProvider's validation tier on it. It gates assigning the machine to a tenant and using it for an instance.",
 							Ref:         ref(apisstoragev1.MachineInBandValidationStatus{}.OpenAPIModelName()),
 						},
 					},
@@ -33772,7 +34355,7 @@ func schema_pkg_apis_storage_v1_MachineInBandValidationStatus(ref common.Referen
 				Properties: map[string]spec.Schema{
 					"result": {
 						SchemaProps: spec.SchemaProps{
-							Description: "Result is where the attempt stands. Only Passed lets the machine be assigned to a tenant or used for an instance on a provider with a validation tier.\n\nPossible enum values:\n - `\"JoinFailed\"` is when the validation NodeClaim failed or the node did not join before the join deadline.\n - `\"Joining\"` is while the validation NodeClaim exists and its node has not joined the validation cluster.\n - `\"Passed\"` is once every test passed.\n - `\"Running\"` is while a test's Certification or Job runs on the node.\n - `\"SetupFailed\"` is when the tests could not run: the suite is missing or not understood, the Certification kind is not served in the validation cluster, a test's image cannot be pulled, a Certification failed without recording the node, the setup deadline passed, or a test pod was lost without an exit code.\n - `\"Starting\"` is once the node joined and before the first test runs.\n - `\"TestFailed\"` is when a test failed on the node: its Certification failed and recorded the node, or its Job exited non-zero or ran past its timeout. The message is the reason recorded for the node, or the last line the Job printed.",
+							Description: "Result is where the attempt stands. Only Passed lets the machine be assigned to a tenant or used for an instance on a provider with a validation tier.\n\nPossible enum values:\n - `\"JoinFailed\"` is when the validation NodeClaim failed or the node did not join before the join deadline.\n - `\"Joining\"` is while the validation NodeClaim exists and its node has not joined the validation cluster.\n - `\"Passed\"` is once the Certification passed.\n - `\"Running\"` is while the Certification runs on the node.\n - `\"SetupFailed\"` is when the Certification did not test the node: its ConfigMap is missing or not understood, the Certification kind is not served in the validation cluster, the setup deadline passed, or the Certification failed without recording the node, succeeded without testing it, was deleted, or did not finish within its timeouts and the setup timeout.\n - `\"Starting\"` is once the node joined and before the Certification runs.\n - `\"TestFailed\"` is when the Certification failed and recorded the node in the failed nodes of a category. The message lists the reasons recorded for the node.",
 							Type:        []string{"string"},
 							Format:      "",
 							Enum:        []interface{}{"JoinFailed", "Joining", "Passed", "Running", "SetupFailed", "Starting", "TestFailed"},
@@ -33794,14 +34377,7 @@ func schema_pkg_apis_storage_v1_MachineInBandValidationStatus(ref common.Referen
 					},
 					"attemptID": {
 						SchemaProps: spec.SchemaProps{
-							Description: "AttemptID identifies the attempt. The Certifications and Jobs of any other attempt are ignored.",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"suiteHash": {
-						SchemaProps: spec.SchemaProps{
-							Description: "SuiteHash is the hash of the test suite the attempt ran. A changed suite does not invalidate a pass, so this says which suite a pass was for.",
+							Description: "AttemptID identifies the attempt. The Certifications of any other attempt are ignored.",
 							Type:        []string{"string"},
 							Format:      "",
 						},
@@ -33828,7 +34404,7 @@ func schema_pkg_apis_storage_v1_MachineInBandValidationStatus(ref common.Referen
 					},
 					"joinTime": {
 						SchemaProps: spec.SchemaProps{
-							Description: "JoinTime is when the attempt's node joined the validation cluster. The setup of the first test counts from it. Unset while the node joins, and for an attempt that started on a node the machine already had there.",
+							Description: "JoinTime is when the attempt's node joined the validation cluster. The setup of the Certification counts from it. Unset while the node joins, and for an attempt that started on a node the machine already had there.",
 							Ref:         ref(metav1.Time{}.OpenAPIModelName()),
 						},
 					},
@@ -33838,23 +34414,15 @@ func schema_pkg_apis_storage_v1_MachineInBandValidationStatus(ref common.Referen
 							Ref:         ref(metav1.Time{}.OpenAPIModelName()),
 						},
 					},
-					"tests": {
+					"certification": {
 						SchemaProps: spec.SchemaProps{
-							Description: "Tests holds the result of each test the attempt reached, in suite order.",
-							Type:        []string{"array"},
-							Items: &spec.SchemaOrArray{
-								Schema: &spec.Schema{
-									SchemaProps: spec.SchemaProps{
-										Default: map[string]interface{}{},
-										Ref:     ref(apisstoragev1.MachineValidationTestResult{}.OpenAPIModelName()),
-									},
-								},
-							},
+							Description: "Certification is the NVIDIA Cluster Readiness Engine Certification the attempt runs on the node, set once it is created. Its verdict is the attempt's result.",
+							Ref:         ref(apisstoragev1.MachineValidationCertification{}.OpenAPIModelName()),
 						},
 					},
 					"rejoin": {
 						SchemaProps: spec.SchemaProps{
-							Description: "Rejoin tracks putting a machine that passed back into the validation cluster after it was released. A rejoin runs no tests.",
+							Description: "Rejoin tracks putting a machine that passed back into the validation cluster after it was released. A rejoin runs no Certification.",
 							Ref:         ref(apisstoragev1.MachineValidationRejoin{}.OpenAPIModelName()),
 						},
 					},
@@ -33868,7 +34436,7 @@ func schema_pkg_apis_storage_v1_MachineInBandValidationStatus(ref common.Referen
 			},
 		},
 		Dependencies: []string{
-			apisstoragev1.MachineValidationRejoin{}.OpenAPIModelName(), apisstoragev1.MachineValidationTestResult{}.OpenAPIModelName(), metav1.Time{}.OpenAPIModelName()},
+			apisstoragev1.MachineValidationCertification{}.OpenAPIModelName(), apisstoragev1.MachineValidationRejoin{}.OpenAPIModelName(), metav1.Time{}.OpenAPIModelName()},
 	}
 }
 
@@ -34234,7 +34802,7 @@ func schema_pkg_apis_storage_v1_MachineValidationArtifact(ref common.ReferenceCa
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
-				Description: "MachineValidationArtifact is a file a validation test produced.",
+				Description: "MachineValidationArtifact is a file an in-band attempt produced.",
 				Type:        []string{"object"},
 				Properties: map[string]spec.Schema{
 					"type": {
@@ -34256,6 +34824,47 @@ func schema_pkg_apis_storage_v1_MachineValidationArtifact(ref common.ReferenceCa
 				Required: []string{"type", "data"},
 			},
 		},
+	}
+}
+
+func schema_pkg_apis_storage_v1_MachineValidationCertification(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "MachineValidationCertification is the Certification of an in-band attempt.",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"name": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Name is the Certification, in the namespace of its ConfigMap. It is cleared once the Certification is deleted, a day after the attempt finished.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"startTime": {
+						SchemaProps: spec.SchemaProps{
+							Description: "StartTime is when the Certification was created.",
+							Ref:         ref(metav1.Time{}.OpenAPIModelName()),
+						},
+					},
+					"templateHash": {
+						SchemaProps: spec.SchemaProps{
+							Description: "TemplateHash is the hash of the certificationTemplate the Certification was created from. It hashes the template's content, so neither its formatting nor the rest of its ConfigMap changes it. A changed template does not invalidate a pass, so this says which template a pass was for.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"report": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Report is the Certification's NCRE report, recorded with the attempt's result. It stays after the Certification is deleted.",
+							Ref:         ref(apisstoragev1.MachineValidationArtifact{}.OpenAPIModelName()),
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			apisstoragev1.MachineValidationArtifact{}.OpenAPIModelName(), metav1.Time{}.OpenAPIModelName()},
 	}
 }
 
@@ -34290,77 +34899,6 @@ func schema_pkg_apis_storage_v1_MachineValidationRejoin(ref common.ReferenceCall
 		},
 		Dependencies: []string{
 			metav1.Time{}.OpenAPIModelName()},
-	}
-}
-
-func schema_pkg_apis_storage_v1_MachineValidationTestResult(ref common.ReferenceCallback) common.OpenAPIDefinition {
-	return common.OpenAPIDefinition{
-		Schema: spec.Schema{
-			SchemaProps: spec.SchemaProps{
-				Description: "MachineValidationTestResult is the result of one test of a validation attempt.",
-				Type:        []string{"object"},
-				Properties: map[string]spec.Schema{
-					"name": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Name is the test's name in the suite.",
-							Default:     "",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"result": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Result is Running, Passed or Failed.",
-							Default:     "",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"message": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Message is what the test found: the reason a failed Certification recorded for the node, or the last line a Job printed.",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"kind": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Kind is what the test ran as in the validation cluster, Certification or Job.",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"startTime": {
-						SchemaProps: spec.SchemaProps{
-							Description: "StartTime is when the test's Certification or Job was created.",
-							Ref:         ref(metav1.Time{}.OpenAPIModelName()),
-						},
-					},
-					"finishTime": {
-						SchemaProps: spec.SchemaProps{
-							Description: "FinishTime is when the test's result was recorded, unset while it runs.",
-							Ref:         ref(metav1.Time{}.OpenAPIModelName()),
-						},
-					},
-					"objectName": {
-						SchemaProps: spec.SchemaProps{
-							Description: "ObjectName is the test's Certification or Job, in the namespace of the suite. It is cleared once the object is deleted, a day after the attempt finished.",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"report": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Report is the test's report, recorded with its result: a Certification's NCRE report, or how a Job's containers ended with the end of their logs. It stays after the Certification or Job is deleted.",
-							Ref:         ref(apisstoragev1.MachineValidationArtifact{}.OpenAPIModelName()),
-						},
-					},
-				},
-				Required: []string{"name", "result"},
-			},
-		},
-		Dependencies: []string{
-			apisstoragev1.MachineValidationArtifact{}.OpenAPIModelName(), metav1.Time{}.OpenAPIModelName()},
 	}
 }
 
@@ -37586,16 +38124,16 @@ func schema_pkg_apis_storage_v1_NodeProviderValidationTier(ref common.ReferenceC
 							Format:      "",
 						},
 					},
-					"suiteConfigMapName": {
+					"certificationConfigMapName": {
 						SchemaProps: spec.SchemaProps{
-							Description: "SuiteConfigMapName is the ConfigMap in the validation cluster that holds the suite, the tests a machine runs there. Defaults to \"pre-ingestion-validation\".",
+							Description: "CertificationConfigMapName is the ConfigMap in the validation cluster that configures the Certification a machine runs there. Defaults to \"pre-ingestion-host-validation\".",
 							Type:        []string{"string"},
 							Format:      "",
 						},
 					},
-					"suiteConfigMapNamespace": {
+					"certificationConfigMapNamespace": {
 						SchemaProps: spec.SchemaProps{
-							Description: "SuiteConfigMapNamespace is the namespace of the suite's ConfigMap in the validation cluster. The tests run in it too. Defaults to \"vcluster-platform\".",
+							Description: "CertificationConfigMapNamespace is the namespace of the Certification's ConfigMap in the validation cluster. The Certification runs in it too. Defaults to \"vcluster-platform\".",
 							Type:        []string{"string"},
 							Format:      "",
 						},
@@ -37608,13 +38146,13 @@ func schema_pkg_apis_storage_v1_NodeProviderValidationTier(ref common.ReferenceC
 					},
 					"setupTimeout": {
 						SchemaProps: spec.SchemaProps{
-							Description: "SetupTimeout is how long the platform keeps trying to set up each test of the suite before it fails the attempt as SetupFailed: from the start of the attempt for the first test, and from the end of the test before it for a later one. How long a test may run is the suite's, set in the test itself. Defaults to 45m.",
+							Description: "SetupTimeout is how long the platform keeps trying to set up the Certification, from the join, or from the start of an attempt that did not join, before it fails the attempt as SetupFailed. A running Certification gets it on top of its own timeouts, set in its ConfigMap, for its workloads to schedule. Defaults to 45m.",
 							Ref:         ref(metav1.Duration{}.OpenAPIModelName()),
 						},
 					},
-					"testPollInterval": {
+					"certificationPollInterval": {
 						SchemaProps: spec.SchemaProps{
-							Description: "TestPollInterval is how often the platform checks a running test for its result. A suite whose tests run for hours can be checked less often. Defaults to 1m.",
+							Description: "CertificationPollInterval is how often the platform checks the running Certification for its result. A Certification that runs for hours can be checked less often. Defaults to 1m.",
 							Ref:         ref(metav1.Duration{}.OpenAPIModelName()),
 						},
 					},
@@ -41178,11 +41716,17 @@ func schema_pkg_apis_storage_v1_StackTemplateDefinition(ref common.ReferenceCall
 							},
 						},
 					},
+					"ui": {
+						SchemaProps: spec.SchemaProps{
+							Description: "UI declares the resources the stack adds to the platform UI on its destination.",
+							Ref:         ref(apisstoragev1.StackUI{}.OpenAPIModelName()),
+						},
+					},
 				},
 			},
 		},
 		Dependencies: []string{
-			apisstoragev1.AppParameter{}.OpenAPIModelName(), apisstoragev1.StackPublishedOutput{}.OpenAPIModelName(), apisstoragev1.StackTask{}.OpenAPIModelName()},
+			apisstoragev1.AppParameter{}.OpenAPIModelName(), apisstoragev1.StackPublishedOutput{}.OpenAPIModelName(), apisstoragev1.StackTask{}.OpenAPIModelName(), apisstoragev1.StackUI{}.OpenAPIModelName()},
 	}
 }
 
@@ -41326,6 +41870,12 @@ func schema_pkg_apis_storage_v1_StackTemplateSpec(ref common.ReferenceCallback) 
 							},
 						},
 					},
+					"ui": {
+						SchemaProps: spec.SchemaProps{
+							Description: "UI declares the resources the stack adds to the platform UI on its destination.",
+							Ref:         ref(apisstoragev1.StackUI{}.OpenAPIModelName()),
+						},
+					},
 					"owner": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Owner holds the owner of this object",
@@ -41350,7 +41900,7 @@ func schema_pkg_apis_storage_v1_StackTemplateSpec(ref common.ReferenceCallback) 
 			},
 		},
 		Dependencies: []string{
-			apisstoragev1.Access{}.OpenAPIModelName(), apisstoragev1.AppParameter{}.OpenAPIModelName(), apisstoragev1.StackPublishedOutput{}.OpenAPIModelName(), apisstoragev1.StackTask{}.OpenAPIModelName(), apisstoragev1.UserOrTeam{}.OpenAPIModelName()},
+			apisstoragev1.Access{}.OpenAPIModelName(), apisstoragev1.AppParameter{}.OpenAPIModelName(), apisstoragev1.StackPublishedOutput{}.OpenAPIModelName(), apisstoragev1.StackTask{}.OpenAPIModelName(), apisstoragev1.StackUI{}.OpenAPIModelName(), apisstoragev1.UserOrTeam{}.OpenAPIModelName()},
 	}
 }
 
@@ -41359,6 +41909,800 @@ func schema_pkg_apis_storage_v1_StackTemplateStatus(ref common.ReferenceCallback
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
 				Type: []string{"object"},
+			},
+		},
+	}
+}
+
+func schema_pkg_apis_storage_v1_StackUI(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "StackUI declares the resources a stack adds to the platform UI. The platform renders them with its own components; a stack ships no frontend code.",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"placements": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Placements say where the platform shows the resources. The default is Cluster.",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: "",
+										Type:    []string{"string"},
+										Format:  "",
+										Enum:    []interface{}{"Cluster", "Project"},
+									},
+								},
+							},
+						},
+					},
+					"resources": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Resources are the kinds the stack provides, each shown as its own page on the destination.",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref(apisstoragev1.StackUIResource{}.OpenAPIModelName()),
+									},
+								},
+							},
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			apisstoragev1.StackUIResource{}.OpenAPIModelName()},
+	}
+}
+
+func schema_pkg_apis_storage_v1_StackUIAction(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "StackUIAction is one operation on a detail page. Exactly one of Delete, Patch and Create is set.",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"name": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Name identifies the action within the resource. It is a DNS label.",
+							Default:     "",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"label": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Label is the button text.",
+							Default:     "",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"when": {
+						SchemaProps: spec.SchemaProps{
+							Description: "When is a CEL expression. The action is offered only when it is true.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"confirm": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Confirm is a question the user answers before the action runs.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"primary": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Primary marks the main action of the page. A client shows it as the one prominent button. At most one action of a resource is primary, and a delete cannot be.",
+							Type:        []string{"boolean"},
+							Format:      "",
+						},
+					},
+					"parameters": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Parameters are the inputs the user fills in. Expressions read them under params.",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref(apisstoragev1.StackUIActionParameter{}.OpenAPIModelName()),
+									},
+								},
+							},
+						},
+					},
+					"delete": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Delete deletes the object, or the objects of a relation.",
+							Ref:         ref(apisstoragev1.StackUIActionTarget{}.OpenAPIModelName()),
+						},
+					},
+					"patch": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Patch applies a JSON merge patch to the object, or to the objects of a relation.",
+							Ref:         ref(apisstoragev1.StackUIPatchAction{}.OpenAPIModelName()),
+						},
+					},
+					"create": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Create creates an object of a resource of this stack, in the object's namespace.",
+							Ref:         ref(apisstoragev1.StackUICreateAction{}.OpenAPIModelName()),
+						},
+					},
+				},
+				Required: []string{"name", "label"},
+			},
+		},
+		Dependencies: []string{
+			apisstoragev1.StackUIActionParameter{}.OpenAPIModelName(), apisstoragev1.StackUIActionTarget{}.OpenAPIModelName(), apisstoragev1.StackUICreateAction{}.OpenAPIModelName(), apisstoragev1.StackUIPatchAction{}.OpenAPIModelName()},
+	}
+}
+
+func schema_pkg_apis_storage_v1_StackUIActionParameter(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "StackUIActionParameter is one input of an action.",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"name": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Name is the key under params. It is a CEL identifier.",
+							Default:     "",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"label": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Label is the input label.",
+							Default:     "",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"type": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Type is the value type. The default is String.\n\nPossible enum values:\n - `\"Boolean\"`\n - `\"Number\"`\n - `\"String\"`",
+							Type:        []string{"string"},
+							Format:      "",
+							Enum:        []interface{}{"Boolean", "Number", "String"},
+						},
+					},
+					"required": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Required rejects an empty value.",
+							Type:        []string{"boolean"},
+							Format:      "",
+						},
+					},
+					"default": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Default is a CEL expression for the initial value, for example \"self.spec.replicas\".",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+				},
+				Required: []string{"name", "label"},
+			},
+		},
+	}
+}
+
+func schema_pkg_apis_storage_v1_StackUIActionTarget(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "StackUIActionTarget names what an action changes.",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"relation": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Relation names a relation whose objects the action changes. Empty changes the object itself.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+				},
+			},
+		},
+	}
+}
+
+func schema_pkg_apis_storage_v1_StackUICard(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "StackUICard is one titled card. Exactly one of Rows, Timeline and Logs is set.",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"title": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Title is the card heading.",
+							Default:     "",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"when": {
+						SchemaProps: spec.SchemaProps{
+							Description: "When is a CEL expression. The card shows only when it is true.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"rows": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Rows are labelled values, shown in order.",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref(apisstoragev1.StackUIRow{}.OpenAPIModelName()),
+									},
+								},
+							},
+						},
+					},
+					"timeline": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Timeline shows the Kubernetes events of the object, newest first.",
+							Ref:         ref(apisstoragev1.StackUITimeline{}.OpenAPIModelName()),
+						},
+					},
+					"logs": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Logs shows the end of a container log.",
+							Ref:         ref(apisstoragev1.StackUILogs{}.OpenAPIModelName()),
+						},
+					},
+				},
+				Required: []string{"title"},
+			},
+		},
+		Dependencies: []string{
+			apisstoragev1.StackUILogs{}.OpenAPIModelName(), apisstoragev1.StackUIRow{}.OpenAPIModelName(), apisstoragev1.StackUITimeline{}.OpenAPIModelName()},
+	}
+}
+
+func schema_pkg_apis_storage_v1_StackUICreateAction(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "StackUICreateAction creates one object.",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"resource": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Resource names a resource of this stack. The platform sets apiVersion, kind and namespace.",
+							Default:     "",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"object": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Object is a CEL expression that builds the object as a map, for example \"{'metadata': {'generateName': self.metadata.name + '-'}, 'spec': {...}}\".",
+							Default:     "",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+				},
+				Required: []string{"resource", "object"},
+			},
+		},
+	}
+}
+
+func schema_pkg_apis_storage_v1_StackUIDetail(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "StackUIDetail is the layout of a detail page: cards of labelled rows.",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"cards": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Cards are shown in order.",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref(apisstoragev1.StackUICard{}.OpenAPIModelName()),
+									},
+								},
+							},
+						},
+					},
+				},
+				Required: []string{"cards"},
+			},
+		},
+		Dependencies: []string{
+			apisstoragev1.StackUICard{}.OpenAPIModelName()},
+	}
+}
+
+func schema_pkg_apis_storage_v1_StackUIForm(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "StackUIForm lays out the spec form. Without groups, the form shows every spec field in schema order.",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"groups": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Groups are shown in order, each with its fields.",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref(apisstoragev1.StackUIFormGroup{}.OpenAPIModelName()),
+									},
+								},
+							},
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			apisstoragev1.StackUIFormGroup{}.OpenAPIModelName()},
+	}
+}
+
+func schema_pkg_apis_storage_v1_StackUIFormGroup(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "StackUIFormGroup is one titled group of form fields.",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"label": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Label is the group heading.",
+							Default:     "",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"fields": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Fields are dotted paths under spec, for example \"warmPoolRef.name\".",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: "",
+										Type:    []string{"string"},
+										Format:  "",
+									},
+								},
+							},
+						},
+					},
+				},
+				Required: []string{"label", "fields"},
+			},
+		},
+	}
+}
+
+func schema_pkg_apis_storage_v1_StackUILabelRelation(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "StackUILabelRelation selects related objects whose label Key equals the value at ValuePath.",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"key": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Key is the label key on the related objects.",
+							Default:     "",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"valuePath": {
+						SchemaProps: spec.SchemaProps{
+							Description: "ValuePath is a JSONPath on the object that gives the label value.",
+							Default:     "",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+				},
+				Required: []string{"key", "valuePath"},
+			},
+		},
+	}
+}
+
+func schema_pkg_apis_storage_v1_StackUILogs(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "StackUILogs reads the log of one pod container.",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"from": {
+						SchemaProps: spec.SchemaProps{
+							Description: "From names a relation whose first object is the pod. Empty reads the object itself, which must then be a pod.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"container": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Container is the container name. Empty reads the pod's only container.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"tailLines": {
+						SchemaProps: spec.SchemaProps{
+							Description: "TailLines is how many lines to show. The default is 100 and the maximum is 1000.",
+							Type:        []string{"integer"},
+							Format:      "int64",
+						},
+					},
+				},
+			},
+		},
+	}
+}
+
+func schema_pkg_apis_storage_v1_StackUIPatchAction(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "StackUIPatchAction changes objects with a JSON merge patch.",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"relation": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Relation names a relation whose objects the action changes. Empty changes the object itself.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"patch": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Patch is a CEL expression that builds the merge patch as a map, for example \"{'spec': {'replicas': params.replicas}}\".",
+							Default:     "",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+				},
+				Required: []string{"patch"},
+			},
+		},
+	}
+}
+
+func schema_pkg_apis_storage_v1_StackUIRelation(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "StackUIRelation finds objects related to the object a detail page shows. Exactly one of Owned, FieldRef and LabelSelector is set. Related objects are read from the object's namespace.",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"name": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Name identifies the relation within the resource. Rows read from it by this name.",
+							Default:     "",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"group": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Group is the API group of the related kind. Empty means the core group.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"version": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Version is the API version of the related kind.",
+							Default:     "",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"resource": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Resource is the plural resource name of the related kind.",
+							Default:     "",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"owned": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Owned selects the objects that carry an owner reference to the object.",
+							Type:        []string{"boolean"},
+							Format:      "",
+						},
+					},
+					"fieldRef": {
+						SchemaProps: spec.SchemaProps{
+							Description: "FieldRef is a JSONPath on the object that holds the name of the related object.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"labelSelector": {
+						SchemaProps: spec.SchemaProps{
+							Description: "LabelSelector selects the related objects by a label whose value comes from the object.",
+							Ref:         ref(apisstoragev1.StackUILabelRelation{}.OpenAPIModelName()),
+						},
+					},
+				},
+				Required: []string{"name", "version", "resource"},
+			},
+		},
+		Dependencies: []string{
+			apisstoragev1.StackUILabelRelation{}.OpenAPIModelName()},
+	}
+}
+
+func schema_pkg_apis_storage_v1_StackUIResource(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "StackUIResource is one kind the stack provides on its destination.",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"name": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Name identifies the resource within the stack. It appears in UI paths, so it is a DNS label.",
+							Default:     "",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"label": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Label is the plural display name, for example \"Sandboxes\".",
+							Default:     "",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"icon": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Icon is an image URL shown next to the label.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"group": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Group is the API group of the kind. Empty means the core group.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"version": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Version is the API version of the kind.",
+							Default:     "",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"resource": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Resource is the plural resource name, for example \"sandboxes\".",
+							Default:     "",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"labelSelector": {
+						SchemaProps: spec.SchemaProps{
+							Description: "LabelSelector limits the list to the objects that belong to the stack, in kubectl selector syntax, for example \"app.kubernetes.io/part-of=web-services\". Without it the list shows every object of the kind, which suits a kind the stack owns, such as its own CRD, but not a built-in kind like Deployments. A resource with a selector declares its columns, because the platform applies the selector when it fills them.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"columns": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Columns replace the printer columns of the kind on the list page. A column reads the listed object only, so it may not set From or When.",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref(apisstoragev1.StackUIRow{}.OpenAPIModelName()),
+									},
+								},
+							},
+						},
+					},
+					"relations": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Relations name the objects a detail page reads next to the object itself. A relation name is also the CEL variable that holds its objects, so it is a CEL identifier.",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref(apisstoragev1.StackUIRelation{}.OpenAPIModelName()),
+									},
+								},
+							},
+						},
+					},
+					"detail": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Detail is the layout of the detail page. Without it, the page shows the object as YAML.",
+							Ref:         ref(apisstoragev1.StackUIDetail{}.OpenAPIModelName()),
+						},
+					},
+					"actions": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Actions are the operations a detail page offers on the object. The platform runs them on the destination as the user who clicks them.",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref(apisstoragev1.StackUIAction{}.OpenAPIModelName()),
+									},
+								},
+							},
+						},
+					},
+					"form": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Form enables create and edit forms for the object's spec, built from the schema the destination serves for the kind. Without it, the resource offers no form.",
+							Ref:         ref(apisstoragev1.StackUIForm{}.OpenAPIModelName()),
+						},
+					},
+				},
+				Required: []string{"name", "label", "version", "resource"},
+			},
+		},
+		Dependencies: []string{
+			apisstoragev1.StackUIAction{}.OpenAPIModelName(), apisstoragev1.StackUIDetail{}.OpenAPIModelName(), apisstoragev1.StackUIForm{}.OpenAPIModelName(), apisstoragev1.StackUIRelation{}.OpenAPIModelName(), apisstoragev1.StackUIRow{}.OpenAPIModelName()},
+	}
+}
+
+func schema_pkg_apis_storage_v1_StackUIRow(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "StackUIRow is one labelled value on a card.",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"label": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Label is the row name.",
+							Default:     "",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"from": {
+						SchemaProps: spec.SchemaProps{
+							Description: "From names the relation the row reads. Empty reads the object itself. A relation that matches more than one object gives one value per object.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"path": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Path is a JSONPath, for example \"{.status.podIP}\". Exactly one of Path and Expression is set.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"expression": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Expression is a CEL expression for a derived value. It sees the object as self and each relation as a list under its name, for example \"size(claim) > 0 ? 'Adopted' : 'Waiting'\". A list result gives one value per entry.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"when": {
+						SchemaProps: spec.SchemaProps{
+							Description: "When is a CEL expression. The row shows only when it is true.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"widget": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Widget selects how the value is shown. The default is Text.\n\nPossible enum values:\n - `\"Badge\"` shows the value as a status badge.\n - `\"Conditions\"` shows a list of Kubernetes conditions as chips.\n - `\"Link\"` shows the value as a link to an object of the LinkTo resource.\n - `\"Mono\"` shows the value in a monospace font.\n - `\"Text\"` shows the value as text.\n - `\"Time\"` shows an RFC 3339 time as a relative time.",
+							Type:        []string{"string"},
+							Format:      "",
+							Enum:        []interface{}{"Badge", "Conditions", "Link", "Mono", "Text", "Time"},
+						},
+					},
+					"linkTo": {
+						SchemaProps: spec.SchemaProps{
+							Description: "LinkTo names a resource of this stack. With the Link widget, the value is the name of an object of that resource, in the object's namespace.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"values": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Values maps raw values to display values, for example \"vnode\" to \"vNode\".",
+							Type:        []string{"object"},
+							AdditionalProperties: &spec.SchemaOrBool{
+								Allows: true,
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: "",
+										Type:    []string{"string"},
+										Format:  "",
+									},
+								},
+							},
+						},
+					},
+					"tones": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Tones maps display values to the tone of their Badge, for example \"Ready\" to Success. A value without a tone is Neutral.",
+							Type:        []string{"object"},
+							AdditionalProperties: &spec.SchemaOrBool{
+								Allows: true,
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: "",
+										Type:    []string{"string"},
+										Format:  "",
+										Enum:    []interface{}{"Danger", "Info", "Neutral", "Success", "Warning"},
+									},
+								},
+							},
+						},
+					},
+				},
+				Required: []string{"label"},
+			},
+		},
+	}
+}
+
+func schema_pkg_apis_storage_v1_StackUITimeline(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "StackUITimeline lists events. It always includes the events of the object itself.",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"relations": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Relations name relations whose objects' events join the timeline, for example the pod of a sandbox.",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: "",
+										Type:    []string{"string"},
+										Format:  "",
+									},
+								},
+							},
+						},
+					},
+				},
 			},
 		},
 	}
@@ -41446,28 +42790,21 @@ func schema_pkg_apis_storage_v1_StorageAccountIdentities(ref common.ReferenceCal
 				Properties: map[string]spec.Schema{
 					"admin": {
 						SchemaProps: spec.SchemaProps{
-							Description: "Admin is the vendor tenant's administrative identity, which the platform operates with. It never reaches a tenant cluster.",
+							Description: "Admin is the vendor tenant's administrative identity, which the platform operates with.",
 							Type:        []string{"string"},
 							Format:      "",
 						},
 					},
 					"csi": {
 						SchemaProps: spec.SchemaProps{
-							Description: "CSI is the tenant's CSI identity, which tenant cluster node plugins log in with: the CSI driver refuses a mount-only one.",
+							Description: "CSI is the identity tenant clusters mount with.",
 							Type:        []string{"string"},
 							Format:      "",
 						},
 					},
 					"mount": {
 						SchemaProps: spec.SchemaProps{
-							Description: "Mount is the mount-only identity machines mount with.",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"s3": {
-						SchemaProps: spec.SchemaProps{
-							Description: "S3 is the tenant's S3 identity, minted with the first storage that offers s3. Its keys stay in the Secret.",
+							Description: "Mount is the identity machines mount with.",
 							Type:        []string{"string"},
 							Format:      "",
 						},
@@ -41599,7 +42936,7 @@ func schema_pkg_apis_storage_v1_StorageAccountSpec(ref common.ReferenceCallback)
 					},
 					"profile": {
 						SchemaProps: spec.SchemaProps{
-							Description: "Profile names the StorageProfile whose tenant-level documents seed Weka or Vast at creation when both are empty. Informational afterwards.",
+							Description: "Profile names the StorageProfile whose tenant-level documents seed Weka at creation when Weka is empty. Informational afterwards.",
 							Type:        []string{"string"},
 							Format:      "",
 						},
@@ -41608,12 +42945,6 @@ func schema_pkg_apis_storage_v1_StorageAccountSpec(ref common.ReferenceCallback)
 						SchemaProps: spec.SchemaProps{
 							Description: "Weka is this tenant's copy of the tenant-level WEKA documents, filled from the profile when the StorageAccount is created and editable per customer from then on.",
 							Ref:         ref(apisstoragev1.WekaTenantSection{}.OpenAPIModelName()),
-						},
-					},
-					"vast": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Vast is this tenant's copy of the tenant-level VAST documents, filled from the profile when the StorageAccount is created and editable per customer from then on.",
-							Ref:         ref(apisstoragev1.VastTenantSection{}.OpenAPIModelName()),
 						},
 					},
 					"deletionPolicy": {
@@ -41635,7 +42966,7 @@ func schema_pkg_apis_storage_v1_StorageAccountSpec(ref common.ReferenceCallback)
 			},
 		},
 		Dependencies: []string{
-			apisstoragev1.Access{}.OpenAPIModelName(), apisstoragev1.UserOrTeam{}.OpenAPIModelName(), apisstoragev1.VastTenantSection{}.OpenAPIModelName(), apisstoragev1.WekaTenantSection{}.OpenAPIModelName()},
+			apisstoragev1.Access{}.OpenAPIModelName(), apisstoragev1.UserOrTeam{}.OpenAPIModelName(), apisstoragev1.WekaTenantSection{}.OpenAPIModelName()},
 	}
 }
 
@@ -41871,13 +43202,6 @@ func schema_pkg_apis_storage_v1_StorageProfileSpec(ref common.ReferenceCallback)
 							Format:      "",
 						},
 					},
-					"description": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Description is a short summary of the tier, shown next to the display name in the admin profile picker and list. Keep the storage vendor out of it, as out of the profile name.",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
 					"owner": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Owner holds the owner of this object",
@@ -41908,7 +43232,7 @@ func schema_pkg_apis_storage_v1_StorageProfileSpec(ref common.ReferenceCallback)
 					},
 					"protocols": {
 						SchemaProps: spec.SchemaProps{
-							Description: "Protocols is how tenants reach the tier's data: posix (the vendor's native file client), nfs, smb, s3 or block, one or several for the same data. WEKA serves posix and s3, VAST nfs. s3 is only valid next to the file protocol: it adds a bucket over the storage's volume.",
+							Description: "Protocols is how tenants reach the tier's data: posix (the vendor's native file client), nfs, smb, s3 or block, one or several for the same data. WEKA serves posix today.",
 							Type:        []string{"array"},
 							Items: &spec.SchemaOrArray{
 								Schema: &spec.Schema{
@@ -41927,18 +43251,12 @@ func schema_pkg_apis_storage_v1_StorageProfileSpec(ref common.ReferenceCallback)
 							Ref:         ref(apisstoragev1.WekaStorageSection{}.OpenAPIModelName()),
 						},
 					},
-					"vast": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Vast is the VAST object model for this tier. Set when the connector's provider is vast.",
-							Ref:         ref(apisstoragev1.VastStorageSection{}.OpenAPIModelName()),
-						},
-					},
 				},
 				Required: []string{"connectorRef"},
 			},
 		},
 		Dependencies: []string{
-			apisstoragev1.Access{}.OpenAPIModelName(), apisstoragev1.UserOrTeam{}.OpenAPIModelName(), apisstoragev1.VastStorageSection{}.OpenAPIModelName(), apisstoragev1.WekaStorageSection{}.OpenAPIModelName()},
+			apisstoragev1.Access{}.OpenAPIModelName(), apisstoragev1.UserOrTeam{}.OpenAPIModelName(), apisstoragev1.WekaStorageSection{}.OpenAPIModelName()},
 	}
 }
 
@@ -42118,40 +43436,6 @@ func schema_pkg_apis_storage_v1_StorageVolumeList(ref common.ReferenceCallback) 
 	}
 }
 
-func schema_pkg_apis_storage_v1_StorageVolumeObject(ref common.ReferenceCallback) common.OpenAPIDefinition {
-	return common.OpenAPIDefinition{
-		Schema: spec.Schema{
-			SchemaProps: spec.SchemaProps{
-				Description: "StorageVolumeObject is where a storage's data is reached over S3.",
-				Type:        []string{"object"},
-				Properties: map[string]spec.Schema{
-					"endpoint": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Endpoint is the S3 endpoint URL the connector names.",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"bucket": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Bucket is the bucket over the storage's volume.",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"pathStyle": {
-						SchemaProps: spec.SchemaProps{
-							Description: "PathStyle is true when clients address the bucket in the path rather than the host name.",
-							Type:        []string{"boolean"},
-							Format:      "",
-						},
-					},
-				},
-			},
-		},
-	}
-}
-
 func schema_pkg_apis_storage_v1_StorageVolumeSpec(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
@@ -42206,22 +43490,9 @@ func schema_pkg_apis_storage_v1_StorageVolumeSpec(ref common.ReferenceCallback) 
 							Ref:         ref(apisstoragev1.WekaVolumeSection{}.OpenAPIModelName()),
 						},
 					},
-					"vast": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Vast is this storage's copy of the profile's volume-level VAST documents, filled and edited like Weka.",
-							Ref:         ref(apisstoragev1.VastVolumeSection{}.OpenAPIModelName()),
-						},
-					},
 					"import": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Import adopts a volume that exists already instead of creating it, and creates the tenant's StorageAccount in import mode when it does not exist yet. The platform never deletes what it did not create.",
-							Type:        []string{"boolean"},
-							Format:      "",
-						},
-					},
-					"encrypted": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Encrypted creates the volume encrypted at rest. On WEKA the client encrypts on the host and a KMS has to wrap the key; without one the storage is refused. It wins over an encrypted key in the vendor section, and the two have to agree at creation. Set at creation only: a later change is reported by the Synced condition and never applied.",
 							Type:        []string{"boolean"},
 							Format:      "",
 						},
@@ -42231,7 +43502,7 @@ func schema_pkg_apis_storage_v1_StorageVolumeSpec(ref common.ReferenceCallback) 
 			},
 		},
 		Dependencies: []string{
-			apisstoragev1.Access{}.OpenAPIModelName(), apisstoragev1.UserOrTeam{}.OpenAPIModelName(), apisstoragev1.VastVolumeSection{}.OpenAPIModelName(), apisstoragev1.WekaVolumeSection{}.OpenAPIModelName(), resource.Quantity{}.OpenAPIModelName()},
+			apisstoragev1.Access{}.OpenAPIModelName(), apisstoragev1.UserOrTeam{}.OpenAPIModelName(), apisstoragev1.WekaVolumeSection{}.OpenAPIModelName(), resource.Quantity{}.OpenAPIModelName()},
 	}
 }
 
@@ -42323,24 +43594,11 @@ func schema_pkg_apis_storage_v1_StorageVolumeStatus(ref common.ReferenceCallback
 							Format:      "",
 						},
 					},
-					"encrypted": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Encrypted is whether the vendor reports the volume as encrypted at rest.",
-							Type:        []string{"boolean"},
-							Format:      "",
-						},
-					},
-					"object": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Object is the S3 bucket over the volume, recorded once object access is ready. It stays recorded for the delete when object access fails, and goes once a profile that drops s3 took the bucket out of the tenant's policy; a tenant reads it only while ObjectReady is True. Only for a storage whose profile lists s3.",
-							Ref:         ref(apisstoragev1.StorageVolumeObject{}.OpenAPIModelName()),
-						},
-					},
 				},
 			},
 		},
 		Dependencies: []string{
-			storagev1.Condition{}.OpenAPIModelName(), apisstoragev1.StorageVolumeApplied{}.OpenAPIModelName(), apisstoragev1.StorageVolumeCapacity{}.OpenAPIModelName(), apisstoragev1.StorageVolumeObject{}.OpenAPIModelName(), apisstoragev1.StorageVolumeVendor{}.OpenAPIModelName()},
+			storagev1.Condition{}.OpenAPIModelName(), apisstoragev1.StorageVolumeApplied{}.OpenAPIModelName(), apisstoragev1.StorageVolumeCapacity{}.OpenAPIModelName(), apisstoragev1.StorageVolumeVendor{}.OpenAPIModelName()},
 	}
 }
 
@@ -42367,7 +43625,7 @@ func schema_pkg_apis_storage_v1_StorageVolumeVendor(ref common.ReferenceCallback
 					},
 					"name": {
 						SchemaProps: spec.SchemaProps{
-							Description: "Name is the vendor-side volume name, a filesystem on WEKA and the view path on VAST.",
+							Description: "Name is the vendor-side volume name, a filesystem on WEKA.",
 							Type:        []string{"string"},
 							Format:      "",
 						},
@@ -44619,175 +45877,6 @@ func schema_pkg_apis_storage_v1_VClusterDeviceOperatorDeployment(ref common.Refe
 	}
 }
 
-func schema_pkg_apis_storage_v1_VastStorageMount(ref common.ReferenceCallback) common.OpenAPIDefinition {
-	return common.OpenAPIDefinition{
-		Schema: spec.Schema{
-			SchemaProps: spec.SchemaProps{
-				Description: "VastStorageMount configures the NFS mounts of machines.",
-				Type:        []string{"object"},
-				Properties: map[string]spec.Schema{
-					"options": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Options replace the default NFS mount options vers=3,proto=tcp, for example vers=4.1 or proto=rdma,port=20049.",
-							Type:        []string{"array"},
-							Items: &spec.SchemaOrArray{
-								Schema: &spec.Schema{
-									SchemaProps: spec.SchemaProps{
-										Default: "",
-										Type:    []string{"string"},
-										Format:  "",
-									},
-								},
-							},
-						},
-					},
-				},
-			},
-		},
-	}
-}
-
-func schema_pkg_apis_storage_v1_VastStorageSection(ref common.ReferenceCallback) common.OpenAPIDefinition {
-	return common.OpenAPIDefinition{
-		Schema: spec.Schema{
-			SchemaProps: spec.SchemaProps{
-				Description: "VastStorageSection is VAST's object model as YAML, as a profile carries it. Each document is sent as the JSON body of the matching VMS create call after the platform fills the keys it owns (names, tenant_id, policy_id, the path, the quota size and credentials); unknown keys pass through untouched. Capacity keys may use the template \"{{ .storage.size }}\" and may be written as Kubernetes quantities. At creation the tenant-level documents are copied into the tenant's StorageAccount and the volume-level ones into the StorageVolume.",
-				Type:        []string{"object"},
-				Properties: map[string]spec.Schema{
-					"tenant": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Tenant is the body of POST /tenants/ minus name.",
-							Ref:         ref(runtime.RawExtension{}.OpenAPIModelName()),
-						},
-					},
-					"vipPool": {
-						SchemaProps: spec.SchemaProps{
-							Description: "VIPPool is the body of POST /vippools/ for the tenant's pool minus name, tenant_id, ip_ranges and subnet_cidr, which the platform allocates from the connector's VIP range. The role defaults to PROTOCOLS.",
-							Ref:         ref(runtime.RawExtension{}.OpenAPIModelName()),
-						},
-					},
-					"csiRole": {
-						SchemaProps: spec.SchemaProps{
-							Description: "CSIRole is the body of POST /roles/ for the tenant-scoped role the platform and the CSI managers hold, minus name and tenant_id. permissions_list defaults to view_logical, create_logical, edit_logical and delete_logical.",
-							Ref:         ref(runtime.RawExtension{}.OpenAPIModelName()),
-						},
-					},
-					"csiManager": {
-						SchemaProps: spec.SchemaProps{
-							Description: "CSIManager is the body of POST /managers/ for the identity tenant clusters use, minus username, password, roles and tenant_id. user_type defaults to TENANT_ADMIN, without which VAST refuses a manager in a tenant.",
-							Ref:         ref(runtime.RawExtension{}.OpenAPIModelName()),
-						},
-					},
-					"viewPolicy": {
-						SchemaProps: spec.SchemaProps{
-							Description: "ViewPolicy is the body of POST /viewpolicies/ minus name and tenant_id. flavor defaults to NFS. Listing hosts in nfs_no_squash without setting nfs_root_squash clears nfs_root_squash, whose default of all hosts would otherwise win.",
-							Ref:         ref(runtime.RawExtension{}.OpenAPIModelName()),
-						},
-					},
-					"view": {
-						SchemaProps: spec.SchemaProps{
-							Description: "View is the body of POST /views/ minus name, path, policy_id and tenant_id. The path is /<tenant>/<storage>; protocols defaults to NFS and create_dir to true.",
-							Ref:         ref(runtime.RawExtension{}.OpenAPIModelName()),
-						},
-					},
-					"quota": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Quota is the body of POST /quotas/ minus name, path and tenant_id. hard_limit defaults to the storage size.",
-							Ref:         ref(runtime.RawExtension{}.OpenAPIModelName()),
-						},
-					},
-					"mount": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Mount configures the NFS mounts machines perform at boot. Platform side, not sent to VAST.",
-							Ref:         ref(apisstoragev1.VastStorageMount{}.OpenAPIModelName()),
-						},
-					},
-				},
-			},
-		},
-		Dependencies: []string{
-			apisstoragev1.VastStorageMount{}.OpenAPIModelName(), runtime.RawExtension{}.OpenAPIModelName()},
-	}
-}
-
-func schema_pkg_apis_storage_v1_VastTenantSection(ref common.ReferenceCallback) common.OpenAPIDefinition {
-	return common.OpenAPIDefinition{
-		Schema: spec.Schema{
-			SchemaProps: spec.SchemaProps{
-				Description: "VastTenantSection holds the documents that describe the vendor tenant, its VIP pool and its identities, one set per platform tenant on a VAST cluster.",
-				Type:        []string{"object"},
-				Properties: map[string]spec.Schema{
-					"tenant": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Tenant is the body of POST /tenants/ minus name.",
-							Ref:         ref(runtime.RawExtension{}.OpenAPIModelName()),
-						},
-					},
-					"vipPool": {
-						SchemaProps: spec.SchemaProps{
-							Description: "VIPPool is the body of POST /vippools/ for the tenant's pool minus name, tenant_id, ip_ranges and subnet_cidr, which the platform allocates from the connector's VIP range. The role defaults to PROTOCOLS.",
-							Ref:         ref(runtime.RawExtension{}.OpenAPIModelName()),
-						},
-					},
-					"csiRole": {
-						SchemaProps: spec.SchemaProps{
-							Description: "CSIRole is the body of POST /roles/ for the tenant-scoped role the platform and the CSI managers hold, minus name and tenant_id. permissions_list defaults to view_logical, create_logical, edit_logical and delete_logical.",
-							Ref:         ref(runtime.RawExtension{}.OpenAPIModelName()),
-						},
-					},
-					"csiManager": {
-						SchemaProps: spec.SchemaProps{
-							Description: "CSIManager is the body of POST /managers/ for the identity tenant clusters use, minus username, password, roles and tenant_id. user_type defaults to TENANT_ADMIN, without which VAST refuses a manager in a tenant.",
-							Ref:         ref(runtime.RawExtension{}.OpenAPIModelName()),
-						},
-					},
-				},
-			},
-		},
-		Dependencies: []string{
-			runtime.RawExtension{}.OpenAPIModelName()},
-	}
-}
-
-func schema_pkg_apis_storage_v1_VastVolumeSection(ref common.ReferenceCallback) common.OpenAPIDefinition {
-	return common.OpenAPIDefinition{
-		Schema: spec.Schema{
-			SchemaProps: spec.SchemaProps{
-				Description: "VastVolumeSection holds the documents that describe one volume, a view with its policy and quota on VAST.",
-				Type:        []string{"object"},
-				Properties: map[string]spec.Schema{
-					"viewPolicy": {
-						SchemaProps: spec.SchemaProps{
-							Description: "ViewPolicy is the body of POST /viewpolicies/ minus name and tenant_id. flavor defaults to NFS. Listing hosts in nfs_no_squash without setting nfs_root_squash clears nfs_root_squash, whose default of all hosts would otherwise win.",
-							Ref:         ref(runtime.RawExtension{}.OpenAPIModelName()),
-						},
-					},
-					"view": {
-						SchemaProps: spec.SchemaProps{
-							Description: "View is the body of POST /views/ minus name, path, policy_id and tenant_id. The path is /<tenant>/<storage>; protocols defaults to NFS and create_dir to true.",
-							Ref:         ref(runtime.RawExtension{}.OpenAPIModelName()),
-						},
-					},
-					"quota": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Quota is the body of POST /quotas/ minus name, path and tenant_id. hard_limit defaults to the storage size.",
-							Ref:         ref(runtime.RawExtension{}.OpenAPIModelName()),
-						},
-					},
-					"mount": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Mount configures the NFS mounts machines perform at boot. Platform side, not sent to VAST.",
-							Ref:         ref(apisstoragev1.VastStorageMount{}.OpenAPIModelName()),
-						},
-					},
-				},
-			},
-		},
-		Dependencies: []string{
-			apisstoragev1.VastStorageMount{}.OpenAPIModelName(), runtime.RawExtension{}.OpenAPIModelName()},
-	}
-}
-
 func schema_pkg_apis_storage_v1_VaultAuthSpec(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
@@ -45357,25 +46446,11 @@ func schema_pkg_apis_storage_v1_VirtualClusterInstanceSpec(ref common.ReferenceC
 							Format:      "",
 						},
 					},
-					"storage": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Storage attaches StorageVolumes of the instance's tenant to the tenant cluster, statically: each entry becomes one PersistentVolume of the volume the platform provisioned and one StorageClass named after the storage that binds claims to it and provisions nothing. The platform adds the vendor's node driver to experimental.deploy and writes the tenant's CSI identity, scoped to the tenant on the storage system, into the tenant cluster directly, since the driver refuses a mount-only login. The storage system's and the vendor tenant's admin identities never reach the tenant cluster. Removing an entry removes its PersistentVolume and StorageClass; the volume itself is never touched. Needs private nodes or a standalone control plane.",
-							Type:        []string{"array"},
-							Items: &spec.SchemaOrArray{
-								Schema: &spec.Schema{
-									SchemaProps: spec.SchemaProps{
-										Default: map[string]interface{}{},
-										Ref:     ref(apisstoragev1.VirtualClusterInstanceStorage{}.OpenAPIModelName()),
-									},
-								},
-							},
-						},
-					},
 				},
 			},
 		},
 		Dependencies: []string{
-			apisstoragev1.Access{}.OpenAPIModelName(), apisstoragev1.InstanceAccessRule{}.OpenAPIModelName(), apisstoragev1.TemplateRef{}.OpenAPIModelName(), apisstoragev1.UserOrTeam{}.OpenAPIModelName(), apisstoragev1.VirtualClusterClusterRef{}.OpenAPIModelName(), apisstoragev1.VirtualClusterInstanceStorage{}.OpenAPIModelName(), apisstoragev1.VirtualClusterTemplateDefinition{}.OpenAPIModelName()},
+			apisstoragev1.Access{}.OpenAPIModelName(), apisstoragev1.InstanceAccessRule{}.OpenAPIModelName(), apisstoragev1.TemplateRef{}.OpenAPIModelName(), apisstoragev1.UserOrTeam{}.OpenAPIModelName(), apisstoragev1.VirtualClusterClusterRef{}.OpenAPIModelName(), apisstoragev1.VirtualClusterTemplateDefinition{}.OpenAPIModelName()},
 	}
 }
 
@@ -45466,90 +46541,11 @@ func schema_pkg_apis_storage_v1_VirtualClusterInstanceStatus(ref common.Referenc
 							Format:      "",
 						},
 					},
-					"storage": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Storage lists the StorageVolumes the rendered values attach to the tenant cluster. It follows status.virtualCluster, so on an instance that waits for a template sync it shows what the tenant cluster runs, not what spec.storage asks for.",
-							Type:        []string{"array"},
-							Items: &spec.SchemaOrArray{
-								Schema: &spec.Schema{
-									SchemaProps: spec.SchemaProps{
-										Default: map[string]interface{}{},
-										Ref:     ref(apisstoragev1.VirtualClusterInstanceStorageStatus{}.OpenAPIModelName()),
-									},
-								},
-							},
-						},
-					},
 				},
 			},
 		},
 		Dependencies: []string{
-			storagev1.Condition{}.OpenAPIModelName(), apisstoragev1.ObjectsStatus{}.OpenAPIModelName(), apisstoragev1.VirtualClusterInstanceStorageStatus{}.OpenAPIModelName(), apisstoragev1.VirtualClusterTemplateDefinition{}.OpenAPIModelName()},
-	}
-}
-
-func schema_pkg_apis_storage_v1_VirtualClusterInstanceStorage(ref common.ReferenceCallback) common.OpenAPIDefinition {
-	return common.OpenAPIDefinition{
-		Schema: spec.Schema{
-			SchemaProps: spec.SchemaProps{
-				Description: "VirtualClusterInstanceStorage attaches one StorageVolume to a tenant cluster.",
-				Type:        []string{"object"},
-				Properties: map[string]spec.Schema{
-					"storageRef": {
-						SchemaProps: spec.SchemaProps{
-							Description: "StorageRef names a StorageVolume assigned to the instance's tenant. It has to be Available when it is attached.",
-							Default:     "",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"default": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Default marks the storage's StorageClass as the tenant cluster's default. At most one entry may set it; when none does, the first attached storage is the default.",
-							Type:        []string{"boolean"},
-							Format:      "",
-						},
-					},
-				},
-				Required: []string{"storageRef"},
-			},
-		},
-	}
-}
-
-func schema_pkg_apis_storage_v1_VirtualClusterInstanceStorageStatus(ref common.ReferenceCallback) common.OpenAPIDefinition {
-	return common.OpenAPIDefinition{
-		Schema: spec.Schema{
-			SchemaProps: spec.SchemaProps{
-				Description: "VirtualClusterInstanceStorageStatus is one storage the rendered values attach.",
-				Type:        []string{"object"},
-				Properties: map[string]spec.Schema{
-					"storageRef": {
-						SchemaProps: spec.SchemaProps{
-							Description: "StorageRef names the StorageVolume.",
-							Default:     "",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"storageClass": {
-						SchemaProps: spec.SchemaProps{
-							Description: "StorageClass is the StorageClass that binds claims in the tenant cluster to the storage's PersistentVolume, of the same name.",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"default": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Default is true for the tenant cluster's default StorageClass.",
-							Type:        []string{"boolean"},
-							Format:      "",
-						},
-					},
-				},
-				Required: []string{"storageRef"},
-			},
-		},
+			storagev1.Condition{}.OpenAPIModelName(), apisstoragev1.ObjectsStatus{}.OpenAPIModelName(), apisstoragev1.VirtualClusterTemplateDefinition{}.OpenAPIModelName()},
 	}
 }
 
@@ -46118,7 +47114,7 @@ func schema_pkg_apis_storage_v1_WekaStorageMount(ref common.ReferenceCallback) c
 				Properties: map[string]spec.Schema{
 					"options": {
 						SchemaProps: spec.SchemaProps{
-							Description: "Options are filesystem-level options passed to mount -o, for example sync_on_close. Client-mode options such as net or num_cores belong to the machine and are set on its node type.",
+							Description: "Options are passed to mount -o, for example net=udp for a host without DPDK. They only matter for the first mount on a host without a running client container.",
 							Type:        []string{"array"},
 							Items: &spec.SchemaOrArray{
 								Schema: &spec.Schema{
@@ -46159,19 +47155,13 @@ func schema_pkg_apis_storage_v1_WekaStorageSection(ref common.ReferenceCallback)
 					},
 					"csiUser": {
 						SchemaProps: spec.SchemaProps{
-							Description: "CSIUser is the body of POST /users for the identity tenant cluster node plugins log in with, minus username and password. The role defaults to CSI, the least csi-wekafs accepts.",
+							Description: "CSIUser is the body of POST /users for the identity tenant clusters mount with, minus username and password. The role defaults to CSI.",
 							Ref:         ref(runtime.RawExtension{}.OpenAPIModelName()),
 						},
 					},
 					"mountUser": {
 						SchemaProps: spec.SchemaProps{
-							Description: "MountUser is the body of POST /users for the mount-only identity machines mount with, minus username and password. The role defaults to Regular, which a mount token needs.",
-							Ref:         ref(runtime.RawExtension{}.OpenAPIModelName()),
-						},
-					},
-					"s3User": {
-						SchemaProps: spec.SchemaProps{
-							Description: "S3User is the body of POST /users for the tenant's S3 identity, minus username, password, role (always S3) and org. posix_uid and posix_gid, the owner of objects written over S3, default to 0.",
+							Description: "MountUser is the body of POST /users for the identity machines mount with, minus username and password. The role defaults to Regular, which a mount token needs.",
 							Ref:         ref(runtime.RawExtension{}.OpenAPIModelName()),
 						},
 					},
@@ -46210,19 +47200,13 @@ func schema_pkg_apis_storage_v1_WekaTenantSection(ref common.ReferenceCallback) 
 					},
 					"csiUser": {
 						SchemaProps: spec.SchemaProps{
-							Description: "CSIUser is the body of POST /users for the identity tenant cluster node plugins log in with, minus username and password. The role defaults to CSI, the least csi-wekafs accepts.",
+							Description: "CSIUser is the body of POST /users for the identity tenant clusters mount with, minus username and password. The role defaults to CSI.",
 							Ref:         ref(runtime.RawExtension{}.OpenAPIModelName()),
 						},
 					},
 					"mountUser": {
 						SchemaProps: spec.SchemaProps{
-							Description: "MountUser is the body of POST /users for the mount-only identity machines mount with, minus username and password. The role defaults to Regular, which a mount token needs.",
-							Ref:         ref(runtime.RawExtension{}.OpenAPIModelName()),
-						},
-					},
-					"s3User": {
-						SchemaProps: spec.SchemaProps{
-							Description: "S3User is the body of POST /users for the tenant's S3 identity, minus username, password, role (always S3) and org. posix_uid and posix_gid, the owner of objects written over S3, default to 0.",
+							Description: "MountUser is the body of POST /users for the identity machines mount with, minus username and password. The role defaults to Regular, which a mount token needs.",
 							Ref:         ref(runtime.RawExtension{}.OpenAPIModelName()),
 						},
 					},

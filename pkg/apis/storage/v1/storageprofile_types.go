@@ -83,11 +83,6 @@ type StorageProfileSpec struct {
 	// +optional
 	DisplayName string `json:"displayName,omitempty"`
 
-	// Description is a short summary of the tier, shown next to the display name in the admin
-	// profile picker and list. Keep the storage vendor out of it, as out of the profile name.
-	// +optional
-	Description string `json:"description,omitempty"`
-
 	// Owner holds the owner of this object
 	// +optional
 	Owner *UserOrTeam `json:"owner,omitempty"`
@@ -101,109 +96,13 @@ type StorageProfileSpec struct {
 	ConnectorRef string `json:"connectorRef"`
 
 	// Protocols is how tenants reach the tier's data: posix (the vendor's native file client), nfs,
-	// smb, s3 or block, one or several for the same data. WEKA serves posix and s3, VAST nfs. s3 is
-	// only valid next to the file protocol: it adds a bucket over the storage's volume.
+	// smb, s3 or block, one or several for the same data. WEKA serves posix today.
 	// +optional
 	Protocols []StorageProtocol `json:"protocols,omitempty"`
 
 	// Weka is the WEKA object model for this tier. Set when the connector's provider is weka.
 	// +optional
 	Weka *WekaStorageSection `json:"weka,omitempty"`
-
-	// Vast is the VAST object model for this tier. Set when the connector's provider is vast.
-	// +optional
-	Vast *VastStorageSection `json:"vast,omitempty"`
-}
-
-// VastStorageSection is VAST's object model as YAML, as a profile carries it. Each document is sent
-// as the JSON body of the matching VMS create call after the platform fills the keys it owns
-// (names, tenant_id, policy_id, the path, the quota size and credentials); unknown keys pass through
-// untouched. Capacity keys may use the template "{{ .storage.size }}" and may be written as
-// Kubernetes quantities. At creation the tenant-level documents are copied into the tenant's
-// StorageAccount and the volume-level ones into the StorageVolume.
-type VastStorageSection struct {
-	VastTenantSection `json:",inline"`
-	VastVolumeSection `json:",inline"`
-}
-
-// VastTenantSection holds the documents that describe the vendor tenant, its VIP pool and its
-// identities, one set per platform tenant on a VAST cluster.
-type VastTenantSection struct {
-	// Tenant is the body of POST /tenants/ minus name.
-	// +optional
-	Tenant *runtime.RawExtension `json:"tenant,omitempty"`
-
-	// VIPPool is the body of POST /vippools/ for the tenant's pool minus name, tenant_id,
-	// ip_ranges and subnet_cidr, which the platform allocates from the connector's VIP range. The
-	// role defaults to PROTOCOLS.
-	// +optional
-	VIPPool *runtime.RawExtension `json:"vipPool,omitempty"`
-
-	// CSIRole is the body of POST /roles/ for the tenant-scoped role the platform and the CSI
-	// managers hold, minus name and tenant_id. permissions_list defaults to view_logical,
-	// create_logical, edit_logical and delete_logical.
-	// +optional
-	CSIRole *runtime.RawExtension `json:"csiRole,omitempty"`
-
-	// CSIManager is the body of POST /managers/ for the identity tenant clusters use, minus
-	// username, password, roles and tenant_id. user_type defaults to TENANT_ADMIN, without which
-	// VAST refuses a manager in a tenant.
-	// +optional
-	CSIManager *runtime.RawExtension `json:"csiManager,omitempty"`
-}
-
-// VastVolumeSection holds the documents that describe one volume, a view with its policy and
-// quota on VAST.
-type VastVolumeSection struct {
-	// ViewPolicy is the body of POST /viewpolicies/ minus name and tenant_id. flavor defaults to
-	// NFS. Listing hosts in nfs_no_squash without setting nfs_root_squash clears nfs_root_squash,
-	// whose default of all hosts would otherwise win.
-	// +optional
-	ViewPolicy *runtime.RawExtension `json:"viewPolicy,omitempty"`
-
-	// View is the body of POST /views/ minus name, path, policy_id and tenant_id. The path is
-	// /<tenant>/<storage>; protocols defaults to NFS and create_dir to true.
-	// +optional
-	View *runtime.RawExtension `json:"view,omitempty"`
-
-	// Quota is the body of POST /quotas/ minus name, path and tenant_id. hard_limit defaults to
-	// the storage size.
-	// +optional
-	Quota *runtime.RawExtension `json:"quota,omitempty"`
-
-	// Mount configures the NFS mounts machines perform at boot. Platform side, not sent to VAST.
-	// +optional
-	Mount *VastStorageMount `json:"mount,omitempty"`
-}
-
-// TenantPart is a copy of the tenant-level documents, nil for a nil section.
-func (s *VastStorageSection) TenantPart() *VastTenantSection {
-	if s == nil {
-		return nil
-	}
-	return &VastTenantSection{Tenant: copyRaw(s.Tenant), VIPPool: copyRaw(s.VIPPool), CSIRole: copyRaw(s.CSIRole), CSIManager: copyRaw(s.CSIManager)}
-}
-
-// VolumePart is a copy of the volume-level documents, nil for a nil section.
-func (s *VastStorageSection) VolumePart() *VastVolumeSection {
-	if s == nil {
-		return nil
-	}
-	out := &VastVolumeSection{ViewPolicy: copyRaw(s.ViewPolicy), View: copyRaw(s.View), Quota: copyRaw(s.Quota)}
-	if s.Mount != nil {
-		mount := *s.Mount
-		mount.Options = append([]string(nil), s.Mount.Options...)
-		out.Mount = &mount
-	}
-	return out
-}
-
-// VastStorageMount configures the NFS mounts of machines.
-type VastStorageMount struct {
-	// Options replace the default NFS mount options vers=3,proto=tcp, for example vers=4.1 or
-	// proto=rdma,port=20049.
-	// +optional
-	Options []string `json:"options,omitempty"`
 }
 
 // WekaStorageSection is WEKA's object model as YAML, as a profile carries it. Each document is sent
@@ -225,21 +124,15 @@ type WekaTenantSection struct {
 	// +optional
 	Tenant *runtime.RawExtension `json:"tenant,omitempty"`
 
-	// CSIUser is the body of POST /users for the identity tenant cluster node plugins log in with,
-	// minus username and password. The role defaults to CSI, the least csi-wekafs accepts.
+	// CSIUser is the body of POST /users for the identity tenant clusters mount with, minus
+	// username and password. The role defaults to CSI.
 	// +optional
 	CSIUser *runtime.RawExtension `json:"csiUser,omitempty"`
 
-	// MountUser is the body of POST /users for the mount-only identity machines mount with, minus
-	// username and password. The role defaults to Regular, which a mount token needs.
+	// MountUser is the body of POST /users for the identity machines mount with, minus username and
+	// password. The role defaults to Regular, which a mount token needs.
 	// +optional
 	MountUser *runtime.RawExtension `json:"mountUser,omitempty"`
-
-	// S3User is the body of POST /users for the tenant's S3 identity, minus username, password,
-	// role (always S3) and org. posix_uid and posix_gid, the owner of objects written over S3,
-	// default to 0.
-	// +optional
-	S3User *runtime.RawExtension `json:"s3User,omitempty"`
 }
 
 // WekaVolumeSection holds the documents that describe one volume, a filesystem on WEKA.
@@ -258,7 +151,7 @@ func (s *WekaStorageSection) TenantPart() *WekaTenantSection {
 	if s == nil {
 		return nil
 	}
-	return &WekaTenantSection{Tenant: copyRaw(s.Tenant), CSIUser: copyRaw(s.CSIUser), MountUser: copyRaw(s.MountUser), S3User: copyRaw(s.S3User)}
+	return &WekaTenantSection{Tenant: copyRaw(s.Tenant), CSIUser: copyRaw(s.CSIUser), MountUser: copyRaw(s.MountUser)}
 }
 
 // VolumePart is a copy of the volume-level documents, nil for a nil section.
@@ -284,8 +177,8 @@ func copyRaw(in *runtime.RawExtension) *runtime.RawExtension {
 
 // WekaStorageMount configures the mounts of machines.
 type WekaStorageMount struct {
-	// Options are filesystem-level options passed to mount -o, for example sync_on_close. Client-mode
-	// options such as net or num_cores belong to the machine and are set on its node type.
+	// Options are passed to mount -o, for example net=udp for a host without DPDK. They only matter
+	// for the first mount on a host without a running client container.
 	// +optional
 	Options []string `json:"options,omitempty"`
 
