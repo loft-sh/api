@@ -1,18 +1,11 @@
 package v1
 
 import (
-	agentstoragev1 "github.com/loft-sh/agentapi/v4/pkg/apis/loft/storage/v1"
+	"strings"
+
+	agentstoragev1 "github.com/loft-sh/agentapi/v5/pkg/apis/loft/storage/v1"
 	corev1 "k8s.io/api/core/v1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
-)
-
-const (
-	ArgoIntegrationSynced agentstoragev1.ConditionType = "ArgoIntegrationSynced"
-
-	ArgoLastAppliedHashAnnotation                = "loft.sh/argo-integration-last-applied-hash"
-	ArgoPreviousClusterAnnotation                = "loft.sh/argo-integration-previous-cluster"
-	ArgoPreviousNamespaceAnnotation              = "loft.sh/argo-integration-previous-namespace"
-	ArgoPreviousVirtualClusterInstanceAnnotation = "loft.sh/argo-integration-previous-virtualclusterinstance"
 )
 
 const (
@@ -27,9 +20,7 @@ const (
 )
 
 const (
-	RancherIntegrationSynced agentstoragev1.ConditionType = "RancherIntegrationSynced"
-
-	RancherLastAppliedHashAnnotation = "loft.sh/rancher-integration-last-applied-hash"
+	ConditionTypeNamespaceTemplateSynced agentstoragev1.ConditionType = "NamespaceTemplateSynced"
 )
 
 // +genclient
@@ -93,7 +84,6 @@ type ProjectSpec struct {
 	AllowedClusters []AllowedCluster `json:"allowedClusters,omitempty"`
 
 	// AllowedRunners are target runners that are allowed to target with
-	// DevPod environments.
 	// +optional
 	AllowedRunners []AllowedRunner `json:"allowedRunners,omitempty"`
 
@@ -101,6 +91,37 @@ type ProjectSpec struct {
 	// project.
 	// +optional
 	AllowedTemplates []AllowedTemplate `json:"allowedTemplates,omitempty"`
+
+	// AllowedNodeTypes restricts which NodeTypes can be referenced by
+	// NodeClaims in this project. An entry can be an exact name
+	// ("aws.large") or a provider wildcard ("aws.*"). If unset (nil),
+	// all NodeTypes are allowed; an empty list disallows all NodeTypes.
+	// +optional
+	AllowedNodeTypes []AllowedNodeType `json:"allowedNodeTypes" jsonschema:"nullable"`
+
+	// AllowedNodeProfiles restricts which NodeProfiles can be referenced
+	// by NodeClaims and joinscript requests in this project. An entry can
+	// be an exact name ("platform.gpu-training") or an owner wildcard
+	// ("platform.*"). If unset (nil), all NodeProfiles are allowed; an
+	// empty list disallows all NodeProfiles.
+	// +optional
+	AllowedNodeProfiles []AllowedNodeProfile `json:"allowedNodeProfiles" jsonschema:"nullable"`
+
+	// AllowedNetworkEnvironments restricts which NetworkEnvironments can be
+	// referenced by NodeClaims in this project. NetworkEnvironments are cluster
+	// scoped and shared across projects, so this is how a project is scoped to a
+	// subset of them. Each entry is an exact NetworkEnvironment name ("shared-vpc").
+	// If unset (nil), all NetworkEnvironments are allowed; an empty list disallows
+	// all NetworkEnvironments.
+	// +optional
+	AllowedNetworkEnvironments []AllowedNetworkEnvironment `json:"allowedNetworkEnvironments" jsonschema:"nullable"`
+
+	// DefaultNodeProfile is the default NodeProfile applied to nodes in this
+	// project when none is selected explicitly. It is overridden by the
+	// vCluster-level privateNodes.defaultProfile and by per-node/per-pool
+	// selection, and is validated against allowedNodeProfiles.
+	// +optional
+	DefaultNodeProfile string `json:"defaultNodeProfile,omitempty"`
 
 	// RequireTemplate configures if a template is required for instance creation.
 	// +optional
@@ -118,25 +139,19 @@ type ProjectSpec struct {
 	// +optional
 	Access []Access `json:"access,omitempty"`
 
-	// NamespacePattern specifies template patterns to use for creating each space or virtual cluster's namespace
+	// NamespaceTemplate defines metadata that should be applied to the project's namespace on creation.
+	// This is useful for environments where admission controllers (e.g., Kyverno)
+	// require specific labels or annotations on namespaces.
+	// +optional
+	NamespaceTemplate *ProjectNamespaceTemplate `json:"namespaceTemplate,omitempty"`
+
+	// NamespacePattern specifies template patterns to use for creating each space or tenant cluster's namespace
 	// +optional
 	NamespacePattern *NamespacePattern `json:"namespacePattern,omitempty"`
-
-	// ArgoIntegration holds information about ArgoCD Integration
-	// +optional
-	ArgoIntegration *ArgoIntegrationSpec `json:"argoCD,omitempty"`
 
 	// VaultIntegration holds information about Vault Integration
 	// +optional
 	VaultIntegration *VaultIntegrationSpec `json:"vault,omitempty"`
-
-	// RancherIntegration holds information about Rancher Integration
-	// +optional
-	RancherIntegration *RancherIntegrationSpec `json:"rancher,omitempty"`
-
-	// DevPod holds DevPod specific configuration for project
-	// +optional
-	DevPod *DevPodProjectSpec `json:"devPod,omitempty"`
 }
 
 type RequireTemplate struct {
@@ -153,12 +168,19 @@ type RequirePreset struct {
 	Enabled bool `json:"disabled,omitempty"`
 }
 
+// ProjectNamespaceTemplate defines metadata to apply to the auto-created project namespace.
+type ProjectNamespaceTemplate struct {
+	// The namespace metadata
+	// +optional
+	TemplateMetadata `json:"metadata,omitempty"`
+}
+
 type NamespacePattern struct {
 	// Space holds the namespace pattern to use for space instances
 	// +optional
 	Space string `json:"space,omitempty"`
 
-	// VirtualCluster holds the namespace pattern to use for virtual cluster instances
+	// VirtualCluster holds the namespace pattern to use for tenant cluster instances
 	// +optional
 	VirtualCluster string `json:"virtualCluster,omitempty"`
 }
@@ -173,14 +195,13 @@ type Quotas struct {
 }
 
 var (
-	SpaceTemplateKind           = "SpaceTemplate"
-	VirtualClusterTemplateKind  = "VirtualClusterTemplate"
-	DevPodWorkspaceTemplateKind = "DevPodWorkspaceTemplate"
-	DevPodWorkspacePresetKind   = "DevPodWorkspacePreset"
+	SpaceTemplateKind          = "SpaceTemplate"
+	VirtualClusterTemplateKind = "VirtualClusterTemplate"
+	StackTemplateKind          = "StackTemplate"
 )
 
 type AllowedTemplate struct {
-	// Kind of the template that is allowed. Currently only supports DevPodWorkspaceTemplate, VirtualClusterTemplate & SpaceTemplate
+	// Kind of the template that is allowed. Supports DevPodWorkspaceTemplate, VirtualClusterTemplate, SpaceTemplate and StackTemplate.
 	// +optional
 	Kind string `json:"kind,omitempty"`
 
@@ -211,7 +232,7 @@ type Member struct {
 	Name string `json:"name,omitempty"`
 
 	// ClusterRole is the assigned role for the above member
-	ClusterRole string `json:"clusterRole,omitempty"`
+	ClusterRole string `json:"clusterRole"`
 }
 
 type AllowedRunner struct {
@@ -224,6 +245,52 @@ type AllowedCluster struct {
 	// Name is the name of the cluster that is allowed to create an environment in.
 	// +optional
 	Name string `json:"name,omitempty"`
+}
+
+type AllowedNodeType struct {
+	// Name of the NodeType, or "<provider>.*" to allow all NodeTypes
+	// of the given provider.
+	// +optional
+	Name string `json:"name,omitempty"`
+}
+
+// AllowedNodeProfile restricts which NodeProfile a project's consumers may
+// reference. The Name field is either an exact profile name or an
+// "<owner>.*" wildcard, matching the same semantics as AllowedNodeType.
+type AllowedNodeProfile struct {
+	// Name of the NodeProfile, or "<owner>.*" to allow all NodeProfiles
+	// with the given owner prefix.
+	// +optional
+	Name string `json:"name,omitempty"`
+}
+
+// AllowedNetworkEnvironment restricts which NetworkEnvironment a project's
+// consumers may reference.
+//
+// Unlike AllowedNodeType and AllowedNodeProfile, there is no "<provider>.*" wildcard
+// here: those resources are named "<provider>.<name>", whereas NetworkEnvironment names
+// are rejected at creation if they contain a dot, so no such prefix could ever match.
+type AllowedNetworkEnvironment struct {
+	// Name is the exact name of the NetworkEnvironment.
+	// +optional
+	Name string `json:"name,omitempty"`
+}
+
+// IsNodeProfileAllowed reports whether name is permitted by AllowedNodeProfiles. A nil
+// list means all NodeProfiles are allowed; an empty list means none are.
+func (s ProjectSpec) IsNodeProfileAllowed(name string) bool {
+	if s.AllowedNodeProfiles == nil {
+		return true
+	}
+	for _, a := range s.AllowedNodeProfiles {
+		if a.Name == name {
+			return true
+		}
+		if strings.HasSuffix(a.Name, ".*") && strings.HasPrefix(name, strings.TrimSuffix(a.Name, "*")) {
+			return true
+		}
+	}
+	return false
 }
 
 type ProjectStatus struct {
@@ -312,117 +379,6 @@ type QuotaStatusProjectCluster struct {
 	Used map[string]string `json:"used,omitempty"`
 }
 
-type ArgoIntegrationSpec struct {
-	// Enabled indicates if the ArgoCD Integration is enabled for the project -- this knob only
-	// enables the syncing of virtualclusters, but does not enable SSO integration or project
-	// creation (see subsequent spec sections!).
-	// +optional
-	Enabled bool `json:"enabled,omitempty"`
-
-	// Cluster defines the name of the cluster that ArgoCD is deployed into -- if not provided this
-	// will default to 'loft-cluster'.
-	// +optional
-	Cluster string `json:"cluster,omitempty"`
-
-	// VirtualClusterInstance defines the name of *virtual cluster* (instance) that ArgoCD is
-	// deployed into. If provided, Cluster will be ignored and Loft will assume that ArgoCD is
-	// running in the specified virtual cluster.
-	// +optional
-	VirtualClusterInstance string `json:"virtualClusterInstance,omitempty"`
-
-	// Namespace defines the namespace in which ArgoCD is running in the cluster.
-	// +optional
-	Namespace string `json:"namespace,omitempty"`
-
-	// SSO defines single-sign-on related values for the ArgoCD Integration. Enabling SSO will allow
-	// users to authenticate to ArgoCD via Loft.
-	// +optional
-	SSO *ArgoSSOSpec `json:"sso,omitempty"`
-
-	// Project defines project related values for the ArgoCD Integration. Enabling Project
-	// integration will cause Loft to generate and manage an ArgoCD appProject that corresponds to
-	// the Loft Project.
-	// +optional
-	Project *ArgoProjectSpec `json:"project,omitempty"`
-}
-
-type ArgoSSOSpec struct {
-	// Enabled indicates if the ArgoCD SSO Integration is enabled for this project. Enabling this
-	// will cause Loft to configure SSO authentication via Loft in ArgoCD. If Projects are *not*
-	// enabled, all users associated with this Project will be assigned either the 'read-only'
-	// (default) role, *or* the roles set under the AssignedRoles field.
-	// +optional
-	Enabled bool `json:"enabled,omitempty"`
-	// Host defines the ArgoCD host address that will be used for OIDC authentication between loft
-	// and ArgoCD. If not specified OIDC integration will be skipped, but vclusters/spaces will
-	// still be synced to ArgoCD.
-	// +optional
-	Host string `json:"host,omitempty"`
-	// AssignedRoles is a list of roles to assign for users who authenticate via Loft -- by default
-	// this will be the `read-only` role. If any roles are provided this will override the default
-	// setting.
-	// +optional
-	AssignedRoles []string `json:"assignedRoles,omitempty"`
-}
-
-type ArgoProjectSpec struct {
-	// Enabled indicates if the ArgoCD Project Integration is enabled for this project. Enabling
-	// this will cause Loft to create an appProject in ArgoCD that is associated with the Loft
-	// Project. When Project integration is enabled Loft will override the default assigned role
-	// set in the SSO integration spec.
-	// +optional
-	Enabled bool `json:"enabled,omitempty"`
-	// Metadata defines additional metadata to attach to the loft created project in ArgoCD.
-	// +optional
-	Metadata ArgoProjectSpecMetadata `json:"metadata,omitempty"`
-	// SourceRepos is a list of source repositories to attach/allow on the project, if not specified
-	// will be "*" indicating all source repositories.
-	// +optional
-	SourceRepos []string `json:"sourceRepos,omitempty"`
-	// Roles is a list of roles that should be attached to the ArgoCD project. If roles are provided
-	// no loft default roles will be set. If no roles are provided *and* SSO is enabled, loft will
-	// configure sane default values.
-	// +optional
-	Roles []ArgoProjectRole `json:"roles,omitempty"`
-}
-
-type ArgoProjectSpecMetadata struct {
-	// ExtraAnnotations are optional annotations that can be attached to the project in ArgoCD.
-	// +optional
-	ExtraAnnotations map[string]string `json:"extraAnnotations,omitempty"`
-	// ExtraLabels are optional labels that can be attached to the project in ArgoCD.
-	// +optional
-	ExtraLabels map[string]string `json:"extraLabels,omitempty"`
-	// Description to add to the ArgoCD project.
-	// +optional
-	Description string `json:"description,omitempty"`
-}
-
-type ArgoProjectRole struct {
-	// Name of the ArgoCD role to attach to the project.
-	Name string `json:"name,omitempty"`
-	// Description to add to the ArgoCD project.
-	// +optional
-	Description string `json:"description,omitempty"`
-	// Rules ist a list of policy rules to attach to the role.
-	Rules []ArgoProjectPolicyRule `json:"rules,omitempty"`
-	// Groups is a list of OIDC group names to bind to the role.
-	Groups []string `json:"groups,omitempty"`
-}
-
-type ArgoProjectPolicyRule struct {
-	// Action is one of "*", "get", "create", "update", "delete", "sync", or "override".
-	// +optional
-	Action string `json:"action,omitempty"`
-	// Application is the ArgoCD project/repository to apply the rule to.
-	// +optional
-	Application string `json:"application,omitempty"`
-	// Allow applies the "allow" permission to the rule, if allow is not set, the permission will
-	// always be set to "deny".
-	// +optional
-	Allow bool `json:"permission,omitempty"`
-}
-
 type VaultIntegrationSpec struct {
 	// Enabled indicates if the Vault Integration is enabled for the project -- this knob only
 	// enables the syncing of secrets to or from Vault, but does not setup Kubernetes authentication
@@ -465,88 +421,6 @@ type VaultAuthSpec struct {
 	// Secret data should contain the `token` key.
 	// +optional
 	TokenSecretRef *corev1.SecretKeySelector `json:"tokenSecretRef,omitempty"`
-}
-
-type RancherIntegrationSpec struct {
-	// Enabled indicates if the Rancher Project Integration is enabled for this project.
-	// +optional
-	Enabled bool `json:"enabled,omitempty"`
-
-	// ProjectRef defines references to rancher project, required for syncMembers and syncVirtualClusters.syncMembers
-	// +optional
-	ProjectRef RancherProjectRef `json:"projectRef,omitempty"`
-
-	// ImportVirtualClusters defines settings to import virtual clusters to Rancher on creation
-	// +optional
-	ImportVirtualClusters ImportVirtualClustersSpec `json:"importVirtualClusters,omitempty"`
-
-	// SyncMembers defines settings to sync Rancher project members to the loft project
-	// +optional
-	SyncMembers SyncMembersSpec `json:"syncMembers,omitempty"`
-}
-
-type RancherProjectRef struct {
-	// Cluster defines the Rancher cluster ID
-	// Needs to be the same id within Loft
-	Cluster string `json:"cluster,omitempty"`
-
-	// Project defines the Rancher project ID
-	Project string `json:"project,omitempty"`
-}
-
-type ImportVirtualClustersSpec struct {
-	// RoleMapping indicates an optional role mapping from a rancher project role to a rancher cluster role. Map to an empty role to exclude users and groups with that role from
-	// being synced.
-	// +optional
-	RoleMapping map[string]string `json:"roleMapping,omitempty"`
-}
-
-type SyncMembersSpec struct {
-	// Enabled indicates whether to sync rancher project members to the loft project.
-	Enabled bool `json:"enabled,omitempty"`
-
-	// RoleMapping indicates an optional role mapping from a rancher role to a loft role. Map to an empty role to exclude users and groups with that role from
-	// being synced.
-	// +optional
-	RoleMapping map[string]string `json:"roleMapping,omitempty"`
-}
-
-type DevPodProjectSpec struct {
-	// Git defines additional git related settings like credentials
-	// +optional
-	Git *GitProjectSpec `json:"git,omitempty"`
-
-	// SSH defines additional ssh related settings like private keys, to be
-	// specified as base64 encoded strings.
-	// +optional
-	SSH *SSHProjectSpec `json:"ssh,omitempty"`
-
-	// FallbackImage defines an image all workspace will fall back to if no devcontainer.json could be detected
-	// +optional
-	FallbackImage string `json:"fallbackImage,omitempty"`
-}
-
-type GitProjectSpec struct {
-	// Token defines the token to use for authentication.
-	// +optional
-	Token string `json:"token,omitempty"`
-
-	// TokenSecretRef defines the project secret to use for token authentication.
-	// Will be used if `Token` is not provided.
-	// +optional
-	TokenProjectSecretRef *corev1.SecretKeySelector `json:"tokenSecretRef,omitempty"`
-}
-
-type SSHProjectSpec struct {
-	// Token defines the private ssh key to use for authentication,
-	// this is a base64 encoded string.
-	// +optional
-	Token string `json:"token,omitempty"`
-
-	// TokenSecretRef defines the project secret to use as private ssh key for authentication.
-	// Will be used if `Token` is not provided.
-	// +optional
-	TokenProjectSecretRef *corev1.SecretKeySelector `json:"tokenSecretRef,omitempty"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object

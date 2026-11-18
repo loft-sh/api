@@ -24,7 +24,7 @@ type ClusterAgentConfigCommon struct {
 	// +optional
 	Audit *AgentAuditConfig `json:"audit,omitempty"`
 
-	// DefaultImageRegistry defines if we should prefix the virtual cluster image
+	// DefaultImageRegistry is the image registry for control plane internal images.
 	// +optional
 	DefaultImageRegistry string `json:"defaultImageRegistry,omitempty"`
 
@@ -47,6 +47,14 @@ type ClusterAgentConfigCommon struct {
 
 	// AnalyticsSpec holds info needed for the agent to send analytics data to the analytics backend.
 	AnalyticsSpec AgentAnalyticsSpec `json:"analyticsSpec"`
+
+	// CostControl is always disabled. Cost Control was removed, but agents from v4 treat a
+	// missing setting as enabled, so the platform sends enabled: false to make them uninstall
+	// their Cost Control releases.
+	CostControl *AgentCostControlConfig `json:"costControl,omitempty"`
+
+	// AuthenticateVersionEndpoint will force authentication for the '/version' endpoint. Will only work with vCluster v0.27 & later
+	AuthenticateVersionEndpoint bool `json:"authenticateVersionEndpoint,omitempty"`
 }
 
 type AgentAuditConfig struct {
@@ -99,4 +107,9 @@ type AgentAuditConfig struct {
 // AgentAnalyticsSpec holds info the agent can use to send analytics data to the analytics backend.
 type AgentAnalyticsSpec struct {
 	AnalyticsEndpoint string `json:"analyticsEndpoint,omitempty"`
+}
+
+type AgentCostControlConfig struct {
+	// Enabled is always false.
+	Enabled *bool `json:"enabled,omitempty"`
 }
