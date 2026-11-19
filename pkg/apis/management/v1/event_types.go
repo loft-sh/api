@@ -1,7 +1,7 @@
 package v1
 
 import (
-	auditv1 "github.com/loft-sh/api/v4/pkg/apis/audit/v1"
+	auditv1 "github.com/loft-sh/api/v5/pkg/apis/audit/v1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 )
 
@@ -27,4 +27,7 @@ type EventSpec struct {
 // EventStatus holds the status, which is the parsed raw config
 type EventStatus struct {
 	auditv1.Event `json:",inline"`
+
+	// Tenant is the tenant recorded for the request when it was stored. Empty for operator requests and events stored before tenant recording.
+	Tenant string `json:"tenant,omitempty"`
 }
