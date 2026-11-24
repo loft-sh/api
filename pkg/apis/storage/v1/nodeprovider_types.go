@@ -216,9 +216,14 @@ type NodeProviderClusterAPI struct {
 // Tenant workloads use an org named after their Tenant; the platform owns the
 // tenant-org namespace of this NICo instance.
 type NodeProviderNICo struct {
-	// Endpoint is the base URL (scheme + host + optional port) of the NICo REST
-	// API. The /v2/org/{org}/nico path is appended by the client.
-	Endpoint string `json:"endpoint"`
+	// Deprecated: use endpoints.api.url. Read only while endpoints is unset.
+	// +optional
+	Endpoint string `json:"endpoint,omitempty"`
+
+	// Endpoints are the NICo services this provider talks to. Set this or the deprecated endpoint,
+	// not both.
+	// +optional
+	Endpoints *NICoEndpoints `json:"endpoints,omitempty"`
 
 	// Org is the NICo organization used for provider-scoped API calls (the
 	// /v2/org/{org}/nico path) and stamped as the provider token's organization
@@ -246,8 +251,7 @@ type NodeProviderNICo struct {
 	// +optional
 	Identity *NICoIdentity `json:"identity,omitempty"`
 
-	// InsecureSkipTLSVerify disables TLS certificate verification against the
-	// NICo endpoint. Intended for development and test only.
+	// Deprecated: use endpoints.api.insecureSkipTLSVerify. Read only while endpoints is unset.
 	// +optional
 	InsecureSkipTLSVerify bool `json:"insecureSkipTLSVerify,omitempty"`
 
@@ -256,6 +260,42 @@ type NodeProviderNICo struct {
 	// +optional
 	// +kubebuilder:validation:Enum=fnn;flat
 	NetworkMode NICoNetworkMode `json:"networkMode,omitempty"`
+}
+
+// NICoEndpoints are the NICo services a provider talks to, each with its own TLS settings.
+type NICoEndpoints struct {
+	// API is the NICo REST API, which every provider needs. The /v2/org/{org}/nico path is
+	// appended by the client, and its URL is also the audience of the tokens the platform signs
+	// for it, which NICo matches exactly.
+	API ServiceEndpoint `json:"api"`
+
+	// BMCProxy is the nico-bmc-proxy this provider's machines are read through. It authenticates
+	// the platform by client certificate and forwards Redfish reads to a machine's BMC, so the
+	// platform never holds a BMC credential itself. Without it, a machine of this provider whose
+	// node type selects a host validation profile fails that profile as Unsupported rather than
+	// silently passing it.
+	// +optional
+	BMCProxy *ServiceEndpoint `json:"bmcProxy,omitempty"`
+}
+
+// ServiceEndpoint is how the platform reaches one HTTP service: where it lives, and how its
+// server certificate is verified. Nothing about it is specific to a provider.
+// +kubebuilder:validation:XValidation:rule="!(has(self.caBundle) && has(self.insecureSkipTLSVerify) && self.insecureSkipTLSVerify)",message="caBundle and insecureSkipTLSVerify cannot both be set: a bundle names the CA to trust and the opt-out trusts anything"
+type ServiceEndpoint struct {
+	// URL is the base URL of the service, carrying a scheme, a host and an optional port.
+	URL string `json:"url"`
+
+	// CABundle is the PEM encoded CA bundle that issued the service's server certificate. Empty
+	// means the system roots are used. Each endpoint carries its own, because the services one
+	// provider talks to are not necessarily issued by the same CA. Refused together with
+	// insecureSkipTLSVerify, which already trusts anything.
+	// +optional
+	CABundle []byte `json:"caBundle,omitempty"`
+
+	// InsecureSkipTLSVerify disables verification of this service's server certificate. Intended
+	// for development and test only. Refused together with caBundle, which it would make useless.
+	// +optional
+	InsecureSkipTLSVerify bool `json:"insecureSkipTLSVerify,omitempty"`
 }
 
 // NICoNetworkMode selects the NICo network virtualization a site provisions.
@@ -746,6 +786,11 @@ type MachineNodeTypeSpec struct {
 	// Machines selects the provider's Machines this NodeType draws from.
 	// +optional
 	Machines NodeTypeMachines `json:"machines,omitempty"`
+
+	// HostValidationProfiles selects the HostValidationProfiles a Machine has to match before this
+	// NodeType picks it.
+	// +optional
+	HostValidationProfiles *NodeTypeHostValidationProfiles `json:"hostValidationProfiles,omitempty"`
 }
 
 type Metal3NodeTypeSpec struct {
@@ -761,6 +806,15 @@ type NodeTypeMachines struct {
 	// Selector is matched against the labels of this provider's Machines. A Machine carries its provider record's
 	// labels (BareMetalHost, NICo machine) except platform keys, plus labels set on the Machine itself. Unset or
 	// empty selects every Machine of the provider.
+	// +optional
+	Selector *metav1.LabelSelector `json:"selector,omitempty"`
+}
+
+// NodeTypeHostValidationProfiles selects the host validation profiles a node type requires.
+type NodeTypeHostValidationProfiles struct {
+	// Selector is matched against the labels of the platform's HostValidationProfiles. Unset selects
+	// none, so the node type picks machines as it did before host validation existed; an empty
+	// selector selects every profile.
 	// +optional
 	Selector *metav1.LabelSelector `json:"selector,omitempty"`
 }
@@ -788,6 +842,38 @@ type NodeProviderStatus struct {
 	// Message is a human-readable message indicating details about why the NodeProvider is in its current state.
 	// +optional
 	Message string `json:"message,omitempty"`
+
+	// NICo holds what a NICo provider publishes for the site team to act on.
+	// +optional
+	NICo *NodeProviderNICoStatus `json:"nico,omitempty"`
+}
+
+// NodeProviderNICoStatus is what a NICo node provider publishes about itself.
+type NodeProviderNICoStatus struct {
+	// BMCProxy is what the site has to trust and grant before the platform can read this provider's
+	// machines through nico-bmc-proxy. It is published while spec.nico.endpoints.bmcProxy is set
+	// and cleared when it is removed.
+	// +optional
+	BMCProxy *NodeProviderNICoBMCProxyStatus `json:"bmcProxy,omitempty"`
+}
+
+// NodeProviderNICoBMCProxyStatus is the proxy configuration the site team copies from the platform.
+type NodeProviderNICoBMCProxyStatus struct {
+	// ClientCA is the PEM encoded certificate of the CA the platform signs its client certificates
+	// with. The site installs it as the proxy's admin root CA file. The platform builds it from its
+	// license key and keeps it nowhere else, so a restart republishes the same certificate and a
+	// regenerated license key republishes a different one.
+	// +optional
+	ClientCA string `json:"clientCA,omitempty"`
+
+	// IssuerCN is the common name of that CA, which the proxy has to accept as an issuer.
+	// +optional
+	IssuerCN string `json:"issuerCN,omitempty"`
+
+	// Principal is the identity the proxy maps this provider's client certificates to, and so the
+	// key the site grants the Redfish reads to in the proxy's ACLs.
+	// +optional
+	Principal string `json:"principal,omitempty"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object

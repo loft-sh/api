@@ -238,12 +238,6 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 		managementv1.ConvertVirtualClusterConfigList{}.OpenAPIModelName():                    schema_pkg_apis_management_v1_ConvertVirtualClusterConfigList(ref),
 		managementv1.ConvertVirtualClusterConfigSpec{}.OpenAPIModelName():                    schema_pkg_apis_management_v1_ConvertVirtualClusterConfigSpec(ref),
 		managementv1.ConvertVirtualClusterConfigStatus{}.OpenAPIModelName():                  schema_pkg_apis_management_v1_ConvertVirtualClusterConfigStatus(ref),
-		managementv1.CostControl{}.OpenAPIModelName():                                        schema_pkg_apis_management_v1_CostControl(ref),
-		managementv1.CostControlClusterConfig{}.OpenAPIModelName():                           schema_pkg_apis_management_v1_CostControlClusterConfig(ref),
-		managementv1.CostControlGPUSettings{}.OpenAPIModelName():                             schema_pkg_apis_management_v1_CostControlGPUSettings(ref),
-		managementv1.CostControlGlobalConfig{}.OpenAPIModelName():                            schema_pkg_apis_management_v1_CostControlGlobalConfig(ref),
-		managementv1.CostControlResourcePrice{}.OpenAPIModelName():                           schema_pkg_apis_management_v1_CostControlResourcePrice(ref),
-		managementv1.CostControlSettings{}.OpenAPIModelName():                                schema_pkg_apis_management_v1_CostControlSettings(ref),
 		managementv1.DatabaseConnector{}.OpenAPIModelName():                                  schema_pkg_apis_management_v1_DatabaseConnector(ref),
 		managementv1.DatabaseConnectorList{}.OpenAPIModelName():                              schema_pkg_apis_management_v1_DatabaseConnectorList(ref),
 		managementv1.DatabaseConnectorSpec{}.OpenAPIModelName():                              schema_pkg_apis_management_v1_DatabaseConnectorSpec(ref),
@@ -263,6 +257,10 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 		managementv1.FeatureStatus{}.OpenAPIModelName():                                      schema_pkg_apis_management_v1_FeatureStatus(ref),
 		managementv1.GPUTypeUsage{}.OpenAPIModelName():                                       schema_pkg_apis_management_v1_GPUTypeUsage(ref),
 		managementv1.GroupResources{}.OpenAPIModelName():                                     schema_pkg_apis_management_v1_GroupResources(ref),
+		managementv1.HostValidationProfile{}.OpenAPIModelName():                              schema_pkg_apis_management_v1_HostValidationProfile(ref),
+		managementv1.HostValidationProfileList{}.OpenAPIModelName():                          schema_pkg_apis_management_v1_HostValidationProfileList(ref),
+		managementv1.HostValidationProfileSpec{}.OpenAPIModelName():                          schema_pkg_apis_management_v1_HostValidationProfileSpec(ref),
+		managementv1.HostValidationProfileStatus{}.OpenAPIModelName():                        schema_pkg_apis_management_v1_HostValidationProfileStatus(ref),
 		managementv1.ImageBuilder{}.OpenAPIModelName():                                       schema_pkg_apis_management_v1_ImageBuilder(ref),
 		managementv1.IngressAuthToken{}.OpenAPIModelName():                                   schema_pkg_apis_management_v1_IngressAuthToken(ref),
 		managementv1.IngressAuthTokenList{}.OpenAPIModelName():                               schema_pkg_apis_management_v1_IngressAuthTokenList(ref),
@@ -421,10 +419,6 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 		managementv1.SelfSubjectAccessReviewList{}.OpenAPIModelName():                        schema_pkg_apis_management_v1_SelfSubjectAccessReviewList(ref),
 		managementv1.SelfSubjectAccessReviewSpec{}.OpenAPIModelName():                        schema_pkg_apis_management_v1_SelfSubjectAccessReviewSpec(ref),
 		managementv1.SelfSubjectAccessReviewStatus{}.OpenAPIModelName():                      schema_pkg_apis_management_v1_SelfSubjectAccessReviewStatus(ref),
-		managementv1.SharedSecret{}.OpenAPIModelName():                                       schema_pkg_apis_management_v1_SharedSecret(ref),
-		managementv1.SharedSecretList{}.OpenAPIModelName():                                   schema_pkg_apis_management_v1_SharedSecretList(ref),
-		managementv1.SharedSecretSpec{}.OpenAPIModelName():                                   schema_pkg_apis_management_v1_SharedSecretSpec(ref),
-		managementv1.SharedSecretStatus{}.OpenAPIModelName():                                 schema_pkg_apis_management_v1_SharedSecretStatus(ref),
 		managementv1.SnapshotRequest{}.OpenAPIModelName():                                    schema_pkg_apis_management_v1_SnapshotRequest(ref),
 		managementv1.SnapshotRequestError{}.OpenAPIModelName():                               schema_pkg_apis_management_v1_SnapshotRequestError(ref),
 		managementv1.SnapshotRequestMetadata{}.OpenAPIModelName():                            schema_pkg_apis_management_v1_SnapshotRequestMetadata(ref),
@@ -667,6 +661,9 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 		apisstoragev1.Bash{}.OpenAPIModelName():                                              schema_pkg_apis_storage_v1_Bash(ref),
 		apisstoragev1.CPUResource{}.OpenAPIModelName():                                       schema_pkg_apis_storage_v1_CPUResource(ref),
 		apisstoragev1.Chart{}.OpenAPIModelName():                                             schema_pkg_apis_storage_v1_Chart(ref),
+		apisstoragev1.ChartAuth{}.OpenAPIModelName():                                         schema_pkg_apis_storage_v1_ChartAuth(ref),
+		apisstoragev1.ChartAuthAWS{}.OpenAPIModelName():                                      schema_pkg_apis_storage_v1_ChartAuthAWS(ref),
+		apisstoragev1.ChartAuthBasic{}.OpenAPIModelName():                                    schema_pkg_apis_storage_v1_ChartAuthBasic(ref),
 		apisstoragev1.ChartSecretRef{}.OpenAPIModelName():                                    schema_pkg_apis_storage_v1_ChartSecretRef(ref),
 		apisstoragev1.ChartStatus{}.OpenAPIModelName():                                       schema_pkg_apis_storage_v1_ChartStatus(ref),
 		apisstoragev1.Cluster{}.OpenAPIModelName():                                           schema_pkg_apis_storage_v1_Cluster(ref),
@@ -695,10 +692,16 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 		apisstoragev1.HelmChartRepository{}.OpenAPIModelName():                               schema_pkg_apis_storage_v1_HelmChartRepository(ref),
 		apisstoragev1.HelmConfiguration{}.OpenAPIModelName():                                 schema_pkg_apis_storage_v1_HelmConfiguration(ref),
 		apisstoragev1.HelmReleaseConfig{}.OpenAPIModelName():                                 schema_pkg_apis_storage_v1_HelmReleaseConfig(ref),
+		apisstoragev1.HostValidationGroup{}.OpenAPIModelName():                               schema_pkg_apis_storage_v1_HostValidationGroup(ref),
+		apisstoragev1.HostValidationProfile{}.OpenAPIModelName():                             schema_pkg_apis_storage_v1_HostValidationProfile(ref),
+		apisstoragev1.HostValidationProfileList{}.OpenAPIModelName():                         schema_pkg_apis_storage_v1_HostValidationProfileList(ref),
+		apisstoragev1.HostValidationProfileSpec{}.OpenAPIModelName():                         schema_pkg_apis_storage_v1_HostValidationProfileSpec(ref),
+		apisstoragev1.HostValidationProfileStatus{}.OpenAPIModelName():                       schema_pkg_apis_storage_v1_HostValidationProfileStatus(ref),
+		apisstoragev1.HostValidationRedfish{}.OpenAPIModelName():                             schema_pkg_apis_storage_v1_HostValidationRedfish(ref),
+		apisstoragev1.HostValidationSetting{}.OpenAPIModelName():                             schema_pkg_apis_storage_v1_HostValidationSetting(ref),
 		apisstoragev1.InstanceAccess{}.OpenAPIModelName():                                    schema_pkg_apis_storage_v1_InstanceAccess(ref),
 		apisstoragev1.InstanceAccessRule{}.OpenAPIModelName():                                schema_pkg_apis_storage_v1_InstanceAccessRule(ref),
 		apisstoragev1.InstanceDeployedAppStatus{}.OpenAPIModelName():                         schema_pkg_apis_storage_v1_InstanceDeployedAppStatus(ref),
-		apisstoragev1.KindSecretRef{}.OpenAPIModelName():                                     schema_pkg_apis_storage_v1_KindSecretRef(ref),
 		apisstoragev1.KubeVirtDeployment{}.OpenAPIModelName():                                schema_pkg_apis_storage_v1_KubeVirtDeployment(ref),
 		apisstoragev1.KubeVirtNodeTypeSpec{}.OpenAPIModelName():                              schema_pkg_apis_storage_v1_KubeVirtNodeTypeSpec(ref),
 		apisstoragev1.KubeVirtProviderDeployment{}.OpenAPIModelName():                        schema_pkg_apis_storage_v1_KubeVirtProviderDeployment(ref),
@@ -722,6 +725,7 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 		apisstoragev1.MachineNetwork{}.OpenAPIModelName():                                    schema_pkg_apis_storage_v1_MachineNetwork(ref),
 		apisstoragev1.MachineNetworkInterface{}.OpenAPIModelName():                           schema_pkg_apis_storage_v1_MachineNetworkInterface(ref),
 		apisstoragev1.MachineNodeTypeSpec{}.OpenAPIModelName():                               schema_pkg_apis_storage_v1_MachineNodeTypeSpec(ref),
+		apisstoragev1.MachineOutOfBandValidationStatus{}.OpenAPIModelName():                  schema_pkg_apis_storage_v1_MachineOutOfBandValidationStatus(ref),
 		apisstoragev1.MachineSpec{}.OpenAPIModelName():                                       schema_pkg_apis_storage_v1_MachineSpec(ref),
 		apisstoragev1.MachineStatus{}.OpenAPIModelName():                                     schema_pkg_apis_storage_v1_MachineStatus(ref),
 		apisstoragev1.MachineSystem{}.OpenAPIModelName():                                     schema_pkg_apis_storage_v1_MachineSystem(ref),
@@ -736,8 +740,8 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 		apisstoragev1.Metal3Deployment{}.OpenAPIModelName():                                  schema_pkg_apis_storage_v1_Metal3Deployment(ref),
 		apisstoragev1.Metal3NodeTypeSpec{}.OpenAPIModelName():                                schema_pkg_apis_storage_v1_Metal3NodeTypeSpec(ref),
 		apisstoragev1.Metal3ProviderDeployment{}.OpenAPIModelName():                          schema_pkg_apis_storage_v1_Metal3ProviderDeployment(ref),
-		apisstoragev1.Metrics{}.OpenAPIModelName():                                           schema_pkg_apis_storage_v1_Metrics(ref),
 		apisstoragev1.MultusDeployment{}.OpenAPIModelName():                                  schema_pkg_apis_storage_v1_MultusDeployment(ref),
+		apisstoragev1.NICoEndpoints{}.OpenAPIModelName():                                     schema_pkg_apis_storage_v1_NICoEndpoints(ref),
 		apisstoragev1.NICoIdentity{}.OpenAPIModelName():                                      schema_pkg_apis_storage_v1_NICoIdentity(ref),
 		apisstoragev1.NICoPlatformIssued{}.OpenAPIModelName():                                schema_pkg_apis_storage_v1_NICoPlatformIssued(ref),
 		apisstoragev1.NamedNodeTypeSpec{}.OpenAPIModelName():                                 schema_pkg_apis_storage_v1_NamedNodeTypeSpec(ref),
@@ -787,6 +791,8 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 		apisstoragev1.NodeProviderMetal3NetBoxCustomFields{}.OpenAPIModelName():              schema_pkg_apis_storage_v1_NodeProviderMetal3NetBoxCustomFields(ref),
 		apisstoragev1.NodeProviderMetal3Netris{}.OpenAPIModelName():                          schema_pkg_apis_storage_v1_NodeProviderMetal3Netris(ref),
 		apisstoragev1.NodeProviderNICo{}.OpenAPIModelName():                                  schema_pkg_apis_storage_v1_NodeProviderNICo(ref),
+		apisstoragev1.NodeProviderNICoBMCProxyStatus{}.OpenAPIModelName():                    schema_pkg_apis_storage_v1_NodeProviderNICoBMCProxyStatus(ref),
+		apisstoragev1.NodeProviderNICoStatus{}.OpenAPIModelName():                            schema_pkg_apis_storage_v1_NodeProviderNICoStatus(ref),
 		apisstoragev1.NodeProviderSpec{}.OpenAPIModelName():                                  schema_pkg_apis_storage_v1_NodeProviderSpec(ref),
 		apisstoragev1.NodeProviderStatus{}.OpenAPIModelName():                                schema_pkg_apis_storage_v1_NodeProviderStatus(ref),
 		apisstoragev1.NodeProviderTerraform{}.OpenAPIModelName():                             schema_pkg_apis_storage_v1_NodeProviderTerraform(ref),
@@ -795,6 +801,7 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 		apisstoragev1.NodeProviderValidationVirtualClusterRef{}.OpenAPIModelName():           schema_pkg_apis_storage_v1_NodeProviderValidationVirtualClusterRef(ref),
 		apisstoragev1.NodeType{}.OpenAPIModelName():                                          schema_pkg_apis_storage_v1_NodeType(ref),
 		apisstoragev1.NodeTypeCapacity{}.OpenAPIModelName():                                  schema_pkg_apis_storage_v1_NodeTypeCapacity(ref),
+		apisstoragev1.NodeTypeHostValidationProfiles{}.OpenAPIModelName():                    schema_pkg_apis_storage_v1_NodeTypeHostValidationProfiles(ref),
 		apisstoragev1.NodeTypeList{}.OpenAPIModelName():                                      schema_pkg_apis_storage_v1_NodeTypeList(ref),
 		apisstoragev1.NodeTypeMachines{}.OpenAPIModelName():                                  schema_pkg_apis_storage_v1_NodeTypeMachines(ref),
 		apisstoragev1.NodeTypeOverhead{}.OpenAPIModelName():                                  schema_pkg_apis_storage_v1_NodeTypeOverhead(ref),
@@ -806,7 +813,6 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 		apisstoragev1.OSImageStatus{}.OpenAPIModelName():                                     schema_pkg_apis_storage_v1_OSImageStatus(ref),
 		apisstoragev1.OSImageStoreStatus{}.OpenAPIModelName():                                schema_pkg_apis_storage_v1_OSImageStoreStatus(ref),
 		apisstoragev1.ObjectsStatus{}.OpenAPIModelName():                                     schema_pkg_apis_storage_v1_ObjectsStatus(ref),
-		apisstoragev1.OpenCost{}.OpenAPIModelName():                                          schema_pkg_apis_storage_v1_OpenCost(ref),
 		apisstoragev1.PodSelector{}.OpenAPIModelName():                                       schema_pkg_apis_storage_v1_PodSelector(ref),
 		apisstoragev1.Project{}.OpenAPIModelName():                                           schema_pkg_apis_storage_v1_Project(ref),
 		apisstoragev1.ProjectList{}.OpenAPIModelName():                                       schema_pkg_apis_storage_v1_ProjectList(ref),
@@ -829,10 +835,7 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 		apisstoragev1.SSHKeyStatus{}.OpenAPIModelName():                                      schema_pkg_apis_storage_v1_SSHKeyStatus(ref),
 		apisstoragev1.SSOIdentity{}.OpenAPIModelName():                                       schema_pkg_apis_storage_v1_SSOIdentity(ref),
 		apisstoragev1.SecretRef{}.OpenAPIModelName():                                         schema_pkg_apis_storage_v1_SecretRef(ref),
-		apisstoragev1.SharedSecret{}.OpenAPIModelName():                                      schema_pkg_apis_storage_v1_SharedSecret(ref),
-		apisstoragev1.SharedSecretList{}.OpenAPIModelName():                                  schema_pkg_apis_storage_v1_SharedSecretList(ref),
-		apisstoragev1.SharedSecretSpec{}.OpenAPIModelName():                                  schema_pkg_apis_storage_v1_SharedSecretSpec(ref),
-		apisstoragev1.SharedSecretStatus{}.OpenAPIModelName():                                schema_pkg_apis_storage_v1_SharedSecretStatus(ref),
+		apisstoragev1.ServiceEndpoint{}.OpenAPIModelName():                                   schema_pkg_apis_storage_v1_ServiceEndpoint(ref),
 		apisstoragev1.SpaceInstance{}.OpenAPIModelName():                                     schema_pkg_apis_storage_v1_SpaceInstance(ref),
 		apisstoragev1.SpaceInstanceList{}.OpenAPIModelName():                                 schema_pkg_apis_storage_v1_SpaceInstanceList(ref),
 		apisstoragev1.SpaceInstanceSpec{}.OpenAPIModelName():                                 schema_pkg_apis_storage_v1_SpaceInstanceSpec(ref),
@@ -886,7 +889,6 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 		apisstoragev1.StackUIResource{}.OpenAPIModelName():                                   schema_pkg_apis_storage_v1_StackUIResource(ref),
 		apisstoragev1.StackUIRow{}.OpenAPIModelName():                                        schema_pkg_apis_storage_v1_StackUIRow(ref),
 		apisstoragev1.StackUITimeline{}.OpenAPIModelName():                                   schema_pkg_apis_storage_v1_StackUITimeline(ref),
-		apisstoragev1.Storage{}.OpenAPIModelName():                                           schema_pkg_apis_storage_v1_Storage(ref),
 		apisstoragev1.StorageAccount{}.OpenAPIModelName():                                    schema_pkg_apis_storage_v1_StorageAccount(ref),
 		apisstoragev1.StorageAccountIdentities{}.OpenAPIModelName():                          schema_pkg_apis_storage_v1_StorageAccountIdentities(ref),
 		apisstoragev1.StorageAccountList{}.OpenAPIModelName():                                schema_pkg_apis_storage_v1_StorageAccountList(ref),
@@ -6222,28 +6224,14 @@ func schema_pkg_apis_management_v1_AgentCostControlConfig(ref common.ReferenceCa
 				Properties: map[string]spec.Schema{
 					"enabled": {
 						SchemaProps: spec.SchemaProps{
-							Description: "Enabled specifies whether the ROI dashboard should be available in the UI, and if the metrics infrastructure that provides dashboard data is deployed",
+							Description: "Enabled is always false.",
 							Type:        []string{"boolean"},
 							Format:      "",
-						},
-					},
-					"metrics": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Metrics are settings applied to metric infrastructure in each connected cluster. These can be overridden in individual clusters by modifying the Cluster's spec",
-							Ref:         ref(apisstoragev1.Metrics{}.OpenAPIModelName()),
-						},
-					},
-					"opencost": {
-						SchemaProps: spec.SchemaProps{
-							Description: "OpenCost are settings applied to OpenCost deployments in each connected cluster. These can be overridden in individual clusters by modifying the Cluster's spec",
-							Ref:         ref(apisstoragev1.OpenCost{}.OpenAPIModelName()),
 						},
 					},
 				},
 			},
 		},
-		Dependencies: []string{
-			apisstoragev1.Metrics{}.OpenAPIModelName(), apisstoragev1.OpenCost{}.OpenAPIModelName()},
 	}
 }
 
@@ -8770,7 +8758,7 @@ func schema_pkg_apis_management_v1_ClusterAgentConfig(ref common.ReferenceCallba
 					},
 					"costControl": {
 						SchemaProps: spec.SchemaProps{
-							Description: "CostControl holds the settings related to the Cost Control ROI dashboard and its metrics gathering infrastructure",
+							Description: "CostControl is always disabled. Cost Control was removed, but agents from v4 treat a missing setting as enabled, so the platform sends enabled: false to make them uninstall their Cost Control releases.",
 							Ref:         ref(managementv1.AgentCostControlConfig{}.OpenAPIModelName()),
 						},
 					},
@@ -8853,7 +8841,7 @@ func schema_pkg_apis_management_v1_ClusterAgentConfigCommon(ref common.Reference
 					},
 					"costControl": {
 						SchemaProps: spec.SchemaProps{
-							Description: "CostControl holds the settings related to the Cost Control ROI dashboard and its metrics gathering infrastructure",
+							Description: "CostControl is always disabled. Cost Control was removed, but agents from v4 treat a missing setting as enabled, so the platform sends enabled: false to make them uninstall their Cost Control releases.",
 							Ref:         ref(managementv1.AgentCostControlConfig{}.OpenAPIModelName()),
 						},
 					},
@@ -9680,18 +9668,6 @@ func schema_pkg_apis_management_v1_ClusterSpec(ref common.ReferenceCallback) com
 							},
 						},
 					},
-					"metrics": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Metrics holds the cluster's metrics backend configuration",
-							Ref:         ref(apisstoragev1.Metrics{}.OpenAPIModelName()),
-						},
-					},
-					"opencost": {
-						SchemaProps: spec.SchemaProps{
-							Description: "OpenCost holds the cluster's OpenCost backend configuration",
-							Ref:         ref(apisstoragev1.OpenCost{}.OpenAPIModelName()),
-						},
-					},
 					"argoCD": {
 						SchemaProps: spec.SchemaProps{
 							Description: "ArgoCD holds the cluster's argo cd configuration",
@@ -9702,7 +9678,7 @@ func schema_pkg_apis_management_v1_ClusterSpec(ref common.ReferenceCallback) com
 			},
 		},
 		Dependencies: []string{
-			apisstoragev1.Access{}.OpenAPIModelName(), apisstoragev1.ArgoCD{}.OpenAPIModelName(), apisstoragev1.Metrics{}.OpenAPIModelName(), apisstoragev1.OpenCost{}.OpenAPIModelName(), apisstoragev1.SecretRef{}.OpenAPIModelName(), apisstoragev1.UserOrTeam{}.OpenAPIModelName()},
+			apisstoragev1.Access{}.OpenAPIModelName(), apisstoragev1.ArgoCD{}.OpenAPIModelName(), apisstoragev1.SecretRef{}.OpenAPIModelName(), apisstoragev1.UserOrTeam{}.OpenAPIModelName()},
 	}
 }
 
@@ -9928,12 +9904,6 @@ func schema_pkg_apis_management_v1_ConfigStatus(ref common.ReferenceCallback) co
 							Ref:         ref(uiv1.UISettingsConfig{}.OpenAPIModelName()),
 						},
 					},
-					"vault": {
-						SchemaProps: spec.SchemaProps{
-							Description: "VaultIntegration holds the vault integration configuration",
-							Ref:         ref(apisstoragev1.VaultIntegrationSpec{}.OpenAPIModelName()),
-						},
-					},
 					"disableConfigEndpoint": {
 						SchemaProps: spec.SchemaProps{
 							Description: "DisableLoftConfigEndpoint will disable setting config via the UI and config.management.loft.sh endpoint",
@@ -9952,12 +9922,6 @@ func schema_pkg_apis_management_v1_ConfigStatus(ref common.ReferenceCallback) co
 						SchemaProps: spec.SchemaProps{
 							Description: "Cloud holds the settings to be used exclusively in vCluster Cloud based environments and deployments.",
 							Ref:         ref(managementv1.Cloud{}.OpenAPIModelName()),
-						},
-					},
-					"costControl": {
-						SchemaProps: spec.SchemaProps{
-							Description: "CostControl holds the settings related to the Cost Control ROI dashboard and its metrics gathering infrastructure",
-							Ref:         ref(managementv1.CostControl{}.OpenAPIModelName()),
 						},
 					},
 					"platformDB": {
@@ -9982,7 +9946,7 @@ func schema_pkg_apis_management_v1_ConfigStatus(ref common.ReferenceCallback) co
 			},
 		},
 		Dependencies: []string{
-			managementv1.Audit{}.OpenAPIModelName(), managementv1.Cloud{}.OpenAPIModelName(), managementv1.CostControl{}.OpenAPIModelName(), managementv1.DatabaseKine{}.OpenAPIModelName(), managementv1.ImageBuilder{}.OpenAPIModelName(), managementv1.OIDC{}.OpenAPIModelName(), managementv1.PlatformDB{}.OpenAPIModelName(), apisstoragev1.Authentication{}.OpenAPIModelName(), apisstoragev1.VaultIntegrationSpec{}.OpenAPIModelName(), uiv1.UISettingsConfig{}.OpenAPIModelName()},
+			managementv1.Audit{}.OpenAPIModelName(), managementv1.Cloud{}.OpenAPIModelName(), managementv1.DatabaseKine{}.OpenAPIModelName(), managementv1.ImageBuilder{}.OpenAPIModelName(), managementv1.OIDC{}.OpenAPIModelName(), managementv1.PlatformDB{}.OpenAPIModelName(), apisstoragev1.Authentication{}.OpenAPIModelName(), uiv1.UISettingsConfig{}.OpenAPIModelName()},
 	}
 }
 
@@ -11095,191 +11059,6 @@ func schema_pkg_apis_management_v1_ConvertVirtualClusterConfigStatus(ref common.
 	}
 }
 
-func schema_pkg_apis_management_v1_CostControl(ref common.ReferenceCallback) common.OpenAPIDefinition {
-	return common.OpenAPIDefinition{
-		Schema: spec.Schema{
-			SchemaProps: spec.SchemaProps{
-				Type: []string{"object"},
-				Properties: map[string]spec.Schema{
-					"enabled": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Enabled specifies whether the ROI dashboard should be available in the UI, and if the metrics infrastructure that provides dashboard data is deployed",
-							Type:        []string{"boolean"},
-							Format:      "",
-						},
-					},
-					"global": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Global are settings for globally managed components",
-							Default:     map[string]interface{}{},
-							Ref:         ref(managementv1.CostControlGlobalConfig{}.OpenAPIModelName()),
-						},
-					},
-					"cluster": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Cluster are settings for each cluster's managed components. These settings apply to all connected clusters unless overridden by modifying the Cluster's spec",
-							Default:     map[string]interface{}{},
-							Ref:         ref(managementv1.CostControlClusterConfig{}.OpenAPIModelName()),
-						},
-					},
-					"settings": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Settings specify price-related settings that are taken into account for the ROI dashboard calculations.",
-							Ref:         ref(managementv1.CostControlSettings{}.OpenAPIModelName()),
-						},
-					},
-				},
-			},
-		},
-		Dependencies: []string{
-			managementv1.CostControlClusterConfig{}.OpenAPIModelName(), managementv1.CostControlGlobalConfig{}.OpenAPIModelName(), managementv1.CostControlSettings{}.OpenAPIModelName()},
-	}
-}
-
-func schema_pkg_apis_management_v1_CostControlClusterConfig(ref common.ReferenceCallback) common.OpenAPIDefinition {
-	return common.OpenAPIDefinition{
-		Schema: spec.Schema{
-			SchemaProps: spec.SchemaProps{
-				Type: []string{"object"},
-				Properties: map[string]spec.Schema{
-					"metrics": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Metrics are settings applied to metric infrastructure in each connected cluster. These can be overridden in individual clusters by modifying the Cluster's spec",
-							Ref:         ref(apisstoragev1.Metrics{}.OpenAPIModelName()),
-						},
-					},
-					"opencost": {
-						SchemaProps: spec.SchemaProps{
-							Description: "OpenCost are settings applied to OpenCost deployments in each connected cluster. These can be overridden in individual clusters by modifying the Cluster's spec",
-							Ref:         ref(apisstoragev1.OpenCost{}.OpenAPIModelName()),
-						},
-					},
-				},
-			},
-		},
-		Dependencies: []string{
-			apisstoragev1.Metrics{}.OpenAPIModelName(), apisstoragev1.OpenCost{}.OpenAPIModelName()},
-	}
-}
-
-func schema_pkg_apis_management_v1_CostControlGPUSettings(ref common.ReferenceCallback) common.OpenAPIDefinition {
-	return common.OpenAPIDefinition{
-		Schema: spec.Schema{
-			SchemaProps: spec.SchemaProps{
-				Type: []string{"object"},
-				Properties: map[string]spec.Schema{
-					"enabled": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Enabled specifies whether GPU settings should be available in the UI.",
-							Type:        []string{"boolean"},
-							Format:      "",
-						},
-					},
-					"averageGPUPrice": {
-						SchemaProps: spec.SchemaProps{
-							Description: "AvgGPUPrice specifies the average GPU price.",
-							Ref:         ref(managementv1.CostControlResourcePrice{}.OpenAPIModelName()),
-						},
-					},
-				},
-			},
-		},
-		Dependencies: []string{
-			managementv1.CostControlResourcePrice{}.OpenAPIModelName()},
-	}
-}
-
-func schema_pkg_apis_management_v1_CostControlGlobalConfig(ref common.ReferenceCallback) common.OpenAPIDefinition {
-	return common.OpenAPIDefinition{
-		Schema: spec.Schema{
-			SchemaProps: spec.SchemaProps{
-				Type: []string{"object"},
-				Properties: map[string]spec.Schema{
-					"metrics": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Metrics these settings apply to metric infrastructure used to aggregate metrics across all connected clusters",
-							Ref:         ref(apisstoragev1.Metrics{}.OpenAPIModelName()),
-						},
-					},
-				},
-			},
-		},
-		Dependencies: []string{
-			apisstoragev1.Metrics{}.OpenAPIModelName()},
-	}
-}
-
-func schema_pkg_apis_management_v1_CostControlResourcePrice(ref common.ReferenceCallback) common.OpenAPIDefinition {
-	return common.OpenAPIDefinition{
-		Schema: spec.Schema{
-			SchemaProps: spec.SchemaProps{
-				Type: []string{"object"},
-				Properties: map[string]spec.Schema{
-					"price": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Price specifies the price.",
-							Type:        []string{"number"},
-							Format:      "double",
-						},
-					},
-					"timePeriod": {
-						SchemaProps: spec.SchemaProps{
-							Description: "TimePeriod specifies the time period for the price.",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-				},
-			},
-		},
-	}
-}
-
-func schema_pkg_apis_management_v1_CostControlSettings(ref common.ReferenceCallback) common.OpenAPIDefinition {
-	return common.OpenAPIDefinition{
-		Schema: spec.Schema{
-			SchemaProps: spec.SchemaProps{
-				Type: []string{"object"},
-				Properties: map[string]spec.Schema{
-					"priceCurrency": {
-						SchemaProps: spec.SchemaProps{
-							Description: "PriceCurrency specifies the currency.",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"averageCPUPricePerNode": {
-						SchemaProps: spec.SchemaProps{
-							Description: "AvgCPUPricePerNode specifies the average CPU price per node.",
-							Ref:         ref(managementv1.CostControlResourcePrice{}.OpenAPIModelName()),
-						},
-					},
-					"averageRAMPricePerNode": {
-						SchemaProps: spec.SchemaProps{
-							Description: "AvgRAMPricePerNode specifies the average RAM price per node.",
-							Ref:         ref(managementv1.CostControlResourcePrice{}.OpenAPIModelName()),
-						},
-					},
-					"gpuSettings": {
-						SchemaProps: spec.SchemaProps{
-							Description: "GPUSettings specifies GPU related settings.",
-							Ref:         ref(managementv1.CostControlGPUSettings{}.OpenAPIModelName()),
-						},
-					},
-					"controlPlanePricePerCluster": {
-						SchemaProps: spec.SchemaProps{
-							Description: "ControlPlanePricePerCluster specifies the price of one physical cluster.",
-							Ref:         ref(managementv1.CostControlResourcePrice{}.OpenAPIModelName()),
-						},
-					},
-				},
-			},
-		},
-		Dependencies: []string{
-			managementv1.CostControlGPUSettings{}.OpenAPIModelName(), managementv1.CostControlResourcePrice{}.OpenAPIModelName()},
-	}
-}
-
 func schema_pkg_apis_management_v1_DatabaseConnector(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
@@ -12159,6 +11938,153 @@ func schema_pkg_apis_management_v1_GroupResources(ref common.ReferenceCallback) 
 						},
 					},
 				},
+			},
+		},
+	}
+}
+
+func schema_pkg_apis_management_v1_HostValidationProfile(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "HostValidationProfile exposes the settings a kind of host has to have to platform admins.",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"kind": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"apiVersion": {
+						SchemaProps: spec.SchemaProps{
+							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"metadata": {
+						SchemaProps: spec.SchemaProps{
+							Default: map[string]interface{}{},
+							Ref:     ref(metav1.ObjectMeta{}.OpenAPIModelName()),
+						},
+					},
+					"spec": {
+						SchemaProps: spec.SchemaProps{
+							Default: map[string]interface{}{},
+							Ref:     ref(managementv1.HostValidationProfileSpec{}.OpenAPIModelName()),
+						},
+					},
+					"status": {
+						SchemaProps: spec.SchemaProps{
+							Default: map[string]interface{}{},
+							Ref:     ref(managementv1.HostValidationProfileStatus{}.OpenAPIModelName()),
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			managementv1.HostValidationProfileSpec{}.OpenAPIModelName(), managementv1.HostValidationProfileStatus{}.OpenAPIModelName(), metav1.ObjectMeta{}.OpenAPIModelName()},
+	}
+}
+
+func schema_pkg_apis_management_v1_HostValidationProfileList(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"kind": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"apiVersion": {
+						SchemaProps: spec.SchemaProps{
+							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"metadata": {
+						SchemaProps: spec.SchemaProps{
+							Default: map[string]interface{}{},
+							Ref:     ref(metav1.ListMeta{}.OpenAPIModelName()),
+						},
+					},
+					"items": {
+						SchemaProps: spec.SchemaProps{
+							Type: []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref(managementv1.HostValidationProfile{}.OpenAPIModelName()),
+									},
+								},
+							},
+						},
+					},
+				},
+				Required: []string{"items"},
+			},
+		},
+		Dependencies: []string{
+			managementv1.HostValidationProfile{}.OpenAPIModelName(), metav1.ListMeta{}.OpenAPIModelName()},
+	}
+}
+
+func schema_pkg_apis_management_v1_HostValidationProfileSpec(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"displayName": {
+						SchemaProps: spec.SchemaProps{
+							Description: "DisplayName is the name that should be displayed in the UI.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"description": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Description describes what the profile is intended for.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"outOfBand": {
+						SchemaProps: spec.SchemaProps{
+							Description: "OutOfBand holds the checks the controller reads from a BMC without running anything on the machine, such as firmware settings.",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref(apisstoragev1.HostValidationGroup{}.OpenAPIModelName()),
+									},
+								},
+							},
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			apisstoragev1.HostValidationGroup{}.OpenAPIModelName()},
+	}
+}
+
+func schema_pkg_apis_management_v1_HostValidationProfileStatus(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
 			},
 		},
 	}
@@ -15241,11 +15167,17 @@ func schema_pkg_apis_management_v1_NodeProviderStatus(ref common.ReferenceCallba
 							Format:      "",
 						},
 					},
+					"nico": {
+						SchemaProps: spec.SchemaProps{
+							Description: "NICo holds what a NICo provider publishes for the site team to act on.",
+							Ref:         ref(apisstoragev1.NodeProviderNICoStatus{}.OpenAPIModelName()),
+						},
+					},
 				},
 			},
 		},
 		Dependencies: []string{
-			storagev1.Condition{}.OpenAPIModelName()},
+			storagev1.Condition{}.OpenAPIModelName(), apisstoragev1.NodeProviderNICoStatus{}.OpenAPIModelName()},
 	}
 }
 
@@ -15436,7 +15368,7 @@ func schema_pkg_apis_management_v1_NodeTypeSpec(ref common.ReferenceCallback) co
 					},
 					"machineAllocationPolicy": {
 						SchemaProps: spec.SchemaProps{
-							Description: "MachineAllocationPolicy selects the machines a tenant's NodeClaims of this type may use: Assigned only those the tenant owns or was assigned exclusively, OnDemand also those no tenant owns or holds (never another tenant's or the platform's). Claims no tenant owns reach unassigned machines either way. Honored by metal3 and nico; externalPlatform node types mirror the remote's value. kubevirt ignores it and runs every VM on the cluster's shared nodes. Empty falls back to the provider's spec.machineAllocationPolicy, then to OnDemand for kubevirt and Assigned for the rest.",
+							Description: "MachineAllocationPolicy selects the machines a tenant's NodeClaims of this type may use: Assigned uses only those the tenant owns or was assigned exclusively, OnDemand uses only those no tenant owns or holds, never the tenant's own or another tenant's. Claims no tenant owns reach unassigned machines either way. Honored by metal3 and nico; externalPlatform node types mirror the remote's value. kubevirt ignores it and runs every VM on the cluster's shared nodes. Empty falls back to the provider's spec.machineAllocationPolicy, then to OnDemand for kubevirt and Assigned for the rest.",
 							Type:        []string{"string"},
 							Format:      "",
 						},
@@ -19575,11 +19507,25 @@ func schema_pkg_apis_management_v1_SelfSubjectAccessReviewSpec(ref common.Refere
 							Ref:         ref(authorizationv1.NonResourceAttributes{}.OpenAPIModelName()),
 						},
 					},
+					"reviews": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Reviews evaluates many access checks in one request, at most 1024. Set either Reviews or ResourceAttributes and NonResourceAttributes, not both.",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref(authorizationv1.SelfSubjectAccessReviewSpec{}.OpenAPIModelName()),
+									},
+								},
+							},
+						},
+					},
 				},
 			},
 		},
 		Dependencies: []string{
-			authorizationv1.NonResourceAttributes{}.OpenAPIModelName(), authorizationv1.ResourceAttributes{}.OpenAPIModelName()},
+			authorizationv1.NonResourceAttributes{}.OpenAPIModelName(), authorizationv1.ResourceAttributes{}.OpenAPIModelName(), authorizationv1.SelfSubjectAccessReviewSpec{}.OpenAPIModelName()},
 	}
 }
 
@@ -19618,198 +19564,26 @@ func schema_pkg_apis_management_v1_SelfSubjectAccessReviewStatus(ref common.Refe
 							Format:      "",
 						},
 					},
+					"statuses": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Statuses holds one result for each entry of spec.reviews, in the same order. When spec.reviews is set, only Statuses carries results.",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref(authorizationv1.SubjectAccessReviewStatus{}.OpenAPIModelName()),
+									},
+								},
+							},
+						},
+					},
 				},
 				Required: []string{"allowed"},
 			},
 		},
-	}
-}
-
-func schema_pkg_apis_management_v1_SharedSecret(ref common.ReferenceCallback) common.OpenAPIDefinition {
-	return common.OpenAPIDefinition{
-		Schema: spec.Schema{
-			SchemaProps: spec.SchemaProps{
-				Description: "SharedSecret holds the secret information",
-				Type:        []string{"object"},
-				Properties: map[string]spec.Schema{
-					"kind": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"apiVersion": {
-						SchemaProps: spec.SchemaProps{
-							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"metadata": {
-						SchemaProps: spec.SchemaProps{
-							Default: map[string]interface{}{},
-							Ref:     ref(metav1.ObjectMeta{}.OpenAPIModelName()),
-						},
-					},
-					"spec": {
-						SchemaProps: spec.SchemaProps{
-							Default: map[string]interface{}{},
-							Ref:     ref(managementv1.SharedSecretSpec{}.OpenAPIModelName()),
-						},
-					},
-					"status": {
-						SchemaProps: spec.SchemaProps{
-							Default: map[string]interface{}{},
-							Ref:     ref(managementv1.SharedSecretStatus{}.OpenAPIModelName()),
-						},
-					},
-				},
-			},
-		},
 		Dependencies: []string{
-			managementv1.SharedSecretSpec{}.OpenAPIModelName(), managementv1.SharedSecretStatus{}.OpenAPIModelName(), metav1.ObjectMeta{}.OpenAPIModelName()},
-	}
-}
-
-func schema_pkg_apis_management_v1_SharedSecretList(ref common.ReferenceCallback) common.OpenAPIDefinition {
-	return common.OpenAPIDefinition{
-		Schema: spec.Schema{
-			SchemaProps: spec.SchemaProps{
-				Type: []string{"object"},
-				Properties: map[string]spec.Schema{
-					"kind": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"apiVersion": {
-						SchemaProps: spec.SchemaProps{
-							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"metadata": {
-						SchemaProps: spec.SchemaProps{
-							Default: map[string]interface{}{},
-							Ref:     ref(metav1.ListMeta{}.OpenAPIModelName()),
-						},
-					},
-					"items": {
-						SchemaProps: spec.SchemaProps{
-							Type: []string{"array"},
-							Items: &spec.SchemaOrArray{
-								Schema: &spec.Schema{
-									SchemaProps: spec.SchemaProps{
-										Default: map[string]interface{}{},
-										Ref:     ref(managementv1.SharedSecret{}.OpenAPIModelName()),
-									},
-								},
-							},
-						},
-					},
-				},
-				Required: []string{"items"},
-			},
-		},
-		Dependencies: []string{
-			managementv1.SharedSecret{}.OpenAPIModelName(), metav1.ListMeta{}.OpenAPIModelName()},
-	}
-}
-
-func schema_pkg_apis_management_v1_SharedSecretSpec(ref common.ReferenceCallback) common.OpenAPIDefinition {
-	return common.OpenAPIDefinition{
-		Schema: spec.Schema{
-			SchemaProps: spec.SchemaProps{
-				Description: "SharedSecretSpec holds the specification",
-				Type:        []string{"object"},
-				Properties: map[string]spec.Schema{
-					"displayName": {
-						SchemaProps: spec.SchemaProps{
-							Description: "DisplayName is the name that should be displayed in the UI",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"description": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Description describes a shared secret",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"owner": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Owner holds the owner of this object",
-							Ref:         ref(apisstoragev1.UserOrTeam{}.OpenAPIModelName()),
-						},
-					},
-					"data": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Data contains the secret data. Each key must consist of alphanumeric characters, '-', '_' or '.'. The serialized form of the secret data is a base64 encoded string, representing the arbitrary (possibly non-string) data value here. Described in https://tools.ietf.org/html/rfc4648#section-4",
-							Type:        []string{"object"},
-							AdditionalProperties: &spec.SchemaOrBool{
-								Allows: true,
-								Schema: &spec.Schema{
-									SchemaProps: spec.SchemaProps{
-										Type:   []string{"string"},
-										Format: "byte",
-									},
-								},
-							},
-						},
-					},
-					"access": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Access holds the access rights for users and teams which will be transformed to Roles and RoleBindings",
-							Type:        []string{"array"},
-							Items: &spec.SchemaOrArray{
-								Schema: &spec.Schema{
-									SchemaProps: spec.SchemaProps{
-										Default: map[string]interface{}{},
-										Ref:     ref(apisstoragev1.Access{}.OpenAPIModelName()),
-									},
-								},
-							},
-						},
-					},
-				},
-			},
-		},
-		Dependencies: []string{
-			apisstoragev1.Access{}.OpenAPIModelName(), apisstoragev1.UserOrTeam{}.OpenAPIModelName()},
-	}
-}
-
-func schema_pkg_apis_management_v1_SharedSecretStatus(ref common.ReferenceCallback) common.OpenAPIDefinition {
-	return common.OpenAPIDefinition{
-		Schema: spec.Schema{
-			SchemaProps: spec.SchemaProps{
-				Description: "SharedSecretStatus holds the status",
-				Type:        []string{"object"},
-				Properties: map[string]spec.Schema{
-					"conditions": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Conditions holds several conditions the project might be in",
-							Type:        []string{"array"},
-							Items: &spec.SchemaOrArray{
-								Schema: &spec.Schema{
-									SchemaProps: spec.SchemaProps{
-										Default: map[string]interface{}{},
-										Ref:     ref(storagev1.Condition{}.OpenAPIModelName()),
-									},
-								},
-							},
-						},
-					},
-				},
-			},
-		},
-		Dependencies: []string{
-			storagev1.Condition{}.OpenAPIModelName()},
+			authorizationv1.SubjectAccessReviewStatus{}.OpenAPIModelName()},
 	}
 }
 
@@ -23621,19 +23395,6 @@ func schema_pkg_apis_management_v1_TeamSpec(ref common.ReferenceCallback) common
 							},
 						},
 					},
-					"imagePullSecrets": {
-						SchemaProps: spec.SchemaProps{
-							Description: "ImagePullSecrets holds secret references to image pull secrets the team has access to.",
-							Type:        []string{"array"},
-							Items: &spec.SchemaOrArray{
-								Schema: &spec.Schema{
-									SchemaProps: spec.SchemaProps{
-										Ref: ref(apisstoragev1.KindSecretRef{}.OpenAPIModelName()),
-									},
-								},
-							},
-						},
-					},
 					"clusterRoles": {
 						SchemaProps: spec.SchemaProps{
 							Description: "ClusterRoles define the cluster roles that the users should have assigned in the cluster.",
@@ -23666,7 +23427,7 @@ func schema_pkg_apis_management_v1_TeamSpec(ref common.ReferenceCallback) common
 			},
 		},
 		Dependencies: []string{
-			apisstoragev1.Access{}.OpenAPIModelName(), apisstoragev1.ClusterRoleRef{}.OpenAPIModelName(), apisstoragev1.KindSecretRef{}.OpenAPIModelName(), apisstoragev1.UserOrTeam{}.OpenAPIModelName()},
+			apisstoragev1.Access{}.OpenAPIModelName(), apisstoragev1.ClusterRoleRef{}.OpenAPIModelName(), apisstoragev1.UserOrTeam{}.OpenAPIModelName()},
 	}
 }
 
@@ -25368,19 +25129,6 @@ func schema_pkg_apis_management_v1_UserSpec(ref common.ReferenceCallback) common
 							Ref:         ref(apisstoragev1.SecretRef{}.OpenAPIModelName()),
 						},
 					},
-					"imagePullSecrets": {
-						SchemaProps: spec.SchemaProps{
-							Description: "ImagePullSecrets holds secret references to image pull secrets the user has access to.",
-							Type:        []string{"array"},
-							Items: &spec.SchemaOrArray{
-								Schema: &spec.Schema{
-									SchemaProps: spec.SchemaProps{
-										Ref: ref(apisstoragev1.KindSecretRef{}.OpenAPIModelName()),
-									},
-								},
-							},
-						},
-					},
 					"tokenGeneration": {
 						SchemaProps: spec.SchemaProps{
 							Description: "TokenGeneration can be used to invalidate all user tokens",
@@ -25443,7 +25191,7 @@ func schema_pkg_apis_management_v1_UserSpec(ref common.ReferenceCallback) common
 			},
 		},
 		Dependencies: []string{
-			apisstoragev1.Access{}.OpenAPIModelName(), apisstoragev1.ClusterRoleRef{}.OpenAPIModelName(), apisstoragev1.KindSecretRef{}.OpenAPIModelName(), apisstoragev1.SecretRef{}.OpenAPIModelName(), apisstoragev1.UserOrTeam{}.OpenAPIModelName()},
+			apisstoragev1.Access{}.OpenAPIModelName(), apisstoragev1.ClusterRoleRef{}.OpenAPIModelName(), apisstoragev1.SecretRef{}.OpenAPIModelName(), apisstoragev1.UserOrTeam{}.OpenAPIModelName()},
 	}
 }
 
@@ -28414,7 +28162,7 @@ func schema_pkg_apis_storage_v1_Access(ref common.ReferenceCallback) common.Open
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
-				Description: "Access describes the access to a secret",
+				Description: "Access grants users and teams verbs on the object that holds it",
 				Type:        []string{"object"},
 				Properties: map[string]spec.Schema{
 					"name": {
@@ -28456,7 +28204,7 @@ func schema_pkg_apis_storage_v1_Access(ref common.ReferenceCallback) common.Open
 					},
 					"users": {
 						SchemaProps: spec.SchemaProps{
-							Description: "Users specifies which users should be able to access this secret with the aforementioned verbs",
+							Description: "Users specifies which users should be able to access this object with the aforementioned verbs",
 							Type:        []string{"array"},
 							Items: &spec.SchemaOrArray{
 								Schema: &spec.Schema{
@@ -28471,7 +28219,7 @@ func schema_pkg_apis_storage_v1_Access(ref common.ReferenceCallback) common.Open
 					},
 					"teams": {
 						SchemaProps: spec.SchemaProps{
-							Description: "Teams specifies which teams should be able to access this secret with the aforementioned verbs",
+							Description: "Teams specifies which teams should be able to access this object with the aforementioned verbs",
 							Type:        []string{"array"},
 							Items: &spec.SchemaOrArray{
 								Schema: &spec.Schema{
@@ -31865,6 +31613,78 @@ func schema_pkg_apis_storage_v1_Chart(ref common.ReferenceCallback) common.OpenA
 	}
 }
 
+func schema_pkg_apis_storage_v1_ChartAuth(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "ChartAuth holds the credentials for a chart repository. The auth method is implied by which field is set.",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"aws": {
+						SchemaProps: spec.SchemaProps{
+							Description: "AWS fetches the registry credentials from AWS.",
+							Ref:         ref(apisstoragev1.ChartAuthAWS{}.OpenAPIModelName()),
+						},
+					},
+					"basic": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Basic logs in with a username and password.",
+							Ref:         ref(apisstoragev1.ChartAuthBasic{}.OpenAPIModelName()),
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			apisstoragev1.ChartAuthAWS{}.OpenAPIModelName(), apisstoragev1.ChartAuthBasic{}.OpenAPIModelName()},
+	}
+}
+
+func schema_pkg_apis_storage_v1_ChartAuthAWS(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"useWorkloadIdentity": {
+						SchemaProps: spec.SchemaProps{
+							Description: "UseWorkloadIdentity fetches an Amazon ECR authorization token with the AWS SDK's default credential chain: EKS Pod Identity, IRSA or the EC2 instance profile. The chart repo must be an Amazon ECR registry, and the identity is the platform's or the agent's, so its IAM policy decides which repositories every cluster can pull charts from.",
+							Type:        []string{"boolean"},
+							Format:      "",
+						},
+					},
+				},
+			},
+		},
+	}
+}
+
+func schema_pkg_apis_storage_v1_ChartAuthBasic(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"username": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Username to log in with.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"password": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Password to log in with.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+				},
+			},
+		},
+	}
+}
+
 func schema_pkg_apis_storage_v1_ChartSecretRef(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
@@ -32030,7 +31850,7 @@ func schema_pkg_apis_storage_v1_ClusterAPINodeTypeSpec(ref common.ReferenceCallb
 					},
 					"machineAllocationPolicy": {
 						SchemaProps: spec.SchemaProps{
-							Description: "MachineAllocationPolicy selects the machines a tenant's NodeClaims of this type may use: Assigned only those the tenant owns or was assigned exclusively, OnDemand also those no tenant owns or holds (never another tenant's or the platform's). Claims no tenant owns reach unassigned machines either way. Honored by metal3 and nico; externalPlatform node types mirror the remote's value. kubevirt ignores it and runs every VM on the cluster's shared nodes. Empty falls back to the provider's spec.machineAllocationPolicy, then to OnDemand for kubevirt and Assigned for the rest.",
+							Description: "MachineAllocationPolicy selects the machines a tenant's NodeClaims of this type may use: Assigned uses only those the tenant owns or was assigned exclusively, OnDemand uses only those no tenant owns or holds, never the tenant's own or another tenant's. Claims no tenant owns reach unassigned machines either way. Honored by metal3 and nico; externalPlatform node types mirror the remote's value. kubevirt ignores it and runs every VM on the cluster's shared nodes. Empty falls back to the provider's spec.machineAllocationPolicy, then to OnDemand for kubevirt and Assigned for the rest.",
 							Type:        []string{"string"},
 							Format:      "",
 						},
@@ -32694,18 +32514,6 @@ func schema_pkg_apis_storage_v1_ClusterSpec(ref common.ReferenceCallback) common
 							},
 						},
 					},
-					"metrics": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Metrics holds the cluster's metrics backend configuration",
-							Ref:         ref(apisstoragev1.Metrics{}.OpenAPIModelName()),
-						},
-					},
-					"opencost": {
-						SchemaProps: spec.SchemaProps{
-							Description: "OpenCost holds the cluster's OpenCost backend configuration",
-							Ref:         ref(apisstoragev1.OpenCost{}.OpenAPIModelName()),
-						},
-					},
 					"argoCD": {
 						SchemaProps: spec.SchemaProps{
 							Description: "ArgoCD holds the cluster's argo cd configuration",
@@ -32716,7 +32524,7 @@ func schema_pkg_apis_storage_v1_ClusterSpec(ref common.ReferenceCallback) common
 			},
 		},
 		Dependencies: []string{
-			apisstoragev1.Access{}.OpenAPIModelName(), apisstoragev1.ArgoCD{}.OpenAPIModelName(), apisstoragev1.Metrics{}.OpenAPIModelName(), apisstoragev1.OpenCost{}.OpenAPIModelName(), apisstoragev1.SecretRef{}.OpenAPIModelName(), apisstoragev1.UserOrTeam{}.OpenAPIModelName()},
+			apisstoragev1.Access{}.OpenAPIModelName(), apisstoragev1.ArgoCD{}.OpenAPIModelName(), apisstoragev1.SecretRef{}.OpenAPIModelName(), apisstoragev1.UserOrTeam{}.OpenAPIModelName()},
 	}
 }
 
@@ -33259,6 +33067,285 @@ func schema_pkg_apis_storage_v1_HelmReleaseConfig(ref common.ReferenceCallback) 
 	}
 }
 
+func schema_pkg_apis_storage_v1_HostValidationGroup(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "HostValidationGroup says where a set of settings lives, and what each one has to be.",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"name": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Name identifies the group in the results. It is a DNS-1123 label, unique within the profile.",
+							Default:     "",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"target": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Target is the component whose BMC holds these settings.\n\nPossible enum values:\n - `\"Host\"` is the machine's own BMC, routed by status.hardware.serial.",
+							Default:     "",
+							Type:        []string{"string"},
+							Format:      "",
+							Enum:        []interface{}{"Host"},
+						},
+					},
+					"type": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Type is the protocol the settings are read with, and names the block below that says where in it they live.\n\nPossible enum values:\n - `\"Redfish\"` reads the settings over Redfish, from the resource named in the group's redfish block.",
+							Default:     "",
+							Type:        []string{"string"},
+							Format:      "",
+							Enum:        []interface{}{"Redfish"},
+						},
+					},
+					"redfish": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Redfish says where the settings live when Type is Redfish. Required then, refused otherwise.",
+							Ref:         ref(apisstoragev1.HostValidationRedfish{}.OpenAPIModelName()),
+						},
+					},
+					"settings": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Settings are the values this group requires. At least one.",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref(apisstoragev1.HostValidationSetting{}.OpenAPIModelName()),
+									},
+								},
+							},
+						},
+					},
+				},
+				Required: []string{"name", "target", "type", "settings"},
+			},
+		},
+		Dependencies: []string{
+			apisstoragev1.HostValidationRedfish{}.OpenAPIModelName(), apisstoragev1.HostValidationSetting{}.OpenAPIModelName()},
+	}
+}
+
+func schema_pkg_apis_storage_v1_HostValidationProfile(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "HostValidationProfile names the settings a kind of host has to have. Node types select profiles by label, and a machine is picked for a node type only once it matches every profile that node type selects. It names neither machines nor a node provider: the controller resolves the backend per machine. Only platform admins manage it.",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"kind": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"apiVersion": {
+						SchemaProps: spec.SchemaProps{
+							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"metadata": {
+						SchemaProps: spec.SchemaProps{
+							Default: map[string]interface{}{},
+							Ref:     ref(metav1.ObjectMeta{}.OpenAPIModelName()),
+						},
+					},
+					"spec": {
+						SchemaProps: spec.SchemaProps{
+							Default: map[string]interface{}{},
+							Ref:     ref(apisstoragev1.HostValidationProfileSpec{}.OpenAPIModelName()),
+						},
+					},
+					"status": {
+						SchemaProps: spec.SchemaProps{
+							Default: map[string]interface{}{},
+							Ref:     ref(apisstoragev1.HostValidationProfileStatus{}.OpenAPIModelName()),
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			apisstoragev1.HostValidationProfileSpec{}.OpenAPIModelName(), apisstoragev1.HostValidationProfileStatus{}.OpenAPIModelName(), metav1.ObjectMeta{}.OpenAPIModelName()},
+	}
+}
+
+func schema_pkg_apis_storage_v1_HostValidationProfileList(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "HostValidationProfileList contains a list of HostValidationProfile.",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"kind": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"apiVersion": {
+						SchemaProps: spec.SchemaProps{
+							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"metadata": {
+						SchemaProps: spec.SchemaProps{
+							Default: map[string]interface{}{},
+							Ref:     ref(metav1.ListMeta{}.OpenAPIModelName()),
+						},
+					},
+					"items": {
+						SchemaProps: spec.SchemaProps{
+							Type: []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref(apisstoragev1.HostValidationProfile{}.OpenAPIModelName()),
+									},
+								},
+							},
+						},
+					},
+				},
+				Required: []string{"items"},
+			},
+		},
+		Dependencies: []string{
+			apisstoragev1.HostValidationProfile{}.OpenAPIModelName(), metav1.ListMeta{}.OpenAPIModelName()},
+	}
+}
+
+func schema_pkg_apis_storage_v1_HostValidationProfileSpec(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "HostValidationProfileSpec is what a host has to satisfy, grouped by where the settings live.",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"displayName": {
+						SchemaProps: spec.SchemaProps{
+							Description: "DisplayName is the name that should be displayed in the UI.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"description": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Description describes what the profile is intended for.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"outOfBand": {
+						SchemaProps: spec.SchemaProps{
+							Description: "OutOfBand holds the checks the controller reads from a BMC without running anything on the machine, such as firmware settings.",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref(apisstoragev1.HostValidationGroup{}.OpenAPIModelName()),
+									},
+								},
+							},
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			apisstoragev1.HostValidationGroup{}.OpenAPIModelName()},
+	}
+}
+
+func schema_pkg_apis_storage_v1_HostValidationProfileStatus(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+			},
+		},
+	}
+}
+
+func schema_pkg_apis_storage_v1_HostValidationRedfish(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "HostValidationRedfish locates a group's settings in Redfish.",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"resource": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Resource is the location relative to the target's Redfish system.\n\nPossible enum values:\n - `\"Bios\"` is the system's Bios resource, whose Attributes hold the firmware settings and whose settings object holds the ones pending the next reboot.",
+							Default:     "",
+							Type:        []string{"string"},
+							Format:      "",
+							Enum:        []interface{}{"Bios"},
+						},
+					},
+				},
+				Required: []string{"resource"},
+			},
+		},
+	}
+}
+
+func schema_pkg_apis_storage_v1_HostValidationSetting(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "HostValidationSetting is one value a host has to have.",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"name": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Name identifies the setting in the results. It is a DNS-1123 label, unique within the group.",
+							Default:     "",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"attribute": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Attribute is the setting's name at the group's location. For a Redfish Bios group it is the name from the BMC's attribute registry.",
+							Default:     "",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"value": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Value is what the attribute has to be. The controller renders the BMC's value before it compares: a string as it is, a boolean as \"true\" or \"false\", a number in decimal. The comparison is exact and case-sensitive.",
+							Default:     "",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"purpose": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Purpose says why the setting is required, for whoever reads the result.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+				},
+				Required: []string{"name", "attribute", "value"},
+			},
+		},
+	}
+}
+
 func schema_pkg_apis_storage_v1_InstanceAccess(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
@@ -33404,51 +33491,6 @@ func schema_pkg_apis_storage_v1_InstanceDeployedAppStatus(ref common.ReferenceCa
 	}
 }
 
-func schema_pkg_apis_storage_v1_KindSecretRef(ref common.ReferenceCallback) common.OpenAPIDefinition {
-	return common.OpenAPIDefinition{
-		Schema: spec.Schema{
-			SchemaProps: spec.SchemaProps{
-				Description: "KindSecretRef is the reference to a secret containing the user password",
-				Type:        []string{"object"},
-				Properties: map[string]spec.Schema{
-					"apiGroup": {
-						SchemaProps: spec.SchemaProps{
-							Description: "APIGroup is the api group of the secret",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"kind": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Kind is the kind of the secret",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"secretName": {
-						SchemaProps: spec.SchemaProps{
-							Type:   []string{"string"},
-							Format: "",
-						},
-					},
-					"secretNamespace": {
-						SchemaProps: spec.SchemaProps{
-							Type:   []string{"string"},
-							Format: "",
-						},
-					},
-					"key": {
-						SchemaProps: spec.SchemaProps{
-							Type:   []string{"string"},
-							Format: "",
-						},
-					},
-				},
-			},
-		},
-	}
-}
-
 func schema_pkg_apis_storage_v1_KubeVirtDeployment(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
@@ -33564,7 +33606,7 @@ func schema_pkg_apis_storage_v1_KubeVirtNodeTypeSpec(ref common.ReferenceCallbac
 					},
 					"machineAllocationPolicy": {
 						SchemaProps: spec.SchemaProps{
-							Description: "MachineAllocationPolicy selects the machines a tenant's NodeClaims of this type may use: Assigned only those the tenant owns or was assigned exclusively, OnDemand also those no tenant owns or holds (never another tenant's or the platform's). Claims no tenant owns reach unassigned machines either way. Honored by metal3 and nico; externalPlatform node types mirror the remote's value. kubevirt ignores it and runs every VM on the cluster's shared nodes. Empty falls back to the provider's spec.machineAllocationPolicy, then to OnDemand for kubevirt and Assigned for the rest.",
+							Description: "MachineAllocationPolicy selects the machines a tenant's NodeClaims of this type may use: Assigned uses only those the tenant owns or was assigned exclusively, OnDemand uses only those no tenant owns or holds, never the tenant's own or another tenant's. Claims no tenant owns reach unassigned machines either way. Honored by metal3 and nico; externalPlatform node types mirror the remote's value. kubevirt ignores it and runs every VM on the cluster's shared nodes. Empty falls back to the provider's spec.machineAllocationPolicy, then to OnDemand for kubevirt and Assigned for the rest.",
 							Type:        []string{"string"},
 							Format:      "",
 						},
@@ -34169,8 +34211,16 @@ func schema_pkg_apis_storage_v1_MachineHostValidationGroupResult(ref common.Refe
 						},
 					},
 					"settings": {
+						VendorExtensible: spec.VendorExtensible{
+							Extensions: spec.Extensions{
+								"x-kubernetes-list-map-keys": []interface{}{
+									"name",
+								},
+								"x-kubernetes-list-type": "map",
+							},
+						},
 						SchemaProps: spec.SchemaProps{
-							Description: "Settings holds one result per setting of the group.",
+							Description: "Settings holds one result per setting of the group, in the order the group declares them.",
 							Type:        []string{"array"},
 							Items: &spec.SchemaOrArray{
 								Schema: &spec.Schema{
@@ -34208,7 +34258,7 @@ func schema_pkg_apis_storage_v1_MachineHostValidationProfileResult(ref common.Re
 					},
 					"result": {
 						SchemaProps: spec.SchemaProps{
-							Description: "Result is the profile's result.\n\nPossible enum values:\n - `\"Matched\"` means every setting has the value the profile requires.\n - `\"Mismatched\"` means a setting has another value, or the BMC does not report it at all. The host is at fault, so it is not read again on its own: an admin fixes the setting and asks for a re-check.\n - `\"ReadFailed\"` means the proxy or the BMC returned an error, or the BMC reported another serial number. The setup is at fault, not the host. The controller reads again on its own.\n - `\"Reading\"` means the check was requested and has not finished. A result left at Reading by a restart is checked again.\n - `\"RebootRequired\"` means every setting that differs already has the required value staged, so the machine matches the profile once it reboots. The platform never reboots a machine, NICo or an admin does. The controller reads again on its own.\n - `\"Unsupported\"` means nothing can read this machine's settings: its node provider is not NICo, or it has no BMC proxy endpoint. The setup is at fault, not the host, and only a change to the node provider clears it.",
+							Description: "Result is the profile's result.\n\nPossible enum values:\n - `\"Matched\"` means every setting has the value the profile requires.\n - `\"Mismatched\"` means a setting has another value, or the BMC does not report it at all. The host is at fault, so it is not read again on its own: an admin fixes the setting and asks for a re-run.\n - `\"ReadFailed\"` means the proxy or the BMC returned an error, or the BMC reported another serial number. The setup is at fault, not the host. The controller reads again on its own.\n - `\"Reading\"` means the check was requested and has not finished. A result left at Reading by a restart is checked again.\n - `\"RebootRequired\"` means every setting that differs already has the required value staged, so the machine matches the profile once it reboots. The platform never reboots a machine, NICo or an admin does. The controller reads again on its own.\n - `\"Unsupported\"` means nothing can read this machine's settings: its node provider is not NICo, or it has no BMC proxy endpoint. The setup is at fault, not the host, and only a change to the node provider clears it.",
 							Default:     "",
 							Type:        []string{"string"},
 							Format:      "",
@@ -34229,9 +34279,17 @@ func schema_pkg_apis_storage_v1_MachineHostValidationProfileResult(ref common.Re
 							Format:      "",
 						},
 					},
-					"outOfBand": {
+					"groups": {
+						VendorExtensible: spec.VendorExtensible{
+							Extensions: spec.Extensions{
+								"x-kubernetes-list-map-keys": []interface{}{
+									"name",
+								},
+								"x-kubernetes-list-type": "map",
+							},
+						},
 						SchemaProps: spec.SchemaProps{
-							Description: "OutOfBand mirrors the profile's out-of-band groups, one result each.",
+							Description: "Groups mirrors the profile's groups, one result each, in the order the profile declares them.",
 							Type:        []string{"array"},
 							Items: &spec.SchemaOrArray{
 								Schema: &spec.Schema{
@@ -34263,6 +34321,13 @@ func schema_pkg_apis_storage_v1_MachineHostValidationSettingResult(ref common.Re
 						SchemaProps: spec.SchemaProps{
 							Description: "Name is the setting's name in the profile.",
 							Default:     "",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"attribute": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Attribute is the setting's attribute in the profile, the name the BMC knows it by.",
 							Type:        []string{"string"},
 							Format:      "",
 						},
@@ -34318,31 +34383,17 @@ func schema_pkg_apis_storage_v1_MachineHostValidationStatus(ref common.Reference
 							Ref:         ref(apisstoragev1.MachineInBandValidationStatus{}.OpenAPIModelName()),
 						},
 					},
-					"readTime": {
+					"outOfBand": {
 						SchemaProps: spec.SchemaProps{
-							Description: "ReadTime is when the settings behind the profile results were read. The retry of a RebootRequired or ReadFailed profile counts from it.",
-							Ref:         ref(metav1.Time{}.OpenAPIModelName()),
-						},
-					},
-					"profiles": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Profiles holds one result per host validation profile the machine was checked against. A profile added to a node type after this check has no entry, and does not count as matched. They gate picking the machine for a node type.",
-							Type:        []string{"array"},
-							Items: &spec.SchemaOrArray{
-								Schema: &spec.Schema{
-									SchemaProps: spec.SchemaProps{
-										Default: map[string]interface{}{},
-										Ref:     ref(apisstoragev1.MachineHostValidationProfileResult{}.OpenAPIModelName()),
-									},
-								},
-							},
+							Description: "OutOfBand is the machine's last check against its host validation profiles, which reads its BMC without running anything on it. It gates picking the machine for a node type.",
+							Ref:         ref(apisstoragev1.MachineOutOfBandValidationStatus{}.OpenAPIModelName()),
 						},
 					},
 				},
 			},
 		},
 		Dependencies: []string{
-			apisstoragev1.MachineHostValidationProfileResult{}.OpenAPIModelName(), apisstoragev1.MachineInBandValidationStatus{}.OpenAPIModelName(), metav1.Time{}.OpenAPIModelName()},
+			apisstoragev1.MachineInBandValidationStatus{}.OpenAPIModelName(), apisstoragev1.MachineOutOfBandValidationStatus{}.OpenAPIModelName()},
 	}
 }
 
@@ -34633,7 +34684,7 @@ func schema_pkg_apis_storage_v1_MachineNodeTypeSpec(ref common.ReferenceCallback
 					},
 					"machineAllocationPolicy": {
 						SchemaProps: spec.SchemaProps{
-							Description: "MachineAllocationPolicy selects the machines a tenant's NodeClaims of this type may use: Assigned only those the tenant owns or was assigned exclusively, OnDemand also those no tenant owns or holds (never another tenant's or the platform's). Claims no tenant owns reach unassigned machines either way. Honored by metal3 and nico; externalPlatform node types mirror the remote's value. kubevirt ignores it and runs every VM on the cluster's shared nodes. Empty falls back to the provider's spec.machineAllocationPolicy, then to OnDemand for kubevirt and Assigned for the rest.",
+							Description: "MachineAllocationPolicy selects the machines a tenant's NodeClaims of this type may use: Assigned uses only those the tenant owns or was assigned exclusively, OnDemand uses only those no tenant owns or holds, never the tenant's own or another tenant's. Claims no tenant owns reach unassigned machines either way. Honored by metal3 and nico; externalPlatform node types mirror the remote's value. kubevirt ignores it and runs every VM on the cluster's shared nodes. Empty falls back to the provider's spec.machineAllocationPolicy, then to OnDemand for kubevirt and Assigned for the rest.",
 							Type:        []string{"string"},
 							Format:      "",
 						},
@@ -34660,12 +34711,61 @@ func schema_pkg_apis_storage_v1_MachineNodeTypeSpec(ref common.ReferenceCallback
 							Ref:         ref(apisstoragev1.NodeTypeMachines{}.OpenAPIModelName()),
 						},
 					},
+					"hostValidationProfiles": {
+						SchemaProps: spec.SchemaProps{
+							Description: "HostValidationProfiles selects the HostValidationProfiles a Machine has to match before this NodeType picks it.",
+							Ref:         ref(apisstoragev1.NodeTypeHostValidationProfiles{}.OpenAPIModelName()),
+						},
+					},
 				},
 				Required: []string{"name"},
 			},
 		},
 		Dependencies: []string{
-			apisstoragev1.ManagedNodeTypeObjectMeta{}.OpenAPIModelName(), apisstoragev1.NodeTypeMachines{}.OpenAPIModelName(), apisstoragev1.NodeTypeOverhead{}.OpenAPIModelName(), resource.Quantity{}.OpenAPIModelName()},
+			apisstoragev1.ManagedNodeTypeObjectMeta{}.OpenAPIModelName(), apisstoragev1.NodeTypeHostValidationProfiles{}.OpenAPIModelName(), apisstoragev1.NodeTypeMachines{}.OpenAPIModelName(), apisstoragev1.NodeTypeOverhead{}.OpenAPIModelName(), resource.Quantity{}.OpenAPIModelName()},
+	}
+}
+
+func schema_pkg_apis_storage_v1_MachineOutOfBandValidationStatus(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "MachineOutOfBandValidationStatus is a machine's last check against its host validation profiles.",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"readTime": {
+						SchemaProps: spec.SchemaProps{
+							Description: "ReadTime is when the settings behind the profile results were read. The retry of a RebootRequired or ReadFailed profile counts from it.",
+							Ref:         ref(metav1.Time{}.OpenAPIModelName()),
+						},
+					},
+					"profiles": {
+						VendorExtensible: spec.VendorExtensible{
+							Extensions: spec.Extensions{
+								"x-kubernetes-list-map-keys": []interface{}{
+									"name",
+								},
+								"x-kubernetes-list-type": "map",
+							},
+						},
+						SchemaProps: spec.SchemaProps{
+							Description: "Profiles holds one result per host validation profile the machine was checked against, by profile name. A profile added to a node type after this check has no entry, and does not count as matched.",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref(apisstoragev1.MachineHostValidationProfileResult{}.OpenAPIModelName()),
+									},
+								},
+							},
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			apisstoragev1.MachineHostValidationProfileResult{}.OpenAPIModelName(), metav1.Time{}.OpenAPIModelName()},
 	}
 }
 
@@ -35329,7 +35429,7 @@ func schema_pkg_apis_storage_v1_Metal3NodeTypeSpec(ref common.ReferenceCallback)
 					},
 					"machineAllocationPolicy": {
 						SchemaProps: spec.SchemaProps{
-							Description: "MachineAllocationPolicy selects the machines a tenant's NodeClaims of this type may use: Assigned only those the tenant owns or was assigned exclusively, OnDemand also those no tenant owns or holds (never another tenant's or the platform's). Claims no tenant owns reach unassigned machines either way. Honored by metal3 and nico; externalPlatform node types mirror the remote's value. kubevirt ignores it and runs every VM on the cluster's shared nodes. Empty falls back to the provider's spec.machineAllocationPolicy, then to OnDemand for kubevirt and Assigned for the rest.",
+							Description: "MachineAllocationPolicy selects the machines a tenant's NodeClaims of this type may use: Assigned uses only those the tenant owns or was assigned exclusively, OnDemand uses only those no tenant owns or holds, never the tenant's own or another tenant's. Claims no tenant owns reach unassigned machines either way. Honored by metal3 and nico; externalPlatform node types mirror the remote's value. kubevirt ignores it and runs every VM on the cluster's shared nodes. Empty falls back to the provider's spec.machineAllocationPolicy, then to OnDemand for kubevirt and Assigned for the rest.",
 							Type:        []string{"string"},
 							Format:      "",
 						},
@@ -35356,6 +35456,12 @@ func schema_pkg_apis_storage_v1_Metal3NodeTypeSpec(ref common.ReferenceCallback)
 							Ref:         ref(apisstoragev1.NodeTypeMachines{}.OpenAPIModelName()),
 						},
 					},
+					"hostValidationProfiles": {
+						SchemaProps: spec.SchemaProps{
+							Description: "HostValidationProfiles selects the HostValidationProfiles a Machine has to match before this NodeType picks it.",
+							Ref:         ref(apisstoragev1.NodeTypeHostValidationProfiles{}.OpenAPIModelName()),
+						},
+					},
 					"bareMetalHosts": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Deprecated: use machines.selector. Read only while machines.selector is unset.",
@@ -35368,7 +35474,7 @@ func schema_pkg_apis_storage_v1_Metal3NodeTypeSpec(ref common.ReferenceCallback)
 			},
 		},
 		Dependencies: []string{
-			apisstoragev1.ManagedNodeTypeObjectMeta{}.OpenAPIModelName(), apisstoragev1.Metal3BareMetalHosts{}.OpenAPIModelName(), apisstoragev1.NodeTypeMachines{}.OpenAPIModelName(), apisstoragev1.NodeTypeOverhead{}.OpenAPIModelName(), resource.Quantity{}.OpenAPIModelName()},
+			apisstoragev1.ManagedNodeTypeObjectMeta{}.OpenAPIModelName(), apisstoragev1.Metal3BareMetalHosts{}.OpenAPIModelName(), apisstoragev1.NodeTypeHostValidationProfiles{}.OpenAPIModelName(), apisstoragev1.NodeTypeMachines{}.OpenAPIModelName(), apisstoragev1.NodeTypeOverhead{}.OpenAPIModelName(), resource.Quantity{}.OpenAPIModelName()},
 	}
 }
 
@@ -35407,47 +35513,6 @@ func schema_pkg_apis_storage_v1_Metal3ProviderDeployment(ref common.ReferenceCal
 	}
 }
 
-func schema_pkg_apis_storage_v1_Metrics(ref common.ReferenceCallback) common.OpenAPIDefinition {
-	return common.OpenAPIDefinition{
-		Schema: spec.Schema{
-			SchemaProps: spec.SchemaProps{
-				Type: []string{"object"},
-				Properties: map[string]spec.Schema{
-					"replicas": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Replicas is the number of desired replicas.",
-							Type:        []string{"integer"},
-							Format:      "int32",
-						},
-					},
-					"resources": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Resources are compute resource required by the metrics backend",
-							Ref:         ref(corev1.ResourceRequirements{}.OpenAPIModelName()),
-						},
-					},
-					"retention": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Retention is the metrics data retention period. Default is 1y",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"storage": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Storage contains settings related to the metrics backend's persistent volume configuration",
-							Default:     map[string]interface{}{},
-							Ref:         ref(apisstoragev1.Storage{}.OpenAPIModelName()),
-						},
-					},
-				},
-			},
-		},
-		Dependencies: []string{
-			apisstoragev1.Storage{}.OpenAPIModelName(), corev1.ResourceRequirements{}.OpenAPIModelName()},
-	}
-}
-
 func schema_pkg_apis_storage_v1_MultusDeployment(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
@@ -35473,6 +35538,35 @@ func schema_pkg_apis_storage_v1_MultusDeployment(ref common.ReferenceCallback) c
 				Required: []string{"enabled"},
 			},
 		},
+	}
+}
+
+func schema_pkg_apis_storage_v1_NICoEndpoints(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "NICoEndpoints are the NICo services a provider talks to, each with its own TLS settings.",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"api": {
+						SchemaProps: spec.SchemaProps{
+							Description: "API is the NICo REST API, which every provider needs. The /v2/org/{org}/nico path is appended by the client, and its URL is also the audience of the tokens the platform signs for it, which NICo matches exactly.",
+							Default:     map[string]interface{}{},
+							Ref:         ref(apisstoragev1.ServiceEndpoint{}.OpenAPIModelName()),
+						},
+					},
+					"bmcProxy": {
+						SchemaProps: spec.SchemaProps{
+							Description: "BMCProxy is the nico-bmc-proxy this provider's machines are read through. It authenticates the platform by client certificate and forwards Redfish reads to a machine's BMC, so the platform never holds a BMC credential itself. Without it, a machine of this provider whose node type selects a host validation profile fails that profile as Unsupported rather than silently passing it.",
+							Ref:         ref(apisstoragev1.ServiceEndpoint{}.OpenAPIModelName()),
+						},
+					},
+				},
+				Required: []string{"api"},
+			},
+		},
+		Dependencies: []string{
+			apisstoragev1.ServiceEndpoint{}.OpenAPIModelName()},
 	}
 }
 
@@ -35586,7 +35680,7 @@ func schema_pkg_apis_storage_v1_NamedNodeTypeSpec(ref common.ReferenceCallback) 
 					},
 					"machineAllocationPolicy": {
 						SchemaProps: spec.SchemaProps{
-							Description: "MachineAllocationPolicy selects the machines a tenant's NodeClaims of this type may use: Assigned only those the tenant owns or was assigned exclusively, OnDemand also those no tenant owns or holds (never another tenant's or the platform's). Claims no tenant owns reach unassigned machines either way. Honored by metal3 and nico; externalPlatform node types mirror the remote's value. kubevirt ignores it and runs every VM on the cluster's shared nodes. Empty falls back to the provider's spec.machineAllocationPolicy, then to OnDemand for kubevirt and Assigned for the rest.",
+							Description: "MachineAllocationPolicy selects the machines a tenant's NodeClaims of this type may use: Assigned uses only those the tenant owns or was assigned exclusively, OnDemand uses only those no tenant owns or holds, never the tenant's own or another tenant's. Claims no tenant owns reach unassigned machines either way. Honored by metal3 and nico; externalPlatform node types mirror the remote's value. kubevirt ignores it and runs every VM on the cluster's shared nodes. Empty falls back to the provider's spec.machineAllocationPolicy, then to OnDemand for kubevirt and Assigned for the rest.",
 							Type:        []string{"string"},
 							Format:      "",
 						},
@@ -37826,10 +37920,15 @@ func schema_pkg_apis_storage_v1_NodeProviderNICo(ref common.ReferenceCallback) c
 				Properties: map[string]spec.Schema{
 					"endpoint": {
 						SchemaProps: spec.SchemaProps{
-							Description: "Endpoint is the base URL (scheme + host + optional port) of the NICo REST API. The /v2/org/{org}/nico path is appended by the client.",
-							Default:     "",
+							Description: "Deprecated: use endpoints.api.url. Read only while endpoints is unset.",
 							Type:        []string{"string"},
 							Format:      "",
+						},
+					},
+					"endpoints": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Endpoints are the NICo services this provider talks to. Set this or the deprecated endpoint, not both.",
+							Ref:         ref(apisstoragev1.NICoEndpoints{}.OpenAPIModelName()),
 						},
 					},
 					"org": {
@@ -37875,7 +37974,7 @@ func schema_pkg_apis_storage_v1_NodeProviderNICo(ref common.ReferenceCallback) c
 					},
 					"insecureSkipTLSVerify": {
 						SchemaProps: spec.SchemaProps{
-							Description: "InsecureSkipTLSVerify disables TLS certificate verification against the NICo endpoint. Intended for development and test only.",
+							Description: "Deprecated: use endpoints.api.insecureSkipTLSVerify. Read only while endpoints is unset.",
 							Type:        []string{"boolean"},
 							Format:      "",
 						},
@@ -37889,11 +37988,65 @@ func schema_pkg_apis_storage_v1_NodeProviderNICo(ref common.ReferenceCallback) c
 						},
 					},
 				},
-				Required: []string{"endpoint"},
 			},
 		},
 		Dependencies: []string{
-			apisstoragev1.MachineNodeTypeSpec{}.OpenAPIModelName(), apisstoragev1.NICoIdentity{}.OpenAPIModelName()},
+			apisstoragev1.MachineNodeTypeSpec{}.OpenAPIModelName(), apisstoragev1.NICoEndpoints{}.OpenAPIModelName(), apisstoragev1.NICoIdentity{}.OpenAPIModelName()},
+	}
+}
+
+func schema_pkg_apis_storage_v1_NodeProviderNICoBMCProxyStatus(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "NodeProviderNICoBMCProxyStatus is the proxy configuration the site team copies from the platform.",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"clientCA": {
+						SchemaProps: spec.SchemaProps{
+							Description: "ClientCA is the PEM encoded certificate of the CA the platform signs its client certificates with. The site installs it as the proxy's admin root CA file. The platform builds it from its license key and keeps it nowhere else, so a restart republishes the same certificate and a regenerated license key republishes a different one.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"issuerCN": {
+						SchemaProps: spec.SchemaProps{
+							Description: "IssuerCN is the common name of that CA, which the proxy has to accept as an issuer.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"principal": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Principal is the identity the proxy maps this provider's client certificates to, and so the key the site grants the Redfish reads to in the proxy's ACLs.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+				},
+			},
+		},
+	}
+}
+
+func schema_pkg_apis_storage_v1_NodeProviderNICoStatus(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "NodeProviderNICoStatus is what a NICo node provider publishes about itself.",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"bmcProxy": {
+						SchemaProps: spec.SchemaProps{
+							Description: "BMCProxy is what the site has to trust and grant before the platform can read this provider's machines through nico-bmc-proxy. It is published while spec.nico.endpoints.bmcProxy is set and cleared when it is removed.",
+							Ref:         ref(apisstoragev1.NodeProviderNICoBMCProxyStatus{}.OpenAPIModelName()),
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			apisstoragev1.NodeProviderNICoBMCProxyStatus{}.OpenAPIModelName()},
 	}
 }
 
@@ -38026,11 +38179,17 @@ func schema_pkg_apis_storage_v1_NodeProviderStatus(ref common.ReferenceCallback)
 							Format:      "",
 						},
 					},
+					"nico": {
+						SchemaProps: spec.SchemaProps{
+							Description: "NICo holds what a NICo provider publishes for the site team to act on.",
+							Ref:         ref(apisstoragev1.NodeProviderNICoStatus{}.OpenAPIModelName()),
+						},
+					},
 				},
 			},
 		},
 		Dependencies: []string{
-			storagev1.Condition{}.OpenAPIModelName()},
+			storagev1.Condition{}.OpenAPIModelName(), apisstoragev1.NodeProviderNICoStatus{}.OpenAPIModelName()},
 	}
 }
 
@@ -38273,6 +38432,27 @@ func schema_pkg_apis_storage_v1_NodeTypeCapacity(ref common.ReferenceCallback) c
 	}
 }
 
+func schema_pkg_apis_storage_v1_NodeTypeHostValidationProfiles(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "NodeTypeHostValidationProfiles selects the host validation profiles a node type requires.",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"selector": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Selector is matched against the labels of the platform's HostValidationProfiles. Unset selects none, so the node type picks machines as it did before host validation existed; an empty selector selects every profile.",
+							Ref:         ref(metav1.LabelSelector{}.OpenAPIModelName()),
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			metav1.LabelSelector{}.OpenAPIModelName()},
+	}
+}
+
 func schema_pkg_apis_storage_v1_NodeTypeList(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
@@ -38437,7 +38617,7 @@ func schema_pkg_apis_storage_v1_NodeTypeSpec(ref common.ReferenceCallback) commo
 					},
 					"machineAllocationPolicy": {
 						SchemaProps: spec.SchemaProps{
-							Description: "MachineAllocationPolicy selects the machines a tenant's NodeClaims of this type may use: Assigned only those the tenant owns or was assigned exclusively, OnDemand also those no tenant owns or holds (never another tenant's or the platform's). Claims no tenant owns reach unassigned machines either way. Honored by metal3 and nico; externalPlatform node types mirror the remote's value. kubevirt ignores it and runs every VM on the cluster's shared nodes. Empty falls back to the provider's spec.machineAllocationPolicy, then to OnDemand for kubevirt and Assigned for the rest.",
+							Description: "MachineAllocationPolicy selects the machines a tenant's NodeClaims of this type may use: Assigned uses only those the tenant owns or was assigned exclusively, OnDemand uses only those no tenant owns or holds, never the tenant's own or another tenant's. Claims no tenant owns reach unassigned machines either way. Honored by metal3 and nico; externalPlatform node types mirror the remote's value. kubevirt ignores it and runs every VM on the cluster's shared nodes. Empty falls back to the provider's spec.machineAllocationPolicy, then to OnDemand for kubevirt and Assigned for the rest.",
 							Type:        []string{"string"},
 							Format:      "",
 						},
@@ -38836,33 +39016,6 @@ func schema_pkg_apis_storage_v1_ObjectsStatus(ref common.ReferenceCallback) comm
 		},
 		Dependencies: []string{
 			apisstoragev1.AppReference{}.OpenAPIModelName(), apisstoragev1.ChartStatus{}.OpenAPIModelName()},
-	}
-}
-
-func schema_pkg_apis_storage_v1_OpenCost(ref common.ReferenceCallback) common.OpenAPIDefinition {
-	return common.OpenAPIDefinition{
-		Schema: spec.Schema{
-			SchemaProps: spec.SchemaProps{
-				Type: []string{"object"},
-				Properties: map[string]spec.Schema{
-					"replicas": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Replicas is the number of desired replicas.",
-							Type:        []string{"integer"},
-							Format:      "int32",
-						},
-					},
-					"resources": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Resources are compute resource required by the OpenCost backend",
-							Ref:         ref(corev1.ResourceRequirements{}.OpenAPIModelName()),
-						},
-					},
-				},
-			},
-		},
-		Dependencies: []string{
-			corev1.ResourceRequirements{}.OpenAPIModelName()},
 	}
 }
 
@@ -39913,192 +40066,39 @@ func schema_pkg_apis_storage_v1_SecretRef(ref common.ReferenceCallback) common.O
 	}
 }
 
-func schema_pkg_apis_storage_v1_SharedSecret(ref common.ReferenceCallback) common.OpenAPIDefinition {
+func schema_pkg_apis_storage_v1_ServiceEndpoint(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
-				Description: "SharedSecret holds the secret information",
+				Description: "ServiceEndpoint is how the platform reaches one HTTP service: where it lives, and how its server certificate is verified. Nothing about it is specific to a provider.",
 				Type:        []string{"object"},
 				Properties: map[string]spec.Schema{
-					"kind": {
+					"url": {
 						SchemaProps: spec.SchemaProps{
-							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+							Description: "URL is the base URL of the service, carrying a scheme, a host and an optional port.",
+							Default:     "",
 							Type:        []string{"string"},
 							Format:      "",
 						},
 					},
-					"apiVersion": {
+					"caBundle": {
 						SchemaProps: spec.SchemaProps{
-							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+							Description: "CABundle is the PEM encoded CA bundle that issued the service's server certificate. Empty means the system roots are used. Each endpoint carries its own, because the services one provider talks to are not necessarily issued by the same CA. Refused together with insecureSkipTLSVerify, which already trusts anything.",
 							Type:        []string{"string"},
+							Format:      "byte",
+						},
+					},
+					"insecureSkipTLSVerify": {
+						SchemaProps: spec.SchemaProps{
+							Description: "InsecureSkipTLSVerify disables verification of this service's server certificate. Intended for development and test only. Refused together with caBundle, which it would make useless.",
+							Type:        []string{"boolean"},
 							Format:      "",
-						},
-					},
-					"metadata": {
-						SchemaProps: spec.SchemaProps{
-							Default: map[string]interface{}{},
-							Ref:     ref(metav1.ObjectMeta{}.OpenAPIModelName()),
-						},
-					},
-					"spec": {
-						SchemaProps: spec.SchemaProps{
-							Default: map[string]interface{}{},
-							Ref:     ref(apisstoragev1.SharedSecretSpec{}.OpenAPIModelName()),
-						},
-					},
-					"status": {
-						SchemaProps: spec.SchemaProps{
-							Default: map[string]interface{}{},
-							Ref:     ref(apisstoragev1.SharedSecretStatus{}.OpenAPIModelName()),
 						},
 					},
 				},
+				Required: []string{"url"},
 			},
 		},
-		Dependencies: []string{
-			apisstoragev1.SharedSecretSpec{}.OpenAPIModelName(), apisstoragev1.SharedSecretStatus{}.OpenAPIModelName(), metav1.ObjectMeta{}.OpenAPIModelName()},
-	}
-}
-
-func schema_pkg_apis_storage_v1_SharedSecretList(ref common.ReferenceCallback) common.OpenAPIDefinition {
-	return common.OpenAPIDefinition{
-		Schema: spec.Schema{
-			SchemaProps: spec.SchemaProps{
-				Description: "SharedSecretList contains a list of SharedSecret",
-				Type:        []string{"object"},
-				Properties: map[string]spec.Schema{
-					"kind": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"apiVersion": {
-						SchemaProps: spec.SchemaProps{
-							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"metadata": {
-						SchemaProps: spec.SchemaProps{
-							Default: map[string]interface{}{},
-							Ref:     ref(metav1.ListMeta{}.OpenAPIModelName()),
-						},
-					},
-					"items": {
-						SchemaProps: spec.SchemaProps{
-							Type: []string{"array"},
-							Items: &spec.SchemaOrArray{
-								Schema: &spec.Schema{
-									SchemaProps: spec.SchemaProps{
-										Default: map[string]interface{}{},
-										Ref:     ref(apisstoragev1.SharedSecret{}.OpenAPIModelName()),
-									},
-								},
-							},
-						},
-					},
-				},
-				Required: []string{"items"},
-			},
-		},
-		Dependencies: []string{
-			apisstoragev1.SharedSecret{}.OpenAPIModelName(), metav1.ListMeta{}.OpenAPIModelName()},
-	}
-}
-
-func schema_pkg_apis_storage_v1_SharedSecretSpec(ref common.ReferenceCallback) common.OpenAPIDefinition {
-	return common.OpenAPIDefinition{
-		Schema: spec.Schema{
-			SchemaProps: spec.SchemaProps{
-				Description: "SharedSecretSpec holds the specification",
-				Type:        []string{"object"},
-				Properties: map[string]spec.Schema{
-					"displayName": {
-						SchemaProps: spec.SchemaProps{
-							Description: "DisplayName is the name that should be displayed in the UI",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"description": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Description describes a shared secret",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"owner": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Owner holds the owner of this object",
-							Ref:         ref(apisstoragev1.UserOrTeam{}.OpenAPIModelName()),
-						},
-					},
-					"data": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Data contains the secret data. Each key must consist of alphanumeric characters, '-', '_' or '.'. The serialized form of the secret data is a base64 encoded string, representing the arbitrary (possibly non-string) data value here. Described in https://tools.ietf.org/html/rfc4648#section-4",
-							Type:        []string{"object"},
-							AdditionalProperties: &spec.SchemaOrBool{
-								Allows: true,
-								Schema: &spec.Schema{
-									SchemaProps: spec.SchemaProps{
-										Type:   []string{"string"},
-										Format: "byte",
-									},
-								},
-							},
-						},
-					},
-					"access": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Access holds the access rights for users and teams which will be transformed to Roles and RoleBindings",
-							Type:        []string{"array"},
-							Items: &spec.SchemaOrArray{
-								Schema: &spec.Schema{
-									SchemaProps: spec.SchemaProps{
-										Default: map[string]interface{}{},
-										Ref:     ref(apisstoragev1.Access{}.OpenAPIModelName()),
-									},
-								},
-							},
-						},
-					},
-				},
-			},
-		},
-		Dependencies: []string{
-			apisstoragev1.Access{}.OpenAPIModelName(), apisstoragev1.UserOrTeam{}.OpenAPIModelName()},
-	}
-}
-
-func schema_pkg_apis_storage_v1_SharedSecretStatus(ref common.ReferenceCallback) common.OpenAPIDefinition {
-	return common.OpenAPIDefinition{
-		Schema: spec.Schema{
-			SchemaProps: spec.SchemaProps{
-				Description: "SharedSecretStatus holds the status",
-				Type:        []string{"object"},
-				Properties: map[string]spec.Schema{
-					"conditions": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Conditions holds several conditions the project might be in",
-							Type:        []string{"array"},
-							Items: &spec.SchemaOrArray{
-								Schema: &spec.Schema{
-									SchemaProps: spec.SchemaProps{
-										Default: map[string]interface{}{},
-										Ref:     ref(storagev1.Condition{}.OpenAPIModelName()),
-									},
-								},
-							},
-						},
-					},
-				},
-			},
-		},
-		Dependencies: []string{
-			storagev1.Condition{}.OpenAPIModelName()},
 	}
 }
 
@@ -42708,32 +42708,6 @@ func schema_pkg_apis_storage_v1_StackUITimeline(ref common.ReferenceCallback) co
 	}
 }
 
-func schema_pkg_apis_storage_v1_Storage(ref common.ReferenceCallback) common.OpenAPIDefinition {
-	return common.OpenAPIDefinition{
-		Schema: spec.Schema{
-			SchemaProps: spec.SchemaProps{
-				Type: []string{"object"},
-				Properties: map[string]spec.Schema{
-					"storageClass": {
-						SchemaProps: spec.SchemaProps{
-							Description: "StorageClass the storage class to use when provisioning the metrics backend's persistent volume If set to \"-\" or \"\" dynamic provisioning is disabled If set to undefined or null (the default), the cluster's default storage class is used for provisioning",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"size": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Size the size of the metrics backend's persistent volume",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-				},
-			},
-		},
-	}
-}
-
 func schema_pkg_apis_storage_v1_StorageAccount(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
@@ -43955,19 +43929,6 @@ func schema_pkg_apis_storage_v1_TeamSpec(ref common.ReferenceCallback) common.Op
 							},
 						},
 					},
-					"imagePullSecrets": {
-						SchemaProps: spec.SchemaProps{
-							Description: "ImagePullSecrets holds secret references to image pull secrets the team has access to.",
-							Type:        []string{"array"},
-							Items: &spec.SchemaOrArray{
-								Schema: &spec.Schema{
-									SchemaProps: spec.SchemaProps{
-										Ref: ref(apisstoragev1.KindSecretRef{}.OpenAPIModelName()),
-									},
-								},
-							},
-						},
-					},
 					"clusterRoles": {
 						SchemaProps: spec.SchemaProps{
 							Description: "ClusterRoles define the cluster roles that the users should have assigned in the cluster.",
@@ -44000,7 +43961,7 @@ func schema_pkg_apis_storage_v1_TeamSpec(ref common.ReferenceCallback) common.Op
 			},
 		},
 		Dependencies: []string{
-			apisstoragev1.Access{}.OpenAPIModelName(), apisstoragev1.ClusterRoleRef{}.OpenAPIModelName(), apisstoragev1.KindSecretRef{}.OpenAPIModelName(), apisstoragev1.UserOrTeam{}.OpenAPIModelName()},
+			apisstoragev1.Access{}.OpenAPIModelName(), apisstoragev1.ClusterRoleRef{}.OpenAPIModelName(), apisstoragev1.UserOrTeam{}.OpenAPIModelName()},
 	}
 }
 
@@ -44551,9 +44512,15 @@ func schema_pkg_apis_storage_v1_TenantNICoStatus(ref common.ReferenceCallback) c
 							Format:      "",
 						},
 					},
+					"api": {
+						SchemaProps: spec.SchemaProps{
+							Description: "API is the NICo REST API endpoint taken from that NodeProvider. The Tenant is released through it, also after the NodeProvider is gone.",
+							Ref:         ref(apisstoragev1.ServiceEndpoint{}.OpenAPIModelName()),
+						},
+					},
 					"endpoint": {
 						SchemaProps: spec.SchemaProps{
-							Description: "Endpoint is the NICo REST API endpoint taken from that NodeProvider.",
+							Description: "Deprecated: use api.url. Read only while api is unset, and still written so a platform without api can release the Tenant.",
 							Type:        []string{"string"},
 							Format:      "",
 						},
@@ -44567,7 +44534,7 @@ func schema_pkg_apis_storage_v1_TenantNICoStatus(ref common.ReferenceCallback) c
 					},
 					"insecureSkipTLSVerify": {
 						SchemaProps: spec.SchemaProps{
-							Description: "InsecureSkipTLSVerify reports whether TLS verification is skipped when reaching the NICo endpoint.",
+							Description: "Deprecated: use api.insecureSkipTLSVerify. Read only while api is unset, and still written so a platform without api can release the Tenant.",
 							Type:        []string{"boolean"},
 							Format:      "",
 						},
@@ -44603,7 +44570,7 @@ func schema_pkg_apis_storage_v1_TenantNICoStatus(ref common.ReferenceCallback) c
 			},
 		},
 		Dependencies: []string{
-			apisstoragev1.TenantNICoSiteAccess{}.OpenAPIModelName()},
+			apisstoragev1.ServiceEndpoint{}.OpenAPIModelName(), apisstoragev1.TenantNICoSiteAccess{}.OpenAPIModelName()},
 	}
 }
 
@@ -45324,7 +45291,7 @@ func schema_pkg_apis_storage_v1_TerraformNodeTypeSpec(ref common.ReferenceCallba
 					},
 					"machineAllocationPolicy": {
 						SchemaProps: spec.SchemaProps{
-							Description: "MachineAllocationPolicy selects the machines a tenant's NodeClaims of this type may use: Assigned only those the tenant owns or was assigned exclusively, OnDemand also those no tenant owns or holds (never another tenant's or the platform's). Claims no tenant owns reach unassigned machines either way. Honored by metal3 and nico; externalPlatform node types mirror the remote's value. kubevirt ignores it and runs every VM on the cluster's shared nodes. Empty falls back to the provider's spec.machineAllocationPolicy, then to OnDemand for kubevirt and Assigned for the rest.",
+							Description: "MachineAllocationPolicy selects the machines a tenant's NodeClaims of this type may use: Assigned uses only those the tenant owns or was assigned exclusively, OnDemand uses only those no tenant owns or holds, never the tenant's own or another tenant's. Claims no tenant owns reach unassigned machines either way. Honored by metal3 and nico; externalPlatform node types mirror the remote's value. kubevirt ignores it and runs every VM on the cluster's shared nodes. Empty falls back to the provider's spec.machineAllocationPolicy, then to OnDemand for kubevirt and Assigned for the rest.",
 							Type:        []string{"string"},
 							Format:      "",
 						},
@@ -45721,19 +45688,6 @@ func schema_pkg_apis_storage_v1_UserSpec(ref common.ReferenceCallback) common.Op
 							Ref:         ref(apisstoragev1.SecretRef{}.OpenAPIModelName()),
 						},
 					},
-					"imagePullSecrets": {
-						SchemaProps: spec.SchemaProps{
-							Description: "ImagePullSecrets holds secret references to image pull secrets the user has access to.",
-							Type:        []string{"array"},
-							Items: &spec.SchemaOrArray{
-								Schema: &spec.Schema{
-									SchemaProps: spec.SchemaProps{
-										Ref: ref(apisstoragev1.KindSecretRef{}.OpenAPIModelName()),
-									},
-								},
-							},
-						},
-					},
 					"tokenGeneration": {
 						SchemaProps: spec.SchemaProps{
 							Description: "TokenGeneration can be used to invalidate all user tokens",
@@ -45796,7 +45750,7 @@ func schema_pkg_apis_storage_v1_UserSpec(ref common.ReferenceCallback) common.Op
 			},
 		},
 		Dependencies: []string{
-			apisstoragev1.Access{}.OpenAPIModelName(), apisstoragev1.ClusterRoleRef{}.OpenAPIModelName(), apisstoragev1.KindSecretRef{}.OpenAPIModelName(), apisstoragev1.SecretRef{}.OpenAPIModelName(), apisstoragev1.UserOrTeam{}.OpenAPIModelName()},
+			apisstoragev1.Access{}.OpenAPIModelName(), apisstoragev1.ClusterRoleRef{}.OpenAPIModelName(), apisstoragev1.SecretRef{}.OpenAPIModelName(), apisstoragev1.UserOrTeam{}.OpenAPIModelName()},
 	}
 }
 
@@ -46145,14 +46099,14 @@ func schema_pkg_apis_storage_v1_VirtualClusterHelmChart(ref common.ReferenceCall
 					},
 					"username": {
 						SchemaProps: spec.SchemaProps{
-							Description: "The username that is required for this repository",
+							Description: "The username that is required for this repository Deprecated: Use Auth.Basic, which takes precedence.",
 							Type:        []string{"string"},
 							Format:      "",
 						},
 					},
 					"password": {
 						SchemaProps: spec.SchemaProps{
-							Description: "The password that is required for this repository",
+							Description: "The password that is required for this repository Deprecated: Use Auth.Basic, which takes precedence.",
 							Type:        []string{"string"},
 							Format:      "",
 						},
@@ -46171,9 +46125,17 @@ func schema_pkg_apis_storage_v1_VirtualClusterHelmChart(ref common.ReferenceCall
 							Format:      "",
 						},
 					},
+					"auth": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Auth configures how helm authenticates to the chart repository. It takes precedence over Username and Password. Without either, the chart is pulled anonymously.",
+							Ref:         ref(apisstoragev1.ChartAuth{}.OpenAPIModelName()),
+						},
+					},
 				},
 			},
 		},
+		Dependencies: []string{
+			apisstoragev1.ChartAuth{}.OpenAPIModelName()},
 	}
 }
 

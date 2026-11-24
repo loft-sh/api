@@ -29,6 +29,7 @@ type ManagementV1Interface interface {
 	DirectClusterEndpointTokensGetter
 	EventsGetter
 	FeaturesGetter
+	HostValidationProfilesGetter
 	IngressAuthTokensGetter
 	LicensesGetter
 	LoftUpgradesGetter
@@ -53,7 +54,6 @@ type ManagementV1Interface interface {
 	SSHKeysGetter
 	SelvesGetter
 	SelfSubjectAccessReviewsGetter
-	SharedSecretsGetter
 	SpaceInstancesGetter
 	SpaceTemplatesGetter
 	StackInstancesGetter
@@ -143,6 +143,10 @@ func (c *ManagementV1Client) Events() EventInterface {
 
 func (c *ManagementV1Client) Features() FeatureInterface {
 	return newFeatures(c)
+}
+
+func (c *ManagementV1Client) HostValidationProfiles() HostValidationProfileInterface {
+	return newHostValidationProfiles(c)
 }
 
 func (c *ManagementV1Client) IngressAuthTokens() IngressAuthTokenInterface {
@@ -239,10 +243,6 @@ func (c *ManagementV1Client) Selves() SelfInterface {
 
 func (c *ManagementV1Client) SelfSubjectAccessReviews() SelfSubjectAccessReviewInterface {
 	return newSelfSubjectAccessReviews(c)
-}
-
-func (c *ManagementV1Client) SharedSecrets(namespace string) SharedSecretInterface {
-	return newSharedSecrets(c, namespace)
 }
 
 func (c *ManagementV1Client) SpaceInstances(namespace string) SpaceInstanceInterface {

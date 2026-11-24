@@ -207,7 +207,17 @@ var (
 	NewFeatureStatusREST = func(getter generic.RESTOptionsGetter) rest.Storage {
 		return NewFeatureStatusRESTFunc(Factory)
 	}
-	NewFeatureStatusRESTFunc          NewRESTFunc
+	NewFeatureStatusRESTFunc               NewRESTFunc
+	ManagementHostValidationProfileStorage = builders.NewApiResourceWithStorage( // Resource status endpoint
+		InternalHostValidationProfile,
+		func() runtime.Object { return &HostValidationProfile{} },     // Register versioned resource
+		func() runtime.Object { return &HostValidationProfileList{} }, // Register versioned resource list
+		NewHostValidationProfileREST,
+	)
+	NewHostValidationProfileREST = func(getter generic.RESTOptionsGetter) rest.Storage {
+		return NewHostValidationProfileRESTFunc(Factory)
+	}
+	NewHostValidationProfileRESTFunc  NewRESTFunc
 	ManagementIngressAuthTokenStorage = builders.NewApiResourceWithStorage( // Resource status endpoint
 		InternalIngressAuthToken,
 		func() runtime.Object { return &IngressAuthToken{} },     // Register versioned resource
@@ -482,17 +492,7 @@ var (
 		return NewSelfSubjectAccessReviewRESTFunc(Factory)
 	}
 	NewSelfSubjectAccessReviewRESTFunc NewRESTFunc
-	ManagementSharedSecretStorage      = builders.NewApiResourceWithStorage( // Resource status endpoint
-		InternalSharedSecret,
-		func() runtime.Object { return &SharedSecret{} },     // Register versioned resource
-		func() runtime.Object { return &SharedSecretList{} }, // Register versioned resource list
-		NewSharedSecretREST,
-	)
-	NewSharedSecretREST = func(getter generic.RESTOptionsGetter) rest.Storage {
-		return NewSharedSecretRESTFunc(Factory)
-	}
-	NewSharedSecretRESTFunc        NewRESTFunc
-	ManagementSpaceInstanceStorage = builders.NewApiResourceWithStorage( // Resource status endpoint
+	ManagementSpaceInstanceStorage     = builders.NewApiResourceWithStorage( // Resource status endpoint
 		InternalSpaceInstance,
 		func() runtime.Object { return &SpaceInstance{} },     // Register versioned resource
 		func() runtime.Object { return &SpaceInstanceList{} }, // Register versioned resource list
@@ -936,6 +936,18 @@ var (
 		func() runtime.Object { return &Feature{} },
 		func() runtime.Object { return &FeatureList{} },
 	)
+	InternalHostValidationProfile = builders.NewInternalResource(
+		"hostvalidationprofiles",
+		"HostValidationProfile",
+		func() runtime.Object { return &HostValidationProfile{} },
+		func() runtime.Object { return &HostValidationProfileList{} },
+	)
+	InternalHostValidationProfileStatus = builders.NewInternalResourceStatus(
+		"hostvalidationprofiles",
+		"HostValidationProfileStatus",
+		func() runtime.Object { return &HostValidationProfile{} },
+		func() runtime.Object { return &HostValidationProfileList{} },
+	)
 	InternalIngressAuthToken = builders.NewInternalResource(
 		"ingressauthtokens",
 		"IngressAuthToken",
@@ -1331,18 +1343,6 @@ var (
 		"SelfSubjectAccessReviewStatus",
 		func() runtime.Object { return &SelfSubjectAccessReview{} },
 		func() runtime.Object { return &SelfSubjectAccessReviewList{} },
-	)
-	InternalSharedSecret = builders.NewInternalResource(
-		"sharedsecrets",
-		"SharedSecret",
-		func() runtime.Object { return &SharedSecret{} },
-		func() runtime.Object { return &SharedSecretList{} },
-	)
-	InternalSharedSecretStatus = builders.NewInternalResourceStatus(
-		"sharedsecrets",
-		"SharedSecretStatus",
-		func() runtime.Object { return &SharedSecret{} },
-		func() runtime.Object { return &SharedSecretList{} },
 	)
 	InternalSpaceInstance = builders.NewInternalResource(
 		"spaceinstances",
@@ -1789,6 +1789,8 @@ var (
 		InternalEventStatus,
 		InternalFeature,
 		InternalFeatureStatus,
+		InternalHostValidationProfile,
+		InternalHostValidationProfileStatus,
 		InternalIngressAuthToken,
 		InternalIngressAuthTokenStatus,
 		InternalKiosk,
@@ -1851,8 +1853,6 @@ var (
 		InternalSelfStatus,
 		InternalSelfSubjectAccessReview,
 		InternalSelfSubjectAccessReviewStatus,
-		InternalSharedSecret,
-		InternalSharedSecretStatus,
 		InternalSpaceInstance,
 		InternalSpaceInstanceStatus,
 		InternalSpaceTemplate,
@@ -1990,8 +1990,7 @@ type AgentAuditEventStatus struct {
 }
 
 type AgentCostControlConfig struct {
-	Enabled                  *bool `json:"enabled,omitempty"`
-	CostControlClusterConfig `json:",inline"`
+	Enabled *bool `json:"enabled,omitempty"`
 }
 
 // +genclient
@@ -2339,21 +2338,19 @@ type ConfigSpec struct {
 }
 
 type ConfigStatus struct {
-	Authentication              storagev1.Authentication        `json:"auth,omitempty"`
-	OIDC                        *OIDC                           `json:"oidc,omitempty"`
-	Audit                       *Audit                          `json:"audit,omitempty"`
-	LoftHost                    string                          `json:"loftHost,omitempty"`
-	ProjectNamespacePrefix      *string                         `json:"projectNamespacePrefix,omitempty"`
-	DevPodSubDomain             string                          `json:"devPodSubDomain,omitempty"`
-	UISettings                  *uiv1.UISettingsConfig          `json:"uiSettings,omitempty"`
-	VaultIntegration            *storagev1.VaultIntegrationSpec `json:"vault,omitempty"`
-	DisableConfigEndpoint       bool                            `json:"disableConfigEndpoint,omitempty"`
-	AuthenticateVersionEndpoint bool                            `json:"authenticateVersionEndpoint,omitempty"`
-	Cloud                       *Cloud                          `json:"cloud,omitempty"`
-	CostControl                 *CostControl                    `json:"costControl,omitempty"`
-	PlatformDB                  *PlatformDB                     `json:"platformDB,omitempty"`
-	ImageBuilder                *ImageBuilder                   `json:"imageBuilder,omitempty"`
-	Database                    *DatabaseKine                   `json:"database,omitempty"`
+	Authentication              storagev1.Authentication `json:"auth,omitempty"`
+	OIDC                        *OIDC                    `json:"oidc,omitempty"`
+	Audit                       *Audit                   `json:"audit,omitempty"`
+	LoftHost                    string                   `json:"loftHost,omitempty"`
+	ProjectNamespacePrefix      *string                  `json:"projectNamespacePrefix,omitempty"`
+	DevPodSubDomain             string                   `json:"devPodSubDomain,omitempty"`
+	UISettings                  *uiv1.UISettingsConfig   `json:"uiSettings,omitempty"`
+	DisableConfigEndpoint       bool                     `json:"disableConfigEndpoint,omitempty"`
+	AuthenticateVersionEndpoint bool                     `json:"authenticateVersionEndpoint,omitempty"`
+	Cloud                       *Cloud                   `json:"cloud,omitempty"`
+	PlatformDB                  *PlatformDB              `json:"platformDB,omitempty"`
+	ImageBuilder                *ImageBuilder            `json:"imageBuilder,omitempty"`
+	Database                    *DatabaseKine            `json:"database,omitempty"`
 }
 
 // +genclient
@@ -2509,40 +2506,6 @@ type ConvertVirtualClusterConfigStatus struct {
 	Converted bool   `json:"converted"`
 }
 
-type CostControl struct {
-	Enabled  *bool                    `json:"enabled,omitempty"`
-	Global   CostControlGlobalConfig  `json:"global,omitempty"`
-	Cluster  CostControlClusterConfig `json:"cluster,omitempty"`
-	Settings *CostControlSettings     `json:"settings,omitempty"`
-}
-
-type CostControlClusterConfig struct {
-	Metrics  *storagev1.Metrics  `json:"metrics,omitempty"`
-	OpenCost *storagev1.OpenCost `json:"opencost,omitempty"`
-}
-
-type CostControlGPUSettings struct {
-	Enabled     bool                      `json:"enabled,omitempty"`
-	AvgGPUPrice *CostControlResourcePrice `json:"averageGPUPrice,omitempty"`
-}
-
-type CostControlGlobalConfig struct {
-	Metrics *storagev1.Metrics `json:"metrics,omitempty"`
-}
-
-type CostControlResourcePrice struct {
-	Price      float64 `json:"price,omitempty"`
-	TimePeriod string  `json:"timePeriod,omitempty"`
-}
-
-type CostControlSettings struct {
-	PriceCurrency               string                    `json:"priceCurrency,omitempty"`
-	AvgCPUPricePerNode          *CostControlResourcePrice `json:"averageCPUPricePerNode,omitempty"`
-	AvgRAMPricePerNode          *CostControlResourcePrice `json:"averageRAMPricePerNode,omitempty"`
-	GPUSettings                 *CostControlGPUSettings   `json:"gpuSettings,omitempty"`
-	ControlPlanePricePerCluster *CostControlResourcePrice `json:"controlPlanePricePerCluster,omitempty"`
-}
-
 // +genclient
 // +genclient:nonNamespaced
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -2642,6 +2605,25 @@ type GroupResources struct {
 	Group         string   `json:"group,omitempty" protobuf:"bytes,1,opt,name=group"`
 	Resources     []string `json:"resources,omitempty" protobuf:"bytes,2,rep,name=resources"`
 	ResourceNames []string `json:"resourceNames,omitempty" protobuf:"bytes,3,rep,name=resourceNames"`
+}
+
+// +genclient
+// +genclient:nonNamespaced
+// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+
+type HostValidationProfile struct {
+	metav1.TypeMeta   `json:",inline"`
+	metav1.ObjectMeta `json:"metadata,omitempty"`
+	Spec              HostValidationProfileSpec   `json:"spec,omitempty"`
+	Status            HostValidationProfileStatus `json:"status,omitempty"`
+}
+
+type HostValidationProfileSpec struct {
+	storagev1.HostValidationProfileSpec `json:",inline"`
+}
+
+type HostValidationProfileStatus struct {
+	storagev1.HostValidationProfileStatus `json:",inline"`
 }
 
 type ImageBuilder struct {
@@ -3422,29 +3404,12 @@ type SelfSubjectAccessReview struct {
 
 type SelfSubjectAccessReviewSpec struct {
 	authorizationv1.SelfSubjectAccessReviewSpec `json:",inline"`
+	Reviews                                     []authorizationv1.SelfSubjectAccessReviewSpec `json:"reviews,omitempty"`
 }
 
 type SelfSubjectAccessReviewStatus struct {
 	authorizationv1.SubjectAccessReviewStatus `json:",inline"`
-}
-
-// +genclient
-// +genclient
-// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
-
-type SharedSecret struct {
-	metav1.TypeMeta   `json:",inline"`
-	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              SharedSecretSpec   `json:"spec,omitempty"`
-	Status            SharedSecretStatus `json:"status,omitempty"`
-}
-
-type SharedSecretSpec struct {
-	storagev1.SharedSecretSpec `json:",inline"`
-}
-
-type SharedSecretStatus struct {
-	storagev1.SharedSecretStatus `json:",inline"`
+	Statuses                                  []authorizationv1.SubjectAccessReviewStatus `json:"statuses,omitempty"`
 }
 
 type SnapshotRequest struct {
@@ -6420,6 +6385,125 @@ func (s *storageFeature) UpdateFeature(ctx context.Context, object *Feature) (*F
 }
 
 func (s *storageFeature) DeleteFeature(ctx context.Context, id string) (bool, error) {
+	st := s.GetStandardStorage()
+	_, sync, err := st.Delete(ctx, id, nil, &metav1.DeleteOptions{})
+	return sync, err
+}
+
+// HostValidationProfile Functions and Structs
+//
+// +k8s:deepcopy-gen=false
+type HostValidationProfileStrategy struct {
+	builders.DefaultStorageStrategy
+}
+
+// +k8s:deepcopy-gen=false
+type HostValidationProfileStatusStrategy struct {
+	builders.DefaultStatusStorageStrategy
+}
+
+// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+
+type HostValidationProfileList struct {
+	metav1.TypeMeta `json:",inline"`
+	metav1.ListMeta `json:"metadata,omitempty"`
+	Items           []HostValidationProfile `json:"items"`
+}
+
+func (HostValidationProfile) NewStatus() interface{} {
+	return HostValidationProfileStatus{}
+}
+
+func (pc *HostValidationProfile) GetStatus() interface{} {
+	return pc.Status
+}
+
+func (pc *HostValidationProfile) SetStatus(s interface{}) {
+	pc.Status = s.(HostValidationProfileStatus)
+}
+
+func (pc *HostValidationProfile) GetSpec() interface{} {
+	return pc.Spec
+}
+
+func (pc *HostValidationProfile) SetSpec(s interface{}) {
+	pc.Spec = s.(HostValidationProfileSpec)
+}
+
+func (pc *HostValidationProfile) GetObjectMeta() *metav1.ObjectMeta {
+	return &pc.ObjectMeta
+}
+
+func (pc *HostValidationProfile) SetGeneration(generation int64) {
+	pc.ObjectMeta.Generation = generation
+}
+
+func (pc HostValidationProfile) GetGeneration() int64 {
+	return pc.ObjectMeta.Generation
+}
+
+// Registry is an interface for things that know how to store HostValidationProfile.
+// +k8s:deepcopy-gen=false
+type HostValidationProfileRegistry interface {
+	ListHostValidationProfiles(ctx context.Context, options *internalversion.ListOptions) (*HostValidationProfileList, error)
+	GetHostValidationProfile(ctx context.Context, id string, options *metav1.GetOptions) (*HostValidationProfile, error)
+	CreateHostValidationProfile(ctx context.Context, id *HostValidationProfile) (*HostValidationProfile, error)
+	UpdateHostValidationProfile(ctx context.Context, id *HostValidationProfile) (*HostValidationProfile, error)
+	DeleteHostValidationProfile(ctx context.Context, id string) (bool, error)
+}
+
+// NewRegistry returns a new Registry interface for the given Storage. Any mismatched types will panic.
+func NewHostValidationProfileRegistry(sp builders.StandardStorageProvider) HostValidationProfileRegistry {
+	return &storageHostValidationProfile{sp}
+}
+
+// Implement Registry
+// storage puts strong typing around storage calls
+// +k8s:deepcopy-gen=false
+type storageHostValidationProfile struct {
+	builders.StandardStorageProvider
+}
+
+func (s *storageHostValidationProfile) ListHostValidationProfiles(ctx context.Context, options *internalversion.ListOptions) (*HostValidationProfileList, error) {
+	if options != nil && options.FieldSelector != nil && !options.FieldSelector.Empty() {
+		return nil, fmt.Errorf("field selector not supported yet")
+	}
+	st := s.GetStandardStorage()
+	obj, err := st.List(ctx, options)
+	if err != nil {
+		return nil, err
+	}
+	return obj.(*HostValidationProfileList), err
+}
+
+func (s *storageHostValidationProfile) GetHostValidationProfile(ctx context.Context, id string, options *metav1.GetOptions) (*HostValidationProfile, error) {
+	st := s.GetStandardStorage()
+	obj, err := st.Get(ctx, id, options)
+	if err != nil {
+		return nil, err
+	}
+	return obj.(*HostValidationProfile), nil
+}
+
+func (s *storageHostValidationProfile) CreateHostValidationProfile(ctx context.Context, object *HostValidationProfile) (*HostValidationProfile, error) {
+	st := s.GetStandardStorage()
+	obj, err := st.Create(ctx, object, nil, &metav1.CreateOptions{})
+	if err != nil {
+		return nil, err
+	}
+	return obj.(*HostValidationProfile), nil
+}
+
+func (s *storageHostValidationProfile) UpdateHostValidationProfile(ctx context.Context, object *HostValidationProfile) (*HostValidationProfile, error) {
+	st := s.GetStandardStorage()
+	obj, _, err := st.Update(ctx, object.Name, rest.DefaultUpdatedObjectInfo(object), nil, nil, false, &metav1.UpdateOptions{})
+	if err != nil {
+		return nil, err
+	}
+	return obj.(*HostValidationProfile), nil
+}
+
+func (s *storageHostValidationProfile) DeleteHostValidationProfile(ctx context.Context, id string) (bool, error) {
 	st := s.GetStandardStorage()
 	_, sync, err := st.Delete(ctx, id, nil, &metav1.DeleteOptions{})
 	return sync, err
@@ -9491,125 +9575,6 @@ func (s *storageSelfSubjectAccessReview) UpdateSelfSubjectAccessReview(ctx conte
 }
 
 func (s *storageSelfSubjectAccessReview) DeleteSelfSubjectAccessReview(ctx context.Context, id string) (bool, error) {
-	st := s.GetStandardStorage()
-	_, sync, err := st.Delete(ctx, id, nil, &metav1.DeleteOptions{})
-	return sync, err
-}
-
-// SharedSecret Functions and Structs
-//
-// +k8s:deepcopy-gen=false
-type SharedSecretStrategy struct {
-	builders.DefaultStorageStrategy
-}
-
-// +k8s:deepcopy-gen=false
-type SharedSecretStatusStrategy struct {
-	builders.DefaultStatusStorageStrategy
-}
-
-// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
-
-type SharedSecretList struct {
-	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
-	Items           []SharedSecret `json:"items"`
-}
-
-func (SharedSecret) NewStatus() interface{} {
-	return SharedSecretStatus{}
-}
-
-func (pc *SharedSecret) GetStatus() interface{} {
-	return pc.Status
-}
-
-func (pc *SharedSecret) SetStatus(s interface{}) {
-	pc.Status = s.(SharedSecretStatus)
-}
-
-func (pc *SharedSecret) GetSpec() interface{} {
-	return pc.Spec
-}
-
-func (pc *SharedSecret) SetSpec(s interface{}) {
-	pc.Spec = s.(SharedSecretSpec)
-}
-
-func (pc *SharedSecret) GetObjectMeta() *metav1.ObjectMeta {
-	return &pc.ObjectMeta
-}
-
-func (pc *SharedSecret) SetGeneration(generation int64) {
-	pc.ObjectMeta.Generation = generation
-}
-
-func (pc SharedSecret) GetGeneration() int64 {
-	return pc.ObjectMeta.Generation
-}
-
-// Registry is an interface for things that know how to store SharedSecret.
-// +k8s:deepcopy-gen=false
-type SharedSecretRegistry interface {
-	ListSharedSecrets(ctx context.Context, options *internalversion.ListOptions) (*SharedSecretList, error)
-	GetSharedSecret(ctx context.Context, id string, options *metav1.GetOptions) (*SharedSecret, error)
-	CreateSharedSecret(ctx context.Context, id *SharedSecret) (*SharedSecret, error)
-	UpdateSharedSecret(ctx context.Context, id *SharedSecret) (*SharedSecret, error)
-	DeleteSharedSecret(ctx context.Context, id string) (bool, error)
-}
-
-// NewRegistry returns a new Registry interface for the given Storage. Any mismatched types will panic.
-func NewSharedSecretRegistry(sp builders.StandardStorageProvider) SharedSecretRegistry {
-	return &storageSharedSecret{sp}
-}
-
-// Implement Registry
-// storage puts strong typing around storage calls
-// +k8s:deepcopy-gen=false
-type storageSharedSecret struct {
-	builders.StandardStorageProvider
-}
-
-func (s *storageSharedSecret) ListSharedSecrets(ctx context.Context, options *internalversion.ListOptions) (*SharedSecretList, error) {
-	if options != nil && options.FieldSelector != nil && !options.FieldSelector.Empty() {
-		return nil, fmt.Errorf("field selector not supported yet")
-	}
-	st := s.GetStandardStorage()
-	obj, err := st.List(ctx, options)
-	if err != nil {
-		return nil, err
-	}
-	return obj.(*SharedSecretList), err
-}
-
-func (s *storageSharedSecret) GetSharedSecret(ctx context.Context, id string, options *metav1.GetOptions) (*SharedSecret, error) {
-	st := s.GetStandardStorage()
-	obj, err := st.Get(ctx, id, options)
-	if err != nil {
-		return nil, err
-	}
-	return obj.(*SharedSecret), nil
-}
-
-func (s *storageSharedSecret) CreateSharedSecret(ctx context.Context, object *SharedSecret) (*SharedSecret, error) {
-	st := s.GetStandardStorage()
-	obj, err := st.Create(ctx, object, nil, &metav1.CreateOptions{})
-	if err != nil {
-		return nil, err
-	}
-	return obj.(*SharedSecret), nil
-}
-
-func (s *storageSharedSecret) UpdateSharedSecret(ctx context.Context, object *SharedSecret) (*SharedSecret, error) {
-	st := s.GetStandardStorage()
-	obj, _, err := st.Update(ctx, object.Name, rest.DefaultUpdatedObjectInfo(object), nil, nil, false, &metav1.UpdateOptions{})
-	if err != nil {
-		return nil, err
-	}
-	return obj.(*SharedSecret), nil
-}
-
-func (s *storageSharedSecret) DeleteSharedSecret(ctx context.Context, id string) (bool, error) {
 	st := s.GetStandardStorage()
 	_, sync, err := st.Delete(ctx, id, nil, &metav1.DeleteOptions{})
 	return sync, err

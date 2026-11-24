@@ -74,6 +74,10 @@ type EventListerExpansion interface{}
 // FeatureLister.
 type FeatureListerExpansion interface{}
 
+// HostValidationProfileListerExpansion allows custom methods to be added to
+// HostValidationProfileLister.
+type HostValidationProfileListerExpansion interface{}
+
 // IngressAuthTokenListerExpansion allows custom methods to be added to
 // IngressAuthTokenLister.
 type IngressAuthTokenListerExpansion interface{}
@@ -185,14 +189,6 @@ type SelfListerExpansion interface{}
 // SelfSubjectAccessReviewListerExpansion allows custom methods to be added to
 // SelfSubjectAccessReviewLister.
 type SelfSubjectAccessReviewListerExpansion interface{}
-
-// SharedSecretListerExpansion allows custom methods to be added to
-// SharedSecretLister.
-type SharedSecretListerExpansion interface{}
-
-// SharedSecretNamespaceListerExpansion allows custom methods to be added to
-// SharedSecretNamespaceLister.
-type SharedSecretNamespaceListerExpansion interface{}
 
 // SpaceInstanceListerExpansion allows custom methods to be added to
 // SpaceInstanceLister.

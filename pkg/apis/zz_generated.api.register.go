@@ -49,6 +49,7 @@ func GetManagementAPIBuilder() *builders.APIGroupBuilder {
 			"DirectClusterEndpointToken",
 			"Event",
 			"Feature",
+			"HostValidationProfile",
 			"IngressAuthToken",
 			"License",
 			"LoftUpgrade",

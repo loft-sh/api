@@ -38,6 +38,8 @@ type Interface interface {
 	Events() EventInformer
 	// Features returns a FeatureInformer.
 	Features() FeatureInformer
+	// HostValidationProfiles returns a HostValidationProfileInformer.
+	HostValidationProfiles() HostValidationProfileInformer
 	// IngressAuthTokens returns a IngressAuthTokenInformer.
 	IngressAuthTokens() IngressAuthTokenInformer
 	// Licenses returns a LicenseInformer.
@@ -84,8 +86,6 @@ type Interface interface {
 	Selves() SelfInformer
 	// SelfSubjectAccessReviews returns a SelfSubjectAccessReviewInformer.
 	SelfSubjectAccessReviews() SelfSubjectAccessReviewInformer
-	// SharedSecrets returns a SharedSecretInformer.
-	SharedSecrets() SharedSecretInformer
 	// SpaceInstances returns a SpaceInstanceInformer.
 	SpaceInstances() SpaceInstanceInformer
 	// SpaceTemplates returns a SpaceTemplateInformer.
@@ -206,6 +206,11 @@ func (v *version) Features() FeatureInformer {
 	return &featureInformer{factory: v.factory, tweakListOptions: v.tweakListOptions}
 }
 
+// HostValidationProfiles returns a HostValidationProfileInformer.
+func (v *version) HostValidationProfiles() HostValidationProfileInformer {
+	return &hostValidationProfileInformer{factory: v.factory, tweakListOptions: v.tweakListOptions}
+}
+
 // IngressAuthTokens returns a IngressAuthTokenInformer.
 func (v *version) IngressAuthTokens() IngressAuthTokenInformer {
 	return &ingressAuthTokenInformer{factory: v.factory, tweakListOptions: v.tweakListOptions}
@@ -319,11 +324,6 @@ func (v *version) Selves() SelfInformer {
 // SelfSubjectAccessReviews returns a SelfSubjectAccessReviewInformer.
 func (v *version) SelfSubjectAccessReviews() SelfSubjectAccessReviewInformer {
 	return &selfSubjectAccessReviewInformer{factory: v.factory, tweakListOptions: v.tweakListOptions}
-}
-
-// SharedSecrets returns a SharedSecretInformer.
-func (v *version) SharedSecrets() SharedSecretInformer {
-	return &sharedSecretInformer{factory: v.factory, namespace: v.namespace, tweakListOptions: v.tweakListOptions}
 }
 
 // SpaceInstances returns a SpaceInstanceInformer.

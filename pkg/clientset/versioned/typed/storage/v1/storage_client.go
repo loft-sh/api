@@ -20,6 +20,7 @@ type StorageV1Interface interface {
 	ClustersGetter
 	ClusterAccessesGetter
 	ClusterRoleTemplatesGetter
+	HostValidationProfilesGetter
 	MachinesGetter
 	MachineConfigTemplatesGetter
 	NetworkEnvironmentsGetter
@@ -32,7 +33,6 @@ type StorageV1Interface interface {
 	OSImagesGetter
 	ProjectsGetter
 	SSHKeysGetter
-	SharedSecretsGetter
 	SpaceInstancesGetter
 	SpaceTemplatesGetter
 	StackInstancesGetter
@@ -84,6 +84,10 @@ func (c *StorageV1Client) ClusterRoleTemplates() ClusterRoleTemplateInterface {
 	return newClusterRoleTemplates(c)
 }
 
+func (c *StorageV1Client) HostValidationProfiles() HostValidationProfileInterface {
+	return newHostValidationProfiles(c)
+}
+
 func (c *StorageV1Client) Machines() MachineInterface {
 	return newMachines(c)
 }
@@ -130,10 +134,6 @@ func (c *StorageV1Client) Projects() ProjectInterface {
 
 func (c *StorageV1Client) SSHKeys() SSHKeyInterface {
 	return newSSHKeys(c)
-}
-
-func (c *StorageV1Client) SharedSecrets(namespace string) SharedSecretInterface {
-	return newSharedSecrets(c, namespace)
 }
 
 func (c *StorageV1Client) SpaceInstances(namespace string) SpaceInstanceInterface {

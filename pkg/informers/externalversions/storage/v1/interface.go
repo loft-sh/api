@@ -24,6 +24,8 @@ type Interface interface {
 	ClusterAccesses() ClusterAccessInformer
 	// ClusterRoleTemplates returns a ClusterRoleTemplateInformer.
 	ClusterRoleTemplates() ClusterRoleTemplateInformer
+	// HostValidationProfiles returns a HostValidationProfileInformer.
+	HostValidationProfiles() HostValidationProfileInformer
 	// Machines returns a MachineInformer.
 	Machines() MachineInformer
 	// MachineConfigTemplates returns a MachineConfigTemplateInformer.
@@ -48,8 +50,6 @@ type Interface interface {
 	Projects() ProjectInformer
 	// SSHKeys returns a SSHKeyInformer.
 	SSHKeys() SSHKeyInformer
-	// SharedSecrets returns a SharedSecretInformer.
-	SharedSecrets() SharedSecretInformer
 	// SpaceInstances returns a SpaceInstanceInformer.
 	SpaceInstances() SpaceInstanceInformer
 	// SpaceTemplates returns a SpaceTemplateInformer.
@@ -127,6 +127,11 @@ func (v *version) ClusterRoleTemplates() ClusterRoleTemplateInformer {
 	return &clusterRoleTemplateInformer{factory: v.factory, tweakListOptions: v.tweakListOptions}
 }
 
+// HostValidationProfiles returns a HostValidationProfileInformer.
+func (v *version) HostValidationProfiles() HostValidationProfileInformer {
+	return &hostValidationProfileInformer{factory: v.factory, tweakListOptions: v.tweakListOptions}
+}
+
 // Machines returns a MachineInformer.
 func (v *version) Machines() MachineInformer {
 	return &machineInformer{factory: v.factory, tweakListOptions: v.tweakListOptions}
@@ -185,11 +190,6 @@ func (v *version) Projects() ProjectInformer {
 // SSHKeys returns a SSHKeyInformer.
 func (v *version) SSHKeys() SSHKeyInformer {
 	return &sSHKeyInformer{factory: v.factory, tweakListOptions: v.tweakListOptions}
-}
-
-// SharedSecrets returns a SharedSecretInformer.
-func (v *version) SharedSecrets() SharedSecretInformer {
-	return &sharedSecretInformer{factory: v.factory, namespace: v.namespace, tweakListOptions: v.tweakListOptions}
 }
 
 // SpaceInstances returns a SpaceInstanceInformer.

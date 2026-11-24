@@ -80,6 +80,10 @@ func (c *FakeManagementV1) Features() v1.FeatureInterface {
 	return newFakeFeatures(c)
 }
 
+func (c *FakeManagementV1) HostValidationProfiles() v1.HostValidationProfileInterface {
+	return newFakeHostValidationProfiles(c)
+}
+
 func (c *FakeManagementV1) IngressAuthTokens() v1.IngressAuthTokenInterface {
 	return newFakeIngressAuthTokens(c)
 }
@@ -174,10 +178,6 @@ func (c *FakeManagementV1) Selves() v1.SelfInterface {
 
 func (c *FakeManagementV1) SelfSubjectAccessReviews() v1.SelfSubjectAccessReviewInterface {
 	return newFakeSelfSubjectAccessReviews(c)
-}
-
-func (c *FakeManagementV1) SharedSecrets(namespace string) v1.SharedSecretInterface {
-	return newFakeSharedSecrets(c, namespace)
 }
 
 func (c *FakeManagementV1) SpaceInstances(namespace string) v1.SpaceInstanceInterface {

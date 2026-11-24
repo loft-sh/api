@@ -56,6 +56,8 @@ func addKnownTypes(scheme *runtime.Scheme) error {
 		&EventList{},
 		&Feature{},
 		&FeatureList{},
+		&HostValidationProfile{},
+		&HostValidationProfileList{},
 		&IngressAuthToken{},
 		&IngressAuthTokenList{},
 		&Kiosk{},
@@ -118,8 +120,6 @@ func addKnownTypes(scheme *runtime.Scheme) error {
 		&SelfList{},
 		&SelfSubjectAccessReview{},
 		&SelfSubjectAccessReviewList{},
-		&SharedSecret{},
-		&SharedSecretList{},
 		&SpaceInstance{},
 		&SpaceInstanceList{},
 		&SpaceTemplate{},
@@ -265,6 +265,7 @@ var (
 			func() runtime.Object { return &Feature{} },     // Register versioned resource
 			func() runtime.Object { return &FeatureList{} }, // Register versioned resource list
 			management.NewFeatureStatusREST),
+		management.ManagementHostValidationProfileStorage,
 		management.ManagementIngressAuthTokenStorage,
 		management.ManagementKioskStorage,
 		management.ManagementLicenseStorage,
@@ -392,7 +393,6 @@ var (
 		management.ManagementSSHKeyStorage,
 		management.ManagementSelfStorage,
 		management.ManagementSelfSubjectAccessReviewStorage,
-		management.ManagementSharedSecretStorage,
 		management.ManagementSpaceInstanceStorage,
 		management.ManagementSpaceTemplateStorage,
 		management.ManagementStackInstanceStorage,
@@ -816,6 +816,14 @@ type FeatureList struct {
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
 
+type HostValidationProfileList struct {
+	metav1.TypeMeta `json:",inline"`
+	metav1.ListMeta `json:"metadata,omitempty"`
+	Items           []HostValidationProfile `json:"items"`
+}
+
+// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+
 type IngressAuthTokenList struct {
 	metav1.TypeMeta `json:",inline"`
 	metav1.ListMeta `json:"metadata,omitempty"`
@@ -1108,14 +1116,6 @@ type SelfSubjectAccessReviewList struct {
 	metav1.TypeMeta `json:",inline"`
 	metav1.ListMeta `json:"metadata,omitempty"`
 	Items           []SelfSubjectAccessReview `json:"items"`
-}
-
-// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
-
-type SharedSecretList struct {
-	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
-	Items           []SharedSecret `json:"items"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object

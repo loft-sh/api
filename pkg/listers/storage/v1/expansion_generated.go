@@ -42,6 +42,10 @@ type ClusterAccessListerExpansion interface{}
 // ClusterRoleTemplateLister.
 type ClusterRoleTemplateListerExpansion interface{}
 
+// HostValidationProfileListerExpansion allows custom methods to be added to
+// HostValidationProfileLister.
+type HostValidationProfileListerExpansion interface{}
+
 // MachineListerExpansion allows custom methods to be added to
 // MachineLister.
 type MachineListerExpansion interface{}
@@ -101,14 +105,6 @@ type ProjectListerExpansion interface{}
 // SSHKeyListerExpansion allows custom methods to be added to
 // SSHKeyLister.
 type SSHKeyListerExpansion interface{}
-
-// SharedSecretListerExpansion allows custom methods to be added to
-// SharedSecretLister.
-type SharedSecretListerExpansion interface{}
-
-// SharedSecretNamespaceListerExpansion allows custom methods to be added to
-// SharedSecretNamespaceLister.
-type SharedSecretNamespaceListerExpansion interface{}
 
 // SpaceInstanceListerExpansion allows custom methods to be added to
 // SpaceInstanceLister.

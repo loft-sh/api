@@ -36,6 +36,8 @@ type EventExpansion interface{}
 
 type FeatureExpansion interface{}
 
+type HostValidationProfileExpansion interface{}
+
 type IngressAuthTokenExpansion interface{}
 
 type LicenseExpansion interface{}
@@ -83,8 +85,6 @@ type SSHKeyExpansion interface{}
 type SelfExpansion interface{}
 
 type SelfSubjectAccessReviewExpansion interface{}
-
-type SharedSecretExpansion interface{}
 
 type SpaceInstanceExpansion interface{}
 

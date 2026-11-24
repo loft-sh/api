@@ -75,9 +75,19 @@ const (
 	// 3339. Only the platform writes it.
 	MachineHandoverDeadlineAnnotation = "machines.vcluster.com/handover-deadline"
 
-	// MachineRerunHostValidationAnnotation asks for a new validation attempt. The
-	// platform removes it once the new attempt is recorded in status.hostValidation.inBand.
-	MachineRerunHostValidationAnnotation = "machines.vcluster.com/rerun-host-validation"
+	// MachineRerunHostValidationInBandAnnotation asks for a new in-band attempt,
+	// which runs the validation tier's tests on the machine. The platform removes
+	// it once the new attempt is recorded in status.hostValidation.inBand.
+	MachineRerunHostValidationInBandAnnotation = "machines.vcluster.com/rerun-host-validation-in-band"
+
+	// MachineRerunHostValidationOutOfBandAnnotation asks for the machine to be
+	// checked against its host validation profiles again, which reads its BMC
+	// without running anything on it. The platform removes it once the results
+	// are recorded, and a request that arrives during a check gets a check of its
+	// own. A machine that was released from an instance or unassigned from a
+	// tenant carries it, since whoever had root on the host could have changed
+	// its settings.
+	MachineRerunHostValidationOutOfBandAnnotation = "machines.vcluster.com/rerun-host-validation-out-of-band"
 )
 
 // Reasons of the HostValidated condition, from the worst down. Where a check
@@ -145,10 +155,9 @@ const (
 )
 
 // HostValidationResult is the verdict of one host validation profile on a
-// machine, in MachineHostValidationProfileResult: whether the machine may serve
-// a node type that requires the profile. It is the first of the values below
-// that the read or any of the profile's settings calls for, which is the order
-// they are declared in.
+// machine, in MachineHostValidationProfileResult, and says whether the machine
+// may serve a node type that requires the profile. A profile takes the worst of
+// what its settings read as, and the condition takes the worst of the profiles.
 // +enum
 type HostValidationResult string
 
@@ -164,7 +173,7 @@ const (
 	HostValidationResultReadFailed HostValidationResult = "ReadFailed"
 	// HostValidationResultMismatched means a setting has another value, or the
 	// BMC does not report it at all. The host is at fault, so it is not read
-	// again on its own: an admin fixes the setting and asks for a re-check.
+	// again on its own: an admin fixes the setting and asks for a re-run.
 	HostValidationResultMismatched HostValidationResult = "Mismatched"
 	// HostValidationResultRebootRequired means every setting that differs
 	// already has the required value staged, so the machine matches the profile
@@ -381,16 +390,27 @@ type MachineHostValidationStatus struct {
 	// +optional
 	InBand *MachineInBandValidationStatus `json:"inBand,omitempty"`
 
+	// OutOfBand is the machine's last check against its host validation
+	// profiles, which reads its BMC without running anything on it. It gates
+	// picking the machine for a node type.
+	// +optional
+	OutOfBand *MachineOutOfBandValidationStatus `json:"outOfBand,omitempty"`
+}
+
+// MachineOutOfBandValidationStatus is a machine's last check against its host
+// validation profiles.
+type MachineOutOfBandValidationStatus struct {
 	// ReadTime is when the settings behind the profile results were read. The
 	// retry of a RebootRequired or ReadFailed profile counts from it.
 	// +optional
 	ReadTime *metav1.Time `json:"readTime,omitempty"`
 
 	// Profiles holds one result per host validation profile the machine was
-	// checked against. A profile added to a node type after this check has no
-	// entry, and does not count as matched. They gate picking the machine for a
-	// node type.
+	// checked against, by profile name. A profile added to a node type after
+	// this check has no entry, and does not count as matched.
 	// +optional
+	// +listType=map
+	// +listMapKey=name
 	Profiles []MachineHostValidationProfileResult `json:"profiles,omitempty"`
 }
 
@@ -475,9 +495,12 @@ type MachineHostValidationProfileResult struct {
 	// +optional
 	SpecHash string `json:"specHash,omitempty"`
 
-	// OutOfBand mirrors the profile's out-of-band groups, one result each.
+	// Groups mirrors the profile's groups, one result each, in the order the
+	// profile declares them.
 	// +optional
-	OutOfBand []MachineHostValidationGroupResult `json:"outOfBand,omitempty"`
+	// +listType=map
+	// +listMapKey=name
+	Groups []MachineHostValidationGroupResult `json:"groups,omitempty"`
 }
 
 // MachineHostValidationGroupResult is the result of one group of a profile,
@@ -496,8 +519,11 @@ type MachineHostValidationGroupResult struct {
 	// with no group results.
 	Serial string `json:"serial"`
 
-	// Settings holds one result per setting of the group.
+	// Settings holds one result per setting of the group, in the order the group
+	// declares them.
 	// +optional
+	// +listType=map
+	// +listMapKey=name
 	Settings []MachineHostValidationSettingResult `json:"settings,omitempty"`
 }
 
@@ -505,6 +531,10 @@ type MachineHostValidationGroupResult struct {
 type MachineHostValidationSettingResult struct {
 	// Name is the setting's name in the profile.
 	Name string `json:"name"`
+
+	// Attribute is the setting's attribute in the profile, the name the BMC knows it by.
+	// +optional
+	Attribute string `json:"attribute,omitempty"`
 
 	// Expected is the value the profile requires.
 	Expected string `json:"expected"`

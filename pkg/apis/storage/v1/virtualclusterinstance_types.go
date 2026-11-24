@@ -419,10 +419,12 @@ type VirtualClusterHelmChart struct {
 	Repo string `json:"repo,omitempty"`
 
 	// The username that is required for this repository
+	// Deprecated: Use Auth.Basic, which takes precedence.
 	// +optional
 	Username string `json:"username,omitempty"`
 
 	// The password that is required for this repository
+	// Deprecated: Use Auth.Basic, which takes precedence.
 	// +optional
 	Password string `json:"password,omitempty"`
 
@@ -433,6 +435,42 @@ type VirtualClusterHelmChart struct {
 	// InsecureSkipTlsVerify skips the TLS verification for the helm chart
 	// +optional
 	InsecureSkipTlsVerify bool `json:"insecureSkipTlsVerify,omitempty"`
+
+	// Auth configures how helm authenticates to the chart repository. It takes precedence over
+	// Username and Password. Without either, the chart is pulled anonymously.
+	// +optional
+	Auth *ChartAuth `json:"auth,omitempty"`
+}
+
+// ChartAuth holds the credentials for a chart repository. The auth method is implied by which
+// field is set.
+type ChartAuth struct {
+	// AWS fetches the registry credentials from AWS.
+	// +optional
+	AWS *ChartAuthAWS `json:"aws,omitempty"`
+
+	// Basic logs in with a username and password.
+	// +optional
+	Basic *ChartAuthBasic `json:"basic,omitempty"`
+}
+
+type ChartAuthAWS struct {
+	// UseWorkloadIdentity fetches an Amazon ECR authorization token with the AWS SDK's default
+	// credential chain: EKS Pod Identity, IRSA or the EC2 instance profile. The chart repo must be an
+	// Amazon ECR registry, and the identity is the platform's or the agent's, so its IAM policy
+	// decides which repositories every cluster can pull charts from.
+	// +optional
+	UseWorkloadIdentity bool `json:"useWorkloadIdentity,omitempty"`
+}
+
+type ChartAuthBasic struct {
+	// Username to log in with.
+	// +optional
+	Username string `json:"username,omitempty"`
+
+	// Password to log in with.
+	// +optional
+	Password string `json:"password,omitempty"`
 }
 
 type PodSelector struct {

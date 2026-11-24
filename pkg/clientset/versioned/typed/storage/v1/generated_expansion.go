@@ -18,6 +18,8 @@ type ClusterAccessExpansion interface{}
 
 type ClusterRoleTemplateExpansion interface{}
 
+type HostValidationProfileExpansion interface{}
+
 type MachineExpansion interface{}
 
 type MachineConfigTemplateExpansion interface{}
@@ -41,8 +43,6 @@ type OSImageExpansion interface{}
 type ProjectExpansion interface{}
 
 type SSHKeyExpansion interface{}
-
-type SharedSecretExpansion interface{}
 
 type SpaceInstanceExpansion interface{}
 

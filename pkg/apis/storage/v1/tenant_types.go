@@ -740,7 +740,13 @@ type TenantNICoStatus struct {
 	// +optional
 	NodeProvider string `json:"nodeProvider,omitempty"`
 
-	// Endpoint is the NICo REST API endpoint taken from that NodeProvider.
+	// API is the NICo REST API endpoint taken from that NodeProvider. The Tenant is released
+	// through it, also after the NodeProvider is gone.
+	// +optional
+	API *ServiceEndpoint `json:"api,omitempty"`
+
+	// Deprecated: use api.url. Read only while api is unset, and still written so a platform
+	// without api can release the Tenant.
 	// +optional
 	Endpoint string `json:"endpoint,omitempty"`
 
@@ -748,8 +754,8 @@ type TenantNICoStatus struct {
 	// +optional
 	ProviderOrg string `json:"providerOrg,omitempty"`
 
-	// InsecureSkipTLSVerify reports whether TLS verification is skipped when
-	// reaching the NICo endpoint.
+	// Deprecated: use api.insecureSkipTLSVerify. Read only while api is unset, and still written
+	// so a platform without api can release the Tenant.
 	// +optional
 	InsecureSkipTLSVerify bool `json:"insecureSkipTLSVerify,omitempty"`
 
